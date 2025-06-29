@@ -26,7 +26,6 @@ export default function decorate(block) {
   });
   opcoGridItems?.forEach((row) => {
     const cardWrapper = a({});
-    console.log('row children : ', row.children);
 
     const [
       itemImage,
@@ -79,7 +78,7 @@ export default function decorate(block) {
       ),
     );
     // Add CTA link at the bottom if available
-    if (itemLink && itemLink?.textContent?.trim()) {
+    if (itemLink) {
       const cta = div(
         { class: ' !m-0 !p-0' },
         a(
