@@ -20,6 +20,7 @@ import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
+import shouldSkipPaths from './skipPaths.json' with { type: 'json' };
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -182,7 +183,8 @@ function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('.json')) return true;
-  if (path.includes("/us/en/products/brands/leica")) return true;
+  const shouldSkip = shouldSkipPaths.includes.includes(path);
+  if (shouldSkip) return true;
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
