@@ -131,11 +131,9 @@ export default async function decorate(block) {
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 lg:px-0',
   });
 
-  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
-  const title = block.querySelector('[data-aue-prop="title"]');
-  const rawIds = productIdEl?.textContent.trim() || '';
-  if (productIdEl) productIdEl.remove();
-  if (title) title.remove();
+  const productIdEl = block.children[1]?.textContent.trim() || '';
+  const title = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
+  const rawIds = productIdEl;
 
   const productIds = rawIds
     .split(',')
