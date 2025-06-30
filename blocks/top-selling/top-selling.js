@@ -27,17 +27,10 @@ export default async function decorate(block) {
       'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
-  const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
-    ?.textContent.trim();
-  const linkText = block
-    .querySelector('[data-aue-prop="card_hrefText"]')
-    ?.textContent.trim();
-  const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
-    || '#';
-
-  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim()
-    || '';
+  const headingText = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
+  const linkText = block.children[1]?.querySelectorAll('p')[0]?.textContent.trim() || '';
+  const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
+  const rawIds = block.children[2].querySelector('p').textContent.trim() || '';
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
