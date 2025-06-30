@@ -30,7 +30,9 @@ export default async function decorate(block) {
   const headingText = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const linkText = block.children[1]?.querySelectorAll('p')[0]?.textContent.trim() || '';
   const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
-  const rawIds = block.children[2].querySelector('p').textContent.trim() || '';
+  const index = block.children.length === 4 ? 3 : 2;
+  const rawIds = block.children[index]?.querySelector('p')?.textContent.trim() || '';
+  
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
@@ -41,9 +43,6 @@ export default async function decorate(block) {
   let currentPage = 1;
   let currentIndex = 0;
   let isGridView = true;
-  const openNewTab = block.querySelector(
-    '[data-aue-prop="subscribe"]',
-  )?.textContent;
   const carouselContainer = div({
     class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
@@ -66,7 +65,7 @@ export default async function decorate(block) {
         href: linkUrl ?? '#',
         class:
           'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
-        target: `${openNewTab ? '_blank' : '_self'}`,
+        target: `${block.children[2].textContent.trim() === 'true' ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
