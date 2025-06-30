@@ -68,75 +68,47 @@
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_alt",
-                "value": "Danaher Corporation",
+                "name": "cardAlt",
                 "label": "Alt Text"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_title",
-                "value": "",
+                "name": "cardTitle",
                 "label": "Title"
-              },
-              {
-                "component": "select",
-                "name": "card_titleType",
-                "value": "h1",
-                "label": "Type",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "h1",
-                    "value": "h1"
-                  },
-                  {
-                    "name": "h2",
-                    "value": "h2"
-                  },
-                  {
-                    "name": "h3",
-                    "value": "h3"
-                  },
-                  {
-                    "name": "h4",
-                    "value": "h4"
-                  },
-                  {
-                    "name": "h5",
-                    "value": "h5"
-                  },
-                  {
-                    "name": "h6",
-                    "value": "h6"
-                  }
-                ]
               },
               {
                 "component": "richtext",
                 "valueType": "string",
-                "name": "card_description",
-                "value": "",
+                "name": "cardDescription",
                 "label": "Description"
               },
               {
                 "component": "aem-content",
                 "valueType": "string",
-                "name": "card_href",
-                "value": "",
+                "name": "cardHref",
                 "label": "Link"
               },
+              {
+                "component": "select",
+                "name": "cardLinkTarget",
+                "label": "Open link in new tab?",
+                "valueType": "string",
+                "options": [
                   {
-                    "component": "boolean",
-                    "name": "cardLinkTarget",
-                    "value": false,
-                    "label": "Open link in new tab?"
+                    "name": "yes",
+                    "value": "yes"
                   },
+                  {
+                    "name": "no",
+                    "value": "no"
+                  }
+                ]
+              },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_hrefText",
-                "value": "",
+                "name": "cardHrefText",
                 "label": "Link Text"
               }
             ]

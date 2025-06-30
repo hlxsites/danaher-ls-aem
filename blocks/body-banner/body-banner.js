@@ -5,31 +5,26 @@ import {
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const title1 = block
-    .querySelector('[data-aue-prop="title1"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
-  const title2 = block
-    .querySelector('[data-aue-prop="title2"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
-  const title3 = block
-    .querySelector('[data-aue-prop="title3"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
-  const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
-  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
-  const ctaText = block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim()
-    || '';
-  const ctaLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
-    || '#';
-  const newTab = block.querySelector(
-    '[data-aue-prop="bodyBannerLinkTarget"]',
-  )?.textContent;
-  const rightColor = block
-    .querySelectorAll('.button-container a')[1]
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '#660099';
+  const [
+    bodyBannerTitle,
+    bodyBannerHeading,
+    bodyBannerSubHeading,
+    bodyBannerDescription,
+    bodyBannerImage,
+    bodyBannerLink,
+    bodyBannerLinkTarget,
+    bodyBannerLinkLabel,
+    bodyBannerBg,
+  ] = block.children;
+  const title1 = bodyBannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const title2 = bodyBannerHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const title3 = bodyBannerSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const descriptionHTML = bodyBannerDescription?.innerHTML || '';
+  const imgEl = bodyBannerImage?.querySelector('img');
+  const ctaLink = bodyBannerLink?.textContent.trim() || '#';
+  const newTab = bodyBannerLinkTarget?.textContent?.trim();
+  const ctaText = bodyBannerLinkLabel?.textContent?.trim() || '';
+  const rightColor = bodyBannerBg?.textContent.trim().replace(/<[^>]*>/g, '') || '#660099';
 
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
@@ -95,15 +90,10 @@ export default function decorate(block) {
         title3,
       ),
 
-      div(
-        {
-          class: 'body-banner-description text-white text-base leading-snug ',
-        },
-        ...Array.from(
-          new DOMParser().parseFromString(descriptionHTML, 'text/html').body
-            .childNodes,
-        ),
-      ),
+      div({
+        id: 'bodyBannerDescription',
+        class: 'body-banner-description text-white text-base leading-snug ',
+      }),
       a(
         {
           href: ctaLink,
@@ -116,8 +106,11 @@ export default function decorate(block) {
       ),
     ),
   );
+  rightSection
+    ?.querySelector('#bodyBannerDescription')
+    ?.insertAdjacentHTML('beforeend', descriptionHTML);
   const descriptionLinks = rightSection
-    ?.querySelector('.body-banner-description')
+    ?.querySelector('#bodyBannerDescription')
     ?.querySelectorAll('a');
   descriptionLinks?.forEach((link) => {
     const linkHref = link?.getAttribute('href');

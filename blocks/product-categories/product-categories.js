@@ -7,17 +7,18 @@ export default async function decorate(block) {
   const baseUrl = 'https://lifesciences.danaher.com';
   const maxCards = 28;
 
+  const [productCategoryId, blockTitle, blockBrand] = block.children;
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  const blockId = block.querySelector('[data-aue-prop="prod_category_id"]')?.textContent || '';
+  const blockId = productCategoryId?.querySelector('a')?.href || '';
 
-  const wrapper = block.closest('.product-categories-wrapper');
-  const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
-  const titleEl = wrapper.querySelector("[data-aue-label='Title']");
+  // const wrapper = block.closest(".product-categories-wrapper");
+  const brandEl = blockBrand?.textContent?.trim().toLowerCase() || '';
+  const titleEl = blockTitle?.textContent?.trim() || '';
 
-  const authoredBrand = brandEl?.textContent?.trim().toLowerCase();
-  const authoredTitle = titleEl?.textContent?.trim();
+  const authoredBrand = brandEl;
+  const authoredTitle = titleEl;
 
   try {
     const response = await fetch(`${baseUrl}/us/en/products-index.json`);
@@ -114,9 +115,11 @@ export default async function decorate(block) {
         const brandArray = item.brand?.split(',') || [];
         return brandArray.some((iBrand) => {
           const brand = iBrand;
-          return brand.toLowerCase() === authoredBrand
-           && !item.fullCategory.includes('|')
-           && item.type === 'Category';
+          return (
+            brand.toLowerCase() === authoredBrand
+            && !item.fullCategory.includes('|')
+            && item.type === 'Category'
+          );
         });
       });
 
@@ -158,7 +161,7 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
-            // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+              // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
             renderGrid(list);
           },
         },

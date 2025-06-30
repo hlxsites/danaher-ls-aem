@@ -1,4 +1,4 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';
 import { getProductInfo } from '../../scripts/common-utils.js';
@@ -23,23 +23,10 @@ export default async function decorate(block) {
   if (wrapper) {
     wrapper.classList.add('w-full', 'md:px-10');
   }
+  const [heading, blockProductIds] = block.children;
 
-  const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const linkText = block
-    .querySelector('[data-aue-prop="card_hrefText"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const linkUrl = block
-    .querySelector('[data-aue-prop="card_hrefUrl"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const rawIds = block
-    .querySelector('[data-aue-prop="productid"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
+  const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
+  const rawIds = blockProductIds?.textContent.trim().replace(/<[^>]*>/g, '') || '';
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
@@ -73,14 +60,6 @@ export default async function decorate(block) {
         class: 'text-black text-2xl font-medium leading-[2.5rem]',
       },
       headingText ?? '',
-    ),
-    a(
-      {
-        href: linkUrl ?? '#',
-        class:
-          'text-danaherpurple-500 text-base font-semibold leading-snug hover:underline',
-      },
-      linkText ?? '',
     ),
   );
 
@@ -304,11 +283,6 @@ export default async function decorate(block) {
     carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   }
   blockWrapper.append(carouselContainer);
+  block.textContent = '';
   block.append(blockWrapper);
-
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains('top-selling-rendered')) {
-      child.style.display = 'none';
-    }
-  });
 }

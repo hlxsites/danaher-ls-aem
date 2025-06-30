@@ -74,13 +74,13 @@
               "name": "insight_link",
               "label": "Link Url"
             },
-            
-        {
-              "component": "boolean",
-              "name": "insightlinkTarget",
-              "value": false,
-              "label": "Open link in new tab?"
-        },
+            {
+                  "component": "boolean",
+                  "name": "insightlinkTarget",
+                  "valueType": "boolean",
+                  "value": false,
+                  "label": "Open link in new tab?"
+            },
             {
               "component": "text",
               "valueType": "string",

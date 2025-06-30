@@ -4,9 +4,42 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const addressSectionContent = block.querySelector(
-    '[data-aue-prop="brandaddress"]',
-  );
+  const [title, brandAddress, callDescription, browseDescription] = block.children;
+
+  brandAddress
+    ?.querySelectorAll('div')[1]
+    ?.classList.add(
+      'flex',
+      'flex-col',
+      'gap-4',
+      'text-black',
+      'text-base',
+      'leading-snug',
+      'items-start',
+    );
+  callDescription
+    ?.querySelectorAll('div')[1]
+    ?.classList.add(
+      'flex',
+      'flex-col',
+      'gap-4',
+      'text-black',
+      'text-base',
+      'leading-snug',
+      'items-start',
+    );
+  browseDescription
+    ?.querySelectorAll('div')[1]
+    ?.classList.add(
+      'flex',
+      'flex-col',
+      'gap-4',
+      'text-black',
+      'text-base',
+      'leading-snug',
+      'items-start',
+    );
+  const addressSectionContent = brandAddress;
   addressSectionContent?.classList.add(
     'flex',
     'flex-col',
@@ -48,9 +81,7 @@ export default function decorate(block) {
       );
     });
   }
-  const callSectionContent = block.querySelector(
-    '[data-aue-prop="callDescription"]',
-  );
+  const callSectionContent = callDescription;
   callSectionContent?.classList.add(
     'flex',
     'flex-col',
@@ -93,9 +124,7 @@ export default function decorate(block) {
     });
   }
 
-  const browseDescriptionContent = block.querySelector(
-    '[data-aue-prop="browseDescription"]',
-  );
+  const browseDescriptionContent = browseDescription;
   browseDescriptionContent?.classList.add(
     'flex',
     'flex-col',
@@ -138,9 +167,6 @@ export default function decorate(block) {
       );
     });
   }
-  const getText = (prop) => block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim()
-    || 'Learn more';
-
   // === Main Container
   const learnMoreContainer = div({
     class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12',
@@ -158,7 +184,7 @@ export default function decorate(block) {
   // === Left: Title
   const titleLearnMore = div(
     { class: 'min-w-[120px] font-medium text-black text-3xl leading-[1.5rem]' },
-    getText('title'),
+    title?.textContent?.trim() || '',
   );
 
   // === Middle: SCIEX address
@@ -192,11 +218,6 @@ export default function decorate(block) {
   learnMoreContainer.appendChild(innerLearnMore);
 
   decorateIcons(learnMoreContainer);
+  block.textContent = '';
   block.appendChild(learnMoreContainer);
-  // Hide authored content
-  [...block.children].forEach((child) => {
-    if (!child.contains(learnMoreContainer)) {
-      child.style.display = 'none';
-    }
-  });
 }

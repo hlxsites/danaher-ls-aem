@@ -11,38 +11,37 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  const [
+    bannerTitle,
+    bannerHeading,
+    bannerDescription,
+    bannerImage,
+    bannerButtonUrl,
+    bannerButtonNewTab,
+    bannerButtonLabel,
+  ] = block.children;
+
+  const opcoBannerItems = [];
+  [...block.children].forEach((child, index) => {
+    if (index > 6) {
+      opcoBannerItems.push(child);
+    }
+  });
+
   const baseUrl = 'https://stage.lifesciences.danaher.com';
-  // document
-  //   .querySelector(".opco-banner-wrapper")
-  //   ?.parentElement?.classList.add("carousel-container");
-  // document
-  //   .querySelector(".opco-banner-wrapper")
-  //   ?.classList.add("carousel-wrapper");
+
+  const currentPath = window.location.href;
 
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  const opcoBannerTitle = block.querySelector(
-    "[data-aue-prop='opcoBannerTitle']",
-  );
-  const opcoBannerHeading = block.querySelector(
-    "[data-aue-prop='opcoBannerHeading']",
-  );
-  const opcoBannerDescription = block.querySelector(
-    "[data-aue-prop='opcoBannerDescription']",
-  )?.innerHTML;
-  const opcoBannerImage = block.querySelector(
-    "img[data-aue-prop='opcoBannerImage']",
-  );
-  const opcoBannerButtonLabel = block.querySelector(
-    "p[data-aue-prop='opcoBannerButtonLabel']",
-  );
-  const opcoBannerButtonTarget = block.querySelector(
-    "p[data-aue-prop='opcoBannerButtonTarget']",
-  );
-  const opcoBannerButtonUrl = block
-    .querySelector('a[href]:not([data-aue-label])')
-    ?.getAttribute('href') || '#';
+  const opcoBannerTitle = bannerTitle;
+  const opcoBannerHeading = bannerHeading;
+  const opcoBannerDescription = bannerDescription?.innerHTML;
+  const opcoBannerImage = bannerImage?.querySelector('img');
+  const opcoBannerButtonLabel = bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const opcoBannerButtonTarget = bannerButtonNewTab?.textContent?.trim() || '';
+  const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
 
   // const linkEls = Array.from({ length: 7 })
   //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
@@ -51,42 +50,46 @@ export default async function decorate(block) {
   const linkWrapper = div({
     class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
   });
+  if (
+    currentPath.includes('products.html')
+    || currentPath.includes('/shop-page')
+    || currentPath.includes('/shop-home')
+  ) {
+    const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
-  const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
+    const brandsRaw = await brandsResponse.json();
+    const allProducts = Array.isArray(brandsRaw)
+      ? brandsRaw
+      : brandsRaw?.data || brandsRaw?.results || [];
+    // Build unique filters (exclude brands with commas)
+    const filterSet = new Set();
+    allProducts.forEach((item) => {
+      if (item.type === 'ProductBrandHome' && item.title !== '') {
+        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
+        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+      }
+    });
+    const allBrands = Array.from(filterSet).sort();
 
-  const brandsRaw = await brandsResponse.json();
-  const allProducts = Array.isArray(brandsRaw)
-    ? brandsRaw
-    : brandsRaw?.data || brandsRaw?.results || [];
-  // Build unique filters (exclude brands with commas)
-  const filterSet = new Set();
-  allProducts.forEach((item) => {
-    if (item.type === 'ProductBrandHome' && item.title !== '') {
-      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-      if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
-    }
-  });
-  const allBrands = Array.from(filterSet).sort();
+    allBrands.forEach((pills) => {
+      const linkLabel = pills?.name || '';
 
-  allBrands.forEach((pills) => {
-    const linkLabel = pills?.name || '';
-
-    const linkTarget = pills?.path || '#';
-    if (linkLabel) {
-      linkWrapper.appendChild(
-        a(
-          {
-            href: linkTarget || '#',
-            target: linkTarget.includes('http') ? '_blank' : '_self',
-            class:
-              'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
-          },
-          linkLabel,
-        ),
-      );
-    }
-  });
-
+      const linkTarget = pills?.path || '#';
+      if (linkLabel) {
+        linkWrapper.appendChild(
+          a(
+            {
+              href: linkTarget || '#',
+              target: linkTarget.includes('http') ? '_blank' : '_self',
+              class:
+                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+            },
+            linkLabel,
+          ),
+        );
+      }
+    });
+  }
   // === LEFT SECTION ===
   const leftContent = div({
     class: 'flex flex-col gap-4 max-w-[567px]',
@@ -106,8 +109,8 @@ export default async function decorate(block) {
   if (opcoBannerImage) {
     leftContent.append(
       img({
-        src: opcoBannerImage.src.replace(/<[^>]*>/g, ''),
-        alt: opcoBannerImage.alt.replace(/<[^>]*>/g, '') || 'Brand Image',
+        src: opcoBannerImage.src,
+        alt: opcoBannerImage.alt || 'Brand Image',
         class: 'w-[120px] mb-2 md:mb-8 h-auto',
       }),
     );
@@ -149,16 +152,24 @@ export default async function decorate(block) {
   }
 
   if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-    const ctaWrapper = button(
+    let opcoTarget;
+
+    if (opcoBannerButtonUrl?.includes('http')) {
+      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+    } else if (opcoBannerButtonUrl?.includes('#')) {
+      opcoTarget = '_self';
+    } else {
+      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+    }
+
+    const ctaWrapper = a(
       {
+        href: opcoBannerButtonUrl,
+        target: opcoTarget,
         class:
           'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
-        onclick: () => window.open(
-          opcoBannerButtonUrl,
-          opcoBannerButtonTarget ? '_blank' : '_self',
-        ),
       },
-      opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      opcoBannerButtonLabel,
     );
     leftContent.append(ctaWrapper);
   }
@@ -171,7 +182,6 @@ export default async function decorate(block) {
   );
 
   // === RIGHT CAROUSEL SECTION ===
-  const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
   const slides = [];
   let currentIndex = 0;
 
@@ -230,29 +240,47 @@ export default async function decorate(block) {
       }),
     ),
   );
-  items.forEach((item, index) => {
-    const opcoBannerItemTitle = item.querySelector(
-      "[data-aue-prop='opcoBannerItemTitle']",
-    );
-    const opcoBannerItemSubHeading = item.querySelector(
-      "[data-aue-prop='opcoBannerItemSubHeading']",
-    );
-    const opcoBannerItemDescription = item.querySelector(
-      "[data-aue-prop='opcoBannerItemDescription']",
-    )?.innerHTML;
-    const opcoBannerItemImage = item.querySelector(
-      "img[data-aue-prop='opcoBannerItemImage']",
-    );
-    const opcoBannerItemBgImage = item.querySelector(
-      "img[data-aue-prop='opcoBannerItemBgImage']",
-    );
-    const opcoBannerItemButtonLabel = item.querySelector(
-      "p[data-aue-prop='opcoBannerItemButtonLabel']",
-    );
-    const opcoBannerItemButtonTarget = item.querySelector(
-      "p[data-aue-prop='opcoBannerItemButtonTarget']",
-    );
-    const ctaUrl = item.querySelector('a[href]')?.getAttribute('href') || '#';
+  opcoBannerItems.forEach((item, index) => {
+    let itemTitle;
+    let itemSubHeading;
+    let itemDescription;
+    let itemImage;
+    let itemBgImage;
+    let itemButtonUrl;
+    let itemButtonTarget;
+    let itemButtonLabel;
+    if (item.children.length > 6) {
+      [
+        itemTitle,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemBgImage,
+        itemButtonUrl,
+        itemButtonTarget,
+        itemButtonLabel,
+      ] = item.children;
+    } else {
+      [
+        itemTitle,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemBgImage,
+        itemButtonUrl,
+        itemButtonLabel,
+        itemButtonTarget,
+      ] = item.children;
+    }
+
+    const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
+    const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
+    const opcoBannerItemDescription = itemDescription?.textContent?.trim();
+    const opcoBannerItemImage = itemImage?.querySelector('img');
+    const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
+    const ctaUrl = itemButtonUrl?.textContent?.trim();
+    const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
+    const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
 
     const contentWrapper = div({
       class:
@@ -263,9 +291,7 @@ export default async function decorate(block) {
       contentWrapper.append(
         img({
           src: opcoBannerItemImage?.src,
-          alt:
-            opcoBannerItemTitle?.textContent.replace(/<[^>]*>/g, '')
-            || 'Slide image',
+          alt: opcoBannerItemTitle || 'Slide image',
           class: `${
             opcoBannerItemBgImage ? 'opacity-0' : ''
           } w-[300px] h-[184px] object-cover`,
@@ -279,7 +305,7 @@ export default async function decorate(block) {
           {
             class: 'text-3xl leading-10 font-medium text-black text-center',
           },
-          opcoBannerItemTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+          opcoBannerItemTitle,
         ),
       );
     }
@@ -291,9 +317,7 @@ export default async function decorate(block) {
             class:
               'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
           },
-          opcoBannerItemSubHeading?.textContent
-            .trim()
-            .replace(/<[^>]*>/g, '') || '',
+          opcoBannerItemSubHeading,
         ),
       );
     }
@@ -325,7 +349,7 @@ export default async function decorate(block) {
       );
     }
 
-    if (opcoBannerItemButtonLabel) {
+    if (opcoBannerItemButtonLabel && ctaUrl) {
       contentWrapper.append(
         button(
           {
@@ -336,9 +360,7 @@ export default async function decorate(block) {
               opcoBannerItemButtonTarget ? '_blank' : '_self',
             ),
           },
-          opcoBannerItemButtonLabel?.textContent
-            .trim()
-            .replace(/<[^>]*>/g, '') || '',
+          opcoBannerItemButtonLabel,
         ),
       );
     }
@@ -403,7 +425,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    items.length > 0 ? controls : '',
+    opcoBannerItems.length > 0 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
@@ -417,10 +439,7 @@ export default async function decorate(block) {
     left,
     right,
   );
-
   block.append(container);
-
-  // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
       child.style.display = 'none';

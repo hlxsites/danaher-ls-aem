@@ -181,42 +181,39 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
+  const [
+    leftTitle,
+    leftLinkLable,
+    leftProductIds,
+    rightTitle,
+    rightLinkLabel,
+    rightProductIds,
+  ] = block.children;
+
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
   const dualCarouselWrapper = div({
     class:
       'dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5',
   });
-  const leftCarouselTitle = block
-    .querySelector('[data-aue-prop="left_carousel_title"]')
-    ?.textContent.trim()
+  const leftCarouselTitle = leftTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '');
-  const leftCarouselProductIds = block
-    .querySelector('[data-aue-prop="left_carousel_product_id"]')
-    ?.textContent.trim()
+  const leftCarouselProductIds = leftProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '')
     .split(',');
-  const leftCarouselLinkText = block
-    .querySelector('[data-aue-prop="left_carousel_link_label"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || 'Continue';
-  const rightCarouselTitle = block
-    .querySelector('[data-aue-prop="right_carousel_title"]')
-    ?.textContent.trim()
+  const leftCarouselLinkText = leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
+  const rightCarouselTitle = rightTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '');
-  const rightCarouselProductIds = block
-    .querySelector('[data-aue-prop="right_carousel_product_id"]')
-    ?.textContent.trim()
+  const rightCarouselProductIds = rightProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '')
     .split(',');
-  const rightCarouselLinkText = block
-    .querySelector('[data-aue-prop="right_carousel_link_label"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || 'View Details';
-
-  block.innerHtml = '';
-  block.textContent = '';
-  Object.keys(block).forEach((key) => delete block[key]);
+  const rightCarouselLinkText = rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '')
+    || 'View Details';
 
   let leftCarouselProducts = '';
   let leftCarouselScrollWrapper = '';
@@ -287,5 +284,6 @@ export default async function decorate(block) {
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute('fill', 'white');
   }
+  block.textContent = '';
   block.append(dualCarouselWrapper);
 }

@@ -3,14 +3,10 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const wrapper = block.closest('.simple-text-wrapper');
+  const [leftText, rightText] = block.children;
 
-  const leftTextEl = wrapper.querySelector(
-    '[data-aue-prop="leftText"]',
-  )?.innerHTML;
-  const rightTextEl = wrapper.querySelector(
-    '[data-aue-prop="rightText"]',
-  )?.innerHTML;
+  const leftTextEl = leftText?.innerHTML || '';
+  const rightTextEl = rightText?.innerHTML || '';
 
   let leftDiv = div();
   if (leftTextEl) {
@@ -56,11 +52,6 @@ export default function decorate(block) {
     },
     simpleTextWrapper,
   );
-  block.appendChild(container);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
+  block.textContent = '';
+  block.append(container);
 }

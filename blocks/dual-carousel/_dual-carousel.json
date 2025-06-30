@@ -23,48 +23,54 @@
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "left_carousel_title",
+                "name": "leftCarouselTitle",
                 "value": "",
                 "label": "Left Carousel Title"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "left_carousel_link_label",
+                "name": "leftCarouselLinkLabel",
                 "value": "",
                 "label": "Left Carousel Link Label"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "left_carousel_product_id",
+                "name": "leftCarouselProductId",
                 "value": "",
                 "label": "Left Carousel Product IDs"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "right_carousel_title",
+                "name": "rightCarouseTitle",
                 "value": "",
                 "label": "Right Carousel Title"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "right_carousel_link_label",
+                "name": "rightCarouselLinkLabel",
                 "value": "",
                 "label": "Right Carousel Link Label"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "right_carousel_product_id",
+                "name": "rightCarouselProductId",
                 "value": "",
                 "label": "Right Carousel Product IDs"
               }
             ]
           }
     ],
-    "filters": [    ]
+    "filters": [
+      {
+      "id": "dual-carousel",
+      "components": [
+        ""
+      ]
+    }]
   }
    
