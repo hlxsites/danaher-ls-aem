@@ -55,7 +55,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = '/content/dam/danaher/products/fallback-image.png';
+        imgElement.src = '/content/dam/danaher/products/fallbackImage.jpeg';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };

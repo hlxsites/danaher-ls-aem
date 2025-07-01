@@ -179,12 +179,12 @@ export default function decorate(block) {
 
     if (productImage) {
       productImage.onerror = () => {
-        productImage.src = '/content/dam/danaher/products/fallback-image.png';
+        productImage.src = '/content/dam/danaher/products/fallbackImage.jpeg';
       };
     }
     let fallbackImage = '';
     if (!productImage) {
-      fallbackImage = '/content/dam/danaher/products/fallback-image.png';
+      fallbackImage = '/content/dam/danaher/products/fallbackImage.jpeg';
     }
     const leftSection = div(
       {
