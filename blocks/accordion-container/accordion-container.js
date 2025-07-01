@@ -140,21 +140,19 @@ export default async function decorate(block) {
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
-  const accordionContainerTitle = block
-    .querySelector('[data-aue-prop="accordion_container_title"]')
-    ?.textContent.trim() || '';
+  const accordionContainerTitle = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const customUUID = generateUUID();
 
-  const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
-
-  const dynamicData = Array.from(acrItems)
+  const dynamicData = Array.from(block.children)
+    .slice(1)
     .map((element) => {
-      const question = element.querySelector(
-        '[data-aue-prop="item_title"]',
-      )?.textContent;
-      const answer = element.querySelector(
-        '[data-aue-prop="item_description"]',
-      )?.innerHTML;
+      const paragraphs = element.querySelectorAll('p');
+      const question = paragraphs[0]?.textContent || '';
+
+      const answer = Array.from(paragraphs)
+        .slice(1)
+        .map((p) => p.outerHTML)
+        .join('');
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
