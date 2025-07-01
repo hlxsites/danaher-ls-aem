@@ -41,7 +41,7 @@ async function getCategoryInfo(category) {
 }
 
 function renderGridCard(item) {
-  const fallbackImagePath = '/icons/fallback-image.png';
+  const fallbackImagePath = '/content/dam/danaher/products/fallback-image.png';
 
   // Create image with fallback functionality
   const createImageWithFallback = (src, alt) => {
@@ -156,14 +156,10 @@ export default async function decorate(block) {
 
   const validItems = relatedCategories.filter(Boolean);
 
-  // Fallback if no valid items found
+  // If no valid items found, return empty wrapper
   if (validItems.length === 0) {
-    validItems.push({
-      title: '',
-      image: '',
-      description: '',
-      path: '',
-    });
+    block.classList.add('hidden');
+    return;
   }
 
   let cardsPerPageGrid = getCardsPerPageGrid();

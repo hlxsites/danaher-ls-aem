@@ -4,54 +4,55 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  const [
-    offerAdvertisement,
-  ] = block.children;
+  const [offerAdvertisement] = block.children;
 
   const titleEl = offerAdvertisement.querySelector('p');
   const linkHref = offerAdvertisement.querySelector('a')?.getAttribute('href') || '#';
   const linkTextEl = offerAdvertisement?.querySelectorAll('p')?.[1];
   const openNewTab = block.children[1]?.querySelector('p')?.textContent;
 
-  const offerAdvertisementWrapper = div({
-    class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 lg:px-0',
-  });
+  // Only create and append wrapper if there is content
+  if (titleEl?.textContent?.trim() || linkTextEl?.textContent?.trim()) {
+    const offerAdvertisementWrapper = div({
+      class:
+        'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 lg:px-0',
+    });
 
-  const titleContainer = titleEl
-    ? div(
-      {
-        class: 'self-stretch flex flex-col justify-start items-start gap-4',
-      },
-      div(
-        {
-          class: 'justify-start text-black text-2xl font-medium',
-        },
-        titleEl,
-      ),
-    )
-    : null;
+    const titleContainer = titleEl
+      ? div(
+          {
+            class: 'self-stretch flex flex-col justify-start items-start gap-4',
+          },
+          div(
+            {
+              class: 'justify-start text-black text-2xl font-medium',
+            },
+            titleEl.textContent.trim(),
+          ),
+        )
+      : null;
 
-  const linkContainer = linkTextEl
-    ? div(
+    const linkContainer = linkTextEl
+      ? div(
+          {
+            class:
+              'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
+          },
+          a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl.textContent.trim()),
+        )
+      : null;
+
+    const outerContainer = div(
       {
         class:
-            'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
+          'w-full bg-gray-200 inline-flex flex-col gap-y-6 md:flex-row md:justify-between md:items-center p-6 md:px-12 py-8',
       },
-      a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl),
-    )
-    : null;
+      ...(titleContainer ? [titleContainer] : []),
+      ...(linkContainer ? [linkContainer] : []),
+    );
 
-  const outerContainer = div(
-    {
-      class:
-        'w-full bg-gray-200 inline-flex flex-col gap-y-6 md:flex-row md:justify-between md:items-center p-6 md:px-12 py-8',
-    },
-    ...(titleContainer ? [titleContainer] : []),
-    ...(linkContainer ? [linkContainer] : []),
-  );
-
-  offerAdvertisementWrapper.appendChild(outerContainer);
-  block.innerHTML = '';
-  block.appendChild(offerAdvertisementWrapper);
+    offerAdvertisementWrapper.appendChild(outerContainer);
+    block.innerHTML = '';
+    block.appendChild(offerAdvertisementWrapper);
+  }
 }
