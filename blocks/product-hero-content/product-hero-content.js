@@ -8,7 +8,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
-  //block.querySelector('[data-aue-prop="prod_hero_id"]')?.textContent || '';
+  // block.querySelector('[data-aue-prop="prod_hero_id"]')?.textContent || '';
   const productHeroContentWrapper = div({
     class:
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',

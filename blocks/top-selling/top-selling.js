@@ -32,7 +32,7 @@ export default async function decorate(block) {
   const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
   const index = block.children.length === 4 ? 3 : 2;
   const rawIds = block.children[index]?.querySelector('p')?.textContent.trim() || '';
-  
+
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
