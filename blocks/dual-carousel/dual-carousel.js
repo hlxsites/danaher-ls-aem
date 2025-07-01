@@ -97,11 +97,11 @@ async function createCarousel(
     if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
       cardImage.setAttribute(
         'src',
-        '/content/dam/danaher/products/fallbackImage.jpeg'
+        '/content/dam/danaher/products/fallback-image.png'
       );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
-          cardImage.src = '/content/dam/danaher/products/fallbackImage.jpeg';
+          cardImage.src = '/content/dam/danaher/products/fallback-image.png';
           cardImage.setAttribute('data-fallback-applied', 'true');
         }
       };
