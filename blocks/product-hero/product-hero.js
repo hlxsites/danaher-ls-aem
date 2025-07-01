@@ -187,7 +187,16 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
     addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(' '));
-    if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
+
+    const countryListRaw = response[0]?.raw?.availableonline;
+    const countryList = Array.isArray(countryListRaw)
+      ? countryListRaw.map((c) => c.toUpperCase()) : [];
+    const showOnLSIG = response[0]?.raw?.showonlsig === 'true';
+
+    const isAvailableRegion = countryList.includes('EN-US') || countryList.includes('EN-GB');
+    const shouldShowRFQ = isAvailableRegion && showOnLSIG;
+
+    if (rfqEl && rfqEl.textContent.includes('Request for Quote') && shouldShowRFQ) {
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
@@ -198,25 +207,47 @@ export default async function decorate(block) {
       }
       defaultContent.append(rfqParent);
 
-      /* brandname checking and displaying buy now btn */
-
-      const brandName = response[0]?.raw?.opco || null;
       const showskupricelistusd = response[0]?.raw.listpriceusd;
-
       const currncyFormat = Number(showskupricelistusd);
 
-      const brandButton = document.createElement('button');
-      brandButton.textContent = 'Buy Now on abcam.com';
-      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '));
-
       const brandURL = response[0]?.raw?.externallink
-        ? `${response[0].raw.externallink}?utm_source=dhls_website` : null;
-      brandButton.addEventListener('click', () => {
-        window.open(brandURL, '_blank');
-      });
+        ? `${response[0].raw.externallink}?utm_source=dhls_website`
+        : null;
 
-      /* eslint eqeqeq: "off" */
-      if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
+      if (Number.isFinite(currncyFormat) && currncyFormat > 0) {
+        const brandName = (response[0]?.raw?.opco || '').trim();
+        let brandLabel = 'Buy Now on external site';
+        switch (brandName.toLowerCase()) {
+          case 'abcam':
+            brandLabel = 'Buy Now on abcam.com';
+            break;
+          case 'idt':
+            brandLabel = 'Buy Now on idtdna.com';
+            break;
+          case 'leica biosystems':
+            brandLabel = 'Buy Now on leicabiosystems.com';
+            break;
+          case 'beckman coulter':
+            brandLabel = 'Buy Now on beckman.com';
+            break;
+          default:
+            brandLabel = 'Buy Now on external site';
+            break;
+        }
+
+        const brandButton = document.createElement('button');
+        brandButton.textContent = brandLabel;
+        brandButton.classList.add(
+          ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '),
+        );
+
+        if (brandURL) {
+          brandButton.addEventListener('click', () => {
+            window.open(brandURL, '_blank');
+          });
+        }
+
+        // Assemble price + buy now + RFQ
         const brandStartPrice = div(
           { class: 'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center' },
           div(
@@ -224,14 +255,14 @@ export default async function decorate(block) {
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
           ),
-          div(
+          brandURL ? div(
             { class: 'flex gap-4 items-stretch add-buynow-btn' },
             brandButton,
-          ),
+          ) : null,
           rfqParent,
         );
+
         defaultContent.append(brandStartPrice);
-        // rfqParent.remove();
       }
     }
 
