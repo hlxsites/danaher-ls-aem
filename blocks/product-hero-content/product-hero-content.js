@@ -8,17 +8,16 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
-  // block.querySelector('[data-aue-prop="prod_hero_id"]')?.textContent || '';
   const productHeroContentWrapper = div({
     class:
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
     id: blockId,
   });
   // Extract title and description
-  const subProductTitle = block.firstElementChild?.firstElementChild?.children[1].textContent?.trim() || '';
-  const subProductDescription = block.firstElementChild?.firstElementChild?.children[2].textContent?.trim() || '';
-  const readMoreLabel = block.children[1].firstElementChild.firstElementChild.textContent.trim() || '';
-  const readMoreLink = block.children[1].querySelector('a')?.href || '';
+  const subProductTitle = block.firstElementChild?.firstElementChild?.children[1]?.textContent?.trim() || '';
+  const subProductDescription = block.firstElementChild?.firstElementChild?.children[2]?.textContent?.trim() || '';
+  const readMoreLabel = block.children[1]?.firstElementChild?.firstElementChild?.textContent.trim() || '';
+  const readMoreLink = block.children[1]?.querySelector('a')?.href || '';
   const openNewTab = block.children[2]?.querySelector('p')?.textContent;
 
   // Title section
