@@ -43,10 +43,6 @@ export default async function decorate(block) {
   const opcoBannerButtonTarget = bannerButtonNewTab?.textContent?.trim() || '';
   const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
 
-  // const linkEls = Array.from({ length: 7 })
-  //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
-  //   .filter(Boolean);
-
   const linkWrapper = div({
     class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
   });
