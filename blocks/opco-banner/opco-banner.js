@@ -63,7 +63,10 @@ export default async function decorate(block) {
     allProducts.forEach((item) => {
       if (item.type === 'Category' && item.title !== '') {
         const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+        if (brand && !brand?.name?.includes(',')) {
+          const brandKey = JSON.stringify(brand);
+          filterSet.add(brandKey);
+        }
       }
     });
     const allBrands = Array.from(filterSet).sort();
