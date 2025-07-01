@@ -187,7 +187,7 @@ export default async function decorate(block) {
   );
 
   // === RIGHT CAROUSEL SECTION ===
-  const slides = [];
+  const slides = opcoBannerItems;
   let currentIndex = 0;
 
   // === CAROUSEL CONTROLS ===
