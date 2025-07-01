@@ -6,18 +6,24 @@ export default async function decorate(block) {
   const productInfoListWrapper = div({
     class: 'dhls-container px-5 lg:px-0',
   });
-  const titleEl = block.querySelector(
-    '[data-aue-prop="prod_info_title"]',
-  )?.textContent;
-  const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
-  if (descEl) {
-    descEl.querySelectorAll('p').forEach((pEle) => {
-      pEle.classList.add(...'text-base font-extralight'.split(' '));
-    });
+  const titleP = block?.firstElementChild?.firstElementChild?.firstElementChild;
+  const titleEl = titleP?.textContent.trim() || '';
+  if (titleEl && titleP) {
+    titleP.remove();
   }
-  const ulEle = block.querySelector('ul');
-  if (ulEle) {
-    ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
+  const descElString = block?.innerHTML || '';
+  let descEl = '';
+  if (descElString) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = descElString;
+    tempDiv.querySelectorAll('p').forEach((pEle) => {
+      pEle.classList.add('text-base', 'font-extralight');
+    });
+    const ulEle = tempDiv.querySelector('ul');
+    if (ulEle) {
+      ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
+    }
+    descEl = tempDiv.innerHTML;
   }
   const productInfoList = div(
     {
@@ -28,7 +34,10 @@ export default async function decorate(block) {
   );
   const productInfoLeft = productInfoList.querySelector('.product-info-left');
   productInfoLeft.textContent = titleEl;
-  productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
+  const target = productInfoList.querySelector('.product-info-right');
+  if (target) {
+    target.innerHTML = descEl;
+  }
   productInfoListWrapper.appendChild(productInfoList);
   productInfoList?.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((el) => {
     el.style.margin = '0';
