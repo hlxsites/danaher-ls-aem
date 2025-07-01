@@ -66,7 +66,7 @@ export default function productBannerDecorate(block) {
 
   const categoryBannerTitle = h1(
     {
-      class: `text-black text-4xl font-bold leading-[48px]${categoryHeading ? '' : ' hidden'}`,
+      class: 'text-black text-4xl font-bold leading-[48px]}',
     },
     categoryHeading,
   );
@@ -76,12 +76,12 @@ export default function productBannerDecorate(block) {
     },
     a(
       {
-        class: `px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden${btnLink ? '' : ' hidden'}`,
+        class: 'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
         {
-          class: `text-right justify-start text-white text-base font-medium leading-snug transition${btnText ? '' : ' hidden'}`,
+          class: 'text-right justify-start text-white text-base font-medium leading-snug transition}',
         },
         btnText,
       ),
@@ -89,9 +89,7 @@ export default function productBannerDecorate(block) {
   );
 
   const tempContainer = document.createElement('div');
-  if (!rawCategoryDescription) {
-    tempContainer.classList.add('hidden');
-  }
+
   tempContainer.innerHTML = rawCategoryDescription;
   tempContainer.querySelectorAll('p').forEach((paragraph) => {
     paragraph.classList.add('text-black');
@@ -131,7 +129,7 @@ export default function productBannerDecorate(block) {
         img({
           src: image.src,
           alt,
-          class: `object-contain${image ? '' : ' hidden'}`,
+          class: 'object-contain',
         }),
       )
       : '',
