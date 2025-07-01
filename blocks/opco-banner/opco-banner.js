@@ -69,11 +69,11 @@ export default async function decorate(block) {
         }
       }
     });
-    const allBrands = Array.from(filterSet).map((str) => JSON.parse(str));
+    //    const allBrands = Array.from(filterSet).map((str) => JSON.parse(str));
 
-    console.log(' all brands 3: ', allBrands);
+    console.log(' all brands 3: ', filterSet);
 
-    allBrands.forEach((pills) => {
+    filterSet.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
       const linkTarget = pills?.path || '#';
