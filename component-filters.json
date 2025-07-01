@@ -30,6 +30,7 @@
       "opco-banner",
       "top-selling",
       "top-selling-products",
+      "top-purchased-products",
       "offer-banner",
       "simple-text",
       "body-banner",
@@ -63,6 +64,33 @@
   },
   {
     "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "dual-carousel",
     "components": [
       ""
     ]
@@ -104,6 +132,18 @@
     ]
   },
   {
+    "id": "product-category-list",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -119,6 +159,19 @@
     "id": "simple-text",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "tabs-container",
+    "components": [
+      "tiny-carousel",
+      "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "tiny-carousel",
+    "components": [
+      "tiny-carousel-item"
     ]
   }
 ]

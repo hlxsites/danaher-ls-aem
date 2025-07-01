@@ -38,6 +38,10 @@
   }
 }
 
+.bg-danaherpurple-50 {
+  background-color: #EADEFF
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
 }
@@ -137,6 +141,13 @@
   -webkit-line-clamp: 5
 }
 
+.top-selling-wrapper :is(.line-clamp-4) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
+}
+
 .top-selling-wrapper :is(.block) {
   display: block
 }
@@ -209,6 +220,10 @@
   height: 1px
 }
 
+.top-selling-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -251,6 +266,10 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.w-8) {
+  width: 2rem
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {
@@ -355,6 +374,10 @@
 
 .top-selling-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.top-selling-wrapper :is(.gap-0) {
+  gap: 0px
 }
 
 .top-selling-wrapper :is(.gap-y-6) {
@@ -480,6 +503,16 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.bg-opacity-10) {
   --tw-bg-opacity: 0.1
 }
@@ -578,6 +611,10 @@
 
 .top-selling-wrapper :is(.pt-4) {
   padding-top: 1rem
+}
+
+.top-selling-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
 }
 
 .top-selling-wrapper :is(.text-left) {
@@ -752,6 +789,14 @@
   outline-color: #7c3aed
 }
 
+.top-selling-wrapper :is(.outline-\[\#7523FF\]) {
+  outline-color: #7523FF
+}
+
+.top-selling-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .top-selling-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
@@ -767,9 +812,19 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.focus\:border-gray-300:focus) {
@@ -863,6 +918,10 @@
   }
 }
 
+.top-selling-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
+}
+
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
 }
@@ -884,5 +943,13 @@
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.top-selling-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+}
+
+.top-selling-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
 }

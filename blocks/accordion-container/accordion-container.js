@@ -88,7 +88,7 @@ function createAccordionBlock(
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
     },
-    div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
+    div({ class: 'accordion-answer text-base font-extralight leading-7 overflow-hidden' }),
   );
 
   answer.forEach((element) => {
@@ -98,10 +98,14 @@ function createAccordionBlock(
   panel.querySelectorAll('a').forEach((link) => {
     link.classList.remove('btn', 'btn-outline-primary');
     link.classList.add(
-      'text-sm',
-      'font-bold',
+      'text-black',
+      'underline',
+      'decoration-black',
+      'hover:decoration-danaherpurple-500',
+      'hover:bg-danaherpurple-25',
       'text-danaherpurple-500',
-      '!no-underline',
+      'hover:bg-danaherpurple-25',
+      'hover:text-danaherpurple-500',
     );
   });
 
@@ -136,21 +140,19 @@ export default async function decorate(block) {
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
-  const accordionContainerTitle = block
-    .querySelector('[data-aue-prop="accordion_container_title"]')
-    ?.textContent.trim() || '';
+  const accordionContainerTitle = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const customUUID = generateUUID();
 
-  const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
-
-  const dynamicData = Array.from(acrItems)
+  const dynamicData = Array.from(block.children)
+    .slice(1)
     .map((element) => {
-      const question = element.querySelector(
-        '[data-aue-prop="item_title"]',
-      )?.textContent;
-      const answer = element.querySelector(
-        '[data-aue-prop="item_description"]',
-      )?.textContent;
+      const paragraphs = element.querySelectorAll('p');
+      const question = paragraphs[0]?.textContent || '';
+
+      const answer = Array.from(paragraphs)
+        .slice(1)
+        .map((p) => p.outerHTML)
+        .join('');
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
@@ -172,11 +174,11 @@ export default async function decorate(block) {
     class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
   });
   const faqTextContainer = div(
-    { class: 'lg:w-[30%]' },
-    h3({ class: 'text-2xl font-bold' }, accordionContainerTitle),
+    { class: 'lg:w-[400px]' },
+    h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
   );
   const accordionContainer = div(
-    { class: 'lg:w-[70%] flex flex-col' },
+    { class: 'lg:w-[840px] flex flex-col' },
     ...dynamicAccordionItems,
   );
 

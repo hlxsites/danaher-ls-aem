@@ -44,9 +44,20 @@
   margin-top: 48px
 }
 
+.product-hero-content-wrapper :is(.relative) {
+  position: relative
+}
+
 .product-hero-content-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
+}
+
+.product-hero-content-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
 }
 
 .product-hero-content-wrapper :is(.block) {
@@ -61,8 +72,16 @@
   width: 100%
 }
 
+.product-hero-content-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .product-hero-content-wrapper :is(.flex-1) {
   flex: 1 1 0%
+}
+
+.product-hero-content-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
 }
 
 .product-hero-content-wrapper :is(.flex-col) {
@@ -101,6 +120,15 @@
   gap: 2rem
 }
 
+.product-hero-content-wrapper :is(.gap-x-2) {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem
+}
+
+.product-hero-content-wrapper :is(.gap-y-1) {
+  row-gap: 0.25rem
+}
+
 .product-hero-content-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -127,6 +155,10 @@
 .product-hero-content-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.product-hero-content-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .product-hero-content-wrapper :is(.px-5) {
@@ -173,6 +205,16 @@
   color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
+.product-hero-content-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.product-hero-content-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 @media (min-width: 768px) {
   .product-hero-content-wrapper :is(.md\:w-96) {
     width: 24rem
@@ -192,8 +234,28 @@
 }
 
 @media (min-width: 1024px) {
+  .product-hero-content-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .product-hero-content-wrapper :is(.lg\:flex-row) {
+    flex-direction: row
+  }
+
   .product-hero-content-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }
+}
+
+.product-hero-content-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.product-hero-content-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.product-hero-content-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
+  stroke: #4000A5
 }

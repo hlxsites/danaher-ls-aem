@@ -1,0 +1,43 @@
+{
+  "definitions": [
+      {
+          "title": "Top-Purchased Products",
+          "id": "top-purchased-products",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Top Purchased Products",
+                  "model": "top-purchased-products"
+                }
+              }
+            }
+          }
+        }
+  ],
+  "models": [
+      {
+          "id": "top-purchased-products",
+          "fields": [
+              {
+                  "component": "text",
+                  "valueType": "string",
+                  "name": "titleText",
+                  "value": "",
+                  "label": "Title"
+                },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "productid",
+              "value": "",
+              "label": "Product IDs (comma separated)"
+            }
+          ]
+        }
+  ],
+  "filters": [
+  ]
+}
+ 

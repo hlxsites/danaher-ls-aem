@@ -1,3 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -113,8 +153,8 @@
   font-weight: 700
 }
 
-.offer-advertisement-wrapper :is(.font-normal) {
-  font-weight: 200
+.offer-advertisement-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .offer-advertisement-wrapper :is(.leading-snug) {
@@ -126,9 +166,14 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.offer-advertisement-wrapper :is(.text-violet-600) {
+.offer-advertisement-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.offer-advertisement-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {

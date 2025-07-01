@@ -85,6 +85,10 @@
   margin-bottom: 3rem
 }
 
+.opco-grid-wrapper :is(.mb-1) {
+  margin-bottom: 0.25rem
+}
+
 .opco-grid-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -278,6 +282,11 @@
   padding-top: 1.25rem
 }
 
+.opco-grid-wrapper :is(.\!text-xl) {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important
+}
+
 .opco-grid-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -297,7 +306,11 @@
   font-weight: 800
 }
 
-.opco-grid-wrapper :is(.font-extralight) {
+.opco-grid-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.opco-grid-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
@@ -313,19 +326,14 @@
   line-height: 1.375
 }
 
-.opco-grid-wrapper :is(.text-blue-600) {
+.opco-grid-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity))
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.opco-grid-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-gray-900) {
@@ -355,6 +363,11 @@
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.opco-grid-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 @media (min-width: 640px) {

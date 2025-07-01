@@ -10,7 +10,7 @@ async function createCarousel(
   carouselProducts,
   carouselLinkText,
 ) {
-  const bgColor = side === 'left' ? 'bg-gray-100' : 'bg-gray-200';
+  const bgColor = side === 'left' ? 'bg-gray-100' : 'bg-[#E5E7EB]';
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
@@ -25,7 +25,7 @@ async function createCarousel(
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
 
@@ -50,17 +50,19 @@ async function createCarousel(
 
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
-    if (!product) return;
-
     const card = div(
       {
         class:
-          'flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+          'flex-shrink-0 hover:shadow-md  cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+        onclick: () => window.open(
+          product?.url,
+          product?.url.includes('http') ? '_blank' : '_self',
+        ),
       },
       img({
-        src: product.images?.[0],
-        alt: product.title || '',
-        class: 'w-full h-[164px] object-contain',
+        src: product?.images?.[0],
+        alt: product?.title || '',
+        class: 'w-full h-[164px] p-0 object-contain',
       }),
       p(
         {
@@ -71,7 +73,7 @@ async function createCarousel(
       p(
         {
           class:
-            'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+            'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
         },
         product?.title || '',
       ),
@@ -79,7 +81,7 @@ async function createCarousel(
         {
           href: product?.url || '#',
           class:
-            'text-danaherpurple-500  !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
+            'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },
         carouselLinkText || '',
 
@@ -92,15 +94,22 @@ async function createCarousel(
       ),
     );
     const cardImage = card.querySelector('img');
-    if (cardImage) {
+
+    if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
+      cardImage.setAttribute(
+        'src',
+        '/content/dam/danaher/products/fallback-image.png',
+      );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
-          cardImage.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+          cardImage.src = '/content/dam/danaher/products/fallback-image.png';
           cardImage.setAttribute('data-fallback-applied', 'true');
         }
       };
     }
-    carouselContent.appendChild(card);
+    if (product?.title !== '' && product.title !== undefined) {
+      carouselContent.appendChild(card);
+    }
   });
 
   const totalCards = carouselContent.children.length;
@@ -172,42 +181,39 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
+  const [
+    leftTitle,
+    leftLinkLable,
+    leftProductIds,
+    rightTitle,
+    rightLinkLabel,
+    rightProductIds,
+  ] = block.children;
+
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
   const dualCarouselWrapper = div({
     class:
       'dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5',
   });
-  const leftCarouselTitle = block
-    .querySelector('[data-aue-prop="left_carousel_title"]')
-    ?.textContent.trim()
+  const leftCarouselTitle = leftTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '');
-  const leftCarouselProductIds = block
-    .querySelector('[data-aue-prop="left_carousel_product_id"]')
-    ?.textContent.trim()
+  const leftCarouselProductIds = leftProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '')
     .split(',');
-  const leftCarouselLinkText = block
-    .querySelector('[data-aue-prop="left_carousel_link_label"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || 'Continue';
-  const rightCarouselTitle = block
-    .querySelector('[data-aue-prop="right_carousel_title"]')
-    ?.textContent.trim()
+  const leftCarouselLinkText = leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
+  const rightCarouselTitle = rightTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '');
-  const rightCarouselProductIds = block
-    .querySelector('[data-aue-prop="right_carousel_product_id"]')
-    ?.textContent.trim()
+  const rightCarouselProductIds = rightProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, '')
     .split(',');
-  const rightCarouselLinkText = block
-    .querySelector('[data-aue-prop="right_carousel_link_label"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || 'View Details';
-
-  block.innerHtml = '';
-  block.textContent = '';
-  Object.keys(block).forEach((key) => delete block[key]);
+  const rightCarouselLinkText = rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '')
+    || 'View Details';
 
   let leftCarouselProducts = '';
   let leftCarouselScrollWrapper = '';
@@ -272,5 +278,12 @@ export default async function decorate(block) {
     rightCarouselScrollWrapper,
   );
   decorateIcons(dualCarouselWrapper);
+  const arrowLeftIcon = document.querySelector(
+    '#icons-sprite-Arrow-circle-left path',
+  );
+  if (arrowLeftIcon) {
+    arrowLeftIcon.setAttribute('fill', 'white');
+  }
+  block.textContent = '';
   block.append(dualCarouselWrapper);
 }

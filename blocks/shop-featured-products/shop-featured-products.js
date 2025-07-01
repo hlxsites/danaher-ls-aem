@@ -47,12 +47,17 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   }
 }
 export default function decorate(block) {
+  const [bannerTitle] = block.children;
+
+  const opcoBannerItems = [];
+  [...block.children].forEach((child, index) => {
+    if (index > 0) {
+      opcoBannerItems.push(child);
+    }
+  });
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const sectionHeading = block
-    .querySelector("[data-aue-label='Section Heading']")
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
+  const sectionHeading = bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
 
   const carouselHead = div({
     class: 'w-full flex sm:flex-row justify-between  gap-3 pb-6',
@@ -96,9 +101,7 @@ export default function decorate(block) {
     }),
   );
   // === RIGHT CAROUSEL SECTION ===
-  const items = block.querySelectorAll(
-    "[data-aue-label='Shop Featured Products Item']",
-  );
+  const items = opcoBannerItems;
   const slides = [];
   let currentIndex = 0;
   const currentPage = 1;
@@ -128,46 +131,61 @@ export default function decorate(block) {
   decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
   items.forEach((item, index) => {
-    const brandTitle = item
-      .querySelector('[data-aue-prop="brandTitle"]')
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, '') || '';
-    const productTitle = item
-      .querySelector("[data-aue-prop='productTitle']")
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, '') || '';
-    const productImage = item.querySelector(
-      "img[data-aue-prop='fileReference']",
-    );
-    const productSubHeading = item
-      .querySelector("[data-aue-prop='productSubHeading']")
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, '') || '';
-    const productDescription = item.querySelector("[data-aue-prop='productDescription']")?.innerHTML
-      || '';
-    const productButtonLabel = item
-      .querySelector("p[data-aue-prop='productButtonLabel']")
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, '') || '';
-    const productButtonUrl = item
-      .querySelector('a[href]:not([data-aue-label])')
-      ?.getAttribute('href')
-      .replace(/<[^>]*>/g, '') || '#';
+    let itemTitle;
+    let itemHeading;
+    let itemSubHeading;
+    let itemDescription;
+    let itemImage;
+    let itemButtonLabel;
+    let itemButtonUrl;
+    let itemButtonTarget;
+    let itemBgColor;
+    if (item.children.length > 8) {
+      [
+        itemTitle,
+        itemHeading,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemButtonLabel,
+        itemButtonUrl,
+        itemButtonTarget,
+        itemBgColor,
+      ] = item.children;
+    } else {
+      [
+        itemTitle,
+        itemHeading,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemButtonLabel,
+        itemButtonUrl,
+        itemBgColor,
+        itemButtonTarget,
+      ] = item.children;
+    }
 
-    const bgColor = item
-      .querySelector("p[data-aue-prop='bg-color']")
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, '') || '#660099';
+    const brandTitle = itemTitle?.textContent?.trim() || '';
+    const productTitle = itemHeading?.textContent?.trim() || '';
+    const productSubHeading = itemSubHeading?.textContent?.trim() || '';
+    const productDescription = itemDescription?.innerHTML || '';
+    const productImage = itemImage?.querySelector('img');
+    const bgColor = itemBgColor?.textContent?.trim() || '#660099';
+    const productButtonUrl = itemButtonUrl?.querySelector('a')?.href;
+    const productButtonTarget = itemButtonTarget?.textContent?.trim() || '';
+    const productButtonLabel = itemButtonLabel?.textContent?.trim() || '';
+
     // === Left Image Section ===
 
     if (productImage) {
       productImage.onerror = () => {
-        productImage.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        productImage.src = '/content/dam/danaher/products/fallback-image.png';
       };
     }
     let fallbackImage = '';
     if (!productImage) {
-      fallbackImage = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+      fallbackImage = '/content/dam/danaher/products/fallback-image.png';
     }
     const leftSection = div(
       {
@@ -217,18 +235,14 @@ export default function decorate(block) {
           productSubHeading,
         ),
 
-        div(
-          {
-            class: 'text-white text-base m-0 font-extralight leading-snug ',
-          },
-          ...Array.from(
-            new DOMParser().parseFromString(productDescription, 'text/html')
-              .body.childNodes,
-          ),
-        ),
+        div({
+          class:
+            'shop-featured-description text-white text-base m-0  leading-snug ',
+        }),
         a(
           {
             href: productButtonUrl,
+            target: productButtonTarget ? '_blank' : '_self',
             class:
               'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },
@@ -236,6 +250,22 @@ export default function decorate(block) {
         ),
       ),
     );
+    if (productDescription) {
+      rightSection
+        ?.querySelector('.shop-featured-description')
+        ?.insertAdjacentHTML('beforeend', productDescription);
+    }
+    const descriptionLinks = rightSection
+      ?.querySelector('.shop-featured-description')
+      ?.querySelectorAll('a');
+    descriptionLinks?.forEach((link) => {
+      const linkHref = link?.getAttribute('href');
+
+      link.setAttribute(
+        'target',
+        linkHref.includes('http') ? '_blank' : '_self',
+      );
+    });
 
     const slide = div(
       {
@@ -262,15 +292,15 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        'w-full gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+        'w-full hidden gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
     carouselHead,
     carouselOuter,
   );
   if (items?.length === 0) {
-    container?.classList.add('hidden');
+    // container?.classList.add("hidden");
   } else if (container?.classList.contains('hidden')) {
-    container?.classList.remove('hidden');
+    // container?.classList.remove("hidden");
   }
 
   //   block.innerHtml = "";

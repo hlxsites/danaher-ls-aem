@@ -21,15 +21,7 @@ export default async function buildAutoBlocks() {
     if (!breadcrumbBlock) {
       const breadcrumbEl = div(
         { class: 'breadcrumb' },
-        div(
-          div(
-            ul(
-              li(
-                a({ href: '/us/en/products' }, 'Products'),
-              ),
-            ),
-          ),
-        ),
+        div(div(ul(li(a({ href: '/us/en/products' }, 'Products'))))),
       );
       if (response) {
         addProductBreadCrumb(response, breadcrumbEl);
@@ -37,7 +29,10 @@ export default async function buildAutoBlocks() {
       breadcrumbBlock = buildBlock('breadcrumb', { elems: [breadcrumbEl] });
     }
     const breadcrumbSection = breadcrumbBlock.parentElement || div(breadcrumbBlock);
-    productHeroEl.parentElement.insertAdjacentElement('afterend', breadcrumbSection);
+    productHeroEl.parentElement.insertAdjacentElement(
+      'afterend',
+      breadcrumbSection,
+    );
   }
 
   buildProductSchema();

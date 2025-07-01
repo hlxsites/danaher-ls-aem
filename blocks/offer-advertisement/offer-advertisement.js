@@ -1,18 +1,18 @@
 import { div, a } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  const titleEl = block
-    .querySelector('[data-aue-prop="offer_advertisement_title"]')
-    ?.textContent?.trim();
-  const linkTextEl = block
-    .querySelector('[data-aue-prop="offer_text"]')
-    ?.textContent?.trim();
-  const linkHref = block
-    .querySelector('div *:not([data-aue-label]) a')
-    ?.getAttribute('href') || '#';
-
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
+  const [
+    offerAdvertisement,
+  ] = block.children;
+
+  const titleEl = offerAdvertisement.querySelector('p');
+  const linkHref = offerAdvertisement.querySelector('a')?.getAttribute('href') || '#';
+  const linkTextEl = offerAdvertisement?.querySelectorAll('p')?.[1];
+  const openNewTab = block.children[1]?.querySelector('p')?.textContent;
+
   const offerAdvertisementWrapper = div({
     class:
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 lg:px-0',
@@ -25,7 +25,7 @@ export default function decorate(block) {
       },
       div(
         {
-          class: 'justify-start text-black text-2xl font-normal',
+          class: 'justify-start text-black text-2xl font-medium',
         },
         titleEl,
       ),
@@ -36,9 +36,9 @@ export default function decorate(block) {
     ? div(
       {
         class:
-            'justify-start text-violet-600 text-base font-bold leading-snug flex items-center gap-1',
+            'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
       },
-      a({ href: linkHref }, linkTextEl),
+      a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl),
     )
     : null;
 

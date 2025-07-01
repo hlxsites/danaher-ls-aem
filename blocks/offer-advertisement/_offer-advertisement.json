@@ -39,7 +39,13 @@
                     "component": "aem-content",
                     "name": "offer_link",
                     "label": "Link"
-                  }
+                  },
+                  {
+                  "component": "boolean",
+                  "name": "subscribe",
+                  "value": false,
+                  "label": "Open Read More link in new tab"
+                }
             ]
         }
     ],

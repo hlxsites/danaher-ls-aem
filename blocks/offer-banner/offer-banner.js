@@ -6,18 +6,27 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
-  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
-  const linkTextEl = block.querySelector('a');
-  const linkLabelEl = block.querySelector('[data-aue-prop="linkLabel"]');
-  const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
 
-  const title = titleEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const [
+    offerBannerTitle,
+    offerBannerImage,
+    offerBannerLink,
+    offerBannerLinkTarget,
+    offerBannerLinkLabel,
+  ] = block.children;
+
+  const titleEl = offerBannerTitle.textContent.trim() || '';
+  const imgEl = offerBannerImage.querySelector('img');
+  const linkTextEl = offerBannerLink.textContent.trim() || '';
+  const linkLabelEl = offerBannerLinkTarget.textContent.trim() || '';
+  const bgColorEl = offerBannerLinkLabel.textContent.trim() || '#E5E7EB';
+
+  const title = titleEl;
   const imgSrc = imgEl?.getAttribute('src').replace(/<[^>]*>/g, '') || '';
   const imgAlt = imgEl?.getAttribute('alt') || 'Banner image';
-  const linkText = linkTextEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
-  const linkLabel = linkLabelEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
-  const bgColor = bgColorEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '#E5E7EB';
+  const linkText = linkTextEl;
+  const linkLabel = linkLabelEl;
+  const bgColor = bgColorEl;
 
   const bannerSection = div(
     {
@@ -48,7 +57,7 @@ export default function decorate(block) {
           {
             href: linkTextEl || '#',
             class:
-                'text-base text-danaherpurple-500 font-semibold mt-4 flex items-center  md:pl-8',
+                'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
           },
           linkLabel || '',
           span({

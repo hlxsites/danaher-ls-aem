@@ -41,17 +41,31 @@ async function getCategoryInfo(category) {
 }
 
 function renderGridCard(item) {
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-40 object-cover',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageElement = img({
-    src: item.image,
-    alt: item.title,
-    class: 'w-full h-40 object-cover',
-  });
+  const imageElement = createImageWithFallback(item.image, item.title);
 
   imageWrapper.append(imageElement);
 
@@ -61,12 +75,16 @@ function renderGridCard(item) {
 
   const titleElement = div(
     {
-      class:
-        'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
+      class: 'p-3',
     },
-    (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    div(
+      {
+        class:
+          'text-black text-xl font-medium line-clamp-2 overflow-hidden leading-7',
+      },
+      (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    ),
   );
-
   const description = div(
     {
       class: 'p-3',
@@ -74,7 +92,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
+          'justify-start text-black text-base font-normal line-clamp-3 overflow-hidden',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -85,12 +103,12 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800  [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
       }),
     ),
   );
@@ -110,15 +128,12 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
-    class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 lg:px-0',
   });
 
-  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
-  const title = block.querySelector('[data-aue-prop="title"]');
-  const rawIds = productIdEl?.textContent.trim() || '';
-  if (productIdEl) productIdEl.remove();
-  if (title) title.remove();
+  const productIdEl = block.children[1]?.textContent.trim() || '';
+  const title = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
+  const rawIds = productIdEl;
 
   const productIds = rawIds
     .split(',')
@@ -168,22 +183,22 @@ export default async function decorate(block) {
   });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+      class: 'text-black text-2xl font-medium whitespace-nowrap',
     },
     title?.textContent || '',
   );
   leftGroup.append(productTitle);
 
   const arrowGroup = div({
-    class: 'flex md:justify-start justify-end items-center gap-3',
+    class: 'flex md:justify-start justify-end items-center',
   });
   const prevDiv = div({
     class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   const nextDiv = div({
     class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   arrowGroup.append(prevDiv, nextDiv);
   carouselHead.append(leftGroup, arrowGroup);
