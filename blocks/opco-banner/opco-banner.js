@@ -39,7 +39,8 @@ export default async function decorate(block) {
   const opcoBannerHeading = bannerHeading;
   const opcoBannerDescription = bannerDescription?.innerHTML;
   const opcoBannerImage = bannerImage?.querySelector('img');
-  const opcoBannerButtonLabel = bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const opcoBannerButtonLabel =
+    bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
   const opcoBannerButtonTarget = bannerButtonNewTab?.textContent?.trim() || '';
   const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
 
@@ -47,9 +48,9 @@ export default async function decorate(block) {
     class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
   });
   if (
-    currentPath.includes('products.html')
-    || currentPath.includes('/shop-page')
-    || currentPath.includes('/shop-home')
+    currentPath.includes('products.html') ||
+    currentPath.includes('/shop-page') ||
+    currentPath.includes('/shop-home')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
@@ -60,10 +61,8 @@ export default async function decorate(block) {
     // Build unique filters (exclude brands with commas)
     const filterSet = new Set();
     allProducts.forEach((item) => {
-      if (item.type === 'ProductBrandHome' && item.title !== '') {
-        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
-      }
+      const brand = item.brand?.trim();
+      if (brand && !brand.includes(',')) filterSet.add(brand);
     });
     const allBrands = Array.from(filterSet).sort();
 
@@ -80,8 +79,8 @@ export default async function decorate(block) {
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
-            linkLabel,
-          ),
+            linkLabel
+          )
         );
       }
     });
@@ -98,8 +97,8 @@ export default async function decorate(block) {
           class:
             'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
         },
-        opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, ''),
-      ),
+        opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, '')
+      )
     );
   }
   if (opcoBannerImage) {
@@ -108,7 +107,7 @@ export default async function decorate(block) {
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
         class: 'w-[120px] mb-2 md:mb-8 h-auto',
-      }),
+      })
     );
   }
 
@@ -119,8 +118,8 @@ export default async function decorate(block) {
           class:
             'text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal',
         },
-        opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, ''),
-      ),
+        opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, '')
+      )
     );
   }
 
@@ -137,7 +136,7 @@ export default async function decorate(block) {
 
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref.includes('http') ? '_blank' : '_self'
       );
     });
     leftContent.append(leftDescription);
@@ -165,7 +164,7 @@ export default async function decorate(block) {
         class:
           'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
       },
-      opcoBannerButtonLabel,
+      opcoBannerButtonLabel
     );
     leftContent.append(ctaWrapper);
   }
@@ -174,7 +173,7 @@ export default async function decorate(block) {
       class:
         'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
     },
-    leftContent,
+    leftContent
   );
 
   // === RIGHT CAROUSEL SECTION ===
@@ -187,7 +186,7 @@ export default async function decorate(block) {
       class:
         'controlsContentText justify-start text-black text-base font-bold leading-snug',
     },
-    `1/${slides.length}`,
+    `1/${slides.length}`
   );
 
   const updateSlides = (dir) => {
@@ -222,7 +221,7 @@ export default async function decorate(block) {
       },
       span({
         class: 'icon icon-arrow-left-icon',
-      }),
+      })
     ),
     numberIndicator,
     button(
@@ -233,8 +232,8 @@ export default async function decorate(block) {
       },
       span({
         class: 'icon icon-arrow-right-icon',
-      }),
-    ),
+      })
+    )
   );
   opcoBannerItems.forEach((item, index) => {
     let itemTitle;
@@ -291,7 +290,7 @@ export default async function decorate(block) {
           class: `${
             opcoBannerItemBgImage ? 'opacity-0' : ''
           } w-[300px] h-[184px] object-cover`,
-        }),
+        })
       );
     }
 
@@ -301,8 +300,8 @@ export default async function decorate(block) {
           {
             class: 'text-3xl leading-10 font-medium text-black text-center',
           },
-          opcoBannerItemTitle,
-        ),
+          opcoBannerItemTitle
+        )
       );
     }
 
@@ -313,8 +312,8 @@ export default async function decorate(block) {
             class:
               'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
           },
-          opcoBannerItemSubHeading,
-        ),
+          opcoBannerItemSubHeading
+        )
       );
     }
 
@@ -322,7 +321,7 @@ export default async function decorate(block) {
       const descriptionHtml = div();
       descriptionHtml.insertAdjacentHTML(
         'beforeend',
-        opcoBannerItemDescription,
+        opcoBannerItemDescription
       );
 
       const descriptionLinks = descriptionHtml.querySelectorAll('a');
@@ -331,7 +330,7 @@ export default async function decorate(block) {
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self',
+          linkHref.includes('http') ? '_blank' : '_self'
         );
       });
       contentWrapper.append(
@@ -340,8 +339,8 @@ export default async function decorate(block) {
             class:
               'text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]',
           },
-          descriptionHtml,
-        ),
+          descriptionHtml
+        )
       );
     }
 
@@ -351,13 +350,14 @@ export default async function decorate(block) {
           {
             class:
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
-            onclick: () => window.open(
-              ctaUrl,
-              opcoBannerItemButtonTarget ? '_blank' : '_self',
-            ),
+            onclick: () =>
+              window.open(
+                ctaUrl,
+                opcoBannerItemButtonTarget ? '_blank' : '_self'
+              ),
           },
-          opcoBannerItemButtonLabel,
-        ),
+          opcoBannerItemButtonLabel
+        )
       );
     }
     const overlayWrapper = div({
@@ -374,7 +374,7 @@ export default async function decorate(block) {
         style: index === 0 ? '' : 'display: none;',
       },
       contentWrapper,
-      overlayWrapper,
+      overlayWrapper
     );
 
     if (opcoBannerItemBgImage) {
@@ -421,7 +421,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    opcoBannerItems.length > 0 ? controls : '',
+    opcoBannerItems.length > 0 ? controls : ''
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
@@ -433,7 +433,7 @@ export default async function decorate(block) {
         'flex flex-col md:flex-row w-full dhls-container !mt-0 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
     },
     left,
-    right,
+    right
   );
   block.append(container);
   [...block.children].forEach((child) => {
