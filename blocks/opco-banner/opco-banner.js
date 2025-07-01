@@ -55,17 +55,16 @@ export default async function decorate(block) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
     const brandsRaw = await brandsResponse.json();
-    let allProducts = Array.isArray(brandsRaw)
+    const allProducts = Array.isArray(brandsRaw)
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
-
+    // Build unique filters (exclude brands with commas)
     const filterSet = new Set();
     allProducts.forEach((item) => {
-      const brand = item.brand?.trim();
-      if (brand && !brand.includes(',')) filterSet.add(brand);
+      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
+      if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
     });
     const allBrands = Array.from(filterSet).sort();
-    console.log(' all brands : ', allBrands);
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
