@@ -70,7 +70,7 @@ export default async function decorate(block) {
       }
     });
     const allBrands = Array.from(filterSet).sort();
-    console.log(' all brands: ', allBrands);
+    console.log(' all brands  2: ', allBrands);
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
