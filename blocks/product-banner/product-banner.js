@@ -149,7 +149,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-danaherpurple-500 hover:text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
+            'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
         detailsLink,
