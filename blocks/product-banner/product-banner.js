@@ -28,7 +28,7 @@ export default function productBannerDecorate(block) {
   const categoryHeading = productBannerTitle?.textContent.trim() || '';
   const btnText = productBannerLink?.textContent.trim() || '#';
   const btnLink = productBannerLinkTarget?.textContent?.trim();
-  const rawCategoryDescription = productBannerHeading?.textContent.trim() || '';
+  const rawCategoryDescription = productBannerHeading?.innerHTML.trim() || '';
   const details = block.children[5]?.querySelector('div')?.innerHTML?.trim() || '';
   const detailsLink = 'Read More';
   const image = block?.querySelector('img');
