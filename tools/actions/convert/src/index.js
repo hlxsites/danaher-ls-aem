@@ -199,13 +199,11 @@ function skipConverter(path) {
     path.includes(convertPath)
   );
     if (!pathsToConvert) {
-      console.log('returning false');
-      return false;
+      return true;
     }
     else 
     {
-      console.log('returning true');
-      return true;
+      return false;
     }
   }
 
