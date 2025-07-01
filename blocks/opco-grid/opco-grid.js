@@ -1,5 +1,7 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { a, div, img, h3, p, span } from '../../scripts/dom-builder.js';
+import {
+  a, div, img, h3, p, span,
+} from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
@@ -7,7 +9,7 @@ export default function decorate(block) {
     block.parentElement.parentElement.classList.contains('opco-grid-container')
   ) {
     block.parentElement.parentElement.classList.remove(
-      ...'bg-danaherlightblue-50'.split(' ')
+      ...'bg-danaherlightblue-50'.split(' '),
     );
   }
 
@@ -39,12 +41,11 @@ export default function decorate(block) {
       cardWrapper.href = makePublicUrl(readMoreLink?.href);
       cardWrapper.title = itemTitle?.textContent?.trim() || '';
     }
-    cardWrapper.className =
-      'opco-grid-wrapper  flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    cardWrapper.className = 'opco-grid-wrapper  flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
     cardWrapper.classList.add(
       'cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(
-        ' '
-      )
+        ' ',
+      ),
     );
 
     const opcoContent = div(
@@ -55,26 +56,26 @@ export default function decorate(block) {
         { class: 'opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0' },
         img({
           src:
-            itemImage?.querySelector('img')?.src ||
-            '/content/dam/danaher/products/fallbackImage.jpeg',
+            itemImage?.querySelector('img')?.src
+            || '/content/dam/danaher/products/fallbackImage.jpeg',
           alt: itemAltText?.textContent.trim() || '',
           class: 'h-[164px] w-[294px] !object-contain',
-        })
+        }),
       ),
       h3(
         {
           class:
             '!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0',
         },
-        itemTitle?.textContent.trim() || ''
+        itemTitle?.textContent.trim() || '',
       ),
       p(
         {
           class:
             'font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug',
         },
-        itemDescription?.textContent.trim() || ''
-      )
+        itemDescription?.textContent.trim() || '',
+      ),
     );
     // Add CTA link at the bottom if available
     if (itemLink) {
@@ -91,8 +92,8 @@ export default function decorate(block) {
           span({
             class:
               'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-          })
-        )
+          }),
+        ),
       );
       opcoContent.append(cta);
     }
