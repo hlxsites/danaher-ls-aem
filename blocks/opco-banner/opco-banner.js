@@ -74,8 +74,6 @@ export default async function decorate(block) {
       .map(([name, path]) => ({ name, path }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    console.log(' all brands  : ', allBrands);
-
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
@@ -84,7 +82,9 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: linkTarget || '#',
+              href: `/us/en/products/brand/${pills?.name
+                ?.toLowerCase()
+                .replace(/\s+/g, '-')}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
