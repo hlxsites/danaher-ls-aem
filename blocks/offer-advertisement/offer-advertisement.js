@@ -4,8 +4,6 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  console.log("block", block);
-
   const [
     offerAdvertisement,
   ] = block.children;
@@ -13,6 +11,7 @@ export default function decorate(block) {
   const titleEl = offerAdvertisement.querySelector('p');
   const linkHref = offerAdvertisement.querySelector('a')?.getAttribute('href') || '#';
   const linkTextEl = offerAdvertisement?.querySelectorAll('p')?.[1];
+  const openNewTab = block.children[1]?.querySelector('p')?.textContent;
 
   const offerAdvertisementWrapper = div({
     class:
@@ -39,7 +38,7 @@ export default function decorate(block) {
         class:
             'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
       },
-      a({ href: linkHref }, linkTextEl),
+      a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl),
     )
     : null;
 
