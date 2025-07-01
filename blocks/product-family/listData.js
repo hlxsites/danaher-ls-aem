@@ -15,7 +15,7 @@ export default function renderProductListCard(item) {
       'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
   });
 
-  const fallbackImagePath = '/icons/fallback-image.png';
+  const fallbackImagePath = '/content/dam/danaher/products/fallback-image.png';
 
   // Create image with fallback functionality
   const createImageWithFallback = (src, alt) => {
