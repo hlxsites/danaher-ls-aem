@@ -61,10 +61,13 @@ export default async function decorate(block) {
     // Build unique filters (exclude brands with commas)
     const filterSet = new Set();
     allProducts.forEach((item) => {
-      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-      if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+      if (item.type === 'Category' && item.title !== '') {
+        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
+        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+      }
     });
     const allBrands = Array.from(filterSet).sort();
+    console.log(' all brands: ', allBrands);
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
