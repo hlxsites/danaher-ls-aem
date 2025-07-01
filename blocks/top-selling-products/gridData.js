@@ -1,6 +1,4 @@
-import {
-  div, p, span, img,
-} from '../../scripts/dom-builder.js';
+import { div, p, span, img } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 /**
@@ -14,10 +12,11 @@ export default function renderGridCard(item) {
     {
       class:
         'w-full hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
-      onclick: () => window.open(
-        item?.url,
-        item?.url?.includes('http') ? '_blank' : '_self',
-      ),
+      onclick: () =>
+        window.open(
+          item?.url,
+          item?.url?.includes('http') ? '_blank' : '_self'
+        ),
     },
     img({
       src: imageUrl,
@@ -29,14 +28,14 @@ export default function renderGridCard(item) {
         class:
           'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
       },
-      item?.brand?.replace(/<[^>]*>/g, '') || '',
+      item?.brand?.replace(/<[^>]*>/g, '') || ''
     ),
     p(
       {
         class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
-      item?.title?.replace(/<[^>]*>/g, '') || '',
+      item?.title?.replace(/<[^>]*>/g, '') || ''
     ),
     span(
       {
@@ -47,8 +46,8 @@ export default function renderGridCard(item) {
       span({
         class:
           'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
-    ),
+      })
+    )
   );
   decorateIcons(card);
 
@@ -56,7 +55,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = '/content/dam/danaher/products/fallback-image.png';
+        imgElement.src = '/content/dam/danaher/products/fallbackImage.jpeg';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };
