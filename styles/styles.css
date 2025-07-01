@@ -2687,6 +2687,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   scroll-behavior: smooth;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .break-normal {
   overflow-wrap: normal;
   word-break: normal;
@@ -2975,6 +2981,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .leading-5 {
