@@ -82,7 +82,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brand/${pills?.name
+              href: `/us/en/products/brands/${pills?.name
                 ?.toLowerCase()
                 .replace(/\s+/g, '-')}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
