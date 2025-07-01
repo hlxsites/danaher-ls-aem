@@ -58,14 +58,20 @@ export default async function decorate(block) {
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
     // Build unique filters (exclude brands with commas)
-    const filterSet = new Set();
+    const brandMap = new Map();
+
     allProducts.forEach((item) => {
-      if (item.type === 'ProductBrandHome' && item.title !== '') {
-        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+      const brand = item.brand?.trim();
+      const path = item.path?.trim();
+
+      if (brand && !brand.includes(',') && !brandMap.has(brand)) {
+        brandMap.set(brand, path);
       }
     });
-    const allBrands = Array.from(filterSet).sort();
+
+    const allBrands = Array.from(brandMap.entries())
+      .map(([name, path]) => ({ name, path }))
+      .sort((asr, b) => asr.name.localeCompare(b.name));
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
@@ -75,7 +81,9 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: linkTarget || '#',
+              href: `/us/en/products/brands/${pills?.name
+                ?.toLowerCase()
+                .replace(/\s+/g, '-')}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -107,7 +115,7 @@ export default async function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[120px] mb-2 md:mb-8 h-auto',
+        class: 'w-[172px] mb-2 md:mb-8 h-auto',
       }),
     );
   }
