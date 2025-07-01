@@ -58,16 +58,14 @@ export default async function decorate(block) {
     let allProducts = Array.isArray(brandsRaw)
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
-    // Build unique filters (exclude brands with commas)
-    allProducts = allProducts.sort((item1, item2) =>
-      item1.title.localeCompare(item2.title)
-    );
+
     const filterSet = new Set();
     allProducts.forEach((item) => {
       const brand = item.brand?.trim();
       if (brand && !brand.includes(',')) filterSet.add(brand);
     });
     const allBrands = Array.from(filterSet).sort();
+    console.log(' all brands : ', allBrands);
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
