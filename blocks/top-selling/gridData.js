@@ -38,7 +38,7 @@ export default function renderGridCard(item) {
       'w-[331px] md:w-[305px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
-  const fallbackImagePath = '/icons/fallback-image.png';
+  const fallbackImagePath = '/content/dam/danaher/products/fallbackImage.jpeg';
 
   // Create image with fallback functionality
   const createImageWithFallback = (src, alt) => {

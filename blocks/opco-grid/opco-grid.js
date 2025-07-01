@@ -57,7 +57,7 @@ export default function decorate(block) {
         img({
           src:
             itemImage?.querySelector('img')?.src
-            || '/content/dam/danaher/products/fallback-image.png',
+            || '/content/dam/danaher/products/fallbackImage.jpeg',
           alt: itemAltText?.textContent.trim() || '',
           class: 'h-[164px] w-[294px] !object-contain',
         }),
