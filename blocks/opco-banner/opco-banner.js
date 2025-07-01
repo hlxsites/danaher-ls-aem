@@ -59,18 +59,22 @@ export default async function decorate(block) {
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
     // Build unique filters (exclude brands with commas)
-    const filterSet = new Set();
+    const brandMap = new Map();
+
     allProducts.forEach((item) => {
-      if (item.type === 'Category' && item.title !== '') {
-        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-        if (brand && !brand?.name?.includes(',')) {
-          const brandKey = JSON.stringify(brand);
-          filterSet.add(brandKey);
-        }
+      const brand = item.brand?.trim();
+      const path = item.path?.trim();
+
+      if (brand && !brand.includes(',') && !brandMap.has(brand)) {
+        brandMap.set(brand, path);
       }
     });
-    const allBrands = Array.from(filterSet).sort();
-    console.log(' all brands  2: ', allBrands);
+
+    const allBrands = Array.from(brandMap.entries())
+      .map(([name, path]) => ({ name, path }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    console.log(' all brands  : ', allBrands);
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
