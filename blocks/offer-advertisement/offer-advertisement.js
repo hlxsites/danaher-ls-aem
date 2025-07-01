@@ -4,6 +4,8 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
+  console.log("block", block);
+
   const [
     offerAdvertisement,
   ] = block.children;
