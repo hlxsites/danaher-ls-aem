@@ -55,10 +55,13 @@ export default async function decorate(block) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
     const brandsRaw = await brandsResponse.json();
-    const allProducts = Array.isArray(brandsRaw)
+    let allProducts = Array.isArray(brandsRaw)
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
     // Build unique filters (exclude brands with commas)
+    allProducts = allProducts.sort((item1, item2) =>
+      item1.title.localeCompare(item2.title)
+    );
     const filterSet = new Set();
     allProducts.forEach((item) => {
       const brand = item.brand?.trim();
