@@ -27,7 +27,7 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered list card element.
  */
 export default function renderListCard(item) {
-  const fallbackImagePath = '/icons/fallback-image.png';
+  const fallbackImagePath = '/content/dam/danaher/products/fallbackImage.jpeg';
 
   // Create image with fallback functionality
   const createImageWithFallback = (src, alt) => {
