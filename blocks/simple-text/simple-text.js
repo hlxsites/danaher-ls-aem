@@ -16,8 +16,7 @@ export default function decorate(block) {
     });
     leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
     leftDiv.querySelectorAll('p')?.forEach((ite) => {
-      console.log('ite text contenbt : ', ite?.textContent?.trim());
-
+      ite.classList.add('pb-4');
       if (ite?.textContent?.trim() === '') {
         ite.remove();
       }
@@ -38,6 +37,12 @@ export default function decorate(block) {
       class: 'text-base text-black md:w-1/2 font-normal leading-snug mt-1',
     });
     rightDiv.insertAdjacentHTML('beforeend', rightTextEl);
+    rightDiv.querySelectorAll('p')?.forEach((ite) => {
+      ite.classList.add('pb-4');
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = rightDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
       const linkHref = link?.getAttribute('href');
