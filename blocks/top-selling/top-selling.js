@@ -65,7 +65,9 @@ export default async function decorate(block) {
         href: linkUrl ?? '#',
         class:
           'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
-        target: `${block.children[2].textContent.trim() === 'true' ? '_blank' : '_self'}`,
+        target: `${
+          block.children[2].textContent.trim() === 'true' ? '_blank' : '_self'
+        }`,
       },
       linkText ?? '',
       linkText?.length
@@ -85,18 +87,22 @@ export default async function decorate(block) {
   const arrowGroup = div({ class: 'flex justify-start items-center' });
   const prevDiv = div(
     {
-      class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
+      class:
+        'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+      class:
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
     }),
   );
   const nextDiv = div(
     {
-      class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
+      class:
+        'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+      class:
+        'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -148,9 +154,9 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error' && product.title?.trim(),
-  );
+  const products = (
+    await Promise.allSettled(productIds.map(getProductInfo))
+  ).filter((product) => product.status !== 'error' && product.title?.trim());
 
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
