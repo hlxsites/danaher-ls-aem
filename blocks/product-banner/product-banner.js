@@ -26,7 +26,7 @@ export default function productBannerDecorate(block) {
     productBannerHeading,
   ] = block.children;
   const categoryHeading = productBannerTitle?.textContent.trim() || '';
-  const btnText = productBannerLink?.textContent.trim() || '#';
+  const btnText = productBannerLink?.textContent.trim() || '';
   const btnLink = productBannerLinkTarget?.textContent?.trim();
   const rawCategoryDescription = productBannerHeading?.innerHTML.trim() || '';
   const details = block.children[5]?.querySelector('div')?.innerHTML?.trim() || '';
@@ -76,12 +76,14 @@ export default function productBannerDecorate(block) {
     },
     a(
       {
-        class: 'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] flex justify-center items-center overflow-hidden',
+        class:
+          'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
         {
-          class: 'text-right justify-start text-white text-base font-medium leading-snug transition}',
+          class:
+            'text-right justify-start text-white text-base font-medium leading-snug transition}',
         },
         btnText,
       ),
@@ -104,7 +106,13 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-800', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add(
+      'text-danaherpurple-500',
+      'hover:text-danaherpurple-800',
+      'mt-8',
+      'gap-4',
+      'font-bold',
+    );
   });
 
   const categoryBannerDescription = div({
@@ -196,8 +204,11 @@ export default function productBannerDecorate(block) {
   block.innerHTML = '';
   block.appendChild(productBannerWrapper);
 
-  block.querySelector('.category_banner-description')?.querySelectorAll('a')?.forEach((aEle, index) => {
-    if (index === 0) aEle.parentElement.classList.add('pt-4');
-    aEle.parentElement.classList.add('pb-4');
-  });
+  block
+    .querySelector('.category_banner-description')
+    ?.querySelectorAll('a')
+    ?.forEach((aEle, index) => {
+      if (index === 0) aEle.parentElement.classList.add('pt-4');
+      aEle.parentElement.classList.add('pb-4');
+    });
 }
