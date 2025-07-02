@@ -291,7 +291,7 @@ export default async function decorate(block) {
 
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.textContent?.trim();
+    const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
     const opcoBannerItemImage = itemImage?.querySelector('img');
     const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
     const ctaUrl = itemButtonUrl?.textContent?.trim();
