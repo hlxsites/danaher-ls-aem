@@ -77,13 +77,17 @@ export default async function decorate(block) {
       const linkLabel = pills?.name || '';
 
       const linkTarget = pills?.path || '#';
+      let brandLink = '';
       if (linkLabel) {
+        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
+          brandLink = 'leica';
+        } else {
+          brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+        }
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${pills?.name
-                ?.toLowerCase()
-                .replace(/\s+/g, '-')}`,
+              href: `/us/en/products/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
