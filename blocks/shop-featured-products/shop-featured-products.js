@@ -242,7 +242,7 @@ export default function decorate(block) {
         a(
           {
             href: productButtonUrl,
-            target: productButtonTarget ? '_blank' : '_self',
+            target: productButtonTarget === 'true' ? '_blank' : '_self',
             class:
               'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },

@@ -168,7 +168,7 @@ export default function decorate(block) {
           a(
             {
               href: linkUrl,
-              target: linkTarget ? '_blank' : '_self',
+              target: linkTarget === 'true' ? '_blank' : '_self',
               class:
                 'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800  text-base font-semibold  flex items-center !m-0 !p-0',
             },
