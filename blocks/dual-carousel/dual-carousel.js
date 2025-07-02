@@ -200,24 +200,31 @@ export default async function decorate(block) {
   const leftCarouselTitle = leftTitle?.textContent
     .trim()
     .replace(/<[^>]*>/g, '');
-  const leftCarouselProductIds = leftProductIds?.textContent
+  const leftCarouselProductIdsRaw = leftProductIds?.textContent
     .trim()
-    .replace(/<[^>]*>/g, '')
-    .split(',');
+    .replace(/<[^>]*>/g, '');
+
+  const leftCarouselProductIds = leftCarouselProductIdsRaw
+    ? leftCarouselProductIdsRaw.split(',')
+    : [];
   const leftCarouselLinkText = leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
   const rightCarouselTitle = rightTitle?.textContent
     .trim()
     .replace(/<[^>]*>/g, '');
-  const rightCarouselProductIds = rightProductIds?.textContent
+  const rightCarouselProductIdsRaw = rightProductIds?.textContent
     .trim()
-    .replace(/<[^>]*>/g, '')
-    .split(',');
+    .replace(/<[^>]*>/g, '');
+
+  const rightCarouselProductIds = rightCarouselProductIdsRaw
+    ? rightCarouselProductIdsRaw.split(',')
+    : [];
+
   const rightCarouselLinkText = rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '')
     || 'View Details';
 
   let leftCarouselProducts = '';
   let leftCarouselScrollWrapper = '';
-  if (leftCarouselProductIds) {
+  if (leftCarouselProductIds?.length > 0) {
     leftCarouselProducts = (
       await Promise.allSettled(
         leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
@@ -243,7 +250,7 @@ export default async function decorate(block) {
 
   let rightCarouselProducts = '';
   let rightCarouselScrollWrapper = '';
-  if (rightCarouselProductIds) {
+  if (rightCarouselProductIds?.length > 0) {
     rightCarouselProducts = (
       await Promise.allSettled(
         rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
