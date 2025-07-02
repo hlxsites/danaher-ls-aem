@@ -46,9 +46,7 @@ export default function decorate(block) {
         class: 'flex items-center justify-center h-full w-full',
       },
       img({
-        src:
-          imgSrc ||
-          'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+        src: imgSrc || '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: imgAlt,
         class: 'w-full h-full object-contain',
       })

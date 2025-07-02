@@ -139,7 +139,7 @@ function facetButtonClick(e) {
 const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
-    { class: 'inline-flex justify-start gap-2' },
+    { class: 'inline-flex justify-start' },
     button(
       {
         class: 'text-left flex flex-row gap-2',
@@ -155,12 +155,10 @@ const facetItem = (filter, valueObj) => {
         }),
       ),
     ),
-    // Add a space between the button and the label/count
-    span({ class: 'ml-1' }, ' '),
     div(
       { class: 'flex items-center gap-2' },
       div(
-        { class: 'justify-start text-black text-sm break-all font-medium leading-5' },
+        { class: 'justify-start text-black text-sm font-medium leading-5' },
         `${valueObj.value} (${valueObj.numberOfResults})`,
       ),
     ),
@@ -194,7 +192,7 @@ function iterateChildren(filter, node, searchQuery = '') {
   const liEl = div(
     { class: 'inline-flex flex-col justify-start items-start gap-2' },
     div(
-      { class: 'inline-flex justify-start gap-2 w-full' },
+      { class: 'inline-flex justify-start' },
       button(
         {
           class: `${filter.facetId} text-left flex flex-row gap-2`,
@@ -213,12 +211,10 @@ function iterateChildren(filter, node, searchQuery = '') {
       ),
       div(
         { class: 'flex items-center gap-2' },
-        // Add a space between the button and the label/count
-        span({ class: 'ml-1' }, ' '),
         div(
           { class: 'flex items-center gap-2' },
           div(
-            { class: 'justify-start text-black text-sm break-all font-medium leading-5' },
+            { class: 'justify-start text-black text-sm font-medium leading-5' },
             `${node.value} (${node.numberOfResults})`,
           ),
         ),
@@ -256,7 +252,7 @@ const renderFacet = (filter, isFirst = false) => {
   }
 
   const facetDiv = div({
-    class: 'facet self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3',
+    class: 'facet self-stretch bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-y-3',
   });
 
   // Facet header
@@ -285,7 +281,11 @@ const renderFacet = (filter, isFirst = false) => {
   // Add search bar for workflowname and opco
   let itemsContainer = null;
   let originalItems = null;
-  if (filter.facetId === 'workflowname' || filter.facetId === 'opco') {
+  // Check if workflowname or opco has more than 10 values, show search for that facet only
+  const needsSearch = (filter.facetId === 'workflowname' && filter.values.length > 10)
+    || (filter.facetId === 'opco' && filter.values.length > 10);
+
+  if (needsSearch) {
     const searchBar = div(
       {
         class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${isFirst ? '' : 'hidden'}`,
@@ -349,10 +349,12 @@ const renderFacet = (filter, isFirst = false) => {
         originalItems.childNodes.forEach((item) => {
           const workflowButton = item.querySelector('button.workflowname');
           if (workflowButton) {
-            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            const labelDiv = item.querySelector('div:nth-child(2)');
+            const label = labelDiv ? labelDiv.textContent.toLowerCase() : '';
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
-              clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
+              const btnEle = clonedItem.querySelector('button');
+              if (btnEle) btnEle.addEventListener('click', filterButtonClick);
               itemsContainer.append(clonedItem);
               hasMatches = true;
             }
@@ -362,7 +364,8 @@ const renderFacet = (filter, isFirst = false) => {
         originalItems.childNodes.forEach((item) => {
           const facetButton = item.querySelector('button');
           if (facetButton) {
-            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            const labelDiv = item.querySelector('div:nth-child(2)');
+            const label = labelDiv ? labelDiv.textContent.toLowerCase() : '';
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
               clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
@@ -487,6 +490,22 @@ function removeWorkflowStep(step) {
 }
 
 /**
+ * Function to remove a specific opco
+ */
+function removeOpcoStep(step) {
+  opco.delete(step);
+  const params = getFilterParams();
+  const queryString = Object.entries(params)
+    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+    .join('&');
+  window.history.replaceState({}, '', queryString ? `#${queryString}` : '#');
+  currentPage = 1;
+  // Update facet checkboxes after removing an opco step
+  updateFacetCheckboxes(false, true);
+  updateProductDisplay();
+}
+
+/**
  * Function to add breadcrumb filter for workflowName
  */
 const breadcrumbWFFilter = (filter) => {
@@ -522,25 +541,27 @@ const breadcrumbWFFilter = (filter) => {
 const breadcrumbOpcoFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (opco.size > 0) {
-    const breadcrumbElement = div(
-      {
-        class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
-        part: 'breadcrumb-button',
-        onclick: (e) => clearFilter(e, false, true),
-        title: `Brand: ${[...opco].join(', ')}`,
-        'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
-      },
-      div(
-        { class: 'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight overflow-wrap break-word' },
-        `Brand: ${[...opco].join(', ')}`,
-      ),
-      div(
-        { class: 'relative overflow-hidden flex-shrink-0' },
-        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500' }),
-      ),
-    );
-    decorateIcons(breadcrumbElement);
-    parent.appendChild(breadcrumbElement);
+    [...opco].forEach((step) => {
+      const breadcrumbElement = div(
+        {
+          class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
+          part: 'breadcrumb-button',
+          onclick: () => removeOpcoStep(step),
+          title: `Brand: ${step}`,
+          'aria-label': `Remove inclusion filter on Brand: ${step}`,
+        },
+        div(
+          { class: 'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight overflow-wrap break-word' },
+          `Brand: ${step}`,
+        ),
+        div(
+          { class: 'relative overflow-hidden flex-shrink-0' },
+          span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500' }),
+        ),
+      );
+      decorateIcons(breadcrumbElement);
+      parent.appendChild(breadcrumbElement);
+    });
   }
 };
 
@@ -951,7 +972,7 @@ export async function decorateProductList(block, blockId) {
   }
 
   block.removeChild(productSkeleton);
-  block.classList.add(...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
+  block.classList.add(...'dhls-container flex flex-col lg:flex-row w-full mx-auto pt-10'.split(' '));
 
   const facetDiv = div({ id: blockId, class: 'max-w-sm mx-auto scroll-mt-32' });
   const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
@@ -985,7 +1006,7 @@ export async function decorateProductList(block, blockId) {
 
   // Initialize breadcrumbContainer with adjusted styling
   breadcrumbContainer = div(
-    { class: 'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[231px]' },
+    { class: 'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[251px]' },
     div(
       { class: 'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center' },
     ),
@@ -1026,7 +1047,7 @@ export async function decorateProductList(block, blockId) {
   decorateIcons(expandAll);
   decorateIcons(header);
 
-  const facetContainer = div({ class: 'self-stretch flex flex-col justify-start items-start max-w-[231px]' });
+  const facetContainer = div({ class: 'self-stretch flex flex-col justify-start items-start w-[251px]' });
   const facets = response.facets || [];
   facets.forEach((filter, index) => {
     const facetElement = renderFacet(filter, index === 0);

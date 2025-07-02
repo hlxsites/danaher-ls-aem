@@ -76,7 +76,7 @@ export default function productBannerDecorate(block) {
     },
     a(
       {
-        class: 'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+        class: 'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
@@ -93,10 +93,6 @@ export default function productBannerDecorate(block) {
   tempContainer.innerHTML = rawCategoryDescription;
   tempContainer.querySelectorAll('p').forEach((paragraph) => {
     paragraph.classList.add('text-black');
-    // Add pb-4 if the paragraph contains an <a> tag
-    if (paragraph.querySelector('a')) {
-      paragraph.classList.add('pb-4');
-    }
   });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
@@ -157,6 +153,15 @@ export default function productBannerDecorate(block) {
     );
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
+
+    const paragraphs = longDescription.querySelectorAll('p');
+    paragraphs.forEach((p) => {
+      p.classList.add('mb-3');
+    });
+    if (paragraphs.length > 0) {
+      paragraphs[paragraphs.length - 1].classList.remove('mb-3');
+    }
+
     longDescription.querySelectorAll('strong').forEach((strong) => {
       strong.classList.add(
         'text-black',
@@ -190,4 +195,9 @@ export default function productBannerDecorate(block) {
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
   block.appendChild(productBannerWrapper);
+
+  block.querySelector('.category_banner-description')?.querySelectorAll('a')?.forEach((aEle, index) => {
+    if (index === 0) aEle.parentElement.classList.add('pt-4');
+    aEle.parentElement.classList.add('pb-4');
+  });
 }

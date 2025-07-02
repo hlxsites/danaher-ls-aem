@@ -1,4 +1,5 @@
-import { div, a } from '../../scripts/dom-builder.js';
+import { div, a, span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -36,11 +37,15 @@ export default function decorate(block) {
       ? div(
         {
           class:
-              'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
+              'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1 group',
         },
         a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl.textContent.trim()),
+        span({
+          class: 'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+        }),
       )
       : null;
+    decorateIcons(linkContainer);
 
     const outerContainer = div(
       {
