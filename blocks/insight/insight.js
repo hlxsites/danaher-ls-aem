@@ -99,8 +99,26 @@ export default function decorate(block) {
     ?.querySelector('#leftColDescription')
     ?.insertAdjacentHTML('beforeend', leftDescHTML);
 
+  leftCol
+    ?.querySelector('#leftColDescription')
+    ?.querySelectorAll('p')
+    ?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
   const leftColLinks = leftCol.querySelectorAll('a');
   leftColLinks?.forEach((link) => {
+    link.classList.add(
+      'text-black',
+      'underline',
+      'decoration-danaherpurple-500',
+      'hover:bg-danaherpurple-500',
+      'hover:text-white',
+    );
     const linkHref = link?.getAttribute('href');
 
     link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
@@ -167,6 +185,13 @@ export default function decorate(block) {
         ?.querySelector('.insight-description')
         ?.querySelectorAll('a');
       descriptionLinks?.forEach((link) => {
+        link.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white',
+        );
         const linkHref = link?.getAttribute('href');
 
         link.setAttribute(

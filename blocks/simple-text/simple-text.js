@@ -15,8 +15,23 @@ export default function decorate(block) {
       class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
     });
     leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
+    leftDiv.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = leftDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
+      );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
@@ -30,9 +45,24 @@ export default function decorate(block) {
     rightDiv = div({
       class: 'text-base text-black md:w-1/2 font-normal leading-snug mt-1',
     });
-    rightDiv.insertAdjacentHTML('beforeend', rightTextEl);
+    rightDiv?.insertAdjacentHTML('beforeend', rightTextEl);
+    rightDiv?.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = rightDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
+      );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',

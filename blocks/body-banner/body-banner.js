@@ -113,6 +113,12 @@ export default function decorate(block) {
     ?.querySelector('#bodyBannerDescription')
     ?.querySelectorAll('a');
   descriptionLinks?.forEach((link) => {
+    link.classList.add(
+      'underline',
+      'decoration-danaherpurple-500',
+      'hover:bg-danaherpurple-500',
+      'hover:text-white',
+    );
     const linkHref = link?.getAttribute('href');
 
     link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
