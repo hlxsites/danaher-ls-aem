@@ -10,6 +10,11 @@ export default function decorate(block) {
 
   let leftDiv = div();
   if (leftTextEl) {
+    leftTextEl.querySelectorAll('p')?.forEach((ite) => {
+      if (ite?.textContent === '') {
+        ite.remove();
+      }
+    });
     // Create the left side
     leftDiv = div({
       class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
@@ -20,7 +25,7 @@ export default function decorate(block) {
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -36,7 +41,7 @@ export default function decorate(block) {
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -50,7 +55,7 @@ export default function decorate(block) {
       class:
         'flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
-    simpleTextWrapper,
+    simpleTextWrapper
   );
   block.textContent = '';
   block.append(container);
