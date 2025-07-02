@@ -144,6 +144,14 @@ export default async function decorate(block) {
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
+    leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = leftDescription?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
       link.classList.add(

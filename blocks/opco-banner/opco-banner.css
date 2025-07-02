@@ -338,6 +338,10 @@
   padding-bottom: 13px
 }
 
+.opco-banner-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
 .opco-banner-wrapper :is(.text-center) {
   text-align: center
 }
