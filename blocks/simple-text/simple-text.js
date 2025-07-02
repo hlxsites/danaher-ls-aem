@@ -23,6 +23,13 @@ export default function decorate(block) {
     });
     const descriptionLinks = leftDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white'
+      );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
@@ -45,6 +52,13 @@ export default function decorate(block) {
     });
     const descriptionLinks = rightDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white'
+      );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
