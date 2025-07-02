@@ -44,9 +44,7 @@ export default function decorate(block) {
         class: 'flex items-center justify-center h-full w-full',
       },
       img({
-        src:
-          imgSrc
-          || '/content/dam/danaher/products/fallbackImage.jpeg',
+        src: imgSrc || '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: imgAlt,
         class: 'w-full h-full object-contain',
       }),
@@ -97,7 +95,7 @@ export default function decorate(block) {
       a(
         {
           href: ctaLink,
-          target: newTab ? '_blank' : '_self',
+          target: newTab === 'true' ? '_blank' : '_self',
           class: `flex justify-center ${
             ctaText ? '' : 'hidden'
           } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-danaherpurple-500 hover:text-white transition duration-300 self-start`,

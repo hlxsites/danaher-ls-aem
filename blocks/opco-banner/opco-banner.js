@@ -88,7 +88,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${brandLink}`,
+              href: `/us/en/products-eds1/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -179,11 +179,11 @@ export default async function decorate(block) {
     let opcoTarget;
 
     if (opcoBannerButtonUrl?.includes('http')) {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     } else if (opcoBannerButtonUrl?.includes('#')) {
       opcoTarget = '_self';
     } else {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     }
 
     const ctaWrapper = a(
@@ -388,7 +388,7 @@ export default async function decorate(block) {
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
             onclick: () => window.open(
               ctaUrl,
-              opcoBannerItemButtonTarget ? '_blank' : '_self',
+              opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
             ),
           },
           opcoBannerItemButtonLabel,
