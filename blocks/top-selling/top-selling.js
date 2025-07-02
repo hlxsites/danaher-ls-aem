@@ -154,9 +154,9 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  const products = (
-    await Promise.allSettled(productIds.map(getProductInfo))
-  ).filter((product) => product.status !== 'error' && product.title?.trim());
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product.status !== 'error' && product.title?.trim(),
+  );
 
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
