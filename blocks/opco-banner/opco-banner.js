@@ -80,7 +80,7 @@ export default async function decorate(block) {
       const linkTarget = pills?.path || '#';
       let brandLink = '';
       if (linkLabel) {
-        if (pills?.name.includes('leica')) {
+        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
           brandLink = 'leica';
         } else {
           brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
