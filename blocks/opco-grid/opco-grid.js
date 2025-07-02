@@ -84,7 +84,8 @@ export default function decorate(block) {
         a(
           {
             href: itemLink?.getAttribute('href') || '#',
-            target: itemLinkTarget.textContent.trim() ? '_blank' : '_self',
+            target:
+              itemLinkTarget.textContent.trim() === 'yes' ? '_blank' : '_self',
             class:
               'card-link inline-flex w-full items-center pt-5 text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold',
           },

@@ -50,6 +50,7 @@ export default async function decorate(block) {
     currentPath.includes('products.html')
     || currentPath.includes('/shop-page')
     || currentPath.includes('/shop-home')
+    || currentPath.includes('/products-eds1.html')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
@@ -77,13 +78,17 @@ export default async function decorate(block) {
       const linkLabel = pills?.name || '';
 
       const linkTarget = pills?.path || '#';
+      let brandLink = '';
       if (linkLabel) {
+        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
+          brandLink = 'leica';
+        } else {
+          brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+        }
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${pills?.name
-                ?.toLowerCase()
-                .replace(/\s+/g, '-')}`,
+              href: `/us/en/products-eds1/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -139,8 +144,23 @@ export default async function decorate(block) {
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
+    leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = leftDescription?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
+      );
       const linkHref = link?.getAttribute('href');
 
       link.setAttribute(
@@ -159,11 +179,11 @@ export default async function decorate(block) {
     let opcoTarget;
 
     if (opcoBannerButtonUrl?.includes('http')) {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     } else if (opcoBannerButtonUrl?.includes('#')) {
       opcoTarget = '_self';
     } else {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     }
 
     const ctaWrapper = a(
@@ -279,7 +299,7 @@ export default async function decorate(block) {
 
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.textContent?.trim();
+    const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
     const opcoBannerItemImage = itemImage?.querySelector('img');
     const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
     const ctaUrl = itemButtonUrl?.textContent?.trim();
@@ -335,6 +355,13 @@ export default async function decorate(block) {
 
       const descriptionLinks = descriptionHtml.querySelectorAll('a');
       descriptionLinks?.forEach((link) => {
+        link.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white',
+        );
         const linkHref = link?.getAttribute('href');
 
         link.setAttribute(
@@ -361,7 +388,7 @@ export default async function decorate(block) {
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
             onclick: () => window.open(
               ctaUrl,
-              opcoBannerItemButtonTarget ? '_blank' : '_self',
+              opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
             ),
           },
           opcoBannerItemButtonLabel,
@@ -443,6 +470,7 @@ export default async function decorate(block) {
     left,
     right,
   );
+
   block.append(container);
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {

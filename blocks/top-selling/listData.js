@@ -188,7 +188,7 @@ export default function renderListCard(item) {
 
   // Bottom section with View Details link - SEPARATED
   const desktopViewDetails = div(
-    { class: 'w-full flex-col gap-2' },
+    { class: 'w-full flex-col gap-2 cursor-pointer' },
     a(
       {
         title: item.title,
