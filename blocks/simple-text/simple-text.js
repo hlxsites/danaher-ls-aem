@@ -10,16 +10,16 @@ export default function decorate(block) {
 
   let leftDiv = div();
   if (leftTextEl) {
-    leftTextEl.querySelectorAll('p')?.forEach((ite) => {
-      if (ite?.textContent === '') {
-        ite.remove();
-      }
-    });
     // Create the left side
     leftDiv = div({
       class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
     });
     leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
+    leftDiv.querySelectorAll('p')?.forEach((ite) => {
+      if (ite?.textContent === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = leftDiv?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
       const linkHref = link?.getAttribute('href');
