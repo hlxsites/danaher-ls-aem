@@ -974,5 +974,171 @@
         "label": "Product IDs(comma separated)"
       }
     ]
+  },
+  {
+    "id": "banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "banner",
+        "value": "",
+        "label": "Banner"
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "breadcrumb",
+        "valueType": "string",
+        "name": "banner",
+        "value": "",
+        "label": "Breadcrumb"
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Columns"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Rows"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "value": "",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "value": "",
+        "label": "Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "card-list",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "RichText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+   {
+    "id": "article-info",
+    "fields": [
+      {
+        "component": "text",
+        "name": "article-info",
+        "value": "",
+        "label": "Article Info",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "recent-articles",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_title",
+        "value": "",
+        "label": "Carousel Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_link",
+        "value": "",
+        "label": "Carousel Link"
+      }
+    ]
+  },
+  {
+    "id": "articles-list",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "RichText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "Tags List",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "value": "",
+        "label": "Tags Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "value": "",
+        "label": "Tags Link"
+      }
+    ]
   }
 ]
