@@ -188,82 +188,90 @@ export default async function decorate(block) {
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
     addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(' '));
 
-    const countryListRaw = response[0]?.raw?.availableonline;
-    const countryList = Array.isArray(countryListRaw)
-      ? countryListRaw.map((c) => c.toUpperCase()) : [];
-    const showOnLSIG = response[0]?.raw?.showonlsig === 'true';
+    const availableOnlineRaw = response[0]?.raw?.availableonline;
+    const availableOnline = Array.isArray(availableOnlineRaw)
+      ? availableOnlineRaw.map((c) => c.toUpperCase()) : [];
 
-    const isAvailableRegion = countryList.includes('EN-US') || countryList.includes('EN-GB');
-    const shouldShowRFQ = isAvailableRegion && showOnLSIG;
+    const shopEnabledRaw = response[0]?.raw?.shopenabledcountry;
+    const shopEnabledCountries = Array.isArray(shopEnabledRaw)
+      ? shopEnabledRaw.map((c) => c.toUpperCase()) : [];
 
-    if (rfqEl && rfqEl.textContent.includes('Request for Quote') && shouldShowRFQ) {
-      let rfqParent;
+    const showskupricelistusd = response[0]?.raw.listpriceusd;
+    const currncyFormat = Number(showskupricelistusd);
+
+    const hasValidPrice = Number.isFinite(currncyFormat) && currncyFormat > 0;
+    const showBuyNow = shopEnabledCountries.length > 0;
+    const showRFQ = availableOnline.length > 0;
+
+    const brandURL = response[0]?.raw?.externallink
+      ? `${response[0].raw.externallink}?utm_source=dhls_website`
+      : null;
+
+    let rfqParent = null;
+    if (rfqEl && rfqEl.textContent.includes('Request for Quote') && showRFQ) {
       rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(' '));
-      if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
+      if (['Product', 'Bundle'].includes(response[0]?.raw?.objecttype)) {
         rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
       } else {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
+    }
 
-      const showskupricelistusd = response[0]?.raw.listpriceusd;
-      const currncyFormat = Number(showskupricelistusd);
+    if (hasValidPrice) {
+      const brandName = (response[0]?.raw?.opco || '').trim();
+      let brandLabel = 'Buy Now on external site';
 
-      const brandURL = response[0]?.raw?.externallink
-        ? `${response[0].raw.externallink}?utm_source=dhls_website`
-        : null;
+      switch (brandName.toLowerCase()) {
+        case 'abcam':
+          brandLabel = 'Buy Now on abcam.com';
+          break;
+        case 'idt':
+          brandLabel = 'Buy Now on idtdna.com';
+          break;
+        case 'leica biosystems':
+          brandLabel = 'Buy Now on leicabiosystems.com';
+          break;
+        case 'beckman coulter':
+          brandLabel = 'Buy Now on beckman.com';
+          break;
+        default:
+          brandLabel = 'Buy Now on external site';
+          break;
+      }
 
-      if (Number.isFinite(currncyFormat) && currncyFormat > 0) {
-        const brandName = (response[0]?.raw?.opco || '').trim();
-        let brandLabel = 'Buy Now on external site';
-        switch (brandName.toLowerCase()) {
-          case 'abcam':
-            brandLabel = 'Buy Now on abcam.com';
-            break;
-          case 'idt':
-            brandLabel = 'Buy Now on idtdna.com';
-            break;
-          case 'leica biosystems':
-            brandLabel = 'Buy Now on leicabiosystems.com';
-            break;
-          case 'beckman coulter':
-            brandLabel = 'Buy Now on beckman.com';
-            break;
-          default:
-            brandLabel = 'Buy Now on external site';
-            break;
-        }
-
-        const brandButton = document.createElement('button');
-        brandButton.textContent = brandLabel;
-        brandButton.classList.add(
+      let brandButton = null;
+      if (showBuyNow) {
+        const btn = document.createElement('button');
+        btn.textContent = brandLabel;
+        btn.classList.add(
           ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '),
         );
 
         if (brandURL) {
-          brandButton.addEventListener('click', () => {
-            window.open(brandURL, '_blank');
-          });
+          btn.addEventListener('click', () => window.open(brandURL, '_blank'));
         }
 
-        // Assemble price + buy now + RFQ
-        const brandStartPrice = div(
-          { class: 'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center' },
-          div(
-            { class: 'price-info' },
-            p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
-            p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
-          ),
-          brandURL ? div(
-            { class: 'flex gap-4 items-stretch add-buynow-btn' },
-            brandButton,
-          ) : null,
-          rfqParent,
-        );
-
-        defaultContent.append(brandStartPrice);
+        brandButton = div({ class: 'flex gap-4 items-stretch add-buynow-btn' }, btn);
       }
+
+      const brandStartPriceChildren = [
+        div(
+          { class: 'price-info' },
+          p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
+          p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
+        ),
+      ];
+
+      if (brandButton) brandStartPriceChildren.push(brandButton);
+      if (rfqParent) brandStartPriceChildren.push(rfqParent);
+
+      const brandStartPrice = div(
+        { class: 'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center' },
+        ...brandStartPriceChildren,
+      );
+      defaultContent.append(brandStartPrice);
     }
 
     const infoDiv = div();
