@@ -353,6 +353,10 @@
   width: 100%
 }
 
+.product-family-wrapper :is(.w-\[251px\]) {
+  width: 251px
+}
+
 .product-family-wrapper :is(.min-w-0) {
   min-width: 0px
 }
@@ -517,6 +521,10 @@
   row-gap: 1rem
 }
 
+.product-family-wrapper :is(.gap-y-3) {
+  row-gap: 0.75rem
+}
+
 .product-family-wrapper :is(.space-y-1 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
@@ -650,6 +658,11 @@
 
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.product-family-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .product-family-wrapper :is(.object-cover) {

@@ -21,7 +21,7 @@ export default function renderProductListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
     });
