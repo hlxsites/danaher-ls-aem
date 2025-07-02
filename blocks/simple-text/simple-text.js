@@ -16,6 +16,8 @@ export default function decorate(block) {
     });
     leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
     leftDiv.querySelectorAll('p')?.forEach((ite) => {
+      console.log('ite text contenbt : ', ite.textContent);
+
       if (ite?.textContent === '') {
         ite.remove();
       }
