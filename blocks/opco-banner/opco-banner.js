@@ -50,7 +50,7 @@ export default async function decorate(block) {
     currentPath.includes('products.html')
     || currentPath.includes('/shop-page')
     || currentPath.includes('/shop-home')
-    || currentPath.includes('/products-eds1')
+    || currentPath.includes('/products-eds1.html')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
