@@ -3,7 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const [leftText, rightText] = block.children;
+  const [leftText, rightText] = [...block.children];
 
   const leftTextEl = leftText?.innerHTML || '';
   const rightTextEl = rightText?.innerHTML || '';
@@ -30,12 +30,12 @@ export default function decorate(block) {
         'underline',
         'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
-        'hover:text-white',
+        'hover:text-white'
       );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -61,12 +61,12 @@ export default function decorate(block) {
         'underline',
         'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
-        'hover:text-white',
+        'hover:text-white'
       );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -80,8 +80,10 @@ export default function decorate(block) {
       class:
         'flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
-    simpleTextWrapper,
+    simpleTextWrapper
   );
+  console.log('block');
+
   block.textContent = '';
   block.append(container);
 }
