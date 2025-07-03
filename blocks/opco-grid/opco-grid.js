@@ -2,7 +2,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   a, div, img, h3, p, span,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   if (
@@ -38,7 +37,7 @@ export default function decorate(block) {
 
     const readMoreLink = itemLink?.querySelector('a');
     if (readMoreLink) {
-      cardWrapper.href = makePublicUrl(readMoreLink?.href);
+      cardWrapper.href = readMoreLink?.href;
       cardWrapper.title = itemTitle?.textContent?.trim() || '';
     }
     cardWrapper.className = 'opco-grid-wrapper  flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
