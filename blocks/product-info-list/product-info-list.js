@@ -19,7 +19,7 @@ export default async function decorate(block) {
     tempDiv.querySelectorAll('p').forEach((pEle) => {
       pEle.classList.add('text-base', 'font-extralight');
     });
-     tempDiv.querySelectorAll('ul')?.forEach((ulEle) => {
+    tempDiv.querySelectorAll('ul')?.forEach((ulEle) => {
       if (ulEle) {
         ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
       }
