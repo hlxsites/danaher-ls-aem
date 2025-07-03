@@ -84,6 +84,6 @@ export default function decorate(block) {
   );
   console.log('block');
 
-  block.textContent = '';
+  block.innerHTML = '';
   block.append(container);
 }
