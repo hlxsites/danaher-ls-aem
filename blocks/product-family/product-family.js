@@ -47,7 +47,7 @@ const productSkeleton = div(
           p({
             class:
               'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          })
+          }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -56,8 +56,8 @@ const productSkeleton = div(
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
-          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' })
-        )
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
       ),
       div(
         { class: 'flex flex-col gap-y-2 animate-pulse' },
@@ -79,7 +79,7 @@ const productSkeleton = div(
           p({
             class:
               'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          })
+          }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -89,8 +89,8 @@ const productSkeleton = div(
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
-          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' })
-        )
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
       ),
       div(
         { class: 'flex flex-col gap-y-2 animate-pulse' },
@@ -112,7 +112,7 @@ const productSkeleton = div(
           p({
             class:
               'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          })
+          }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -121,11 +121,11 @@ const productSkeleton = div(
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
           div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
-          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' })
-        )
-      )
-    )
-  )
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+    ),
+  ),
 );
 
 /**
@@ -198,16 +198,16 @@ const facetItem = (filter, valueObj) => {
           class: `checkbox-icon icon ${
             isSelected ? 'icon-check-purple-square' : 'icon-square'
           } w-4 min-w-4 min-h-4 pt-1`,
-        })
-      )
+        }),
+      ),
     ),
     div(
       { class: 'flex items-center gap-2' },
       div(
         { class: 'justify-start text-black text-sm font-medium leading-5' },
-        `${valueObj.value} (${valueObj.numberOfResults})`
-      )
-    )
+        `${valueObj.value} (${valueObj.numberOfResults})`,
+      ),
+    ),
   );
 };
 
@@ -226,16 +226,16 @@ function iterateChildren(filter, node, searchQuery = '') {
     hasMatchingChild = node.children.some((child) => {
       const childValueLower = child.value.toLowerCase();
       return (
-        childValueLower.includes(searchQueryLower) ||
-        iterateChildren(filter, child, searchQuery)
+        childValueLower.includes(searchQueryLower)
+        || iterateChildren(filter, child, searchQuery)
       );
     });
   }
 
   if (
-    searchQuery &&
-    !nodeValueLower.includes(searchQueryLower) &&
-    !hasMatchingChild
+    searchQuery
+    && !nodeValueLower.includes(searchQueryLower)
+    && !hasMatchingChild
   ) {
     return null;
   }
@@ -259,8 +259,8 @@ function iterateChildren(filter, node, searchQuery = '') {
             class: `checkbox-icon icon ${
               isSelected ? 'icon-check-purple-square' : 'icon-square'
             } w-4 min-w-4 min-h-4 pt-1`,
-          })
-        )
+          }),
+        ),
       ),
       div(
         { class: 'flex items-center gap-2' },
@@ -268,11 +268,11 @@ function iterateChildren(filter, node, searchQuery = '') {
           { class: 'flex items-center gap-2' },
           div(
             { class: 'justify-start text-black text-sm font-medium leading-5' },
-            `${node.value} (${node.numberOfResults})`
-          )
-        )
-      )
-    )
+            `${node.value} (${node.numberOfResults})`,
+          ),
+        ),
+      ),
+    ),
   );
 
   if (node.children && node.children.length > 0) {
@@ -324,7 +324,7 @@ const renderFacet = (filter, isFirst = false) => {
         class:
           'flex-1 flex items-start text-left text-black text-base font-bold leading-snug',
       },
-      filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step')
+      filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
     ),
     div(
       { class: 'w-4 h-4 relative mb-2' },
@@ -332,8 +332,8 @@ const renderFacet = (filter, isFirst = false) => {
         class: `icon ${
           isFirst ? 'icon-minus-gray' : 'icon-plus-gray'
         } p-1 ml-1`,
-      })
-    )
+      }),
+    ),
   );
   // Facet contents
   const contents = fieldset({
@@ -346,9 +346,8 @@ const renderFacet = (filter, isFirst = false) => {
   let itemsContainer = null;
   let originalItems = null;
   // Check if workflowname or opco has more than 10 values, show search for that facet only
-  const needsSearch =
-    (filter.facetId === 'workflowname' && filter.values.length > 10) ||
-    (filter.facetId === 'opco' && filter.values.length > 10);
+  const needsSearch = (filter.facetId === 'workflowname' && filter.values.length > 10)
+    || (filter.facetId === 'opco' && filter.values.length > 10);
 
   if (needsSearch) {
     const searchBar = div(
@@ -368,8 +367,8 @@ const renderFacet = (filter, isFirst = false) => {
           'aria-label': `Search for values in the ${
             filter.label || filter.facetId
           } facet`,
-        })
-      )
+        }),
+      ),
     );
     decorateIcons(searchBar);
     contents.append(searchBar);
@@ -392,7 +391,7 @@ const renderFacet = (filter, isFirst = false) => {
       } else {
         const noItems = div(
           { class: 'text-gray-500 text-sm' },
-          'No process steps available'
+          'No process steps available',
         );
         originalItems.append(noItems.cloneNode(true));
         itemsContainer.append(noItems);
@@ -407,7 +406,7 @@ const renderFacet = (filter, isFirst = false) => {
       } else {
         const noItems = div(
           { class: 'text-gray-500 text-sm' },
-          'No brands available'
+          'No brands available',
         );
         originalItems.append(noItems.cloneNode(true));
         itemsContainer.append(noItems);
@@ -462,8 +461,8 @@ const renderFacet = (filter, isFirst = false) => {
             { class: 'text-gray-500 text-sm' },
             `No ${
               filter.facetId === 'workflowname' ? 'process steps' : 'brands'
-            } found`
-          )
+            } found`,
+          ),
         );
       }
     });
@@ -477,7 +476,7 @@ const renderFacet = (filter, isFirst = false) => {
         });
       } else {
         contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No process steps available')
+          div({ class: 'text-gray-500 text-sm' }, 'No process steps available'),
         );
       }
     }
@@ -488,7 +487,7 @@ const renderFacet = (filter, isFirst = false) => {
         });
       } else {
         contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No brands available')
+          div({ class: 'text-gray-500 text-sm' }, 'No brands available'),
         );
       }
     }
@@ -612,15 +611,15 @@ const breadcrumbWFFilter = (filter) => {
             class:
               'justify-start text-danaherpurple-500 text-sm font-medium leading-5 overflow-wrap break-word',
           },
-          `Process Step: ${step}`
+          `Process Step: ${step}`,
         ),
         div(
           { class: 'relative overflow-hidden flex-shrink-0' },
           span({
             class:
               'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500',
-          })
-        )
+          }),
+        ),
       );
       decorateIcons(breadcrumbElement);
       parent.appendChild(breadcrumbElement);
@@ -649,15 +648,15 @@ const breadcrumbOpcoFilter = (filter) => {
             class:
               'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight overflow-wrap break-word',
           },
-          `Brand: ${step}`
+          `Brand: ${step}`,
         ),
         div(
           { class: 'relative overflow-hidden flex-shrink-0' },
           span({
             class:
               'icon icon-cross w-3 h-3 danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-          })
-        )
+          }),
+        ),
       );
       decorateIcons(breadcrumbElement);
       parent.appendChild(breadcrumbElement);
@@ -739,7 +738,7 @@ function filterButtonClick(e) {
     window.history.replaceState(
       {},
       '',
-      '#workflowname=automated-cell-imaging-systems'
+      '#workflowname=automated-cell-imaging-systems',
     );
     currentPage = 1;
     updateProductDisplay();
@@ -842,7 +841,7 @@ function renderPagination(totalProducts, paginationWrapper) {
           class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
             prevEnabled ? 'danaherpurple-500' : 'text-gray-400'
           } [&_svg>use]:stroke-current`,
-        })
+        }),
       ),
       div(
         {
@@ -850,9 +849,9 @@ function renderPagination(totalProducts, paginationWrapper) {
             prevEnabled ? 'danaherpurple-500' : 'gray-400'
           } text-sm font-medium leading-5`,
         },
-        'Previous'
-      )
-    )
+        'Previous',
+      ),
+    ),
   );
   decorateIcons(prevButton);
   prevButton.addEventListener('click', () => {
@@ -898,9 +897,9 @@ function renderPagination(totalProducts, paginationWrapper) {
               currentPage === page ? 'danaherpurple-500' : 'gray-700'
             } text-sm font-medium leading-tight`,
           },
-          page.toString()
-        )
-      )
+          page.toString(),
+        ),
+      ),
     );
     pageNumber.addEventListener('click', () => {
       currentPage = page;
@@ -929,10 +928,10 @@ function renderPagination(totalProducts, paginationWrapper) {
                 class:
                   'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
               },
-              '...'
-            )
-          )
-        )
+              '...',
+            ),
+          ),
+        ),
       );
     }
   }
@@ -958,10 +957,10 @@ function renderPagination(totalProducts, paginationWrapper) {
               class:
                 'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
             },
-            '...'
-          )
-        )
-      )
+            '...',
+          ),
+        ),
+      ),
     );
   }
 
@@ -990,7 +989,7 @@ function renderPagination(totalProducts, paginationWrapper) {
             nextEnabled ? 'danaherpurple-500' : 'gray-400'
           } text-sm font-medium leading-5`,
         },
-        'Next'
+        'Next',
       ),
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
@@ -998,9 +997,9 @@ function renderPagination(totalProducts, paginationWrapper) {
           class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
             nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
           } [&_svg>use]:stroke-current`,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
   decorateIcons(nextButton);
   nextButton.addEventListener('click', () => {
@@ -1053,10 +1052,9 @@ async function updateProductDisplay() {
   productCount.textContent = `${response.totalCount} Products Available`;
 
   if (workflowName.size > 0 || opco.size > 0) {
-    const breadcrumbList =
-      breadcrumbContainer.querySelector('.breadcrumb-list');
+    const breadcrumbList = breadcrumbContainer.querySelector('.breadcrumb-list');
     const clearButtonContainer = breadcrumbContainer.querySelector(
-      '.clear-button-container'
+      '.clear-button-container',
     );
     breadcrumbList.innerHTML = '';
     clearButtonContainer.innerHTML = '';
@@ -1079,16 +1077,16 @@ async function updateProductDisplay() {
           span({
             class:
               'icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]',
-          })
+          }),
         ),
         div(
           {
             class:
               'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word',
           },
-          'Clear Results'
-        )
-      )
+          'Clear Results',
+        ),
+      ),
     );
     decorateIcons(clearButtonWrapper);
     clearButtonContainer.appendChild(clearButtonWrapper);
@@ -1099,14 +1097,13 @@ async function updateProductDisplay() {
   }
 
   if (!products || products.length === 0) {
-    let errorMessage =
-      'No products match the selected filters. Please try different filters.';
+    let errorMessage = 'No products match the selected filters. Please try different filters.';
     if (params.workflowname) {
       errorMessage = `No products found for ${params.workflowname}. Please try a different filter.`;
     }
     const noProductsMessage = div(
       { class: 'w-full text-center py-8 text-gray-600 text-lg' },
-      errorMessage
+      errorMessage,
     );
     productContainer.append(noProductsMessage);
     paginationContainerWrapper.style.display = 'none';
@@ -1115,15 +1112,15 @@ async function updateProductDisplay() {
 
   const productsWrapper = isGridView
     ? div({
-        class:
+      class:
           'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start',
-      })
+    })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
   const productsToDisplay = products.slice(startIndex, endIndex);
   productsToDisplay.forEach((item) => {
     productsWrapper.append(
-      isGridView ? renderProductGridCard(item) : renderProductListCard(item)
+      isGridView ? renderProductGridCard(item) : renderProductListCard(item),
     );
   });
 
@@ -1153,8 +1150,8 @@ export async function decorateProductList(block, blockId) {
   block.removeChild(productSkeleton);
   block.classList.add(
     ...'dhls-container flex flex-col lg:flex-row w-full mx-auto pt-10'.split(
-      ' '
-    )
+      ' ',
+    ),
   );
 
   const facetDiv = div({ id: blockId, class: 'max-w-sm mx-auto scroll-mt-32' });
@@ -1176,8 +1173,8 @@ export async function decorateProductList(block, blockId) {
         span({
           class:
             'icon icon-adjustments w-6 h-6 absolute [&_svg>use]:stroke-danaherpurple-500',
-        })
-      )
+        }),
+      ),
     ),
     div(
       { class: 'flex-1 h-6 relative' },
@@ -1188,10 +1185,10 @@ export async function decorateProductList(block, blockId) {
             class:
               'w-64 left-0 top-[-6px] absolute justify-start text-black !text-3xl font-medium !leading-10',
           },
-          'Filters'
-        )
-      )
-    )
+          'Filters',
+        ),
+      ),
+    ),
   );
 
   // Initialize breadcrumbContainer with adjusted styling
@@ -1204,7 +1201,7 @@ export async function decorateProductList(block, blockId) {
       class:
         'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center',
     }),
-    div({ class: 'clear-button-container mt-4' })
+    div({ class: 'clear-button-container mt-4' }),
   );
 
   const expandAll = div(
@@ -1212,8 +1209,7 @@ export async function decorateProductList(block, blockId) {
       class:
         'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
-        const facetButtons =
-          filterWrapper.querySelectorAll('.facet-header-btn');
+        const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
         facetButtons.forEach((btn) => {
           btn.setAttribute('aria-expanded', 'true');
           const parent = btn.closest('div.facet');
@@ -1239,9 +1235,9 @@ export async function decorateProductList(block, blockId) {
         span({
           class:
             'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   decorateIcons(expandAll);
@@ -1268,7 +1264,7 @@ export async function decorateProductList(block, blockId) {
   });
   productCount = div(
     { class: 'text-black text-2xl font-medium' },
-    `${response.totalCount} Products Available`
+    `${response.totalCount} Products Available`,
   );
   const viewToggleWrapper = div({ class: 'flex items-center gap-2 min-w-fit' });
   const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' });
@@ -1288,8 +1284,8 @@ export async function decorateProductList(block, blockId) {
       span({
         class:
           'icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
-      })
-    )
+      }),
+    ),
   );
 
   gridBtn = div(
@@ -1307,8 +1303,8 @@ export async function decorateProductList(block, blockId) {
       span({
         class:
           'icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white',
-      })
-    )
+      }),
+    ),
   );
 
   viewModeGroup.append(listBtn, gridBtn);
@@ -1338,7 +1334,7 @@ export async function decorateProductList(block, blockId) {
         .querySelector('.icon')
         .classList.replace(
           '[&_svg>use]:stroke-gray-600',
-          '[&_svg>use]:stroke-white'
+          '[&_svg>use]:stroke-white',
         );
       gridBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
       gridBtn
@@ -1348,7 +1344,7 @@ export async function decorateProductList(block, blockId) {
         .querySelector('.icon')
         .classList.replace(
           '[&_svg>use]:stroke-white',
-          '[&_svg>use]:stroke-gray-600'
+          '[&_svg>use]:stroke-gray-600',
         );
       updateProductDisplay();
     }
@@ -1366,7 +1362,7 @@ export async function decorateProductList(block, blockId) {
         .querySelector('.icon')
         .classList.replace(
           '[&_svg>use]:stroke-gray-600',
-          '[&_svg>use]:stroke-white'
+          '[&_svg>use]:stroke-white',
         );
       listBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
       listBtn
@@ -1376,7 +1372,7 @@ export async function decorateProductList(block, blockId) {
         .querySelector('.icon')
         .classList.replace(
           '[&_svg>use]:stroke-white',
-          '[&_svg>use]:stroke-gray-600'
+          '[&_svg>use]:stroke-gray-600',
         );
       updateProductDisplay();
     }
@@ -1387,8 +1383,8 @@ export async function decorateProductList(block, blockId) {
   } else {
     block.classList.remove(
       ...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(
-        ' '
-      )
+        ' ',
+      ),
     );
   }
 }
