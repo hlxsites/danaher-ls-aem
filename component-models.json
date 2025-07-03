@@ -1,5 +1,155 @@
 [
   {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "container",
+        "label": "Fieldset",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": "Default tittle"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "description",
+            "label": "Description",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "canonical",
+            "label": "Canonical",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "keywords",
+            "multi": true,
+            "label": "Keywords",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null,
+            "value": ""
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "image",
+            "label": "Image",
+            "multi": false,
+            "value": ""
+          },
+          {
+            "component": "aem-tag",
+            "valueType": "string",
+            "name": "pageTags",
+            "label": "AEM Tag Picker",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "authorName",
+            "label": "Author Name",
+            "value": ""
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "authorImage",
+            "label": "Author Image",
+            "multi": false,
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "template",
+            "label": "Template",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "pageOrder",
+            "label": "Page Order",
+            "value": "10"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "metaTagContentSecurityPolicy",
+            "label": "Meta Tag: Content Security Policy",
+            "value": "default Content Security Policy"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "hreflangTags",
+            "label": "Hreflang Tags",
+            "value": "default href lang tags"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "Robots",
+            "label": "Meta Tag: Robots",
+            "value": "default Robots"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "gtmSiteVerif",
+            "label": "GTM: Google Site Verification",
+            "value": "default Google Site Verification"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "enableSiteInterceptScript",
+            "label": "Enable Site Intercept Script",
+            "value": "false"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "enableSurveyScript",
+            "label": "Enable Survey Script",
+            "value": "false"
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "pageTrackingID",
+            "label": "Page Tracking ID",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "image",
     "fields": [
       {
