@@ -1,6 +1,4 @@
-import {
-  div, span, img, a, h1,
-} from '../../scripts/dom-builder.js';
+import { div, span, img, a, h1 } from '../../scripts/dom-builder.js';
 
 function toggleDetails(event) {
   const detailsText = event.target.previousElementSibling;
@@ -29,7 +27,8 @@ export default function productBannerDecorate(block) {
   const btnText = productBannerLink?.textContent.trim() || '';
   const btnLink = productBannerLinkTarget?.textContent?.trim();
   const rawCategoryDescription = productBannerHeading?.innerHTML.trim() || '';
-  const details = block.children[5]?.querySelector('div')?.innerHTML?.trim() || '';
+  const details =
+    block.children[5]?.querySelector('div')?.innerHTML?.trim() || '';
   const detailsLink = 'Read More';
   const image = block?.querySelector('img');
   const alt = image?.getAttribute('alt') || categoryHeading;
@@ -68,7 +67,7 @@ export default function productBannerDecorate(block) {
     {
       class: 'text-black text-4xl font-bold leading-[48px]}',
     },
-    categoryHeading,
+    categoryHeading
   );
   const categoryBannerCta = div(
     {
@@ -85,9 +84,9 @@ export default function productBannerDecorate(block) {
           class:
             'text-right justify-start text-white text-base font-medium leading-snug transition}',
         },
-        btnText,
-      ),
-    ),
+        btnText
+      )
+    )
   );
 
   const tempContainer = document.createElement('div');
@@ -111,7 +110,7 @@ export default function productBannerDecorate(block) {
       'hover:text-danaherpurple-800',
       'mt-8',
       'gap-4',
-      'font-bold',
+      'font-bold'
     );
   });
 
@@ -129,14 +128,14 @@ export default function productBannerDecorate(block) {
     },
     hasImage
       ? div(
-        { class: 'flex justify-center items-center w-11/12 h-11/12' },
-        img({
-          src: image.src,
-          alt,
-          class: 'object-contain',
-        }),
-      )
-      : '',
+          { class: 'flex justify-center items-center w-11/12 h-11/12' },
+          img({
+            src: image.src,
+            alt,
+            class: 'object-contain',
+          })
+        )
+      : ''
   );
 
   // Conditionally create categoryBannerDetails only if details exist
@@ -153,13 +152,14 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'absolute right-0 bottom-0 bg-white pl-[10px] text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer',
+            'absolute right-0 bottom-0 bg-white pl-[9px] text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
-        detailsLink,
-      ),
+        detailsLink
+      )
     );
-    const longDescription = categoryBannerDetails.querySelector('.long-description');
+    const longDescription =
+      categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
 
     const paragraphs = longDescription.querySelectorAll('p');
@@ -179,7 +179,7 @@ export default function productBannerDecorate(block) {
           'underline',
           'decoration-danaherpurple-500',
           'hover:bg-danaherpurple-500',
-          'hover:text-white',
+          'hover:text-white'
         );
       } else {
         strong.classList.add('text-black');
@@ -193,7 +193,7 @@ export default function productBannerDecorate(block) {
     categoryBannerLeft.append(
       categoryBannerTitle,
       categoryBannerCta,
-      categoryBannerDescription,
+      categoryBannerDescription
     );
   } else {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);

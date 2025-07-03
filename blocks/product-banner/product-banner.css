@@ -189,6 +189,10 @@
   padding-left: 10px
 }
 
+.product-banner-wrapper :is(.pl-\[9px\]) {
+  padding-left: 9px
+}
+
 .product-banner-wrapper :is(.text-right) {
   text-align: right
 }
