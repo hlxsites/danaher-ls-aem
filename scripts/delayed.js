@@ -126,7 +126,7 @@ async function getAuthToken() {
     const siteID = window.DanaherConfig?.siteID;
     const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
     const authRequest = await fetch(
-      `https://stage.lifesciences.danaher.com/content/danaher/services/auth/token?id=${siteID}`,
+      `/content/danaher/services/auth/token?id=${siteID}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
