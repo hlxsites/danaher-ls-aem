@@ -298,10 +298,6 @@
   font-weight: 400
 }
 
-.top-purchased-products-wrapper :is(.font-semibold) {
-  font-weight: 700
-}
-
 .top-purchased-products-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -384,10 +380,6 @@
 .top-purchased-products-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
-}
-
-.top-purchased-products-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
 }
 
 .top-purchased-products-wrapper :is(.hover\:shadow-md:hover) {

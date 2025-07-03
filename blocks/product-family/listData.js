@@ -21,7 +21,7 @@ export default function renderProductListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
+        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute border border-gray-200 object-contain',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
     });
@@ -42,19 +42,18 @@ export default function renderProductListCard(item) {
 
   // Image Section (used in both mobile and desktop)
   const imageSection = div({
-    class: 'w-[100px] h-[100px] inline-flex flex-col justify-start items-center gap-3',
+    class:
+      'w-[100px] h-[100px] inline-flex flex-col justify-start items-center gap-3',
   });
 
   const imageWrapper = div({
-    class:
-      'self-stretch relative rounded-md',
+    class: 'self-stretch relative rounded-md',
   });
 
   const imageUrl = item.raw?.images?.[0] || '';
   imageWrapper.append(
     div({
-      class:
-        'md:w-full left-0 top-0 absolute bg-white rounded-md',
+      class: 'md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
     createImageWithFallback(imageUrl, item.title || ''),
   );
@@ -77,8 +76,7 @@ export default function renderProductListCard(item) {
   mobileTitleSection.append(
     div(
       {
-        class:
-          'text-black font-medium leading-7 line-clamp-2 text-xl',
+        class: 'text-black font-medium leading-7 line-clamp-2 text-xl',
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -157,22 +155,26 @@ export default function renderProductListCard(item) {
 
   decorateIcons(desktopviewdetail);
 
-  desktopContentSection.append(desktopTitle, desktopDescSection, spacer, desktopviewdetail);
+  desktopContentSection.append(
+    desktopTitle,
+    desktopDescSection,
+    spacer,
+    desktopviewdetail,
+  );
 
   // Create desktop image section with fallback
   const desktopImageSection = div({
-    class: 'w-[100px] h-[100px] inline-flex flex-col justify-start items-center gap-3',
+    class:
+      'w-[100px] h-[100px] inline-flex flex-col justify-start items-center gap-3',
   });
 
   const desktopImageWrapper = div({
-    class:
-      'self-stretch relative rounded-md',
+    class: 'self-stretch relative rounded-md',
   });
 
   desktopImageWrapper.append(
     div({
-      class:
-        'md:w-full left-0 top-0 absolute bg-white rounded-md',
+      class: 'md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
     createImageWithFallback(imageUrl, item.title || ''),
   );

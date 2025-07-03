@@ -341,8 +341,8 @@
   width: 14px
 }
 
-.product-family-wrapper :is(.w-\[231px\]) {
-  width: 231px
+.product-family-wrapper :is(.w-\[251px\]) {
+  width: 251px
 }
 
 .product-family-wrapper :is(.w-\[331px\]) {
@@ -351,10 +351,6 @@
 
 .product-family-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-family-wrapper :is(.w-\[251px\]) {
-  width: 251px
 }
 
 .product-family-wrapper :is(.min-w-0) {
@@ -368,10 +364,6 @@
 
 .product-family-wrapper :is(.max-w-5xl) {
   max-width: 64rem
-}
-
-.product-family-wrapper :is(.max-w-\[231px\]) {
-  max-width: 231px
 }
 
 .product-family-wrapper :is(.max-w-sm) {
@@ -517,12 +509,12 @@
   row-gap: 0.5rem
 }
 
-.product-family-wrapper :is(.gap-y-4) {
-  row-gap: 1rem
-}
-
 .product-family-wrapper :is(.gap-y-3) {
   row-gap: 0.75rem
+}
+
+.product-family-wrapper :is(.gap-y-4) {
+  row-gap: 1rem
 }
 
 .product-family-wrapper :is(.space-y-1 > :not([hidden]) ~ :not([hidden])) {
@@ -541,10 +533,6 @@
 
 .product-family-wrapper :is(.overflow-visible) {
   overflow: visible
-}
-
-.product-family-wrapper :is(.break-all) {
-  word-break: break-all
 }
 
 .product-family-wrapper :is(.rounded) {
@@ -663,11 +651,6 @@
 .product-family-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.product-family-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
 }
 
 .product-family-wrapper :is(.p-1) {
