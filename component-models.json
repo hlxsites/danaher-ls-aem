@@ -431,6 +431,23 @@
         "label": "Description"
       },
       {
+        "component": "select",
+        "name": "insightItemLinkType",
+        "label": "Link Type",
+        "value": "url",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "aem-content",
         "name": "insight_link",
         "label": "Link Url"
