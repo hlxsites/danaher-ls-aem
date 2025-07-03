@@ -32,49 +32,6 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "ogTitle",
-              "label": "og:title",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogDescription",
-              "label": "og:description",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogUrl",
-              "label": "og:url",
-              "value": ""
-            },
-            {
-              "component": "reference",
-              "valueType": "string",
-              "name": "ogImage",
-              "label": "og:image",
-              "multi": false,
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogImageSecureUrl",
-              "label": "og:image:secure_url",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogImageAlt",
-              "label": "og:image:alt",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
               "name": "articleTag",
               "label": "article:tag",
               "value": ""
@@ -82,51 +39,8 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "twitterCard",
-              "label": "twitter:card",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "twitterTitle",
-              "label": "twitter:title",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "twitterDescription",
-              "label": "twitter:description",
-              "value": ""
-            },
-            {
-              "component": "reference",
-              "valueType": "string",
-              "name": "twitterImage",
-              "label": "twitter:image",
-              "multi": false,
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
               "name": "path",
               "label": ":path",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogSiteName",
-              "label": "og:site_name",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "ogType",
-              "label": "og:type",
               "value": ""
             },
             {
