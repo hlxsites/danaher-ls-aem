@@ -88,7 +88,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products-eds1/${brandLink}`,
+              href: `/us/en/products-eds1/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -318,7 +318,7 @@ export default async function decorate(block) {
           alt: opcoBannerItemTitle || 'Slide image',
           class: `${
             opcoBannerItemBgImage ? 'opacity-0' : ''
-          } w-[300px] h-[184px] object-cover`,
+          } w-[300px] h-[184px] object-contain`,
         }),
       );
     }
@@ -403,9 +403,9 @@ export default async function decorate(block) {
       {
         id: `opcoBannerSlide${index}`,
         'data-index': index,
-        class: ` ${
-          opcoBannerItemBgImage ? 'hasBg ' : ' '
-        }carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
+        class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
+          opcoBannerItems.length > 1 ? '' : 'justify-center'
+        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
         style: index === 0 ? '' : 'display: none;',
       },
       contentWrapper,
@@ -456,7 +456,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    opcoBannerItems.length > 0 ? controls : '',
+    opcoBannerItems.length > 1 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {

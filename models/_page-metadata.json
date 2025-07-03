@@ -32,7 +32,7 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "articleTag",
+              "name": "article:Tag",
               "label": "article:tag",
               "value": ""
             },

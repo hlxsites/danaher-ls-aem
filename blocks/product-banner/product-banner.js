@@ -171,13 +171,19 @@ export default function productBannerDecorate(block) {
     }
 
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add(
-        'text-black',
-        'underline',
-        'decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white',
-      );
+      // If <strong> contains an <a>, style the <a>
+      const anchor = strong.querySelector('a');
+      if (anchor) {
+        anchor.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white',
+        );
+      } else {
+        strong.classList.add('text-black');
+      }
     });
   }
 

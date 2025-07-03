@@ -1,5 +1,5 @@
 import {
-  div, p, span, img,
+  a, p, span, img,
 } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -10,14 +10,12 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
  */
 export default function renderGridCard(item) {
   const imageUrl = item.images?.[0];
-  const card = div(
+  const card = a(
     {
+      href: item?.url,
+      target: item?.url?.includes('http') ? '_blank' : '_self',
       class:
         'w-full hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
-      onclick: () => window.open(
-        item?.url,
-        item?.url?.includes('http') ? '_blank' : '_self',
-      ),
     },
     img({
       src: imageUrl,
@@ -38,8 +36,10 @@ export default function renderGridCard(item) {
       },
       item?.title?.replace(/<[^>]*>/g, '') || '',
     ),
-    span(
+    a(
       {
+        href: item?.url,
+        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
           'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
       },

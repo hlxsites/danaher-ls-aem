@@ -83,7 +83,7 @@ export default function decorate(block) {
         { class: ' !m-0 !p-0' },
         a(
           {
-            href: itemLink?.getAttribute('href') || '#',
+            href: readMoreLink?.href || '#',
             target:
               itemLinkTarget.textContent.trim() === 'yes' ? '_blank' : '_self',
             class:

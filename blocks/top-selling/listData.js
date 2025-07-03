@@ -33,7 +33,7 @@ export default function renderListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
+        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
     });
@@ -161,8 +161,7 @@ export default function renderListCard(item) {
       ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
       div(
         {
-          class:
-            'justify-start text-black text-xl font-medium leading-7',
+          class: 'justify-start text-black text-xl font-medium leading-7',
         },
         (item.title || '').trim().replace(/<[^>]*>/g, ''),
       ),

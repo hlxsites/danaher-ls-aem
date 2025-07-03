@@ -31,7 +31,7 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "articleTag",
+            "name": "article:tag",
             "label": "article:tag",
             "value": ""
           },
@@ -526,6 +526,23 @@
         "label": "Description"
       },
       {
+        "component": "select",
+        "name": "insightItemLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "aem-content",
         "name": "insight_link",
         "label": "Link Url"
@@ -594,6 +611,23 @@
         "name": "offer_advertisement_title",
         "value": "",
         "label": "Offer Title"
+      },
+      {
+        "component": "select",
+        "name": "adLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
       },
       {
         "component": "text",
