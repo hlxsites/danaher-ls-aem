@@ -7,10 +7,6 @@ export default function decorate(block) {
 
   block.dataset.decorated = 'true';
 
-  // Clean up block
-
-  block.textContent = '';
-
   // Clean parent
 
   const parent = block?.parentElement?.parentElement;
@@ -23,6 +19,9 @@ export default function decorate(block) {
 
   const rawChildren = [...block.children];
 
+  // Clean up block
+
+  block.textContent = '';
   const leftTextEl = rawChildren[0]?.innerHTML || '';
 
   const rightTextEl = rawChildren[1]?.innerHTML || '';
