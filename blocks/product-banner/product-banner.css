@@ -1,5 +1,17 @@
+.product-banner-wrapper :is(.absolute) {
+  position: absolute
+}
+
 .product-banner-wrapper :is(.relative) {
   position: relative
+}
+
+.product-banner-wrapper :is(.bottom-0) {
+  bottom: 0px
+}
+
+.product-banner-wrapper :is(.right-0) {
+  right: 0px
 }
 
 .product-banner-wrapper :is(.mx-auto) {
@@ -132,6 +144,11 @@
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
+.product-banner-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -166,6 +183,10 @@
 
 .product-banner-wrapper :is(.pt-6) {
   padding-top: 1.5rem
+}
+
+.product-banner-wrapper :is(.pl-\[10px\]) {
+  padding-left: 10px
 }
 
 .product-banner-wrapper :is(.text-right) {
