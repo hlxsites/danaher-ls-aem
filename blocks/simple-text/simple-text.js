@@ -82,10 +82,9 @@ export default function decorate(block) {
     },
     simpleTextWrapper
   );
-  block.textContent = '';
   // Clear only specific children or hide content during rendering
-  Array.from(block.children).forEach((child) => {
-    child.style.display = 'none'; // Hide each child element for rendering
+  [...block.children].forEach((child) => {
+    child.textContent = ''; // Hide each child element for rendering
   });
   block.append(container);
 }
