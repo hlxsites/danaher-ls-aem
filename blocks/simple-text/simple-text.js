@@ -82,8 +82,10 @@ export default function decorate(block) {
     },
     simpleTextWrapper
   );
-  console.log('block');
 
-  block.innerHTML = '';
+  // Clear only specific children or hide content during rendering
+  Array.from(block.children).forEach((child) => {
+    child.style.display = 'none'; // Hide each child element for rendering
+  });
   block.append(container);
 }
