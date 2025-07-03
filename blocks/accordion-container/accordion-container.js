@@ -1,12 +1,10 @@
-import {
-  div, h3, input, label, span,
-} from '../../scripts/dom-builder.js';
+import { div, h3, input, label, span } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function toggleAccordion(blockUUID, activeAccordion) {
   const allAccordions = document.querySelectorAll(
-    `div#accordion-${blockUUID} div.accordion-item`,
+    `div#accordion-${blockUUID} div.accordion-item`
   );
   allAccordions.forEach((accordion) => {
     const checkbox = accordion.querySelector('input[type="checkbox"]');
@@ -15,7 +13,7 @@ function toggleAccordion(blockUUID, activeAccordion) {
     if (accordion.id === activeAccordion.id) {
       panel?.setAttribute(
         'aria-expanded',
-        checkbox?.checked ? 'false' : 'true',
+        checkbox?.checked ? 'false' : 'true'
       );
     }
 
@@ -33,7 +31,7 @@ function createAccordionBlock(
   uuid,
   parentElement,
   index,
-  customUUID,
+  customUUID
 ) {
   parentElement.innerHTML = '';
   parentElement.classList.add(
@@ -41,7 +39,7 @@ function createAccordionBlock(
     'relative',
     'py-6',
     'border-t',
-    'border-gray-300',
+    'border-gray-300'
   );
   parentElement.id = `accordion-item-${index}`;
 
@@ -67,7 +65,7 @@ function createAccordionBlock(
     },
     h3(
       { class: '!text-xl font-medium leading-7 my-0 mr-12', title: question },
-      question,
+      question
     ),
     span({
       class:
@@ -76,7 +74,7 @@ function createAccordionBlock(
     span({
       class:
         'icon icon-chevron-up w-6 h-6 absolute right-0 fill-current text-gray-500 chevron-down [&_svg>use]:stroke-gray-500',
-    }),
+    })
   );
 
   if (image && index === 0) summaryContent.classList.add('show');
@@ -88,7 +86,10 @@ function createAccordionBlock(
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
     },
-    div({ class: 'accordion-answer text-base font-extralight leading-7 overflow-hidden' }),
+    div({
+      class:
+        'accordion-answer text-base font-extralight leading-7 overflow-hidden',
+    })
   );
 
   answer.forEach((element) => {
@@ -105,7 +106,7 @@ function createAccordionBlock(
       'hover:bg-danaherpurple-25',
       'text-danaherpurple-500',
       'hover:bg-danaherpurple-25',
-      'hover:text-danaherpurple-500',
+      'hover:text-danaherpurple-500'
     );
   });
 
@@ -140,19 +141,22 @@ export default async function decorate(block) {
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
-  const accordionContainerTitle = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
+  const accordionContainerTitle =
+    block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const customUUID = generateUUID();
 
   const dynamicData = Array.from(block.children)
     .slice(1)
     .map((element) => {
       const paragraphs = element.querySelectorAll('p');
-      const question = paragraphs[0]?.textContent || '';
+      const firstParagraph = paragraphs[0];
+      const question = firstParagraph?.textContent.trim() || '';
 
-      const answer = Array.from(paragraphs)
-        .slice(1)
-        .map((p) => p.outerHTML)
-        .join('');
+      element.children[0].firstElementChild.remove();
+      const allChildren = Array.from(element.children);
+
+      const answer = allChildren.map((child) => child.outerHTML).join('');
+
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
@@ -166,7 +170,7 @@ export default async function decorate(block) {
       uuid,
       div(),
       index,
-      customUUID,
+      customUUID
     );
   });
 
@@ -175,11 +179,11 @@ export default async function decorate(block) {
   });
   const faqTextContainer = div(
     { class: 'lg:w-[400px]' },
-    h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
+    h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle)
   );
   const accordionContainer = div(
     { class: 'lg:w-[840px] flex flex-col' },
-    ...dynamicAccordionItems,
+    ...dynamicAccordionItems
   );
 
   layoutContainer.append(faqTextContainer, accordionContainer);
