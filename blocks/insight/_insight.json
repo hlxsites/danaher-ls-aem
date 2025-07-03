@@ -73,7 +73,7 @@
                 "component": "select",
                 "name": "insightItemLinkType",
                 "label": "Link Type",
-                "value":"url",
+                "required": true,
                 "valueType": "string",
                 "options": [
                   {

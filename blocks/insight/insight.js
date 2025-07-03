@@ -150,6 +150,13 @@ export default function decorate(block) {
             class: 'w-12 mt-[2px] object-contain flex-shrink-0',
           })
         : null;
+      console.log('title:  ', title);
+      console.log('description:  ', description);
+      console.log('linkType:  ', linkType);
+      console.log('linkUrl:  ', linkUrl);
+      console.log('linkTarget:  ', linkTarget);
+      console.log('linkLabel:  ', linkLabel);
+      console.log('imgSrc:  ', imgSrc);
 
       const container = div(
         {
