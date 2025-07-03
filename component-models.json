@@ -518,6 +518,23 @@
         "label": "Offer Title"
       },
       {
+        "component": "select",
+        "name": "adLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "offer_text",

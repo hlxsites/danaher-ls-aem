@@ -1,5 +1,6 @@
 import { div, a, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { decorateModals } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -9,8 +10,9 @@ export default function decorate(block) {
 
   const titleEl = offerAdvertisement.querySelector('p');
   const linkHref = offerAdvertisement.querySelector('a')?.getAttribute('href') || '#';
+  const openLinktype = block.children[1]?.querySelector('p')?.textContent || '';
   const linkTextEl = offerAdvertisement?.querySelectorAll('p')?.[1];
-  const openNewTab = block.children[1]?.querySelector('p')?.textContent;
+  const openNewTab = block.children[2]?.querySelector('p')?.textContent;
 
   // Only create and append wrapper if there is content
   if (titleEl?.textContent?.trim() || linkTextEl?.textContent?.trim()) {
@@ -39,13 +41,22 @@ export default function decorate(block) {
           class:
               'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1 group',
         },
-        a({ href: linkHref, target: `${openNewTab === 'true' ? '_blank' : '_self'}` }, linkTextEl.textContent.trim()),
+        a(
+          {
+            href: openLinktype === 'modal' ? '#' : linkHref,
+            class: `${openLinktype === 'modal' ? 'show-modal-btn' : ''}`,
+            target: `${openNewTab === 'true' ? '_blank' : '_self'}`,
+          },
+          linkTextEl.textContent.trim(),
+        ),
         span({
-          class: 'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+          class:
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
         }),
       )
       : null;
     decorateIcons(linkContainer);
+    decorateModals(linkContainer);
 
     const outerContainer = div(
       {
