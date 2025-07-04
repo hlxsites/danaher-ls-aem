@@ -3,7 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  if (block?.classList.contains('is-decorated')) return;
+  if (block.querySelector('.simple-text')) return;
 
   const [leftText, rightText] = block.children;
 
