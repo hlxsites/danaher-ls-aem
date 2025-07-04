@@ -1,25 +1,30 @@
+import { div } from '../../scripts/dom-builder.js';
+
 export default function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const [leftText, rightText] = block.children;
 
-  // Only add classes/attributes, never restructure DOM
+  const leftTextEl = leftText?.innerHTML || '';
+  const rightTextEl = rightText?.innerHTML || '';
 
-  if (leftText) {
-    leftText.classList.add(
-      'pl-0',
-      'font-medium',
-      'text-3xl',
-      'text-black',
-      'md:w-1/2',
-      'leading-10'
-    );
-
-    leftText.querySelectorAll('p').forEach((p, idx, arr) => {
-      if (idx !== arr.length - 1) p.classList.add('pb-4');
-
-      if (!p.textContent.trim()) p.remove();
+  let leftDiv = div();
+  if (leftTextEl) {
+    // Create the left side
+    leftDiv = div({
+      class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
     });
-
-    leftText.querySelectorAll('a').forEach((link) => {
+    leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
+    leftDiv.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
+    const descriptionLinks = leftDiv?.querySelectorAll('a');
+    descriptionLinks?.forEach((link) => {
       link.classList.add(
         'text-black',
         'underline',
@@ -27,30 +32,30 @@ export default function decorate(block) {
         'hover:bg-danaherpurple-500',
         'hover:text-white'
       );
-
-      const href = link.getAttribute('href') || '';
-
-      link.setAttribute('target', href.includes('http') ? '_blank' : '_self');
+      const linkHref = link?.getAttribute('href');
+      link.setAttribute(
+        'target',
+        linkHref.includes('http') ? '_blank' : '_self'
+      );
     });
   }
-
-  if (rightText) {
-    rightText.classList.add(
-      'text-base',
-      'text-black',
-      'md:w-1/2',
-      'font-normal',
-      'leading-snug',
-      'mt-1'
-    );
-
-    rightText.querySelectorAll('p').forEach((p, idx, arr) => {
-      if (idx !== arr.length - 1) p.classList.add('pb-4');
-
-      if (!p.textContent.trim()) p.remove();
+  let rightDiv = div();
+  if (rightTextEl) {
+    // Create the right side
+    rightDiv = div({
+      class: 'text-base text-black md:w-1/2 font-normal leading-snug mt-1',
     });
-
-    rightText.querySelectorAll('a').forEach((link) => {
+    rightDiv?.insertAdjacentHTML('beforeend', rightTextEl);
+    rightDiv?.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
+    const descriptionLinks = rightDiv?.querySelectorAll('a');
+    descriptionLinks?.forEach((link) => {
       link.classList.add(
         'text-black',
         'underline',
@@ -58,28 +63,25 @@ export default function decorate(block) {
         'hover:bg-danaherpurple-500',
         'hover:text-white'
       );
-
-      const href = link.getAttribute('href') || '';
-
-      link.setAttribute('target', href.includes('http') ? '_blank' : '_self');
+      const linkHref = link?.getAttribute('href');
+      link.setAttribute(
+        'target',
+        linkHref.includes('http') ? '_blank' : '_self'
+      );
     });
   }
-
-  // Only add layout classes to block root, do not wrap
-
-  block.classList.add(
-    'flex',
-    'flex-col',
-    'md:flex-row',
-    'w-full',
-    'gap-6',
-    'pl-0',
-    'pr-0',
-    'pb-0',
-    'm-0',
-    'dhls-container',
-    'px-5',
-    'lg:px-10',
-    'dhlsBp:p-0'
+  const simpleTextWrapper = div({
+    class: 'w-full pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row gap-6',
+  });
+  simpleTextWrapper.append(leftDiv, rightDiv);
+  // Wrap both in flex container
+  const container = div(
+    {
+      class:
+        'flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+    },
+    simpleTextWrapper
   );
+  block.textContent = '';
+  block.append(container);
 }
