@@ -86,6 +86,8 @@ export default function decorate(block) {
   );
   block.append(container);
   [...block.children].forEach((ite) => {
-    ite.style.display = 'none';
+    [...ite.children].array.forEach((element) => {
+      element.style.display = 'none';
+    });
   });
 }
