@@ -187,7 +187,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Estimate if content is likely to be truncated based on length
-    const textContent = longDescription.textContent;
+    const { textContent } = longDescription;
     const approxCharsPerLine = 60;
     const estimatedLines = textContent.length / approxCharsPerLine;
     const isTruncated = estimatedLines > 6;
