@@ -21,14 +21,14 @@
             "id": "simple-text",
             "fields": [
                 {   
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "leftText",
                     "value": "",
                     "label": "Left Text"
                   },
                   {
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "rightText",
                     "value": "",
@@ -38,6 +38,12 @@
         }
     ],
     "filters": [
+      {
+      "id": "simple-text",
+      "components": [
+        ""
+      ]
+    }
     ]
   }
    
