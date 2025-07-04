@@ -5,7 +5,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
   const containerss = block.querySelector(':scope > div');
   if (!containerss) return;
-  if (containerss.classList.contains('simple-text')) return;
+  if (containerss.classList.contains('simple-text-content')) return;
 
   const [leftText, rightText] = block.children;
 
