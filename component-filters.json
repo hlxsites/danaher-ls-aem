@@ -124,53 +124,5 @@
     "components": [
       ""
     ]
-  },
-  {
-    "id": "breadcrumb",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "recent-articles",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "tags-list",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "related-articles",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "article-info",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "columns",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "card-list",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "banner",
-    "components": [
-      ""
-    ]
   }
 ]
