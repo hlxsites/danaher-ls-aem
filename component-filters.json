@@ -8,14 +8,12 @@
   {
     "id": "section",
     "components": [
-      "article-info",
       "breadcrumb",
       "banner",
       "text",
       "image",
       "button",
       "title",
-      "card-list",
       "columns",
       "takeway",
       "product-banner",
@@ -48,9 +46,7 @@
       "offer-advertisement",
       "related-category",
       "product-hero-content",
-      "product-info-list",
-      "related-articles",
-      "tags-list"
+      "product-info-list"
     ]
   },
   {
