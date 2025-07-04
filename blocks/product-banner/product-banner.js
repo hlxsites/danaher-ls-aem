@@ -153,7 +153,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer',
+            'read-more text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer hidden',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -185,6 +185,14 @@ export default function productBannerDecorate(block) {
         strong.classList.add('text-black');
       }
     });
+
+    // Estimate if content is likely to be truncated based on length
+    const { textContent } = longDescription;
+    const approxCharsPerLine = 60;
+    const estimatedLines = textContent.length / approxCharsPerLine;
+    const isTruncated = estimatedLines > 6;
+    const readMoreLink = categoryBannerDetails.querySelector('.read-more');
+    readMoreLink.style.display = isTruncated ? 'inline-block' : 'none';
   }
 
   if (
