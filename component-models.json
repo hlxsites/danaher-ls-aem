@@ -31,7 +31,7 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "article:tag",
+            "name": "article:Tag",
             "label": "article:tag",
             "value": ""
           },

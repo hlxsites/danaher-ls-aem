@@ -155,12 +155,6 @@
     ]
   },
   {
-    "id": "simple-text",
-    "components": [
-      ""
-    ]
-  },
-  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",
