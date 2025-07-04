@@ -132,7 +132,7 @@ export const getProductDetails = async (product) => {
     }
   } catch (error) {
     // eslint-disable-next-line
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 

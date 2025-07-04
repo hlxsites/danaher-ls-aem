@@ -17,14 +17,14 @@ import {
   decorateBlock,
 } from './lib-franklin.js';
 
-import {
-  div,
-  img,
-} from './dom-builder.js';
+import { div, img } from './dom-builder.js';
 
 // if the page url does not have .html, then add .html to the url
 if (window.location.hostname.includes('lifesciences.danaher.com')) {
-  if (!window.location.pathname.endsWith('.html') && window.location.pathname !== '/') {
+  if (
+    !window.location.pathname.endsWith('.html')
+    && window.location.pathname !== '/'
+  ) {
     window.location.pathname += '.html';
   }
 }
@@ -90,7 +90,9 @@ export function moveInstrumentation(from, to) {
     to,
     [...from.attributes]
       .map(({ nodeName }) => nodeName)
-      .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-')),
+      .filter(
+        (attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-'),
+      ),
   );
 }
 
@@ -118,7 +120,9 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
       class: 'mb-2 h-48 w-full object-cover',
     });
   }
-  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [
+    { width: '500' },
+  ]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
 }
@@ -126,9 +130,14 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
     const picture = document.createElement('picture');
-    picture.appendChild(img({
-      src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
-    }));
+    picture.appendChild(
+      img({
+        src: `${src}?$danaher-mobile$`,
+        fetchpriority: 'high',
+        alt,
+        loading: eager ? 'eager' : 'lazy',
+      }),
+    );
     return picture;
   }
   return img({
@@ -171,21 +180,51 @@ export function scrollJumpMenuFixed(pageJumpMenuContainer) {
     originalOffset = rectPageTabs.top;
   }
   if (window.scrollY > originalOffset) {
-    pageJumpMenuContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    document.querySelector('.page-jump-menu-container.fixed ul')?.classList.add('shadow-none', 'rounded-none');
-    document.querySelectorAll('.page-jump-menu-container.fixed ul li')?.forEach((el) => {
-      el?.firstElementChild?.classList.add('rounded-full');
-      el?.firstElementChild?.querySelector('span.icon svg use')?.classList.add('stroke-danaherpurple-500');
-    });
-    document.querySelector('.page-jump-menu-container.fixed li[aria-selected="true"] a span.icon svg')?.classList.add('stroke-white');
-    pageJumpMenuContainer.classList.remove(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+    pageJumpMenuContainer.classList.add(
+      ...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    document
+      .querySelector('.page-jump-menu-container.fixed ul')
+      ?.classList.add('shadow-none', 'rounded-none');
+    document
+      .querySelectorAll('.page-jump-menu-container.fixed ul li')
+      ?.forEach((el) => {
+        el?.firstElementChild?.classList.add('rounded-full');
+        el?.firstElementChild
+          ?.querySelector('span.icon svg use')
+          ?.classList.add('stroke-danaherpurple-500');
+      });
+    document
+      .querySelector(
+        '.page-jump-menu-container.fixed li[aria-selected="true"] a span.icon svg',
+      )
+      ?.classList.add('stroke-white');
+    pageJumpMenuContainer.classList.remove(
+      ...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
   } else {
-    pageJumpMenuContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => {
-      el?.firstElementChild?.classList.remove('rounded-full');
-      el?.firstElementChild?.querySelector('span.icon svg use')?.classList.remove('stroke-danaherpurple-500');
-    });
-    pageJumpMenuContainer.classList.add(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+    pageJumpMenuContainer.classList.remove(
+      ...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    document
+      .querySelectorAll('.page-jump-menu-container ul li')
+      ?.forEach((el) => {
+        el?.firstElementChild?.classList.remove('rounded-full');
+        el?.firstElementChild
+          ?.querySelector('span.icon svg use')
+          ?.classList.remove('stroke-danaherpurple-500');
+      });
+    pageJumpMenuContainer.classList.add(
+      ...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
   }
 }
 
@@ -196,11 +235,27 @@ export function scrollPageTabFixed(pageTabsContainer) {
     pageTabsOriginalOffset = rectPageTabs.top;
   }
   if (window.scrollY > pageTabsOriginalOffset) {
-    pageTabsContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.remove(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+    pageTabsContainer.classList.add(
+      ...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    pageTabsContainer.classList.remove(
+      ...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
   } else {
-    pageTabsContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.add(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+    pageTabsContainer.classList.remove(
+      ...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    pageTabsContainer.classList.add(
+      ...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
   }
 }
 /**
@@ -237,7 +292,9 @@ export function makePublicUrl(url) {
  * @param {string} name
  */
 export function setJsonLd(data, name) {
-  const existingScript = document.head.querySelector(`script[data-name="${name}"]`);
+  const existingScript = document.head.querySelector(
+    `script[data-name="${name}"]`,
+  );
   if (existingScript) {
     existingScript.innerHTML = JSON.stringify(data);
     return;
@@ -253,7 +310,8 @@ export function setJsonLd(data, name) {
 
 // Set the favicon
 function setFavicon() {
-  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  const faviconLink = document.querySelector("link[rel*='icon']")
+    || document.createElement('link');
   faviconLink.type = 'image/x-icon';
   faviconLink.rel = 'shortcut icon';
   faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
@@ -288,9 +346,22 @@ export async function getFragmentFromFile(url) {
 export function getCookie(cname) {
   let value = decodeURIComponent(
     // eslint-disable-next-line prefer-template
-    document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1'),
+    document.cookie.replace(
+      new RegExp(
+        `(?:(?:^|.*;)\\s*${
+          encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&')
+        }\\s*\\=\\s*([^;]*).*$)|^.*$`,
+      ),
+      '$1',
+    ),
   ) || null;
-  if (value && ((value.substring(0, 1) === '{' && value.substring(value.length - 1, value.length) === '}') || (value.substring(0, 1) === '[' && value.substring(value.length - 1, value.length) === ']'))) {
+  if (
+    value
+    && ((value.substring(0, 1) === '{'
+      && value.substring(value.length - 1, value.length) === '}')
+      || (value.substring(0, 1) === '['
+        && value.substring(value.length - 1, value.length) === ']'))
+  ) {
     try {
       value = JSON.parse(value);
     } catch (e) {
@@ -313,18 +384,24 @@ export function isOTEnabled() {
 }
 
 /**
-* Set the content of a cookie
-* @param {string} cname The cookie name (or property)
-* @param {string} cvalue The cookie value
-* @param {number} expTime The cookie expiry time (default 30 days)
-* @param {string} path The cookie path (optional)
-*
-*/
-export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, path = '/') {
+ * Set the content of a cookie
+ * @param {string} cname The cookie name (or property)
+ * @param {string} cvalue The cookie value
+ * @param {number} expTime The cookie expiry time (default 30 days)
+ * @param {string} path The cookie path (optional)
+ *
+ */
+export function setCookie(
+  cname,
+  cvalue,
+  expTime = 30 * 1000 * 60 * 60 * 24,
+  path = '/',
+) {
   const today = new Date();
-  today.setTime(today.getTime() + (expTime));
+  today.setTime(today.getTime() + expTime);
   const expires = 'expires='.concat(today.toGMTString());
-  const cookieString = cname.concat('=')
+  const cookieString = cname
+    .concat('=')
     .concat(cvalue)
     .concat(';')
     .concat(expires)
@@ -338,7 +415,9 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
  * @param {Element} main The container element
  */
 async function buildVideo(main) {
-  const videoLinks = main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]');
+  const videoLinks = main.querySelectorAll(
+    'a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]',
+  );
   if (videoLinks.length > 0) {
     const { default: decorateEmbed } = await import('../blocks/embed/embed.js');
     videoLinks.forEach((link) => {
@@ -371,8 +450,10 @@ function loadMobileMenu() {
   const breadcrumb = document.querySelector('breadcrumb');
   const mobileMunu = document.createElement('mobilemenu');
   const url = new URL(window.location.href);
-  if (url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/)
-    || url.pathname.match(/\/us\/en\/solutions\//)) {
+  if (
+    url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/)
+    || url.pathname.match(/\/us\/en\/solutions\//)
+  ) {
     breadcrumb.after(mobileMunu);
   }
 }
@@ -392,14 +473,18 @@ function buildAutoBlocks(main) {
 
 export function decorateModals(main) {
   const ctaModalButton = main.querySelector('.show-modal-btn');
-  const content = () => (ctaModalButton.getAttribute('data-dialog-message') ? ctaModalButton.getAttribute('dialog-message') : '');
+  const content = () => (ctaModalButton.getAttribute('data-dialog-message')
+    ? ctaModalButton.getAttribute('dialog-message')
+    : '');
   // Listens to the custom modal button
   ctaModalButton?.addEventListener('click', async (e) => {
     e.preventDefault();
     // eslint-disable-next-line import/no-cycle
     const { default: getModal } = await import('./modal.js');
     const customModal = await getModal('custom-modal', content, (modal) => {
-      modal.querySelector('p[name="close"]')?.addEventListener('click', () => modal.close());
+      modal
+        .querySelector('p[name="close"]')
+        ?.addEventListener('click', () => modal.close());
     });
     customModal.showModal();
   });
@@ -411,7 +496,9 @@ export function decorateModals(main) {
  */
 function decorateTwoColumnSection(main) {
   main.querySelectorAll('.section.container-two-col').forEach((section) => {
-    const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
+    const defaultContentWrappers = section.querySelectorAll(
+      ':scope > .default-content-wrapper',
+    );
     defaultContentWrappers.forEach((contentWrapper) => {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
@@ -433,21 +520,26 @@ function decorateTwoColumnSection(main) {
         newSection.appendChild(
           div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
         );
-        currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
+        currentDiv = div({
+          class:
+            'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10',
+        });
       }
       const childClone = child.cloneNode(true);
-      if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
+      if (
+        childClone.tagName === 'H2'
+        && childClone.querySelector(':scope > strong')
+      ) {
         if (currentDiv?.classList.contains('col-right')) {
           newSection.appendChild(currentDiv);
         }
         childClone.className = 'text-3xl leading-6 pt-6 pb-4 my-0';
         newSection.appendChild(
-          div(
-            { class: 'col-left lg:w-1/3 xl:w-1/3 pr-11' },
-            childClone,
-          ),
+          div({ class: 'col-left lg:w-1/3 xl:w-1/3 pr-11' }, childClone),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-2/3 pt-6 pb-10' });
+        currentDiv = div({
+          class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-2/3 pt-6 pb-10',
+        });
       } else if (currentDiv?.classList.contains('col-right')) {
         currentDiv.appendChild(childClone);
       }
@@ -466,15 +558,16 @@ function decorateTwoColumnSection(main) {
  * @param {Element} main The main element
  */
 function updateExternalLinks(main) {
-  const REFERERS = [
-    window.location.origin,
-  ];
+  const REFERERS = [window.location.origin];
   main.querySelectorAll('a[href]').forEach((a) => {
     try {
       const { origin, pathname, hash } = new URL(a.href, window.location.href);
       const targetHash = hash && hash.startsWith('#_');
       const isPDF = pathname.split('.').pop() === 'pdf';
-      if ((origin && origin !== window.location.origin && !targetHash) || isPDF) {
+      if (
+        (origin && origin !== window.location.origin && !targetHash)
+        || isPDF
+      ) {
         a.setAttribute('target', '_blank');
         if (!REFERERS.includes(origin)) a.setAttribute('rel', 'noopener');
       } else if (targetHash) {
@@ -518,15 +611,17 @@ function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
       });
 
       const loadLazyBlocks = (lazySection) => {
-        lazySection.querySelectorAll('.block[data-block-lazy-load]').forEach(async (block) => {
-          block.removeAttribute('data-block-lazy-load');
-          // Mark them back in the initialised status
-          block.setAttribute('data-block-status', 'initialized');
-          // Manually load each block: Download CSS, JS, execute the decorate
-          await loadBlock(block);
-          // Show the block only when everything is ready to avoid CLS
-          block.parentElement.style.display = '';
-        });
+        lazySection
+          .querySelectorAll('.block[data-block-lazy-load]')
+          .forEach(async (block) => {
+            block.removeAttribute('data-block-lazy-load');
+            // Mark them back in the initialised status
+            block.setAttribute('data-block-status', 'initialized');
+            // Manually load each block: Download CSS, JS, execute the decorate
+            await loadBlock(block);
+            // Show the block only when everything is ready to avoid CLS
+            block.parentElement.style.display = '';
+          });
 
         // force the loaded status of the section
         section.setAttribute('data-section-status', 'loaded');
@@ -579,7 +674,10 @@ function decoratePageNav(main) {
     }
   });
 
-  lazyLoadHiddenPageNavTabs(sections, namedSections[0].getAttribute('aria-labelledby'));
+  lazyLoadHiddenPageNavTabs(
+    sections,
+    namedSections[0].getAttribute('aria-labelledby'),
+  );
 }
 
 /**
@@ -612,7 +710,9 @@ async function decorateTemplates(main) {
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
       const templateObj = TEMPLATE_LIST[template];
-      const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
+      const templateName = typeof templateObj === 'string'
+        ? templateObj
+        : templateObj.templateName;
       const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
       const decorator = await Promise.all([
         import(`../templates/${templateName}/${templateName}.js`),
@@ -633,14 +733,14 @@ async function decorateTemplates(main) {
  * Decorate blocks in an embed fragment.
  */
 function decorateEmbeddedBlocks(container) {
-  container
-    .querySelectorAll('div.section > div')
-    .forEach(decorateBlock);
+  container.querySelectorAll('div.section > div').forEach(decorateBlock);
 }
 
 export async function processEmbedFragment(element) {
   const block = div({ class: 'embed-fragment' });
-  [...element.classList].forEach((className) => { block.classList.add(className); });
+  [...element.classList].forEach((className) => {
+    block.classList.add(className);
+  });
   const link = element.textContent;
   if (link) {
     const fragment = await getFragmentFromFile(`${link}.plain.html`);
@@ -674,10 +774,8 @@ function loadEvergageScript() {
   } else {
     script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
   }
-  script.onload = function onEvergageLoad() {
-  };
-  script.onerror = function onEvergageError() {
-  };
+  script.onload = function onEvergageLoad() {};
+  script.onerror = function onEvergageError() {};
   document.head.appendChild(script);
 }
 loadEvergageScript();
@@ -954,7 +1052,8 @@ function loadSideNav(main) {
       divRight.append(el);
     });
     const divEl = div({
-      class: '!flex !flex-col lg:!flex-row !gap-[3%] max-[639px]:pt-7 !max-w-7xl !mx-auto px-6 min-[1441px]:pt-12',
+      class:
+        '!flex !flex-col lg:!flex-row !gap-[3%] max-[639px]:pt-7 !max-w-7xl !mx-auto px-6 min-[1441px]:pt-12',
     });
     divEl.append(divLeft, divRight);
     main.append(divEl);
@@ -1031,7 +1130,10 @@ function getDLPage() {
   } else if (path.includes('/us/en/new-lab/join-today')) {
     page.level = 'other';
     page.type = 'join-today';
-  } else if (path.includes('/us/en/search') || path.includes('/us/en/danahersearch')) {
+  } else if (
+    path.includes('/us/en/search')
+    || path.includes('/us/en/danahersearch')
+  ) {
     page.level = 'top';
     page.type = 'search';
   } else if (path.includes('/us/en/signin')) {
@@ -1076,18 +1178,49 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     categoryProductKey: 'xx2a299d60-2cf1-48ab-b9d5-94daeb25f1d6',
     categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
     productRecommendationsKey: 'xx107716c0-1ccd-4a61-8717-6ca36b6cdb0e',
-    megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
+    megaMenuPath:
+      '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
     host: 'lifesciences.danaher.com',
     scene7host: 'https://danaherls.scene7.com',
   };
 } else {
+  // window.DanaherConfig = {
+  //   siteID: 'ls-us-en',
+  //   gtmID: 'GTM-KCBGM2N',
+  //   munchkinID: '439-KNJ-322',
+  //   marketoDomain: '//439-KNJ-322.mktoweb.com',
+  //   quoteCartPath: '/us/en/quote-cart.html',
+  //   cartPath: '/us/en/cart.html',
+  //   addressesPath: '/us/en/addresses.html',
+  //   shippingPath: '/us/en/shipping.html',
+  //   paymentPath: '/us/en/payment.html',
+  //   receiptPath: '/us/en/receipt.html',
+  //   quoteSubmitPath: '/us/en/submit-quote.html',
+  //   intershopDomain: 'https://stage.shop.lifesciences.danaher.com',
+  //   intershopPath: '/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-',
+  //   searchOrg: 'danahernonproduction1892f3fhz',
+  //   searchKey: 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b',
+  //   workflowProductKey: 'xx26ffc727-cc72-4bbd-98e3-34052f296382',
+  //   workflowResourceKey: 'xx14676f1d-cf4a-4a38-94f0-eda56e9920f1',
+  //   productKey: 'xx32da148e-dfd0-4725-a443-c05a7793afea',
+  //   familyProductKey: 'xx4e3989d6-93aa-4140-a227-19da35fcd1cc',
+  //   familyResourceKey: 'xx8274a91e-b29c-4267-8b3a-5022a2698605',
+  //   categoryProductKey: 'xxdf9d160d-f6e5-4c8c-969b-8570d7b81418',
+  //   categoryDetailKey: 'xxf2ea9bfd-bccb-4195-90fd-7757504fdc33',
+  //   productRecommendationsKey: 'xxea4d2c40-26e7-4e98-9377-d8ebe3f435ea',
+  //   megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
+  //   coveoProductPageTitle: 'Product Page',
+  //   pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
+  //   host: 'stage.lifesciences.danaher.com',
+  //   scene7host: 'https://s7d9.scene7.com',
+  // };
   window.DanaherConfig = {
     siteID: 'ls-us-en',
-    gtmID: 'GTM-KCBGM2N',
-    munchkinID: '439-KNJ-322',
-    marketoDomain: '//439-KNJ-322.mktoweb.com',
+    gtmID: 'GTM-THXPLCS',
+    munchkinID: '306-EHG-641',
+    marketoDomain: '//306-EHG-641.mktoweb.com',
     quoteCartPath: '/us/en/quote-cart.html',
     cartPath: '/us/en/cart.html',
     addressesPath: '/us/en/addresses.html',
@@ -1095,23 +1228,24 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     paymentPath: '/us/en/payment.html',
     receiptPath: '/us/en/receipt.html',
     quoteSubmitPath: '/us/en/submit-quote.html',
-    intershopDomain: 'https://stage.shop.lifesciences.danaher.com',
+    intershopDomain: 'https://shop.lifesciences.danaher.com',
     intershopPath: '/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-',
-    searchOrg: 'danahernonproduction1892f3fhz',
-    searchKey: 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b',
-    workflowProductKey: 'xx26ffc727-cc72-4bbd-98e3-34052f296382',
-    workflowResourceKey: 'xx14676f1d-cf4a-4a38-94f0-eda56e9920f1',
-    productKey: 'xx32da148e-dfd0-4725-a443-c05a7793afea',
-    familyProductKey: 'xx4e3989d6-93aa-4140-a227-19da35fcd1cc',
-    familyResourceKey: 'xx8274a91e-b29c-4267-8b3a-5022a2698605',
-    categoryProductKey: 'xxdf9d160d-f6e5-4c8c-969b-8570d7b81418',
-    categoryDetailKey: 'xxf2ea9bfd-bccb-4195-90fd-7757504fdc33',
-    productRecommendationsKey: 'xxea4d2c40-26e7-4e98-9377-d8ebe3f435ea',
-    megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
+    searchOrg: 'danaherproductionrfl96bkr',
+    searchKey: 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2',
+    workflowProductKey: 'xx3d1b8da5-d1e9-4989-bbed-264a248a9e22',
+    workflowResourceKey: 'xxf6a8b387-10f2-4660-af5d-6d304d0a789d',
+    productKey: 'xxfb161aa6-0fa0-419f-af37-9c6d7784bf76',
+    familyProductKey: 'xx1ecd2a4f-8391-4c70-b3c0-2d589bda56b7',
+    familyResourceKey: 'xx9dd85afc-64b6-4295-bc5d-eb8285f96d52',
+    categoryProductKey: 'xx2a299d60-2cf1-48ab-b9d5-94daeb25f1d6',
+    categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
+    productRecommendationsKey: 'xx107716c0-1ccd-4a61-8717-6ca36b6cdb0e',
+    megaMenuPath:
+      '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
-    host: 'stage.lifesciences.danaher.com',
-    scene7host: 'https://s7d9.scene7.com',
+    host: 'lifesciences.danaher.com',
+    scene7host: 'https://danaherls.scene7.com',
   };
 }
 // Danaher Config - End
