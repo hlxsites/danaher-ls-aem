@@ -1123,21 +1123,21 @@
     ]
   },
   {
-    "id": "Tags List",
+    "id": "tags-list",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
         "name": "text",
         "value": "",
-        "label": "Tags Text"
+        "label": "Tags Label"
       },
       {
-        "component": "text",
+        "component": "aem-content",
         "valueType": "string",
-        "name": "text",
+        "name": "link",
         "value": "",
-        "label": "Tags Link"
+        "label": "Tags Url"
       }
     ]
   }
