@@ -4,6 +4,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const [leftText, rightText] = [...block.children];
+  block.textContent = "";
 
   const leftTextEl = leftText?.innerHTML || "";
   const rightTextEl = rightText?.innerHTML || "";
@@ -82,5 +83,5 @@ export default function decorate(block) {
     },
     simpleTextWrapper
   );
-  block.innerHTML = container;
+  block.append(container);
 }
