@@ -40,7 +40,7 @@ export function getAuthorization() {
   if (localStorage.getItem('authToken')) {
     authHeader.append(
       'Authorization',
-      `Bearer ${localStorage.getItem('authToken')}`,
+      `Bearer ${localStorage.getItem('authToken')}`
     );
   }
   if (tokenInStore) {
@@ -72,11 +72,13 @@ async function makeCoveoRequest(
   path,
   accessParam,
   payload = {},
-  isAnalytics = false,
+  isAnalytics = false
 ) {
-  const accessToken = window.DanaherConfig?.[accessParam]
-    || 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-  const organizationId = window.DanaherConfig?.searchOrg || 'danahernonproduction1892f3fhz';
+  const accessToken =
+    window.DanaherConfig?.[accessParam] ||
+    'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId =
+    window.DanaherConfig?.searchOrg || 'danaherproductionrfl96bkr';
   const domain = isAnalytics ? '.analytics.org.coveo.com' : '.org.coveo.com';
   const apiUrl = isAnalytics
     ? `https://${organizationId}${domain}${path}`
@@ -100,7 +102,7 @@ export async function makeCoveoApiRequest(path, accessParam, payload = {}) {
 export async function makeCoveoAnalyticsApiRequest(
   path,
   accessParam,
-  payload = {},
+  payload = {}
 ) {
   // eslint-disable-next-line no-return-await
   return await makeCoveoRequest(path, accessParam, payload, true);
@@ -132,7 +134,7 @@ export const getProductDetails = async (product) => {
     }
   } catch (error) {
     // eslint-disable-next-line
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
@@ -166,7 +168,7 @@ export async function getProductResponse() {
       response = fullResponse.results;
       localStorage.setItem(
         'product-details',
-        JSON.stringify(fullResponse.results),
+        JSON.stringify(fullResponse.results)
       );
       return response;
     }
@@ -178,14 +180,19 @@ export async function getProductResponse() {
           const parser = new DOMParser();
           const doc = parser.parseFromString(data, 'text/html');
           document.head.innerHTML = doc.head.innerHTML;
-          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
+          document.querySelector('main').innerHTML =
+            doc.querySelector('main')?.innerHTML;
           document.title = 'Product Not Found';
-          document.querySelector('h1.heading-text').innerText = 'Product Not Found';
-          document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
-          window.addEventListener('load', () => sampleRUM('404', {
-            source: document.referrer,
-            target: window.location.href,
-          }));
+          document.querySelector('h1.heading-text').innerText =
+            'Product Not Found';
+          document.querySelector('p.description-text').innerText =
+            'The product you are looking for is not available. Please try again later.';
+          window.addEventListener('load', () =>
+            sampleRUM('404', {
+              source: document.referrer,
+              target: window.location.href,
+            })
+          );
         })
         .catch((error) => {
           // eslint-disable-next-line no-console
@@ -284,7 +291,7 @@ function getAnalytics(extraParams = {}) {
     .withContext(getContextKey(), getContextValue())
     .withContextHost(window.DanaherConfig.host)
     .withContextInternal(
-      typeof getCookie('exclude-from-analytics') !== 'undefined',
+      typeof getCookie('exclude-from-analytics') !== 'undefined'
     )
     .build();
 
@@ -306,12 +313,12 @@ function getAnalytics(extraParams = {}) {
 
 function buildProductsApiPayload(extraParams = {}) {
   const searchHistory = JSON.parse(
-    localStorage.getItem('__coveo.analytics.history') || '[]',
+    localStorage.getItem('__coveo.analytics.history') || '[]'
   );
 
   const payload = new ProductPayloadBuilder()
     .withActionHistory(
-      searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+      searchHistory.map(({ time, value, name }) => ({ time, value, name }))
     )
     .withAnonymous(false)
     .withAQ(`@${getRequestType()}==${getContextValue()}`)
@@ -320,9 +327,9 @@ function buildProductsApiPayload(extraParams = {}) {
         .withContext(getRequestType(), getContextValue())
         .withHost(window.DanaherConfig.host)
         .withInternal(
-          typeof getCookie('exclude-from-analytics') !== 'undefined',
+          typeof getCookie('exclude-from-analytics') !== 'undefined'
         )
-        .build(),
+        .build()
     )
     .withFieldsToInclude(['images', 'description', 'collection', 'source'])
     .withFirstResult(0)
@@ -368,9 +375,9 @@ function buildAnalyticsPayload(response, actionCause, extraParams = {}) {
         .withContext(getContextKey(), getContextValue())
         .withContextHost(window.DanaherConfig.host)
         .withContextInternal(
-          typeof getCookie('exclude-from-analytics') !== 'undefined',
+          typeof getCookie('exclude-from-analytics') !== 'undefined'
         )
-        .build(),
+        .build()
     )
     .build();
 
@@ -394,7 +401,7 @@ async function fetchAndHandleResponse(storageKey, payload) {
     const fullResponse = await makeCoveoApiRequest(
       '/rest/search/v2',
       'categoryProductKey',
-      payload,
+      payload
     );
     const clientId = getCookie('coveo_visitorId');
 
@@ -404,7 +411,7 @@ async function fetchAndHandleResponse(storageKey, payload) {
         await makeCoveoAnalyticsApiRequest(
           '/rest/v15/analytics/search',
           'categoryProductKey',
-          onLoadCoveoAnalyticsPayload(fullResponse),
+          onLoadCoveoAnalyticsPayload(fullResponse)
         );
       }
     } else localStorage.removeItem(storageKey);
@@ -472,7 +479,7 @@ export async function getProductsForCategories(extraParams = {}) {
             ],
             preventAutoSelect: !!extraParams[key],
             freezeCurrentValues: !!extraParams[key],
-          }),
+          })
         );
       } else {
         facets.push(
@@ -481,7 +488,7 @@ export async function getProductsForCategories(extraParams = {}) {
               queryToObject(decodeURIComponent(extraParams[key])),
             ],
             preventAutoSelect: !!extraParams[key],
-          }),
+          })
         );
       }
       analyticsPayload.facetId = key;
@@ -522,14 +529,15 @@ export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
       makeCoveoAnalyticsApiRequest(
         '/rest/v15/analytics/click',
         'categoryProductKey',
-        onClickCoveoAnalyticsPayload(response, idx, res),
+        onClickCoveoAnalyticsPayload(response, idx, res)
       );
     }
   });
 }
 
 function getProductRecomnsSearchApiPayload() {
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const host =
+    window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString
@@ -583,7 +591,8 @@ function getProductRecomnsSearchApiPayload() {
 }
 
 function getProductRecomnsAnalyticsPayload(resp) {
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const host =
+    window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
   const results = [];
@@ -624,19 +633,19 @@ export async function getProductRecommendationsResponse() {
     const fullResponse = await makeCoveoApiRequest(
       '/rest/search/v2',
       'productRecommendationsKey',
-      getProductRecomnsSearchApiPayload(),
+      getProductRecomnsSearchApiPayload()
     );
     const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem(
         'product-recommendations',
-        JSON.stringify(fullResponse),
+        JSON.stringify(fullResponse)
       );
       if (clientId !== null) {
         await makeCoveoAnalyticsApiRequest(
           '/rest/v15/analytics/search',
           'productRecommendationsKey',
-          getProductRecomnsAnalyticsPayload(fullResponse),
+          getProductRecomnsAnalyticsPayload(fullResponse)
         );
       }
       return fullResponse;
@@ -651,7 +660,8 @@ export async function getProductRecommendationsResponse() {
 function onClickProductRecomnsPayload(srchUid, idx, resp) {
   const clientId = getCookie('coveo_visitorId');
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const host =
+    window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const payload = {
     actionCause: 'recommendationOpen',
     anonymous: false,
@@ -686,8 +696,8 @@ export async function onClickProductRecomnsResponse(clickedItem, index) {
   response?.results?.forEach((res) => {
     const matchItem = res?.clickUri;
     if (
-      clickedItem.replace(/\.html$/, '')
-      === matchItem
+      clickedItem.replace(/\.html$/, '') ===
+      matchItem
         .split('/')
         .pop()
         .replace(/\.html$/, '')
@@ -697,7 +707,7 @@ export async function onClickProductRecomnsResponse(clickedItem, index) {
       makeCoveoAnalyticsApiRequest(
         '/rest/v15/analytics/click',
         'productRecommendationsKey',
-        onClickProductRecomnsPayload(searchUid, idx, res),
+        onClickProductRecomnsPayload(searchUid, idx, res)
       );
     }
   });
