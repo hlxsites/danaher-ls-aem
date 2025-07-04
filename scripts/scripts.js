@@ -14,6 +14,7 @@ import {
   getMetadata,
   createOptimizedPicture,
   loadBlock,
+  decorateBlock,
 } from './lib-franklin.js';
 import { div, img } from './dom-builder.js';
 if (window.location.hostname.includes('lifesciences.danaher.com')) {

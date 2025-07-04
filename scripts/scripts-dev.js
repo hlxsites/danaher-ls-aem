@@ -14,6 +14,7 @@ import {
   getMetadata,
   createOptimizedPicture,
   loadBlock,
+  decorateBlock,
 } from './lib-franklin.js';
 
 import { div, img } from './dom-builder.js';
@@ -742,7 +743,7 @@ async function decorateTemplates(main) {
  * Decorate blocks in an embed fragment.
  */
 function decorateEmbeddedBlocks(container) {
-  //container.querySelectorAll('div.section > div').forEach(decorateBlock);
+  container.querySelectorAll('div.section > div').forEach(decorateBlock);
 }
 
 export async function processEmbedFragment(element) {
