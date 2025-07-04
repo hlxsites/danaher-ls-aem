@@ -187,7 +187,7 @@ const accessToken =
 const organizationId =
   window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchOrg
-    : 'danaherproductionrfl96bkr';
+    : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
 const authHeader = getAuthorization();
