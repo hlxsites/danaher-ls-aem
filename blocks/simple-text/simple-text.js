@@ -84,9 +84,4 @@ export default function decorate(block) {
     simpleTextWrapper
   );
   block.append(container);
-  [...block.children]?.forEach((element) => {
-    [...element.children].forEach((ite) => {
-      ite.style.display = "none";
-    });
-  });
 }
