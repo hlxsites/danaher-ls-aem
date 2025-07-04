@@ -1,41 +1,41 @@
-import { div } from '../../scripts/dom-builder.js';
+import { div } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
   const [leftText, rightText] = [...block.children];
 
-  const leftTextEl = leftText?.innerHTML || '';
-  const rightTextEl = rightText?.innerHTML || '';
+  const leftTextEl = leftText?.innerHTML || "";
+  const rightTextEl = rightText?.innerHTML || "";
 
   let leftDiv = div();
   if (leftTextEl) {
     // Create the left side
     leftDiv = div({
-      class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
+      class: "pl-0  font-medium text-3xl text-black md:w-1/2 leading-10",
     });
-    leftDiv.insertAdjacentHTML('beforeend', leftTextEl);
-    leftDiv.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+    leftDiv.insertAdjacentHTML("beforeend", leftTextEl);
+    leftDiv.querySelectorAll("p")?.forEach((ite, inde, arr) => {
       if (inde !== arr.length - 1) {
-        ite.classList.add('pb-4');
+        ite.classList.add("pb-4");
       }
-      if (ite?.textContent?.trim() === '') {
+      if (ite?.textContent?.trim() === "") {
         ite.remove();
       }
     });
-    const descriptionLinks = leftDiv?.querySelectorAll('a');
+    const descriptionLinks = leftDiv?.querySelectorAll("a");
     descriptionLinks?.forEach((link) => {
       link.classList.add(
-        'text-black',
-        'underline',
-        'decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white'
+        "text-black",
+        "underline",
+        "decoration-danaherpurple-500",
+        "hover:bg-danaherpurple-500",
+        "hover:text-white"
       );
-      const linkHref = link?.getAttribute('href');
+      const linkHref = link?.getAttribute("href");
       link.setAttribute(
-        'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+        "target",
+        linkHref.includes("http") ? "_blank" : "_self"
       );
     });
   }
@@ -43,44 +43,44 @@ export default function decorate(block) {
   if (rightTextEl) {
     // Create the right side
     rightDiv = div({
-      class: 'text-base text-black md:w-1/2 font-normal leading-snug mt-1',
+      class: "text-base text-black md:w-1/2 font-normal leading-snug mt-1",
     });
-    rightDiv?.insertAdjacentHTML('beforeend', rightTextEl);
-    rightDiv?.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+    rightDiv?.insertAdjacentHTML("beforeend", rightTextEl);
+    rightDiv?.querySelectorAll("p")?.forEach((ite, inde, arr) => {
       if (inde !== arr.length - 1) {
-        ite.classList.add('pb-4');
+        ite.classList.add("pb-4");
       }
-      if (ite?.textContent?.trim() === '') {
+      if (ite?.textContent?.trim() === "") {
         ite.remove();
       }
     });
-    const descriptionLinks = rightDiv?.querySelectorAll('a');
+    const descriptionLinks = rightDiv?.querySelectorAll("a");
     descriptionLinks?.forEach((link) => {
       link.classList.add(
-        'text-black',
-        'underline',
-        'decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white'
+        "text-black",
+        "underline",
+        "decoration-danaherpurple-500",
+        "hover:bg-danaherpurple-500",
+        "hover:text-white"
       );
-      const linkHref = link?.getAttribute('href');
+      const linkHref = link?.getAttribute("href");
       link.setAttribute(
-        'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+        "target",
+        linkHref.includes("http") ? "_blank" : "_self"
       );
     });
   }
   const simpleTextWrapper = div({
-    class: 'w-full pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row gap-6',
+    class: "w-full pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row gap-6",
   });
   simpleTextWrapper.append(leftDiv, rightDiv);
   // Wrap both in flex container
   const container = div(
     {
       class:
-        'flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+        "flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     },
     simpleTextWrapper
   );
-  block.append(container);
+  block.innerHTML = container;
 }
