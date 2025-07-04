@@ -26,6 +26,13 @@
               "name": "banner",
               "value": "",
               "label": "Banner"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "description",
+              "value": "",
+              "label": "Description"
             }
           ]
       }
