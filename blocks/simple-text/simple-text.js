@@ -84,6 +84,5 @@ export default function decorate(block) {
     },
     simpleTextWrapper
   );
-  block.textContent = '';
   block.append(container);
 }
