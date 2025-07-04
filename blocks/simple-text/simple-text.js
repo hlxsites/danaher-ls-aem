@@ -3,7 +3,9 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  if (block.querySelector('.simple-text-content')) return;
+  const containerss = block.querySelector(':scope > div');
+  if (!containerss) return;
+  if (containerss.classList.contains('.simple-text')) return;
 
   const [leftText, rightText] = block.children;
 
