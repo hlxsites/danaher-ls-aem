@@ -1139,8 +1139,6 @@ export async function decorateProductList(block, blockId) {
   document.documentElement.style.scrollBehavior = 'smooth';
 
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
-  console.log('params: ', params);
-
   let response;
   try {
     response = await getProductsForCategories(params);
@@ -1148,7 +1146,6 @@ export async function decorateProductList(block, blockId) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
   }
-  console.log('response: ', response);
 
   block.removeChild(productSkeleton);
   block.classList.add(
