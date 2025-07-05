@@ -111,6 +111,7 @@ function attachEventListners(main) {
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
       console.log(' attach event: ', main);
+      console.log(' eventType: ', eventType);
 
       const applied = await applyChanges(event);
       if (!applied) window.location.reload();
