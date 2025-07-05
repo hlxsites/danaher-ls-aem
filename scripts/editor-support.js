@@ -108,6 +108,7 @@ function attachEventListners(main) {
   ].forEach((eventType) =>
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
+      console.log('eventType: ', eventType);
       console.log('event: ', event);
 
       const applied = await applyChanges(event);
