@@ -473,9 +473,8 @@ export default async function decorate(block) {
     left,
     right
   );
-  const isEditor =
-    document.body.classList.contains('hlx-edit') ||
-    document.documentElement.classList.contains('hlx-edit');
+  const isEditor = !!document.querySelector('script[src*="universal-editor"]');
+
   console.log('isEditor : ', isEditor);
 
   block.append(container);
