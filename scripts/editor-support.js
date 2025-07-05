@@ -109,11 +109,8 @@ function attachEventListners(main) {
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
 
-      console.log('eventType: ', eventType);
-      console.log('event: ', event);
-
-      //const applied = await applyChanges(event);
-      window.location.reload();
+      const applied = await applyChanges(event);
+      if (applied) window.location.reload();
     })
   );
 }
