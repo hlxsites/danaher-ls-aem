@@ -32,11 +32,8 @@ async function applyChanges(event) {
       const newMain = parsedUpdate.querySelector(
         `[data-aue-resource="${resource}"]`
       );
-      console.log(' matches main: ', newMain);
 
       newMain.style.display = 'none';
-      console.log('  element: ', element);
-      element.textContent = '';
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
       decorateRichtext(newMain);
@@ -51,6 +48,8 @@ async function applyChanges(event) {
     const block =
       element.parentElement?.closest('.block[data-aue-resource]') ||
       element?.closest('.block[data-aue-resource]');
+
+    console.log('  block: ', block);
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
       const newBlock = parsedUpdate.querySelector(
@@ -112,8 +111,6 @@ function attachEventListners(main) {
   ].forEach((eventType) =>
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
-      console.log(' attach event: ', main);
-      console.log(' eventType: ', eventType);
 
       const applied = await applyChanges(event);
       if (!applied) window.location.reload();
