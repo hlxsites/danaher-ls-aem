@@ -473,12 +473,16 @@ export default async function decorate(block) {
     left,
     right
   );
-  console.log('isEditor : ', document);
-
+  const isEditor = document.classList.contains('adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(container)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }
