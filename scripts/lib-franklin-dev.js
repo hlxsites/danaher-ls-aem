@@ -37,9 +37,12 @@ function wrapTextNodes(block) {
     [...el.attributes]
       // move the instrumentation from the cell to the new paragraph, also keep the class
       // in case the content is a buttton and the cell the button-container
-      .filter(({ nodeName }) => nodeName === 'class'
-        || nodeName.startsWith('data-aue')
-        || nodeName.startsWith('data-richtext'))
+      .filter(
+        ({ nodeName }) =>
+          nodeName === 'class' ||
+          nodeName.startsWith('data-aue') ||
+          nodeName.startsWith('data-richtext')
+      )
       .forEach(({ nodeName, nodeValue }) => {
         wrapper.setAttribute(nodeName, nodeValue);
         el.removeAttribute(nodeName);
@@ -49,13 +52,16 @@ function wrapTextNodes(block) {
 
   block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
     if (blockColumn.hasChildNodes()) {
-      const hasWrapper = !!blockColumn.firstElementChild
-        && validWrappers.some((tagName) => blockColumn.firstElementChild.tagName === tagName);
+      const hasWrapper =
+        !!blockColumn.firstElementChild &&
+        validWrappers.some(
+          (tagName) => blockColumn.firstElementChild.tagName === tagName
+        );
       if (!hasWrapper) {
         wrap(blockColumn);
       } else if (
-        blockColumn.firstElementChild.tagName === 'PICTURE'
-        && (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
+        blockColumn.firstElementChild.tagName === 'PICTURE' &&
+        (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
       ) {
         wrap(blockColumn);
       }
@@ -71,10 +77,13 @@ function wrapTextNodes(block) {
 export function sampleRUM(checkpoint, data = {}) {
   sampleRUM.defer = sampleRUM.defer || [];
   const defer = (fnname) => {
-    sampleRUM[fnname] = sampleRUM[fnname] || ((...args) => sampleRUM.defer.push({ fnname, args }));
+    sampleRUM[fnname] =
+      sampleRUM[fnname] ||
+      ((...args) => sampleRUM.defer.push({ fnname, args }));
   };
-  sampleRUM.drain = sampleRUM.drain
-    || ((dfnname, fn) => {
+  sampleRUM.drain =
+    sampleRUM.drain ||
+    ((dfnname, fn) => {
       sampleRUM[dfnname] = fn;
       sampleRUM.defer
         .filter(({ fnname }) => dfnname === fnname)
@@ -94,7 +103,9 @@ export function sampleRUM(checkpoint, data = {}) {
     if (!window.hlx.rum) {
       const usp = new URLSearchParams(window.location.search);
       const weight = usp.get('rum') === 'on' ? 1 : 20; // with parameter, weight is 1. Defaults to 100.
-      const id = Array.from({ length: 75 }, (_, i) => String.fromCharCode(48 + i))
+      const id = Array.from({ length: 75 }, (_, i) =>
+        String.fromCharCode(48 + i)
+      )
         .filter((a) => /\d|[A-Z]/i.test(a))
         .filter(() => Math.random() * 75 > 70)
         .join('');
@@ -144,7 +155,7 @@ export function sampleRUM(checkpoint, data = {}) {
             t: Date.now() - firstReadTime,
             ...data,
           },
-          knownProperties,
+          knownProperties
         );
         const url = `https://rum.hlx.page/.rum/${weight}`;
         // eslint-disable-next-line no-unused-expressions
@@ -157,7 +168,8 @@ export function sampleRUM(checkpoint, data = {}) {
         lazy: () => {
           // use classic script to avoid CORS issues
           const script = document.createElement('script');
-          script.src = 'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
+          script.src =
+            'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
           document.head.appendChild(script);
           return true;
         },
@@ -206,7 +218,7 @@ export async function loadScript(src, attrs) {
       const script = document.createElement('script');
       script.src = src;
       if (attrs) {
-      // eslint-disable-next-line no-restricted-syntax, guard-for-in
+        // eslint-disable-next-line no-restricted-syntax, guard-for-in
         for (const attr in attrs) {
           script.setAttribute(attr, attrs[attr]);
         }
@@ -227,7 +239,9 @@ export async function loadScript(src, attrs) {
  */
 export function getMetadata(name) {
   const attr = name && name.includes(':') ? 'property' : 'name';
-  const meta = [...document.head.querySelectorAll(`meta[${attr}="${name}" i]`)].map((m) => m.content).join(', ');
+  const meta = [...document.head.querySelectorAll(`meta[${attr}="${name}" i]`)]
+    .map((m) => m.content)
+    .join(', ');
   return meta || '';
 }
 
@@ -238,7 +252,11 @@ export function getMetadata(name) {
  */
 export function toClassName(name) {
   return typeof name === 'string'
-    ? name.toLowerCase().replace(/[^0-9a-z]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+    ? name
+        .toLowerCase()
+        .replace(/[^0-9a-z]/gi, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
     : '';
 }
 
@@ -257,14 +275,19 @@ export function toCamelCase(name) {
  * @returns an array of HTMLElement nodes that match the given scope
  */
 export function getAllMetadata(scope) {
-  return [...document.head.querySelectorAll(`meta[property^="${scope}:"],meta[name^="${scope}-"]`)]
-    .reduce((res, meta) => {
-      const id = toClassName(meta.name
+  return [
+    ...document.head.querySelectorAll(
+      `meta[property^="${scope}:"],meta[name^="${scope}-"]`
+    ),
+  ].reduce((res, meta) => {
+    const id = toClassName(
+      meta.name
         ? meta.name.substring(scope.length + 1)
-        : meta.getAttribute('property').split(':')[1]);
-      res[id] = meta.getAttribute('content');
-      return res;
-    }, {});
+        : meta.getAttribute('property').split(':')[1]
+    );
+    res[id] = meta.getAttribute('content');
+    return res;
+  }, {});
 }
 
 const ICONS_CACHE = {};
@@ -277,52 +300,63 @@ export async function decorateIcons(element) {
   let svgSprite = document.getElementById('franklin-svg-sprite');
   if (!svgSprite) {
     const div = document.createElement('div');
-    div.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" id="franklin-svg-sprite" style="display: none"></svg>';
+    div.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" id="franklin-svg-sprite" style="display: none"></svg>';
     svgSprite = div.firstElementChild;
     document.body.append(div.firstElementChild);
   }
 
   // Download all new icons
   const icons = [...element.querySelectorAll('span.icon')];
-  await Promise.all(icons.map(async (span) => {
-    const iconName = Array.from(span.classList).find((c) => c.startsWith('icon-')).substring(5);
-    if (!ICONS_CACHE[iconName]) {
-      ICONS_CACHE[iconName] = true;
-      try {
-        let iconSource = `${window.hlx.codeBasePath}/icons/${iconName}.svg`;
-        if (iconName.startsWith('dam-')) {
-          const isPublicDomain = window.location.hostname.includes('lifesciences.danaher.com');
-          iconSource = isPublicDomain ? '' : 'https://lifesciences.danaher.com';
-          iconSource += `/content/dam/danaher/system/icons/${iconName.substring(4).replace('_', ' ')}.svg`;
-        }
-        const response = await fetch(iconSource);
-        if (!response.ok) {
+  await Promise.all(
+    icons.map(async (span) => {
+      const iconName = Array.from(span.classList)
+        .find((c) => c.startsWith('icon-'))
+        .substring(5);
+      if (!ICONS_CACHE[iconName]) {
+        ICONS_CACHE[iconName] = true;
+        try {
+          let iconSource = `${window.hlx.codeBasePath}/icons/${iconName}.svg`;
+          if (iconName.startsWith('dam-')) {
+            const isPublicDomain = window.location.hostname.includes(
+              'lifesciences.danaher.com'
+            );
+            iconSource = isPublicDomain
+              ? ''
+              : 'https://lifesciences.danaher.com';
+            iconSource += `/content/dam/danaher/system/icons/${iconName
+              .substring(4)
+              .replace('_', ' ')}.svg`;
+          }
+          const response = await fetch(iconSource);
+          if (!response.ok) {
+            ICONS_CACHE[iconName] = false;
+            return;
+          }
+          // Styled icons don't play nice with the sprite approach because of shadow dom isolation
+          const svg = await response.text();
+          if (svg.match(/(<style | class=)/)) {
+            ICONS_CACHE[iconName] = { styled: true, html: svg };
+          } else {
+            ICONS_CACHE[iconName] = {
+              html: svg
+                .replace('<svg', `<symbol id="icons-sprite-${iconName}"`)
+                .replace(/ width=".*?"/, '')
+                .replace(/ height=".*?"/, '')
+                .replace('</svg>', '</symbol>'),
+            };
+          }
+        } catch (error) {
           ICONS_CACHE[iconName] = false;
-          return;
+          // eslint-disable-next-line no-console
+          console.error(error);
         }
-        // Styled icons don't play nice with the sprite approach because of shadow dom isolation
-        const svg = await response.text();
-        if (svg.match(/(<style | class=)/)) {
-          ICONS_CACHE[iconName] = { styled: true, html: svg };
-        } else {
-          ICONS_CACHE[iconName] = {
-            html: svg
-              .replace('<svg', `<symbol id="icons-sprite-${iconName}"`)
-              .replace(/ width=".*?"/, '')
-              .replace(/ height=".*?"/, '')
-              .replace('</svg>', '</symbol>'),
-          };
-        }
-      } catch (error) {
-        ICONS_CACHE[iconName] = false;
-        // eslint-disable-next-line no-console
-        console.error(error);
       }
-    }
-  }));
+    })
+  );
 
-  const symbols = Object
-    .keys(ICONS_CACHE).filter((k) => !svgSprite.querySelector(`#icons-sprite-${k}`))
+  const symbols = Object.keys(ICONS_CACHE)
+    .filter((k) => !svgSprite.querySelector(`#icons-sprite-${k}`))
     .map((k) => ICONS_CACHE[k])
     .filter((v) => !v.styled)
     .map((v) => v.html)
@@ -330,8 +364,11 @@ export async function decorateIcons(element) {
   svgSprite.innerHTML += symbols;
 
   icons.forEach((span) => {
-    const iconName = Array.from(span.classList).find((c) => c.startsWith('icon-')).substring(5);
-    const parent = span.firstElementChild?.tagName === 'A' ? span.firstElementChild : span;
+    const iconName = Array.from(span.classList)
+      .find((c) => c.startsWith('icon-'))
+      .substring(5);
+    const parent =
+      span.firstElementChild?.tagName === 'A' ? span.firstElementChild : span;
     // Styled icons need to be inlined as-is, while unstyled ones can leverage the sprite
     if (ICONS_CACHE[iconName].styled) {
       parent.innerHTML = ICONS_CACHE[iconName].html;
@@ -357,7 +394,8 @@ export async function fetchPlaceholders(prefix = 'default') {
             return resp.json();
           }
           throw new Error(`${resp.status}: ${resp.statusText}`);
-        }).then((json) => {
+        })
+        .then((json) => {
           const placeholders = {};
           json.data
             .filter((placeholder) => placeholder.Key)
@@ -366,7 +404,8 @@ export async function fetchPlaceholders(prefix = 'default') {
             });
           window.placeholders[prefix] = placeholders;
           resolve();
-        }).catch((error) => {
+        })
+        .catch((error) => {
           // error loading placeholders
           window.placeholders[prefix] = {};
           reject(error);
@@ -445,38 +484,42 @@ export function readBlockConfig(block) {
  * @param {Element} main The container element
  */
 export function decorateSections(main) {
-  main.querySelectorAll(':scope > div:not([data-section-status])').forEach((section) => {
-    const wrappers = [];
-    let defaultContent = false;
-    [...section.children].forEach((e) => {
-      if ((e.tagName === 'DIV' && e.className) || !defaultContent) {
-        const wrapper = document.createElement('div');
-        wrappers.push(wrapper);
-        defaultContent = e.tagName !== 'DIV' || !e.className;
-        if (defaultContent) wrapper.classList.add('default-content-wrapper');
-      }
-      wrappers[wrappers.length - 1].append(e);
-    });
-    wrappers.forEach((wrapper) => section.append(wrapper));
-    section.classList.add('section');
-    section.dataset.sectionStatus = 'initialized';
-    section.style.display = 'none';
-
-    /* process section metadata */
-    const sectionMeta = section.querySelector('div.section-metadata');
-    if (sectionMeta) {
-      const meta = readBlockConfig(sectionMeta);
-      Object.keys(meta).forEach((key) => {
-        if (key === 'style') {
-          const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
-          styles.forEach((style) => section.classList.add(style));
-        } else {
-          section.dataset[toCamelCase(key)] = meta[key];
+  main
+    .querySelectorAll(':scope > div:not([data-section-status])')
+    .forEach((section) => {
+      const wrappers = [];
+      let defaultContent = false;
+      [...section.children].forEach((e) => {
+        if ((e.tagName === 'DIV' && e.className) || !defaultContent) {
+          const wrapper = document.createElement('div');
+          wrappers.push(wrapper);
+          defaultContent = e.tagName !== 'DIV' || !e.className;
+          if (defaultContent) wrapper.classList.add('default-content-wrapper');
         }
+        wrappers[wrappers.length - 1].append(e);
       });
-      sectionMeta.parentNode.remove();
-    }
-  });
+      wrappers.forEach((wrapper) => section.append(wrapper));
+      section.classList.add('section');
+      section.dataset.sectionStatus = 'initialized';
+      section.style.display = 'none';
+
+      /* process section metadata */
+      const sectionMeta = section.querySelector('div.section-metadata');
+      if (sectionMeta) {
+        const meta = readBlockConfig(sectionMeta);
+        Object.keys(meta).forEach((key) => {
+          if (key === 'style') {
+            const styles = meta.style
+              .split(',')
+              .map((style) => toClassName(style.trim()));
+            styles.forEach((style) => section.classList.add(style));
+          } else {
+            section.dataset[toCamelCase(key)] = meta[key];
+          }
+        });
+        sectionMeta.parentNode.remove();
+      }
+    });
 }
 
 /**
@@ -489,7 +532,9 @@ export function updateSectionsStatus(main) {
     const section = sections[i];
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
-      const loadingBlock = section.querySelector('.block[data-block-status="initialized"], .block[data-block-status="loading"]');
+      const loadingBlock = section.querySelector(
+        '.block[data-block-status="initialized"], .block[data-block-status="loading"]'
+      );
       if (loadingBlock) {
         section.dataset.sectionStatus = 'loading';
         break;
@@ -506,9 +551,7 @@ export function updateSectionsStatus(main) {
  * @param {Element} main The container element
  */
 export function decorateBlocks(main) {
-  main
-    .querySelectorAll('div.section > div > div')
-    .forEach(decorateBlock);
+  main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
 /**
@@ -539,7 +582,7 @@ export function buildBlock(blockName, content) {
     });
     blockEl.appendChild(rowEl);
   });
-  return (blockEl);
+  return blockEl;
 }
 
 /**
@@ -553,23 +596,22 @@ async function loadModule(name, jsPath, cssPath, ...args) {
   const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
   const decorationComplete = jsPath
     ? new Promise((resolve) => {
-      (async () => {
-        let mod;
-        try {
-          mod = await import(jsPath);
-          if (mod.default) {
-            await mod.default.apply(null, args);
+        (async () => {
+          let mod;
+          try {
+            mod = await import(jsPath);
+            if (mod.default) {
+              await mod.default.apply(null, args);
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(`failed to load module for ${name}`, error);
           }
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log(`failed to load module for ${name}`, error);
-        }
-        resolve(mod);
-      })();
-    })
+          resolve(mod);
+        })();
+      })
     : Promise.resolve();
-  return Promise.all([cssLoaded, decorationComplete])
-    .then(([, api]) => api);
+  return Promise.all([cssLoaded, decorationComplete]).then(([, api]) => api);
 }
 
 /**
@@ -581,12 +623,20 @@ async function loadModule(name, jsPath, cssPath, ...args) {
  */
 function getBlockConfig(block) {
   const { blockName } = block.dataset;
-  const jsPath = blockName ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js` : '';
-  const cssPath = blockName ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css` : '';
+  const jsPath = blockName
+    ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
+    : '';
+  const cssPath = blockName
+    ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`
+    : '';
   const original = { blockName, jsPath };
   return (window.hlx.patchBlockConfig || [])
     .filter((fn) => typeof fn === 'function')
-    .reduce((config, fn) => fn(config, original), { blockName, jsPath, cssPath });
+    .reduce((config, fn) => fn(config, original), {
+      blockName,
+      jsPath,
+      cssPath,
+    });
 }
 
 const cssExpectionalBlocks = [];
@@ -603,7 +653,9 @@ export async function loadBlock(block) {
     try {
       if (cssExpectionalBlocks.includes(blockName)) {
         await loadModule(blockName, jsPath, undefined, block);
-      } else { await loadModule(blockName, jsPath, cssPath, block); }
+      } else {
+        await loadModule(blockName, jsPath, cssPath, block);
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
@@ -611,7 +663,16 @@ export async function loadBlock(block) {
     block.dataset.blockStatus = 'loaded';
   }
 }
-
+export async function loadSections(element) {
+  const sections = [...element.querySelectorAll('div.section')];
+  for (let i = 0; i < sections.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await loadSection(sections[i]);
+    if (i === 0 && sampleRUM.enhance) {
+      sampleRUM.enhance();
+    }
+  }
+}
 /**
  * Loads JS and CSS for all blocks in a container element.
  * @param {Element} main The container element
@@ -634,7 +695,15 @@ export async function loadBlocks(main) {
  * @param {Array} [breakpoints] Breakpoints and corresponding params (eg. width)
  * @returns {Element} The picture element
  */
-export function createOptimizedPicture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
+export function createOptimizedPicture(
+  src,
+  alt = '',
+  eager = false,
+  breakpoints = [
+    { media: '(min-width: 600px)', width: '2000' },
+    { width: '750' },
+  ]
+) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
   const { pathname } = url;
@@ -645,7 +714,10 @@ export function createOptimizedPicture(src, alt = '', eager = false, breakpoints
     const source = document.createElement('source');
     if (br.media) source.setAttribute('media', br.media);
     source.setAttribute('type', 'image/webp');
-    source.setAttribute('srcset', `${pathname}?width=${br.width}&format=webply&optimize=medium`);
+    source.setAttribute(
+      'srcset',
+      `${pathname}?width=${br.width}&format=webply&optimize=medium`
+    );
     picture.appendChild(source);
   });
 
@@ -654,14 +726,20 @@ export function createOptimizedPicture(src, alt = '', eager = false, breakpoints
     if (i < breakpoints.length - 1) {
       const source = document.createElement('source');
       if (br.media) source.setAttribute('media', br.media);
-      source.setAttribute('srcset', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
+      source.setAttribute(
+        'srcset',
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+      );
       picture.appendChild(source);
     } else {
       const img = document.createElement('img');
       img.setAttribute('loading', eager ? 'eager' : 'lazy');
       img.setAttribute('alt', alt);
       picture.appendChild(img);
-      img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=medium`);
+      img.setAttribute(
+        'src',
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+      );
     }
   });
 
@@ -721,19 +799,35 @@ export function decorateButtons(element) {
     if (a.href !== a.textContent && a.title !== 'link') {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
-      if (!a.querySelector('img') && twoup.tagName !== 'LI' && !a.closest('.call-to-action')
-          && !a.closest('.mini-teasers') && !a.closest('.bg-color-right')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+      if (
+        !a.querySelector('img') &&
+        twoup.tagName !== 'LI' &&
+        !a.closest('.call-to-action') &&
+        !a.closest('.mini-teasers') &&
+        !a.closest('.bg-color-right')
+      ) {
+        if (
+          up.childNodes.length === 1 &&
+          (up.tagName === 'P' || up.tagName === 'DIV')
+        ) {
           a.className = 'btn btn-outline-primary'; // default
           up.classList.add('button-container');
         }
-        if (up.childNodes.length === 1 && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+        if (
+          up.childNodes.length === 1 &&
+          up.tagName === 'STRONG' &&
+          twoup.childNodes.length === 1 &&
+          twoup.tagName === 'P'
+        ) {
           a.className = 'btn btn-outline-primary';
           twoup.classList.add('button-container');
         }
-        if (up.childNodes.length === 1 && up.tagName === 'EM'
-          && twoup.childNodes.length === 1 && twoup.tagName === 'P') {
+        if (
+          up.childNodes.length === 1 &&
+          up.tagName === 'EM' &&
+          twoup.childNodes.length === 1 &&
+          twoup.tagName === 'P'
+        ) {
           a.className = 'btn btn-outline-secondary';
           twoup.classList.add('button-container');
         }
@@ -747,7 +841,7 @@ export function decorateButtons(element) {
  */
 export async function waitForLCP(lcpBlocks) {
   const block = document.querySelector('main .block');
-  const hasLCPBlock = (block && lcpBlocks.includes(block.dataset.blockName));
+  const hasLCPBlock = block && lcpBlocks.includes(block.dataset.blockName);
   if (hasLCPBlock) await loadBlock(block);
 
   document.body.style.display = null;
@@ -789,7 +883,10 @@ export function loadFooter(footer) {
 
 function parsePluginParams(id, config) {
   const pluginId = !config
-    ? id.split('/').splice(id.endsWith('/') ? -2 : -1, 1)[0].replace(/\.js/, '')
+    ? id
+        .split('/')
+        .splice(id.endsWith('/') ? -2 : -1, 1)[0]
+        .replace(/\.js/, '')
     : id;
   const pluginConfig = {
     load: 'eager',
@@ -826,57 +923,82 @@ class PluginsRegistry {
 
   // Register a new plugin
   add(id, config) {
-    const { id: pluginId, config: pluginConfig } = parsePluginParams(id, config);
+    const { id: pluginId, config: pluginConfig } = parsePluginParams(
+      id,
+      config
+    );
     this.#plugins.set(pluginId, pluginConfig);
   }
 
   // Get the plugin
-  get(id) { return this.#plugins.get(id); }
+  get(id) {
+    return this.#plugins.get(id);
+  }
 
   // Check if the plugin exists
-  includes(id) { return !!this.#plugins.has(id); }
+  includes(id) {
+    return !!this.#plugins.has(id);
+  }
 
   // Load all plugins that are referenced by URL, and updated their configuration with the
   // actual API they expose
   async load(phase) {
     [...this.#plugins.entries()]
-      .filter(([, plugin]) => plugin.condition
-      && !plugin.condition(document, plugin.options, executionContext))
+      .filter(
+        ([, plugin]) =>
+          plugin.condition &&
+          !plugin.condition(document, plugin.options, executionContext)
+      )
       .map(([id]) => this.#plugins.delete(id));
-    return Promise.all([...this.#plugins.entries()]
-      // Filter plugins that don't match the execution conditions
-      .filter(([, plugin]) => (
-        (!plugin.condition || plugin.condition(document, plugin.options, executionContext))
-        && phase === plugin.load && plugin.url
-      ))
-      .map(async ([key, plugin]) => {
-        try {
-          // If the plugin has a default export, it will be executed immediately
-          const pluginApi = (await loadModule(
-            key,
-            !plugin.url.endsWith('.js') ? `${plugin.url}/${key}.js` : plugin.url,
-            !plugin.url.endsWith('.js') ? `${plugin.url}/${key}.css` : null,
-            document,
-            plugin.options,
-            executionContext,
-          )) || {};
-          this.#plugins.set(key, { ...plugin, ...pluginApi });
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error('Could not load specified plugin', key);
-        }
-      }));
+    return Promise.all(
+      [...this.#plugins.entries()]
+        // Filter plugins that don't match the execution conditions
+        .filter(
+          ([, plugin]) =>
+            (!plugin.condition ||
+              plugin.condition(document, plugin.options, executionContext)) &&
+            phase === plugin.load &&
+            plugin.url
+        )
+        .map(async ([key, plugin]) => {
+          try {
+            // If the plugin has a default export, it will be executed immediately
+            const pluginApi =
+              (await loadModule(
+                key,
+                !plugin.url.endsWith('.js')
+                  ? `${plugin.url}/${key}.js`
+                  : plugin.url,
+                !plugin.url.endsWith('.js') ? `${plugin.url}/${key}.css` : null,
+                document,
+                plugin.options,
+                executionContext
+              )) || {};
+            this.#plugins.set(key, { ...plugin, ...pluginApi });
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error('Could not load specified plugin', key);
+          }
+        })
+    );
   }
 
   // Run a specific phase in the plugin
   async run(phase) {
-    return [...this.#plugins.values()]
-      .reduce((promise, plugin) => ( // Using reduce to execute plugins sequencially
-        plugin[phase] && (!plugin.condition
-            || plugin.condition(document, plugin.options, executionContext))
-          ? promise.then(() => plugin[phase](document, plugin.options, executionContext))
-          : promise
-      ), Promise.resolve());
+    return [...this.#plugins.values()].reduce(
+      (
+        promise,
+        plugin // Using reduce to execute plugins sequencially
+      ) =>
+        plugin[phase] &&
+        (!plugin.condition ||
+          plugin.condition(document, plugin.options, executionContext))
+          ? promise.then(() =>
+              plugin[phase](document, plugin.options, executionContext)
+            )
+          : promise,
+      Promise.resolve()
+    );
   }
 }
 
@@ -888,18 +1010,26 @@ class TemplatesRegistry {
       id.forEach((i) => window.hlx.templates.add(i));
       return;
     }
-    const { id: templateId, config: templateConfig } = parsePluginParams(id, url);
-    templateConfig.condition = () => toClassName(getMetadata('template')) === templateId;
+    const { id: templateId, config: templateConfig } = parsePluginParams(
+      id,
+      url
+    );
+    templateConfig.condition = () =>
+      toClassName(getMetadata('template')) === templateId;
     window.hlx.plugins.add(templateId, templateConfig);
   }
 
   // Get the template
   // eslint-disable-next-line class-methods-use-this
-  get(id) { return window.hlx.plugins.get(id); }
+  get(id) {
+    return window.hlx.plugins.get(id);
+  }
 
   // Check if the template exists
   // eslint-disable-next-line class-methods-use-this
-  includes(id) { return window.hlx.plugins.includes(id); }
+  includes(id) {
+    return window.hlx.plugins.includes(id);
+  }
 }
 
 /**
@@ -909,7 +1039,8 @@ export function setup() {
   window.hlx = window.hlx || {};
   window.hlx.RUM_MASK_URL = 'full';
   window.hlx.codeBasePath = '';
-  window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
+  window.hlx.lighthouse =
+    new URLSearchParams(window.location.search).get('lighthouse') === 'on';
   window.hlx.patchBlockConfig = [];
   window.hlx.plugins = new PluginsRegistry();
   window.hlx.templates = new TemplatesRegistry();
@@ -919,7 +1050,9 @@ export function setup() {
     try {
       const scriptURL = new URL(scriptEl.src, window.location);
       if (scriptURL.host === window.location.host) {
-        [window.hlx.codeBasePath] = scriptURL.pathname.split('/scripts/scripts.js');
+        [window.hlx.codeBasePath] = scriptURL.pathname.split(
+          '/scripts/scripts.js'
+        );
       } else {
         [window.hlx.codeBasePath] = scriptURL.href.split('/scripts/scripts.js');
       }
@@ -940,7 +1073,10 @@ function init() {
   window.addEventListener('load', () => sampleRUM('load'));
 
   window.addEventListener('unhandledrejection', (event) => {
-    sampleRUM('error', { source: event.reason.sourceURL, target: event.reason.line });
+    sampleRUM('error', {
+      source: event.reason.sourceURL,
+      target: event.reason.line,
+    });
   });
 
   window.addEventListener('error', (event) => {
