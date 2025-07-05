@@ -23,6 +23,8 @@ export default async function decorate(block) {
 
   const opcoBannerItems = [];
   [...block.children].forEach((child, index) => {
+    console.log('child dataset: ', child.dataset.aueModel);
+
     if (index > 6) {
       opcoBannerItems.push(child);
     }
@@ -474,9 +476,4 @@ export default async function decorate(block) {
   );
   block.textContent = '';
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
 }
