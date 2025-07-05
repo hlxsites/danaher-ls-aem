@@ -5,7 +5,6 @@ import {
   decorateIcons,
   decorateSections,
   loadBlock,
-  loadScript,
   loadSections,
 } from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
