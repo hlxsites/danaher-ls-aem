@@ -476,7 +476,7 @@ export default async function decorate(block) {
   const isEditor = window.location.pathname.includes(
     '/universal-editor/canvas'
   );
-  console.log(' is editor : ', isEditor);
+  console.log(' is editor : ', window.location.pathname);
 
   if (!isEditor) {
     block.textContent = '';
