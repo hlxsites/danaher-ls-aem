@@ -464,7 +464,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    opcoBannerItems.length > 1 ? controls : ''
+    [...block.children].length > 1 ? controls : ''
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
