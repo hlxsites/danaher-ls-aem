@@ -26,7 +26,6 @@ async function applyChanges(event) {
 
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
-  console.log('element: ', element);
 
   if (element) {
     if (element.matches('main')) {
