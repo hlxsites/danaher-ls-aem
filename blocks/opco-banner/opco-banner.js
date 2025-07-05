@@ -268,11 +268,11 @@ export default async function decorate(block) {
   );
   [...block.children].forEach((item, index) => {
     if (index > 6) {
-      const contentWrapper = div({
-        class:
-          'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
-      });
-
+      // const contentWrapper = div({
+      //   class:
+      //     'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
+      // });
+      const contentWrapper = document.createElement('div');
       moveInstrumentation(item, contentWrapper);
       while (item.firstElementChild)
         contentWrapper.append(item.firstElementChild);
