@@ -19,14 +19,15 @@ export default async function decorate(block) {
     bannerButtonUrl,
     bannerButtonNewTab,
     bannerButtonLabel,
+    ...opcoBannerItems
   ] = block.children;
 
-  const opcoBannerItems = [];
-  [...block.children].forEach((child, index) => {
-    if (index > 6) {
-      opcoBannerItems.push(child);
-    }
-  });
+  // const opcoBannerItems = [];
+  // [...block.children].forEach((child, index) => {
+  //   if (index > 6) {
+  //     opcoBannerItems.push(child);
+  //   }
+  // });
 
   const baseUrl = 'https://lifesciences.danaher.com';
 
