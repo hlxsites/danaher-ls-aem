@@ -9,6 +9,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const [
@@ -411,7 +412,7 @@ export default async function decorate(block) {
       contentWrapper,
       overlayWrapper,
     );
-
+    moveInstrumentation(slide);
     if (opcoBannerItemBgImage) {
       overlayWrapper?.classList.remove('hidden');
       slide.style.padding = '2.5rem';
@@ -470,11 +471,6 @@ export default async function decorate(block) {
     left,
     right,
   );
-
+  block.textContent='';
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
 }
