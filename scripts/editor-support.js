@@ -49,12 +49,13 @@ async function applyChanges(event) {
       element.parentElement?.closest('.block[data-aue-resource]') ||
       element?.closest('.block[data-aue-resource]');
 
-    console.log('  block: ', block);
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
       const newBlock = parsedUpdate.querySelector(
         `[data-aue-resource="${blockResource}"]`
       );
+      console.log('  block: ', block);
+      console.log('  newBlock: ', newBlock);
       if (newBlock) {
         newBlock.style.display = 'none';
         block.insertAdjacentElement('afterend', newBlock);
