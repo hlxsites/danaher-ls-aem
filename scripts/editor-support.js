@@ -26,6 +26,7 @@ async function applyChanges(event) {
 
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
+  console.log('element: ', element);
 
   if (element) {
     if (element.matches('main')) {
@@ -108,7 +109,6 @@ function attachEventListners(main) {
   ].forEach((eventType) =>
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
-      console.log('event type: ', eventType);
 
       const applied = await applyChanges(event);
       if (!applied) window.location.reload();
