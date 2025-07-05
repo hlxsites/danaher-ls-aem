@@ -39,7 +39,7 @@ async function applyChanges(event) {
       decorateRichtext(newMain);
       await loadSections(newMain);
       element.remove();
-      newMain.style.display = null;
+      newMain.style.display = '';
       // eslint-disable-next-line no-use-before-define
       attachEventListners(newMain);
       return true;
