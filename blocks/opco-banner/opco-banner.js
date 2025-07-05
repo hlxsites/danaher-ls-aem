@@ -474,16 +474,18 @@ export default async function decorate(block) {
     right
   );
 
-  const isEditor = document.querySelector('.adobe-ue-edit');
-  if (!isEditor) {
-    block.textContent = '';
-  }
-  block.append(container);
-  if (isEditor) {
-    [...block.children].forEach((child) => {
-      if (!child.contains(container)) {
-        child.style.display = 'none';
-      }
-    });
-  }
+  block.replaceChildren(container);
+
+  // const isEditor = document.querySelector('.adobe-ue-edit');
+  // if (!isEditor) {
+  //   block.textContent = '';
+  // }
+  // block.append(container);
+  // if (isEditor) {
+  //   [...block.children].forEach((child) => {
+  //     if (!child.contains(container)) {
+  //       child.style.display = 'none';
+  //     }
+  //   });
+  // }
 }
