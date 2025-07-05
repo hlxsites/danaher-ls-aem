@@ -11,14 +11,16 @@ import {
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
-  // === clean up the outer wrapper ===
+  // === clean up wrapper ===
 
   block?.parentElement?.parentElement?.removeAttribute('class');
 
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  // === read main banner elements ===
+  // === get block children ===
 
   const [
     bannerTitle,
@@ -35,21 +37,95 @@ export default async function decorate(block) {
 
     bannerButtonLabel,
 
-    ...opcoBannerItems
+    ...carouselItems
   ] = block.children;
+
+  // === build left section ===
+
+  const left = div({ class: 'opco-banner-left flex flex-col gap-4' });
+
+  moveInstrumentation(bannerTitle, left);
+
+  if (bannerTitle) {
+    const titleText = bannerTitle.textContent.trim();
+
+    left.append(
+      p({ class: 'text-danaherpurple-800 font-medium text-lg' }, titleText)
+    );
+  }
 
   const bannerImg = bannerImage?.querySelector('img');
 
-  const buttonLabel = bannerButtonLabel?.textContent?.trim() || '';
+  if (bannerImg) {
+    left.append(
+      img({
+        src: bannerImg.src,
+
+        alt: bannerImg.alt || '',
+
+        class: 'w-[172px] mb-2 md:mb-8',
+      })
+    );
+  }
+
+  if (bannerHeading) {
+    const headingText = bannerHeading.textContent.trim();
+
+    left.append(h1({ class: 'text-4xl font-medium text-black' }, headingText));
+  }
+
+  if (bannerDescription) {
+    const desc = div({ class: 'text-base text-black' });
+
+    desc.innerHTML = bannerDescription.innerHTML;
+
+    desc.querySelectorAll('p').forEach((el, i, arr) => {
+      if (i !== arr.length - 1) el.classList.add('pb-4');
+
+      if (!el.textContent.trim()) el.remove();
+    });
+
+    desc.querySelectorAll('a').forEach((link) => {
+      link.classList.add(
+        'underline',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white'
+      );
+
+      link.target = link.href.includes('http') ? '_blank' : '_self';
+    });
+
+    left.append(desc);
+  }
+
+  // button
+
+  const buttonUrl = bannerButtonUrl?.textContent?.trim();
+
+  const buttonLabel = bannerButtonLabel?.textContent?.trim();
 
   const buttonTarget =
     bannerButtonNewTab?.textContent?.trim() === 'true' ? '_blank' : '_self';
 
-  const buttonUrl = bannerButtonUrl?.textContent?.trim() || '';
+  if (buttonUrl && buttonLabel) {
+    left.append(
+      a(
+        {
+          href: buttonUrl,
 
-  // === brands link filter ===
+          target: buttonTarget,
 
-  const linkWrapper = div({ class: 'flex flex-wrap gap-2 max-w-[344px]' });
+          class:
+            'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 hover:bg-danaherpurple-800',
+        },
+        buttonLabel
+      )
+    );
+  }
+
+  // === brands links (like pills) ===
+
+  const linksWrapper = div({ class: 'flex flex-wrap gap-2 mt-4' });
 
   const currentPath = window.location.href;
 
@@ -78,148 +154,50 @@ export default async function decorate(block) {
         }
       });
 
-      [...brandMap.entries()]
+      [...brandMap.keys()].sort().forEach((brand) => {
+        const brandSlug = /leica/i.test(brand)
+          ? 'leica'
+          : brand.toLowerCase().replace(/\s+/g, '-');
 
-        .sort(([a], [b]) => a.localeCompare(b))
+        linksWrapper.append(
+          a(
+            {
+              href: `/us/en/products-eds1/brands/${brandSlug}`,
 
-        .forEach(([brand]) => {
-          const brandSlug = /leica/i.test(brand)
-            ? 'leica'
-            : brand.toLowerCase().replace(/\s+/g, '-');
+              class:
+                'text-sm bg-danaherpurple-25 text-danaherpurple-800 px-4 py-1 rounded',
+            },
+            brand
+          )
+        );
+      });
 
-          linkWrapper.append(
-            a(
-              {
-                href: `/us/en/products-eds1/brands/${brandSlug}`,
-
-                target: '_self',
-
-                class:
-                  'text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
-              },
-              brand
-            )
-          );
-        });
+      left.append(linksWrapper);
     } catch (e) {
-      console.error('Brands fetch failed', e);
+      console.error('brands fetch failed', e);
     }
   }
 
-  // === left section ===
+  // === build right slides ===
 
-  const left = div({ class: 'flex flex-col gap-4 max-w-[567px]' });
+  const right = div({
+    class: 'opco-banner-right relative flex flex-col items-center gap-4',
+  });
 
-  if (bannerTitle) {
-    left.append(
-      p(
-        { class: 'text-danaherpurple-800 font-medium text-lg' },
-        bannerTitle.textContent.trim()
-      )
-    );
-  }
+  const slides = [];
 
-  if (bannerImg) {
-    left.append(
-      img({
-        src: bannerImg.src,
+  carouselItems.forEach((item, idx) => {
+    moveInstrumentation(item, right);
 
-        alt: bannerImg.alt || '',
-
-        class: 'w-[172px] mb-2 md:mb-8',
-      })
-    );
-  }
-
-  if (bannerHeading) {
-    left.append(
-      h1(
-        { class: 'text-4xl text-black font-medium' },
-        bannerHeading.textContent.trim()
-      )
-    );
-  }
-
-  if (bannerDescription) {
-    const desc = div({ class: 'text-[18px] text-black' });
-
-    desc.innerHTML = bannerDescription.innerHTML;
-
-    desc.querySelectorAll('p').forEach((p, i, arr) => {
-      if (i !== arr.length - 1) p.classList.add('pb-4');
-
-      if (!p.textContent.trim()) p.remove();
-    });
-
-    desc.querySelectorAll('a').forEach((link) => {
-      link.classList.add(
-        'underline',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white'
-      );
-
-      link.target = link.href.includes('http') ? '_blank' : '_self';
-    });
-
-    left.append(desc);
-  }
-
-  if (linkWrapper.childElementCount) left.append(linkWrapper);
-
-  if (buttonUrl && buttonLabel) {
-    left.append(
-      a(
-        {
-          href: buttonUrl,
-
-          target: buttonTarget,
-
-          class:
-            'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 hover:bg-danaherpurple-800',
-        },
-        buttonLabel
-      )
-    );
-  }
-
-  // === right slides section ===
-
-  const slides = opcoBannerItems.map((item, idx) => {
     const [title, subhead, desc, imgWrap, bgWrap, btnUrl, btnTarget, btnLabel] =
       item.children;
 
-    const itemImg = imgWrap?.querySelector('img');
-
-    const itemBg = bgWrap?.querySelector('img');
-
-    const cta = btnUrl?.textContent?.trim() || '';
-
-    const ctaLabel = btnLabel?.textContent?.trim() || '';
-
-    const ctaTarget =
-      btnTarget?.textContent?.trim() === 'true' ? '_blank' : '_self';
-
-    const content = div({
-      class:
-        'flex flex-col items-center justify-center text-center gap-2 max-w-[470px]',
+    const slideContent = div({
+      class: 'flex flex-col items-center gap-2 text-center',
     });
 
-    if (itemImg) {
-      content.append(
-        img({
-          src: itemImg.src,
-
-          alt: title?.textContent || '',
-
-          class: itemBg
-            ? 'opacity-0 w-[300px] h-[184px]'
-            : 'w-[300px] h-[184px]',
-        })
-      );
-    }
-
     if (title) {
-      content.append(
+      slideContent.append(
         h2(
           { class: 'text-3xl font-medium text-black' },
           title.textContent.trim()
@@ -228,7 +206,7 @@ export default async function decorate(block) {
     }
 
     if (subhead) {
-      content.append(
+      slideContent.append(
         p(
           { class: 'text-xl font-medium text-black' },
           subhead.textContent.trim()
@@ -237,11 +215,11 @@ export default async function decorate(block) {
     }
 
     if (desc) {
-      const descBlock = div();
+      const descDiv = div();
 
-      descBlock.innerHTML = desc.innerHTML;
+      descDiv.innerHTML = desc.innerHTML;
 
-      descBlock.querySelectorAll('a').forEach((link) => {
+      descDiv.querySelectorAll('a').forEach((link) => {
         link.classList.add(
           'underline',
           'hover:bg-danaherpurple-500',
@@ -251,17 +229,38 @@ export default async function decorate(block) {
         link.target = link.href.includes('http') ? '_blank' : '_self';
       });
 
-      content.append(div({ class: 'text-base text-black' }, descBlock));
+      slideContent.append(descDiv);
     }
 
-    if (cta && ctaLabel) {
-      content.append(
+    const itemImg = imgWrap?.querySelector('img');
+
+    if (itemImg) {
+      slideContent.append(
+        img({
+          src: itemImg.src,
+
+          alt: title?.textContent || '',
+
+          class: 'w-[300px] h-[184px]',
+        })
+      );
+    }
+
+    const ctaUrl = btnUrl?.textContent?.trim();
+
+    const ctaLabel = btnLabel?.textContent?.trim();
+
+    const ctaTarget =
+      btnTarget?.textContent?.trim() === 'true' ? '_blank' : '_self';
+
+    if (ctaUrl && ctaLabel) {
+      slideContent.append(
         button(
           {
             class:
-              'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 mt-4 hover:bg-danaherpurple-800',
+              'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 hover:bg-danaherpurple-800',
 
-            onclick: () => window.open(cta, ctaTarget),
+            onclick: () => window.open(ctaUrl, ctaTarget),
           },
           ctaLabel
         )
@@ -270,41 +269,37 @@ export default async function decorate(block) {
 
     const overlay = div({
       class:
-        'absolute inset-0 bg-gradient-to-b from-transparent to-black/95 hidden',
+        'absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hidden',
     });
 
     const slide = div(
       {
-        id: `opcoBannerSlide${idx}`,
-
-        class: `carousel-slide relative flex flex-col items-center p-10 min-h-[600px] ${
-          itemBg ? 'hasBg' : ''
+        class: `carousel-slide relative flex flex-col items-center min-h-[600px] p-10 ${
+          bgWrap?.querySelector('img') ? 'hasBg' : ''
         }`,
 
         style: idx === 0 ? '' : 'display: none;',
       },
-      content,
+      slideContent,
       overlay
     );
 
-    if (itemBg) {
-      slide.style.backgroundImage = `url('${itemBg.src}')`;
+    // add background image
+
+    const bgImg = bgWrap?.querySelector('img');
+
+    if (bgImg) {
+      slide.style.backgroundImage = `url(${bgImg.src})`;
 
       slide.style.backgroundSize = 'cover';
 
-      slide.style.backgroundPosition = 'center';
-
       overlay.classList.remove('hidden');
-
-      slide
-        .querySelectorAll('.text-center')
-        .forEach((el) => (el.style.color = '#fff'));
     }
 
-    return slide;
+    slides.push(slide);
   });
 
-  // === controls ===
+  // === build controls ===
 
   let currentIndex = 0;
 
@@ -320,57 +315,47 @@ export default async function decorate(block) {
 
     slides[currentIndex].style.display = 'flex';
 
-    const active = slides[currentIndex];
+    numberIndicator.textContent = `${currentIndex + 1}/${slides.length}`;
 
-    if (active.classList.contains('hasBg')) {
+    if (slides[currentIndex].classList.contains('hasBg')) {
       numberIndicator.style.color = '#fff';
     } else {
       numberIndicator.style.color = '';
     }
-
-    numberIndicator.textContent = `${currentIndex + 1}/${slides.length}`;
   };
 
-  const controls =
-    slides.length > 1
-      ? div(
-          { class: 'absolute bottom-6 flex gap-4' },
+  const controls = div(
+    { class: 'flex gap-4 mt-4' },
 
-          button(
-            { class: 'rounded-full p-2', onclick: () => updateSlides(-1) },
-            span({ class: 'icon icon-arrow-left-icon' })
-          ),
+    button(
+      { onclick: () => updateSlides(-1) },
+      span({ class: 'icon icon-arrow-left-icon' })
+    ),
 
-          numberIndicator,
+    numberIndicator,
 
-          button(
-            { class: 'rounded-full p-2', onclick: () => updateSlides(1) },
-            span({ class: 'icon icon-arrow-right-icon' })
-          )
-        )
-      : '';
-
-  decorateIcons(controls);
-
-  // === final container ===
-
-  const wrapper = div(
-    {
-      class: 'flex flex-col md:flex-row border-b border-gray-300',
-    },
-
-    div({ class: 'md:w-1/2 p-6' }, left),
-
-    div(
-      { class: 'md:w-1/2 relative flex flex-col items-center gap-6' },
-
-      ...slides,
-
-      controls
+    button(
+      { onclick: () => updateSlides(1) },
+      span({ class: 'icon icon-arrow-right-icon' })
     )
   );
 
-  block.innerHTML = '';
+  decorateIcons(controls);
 
-  block.append(wrapper);
+  if (slides.length > 1) right.append(...slides, controls);
+  else right.append(...slides);
+
+  // === assemble block ===
+
+  const container = div(
+    {
+      class: 'opco-banner flex flex-col md:flex-row border-b border-gray-300',
+    },
+    left,
+    right
+  );
+
+  block.textContent = '';
+
+  block.append(container);
 }
