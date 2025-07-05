@@ -25,12 +25,6 @@ async function applyChanges(event) {
   const { content } = updates[0];
   if (!content) return false;
 
-  // load dompurify
-  await loadScript(`${window.hlx.codeBasePath}/scripts/dompurify.min.js`);
-
-  const sanitizedContent = window.DOMPurify.sanitize(content, {
-    USE_PROFILES: { html: true },
-  });
   const parsedUpdate = new DOMParser().parseFromString(
     sanitizedContent,
     'text/html'
