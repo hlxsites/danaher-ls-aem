@@ -220,6 +220,16 @@ export default function decorate(block) {
   eyesection.appendChild(wrapper);
   decorateIcons(eyesection);
   decorateModals(eyesection);
-  block.textContent = '';
+  const isEditor = document.querySelector('.adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(eyesection);
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(eyesection)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }

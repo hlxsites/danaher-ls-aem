@@ -305,11 +305,16 @@ export default function decorate(block) {
   //   block.innerHtml = "";
   //   block.textContent = "";
   //   Object.keys(block).forEach((key) => delete block[key]);
+  const isEditor = document.querySelector('.adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(container);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(container)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }
