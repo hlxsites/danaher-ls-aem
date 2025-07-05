@@ -13,17 +13,19 @@ import { decorateModals } from '../../scripts/scripts.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const [insightTitle, insightDescription] = block.children;
+  const [insightTitle, insightDescription, ...insightItemsList] =
+    block.children;
 
-  const insightItemsList = [];
-  [...block.children].forEach((child, index) => {
-    if (index > 1) {
-      insightItemsList.push(child);
-    }
-  });
+  // const insightItemsList = [];
+  // [...block.children].forEach((child, index) => {
+  //   if (index > 1) {
+  //     insightItemsList.push(child);
+  //   }
+  // });
 
   // Extract top-level title/description
-  const leftTitle = insightTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const leftTitle =
+    insightTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
   const leftDescHTML = insightDescription?.innerHTML;
 
   // Create structured JSON from insight items
@@ -60,7 +62,8 @@ export default function decorate(block) {
 
     const title = itemTitle?.textContent.trim() || '';
     const description = itemDescription?.textContent.trim() || '';
-    const linkUrl = itemButtonUrl?.textContent.trim().replace(/<[^>]*>/g, '') || '#';
+    const linkUrl =
+      itemButtonUrl?.textContent.trim().replace(/<[^>]*>/g, '') || '#';
     const linkTarget = itemButtonTarget?.textContent.trim() || '';
     const linkType = itemLinkType?.textContent.trim() || 'url';
     const linkLabel = itemButtonLabel?.textContent.trim();
@@ -68,9 +71,10 @@ export default function decorate(block) {
     const imgEl = itemImage?.querySelector('img');
 
     const imgSrc = imgEl?.getAttribute('src') || '';
-    const fullImgSrc = imgSrc && !imgSrc.startsWith('http')
-      ? `${window.location.origin}${imgSrc}`
-      : imgSrc.replace(/<[^>]*>/g, '');
+    const fullImgSrc =
+      imgSrc && !imgSrc.startsWith('http')
+        ? `${window.location.origin}${imgSrc}`
+        : imgSrc.replace(/<[^>]*>/g, '');
 
     return {
       title,
@@ -94,12 +98,12 @@ export default function decorate(block) {
     { class: 'w-full md:w-1/2 pr-0 md:pr-6' },
     h2(
       { class: 'text-2xl md:text-3xl font-semibold mb-4 mt-0 text-black' },
-      leftTitle,
+      leftTitle
     ),
     div({
       class: 'text-base text-black font-normal leading-relaxed',
       id: 'leftColDescription',
-    }),
+    })
   );
   leftCol
     ?.querySelector('#leftColDescription')
@@ -123,7 +127,7 @@ export default function decorate(block) {
       'underline',
       'decoration-danaherpurple-500',
       'hover:bg-danaherpurple-500',
-      'hover:text-white',
+      'hover:text-white'
     );
     const linkHref = link?.getAttribute('href');
 
@@ -137,17 +141,15 @@ export default function decorate(block) {
 
   insightItems.forEach(
     (
-      {
-        title, description, linkType, linkUrl, linkTarget, linkLabel, imgSrc,
-      },
-      ind,
+      { title, description, linkType, linkUrl, linkTarget, linkLabel, imgSrc },
+      ind
     ) => {
       const imageEl = imgSrc
         ? img({
-          src: imgSrc,
-          alt: title,
-          class: 'w-12 mt-[2px] object-contain flex-shrink-0',
-        })
+            src: imgSrc,
+            alt: title,
+            class: 'w-12 mt-[2px] object-contain flex-shrink-0',
+          })
         : null;
 
       const container = div(
@@ -165,14 +167,14 @@ export default function decorate(block) {
                 ind === 0 ? 'mt-0' : ''
               } `,
             },
-            title,
+            title
           ),
           div(
             {
               class:
                 'insight-description font-normal text-base textblack mb-3 text-black !m-0 !p-0',
             },
-            description,
+            description
           ),
           a(
             {
@@ -186,9 +188,9 @@ export default function decorate(block) {
             span({
               class:
                 'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-            }),
-          ),
-        ),
+            })
+          )
+        )
       );
 
       const descriptionLinks = container
@@ -200,17 +202,17 @@ export default function decorate(block) {
           'underline',
           'decoration-danaherpurple-500',
           'hover:bg-danaherpurple-500',
-          'hover:text-white',
+          'hover:text-white'
         );
         const linkHref = link?.getAttribute('href');
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self',
+          linkHref.includes('http') ? '_blank' : '_self'
         );
       });
       rightCol.appendChild(container);
-    },
+    }
   );
 
   // Final Assembly
