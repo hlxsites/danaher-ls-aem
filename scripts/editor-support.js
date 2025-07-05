@@ -27,15 +27,16 @@ async function applyChanges(event) {
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
-  console.log('resource : ', resource);
-  console.log('element : ', element);
   if (element) {
     if (element.matches('main')) {
       const newMain = parsedUpdate.querySelector(
         `[data-aue-resource="${resource}"]`
       );
+      console.log(' matches main: ', newMain);
 
       newMain.style.display = 'none';
+      console.log('  element: ', element);
+      element.textContent = '';
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
       decorateRichtext(newMain);
