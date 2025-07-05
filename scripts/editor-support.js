@@ -11,7 +11,6 @@ import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
 async function applyChanges(event) {
-  console.log('newmain : ', event);
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
 
@@ -28,6 +27,8 @@ async function applyChanges(event) {
   const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
+  console.log('resource : ', resource);
+  console.log('element : ', element);
   if (element) {
     if (element.matches('main')) {
       const newMain = parsedUpdate.querySelector(
