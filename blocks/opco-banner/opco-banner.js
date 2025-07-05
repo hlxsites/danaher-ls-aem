@@ -464,7 +464,7 @@ export default async function decorate(block) {
       class:
         'flex flex-col md:flex-row w-full dhls-container !mt-0 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
     },
-    // left,
+    left,
     right
   );
 
