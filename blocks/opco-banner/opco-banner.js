@@ -473,7 +473,10 @@ export default async function decorate(block) {
     left,
     right
   );
-  console.log('window.hlx?.editorMode : ', window.hlx?.editorMode);
+  const isEditor =
+    document.body.classList.contains('hlx-edit') ||
+    document.documentElement.classList.contains('hlx-edit');
+  console.log('isEditor : ', isEditor);
 
   block.append(container);
   [...block.children].forEach((child) => {
