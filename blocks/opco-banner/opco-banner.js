@@ -229,13 +229,13 @@ export default async function decorate(block) {
     let opcoBannerButtonLabel = '';
     let opcoBannerButtonTarget = '';
     if (index === 4) {
-      opcoBannerButtonUrl = opcoBannerButtonUrl?.querySelector('a');
+      opcoBannerButtonUrl = rowElement?.querySelector('a');
     }
     if (index === 5) {
-      opcoBannerButtonTarget = opcoTarget?.textContent?.trim();
+      opcoBannerButtonTarget = rowElement?.textContent?.trim();
     }
     if (index === 6) {
-      opcoBannerButtonLabel = opcoBannerButtonLabel?.textContent?.trim();
+      opcoBannerButtonLabel = rowElement?.textContent?.trim();
     }
     if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
       let opcoTarget = '';
