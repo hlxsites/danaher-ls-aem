@@ -71,6 +71,9 @@ export default async function decorate(block) {
     )
   );
 
+  const left = div({
+    class: 'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
+  });
   [...block.children].forEach(async (rowElement, index) => {
     const bannerTitle = rowElement[0];
     const bannerHeading = rowElement[1];
@@ -263,13 +266,7 @@ export default async function decorate(block) {
       );
       leftContent.append(ctaWrapper);
     }
-    const left = div(
-      {
-        class:
-          'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
-      },
-      leftContent
-    );
+    left.append(leftContent);
     opcoBannerItems.forEach((item, index) => {
       let itemTitle;
       let itemSubHeading;
