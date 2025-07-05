@@ -266,7 +266,7 @@ export default async function decorate(block) {
       })
     )
   );
-  [...opcoBannerItems].forEach((item, index) => {
+  opcoBannerItems.forEach((item, index) => {
     let itemTitle;
     let itemSubHeading;
     let itemDescription;
