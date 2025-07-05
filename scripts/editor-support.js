@@ -26,7 +26,7 @@ async function applyChanges(event) {
   if (!content) return false;
 
   // load dompurify
-  await loadScript(`${window.hlx.codeBasePath}/scripts/lib-franklin.js`);
+  await loadScript(`./dompurify.min.js`);
 
   const sanitizedContent = window.DOMPurify.sanitize(content, {
     USE_PROFILES: { html: true },
