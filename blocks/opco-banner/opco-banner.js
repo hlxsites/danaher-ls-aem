@@ -74,6 +74,16 @@ export default async function decorate(block) {
   const left = div({
     class: 'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
   });
+
+  // === LEFT SECTION ===
+  const leftContent = div({
+    class: 'flex flex-col gap-4 max-w-[567px]',
+  });
+
+  let opcoBannerButtonUrl = '';
+  let opcoBannerButtonLabel = '';
+  let opcoBannerButtonTarget = '';
+
   let opcoBannerItems = [];
   [...block.children].forEach(async (row, ind) => {
     if (ind > 6) {
@@ -150,10 +160,6 @@ export default async function decorate(block) {
         }
       });
     }
-    // === LEFT SECTION ===
-    const leftContent = div({
-      class: 'flex flex-col gap-4 max-w-[567px]',
-    });
 
     if (index === 0) {
       leftContent.append(
@@ -225,9 +231,6 @@ export default async function decorate(block) {
     if (linkWrapper.childNodes.length > 0) {
       leftContent.append(linkWrapper);
     }
-    let opcoBannerButtonUrl = '';
-    let opcoBannerButtonLabel = '';
-    let opcoBannerButtonTarget = '';
     if (index === 4) {
       opcoBannerButtonUrl = rowElement?.querySelector('a');
     }
@@ -258,7 +261,6 @@ export default async function decorate(block) {
       );
       leftContent.append(ctaWrapper);
     }
-    left.append(leftContent);
     opcoBannerItems.forEach((item, index) => {
       let itemTitle;
       let itemSubHeading;
@@ -446,6 +448,7 @@ export default async function decorate(block) {
     });
   });
   decorateIcons(controls);
+  left.append(leftContent);
   const right = div(
     {
       id: 'opcoBannerCarouselOuter',
