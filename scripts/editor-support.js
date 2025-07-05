@@ -96,11 +96,8 @@ async function applyChanges(event) {
 
   return false;
 }
-let listenersAttached = false;
 
 function attachEventListners(main) {
-  if (listenersAttached) return;
-  listenersAttached = true;
   [
     'aue:content-patch',
     'aue:content-update',
@@ -115,7 +112,7 @@ function attachEventListners(main) {
       console.log('eventType: ', eventType);
       console.log('event: ', event);
 
-      const applied = await applyChanges(event);
+      //const applied = await applyChanges(event);
       console.log('applied : ', applied);
 
       if (!applied) window.location.reload();
