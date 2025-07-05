@@ -54,7 +54,7 @@ async function applyChanges(event) {
       );
       if (newBlock) {
         newBlock.style.display = 'none';
-        block.insertAdjacentElement('afterend', newBlock);
+        //block.insertAdjacentElement('afterend', newBlock);
         block.remove();
         decorateButtons(newBlock);
         decorateIcons(newBlock);
