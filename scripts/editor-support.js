@@ -54,11 +54,11 @@ async function applyChanges(event) {
       const newBlock = parsedUpdate.querySelector(
         `[data-aue-resource="${blockResource}"]`
       );
-      console.log('  block: ', block);
-      console.log('  newBlock: ', newBlock);
+      console.log('  block 1: ', block);
       if (newBlock) {
+        console.log('  newBlock 1: ', newBlock);
         newBlock.style.display = 'none';
-        block.textContent = '';
+        block.innerHTML = '';
         block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
         decorateIcons(newBlock);
