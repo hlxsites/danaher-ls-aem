@@ -5,7 +5,6 @@ import {
   decorateIcons,
   decorateSections,
   loadBlock,
-  loadScript,
   loadSections,
 } from './lib-franklin.js';
 import { decorateRichtext } from './editor-support-rte.js';
@@ -25,10 +24,7 @@ async function applyChanges(event) {
   const { content } = updates[0];
   if (!content) return false;
 
-  const parsedUpdate = new DOMParser().parseFromString(
-    sanitizedContent,
-    'text/html'
-  );
+  const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
   if (element) {
