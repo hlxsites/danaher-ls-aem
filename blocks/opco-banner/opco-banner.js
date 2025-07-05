@@ -9,6 +9,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const [
@@ -311,7 +312,7 @@ export default async function decorate(block) {
       class:
         'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
     });
-
+    moveInstrumentation(item, contentWrapper);
     if (opcoBannerItemImage) {
       contentWrapper.append(
         img({
