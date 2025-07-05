@@ -15,19 +15,17 @@ export function decorateRichtext(container = document) {
   }
 
   let element;
-  while (element = container.querySelector('[data-richtext-prop]:not(div)')) {
-    const {
-      richtextResource,
-      richtextProp,
-      richtextFilter,
-      richtextLabel,
-    } = element.dataset;
+  while ((element = container.querySelector('[data-richtext-prop]:not(div)'))) {
+    const { richtextResource, richtextProp, richtextFilter, richtextLabel } =
+      element.dataset;
     deleteInstrumentation(element);
     const siblings = [];
     let sibling = element;
-    while (sibling = sibling.nextElementSibling) {
-      if (sibling.dataset.richtextResource === richtextResource
-        && sibling.dataset.richtextProp === richtextProp) {
+    while ((sibling = sibling.nextElementSibling)) {
+      if (
+        sibling.dataset.richtextResource === richtextResource &&
+        sibling.dataset.richtextProp === richtextProp
+      ) {
         deleteInstrumentation(sibling);
         siblings.push(sibling);
       } else break;
@@ -35,21 +33,32 @@ export function decorateRichtext(container = document) {
 
     let orphanElements;
     if (richtextResource && richtextProp) {
-      orphanElements = document.querySelectorAll(`[data-richtext-id="${richtextResource}"][data-richtext-prop="${richtextProp}"]`);
+      orphanElements = document.querySelectorAll(
+        `[data-richtext-id="${richtextResource}"][data-richtext-prop="${richtextProp}"]`
+      );
     } else {
       const editable = element.closest('[data-aue-resource]');
       if (editable) {
-        orphanElements = editable.querySelectorAll(`:scope > :not([data-aue-resource]) [data-richtext-prop="${richtextProp}"]`);
+        orphanElements = editable.querySelectorAll(
+          `:scope > :not([data-aue-resource]) [data-richtext-prop="${richtextProp}"]`
+        );
       } else {
-        console.warn(`Editable parent not found or richtext property ${richtextProp}`);
+        console.warn(
+          `Editable parent not found or richtext property ${richtextProp}`
+        );
         return;
       }
     }
 
     if (orphanElements.length) {
-      console.warn('Found orphan elements of a richtext, that were not consecutive siblings of '
-        + 'the first paragraph', orphanElements);
-      orphanElements.forEach((orphanElement) => deleteInstrumentation(orphanElement));
+      console.warn(
+        'Found orphan elements of a richtext, that were not consecutive siblings of ' +
+          'the first paragraph',
+        orphanElements
+      );
+      orphanElements.forEach((orphanElement) =>
+        deleteInstrumentation(orphanElement)
+      );
     } else {
       const group = document.createElement('div');
       if (richtextResource) {
@@ -69,6 +78,9 @@ export function decorateRichtext(container = document) {
 // in cases where the block decoration is not done in one synchronous iteration we need to listen
 // for new richtext-instrumented elements
 const observer = new MutationObserver(() => decorateRichtext());
-observer.observe(document, { attributeFilter: ['data-richtext-prop'], subtree: true });
+observer.observe(document, {
+  attributeFilter: ['data-richtext-prop'],
+  subtree: true,
+});
 
 decorateRichtext();
