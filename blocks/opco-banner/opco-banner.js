@@ -88,6 +88,7 @@ export default async function decorate(block) {
     console.log('banner bannerButtonLabel: ', rowElement[6]);
 
     const opcoBannerItems = [...rowElement.children];
+    console.log('banner opcoBannerItems: ', opcoBannerItems);
 
     const baseUrl = 'https://lifesciences.danaher.com';
 
