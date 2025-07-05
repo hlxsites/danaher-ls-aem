@@ -83,23 +83,7 @@ export default async function decorate(block) {
     }
   });
   [...block.children].forEach(async (rowElement, index) => {
-    const bannerTitle = rowElement[0];
-    const bannerHeading = rowElement[1];
-    const bannerDescription = rowElement[2];
-    const bannerImage = rowElement[3];
-    const bannerButtonUrl = rowElement[4];
-    const bannerButtonNewTab = rowElement[5];
-    const bannerButtonLabel = rowElement[6];
-    console.log('banner bannerTitle: ', rowElement[0]);
-    console.log('banner bannerHeading: ', rowElement[1]);
-    console.log('banner bannerDescription: ', rowElement[2]);
-    console.log('banner bannerImage: ', rowElement[3]);
-    console.log('banner bannerButtonUrl: ', rowElement[4]);
-    console.log('banner bannerButtonNewTab: ', rowElement[5]);
-    console.log('banner bannerButtonLabel: ', rowElement[6]);
-
     const opcoBannerItems = [...rowElement.children];
-    console.log('banner opcoBannerItems: ', opcoBannerItems);
 
     const baseUrl = 'https://lifesciences.danaher.com';
 
@@ -107,16 +91,6 @@ export default async function decorate(block) {
 
     block?.parentElement?.parentElement?.removeAttribute('class');
     block?.parentElement?.parentElement?.removeAttribute('style');
-
-    const opcoBannerTitle = bannerTitle;
-    const opcoBannerHeading = bannerHeading;
-    const opcoBannerDescription = bannerDescription?.innerHTML;
-    const opcoBannerImage = bannerImage?.querySelector('img');
-    const opcoBannerButtonLabel =
-      bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
-    const opcoBannerButtonTarget =
-      bannerButtonNewTab?.textContent?.trim() || '';
-    const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
 
     const linkWrapper = div({
       class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
@@ -181,46 +155,46 @@ export default async function decorate(block) {
       class: 'flex flex-col gap-4 max-w-[567px]',
     });
 
-    if (opcoBannerTitle) {
+    if (index === 0) {
       leftContent.append(
         p(
           {
             class:
               'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
           },
-          opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, '')
+          rowElement.textContent.trim().replace(/<[^>]*>/g, '')
         )
       );
     }
-    if (opcoBannerImage) {
+    if (index === 3) {
       leftContent.append(
         img({
-          src: opcoBannerImage.src,
-          alt: opcoBannerImage.alt || 'Brand Image',
+          src: rowElement?.querySelector('img')?.src,
+          alt: rowElement?.querySelector('img')?.alt || 'Brand Image',
           class: 'w-[172px] mb-2 md:mb-8 h-auto',
         })
       );
     }
 
-    if (opcoBannerHeading) {
+    if (index === 1) {
       leftContent.append(
         h1(
           {
             class:
               'text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal',
           },
-          opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, '')
+          rowElement?.textContent.trim().replace(/<[^>]*>/g, '')
         )
       );
     }
 
-    if (opcoBannerDescription) {
+    if (index === 2) {
       const leftDescription = div({
         id: 'opcoBannerDescription',
         class: 'text-[18px] leading-[22px] font-normal text-black w-full',
       });
 
-      leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
+      leftDescription.insertAdjacentHTML('beforeend', rowElement?.innerHTML);
       leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
         if (inde !== arr.length - 1) {
           ite.classList.add('pb-4');
@@ -251,10 +225,19 @@ export default async function decorate(block) {
     if (linkWrapper.childNodes.length > 0) {
       leftContent.append(linkWrapper);
     }
-
+    let opcoBannerButtonUrl = '';
+    let opcoBannerButtonLabel = '';
+    let opcoTarget = '';
+    if (index === 4) {
+      opcoBannerButtonUrl = opcoBannerButtonUrl.querySelector('a');
+    }
+    if (index === 5) {
+      opcoTarget = opcoTarget?.textContent?.trim();
+    }
+    if (index === 6) {
+      opcoBannerButtonLabel = opcoBannerButtonLabel?.textContent?.trim();
+    }
     if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-      let opcoTarget;
-
       if (opcoBannerButtonUrl?.includes('http')) {
         opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
       } else if (opcoBannerButtonUrl?.includes('#')) {
