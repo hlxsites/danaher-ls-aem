@@ -473,13 +473,12 @@ export default async function decorate(block) {
     left,
     right
   );
-  const isEditor = window.location.pathname.includes(
-    '/universal-editor/canvas'
-  );
-  console.log(' is editor : ', window.location.href);
+  console.log('isEditor : ', document);
 
-  if (!isEditor) {
-    block.textContent = '';
-  }
   block.append(container);
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = 'none';
+    }
+  });
 }
