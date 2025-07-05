@@ -72,6 +72,8 @@ export default async function decorate(block) {
   );
 
   [...block.children].forEach(async (rowElement, index) => {
+    console.log('rowelement : ', rowElement);
+
     const bannerTitle = rowElement[0];
     const bannerHeading = rowElement[1];
     const bannerDescription = rowElement[2];
