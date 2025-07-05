@@ -40,7 +40,7 @@ async function applyChanges(event) {
       element.remove();
       newMain.style.display = null;
       // eslint-disable-next-line no-use-before-define
-      attachEventListners(newMain);
+      // attachEventListners(newMain);
       return true;
     }
 
@@ -108,7 +108,6 @@ function attachEventListners(main) {
   ].forEach((eventType) =>
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
-      console.log('evenr: ', event);
 
       const applied = await applyChanges(event);
       if (!applied) window.location.reload();
