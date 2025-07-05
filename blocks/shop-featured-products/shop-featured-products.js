@@ -302,9 +302,6 @@ export default function decorate(block) {
     // container?.classList.remove("hidden");
   }
 
-  //   block.innerHtml = "";
-  //   block.textContent = "";
-  //   Object.keys(block).forEach((key) => delete block[key]);
   const isEditor = document.querySelector('.adobe-ue-edit');
   if (!isEditor) {
     block.textContent = '';
