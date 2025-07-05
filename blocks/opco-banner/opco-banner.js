@@ -473,6 +473,8 @@ export default async function decorate(block) {
     opcoBannerInstrument,
     opcoBannerItems.length > 1 ? controls : ''
   );
+  console.log('opcoBannerItems : ', opcoBannerItems);
+
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
     numberIndicator.style.color = '#fff';
