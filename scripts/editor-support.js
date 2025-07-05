@@ -58,6 +58,7 @@ async function applyChanges(event) {
       console.log('  newBlock: ', newBlock);
       if (newBlock) {
         newBlock.style.display = 'none';
+        block.textContent = '';
         block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
         decorateIcons(newBlock);
