@@ -473,6 +473,7 @@ export default async function decorate(block) {
     left,
     right
   );
+  console.log('window.hlx?.editorMode : ', window.hlx?.editorMode);
 
   block.append(container);
   [...block.children].forEach((child) => {
