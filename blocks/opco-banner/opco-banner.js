@@ -227,17 +227,18 @@ export default async function decorate(block) {
     }
     let opcoBannerButtonUrl = '';
     let opcoBannerButtonLabel = '';
-    let opcoTarget = '';
+    let opcoBannerButtonTarget = '';
     if (index === 4) {
-      opcoBannerButtonUrl = opcoBannerButtonUrl.querySelector('a');
+      opcoBannerButtonUrl = opcoBannerButtonUrl?.querySelector('a');
     }
     if (index === 5) {
-      opcoTarget = opcoTarget?.textContent?.trim();
+      opcoBannerButtonTarget = opcoTarget?.textContent?.trim();
     }
     if (index === 6) {
       opcoBannerButtonLabel = opcoBannerButtonLabel?.textContent?.trim();
     }
     if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
+      let opcoTarget = '';
       if (opcoBannerButtonUrl?.includes('http')) {
         opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
       } else if (opcoBannerButtonUrl?.includes('#')) {
