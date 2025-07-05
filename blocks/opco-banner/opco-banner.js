@@ -473,10 +473,6 @@ export default async function decorate(block) {
     right
   );
 
+  block.textContent = '';
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
 }
