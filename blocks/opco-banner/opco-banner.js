@@ -71,14 +71,15 @@ export default async function decorate(block) {
     )
   );
 
-  [...block.children].forEach(async (rowElement) => {
-    const bannerTitle = rowElement;
-    const bannerHeading = rowElement;
-    const bannerDescription = rowElement;
-    const bannerImage = rowElement;
-    const bannerButtonUrl = rowElement;
-    const bannerButtonNewTab = rowElement;
-    const bannerButtonLabel = rowElement;
+  [...block.children].forEach(async (rowElement, index) => {
+    const bannerTitle = rowElement[0];
+    const bannerHeading = rowElement[1];
+    const bannerDescription = rowElement[2];
+    const bannerImage = rowElement[3];
+    const bannerButtonUrl = rowElement[4];
+    const bannerButtonNewTab = rowElement[5];
+    const bannerButtonLabel = rowElement[6];
+    console.log('banner details: ', rowElement[index]);
 
     const opcoBannerItems = [...rowElement.children];
 
