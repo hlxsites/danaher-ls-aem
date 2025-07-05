@@ -19,15 +19,14 @@ export default async function decorate(block) {
     bannerButtonUrl,
     bannerButtonNewTab,
     bannerButtonLabel,
-    ...opcoBannerItems
   ] = block.children;
 
-  // const opcoBannerItems = [];
-  // [...block.children].forEach((child, index) => {
-  //   if (index > 6) {
-  //     opcoBannerItems.push(child);
-  //   }
-  // });
+  const opcoBannerItems = [];
+  [...block.children].forEach((child, index) => {
+    if (index > 6) {
+      opcoBannerItems.push(child);
+    }
+  });
 
   const baseUrl = 'https://lifesciences.danaher.com';
 
@@ -473,16 +472,11 @@ export default async function decorate(block) {
     left,
     right
   );
-  const isEditor = document.querySelector('.adobe-ue-edit');
-  if (!isEditor) {
-    block.textContent = '';
-  }
+  block.textContent = '';
   block.append(container);
-  if (isEditor) {
-    [...block.children].forEach((child) => {
-      if (!child.contains(container)) {
-        child.style.display = 'none';
-      }
-    });
-  }
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = 'none';
+    }
+  });
 }
