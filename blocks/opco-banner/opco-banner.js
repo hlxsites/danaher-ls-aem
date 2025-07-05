@@ -8,475 +8,369 @@ import {
   a,
   span,
 } from '../../scripts/dom-builder.js';
+
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  // === clean up the outer wrapper ===
+
+  block?.parentElement?.parentElement?.removeAttribute('class');
+
+  block?.parentElement?.parentElement?.removeAttribute('style');
+
+  // === read main banner elements ===
+
   const [
     bannerTitle,
+
     bannerHeading,
+
     bannerDescription,
+
     bannerImage,
+
     bannerButtonUrl,
+
     bannerButtonNewTab,
+
     bannerButtonLabel,
+
+    ...opcoBannerItems
   ] = block.children;
 
-  const opcoBannerItems = [];
-  [...block.children].forEach((child, index) => {
-    if (index > 6) {
-      opcoBannerItems.push(child);
-    }
-  });
+  const bannerImg = bannerImage?.querySelector('img');
 
-  const baseUrl = 'https://lifesciences.danaher.com';
+  const buttonLabel = bannerButtonLabel?.textContent?.trim() || '';
+
+  const buttonTarget =
+    bannerButtonNewTab?.textContent?.trim() === 'true' ? '_blank' : '_self';
+
+  const buttonUrl = bannerButtonUrl?.textContent?.trim() || '';
+
+  // === brands link filter ===
+
+  const linkWrapper = div({ class: 'flex flex-wrap gap-2 max-w-[344px]' });
 
   const currentPath = window.location.href;
 
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
-
-  const opcoBannerTitle = bannerTitle;
-  const opcoBannerHeading = bannerHeading;
-  const opcoBannerDescription = bannerDescription?.innerHTML;
-  const opcoBannerImage = bannerImage?.querySelector('img');
-  const opcoBannerButtonLabel =
-    bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
-  const opcoBannerButtonTarget = bannerButtonNewTab?.textContent?.trim() || '';
-  const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
-
-  const linkWrapper = div({
-    class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
-  });
   if (
     currentPath.includes('products.html') ||
     currentPath.includes('/shop-page') ||
     currentPath.includes('/shop-home') ||
     currentPath.includes('/products-eds1.html')
   ) {
-    const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
+    try {
+      const res = await fetch(
+        'https://lifesciences.danaher.com/us/en/products-index.json'
+      );
 
-    const brandsRaw = await brandsResponse.json();
-    const allProducts = Array.isArray(brandsRaw)
-      ? brandsRaw
-      : brandsRaw?.data || brandsRaw?.results || [];
-    // Build unique filters (exclude brands with commas)
-    const brandMap = new Map();
+      const data = await res.json();
 
-    allProducts.forEach((item) => {
-      const brand = item.brand?.trim();
-      const path = item.path?.trim();
+      const products = Array.isArray(data)
+        ? data
+        : data?.data || data?.results || [];
 
-      if (brand && !brand.includes(',') && !brandMap.has(brand)) {
-        brandMap.set(brand, path);
-      }
-    });
+      const brandMap = new Map();
 
-    const allBrands = Array.from(brandMap.entries())
-      .map(([name, path]) => ({ name, path }))
-      .sort((asr, b) => asr.name.localeCompare(b.name));
-
-    allBrands.forEach((pills) => {
-      const linkLabel = pills?.name || '';
-
-      const linkTarget = pills?.path || '#';
-      let brandLink = '';
-      if (linkLabel) {
-        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
-          brandLink = 'leica';
-        } else {
-          brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+      products.forEach(({ brand, path }) => {
+        if (brand && !brand.includes(',') && !brandMap.has(brand)) {
+          brandMap.set(brand, path);
         }
-        linkWrapper.appendChild(
-          a(
-            {
-              href: `/us/en/products-eds1/brands/${brandLink}`,
-              target: linkTarget.includes('http') ? '_blank' : '_self',
-              class:
-                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
-            },
-            linkLabel
-          )
-        );
-      }
-    });
-  }
-  // === LEFT SECTION ===
-  const leftContent = div({
-    class: 'flex flex-col gap-4 max-w-[567px]',
-  });
+      });
 
-  if (opcoBannerTitle) {
-    leftContent.append(
+      [...brandMap.entries()]
+
+        .sort(([a], [b]) => a.localeCompare(b))
+
+        .forEach(([brand]) => {
+          const brandSlug = /leica/i.test(brand)
+            ? 'leica'
+            : brand.toLowerCase().replace(/\s+/g, '-');
+
+          linkWrapper.append(
+            a(
+              {
+                href: `/us/en/products-eds1/brands/${brandSlug}`,
+
+                target: '_self',
+
+                class:
+                  'text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+              },
+              brand
+            )
+          );
+        });
+    } catch (e) {
+      console.error('Brands fetch failed', e);
+    }
+  }
+
+  // === left section ===
+
+  const left = div({ class: 'flex flex-col gap-4 max-w-[567px]' });
+
+  if (bannerTitle) {
+    left.append(
       p(
-        {
-          class:
-            'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
-        },
-        opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, '')
+        { class: 'text-danaherpurple-800 font-medium text-lg' },
+        bannerTitle.textContent.trim()
       )
     );
   }
-  if (opcoBannerImage) {
-    leftContent.append(
+
+  if (bannerImg) {
+    left.append(
       img({
-        src: opcoBannerImage.src,
-        alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[172px] mb-2 md:mb-8 h-auto',
+        src: bannerImg.src,
+
+        alt: bannerImg.alt || '',
+
+        class: 'w-[172px] mb-2 md:mb-8',
       })
     );
   }
 
-  if (opcoBannerHeading) {
-    leftContent.append(
+  if (bannerHeading) {
+    left.append(
       h1(
-        {
-          class:
-            'text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal',
-        },
-        opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, '')
+        { class: 'text-4xl text-black font-medium' },
+        bannerHeading.textContent.trim()
       )
     );
   }
 
-  if (opcoBannerDescription) {
-    const leftDescription = div({
-      id: 'opcoBannerDescription',
-      class: 'text-[18px] leading-[22px] font-normal text-black w-full',
+  if (bannerDescription) {
+    const desc = div({ class: 'text-[18px] text-black' });
+
+    desc.innerHTML = bannerDescription.innerHTML;
+
+    desc.querySelectorAll('p').forEach((p, i, arr) => {
+      if (i !== arr.length - 1) p.classList.add('pb-4');
+
+      if (!p.textContent.trim()) p.remove();
     });
 
-    leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
-    leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
-      if (inde !== arr.length - 1) {
-        ite.classList.add('pb-4');
-      }
-      if (ite?.textContent?.trim() === '') {
-        ite.remove();
-      }
-    });
-    const descriptionLinks = leftDescription?.querySelectorAll('a');
-    descriptionLinks?.forEach((link) => {
+    desc.querySelectorAll('a').forEach((link) => {
       link.classList.add(
-        'text-black',
         'underline',
-        'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
         'hover:text-white'
       );
-      const linkHref = link?.getAttribute('href');
 
-      link.setAttribute(
-        'target',
-        linkHref.includes('http') ? '_blank' : '_self'
-      );
+      link.target = link.href.includes('http') ? '_blank' : '_self';
     });
-    leftContent.append(leftDescription);
+
+    left.append(desc);
   }
 
-  if (linkWrapper.childNodes.length > 0) {
-    leftContent.append(linkWrapper);
-  }
+  if (linkWrapper.childElementCount) left.append(linkWrapper);
 
-  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-    let opcoTarget;
+  if (buttonUrl && buttonLabel) {
+    left.append(
+      a(
+        {
+          href: buttonUrl,
 
-    if (opcoBannerButtonUrl?.includes('http')) {
-      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
-    } else if (opcoBannerButtonUrl?.includes('#')) {
-      opcoTarget = '_self';
-    } else {
-      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
-    }
+          target: buttonTarget,
 
-    const ctaWrapper = a(
-      {
-        href: opcoBannerButtonUrl,
-        target: opcoTarget,
-        class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
-      },
-      opcoBannerButtonLabel
+          class:
+            'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 hover:bg-danaherpurple-800',
+        },
+        buttonLabel
+      )
     );
-    leftContent.append(ctaWrapper);
   }
-  const left = div(
-    {
+
+  // === right slides section ===
+
+  const slides = opcoBannerItems.map((item, idx) => {
+    const [title, subhead, desc, imgWrap, bgWrap, btnUrl, btnTarget, btnLabel] =
+      item.children;
+
+    const itemImg = imgWrap?.querySelector('img');
+
+    const itemBg = bgWrap?.querySelector('img');
+
+    const cta = btnUrl?.textContent?.trim() || '';
+
+    const ctaLabel = btnLabel?.textContent?.trim() || '';
+
+    const ctaTarget =
+      btnTarget?.textContent?.trim() === 'true' ? '_blank' : '_self';
+
+    const content = div({
       class:
-        'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
-    },
-    leftContent
-  );
-
-  // === RIGHT CAROUSEL SECTION ===
-  const slides = [];
-  let currentIndex = 0;
-
-  // === CAROUSEL CONTROLS ===
-  const numberIndicator = span(
-    {
-      class:
-        'controlsContentText justify-start text-black text-base font-bold leading-snug',
-    },
-    `1/${slides.length}`
-  );
-
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    if (slides) {
-      slides[currentIndex].style.display = 'none';
-    }
-    currentIndex = (currentIndex + dir + total) % total;
-    if (slides[currentIndex]) {
-      slides[currentIndex].style.display = 'flex';
-    }
-    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
-
-    if (getSlides && getSlides.classList.contains('hasBg')) {
-      numberIndicator.style.color = '#fff';
-    } else {
-      numberIndicator.style.color = '';
-    }
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-  const controls = div(
-    {
-      id: 'opcoBannerControls',
-      class:
-        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4',
-    },
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 p-2.5 h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(-1),
-      },
-      span({
-        class: 'icon icon-arrow-left-icon',
-      })
-    ),
-    numberIndicator,
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(1),
-      },
-      span({
-        class: 'icon icon-arrow-right-icon',
-      })
-    )
-  );
-  opcoBannerItems.forEach((item, index) => {
-    let itemTitle;
-    let itemSubHeading;
-    let itemDescription;
-    let itemImage;
-    let itemBgImage;
-    let itemButtonUrl;
-    let itemButtonTarget;
-    let itemButtonLabel;
-    if (item.children.length > 6) {
-      [
-        itemTitle,
-        itemSubHeading,
-        itemDescription,
-        itemImage,
-        itemBgImage,
-        itemButtonUrl,
-        itemButtonTarget,
-        itemButtonLabel,
-      ] = item.children;
-    } else {
-      [
-        itemTitle,
-        itemSubHeading,
-        itemDescription,
-        itemImage,
-        itemBgImage,
-        itemButtonUrl,
-        itemButtonLabel,
-        itemButtonTarget,
-      ] = item.children;
-    }
-
-    const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
-    const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
-    const opcoBannerItemImage = itemImage?.querySelector('img');
-    const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
-    const ctaUrl = itemButtonUrl?.textContent?.trim();
-    const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
-    const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
-
-    const contentWrapper = div({
-      class:
-        'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
+        'flex flex-col items-center justify-center text-center gap-2 max-w-[470px]',
     });
 
-    if (opcoBannerItemImage) {
-      contentWrapper.append(
+    if (itemImg) {
+      content.append(
         img({
-          src: opcoBannerItemImage?.src,
-          alt: opcoBannerItemTitle || 'Slide image',
-          class: `${
-            opcoBannerItemBgImage ? 'opacity-0' : ''
-          } w-[300px] h-[184px] object-contain`,
+          src: itemImg.src,
+
+          alt: title?.textContent || '',
+
+          class: itemBg
+            ? 'opacity-0 w-[300px] h-[184px]'
+            : 'w-[300px] h-[184px]',
         })
       );
     }
 
-    if (opcoBannerItemTitle) {
-      contentWrapper.append(
+    if (title) {
+      content.append(
         h2(
-          {
-            class: 'text-3xl leading-10 font-medium text-black text-center',
-          },
-          opcoBannerItemTitle
+          { class: 'text-3xl font-medium text-black' },
+          title.textContent.trim()
         )
       );
     }
 
-    if (opcoBannerItemSubHeading) {
-      contentWrapper.append(
+    if (subhead) {
+      content.append(
         p(
-          {
-            class:
-              'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
-          },
-          opcoBannerItemSubHeading
+          { class: 'text-xl font-medium text-black' },
+          subhead.textContent.trim()
         )
       );
     }
 
-    if (opcoBannerItemDescription) {
-      const descriptionHtml = div();
-      descriptionHtml.insertAdjacentHTML(
-        'beforeend',
-        opcoBannerItemDescription
-      );
+    if (desc) {
+      const descBlock = div();
 
-      const descriptionLinks = descriptionHtml.querySelectorAll('a');
-      descriptionLinks?.forEach((link) => {
+      descBlock.innerHTML = desc.innerHTML;
+
+      descBlock.querySelectorAll('a').forEach((link) => {
         link.classList.add(
-          'text-black',
           'underline',
-          'decoration-danaherpurple-500',
           'hover:bg-danaherpurple-500',
           'hover:text-white'
         );
-        const linkHref = link?.getAttribute('href');
 
-        link.setAttribute(
-          'target',
-          linkHref.includes('http') ? '_blank' : '_self'
-        );
+        link.target = link.href.includes('http') ? '_blank' : '_self';
       });
-      contentWrapper.append(
-        div(
-          {
-            class:
-              'text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]',
-          },
-          descriptionHtml
-        )
-      );
+
+      content.append(div({ class: 'text-base text-black' }, descBlock));
     }
 
-    if (opcoBannerItemButtonLabel && ctaUrl) {
-      contentWrapper.append(
+    if (cta && ctaLabel) {
+      content.append(
         button(
           {
             class:
-              'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
-            onclick: () =>
-              window.open(
-                ctaUrl,
-                opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self'
-              ),
+              'bg-danaherpurple-500 text-white rounded-[30px] px-6 py-3 mt-4 hover:bg-danaherpurple-800',
+
+            onclick: () => window.open(cta, ctaTarget),
           },
-          opcoBannerItemButtonLabel
+          ctaLabel
         )
       );
     }
-    const overlayWrapper = div({
+
+    const overlay = div({
       class:
-        'absolute top-0 w-full h-full  bg-gradient-to-b from-black/0 to-black/95 hidden',
+        'absolute inset-0 bg-gradient-to-b from-transparent to-black/95 hidden',
     });
+
     const slide = div(
       {
-        id: `opcoBannerSlide${index}`,
-        'data-index': index,
-        class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
-          opcoBannerItems.length > 1 ? '' : 'justify-center'
-        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
-        style: index === 0 ? '' : 'display: none;',
+        id: `opcoBannerSlide${idx}`,
+
+        class: `carousel-slide relative flex flex-col items-center p-10 min-h-[600px] ${
+          itemBg ? 'hasBg' : ''
+        }`,
+
+        style: idx === 0 ? '' : 'display: none;',
       },
-      contentWrapper,
-      overlayWrapper
+      content,
+      overlay
     );
 
-    if (opcoBannerItemBgImage) {
-      overlayWrapper?.classList.remove('hidden');
-      slide.style.padding = '2.5rem';
-      slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
+    if (itemBg) {
+      slide.style.backgroundImage = `url('${itemBg.src}')`;
+
       slide.style.backgroundSize = 'cover';
-      slide.style.backgroundSize = 'cover';
+
       slide.style.backgroundPosition = 'center';
-      slide.querySelectorAll('.text-center')?.forEach((it) => {
-        it.style.color = '#fff';
-      });
-    } else {
-      overlayWrapper?.classList.add('hidden');
-      if (slide.hasAttribute('style')) {
-        slide.style.padding = '';
-        slide.style.backgroundImage = '';
-        slide.style.backgroundSize = '';
-        slide.style.backgroundPosition = '';
-        slide.querySelectorAll('.text-center')?.forEach((ite) => {
-          if (ite.hasAttribute('style')) {
-            ite.removeAttribute('style');
-          }
-        });
-      }
+
+      overlay.classList.remove('hidden');
+
+      slide
+        .querySelectorAll('.text-center')
+        .forEach((el) => (el.style.color = '#fff'));
     }
-    if (!opcoBannerItemImage && !opcoBannerItemTitle) {
-      slide.classList.add('hidden');
-    } else {
-      if (slide.classList.contains('hidden')) {
-        slide.classList.remove('hidden');
-      }
-      if (numberIndicator) {
-        numberIndicator.textContent = `1/${index + 1}`;
-      }
-      slides.push(slide);
-    }
+
+    return slide;
   });
-  decorateIcons(controls);
-  const right = div(
-    {
-      id: 'opcoBannerCarouselOuter',
-      class:
-        'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
-    },
-    ...slides,
-    opcoBannerItems.length > 1 ? controls : ''
-  );
-  const getFirstSlide = right.querySelector('#opcoBannerSlide0');
-  if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
-    numberIndicator.style.color = '#fff';
-  }
-  const container = div(
-    {
-      class:
-        'flex flex-col md:flex-row w-full dhls-container !mt-0 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
-    },
-    left,
-    right
+
+  // === controls ===
+
+  let currentIndex = 0;
+
+  const numberIndicator = span(
+    { class: 'text-base font-bold' },
+    `1/${slides.length}`
   );
 
-  block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
+  const updateSlides = (dir) => {
+    slides[currentIndex].style.display = 'none';
+
+    currentIndex = (currentIndex + dir + slides.length) % slides.length;
+
+    slides[currentIndex].style.display = 'flex';
+
+    const active = slides[currentIndex];
+
+    if (active.classList.contains('hasBg')) {
+      numberIndicator.style.color = '#fff';
+    } else {
+      numberIndicator.style.color = '';
     }
-  });
+
+    numberIndicator.textContent = `${currentIndex + 1}/${slides.length}`;
+  };
+
+  const controls =
+    slides.length > 1
+      ? div(
+          { class: 'absolute bottom-6 flex gap-4' },
+
+          button(
+            { class: 'rounded-full p-2', onclick: () => updateSlides(-1) },
+            span({ class: 'icon icon-arrow-left-icon' })
+          ),
+
+          numberIndicator,
+
+          button(
+            { class: 'rounded-full p-2', onclick: () => updateSlides(1) },
+            span({ class: 'icon icon-arrow-right-icon' })
+          )
+        )
+      : '';
+
+  decorateIcons(controls);
+
+  // === final container ===
+
+  const wrapper = div(
+    {
+      class: 'flex flex-col md:flex-row border-b border-gray-300',
+    },
+
+    div({ class: 'md:w-1/2 p-6' }, left),
+
+    div(
+      { class: 'md:w-1/2 relative flex flex-col items-center gap-6' },
+
+      ...slides,
+
+      controls
+    )
+  );
+
+  block.innerHTML = '';
+
+  block.append(wrapper);
 }
