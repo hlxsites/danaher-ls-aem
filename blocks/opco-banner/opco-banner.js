@@ -267,13 +267,6 @@ export default async function decorate(block) {
     )
   );
   [...block.children].forEach((item, index) => {
-    const contentWrapper = div({
-      class:
-        'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
-    });
-    moveInstrumentation(item, contentWrapper);
-    while (item.firstElementChild)
-      contentWrapper.append(item.firstElementChild);
     if (index > 6) {
       let itemTitle;
       let itemSubHeading;
@@ -283,7 +276,7 @@ export default async function decorate(block) {
       let itemButtonUrl;
       let itemButtonTarget;
       let itemButtonLabel;
-      if (contentWrapper.children.length > 6) {
+      if (item.children.length > 6) {
         [
           itemTitle,
           itemSubHeading,
@@ -293,7 +286,7 @@ export default async function decorate(block) {
           itemButtonUrl,
           itemButtonTarget,
           itemButtonLabel,
-        ] = contentWrapper.children;
+        ] = item.children;
       } else {
         [
           itemTitle,
@@ -304,7 +297,7 @@ export default async function decorate(block) {
           itemButtonUrl,
           itemButtonLabel,
           itemButtonTarget,
-        ] = contentWrapper.children;
+        ] = item.children;
       }
 
       const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
@@ -316,6 +309,11 @@ export default async function decorate(block) {
       const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
       const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
 
+      const contentWrapper = div({
+        class:
+          'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
+      });
+      moveInstrumentation(item, contentWrapper);
       if (opcoBannerItemImage) {
         contentWrapper.append(
           img({
@@ -418,6 +416,7 @@ export default async function decorate(block) {
         overlayWrapper
       );
 
+      moveInstrumentation(item, slide);
       if (opcoBannerItemBgImage) {
         overlayWrapper?.classList.remove('hidden');
         slide.style.padding = '2.5rem';
