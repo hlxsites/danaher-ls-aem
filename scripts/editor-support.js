@@ -32,6 +32,7 @@ async function applyChanges(event) {
       const newMain = parsedUpdate.querySelector(
         `[data-aue-resource="${resource}"]`
       );
+      console.log('newmain : ', newMain);
 
       newMain.style.display = 'none';
       element.insertAdjacentElement('afterend', newMain);
@@ -39,7 +40,7 @@ async function applyChanges(event) {
       decorateRichtext(newMain);
       await loadSections(newMain);
       element.remove();
-      newMain.style.display = '';
+      newMain.style.display = null;
       // eslint-disable-next-line no-use-before-define
       attachEventListners(newMain);
       return true;
