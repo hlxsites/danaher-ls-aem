@@ -473,7 +473,7 @@ export default async function decorate(block) {
     left,
     right
   );
-  const isEditor = document.classList.contains('adobe-ue-edit');
+  const isEditor = document.querySelector('.adobe-ue-edit');
   if (!isEditor) {
     block.textContent = '';
   }
