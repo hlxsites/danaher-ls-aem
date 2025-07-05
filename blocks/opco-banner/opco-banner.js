@@ -80,12 +80,7 @@ export default async function decorate(block) {
     const bannerButtonNewTab = rowElement;
     const bannerButtonLabel = rowElement;
 
-    const opcoBannerItems = [];
-    [...block.children].forEach((child, index) => {
-      if (index > 6) {
-        opcoBannerItems.push(child);
-      }
-    });
+    const opcoBannerItems = [...rowElement.children];
 
     const baseUrl = 'https://lifesciences.danaher.com';
 
