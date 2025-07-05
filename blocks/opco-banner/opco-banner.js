@@ -74,6 +74,14 @@ export default async function decorate(block) {
   const left = div({
     class: 'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
   });
+  let opcoBannerItems = [];
+  [...block.children].forEach(async (row, ind) => {
+    if (ind > 6) {
+      [...row.children].forEach((ite) => {
+        opcoBannerItems.push(ite);
+      });
+    }
+  });
   [...block.children].forEach(async (rowElement, index) => {
     const bannerTitle = rowElement[0];
     const bannerHeading = rowElement[1];
@@ -461,7 +469,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    [...block.children].length > 1 ? controls : ''
+    opcoBannerItems.length > 1 ? controls : ''
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
