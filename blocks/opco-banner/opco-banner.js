@@ -71,199 +71,202 @@ export default async function decorate(block) {
     )
   );
 
-  [...block.children].forEach((rowElement) => {
-      const  bannerTitle=rowElement;
+  [...block.children].forEach(async (rowElement) => {
+    const bannerTitle = rowElement;
     const bannerHeading = rowElement;
-    const bannerDescription =rowElement;
-    const bannerImage=rowElement;
-    const bannerButtonUrl=rowElement;
-    const bannerButtonNewTab=rowElement;
-    const bannerButtonLabel=rowElement;
+    const bannerDescription = rowElement;
+    const bannerImage = rowElement;
+    const bannerButtonUrl = rowElement;
+    const bannerButtonNewTab = rowElement;
+    const bannerButtonLabel = rowElement;
 
-  const opcoBannerItems = [];
-  [...block.children].forEach((child, index) => {
-    if (index > 6) {
-      opcoBannerItems.push(child);
-    }
-  });
-
-  const baseUrl = 'https://lifesciences.danaher.com';
-
-  const currentPath = window.location.href;
-
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
-
-  const opcoBannerTitle = bannerTitle;
-  const opcoBannerHeading = bannerHeading;
-  const opcoBannerDescription = bannerDescription?.innerHTML;
-  const opcoBannerImage = bannerImage?.querySelector('img');
-  const opcoBannerButtonLabel =
-    bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
-  const opcoBannerButtonTarget = bannerButtonNewTab?.textContent?.trim() || '';
-  const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
-
-  const linkWrapper = div({
-    class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
-  });
-  if (
-    currentPath.includes('products.html') ||
-    currentPath.includes('/shop-page') ||
-    currentPath.includes('/shop-home') ||
-    currentPath.includes('/products-eds1.html')
-  ) {
-    const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
-
-    const brandsRaw = await brandsResponse.json();
-    const allProducts = Array.isArray(brandsRaw)
-      ? brandsRaw
-      : brandsRaw?.data || brandsRaw?.results || [];
-    // Build unique filters (exclude brands with commas)
-    const brandMap = new Map();
-
-    allProducts.forEach((item) => {
-      const brand = item.brand?.trim();
-      const path = item.path?.trim();
-
-      if (brand && !brand.includes(',') && !brandMap.has(brand)) {
-        brandMap.set(brand, path);
+    const opcoBannerItems = [];
+    [...block.children].forEach((child, index) => {
+      if (index > 6) {
+        opcoBannerItems.push(child);
       }
     });
 
-    const allBrands = Array.from(brandMap.entries())
-      .map(([name, path]) => ({ name, path }))
-      .sort((asr, b) => asr.name.localeCompare(b.name));
+    const baseUrl = 'https://lifesciences.danaher.com';
 
-    allBrands.forEach((pills) => {
-      const linkLabel = pills?.name || '';
+    const currentPath = window.location.href;
 
-      const linkTarget = pills?.path || '#';
-      let brandLink = '';
-      if (linkLabel) {
-        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
-          brandLink = 'leica';
-        } else {
-          brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+    block?.parentElement?.parentElement?.removeAttribute('class');
+    block?.parentElement?.parentElement?.removeAttribute('style');
+
+    const opcoBannerTitle = bannerTitle;
+    const opcoBannerHeading = bannerHeading;
+    const opcoBannerDescription = bannerDescription?.innerHTML;
+    const opcoBannerImage = bannerImage?.querySelector('img');
+    const opcoBannerButtonLabel =
+      bannerButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+    const opcoBannerButtonTarget =
+      bannerButtonNewTab?.textContent?.trim() || '';
+    const opcoBannerButtonUrl = bannerButtonUrl.textContent?.trim();
+
+    const linkWrapper = div({
+      class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
+    });
+    if (
+      currentPath.includes('products.html') ||
+      currentPath.includes('/shop-page') ||
+      currentPath.includes('/shop-home') ||
+      currentPath.includes('/products-eds1.html')
+    ) {
+      const brandsResponse = await fetch(
+        `${baseUrl}/us/en/products-index.json`
+      );
+
+      const brandsRaw = await brandsResponse.json();
+      const allProducts = Array.isArray(brandsRaw)
+        ? brandsRaw
+        : brandsRaw?.data || brandsRaw?.results || [];
+      // Build unique filters (exclude brands with commas)
+      const brandMap = new Map();
+
+      allProducts.forEach((item) => {
+        const brand = item.brand?.trim();
+        const path = item.path?.trim();
+
+        if (brand && !brand.includes(',') && !brandMap.has(brand)) {
+          brandMap.set(brand, path);
         }
-        linkWrapper.appendChild(
-          a(
-            {
-              href: `/us/en/products-eds1/brands/${brandLink}`,
-              target: linkTarget.includes('http') ? '_blank' : '_self',
-              class:
-                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
-            },
-            linkLabel
-          )
-        );
-      }
-    });
-  }
-  // === LEFT SECTION ===
-  const leftContent = div({
-    class: 'flex flex-col gap-4 max-w-[567px]',
-  });
+      });
 
-  if (opcoBannerTitle) {
-    leftContent.append(
-      p(
-        {
-          class:
-            'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
-        },
-        opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, '')
-      )
-    );
-  }
-  if (opcoBannerImage) {
-    leftContent.append(
-      img({
-        src: opcoBannerImage.src,
-        alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[172px] mb-2 md:mb-8 h-auto',
-      })
-    );
-  }
+      const allBrands = Array.from(brandMap.entries())
+        .map(([name, path]) => ({ name, path }))
+        .sort((asr, b) => asr.name.localeCompare(b.name));
 
-  if (opcoBannerHeading) {
-    leftContent.append(
-      h1(
-        {
-          class:
-            'text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal',
-        },
-        opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, '')
-      )
-    );
-  }
+      allBrands.forEach((pills) => {
+        const linkLabel = pills?.name || '';
 
-  if (opcoBannerDescription) {
-    const leftDescription = div({
-      id: 'opcoBannerDescription',
-      class: 'text-[18px] leading-[22px] font-normal text-black w-full',
+        const linkTarget = pills?.path || '#';
+        let brandLink = '';
+        if (linkLabel) {
+          if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
+            brandLink = 'leica';
+          } else {
+            brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+          }
+          linkWrapper.appendChild(
+            a(
+              {
+                href: `/us/en/products-eds1/brands/${brandLink}`,
+                target: linkTarget.includes('http') ? '_blank' : '_self',
+                class:
+                  'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+              },
+              linkLabel
+            )
+          );
+        }
+      });
+    }
+    // === LEFT SECTION ===
+    const leftContent = div({
+      class: 'flex flex-col gap-4 max-w-[567px]',
     });
 
-    leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
-    leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
-      if (inde !== arr.length - 1) {
-        ite.classList.add('pb-4');
-      }
-      if (ite?.textContent?.trim() === '') {
-        ite.remove();
-      }
-    });
-    const descriptionLinks = leftDescription?.querySelectorAll('a');
-    descriptionLinks?.forEach((link) => {
-      link.classList.add(
-        'text-black',
-        'underline',
-        'decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white'
+    if (opcoBannerTitle) {
+      leftContent.append(
+        p(
+          {
+            class:
+              'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
+          },
+          opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, '')
+        )
       );
-      const linkHref = link?.getAttribute('href');
-
-      link.setAttribute(
-        'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+    }
+    if (opcoBannerImage) {
+      leftContent.append(
+        img({
+          src: opcoBannerImage.src,
+          alt: opcoBannerImage.alt || 'Brand Image',
+          class: 'w-[172px] mb-2 md:mb-8 h-auto',
+        })
       );
-    });
-    leftContent.append(leftDescription);
-  }
-
-  if (linkWrapper.childNodes.length > 0) {
-    leftContent.append(linkWrapper);
-  }
-
-  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-    let opcoTarget;
-
-    if (opcoBannerButtonUrl?.includes('http')) {
-      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
-    } else if (opcoBannerButtonUrl?.includes('#')) {
-      opcoTarget = '_self';
-    } else {
-      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     }
 
-    const ctaWrapper = a(
+    if (opcoBannerHeading) {
+      leftContent.append(
+        h1(
+          {
+            class:
+              'text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal',
+          },
+          opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, '')
+        )
+      );
+    }
+
+    if (opcoBannerDescription) {
+      const leftDescription = div({
+        id: 'opcoBannerDescription',
+        class: 'text-[18px] leading-[22px] font-normal text-black w-full',
+      });
+
+      leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
+      leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+        if (inde !== arr.length - 1) {
+          ite.classList.add('pb-4');
+        }
+        if (ite?.textContent?.trim() === '') {
+          ite.remove();
+        }
+      });
+      const descriptionLinks = leftDescription?.querySelectorAll('a');
+      descriptionLinks?.forEach((link) => {
+        link.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white'
+        );
+        const linkHref = link?.getAttribute('href');
+
+        link.setAttribute(
+          'target',
+          linkHref.includes('http') ? '_blank' : '_self'
+        );
+      });
+      leftContent.append(leftDescription);
+    }
+
+    if (linkWrapper.childNodes.length > 0) {
+      leftContent.append(linkWrapper);
+    }
+
+    if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
+      let opcoTarget;
+
+      if (opcoBannerButtonUrl?.includes('http')) {
+        opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
+      } else if (opcoBannerButtonUrl?.includes('#')) {
+        opcoTarget = '_self';
+      } else {
+        opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
+      }
+
+      const ctaWrapper = a(
+        {
+          href: opcoBannerButtonUrl,
+          target: opcoTarget,
+          class:
+            'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
+        },
+        opcoBannerButtonLabel
+      );
+      leftContent.append(ctaWrapper);
+    }
+    const left = div(
       {
-        href: opcoBannerButtonUrl,
-        target: opcoTarget,
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
+          'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
       },
-      opcoBannerButtonLabel
+      leftContent
     );
-    leftContent.append(ctaWrapper);
-  }
-  const left = div(
-    {
-      class:
-        'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
-    },
-    leftContent
-  );
     opcoBannerItems.forEach((item, index) => {
       let itemTitle;
       let itemSubHeading;
