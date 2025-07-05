@@ -463,13 +463,14 @@ export default async function decorate(block) {
     }
   });
   decorateIcons(controls);
+  opcoBannerInstrument.append(...slides);
   const right = div(
     {
       id: 'opcoBannerCarouselOuter',
       class:
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
-    ...slides,
+    opcoBannerInstrument,
     opcoBannerItems.length > 1 ? controls : ''
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
