@@ -32,6 +32,7 @@ async function applyChanges(event) {
       const newMain = parsedUpdate.querySelector(
         `[data-aue-resource="${resource}"]`
       );
+
       newMain.style.display = 'none';
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
