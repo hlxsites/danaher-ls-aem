@@ -58,13 +58,13 @@ async function applyChanges(event) {
       );
       if (newBlock) {
         newBlock.style.display = 'none';
-        block.insertAdjacentElement('afterend', newBlock);
+        //        block.insertAdjacentElement('afterend', newBlock);
+        block.remove();
         decorateButtons(newBlock);
         decorateIcons(newBlock);
         decorateBlock(newBlock);
         decorateRichtext(newBlock);
         await loadBlock(newBlock);
-        block.remove();
         newBlock.style.display = null;
         return true;
       }
