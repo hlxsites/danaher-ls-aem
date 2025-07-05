@@ -72,8 +72,6 @@ export default async function decorate(block) {
   );
 
   [...block.children].forEach(async (rowElement, index) => {
-    console.log('rowelement : ', rowElement);
-
     const bannerTitle = rowElement[0];
     const bannerHeading = rowElement[1];
     const bannerDescription = rowElement[2];
@@ -81,7 +79,13 @@ export default async function decorate(block) {
     const bannerButtonUrl = rowElement[4];
     const bannerButtonNewTab = rowElement[5];
     const bannerButtonLabel = rowElement[6];
-    console.log('banner details: ', rowElement[index]);
+    console.log('banner bannerTitle: ', rowElement[0]);
+    console.log('banner bannerHeading: ', rowElement[1]);
+    console.log('banner bannerDescription: ', rowElement[2]);
+    console.log('banner bannerImage: ', rowElement[3]);
+    console.log('banner bannerButtonUrl: ', rowElement[4]);
+    console.log('banner bannerButtonNewTab: ', rowElement[5]);
+    console.log('banner bannerButtonLabel: ', rowElement[6]);
 
     const opcoBannerItems = [...rowElement.children];
 
