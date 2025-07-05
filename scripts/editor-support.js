@@ -5,7 +5,8 @@ import {
   decorateIcons,
   decorateSections,
   loadBlock,
-  loadBlocks,
+  loadScript,
+  loadSections,
 } from './lib-franklin.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
@@ -24,7 +25,16 @@ async function applyChanges(event) {
   const { content } = updates[0];
   if (!content) return false;
 
-  const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
+  // load dompurify
+  await loadScript(`${window.hlx.codeBasePath}/scripts/dompurify.min.js`);
+
+  const sanitizedContent = window.DOMPurify.sanitize(content, {
+    USE_PROFILES: { html: true },
+  });
+  const parsedUpdate = new DOMParser().parseFromString(
+    sanitizedContent,
+    'text/html'
+  );
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
   if (element) {
@@ -36,7 +46,7 @@ async function applyChanges(event) {
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
       decorateRichtext(newMain);
-      await loadBlocks(newMain);
+      await loadSections(newMain);
       element.remove();
       newMain.style.display = null;
       // eslint-disable-next-line no-use-before-define
@@ -54,13 +64,13 @@ async function applyChanges(event) {
       );
       if (newBlock) {
         newBlock.style.display = 'none';
-        //block.insertAdjacentElement('afterend', newBlock);
-        block.remove();
+        block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
         decorateIcons(newBlock);
         decorateBlock(newBlock);
         decorateRichtext(newBlock);
         await loadBlock(newBlock);
+        block.remove();
         newBlock.style.display = null;
         return true;
       }
@@ -80,7 +90,7 @@ async function applyChanges(event) {
           decorateRichtext(newSection);
           decorateSections(parentElement);
           decorateBlocks(parentElement);
-          await loadBlocks(parentElement);
+          await loadSections(parentElement);
           element.remove();
           newSection.style.display = null;
         } else {
@@ -104,12 +114,11 @@ function attachEventListners(main) {
     'aue:content-add',
     'aue:content-move',
     'aue:content-remove',
+    'aue:content-copy',
   ].forEach((eventType) =>
     main?.addEventListener(eventType, async (event) => {
       event.stopPropagation();
       const applied = await applyChanges(event);
-      console.log(' applied: ', applied);
-
       if (!applied) window.location.reload();
     })
   );
