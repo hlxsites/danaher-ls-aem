@@ -5,7 +5,6 @@ import {
   decorateIcons,
   decorateSections,
   loadBlock,
-  loadScript,
   loadSections,
 } from './lib-franklin.js';
 import { decorateRichtext } from './editor-support-rte.js';
