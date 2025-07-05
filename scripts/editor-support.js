@@ -113,9 +113,7 @@ function attachEventListners(main) {
       console.log('event: ', event);
 
       //const applied = await applyChanges(event);
-      console.log('applied : ', applied);
-
-      if (!applied) window.location.reload();
+      window.location.reload();
     })
   );
 }
