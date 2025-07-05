@@ -9,6 +9,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const [
@@ -23,8 +24,6 @@ export default async function decorate(block) {
 
   const opcoBannerItems = [];
   [...block.children].forEach((child, index) => {
-    console.log('child dataset: ', child.dataset.aueModel);
-
     if (index > 6) {
       opcoBannerItems.push(child);
     }
@@ -267,189 +266,200 @@ export default async function decorate(block) {
       })
     )
   );
-  opcoBannerItems.forEach((item, index) => {
-    let itemTitle;
-    let itemSubHeading;
-    let itemDescription;
-    let itemImage;
-    let itemBgImage;
-    let itemButtonUrl;
-    let itemButtonTarget;
-    let itemButtonLabel;
-    if (item.children.length > 6) {
-      [
-        itemTitle,
-        itemSubHeading,
-        itemDescription,
-        itemImage,
-        itemBgImage,
-        itemButtonUrl,
-        itemButtonTarget,
-        itemButtonLabel,
-      ] = item.children;
-    } else {
-      [
-        itemTitle,
-        itemSubHeading,
-        itemDescription,
-        itemImage,
-        itemBgImage,
-        itemButtonUrl,
-        itemButtonLabel,
-        itemButtonTarget,
-      ] = item.children;
-    }
 
-    const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
-    const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
-    const opcoBannerItemImage = itemImage?.querySelector('img');
-    const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
-    const ctaUrl = itemButtonUrl?.textContent?.trim();
-    const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
-    const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
+  const opcoBannerInstrument = document.createElement('div');
+  [...block.children].forEach((child, index) => {
+    if (index > 6) {
+      moveInstrumentation(child, opcoBannerInstrument);
+      while (child.firstElementChild) {
+        opcoBannerInstrument.append(child.firstElementChild);
+      }
+      [...opcoBannerInstrument.children].forEach((item, index) => {
+        let itemTitle;
+        let itemSubHeading;
+        let itemDescription;
+        let itemImage;
+        let itemBgImage;
+        let itemButtonUrl;
+        let itemButtonTarget;
+        let itemButtonLabel;
+        if (item.children.length > 6) {
+          [
+            itemTitle,
+            itemSubHeading,
+            itemDescription,
+            itemImage,
+            itemBgImage,
+            itemButtonUrl,
+            itemButtonTarget,
+            itemButtonLabel,
+          ] = item.children;
+        } else {
+          [
+            itemTitle,
+            itemSubHeading,
+            itemDescription,
+            itemImage,
+            itemBgImage,
+            itemButtonUrl,
+            itemButtonLabel,
+            itemButtonTarget,
+          ] = item.children;
+        }
 
-    const contentWrapper = div({
-      class:
-        'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
-    });
+        const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
+        const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
+        const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
+        const opcoBannerItemImage = itemImage?.querySelector('img');
+        const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
+        const ctaUrl = itemButtonUrl?.textContent?.trim();
+        const opcoBannerItemButtonTarget =
+          itemButtonTarget?.textContent?.trim();
+        const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
 
-    if (opcoBannerItemImage) {
-      contentWrapper.append(
-        img({
-          src: opcoBannerItemImage?.src,
-          alt: opcoBannerItemTitle || 'Slide image',
-          class: `${
-            opcoBannerItemBgImage ? 'opacity-0' : ''
-          } w-[300px] h-[184px] object-contain`,
-        })
-      );
-    }
-
-    if (opcoBannerItemTitle) {
-      contentWrapper.append(
-        h2(
-          {
-            class: 'text-3xl leading-10 font-medium text-black text-center',
-          },
-          opcoBannerItemTitle
-        )
-      );
-    }
-
-    if (opcoBannerItemSubHeading) {
-      contentWrapper.append(
-        p(
-          {
-            class:
-              'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
-          },
-          opcoBannerItemSubHeading
-        )
-      );
-    }
-
-    if (opcoBannerItemDescription) {
-      const descriptionHtml = div();
-      descriptionHtml.insertAdjacentHTML(
-        'beforeend',
-        opcoBannerItemDescription
-      );
-
-      const descriptionLinks = descriptionHtml.querySelectorAll('a');
-      descriptionLinks?.forEach((link) => {
-        link.classList.add(
-          'text-black',
-          'underline',
-          'decoration-danaherpurple-500',
-          'hover:bg-danaherpurple-500',
-          'hover:text-white'
-        );
-        const linkHref = link?.getAttribute('href');
-
-        link.setAttribute(
-          'target',
-          linkHref.includes('http') ? '_blank' : '_self'
-        );
-      });
-      contentWrapper.append(
-        div(
-          {
-            class:
-              'text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]',
-          },
-          descriptionHtml
-        )
-      );
-    }
-
-    if (opcoBannerItemButtonLabel && ctaUrl) {
-      contentWrapper.append(
-        button(
-          {
-            class:
-              'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
-            onclick: () =>
-              window.open(
-                ctaUrl,
-                opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self'
-              ),
-          },
-          opcoBannerItemButtonLabel
-        )
-      );
-    }
-    const overlayWrapper = div({
-      class:
-        'absolute top-0 w-full h-full  bg-gradient-to-b from-black/0 to-black/95 hidden',
-    });
-    const slide = div(
-      {
-        id: `opcoBannerSlide${index}`,
-        'data-index': index,
-        class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
-          opcoBannerItems.length > 1 ? '' : 'justify-center'
-        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
-        style: index === 0 ? '' : 'display: none;',
-      },
-      contentWrapper,
-      overlayWrapper
-    );
-
-    if (opcoBannerItemBgImage) {
-      overlayWrapper?.classList.remove('hidden');
-      slide.style.padding = '2.5rem';
-      slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundPosition = 'center';
-      slide.querySelectorAll('.text-center')?.forEach((it) => {
-        it.style.color = '#fff';
-      });
-    } else {
-      overlayWrapper?.classList.add('hidden');
-      if (slide.hasAttribute('style')) {
-        slide.style.padding = '';
-        slide.style.backgroundImage = '';
-        slide.style.backgroundSize = '';
-        slide.style.backgroundPosition = '';
-        slide.querySelectorAll('.text-center')?.forEach((ite) => {
-          if (ite.hasAttribute('style')) {
-            ite.removeAttribute('style');
-          }
+        const contentWrapper = div({
+          class:
+            'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
         });
-      }
-    }
-    if (!opcoBannerItemImage && !opcoBannerItemTitle) {
-      slide.classList.add('hidden');
-    } else {
-      if (slide.classList.contains('hidden')) {
-        slide.classList.remove('hidden');
-      }
-      if (numberIndicator) {
-        numberIndicator.textContent = `1/${index + 1}`;
-      }
-      slides.push(slide);
+
+        if (opcoBannerItemImage) {
+          contentWrapper.append(
+            img({
+              src: opcoBannerItemImage?.src,
+              alt: opcoBannerItemTitle || 'Slide image',
+              class: `${
+                opcoBannerItemBgImage ? 'opacity-0' : ''
+              } w-[300px] h-[184px] object-contain`,
+            })
+          );
+        }
+
+        if (opcoBannerItemTitle) {
+          contentWrapper.append(
+            h2(
+              {
+                class: 'text-3xl leading-10 font-medium text-black text-center',
+              },
+              opcoBannerItemTitle
+            )
+          );
+        }
+
+        if (opcoBannerItemSubHeading) {
+          contentWrapper.append(
+            p(
+              {
+                class:
+                  'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
+              },
+              opcoBannerItemSubHeading
+            )
+          );
+        }
+
+        if (opcoBannerItemDescription) {
+          const descriptionHtml = div();
+          descriptionHtml.insertAdjacentHTML(
+            'beforeend',
+            opcoBannerItemDescription
+          );
+
+          const descriptionLinks = descriptionHtml.querySelectorAll('a');
+          descriptionLinks?.forEach((link) => {
+            link.classList.add(
+              'text-black',
+              'underline',
+              'decoration-danaherpurple-500',
+              'hover:bg-danaherpurple-500',
+              'hover:text-white'
+            );
+            const linkHref = link?.getAttribute('href');
+
+            link.setAttribute(
+              'target',
+              linkHref.includes('http') ? '_blank' : '_self'
+            );
+          });
+          contentWrapper.append(
+            div(
+              {
+                class:
+                  'text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]',
+              },
+              descriptionHtml
+            )
+          );
+        }
+
+        if (opcoBannerItemButtonLabel && ctaUrl) {
+          contentWrapper.append(
+            button(
+              {
+                class:
+                  'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
+                onclick: () =>
+                  window.open(
+                    ctaUrl,
+                    opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self'
+                  ),
+              },
+              opcoBannerItemButtonLabel
+            )
+          );
+        }
+        const overlayWrapper = div({
+          class:
+            'absolute top-0 w-full h-full  bg-gradient-to-b from-black/0 to-black/95 hidden',
+        });
+        const slide = div(
+          {
+            id: `opcoBannerSlide${index}`,
+            'data-index': index,
+            class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
+              opcoBannerItems.length > 1 ? '' : 'justify-center'
+            } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
+            style: index === 0 ? '' : 'display: none;',
+          },
+          contentWrapper,
+          overlayWrapper
+        );
+
+        if (opcoBannerItemBgImage) {
+          overlayWrapper?.classList.remove('hidden');
+          slide.style.padding = '2.5rem';
+          slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
+          slide.style.backgroundSize = 'cover';
+          slide.style.backgroundSize = 'cover';
+          slide.style.backgroundPosition = 'center';
+          slide.querySelectorAll('.text-center')?.forEach((it) => {
+            it.style.color = '#fff';
+          });
+        } else {
+          overlayWrapper?.classList.add('hidden');
+          if (slide.hasAttribute('style')) {
+            slide.style.padding = '';
+            slide.style.backgroundImage = '';
+            slide.style.backgroundSize = '';
+            slide.style.backgroundPosition = '';
+            slide.querySelectorAll('.text-center')?.forEach((ite) => {
+              if (ite.hasAttribute('style')) {
+                ite.removeAttribute('style');
+              }
+            });
+          }
+        }
+        if (!opcoBannerItemImage && !opcoBannerItemTitle) {
+          slide.classList.add('hidden');
+        } else {
+          if (slide.classList.contains('hidden')) {
+            slide.classList.remove('hidden');
+          }
+          if (numberIndicator) {
+            numberIndicator.textContent = `1/${index + 1}`;
+          }
+          slides.push(slide);
+        }
+      });
     }
   });
   decorateIcons(controls);
