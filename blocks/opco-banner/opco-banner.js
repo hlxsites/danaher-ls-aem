@@ -268,6 +268,14 @@ export default async function decorate(block) {
   );
   [...block.children].forEach((item, index) => {
     if (index > 6) {
+      const contentWrapper = div({
+        class:
+          'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
+      });
+
+      moveInstrumentation(item, contentWrapper);
+      while (item.firstElementChild)
+        contentWrapper.append(item.firstElementChild);
       let itemTitle;
       let itemSubHeading;
       let itemDescription;
@@ -276,7 +284,7 @@ export default async function decorate(block) {
       let itemButtonUrl;
       let itemButtonTarget;
       let itemButtonLabel;
-      if (item.children.length > 6) {
+      if (contentWrapper.children.length > 6) {
         [
           itemTitle,
           itemSubHeading,
@@ -286,7 +294,7 @@ export default async function decorate(block) {
           itemButtonUrl,
           itemButtonTarget,
           itemButtonLabel,
-        ] = item.children;
+        ] = contentWrapper.children;
       } else {
         [
           itemTitle,
@@ -297,7 +305,7 @@ export default async function decorate(block) {
           itemButtonUrl,
           itemButtonLabel,
           itemButtonTarget,
-        ] = item.children;
+        ] = contentWrapper.children;
       }
 
       const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
@@ -308,11 +316,6 @@ export default async function decorate(block) {
       const ctaUrl = itemButtonUrl?.textContent?.trim();
       const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
       const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
-
-      const contentWrapper = div({
-        class:
-          'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
-      });
 
       if (opcoBannerItemImage) {
         contentWrapper.append(
