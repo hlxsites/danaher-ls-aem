@@ -412,7 +412,7 @@ export default async function decorate(block) {
       contentWrapper,
       overlayWrapper,
     );
-    moveInstrumentation(slide);
+    moveInstrumentation(item,slide);
     if (opcoBannerItemBgImage) {
       overlayWrapper?.classList.remove('hidden');
       slide.style.padding = '2.5rem';
