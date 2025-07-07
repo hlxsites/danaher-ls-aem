@@ -1,5 +1,100 @@
 [
   {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "container",
+        "label": "Fieldset",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "description",
+            "label": "Description",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "keywords",
+            "multi": true,
+            "label": "Keywords",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "article:tag",
+            "label": "article:tag",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": ":path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "template",
+            "label": "Template",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "brand",
+            "label": "Brand",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "creationdate",
+            "label": "Creation Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null,
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "updatedate",
+            "label": "Update Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null,
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "fullcategory",
+            "label": "Full Category",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "viewport",
+            "label": "View Port",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "image",
     "fields": [
       {
@@ -217,6 +312,12 @@
         "label": "Link"
       },
       {
+        "component": "boolean",
+        "name": "bodyBannerLinkTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "linklabel",
@@ -233,15 +334,117 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "cards",
     "fields": [
       {
         "component": "multiselect",
+        "valueType": "string",
         "name": "classes",
         "value": "",
-        "label": "Style",
-        "valueType": "string"
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "Article Card",
+            "value": "articlecard"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cards-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
       },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_alt",
+        "value": "Danaher Corporation",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_opco",
+        "value": "",
+        "label": "Opco"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
       {
         "component": "text",
         "valueType": "number",
@@ -264,42 +467,42 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "left_carousel_title",
+        "name": "leftCarouselTitle",
         "value": "",
         "label": "Left Carousel Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "left_carousel_link_label",
+        "name": "leftCarouselLinkLabel",
         "value": "",
         "label": "Left Carousel Link Label"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "left_carousel_product_id",
+        "name": "leftCarouselProductId",
         "value": "",
         "label": "Left Carousel Product IDs"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "right_carousel_title",
+        "name": "rightCarouseTitle",
         "value": "",
         "label": "Right Carousel Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "right_carousel_link_label",
+        "name": "rightCarouselLinkLabel",
         "value": "",
         "label": "Right Carousel Link Label"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "right_carousel_product_id",
+        "name": "rightCarouselProductId",
         "value": "",
         "label": "Right Carousel Product IDs"
       }
@@ -342,9 +545,33 @@
         "label": "Description"
       },
       {
+        "component": "select",
+        "name": "insightItemLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "aem-content",
         "name": "insight_link",
         "label": "Link Url"
+      },
+      {
+        "component": "boolean",
+        "name": "insightlinkTarget",
+        "valueType": "boolean",
+        "value": false,
+        "label": "Open link in new tab?"
       },
       {
         "component": "text",
@@ -405,6 +632,23 @@
         "label": "Offer Title"
       },
       {
+        "component": "select",
+        "name": "adLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "offer_text",
@@ -415,6 +659,12 @@
         "component": "aem-content",
         "name": "offer_link",
         "label": "Link"
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Open Read More link in new tab"
       }
     ]
   },
@@ -441,7 +691,14 @@
         "label": "Offer Link"
       },
       {
-        "component": "aem-content",
+        "component": "boolean",
+        "name": "linkTarget",
+        "valueType": "boolean",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
+        "component": "text",
         "name": "linkLabel",
         "label": "Offer Link Label"
       },
@@ -483,7 +740,7 @@
         "valueType": "string",
         "name": "opcoBannerImage",
         "label": "Banner Image",
-        "multi": true
+        "multi": false
       },
       {
         "component": "aem-content",
@@ -491,95 +748,18 @@
         "label": "Banner Button Url"
       },
       {
+        "component": "boolean",
+        "name": "opcoBannerButtonTarget",
+        "valueType": "boolean",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerButtonLabel",
         "value": "",
         "label": "Banner Button Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerLink1",
-        "value": "",
-        "valueType": "string",
-        "label": "Button 1 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink1Label",
-        "value": "",
-        "label": "Button 1 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerLink2",
-        "value": "",
-        "valueType": "string",
-        "label": "Button 2 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink2Label",
-        "value": "",
-        "label": "Button 2 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerLink3",
-        "value": "",
-        "valueType": "string",
-        "label": "Button 3 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink3Label",
-        "value": "",
-        "label": "Button 3 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerLink4",
-        "value": "",
-        "valueType": "string",
-        "label": "Button 4 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink4Label",
-        "value": "",
-        "label": "Button 4 Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "opcoBannerLink5",
-        "value": "",
-        "label": "Button 5 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink5Label",
-        "value": "",
-        "label": "Button 5 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerLink6",
-        "value": "",
-        "valueType": "string",
-        "label": "Button 6 Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerLink6Label",
-        "value": "",
-        "label": "Button 6 Label"
       }
     ]
   },
@@ -627,6 +807,12 @@
         "label": "Button Url"
       },
       {
+        "component": "boolean",
+        "name": "opcoBannerItemButtonTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerItemButtonLabel",
@@ -670,72 +856,54 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "card_alt",
-        "value": "Danaher Corporation",
+        "name": "cardAlt",
         "label": "Alt Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "card_title",
-        "value": "",
+        "name": "cardTitle",
         "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "card_titleType",
-        "value": "h1",
-        "label": "Type",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "card_description",
-        "value": "",
+        "name": "cardDescription",
         "label": "Description"
       },
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "card_href",
-        "value": "",
+        "name": "cardHref",
         "label": "Link"
+      },
+      {
+        "component": "select",
+        "name": "cardLinkTarget",
+        "label": "Open link in new tab?",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "yes",
+            "value": "yes"
+          },
+          {
+            "name": "no",
+            "value": "no"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
+        "name": "cardHrefText",
         "label": "Link Text"
       }
     ]
+  },
+  {
+    "id": "page-tabs",
+    "fields": []
   },
   {
     "id": "product-banner",
@@ -788,6 +956,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "prod_category_id",
+        "value": "",
+        "label": "Product Category ID"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "title",
         "value": "",
         "label": "Title"
@@ -802,8 +977,51 @@
     ]
   },
   {
+    "id": "product-category-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "product-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "product-family",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "family_id",
+        "value": "",
+        "label": "Family ID"
+      }
+    ]
+  },
+  {
     "id": "product-hero-content",
     "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_hero_id",
+        "value": "",
+        "label": "Product Hero ID"
+      },
       {
         "component": "text",
         "valueType": "string",
@@ -812,19 +1030,41 @@
         "label": "Title"
       },
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "prod_hero_description",
         "value": "",
         "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readMore_label",
+        "value": "",
+        "label": "Read More Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "readMore_link",
+        "label": "Read More Link"
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Open Read More link in new tab"
       }
     ]
+  },
+  {
+    "id": "product-hero",
+    "fields": []
   },
   {
     "id": "product-info-list",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "prod_info_title",
         "value": "",
@@ -941,9 +1181,15 @@
         "label": "Button URL"
       },
       {
+        "component": "boolean",
+        "name": "productButtonTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
-        "name": "bg-color",
+        "name": "bgColor",
         "value": "#4000A5",
         "label": "Bg Color"
       }
@@ -969,7 +1215,51 @@
     ]
   },
   {
-    "id": "top-selling-products",
+    "id": "tabs-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "value": "",
+        "label": "Container Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tiny-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      }
+    ],
+    "multi": true
+  },
+  {
+    "id": "tiny-carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "product_id",
+        "value": "",
+        "label": "Product ID"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "top-purchased-products",
     "fields": [
       {
         "component": "text",
@@ -1010,6 +1300,12 @@
         "name": "card_hrefUrl",
         "value": "",
         "label": "Link URL"
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Open link in new tab"
       },
       {
         "component": "text",

@@ -44,7 +44,7 @@ window.targetGlobalSettings = {
 function loadAT() {
   function targetPageParams() {
     return {
-      'at_property': '6aeb619e-92d9-f4cf-f209-6d88ff58af6a'
+      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
     };
   }
   loadScript('/scripts/at-lsig.js');
@@ -75,7 +75,7 @@ function sendCoveoEventPage() {
   coveoua(
     'init',
     accessToken,
-    `https://${organizationId}.analytics.org.coveo.com`,
+    `https://${organizationId}.analytics.org.coveo.com`
   );
 
   coveoua('send', 'view', {
@@ -85,17 +85,16 @@ function sendCoveoEventPage() {
     username: 'anonymous',
     title: title,
     location: document.location.href,
-    originLevel1: "DanaherMainSearch",
+    originLevel1: 'DanaherMainSearch',
   });
 }
 
 function sendCoveoEventProduct() {
-
   coveoua('set', 'currencyCode', 'USD');
   coveoua(
     'init',
     accessToken,
-    `https://${organizationId}.analytics.org.coveo.com`,
+    `https://${organizationId}.analytics.org.coveo.com`
   );
 
   const cats = document.querySelector('.hero-default-content .categories');
@@ -109,12 +108,12 @@ function sendCoveoEventProduct() {
     name: document.querySelector('.hero-default-content .title')?.textContent,
     category: pcats,
     price: 0,
-    brand: document.querySelector('.hero-default-content .brand')?.textContent
+    brand: document.querySelector('.hero-default-content .brand')?.textContent,
   });
 
   coveoua('ec:setAction', 'detail');
   coveoua('send', 'event', {
-    "searchHub": "DanaherMainSearch"
+    searchHub: 'DanaherMainSearch',
   });
 }
 
@@ -126,17 +125,29 @@ async function getAuthToken() {
     refresh = true;
     const siteID = window.DanaherConfig?.siteID;
     const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
-    const authRequest = await fetch(`/content/danaher/services/auth/token?id=${siteID}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData,
-    });
+    const authRequest = await fetch(
+      `/content/danaher/services/auth/token?id=${siteID}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData,
+      }
+    );
     if (authRequest.ok) {
       const hostName = window.location.hostname;
-      const env = hostName.includes('local') ? 'local' : hostName.includes('dev') ? 'dev' : hostName.includes('stage') ? 'stage' : 'prod';
+      const env = hostName.includes('local')
+        ? 'local'
+        : hostName.includes('dev')
+        ? 'dev'
+        : hostName.includes('stage')
+        ? 'stage'
+        : 'prod';
       const data = await authRequest.json();
       sessionStorage.setItem(`${siteID}_${env}_apiToken`, JSON.stringify(data));
-      sessionStorage.setItem(`${siteID}_${env}_refresh-token`, data.refresh_token);
+      sessionStorage.setItem(
+        `${siteID}_${env}_refresh-token`,
+        data.refresh_token
+      );
     }
   }
 }
@@ -150,8 +161,9 @@ loadScript('https://cdn.usefathom.com/script.js', attrs);
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
-  c[a] = c[a]
-    || function () {
+  c[a] =
+    c[a] ||
+    function () {
       (c[a].q = c[a].q || []).push(arguments);
     };
   c[a].t = Date.now();
@@ -161,23 +173,28 @@ loadScript('https://cdn.usefathom.com/script.js', attrs);
   u.src = e;
   O = o.getElementsByTagName(v)[0];
   O.parentNode.insertBefore(u, O);
-}(
+})(
   window,
   document,
   'script',
-  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js',
-));
+  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js'
+);
 
-const accessToken = window.DanaherConfig !== undefined
-  ? window.DanaherConfig.searchKey
-  : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-const organizationId = window.DanaherConfig !== undefined
-  ? window.DanaherConfig.searchOrg
-  : 'danahernonproduction1892f3fhz';
+const accessToken =
+  window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchKey
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+const organizationId =
+  window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
 const authHeader = getAuthorization();
-if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+if (
+  !authHeader ||
+  !(authHeader.has('authentication-token') || authHeader.has('Authorization'))
+) {
   getAuthToken();
 }
 
@@ -186,7 +203,10 @@ if (!window.location.hostname.includes('localhost')) {
   //loadAT();
 
   if (isOTEnabled()) {
-    if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1')) {
+    if (
+      getMetadata('template') === 'ProductDetail' &&
+      document.querySelector('h1')
+    ) {
       sendCoveoEventProduct();
     } else if (getMetadata('template') !== 'ProductDetail') {
       sendCoveoEventPage();

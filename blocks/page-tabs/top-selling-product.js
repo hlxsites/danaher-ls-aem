@@ -1,4 +1,4 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';
 import { getProductInfo } from '../../scripts/common-utils.js';
@@ -16,35 +16,7 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
-  const wrapper = block.closest('.top-selling-products-wrapper');
-  if (wrapper) {
-    wrapper.classList.add('w-full', 'md:px-10');
-  }
-
-  const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const linkText = block
-    .querySelector('[data-aue-prop="card_hrefText"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const linkUrl = block
-    .querySelector('[data-aue-prop="card_hrefUrl"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '');
-  const rawIds = block
-    .querySelector('[data-aue-prop="productid"]')
-    ?.textContent.trim()
-    .replace(/<[^>]*>/g, '') || '';
-  const productIds = rawIds
-    .split(',')
-    .map((id) => id.trim())
-    .filter(Boolean);
-
+export default async function topSellingProducts(headingText, productIds) {
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
   let currentPage = 1;
@@ -57,7 +29,7 @@ export default async function decorate(block) {
   });
   const carouselContainer = div({
     class:
-      'carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center',
+      'carousel-container flex flex-col w-[1300px] py-6 pt-0 pb-0 justify-center',
   });
   const carouselHead = div({
     class:
@@ -70,18 +42,18 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-medium leading-[2.5rem]',
+        class: 'text-black text-2xl font-medium leading-loose ',
       },
       headingText ?? '',
     ),
-    a(
-      {
-        href: linkUrl ?? '#',
-        class:
-          'text-danaherpurple-500 text-base font-semibold leading-snug hover:underline',
-      },
-      linkText ?? '',
-    ),
+    // a(
+    //   {
+    //     href: linkUrl ?? '#',
+    //     class:
+    //       'text-danaherpurple-500 text-base font-semibold leading-snug hover:underline',
+    //   },
+    //   linkText ?? '',
+    // ),
   );
 
   const arrows = div({
@@ -300,11 +272,11 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-  block.append(blockWrapper);
-
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains('top-selling-rendered')) {
-      child.style.display = 'none';
-    }
-  });
+  //   block.append(blockWrapper);
+  return blockWrapper;
+  //   [...block.children].forEach((child) => {
+  //     if (!child.classList.contains('top-selling-rendered')) {
+  //       child.style.display = 'none';
+  //     }
+  //   });
 }

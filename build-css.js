@@ -65,11 +65,6 @@ const fileMappings = [
     wrapper: 'carousel-wrapper',
   },
   {
-    content: './blocks/product-family/product-family.js',
-    output: './blocks/product-family/product-family.css',
-    wrapper: 'product-family-wrapper',
-  },
-  {
     content: './blocks/columns/columns.js',
     output: './blocks/columns/columns.css',
     wrapper: 'columns-wrapper',
@@ -334,8 +329,15 @@ const fileMappings = [
   },
   {
     content: [
+      './blocks/top-purchased-products/top-purchased-products.js',
+      './blocks/top-purchased-products/gridData.js',
+    ],
+    output: './blocks/top-purchased-products/top-purchased-products.css',
+    wrapper: 'top-purchased-products-wrapper',
+  },
+  {
+    content: [
       './blocks/top-selling-products/top-selling-products.js',
-      './blocks/top-selling-products/listData.js',
       './blocks/top-selling-products/gridData.js',
     ],
     output: './blocks/top-selling-products/top-selling-products.css',

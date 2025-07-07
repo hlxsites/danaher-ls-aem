@@ -7,14 +7,19 @@ export default async function decorate(block) {
   const baseUrl = 'https://lifesciences.danaher.com';
   const maxCards = 28;
 
+  const [productCategoryId, blockTitle, blockBrand] = block.children;
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const wrapper = block.closest('.product-categories-wrapper');
-  const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
-  const titleEl = wrapper.querySelector("[data-aue-label='Title']");
 
-  const authoredBrand = brandEl?.textContent?.trim().toLowerCase();
-  const authoredTitle = titleEl?.textContent?.trim();
+  document.documentElement.style.scrollBehavior = 'smooth';
+  const blockId = productCategoryId?.querySelector('p')?.textContent?.trim() || '';
+
+  // const wrapper = block.closest(".product-categories-wrapper");
+  const brandEl = blockBrand?.textContent?.trim().toLowerCase() || '';
+  const titleEl = blockTitle?.textContent?.trim() || '';
+
+  const authoredBrand = brandEl;
+  const authoredTitle = titleEl;
 
   try {
     const response = await fetch(`${baseUrl}/us/en/products-index.json`);
@@ -22,6 +27,13 @@ export default async function decorate(block) {
     let allProducts = Array.isArray(raw)
       ? raw
       : raw?.data || raw?.results || [];
+
+    const filteredProducts = allProducts
+      .filter(({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1)
+      .filter(({ type }) => type === 'Category')
+      .filter(({ path }) => !path.includes('/product-coveo'));
+
+    allProducts = filteredProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
     const createCard = (item) => {
       const title = item.title || '';
@@ -32,30 +44,33 @@ export default async function decorate(block) {
       return div(
         {
           class:
-            'border border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col',
+            'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
+          onclick: () => window.open(
+            clickUri,
+            clickUri?.includes('http') ? '_blank' : '_self',
+          ),
         },
         image
           && img({
             src:
-              absImg
-              || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+              absImg || '/content/dam/danaher/system/icons/preview-image.png',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
         p(
           {
             class:
-              'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+              'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
           },
           title,
         ),
         a(
           {
             href: clickUri,
-            target: '_blank',
+            target: clickUri?.includes('http') ? '_blank' : '_self',
             rel: 'noopener noreferrer',
             class:
-              'text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3',
+              'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
           },
           'Browse Products',
           span({
@@ -70,7 +85,7 @@ export default async function decorate(block) {
       class: 'w-full bg-white  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     });
     const header = div(
-      { class: 'flex flex-col gap-2 mb-6' },
+      { class: 'flex flex-col gap-2 mb-6 scroll-mt-32', id: blockId },
       h2(
         {
           class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
@@ -93,18 +108,25 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        grid.appendChild(createCard(item));
-        decorateIcons(grid);
+        if (item.type === 'Category') {
+          grid.appendChild(createCard(item));
+          decorateIcons(grid);
+        }
       });
     };
     decorateIcons(sectionWrapper);
     // CASE 1: Authored Brand
 
     if (authoredBrand && authoredTitle) {
-      allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+      // allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
-        const brand = item.brand || '';
-        return brand.toLowerCase() === authoredBrand && !brand.includes('|');
+        const brandArray = item.brand?.split(',') || [];
+        return brandArray.some((iBrand) => {
+          const brand = iBrand;
+          return (
+            brand.toLowerCase() === authoredBrand
+          );
+        });
       });
 
       renderGrid(filtered);
@@ -145,7 +167,7 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
-
+              // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
             renderGrid(list);
           },
         },

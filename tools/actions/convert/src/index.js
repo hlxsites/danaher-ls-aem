@@ -20,6 +20,8 @@ import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
+// eslint-disable-next-line
+import pathConfig from './pathConfig.json' with { type: 'json' };
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -152,7 +154,7 @@ function mapInbound(franklinPath, cfg) {
             if (franklinBasePath.endsWith('/')) {
               return appendExtensionInbound(
                 aemBasePath + candidate.substring(franklinBasePath.length),
-                extension,
+                extension
               );
             }
             // else, ignore folder => single page as this is not reversible
@@ -161,7 +163,11 @@ function mapInbound(franklinPath, cfg) {
             // mapping to a folder aka. /index, e.g. /content/site/us/en:/
             // mapping to a single page, aka. exact match, /content/site/us/en/page:/vanity
             // eslint-disable-next-line no-lonely-if
-            if ((franklinBasePath.endsWith('/') && candidate.endsWith('/index')) || franklinBasePath === candidate) {
+            if (
+              (franklinBasePath.endsWith('/') &&
+                candidate.endsWith('/index')) ||
+              franklinBasePath === candidate
+            ) {
               return appendExtensionInbound(aemBasePath, extension);
             }
           }
@@ -174,15 +180,34 @@ function mapInbound(franklinPath, cfg) {
 }
 
 export function isBinary(contentType) {
-  if (contentType.startsWith('text/') || contentType.startsWith('message/')) return false;
-  if (contentType.startsWith('audio/') || contentType.startsWith('image/') || contentType.startsWith('video/')) return true;
+  if (contentType.startsWith('text/') || contentType.startsWith('message/'))
+    return false;
+  if (
+    contentType.startsWith('audio/') ||
+    contentType.startsWith('image/') ||
+    contentType.startsWith('video/')
+  )
+    return true;
   return mediaTypes[contentType];
 }
 function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('.json')) return true;
-  if (path.includes("/us/en/products/brands/leica")) return true;
+  if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+    console.log('Inside the emarketplace');
+    const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
+    path.includes(convertPath)
+  );
+    if (!pathsToConvert) {
+      return true;
+    }
+    else 
+    {
+      return false;
+    }
+  }
+
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
@@ -199,11 +224,15 @@ function rewriteLink(link, attribute, origin, liveUrls) {
   if (urlStr) {
     if (urlStr.startsWith('#')) return;
 
-    const url = urlStr.startsWith('/') ? new URL(urlStr, origin) : new URL(urlStr);
+    const url = urlStr.startsWith('/')
+      ? new URL(urlStr, origin)
+      : new URL(urlStr);
     if (url.pathname.indexOf('.') > 0 || url.pathname.endsWith('/')) return;
 
-    if (url.hostname === origin.hostname
-      || liveUrls.some((liveUrl) => url.hostname === liveUrl.hostname)) {
+    if (
+      url.hostname === origin.hostname ||
+      liveUrls.some((liveUrl) => url.hostname === liveUrl.hostname)
+    ) {
       link.setAttribute(attribute, `${urlStr}.html`);
       // replace also the text content if it equals the urlStr
       if (link.textContent === urlStr) {
@@ -255,7 +284,11 @@ async function rewriteLinksAndImages(state) {
 
     // eslint-disable-next-line no-param-reassign
     state = {
-      ...state, originUrl, blob, contentType, contentLength: blob.length,
+      ...state,
+      originUrl,
+      blob,
+      contentType,
+      contentLength: blob.length,
     };
   }
   return state;
@@ -286,11 +319,11 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
   const appendSuffix = opts.appendSuffix || defaultAppendSuffix;
 
   if (!origin) {
-    throw new Error('\'origin\' not set in converter.yaml');
+    throw new Error("'origin' not set in converter.yaml");
   }
 
   if (!internalHost) {
-    throw new Error('\'internalHost\' not set in converter.yaml');
+    throw new Error("'internalHost' not set in converter.yaml");
   }
 
   let mappedPath = mapPathToFranklinDeliveryServlet(internalHost, path);
@@ -313,13 +346,19 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
     return { ...state, error: { code: resp.status, message: resp.statusText } };
   }
 
-  const [contentType] = (resp.headers.get('content-type') || 'text/html').split(';');
+  const [contentType] = (resp.headers.get('content-type') || 'text/html').split(
+    ';'
+  );
   const contentLength = resp.headers.get('content-length') || -1;
   // for binaries return the readable stream
   const blob = isBinary(contentType) ? resp.body : await resp.text();
 
   return {
-    ...state, originUrl, blob, contentType, contentLength,
+    ...state,
+    originUrl,
+    blob,
+    contentType,
+    contentLength,
   };
 }
 
@@ -340,13 +379,18 @@ export async function main(params) {
   const silent = params.silent === 'true';
   const pipeline = skipConverter(path)
     ? pipe()
-      .use(fetchContentWithFranklinDeliveryServlet)
-      .use(rewriteLinksAndImages)
+        .use(fetchContentWithFranklinDeliveryServlet)
+        .use(rewriteLinksAndImages)
     : createPipeline();
   if (silent) {
     pipeline.logger = { log: () => {} };
   }
-  return pipeline.wrap(toRuntime, {
-    transform, converterCfg, mappingCfg, silent,
-  }).apply(this, [params]);
+  return pipeline
+    .wrap(toRuntime, {
+      transform,
+      converterCfg,
+      mappingCfg,
+      silent,
+    })
+    .apply(this, [params]);
 }

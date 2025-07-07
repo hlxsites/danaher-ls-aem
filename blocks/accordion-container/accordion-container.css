@@ -16,6 +16,10 @@
   right: 0px
 }
 
+.accordion-container-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .accordion-container-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -119,6 +123,10 @@
   fill: currentColor
 }
 
+.accordion-container-wrapper :is(.\!p-0) {
+  padding: 0px !important
+}
+
 .accordion-container-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -158,6 +166,10 @@
   line-height: 1.25rem
 }
 
+.accordion-container-wrapper :is(.\!text-\[32px\]) {
+  font-size: 32px !important
+}
+
 .accordion-container-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -168,6 +180,10 @@
 
 .accordion-container-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.accordion-container-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .accordion-container-wrapper :is(.leading-7) {
@@ -184,8 +200,21 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
+.accordion-container-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.accordion-container-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
 .accordion-container-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important
+}
+
+.accordion-container-wrapper :is(.decoration-black) {
+  text-decoration-color: #000
 }
 
 .accordion-container-wrapper :is(.opacity-0) {
@@ -208,6 +237,20 @@
 
 .accordion-container-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.accordion-container-wrapper :is(.hover\:bg-danaherpurple-25:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {
+  text-decoration-color: #7523FF
 }
 
 .accordion-container-wrapper :is(.peer:checked ~ .peer-checked\:grid-rows-\[1fr\]) {
@@ -244,6 +287,14 @@
 
   .accordion-container-wrapper :is(.lg\:w-\[70\%\]) {
     width: 70%
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[840px\]) {
+    width: 840px
   }
 
   .accordion-container-wrapper :is(.lg\:flex-row) {

@@ -41,17 +41,31 @@ async function getCategoryInfo(category) {
 }
 
 function renderGridCard(item) {
+  const fallbackImagePath = '/content/dam/danaher/products/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-40 object-cover',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageElement = img({
-    src: item.image,
-    alt: item.title,
-    class: 'w-full h-40 object-cover',
-  });
+  const imageElement = createImageWithFallback(item.image, item.title);
 
   imageWrapper.append(imageElement);
 
@@ -61,12 +75,16 @@ function renderGridCard(item) {
 
   const titleElement = div(
     {
-      class:
-        'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
+      class: 'p-3',
     },
-    (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    div(
+      {
+        class:
+          'text-black text-xl font-medium line-clamp-2 overflow-hidden leading-7',
+      },
+      (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    ),
   );
-
   const description = div(
     {
       class: 'p-3',
@@ -74,7 +92,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
+          'justify-start text-black text-base font-normal line-clamp-3 overflow-hidden',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -85,12 +103,12 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
       }),
     ),
   );
@@ -109,16 +127,10 @@ function getCardsPerPageGrid() {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const relatedCategoryWrapper = div({
-    class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
-  });
 
-  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
-  const title = block.querySelector('[data-aue-prop="title"]');
-  const rawIds = productIdEl?.textContent.trim() || '';
-  if (productIdEl) productIdEl.remove();
-  if (title) title.remove();
+  const productIdEl = block.children[1]?.textContent.trim() || '';
+  const title = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
+  const rawIds = productIdEl;
 
   const productIds = rawIds
     .split(',')
@@ -141,16 +153,31 @@ export default async function decorate(block) {
 
   const validItems = relatedCategories.filter(Boolean);
 
-  // Fallback if no valid items found
+  // If no valid items, do not append wrapper to avoid taking space
   if (validItems.length === 0) {
-    validItems.push({
-      title: '',
-      image: '',
-      description: '',
-      path: '',
-    });
+    return;
   }
 
+  const relatedCategoryWrapper = div({
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 lg:px-0',
+  });
+
+  const carouselCards = div({
+    class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
+  });
+
+  // If fewer than 5 items, show static cards without carousel
+  if (validItems.length < 5) {
+    validItems.forEach((item) => {
+      const card = renderGridCard(item);
+      if (card) carouselCards.append(card);
+    });
+    relatedCategoryWrapper.append(carouselCards);
+    block.append(relatedCategoryWrapper);
+    return;
+  }
+
+  // Full carousel for 5 or more items
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;
 
@@ -168,29 +195,25 @@ export default async function decorate(block) {
   });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+      class: 'text-black text-2xl font-medium whitespace-nowrap',
     },
     title?.textContent || '',
   );
   leftGroup.append(productTitle);
 
   const arrowGroup = div({
-    class: 'flex md:justify-start justify-end items-center gap-3',
+    class: 'flex md:justify-start justify-end items-center',
   });
   const prevDiv = div({
     class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   const nextDiv = div({
     class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   arrowGroup.append(prevDiv, nextDiv);
   carouselHead.append(leftGroup, arrowGroup);
-
-  const carouselCards = div({
-    class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
-  });
 
   function updateCarousel() {
     carouselCards.innerHTML = '';
@@ -207,19 +230,13 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        stroke="${currentIndex > 0 ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-  currentIndex + cardsPerPageGrid < validItems.length
-    ? '#7523FF'
-    : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        stroke="${currentIndex + cardsPerPageGrid < validItems.length ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
   }
 

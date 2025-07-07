@@ -69,10 +69,34 @@
               "value": "",
               "label": "Description"
             },
+              {
+                "component": "select",
+                "name": "insightItemLinkType",
+                "label": "Link Type",
+                "required": true,
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "modal",
+                    "value": "modal"
+                  },
+                  {
+                    "name": "url",
+                    "value": "url"
+                  }
+                ]
+              },
             {
               "component": "aem-content",
               "name": "insight_link",
               "label": "Link Url"
+            },
+            {
+                  "component": "boolean",
+                  "name": "insightlinkTarget",
+                  "valueType": "boolean",
+                  "value": false,
+                  "label": "Open link in new tab?"
             },
             {
               "component": "text",
