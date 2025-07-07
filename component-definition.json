@@ -159,6 +159,21 @@
           }
         },
         {
+          "title": "Breadcrumb",
+          "id": "breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Breadcrumb",
+                  "model": "breadcrumb"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "card list",
           "id": "card-list",
           "plugins": {
@@ -502,6 +517,36 @@
                 "template": {
                   "name": "Product Info List",
                   "model": "product-info-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Recent Articles",
+          "id": "recent-articles",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Recent Articles",
+                  "model": "recent-articles"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Related Articles",
+          "id": "related-articles",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Related Articles",
+                  "model": "related-articles"
                 }
               }
             }
