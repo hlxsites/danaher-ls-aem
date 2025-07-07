@@ -1,8 +1,9 @@
 [
   {
-    "id": "page-metadata",
+    "id": "image",
     "fields": [
       {
+<<<<<<< HEAD
         "component": "container",
         "label": "Fieldset",
         "fields": [
@@ -91,6 +92,17 @@
             "value": ""
           }
         ]
+=======
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -443,32 +455,62 @@
     ]
   },
   {
+<<<<<<< HEAD
+    "id": "dual-carousel",
+=======
+    "id": "dashboard",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+<<<<<<< HEAD
+        "name": "leftCarouselTitle",
+        "value": "",
+=======
+        "name": "dashboardTitle",
+        "value": "",
+        "label": "Page Title"
+      }
+    ]
+  },
+  {
     "id": "dual-carousel",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "leftCarouselTitle",
+        "name": "left_carousel_title",
         "value": "",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "label": "Left Carousel Title"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "leftCarouselLinkLabel",
+=======
+        "name": "left_carousel_link_label",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "value": "",
         "label": "Left Carousel Link Label"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "leftCarouselProductId",
+=======
+        "name": "left_carousel_product_id",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "value": "",
         "label": "Left Carousel Product IDs"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "leftProductsEndPoint",
         "value": "",
         "label": "Left Carousel Products API Endpoint"
@@ -477,19 +519,27 @@
         "component": "text",
         "valueType": "string",
         "name": "rightCarouseTitle",
+=======
+        "name": "right_carousel_title",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "value": "",
         "label": "Right Carousel Title"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "rightCarouselLinkLabel",
+=======
+        "name": "right_carousel_link_label",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "value": "",
         "label": "Right Carousel Link Label"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "rightCarouselProductId",
         "value": "",
         "label": "Right Carousel Product IDs"
@@ -500,6 +550,11 @@
         "name": "rightProductsEndPoint",
         "value": "",
         "label": "Right Carousel Products API Endpoint"
+=======
+        "name": "right_carousel_product_id",
+        "value": "",
+        "label": "Right Carousel Product IDs"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -540,6 +595,7 @@
         "label": "Description"
       },
       {
+<<<<<<< HEAD
         "component": "select",
         "name": "insightItemLinkType",
         "label": "Link Type",
@@ -557,11 +613,14 @@
         ]
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "aem-content",
         "name": "insight_link",
         "label": "Link Url"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "insightlinkTarget",
         "valueType": "boolean",
@@ -569,6 +628,8 @@
         "label": "Open link in new tab?"
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "text",
         "valueType": "string",
         "name": "linklabel",
@@ -617,6 +678,112 @@
     ]
   },
   {
+<<<<<<< HEAD
+=======
+    "id": "login",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "loginFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLabel",
+        "value": "",
+        "label": "Forgot Password Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLink",
+        "value": "",
+        "label": "Forgot Password Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountText",
+        "value": "",
+        "label": "New Account Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLabel",
+        "value": "",
+        "label": "New Account Button Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLink",
+        "value": "",
+        "label": "New Account Button Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     "id": "offer-advertisement",
     "fields": [
       {
@@ -627,6 +794,7 @@
         "label": "Offer Title"
       },
       {
+<<<<<<< HEAD
         "component": "select",
         "name": "adLinkType",
         "label": "Link Type",
@@ -644,6 +812,8 @@
         ]
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "text",
         "valueType": "string",
         "name": "offer_text",
@@ -654,12 +824,15 @@
         "component": "aem-content",
         "name": "offer_link",
         "label": "Link"
+<<<<<<< HEAD
       },
       {
         "component": "boolean",
         "name": "subscribe",
         "value": false,
         "label": "Open Read More link in new tab"
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -686,6 +859,7 @@
         "label": "Offer Link"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "linkTarget",
         "valueType": "boolean",
@@ -694,6 +868,9 @@
       },
       {
         "component": "text",
+=======
+        "component": "aem-content",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "name": "linkLabel",
         "label": "Offer Link Label"
       },
@@ -735,7 +912,11 @@
         "valueType": "string",
         "name": "opcoBannerImage",
         "label": "Banner Image",
+<<<<<<< HEAD
         "multi": false
+=======
+        "multi": true
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       },
       {
         "component": "aem-content",
@@ -743,6 +924,7 @@
         "label": "Banner Button Url"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "opcoBannerButtonTarget",
         "valueType": "boolean",
@@ -750,11 +932,100 @@
         "label": "Open link in new tab?"
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerButtonLabel",
         "value": "",
         "label": "Banner Button Label"
+<<<<<<< HEAD
+=======
+      },
+      {
+        "component": "aem-content",
+        "name": "opcoBannerLink1",
+        "value": "",
+        "valueType": "string",
+        "label": "Button 1 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink1Label",
+        "value": "",
+        "label": "Button 1 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "opcoBannerLink2",
+        "value": "",
+        "valueType": "string",
+        "label": "Button 2 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink2Label",
+        "value": "",
+        "label": "Button 2 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "opcoBannerLink3",
+        "value": "",
+        "valueType": "string",
+        "label": "Button 3 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink3Label",
+        "value": "",
+        "label": "Button 3 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "opcoBannerLink4",
+        "value": "",
+        "valueType": "string",
+        "label": "Button 4 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink4Label",
+        "value": "",
+        "label": "Button 4 Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "opcoBannerLink5",
+        "value": "",
+        "label": "Button 5 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink5Label",
+        "value": "",
+        "label": "Button 5 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "opcoBannerLink6",
+        "value": "",
+        "valueType": "string",
+        "label": "Button 6 Url"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerLink6Label",
+        "value": "",
+        "label": "Button 6 Label"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -802,12 +1073,15 @@
         "label": "Button Url"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "opcoBannerItemButtonTarget",
         "value": false,
         "label": "Open link in new tab?"
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerItemButtonLabel",
@@ -851,12 +1125,18 @@
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "cardAlt",
+=======
+        "name": "card_alt",
+        "value": "Danaher Corporation",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "label": "Alt Text"
       },
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "cardTitle",
         "label": "Title"
       },
@@ -864,11 +1144,56 @@
         "component": "richtext",
         "valueType": "string",
         "name": "cardDescription",
+=======
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "label": "Description"
       },
       {
         "component": "aem-content",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "cardHref",
         "label": "Link"
       },
@@ -892,6 +1217,17 @@
         "component": "text",
         "valueType": "string",
         "name": "cardHrefText",
+=======
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "label": "Link Text"
       }
     ]
@@ -951,6 +1287,7 @@
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "prod_category_id",
         "value": "",
         "label": "Product Category ID"
@@ -958,6 +1295,8 @@
       {
         "component": "text",
         "valueType": "string",
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "name": "title",
         "value": "",
         "label": "Title"
@@ -996,6 +1335,7 @@
     ]
   },
   {
+<<<<<<< HEAD
     "id": "product-family",
     "fields": [
       {
@@ -1008,11 +1348,14 @@
     ]
   },
   {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     "id": "product-hero-content",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
+<<<<<<< HEAD
         "name": "prod_hero_id",
         "value": "",
         "label": "Product Hero ID"
@@ -1020,16 +1363,23 @@
       {
         "component": "text",
         "valueType": "string",
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "name": "prod_hero_title",
         "value": "",
         "label": "Title"
       },
       {
+<<<<<<< HEAD
         "component": "text",
+=======
+        "component": "richtext",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "valueType": "string",
         "name": "prod_hero_description",
         "value": "",
         "label": "Description"
+<<<<<<< HEAD
       },
       {
         "component": "text",
@@ -1048,6 +1398,8 @@
         "name": "subscribe",
         "value": false,
         "label": "Open Read More link in new tab"
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -1059,7 +1411,11 @@
     "id": "product-info-list",
     "fields": [
       {
+<<<<<<< HEAD
         "component": "text",
+=======
+        "component": "richtext",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "valueType": "string",
         "name": "prod_info_title",
         "value": "",
@@ -1075,6 +1431,105 @@
     ]
   },
   {
+<<<<<<< HEAD
+=======
+    "id": "register",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormFirstNameLabel",
+        "value": "",
+        "label": "First Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormLastNameLabel",
+        "value": "",
+        "label": "Last Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormCompanyNameLabel",
+        "value": "",
+        "label": "Company Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormConfirmPasswordLabel",
+        "value": "",
+        "label": "Confirm Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "registerFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     "id": "related-category",
     "fields": [
       {
@@ -1176,6 +1631,7 @@
         "label": "Button URL"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "productButtonTarget",
         "value": false,
@@ -1185,6 +1641,11 @@
         "component": "text",
         "valueType": "string",
         "name": "bgColor",
+=======
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "value": "#4000A5",
         "label": "Bg Color"
       }
@@ -1254,7 +1715,11 @@
     ]
   },
   {
+<<<<<<< HEAD
     "id": "top-purchased-products",
+=======
+    "id": "top-selling-products",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     "fields": [
       {
         "component": "text",
@@ -1269,6 +1734,7 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs (comma separated)"
+<<<<<<< HEAD
       },
       {
         "component": "text",
@@ -1276,6 +1742,8 @@
         "name": "productsEndPoint",
         "value": "",
         "label": "Products API Endpoint"
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }
     ]
   },
@@ -1304,12 +1772,15 @@
         "label": "Link URL"
       },
       {
+<<<<<<< HEAD
         "component": "boolean",
         "name": "subscribe",
         "value": false,
         "label": "Open link in new tab"
       },
       {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         "component": "text",
         "valueType": "string",
         "name": "productid",

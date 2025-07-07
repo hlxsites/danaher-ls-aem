@@ -23,27 +23,40 @@
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "leftCarouselTitle",
+=======
+                "name": "left_carousel_title",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "value": "",
                 "label": "Left Carousel Title"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "leftCarouselLinkLabel",
+=======
+                "name": "left_carousel_link_label",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "value": "",
                 "label": "Left Carousel Link Label"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "leftCarouselProductId",
+=======
+                "name": "left_carousel_product_id",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "value": "",
                 "label": "Left Carousel Product IDs"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "leftProductsEndPoint",
                 "value": "",
                 "label": "Left Carousel Products API Endpoint"
@@ -52,19 +65,27 @@
                 "component": "text",
                 "valueType": "string",
                 "name": "rightCarouseTitle",
+=======
+                "name": "right_carousel_title",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "value": "",
                 "label": "Right Carousel Title"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "rightCarouselLinkLabel",
+=======
+                "name": "right_carousel_link_label",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "value": "",
                 "label": "Right Carousel Link Label"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "rightCarouselProductId",
                 "value": "",
                 "label": "Right Carousel Product IDs"
@@ -75,10 +96,16 @@
                 "name": "rightProductsEndPoint",
                 "value": "",
                 "label": "Right Carousel Products API Endpoint"
+=======
+                "name": "right_carousel_product_id",
+                "value": "",
+                "label": "Right Carousel Product IDs"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               }
             ]
           }
     ],
+<<<<<<< HEAD
     "filters": [
       {
       "id": "dual-carousel",
@@ -86,5 +113,8 @@
         ""
       ]
     }]
+=======
+    "filters": [    ]
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   }
    

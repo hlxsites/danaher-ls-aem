@@ -4,6 +4,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
   const [title, brandAddress, callDescription, browseDescription] = block.children;
 
   brandAddress
@@ -40,19 +41,29 @@ export default function decorate(block) {
       'items-start',
     );
   const addressSectionContent = brandAddress;
+=======
+  const addressSectionContent = block.querySelector(
+    '[data-aue-prop="brandaddress"]',
+  );
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   addressSectionContent?.classList.add(
     'flex',
     'flex-col',
     'gap-4',
     'text-black',
     'text-base',
+<<<<<<< HEAD
     'text-black',
+=======
+    'font-extralight',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     'leading-snug',
     'items-start',
   );
   const addressSectionAnchor = addressSectionContent?.querySelectorAll('a') ?? [];
   if (addressSectionAnchor.length) {
     addressSectionAnchor?.forEach((anchor) => {
+<<<<<<< HEAD
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
@@ -63,6 +74,11 @@ export default function decorate(block) {
         'cursor-pointer',
         'hover:text-danaherpurple-800',
         '[&_svg>use]:hover:stroke-danaherpurple-800',
+=======
+      anchor?.classList.add(
+        'text-danaherpurple-500',
+        'cursor-pointer',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'text-base',
         'font-semibold',
         'flex',
@@ -81,20 +97,31 @@ export default function decorate(block) {
       );
     });
   }
+<<<<<<< HEAD
   const callSectionContent = callDescription;
+=======
+  const callSectionContent = block.querySelector(
+    '[data-aue-prop="callDescription"]',
+  );
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   callSectionContent?.classList.add(
     'flex',
     'flex-col',
     'gap-4',
     'text-black',
     'text-base',
+<<<<<<< HEAD
     'text-black',
+=======
+    'font-extralight',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     'leading-snug',
     'items-start',
   );
   const callSectionAnchor = callSectionContent?.querySelectorAll('a') ?? [];
   if (callSectionAnchor.length) {
     callSectionAnchor?.forEach((anchor) => {
+<<<<<<< HEAD
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
@@ -105,6 +132,11 @@ export default function decorate(block) {
         'cursor-pointer',
         'hover:text-danaherpurple-800',
         '[&_svg>use]:hover:stroke-danaherpurple-800',
+=======
+      anchor?.classList.add(
+        'text-danaherpurple-500',
+        'cursor-pointer',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'text-base',
         'font-semibold',
         'flex',
@@ -124,21 +156,31 @@ export default function decorate(block) {
     });
   }
 
+<<<<<<< HEAD
   const browseDescriptionContent = browseDescription;
+=======
+  const browseDescriptionContent = block.querySelector(
+    '[data-aue-prop="browseDescription"]',
+  );
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   browseDescriptionContent?.classList.add(
     'flex',
     'flex-col',
     'gap-4',
+<<<<<<< HEAD
     'text-black',
     'text-base',
     'text-black',
     'leading-snug',
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     'items-start',
   );
   const browseDescriptionAnchor = browseDescriptionContent?.querySelectorAll('a') ?? [];
 
   if (browseDescriptionAnchor.length) {
     browseDescriptionAnchor?.forEach((anchor) => {
+<<<<<<< HEAD
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
@@ -149,6 +191,11 @@ export default function decorate(block) {
         'cursor-pointer',
         'hover:text-danaherpurple-800',
         '[&_svg>use]:hover:stroke-danaherpurple-800',
+=======
+      anchor?.classList.add(
+        'text-danaherpurple-500',
+        'cursor-pointer',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'text-base',
         'font-semibold',
         'flex',
@@ -167,6 +214,12 @@ export default function decorate(block) {
       );
     });
   }
+<<<<<<< HEAD
+=======
+  const getText = (prop) => block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim()
+    || 'Learn more';
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   // === Main Container
   const learnMoreContainer = div({
     class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12',
@@ -184,7 +237,11 @@ export default function decorate(block) {
   // === Left: Title
   const titleLearnMore = div(
     { class: 'min-w-[120px] font-medium text-black text-3xl leading-[1.5rem]' },
+<<<<<<< HEAD
     title?.textContent?.trim() || '',
+=======
+    getText('title'),
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   );
 
   // === Middle: SCIEX address
@@ -196,7 +253,11 @@ export default function decorate(block) {
 
   let browseSection = '';
   if (addressSectionContent) {
+<<<<<<< HEAD
     addressSection = div({ class: 'text-center md:text-left mt-2' });
+=======
+    addressSection = div({ class: ' text-center md:text-left mt-2' });
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     addressSection?.append(addressSectionContent);
   }
   if (callSectionContent) {
@@ -218,6 +279,16 @@ export default function decorate(block) {
   learnMoreContainer.appendChild(innerLearnMore);
 
   decorateIcons(learnMoreContainer);
+<<<<<<< HEAD
   block.textContent = '';
   block.appendChild(learnMoreContainer);
+=======
+  block.appendChild(learnMoreContainer);
+  // Hide authored content
+  [...block.children].forEach((child) => {
+    if (!child.contains(learnMoreContainer)) {
+      child.style.display = 'none';
+    }
+  });
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 }

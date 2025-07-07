@@ -17,6 +17,10 @@
          }
     ],
     "models": [
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         {
             "id": "simple-text",
             "fields": [

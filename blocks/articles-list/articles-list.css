@@ -200,10 +200,13 @@
   fill: currentColor
 }
 
+<<<<<<< HEAD
 .articles-list-wrapper :is(.\!p-0) {
   padding: 0px !important
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .articles-list-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem

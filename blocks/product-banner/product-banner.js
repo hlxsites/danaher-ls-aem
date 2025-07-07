@@ -18,6 +18,7 @@ function toggleDetails(event) {
 export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
 
   const [
     productBannerTitle,
@@ -38,16 +39,31 @@ export default function productBannerDecorate(block) {
 
   // Add smooth scroll behavior to the html tag
   document.documentElement.style.scrollBehavior = 'smooth';
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const productBannerWrapper = div({
     class:
       'flex flex-col md:flex-row gap-6 max-w-[1358px] mx-auto px-5 md:px-[39px]',
   });
 
+<<<<<<< HEAD
   // Check if details is non-empty (not just whitespace)
   const hasDetails = details?.trim().length > 0;
 
   // Check if image exists and has a valid src
   const hasImage = image && image.src && image.src.trim() !== '';
+=======
+  const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
+  const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || '';
+  const btnLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
+    || '#';
+  const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
+  const details = block.querySelector('[data-aue-prop="long_desc"]')?.innerHTML || '';
+
+  const detailsLink = 'Read More';
+  const image = block.querySelector('img');
+  const alt = image?.getAttribute('alt') || 'category image';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const categoryBanner = div({
     class:
@@ -55,18 +71,30 @@ export default function productBannerDecorate(block) {
   });
 
   const categoryBannerLeft = div({
+<<<<<<< HEAD
     class:
       'lg:min-w-[608px] basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+=======
+    class: 'basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   });
 
   const categoryBannerRight = div({
     class:
+<<<<<<< HEAD
       'category_banner-right lg:min-w-[608px] basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+=======
+      'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   });
 
   const categoryBannerTitle = h1(
     {
+<<<<<<< HEAD
       class: 'text-black text-4xl font-bold leading-[48px]}',
+=======
+      class: 'text-black text-4xl font-bold leading-[48px]',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     },
     categoryHeading,
   );
@@ -77,13 +105,21 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
+<<<<<<< HEAD
           'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] flex justify-center items-center overflow-hidden',
+=======
+          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         href: btnLink,
       },
       div(
         {
           class:
+<<<<<<< HEAD
             'text-right justify-start text-white text-base font-medium leading-snug transition}',
+=======
+            'text-right justify-start text-white text-base font-normal leading-snug',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         btnText,
       ),
@@ -91,10 +127,21 @@ export default function productBannerDecorate(block) {
   );
 
   const tempContainer = document.createElement('div');
+<<<<<<< HEAD
 
   tempContainer.innerHTML = rawCategoryDescription;
   tempContainer.querySelectorAll('p').forEach((paragraph) => {
     paragraph.classList.add('text-black');
+=======
+  tempContainer.innerHTML = rawCategoryDescription;
+
+  tempContainer.querySelectorAll('p').forEach((paragraph) => {
+    paragraph.classList.add('text-black');
+    // Add pb-4 if the paragraph contains an <a> tag
+    if (paragraph.querySelector('a')) {
+      paragraph.classList.add('pb-4');
+    }
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
@@ -106,6 +153,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
+<<<<<<< HEAD
     link.classList.add(
       'text-danaherpurple-500',
       'hover:text-danaherpurple-800',
@@ -113,6 +161,9 @@ export default function productBannerDecorate(block) {
       'gap-4',
       'font-bold',
     );
+=======
+    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   });
 
   const categoryBannerDescription = div({
@@ -123,6 +174,7 @@ export default function productBannerDecorate(block) {
 
   const categoryBannerIcon = div(
     {
+<<<<<<< HEAD
       class: hasImage
         ? 'bg-gray-50 w-full h-[265px] lg:h-[400px] flex justify-center items-center'
         : '',
@@ -195,6 +247,39 @@ export default function productBannerDecorate(block) {
     readMoreLink.style.display = isTruncated ? 'inline-block' : 'none';
   }
 
+=======
+      class:
+        'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center',
+    },
+    div(
+      { class: 'flex justify-center items-center w-11/12 h-11/12' },
+      img({
+        src: image?.src || '',
+        alt,
+        class: 'object-contain',
+      }),
+    ),
+  );
+  const categoryBannerDetails = div(
+    {
+      class: 'category_banner-details justify-start',
+    },
+    span({
+      class:
+        'long-description text-black text-base font-extralight leading-snug line-clamp-6',
+    }),
+    span(
+      {
+        class:
+          'text-violet-600 text-base font-bold leading-snug cursor-pointer',
+        onclick: toggleDetails,
+      },
+      detailsLink,
+    ),
+  );
+
+  categoryBannerDetails.querySelector('.long-description').innerHTML = details;
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   if (
     categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
   ) {
@@ -206,6 +291,7 @@ export default function productBannerDecorate(block) {
   } else {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }
+<<<<<<< HEAD
 
   if (hasImage) {
     categoryBannerRight.append(categoryBannerIcon);
@@ -213,10 +299,14 @@ export default function productBannerDecorate(block) {
   if (hasDetails) {
     categoryBannerRight.append(categoryBannerDetails);
   }
+=======
+  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
   block.appendChild(productBannerWrapper);
+<<<<<<< HEAD
 
   block
     .querySelector('.category_banner-description')
@@ -225,4 +315,6 @@ export default function productBannerDecorate(block) {
       if (index === 0) aEle.parentElement.classList.add('pt-4');
       aEle.parentElement.classList.add('pb-4');
     });
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 }

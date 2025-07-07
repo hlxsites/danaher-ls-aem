@@ -257,6 +257,13 @@
   line-height: 1.5rem
 }
 
+<<<<<<< HEAD
+=======
+.shop-featured-products-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .shop-featured-products-wrapper :is(.font-medium) {
   font-weight: 400
 }

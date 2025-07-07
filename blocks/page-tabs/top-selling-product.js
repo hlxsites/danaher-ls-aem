@@ -17,6 +17,32 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function topSellingProducts(headingText, productIds) {
+<<<<<<< HEAD
+=======
+  //   block?.parentElement?.parentElement?.removeAttribute('class');
+  //   block?.parentElement?.parentElement?.removeAttribute('style');
+  //   const wrapper = block.closest('.top-selling-products-wrapper');
+  //   if (wrapper) {
+  //     wrapper.classList.add('w-full', 'md:px-10');
+  //   }
+
+  //   const headingText = block
+  //     .querySelector('[data-aue-prop="titleText"]')
+  //     ?.textContent.trim();
+  //   const linkText = block
+  //     .querySelector('[data-aue-prop="card_hrefText"]')
+  //     ?.textContent.trim();
+  //   const linkUrl = block
+  //     .querySelector('[data-aue-prop="card_hrefUrl"]')
+  //     ?.textContent.trim();
+  //   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim()
+  // || '';
+  //   const productIds = rawIds
+  //     .split(',')
+  //     .map((id) => id.trim())
+  //     .filter(Boolean);
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
   let currentPage = 1;

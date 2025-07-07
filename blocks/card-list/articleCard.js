@@ -6,7 +6,7 @@ import {
 import {
   li, a, p, div, time, span, h3,
 } from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 const template = getMetadata('template');
 let linkText = '';
@@ -26,6 +26,7 @@ export default function createCard(article, firstCard = false) {
 
   const cardWrapper = a(
     {
+<<<<<<< HEAD
       class: 'group h-full ',
       target: article.path?.includes('http') ? '_blank' : '_self',
       href: makePublicUrl(article.path),
@@ -36,6 +37,13 @@ export default function createCard(article, firstCard = false) {
       article.title,
       firstCard,
     ),
+=======
+      class: 'group h-full',
+      href: makePublicUrl(article.path),
+      title: article.title,
+    },
+    imageHelper(article.image, article.title, firstCard),
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     div(
       { class: '' },
       p({ class: 'eyebrow-sm' }, article.brand || 'Danaher Corporation'),
@@ -49,16 +57,25 @@ export default function createCard(article, firstCard = false) {
       div(
         {
           class:
+<<<<<<< HEAD
             'mt-auto items-center text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
+=======
+            'mt-auto inline-flex items-center w-full  py-5 text-base text-danaherpurple-500 font-semibold',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         linkText,
         span({
           class:
+<<<<<<< HEAD
             'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+=======
+            'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         }),
       ),
     ),
   );
+  decorateIcons(cardWrapper);
   const showDateTime = p(
     { class: 'text-base text-gray-500 font-extralight' },
     time(

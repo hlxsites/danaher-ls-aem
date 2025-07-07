@@ -5,6 +5,7 @@ import {
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
   const [
     bodyBannerTitle,
     bodyBannerHeading,
@@ -25,6 +26,30 @@ export default function decorate(block) {
   const newTab = bodyBannerLinkTarget?.textContent?.trim();
   const ctaText = bodyBannerLinkLabel?.textContent?.trim() || '';
   const rightColor = bodyBannerBg?.textContent.trim().replace(/<[^>]*>/g, '') || '#660099';
+=======
+  const title1 = block
+    .querySelector('[data-aue-prop="title1"]')
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
+  const title2 = block
+    .querySelector('[data-aue-prop="title2"]')
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
+  const title3 = block
+    .querySelector('[data-aue-prop="title3"]')
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
+  const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
+  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
+  const ctaText = block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim()
+    || '';
+  const ctaLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
+    || '#';
+  const rightColor = block
+    .querySelectorAll('.button-container a')[1]
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '#660099';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
@@ -44,7 +69,13 @@ export default function decorate(block) {
         class: 'flex items-center justify-center h-full w-full',
       },
       img({
+<<<<<<< HEAD
         src: imgSrc || '/content/dam/danaher/products/fallbackImage.jpeg',
+=======
+        src:
+          imgSrc
+          || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         alt: imgAlt,
         class: 'w-full h-full object-contain',
       }),
@@ -88,6 +119,7 @@ export default function decorate(block) {
         title3,
       ),
 
+<<<<<<< HEAD
       div({
         id: 'bodyBannerDescription',
         class: 'body-banner-description text-white text-base leading-snug ',
@@ -99,11 +131,29 @@ export default function decorate(block) {
           class: `flex justify-center ${
             ctaText ? '' : 'hidden'
           } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-danaherpurple-500 hover:text-white transition duration-300 self-start`,
+=======
+      div(
+        {
+          class: 'text-white text-base font-extralight leading-snug ',
+        },
+        ...Array.from(
+          new DOMParser().parseFromString(descriptionHTML, 'text/html').body
+            .childNodes,
+        ),
+      ),
+      a(
+        {
+          href: ctaLink,
+          class: `flex justify-center ${
+            ctaText ? '' : 'hidden'
+          } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         ctaText,
       ),
     ),
   );
+<<<<<<< HEAD
   rightSection
     ?.querySelector('#bodyBannerDescription')
     ?.insertAdjacentHTML('beforeend', descriptionHTML);
@@ -121,6 +171,9 @@ export default function decorate(block) {
 
     link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
   });
+=======
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
   block.appendChild(bannerSection);

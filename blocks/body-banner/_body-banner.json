@@ -56,6 +56,7 @@
                     "component": "aem-content",
                     "name": "link",
                     "label": "Link"
+<<<<<<< HEAD
                   },
                   {
                     "component": "boolean",
@@ -64,6 +65,9 @@
                     "label": "Open link in new tab?"
                   },
                   {
+=======
+                  },{
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                     "component": "text",
                     "valueType": "string",
                     "name": "linklabel",

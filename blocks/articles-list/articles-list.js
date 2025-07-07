@@ -79,21 +79,33 @@ export default async function decorate(block) {
       h2({ class: 'mt-0' }, `${compHeading}`),
       a(
         {
+<<<<<<< HEAD
           class:
             'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800  text-base font-semibold  flex items-center !m-0 !p-0',
           href: targetUrl,
           target: targetUrl?.includes('http') ? '_blank' : '_self',
+=======
+          class: 'text-sm font-bold flex items-center text-danaherpurple-500',
+          href: targetUrl,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         'See all',
         span({
           class:
+<<<<<<< HEAD
             'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+=======
+            'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         }),
       ),
     );
     decorateIcons(divEl);
   }
   block.textContent = '';
+<<<<<<< HEAD
   decorateIcons(cardList);
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   block.append(divEl, cardList);
 }

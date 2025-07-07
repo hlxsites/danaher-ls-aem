@@ -12,11 +12,24 @@ const fileMappings = [
     wrapper: 'accordion-wrapper',
   },
   {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
+  },
+  {
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
   },
   {
+<<<<<<< HEAD
+=======
+    content: './blocks/learn-more/learn-more.js',
+    output: './blocks/learn-more/learn-more.css',
+    wrapper: 'learn-more-wrapper',
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     content: [
       './blocks/articles-list/articles-list.js',
       './blocks/card-list/articleCard.js',
@@ -25,9 +38,23 @@ const fileMappings = [
     wrapper: 'articles-list-wrapper',
   },
   {
-    content: './blocks/banner/banner.js',
-    output: './blocks/banner/banner.css',
-    wrapper: 'banner',
+    content: [
+      './blocks/cartlanding/cartlanding.js',
+      './blocks/cartlanding/cartItem.js',
+      './blocks/cartlanding/addproduct.js',
+      './blocks/cartlanding/mycart.js',
+      './blocks/cartlanding/price.js',
+      './blocks/cartlanding/recommendedproducts.js',
+      './blocks/cartlanding/emptyCart.js',
+      './blocks/cartlanding/cartDetails.js',
+    ],
+    output: './blocks/cartlanding/cartlanding.css',
+    wrapper: 'cartlanding-wrapper',
+  },
+  {
+    content: './blocks/blog-hero/blog-hero.js',
+    output: './blocks/blog-hero/blog-hero.css',
+    wrapper: 'blog-hero-wrapper',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',
@@ -60,11 +87,38 @@ const fileMappings = [
     wrapper: 'cards-wrapper',
   },
   {
+    content: './blocks/opco-grid/opco-grid.js',
+    output: './blocks/opco-grid/opco-grid.css',
+    wrapper: 'opco-grid-wrapper',
+  },
+  {
     content: './blocks/carousel/carousel.js',
     output: './blocks/carousel/carousel.css',
     wrapper: 'carousel-wrapper',
   },
   {
+<<<<<<< HEAD
+=======
+    content: './blocks/dashboard/dashboard.js',
+    output: './blocks/dashboard/dashboard.css',
+    wrapper: 'dashboard-wrapper',
+  },
+  {
+    content: './blocks/dual-carousel/dual-carousel.js',
+    output: './blocks/dual-carousel/dual-carousel.css',
+    wrapper: 'dual-carousel-wrapper',
+  },
+  {
+    content: [
+      './blocks/product-family/product-family.js',
+      './blocks/product-family/gridData.js',
+      './blocks/product-family/listData.js',
+    ],
+    output: './blocks/product-family/product-family.css',
+    wrapper: 'product-family-wrapper',
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     content: './blocks/columns/columns.js',
     output: './blocks/columns/columns.css',
     wrapper: 'columns-wrapper',
@@ -148,6 +202,14 @@ const fileMappings = [
     wrapper: 'product-category-wrapper',
   },
   {
+<<<<<<< HEAD
+=======
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     content: [
       './blocks/product-category-list/product-category-list.js',
       './blocks/product-category-list/filter.js',
@@ -161,14 +223,34 @@ const fileMappings = [
     wrapper: 'product-citations-wrapper',
   },
   {
+    content: './blocks/shop-featured-products/shop-featured-products.js',
+    output: './blocks/shop-featured-products/shop-featured-products.css',
+    wrapper: 'shop-featured-products-wrapper',
+  },
+  {
     content: './blocks/product-hero/product-hero.js',
     output: './blocks/product-hero/product-hero.css',
     wrapper: 'product-hero-wrapper',
   },
   {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/product-banner/product-banner.css',
+    wrapper: 'product-banner-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
     content: './blocks/product-menu/product-menu.js',
     output: './blocks/product-menu/product-menu.css',
     wrapper: 'product-menu-wrapper',
+  },
+  {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
   },
   {
     content: './blocks/product-overview/product-overview.js',
@@ -199,6 +281,14 @@ const fileMappings = [
     wrapper: 'recent-articles-wrapper',
   },
   {
+<<<<<<< HEAD
+=======
+    content: './blocks/recent-category/recent-category.js',
+    output: './blocks/recent-category/recent-category.css',
+    wrapper: 'recent-category-wrapper',
+  },
+  {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     content: [
       './blocks/related-articles/related-articles.js',
       './blocks/card-list/articleCard.js',
@@ -237,6 +327,75 @@ const fileMappings = [
     wrapper: 'talk-to-an-expert-form-wrapper',
   },
   {
+    content: [
+      './blocks/top-selling/top-selling.js',
+      './blocks/top-selling/listData.js',
+      './blocks/top-selling/gridData.js',
+    ],
+    output: './blocks/top-selling/top-selling.css',
+    wrapper: 'top-selling-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-selling-products/top-selling-products.js',
+      './blocks/top-selling-products/listData.js',
+      './blocks/top-selling-products/gridData.js',
+    ],
+    output: './blocks/top-selling-products/top-selling-products.css',
+    wrapper: 'top-selling-products-wrapper',
+  },
+  {
+    content: './blocks/offer-banner/offer-banner.js',
+    output: './blocks/offer-banner/offer-banner.css',
+    wrapper: 'offer-banner-wrapper',
+  },
+  {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
+  },
+  {
+    content: './blocks/simple-text/simple-text.js',
+    output: './blocks/simple-text/simple-text.css',
+    wrapper: 'simple-text-wrapper',
+  },
+  {
+    content: './blocks/tiny-carousel/tiny-carousel.js',
+    output: './blocks/tiny-carousel/tiny-carousel.css',
+    wrapper: 'tiny-carousel-wrapper',
+  },
+  {
+    content: './blocks/opco-banner/opco-banner.js',
+    output: './blocks/opco-banner/opco-banner.css',
+    wrapper: 'opco-banner-wrapper',
+  },
+  {
+    content: [
+      './blocks/checkout/checkout.js',
+      './blocks/checkout/checkoutUtilities.js',
+      './blocks/checkout/paymentModule.js',
+      './blocks/checkout/shippingAddress.js',
+      './blocks/checkout/shippingMethods.js',
+    ],
+    output: './blocks/checkout/checkout.css',
+    wrapper: 'checkout',
+  },
+  {
+    content: './blocks/insight/insight.js',
+    output: './blocks/insight/insight.css',
+    wrapper: 'insight-wrapper',
+  },
+  {
+    content: './blocks/login/login.js',
+    output: './blocks/login/login.css',
+    wrapper: 'login-wrapper',
+  },
+  {
+    content: './blocks/register/register.js',
+    output: './blocks/register/register.css',
+    wrapper: 'register-wrapper',
+  },
+  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
@@ -260,6 +419,7 @@ const fileMappings = [
     wrapper: 'separator-line-wrapper',
   },
   {
+<<<<<<< HEAD
     content: './blocks/accordion-container/accordion-container.js',
     output: './blocks/accordion-container/accordion-container.css',
     wrapper: 'accordion-container-wrapper',
@@ -374,6 +534,8 @@ const fileMappings = [
     wrapper: 'separator-line-wrapper',
   },
   {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     content: './blocks/body-banner/body-banner.js',
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',

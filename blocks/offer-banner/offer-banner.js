@@ -6,6 +6,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
 
   const [
     offerBannerTitle,
@@ -27,6 +28,20 @@ export default function decorate(block) {
   const linkText = linkTextEl;
   const linkLabel = linkLabelEl;
   const bgColor = bgColorEl;
+=======
+  const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
+  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
+  const linkTextEl = block.querySelector('a');
+  const linkLabelEl = block.querySelector('[data-aue-prop="linkLabel"]');
+  const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
+
+  const title = titleEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const imgSrc = imgEl?.getAttribute('src').replace(/<[^>]*>/g, '') || '';
+  const imgAlt = imgEl?.getAttribute('alt') || 'Banner image';
+  const linkText = linkTextEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const linkLabel = linkLabelEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '';
+  const bgColor = bgColorEl?.textContent?.trim().replace(/<[^>]*>/g, '') || '#E5E7EB';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const bannerSection = div(
     {
@@ -57,7 +72,11 @@ export default function decorate(block) {
           {
             href: linkTextEl || '#',
             class:
+<<<<<<< HEAD
                 'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
+=======
+                'text-base text-danaherpurple-500 font-semibold mt-4 flex items-center  md:pl-8',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           linkLabel || '',
           span({

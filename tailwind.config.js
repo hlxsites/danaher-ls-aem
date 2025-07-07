@@ -104,7 +104,10 @@ module.exports = {
     "bg-color-right",
     "top-border",
     "bg-danaherpurple-800",
+<<<<<<< HEAD
     "bg-gray-100",
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   ],
   theme: {
     extend: {

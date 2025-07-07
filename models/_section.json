@@ -44,7 +44,14 @@
       "button",
       "title",
       "columns",
+<<<<<<< HEAD
       "takeway",
+=======
+      "dashboard",
+      "takeway",
+      "checkout",
+      "order-status",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       "product-banner",
       "product-category",
       "product-family",
@@ -52,13 +59,22 @@
       "shop-featured-products",
       "product-card",
       "call-to-action",
+<<<<<<< HEAD
+=======
+      "login",
+      "register",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       "accordion",
       "recent-articles",
       "carousel",
       "dual-carousel",
       "opco-banner",
       "top-selling",
+<<<<<<< HEAD
       "top-purchased-products",
+=======
+      "top-selling-products",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       "offer-banner",
       "simple-text",
       "body-banner",

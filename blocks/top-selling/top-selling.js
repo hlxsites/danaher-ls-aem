@@ -27,12 +27,26 @@ export default async function decorate(block) {
       'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
+<<<<<<< HEAD
   const headingText = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const linkText = block.children[1]?.querySelectorAll('p')[0]?.textContent.trim() || '';
   const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
   const index = block.children.length === 4 ? 3 : 2;
   const rawIds = block.children[index]?.querySelector('p')?.textContent.trim() || '';
 
+=======
+  const headingText = block
+    .querySelector('[data-aue-prop="titleText"]')
+    ?.textContent.trim();
+  const linkText = block
+    .querySelector('[data-aue-prop="card_hrefText"]')
+    ?.textContent.trim();
+  const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
+    || '#';
+
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim()
+    || '';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
@@ -43,6 +57,12 @@ export default async function decorate(block) {
   let currentPage = 1;
   let currentIndex = 0;
   let isGridView = true;
+<<<<<<< HEAD
+=======
+  const openNewTab = block.querySelector(
+    '[data-aue-prop="subscribe"]',
+  )?.textContent;
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const carouselContainer = div({
     class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
@@ -56,7 +76,11 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
+<<<<<<< HEAD
         class: 'text-2xl text-black font-medium',
+=======
+        class: 'text-black text-2xl font-normal leading-loose',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       },
       headingText ?? '',
     ),
@@ -64,6 +88,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
+<<<<<<< HEAD
           'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
         target: `${
           block.children[2].textContent.trim() === 'true' ? '_blank' : '_self'
@@ -79,11 +104,20 @@ export default async function decorate(block) {
     ),
   );
   decorateIcons(leftGroup);
+=======
+          'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
+        target: `${openNewTab ? '_blank' : '_self'}`,
+      },
+      linkText ?? '',
+    ),
+  );
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const arrows = div({
     class:
       'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
+<<<<<<< HEAD
   const arrowGroup = div({ class: 'flex justify-start items-center' });
   const prevDiv = div(
     {
@@ -93,16 +127,35 @@ export default async function decorate(block) {
     span({
       class:
         'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+=======
+  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const prevDiv = div(
+    {
+      class:
+        'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     }),
   );
   const nextDiv = div(
     {
       class:
+<<<<<<< HEAD
         'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
         'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+=======
+        'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -114,7 +167,11 @@ export default async function decorate(block) {
   const listBtn = div(
     {
       class:
+<<<<<<< HEAD
         'w-8 h-8 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+=======
+        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -127,7 +184,11 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
+<<<<<<< HEAD
         'w-8 h-8 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+=======
+        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -155,6 +216,7 @@ export default async function decorate(block) {
   });
 
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
+<<<<<<< HEAD
     (product) => product.status !== 'error' && product.title?.trim(),
   );
 
@@ -163,6 +225,11 @@ export default async function decorate(block) {
     topSellingWrapper.style.display = 'none';
   }
 
+=======
+    (product) => product.status !== 'error',
+  );
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
@@ -198,6 +265,7 @@ export default async function decorate(block) {
     }`;
 
     if (isGridView) {
+<<<<<<< HEAD
       let cardsToDisplay;
       if (products.length < 5) {
         cardsToDisplay = products; // Show all cards if fewer than 4
@@ -211,12 +279,25 @@ export default async function decorate(block) {
       }
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
+=======
+      const cardsToDisplay = products.slice(
+        currentIndex,
+        currentIndex + cardsPerPageGrid,
+      );
+      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
+      paginationContainer.style.display = 'none';
+      arrowGroup.style.display = 'flex';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
+<<<<<<< HEAD
       paginationContainer.style.display = products.length < 7 ? 'none' : 'flex';
+=======
+      paginationContainer.style.display = 'flex';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       arrowGroup.style.display = 'none';
 
       /* Render pagination */
@@ -252,14 +333,22 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
+<<<<<<< HEAD
                 prevEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
+=======
+                prevEnabled ? 'text-gray-700' : 'text-gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               } [&_svg>use]:stroke-current`,
             }),
           ),
           div(
             {
               class: `justify-start text-${
+<<<<<<< HEAD
                 prevEnabled ? 'danaherpurple-500' : 'gray-400'
+=======
+                prevEnabled ? 'gray-700' : 'gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               } text-sm font-medium leading-tight`,
             },
             'Previous',
@@ -299,7 +388,11 @@ export default async function decorate(block) {
         pageNumber.append(
           div({
             class: `self-stretch h-0.5 ${
+<<<<<<< HEAD
               currentPage === page ? 'bg-danaherpurple-500' : 'bg-transparent'
+=======
+              currentPage === page ? 'bg-violet-600' : 'bg-transparent'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             }`,
           }),
           div(
@@ -310,7 +403,11 @@ export default async function decorate(block) {
             div(
               {
                 class: `text-center justify-start text-${
+<<<<<<< HEAD
                   currentPage === page ? 'danaherpurple-500' : 'gray-700'
+=======
+                  currentPage === page ? 'violet-600' : 'gray-700'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 } text-sm font-medium leading-tight`,
               },
               page.toString(),
@@ -402,7 +499,11 @@ export default async function decorate(block) {
           div(
             {
               class: `justify-start text-${
+<<<<<<< HEAD
                 nextEnabled ? 'danaherpurple-500' : 'gray-400'
+=======
+                nextEnabled ? 'gray-700' : 'gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               } text-sm font-medium leading-tight`,
             },
             'Next',
@@ -411,7 +512,11 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
+<<<<<<< HEAD
                 nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
+=======
+                nextEnabled ? 'text-gray-700' : 'text-gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               } [&_svg>use]:stroke-current`,
             }),
           ),
@@ -470,8 +575,13 @@ export default async function decorate(block) {
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn.classList.replace(
+<<<<<<< HEAD
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
+=======
+      toGridView ? 'bg-white' : 'bg-violet-600',
+      toGridView ? 'bg-violet-600' : 'bg-white',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     );
     gridBtn
       .querySelector('.icon')
@@ -487,8 +597,13 @@ export default async function decorate(block) {
       );
 
     listBtn.classList.replace(
+<<<<<<< HEAD
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
+=======
+      toGridView ? 'bg-violet-600' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-violet-600',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     );
     listBtn
       .querySelector('.icon')

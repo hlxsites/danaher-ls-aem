@@ -93,6 +93,7 @@
           "label": "Button URL"
         },
         {
+<<<<<<< HEAD
               "component": "boolean",
               "name": "productButtonTarget",
               "value": false,
@@ -102,6 +103,11 @@
          "component": "text",
           "valueType": "string",
            "name": "bgColor",
+=======
+         "component": "text",
+          "valueType": "string",
+           "name": "bg-color",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
            "value": "#4000A5",
            "label": "Bg Color"
         }

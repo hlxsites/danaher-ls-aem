@@ -88,10 +88,14 @@ function createAccordionBlock(
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
     },
+<<<<<<< HEAD
     div({
       class:
         'accordion-answer text-base font-extralight leading-7 overflow-hidden',
     }),
+=======
+    div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   );
 
   answer.forEach((element) => {
@@ -101,6 +105,7 @@ function createAccordionBlock(
   panel.querySelectorAll('a').forEach((link) => {
     link.classList.remove('btn', 'btn-outline-primary');
     link.classList.add(
+<<<<<<< HEAD
       'text-black',
       'underline',
       'decoration-black',
@@ -109,6 +114,12 @@ function createAccordionBlock(
       'text-danaherpurple-500',
       'hover:bg-danaherpurple-25',
       'hover:text-danaherpurple-500',
+=======
+      'text-sm',
+      'font-bold',
+      'text-danaherpurple-500',
+      '!no-underline',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     );
   });
 
@@ -143,6 +154,7 @@ export default async function decorate(block) {
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
+<<<<<<< HEAD
   const accordionContainerTitle = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
   const customUUID = generateUUID();
 
@@ -158,6 +170,23 @@ export default async function decorate(block) {
 
       const answer = allChildren.map((child) => child.outerHTML).join('');
 
+=======
+  const accordionContainerTitle = block
+    .querySelector('[data-aue-prop="accordion_container_title"]')
+    ?.textContent.trim() || '';
+  const customUUID = generateUUID();
+
+  const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
+
+  const dynamicData = Array.from(acrItems)
+    .map((element) => {
+      const question = element.querySelector(
+        '[data-aue-prop="item_title"]',
+      )?.textContent;
+      const answer = element.querySelector(
+        '[data-aue-prop="item_description"]',
+      )?.textContent;
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
@@ -179,11 +208,19 @@ export default async function decorate(block) {
     class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
   });
   const faqTextContainer = div(
+<<<<<<< HEAD
     { class: 'lg:w-[400px]' },
     h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
   );
   const accordionContainer = div(
     { class: 'lg:w-[840px] flex flex-col' },
+=======
+    { class: 'lg:w-[30%]' },
+    h3({ class: 'text-2xl font-bold' }, accordionContainerTitle),
+  );
+  const accordionContainer = div(
+    { class: 'lg:w-[70%] flex flex-col' },
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     ...dynamicAccordionItems,
   );
 

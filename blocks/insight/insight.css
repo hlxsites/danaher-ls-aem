@@ -136,11 +136,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
 .insight-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .insight-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -180,10 +183,13 @@
   padding-top: 0px
 }
 
+<<<<<<< HEAD
 .insight-wrapper :is(.pb-4) {
   padding-bottom: 1rem
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .insight-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -199,6 +205,13 @@
   line-height: 1.75rem
 }
 
+<<<<<<< HEAD
+=======
+.insight-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .insight-wrapper :is(.font-normal) {
   font-weight: 200
 }
@@ -221,6 +234,7 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
 .insight-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -244,6 +258,8 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 @media (min-width: 768px) {
   .insight-wrapper :is(.md\:w-1\/2) {
     width: 50%

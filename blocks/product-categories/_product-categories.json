@@ -19,6 +19,7 @@
     ],
     "models": [  {
         "id": "product-categories",
+<<<<<<< HEAD
         "fields": [
           {
             "component": "text",
@@ -28,6 +29,9 @@
             "label": "Product Category ID"
           },
           {
+=======
+        "fields": [{
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             "component": "text",
             "valueType": "string",
             "name": "title",

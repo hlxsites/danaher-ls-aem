@@ -175,6 +175,35 @@
           }
         },
         {
+<<<<<<< HEAD
+          "title": "Columns",
+          "id": "columns",
+=======
+          "title": "Checkout",
+          "id": "checkout",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+<<<<<<< HEAD
+                  "columns": "2",
+                  "rows": "1"
+=======
+                  "name": "Checkout",
+                  "model": "checkout"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
+                }
+              }
+            }
+          }
+        },
+        {
+<<<<<<< HEAD
+          "title": "Dual Carousel",
+          "id": "dual-carousel",
+=======
           "title": "Columns",
           "id": "columns",
           "plugins": {
@@ -190,6 +219,24 @@
           }
         },
         {
+          "title": "Dashboard",
+          "id": "dashboard",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+<<<<<<< HEAD
+=======
+                  "name": "dashboard",
+                  "model": "dashboard"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {
@@ -197,6 +244,7 @@
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                   "name": "Dual Carousel",
                   "model": "dual-carousel"
                 }
@@ -251,6 +299,24 @@
           }
         },
         {
+<<<<<<< HEAD
+=======
+          "title": "Login",
+          "id": "login",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Login",
+                  "model": "login"
+                }
+              }
+            }
+          }
+        },
+        {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           "title": "Offer Advertisement",
           "id": "offer-advertisement",
           "plugins": {
@@ -478,6 +544,24 @@
           }
         },
         {
+<<<<<<< HEAD
+=======
+          "title": "Register",
+          "id": "register",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Register",
+                  "model": "register"
+                }
+              }
+            }
+          }
+        },
+        {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           "title": "Related Category",
           "id": "related-category",
           "plugins": {
@@ -606,15 +690,25 @@
           }
         },
         {
+<<<<<<< HEAD
           "title": "Top-Purchased Products",
           "id": "top-purchased-products",
+=======
+          "title": "Top-Selling Products",
+          "id": "top-selling-products",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
+<<<<<<< HEAD
                   "name": "Top Purchased Products",
                   "model": "top-purchased-products"
+=======
+                  "name": "Top-Selling Products",
+                  "model": "top-selling-products"
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 }
               }
             }

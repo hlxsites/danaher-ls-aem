@@ -68,12 +68,18 @@
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "cardAlt",
+=======
+                "name": "card_alt",
+                "value": "Danaher Corporation",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "label": "Alt Text"
               },
               {
                 "component": "text",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "cardTitle",
                 "label": "Title"
               },
@@ -81,11 +87,56 @@
                 "component": "richtext",
                 "valueType": "string",
                 "name": "cardDescription",
+=======
+                "name": "card_title",
+                "value": "",
+                "label": "Title"
+              },
+              {
+                "component": "select",
+                "name": "card_titleType",
+                "value": "h1",
+                "label": "Type",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "h1",
+                    "value": "h1"
+                  },
+                  {
+                    "name": "h2",
+                    "value": "h2"
+                  },
+                  {
+                    "name": "h3",
+                    "value": "h3"
+                  },
+                  {
+                    "name": "h4",
+                    "value": "h4"
+                  },
+                  {
+                    "name": "h5",
+                    "value": "h5"
+                  },
+                  {
+                    "name": "h6",
+                    "value": "h6"
+                  }
+                ]
+              },
+              {
+                "component": "richtext",
+                "valueType": "string",
+                "name": "card_description",
+                "value": "",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "label": "Description"
               },
               {
                 "component": "aem-content",
                 "valueType": "string",
+<<<<<<< HEAD
                 "name": "cardHref",
                 "label": "Link"
               },
@@ -109,6 +160,17 @@
                 "component": "text",
                 "valueType": "string",
                 "name": "cardHrefText",
+=======
+                "name": "card_href",
+                "value": "",
+                "label": "Link"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_hrefText",
+                "value": "",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                 "label": "Link Text"
               }
             ]

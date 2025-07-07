@@ -128,27 +128,6 @@ const buildCheckboxElement = (lable, field, inputType, inputName, value, require
   ),
 );
 
-// Create a group of radio button options
-const buildOptionsElement = (name, options, required = false) => div(
-  { class: 'flex flex-col gap-2' },
-  ...options.map((opt) => div(
-    { class: 'flex items-baseline' },
-    input({
-      type: 'radio',
-      name,
-      value: opt.value,
-      id: `${name}_${opt.value}`,
-      'data-required': required,
-      class: 'input-focus-radio',
-      'aria-label': name,
-    }),
-    label(
-      { for: `${name}_${opt.value}`, class: 'pl-2' },
-      opt.label,
-    ),
-  )),
-);
-
 function tnc() {
   const tncEl = div(
     { class: 'flex items-center mt-5' },
@@ -233,6 +212,7 @@ function loadUTMParams() {
   } else {
     document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
   }
+  document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
   document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
@@ -440,6 +420,7 @@ async function loadForm(row, tags) {
     );
     formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
   }
+<<<<<<< HEAD
   if (formId === 'genedataform') {
     const genedataformFields = div(
       { class: 'container mx-auto space-y-4' },
@@ -541,6 +522,9 @@ async function loadForm(row, tags) {
     );
     formEl.querySelector('.add-gated-form-fields')?.append(wsawgenedataformFields);
   }
+=======
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   decorateIcons(formEl);
   row.innerHTML = '';
   row.append(formEl);
@@ -556,13 +540,6 @@ async function loadForm(row, tags) {
   document.querySelector('#gatedform')?.addEventListener('submit', (event) => {
     if (formValidate()) {
       getInquiry('gatedform');
-    } else {
-      event.preventDefault();
-    }
-  });
-  document.querySelector('#genedataform')?.addEventListener('submit', (event) => {
-    if (formValidate()) {
-      getInquiry('genedataform');
     } else {
       event.preventDefault();
     }

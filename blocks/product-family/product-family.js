@@ -3,12 +3,16 @@
 /* eslint-disable no-console */
 import { getProductsForCategories } from '../../scripts/commerce.js';
 import {
+<<<<<<< HEAD
   div,
   span,
   button,
   fieldset,
   input,
   p,
+=======
+  div, span, fieldset, input, p,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
@@ -18,7 +22,11 @@ import renderProductListCard from './listData.js';
 const productSkeleton = div(
   {
     class:
+<<<<<<< HEAD
       'dhls-container coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4',
+=======
+      'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   },
   div(
     { class: 'col-span-4 w-full' },
@@ -170,8 +178,13 @@ function facetButtonClick(e) {
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
+<<<<<<< HEAD
   icon.classList.toggle('icon-plus-gray', isExpanded);
   icon.classList.toggle('icon-minus-gray', !isExpanded);
+=======
+  icon.classList.toggle('icon-plus', isExpanded);
+  icon.classList.toggle('icon-minus', !isExpanded);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   contents.classList.toggle('hidden', isExpanded);
   searchWrapper?.classList.toggle('hidden', isExpanded);
   decorateIcons(parentElement);
@@ -183,10 +196,17 @@ function facetButtonClick(e) {
 const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
+<<<<<<< HEAD
     { class: 'inline-flex justify-start' },
     button(
       {
         class: 'text-left flex flex-row gap-2',
+=======
+    { class: 'inline-flex justify-start items-center gap-2' },
+    div(
+      {
+        class: 'text-left hover:bg-gray-100 flex flex-row items-center gap-2',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
@@ -197,15 +217,31 @@ const facetItem = (filter, valueObj) => {
         span({
           class: `checkbox-icon icon ${
             isSelected ? 'icon-check-purple-square' : 'icon-square'
+<<<<<<< HEAD
           } w-4 min-w-4 min-h-4 pt-1`,
+=======
+          } w-4 min-w-4 min-h-4`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         }),
       ),
     ),
     div(
       { class: 'flex items-center gap-2' },
       div(
+<<<<<<< HEAD
         { class: 'justify-start text-black text-sm font-medium leading-5' },
         `${valueObj.value} (${valueObj.numberOfResults})`,
+=======
+        {
+          class:
+            'justify-start text-black text-sm break-all font-normal leading-tight',
+        },
+        valueObj.value,
+      ),
+      div(
+        { class: 'text-gray-500 text-sm font-normal' },
+        `(${valueObj.numberOfResults})`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       ),
     ),
   );
@@ -243,10 +279,17 @@ function iterateChildren(filter, node, searchQuery = '') {
   const liEl = div(
     { class: 'inline-flex flex-col justify-start items-start gap-2' },
     div(
+<<<<<<< HEAD
       { class: 'inline-flex justify-start' },
       button(
         {
           class: `${filter.facetId} text-left flex flex-row gap-2`,
+=======
+      { class: 'inline-flex justify-start items-center gap-2 w-full' },
+      div(
+        {
+          class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
@@ -258,18 +301,34 @@ function iterateChildren(filter, node, searchQuery = '') {
           span({
             class: `checkbox-icon icon ${
               isSelected ? 'icon-check-purple-square' : 'icon-square'
+<<<<<<< HEAD
             } w-4 min-w-4 min-h-4 pt-1`,
+=======
+            } w-4 min-w-4 min-h-4`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           }),
         ),
       ),
       div(
         { class: 'flex items-center gap-2' },
         div(
+<<<<<<< HEAD
           { class: 'flex items-center gap-2' },
           div(
             { class: 'justify-start text-black text-sm font-medium leading-5' },
             `${node.value} (${node.numberOfResults})`,
           ),
+=======
+          {
+            class:
+              'justify-start text-black text-sm break-all font-normal leading-tight',
+          },
+          node.value,
+        ),
+        div(
+          { class: 'text-gray-500 text-sm font-normal' },
+          `(${node.numberOfResults})`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         ),
       ),
     ),
@@ -308,11 +367,19 @@ const renderFacet = (filter, isFirst = false) => {
 
   const facetDiv = div({
     class:
+<<<<<<< HEAD
       'facet py-3 self-stretch bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-y-3',
   });
 
   // Facet header
   const header = button(
+=======
+      'facet self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3',
+  });
+
+  // Facet header
+  const header = div(
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     {
       class:
         'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
@@ -322,7 +389,11 @@ const renderFacet = (filter, isFirst = false) => {
     div(
       {
         class:
+<<<<<<< HEAD
           'flex-1 flex items-start text-left text-black text-base font-bold leading-snug',
+=======
+          'flex-1 flex items-start text-left text-black text-base font-semibold leading-normal',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       },
       filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
     ),
@@ -330,8 +401,13 @@ const renderFacet = (filter, isFirst = false) => {
       { class: 'w-4 h-4 relative mb-2' },
       span({
         class: `icon ${
+<<<<<<< HEAD
           isFirst ? 'icon-minus-gray' : 'icon-plus-gray'
         } p-1 ml-1`,
+=======
+          isFirst ? 'icon-minus' : 'icon-plus'
+        } [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       }),
     ),
   );
@@ -345,11 +421,15 @@ const renderFacet = (filter, isFirst = false) => {
   // Add search bar for workflowname and opco
   let itemsContainer = null;
   let originalItems = null;
+<<<<<<< HEAD
   // Check if workflowname or opco has more than 10 values, show search for that facet only
   const needsSearch = (filter.facetId === 'workflowname' && filter.values.length > 10)
     || (filter.facetId === 'opco' && filter.values.length > 10);
 
   if (needsSearch) {
+=======
+  if (filter.facetId === 'workflowname' || filter.facetId === 'opco') {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     const searchBar = div(
       {
         class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${
@@ -361,7 +441,11 @@ const renderFacet = (filter, isFirst = false) => {
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
           class:
+<<<<<<< HEAD
             'justify-start text-gray-500 text-sm font-medium leading-5 pt-1 bg-transparent outline-none flex-1',
+=======
+            'justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           type: 'text',
           placeholder: 'Search',
           'aria-label': `Search for values in the ${
@@ -426,12 +510,23 @@ const renderFacet = (filter, isFirst = false) => {
         originalItems.childNodes.forEach((item) => {
           const workflowButton = item.querySelector('button.workflowname');
           if (workflowButton) {
+<<<<<<< HEAD
             const labelDiv = item.querySelector('div:nth-child(2)');
             const label = labelDiv ? labelDiv.textContent.toLowerCase() : '';
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
               const btnEle = clonedItem.querySelector('button');
               if (btnEle) btnEle.addEventListener('click', filterButtonClick);
+=======
+            const label = item
+              .querySelector('div:nth-child(2)')
+              .textContent.toLowerCase();
+            if (!searchQuery || label.includes(searchQuery)) {
+              const clonedItem = item.cloneNode(true);
+              clonedItem
+                .querySelector('button')
+                .addEventListener('click', filterButtonClick);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               itemsContainer.append(clonedItem);
               hasMatches = true;
             }
@@ -441,8 +536,14 @@ const renderFacet = (filter, isFirst = false) => {
         originalItems.childNodes.forEach((item) => {
           const facetButton = item.querySelector('button');
           if (facetButton) {
+<<<<<<< HEAD
             const labelDiv = item.querySelector('div:nth-child(2)');
             const label = labelDiv ? labelDiv.textContent.toLowerCase() : '';
+=======
+            const label = item
+              .querySelector('div:nth-child(2)')
+              .textContent.toLowerCase();
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
               clonedItem
@@ -575,6 +676,7 @@ function removeWorkflowStep(step) {
 }
 
 /**
+<<<<<<< HEAD
  * Function to remove a specific opco
  */
 function removeOpcoStep(step) {
@@ -591,6 +693,8 @@ function removeOpcoStep(step) {
 }
 
 /**
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
  * Function to add breadcrumb filter for workflowName
  */
 const breadcrumbWFFilter = (filter) => {
@@ -609,7 +713,11 @@ const breadcrumbWFFilter = (filter) => {
         div(
           {
             class:
+<<<<<<< HEAD
               'justify-start text-danaherpurple-500 text-sm font-medium leading-5 overflow-wrap break-word',
+=======
+              'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           `Process Step: ${step}`,
         ),
@@ -617,7 +725,11 @@ const breadcrumbWFFilter = (filter) => {
           { class: 'relative overflow-hidden flex-shrink-0' },
           span({
             class:
+<<<<<<< HEAD
               'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500',
+=======
+              'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           }),
         ),
       );
@@ -633,6 +745,7 @@ const breadcrumbWFFilter = (filter) => {
 const breadcrumbOpcoFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (opco.size > 0) {
+<<<<<<< HEAD
     [...opco].forEach((step) => {
       const breadcrumbElement = div(
         {
@@ -661,6 +774,36 @@ const breadcrumbOpcoFilter = (filter) => {
       decorateIcons(breadcrumbElement);
       parent.appendChild(breadcrumbElement);
     });
+=======
+    const breadcrumbElement = div(
+      {
+        class:
+          'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
+        part: 'breadcrumb-button',
+        onclick: (e) => clearFilter(e, false, true),
+        title: `Brand: ${[...opco].join(', ')}`,
+        'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(
+          ', ',
+        )}`,
+      },
+      div(
+        {
+          class:
+            'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word',
+        },
+        `Brand: ${[...opco].join(', ')}`,
+      ),
+      div(
+        { class: 'relative overflow-hidden flex-shrink-0' },
+        span({
+          class:
+            'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500',
+        }),
+      ),
+    );
+    decorateIcons(breadcrumbElement);
+    parent.appendChild(breadcrumbElement);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   }
 };
 
@@ -765,6 +908,10 @@ function filterButtonClick(e) {
 
 // Constants for pagination
 const GRID_ITEMS_PER_PAGE = 21;
+<<<<<<< HEAD
+=======
+const GRID_ITEMS_PER_PAGE_MOBILE = 7;
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 const LIST_ITEMS_PER_PAGE = 7;
 let currentPage = 1;
 let isGridView = true;
@@ -799,7 +946,20 @@ function scrollToFirstCard() {
  */
 function renderPagination(totalProducts, paginationWrapper) {
   paginationWrapper.innerHTML = '';
+<<<<<<< HEAD
   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
+=======
+  let itemsPerPage;
+  if (isGridView) {
+    if (window.innerWidth < 1024) {
+      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
+    } else {
+      itemsPerPage = GRID_ITEMS_PER_PAGE;
+    }
+  } else {
+    itemsPerPage = LIST_ITEMS_PER_PAGE;
+  }
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
   if (totalPages <= 1) {
@@ -839,15 +999,24 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
+<<<<<<< HEAD
             prevEnabled ? 'danaherpurple-500' : 'text-gray-400'
+=======
+            prevEnabled ? 'text-gray-700' : 'text-gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           } [&_svg>use]:stroke-current`,
         }),
       ),
       div(
         {
           class: `justify-start text-${
+<<<<<<< HEAD
             prevEnabled ? 'danaherpurple-500' : 'gray-400'
           } text-sm font-medium leading-5`,
+=======
+            prevEnabled ? 'text-gray-700' : 'text-gray-400'
+          } text-sm font-medium leading-tight`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         'Previous',
       ),
@@ -883,7 +1052,11 @@ function renderPagination(totalProducts, paginationWrapper) {
     pageNumber.append(
       div({
         class: `self-stretch h-0.5 ${
+<<<<<<< HEAD
           currentPage === page ? 'bg-danaherpurple-500' : 'bg-transparent'
+=======
+          currentPage === page ? 'bg-violet-600' : 'bg-transparent'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         }`,
       }),
       div(
@@ -894,7 +1067,11 @@ function renderPagination(totalProducts, paginationWrapper) {
         div(
           {
             class: `text-center justify-start text-${
+<<<<<<< HEAD
               currentPage === page ? 'danaherpurple-500' : 'gray-700'
+=======
+              currentPage === page ? 'violet-600' : 'gray-700'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             } text-sm font-medium leading-tight`,
           },
           page.toString(),
@@ -986,8 +1163,13 @@ function renderPagination(totalProducts, paginationWrapper) {
       div(
         {
           class: `justify-start text-${
+<<<<<<< HEAD
             nextEnabled ? 'danaherpurple-500' : 'gray-400'
           } text-sm font-medium leading-5`,
+=======
+            nextEnabled ? 'gray-700' : 'text-gray-400'
+          } text-sm font-medium leading-tight`,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         'Next',
       ),
@@ -995,7 +1177,11 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
+<<<<<<< HEAD
             nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
+=======
+            nextEnabled ? 'text-gray-700' : 'text-gray-400'
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           } [&_svg>use]:stroke-current`,
         }),
       ),
@@ -1045,7 +1231,20 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
+<<<<<<< HEAD
   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
+=======
+  let itemsPerPage;
+  if (isGridView) {
+    if (window.innerWidth < 1024) {
+      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
+    } else {
+      itemsPerPage = GRID_ITEMS_PER_PAGE;
+    }
+  } else {
+    itemsPerPage = LIST_ITEMS_PER_PAGE;
+  }
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
@@ -1065,7 +1264,11 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
+<<<<<<< HEAD
     const clearButtonWrapper = button(
+=======
+    const clearButtonWrapper = div(
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       {
         class: 'px-3 py-1 flex justify-start items-center gap-2',
         onclick: (e) => clearFilter(e, true, true),
@@ -1075,14 +1278,22 @@ async function updateProductDisplay() {
         div(
           { class: 'w-3.5 h-3.5 mt-[-10px]' },
           span({
+<<<<<<< HEAD
             class:
               'icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]',
+=======
+            class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           }),
         ),
         div(
           {
             class:
+<<<<<<< HEAD
               'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word',
+=======
+              'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           'Clear Results',
         ),
@@ -1112,8 +1323,12 @@ async function updateProductDisplay() {
 
   const productsWrapper = isGridView
     ? div({
+<<<<<<< HEAD
       class:
           'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start',
+=======
+      class: 'products-wrapper w-full flex flex-wrap gap-5 justify-center',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
@@ -1131,6 +1346,7 @@ async function updateProductDisplay() {
 /**
  * Function to decorate product list
  */
+<<<<<<< HEAD
 export async function decorateProductList(block, blockId) {
   block.innerHTML = '';
   block.append(productSkeleton);
@@ -1138,6 +1354,12 @@ export async function decorateProductList(block, blockId) {
   // Add smooth scroll behavior to the html tag
   document.documentElement.style.scrollBehavior = 'smooth';
 
+=======
+export async function decorateProductList(block) {
+  block.innerHTML = '';
+  block.append(productSkeleton);
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
   let response;
   try {
@@ -1149,12 +1371,20 @@ export async function decorateProductList(block, blockId) {
 
   block.removeChild(productSkeleton);
   block.classList.add(
+<<<<<<< HEAD
     ...'dhls-container flex flex-col lg:flex-row w-full mx-auto pt-10'.split(
+=======
+    ...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       ' ',
     ),
   );
 
+<<<<<<< HEAD
   const facetDiv = div({ id: blockId, class: 'max-w-sm mx-auto scroll-mt-32' });
+=======
+  const facetDiv = div({ id: 'filter', class: 'max-w-sm mx-auto' });
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const contentWrapper = div({
     class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4',
   });
@@ -1167,7 +1397,11 @@ export async function decorateProductList(block, blockId) {
   const header = div(
     { class: 'self-stretch inline-flex justify-start items-center gap-4' },
     div(
+<<<<<<< HEAD
       { class: 'w-12 h-12 relative bg-danaherpurple-50 rounded-3xl' },
+=======
+      { class: 'w-12 h-12 relative bg-violet-50 rounded-3xl' },
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
@@ -1183,7 +1417,11 @@ export async function decorateProductList(block, blockId) {
         div(
           {
             class:
+<<<<<<< HEAD
               'w-64 left-0 top-[-6px] absolute justify-start text-black !text-3xl font-medium !leading-10',
+=======
+              'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal leading-10',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           'Filters',
         ),
@@ -1195,7 +1433,11 @@ export async function decorateProductList(block, blockId) {
   breadcrumbContainer = div(
     {
       class:
+<<<<<<< HEAD
         'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[251px]',
+=======
+        'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[231px]',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     },
     div({
       class:
@@ -1216,14 +1458,20 @@ export async function decorateProductList(block, blockId) {
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
+<<<<<<< HEAD
           icon.classList.remove('icon-plus-gray');
           icon.classList.add('icon-minus-gray');
+=======
+          icon.classList.remove('icon-plus');
+          icon.classList.add('icon-minus');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           contents.classList.remove('hidden');
           searchWrapper?.classList.remove('hidden');
           decorateIcons(parent);
         });
       },
     },
+<<<<<<< HEAD
     button(
       {
         class:
@@ -1237,6 +1485,21 @@ export async function decorateProductList(block, blockId) {
             'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
         }),
       ),
+=======
+    div(
+      {
+        class:
+          'text-right justify-start text-violet-600 text-base font-bold leading-snug',
+      },
+      'Expand All',
+    ),
+    div(
+      { class: 'w-4 h-4 relative mb-2' },
+      span({
+        class:
+          'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1',
+      }),
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     ),
   );
 
@@ -1244,7 +1507,11 @@ export async function decorateProductList(block, blockId) {
   decorateIcons(header);
 
   const facetContainer = div({
+<<<<<<< HEAD
     class: 'self-stretch flex flex-col justify-start items-start w-[251px]',
+=======
+    class: 'self-stretch flex flex-col justify-start items-start max-w-[231px]',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   });
   const facets = response.facets || [];
   facets.forEach((filter, index) => {
@@ -1260,10 +1527,17 @@ export async function decorateProductList(block, blockId) {
 
   const headerWrapper = div({
     class:
+<<<<<<< HEAD
       'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0',
   });
   productCount = div(
     { class: 'text-black text-2xl font-medium' },
+=======
+      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 px-5 lg:px-0 min-w-0',
+  });
+  productCount = div(
+    { class: 'text-black text-base font-medium' },
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     `${response.totalCount} Products Available`,
   );
   const viewToggleWrapper = div({ class: 'flex items-center gap-2 min-w-fit' });
@@ -1274,7 +1548,11 @@ export async function decorateProductList(block, blockId) {
       class: [
         'px-3 py-2 bg-white',
         'rounded-tl-[20px] rounded-bl-[20px]',
+<<<<<<< HEAD
         'outline outline-1 outline-offset-[-1px] outline-danaherpurple-500',
+=======
+        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'flex justify-center items-center',
         'overflow-visible cursor-pointer z-10',
       ].join(' '),
@@ -1291,9 +1569,15 @@ export async function decorateProductList(block, blockId) {
   gridBtn = div(
     {
       class: [
+<<<<<<< HEAD
         'px-3 py-2 bg-danaherpurple-500',
         'rounded-tr-[20px] rounded-br-[20px]',
         'outline outline-1 outline-offset-[-1px] outline-danaherpurple-500',
+=======
+        'px-3 py-2 bg-violet-600',
+        'rounded-tr-[20px] rounded-br-[20px]',
+        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         'flex justify-center items-center',
         'overflow-visible cursor-pointer z-10',
       ].join(' '),
@@ -1326,7 +1610,11 @@ export async function decorateProductList(block, blockId) {
     if (isGridView) {
       isGridView = false;
       currentPage = 1;
+<<<<<<< HEAD
       listBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
+=======
+      listBtn.classList.replace('bg-white', 'bg-violet-600');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       listBtn
         .querySelector('.icon')
         .classList.replace('text-gray-600', 'text-white');
@@ -1336,7 +1624,11 @@ export async function decorateProductList(block, blockId) {
           '[&_svg>use]:stroke-gray-600',
           '[&_svg>use]:stroke-white',
         );
+<<<<<<< HEAD
       gridBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
+=======
+      gridBtn.classList.replace('bg-violet-600', 'bg-white');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       gridBtn
         .querySelector('.icon')
         .classList.replace('text-white', 'text-gray-600');
@@ -1354,7 +1646,11 @@ export async function decorateProductList(block, blockId) {
     if (!isGridView) {
       isGridView = true;
       currentPage = 1;
+<<<<<<< HEAD
       gridBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
+=======
+      gridBtn.classList.replace('bg-white', 'bg-violet-600');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       gridBtn
         .querySelector('.icon')
         .classList.replace('text-gray-600', 'text-white');
@@ -1364,7 +1660,11 @@ export async function decorateProductList(block, blockId) {
           '[&_svg>use]:stroke-gray-600',
           '[&_svg>use]:stroke-white',
         );
+<<<<<<< HEAD
       listBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
+=======
+      listBtn.classList.replace('bg-violet-600', 'bg-white');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       listBtn
         .querySelector('.icon')
         .classList.replace('text-white', 'text-gray-600');
@@ -1377,6 +1677,7 @@ export async function decorateProductList(block, blockId) {
       updateProductDisplay();
     }
   });
+<<<<<<< HEAD
   if (response?.facets?.length > 0 && response?.facets?.length > 0) {
     block.append(facetDiv, contentWrapper);
     updateProductDisplay();
@@ -1387,11 +1688,20 @@ export async function decorateProductList(block, blockId) {
       ),
     );
   }
+=======
+
+  block.append(facetDiv, contentWrapper);
+  updateProductDisplay();
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 }
 
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
   const blockId = block?.querySelector('p')?.textContent || '';
   decorateProductList(block, blockId);
+=======
+  decorateProductList(block);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 }

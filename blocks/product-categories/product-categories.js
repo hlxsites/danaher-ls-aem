@@ -7,6 +7,7 @@ export default async function decorate(block) {
   const baseUrl = 'https://lifesciences.danaher.com';
   const maxCards = 28;
 
+<<<<<<< HEAD
   const [productCategoryId, blockTitle, blockBrand] = block.children;
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
@@ -20,6 +21,16 @@ export default async function decorate(block) {
 
   const authoredBrand = brandEl;
   const authoredTitle = titleEl;
+=======
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  const wrapper = block.closest('.product-categories-wrapper');
+  const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
+  const titleEl = wrapper.querySelector("[data-aue-label='Title']");
+
+  const authoredBrand = brandEl?.textContent?.trim().toLowerCase();
+  const authoredTitle = titleEl?.textContent?.trim();
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   try {
     const response = await fetch(`${baseUrl}/us/en/products-index.json`);
@@ -28,6 +39,7 @@ export default async function decorate(block) {
       ? raw
       : raw?.data || raw?.results || [];
 
+<<<<<<< HEAD
     const filteredProducts = allProducts
       .filter(({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1)
       .filter(({ type }) => type === 'Category')
@@ -35,6 +47,8 @@ export default async function decorate(block) {
 
     allProducts = filteredProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     const createCard = (item) => {
       const title = item.title || '';
       const clickUri = item.path || item.url || item.ClickUri || '#';
@@ -44,33 +58,53 @@ export default async function decorate(block) {
       return div(
         {
           class:
+<<<<<<< HEAD
             'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
           onclick: () => window.open(
             clickUri,
             clickUri?.includes('http') ? '_blank' : '_self',
           ),
+=======
+            'border border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
         },
         image
           && img({
             src:
+<<<<<<< HEAD
               absImg || '/content/dam/danaher/system/icons/preview-image.png',
+=======
+              absImg
+              || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
         p(
           {
             class:
+<<<<<<< HEAD
               'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
+=======
+              'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           title,
         ),
         a(
           {
             href: clickUri,
+<<<<<<< HEAD
             target: clickUri?.includes('http') ? '_blank' : '_self',
             rel: 'noopener noreferrer',
             class:
               'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
+=======
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            class:
+              'text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
           },
           'Browse Products',
           span({
@@ -85,7 +119,11 @@ export default async function decorate(block) {
       class: 'w-full bg-white  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     });
     const header = div(
+<<<<<<< HEAD
       { class: 'flex flex-col gap-2 mb-6 scroll-mt-32', id: blockId },
+=======
+      { class: 'flex flex-col gap-2 mb-6' },
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       h2(
         {
           class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
@@ -108,16 +146,22 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
+<<<<<<< HEAD
         if (item.type === 'Category') {
           grid.appendChild(createCard(item));
           decorateIcons(grid);
         }
+=======
+        grid.appendChild(createCard(item));
+        decorateIcons(grid);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       });
     };
     decorateIcons(sectionWrapper);
     // CASE 1: Authored Brand
 
     if (authoredBrand && authoredTitle) {
+<<<<<<< HEAD
       // allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
         const brandArray = item.brand?.split(',') || [];
@@ -130,6 +174,22 @@ export default async function decorate(block) {
       });
 
       renderGrid(filtered);
+=======
+      allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+      const filtered = allProducts.filter((item) => {
+        const brand = item.brand || '';
+        return brand.toLowerCase() === authoredBrand && !brand.includes('|');
+      });
+      const productsCountLabel = p(
+        {
+          class: 'pt-6 w-full text-black text-2xl font-medium leading-loose',
+        },
+        `${filtered.length} Products available`,
+      );
+
+      renderGrid(filtered);
+      header?.append(productsCountLabel);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       sectionWrapper.append(header, grid);
     } else {
       // CASE 2: All brands with filters from item.brand
@@ -167,7 +227,11 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
+<<<<<<< HEAD
               // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+=======
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             renderGrid(list);
           },
         },

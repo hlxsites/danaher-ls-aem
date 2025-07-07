@@ -4,6 +4,7 @@
   margin-top: 48px
 }
 
+<<<<<<< HEAD
 .product-info-list-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
 }
@@ -20,6 +21,8 @@
   margin-bottom: 0.75rem !important
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .product-info-list-wrapper :is(.block) {
   display: block
 }
@@ -54,11 +57,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
 .product-info-list-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .product-info-list-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -68,15 +74,19 @@
   padding-left: 2rem
 }
 
+<<<<<<< HEAD
 .product-info-list-wrapper :is(.\!text-\[32px\]) {
   font-size: 32px !important
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .product-info-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
 }
 
+<<<<<<< HEAD
 .product-info-list-wrapper :is(.\!font-medium) {
   font-weight: 400 !important
 }
@@ -94,6 +104,12 @@
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important
 }
 
+=======
+.product-info-list-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 @media (min-width: 1024px) {
   .product-info-list-wrapper :is(.lg\:w-\[400px\]) {
     width: 400px

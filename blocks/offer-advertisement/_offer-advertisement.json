@@ -27,6 +27,7 @@
                     "name": "offer_advertisement_title",
                     "value": "",
                     "label": "Offer Title"
+<<<<<<< HEAD
                   },{
                     "component": "select",
                     "name": "adLinkType",
@@ -43,6 +44,8 @@
                         "value": "url"
                       }
                     ]
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                   },
                   {
                     "component": "text",
@@ -55,6 +58,7 @@
                     "component": "aem-content",
                     "name": "offer_link",
                     "label": "Link"
+<<<<<<< HEAD
                   },
                   {
                   "component": "boolean",
@@ -62,6 +66,9 @@
                   "value": false,
                   "label": "Open Read More link in new tab"
                 }
+=======
+                  }
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             ]
         }
     ],

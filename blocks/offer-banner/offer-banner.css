@@ -66,11 +66,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
 .offer-banner-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .offer-banner-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -111,11 +114,14 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
 .offer-banner-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 @media (min-width: 768px) {
   .offer-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row

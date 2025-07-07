@@ -69,6 +69,7 @@
               "value": "",
               "label": "Description"
             },
+<<<<<<< HEAD
               {
                 "component": "select",
                 "name": "insightItemLinkType",
@@ -86,12 +87,15 @@
                   }
                 ]
               },
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             {
               "component": "aem-content",
               "name": "insight_link",
               "label": "Link Url"
             },
             {
+<<<<<<< HEAD
                   "component": "boolean",
                   "name": "insightlinkTarget",
                   "valueType": "boolean",
@@ -99,6 +103,8 @@
                   "label": "Open link in new tab?"
             },
             {
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
               "component": "text",
               "valueType": "string",
               "name": "linklabel",

@@ -36,6 +36,7 @@
                     "component": "aem-content",
                     "name": "link",
                     "label": "Offer Link"
+<<<<<<< HEAD
                   },
             {
                   "component": "boolean",
@@ -45,6 +46,10 @@
                   "label": "Open link in new tab?"
             },{
                     "component": "text",
+=======
+                  },{
+                    "component": "aem-content",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
                     "name": "linkLabel",
                     "label": "Offer Link Label"
                   },{

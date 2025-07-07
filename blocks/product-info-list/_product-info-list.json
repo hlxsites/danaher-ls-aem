@@ -21,7 +21,11 @@
         "id": "product-info-list",
         "fields": [
           {
+<<<<<<< HEAD
             "component": "text",
+=======
+            "component": "richtext",
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             "valueType": "string",
             "name": "prod_info_title",
             "value": "",

@@ -18,11 +18,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
 .separator-line-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .separator-line-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem

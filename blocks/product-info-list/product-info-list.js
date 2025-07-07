@@ -6,6 +6,7 @@ export default async function decorate(block) {
   const productInfoListWrapper = div({
     class: 'dhls-container px-5 lg:px-0',
   });
+<<<<<<< HEAD
   const titleP = block?.firstElementChild?.firstElementChild?.firstElementChild;
   const titleEl = titleP?.textContent.trim() || '';
   if (titleEl && titleP) {
@@ -25,11 +26,26 @@ export default async function decorate(block) {
       }
     });
     descEl = tempDiv.innerHTML;
+=======
+  const titleEl = block.querySelector(
+    '[data-aue-prop="prod_info_title"]',
+  )?.innerHTML;
+  const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
+  if (descEl) {
+    descEl.querySelectorAll('p').forEach((pEle) => {
+      pEle.classList.add(...'text-base font-normal'.split(' '));
+    });
+  }
+  const ulEle = block.querySelector('ul');
+  if (ulEle) {
+    ulEle.classList.add(...'list-disc pl-8'.split(' '));
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   }
   const productInfoList = div(
     {
       class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5',
     },
+<<<<<<< HEAD
     div({ class: 'product-info-left lg:w-[400px] !font-medium !text-black !text-[32px] !leading-10' }),
     div({ class: 'product-info-right lg:w-[840px]' }),
   );
@@ -54,6 +70,14 @@ export default async function decorate(block) {
   if (paragraphs.length > 1) {
     paragraphs[paragraphs.length - 1].classList.remove('mb-3');
   }
+=======
+    div({ class: 'product-info-left lg:w-[400px]' }),
+    div({ class: 'product-info-right lg:w-[840px]' }),
+  );
+  productInfoList.querySelector('.product-info-left').innerHTML = titleEl;
+  productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
+  productInfoListWrapper.appendChild(productInfoList);
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   block.innerHTML = '';
   block.appendChild(productInfoListWrapper);
 }

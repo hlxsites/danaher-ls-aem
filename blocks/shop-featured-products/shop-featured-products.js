@@ -47,6 +47,7 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   }
 }
 export default function decorate(block) {
+<<<<<<< HEAD
   const [bannerTitle] = block.children;
 
   const opcoBannerItems = [];
@@ -58,6 +59,14 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const sectionHeading = bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+=======
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  const sectionHeading = block
+    .querySelector("[data-aue-label='Section Heading']")
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const carouselHead = div({
     class: 'w-full flex sm:flex-row justify-between  gap-3 pb-6',
@@ -101,7 +110,13 @@ export default function decorate(block) {
     }),
   );
   // === RIGHT CAROUSEL SECTION ===
+<<<<<<< HEAD
   const items = opcoBannerItems;
+=======
+  const items = block.querySelectorAll(
+    "[data-aue-label='Shop Featured Products Item']",
+  );
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   const slides = [];
   let currentIndex = 0;
   const currentPage = 1;
@@ -131,6 +146,7 @@ export default function decorate(block) {
   decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
   items.forEach((item, index) => {
+<<<<<<< HEAD
     let itemTitle;
     let itemHeading;
     let itemSubHeading;
@@ -176,16 +192,56 @@ export default function decorate(block) {
     const productButtonTarget = itemButtonTarget?.textContent?.trim() || '';
     const productButtonLabel = itemButtonLabel?.textContent?.trim() || '';
 
+=======
+    const brandTitle = item
+      .querySelector('[data-aue-prop="brandTitle"]')
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '';
+    const productTitle = item
+      .querySelector("[data-aue-prop='productTitle']")
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '';
+    const productImage = item.querySelector(
+      "img[data-aue-prop='fileReference']",
+    );
+    const productSubHeading = item
+      .querySelector("[data-aue-prop='productSubHeading']")
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '';
+    const productDescription = item.querySelector("[data-aue-prop='productDescription']")?.innerHTML
+      || '';
+    const productButtonLabel = item
+      .querySelector("p[data-aue-prop='productButtonLabel']")
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '';
+    const productButtonUrl = item
+      .querySelector('a[href]:not([data-aue-label])')
+      ?.getAttribute('href')
+      .replace(/<[^>]*>/g, '') || '#';
+
+    const bgColor = item
+      .querySelector("p[data-aue-prop='bg-color']")
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '#660099';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     // === Left Image Section ===
 
     if (productImage) {
       productImage.onerror = () => {
+<<<<<<< HEAD
         productImage.src = '/content/dam/danaher/products/fallbackImage.jpeg';
+=======
+        productImage.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       };
     }
     let fallbackImage = '';
     if (!productImage) {
+<<<<<<< HEAD
       fallbackImage = '/content/dam/danaher/products/fallbackImage.jpeg';
+=======
+      fallbackImage = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     }
     const leftSection = div(
       {
@@ -235,6 +291,7 @@ export default function decorate(block) {
           productSubHeading,
         ),
 
+<<<<<<< HEAD
         div({
           class:
             'shop-featured-description text-white text-base m-0  leading-snug ',
@@ -243,6 +300,20 @@ export default function decorate(block) {
           {
             href: productButtonUrl,
             target: productButtonTarget === 'true' ? '_blank' : '_self',
+=======
+        div(
+          {
+            class: 'text-white text-base m-0 font-extralight leading-snug ',
+          },
+          ...Array.from(
+            new DOMParser().parseFromString(productDescription, 'text/html')
+              .body.childNodes,
+          ),
+        ),
+        a(
+          {
+            href: productButtonUrl,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             class:
               'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },
@@ -250,6 +321,7 @@ export default function decorate(block) {
         ),
       ),
     );
+<<<<<<< HEAD
     if (productDescription) {
       rightSection
         ?.querySelector('.shop-featured-description')
@@ -266,6 +338,8 @@ export default function decorate(block) {
         linkHref.includes('http') ? '_blank' : '_self',
       );
     });
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
     const slide = div(
       {
@@ -292,15 +366,25 @@ export default function decorate(block) {
   const container = div(
     {
       class:
+<<<<<<< HEAD
         'w-full hidden gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+=======
+        'w-full gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     },
     carouselHead,
     carouselOuter,
   );
   if (items?.length === 0) {
+<<<<<<< HEAD
     // container?.classList.add("hidden");
   } else if (container?.classList.contains('hidden')) {
     // container?.classList.remove("hidden");
+=======
+    container?.classList.add('hidden');
+  } else if (container?.classList.contains('hidden')) {
+    container?.classList.remove('hidden');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   }
 
   //   block.innerHtml = "";

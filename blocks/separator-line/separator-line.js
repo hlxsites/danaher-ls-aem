@@ -3,6 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
 
   const [heightInput, bgColorInput] = block.children;
   const bgColorContainer = bgColorInput?.textContent?.trim() || '#D1D5DB';
@@ -10,6 +11,15 @@ export default function decorate(block) {
 
   const bgColor = bgColorContainer;
   const height = separatorHeight;
+=======
+  const bgColorContainer = block.querySelector('[data-aue-prop="bg-color"]');
+  const separatorHeight = block.querySelector(
+    '[data-aue-prop="separatorHeight"]',
+  );
+
+  const bgColor = bgColorContainer?.textContent?.trim() || '#D1D5DB';
+  const height = separatorHeight?.textContent?.trim() || '1';
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
   const separatorSection = div({
     style: `background-color: ${bgColor};height: ${height}px`,

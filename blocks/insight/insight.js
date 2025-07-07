@@ -1,5 +1,9 @@
 import {
   div,
+<<<<<<< HEAD
+=======
+  p,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   h2,
   a,
   img,
@@ -8,11 +12,15 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+<<<<<<< HEAD
 import { decorateModals } from '../../scripts/scripts.js';
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+<<<<<<< HEAD
   const [insightTitle, insightDescription] = block.children;
 
   const insightItemsList = [];
@@ -67,6 +75,32 @@ export default function decorate(block) {
 
     const imgEl = itemImage?.querySelector('img');
 
+=======
+  const getText = (prop, el = block) => el
+    .querySelector(`[data-aue-prop="${prop}"]`)
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
+
+  const getHTML = (prop, el = block) => el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
+
+  // Extract top-level title/description
+  const leftTitle = getText('titleText');
+  const leftDescHTML = getHTML('description');
+
+  // Create structured JSON from insight items
+  const itemElements = [
+    ...block.querySelectorAll('[data-aue-model="insight-item"]'),
+  ];
+  const insightItems = itemElements.map((item) => {
+    const title = getText('lefttitle', item);
+    const description = getText('leftDes', item);
+    const linkUrl = item
+      .querySelector('a')
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, '') || '#';
+    const linkLabel = getText('linklabel', item);
+    const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
     const imgSrc = imgEl?.getAttribute('src') || '';
     const fullImgSrc = imgSrc && !imgSrc.startsWith('http')
       ? `${window.location.origin}${imgSrc}`
@@ -75,9 +109,13 @@ export default function decorate(block) {
     return {
       title,
       description,
+<<<<<<< HEAD
       linkType,
       linkUrl,
       linkTarget,
+=======
+      linkUrl,
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       linkLabel,
       imgSrc: fullImgSrc,
     };
@@ -96,6 +134,7 @@ export default function decorate(block) {
       { class: 'text-2xl md:text-3xl font-semibold mb-4 mt-0 text-black' },
       leftTitle,
     ),
+<<<<<<< HEAD
     div({
       class: 'text-base text-black font-normal leading-relaxed',
       id: 'leftColDescription',
@@ -129,6 +168,17 @@ export default function decorate(block) {
 
     link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
   });
+=======
+    div(
+      { class: 'text-base text-black font-normal leading-relaxed' },
+      ...Array.from(
+        new DOMParser().parseFromString(leftDescHTML, 'text/html').body
+          .childNodes,
+      ),
+    ),
+  );
+
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   // RIGHT COLUMN
   const rightCol = div({
     class:
@@ -136,12 +186,18 @@ export default function decorate(block) {
   });
 
   insightItems.forEach(
+<<<<<<< HEAD
     (
       {
         title, description, linkType, linkUrl, linkTarget, linkLabel, imgSrc,
       },
       ind,
     ) => {
+=======
+    ({
+      title, description, linkUrl, linkLabel, imgSrc,
+    }, ind) => {
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       const imageEl = imgSrc
         ? img({
           src: imgSrc,
@@ -167,20 +223,31 @@ export default function decorate(block) {
             },
             title,
           ),
+<<<<<<< HEAD
           div(
             {
               class:
                 'insight-description font-normal text-base textblack mb-3 text-black !m-0 !p-0',
             },
+=======
+          p(
+            { class: 'text-base textblack mb-3 font-extralight !m-0 !p-0' },
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             description,
           ),
           a(
             {
+<<<<<<< HEAD
               href: linkType === 'modal' ? '#' : linkUrl,
               target: linkTarget === 'true' ? '_blank' : '_self',
               class: `text-danaherpurple-500  ${
                 linkType === 'modal' ? 'show-modal-btn' : ''
               } [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800  text-base font-semibold  flex items-center !m-0 !p-0`,
+=======
+              href: linkUrl,
+              class:
+                'text-danaherpurple-500 text-base font-semibold  flex items-center !m-0 !p-0',
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
             },
             linkLabel,
             span({
@@ -191,6 +258,7 @@ export default function decorate(block) {
         ),
       );
 
+<<<<<<< HEAD
       const descriptionLinks = container
         ?.querySelector('.insight-description')
         ?.querySelectorAll('a');
@@ -209,6 +277,8 @@ export default function decorate(block) {
           linkHref.includes('http') ? '_blank' : '_self',
         );
       });
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
       rightCol.appendChild(container);
     },
   );
@@ -217,8 +287,13 @@ export default function decorate(block) {
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
   decorateIcons(eyesection);
+<<<<<<< HEAD
   decorateModals(eyesection);
   block.append(eyesection);
+=======
+  block.append(eyesection);
+  // Hide authored content
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
   [...block.children].forEach((child) => {
     if (!child.contains(eyesection)) {
       child.style.display = 'none';

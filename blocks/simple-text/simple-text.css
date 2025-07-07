@@ -86,11 +86,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
 .simple-text-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .simple-text-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -108,10 +111,13 @@
   padding-right: 0px
 }
 
+<<<<<<< HEAD
 .simple-text-wrapper :is(.pb-4) {
   padding-bottom: 1rem
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 .simple-text-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -122,12 +128,21 @@
   line-height: 1.5rem
 }
 
+<<<<<<< HEAD
 .simple-text-wrapper :is(.font-medium) {
   font-weight: 400
 }
 
 .simple-text-wrapper :is(.font-normal) {
   font-weight: 200
+=======
+.simple-text-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.simple-text-wrapper :is(.font-medium) {
+  font-weight: 400
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 }
 
 .simple-text-wrapper :is(.leading-10) {
@@ -143,6 +158,7 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
 .simple-text-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -161,6 +177,8 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+=======
+>>>>>>> 169f3ab83f962246a350c9954f02dd66c0cc1d2a
 @media (min-width: 768px) {
   .simple-text-wrapper :is(.md\:w-1\/2) {
     width: 50%
