@@ -31,7 +31,7 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "article:tag",
+            "name": "article:Tag",
             "label": "article:tag",
             "value": ""
           },
@@ -469,6 +469,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "leftProductsEndPoint",
+        "value": "",
+        "label": "Left Carousel Products API Endpoint"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "rightCarouseTitle",
         "value": "",
         "label": "Right Carousel Title"
@@ -486,6 +493,13 @@
         "name": "rightCarouselProductId",
         "value": "",
         "label": "Right Carousel Product IDs"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rightProductsEndPoint",
+        "value": "",
+        "label": "Right Carousel Products API Endpoint"
       }
     ]
   },
@@ -1255,6 +1269,13 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs (comma separated)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productsEndPoint",
+        "value": "",
+        "label": "Products API Endpoint"
       }
     ]
   },
