@@ -26,8 +26,7 @@ export default async function decorate(block) {
   const [heading, blockProductIds, productsEndPoint] = block.children;
 
   const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
-  const rawIds =
-    blockProductIds?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const rawIds = blockProductIds?.textContent.trim().replace(/<[^>]*>/g, '') || '';
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
@@ -60,8 +59,8 @@ export default async function decorate(block) {
       {
         class: 'text-black text-2xl font-medium leading-[2.5rem]',
       },
-      headingText ?? ''
-    )
+      headingText ?? '',
+    ),
   );
 
   const arrows = div({
@@ -76,7 +75,7 @@ export default async function decorate(block) {
     span({
       class:
         'icon icon-Arrow-circle-left  cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
-    })
+    }),
   );
   const nextDiv = div(
     {
@@ -86,7 +85,7 @@ export default async function decorate(block) {
     span({
       class:
         'icon icon-Arrow-circle-right  cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-    })
+    }),
   );
   arrowGroup.append(prevDiv, nextDiv);
   decorateIcons(arrowGroup);
@@ -101,8 +100,8 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-view-list w-5 h-5 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
-      })
-    )
+      }),
+    ),
   );
   const gridBtn = div(
     {
@@ -114,8 +113,8 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white',
-      })
-    )
+      }),
+    ),
   );
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
@@ -134,7 +133,7 @@ export default async function decorate(block) {
 
   const products = (
     await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false))
+      productIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
     .filter((product) => product.status !== 'error')
@@ -149,11 +148,9 @@ export default async function decorate(block) {
     if (isGridView) {
       const cardsToDisplay = products.slice(
         currentIndex,
-        currentIndex + cardsPerPageGrid
+        currentIndex + cardsPerPageGrid,
       );
-      cardsToDisplay?.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
+      cardsToDisplay?.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
       arrowGroup.style.display = 'flex';
     }
@@ -170,7 +167,7 @@ export default async function decorate(block) {
         ?.querySelector('span')
         ?.classList.remove(
           '[&_svg>use]:stroke-gray-300',
-          'pointer-events-none'
+          'pointer-events-none',
         );
     } else {
       prevDiv
@@ -188,7 +185,7 @@ export default async function decorate(block) {
         ?.querySelector('span')
         ?.classList.remove(
           '[&_svg>use]:stroke-gray-300',
-          'pointer-events-none'
+          'pointer-events-none',
         );
     } else {
       nextDiv
@@ -216,8 +213,8 @@ export default async function decorate(block) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
     } else if (
-      !isGridView &&
-      currentPage < Math.ceil(products.length / cardsPerPageList)
+      !isGridView
+      && currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
       currentPage += 1;
       updateCarousel();
@@ -233,36 +230,36 @@ export default async function decorate(block) {
 
     gridBtn?.classList.replace(
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
-      toGridView ? 'bg-danaherpurple-500' : 'bg-white'
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
       ?.querySelector('.icon')
       ?.classList.replace(
         toGridView ? 'text-gray-600' : 'text-white',
-        toGridView ? 'text-white' : 'text-gray-600'
+        toGridView ? 'text-white' : 'text-gray-600',
       );
     gridBtn
       ?.querySelector('.icon')
       ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600'
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
       );
 
     listBtn?.classList.replace(
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
-      toGridView ? 'bg-white' : 'bg-danaherpurple-500'
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
       ?.querySelector('.icon')
       ?.classList.replace(
         toGridView ? 'text-white' : 'text-gray-600',
-        toGridView ? 'text-gray-600' : 'text-white'
+        toGridView ? 'text-gray-600' : 'text-white',
       );
     listBtn
       ?.querySelector('.icon')
       ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white'
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
 
     updateCarousel();
