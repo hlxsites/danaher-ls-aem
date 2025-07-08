@@ -240,6 +240,7 @@ export default function renderProductListCard(item) {
   card.append(leftSection, rightSection);
 
   decorateModals(desktopActionButtons);
+  decorateModals(actionButtons);
 
   return card;
 }
