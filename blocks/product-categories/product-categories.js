@@ -4,7 +4,7 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const baseUrl = `https://${window.DanaherConfig.host}/`;
+  const baseUrl = `https://${window.DanaherConfig.host}`;
   const maxCards = 28;
 
   const [productCategoryId, blockTitle, blockBrand] = block.children;

@@ -41,7 +41,7 @@ export function preLoader() {
     },
     img({
       class: ' h-24',
-      src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif',
+      src: '/content/dam/loading_icon.gif',
     }),
   );
 }
