@@ -2,6 +2,8 @@ import { div, h2 } from '../../scripts/dom-builder.js';
 import { getProductResponse } from '../../scripts/commerce.js';
 
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const response = await getProductResponse();
   if (response?.length > 0) {
     if (response[0]?.raw.attributejson !== undefined) {

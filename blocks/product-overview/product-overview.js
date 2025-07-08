@@ -1,6 +1,8 @@
 import { getProductResponse } from '../../scripts/commerce.js';
 
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const response = await getProductResponse();
   if (response?.length > 0) {
     block.innerHTML = response[0].raw?.richlongdescription ? response[0].raw.richlongdescription : '';

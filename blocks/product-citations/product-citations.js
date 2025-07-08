@@ -4,6 +4,8 @@ import {
 import { loadScript } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const citationsLinkEl = block.querySelector('a');
   if (citationsLinkEl) {
     const id = citationsLinkEl.getAttribute('title');

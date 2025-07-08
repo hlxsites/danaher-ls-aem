@@ -88,6 +88,8 @@ const childProducts = `
 `;
 
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const sku = document.querySelector('.sku.hidden')?.textContent.trim();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
   const response = await getProductResponse();
