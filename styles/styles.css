@@ -698,6 +698,7 @@ main .default-content-wrapper h2,
   }
 }
 
+<<<<<<< HEAD
 .bg-danaherpurple-50 {
   background-color: #EADEFF;
 }
@@ -709,6 +710,8 @@ main .default-content-wrapper h2,
   line-height: 1.75rem;
 }
 
+=======
+>>>>>>> em1-so-optimized
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none;
 }
@@ -794,8 +797,12 @@ main
       .carousel-wrapper,
       .page-jump-menu-wrapper,
       .page-tabs-wrapper,
+<<<<<<< HEAD
       .spline-viewer-wrapper,
       .tiled-viewer-wrapper
+=======
+      .spline-viewer-wrapper
+>>>>>>> em1-so-optimized
     ) {
     margin-left: auto;
     margin-right: auto;
@@ -2169,11 +2176,13 @@ svg symbol path {
 .appear breadcrumb {
   display: block;
   height: 3.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 1024px) {
   .appear breadcrumb {
-    height: 2.5rem;
+    height: 45px;
   }
 }
 
@@ -2734,6 +2743,11 @@ button {
   margin: 0px;
 }
 
+.\!mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2829,6 +2843,10 @@ button {
   display: inline;
 }
 
+.\!flex {
+  display: flex !important;
+}
+
 .flex {
   display: flex;
 }
@@ -2893,8 +2911,13 @@ button {
   height: 100%;
 }
 
+<<<<<<< HEAD
 .max-h-48 {
   max-height: 12rem;
+=======
+.\!w-full {
+  width: 100% !important;
+>>>>>>> em1-so-optimized
 }
 
 .w-10 {
@@ -2957,8 +2980,13 @@ button {
   width: 100%;
 }
 
+<<<<<<< HEAD
 .min-w-\[320px\] {
   min-width: 320px;
+=======
+.\!max-w-7xl {
+  max-width: 80rem !important;
+>>>>>>> em1-so-optimized
 }
 
 .max-w-7xl {
@@ -3015,6 +3043,10 @@ button {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.\!flex-col {
+  flex-direction: column !important;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -3045,6 +3077,10 @@ button {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.\!gap-\[3\%\] {
+  gap: 3% !important;
 }
 
 .gap-2 {
@@ -3210,6 +3246,11 @@ button {
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -3233,10 +3274,13 @@ button {
   --tw-bg-opacity: 0.5;
 }
 
+<<<<<<< HEAD
 .fill-current {
   fill: currentColor;
 }
 
+=======
+>>>>>>> em1-so-optimized
 .stroke-danaherpurple-500 {
   stroke: #7523FF;
 }
@@ -3349,6 +3393,7 @@ button {
   padding-bottom: 1.5rem;
 }
 
+<<<<<<< HEAD
 .pl-0 {
   padding-left: 0px;
 }
@@ -3369,6 +3414,8 @@ button {
   padding-left: 2.25rem;
 }
 
+=======
+>>>>>>> em1-so-optimized
 .pr-11 {
   padding-right: 2.75rem;
 }
@@ -3379,6 +3426,10 @@ button {
 
 .pt-12 {
   padding-top: 3rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .pt-4 {
@@ -3890,8 +3941,20 @@ main .section.top-border {
     max-width: 80rem;
   }
 
+  .lg\:max-w-\[25\%\] {
+    max-width: 25%;
+  }
+
+  .lg\:max-w-\[72\%\] {
+    max-width: 72%;
+  }
+
   .lg\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .lg\:\!flex-row {
+    flex-direction: row !important;
   }
 
   .lg\:px-8 {

@@ -1,6 +1,4 @@
-import {
-  div, p, span, input, button,
-} from '../../scripts/dom-builder.js';
+import { div, p, span, input, button } from '../../scripts/dom-builder.js';
 import {
   getAuthorization,
   getCommerceBase,
@@ -20,7 +18,8 @@ function showImage(e) {
   if (e.target) {
     const currentPicture = e.target.parentElement;
     const currentActive = currentPicture.parentElement.querySelector('.active');
-    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
+    if (currentActive && currentActive.className.includes('active'))
+      currentActive.classList.toggle('active');
     currentPicture.classList.toggle('active');
     selectedImage.replaceWith(currentPicture.cloneNode(true));
   }
@@ -28,20 +27,20 @@ function showImage(e) {
 
 function loadMore() {
   const allImageContainer = document.querySelector(
-    '.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active',
+    '.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active'
   ).parentElement;
   const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
   const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
   if (shownImage.length > 0) {
     if (
-      shownImage[shownImage.length - 1].nextElementSibling
-      && !shownImage[shownImage.length - 1].nextElementSibling.className.includes(
-        'view-more',
+      shownImage[shownImage.length - 1].nextElementSibling &&
+      !shownImage[shownImage.length - 1].nextElementSibling.className.includes(
+        'view-more'
       )
     ) {
       shownImage[0].classList.add('hidden');
       shownImage[shownImage.length - 1].nextElementSibling.classList.remove(
-        'hidden',
+        'hidden'
       );
     } else {
       // REMOVE THE LASTS FIRST-INDEXED NON-HIDDEN VALUE
@@ -49,7 +48,7 @@ function loadMore() {
       if (firstNonActive) firstNonActive.classList.remove('hidden');
       // HIDE THE LAST-HIDDEN-ELEMENT'S NEXT-SIBLING
       notShownImage[notShownImage.length - 1].nextElementSibling.classList.add(
-        'hidden',
+        'hidden'
       );
     }
   }
@@ -58,14 +57,14 @@ function loadMore() {
 function imageSlider(allImages, productName = 'product') {
   const slideContent = div(
     { class: 'image-content' },
-    createOptimizedS7Picture(allImages[0], `${productName} - image`, true),
+    createOptimizedS7Picture(allImages[0], `${productName} - image`, true)
   );
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = createOptimizedS7Picture(
       image,
       `${productName} - image ${index + 1}`,
-      false,
+      false
     );
     let imageClass = index === 0 ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
@@ -84,7 +83,7 @@ function imageSlider(allImages, productName = 'product') {
   }
   return div(
     { class: 'vertical-gallery-container' },
-    div(slideContent, verticalSlides),
+    div(slideContent, verticalSlides)
   );
 }
 
@@ -176,9 +175,9 @@ async function addToQuote(product) {
     const baseURL = getCommerceBase();
     const authHeader = getAuthorization();
     if (
-      authHeader
-      && (authHeader.has('authentication-token')
-        || authHeader.has('Authorization'))
+      authHeader &&
+      (authHeader.has('authentication-token') ||
+        authHeader.has('Authorization'))
     ) {
       const quote = await fetch(`${baseURL}/rfqcart/-`, {
         method: 'POST',
@@ -259,9 +258,9 @@ export default async function decorate(block) {
           div({
             class:
               'text-center justify-start text-violet-900 text-lg font-normal',
-          }),
-        ),
-      ),
+          })
+        )
+      )
     );
 
     headingDiv.append(skudiv);
@@ -273,7 +272,7 @@ export default async function decorate(block) {
         {
           class: 'self-stretch justify-start text-black text-4xl font-normal',
         },
-        response[0]?.raw.titlelsig,
+        response[0]?.raw.titlelsig
       ),
       div(
         {
@@ -283,8 +282,8 @@ export default async function decorate(block) {
           {
             class: 'w-64 justify-start text-gray-700 text-base font-extralight',
           },
-          productInfo.data.sku,
-        ),
+          productInfo.data.sku
+        )
       ),
       div(
         { class: 'self-stretch flex flex-col justify-start items-start' },
@@ -293,9 +292,9 @@ export default async function decorate(block) {
             class:
               'self-stretch justify-start text-black text-base font-extralight',
           },
-          response[0]?.raw.richdescription,
-        ),
-      ),
+          response[0]?.raw.richdescription
+        )
+      )
     );
     headingDiv.append(itemInfoDiv);
     defaultContent.append(headingDiv);
@@ -309,7 +308,7 @@ export default async function decorate(block) {
         {
           class: 'justify-start text-black text-4xl font-normal',
         },
-        `$${productInfo.data.salePrice.value}`,
+        `$${productInfo.data.salePrice.value}`
       ),
       div(
         {
@@ -329,14 +328,14 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base font-extralight',
             },
-            'Availability',
+            'Availability'
           ),
           div(
             {
               class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.availability ? 'EA' : 'EA',
-          ),
+            productInfo.data.availability ? 'EA' : 'EA'
+          )
         ),
 
         div({
@@ -352,7 +351,7 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base font-extralight ',
             },
-            'Unit of Measure',
+            'Unit of Measure'
           ),
           div(
             {
@@ -360,8 +359,8 @@ export default async function decorate(block) {
             },
             productInfo.data.packingUnit === ''
               ? 'EA'
-              : productInfo.data.packingUnit,
-          ),
+              : productInfo.data.packingUnit
+          )
         ),
 
         div({
@@ -377,16 +376,16 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base font-extralight',
             },
-            'Min. Order Qty',
+            'Min. Order Qty'
           ),
           div(
             {
               class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.minOrderQuantity,
-          ),
-        ),
-      ),
+            productInfo.data.minOrderQuantity
+          )
+        )
+      )
     );
 
     const shipInfo = div(
@@ -402,14 +401,14 @@ export default async function decorate(block) {
           {
             class: 'w-20 justify-start text-black text-base font-extralight',
           },
-          'Ship From',
+          'Ship From'
         ),
         div(
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer,
-        ),
+          productInfo.data.manufacturer
+        )
       ),
       div(
         {
@@ -419,15 +418,15 @@ export default async function decorate(block) {
           {
             class: 'w-20 justify-start text-black text-base font-extralight',
           },
-          'Sold By',
+          'Sold By'
         ),
         div(
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer,
-        ),
-      ),
+          productInfo.data.manufacturer
+        )
+      )
     );
 
     // defaultContent.prepend(
@@ -445,20 +444,20 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
     addCartBtnEl.classList.add(
-      ...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(
-        ' ',
-      ),
+      ...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(
+        ' '
+      )
     );
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(
-        ...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(
-          ' ',
-        ),
+        ...'btn-outline-trending-brand mt-6 text-lg rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(
+          ' '
+        )
       );
       if (
-        response[0]?.raw?.objecttype === 'Product'
-        || response[0]?.raw?.objecttype === 'Bundle'
+        response[0]?.raw?.objecttype === 'Product' ||
+        response[0]?.raw?.objecttype === 'Bundle'
       ) {
         rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => {
@@ -467,119 +466,11 @@ export default async function decorate(block) {
       } else {
         rfqParent = p(
           { class: 'show-modal-btn lg:w-55 cursor-pointer' },
-          rfqEl,
+          rfqEl
         );
       }
+      defaultContent.append(rfqParent);
 
-      const modalInput = input({
-        id: productInfo.data.lineItemId,
-        class:
-          'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
-        type: 'number',
-        min: productInfo.data.minOrderQuantity,
-        max:
-          productInfo.data.maxOrderQuantity == 0
-            ? 99
-            : productInfo.data.maxOrderQuantity,
-        name: 'item-quantity',
-        value: 1,
-      });
-
-      const buyButton = div(
-        {
-          class: 'flex justify-start items-start gap-3',
-        },
-        button(
-          {
-            class:
-              'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-            sku: productInfo.data.sku,
-            productName: productInfo.data.productName,
-            minOrderQuantity: productInfo.data.minOrderQuantity,
-            manufacturer: productInfo.data.manufacturer,
-            maxOrderQuantity: productInfo.data.maxOrderQuantity,
-            price: productInfo.data.salePrice.value,
-            quantity: 0,
-          },
-          'Buy Now',
-        ),
-      );
-      let enteredValue = 0;
-      modalInput.addEventListener('change', (event) => {
-        // const selectedDiv = document.getElementById
-        // (productInfo.data.lineItemId); // or any div reference
-        const inputElement = document.getElementById(
-          productInfo.data.lineItemId,
-        );
-        const productItem = inputElement.parentElement;
-        enteredValue = event.target.value;
-        if (enteredValue < Number(inputElement.min)) {
-          productItem.style.border = '2px solid red';
-          // eslint-disable-next-line
-          alert(
-            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-          );
-        } else if (enteredValue > Number(input.max)) {
-          productItem.style.border = '2px solid red';
-          // eslint-disable-next-line
-          alert(
-            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-          );
-        } else {
-          productItem.style.border = '';
-          // modifyCart("quantity-added", input, event.target.value);
-        }
-        // modifyCart("quantity-added", event.target.value);
-      });
-      buyButton.addEventListener('click', async (event) => {
-        showPreLoader();
-        const item = event.target.attributes;
-        if (enteredValue == 0) enteredValue = 1;
-        item.enteredValue = Number(enteredValue);
-        const res = await addItemToCart(item, 'product-sku');
-
-        if (res) {
-          if (res.status == 'success') {
-            removePreLoader();
-          }
-        }
-      });
-      const addToCart = div(
-        {
-          class: 'self-stretch inline-flex justify-start items-end gap-3',
-        },
-        modalInput,
-        buyButton,
-      );
-      decorateIcons(addToCart);
-      // defaultContent.append(rfqParent);
-      const buttonTab = div(
-        {
-          class:
-            'w-full self-stretch inline-flex justify-start items-end gap-3',
-        },
-        productInfo.data.salePrice?.value != 0
-          && response[0]?.raw?.objecttype === 'Product'
-          ? addToCart
-          : '',
-        rfqParent,
-      );
-
-      const priceInfoDiv = div({
-        class: 'self-stretch flex flex-col justify-start items-start gap-5',
-      });
-      if (
-        response[0]?.raw?.objecttype === 'Product'
-        || response[0]?.raw?.objecttype === 'Bundle'
-      ) {
-        priceInfoDiv.append(infoTab);
-        priceInfoDiv.append(shipInfo);
-      }
-      priceInfoDiv.prepend(
-        span({ class: 'sku hidden' }, response[0]?.raw.productid),
-      );
-      priceInfoDiv.append(buttonTab);
-      defaultContent.append(priceInfoDiv);
       /* brandname checking and displaying buy now btn */
 
       const brandName = response[0]?.raw?.opco || null;
@@ -590,9 +481,9 @@ export default async function decorate(block) {
       const brandButton = document.createElement('button');
       brandButton.textContent = 'Buy Now on abcam.com';
       brandButton.classList.add(
-        ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
-          ' ',
-        ),
+        ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(
+          ' '
+        )
       );
 
       const brandURL = response[0]?.raw?.externallink
@@ -604,29 +495,31 @@ export default async function decorate(block) {
 
       /* eslint eqeqeq: "off" */
       if (
-        showskupricelistusd
-        && brandName === 'Abcam'
-        && showskupricelistusd != ''
+        showskupricelistusd &&
+        brandName === 'Abcam' &&
+        showskupricelistusd != ''
       ) {
         const brandStartPrice = div(
-          { class: 'brand-price mt-4 flex divide-x gap-4' },
+          {
+            class:
+              'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center',
+          },
           div(
+            { class: 'price-info' },
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p(
               { class: 'start-price leading-none' },
-              `${formatMoney(currncyFormat)}`,
-            ),
+              `${formatMoney(currncyFormat)}`
+            )
           ),
           div(
-            {
-              class:
-                'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start',
-            },
-            brandButton,
+            { class: 'flex gap-4 items-stretch add-buynow-btn' },
+            brandButton
           ),
+          rfqParent
         );
         defaultContent.append(brandStartPrice);
-        rfqParent.remove();
+        // rfqParent.remove();
       }
     }
 
@@ -640,7 +533,7 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-Globe-alt w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const externalLink = div(
       {
@@ -649,12 +542,12 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-External-link w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const externalButton = div(
       { class: 'inline-flex cursor-pointer justify-center items-center' },
       `To learn more visit ${response[0]?.raw.opco} `,
-      externalLink,
+      externalLink
     );
     const clickableLink = response[0].raw.externallink
       ? response[0].raw.externallink
@@ -669,7 +562,7 @@ export default async function decorate(block) {
           'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
       },
       globeImg,
-      externalButton,
+      externalButton
     );
     decorateIcons(info);
     infoDiv.prepend(info);
@@ -697,7 +590,7 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const rectangleButton = div(
       {
@@ -706,7 +599,7 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const chevronButton = div(
       {
@@ -715,7 +608,7 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const clipBoard = div(
       {
@@ -724,7 +617,7 @@ export default async function decorate(block) {
       span({
         class:
           'icon icon-ClipboardList w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
+      })
     );
     const categoryLink = div(
       {
@@ -747,7 +640,7 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base',
             },
-            'See all products in this family',
+            'See all products in this family'
           ),
           div(
             {
@@ -756,9 +649,9 @@ export default async function decorate(block) {
             span({
               class:
                 'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
-            }),
-          ),
-        ),
+            })
+          )
+        )
       ),
       div(
         {
@@ -767,8 +660,8 @@ export default async function decorate(block) {
         span({
           class:
             'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
-        }),
-      ),
+        })
+      )
     );
 
     decorateIcons(categoryLink);
@@ -776,10 +669,13 @@ export default async function decorate(block) {
     categoryLink.addEventListener('click', () => {
       const main = block.closest('main');
       const sections = main.querySelectorAll('.section.page-tab');
-      const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
+      const tabSections = [...sections].filter((section) =>
+        section.hasAttribute('data-tabname')
+      );
       if (tabSections) {
-        const currentTab = window.location.hash?.replace('#', '')
-          || tabSections[0].getAttribute('aria-labelledby');
+        const currentTab =
+          window.location.hash?.replace('#', '') ||
+          tabSections[0].getAttribute('aria-labelledby');
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -811,7 +707,7 @@ export default async function decorate(block) {
           span({
             class:
               'icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
-          }),
+          })
         ),
         div(
           {
@@ -821,10 +717,10 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base',
             },
-            'See all products in this family',
-          ),
-        ),
-      ),
+            'See all products in this family'
+          )
+        )
+      )
     );
     decorateIcons(categoryLinkSku);
     categoryLinkSku.addEventListener('click', () => {
@@ -848,12 +744,12 @@ export default async function decorate(block) {
             {
               class: 'justify-start text-black text-base',
             },
-            'See all items in this bundle',
+            'See all items in this bundle'
           ),
-          rectangleButton,
-        ),
+          rectangleButton
+        )
       ),
-      chevronButton,
+      chevronButton
     );
 
     // decorateIcons(bundleLink);
@@ -862,16 +758,19 @@ export default async function decorate(block) {
         class: 'w-full inline-flex gap-6 flex-col md:flex-row',
       },
       bundleLink,
-      categoryLink,
+      categoryLink
     );
     decorateIcons(bundleTab);
     bundleLink.addEventListener('click', () => {
       const main = block.closest('main');
       const sections = main.querySelectorAll('.section.page-tab');
-      const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
+      const tabSections = [...sections].filter((section) =>
+        section.hasAttribute('data-tabname')
+      );
       if (tabSections) {
-        const currentTab = window.location.hash?.replace('#', '')
-          || tabSections[0].getAttribute('aria-labelledby');
+        const currentTab =
+          window.location.hash?.replace('#', '') ||
+          tabSections[0].getAttribute('aria-labelledby');
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -900,9 +799,9 @@ export default async function decorate(block) {
             },
 
             categoryLink,
-            div({ class: 'w-full inline-flex flex-col h-[0px]' }),
-          ),
-        ),
+            div({ class: 'w-full inline-flex flex-col h-[0px]' })
+          )
+        )
       );
       defaultContent.append(
         div(
@@ -910,8 +809,8 @@ export default async function decorate(block) {
             class:
               'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
-          infoDiv,
-        ),
+          infoDiv
+        )
       );
     } else if (response[0]?.raw?.objecttype === 'Bundle') {
       defaultContent.append(
@@ -920,8 +819,8 @@ export default async function decorate(block) {
             class:
               'w-[692px] inline-flex justify-start items-center gap-6 flex-col',
           },
-          bundleTab,
-        ),
+          bundleTab
+        )
       );
       defaultContent.append(
         div(
@@ -929,8 +828,8 @@ export default async function decorate(block) {
             class:
               'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
-          infoDiv,
-        ),
+          infoDiv
+        )
       );
     } else {
       defaultContent.append(
@@ -945,9 +844,9 @@ export default async function decorate(block) {
             },
 
             categoryLinkSku,
-            infoDiv,
-          ),
-        ),
+            infoDiv
+          )
+        )
       );
     }
 
@@ -962,8 +861,8 @@ export default async function decorate(block) {
             class:
               'text-center justify-start text-violet-600 text-lg font-normal ',
           },
-          category,
-        ),
+          category
+        )
       );
       return list;
     };
@@ -982,8 +881,8 @@ export default async function decorate(block) {
       div(
         { class: 'product-hero-content' },
         div({ class: 'hero-default-content w-full' }, defaultContent),
-        verticalImageGallery,
-      ),
+        verticalImageGallery
+      )
     );
     decorateModals(block);
     const richdescription = document.getElementById('description');

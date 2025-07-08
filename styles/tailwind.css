@@ -116,8 +116,12 @@
       .carousel-wrapper,
       .page-jump-menu-wrapper,
       .page-tabs-wrapper,
+<<<<<<< HEAD
       .spline-viewer-wrapper,
       .tiled-viewer-wrapper
+=======
+      .spline-viewer-wrapper
+>>>>>>> em1-so-optimized
     ) {
     @apply md:max-w-7xl md:mx-auto;
   }
@@ -645,7 +649,7 @@
   }
 
   .appear breadcrumb {
-    @apply block h-14 lg:h-10;
+    @apply block h-14 lg:h-[45px] bg-[#F9FAFB];
   }
 
   main
@@ -750,6 +754,7 @@
   .seventythirty .columns-2-cols .container .columns-img-col picture img {
     @apply !w-1/2;
   }
+<<<<<<< HEAD
 
   button {
     @apply mt-[10px] bg-purple-600 text-white rounded-full px-[20px] py-[10px] cursor-pointer border-none;
@@ -852,6 +857,8 @@
   #mainPreLoader {
     @apply fixed w-full backdrop-blur-[3px] z-[1213456789] left-0 top-0 h-[100vh];
   }
+=======
+>>>>>>> em1-so-optimized
 }
 
 @layer utilities {

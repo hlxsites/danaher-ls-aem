@@ -16,6 +16,13 @@
   right: 0px
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -110,10 +117,25 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.fill-current) {
   fill: currentColor
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.\!p-0) {
+  padding: 0px !important
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -153,6 +175,13 @@
   line-height: 1.25rem
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.\!text-\[32px\]) {
+  font-size: 32px !important
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -165,6 +194,13 @@
   font-weight: 700
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -179,10 +215,29 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.accordion-container-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.decoration-black) {
+  text-decoration-color: #000
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.opacity-0) {
   opacity: 0
 }
@@ -205,6 +260,23 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
+<<<<<<< HEAD
+=======
+.accordion-container-wrapper :is(.hover\:bg-danaherpurple-25:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {
+  text-decoration-color: #7523FF
+}
+
+>>>>>>> em1-so-optimized
 .accordion-container-wrapper :is(.peer:checked ~ .peer-checked\:grid-rows-\[1fr\]) {
   grid-template-rows: 1fr
 }
@@ -241,6 +313,17 @@
     width: 70%
   }
 
+<<<<<<< HEAD
+=======
+  .accordion-container-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[840px\]) {
+    width: 840px
+  }
+
+>>>>>>> em1-so-optimized
   .accordion-container-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }

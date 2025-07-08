@@ -44,11 +44,28 @@
   margin-top: 48px
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.relative) {
+  position: relative
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.block) {
   display: block
 }
@@ -61,10 +78,24 @@
   width: 100%
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -101,6 +132,18 @@
   gap: 2rem
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.gap-x-2) {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem
+}
+
+.product-hero-content-wrapper :is(.gap-y-1) {
+  row-gap: 0.25rem
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -119,11 +162,26 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
+>>>>>>> em1-so-optimized
 .product-hero-content-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -168,6 +226,19 @@
   color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.product-hero-content-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.product-hero-content-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
+>>>>>>> em1-so-optimized
 @media (min-width: 768px) {
   .product-hero-content-wrapper :is(.md\:w-96) {
     width: 24rem
@@ -187,8 +258,34 @@
 }
 
 @media (min-width: 1024px) {
+<<<<<<< HEAD
+=======
+  .product-hero-content-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .product-hero-content-wrapper :is(.lg\:flex-row) {
+    flex-direction: row
+  }
+
+>>>>>>> em1-so-optimized
   .product-hero-content-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }
+<<<<<<< HEAD
+=======
+}
+
+.product-hero-content-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.product-hero-content-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.product-hero-content-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
+  stroke: #4000A5
+>>>>>>> em1-so-optimized
 }

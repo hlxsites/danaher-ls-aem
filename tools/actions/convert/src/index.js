@@ -14,12 +14,14 @@
 /* eslint-disable import/no-relative-packages */
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { JSDOM } from "jsdom";
-import { pipe, toRuntime } from "crosswalk-converter";
-import transform from "../../../importer/import.js";
-import converterCfg from "../../../../converter.yaml";
-import mappingCfg from "../../../../paths.json";
-import createPipeline from "./utils.js";
+import { JSDOM } from 'jsdom';
+import { pipe, toRuntime } from 'crosswalk-converter';
+import transform from '../../../importer/import.js';
+import converterCfg from '../../../../converter.yaml';
+import mappingCfg from '../../../../paths.json';
+import createPipeline from './utils.js';
+// eslint-disable-next-line
+import pathConfig from './pathConfig.json' with { type: 'json' };
 
 const mediaTypes = {
   "application/atom+xml": false,
@@ -162,8 +164,8 @@ function mapInbound(franklinPath, cfg) {
             // mapping to a single page, aka. exact match, /content/site/us/en/page:/vanity
             // eslint-disable-next-line no-lonely-if
             if (
-              (franklinBasePath.endsWith("/") &&
-                candidate.endsWith("/index")) ||
+              (franklinBasePath.endsWith('/') &&
+                candidate.endsWith('/index')) ||
               franklinBasePath === candidate
             ) {
               return appendExtensionInbound(aemBasePath, extension);
@@ -178,12 +180,12 @@ function mapInbound(franklinPath, cfg) {
 }
 
 export function isBinary(contentType) {
-  if (contentType.startsWith("text/") || contentType.startsWith("message/"))
+  if (contentType.startsWith('text/') || contentType.startsWith('message/'))
     return false;
   if (
-    contentType.startsWith("audio/") ||
-    contentType.startsWith("image/") ||
-    contentType.startsWith("video/")
+    contentType.startsWith('audio/') ||
+    contentType.startsWith('image/') ||
+    contentType.startsWith('video/')
   )
     return true;
   return mediaTypes[contentType];
@@ -191,7 +193,21 @@ export function isBinary(contentType) {
 function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
-  if (path.includes(".json")) return true;
+  if (path.includes('.json')) return true;
+  if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+    console.log('Inside the emarketplace');
+    const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
+    path.includes(convertPath)
+  );
+    if (!pathsToConvert) {
+      return true;
+    }
+    else 
+    {
+      return false;
+    }
+  }
+
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
@@ -208,10 +224,10 @@ function rewriteLink(link, attribute, origin, liveUrls) {
   if (urlStr) {
     if (urlStr.startsWith("#")) return;
 
-    const url = urlStr.startsWith("/")
+    const url = urlStr.startsWith('/')
       ? new URL(urlStr, origin)
       : new URL(urlStr);
-    if (url.pathname.indexOf(".") > 0 || url.pathname.endsWith("/")) return;
+    if (url.pathname.indexOf('.') > 0 || url.pathname.endsWith('/')) return;
 
     if (
       url.hostname === origin.hostname ||
@@ -330,10 +346,10 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
     return { ...state, error: { code: resp.status, message: resp.statusText } };
   }
 
-  const [contentType] = (resp.headers.get("content-type") || "text/html").split(
-    ";"
+  const [contentType] = (resp.headers.get('content-type') || 'text/html').split(
+    ';'
   );
-  const contentLength = resp.headers.get("content-length") || -1;
+  const contentLength = resp.headers.get('content-length') || -1;
   // for binaries return the readable stream
   const blob = isBinary(contentType) ? resp.body : await resp.text();
 

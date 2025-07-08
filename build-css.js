@@ -22,11 +22,6 @@ const fileMappings = [
     wrapper: 'article-info-wrapper',
   },
   {
-    content: './blocks/learn-more/learn-more.js',
-    output: './blocks/learn-more/learn-more.css',
-    wrapper: 'learn-more-wrapper',
-  },
-  {
     content: [
       './blocks/articles-list/articles-list.js',
       './blocks/card-list/articleCard.js',
@@ -92,25 +87,6 @@ const fileMappings = [
     content: './blocks/carousel/carousel.js',
     output: './blocks/carousel/carousel.css',
     wrapper: 'carousel-wrapper',
-  },
-  {
-    content: './blocks/dashboard/dashboard.js',
-    output: './blocks/dashboard/dashboard.css',
-    wrapper: 'dashboard-wrapper',
-  },
-  {
-    content: './blocks/dual-carousel/dual-carousel.js',
-    output: './blocks/dual-carousel/dual-carousel.css',
-    wrapper: 'dual-carousel-wrapper',
-  },
-  {
-    content: [
-      './blocks/product-family/product-family.js',
-      './blocks/product-family/gridData.js',
-      './blocks/product-family/listData.js',
-    ],
-    output: './blocks/product-family/product-family.css',
-    wrapper: 'product-family-wrapper',
   },
   {
     content: './blocks/columns/columns.js',
@@ -196,11 +172,6 @@ const fileMappings = [
     wrapper: 'product-category-wrapper',
   },
   {
-    content: './blocks/product-categories/product-categories.js',
-    output: './blocks/product-categories/product-categories.css',
-    wrapper: 'product-categories-wrapper',
-  },
-  {
     content: [
       './blocks/product-category-list/product-category-list.js',
       './blocks/product-category-list/filter.js',
@@ -270,11 +241,6 @@ const fileMappings = [
     content: './blocks/recent-articles/recent-articles.js',
     output: './blocks/recent-articles/recent-articles.css',
     wrapper: 'recent-articles-wrapper',
-  },
-  {
-    content: './blocks/recent-category/recent-category.js',
-    output: './blocks/recent-category/recent-category.css',
-    wrapper: 'recent-category-wrapper',
   },
   {
     content: [
@@ -407,6 +373,120 @@ const fileMappings = [
     wrapper: 'separator-line-wrapper',
   },
   {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
+  },
+  {
+    content: './blocks/learn-more/learn-more.js',
+    output: './blocks/learn-more/learn-more.css',
+    wrapper: 'learn-more-wrapper',
+  },
+  {
+    content: './blocks/opco-grid/opco-grid.js',
+    output: './blocks/opco-grid/opco-grid.css',
+    wrapper: 'opco-grid-wrapper',
+  },
+  {
+    content: './blocks/dual-carousel/dual-carousel.js',
+    output: './blocks/dual-carousel/dual-carousel.css',
+    wrapper: 'dual-carousel-wrapper',
+  },
+  {
+    content: [
+      './blocks/product-family/product-family.js',
+      './blocks/product-family/gridData.js',
+      './blocks/product-family/listData.js',
+    ],
+    output: './blocks/product-family/product-family.css',
+    wrapper: 'product-family-wrapper',
+  },
+  {
+    content: './blocks/product-category/product-category.js',
+    output: './blocks/product-category/product-category.css',
+    wrapper: 'product-category-wrapper',
+  },
+  {
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
+    content: './blocks/shop-featured-products/shop-featured-products.js',
+    output: './blocks/shop-featured-products/shop-featured-products.css',
+    wrapper: 'shop-featured-products-wrapper',
+  },
+  {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/product-banner/product-banner.css',
+    wrapper: 'product-banner-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-selling/top-selling.js',
+      './blocks/top-selling/listData.js',
+      './blocks/top-selling/gridData.js',
+    ],
+    output: './blocks/top-selling/top-selling.css',
+    wrapper: 'top-selling-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-purchased-products/top-purchased-products.js',
+      './blocks/top-purchased-products/gridData.js',
+    ],
+    output: './blocks/top-purchased-products/top-purchased-products.css',
+    wrapper: 'top-purchased-products-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-selling-products/top-selling-products.js',
+      './blocks/top-selling-products/gridData.js',
+    ],
+    output: './blocks/top-selling-products/top-selling-products.css',
+    wrapper: 'top-selling-products-wrapper',
+  },
+  {
+    content: './blocks/offer-banner/offer-banner.js',
+    output: './blocks/offer-banner/offer-banner.css',
+    wrapper: 'offer-banner-wrapper',
+  },
+  {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
+  },
+  {
+    content: './blocks/simple-text/simple-text.js',
+    output: './blocks/simple-text/simple-text.css',
+    wrapper: 'simple-text-wrapper',
+  },
+  {
+    content: './blocks/opco-banner/opco-banner.js',
+    output: './blocks/opco-banner/opco-banner.css',
+    wrapper: 'opco-banner-wrapper',
+  },
+  {
+    content: './blocks/insight/insight.js',
+    output: './blocks/insight/insight.css',
+    wrapper: 'insight-wrapper',
+  },
+  {
+    content: './blocks/separator-line/separator-line.js',
+    output: './blocks/separator-line/separator-line.css',
+    wrapper: 'separator-line-wrapper',
+  },
+  {
     content: './blocks/body-banner/body-banner.js',
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',
@@ -416,9 +496,7 @@ const fileMappings = [
 const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
-fileMappings.forEach(({
-  content, input, output, wrapper,
-}) => {
+fileMappings.forEach(({ content, input, output, wrapper }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
   const command = `npx tailwindcss ${
     input ? `-i ${input}` : './styles/proxy-tailwind.css'

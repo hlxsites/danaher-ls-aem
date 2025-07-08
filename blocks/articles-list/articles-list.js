@@ -1,8 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
-import {
-  ul, div, a, h2, span,
-} from '../../scripts/dom-builder.js';
+import { ul, div, a, h2, span } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 import createLabCard from '../card-list/newLabCard.js';
 
@@ -29,9 +27,10 @@ export default async function decorate(block) {
 
   let articles = await ffetch(`/us/en/${indexType}-index.json`)
     .filter(({ brand }) => {
-      const match = brandName && brandName !== '' && brand
-        ? brandName.toLowerCase() === brand.toLowerCase()
-        : true;
+      const match =
+        brandName && brandName !== '' && brand
+          ? brandName.toLowerCase() === brand.toLowerCase()
+          : true;
       return match;
     })
     .filter(({ type }) => type.toLowerCase() === articleType)
@@ -47,9 +46,10 @@ export default async function decorate(block) {
   });
 
   articles.forEach((article, index) => {
-    const card = pageType === 'new-lab'
-      ? createLabCard(article, index === 0)
-      : createCard(article, index === 0);
+    const card =
+      pageType === 'new-lab'
+        ? createLabCard(article, index === 0)
+        : createCard(article, index === 0);
 
     // Ensure left alignment and spacing
     card.classList.add('text-left', 'pr-6', 'pb-2');
@@ -79,18 +79,21 @@ export default async function decorate(block) {
       h2({ class: 'mt-0' }, `${compHeading}`),
       a(
         {
-          class: 'text-sm font-bold flex items-center text-danaherpurple-500',
+          class:
+            'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800  text-base font-semibold  flex items-center !m-0 !p-0',
           href: targetUrl,
+          target: targetUrl?.includes('http') ? '_blank' : '_self',
         },
         'See all',
         span({
           class:
-            'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        }),
-      ),
+            'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        })
+      )
     );
     decorateIcons(divEl);
   }
   block.textContent = '';
+  decorateIcons(cardList);
   block.append(divEl, cardList);
 }

@@ -13,6 +13,7 @@ import {
   getAuthorization,
   isLoggedInUser,
   makeCoveoApiRequest,
+  getCommerceBase,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
 
@@ -42,7 +43,7 @@ function formatSuggestionString(highlightedText, inputText) {
   return highlightedText
     .replace(
       /\[([^\]]+)\]/g,
-      inputText ? '<span class="font-bold">$1</span>' : '$1',
+      inputText ? '<span class="font-bold">$1</span>' : '$1'
     )
     .replace(/\{([^}]+)\}/g, '$1');
 }
@@ -58,13 +59,13 @@ function getRecentSearches() {
 function setRecentSearches(searchValue) {
   const recentSearches = getRecentSearches();
   const searchValueIndex = recentSearches.findIndex(
-    (search) => search === searchValue,
+    (search) => search === searchValue
   );
   if (searchValueIndex > -1) recentSearches.splice(searchValueIndex, 1);
   recentSearches.unshift(searchValue);
   localStorage.setItem(
     'coveo-recent-queries',
-    JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES)),
+    JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES))
   );
 }
 
@@ -73,7 +74,8 @@ function toggleSearchBoxMobile(e) {
   const searchBox = document.querySelector('.mobile-search');
   searchBox.classList.toggle('hidden');
   searchBox.closest('.navbar-wrapper')?.classList.toggle('pb-0');
-  if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
+  if (!searchBox.classList.contains('show'))
+    searchBox.querySelector('input').focus();
 }
 
 function getCoveoApiPayload(searchValue, type) {
@@ -122,14 +124,15 @@ async function submitSearchQuery(searchInput, actionCause = '') {
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm, 'search');
     const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
-    requestPayload.analytics.actionCause = actionCause
-      || searchInput.getAttribute('data-action-cause')
-      || 'searchFromLink';
+    requestPayload.analytics.actionCause =
+      actionCause ||
+      searchInput.getAttribute('data-action-cause') ||
+      'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
     const triggerResponseData = await makeCoveoApiRequest(
       '/rest/search/v2/plan',
       'searchKey',
-      triggerRequestPayload,
+      triggerRequestPayload
     );
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
@@ -165,21 +168,23 @@ function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
       span({
         class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
       }),
-      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
-    ),
+      span({ class: 'search-suggestion-text break-all line-clamp-2' })
+    )
   );
-  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
-    ? `
+  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML =
+    suggestionType === 'recent'
+      ? `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
         <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
       </svg>
     `
-    : `
+      : `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
         <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
       </svg>
     `;
-  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
+  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML =
+    searchText;
   searchSuggestion.addEventListener('click', async (e) => {
     const searchInput = e.target.closest('.searchbox').querySelector('input');
     searchInput.value = e.target
@@ -188,7 +193,7 @@ function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
     searchInput.focus();
     await submitSearchQuery(
       searchInput,
-      suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink',
+      suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink'
     );
   });
   return searchSuggestion;
@@ -202,7 +207,7 @@ async function buildSearchSuggestions(searchbox) {
   const suggestionsResponseData = await makeCoveoApiRequest(
     '/rest/search/v2/querySuggest',
     'searchKey',
-    requestPayload,
+    requestPayload
   );
   const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
@@ -222,18 +227,22 @@ async function buildSearchSuggestions(searchbox) {
             searchboxInput.focus();
           },
         },
-        'Clear',
-      ),
+        'Clear'
+      )
     );
     searchSuggestions.append(recentSearchesHeading);
-    recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
+    recentSearches.forEach((recentSearch) =>
+      searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent'))
+    );
   }
-  suggestions.forEach((suggestion) => searchSuggestions.append(
-    buildSearchSuggestion(
-      formatSuggestionString(suggestion.highlighted, inputText),
-      'suggestion',
-    ),
-  ));
+  suggestions.forEach((suggestion) =>
+    searchSuggestions.append(
+      buildSearchSuggestion(
+        formatSuggestionString(suggestion.highlighted, inputText),
+        'suggestion'
+      )
+    )
+  );
 }
 
 function handleSearchClear(searchBox, searchInput) {
@@ -283,9 +292,10 @@ function addEventToSearchInput(searchBlock) {
   });
   searchInput.addEventListener('keydown', async (e) => {
     const { key } = e;
-    const suggestionChildren = Array.from(
-      searchbox.querySelectorAll('.search-suggestions button.suggestion'),
-    ) || [];
+    const suggestionChildren =
+      Array.from(
+        searchbox.querySelectorAll('.search-suggestions button.suggestion')
+      ) || [];
     const suggestionCount = suggestionChildren.length;
     const handleKeyNavigation = () => {
       searchInput.value = suggestionChildren[
@@ -299,27 +309,30 @@ function addEventToSearchInput(searchBlock) {
       suggestionChildren.forEach((suggestionItem, idx) => {
         suggestionItem.classList.toggle(
           'selected',
-          idx === selectedSuggestionIndex,
+          idx === selectedSuggestionIndex
         );
       });
-      const actionCause = suggestionChildren[selectedSuggestionIndex].getAttribute(
-        'data-suggestion-type',
-      ) === 'recent'
-        ? 'searchFromLink'
-        : 'omniboxFromLink';
+      const actionCause =
+        suggestionChildren[selectedSuggestionIndex].getAttribute(
+          'data-suggestion-type'
+        ) === 'recent'
+          ? 'searchFromLink'
+          : 'omniboxFromLink';
       searchInput.setAttribute('data-action-cause', actionCause);
     };
     if (key === 'Enter') {
       await submitSearchQuery(searchInput);
     } else if (e.key === 'ArrowUp') {
-      selectedSuggestionIndex = selectedSuggestionIndex > 0
-        ? selectedSuggestionIndex - 1
-        : suggestionCount - 1;
+      selectedSuggestionIndex =
+        selectedSuggestionIndex > 0
+          ? selectedSuggestionIndex - 1
+          : suggestionCount - 1;
       handleKeyNavigation();
     } else if (e.key === 'ArrowDown') {
-      selectedSuggestionIndex = selectedSuggestionIndex < suggestionCount - 1
-        ? selectedSuggestionIndex + 1
-        : 0;
+      selectedSuggestionIndex =
+        selectedSuggestionIndex < suggestionCount - 1
+          ? selectedSuggestionIndex + 1
+          : 0;
       handleKeyNavigation();
     }
   });
@@ -347,7 +360,7 @@ function getSearchInput() {
           'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
         title:
           'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
-      }),
+      })
     ),
     div(
       { class: 'py-2' },
@@ -357,8 +370,8 @@ function getSearchInput() {
             'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
           'aria-label': 'Clear',
         },
-        div({ class: 'w-3 h-3 mx-auto search-clear-icon' }),
-      ),
+        div({ class: 'w-3 h-3 mx-auto search-clear-icon' })
+      )
     ),
     div(
       { class: 'p-2' },
@@ -373,9 +386,9 @@ function getSearchInput() {
         span({
           class: 'w-4 h-4 searchbox-icon',
           style: 'filter: brightness(0) invert(1);',
-        }),
-      ),
-    ),
+        })
+      )
+    )
   );
   inputWrapper.querySelector('span.searchbox-icon').innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -383,7 +396,7 @@ function getSearchInput() {
     </svg>
   `;
   inputWrapper.querySelector(
-    '.searchbox-clear .search-clear-icon',
+    '.searchbox-clear .search-clear-icon'
   ).innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" class="w-3 h-3">
       <path d="m18 2-1.8-2-7.1 7.1-7.1-7.1-2 2 7.1 7.1-7.1 7.1 2 1.8 7.1-6.9 7.1 6.9 1.8-1.8-6.9-7.1z"></path>
@@ -397,12 +410,12 @@ function getSearchInput() {
     },
     div({
       class: 'search-suggestions flex flex-grow basis-1/2 flex-col',
-    }),
+    })
   );
   const searchbox = div(
     { class: 'searchbox relative flex-grow' },
     inputWrapper,
-    searchSuggestionsWrapper,
+    searchSuggestionsWrapper
   );
 
   return searchbox;
@@ -419,11 +432,13 @@ function hideFlyoutMenu() {
 function sortFlyoutMenus(menuPath) {
   const menuList = document.querySelector('#menu-flyout ul');
   const heading = menuPath.split('|');
-  if (heading) document.querySelector('#menu-flyout h4').textContent = heading[heading.length - 1];
+  if (heading)
+    document.querySelector('#menu-flyout h4').textContent =
+      heading[heading.length - 1];
   [...menuList.children].forEach((menu) => {
     if (
+      menu.getAttribute('data-content') !== menuPath &&
       menu.getAttribute('data-content') !== menuPath
-      && menu.getAttribute('data-content') !== menuPath
     ) {
       menu.classList.add('hidden');
     } else {
@@ -464,7 +479,8 @@ function buildLogosBlock(headerBlock) {
     logoImg.setAttribute('alt', logoTitle);
     logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
-    logoLink.className = 'h-full flex items-center group-hover:bg-danahergray-200';
+    logoLink.className =
+      'h-full flex items-center group-hover:bg-danahergray-200';
     logoLink.append(logoPicture);
     logoLi.innerHTML = '';
     logoLi.append(logoLink);
@@ -479,16 +495,17 @@ function buildSearchBlockMobile() {
       getSearchInput(),
       div(
         { class: 'close', onclick: toggleSearchBoxMobile },
-        span({ class: 'icon icon-close [&_svg]:stroke-white' }),
-      ),
-    ),
+        span({ class: 'icon icon-close [&_svg]:stroke-white' })
+      )
+    )
   );
   addEventToSearchInput(searchBlockMobile);
   return searchBlockMobile;
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  loginLink.className =
+    'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
@@ -498,7 +515,7 @@ function buildLoginBlock(loginLink) {
   `;
   const loginSpan = span(
     { class: 'w-12 pl-2 lg:block hidden lg:inline' },
-    loginLink.textContent,
+    loginLink.textContent
   );
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
@@ -514,11 +531,11 @@ function buildLoggedInUserBlock(loginLink, user) {
       class:
         'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
     },
-    span(shortName(user)),
+    span(shortName(user))
   );
   const loginSpan = span(
     { class: 'pl-1 text-xs font-semibold text-black' },
-    'My Account',
+    'My Account'
   );
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
@@ -528,7 +545,8 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
+  searchHtmlBlock.className =
+    'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({
     class: 'w-full flex flex-row flex-wrap justify-between',
@@ -544,13 +562,16 @@ function buildSearchBlock(headerBlock) {
 
   // danaher logo
   const logoPictureBlock = searchHtmlBlock.querySelector(
-    ':scope > p > picture',
+    ':scope > p > picture'
   );
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
-  if (window.location.pathname === '/') logoLinkBlock.href = 'https://danaher.com/?utm_source=dhls_website&utm_medium=referral&utm_content=header';
+  if (window.location.pathname === '/')
+    logoLinkBlock.href =
+      'https://danaher.com/?utm_source=dhls_website&utm_medium=referral&utm_content=header';
   const logoImg = logoPictureBlock.querySelector('img');
-  logoImg.className = 'brand-logo max-w-full w-14 md:w-20 lg:w-44 h-full object-contain';
+  logoImg.className =
+    'brand-logo max-w-full w-14 md:w-20 lg:w-44 h-full object-contain';
   logoLinkBlock.className = 'ml-2 mb-2';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
@@ -569,7 +590,7 @@ function buildSearchBlock(headerBlock) {
     span({
       class:
         'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+    })
   );
 
   searchNewBlock.append(hamburgerIcon);
@@ -589,7 +610,8 @@ function buildSearchBlock(headerBlock) {
 
   // quote
   const quoteLink = searchLinks[1];
-  quoteLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  quoteLink.className =
+    'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
@@ -599,11 +621,11 @@ function buildSearchBlock(headerBlock) {
   `;
   const quoteSpan = span(
     { class: 'w-12 pl-2 lg:block hidden lg:inline' },
-    quoteLink.textContent,
+    quoteLink.textContent
   );
   const quoteCount = span(
     { class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' },
-    0,
+    0
   );
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
@@ -613,7 +635,7 @@ function buildSearchBlock(headerBlock) {
     }),
     span({
       class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500',
-    }),
+    })
   );
 
   quoteLink.textContent = '';
@@ -623,7 +645,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteDot);
   const searchIcon = div(
     { class: 'search-icon md:hidden cursor-pointer' },
-    span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }),
+    span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' })
   );
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
@@ -635,8 +657,8 @@ function buildSearchBlock(headerBlock) {
   searchHtmlBlockInner.append(
     div(
       { class: 'hidden md:block w-full md:w-3/5 order-last md:order-none' },
-      getSearchInput(),
-    ),
+      getSearchInput()
+    )
   );
 
   // aggregation
@@ -659,7 +681,7 @@ function buildSearchBlock(headerBlock) {
 
 function buildNavBlock(headerBlock) {
   const extendedSectionBlock = headerBlock.querySelector(
-    'div.extended-section',
+    'div.extended-section'
   );
   const menuLinks = [];
   [...headerBlock.children].slice(2).forEach((menuItemEl) => {
@@ -685,7 +707,7 @@ function buildNavBlock(headerBlock) {
         'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold',
       href: '/',
     },
-    'Life Sciences',
+    'Life Sciences'
   );
 
   // main nav
@@ -699,14 +721,14 @@ function buildNavBlock(headerBlock) {
           'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
         href: item.querySelector('a')?.href || '#',
       },
-      menuItemName,
+      menuItemName
     );
     if (expandIcon) {
       menuItemEl.append(
         span({
           class:
             'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1',
-        }),
+        })
       );
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
@@ -726,7 +748,7 @@ function buildFlyoutMenus(headerBlock) {
     span({
       class:
         'icon icon-x w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70',
-    }),
+    })
   );
   closeFlyout.addEventListener('click', hideFlyoutMenu);
 
@@ -736,9 +758,11 @@ function buildFlyoutMenus(headerBlock) {
       class:
         'icon icon-arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5',
     }),
-    'Back',
+    'Back'
   );
-  backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
+  backFlyout.addEventListener('click', () =>
+    sortFlyoutMenus(backFlyout.getAttribute('data-redirect'))
+  );
 
   const exploreFlyout = a(
     {
@@ -750,7 +774,7 @@ function buildFlyoutMenus(headerBlock) {
     span({
       class:
         'icon icon-arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5',
-    }),
+    })
   );
 
   const navigateActions = div(
@@ -759,7 +783,7 @@ function buildFlyoutMenus(headerBlock) {
         'flex justify-between text-base text-danaherpurple-500 font-bold mx-2',
     },
     backFlyout,
-    exploreFlyout,
+    exploreFlyout
   );
 
   decorateIcons(closeFlyout);
@@ -789,15 +813,15 @@ function buildFlyoutMenus(headerBlock) {
           span({
             class:
               'icon icon-arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5',
-          }),
+          })
         );
         liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
       } else {
         liTag.append(
           a(
             { href: flyMenuChild.querySelector('a')?.href },
-            flyMenuChild.textContent,
-          ),
+            flyMenuChild.textContent
+          )
         );
       }
       decorateIcons(liTag);
@@ -821,12 +845,12 @@ function buildFlyoutMenus(headerBlock) {
       closeFlyout,
       h4(
         { class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' },
-        'Flyout Menu Heading',
+        'Flyout Menu Heading'
       ),
       navigateActions,
       div({ class: 'border-b border-black py-2 mx-2' }),
-      menuWrapper,
-    ),
+      menuWrapper
+    )
   );
   flyout.addEventListener('click', (event) => {
     if (event.target.id === 'menu-flyout') hideFlyoutMenu();
@@ -848,7 +872,7 @@ function handleScroll() {
       'top-0',
       'w-full',
       'lg:!pb-4',
-      'shadow-lg',
+      'shadow-lg'
     );
     stickyHeader?.firstElementChild.classList.add('bg-white');
     hamburgerIcon?.classList.remove('lg:hidden');
@@ -867,7 +891,7 @@ function handleScroll() {
       'top-0',
       'w-full',
       'lg:!pb-4',
-      'shadow-lg',
+      'shadow-lg'
     );
     stickyHeader?.firstElementChild.classList.remove('bg-danaherblue-600');
     hamburgerIcon?.classList.add('lg:hidden');
@@ -881,28 +905,28 @@ function handleScroll() {
   }
 }
 
-// async function getQuote(headerBlock, authHeader) {
-//   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
-//     headers: authHeader,
-//   });
-//   if (quoteRequest.status === 200) {
-//     const data = await quoteRequest?.json();
-//     if (data && data.items) {
-//       const rfqQuantity = data.items.length;
-//       if (rfqQuantity !== 0) {
-//         const quantityElement = headerBlock.querySelector(
-//           'a.quote span.quantity',
-//         );
-//         if (quantityElement) quantityElement.textContent = rfqQuantity;
-//         const dotElement = headerBlock.querySelector('a.quote span.dot');
-//         if (dotElement) dotElement.classList.remove('hidden');
-//       }
-//     }
-//   } else if (quoteRequest.status !== 404) {
-//     // eslint-disable-next-line no-console
-//     console.warn('Failed to load quote cart');
-//   }
-// }
+async function getQuote(headerBlock, authHeader) {
+  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
+    headers: authHeader,
+  });
+  if (quoteRequest.status === 200) {
+    const data = await quoteRequest?.json();
+    if (data && data.items) {
+      const rfqQuantity = data.items.length;
+      if (rfqQuantity !== 0) {
+        const quantityElement = headerBlock.querySelector(
+          'a.quote span.quantity'
+        );
+        if (quantityElement) quantityElement.textContent = rfqQuantity;
+        const dotElement = headerBlock.querySelector('a.quote span.dot');
+        if (dotElement) dotElement.classList.remove('hidden');
+      }
+    }
+  } else if (quoteRequest.status !== 404) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to load quote cart');
+  }
+}
 
 /**
  * decorates the header, mainly the nav
@@ -910,62 +934,36 @@ function handleScroll() {
  */
 export default async function decorate(block) {
   const resp = await fetch('/fragments/header/master.plain.html');
+  const html = await resp.text();
 
+  // build header DOM
+  const headerBlock = div({
+    class: 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20',
+  });
+  headerBlock.innerHTML = html;
+
+  buildLogosBlock(headerBlock);
+  buildSearchBlock(headerBlock);
+  buildNavBlock(headerBlock);
+  const flyout = buildFlyoutMenus(headerBlock);
+
+  decorateIcons(headerBlock);
+
+  window.addEventListener('scroll', handleScroll);
+  block.innerHTML = '';
+
+  block.append(headerBlock);
+  block.append(flyout);
+  const authHeader = getAuthorization();
   if (
-    resp.ok
-    && (!window.location.href.includes('login')
-      || !window.location.href.includes('register'))
+    authHeader &&
+    (authHeader.has('authentication-token') || authHeader.has('Authorization'))
   ) {
-    const html = await resp.text();
-
-    // build header DOM
-    const headerBlock = div({
-      class:
-        'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20',
-    });
-    headerBlock.innerHTML = html;
-
-    buildLogosBlock(headerBlock);
-    buildSearchBlock(headerBlock);
-    buildNavBlock(headerBlock);
-    const flyout = buildFlyoutMenus(headerBlock);
-
-    decorateIcons(headerBlock);
-
-    window.addEventListener('scroll', handleScroll);
-    block.innerHTML = '';
-
-    block.append(headerBlock);
-    block.append(flyout);
-    const authHeader = getAuthorization();
-    if (
-      authHeader
-      && (authHeader.has('authentication-token')
-        || authHeader.has('Authorization'))
-    ) {
-      // getQuote(headerBlock, authHeader);
-    }
-    document
-      .querySelector('div.search-icon')
-      ?.addEventListener('click', toggleSearchBoxMobile);
+    getQuote(headerBlock, authHeader);
   }
-  if (window.location.href.includes('products')) {
-    const metaTemplate = document.createElement('meta');
-    metaTemplate.name = 'template';
-    metaTemplate.content = 'Category';
-    document.head.appendChild(metaTemplate);
-    const currentPath = new URL(window.location.href);
-    const currentUrl = currentPath.pathname.split('.html');
-    const currentParams = currentUrl[0].split('/');
-    const metaFullCategory = document.createElement('meta');
-    metaFullCategory.name = 'fullcategory';
-    metaFullCategory.content = currentParams[currentParams.length - 1];
-    document.head.appendChild(metaFullCategory);
-    const metaBrand = document.createElement('meta');
-    metaBrand.name = 'brand';
-    metaBrand.content = 'SCIEX';
-    document.head.appendChild(metaBrand);
-  }
+  document
+    .querySelector('div.search-icon')
+    ?.addEventListener('click', toggleSearchBoxMobile);
 
   return block;
 }

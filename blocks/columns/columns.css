@@ -364,6 +364,11 @@
   background-color: rgb(122 25 127 / var(--tw-bg-opacity));
 }
 
+.columns-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .columns-wrapper :is(.bg-transparent) {
   background-color: transparent;
 }

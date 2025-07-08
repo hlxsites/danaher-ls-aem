@@ -81,6 +81,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.learn-more-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+>>>>>>> em1-so-optimized
 .learn-more-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -113,10 +121,13 @@
   line-height: 1.25rem
 }
 
+<<<<<<< HEAD
 .learn-more-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
+=======
+>>>>>>> em1-so-optimized
 .learn-more-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -148,6 +159,14 @@
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
+=======
+.learn-more-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
+>>>>>>> em1-so-optimized
 @media (min-width: 768px) {
   .learn-more-wrapper :is(.md\:flex-row) {
     flex-direction: row

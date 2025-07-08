@@ -23,11 +23,19 @@
   margin-bottom: 1.5rem
 }
 
+<<<<<<< HEAD
 .product-categories-wrapper :is(.\!line-clamp-3) {
   overflow: hidden !important;
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
   -webkit-line-clamp: 3 !important
+=======
+.product-categories-wrapper :is(.\!line-clamp-2) {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important
+>>>>>>> em1-so-optimized
 }
 
 .product-categories-wrapper :is(.block) {
@@ -58,10 +66,24 @@
   flex-grow: 1
 }
 
+<<<<<<< HEAD
+=======
+.product-categories-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+>>>>>>> em1-so-optimized
 .product-categories-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
 
+<<<<<<< HEAD
+=======
+.product-categories-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
+}
+
+>>>>>>> em1-so-optimized
 .product-categories-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr))
 }
@@ -178,20 +200,26 @@
   padding-bottom: 0.75rem !important
 }
 
+<<<<<<< HEAD
 .product-categories-wrapper :is(.pt-6) {
   padding-top: 1.5rem
 }
 
+=======
+>>>>>>> em1-so-optimized
 .product-categories-wrapper :is(.\!text-3xl) {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important
 }
 
+<<<<<<< HEAD
 .product-categories-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
 }
 
+=======
+>>>>>>> em1-so-optimized
 .product-categories-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
@@ -219,10 +247,13 @@
   line-height: 1.75rem
 }
 
+<<<<<<< HEAD
 .product-categories-wrapper :is(.leading-loose) {
   line-height: 2
 }
 
+=======
+>>>>>>> em1-so-optimized
 .product-categories-wrapper :is(.leading-tight) {
   line-height: 1.25
 }
@@ -254,10 +285,26 @@
   transition-duration: 150ms
 }
 
+<<<<<<< HEAD
 .product-categories-wrapper :is(.transition-shadow) {
   transition-property: box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
+=======
+.product-categories-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
+.product-categories-wrapper :is(.hover\:scale-105:hover) {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.product-categories-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+>>>>>>> em1-so-optimized
 }
 
 .product-categories-wrapper :is(.hover\:shadow-md:hover) {

@@ -1,3 +1,15 @@
+.bg-danaherpurple-50 {
+  background-color: #EADEFF
+}
+
+.download-wrapper :is(.\!mb-0) {
+  margin-bottom: 0px !important
+}
+
+.download-wrapper :is(.\!mt-0) {
+  margin-top: 0px !important
+}
+
 .download-wrapper :is(.mb-3) {
   margin-bottom: 0.75rem
 }
@@ -86,9 +98,19 @@
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
+.download-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
+}
+
 .download-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.download-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 .download-wrapper :is(.object-cover) {
@@ -147,9 +169,9 @@
   letter-spacing: 0.025em
 }
 
-.download-wrapper :is(.text-danaherlightblue-500) {
+.download-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(59 199 229 / var(--tw-text-opacity))
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .download-wrapper :is(.text-gray-900) {

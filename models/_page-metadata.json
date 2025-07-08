@@ -1,0 +1,99 @@
+{
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "container",
+          "label": "Fieldset",
+          "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "title",
+              "label": "Title",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "description",
+              "label": "Description",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "keywords",
+              "multi": true,
+              "label": "Keywords",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "article:Tag",
+              "label": "article:tag",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "path",
+              "label": ":path",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "template",
+              "label": "Template",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "brand",
+              "label": "Brand",
+              "value": ""
+            },
+            {
+              "component": "date-time",
+              "valueType": "date-time",
+              "name": "creationdate",
+              "label": "Creation Date",
+              "placeholder": "YYYY-MM-DD",
+              "displayFormat": null,
+              "valueFormat": null,
+              "value": ""
+            },
+            {
+              "component": "date-time",
+              "valueType": "date-time",
+              "name": "updatedate",
+              "label": "Update Date",
+              "placeholder": "YYYY-MM-DD",
+              "displayFormat": null,
+              "valueFormat": null,
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "fullcategory",
+              "label": "Full Category",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "viewport",
+              "label": "View Port",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
