@@ -212,7 +212,7 @@ export default function renderListCard(item) {
   );
 
   let rightSection;
-  //if (item.showCart && item.price !== undefined) {
+  // if (item.showCart && item.price !== undefined) {
   if (item.showCart && item.price === 'abc123') {
     rightSection = div({
       class:

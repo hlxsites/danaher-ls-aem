@@ -10,10 +10,11 @@ import {
 } from './product-payload-builder.js';
 
 import { getApiData } from './api-utils.js';
+
 export function getCommerceBase() {
   return window.DanaherConfig !== undefined
     ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
-    : "https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-";
+    : 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 }
 // export function getCommerceBase() {
 //   return 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/';

@@ -80,7 +80,7 @@ export default function renderGridCard(item) {
 
   // Combine pricingDetails and actionButtons in one block
   let pricingAndActions;
-  //if (item.showCart && item.price !== undefined) {
+  // if (item.showCart && item.price !== undefined) {
   if (item.showCart && item.price === 'abc123') {
     pricingAndActions = div(
       { class: 'self-stretch bg-gray-50 flex flex-col gap-0' },
