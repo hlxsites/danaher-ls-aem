@@ -211,7 +211,7 @@ export default function renderProductListCard(item) {
 
   // Right Section: Action Buttons (Visible only in Desktop)
   const rightSection = div({
-    class: 'w-full md:w-64 h-full p-4 bg-gray-50 hidden md:flex flex-col gap-4',
+    class: 'w-full md:w-64 h-full p-6 bg-gray-50 hidden md:flex flex-col gap-4',
   });
 
   // Action Buttons for desktop view (same as mobile but in rightSection)

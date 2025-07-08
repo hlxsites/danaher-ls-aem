@@ -70,7 +70,7 @@ export default function renderProductGridCard(item) {
       ),
     ),
     div(
-      { class: 'self-stretch inline-flex justify-start items-center gap-3 pb-3 pt-6' }, // Moved to bottom with padding
+      { class: 'self-stretch inline-flex justify-start items-center gap-3 pt-6' },
       button(
         {
           class:
