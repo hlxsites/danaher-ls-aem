@@ -1,27 +1,25 @@
-import { a, div, p, span } from '../../scripts/dom-builder.js';
+import {
+  a, div, p, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const blockId =
-    block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() ||
-    '';
+  const blockId = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim()
+    || '';
   const productHeroContentWrapper = div({
     class:
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
     id: blockId,
   });
   // Extract title and description
-  const subProductTitle =
-    block.firstElementChild?.firstElementChild?.children[1]?.textContent?.trim() ||
-    '';
-  const subProductDescription =
-    block.firstElementChild?.firstElementChild?.children[2]?.textContent?.trim() ||
-    '';
-  const readMoreLabel =
-    block.children[1]?.firstElementChild?.firstElementChild?.textContent.trim() ||
-    '';
+  const subProductTitle = block.firstElementChild?.firstElementChild?.children[1]?.textContent?.trim()
+    || '';
+  const subProductDescription = block.firstElementChild?.firstElementChild?.children[2]?.textContent?.trim()
+    || '';
+  const readMoreLabel = block.children[1]?.firstElementChild?.firstElementChild?.textContent.trim()
+    || '';
   const readMoreLink = block.children[1]?.querySelector('a')?.href || '';
   const openNewTab = block.children[2]?.querySelector('p')?.textContent;
 
@@ -36,8 +34,8 @@ export default function decorate(block) {
         id: subProductTitle.toLowerCase().replace(/\s+/g, '-'),
         class: 'flex-1 text-black text-[32px] !font-medium !leading-10',
       },
-      subProductTitle
-    )
+      subProductTitle,
+    ),
   );
 
   // Description section
@@ -50,8 +48,8 @@ export default function decorate(block) {
         class:
           'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      p({ class: 'desc-para' }, subProductDescription)
-    )
+      p({ class: 'desc-para' }, subProductDescription),
+    ),
   );
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a(
@@ -65,7 +63,7 @@ export default function decorate(block) {
       span({
         class:
           'icon icon icon-arrow-right w-[18px] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-      })
+      }),
     );
     descriptionDiv.append(readMore);
   }
@@ -78,7 +76,7 @@ export default function decorate(block) {
         'self-stretch w-full flex flex-col lg:flex-row justify-start items-start gap-3 md:gap-5',
     },
     titleDiv,
-    descriptionDiv
+    descriptionDiv,
   );
 
   // Outer container
@@ -87,7 +85,7 @@ export default function decorate(block) {
       class:
         'self-stretch w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
-    innerContainer
+    innerContainer,
   );
 
   productHeroContentWrapper.append(outerContainer);

@@ -38,10 +38,9 @@ function wrapTextNodes(block) {
       // move the instrumentation from the cell to the new paragraph, also keep the class
       // in case the content is a buttton and the cell the button-container
       .filter(
-        ({ nodeName }) =>
-          nodeName === 'class' ||
-          nodeName.startsWith('data-aue') ||
-          nodeName.startsWith('data-richtext')
+        ({ nodeName }) => nodeName === 'class'
+          || nodeName.startsWith('data-aue')
+          || nodeName.startsWith('data-richtext'),
       )
       .forEach(({ nodeName, nodeValue }) => {
         wrapper.setAttribute(nodeName, nodeValue);
@@ -52,16 +51,15 @@ function wrapTextNodes(block) {
 
   block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
     if (blockColumn.hasChildNodes()) {
-      const hasWrapper =
-        !!blockColumn.firstElementChild &&
-        validWrappers.some(
-          (tagName) => blockColumn.firstElementChild.tagName === tagName
+      const hasWrapper = !!blockColumn.firstElementChild
+        && validWrappers.some(
+          (tagName) => blockColumn.firstElementChild.tagName === tagName,
         );
       if (!hasWrapper) {
         wrap(blockColumn);
       } else if (
-        blockColumn.firstElementChild.tagName === 'PICTURE' &&
-        (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
+        blockColumn.firstElementChild.tagName === 'PICTURE'
+        && (blockColumn.children.length > 1 || !!blockColumn.textContent.trim())
       ) {
         wrap(blockColumn);
       }
@@ -77,13 +75,11 @@ function wrapTextNodes(block) {
 export function sampleRUM(checkpoint, data = {}) {
   sampleRUM.defer = sampleRUM.defer || [];
   const defer = (fnname) => {
-    sampleRUM[fnname] =
-      sampleRUM[fnname] ||
-      ((...args) => sampleRUM.defer.push({ fnname, args }));
+    sampleRUM[fnname] = sampleRUM[fnname]
+      || ((...args) => sampleRUM.defer.push({ fnname, args }));
   };
-  sampleRUM.drain =
-    sampleRUM.drain ||
-    ((dfnname, fn) => {
+  sampleRUM.drain = sampleRUM.drain
+    || ((dfnname, fn) => {
       sampleRUM[dfnname] = fn;
       sampleRUM.defer
         .filter(({ fnname }) => dfnname === fnname)
@@ -103,9 +99,7 @@ export function sampleRUM(checkpoint, data = {}) {
     if (!window.hlx.rum) {
       const usp = new URLSearchParams(window.location.search);
       const weight = usp.get('rum') === 'on' ? 1 : 20; // with parameter, weight is 1. Defaults to 100.
-      const id = Array.from({ length: 75 }, (_, i) =>
-        String.fromCharCode(48 + i)
-      )
+      const id = Array.from({ length: 75 }, (_, i) => String.fromCharCode(48 + i))
         .filter((a) => /\d|[A-Z]/i.test(a))
         .filter(() => Math.random() * 75 > 70)
         .join('');
@@ -155,7 +149,7 @@ export function sampleRUM(checkpoint, data = {}) {
             t: Date.now() - firstReadTime,
             ...data,
           },
-          knownProperties
+          knownProperties,
         );
         const url = `https://rum.hlx.page/.rum/${weight}`;
         // eslint-disable-next-line no-unused-expressions
@@ -168,8 +162,7 @@ export function sampleRUM(checkpoint, data = {}) {
         lazy: () => {
           // use classic script to avoid CORS issues
           const script = document.createElement('script');
-          script.src =
-            'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
+          script.src = 'https://rum.hlx.page/.rum/@adobe/helix-rum-enhancer@^1/src/index.js';
           document.head.appendChild(script);
           return true;
         },
@@ -253,10 +246,10 @@ export function getMetadata(name) {
 export function toClassName(name) {
   return typeof name === 'string'
     ? name
-        .toLowerCase()
-        .replace(/[^0-9a-z]/gi, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
+      .toLowerCase()
+      .replace(/[^0-9a-z]/gi, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
     : '';
 }
 
@@ -277,13 +270,13 @@ export function toCamelCase(name) {
 export function getAllMetadata(scope) {
   return [
     ...document.head.querySelectorAll(
-      `meta[property^="${scope}:"],meta[name^="${scope}-"]`
+      `meta[property^="${scope}:"],meta[name^="${scope}-"]`,
     ),
   ].reduce((res, meta) => {
     const id = toClassName(
       meta.name
         ? meta.name.substring(scope.length + 1)
-        : meta.getAttribute('property').split(':')[1]
+        : meta.getAttribute('property').split(':')[1],
     );
     res[id] = meta.getAttribute('content');
     return res;
@@ -300,8 +293,7 @@ export async function decorateIcons(element) {
   let svgSprite = document.getElementById('franklin-svg-sprite');
   if (!svgSprite) {
     const div = document.createElement('div');
-    div.innerHTML =
-      '<svg xmlns="http://www.w3.org/2000/svg" id="franklin-svg-sprite" style="display: none"></svg>';
+    div.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" id="franklin-svg-sprite" style="display: none"></svg>';
     svgSprite = div.firstElementChild;
     document.body.append(div.firstElementChild);
   }
@@ -319,7 +311,7 @@ export async function decorateIcons(element) {
           let iconSource = `${window.hlx.codeBasePath}/icons/${iconName}.svg`;
           if (iconName.startsWith('dam-')) {
             const isPublicDomain = window.location.hostname.includes(
-              'lifesciences.danaher.com'
+              'lifesciences.danaher.com',
             );
             iconSource = isPublicDomain
               ? ''
@@ -352,7 +344,7 @@ export async function decorateIcons(element) {
           console.error(error);
         }
       }
-    })
+    }),
   );
 
   const symbols = Object.keys(ICONS_CACHE)
@@ -367,8 +359,7 @@ export async function decorateIcons(element) {
     const iconName = Array.from(span.classList)
       .find((c) => c.startsWith('icon-'))
       .substring(5);
-    const parent =
-      span.firstElementChild?.tagName === 'A' ? span.firstElementChild : span;
+    const parent = span.firstElementChild?.tagName === 'A' ? span.firstElementChild : span;
     // Styled icons need to be inlined as-is, while unstyled ones can leverage the sprite
     if (ICONS_CACHE[iconName].styled) {
       parent.innerHTML = ICONS_CACHE[iconName].html;
@@ -533,7 +524,7 @@ export function updateSectionsStatus(main) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector(
-        '.block[data-block-status="initialized"], .block[data-block-status="loading"]'
+        '.block[data-block-status="initialized"], .block[data-block-status="loading"]',
       );
       if (loadingBlock) {
         section.dataset.sectionStatus = 'loading';
@@ -596,20 +587,20 @@ async function loadModule(name, jsPath, cssPath, ...args) {
   const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
   const decorationComplete = jsPath
     ? new Promise((resolve) => {
-        (async () => {
-          let mod;
-          try {
-            mod = await import(jsPath);
-            if (mod.default) {
-              await mod.default.apply(null, args);
-            }
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log(`failed to load module for ${name}`, error);
+      (async () => {
+        let mod;
+        try {
+          mod = await import(jsPath);
+          if (mod.default) {
+            await mod.default.apply(null, args);
           }
-          resolve(mod);
-        })();
-      })
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.log(`failed to load module for ${name}`, error);
+        }
+        resolve(mod);
+      })();
+    })
     : Promise.resolve();
   return Promise.all([cssLoaded, decorationComplete]).then(([, api]) => api);
 }
@@ -706,7 +697,7 @@ export function createOptimizedPicture(
   breakpoints = [
     { media: '(min-width: 600px)', width: '2000' },
     { width: '750' },
-  ]
+  ],
 ) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
@@ -720,7 +711,7 @@ export function createOptimizedPicture(
     source.setAttribute('type', 'image/webp');
     source.setAttribute(
       'srcset',
-      `${pathname}?width=${br.width}&format=webply&optimize=medium`
+      `${pathname}?width=${br.width}&format=webply&optimize=medium`,
     );
     picture.appendChild(source);
   });
@@ -732,7 +723,7 @@ export function createOptimizedPicture(
       if (br.media) source.setAttribute('media', br.media);
       source.setAttribute(
         'srcset',
-        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`,
       );
       picture.appendChild(source);
     } else {
@@ -742,7 +733,7 @@ export function createOptimizedPicture(
       picture.appendChild(img);
       img.setAttribute(
         'src',
-        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`
+        `${pathname}?width=${br.width}&format=${ext}&optimize=medium`,
       );
     }
   });
@@ -804,33 +795,33 @@ export function decorateButtons(element) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
       if (
-        !a.querySelector('img') &&
-        twoup.tagName !== 'LI' &&
-        !a.closest('.call-to-action') &&
-        !a.closest('.mini-teasers') &&
-        !a.closest('.bg-color-right')
+        !a.querySelector('img')
+        && twoup.tagName !== 'LI'
+        && !a.closest('.call-to-action')
+        && !a.closest('.mini-teasers')
+        && !a.closest('.bg-color-right')
       ) {
         if (
-          up.childNodes.length === 1 &&
-          (up.tagName === 'P' || up.tagName === 'DIV')
+          up.childNodes.length === 1
+          && (up.tagName === 'P' || up.tagName === 'DIV')
         ) {
           a.className = 'btn btn-outline-primary'; // default
           up.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1 &&
-          up.tagName === 'STRONG' &&
-          twoup.childNodes.length === 1 &&
-          twoup.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'btn btn-outline-primary';
           twoup.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1 &&
-          up.tagName === 'EM' &&
-          twoup.childNodes.length === 1 &&
-          twoup.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'btn btn-outline-secondary';
           twoup.classList.add('button-container');
@@ -888,9 +879,9 @@ export function loadFooter(footer) {
 function parsePluginParams(id, config) {
   const pluginId = !config
     ? id
-        .split('/')
-        .splice(id.endsWith('/') ? -2 : -1, 1)[0]
-        .replace(/\.js/, '')
+      .split('/')
+      .splice(id.endsWith('/') ? -2 : -1, 1)[0]
+      .replace(/\.js/, '')
     : id;
   const pluginConfig = {
     load: 'eager',
@@ -929,7 +920,7 @@ class PluginsRegistry {
   add(id, config) {
     const { id: pluginId, config: pluginConfig } = parsePluginParams(
       id,
-      config
+      config,
     );
     this.#plugins.set(pluginId, pluginConfig);
   }
@@ -949,41 +940,38 @@ class PluginsRegistry {
   async load(phase) {
     [...this.#plugins.entries()]
       .filter(
-        ([, plugin]) =>
-          plugin.condition &&
-          !plugin.condition(document, plugin.options, executionContext)
+        ([, plugin]) => plugin.condition
+          && !plugin.condition(document, plugin.options, executionContext),
       )
       .map(([id]) => this.#plugins.delete(id));
     return Promise.all(
       [...this.#plugins.entries()]
         // Filter plugins that don't match the execution conditions
         .filter(
-          ([, plugin]) =>
-            (!plugin.condition ||
-              plugin.condition(document, plugin.options, executionContext)) &&
-            phase === plugin.load &&
-            plugin.url
+          ([, plugin]) => (!plugin.condition
+              || plugin.condition(document, plugin.options, executionContext))
+            && phase === plugin.load
+            && plugin.url,
         )
         .map(async ([key, plugin]) => {
           try {
             // If the plugin has a default export, it will be executed immediately
-            const pluginApi =
-              (await loadModule(
-                key,
-                !plugin.url.endsWith('.js')
-                  ? `${plugin.url}/${key}.js`
-                  : plugin.url,
-                !plugin.url.endsWith('.js') ? `${plugin.url}/${key}.css` : null,
-                document,
-                plugin.options,
-                executionContext
-              )) || {};
+            const pluginApi = (await loadModule(
+              key,
+              !plugin.url.endsWith('.js')
+                ? `${plugin.url}/${key}.js`
+                : plugin.url,
+              !plugin.url.endsWith('.js') ? `${plugin.url}/${key}.css` : null,
+              document,
+              plugin.options,
+              executionContext,
+            )) || {};
             this.#plugins.set(key, { ...plugin, ...pluginApi });
           } catch (err) {
             // eslint-disable-next-line no-console
             console.error('Could not load specified plugin', key);
           }
-        })
+        }),
     );
   }
 
@@ -992,16 +980,13 @@ class PluginsRegistry {
     return [...this.#plugins.values()].reduce(
       (
         promise,
-        plugin // Using reduce to execute plugins sequencially
-      ) =>
-        plugin[phase] &&
-        (!plugin.condition ||
-          plugin.condition(document, plugin.options, executionContext))
-          ? promise.then(() =>
-              plugin[phase](document, plugin.options, executionContext)
-            )
-          : promise,
-      Promise.resolve()
+        plugin, // Using reduce to execute plugins sequencially
+      ) => (plugin[phase]
+        && (!plugin.condition
+          || plugin.condition(document, plugin.options, executionContext))
+        ? promise.then(() => plugin[phase](document, plugin.options, executionContext))
+        : promise),
+      Promise.resolve(),
     );
   }
 }
@@ -1016,10 +1001,9 @@ class TemplatesRegistry {
     }
     const { id: templateId, config: templateConfig } = parsePluginParams(
       id,
-      url
+      url,
     );
-    templateConfig.condition = () =>
-      toClassName(getMetadata('template')) === templateId;
+    templateConfig.condition = () => toClassName(getMetadata('template')) === templateId;
     window.hlx.plugins.add(templateId, templateConfig);
   }
 
@@ -1043,8 +1027,7 @@ export function setup() {
   window.hlx = window.hlx || {};
   window.hlx.RUM_MASK_URL = 'full';
   window.hlx.codeBasePath = '';
-  window.hlx.lighthouse =
-    new URLSearchParams(window.location.search).get('lighthouse') === 'on';
+  window.hlx.lighthouse = new URLSearchParams(window.location.search).get('lighthouse') === 'on';
   window.hlx.patchBlockConfig = [];
   window.hlx.plugins = new PluginsRegistry();
   window.hlx.templates = new TemplatesRegistry();
@@ -1055,7 +1038,7 @@ export function setup() {
       const scriptURL = new URL(scriptEl.src, window.location);
       if (scriptURL.host === window.location.host) {
         [window.hlx.codeBasePath] = scriptURL.pathname.split(
-          '/scripts/scripts.js'
+          '/scripts/scripts.js',
         );
       } else {
         [window.hlx.codeBasePath] = scriptURL.href.split('/scripts/scripts.js');

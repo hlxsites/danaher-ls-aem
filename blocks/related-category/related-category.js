@@ -1,4 +1,6 @@
-import { div, a, img, span } from '../../scripts/dom-builder.js';
+import {
+  div, a, img, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 async function getCategoryInfo(category) {
@@ -7,7 +9,7 @@ async function getCategoryInfo(category) {
   if (api) {
     try {
       const res = await fetch(
-        'https://lifesciences.danaher.com/us/en/products-index.json'
+        'https://lifesciences.danaher.com/us/en/products-index.json',
       );
       if (!res.ok) {
         return {};
@@ -80,8 +82,8 @@ function renderGridCard(item) {
         class:
           'text-black text-xl font-medium line-clamp-2 overflow-hidden leading-7',
       },
-      (item.title || '').replace(/<[^>]*>/g, '').trim()
-    )
+      (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    ),
   );
   const description = div(
     {
@@ -92,8 +94,8 @@ function renderGridCard(item) {
         class:
           'justify-start text-black text-base font-normal line-clamp-3 overflow-hidden',
       },
-      (item.description || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.description || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   const linkWrapper = div(
@@ -108,8 +110,8 @@ function renderGridCard(item) {
       span({
         class:
           'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
-      })
-    )
+      }),
+    ),
   );
   decorateIcons(linkWrapper);
 
@@ -128,9 +130,8 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
 
   const productIdEl = block.children[1]?.textContent.trim() || '';
-  const title =
-    block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() ||
-    '';
+  const title = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim()
+    || '';
   const rawIds = productIdEl;
 
   const productIds = rawIds
@@ -149,7 +150,7 @@ export default async function decorate(block) {
         description: product.description,
         path: product.path,
       };
-    })
+    }),
   );
 
   const validItems = relatedCategories.filter(Boolean);
@@ -198,7 +199,7 @@ export default async function decorate(block) {
     {
       class: 'text-black text-2xl font-medium whitespace-nowrap',
     },
-    title?.textContent || ''
+    title?.textContent || '',
   );
   leftGroup.append(productTitle);
 
@@ -219,7 +220,7 @@ export default async function decorate(block) {
 
     const cardsToDisplay = validItems.slice(
       currentIndex,
-      currentIndex + cardsPerPageGrid
+      currentIndex + cardsPerPageGrid,
     );
     cardsToDisplay.forEach((item) => {
       const card = renderGridCard(item);
@@ -230,18 +231,18 @@ export default async function decorate(block) {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
         stroke="${
-          currentIndex > 0 ? '#7523FF' : '#D1D5DB'
-        }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
         stroke="${
-          currentIndex + cardsPerPageGrid < validItems.length
-            ? '#7523FF'
-            : '#D1D5DB'
-        }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  currentIndex + cardsPerPageGrid < validItems.length
+    ? '#7523FF'
+    : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
   }
 

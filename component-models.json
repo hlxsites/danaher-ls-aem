@@ -1,6 +1,6 @@
 [
   {
-    "id": "image",
+    "id": "page-metadata",
     "fields": [
       {
         "component": "container",
@@ -114,13 +114,6 @@
     "id": "title",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "Image",
-        "multi": false
-      },
-      {
         "component": "text",
         "name": "title",
         "label": "Title"
@@ -155,32 +148,11 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "card_description",
-        "value": "",
-        "label": "Description"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_href",
-        "value": "",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
       }
     ]
   },
   {
-    "id": "dual-carousel",
+    "id": "button",
     "fields": [
       {
         "component": "aem-content",
@@ -346,9 +318,9 @@
     "id": "cards",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
-        "name": "offer_advertisement_title",
+        "name": "classes",
         "value": "",
         "label": "Block Options",
         "options": [
@@ -471,6 +443,18 @@
     ]
   },
   {
+    "id": "dashboard",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dashboardTitle",
+        "value": "",
+        "label": "Page Title"
+      }
+    ]
+  },
+  {
     "id": "dual-carousel",
     "fields": [
       {
@@ -547,32 +531,6 @@
         "name": "description",
         "value": "",
         "label": "Description"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "opcoBannerItemImage",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "opcoBannerItemBgImage",
-        "label": "Background Image",
-        "multi": false
-      },
-      {
-        "component": "aem-content",
-        "name": "opcoBannerItemButtonUrl",
-        "label": "Button Url"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opcoBannerItemButtonLabel",
-        "value": "",
-        "label": "Button Label"
       }
     ]
   },
@@ -580,7 +538,7 @@
     "id": "insight-item",
     "fields": [
       {
-        "component": "multiselect",
+        "component": "text",
         "valueType": "string",
         "name": "lefttitle",
         "value": "",
@@ -667,6 +625,109 @@
         "name": "browseDescription",
         "value": "",
         "label": "Browse-Description"
+      }
+    ]
+  },
+  {
+    "id": "login",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "loginFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLabel",
+        "value": "",
+        "label": "Forgot Password Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLink",
+        "value": "",
+        "label": "Forgot Password Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountText",
+        "value": "",
+        "label": "New Account Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLabel",
+        "value": "",
+        "label": "New Account Button Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLink",
+        "value": "",
+        "label": "New Account Button Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
@@ -874,9 +935,9 @@
     "id": "opco-grid",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
-        "name": "title",
+        "name": "classes",
         "value": "",
         "label": "Block Options",
         "options": [
@@ -896,7 +957,7 @@
     "id": "opco-grid-item",
     "fields": [
       {
-        "component": "text",
+        "component": "reference",
         "valueType": "string",
         "name": "fileReference",
         "label": "Image",
@@ -1117,7 +1178,7 @@
         "valueType": "string",
         "name": "prod_info_title",
         "value": "",
-        "label": "Product Sub Heading"
+        "label": "Title"
       },
       {
         "component": "richtext",
@@ -1125,6 +1186,102 @@
         "name": "prod_info_description",
         "value": "",
         "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "register",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormFirstNameLabel",
+        "value": "",
+        "label": "First Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormLastNameLabel",
+        "value": "",
+        "label": "Last Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormCompanyNameLabel",
+        "value": "",
+        "label": "Company Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormConfirmPasswordLabel",
+        "value": "",
+        "label": "Confirm Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "registerFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
@@ -1330,6 +1487,25 @@
         "name": "productsEndPoint",
         "value": "",
         "label": "Products API Endpoint"
+      }
+    ]
+  },
+  {
+    "id": "top-selling-products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs (comma separated)"
       }
     ]
   },

@@ -1,77 +1,16 @@
-<<<<<<< HEAD
-=======
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
-@media (min-width: 1760px) {
-  .container {
-    max-width: 1760px
-  }
-}
-
-.product-banner-wrapper :is(.absolute) {
-  position: absolute
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.relative) {
   position: relative
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.bottom-0) {
-  bottom: 0px
-}
-
-.product-banner-wrapper :is(.right-0) {
-  right: 0px
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.mb-3) {
   margin-bottom: 0.75rem
 }
 
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.mt-0) {
   margin-top: 0px
 }
@@ -80,29 +19,6 @@
   margin-top: 2rem
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.mb-0) {
-  margin-bottom: 0px
-}
-
-.product-banner-wrapper :is(.mr-2) {
-  margin-right: 0.5rem
-}
-
-.product-banner-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
-}
-
-.product-banner-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
-.product-banner-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.line-clamp-6) {
   overflow: hidden;
   display: -webkit-box;
@@ -114,17 +30,10 @@
   display: block
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.inline-block) {
   display: inline-block
 }
 
-.product-banner-wrapper :is(.inline) {
-  display: inline
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.flex) {
   display: flex
 }
@@ -133,13 +42,10 @@
   display: inline-flex
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.hidden) {
   display: none
 }
 
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.h-\[265px\]) {
   height: 265px
 }
@@ -164,13 +70,6 @@
   cursor: pointer
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.flex-row) {
-  flex-direction: row
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -183,13 +82,6 @@
   align-items: center
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.items-baseline) {
-  align-items: baseline
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.justify-start) {
   justify-content: flex-start
 }
@@ -206,25 +98,6 @@
   gap: 1.5rem
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.gap-2) {
-  gap: 0.5rem
-}
-
-.product-banner-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
-.product-banner-wrapper :is(.gap-0) {
-  gap: 0px
-}
-
-.product-banner-wrapper :is(.gap-0\.5) {
-  gap: 0.125rem
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.gap-x-6) {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem
@@ -247,41 +120,24 @@
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
-}
-
-<<<<<<< HEAD
-.product-banner-wrapper :is(.bg-violet-600) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
-=======
-.product-banner-wrapper :is(.bg-white) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
->>>>>>> em1-so-optimized
 }
 
 .product-banner-wrapper :is(.object-contain) {
@@ -312,24 +168,14 @@
   padding-top: 3rem
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.pt-4) {
   padding-top: 1rem
 }
 
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.pt-6) {
   padding-top: 1.5rem
 }
 
-<<<<<<< HEAD
-=======
-.product-banner-wrapper :is(.pl-\[9px\]) {
-  padding-left: 9px
-}
-
->>>>>>> em1-so-optimized
 .product-banner-wrapper :is(.text-right) {
   text-align: right
 }
@@ -352,13 +198,8 @@
   font-weight: 200
 }
 
-<<<<<<< HEAD
-.product-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-=======
 .product-banner-wrapper :is(.font-medium) {
   font-weight: 400
->>>>>>> em1-so-optimized
 }
 
 .product-banner-wrapper :is(.leading-\[48px\]) {
@@ -374,15 +215,9 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-<<<<<<< HEAD
-.product-banner-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-=======
 .product-banner-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
->>>>>>> em1-so-optimized
 }
 
 .product-banner-wrapper :is(.text-white) {
@@ -390,8 +225,6 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -400,15 +233,6 @@
   text-decoration-color: #7523FF
 }
 
->>>>>>> em1-so-optimized
-.product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-<<<<<<< HEAD
-=======
 .product-banner-wrapper :is(.transition) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -437,7 +261,6 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
->>>>>>> em1-so-optimized
 @media (min-width: 768px) {
   .product-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
@@ -458,13 +281,10 @@
     height: 400px
   }
 
-<<<<<<< HEAD
-=======
   .product-banner-wrapper :is(.lg\:min-w-\[608px\]) {
     min-width: 608px
   }
 
->>>>>>> em1-so-optimized
   .product-banner-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }

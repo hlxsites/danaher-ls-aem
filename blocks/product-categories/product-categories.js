@@ -1,4 +1,6 @@
-import { div, p, h2, a, img, span } from '../../scripts/dom-builder.js';
+import {
+  div, p, h2, a, img, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
@@ -10,8 +12,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
 
   document.documentElement.style.scrollBehavior = 'smooth';
-  const blockId =
-    productCategoryId?.querySelector('p')?.textContent?.trim() || '';
+  const blockId = productCategoryId?.querySelector('p')?.textContent?.trim() || '';
 
   // const wrapper = block.closest(".product-categories-wrapper");
   const brandEl = blockBrand?.textContent?.trim().toLowerCase() || '';
@@ -29,15 +30,12 @@ export default async function decorate(block) {
 
     const filteredProducts = allProducts
       .filter(
-        ({ fullCategory }) =>
-          fullCategory && fullCategory.split('|').length === 1
+        ({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1,
       )
       .filter(({ type }) => type === 'Category')
       .filter(({ path }) => !path.includes('/product-coveo'));
 
-    allProducts = filteredProducts.sort((item1, item2) =>
-      item1.title.localeCompare(item2.title)
-    );
+    allProducts = filteredProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
     const createCard = (item) => {
       const title = item.title || '';
@@ -49,14 +47,13 @@ export default async function decorate(block) {
         {
           class:
             'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
-          onclick: () =>
-            window.open(
-              clickUri,
-              clickUri?.includes('http') ? '_blank' : '_self'
-            ),
+          onclick: () => window.open(
+            clickUri,
+            clickUri?.includes('http') ? '_blank' : '_self',
+          ),
         },
-        image &&
-          img({
+        image
+          && img({
             src:
               absImg || '/content/dam/danaher/system/icons/preview-image.png',
             alt: title,
@@ -67,7 +64,7 @@ export default async function decorate(block) {
             class:
               'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
           },
-          title
+          title,
         ),
         a(
           {
@@ -81,8 +78,8 @@ export default async function decorate(block) {
           span({
             class:
               'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-          })
-        )
+          }),
+        ),
       );
     };
 
@@ -97,8 +94,8 @@ export default async function decorate(block) {
             authoredTitle ? '' : 'mb-6'
           }`,
         },
-        authoredTitle || 'All Categories'
-      )
+        authoredTitle || 'All Categories',
+      ),
     );
 
     const grid = div({
@@ -147,40 +144,35 @@ export default async function decorate(block) {
       });
       const allBrands = Array.from(filterSet).sort();
 
-      const createFilterBtn = (label, value) =>
-        span(
-          {
-            class: `px-3 py-1 bg-gray-100 border-2 cursor-pointer border-danaherpurple-500 text-sm text-gray-500 font-medium leading-tight transition ${
-              value === activeBrand
-                ? 'border-danaherpurple-500'
-                : 'border-gray-100'
-            }`,
-            onclick: (event) => {
-              activeBrand = value;
-              [...filterBar.children].forEach((btn) =>
-                btn.classList.remove(
-                  'border-danaherpurple-500',
-                  'border-gray-100'
-                )
-              );
-              event.target.classList.add('border-danaherpurple-500');
+      const createFilterBtn = (label, value) => span(
+        {
+          class: `px-3 py-1 bg-gray-100 border-2 cursor-pointer border-danaherpurple-500 text-sm text-gray-500 font-medium leading-tight transition ${
+            value === activeBrand
+              ? 'border-danaherpurple-500'
+              : 'border-gray-100'
+          }`,
+          onclick: (event) => {
+            activeBrand = value;
+            [...filterBar.children].forEach((btn) => btn.classList.remove(
+              'border-danaherpurple-500',
+              'border-gray-100',
+            ));
+            event.target.classList.add('border-danaherpurple-500');
 
-              const list =
-                value === 'all'
-                  ? allProducts
-                  : allProducts.filter((pr) => {
-                      const brands =
-                        pr.brand
-                          ?.split(',')
-                          .map((b) => b.trim().toLowerCase()) || [];
-                      return brands.includes(value);
-                    });
+            const list = value === 'all'
+              ? allProducts
+              : allProducts.filter((pr) => {
+                const brands = pr.brand
+                  ?.split(',')
+                  .map((b) => b.trim().toLowerCase()) || [];
+                return brands.includes(value);
+              });
               // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
-              renderGrid(list);
-            },
+            renderGrid(list);
           },
-          label
-        );
+        },
+        label,
+      );
 
       filterBar.appendChild(createFilterBtn('All', 'all'));
       allBrands.forEach((brand) => {

@@ -200,13 +200,10 @@
   fill: currentColor
 }
 
-<<<<<<< HEAD
-=======
 .articles-list-wrapper :is(.\!p-0) {
   padding: 0px !important
 }
 
->>>>>>> em1-so-optimized
 .articles-list-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -236,15 +233,6 @@
 .articles-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.articles-list-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.articles-list-wrapper :is(.font-bold) {
-  font-weight: 700
 }
 
 .articles-list-wrapper :is(.font-extralight) {

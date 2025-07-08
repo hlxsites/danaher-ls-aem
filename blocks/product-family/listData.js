@@ -1,4 +1,6 @@
-import { div, a, input, span, img } from '../../scripts/dom-builder.js';
+import {
+  div, a, input, span, img,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
 
@@ -53,7 +55,7 @@ export default function renderProductListCard(item) {
     div({
       class: 'md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
-    createImageWithFallback(imageUrl, item.title || '')
+    createImageWithFallback(imageUrl, item.title || ''),
   );
 
   imageSection.append(imageWrapper);
@@ -76,8 +78,8 @@ export default function renderProductListCard(item) {
       {
         class: 'text-black font-medium leading-7 line-clamp-2 text-xl',
       },
-      (item.title || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   // Swap positions: image on the left, title on the right
@@ -94,8 +96,8 @@ export default function renderProductListCard(item) {
         class:
           'self-stretch text-black text-base font-extralight leading-snug line-clamp-4',
       },
-      (item?.raw?.description || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item?.raw?.description || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   mobileDescSection.append(
@@ -109,8 +111,8 @@ export default function renderProductListCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-      })
-    )
+      }),
+    ),
   );
 
   decorateIcons(mobileDescSection);
@@ -124,7 +126,7 @@ export default function renderProductListCard(item) {
 
   const desktopTitle = div(
     { class: 'text-black font-medium leading-7 text-xl line-clamp-2' },
-    (item.title || '').trim().replace(/<[^>]*>/g, '')
+    (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
   const desktopDescSection = div(
@@ -132,7 +134,7 @@ export default function renderProductListCard(item) {
       class:
         'self-stretch text-black text-base font-extralight leading-snug line-clamp-4',
     },
-    (item?.raw?.description || '').trim().replace(/<[^>]*>/g, '')
+    (item?.raw?.description || '').trim().replace(/<[^>]*>/g, ''),
   );
 
   // Add a spacer div to push the view details to the bottom
@@ -148,7 +150,7 @@ export default function renderProductListCard(item) {
     span({
       class:
         'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-    })
+    }),
   );
 
   decorateIcons(desktopviewdetail);
@@ -157,7 +159,7 @@ export default function renderProductListCard(item) {
     desktopTitle,
     desktopDescSection,
     spacer,
-    desktopviewdetail
+    desktopviewdetail,
   );
 
   // Create desktop image section with fallback
@@ -174,7 +176,7 @@ export default function renderProductListCard(item) {
     div({
       class: 'md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
-    createImageWithFallback(imageUrl, item.title || '')
+    createImageWithFallback(imageUrl, item.title || ''),
   );
 
   desktopImageSection.append(desktopImageWrapper);
@@ -182,7 +184,7 @@ export default function renderProductListCard(item) {
   leftSection.append(
     div({ class: 'hidden md:flex' }, desktopImageSection),
     mobileContentSection,
-    desktopContentSection
+    desktopContentSection,
   );
 
   // Right Section: Pricing and Action Buttons (Visible on both Mobile and Desktop)
@@ -199,39 +201,39 @@ export default function renderProductListCard(item) {
     { class: 'flex flex-col gap-2' },
     div(
       { class: 'text-right text-black text-2xl font-medium leading-loose' },
-      `$${price.toLocaleString()}`
+      `$${price.toLocaleString()}`,
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
       div(
         { class: 'text-black text-sm font-extralight leading-snug' },
-        'Availability:'
+        'Availability:',
       ),
       div(
         { class: 'text-black text-sm font-extralight leading-snug' },
         availability,
         span(
           { class: 'text-black text-sm font-bold leading-snug' },
-          ' Available'
-        )
-      )
+          ' Available',
+        ),
+      ),
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
       div(
         { class: 'text-black text-sm font-extralight leading-snug' },
-        'Unit of Measure:'
+        'Unit of Measure:',
       ),
-      div({ class: 'text-black text-sm font-bold leading-snug' }, uom)
+      div({ class: 'text-black text-sm font-bold leading-snug' }, uom),
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
       div(
         { class: 'text-black text-sm font-extralight leading-snug' },
-        'Min. Order Qty:'
+        'Min. Order Qty:',
       ),
-      div({ class: 'text-black text-sm font-bold leading-snug' }, minQty)
-    )
+      div({ class: 'text-black text-sm font-bold leading-snug' }, minQty),
+    ),
   );
 
   const actionButtons = div(
@@ -251,16 +253,16 @@ export default function renderProductListCard(item) {
           class:
             'w-20 px-4 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy')
+        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
       ),
       div(
         {
           class:
             'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote')
-      )
-    )
+        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote'),
+      ),
+    ),
   );
 
   rightSection.append(pricingDetails, actionButtons);

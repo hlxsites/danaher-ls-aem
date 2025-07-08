@@ -8,9 +8,7 @@ async function fetchAllProductCategories() {
   const topicHubs = await ffetch('/us/en/products-index.json')
     .filter(({ type }) => type === 'TopicHub')
     .all();
-  return topicHubs.sort((item1, item2) =>
-    item1.title.localeCompare(item2.title)
-  );
+  return topicHubs.sort((item1, item2) => item1.title.localeCompare(item2.title));
 }
 
 function renderSideNav(sideNavItems) {
@@ -31,10 +29,10 @@ function renderSideNav(sideNavItems) {
               class: 'py-4 pr-2 pl-2.5 text-base',
               href: makePublicUrl(sideNavItem.path),
             },
-            sideNavItem.title
-          )
-        )
-      )
+            sideNavItem.title,
+          ),
+        ),
+      ),
     );
   });
   return sideNavElements;
@@ -77,15 +75,15 @@ export default async function decorate(block) {
 
         if (solutionPath.includes('/process-steps')) {
           return (
-            pathParts.length === expectedLength &&
-            path.includes(`${solutionPath}/`)
+            pathParts.length === expectedLength
+            && path.includes(`${solutionPath}/`)
           );
         }
 
         return (
-          !path.includes('/process-steps') &&
-          pathParts.length === expectedLength &&
-          path.includes(`${solutionPath}/`)
+          !path.includes('/process-steps')
+          && pathParts.length === expectedLength
+          && path.includes(`${solutionPath}/`)
         );
       })
       .all();
@@ -100,13 +98,14 @@ export default async function decorate(block) {
   selectedNavItem = sideNavElements
     .querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)
     ?.closest('.side-nav-item');
-  if (selectedNavItem)
+  if (selectedNavItem) {
     selectedNavItem.classList.add(
-      ...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' ')
+      ...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '),
     );
+  }
   const navHeadingDiv = div(
     { class: 'text-xl font-normal' },
-    strong(sideNavTitle)
+    strong(sideNavTitle),
   );
   if (blockParent?.classList.contains('default-content-wrapper')) {
     navHeadingDiv.classList.add('pt-0');
@@ -114,8 +113,8 @@ export default async function decorate(block) {
   block.append(navHeadingDiv, sideNavElements);
   block?.parentElement?.parentElement?.nextElementSibling?.classList.add(
     ...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 lg:pt-6 px-0 stretch'.split(
-      ' '
-    )
+      ' ',
+    ),
   );
   return block;
 }

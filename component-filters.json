@@ -6,55 +6,7 @@
     ]
   },
   {
-    "id": "insight",
-    "components": [
-      "insight-item"
-    ]
-  },
-  {
-    "id": "learn-more",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "top-selling",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "opco-banner",
-    "components": [
-      "opco-banner-item"
-    ]
-  },
-  {
-    "id": "opco-grid",
-    "components": [
-      "opco-grid-item"
-    ]
-  },
-  {
-    "id": "product-categories",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "product-category-list",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "product-category",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "top-selling",
+    "id": "section",
     "components": [
       "breadcrumb",
       "banner",
@@ -63,6 +15,10 @@
       "button",
       "title",
       "columns",
+      "dashboard",
+      "takeway",
+      "checkout",
+      "order-status",
       "takeway",
       "product-banner",
       "product-category",
@@ -71,6 +27,8 @@
       "shop-featured-products",
       "product-card",
       "call-to-action",
+      "login",
+      "register",
       "accordion",
       "recent-articles",
       "carousel",
@@ -100,7 +58,7 @@
   {
     "id": "accordion-container",
     "components": [
-      "shop-featured-products-item"
+      "accordion-item"
     ]
   },
   {
@@ -116,9 +74,9 @@
     ]
   },
   {
-    "id": "tiny-carousel",
+    "id": "cards",
     "components": [
-      "tiny-carousel-item"
+      "cards-item"
     ]
   },
   {

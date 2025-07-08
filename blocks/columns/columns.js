@@ -232,7 +232,7 @@ const buildInputElement = (
   inputName,
   autoCmplte,
   required,
-  dtName
+  dtName,
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   return div(
@@ -240,7 +240,7 @@ const buildInputElement = (
     label(
       { for: lable, class: 'font-normal text-sm leading-4' },
       field,
-      dataRequired
+      dataRequired,
     ),
     input({
       type: inputType,
@@ -255,7 +255,7 @@ const buildInputElement = (
       id: 'msg',
       'data-name': dtName,
       class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    })
+    }),
   );
 };
 
@@ -265,13 +265,13 @@ function createDropdown(itemsList) {
   const list = document.createElement('ul');
   list.classList.add(
     ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(
-      ' '
-    )
+      ' ',
+    ),
   );
   items.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(
-      ...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' ')
+      ...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '),
     );
     li.textContent = item;
     list.append(li);
@@ -285,7 +285,7 @@ function buildSelectElement(
   inputType,
   inputId,
   dataName,
-  inputList
+  inputList,
 ) {
   const selectIcon = div(
     { class: 'space-y-2' },
@@ -295,7 +295,7 @@ function buildSelectElement(
         class: 'font-normal text-sm leading-4',
       },
       fieldName,
-      span({ class: 'text-red-500' }, '*')
+      span({ class: 'text-red-500' }, '*'),
     ),
     div(
       { class: 'relative bg-white' },
@@ -311,15 +311,15 @@ function buildSelectElement(
             'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
-        span({ class: 'icon icon-dropdown w-3 h-3' })
+        span({ class: 'icon icon-dropdown w-3 h-3' }),
       ),
       createDropdown(inputList),
       span({
         id: 'msg',
         'data-name': dataName,
         class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-      })
-    )
+      }),
+    ),
   );
   return selectIcon;
 }
@@ -330,26 +330,25 @@ const buildCheckboxElement = (
   inputType,
   inputName,
   value,
-  required
-) =>
-  div(
-    { class: 'flex items-baseline' },
-    input({
-      type: inputType,
-      name: inputName,
-      class: 'input-focus-checkbox',
-      value,
-      'data-required': required,
-      'aria-label': inputName,
-    }),
-    label(
-      {
-        for: lable,
-        class: 'pl-2',
-      },
-      field
-    )
-  );
+  required,
+) => div(
+  { class: 'flex items-baseline' },
+  input({
+    type: inputType,
+    name: inputName,
+    class: 'input-focus-checkbox',
+    value,
+    'data-required': required,
+    'aria-label': inputName,
+  }),
+  label(
+    {
+      for: lable,
+      class: 'pl-2',
+    },
+    field,
+  ),
+);
 
 function tnc() {
   const tncEl = div(
@@ -370,11 +369,11 @@ function tnc() {
             class: 'text-[#333333] underline',
             tabindex: '-1',
           },
-          'here '
-        )
+          'here ',
+        ),
       ),
       span(
-        'to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. '
+        'to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. ',
       ),
       span(' For more information please review our '),
       strong(
@@ -389,14 +388,14 @@ function tnc() {
             class: 'text-[#333333] underline',
             tabindex: '-1',
           },
-          'Privacy Policy.'
-        )
+          'Privacy Policy.',
+        ),
       ),
       div(
         { class: 'flex items-center mt-5' },
-        span(' Please send me communications by: ')
-      )
-    )
+        span(' Please send me communications by: '),
+      ),
+    ),
   );
   return tncEl;
 }
@@ -436,26 +435,22 @@ function formValidate() {
 
 function loadUTMParams() {
   document.getElementsByName('UTM_Content')[0].value = localStorage.getItem(
-    'danaher_utm_content'
+    'danaher_utm_content',
   );
   if (window.location.pathname.includes('new-lab')) {
     document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   } else {
     document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem(
-      'danaher_utm_campaign'
+      'danaher_utm_campaign',
     );
   }
   document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
-  document.getElementsByName('UTM_Medium')[0].value =
-    localStorage.getItem('danaher_utm_medium');
-  document.getElementsByName('UTM_Term')[0].value =
-    localStorage.getItem('danaher_utm_term');
-  document.getElementsByName('UTM_Source')[0].value =
-    localStorage.getItem('danaher_utm_source');
-  document.getElementsByName('UTM_NLC')[0].value =
-    localStorage.getItem('danaher_utm_nlc');
+  document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
+  document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
+  document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
+  document.getElementsByName('UTM_NLC')[0].value = localStorage.getItem('danaher_utm_nlc');
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem(
-    'danaher_utm_previouspage'
+    'danaher_utm_previouspage',
   );
 }
 
@@ -547,7 +542,7 @@ async function loadForm(row, tags) {
           'First_Name',
           'given-name',
           true,
-          'First_Name'
+          'First_Name',
         ),
         buildInputElement(
           'Last_Name',
@@ -556,7 +551,7 @@ async function loadForm(row, tags) {
           'Last_Name',
           'family-name',
           true,
-          'Last_Name'
+          'Last_Name',
         ),
         buildInputElement(
           'Email_Address',
@@ -565,7 +560,7 @@ async function loadForm(row, tags) {
           'Email_Address',
           'email',
           true,
-          'Email_Address'
+          'Email_Address',
         ),
         buildInputElement(
           'Phone_Number',
@@ -574,7 +569,7 @@ async function loadForm(row, tags) {
           'Phone_Number',
           'tel',
           false,
-          'Phone_Number'
+          'Phone_Number',
         ),
         buildInputElement(
           'Company_Name',
@@ -583,7 +578,7 @@ async function loadForm(row, tags) {
           'Company_Name',
           'organization',
           true,
-          'Company_Name'
+          'Company_Name',
         ),
         div({ class: 'add-gated-form-fields' }),
         div({ class: 'add-lab-inquiry' }),
@@ -596,7 +591,7 @@ async function loadForm(row, tags) {
             'checkbox',
             'Email_Opt_In',
             'true',
-            false
+            false,
           ),
           buildCheckboxElement(
             'DHLS_Interest',
@@ -604,7 +599,7 @@ async function loadForm(row, tags) {
             'checkbox',
             'SMS_Opt_In',
             'true',
-            false
+            false,
           ),
           buildCheckboxElement(
             'DHLS_Interest',
@@ -612,7 +607,7 @@ async function loadForm(row, tags) {
             'checkbox',
             'Phone_Opt_In',
             'true',
-            false
+            false,
           ),
           buildCheckboxElement(
             'DHLS_Interest',
@@ -620,9 +615,9 @@ async function loadForm(row, tags) {
             'checkbox',
             'Post_Opt_In',
             'true',
-            false
-          )
-        )
+            false,
+          ),
+        ),
       ),
       input({
         type: 'submit',
@@ -631,8 +626,8 @@ async function loadForm(row, tags) {
         class:
           'btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
         role: 'button',
-      })
-    )
+      }),
+    ),
   );
 
   if (formId === 'labinquiry') {
@@ -644,7 +639,7 @@ async function loadForm(row, tags) {
         'checkbox',
         'Country',
         'Country',
-        countries
+        countries,
       ),
       buildInputElement(
         'Postal_Code',
@@ -653,7 +648,7 @@ async function loadForm(row, tags) {
         'Postal_Code',
         'postal-code',
         true,
-        'Postal_Code'
+        'Postal_Code',
       ),
       buildInputElement(
         'Department',
@@ -662,7 +657,7 @@ async function loadForm(row, tags) {
         'Department',
         'Department',
         false,
-        'Department'
+        'Department',
       ),
       /* Areas of Interest  */
       div(
@@ -672,7 +667,7 @@ async function loadForm(row, tags) {
             for: 'Areas_of_Interest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Areas of Interest'
+          'Areas of Interest',
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -680,7 +675,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Analytical & Assay Reagents',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -688,7 +683,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Automation & Lab Workflow Solutions',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -696,7 +691,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Cellular Analysis & Imaging',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -704,7 +699,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Genomics & Gene Editing',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -712,7 +707,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'High-Throughput & Screening Systems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -720,7 +715,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Molecular & Protein Analysis',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -728,7 +723,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Proteins, Antibodies & Cell Culture',
-          false
+          false,
         ),
         buildCheckboxElement(
           'Areas_of_Interest',
@@ -736,8 +731,8 @@ async function loadForm(row, tags) {
           'checkbox',
           'Areas_of_Interest',
           'Separation, Purification & Sample Processing',
-          false
-        )
+          false,
+        ),
       ),
       /* OpCo Interest  */
       div(
@@ -747,7 +742,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interested in hearing from one of our brands? Select all that apply.'
+          'Interested in hearing from one of our brands? Select all that apply.',
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -755,7 +750,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Abcam',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -763,7 +758,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Aldevron',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -771,7 +766,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Beckman Coulter Life Sciences',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -779,7 +774,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Cytiva',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -787,7 +782,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Genedata',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -795,7 +790,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDBS',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -803,7 +798,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDT',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -811,7 +806,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Leica Biosystems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -819,7 +814,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Leica Microsystems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -827,7 +822,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Molecular Devices',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -835,7 +830,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Phenomenex',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -843,8 +838,8 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'SCIEX',
-          false
-        )
+          false,
+        ),
       ),
       buildInputElement(
         'OpCo_Comments',
@@ -853,8 +848,8 @@ async function loadForm(row, tags) {
         'OpCo_Comments',
         'primary-product-interest',
         false,
-        'OpCo_Comments'
-      )
+        'OpCo_Comments',
+      ),
     );
     formEl.querySelector('.add-lab-inquiry')?.append(additionField);
   }
@@ -869,7 +864,7 @@ async function loadForm(row, tags) {
         'Postal_Code',
         'postal-code',
         true,
-        'Postal_Code'
+        'Postal_Code',
       ),
       buildSelectElement(
         'Job_Role',
@@ -877,7 +872,7 @@ async function loadForm(row, tags) {
         'checkbox',
         'Job_Role',
         'Job_Role',
-        jobRole
+        jobRole,
       ),
       buildSelectElement(
         'Country',
@@ -885,7 +880,7 @@ async function loadForm(row, tags) {
         'checkbox',
         'Country',
         'Country',
-        countries
+        countries,
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -894,7 +889,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?'
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           {
@@ -910,7 +905,7 @@ async function loadForm(row, tags) {
             label: 'Not right now, but potentially in the future',
             value: 'potentially_in_future',
           },
-        ])
+        ]),
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -919,7 +914,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.'
+          'Interest in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -927,7 +922,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Abcam',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -935,7 +930,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Aldevron',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -943,7 +938,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Beckman Coulter Life Sciences',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -951,7 +946,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Genedata',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -959,7 +954,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDBS',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -967,7 +962,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDT',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -975,7 +970,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Leica Microsystems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -983,7 +978,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Molecular Devices',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -991,7 +986,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Phenomenex',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -999,9 +994,9 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'SCIEX',
-          false
-        )
-      )
+          false,
+        ),
+      ),
     );
     formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
   }
@@ -1014,7 +1009,7 @@ async function loadForm(row, tags) {
         'checkbox',
         'Country',
         'Country',
-        countries
+        countries,
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -1023,7 +1018,7 @@ async function loadForm(row, tags) {
             for: 'model_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Which of the following challenges have you faced when working with microphysiological systems or human-relevant models? (Select all that apply).'
+          'Which of the following challenges have you faced when working with microphysiological systems or human-relevant models? (Select all that apply).',
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1031,7 +1026,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'limited_expertise_tools',
-          false
+          false,
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1039,7 +1034,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'organoid_loss_degradation',
-          false
+          false,
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1047,7 +1042,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'difficulty_real_time_data',
-          false
+          false,
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1055,7 +1050,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'reproducibility_consistency',
-          false
+          false,
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1063,7 +1058,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'lack_standardization_automation',
-          false
+          false,
         ),
         buildCheckboxElement(
           'model_challenges',
@@ -1071,8 +1066,8 @@ async function loadForm(row, tags) {
           'checkbox',
           'model_challenges',
           'poor_data_traceability',
-          false
-        )
+          false,
+        ),
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -1081,7 +1076,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?'
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           {
@@ -1097,7 +1092,7 @@ async function loadForm(row, tags) {
             label: 'Not right now, but potentially in the future',
             value: 'potentially_in_future',
           },
-        ])
+        ]),
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -1106,7 +1101,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.'
+          'Interest in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1114,7 +1109,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Abcam',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1122,7 +1117,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Aldevron',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1130,7 +1125,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Beckman Coulter Life Sciences',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1138,7 +1133,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Genedata',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1146,7 +1141,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDBS',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1154,7 +1149,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDT',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1162,7 +1157,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Leica Microsystems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1170,7 +1165,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Molecular Devices',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1178,7 +1173,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Phenomenex',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1186,9 +1181,9 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'SCIEX',
-          false
-        )
-      )
+          false,
+        ),
+      ),
     );
     formEl.querySelector('.add-gated-form-fields')?.append(genedataformFields);
   }
@@ -1202,7 +1197,7 @@ async function loadForm(row, tags) {
         'checkbox',
         'Country',
         'Country',
-        countries
+        countries,
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -1211,7 +1206,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?'
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           {
@@ -1227,7 +1222,7 @@ async function loadForm(row, tags) {
             label: 'Not right now, but potentially in the future',
             value: 'potentially_in_future',
           },
-        ])
+        ]),
       ),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -1236,7 +1231,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.'
+          'Interest in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1244,7 +1239,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Abcam',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1252,7 +1247,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Aldevron',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1260,7 +1255,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Beckman Coulter Life Sciences',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1268,7 +1263,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Genedata',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1276,7 +1271,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDBS',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1284,7 +1279,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'IDT',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1292,7 +1287,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Leica Microsystems',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1300,7 +1295,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Molecular Devices',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1308,7 +1303,7 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'Phenomenex',
-          false
+          false,
         ),
         buildCheckboxElement(
           'OpCo_Interest',
@@ -1316,9 +1311,9 @@ async function loadForm(row, tags) {
           'checkbox',
           'OpCo_Interest',
           'SCIEX',
-          false
-        )
-      )
+          false,
+        ),
+      ),
     );
     formEl
       .querySelector('.add-gated-form-fields')
@@ -1404,8 +1399,8 @@ export default function decorate(block) {
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
       if (
-        window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/')
+        window.location.pathname.includes('/us/en/blog/')
+        || window.location.pathname.includes('/us/en/news/')
       ) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
       } else {
@@ -1427,17 +1422,16 @@ export default function decorate(block) {
   });
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(
-      ...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' ')
+      ...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '),
     );
-    if (sectionDiv.className.includes('text-white'))
-      ele.classList.add('text-white');
+    if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(
       ...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(
-        ' '
-      )
+        ' ',
+      ),
     );
   });
 
@@ -1445,12 +1439,12 @@ export default function decorate(block) {
     block
       .querySelectorAll('div > div:nth-child(2) > p > a')
       .forEach((ele, index, arr) => {
-        if (index === arr.length - 1)
-          ele.parentElement?.classList.add('border-0');
-        else
+        if (index === arr.length - 1) ele.parentElement?.classList.add('border-0');
+        else {
           ele.parentElement?.classList.add(
-            ...'border-b border-solid border-black my-6'.split(' ')
+            ...'border-b border-solid border-black my-6'.split(' '),
           );
+        }
       });
   }
 
@@ -1458,18 +1452,19 @@ export default function decorate(block) {
     const divEl = block.querySelector('div > div:nth-child(2)');
     divEl.classList.add('bg-danaherred-800', 'pb-10');
     divEl.querySelectorAll('p').forEach((ele, index, arr) => {
-      if (!ele.className.includes('.button-container'))
+      if (!ele.className.includes('.button-container')) {
         ele.classList.add(
-          ...'py-2 px-6 leading-7 text-base !text-white'.split(' ')
+          ...'py-2 px-6 leading-7 text-base !text-white'.split(' '),
         );
+      }
       ele.classList.add('href-text');
       if (index === arr.length - 1) {
         ele
           .querySelector('a')
           ?.classList.add(
             ...'btn-outline-trending-brand text-lg font-medium rounded-full px-6 py-3 !no-underline'.split(
-              ' '
-            )
+              ' ',
+            ),
           );
       }
     });
@@ -1491,8 +1486,8 @@ export default function decorate(block) {
         };
       } else if (!block.className.includes('itemscenter')) {
         if (
-          window.location.pathname.includes('/us/en/blog/') ||
-          window.location.pathname.includes('/us/en/news/')
+          window.location.pathname.includes('/us/en/blog/')
+          || window.location.pathname.includes('/us/en/news/')
         ) {
           row.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
           row.querySelectorAll('h1').forEach((ele) => {
@@ -1503,8 +1498,8 @@ export default function decorate(block) {
           const aTag = row.querySelectorAll('p > a');
           const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
           if (
-            formType[0]?.title === 'Form_Type' &&
-            formType[0]?.textContent === 'promotion'
+            formType[0]?.title === 'Form_Type'
+            && formType[0]?.textContent === 'promotion'
           ) {
             loadForm(row, aTag);
           }
@@ -1515,8 +1510,8 @@ export default function decorate(block) {
       ulEle.forEach((ele) => {
         ele.classList.add(
           ...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(
-            ' '
-          )
+            ' ',
+          ),
         );
       });
 
@@ -1524,12 +1519,12 @@ export default function decorate(block) {
       spanEl.forEach((element) => {
         element.classList.add(
           ...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(
-            ' '
-          )
+            ' ',
+          ),
         );
         const svg = element.querySelector('svg');
         svg.classList.add(
-          ...'w-4 h-4 rounded shadow invert brightness-0'.split(' ')
+          ...'w-4 h-4 rounded shadow invert brightness-0'.split(' '),
         );
       });
 
@@ -1552,19 +1547,19 @@ export default function decorate(block) {
       }
       if (block.className.includes('columns-2-cols')) {
         if (
-          window.location.pathname.includes('/us/en/blog/') ||
-          window.location.pathname.includes('/us/en/news/')
+          window.location.pathname.includes('/us/en/blog/')
+          || window.location.pathname.includes('/us/en/news/')
         ) {
           block.firstElementChild?.classList.add(
             ...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(
-              ' '
-            )
+              ' ',
+            ),
           );
         } else {
           block.firstElementChild?.classList.add(
             ...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(
-              ' '
-            )
+              ' ',
+            ),
           );
         }
         const pTags = row.querySelectorAll('p');
@@ -1578,8 +1573,8 @@ export default function decorate(block) {
       } else if (block.className.includes('columns-3-cols')) {
         block.firstElementChild?.classList.add(
           ...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(
-            ' '
-          )
+            ' ',
+          ),
         );
         const heading = block.querySelector('h4');
         heading?.classList.add('font-bold');
@@ -1592,8 +1587,7 @@ export default function decorate(block) {
             item.parentElement.classList.add('link', 'pb-8');
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold'.split(' '));
-            if (sectionDiv.className.includes('text-white'))
-              item.classList.add('text-white');
+            if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
             else item.classList.add('text-danaherpurple-500');
           }
         });
@@ -1605,24 +1599,23 @@ export default function decorate(block) {
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
           if (
-            window.location.pathname.includes('/us/en/blog/') ||
-            window.location.pathname.includes('/us/en/news/')
+            window.location.pathname.includes('/us/en/blog/')
+            || window.location.pathname.includes('/us/en/news/')
           ) {
             picWrapper.classList.add(
               ...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(
-                ' '
-              )
+                ' ',
+              ),
             );
             pic
               .querySelector('img')
               .classList.add(
-                ...'absolute bottom-0 h-full w-full object-cover'.split(' ')
+                ...'absolute bottom-0 h-full w-full object-cover'.split(' '),
               );
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');
-            const seventythirtyEl =
-              picWrapper.parentElement?.parentElement?.parentElement
-                ?.parentElement;
+            const seventythirtyEl = picWrapper.parentElement?.parentElement?.parentElement
+              ?.parentElement;
             if (seventythirtyEl.querySelector('img')) {
               pic.querySelector('img').classList.add('block', 'w-1/2');
             } else {

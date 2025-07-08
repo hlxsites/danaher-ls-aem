@@ -4,8 +4,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const [title, brandAddress, callDescription, browseDescription] =
-    block.children;
+  const [title, brandAddress, callDescription, browseDescription] = block.children;
 
   brandAddress
     ?.querySelectorAll('div')[1]
@@ -16,7 +15,7 @@ export default function decorate(block) {
       'text-black',
       'text-base',
       'leading-snug',
-      'items-start'
+      'items-start',
     );
   callDescription
     ?.querySelectorAll('div')[1]
@@ -27,7 +26,7 @@ export default function decorate(block) {
       'text-black',
       'text-base',
       'leading-snug',
-      'items-start'
+      'items-start',
     );
   browseDescription
     ?.querySelectorAll('div')[1]
@@ -38,7 +37,7 @@ export default function decorate(block) {
       'text-black',
       'text-base',
       'leading-snug',
-      'items-start'
+      'items-start',
     );
   const addressSectionContent = brandAddress;
   addressSectionContent?.classList.add(
@@ -49,16 +48,15 @@ export default function decorate(block) {
     'text-base',
     'text-black',
     'leading-snug',
-    'items-start'
+    'items-start',
   );
-  const addressSectionAnchor =
-    addressSectionContent?.querySelectorAll('a') ?? [];
+  const addressSectionAnchor = addressSectionContent?.querySelectorAll('a') ?? [];
   if (addressSectionAnchor.length) {
     addressSectionAnchor?.forEach((anchor) => {
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
-        linkHref?.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self',
       );
       anchor?.classList.add(
         'text-danaherpurple-500',
@@ -70,7 +68,7 @@ export default function decorate(block) {
         'flex',
         'items-center',
         'leading-snug',
-        'link'
+        'link',
       );
       anchor?.classList.remove('btn', 'btn-outline-primary');
       anchor?.parentElement?.classList.remove('btn', 'btn-outline-primary');
@@ -79,7 +77,7 @@ export default function decorate(block) {
         span({
           class:
             'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        })
+        }),
       );
     });
   }
@@ -92,7 +90,7 @@ export default function decorate(block) {
     'text-base',
     'text-black',
     'leading-snug',
-    'items-start'
+    'items-start',
   );
   const callSectionAnchor = callSectionContent?.querySelectorAll('a') ?? [];
   if (callSectionAnchor.length) {
@@ -100,7 +98,7 @@ export default function decorate(block) {
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
-        linkHref?.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self',
       );
       anchor?.classList.add(
         'text-danaherpurple-500',
@@ -112,7 +110,7 @@ export default function decorate(block) {
         'flex',
         'items-center',
         'leading-snug',
-        'link'
+        'link',
       );
       anchor?.classList.remove('btn', 'btn-outline-primary');
       anchor?.parentElement?.classList.remove('btn', 'btn-outline-primary');
@@ -121,7 +119,7 @@ export default function decorate(block) {
         span({
           class:
             'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        })
+        }),
       );
     });
   }
@@ -135,17 +133,16 @@ export default function decorate(block) {
     'text-base',
     'text-black',
     'leading-snug',
-    'items-start'
+    'items-start',
   );
-  const browseDescriptionAnchor =
-    browseDescriptionContent?.querySelectorAll('a') ?? [];
+  const browseDescriptionAnchor = browseDescriptionContent?.querySelectorAll('a') ?? [];
 
   if (browseDescriptionAnchor.length) {
     browseDescriptionAnchor?.forEach((anchor) => {
       const linkHref = anchor?.getAttribute('href');
       anchor.setAttribute(
         'target',
-        linkHref?.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self',
       );
       anchor?.classList.add(
         'text-danaherpurple-500',
@@ -157,7 +154,7 @@ export default function decorate(block) {
         'flex',
         'items-center',
         'leading-snug',
-        'link'
+        'link',
       );
       anchor?.classList.remove('btn', 'btn-outline-primary');
       anchor?.parentElement?.classList.remove('btn-outline-primary');
@@ -166,7 +163,7 @@ export default function decorate(block) {
         span({
           class:
             'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        })
+        }),
       );
     });
   }
@@ -187,7 +184,7 @@ export default function decorate(block) {
   // === Left: Title
   const titleLearnMore = div(
     { class: 'min-w-[120px] font-medium text-black text-3xl leading-[1.5rem]' },
-    title?.textContent?.trim() || ''
+    title?.textContent?.trim() || '',
   );
 
   // === Middle: SCIEX address
@@ -213,7 +210,7 @@ export default function decorate(block) {
   const rightSection = div(
     { class: 'space-y-6 text-right md:text-left mt-2' },
     callSection,
-    browseSection
+    browseSection,
   );
 
   // === Assemble Columns

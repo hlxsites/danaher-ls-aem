@@ -78,14 +78,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-<<<<<<< HEAD
-=======
 .body-banner-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
->>>>>>> em1-so-optimized
 .body-banner-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -139,13 +136,6 @@
   font-weight: 400 !important
 }
 
-<<<<<<< HEAD
-.body-banner-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
-=======
->>>>>>> em1-so-optimized
 .body-banner-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -172,8 +162,6 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-<<<<<<< HEAD
-=======
 .body-banner-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -182,7 +170,6 @@
   text-decoration-color: #7523FF
 }
 
->>>>>>> em1-so-optimized
 .body-banner-wrapper :is(.transition) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -195,10 +182,6 @@
   transition-duration: 300ms
 }
 
-<<<<<<< HEAD
-.body-banner-wrapper :is(.hover\:bg-opacity-90:hover) {
-  --tw-bg-opacity: 0.9
-=======
 .body-banner-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
@@ -207,7 +190,6 @@
 .body-banner-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
->>>>>>> em1-so-optimized
 }
 
 @media (min-width: 768px) {

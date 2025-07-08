@@ -1,4 +1,6 @@
-import { div, p, img, a, span } from '../../scripts/dom-builder.js';
+import {
+  div, p, img, a, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
@@ -36,10 +38,10 @@ export default function decorate(block) {
     // Logo
     imgSrc
       ? img({
-          src: imgSrc.replace(/<[^>]*>/g, ''),
-          alt: imgAlt.replace(/<[^>]*>/g, ''),
-          class: 'h-16 w-auto',
-        })
+        src: imgSrc.replace(/<[^>]*>/g, ''),
+        alt: imgAlt.replace(/<[^>]*>/g, ''),
+        class: 'h-16 w-auto',
+      })
       : '',
 
     // Text Block
@@ -52,19 +54,19 @@ export default function decorate(block) {
       // Discover Link
       linkText
         ? a(
-            {
-              href: linkTextEl || '#',
-              class:
+          {
+            href: linkTextEl || '#',
+            class:
                 'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
-            },
-            linkLabel || '',
-            span({
-              class:
+          },
+          linkLabel || '',
+          span({
+            class:
                 'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-            })
-          )
-        : ''
-    )
+          }),
+        )
+        : '',
+    ),
   );
   decorateIcons(bannerSection);
   block.innerHTML = '';

@@ -1,4 +1,6 @@
-import { div, p, a, input, span, img } from '../../scripts/dom-builder.js';
+import {
+  div, p, a, input, span, img,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { makePublicUrl, decorateModals } from '../../scripts/scripts.js';
 
@@ -32,15 +34,15 @@ export default function renderProductGridCard(item) {
 
   const imageElement = createImageWithFallback(
     item.raw.images?.[0],
-    item.title
+    item.title,
   );
 
   const titleElement = div(
     { class: 'p-3' },
     p(
       { class: 'text-black text-xl font-medium leading-7 line-clamp-2' },
-      (item.title || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   const contentWrapper = div({
@@ -62,7 +64,7 @@ export default function renderProductGridCard(item) {
       {
         class: 'text-right justify-start text-black text-2xl font-medium',
       },
-      `$${price.toLocaleString()}`
+      `$${price.toLocaleString()}`,
     ),
     div(
       { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
@@ -70,18 +72,18 @@ export default function renderProductGridCard(item) {
         { class: 'flex justify-between items-center w-full' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Unit of Measure:'
+          'Unit of Measure:',
         ),
-        div({ class: 'text-black text-base font-bold leading-snug' }, uom)
+        div({ class: 'text-black text-base font-bold leading-snug' }, uom),
       ),
       div(
         { class: 'flex justify-between items-center w-full' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Min. Order Qty:'
+          'Min. Order Qty:',
         ),
-        div({ class: 'text-black text-base font-bold leading-snug' }, minQty)
-      )
+        div({ class: 'text-black text-base font-bold leading-snug' }, minQty),
+      ),
     ),
     div(
       { class: 'inline-flex justify-start items-center ml-3 gap-3' },
@@ -98,16 +100,16 @@ export default function renderProductGridCard(item) {
           class:
             'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy')
+        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
       ),
       div(
         {
           class:
             'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote')
-      )
-    )
+        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote'),
+      ),
+    ),
   );
 
   const viewDetailsButton = div(
@@ -122,8 +124,8 @@ export default function renderProductGridCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-      })
-    )
+      }),
+    ),
   );
 
   decorateIcons(viewDetailsButton);

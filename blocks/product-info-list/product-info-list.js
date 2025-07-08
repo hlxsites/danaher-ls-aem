@@ -34,7 +34,7 @@ export default async function decorate(block) {
       class:
         'product-info-left lg:w-[400px] !font-medium !text-black !text-[32px] !leading-10',
     }),
-    div({ class: 'product-info-right lg:w-[840px]' })
+    div({ class: 'product-info-right lg:w-[840px]' }),
   );
   const productInfoLeft = productInfoList.querySelector('.product-info-left');
   productInfoLeft.textContent = titleEl;

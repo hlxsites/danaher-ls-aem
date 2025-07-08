@@ -1,4 +1,6 @@
-import { div, span, img, p } from './dom-builder.js';
+import {
+  div, span, img, p,
+} from './dom-builder.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
 import { getApiData } from './api-utils.js';
@@ -40,7 +42,7 @@ export function preLoader() {
     img({
       class: ' h-24',
       src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif',
-    })
+    }),
   );
 }
 
@@ -60,7 +62,7 @@ const generatePreloader = div(
     class: 'hidden',
     id: 'mainPreLoader',
   },
-  preLoader()
+  preLoader(),
 );
 const getMainDiv = document.querySelector('body');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
@@ -100,7 +102,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
       {
         class: 'modal-body py-6 pb-6',
       },
-      content
+      content,
     );
   }
   let cancelButton = '';
@@ -110,7 +112,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
         class: 'mt-6 text-danaherpurple-500 cursor-pointer',
         id: 'closeUtilityModal',
       },
-      'Cancel'
+      'Cancel',
     );
     if (content && modalBody) {
       const getModalButtonWrapper = modalBody.querySelector('.button-wrapper');
@@ -118,7 +120,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
         getModalButtonWrapper.classList.add(
           'flex',
           'justify-between',
-          'items-center'
+          'items-center',
         );
         getModalButtonWrapper.append(cancelButton);
       }
@@ -136,7 +138,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
       },
       span({
         class: 'icon icon-close cursor-pointer',
-      })
+      }),
     );
     modalCloseButton.addEventListener('click', (e) => {
       e.preventDefault();
@@ -166,7 +168,7 @@ export async function getProductInfo(id, needInterShop = true) {
   if (api) {
     try {
       const coveoResponse = await getApiData(
-        `https://lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
+        `https://lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
       if (coveoResponse?.status === 'success') {
         let productData = {};
@@ -186,15 +188,14 @@ export async function getProductInfo(id, needInterShop = true) {
         if (needInterShop) {
           const intershopProductId = id.slice(0, id.lastIndexOf('-'));
           const intershopData = await getApiData(
-            `${baseURL}products/${intershopProductId}`
+            `${baseURL}products/${intershopProductId}`,
           );
 
           if (intershopData?.status === 'success') {
             const shopData = intershopData.data;
 
             const showCart = shopData?.attributes?.some(
-              (attr) =>
-                attr.name === 'show_add_to_cart' && attr.value === 'True'
+              (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
             );
 
             productData = {

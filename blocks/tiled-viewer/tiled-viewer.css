@@ -50,13 +50,8 @@
   display: block
 }
 
-<<<<<<< HEAD
-.tiled-viewer-wrapper :is(.\!h-\[200px\]) {
-  height: 200px !important
-=======
 .tiled-viewer-wrapper :is(.border) {
   border-width: 1px
->>>>>>> em1-so-optimized
 }
 
 .tiled-viewer-wrapper :is(.bg-danaherlightblue-50) {
@@ -69,14 +64,7 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-<<<<<<< HEAD
-@media (min-width: 768px) {
-  .tiled-viewer-wrapper :is(.md\:\!h-\[600px\]) {
-    height: 600px !important
-  }
-=======
 .tiled-viewer-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
->>>>>>> em1-so-optimized
 }

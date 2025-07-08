@@ -1,4 +1,6 @@
-import { div, img, a, button, input, span } from '../../scripts/dom-builder.js';
+import {
+  div, img, a, button, input, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
@@ -14,8 +16,8 @@ function createCarrierFreeBadge(carrierFreeText) {
         class:
           'text-center justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight',
       },
-      carrierFreeText
-    )
+      carrierFreeText,
+    ),
   );
 }
 
@@ -71,8 +73,8 @@ export default function renderListCard(item) {
     }),
     a(
       { title: item.title },
-      createImageWithFallback(imageUrl, item.title || '')
-    )
+      createImageWithFallback(imageUrl, item.title || ''),
+    ),
   );
 
   imageSection.append(imageWrapper);
@@ -97,8 +99,8 @@ export default function renderListCard(item) {
         class:
           'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2',
       },
-      (item.title || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   mobileTitleSection.append(mobileTitleWrapper);
@@ -119,9 +121,9 @@ export default function renderListCard(item) {
             class:
               'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
           },
-          (item.description || '').trim().replace(/<[^>]*>/g, '')
-        )
-      )
+          (item.description || '').trim().replace(/<[^>]*>/g, ''),
+        ),
+      ),
     ),
     a(
       {
@@ -134,8 +136,8 @@ export default function renderListCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-      })
-    )
+      }),
+    ),
   );
   decorateIcons(mobileDescSection);
 
@@ -161,9 +163,9 @@ export default function renderListCard(item) {
         {
           class: 'justify-start text-black text-xl font-medium leading-7',
         },
-        (item.title || '').trim().replace(/<[^>]*>/g, '')
-      )
-    )
+        (item.title || '').trim().replace(/<[^>]*>/g, ''),
+      ),
+    ),
   );
 
   desktopTitleAndDesc.append(
@@ -177,10 +179,10 @@ export default function renderListCard(item) {
             class:
               'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
           },
-          (item.description || '').trim().replace(/<[^>]*>/g, '')
-        )
-      )
-    )
+          (item.description || '').trim().replace(/<[^>]*>/g, ''),
+        ),
+      ),
+    ),
   );
 
   // Bottom section with View Details link - SEPARATED
@@ -196,8 +198,8 @@ export default function renderListCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-      })
-    )
+      }),
+    ),
   );
 
   decorateIcons(desktopViewDetails);
@@ -206,7 +208,7 @@ export default function renderListCard(item) {
     imageSection,
     mobileContentSection,
     mobileDescSection,
-    desktopContentSection
+    desktopContentSection,
   );
 
   let rightSection;
@@ -220,7 +222,7 @@ export default function renderListCard(item) {
       {
         class: 'w-64 text-right justify-start text-black text-2xl font-medium',
       },
-      `$${item.price.toLocaleString()}.00`
+      `$${item.price.toLocaleString()}.00`,
     );
 
     const pricingDetails = div({ class: 'w-64 flex flex-col gap-1' });
@@ -229,35 +231,35 @@ export default function renderListCard(item) {
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Availability:'
+          'Availability:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          `${item?.availability || ''} Available`
-        )
+          `${item?.availability || ''} Available`,
+        ),
       ),
       div(
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Unit of Measure:'
+          'Unit of Measure:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.uom || ''
-        )
+          item?.uom || '',
+        ),
       ),
       div(
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Min. Order Qty:'
+          'Min. Order Qty:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.minQty || ''
-        )
-      )
+          item?.minQty || '',
+        ),
+      ),
     );
 
     const actionButtons = div({
@@ -282,8 +284,8 @@ export default function renderListCard(item) {
             class:
               'justify-start text-white text-base font-medium leading-snug',
           },
-          'Buy'
-        )
+          'Buy',
+        ),
       ),
       button(
         {
@@ -294,9 +296,9 @@ export default function renderListCard(item) {
           {
             class: 'inherit text-base font-medium leading-snug',
           },
-          'Quote'
-        )
-      )
+          'Quote',
+        ),
+      ),
     );
 
     rightSection.append(price, pricingDetails, actionButtons);
@@ -323,8 +325,8 @@ export default function renderListCard(item) {
               class:
                 'justify-start text-white text-base font-medium leading-snug',
             },
-            'Price & Availability'
-          )
+            'Price & Availability',
+          ),
         ),
         button(
           {
@@ -335,9 +337,9 @@ export default function renderListCard(item) {
             {
               class: 'inherit text-base font-medium leading-snug',
             },
-            'Quote'
-          )
-        )
+            'Quote',
+          ),
+        ),
       );
     } else {
       actionButtons.append(
@@ -350,9 +352,9 @@ export default function renderListCard(item) {
             {
               class: 'inherit text-base font-medium leading-snug',
             },
-            'Quote'
-          )
-        )
+            'Quote',
+          ),
+        ),
       );
     }
 
