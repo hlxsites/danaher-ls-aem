@@ -4,7 +4,7 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const baseUrl = 'https://lifesciences.danaher.com';
+  const baseUrl = `https://${window.DanaherConfig.host}/`;
   const maxCards = 28;
 
   const [productCategoryId, blockTitle, blockBrand] = block.children;
@@ -29,7 +29,9 @@ export default async function decorate(block) {
       : raw?.data || raw?.results || [];
 
     const filteredProducts = allProducts
-      .filter(({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1)
+      .filter(
+        ({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1,
+      )
       .filter(({ type }) => type === 'Category')
       .filter(({ path }) => !path.includes('/product-coveo'));
 
@@ -123,9 +125,7 @@ export default async function decorate(block) {
         const brandArray = item.brand?.split(',') || [];
         return brandArray.some((iBrand) => {
           const brand = iBrand;
-          return (
-            brand.toLowerCase() === authoredBrand
-          );
+          return brand.toLowerCase() === authoredBrand;
         });
       });
 

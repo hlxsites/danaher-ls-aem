@@ -16,7 +16,7 @@ import { getApiData } from './api-utils.js';
 //     : "https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-";
 // }
 export function getCommerceBase() {
-  return 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/';
+  return `https://${window.DanaherConfig.intershopDomain}/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/`;
 }
 
 /**
@@ -132,7 +132,7 @@ export const getProductDetails = async (product) => {
     }
   } catch (error) {
     // eslint-disable-next-line
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 

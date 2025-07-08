@@ -29,7 +29,7 @@ export default async function decorate(block) {
   //   }
   // });
 
-  const baseUrl = 'https://lifesciences.danaher.com';
+  const baseUrl = `https://${window.DanaherConfig.host}/lifesciences.danaher.com`;
 
   const currentPath = window.location.href;
 
