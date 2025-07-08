@@ -161,7 +161,7 @@ export default async function decorate(block) {
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
-  if (dynamicData.length > 0) {
+  if (accordionContainerTitle.trim() !== '' && dynamicData.length > 0) {
     const dynamicAccordionItems = dynamicData.map((data, index) => {
       const uuid = generateUUID();
       return createAccordionBlock(
