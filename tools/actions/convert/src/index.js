@@ -20,6 +20,7 @@ import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
+// eslint-disable-next-line
 import pathConfig from './pathConfig.json' with { type: 'json' };
 
 const mediaTypes = {

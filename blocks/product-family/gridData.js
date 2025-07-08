@@ -16,14 +16,14 @@ export default function renderProductGridCard(item) {
       'lg:w-[305px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start ',
   });
 
-  const fallbackImagePath = '/icons/fallback-image.png';
+  const fallbackImagePath = '/content/dam/danaher/products/fallbackImage.jpeg';
 
   // Compact image creation with fallback
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       src: src || fallbackImagePath,
       alt: alt || 'Product image not available',
-      class: 'w-full h-40 object-cover',
+      class: 'w-full h-40 object-contain',
     });
 
     // Add error handler for fallback

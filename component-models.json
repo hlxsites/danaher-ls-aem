@@ -1,5 +1,100 @@
 [
   {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "container",
+        "label": "Fieldset",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "description",
+            "label": "Description",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "keywords",
+            "multi": true,
+            "label": "Keywords",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "article:Tag",
+            "label": "article:tag",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": ":path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "template",
+            "label": "Template",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "brand",
+            "label": "Brand",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "creationdate",
+            "label": "Creation Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null,
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "updatedate",
+            "label": "Update Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null,
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "fullcategory",
+            "label": "Full Category",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "viewport",
+            "label": "View Port",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "image",
     "fields": [
       {
@@ -151,6 +246,25 @@
         "name": "title",
         "value": "",
         "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "banner",
+        "value": "",
+        "label": "Banner"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
       }
     ]
   },
@@ -332,6 +446,13 @@
     "id": "columns",
     "fields": [
       {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Style",
+        "valueType": "string"
+      },
+      {
         "component": "text",
         "valueType": "number",
         "name": "columns",
@@ -431,6 +552,23 @@
         "label": "Description"
       },
       {
+        "component": "select",
+        "name": "insightItemLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
+      },
+      {
         "component": "aem-content",
         "name": "insight_link",
         "label": "Link Url"
@@ -499,6 +637,23 @@
         "name": "offer_advertisement_title",
         "value": "",
         "label": "Offer Title"
+      },
+      {
+        "component": "select",
+        "name": "adLinkType",
+        "label": "Link Type",
+        "required": true,
+        "valueType": "string",
+        "options": [
+          {
+            "name": "modal",
+            "value": "modal"
+          },
+          {
+            "name": "url",
+            "value": "url"
+          }
+        ]
       },
       {
         "component": "text",
@@ -1112,25 +1267,6 @@
   },
   {
     "id": "top-purchased-products",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "titleText",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "productid",
-        "value": "",
-        "label": "Product IDs (comma separated)"
-      }
-    ]
-  },
-  {
-    "id": "top-selling-products",
     "fields": [
       {
         "component": "text",

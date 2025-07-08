@@ -13,10 +13,11 @@ import {
   getAuthorization,
   isLoggedInUser,
   makeCoveoApiRequest,
+  getCommerceBase,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
 
-// const baseURL = getCommerceBase();
+const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
@@ -881,28 +882,28 @@ function handleScroll() {
   }
 }
 
-// async function getQuote(headerBlock, authHeader) {
-//   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
-//     headers: authHeader,
-//   });
-//   if (quoteRequest.status === 200) {
-//     const data = await quoteRequest?.json();
-//     if (data && data.items) {
-//       const rfqQuantity = data.items.length;
-//       if (rfqQuantity !== 0) {
-//         const quantityElement = headerBlock.querySelector(
-//           'a.quote span.quantity',
-//         );
-//         if (quantityElement) quantityElement.textContent = rfqQuantity;
-//         const dotElement = headerBlock.querySelector('a.quote span.dot');
-//         if (dotElement) dotElement.classList.remove('hidden');
-//       }
-//     }
-//   } else if (quoteRequest.status !== 404) {
-//     // eslint-disable-next-line no-console
-//     console.warn('Failed to load quote cart');
-//   }
-// }
+async function getQuote(headerBlock, authHeader) {
+  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
+    headers: authHeader,
+  });
+  if (quoteRequest.status === 200) {
+    const data = await quoteRequest?.json();
+    if (data && data.items) {
+      const rfqQuantity = data.items.length;
+      if (rfqQuantity !== 0) {
+        const quantityElement = headerBlock.querySelector(
+          'a.quote span.quantity',
+        );
+        if (quantityElement) quantityElement.textContent = rfqQuantity;
+        const dotElement = headerBlock.querySelector('a.quote span.dot');
+        if (dotElement) dotElement.classList.remove('hidden');
+      }
+    }
+  } else if (quoteRequest.status !== 404) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to load quote cart');
+  }
+}
 
 /**
  * decorates the header, mainly the nav
@@ -910,62 +911,36 @@ function handleScroll() {
  */
 export default async function decorate(block) {
   const resp = await fetch('/fragments/header/master.plain.html');
+  const html = await resp.text();
 
+  // build header DOM
+  const headerBlock = div({
+    class: 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20',
+  });
+  headerBlock.innerHTML = html;
+
+  buildLogosBlock(headerBlock);
+  buildSearchBlock(headerBlock);
+  buildNavBlock(headerBlock);
+  const flyout = buildFlyoutMenus(headerBlock);
+
+  decorateIcons(headerBlock);
+
+  window.addEventListener('scroll', handleScroll);
+  block.innerHTML = '';
+
+  block.append(headerBlock);
+  block.append(flyout);
+  const authHeader = getAuthorization();
   if (
-    resp.ok
-    && (!window.location.href.includes('login')
-      || !window.location.href.includes('register'))
+    authHeader
+    && (authHeader.has('authentication-token') || authHeader.has('Authorization'))
   ) {
-    const html = await resp.text();
-
-    // build header DOM
-    const headerBlock = div({
-      class:
-        'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20',
-    });
-    headerBlock.innerHTML = html;
-
-    buildLogosBlock(headerBlock);
-    buildSearchBlock(headerBlock);
-    buildNavBlock(headerBlock);
-    const flyout = buildFlyoutMenus(headerBlock);
-
-    decorateIcons(headerBlock);
-
-    window.addEventListener('scroll', handleScroll);
-    block.innerHTML = '';
-
-    block.append(headerBlock);
-    block.append(flyout);
-    const authHeader = getAuthorization();
-    if (
-      authHeader
-      && (authHeader.has('authentication-token')
-        || authHeader.has('Authorization'))
-    ) {
-      // getQuote(headerBlock, authHeader);
-    }
-    document
-      .querySelector('div.search-icon')
-      ?.addEventListener('click', toggleSearchBoxMobile);
+    getQuote(headerBlock, authHeader);
   }
-  if (window.location.href.includes('products')) {
-    const metaTemplate = document.createElement('meta');
-    metaTemplate.name = 'template';
-    metaTemplate.content = 'Category';
-    document.head.appendChild(metaTemplate);
-    const currentPath = new URL(window.location.href);
-    const currentUrl = currentPath.pathname.split('.html');
-    const currentParams = currentUrl[0].split('/');
-    const metaFullCategory = document.createElement('meta');
-    metaFullCategory.name = 'fullcategory';
-    metaFullCategory.content = currentParams[currentParams.length - 1];
-    document.head.appendChild(metaFullCategory);
-    const metaBrand = document.createElement('meta');
-    metaBrand.name = 'brand';
-    metaBrand.content = 'SCIEX';
-    document.head.appendChild(metaBrand);
-  }
+  document
+    .querySelector('div.search-icon')
+    ?.addEventListener('click', toggleSearchBoxMobile);
 
   return block;
 }

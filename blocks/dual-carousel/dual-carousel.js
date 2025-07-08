@@ -50,14 +50,12 @@ async function createCarousel(
 
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
-    const card = div(
+    const card = a(
       {
+        href: product?.url,
+        target: product?.url.includes('http') ? '_blank' : '_self',
         class:
           'flex-shrink-0 hover:shadow-md  cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
-        onclick: () => window.open(
-          product?.url,
-          product?.url.includes('http') ? '_blank' : '_self',
-        ),
       },
       img({
         src: product?.images?.[0],
@@ -79,7 +77,8 @@ async function createCarousel(
       ),
       a(
         {
-          href: product?.url || '#',
+          href: product?.url,
+          target: product?.url.includes('http') ? '_blank' : '_self',
           class:
             'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },
@@ -98,16 +97,16 @@ async function createCarousel(
     if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
       cardImage.setAttribute(
         'src',
-        '/content/dam/danaher/products/fallback-image.png',
+        '/content/dam/danaher/products/fallbackImage.jpeg',
       );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
-          cardImage.src = '/content/dam/danaher/products/fallback-image.png';
+          cardImage.src = '/content/dam/danaher/products/fallbackImage.jpeg';
           cardImage.setAttribute('data-fallback-applied', 'true');
         }
       };
     }
-    if (product?.title !== '' && product.title !== undefined) {
+    if (product?.title !== '' && product?.title !== undefined) {
       carouselContent.appendChild(card);
     }
   });
@@ -200,24 +199,31 @@ export default async function decorate(block) {
   const leftCarouselTitle = leftTitle?.textContent
     .trim()
     .replace(/<[^>]*>/g, '');
-  const leftCarouselProductIds = leftProductIds?.textContent
+  const leftCarouselProductIdsRaw = leftProductIds?.textContent
     .trim()
-    .replace(/<[^>]*>/g, '')
-    .split(',');
+    .replace(/<[^>]*>/g, '');
+
+  const leftCarouselProductIds = leftCarouselProductIdsRaw
+    ? leftCarouselProductIdsRaw.split(',')
+    : [];
   const leftCarouselLinkText = leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
   const rightCarouselTitle = rightTitle?.textContent
     .trim()
     .replace(/<[^>]*>/g, '');
-  const rightCarouselProductIds = rightProductIds?.textContent
+  const rightCarouselProductIdsRaw = rightProductIds?.textContent
     .trim()
-    .replace(/<[^>]*>/g, '')
-    .split(',');
+    .replace(/<[^>]*>/g, '');
+
+  const rightCarouselProductIds = rightCarouselProductIdsRaw
+    ? rightCarouselProductIdsRaw.split(',')
+    : [];
+
   const rightCarouselLinkText = rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '')
     || 'View Details';
 
   let leftCarouselProducts = '';
   let leftCarouselScrollWrapper = '';
-  if (leftCarouselProductIds) {
+  if (leftCarouselProductIds?.length > 0) {
     leftCarouselProducts = (
       await Promise.allSettled(
         leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
@@ -243,7 +249,7 @@ export default async function decorate(block) {
 
   let rightCarouselProducts = '';
   let rightCarouselScrollWrapper = '';
-  if (rightCarouselProductIds) {
+  if (rightCarouselProductIds?.length > 0) {
     rightCarouselProducts = (
       await Promise.allSettled(
         rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),

@@ -2,7 +2,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   a, div, img, h3, p, span,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   if (
@@ -38,7 +37,7 @@ export default function decorate(block) {
 
     const readMoreLink = itemLink?.querySelector('a');
     if (readMoreLink) {
-      cardWrapper.href = makePublicUrl(readMoreLink?.href);
+      cardWrapper.href = readMoreLink?.href;
       cardWrapper.title = itemTitle?.textContent?.trim() || '';
     }
     cardWrapper.className = 'opco-grid-wrapper  flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
@@ -57,7 +56,7 @@ export default function decorate(block) {
         img({
           src:
             itemImage?.querySelector('img')?.src
-            || '/content/dam/danaher/products/fallback-image.png',
+            || '/content/dam/danaher/products/fallbackImage.jpeg',
           alt: itemAltText?.textContent.trim() || '',
           class: 'h-[164px] w-[294px] !object-contain',
         }),
@@ -83,8 +82,9 @@ export default function decorate(block) {
         { class: ' !m-0 !p-0' },
         a(
           {
-            href: itemLink?.getAttribute('href') || '#',
-            target: itemLinkTarget.textContent.trim() ? '_blank' : '_self',
+            href: readMoreLink?.href || '#',
+            target:
+              itemLinkTarget.textContent.trim() === 'yes' ? '_blank' : '_self',
             class:
               'card-link inline-flex w-full items-center pt-5 text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold',
           },

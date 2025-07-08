@@ -1,47 +1,3 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
-@media (min-width: 1760px) {
-  .container {
-    max-width: 1760px
-  }
-}
-
-.product-banner-wrapper :is(.visible) {
-  visibility: visible
-}
-
 .product-banner-wrapper :is(.relative) {
   position: relative
 }
@@ -49,6 +5,10 @@
 .product-banner-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
+}
+
+.product-banner-wrapper :is(.mb-3) {
+  margin-bottom: 0.75rem
 }
 
 .product-banner-wrapper :is(.mt-0) {
@@ -68,6 +28,10 @@
 
 .product-banner-wrapper :is(.block) {
   display: block
+}
+
+.product-banner-wrapper :is(.inline-block) {
+  display: inline-block
 }
 
 .product-banner-wrapper :is(.flex) {
@@ -204,6 +168,10 @@
   padding-top: 3rem
 }
 
+.product-banner-wrapper :is(.pt-4) {
+  padding-top: 1rem
+}
+
 .product-banner-wrapper :is(.pt-6) {
   padding-top: 1.5rem
 }
@@ -271,10 +239,6 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.product-banner-wrapper :is(.filter) {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
 .product-banner-wrapper :is(.transition) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -291,11 +255,6 @@
 .product-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-banner-wrapper :is(.hover\:text-danaherpurple-500:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .product-banner-wrapper :is(.hover\:text-danaherpurple-800:hover) {

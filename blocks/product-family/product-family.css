@@ -341,8 +341,8 @@
   width: 14px
 }
 
-.product-family-wrapper :is(.w-\[231px\]) {
-  width: 231px
+.product-family-wrapper :is(.w-\[251px\]) {
+  width: 251px
 }
 
 .product-family-wrapper :is(.w-\[331px\]) {
@@ -351,6 +351,10 @@
 
 .product-family-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-family-wrapper :is(.w-\[231px\]) {
+  width: 231px
 }
 
 .product-family-wrapper :is(.min-w-0) {
@@ -366,16 +370,16 @@
   max-width: 64rem
 }
 
-.product-family-wrapper :is(.max-w-\[231px\]) {
-  max-width: 231px
-}
-
 .product-family-wrapper :is(.max-w-sm) {
   max-width: 24rem
 }
 
 .product-family-wrapper :is(.max-w-xs) {
   max-width: 20rem
+}
+
+.product-family-wrapper :is(.max-w-\[231px\]) {
+  max-width: 231px
 }
 
 .product-family-wrapper :is(.flex-1) {
@@ -511,6 +515,10 @@
 
 .product-family-wrapper :is(.gap-y-2) {
   row-gap: 0.5rem
+}
+
+.product-family-wrapper :is(.gap-y-3) {
+  row-gap: 0.75rem
 }
 
 .product-family-wrapper :is(.gap-y-4) {
@@ -650,6 +658,11 @@
 
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.product-family-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .product-family-wrapper :is(.object-cover) {

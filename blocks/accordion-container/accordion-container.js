@@ -88,7 +88,10 @@ function createAccordionBlock(
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
     },
-    div({ class: 'accordion-answer text-base font-extralight leading-7 overflow-hidden' }),
+    div({
+      class:
+        'accordion-answer text-base font-extralight leading-7 overflow-hidden',
+    }),
   );
 
   answer.forEach((element) => {
@@ -147,12 +150,14 @@ export default async function decorate(block) {
     .slice(1)
     .map((element) => {
       const paragraphs = element.querySelectorAll('p');
-      const question = paragraphs[0]?.textContent || '';
+      const firstParagraph = paragraphs[0];
+      const question = firstParagraph?.textContent.trim() || '';
 
-      const answer = Array.from(paragraphs)
-        .slice(1)
-        .map((p) => p.outerHTML)
-        .join('');
+      element.children[0].firstElementChild.remove();
+      const allChildren = Array.from(element.children);
+
+      const answer = allChildren.map((child) => child.outerHTML).join('');
+
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);

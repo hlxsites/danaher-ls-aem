@@ -4,14 +4,15 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const baseUrl = 'https://lifesciences.danaher.com';
+  const baseUrl = `https://${window.DanaherConfig.host}`;
   const maxCards = 28;
 
   const [productCategoryId, blockTitle, blockBrand] = block.children;
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
 
-  const blockId = productCategoryId?.querySelector('a')?.href || '';
+  document.documentElement.style.scrollBehavior = 'smooth';
+  const blockId = productCategoryId?.querySelector('p')?.textContent?.trim() || '';
 
   // const wrapper = block.closest(".product-categories-wrapper");
   const brandEl = blockBrand?.textContent?.trim().toLowerCase() || '';
@@ -26,6 +27,13 @@ export default async function decorate(block) {
     let allProducts = Array.isArray(raw)
       ? raw
       : raw?.data || raw?.results || [];
+
+    const filteredProducts = allProducts
+      .filter(({ fullCategory }) => fullCategory && fullCategory.split('|').length === 1)
+      .filter(({ type }) => type === 'Category')
+      .filter(({ path }) => !path.includes('/product-coveo'));
+
+    allProducts = filteredProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
     const createCard = (item) => {
       const title = item.title || '';
@@ -110,15 +118,13 @@ export default async function decorate(block) {
     // CASE 1: Authored Brand
 
     if (authoredBrand && authoredTitle) {
-      allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+      // allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
         const brandArray = item.brand?.split(',') || [];
         return brandArray.some((iBrand) => {
           const brand = iBrand;
           return (
             brand.toLowerCase() === authoredBrand
-            && !item.fullCategory.includes('|')
-            && item.type === 'Category'
           );
         });
       });

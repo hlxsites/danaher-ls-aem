@@ -19,10 +19,11 @@ export default async function decorate(block) {
     tempDiv.querySelectorAll('p').forEach((pEle) => {
       pEle.classList.add('text-base', 'font-extralight');
     });
-    const ulEle = tempDiv.querySelector('ul');
-    if (ulEle) {
-      ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
-    }
+    tempDiv.querySelectorAll('ul')?.forEach((ulEle) => {
+      if (ulEle) {
+        ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
+      }
+    });
     descEl = tempDiv.innerHTML;
   }
   const productInfoList = div(
@@ -43,6 +44,16 @@ export default async function decorate(block) {
     el.style.margin = '0';
     el.style.padding = '0';
   });
+  productInfoList.querySelector('.product-info-right')?.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((hEle) => {
+    hEle.classList.add('!mb-3');
+  });
+  const paragraphs = productInfoList.querySelector('.product-info-right')?.querySelectorAll('p');
+  paragraphs?.forEach((p) => {
+    p.classList.add('mb-3');
+  });
+  if (paragraphs.length > 1) {
+    paragraphs[paragraphs.length - 1].classList.remove('mb-3');
+  }
   block.innerHTML = '';
   block.appendChild(productInfoListWrapper);
 }

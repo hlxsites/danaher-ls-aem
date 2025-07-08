@@ -100,6 +100,10 @@
   padding-bottom: 0px
 }
 
+.simple-text-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
 .simple-text-wrapper :is(.pl-0) {
   padding-left: 0px
 }
@@ -137,6 +141,24 @@
 .simple-text-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.simple-text-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
+.simple-text-wrapper :is(.decoration-danaherpurple-500) {
+  text-decoration-color: #7523FF
+}
+
+.simple-text-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.simple-text-wrapper :is(.hover\:text-white:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {

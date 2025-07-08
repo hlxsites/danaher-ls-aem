@@ -44,9 +44,7 @@ export default function decorate(block) {
         class: 'flex items-center justify-center h-full w-full',
       },
       img({
-        src:
-          imgSrc
-          || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+        src: imgSrc || '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: imgAlt,
         class: 'w-full h-full object-contain',
       }),
@@ -97,7 +95,7 @@ export default function decorate(block) {
       a(
         {
           href: ctaLink,
-          target: newTab ? '_blank' : '_self',
+          target: newTab === 'true' ? '_blank' : '_self',
           class: `flex justify-center ${
             ctaText ? '' : 'hidden'
           } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-danaherpurple-500 hover:text-white transition duration-300 self-start`,
@@ -113,6 +111,12 @@ export default function decorate(block) {
     ?.querySelector('#bodyBannerDescription')
     ?.querySelectorAll('a');
   descriptionLinks?.forEach((link) => {
+    link.classList.add(
+      'underline',
+      'decoration-danaherpurple-500',
+      'hover:bg-danaherpurple-500',
+      'hover:text-white',
+    );
     const linkHref = link?.getAttribute('href');
 
     link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');

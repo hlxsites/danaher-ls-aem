@@ -26,9 +26,9 @@ export default function productBannerDecorate(block) {
     productBannerHeading,
   ] = block.children;
   const categoryHeading = productBannerTitle?.textContent.trim() || '';
-  const btnText = productBannerLink?.textContent.trim() || '#';
+  const btnText = productBannerLink?.textContent.trim() || '';
   const btnLink = productBannerLinkTarget?.textContent?.trim();
-  const rawCategoryDescription = productBannerHeading?.textContent.trim() || '';
+  const rawCategoryDescription = productBannerHeading?.innerHTML.trim() || '';
   const details = block.children[5]?.querySelector('div')?.innerHTML?.trim() || '';
   const detailsLink = 'Read More';
   const image = block?.querySelector('img');
@@ -76,12 +76,14 @@ export default function productBannerDecorate(block) {
     },
     a(
       {
-        class: 'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+        class:
+          'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
         {
-          class: 'text-right justify-start text-white text-base font-medium leading-snug transition}',
+          class:
+            'text-right justify-start text-white text-base font-medium leading-snug transition}',
         },
         btnText,
       ),
@@ -93,10 +95,6 @@ export default function productBannerDecorate(block) {
   tempContainer.innerHTML = rawCategoryDescription;
   tempContainer.querySelectorAll('p').forEach((paragraph) => {
     paragraph.classList.add('text-black');
-    // Add pb-4 if the paragraph contains an <a> tag
-    if (paragraph.querySelector('a')) {
-      paragraph.classList.add('pb-4');
-    }
   });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
@@ -108,7 +106,13 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-800', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add(
+      'text-danaherpurple-500',
+      'hover:text-danaherpurple-800',
+      'mt-8',
+      'gap-4',
+      'font-bold',
+    );
   });
 
   const categoryBannerDescription = div({
@@ -149,7 +153,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer',
+            'read-more text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug cursor-pointer hidden',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -157,15 +161,38 @@ export default function productBannerDecorate(block) {
     );
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
-    longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add(
-        'text-black',
-        'underline',
-        'decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-500',
-        'hover:text-white',
-      );
+
+    const paragraphs = longDescription.querySelectorAll('p');
+    paragraphs.forEach((p) => {
+      p.classList.add('mb-3');
     });
+    if (paragraphs.length > 0) {
+      paragraphs[paragraphs.length - 1].classList.remove('mb-3');
+    }
+
+    longDescription.querySelectorAll('strong').forEach((strong) => {
+      // If <strong> contains an <a>, style the <a>
+      const anchor = strong.querySelector('a');
+      if (anchor) {
+        anchor.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white',
+        );
+      } else {
+        strong.classList.add('text-black');
+      }
+    });
+
+    // Estimate if content is likely to be truncated based on length
+    const { textContent } = longDescription;
+    const approxCharsPerLine = 60;
+    const estimatedLines = textContent.length / approxCharsPerLine;
+    const isTruncated = estimatedLines > 6;
+    const readMoreLink = categoryBannerDetails.querySelector('.read-more');
+    readMoreLink.style.display = isTruncated ? 'inline-block' : 'none';
   }
 
   if (
@@ -190,4 +217,12 @@ export default function productBannerDecorate(block) {
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
   block.appendChild(productBannerWrapper);
+
+  block
+    .querySelector('.category_banner-description')
+    ?.querySelectorAll('a')
+    ?.forEach((aEle, index) => {
+      if (index === 0) aEle.parentElement.classList.add('pt-4');
+      aEle.parentElement.classList.add('pb-4');
+    });
 }

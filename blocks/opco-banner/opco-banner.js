@@ -28,7 +28,7 @@ export default async function decorate(block) {
     }
   });
 
-  const baseUrl = 'https://stage.lifesciences.danaher.com';
+  const baseUrl = `https://${window.DanaherConfig.host}`;
 
   const currentPath = window.location.href;
 
@@ -50,6 +50,7 @@ export default async function decorate(block) {
     currentPath.includes('products.html')
     || currentPath.includes('/shop-page')
     || currentPath.includes('/shop-home')
+    || currentPath.includes('/products-eds1.html')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
@@ -58,24 +59,36 @@ export default async function decorate(block) {
       ? brandsRaw
       : brandsRaw?.data || brandsRaw?.results || [];
     // Build unique filters (exclude brands with commas)
-    const filterSet = new Set();
+    const brandMap = new Map();
+
     allProducts.forEach((item) => {
-      if (item.type === 'ProductBrandHome' && item.title !== '') {
-        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-        if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+      const brand = item.brand?.trim();
+      const path = item.path?.trim();
+
+      if (brand && !brand.includes(',') && !brandMap.has(brand)) {
+        brandMap.set(brand, path);
       }
     });
-    const allBrands = Array.from(filterSet).sort();
+
+    const allBrands = Array.from(brandMap.entries())
+      .map(([name, path]) => ({ name, path }))
+      .sort((asr, b) => asr.name.localeCompare(b.name));
 
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
       const linkTarget = pills?.path || '#';
+      let brandLink = '';
       if (linkLabel) {
+        if (pills?.name.includes('leica') || pills?.name.includes('Leica')) {
+          brandLink = 'leica';
+        } else {
+          brandLink = pills?.name?.toLowerCase().replace(/\s+/g, '-');
+        }
         linkWrapper.appendChild(
           a(
             {
-              href: linkTarget || '#',
+              href: `/us/en/products/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -107,7 +120,7 @@ export default async function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[120px] mb-2 md:mb-8 h-auto',
+        class: 'w-[172px] mb-2 md:mb-8 h-auto',
       }),
     );
   }
@@ -131,8 +144,23 @@ export default async function decorate(block) {
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
+    leftDescription.querySelectorAll('p')?.forEach((ite, inde, arr) => {
+      if (inde !== arr.length - 1) {
+        ite.classList.add('pb-4');
+      }
+      if (ite?.textContent?.trim() === '') {
+        ite.remove();
+      }
+    });
     const descriptionLinks = leftDescription?.querySelectorAll('a');
     descriptionLinks?.forEach((link) => {
+      link.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
+      );
       const linkHref = link?.getAttribute('href');
 
       link.setAttribute(
@@ -151,11 +179,11 @@ export default async function decorate(block) {
     let opcoTarget;
 
     if (opcoBannerButtonUrl?.includes('http')) {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     } else if (opcoBannerButtonUrl?.includes('#')) {
       opcoTarget = '_self';
     } else {
-      opcoTarget = opcoBannerButtonTarget ? '_blank' : '_self';
+      opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
     }
 
     const ctaWrapper = a(
@@ -271,7 +299,7 @@ export default async function decorate(block) {
 
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || '';
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.textContent?.trim();
+    const opcoBannerItemDescription = itemDescription?.innerHTML?.trim();
     const opcoBannerItemImage = itemImage?.querySelector('img');
     const opcoBannerItemBgImage = itemBgImage?.querySelector('img');
     const ctaUrl = itemButtonUrl?.textContent?.trim();
@@ -290,7 +318,7 @@ export default async function decorate(block) {
           alt: opcoBannerItemTitle || 'Slide image',
           class: `${
             opcoBannerItemBgImage ? 'opacity-0' : ''
-          } w-[300px] h-[184px] object-cover`,
+          } w-[300px] h-[184px] object-contain`,
         }),
       );
     }
@@ -327,6 +355,13 @@ export default async function decorate(block) {
 
       const descriptionLinks = descriptionHtml.querySelectorAll('a');
       descriptionLinks?.forEach((link) => {
+        link.classList.add(
+          'text-black',
+          'underline',
+          'decoration-danaherpurple-500',
+          'hover:bg-danaherpurple-500',
+          'hover:text-white',
+        );
         const linkHref = link?.getAttribute('href');
 
         link.setAttribute(
@@ -353,7 +388,7 @@ export default async function decorate(block) {
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
             onclick: () => window.open(
               ctaUrl,
-              opcoBannerItemButtonTarget ? '_blank' : '_self',
+              opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
             ),
           },
           opcoBannerItemButtonLabel,
@@ -368,9 +403,9 @@ export default async function decorate(block) {
       {
         id: `opcoBannerSlide${index}`,
         'data-index': index,
-        class: ` ${
-          opcoBannerItemBgImage ? 'hasBg ' : ' '
-        }carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
+        class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
+          opcoBannerItems.length > 1 ? '' : 'justify-center'
+        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
         style: index === 0 ? '' : 'display: none;',
       },
       contentWrapper,
@@ -421,7 +456,7 @@ export default async function decorate(block) {
         'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    opcoBannerItems.length > 0 ? controls : '',
+    opcoBannerItems.length > 1 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
@@ -435,6 +470,7 @@ export default async function decorate(block) {
     left,
     right,
   );
+
   block.append(container);
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
