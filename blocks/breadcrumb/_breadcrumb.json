@@ -16,6 +16,17 @@
           }
         }
     ],
-    "models": [    ],
+    "models": [  
+      {  
+          "id": "breadcrumb",
+          "fields": [
+            {
+              "component": "aem-content",
+              "name": "link",
+              "label": "Link"
+            }  
+          ]
+      }
+    ],
     "filters": [    ]
   }
