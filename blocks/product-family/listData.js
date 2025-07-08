@@ -239,7 +239,7 @@ export default function renderProductListCard(item) {
   // Assemble the card
   card.append(leftSection, rightSection);
 
-  decorateModals(card);
+  decorateModals(desktopActionButtons);
 
   return card;
 }
