@@ -23,7 +23,12 @@ export default async function decorate(block) {
   if (wrapper) {
     wrapper.classList.add('w-full', 'md:px-10');
   }
-  const [heading, blockProductIds, productsEndPoint] = block.children;
+  const [
+    heading,
+    blockProductIds,
+    productsEndPoint = null,
+    productsSource = null,
+  ] = block.children;
 
   const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
   const rawIds = blockProductIds?.textContent.trim().replace(/<[^>]*>/g, '') || '';

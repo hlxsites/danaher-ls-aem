@@ -40,6 +40,23 @@
                 "name": "productsEndPoint",
                 "value": "",
                 "label": "Products API Endpoint"
+              },
+              {
+                "component": "select",
+                "name": "productsSource",
+                "label": "Products Source",
+                "required": true,
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "csv",
+                    "value": "csv"
+                  },
+                  {
+                    "name": "api",
+                    "value": "api"
+                  }
+                ]
               }
           ]
         }
