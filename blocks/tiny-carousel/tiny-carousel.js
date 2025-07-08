@@ -62,7 +62,7 @@ export default async function decorate(block) {
 
       try {
         const res = await fetch(
-          `https://lifesciences.danaher.com/us/en/product-data/?product=${id}`,
+          `https://${window.DanaherConfig.host}/us/en/product-data/?product=${id}`,
         );
         if (!res.ok) return null;
 
