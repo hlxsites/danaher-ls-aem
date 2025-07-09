@@ -154,9 +154,14 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error' && product.title?.trim(),
+  const results = await Promise.allSettled(
+    // making false as we don't need intershop data for top selling products as of now
+    productIds.map((id) => getProductInfo(id, false)),
   );
+
+  const products = results
+    .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
+    .map((result) => result.value);
 
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
