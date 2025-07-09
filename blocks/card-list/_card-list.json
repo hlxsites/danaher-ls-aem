@@ -16,6 +16,25 @@
           }
         }
     ],
-    "models": [    ],
+    "models": [
+      {
+        "id": "card-list",
+        "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "card_alt",
+              "value": "",
+              "label": "Text"
+            },
+            {
+              "component": "aem-content",
+              "name": "link",
+              "label": "Link",
+              "value": ""
+            }  
+          ]
+        }
+      ],
     "filters": [    ]
   } 
