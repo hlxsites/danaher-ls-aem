@@ -20,21 +20,48 @@
       {
         "id": "card-list",
         "fields": [
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "card_alt",
-              "value": "",
-              "label": "Text"
-            },
-            {
-              "component": "aem-content",
-              "name": "link",
-              "label": "Link",
-              "value": ""
-            }  
-          ]
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "BannerTitle",
+          "value": "",
+          "label": "Banner Title"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "BannerHeading",
+          "value": "",
+          "label": "Banner Heading"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "BannerDescription",
+          "value": "",
+          "label": "Banner Description"
+        },
+        {
+          "component": "aem-content",
+          "name": "opcoBannerButtonUrl",
+          "label": "Banner Button Url"
+        },
+        {
+          "component": "boolean",
+          "name": "BannerButtonTarget",
+          "valueType": "boolean",
+          "value": false,
+          "label": "Open link in new tab?"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "BannerButtonLabel",
+          "value": "",
+          "label": "Banner Button Label"
         }
-      ],
+    ]
+  }
+  ],
     "filters": [    ]
   } 
