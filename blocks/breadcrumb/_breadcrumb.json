@@ -18,7 +18,7 @@
     ],
     "models": [  
       {  
-          "id": "Breadcrumb",
+          "id": "breadcrumb",
           "fields": [
             {
               "component": "aem-content",
