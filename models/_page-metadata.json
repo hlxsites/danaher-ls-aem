@@ -39,6 +39,20 @@
             {
               "component": "text",
               "valueType": "string",
+              "name": "test:Tag",
+              "label": "test:tag",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "testsTag",
+              "label": "test:tag",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
               "name": "path",
               "label": ":path",
               "value": ""
