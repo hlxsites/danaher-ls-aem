@@ -53,6 +53,13 @@
             {
               "component": "text",
               "valueType": "string",
+              "name": "og:article",
+              "label": "og:article",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
               "name": "path",
               "label": ":path",
               "value": ""
