@@ -2268,7 +2268,7 @@ export const cartItemsContainer = (cartItemValue) => {
   const modalInput = input({
     // id: cartItemValue.lineItemId,
     class:
-      "w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center",
+      "w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center",
     type: "number",
     min: cartItemValue.minOrderQuantity,
     max:
@@ -2463,7 +2463,7 @@ export const cartItemsContainer = (cartItemValue) => {
     ),
     div(
       {
-        class: "sm:w-64 w-[11rem] justify-start text-black text-base font-bold",
+        class: "sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold",
         // id: `product-Quantity-${opcoBe[0]}`,
       },
         div(

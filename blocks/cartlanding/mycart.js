@@ -61,7 +61,7 @@ export const mycart = async () => {
   }
 
   const myCartContainerWrapper = div({
-    class: "",
+    class: "dhls-container px-5 lg:px-10",
     id: "myCartContainerWrapper",
   });
   const myCartEmptyContainer = div({
@@ -69,7 +69,7 @@ export const mycart = async () => {
     id: "myCartEmptyContainer",
   });
   const myCartListContainer = div({
-    class: "flex w-full flex-col",
+    class: "flex w-full flex-col gap-4",
     id: "myCartListContainer",
   });
   if (
@@ -119,23 +119,25 @@ export const mycart = async () => {
     class: "w-full inline-flex lg:flex-row flex-col gap-[4rem]",
   });
   const containerListWrapper = div({
-    class: "inline-flex flex-col gap-2 sm:max-w-[70%] max-w-[100%] justify-between",
+    class: "inline-flex flex-col gap-2 sm:max-w-[70%] max-w-[100%] ",
     id: "containerListWrapper",
   });
   const description = div(
     {
       class:
-        "w-full break-normal justify-start text-black text-base font-extralight ",
+        "w-[737px] break-normal justify-start text-black text-base font-extralight ",
     },
     "Welcome to your cart. Review your selections, make any last-minute adjustments, and prepare for a seamless checkout experience tailored just for you."
   );
   myCartListContainer.append(container);
+  myCartListContainer.append(description);
   myCartListContainer.append(
     div({
       class: "h-[26px]",
     })
   );
-  containerListWrapper.append(description);
+  
+  // containerListWrapper.append(description);
   const priceContainer = await checkoutSummary();
   const searchBlock = await addProducts();
   const cartItems = await cartItem();

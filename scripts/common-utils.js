@@ -50,7 +50,7 @@ export function preLoader() {
     },
     img({
       class: ' h-24',
-      src: 'https://stage.lifesciences.danaher.com/content/dam/loading_icon.gif',
+      src: '/icons/loading_icon.gif',
     }),
   );
 }

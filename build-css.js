@@ -43,10 +43,16 @@ const fileMappings = [
       './blocks/cartlanding/listData.js',
       './blocks/cartlanding/noProduct.js',
       './blocks/cartlanding/related-products.js',
-      './scripts/cart-checkout-utils.js'
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js'
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',
+  },
+  {
+    content: './blocks/order-submit/order-submit.js',
+    output: './blocks/order-submit/order-submit.css',
+    wrapper: 'order-submit-wrapper',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',
@@ -335,6 +341,8 @@ const fileMappings = [
       './blocks/checkout/paymentModule.js',
       './blocks/checkout/shippingAddress.js',
       './blocks/checkout/shippingMethods.js',
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js'
     ],
     output: './blocks/checkout/checkout.css',
     wrapper: 'checkout',
