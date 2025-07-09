@@ -334,6 +334,16 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "cards",
     "fields": [
       {
@@ -1085,6 +1095,10 @@
         "label": "Description"
       }
     ]
+  },
+  {
+    "id": "recent-articles",
+    "fields": []
   },
   {
     "id": "related-category",
