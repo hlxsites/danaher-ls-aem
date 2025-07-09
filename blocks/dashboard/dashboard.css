@@ -99,6 +99,10 @@
   height: 2.5rem
 }
 
+.dashboard-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .dashboard-wrapper :is(.h-3) {
   height: 0.75rem
 }
@@ -113,10 +117,6 @@
 
 .dashboard-wrapper :is(.h-\[2px\]) {
   height: 2px
-}
-
-.dashboard-wrapper :is(.h-\[32px\]) {
-  height: 32px
 }
 
 .dashboard-wrapper :is(.max-h-48) {

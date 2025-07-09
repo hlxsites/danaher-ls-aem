@@ -234,6 +234,10 @@
   height: 3rem
 }
 
+.checkout :is(.h-20) {
+  height: 5rem
+}
+
 .checkout :is(.h-28) {
   height: 7rem
 }
@@ -248,10 +252,6 @@
 
 .checkout :is(.h-\[0px\]) {
   height: 0px
-}
-
-.checkout :is(.h-\[32px\]) {
-  height: 32px
 }
 
 .checkout :is(.h-\[93px\]) {

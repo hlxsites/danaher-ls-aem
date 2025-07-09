@@ -297,6 +297,10 @@
   height: 4rem
 }
 
+.cartlanding-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .cartlanding-wrapper :is(.h-28) {
   height: 7rem
 }
@@ -347,10 +351,6 @@
 
 .cartlanding-wrapper :is(.h-\[26px\]) {
   height: 26px
-}
-
-.cartlanding-wrapper :is(.h-\[32px\]) {
-  height: 32px
 }
 
 .cartlanding-wrapper :is(.h-\[35px\]) {

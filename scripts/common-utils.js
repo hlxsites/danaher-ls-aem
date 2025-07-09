@@ -49,7 +49,7 @@ export function preLoader() {
       id: 'preLoader',
     },
     img({
-      class: ' h-[32px]',
+      class: 'h-20',
       src: '/icons/loading_icon.gif',
     })
   );
