@@ -249,28 +249,6 @@
     ]
   },
   {
-    "id": "card-list",
-    "fields": [
-      {
-        "component": "multiselect",
-        "valueType": "string",
-        "name": "classes",
-        "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "Article Card",
-            "value": "articlecard"
-          },
-          {
-            "name": "4 Columns",
-            "value": "cols-4"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "cards",
     "fields": [
       {
