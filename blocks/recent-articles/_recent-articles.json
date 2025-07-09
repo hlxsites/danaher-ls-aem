@@ -16,6 +16,12 @@
           }
         }
     ],
-    "models": [    ],
+    "models": [
+      {
+        "id": "recent-articles",
+        "fields": [
+        ]
+      }
+    ],
     "filters": [    ]
   }

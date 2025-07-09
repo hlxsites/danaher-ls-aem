@@ -509,6 +509,10 @@ const transformContent = (main, document) => {
     const blocks = [...section.querySelectorAll('div[class]')];
     blocks.forEach((block) => {
       let blockName = block.classList.item(0);
+      // uppercase the blcok name first character 
+      blockName = blockName.charAt(0).toUpperCase() + blockName.slice(1);
+      // update the character after the dash to uppercase but do not remove the dahs
+      blockName = blockName.replace(/-([a-z])/g, (_, char) => `-${char.toUpperCase()}`);
       const blockVariants = [...block.classList].slice(1);
 
       const rows = [];
