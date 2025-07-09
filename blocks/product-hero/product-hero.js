@@ -12,7 +12,7 @@ import {
   getProductDetails,
 } from '../../scripts/commerce.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
-import { addItemToCart } from '../cartlanding/myCartService.js';
+// import { addItemToCart } from '../cartlanding/myCartService.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
@@ -238,7 +238,7 @@ export default async function decorate(block) {
   const response = await getProductResponse();
 
   if (response?.length > 0) {
-    console.log('respnseee', response);
+    console.log('respnseee', response[0]?.raw?.sku);
     const productInfo = await getProductDetails(response[0]?.raw?.sku);
     console.log('product Info', productInfo);
     const allImages = response[0]?.raw.images;
@@ -305,7 +305,7 @@ export default async function decorate(block) {
             class:
               'self-stretch justify-start text-black text-base font-extralight',
           },
-          response[0]?.raw.richdescription,
+          response[0]?.raw.richdescription.replace(/<[^>]*>/g, ''),
         ),
       ),
     );
@@ -547,13 +547,13 @@ export default async function decorate(block) {
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
         console.log('item  id', item);
-        const res = await addItemToCart(item, 'product-sku');
+        // const res = await addItemToCart(item, 'product-sku');
 
-        if (res) {
-          if (res.status == 'success') {
-            removePreLoader();
-          }
-        }
+        // if (res) {
+        //   if (res.status == 'success') {
+        //     removePreLoader();
+        //   }
+        // }
       });
       const addToCart = div(
         {
