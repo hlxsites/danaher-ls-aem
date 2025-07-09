@@ -43,7 +43,7 @@ const fileMappings = [
       './blocks/cartlanding/listData.js',
       './blocks/cartlanding/noProduct.js',
       './blocks/cartlanding/related-products.js',
-
+      './scripts/cart-checkout-utils.js'
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',

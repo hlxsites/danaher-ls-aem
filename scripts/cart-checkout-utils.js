@@ -1761,11 +1761,11 @@ get price type if its net or gross
   const summaryModule = div(
     {
       id: 'checkoutSummaryContainer',
-      class: 'flex flex-col justify-start items-start gap-4',
+      class: 'flex flex-col justify-start items-start gap-4 p-[22px] outline outline-1 outline-offset-[-1px] outline-gray-200',
     },
     div(
       {
-        class: ' flex flex-col justify-start items-start gap-y-6',
+        class: 'p-[22px] flex flex-col justify-start items-start gap-y-6',
         id: 'checkoutSummaryWrapper',
       },
       div(
@@ -1956,7 +1956,7 @@ get price type if its net or gross
    */
     div(
       {
-        class: ' flex flex-col justify-center w-full items-start gap-4',
+        class: 'p-[22px] flex flex-col justify-center w-full items-start gap-4',
       },
       button({
         class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${

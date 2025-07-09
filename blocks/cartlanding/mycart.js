@@ -1,10 +1,12 @@
 import { div } from "../../scripts/dom-builder.js";
 import { cartItem } from "./cartItem.js";
-import { price } from "./price.js";
 import { emptyCart } from "./emptyCart.js";
 import { recommendedProducts } from "./recommendedproducts.js";
 import { addProducts } from "./addproducts.js";
-import { getBasketDetails } from "../../scripts/cart-checkout-utils.js";
+import {
+  getBasketDetails,
+  checkoutSummary,
+} from '../../scripts/cart-checkout-utils.js';
 
 export const prodQuantity = (totalProductQuantity) => {
   return div(
@@ -134,7 +136,7 @@ export const mycart = async () => {
     })
   );
   containerListWrapper.append(description);
-  const priceContainer = await price();
+  const priceContainer = await checkoutSummary();
   const searchBlock = await addProducts();
   const cartItems = await cartItem();
 
