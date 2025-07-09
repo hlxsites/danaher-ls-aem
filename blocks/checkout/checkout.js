@@ -67,7 +67,7 @@ export default async function decorate(block) {
         if (module.getAttribute('id') === 'checkout-details') {
           module.className = '';
           module.className =
-            'checkout-summary-wrapper border-1 border-danahergray-75 bg-white p-6 flex justify-center';
+            'checkout-summary-wrapper border-1 border-danahergray-75 bg-white h-max p-6 flex justify-center';
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);

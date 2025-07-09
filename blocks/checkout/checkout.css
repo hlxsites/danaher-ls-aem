@@ -262,6 +262,11 @@
   height: auto
 }
 
+.checkout :is(.h-max) {
+  height: -moz-max-content;
+  height: max-content
+}
+
 .checkout :is(.max-h-48) {
   max-height: 12rem
 }
