@@ -1030,81 +1030,92 @@ export const recommendedProduct = [
 export async function updateCart(newItem) {
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
+    console.log("getProductDetailsObject", getProductDetailsObject);
     const response = getProductDetailsObject.data.map((itemToBeDisplayed) => {
+      console.log("itemToBeDisplayed", itemToBeDisplayed);
       const opcoBe = Object.keys(itemToBeDisplayed);
-      const imgsrc = opcoBe[0].split(' ')[0];
-      if (newItem[0].data.manufacturer === opcoBe[0]) {
+      const imgsrc = opcoBe[0].split(" ")[0];
+      if (newItem[0].data.manufacturer == opcoBe[0]) {
         const quantityElement = document.getElementById(
-          `product-Quantity-${opcoBe[0]}`,
+          `product-Quantity-${opcoBe[0]}`
         );
         const cartContainer = document.getElementById(opcoBe[0]);
         if (cartContainer) {
           cartContainer.append(cartItemsContainer(newItem[0].data)); // Add updated item
           quantityElement.innerHTML = ` ${itemToBeDisplayed[opcoBe].length} Items`;
           return cartContainer;
+        } else {
+          console.log("inside else");
+          const cartItemContainer =
+            document.getElementById("cartItemContainer");
+          if (cartItemContainer.hasChildNodes() === false) {
+            console.log("inside if");
+            const cartListContainer = div({
+              class: "w-full",
+              id: "cartListContainer",
+            });
+            const addProductListContainer = div({
+              class: "",
+              id: "addProductListContainer",
+            });
+            const cartItemDisplayContainer = div({
+              class: "",
+              id: opcoBe[0],
+            });
+
+            let logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
+            console.log("logoDivDisplay: 381", logoDivDisplay);
+            // cartListContainer.append(divider(300));
+            cartListContainer.append(logoDivDisplay);
+            // cartListContainer.append(divider(200));
+            itemToBeDisplayed[opcoBe].forEach((item) => {
+              cartItemDisplayContainer.append(divider(200));
+              cartItemDisplayContainer.append(cartItemsContainer(item));
+              
+            });
+
+            cartListContainer.append(cartItemDisplayContainer);
+            // cartListContainer.append(divider(300));
+            console.log("cartItemDisplayContainer 181: ", cartItemContainer);
+            const dividerMain = hr({
+              class: `w-full border-black-400`,
+            });
+
+            addProductListContainer.append(addProducts());
+            addProductListContainer.append(dividerMain);
+            cartItemContainer.append(cartListContainer);
+            // cartItemContainer.append(addProductListContainer);
+            return cartItemContainer;
+          } else {
+            const cartListContainer =
+              document.getElementById("cartListContainer");
+            console.log("inside else", cartListContainer);
+            const cartItemDisplayContainer = div({
+              class: "w-full",
+              id: opcoBe[0],
+            });
+
+            let logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
+            console.log("logoDivDisplay 411", logoDivDisplay);
+            // cartListContainer.append(divider(300));
+            cartListContainer.append(logoDivDisplay);
+            // cartListContainer.append(divider(200));
+            itemToBeDisplayed[opcoBe].forEach((item) => {
+              cartItemDisplayContainer.append(divider(200));
+              cartItemDisplayContainer.append(cartItemsContainer(item));
+              
+            });
+            cartListContainer.append(cartItemDisplayContainer);
+            // cartListContainer.append(divider(300));
+            return cartItemContainer;
+          }
         }
-        const cartItemContainer = document.getElementById('cartItemContainer');
-        if (cartItemContainer.hasChildNodes() === false) {
-          const cartListContainer = div({
-            class: 'w-full',
-            id: 'cartListContainer',
-          });
-          const addProductListContainer = div({
-            class: '',
-            id: 'addProductListContainer',
-          });
-          const cartItemDisplayContainer = div({
-            class: '',
-            id: opcoBe[0],
-          });
-
-          const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-          // cartListContainer.append(divider(300));
-          cartListContainer.append(logoDivDisplay);
-          // cartListContainer.append(divider(200));
-          itemToBeDisplayed[opcoBe].forEach((item) => {
-            cartItemDisplayContainer.append(cartItemsContainer(item));
-            cartItemDisplayContainer.append(divider(200));
-          });
-
-          cartListContainer.append(cartItemDisplayContainer);
-          cartListContainer.append(divider(300));
-          const dividerMain = hr({
-            class: 'w-full border-black-400',
-          });
-
-          addProductListContainer.append(addProducts());
-          addProductListContainer.append(dividerMain);
-          cartItemContainer.append(cartListContainer);
-          cartItemContainer.append(addProductListContainer);
-          return cartItemContainer;
-        }
-        const cartListContainer = document.getElementById('cartListContainer');
-        const cartItemDisplayContainer = div({
-          class: 'w-full',
-          id: opcoBe[0],
-        });
-
-        const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-        // cartListContainer.append(divider(300));
-        cartListContainer.append(logoDivDisplay);
-        // cartListContainer.append(divider(200));
-        itemToBeDisplayed[opcoBe].forEach((item) => {
-          cartItemDisplayContainer.append(cartItemsContainer(item));
-          cartItemDisplayContainer.append(divider(200));
-        });
-        cartListContainer.append(cartItemDisplayContainer);
-        cartListContainer.append(divider(300));
-        return cartItemContainer;
       }
-
-      return 'error';
     });
-    if (response[0] === undefined) return response[1];
-    return response[0];
+    console.log("responseeee", response);
+    if (response[0] == undefined) return response[1];
+    else return response[0];
   }
-
-  return 'no product details found';
 }
 
 // function to add item to basket

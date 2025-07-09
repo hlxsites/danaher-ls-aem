@@ -179,96 +179,136 @@ export const sessionObject = async (
   type,
   quantity,
   lineItemId,
-  manufacturer,
+  manufacturer
 ) => {
+  console.log(
+    "type, quantity, lineItemId, manufacturer",
+    type,
+    quantity,
+    lineItemId,
+    manufacturer
+  );
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
-    const foundObject = getProductDetailsObject.data.find((obj) => {
-      const fObject = Object.prototype.hasOwnProperty.call(obj, manufacturer);
-      return fObject;
-    });
+    console.log(getProductDetailsObject.data);
+    const foundObject = getProductDetailsObject.data.find((obj) =>
+      obj.hasOwnProperty(manufacturer)
+    );
 
     if (foundObject) {
+      console.log(`Found an object with the key`, foundObject);
       const result = foundObject[manufacturer].find(
-        (obj) => obj.lineItemId === lineItemId,
+        (obj) => obj.lineItemId === lineItemId
       );
       if (result) {
-        if (type === 'delete-item') {
+        console.log("resulttt", result);
+        if (type == "delete-item") {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
-          if (foundObject[manufacturer].length === 0) {
-            const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
+          console.log("resulttt", foundObject[manufacturer].length);
+          if (foundObject[manufacturer].length == 0) {
+            const manufacturerIndex =
+              getProductDetailsObject.data.indexOf(foundObject);
+            console.log("manufacturer index", manufacturerIndex);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
-            sessionStorage.removeItem('productDetailObject');
+            sessionStorage.removeItem("productDetailObject");
             sessionStorage.setItem(
-              'productDetailObject',
-              JSON.stringify(getProductDetailsObject.data),
+              "productDetailObject",
+              JSON.stringify(getProductDetailsObject.data)
             );
-            return 'success';
+            return "success";
+          } else {
+            console.log("index", foundObject[manufacturer]);
+            const manufacturerIndex =
+              getProductDetailsObject.data.indexOf(foundObject);
+            console.log(
+              "getProductDetailsObject.data.indexOf(foundObject)",
+              getProductDetailsObject.data[manufacturerIndex][manufacturer]
+            );
+            getProductDetailsObject.data[manufacturerIndex][manufacturer] =
+              foundObject[manufacturer];
+            console.log(getProductDetailsObject);
+            sessionStorage.removeItem("productDetailObject");
+            sessionStorage.setItem(
+              "productDetailObject",
+              JSON.stringify(getProductDetailsObject.data)
+            );
+            return "success";
           }
-          const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-          getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-          sessionStorage.removeItem('productDetailObject');
-          sessionStorage.setItem(
-            'productDetailObject',
-            JSON.stringify(getProductDetailsObject.data),
+        } else {
+          result.itemQuantity = quantity;
+          const index = foundObject[manufacturer].indexOf(result);
+          foundObject[manufacturer][index] = result;
+          console.log("resulttt", foundObject[manufacturer]);
+          const manufacturerIndex =
+            getProductDetailsObject.data.indexOf(foundObject);
+          console.log(
+            "getProductDetailsObject.data.indexOf(foundObject)",
+            getProductDetailsObject.data[manufacturerIndex][manufacturer]
           );
-          return 'success';
+          getProductDetailsObject.data[manufacturerIndex][manufacturer] =
+            foundObject[manufacturer];
+          console.log(getProductDetailsObject);
+          sessionStorage.removeItem("productDetailObject");
+          sessionStorage.setItem(
+            "productDetailObject",
+            JSON.stringify(getProductDetailsObject.data)
+          );
+          return "success";
         }
-        result.itemQuantity = quantity;
-        const index = foundObject[manufacturer].indexOf(result);
-        foundObject[manufacturer][index] = result;
-        const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-        getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.setItem(
-          'productDetailObject',
-          JSON.stringify(getProductDetailsObject.data),
-        );
-        return 'success';
       }
-
-      return 'error';
+    } else {
+      console.log(`No object with the key' was found.`);
+      return "No object with the key' was found";
     }
-    return "No object with the key' was found";
   }
-  return 'no product details found';
 };
-
 export const updateProductQuantityValue = async (
   type,
   quantity,
   lineItemId,
-  manufacturer,
+  manufacturer
 ) => {
-  if (type === 'delete-item') {
+  if (type == "delete-item") {
     const quantityElement = document.getElementById(lineItemId);
-    const opco = manufacturer.split(' ')[0];
+    const opco = manufacturer.split(" ")[0];
     const response = await sessionObject(
       type,
       quantity,
       lineItemId,
-      manufacturer,
+      manufacturer
     );
     if (response) {
+      console.log("sucess response")
+      console.log("sucess response", quantityElement)
       quantityElement.remove();
       const manufacturerElement = document.getElementById(manufacturer);
       const manufacturerDiv = document.getElementById(opco);
-      if (manufacturerElement.children.length === 1) {
+      console.log("quantity element", manufacturerElement);
+      console.log("manufacturerDiv", manufacturerDiv);
+      const hr = manufacturerElement.querySelector("hr");
+      console.log("hr", hr);
+      console.log("child nodesssss", manufacturerElement.children.length);
+      if (manufacturerElement.children.length == 1) {
+        manufacturerDiv.parentElement.remove();
         manufacturerDiv.remove();
+        hr.remove();
         manufacturerElement.remove();
       }
     }
     return response;
+  } else {
+    console.log("quantity n lineItemId", quantity, lineItemId);
+    const quantityElement = document.getElementById(lineItemId);
+    console.log("quantity element", quantityElement);
+    const response = await sessionObject(
+      type,
+      quantity,
+      lineItemId,
+      manufacturer
+    );
+    return response;
   }
-
-  const response = await sessionObject(
-    type,
-    quantity,
-    lineItemId,
-    manufacturer,
-  );
-  return response;
 };
 
 export const updateCartQuantity = (newQuantity) => {

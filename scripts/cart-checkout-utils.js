@@ -43,46 +43,88 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  const logoDivContainer = div(
-    {},
-    hr({
-      class: 'w-full border-black-300',
-    }),
+  console.log("logo div calledddddd")
+  // const logoDiv = div({}, hr({
+  //     class: `w-full border-black-300`,
+  //   }),
+  //   div(
+  //     {
+  //       class: "w-full px-4 py-3 inline-flex justify-between items-center",
+  //       id: imgsrc,
+  //     },
+  //     div(
+  //       {
+  //         class:
+  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       img({
+  //         class: "",
+  //         src: `/icons/${imgsrc}.png`,
+  //       })
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       opcoBe[0]
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+  //         id: `product-Quantity-${opcoBe[0]}`,
+  //       },
+  //       `${itemToBeDisplayed[opcoBe].length} Items`
+  //     )
+  //   ),
+  //   hr({
+  //     class: `w-full border-black-200`,
+  //   }))
+  const logoDiv = div(
+    {
+      class:
+        "w-full self-stretch py-3 bg-gray-100 border-t border-gray-300 inline-flex justify-start items-center gap-1",
+    },
     div(
       {
-        class: 'w-full px-4 py-3 inline-flex justify-between items-center',
+        class: "w-28 px-5 flex justify-start items-center gap-3",
         id: imgsrc,
       },
       div(
         {
-          class:
-            'w-24 justify-start text-black text-base font-bold  leading-snug',
+          class: "justify-start text-black text-base font-bold truncate",
         },
-        img({
-          class: '',
-          src: `https://feature-em-t149--danaher-ls-aem--hlxsites.aem.page/icons/${imgsrc}.png`,
-        }),
-      ),
-      div(
-        {
-          class:
-            'w-[30rem] justify-start text-black text-base font-bold  leading-snug',
-        },
-        opcoBe[0],
-      ),
-      div(
-        {
-          class: 'justify-start text-black text-base font-normal  leading-snug',
-          id: `product-Quantity-${opcoBe[0]}`,
-        },
-        `${itemToBeDisplayed[opcoBe].length} Items`,
-      ),
+        opcoBe[0]
+      )
     ),
-    hr({
-      class: 'w-full border-black-200',
-    }),
+    div(
+      {
+        class: "w-64 justify-start text-black text-base font-bold",
+        id: `product-Quantity-${opcoBe[0]}`,
+      },
+      `${itemToBeDisplayed[opcoBe].length} Items`
+    ),
+    div(
+      {
+        class: "hidden sm:block w-24 justify-start text-black text-base font-bold",
+      },
+      "QTY"
+    ),
+    div(
+      {
+        class: "hidden sm:block w-48 justify-start text-black text-base font-bold",
+      },
+      "Unit Price"
+    ),
+    div(
+      {
+        class: "hidden sm:block w-[3rem] justify-start text-black text-base font-bold",
+      },
+      "Total"
+    )
   );
-  return logoDivContainer;
+  return logoDiv;
 };
 
 export const divider = (val) => hr({
@@ -2153,168 +2195,330 @@ export async function updateCheckoutSummary() {
 }
 
 export const cartItemsContainer = (cartItemValue) => {
+  console.log("cart item value", cartItemValue);
   const modifyCart = async (type, element, value) => {
+    console.log(element);
     showPreLoader();
-    if (type === 'delete-item') {
+    if (type == "delete-item") {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
-        type,
+        type: type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response == "success") {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
-          const getProductDetailsResponse = getProductDetailsObject.data.map(
+          const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
+              console.log("opcoBe", opcoBe.length);
+              const str = `product-Quantity-${opcoBe[0]}`;
+              const parts = str.split("-");
               const logodivId = document.getElementById(
-                `product-Quantity-${opcoBe[0]}`,
+                `product-Quantity-${opcoBe[0]}`
+              );
+              console.log(
+                "${itemToBeDisplayed[opcoBe].length",
+                itemToBeDisplayed[opcoBe[0]].length
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
               } Items`;
-              return logodivId;
-            },
+            }
           );
-          await updateCheckoutSummary();
-          removePreLoader();
-          return getProductDetailsResponse;
         }
         removePreLoader();
       } else {
-        // alert(response);
+        alert(response);
         removePreLoader();
-        return response;
       }
     } else {
       const item = {
         lineItemId: cartItemValue.lineItemId,
-        value,
+        value: value,
         manufacturer: cartItemValue.manufacturer,
-        type,
+        type: type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
-        await updateCheckoutSummary();
+      if (response == "success") {
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
-        // alert(response);
+        alert(response);
         removePreLoader();
         element.blur(); // Removes focus from the input
       }
-      removePreLoader();
-      return response ?? {};
     }
-    removePreLoader();
-    return {};
   };
   const modalCloseButton = button(
     {
-      class: 'w-10 h-10 pr-11 bg-white',
+      class: "sm:w-[7.5rem] sm:h-[3.5rem] bg-white",
     },
     span({
       id: `delteItem-${cartItemValue.sku}`,
-      class: 'icon icon-icons8-delete cart-delete',
-    }),
+      class: "icon icon-icons8-delete cart-delete",
+    })
   );
-  modalCloseButton.addEventListener('click', async () => {
-    const inputElement = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', inputElement, '');
+  modalCloseButton.addEventListener("click", (event) => {
+    const input = document.getElementById(cartItemValue.lineItemId);
+    console.log("Clicked on item with ID: ", input);
+    modifyCart("delete-item", input, "");
   });
   const modalInput = input({
     // id: cartItemValue.lineItemId,
     class:
-      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
-    type: 'number',
+      "w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center",
+    type: "number",
     min: cartItemValue.minOrderQuantity,
     max:
-      cartItemValue.maxOrderQuantity === 0
-        ? 99
-        : cartItemValue.maxOrderQuantity,
-    name: 'item-quantity',
+      cartItemValue.maxOrderQuantity == 0 ? 99 : cartItemValue.maxOrderQuantity,
+    name: "item-quantity",
     value: cartItemValue.itemQuantity,
   });
-  modalInput.addEventListener('change', async (event) => {
+  modalInput.addEventListener("change", (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const inputElement = selectedDiv.querySelector('input');
-    const productItem = inputElement.parentElement.parentElement;
+    const input = selectedDiv.querySelector("input");
+    const productItem = input.parentElement.parentElement;
+    console.log("productItem", input);
 
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
-      productItem.style.border = '2px solid red';
-      // alert(
-      //   `Please enter a valid order quantity which should be
-      //  greater then ${input.min} and less then ${input.max}`
-      // );
+      console.log("minnn");
+      productItem.style.border = "2px solid red";
+      alert(
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+      );
     } else if (enteredValue > Number(input.max)) {
-      productItem.style.border = '2px solid red';
-      // alert(
-      //   `Please enter a valid order quantity which should
-      // be greater then ${input.min} and less then ${input.max}`
-      // );
+      console.log("max");
+      productItem.style.border = "2px solid red";
+      alert(
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+      );
     } else {
-      productItem.style.border = '';
-      modifyCart('quantity-added', inputElement, event.target.value);
+      productItem.style.border = "";
+      modifyCart("quantity-added", input, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
   const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+    "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg",
     cartItemValue.productName,
     {
       href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+        "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg"
       ),
       title: cartItemValue.productName,
-      class: 'justify-center',
-    },
+      class: "justify-center",
+    }
   );
-  const itemContainer = div(
+  // const itemContainer = div(
+  //   {
+  //     class: "flex w-full justify-between items-center",
+  //     id: cartItemValue.lineItemId,
+  //   },
+  //   div(
+  //     {
+  //       class:
+  //         "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
+  //     },
+  //     image
+  //   ),
+  //   div(
+  //     {
+  //       class: "w-96",
+  //     },
+  //     div(
+  //       {
+  //         class: "",
+  //       },
+  //       cartItemValue.productName
+  //     ),
+  //     div(
+  //       {
+  //         class: " text-gray-500 text-base font-extralight",
+  //       },
+  //       `SKU: ${cartItemValue.sku}`
+  //     )
+  //   ),
+  //   div(
+  //     {
+  //       class: "",
+  //     },
+  //     modalInput
+  //   ),
+  //   div(
+  //     {
+  //       class: "w-11 text-right text-black text-base font-bold",
+  //     },
+  //     `$${cartItemValue.salePrice.value}`
+  //   ),
+  //   modalCloseButton
+  // );
+  // const itemContainer = div(
+  //   {
+  //     class:
+  //       "w-full self-stretch p-4 relative inline-flex justify-start items-center",
+  //   },
+  //   div(
+  //     { class: "inline-flex justify-start items-center gap-3.5" },
+  //     div(
+  //       {
+  //         class:
+  //           "w-28 p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-start items-center gap-2.5",
+  //       },
+  //       // div(
+  //       //   {
+  //       //     class: "w-16 self-stretch relative overflow-hidden",
+  //       //   },
+  //         image
+  //         // img({
+  //         //   class: "w-20 h-28 left-[-4px] top-[-24px] absolute",
+  //         //   src: `/images/wesee/dummy.png `,
+  //         // })
+  //       // )
+  //     ),
+  //     div(
+  //       { class: "w-64 inline-flex flex-col justify-start items-start" },
+  //       div(
+  //         {
+  //           class: "self-stretch justify-start text-black text-base font-bold",
+  //         },
+  //         cartItemValue.productName
+  //       ),
+  //       div(
+  //         {
+  //           class:
+  //             "self-stretch justify-start text-gray-500 text-sm font-normal ",
+  //         },
+  //         cartItemValue.sku
+  //       )
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-11 inline-flex flex-col justify-start items-start" },
+  //     // div({
+  //     //     class:"w-11 h-10 px-4 py-3 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center overflow-hidden"
+  //     // },
+  //     // div({
+  //     //     class:"justify-start text-gray-700 text-base font-normal"
+  //     // }, "2")
+  //     modalInput
+  //     // )
+  //   ),
+  //   div(
+  //     { class: "w-44 inline-flex flex-col justify-start items-end" },
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-black text-base font-bold",
+  //       },
+  //       `$${cartItemValue.salePrice.value}`
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-gray-500 text-base",
+  //       },
+  //       " $100.00"
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-28 inline-flex flex-col justify-start items-end" },
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-black text-base font-bold",
+  //       },
+  //       "$200.00"
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
+  //     modalCloseButton
+  //   )
+  // );
+  const itemsscontainer = div(
     {
-      class: 'flex w-full justify-between items-center',
-      id: cartItemValue.lineItemId,
+      class:
+        "w-full py-3 border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1",
+        id: cartItemValue.lineItemId,
+    },
+    div({
+      class:"py-3 inline-flex gap-2 "
     },
     div(
       {
-        class:
-          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
-      },
-      image,
-    ),
-    div(
-      {
-        class: 'w-96',
+        class: "w-28 p-2 flex justify-start items-center gap-3 border border-solid border-gray-300",
       },
       div(
         {
-          class: '',
+          class: "justify-start text-black text-base font-bold truncate m-[5px]",
         },
-        cartItemValue.productName,
+        img({
+            class: "w-full h-auto",
+            src: cartItemValue.images ? cartItemValue.images[0].effectiveUrl : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble" ,
+        })
+      )
+    ),
+    div(
+      {
+        class: "sm:w-64 w-[11rem] justify-start text-black text-base font-bold",
+        // id: `product-Quantity-${opcoBe[0]}`,
+      },
+        div(
+          {
+            class: "w-full justify-start items-center text-black text-base font-bold",
+          },
+          cartItemValue.productName
+        ),
+        div(
+          {
+            class:
+              "w-full justify-start items-center text-gray-500 text-sm font-normal ",
+          },
+          cartItemValue.sku
+        )
+      
+    ),
+  ),
+    div({
+      class: "sm:pl-[0px] pl-[13px] inline-flex justify-start items-center"
+    }, div(
+      {
+        class: "w-24 justify-start text-black text-base font-bold",
+      },
+     modalInput
+    ),
+    div(
+      {
+        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+      },
+     div(
+        {
+          class:
+            "w-full justify-start text-gray-500 text-base font-bold item line-through",
+        },
+        `$${cartItemValue.salePrice.value}`
       ),
       div(
         {
-          class: ' text-gray-500 text-base font-extralight',
+          class:
+            "w-full justify-start text-black text-base",
         },
-        `SKU: ${cartItemValue.sku}`,
-      ),
+       `$${cartItemValue.salePrice.value}`
+      )
     ),
     div(
       {
-        class: '',
+        class: "w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]",
       },
-      modalInput,
+      `$${cartItemValue.salePrice.value}`
     ),
-    div(
-      {
-        class: 'w-11 text-right text-black text-base font-bold',
-      },
-      `$${cartItemValue.salePrice.value}`,
-    ),
-    modalCloseButton,
+    modalCloseButton)
+    
+  
   );
-
-  decorateIcons(itemContainer);
-  return itemContainer;
+  decorateIcons(itemsscontainer);
+  return itemsscontainer;
 };
