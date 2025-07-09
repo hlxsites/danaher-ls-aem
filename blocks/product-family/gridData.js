@@ -103,7 +103,7 @@ export default function renderProductGridCard(item) {
 
   decorateIcons(viewDetailsButton);
 
-  const bgWrapper = div({ class: 'bg-gray-50 h-[191px]' });
+  const bgWrapper = div({ class: 'bg-gray-50 h-[191px] self-stretch' });
   bgWrapper.append(pricingAndActions);
   card.append(
     imageElement,
