@@ -668,6 +668,26 @@ export async function loadBlocks(main) {
     updateSectionsStatus(main);
   }
 }
+
+/**
+ * Loads all blocks in a section.
+ * @param {Element} section The section element
+ */
+
+async function loadSection(section, loadCallback) {
+  const status = section.dataset.sectionStatus;
+  if (!status || status === 'initialized') {
+    section.dataset.sectionStatus = 'loading';
+    const blocks = [...section.querySelectorAll('div.block')];
+    for (let i = 0; i < blocks.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await loadBlock(blocks[i]);
+    }
+    if (loadCallback) await loadCallback(section);
+    section.dataset.sectionStatus = 'loaded';
+    section.style.display = null;
+  }
+}
 /**
  * Loads all sections.
  * @param {Element} element The parent element of sections to load

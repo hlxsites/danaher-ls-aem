@@ -1948,7 +1948,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.href.includes('cartlanding')) {
-        window.location.href = '/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout-summary';
+        window.location.href = '/us/en/products/cart-checkout/checkout';
       } else {
         changeStep(e);
       }

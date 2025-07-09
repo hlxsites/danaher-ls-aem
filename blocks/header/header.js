@@ -17,7 +17,7 @@ import {
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
 
-// const baseURL = getCommerceBase();
+const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';

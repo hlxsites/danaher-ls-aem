@@ -1,4 +1,6 @@
-import { div, p, a, span, img, button } from '../../scripts/dom-builder.js';
+import {
+  div, p, a, span, img, button,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { makePublicUrl, decorateModals } from '../../scripts/scripts.js';
 
@@ -32,15 +34,15 @@ export default function renderProductGridCard(item) {
 
   const imageElement = createImageWithFallback(
     item.raw.images?.[0],
-    item.title
+    item.title,
   );
 
   const titleElement = div(
     { class: 'p-3' },
     p(
       { class: 'text-black text-xl font-medium leading-7 line-clamp-2' },
-      (item.title || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   const contentWrapper = div({
@@ -64,9 +66,9 @@ export default function renderProductGridCard(item) {
             class:
               'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
           },
-          item?.raw?.description.trim().replace(/<[^>]*>/g, '')
-        )
-      )
+          item?.raw?.description.trim().replace(/<[^>]*>/g, ''),
+        ),
+      ),
     ),
     div(
       {
@@ -81,10 +83,10 @@ export default function renderProductGridCard(item) {
           {
             class: 'inherit text-base font-medium leading-snug',
           },
-          'Quote'
-        )
-      )
-    )
+          'Quote',
+        ),
+      ),
+    ),
   );
 
   const viewDetailsButton = div(
@@ -99,8 +101,8 @@ export default function renderProductGridCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-      })
-    )
+      }),
+    ),
   );
 
   decorateIcons(viewDetailsButton);

@@ -19,82 +19,76 @@ import {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+  const [
+    heading,
+    subHeading,
+    formTitle,
+    formSubHeading,
+    emailLabel,
+    passwordLabel,
+    checkBoxText,
+    forgetPasswordLabel,
+    submitButtonLabel,
+    newAccountText,
+    newAccountButtnLabel,
+    bgImage,
+  ] = block.children;
   document.querySelector('header')?.remove();
   document.querySelector('breadcrumb')?.remove();
   document.querySelector('footer')?.remove();
 
-  const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
-  const loginSubHeading = block.querySelector(
-    "[data-aue-prop='loginSubHeading']",
-  );
-  const loginFormTitle = block.querySelector(
-    "[data-aue-prop='loginFormTitle']",
-  );
-  const loginFormSubHeading = block.querySelector(
-    "[data-aue-prop='loginFormSubHeading']",
-  );
-  const loginFormEmailLabel = block.querySelector(
-    "[data-aue-prop='loginFormEmailLabel']",
-  );
-  const loginFormPasswordLabel = block.querySelector(
-    "[data-aue-prop='loginFormPasswordLabel']",
-  );
-  const loginFormCheckboxText = block.querySelector(
-    "[data-aue-prop='loginFormCheckboxText']",
-  );
-  const loginFormForgotPasswordLabel = block.querySelector(
-    "[data-aue-prop='loginFormForgotPasswordLabel']",
-  );
-  const loginFormForgotPasswordLink = block.querySelectorAll('.btn')[0];
-  const loginFormSubmitButtonLabel = block.querySelector(
-    "[data-aue-prop='loginFormSubmitButtonLabel']",
-  );
-  const loginFormNewAccountText = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountText']",
-  );
-  const loginFormNewAccountButtonLabel = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountButtonLabel']",
-  );
-  const loginFormNewAccountButtonLink = block.querySelectorAll('.btn')[1];
-  const backgroundImage = block.querySelector(
-    "[data-aue-prop='backgroundImage']",
-  );
+  const loginHeading = heading;
+  const loginSubHeading = subHeading;
+  const loginFormTitle = formTitle;
+  const loginFormSubHeading = formSubHeading;
+  const loginFormEmailLabel = emailLabel;
+  const loginFormPasswordLabel = passwordLabel;
+  const loginFormCheckboxText = checkBoxText;
+  const loginFormForgotPasswordLabel = forgetPasswordLabel;
+  const loginFormForgotPasswordLink = submitButtonLabel.querySelector('a');
+  const loginFormSubmitButtonLabel = 'Submit';
+  const loginFormNewAccountText = newAccountText;
+  const loginFormNewAccountButtonLabel = newAccountButtnLabel;
+  const loginFormNewAccountButtonLink = 'Submit';
+  const backgroundImage = bgImage?.querySelector('img')?.src || '';
 
   // object to map data with html
 
   const contentObject = {
     loginHeading:
-      loginHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginHeading?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginSubHeading:
-      loginSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginSubHeading?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginFormTitle:
-      loginFormTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginFormTitle?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginFormSubHeading:
-      loginFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginFormSubHeading?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginFormEmailLabel:
-      loginFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginFormEmailLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginFormPasswordLabel:
-      loginFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginFormPasswordLabel?.textContent?.trim().replace(/<[^>]*>/g, '') || '',
     loginFormCheckboxText: loginFormCheckboxText || '',
     loginFormForgotPasswordLabel:
       loginFormForgotPasswordLabel?.textContent
-        .trim()
+        ?.trim()
         .replace(/<[^>]*>/g, '') || '',
     loginFormForgotPasswordLink:
-      loginFormForgotPasswordLink?.textContent.trim().replace(/<[^>]*>/g, '')
-      || '',
+      loginFormForgotPasswordLink?.textContent
+        ?.trim()
+        .replace(/<[^>]*>/g, '') || '',
     loginFormSubmitButtonLabel:
-      loginFormSubmitButtonLabel?.textContent.trim().replace(/<[^>]*>/g, '')
-      || '',
+      loginFormSubmitButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '')
+      || 'Submit',
     loginFormNewAccountText:
-      loginFormNewAccountText?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      loginFormNewAccountText?.textContent?.trim().replace(/<[^>]*>/g, '')
+      || '',
     loginFormNewAccountButtonLabel:
       loginFormNewAccountButtonLabel?.textContent
-        .trim()
+        ?.trim()
         .replace(/<[^>]*>/g, '') || '',
     loginFormNewAccountButtonLink:
       loginFormNewAccountButtonLink?.textContent
-        .trim()
+        ?.trim()
         .replace(/<[^>]*>/g, '') || '',
     backgroundImage:
       backgroundImage?.src
@@ -235,7 +229,8 @@ export default async function decorate(block) {
   formContentLinks.forEach((lin) => {
     lin.classList.add(
       'border-b',
-      'hover:text-danaherpurple-500',
+      'hover:text-white',
+      'hover:bg-danaherpurple-500',
       'border-danaherpurple-500',
     );
   });
@@ -310,7 +305,7 @@ export default async function decorate(block) {
           formResponse.classList.remove('text-red-700');
         }
         formResponse.textContent = 'Login Successfull';
-        window.location.href = '/us/en/eds-stage-test/dashboard.html?ref=feature-cart-checkout-summary';
+        window.location.href = '/us/en/products/cart-checkout/dashboard';
         return true;
       }
       formResponse.classList.remove('hidden');
