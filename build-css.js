@@ -335,6 +335,11 @@ const fileMappings = [
     wrapper: 'checkout',
   },
   {
+    content: './blocks/dashboard/dashboard.js',
+    output: './blocks/dashboard/dashboard.css',
+    wrapper: 'dashboard-wrapper',
+  },
+  {
     content: './blocks/insight/insight.js',
     output: './blocks/insight/insight.css',
     wrapper: 'insight-wrapper',
@@ -496,9 +501,7 @@ const fileMappings = [
 const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
-fileMappings.forEach(({
-  content, input, output, wrapper,
-}) => {
+fileMappings.forEach(({ content, input, output, wrapper }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
   const command = `npx tailwindcss ${
     input ? `-i ${input}` : './styles/proxy-tailwind.css'
