@@ -45,7 +45,7 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "testsTag",
+            "name": "testTag",
             "label": "test:tag",
             "value": ""
           },
