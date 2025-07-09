@@ -45,12 +45,43 @@
   line-height: 1.75rem
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
+.cartlanding-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .cartlanding-wrapper :is(.absolute) {
   position: absolute
 }
 
 .cartlanding-wrapper :is(.relative) {
   position: relative
+}
+
+.cartlanding-wrapper :is(.bottom-2) {
+  bottom: 0.5rem
+}
+
+.cartlanding-wrapper :is(.left-0) {
+  left: 0px
+}
+
+.cartlanding-wrapper :is(.left-2) {
+  left: 0.5rem
+}
+
+.cartlanding-wrapper :is(.left-\[-4px\]) {
+  left: -4px
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -65,12 +96,36 @@
   left: 63px
 }
 
+.cartlanding-wrapper :is(.left-\[747px\]) {
+  left: 747px
+}
+
+.cartlanding-wrapper :is(.right-0) {
+  right: 0px
+}
+
+.cartlanding-wrapper :is(.top-0) {
+  top: 0px
+}
+
+.cartlanding-wrapper :is(.top-\[-24px\]) {
+  top: -24px
+}
+
+.cartlanding-wrapper :is(.top-\[49px\]) {
+  top: 49px
+}
+
 .cartlanding-wrapper :is(.top-\[57px\]) {
   top: 57px
 }
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
+}
+
+.cartlanding-wrapper :is(.z-0) {
+  z-index: 0
 }
 
 .cartlanding-wrapper :is(.z-10) {
@@ -81,8 +136,54 @@
   margin: 0px
 }
 
+.cartlanding-wrapper :is(.m-\[5px\]) {
+  margin: 5px
+}
+
+.cartlanding-wrapper :is(.m-\[7px\]) {
+  margin: 7px
+}
+
 .cartlanding-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.cartlanding-wrapper :is(.ml-2) {
+  margin-left: 0.5rem
+}
+
+.cartlanding-wrapper :is(.mr-\[8px\]) {
+  margin-right: 8px
+}
+
+.cartlanding-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
+}
+
+.cartlanding-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
+.cartlanding-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
+.cartlanding-wrapper :is(.mt-8) {
+  margin-top: 2rem
+}
+
+.cartlanding-wrapper :is(.line-clamp-2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}
+
+.cartlanding-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
 }
 
 .cartlanding-wrapper :is(.line-clamp-4) {
@@ -90,6 +191,13 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4
+}
+
+.cartlanding-wrapper :is(.line-clamp-5) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5
 }
 
 .cartlanding-wrapper :is(.block) {
@@ -104,12 +212,24 @@
   display: inline-flex
 }
 
+.cartlanding-wrapper :is(.grid) {
+  display: grid
+}
+
 .cartlanding-wrapper :is(.hidden) {
   display: none
 }
 
 .cartlanding-wrapper :is(.\!h-20) {
   height: 5rem !important
+}
+
+.cartlanding-wrapper :is(.h-0) {
+  height: 0px
+}
+
+.cartlanding-wrapper :is(.h-0\.5) {
+  height: 0.125rem
 }
 
 .cartlanding-wrapper :is(.h-10) {
@@ -120,28 +240,88 @@
   height: 3rem
 }
 
+.cartlanding-wrapper :is(.h-16) {
+  height: 4rem
+}
+
+.cartlanding-wrapper :is(.h-28) {
+  height: 7rem
+}
+
+.cartlanding-wrapper :is(.h-4) {
+  height: 1rem
+}
+
 .cartlanding-wrapper :is(.h-40) {
   height: 10rem
+}
+
+.cartlanding-wrapper :is(.h-44) {
+  height: 11rem
+}
+
+.cartlanding-wrapper :is(.h-48) {
+  height: 12rem
+}
+
+.cartlanding-wrapper :is(.h-5) {
+  height: 1.25rem
+}
+
+.cartlanding-wrapper :is(.h-6) {
+  height: 1.5rem
 }
 
 .cartlanding-wrapper :is(.h-7) {
   height: 1.75rem
 }
 
+.cartlanding-wrapper :is(.h-9) {
+  height: 2.25rem
+}
+
 .cartlanding-wrapper :is(.h-\[0px\]) {
   height: 0px
+}
+
+.cartlanding-wrapper :is(.h-\[164px\]) {
+  height: 164px
 }
 
 .cartlanding-wrapper :is(.h-\[26px\]) {
   height: 26px
 }
 
+.cartlanding-wrapper :is(.h-\[35px\]) {
+  height: 35px
+}
+
+.cartlanding-wrapper :is(.h-\[60px\]) {
+  height: 60px
+}
+
 .cartlanding-wrapper :is(.h-\[70px\]) {
   height: 70px
 }
 
+.cartlanding-wrapper :is(.h-\[93px\]) {
+  height: 93px
+}
+
+.cartlanding-wrapper :is(.h-auto) {
+  height: auto
+}
+
 .cartlanding-wrapper :is(.h-full) {
   height: 100%
+}
+
+.cartlanding-wrapper :is(.h-px) {
+  height: 1px
+}
+
+.cartlanding-wrapper :is(.min-h-\[485px\]) {
+  min-height: 485px
 }
 
 .cartlanding-wrapper :is(.w-10) {
@@ -152,6 +332,14 @@
   width: 2.75rem
 }
 
+.cartlanding-wrapper :is(.w-14) {
+  width: 3.5rem
+}
+
+.cartlanding-wrapper :is(.w-16) {
+  width: 4rem
+}
+
 .cartlanding-wrapper :is(.w-20) {
   width: 5rem
 }
@@ -160,12 +348,32 @@
   width: 6rem
 }
 
+.cartlanding-wrapper :is(.w-28) {
+  width: 7rem
+}
+
 .cartlanding-wrapper :is(.w-40) {
   width: 10rem
 }
 
+.cartlanding-wrapper :is(.w-44) {
+  width: 11rem
+}
+
 .cartlanding-wrapper :is(.w-48) {
   width: 12rem
+}
+
+.cartlanding-wrapper :is(.w-5) {
+  width: 1.25rem
+}
+
+.cartlanding-wrapper :is(.w-6) {
+  width: 1.5rem
+}
+
+.cartlanding-wrapper :is(.w-64) {
+  width: 16rem
 }
 
 .cartlanding-wrapper :is(.w-7) {
@@ -180,16 +388,80 @@
   width: 20rem
 }
 
+.cartlanding-wrapper :is(.w-96) {
+  width: 24rem
+}
+
+.cartlanding-wrapper :is(.w-\[11rem\]) {
+  width: 11rem
+}
+
 .cartlanding-wrapper :is(.w-\[1227px\]) {
   width: 1227px
+}
+
+.cartlanding-wrapper :is(.w-\[1280px\]) {
+  width: 1280px
 }
 
 .cartlanding-wrapper :is(.w-\[1358px\]) {
   width: 1358px
 }
 
+.cartlanding-wrapper :is(.w-\[200px\]) {
+  width: 200px
+}
+
+.cartlanding-wrapper :is(.w-\[280px\]) {
+  width: 280px
+}
+
+.cartlanding-wrapper :is(.w-\[3\.5rem\]) {
+  width: 3.5rem
+}
+
+.cartlanding-wrapper :is(.w-\[300px\]) {
+  width: 300px
+}
+
+.cartlanding-wrapper :is(.w-\[30rem\]) {
+  width: 30rem
+}
+
+.cartlanding-wrapper :is(.w-\[331px\]) {
+  width: 331px
+}
+
+.cartlanding-wrapper :is(.w-\[350px\]) {
+  width: 350px
+}
+
+.cartlanding-wrapper :is(.w-\[3rem\]) {
+  width: 3rem
+}
+
 .cartlanding-wrapper :is(.w-\[40rem\]) {
   width: 40rem
+}
+
+.cartlanding-wrapper :is(.w-\[59px\]) {
+  width: 59px
+}
+
+.cartlanding-wrapper :is(.w-\[5rem\]) {
+  width: 5rem
+}
+
+.cartlanding-wrapper :is(.w-\[683px\]) {
+  width: 683px
+}
+
+.cartlanding-wrapper :is(.w-\[73px\]) {
+  width: 73px
+}
+
+.cartlanding-wrapper :is(.w-\[75px\]) {
+  width: 75px
 }
 
 .cartlanding-wrapper :is(.w-\[855px\]) {
@@ -204,8 +476,24 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.max-w-\[100\%\]) {
+  max-width: 100%
+}
+
+.cartlanding-wrapper :is(.max-w-\[150px\]) {
+  max-width: 150px
+}
+
 .cartlanding-wrapper :is(.max-w-\[70\%\]) {
   max-width: 70%
+}
+
+.cartlanding-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.cartlanding-wrapper :is(.flex-grow) {
+  flex-grow: 1
 }
 
 .cartlanding-wrapper :is(.cursor-pointer) {
@@ -216,8 +504,16 @@
   resize: both
 }
 
+.cartlanding-wrapper :is(.flex-row) {
+  flex-direction: row
+}
+
 .cartlanding-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.cartlanding-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse
 }
 
 .cartlanding-wrapper :is(.flex-wrap) {
@@ -230,6 +526,10 @@
 
 .cartlanding-wrapper :is(.items-start) {
   align-items: flex-start
+}
+
+.cartlanding-wrapper :is(.items-end) {
+  align-items: flex-end
 }
 
 .cartlanding-wrapper :is(.items-center) {
@@ -252,12 +552,24 @@
   justify-content: space-between
 }
 
+.cartlanding-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
 .cartlanding-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
 
+.cartlanding-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
 .cartlanding-wrapper :is(.gap-3) {
   gap: 0.75rem
+}
+
+.cartlanding-wrapper :is(.gap-3\.5) {
+  gap: 0.875rem
 }
 
 .cartlanding-wrapper :is(.gap-4) {
@@ -276,8 +588,28 @@
   gap: 4rem
 }
 
+.cartlanding-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
+.cartlanding-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+
+.cartlanding-wrapper :is(.self-stretch) {
+  align-self: stretch
+}
+
 .cartlanding-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.cartlanding-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
 .cartlanding-wrapper :is(.whitespace-nowrap) {
@@ -293,6 +625,10 @@
   overflow-wrap: break-word
 }
 
+.cartlanding-wrapper :is(.rounded-\[20px\]) {
+  border-radius: 20px
+}
+
 .cartlanding-wrapper :is(.rounded-\[48px\]) {
   border-radius: 48px
 }
@@ -301,12 +637,50 @@
   border-radius: 9999px
 }
 
+.cartlanding-wrapper :is(.rounded-md) {
+  border-radius: 0.375rem
+}
+
+.cartlanding-wrapper :is(.rounded-bl-\[20px\]) {
+  border-bottom-left-radius: 20px
+}
+
+.cartlanding-wrapper :is(.rounded-br-\[20px\]) {
+  border-bottom-right-radius: 20px
+}
+
+.cartlanding-wrapper :is(.rounded-tl-\[20px\]) {
+  border-top-left-radius: 20px
+}
+
+.cartlanding-wrapper :is(.rounded-tr-\[20px\]) {
+  border-top-right-radius: 20px
+}
+
+.cartlanding-wrapper :is(.border) {
+  border-width: 1px
+}
+
 .cartlanding-wrapper :is(.border-2) {
   border-width: 2px
 }
 
+.cartlanding-wrapper :is(.border-t) {
+  border-top-width: 1px
+}
+
 .cartlanding-wrapper :is(.border-solid) {
   border-style: solid
+}
+
+.cartlanding-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.cartlanding-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .cartlanding-wrapper :is(.bg-danaherlightblue-50) {
@@ -329,6 +703,30 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+.cartlanding-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
+.cartlanding-wrapper :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.cartlanding-wrapper :is(.bg-transparent) {
+  background-color: transparent
+}
+
+.cartlanding-wrapper :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+}
+
+.cartlanding-wrapper :is(.bg-violet-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
+}
+
 .cartlanding-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -338,13 +736,61 @@
   --tw-bg-opacity: 0.1
 }
 
+.cartlanding-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
+.cartlanding-wrapper :is(.fill-gray-400) {
+  fill: #9ca3af
+}
+
+.cartlanding-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
 .cartlanding-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
 }
 
+.cartlanding-wrapper :is(.p-2) {
+  padding: 0.5rem
+}
+
+.cartlanding-wrapper :is(.p-2\.5) {
+  padding: 0.625rem
+}
+
+.cartlanding-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
+.cartlanding-wrapper :is(.p-4) {
+  padding: 1rem
+}
+
 .cartlanding-wrapper :is(.p-6) {
   padding: 1.5rem
+}
+
+.cartlanding-wrapper :is(.p-\[0px\]) {
+  padding: 0px
+}
+
+.cartlanding-wrapper :is(.px-0) {
+  padding-left: 0px;
+  padding-right: 0px
+}
+
+.cartlanding-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.cartlanding-wrapper :is(.px-3) {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem
 }
 
 .cartlanding-wrapper :is(.px-4) {
@@ -352,9 +798,19 @@
   padding-right: 1rem
 }
 
+.cartlanding-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .cartlanding-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
+}
+
+.cartlanding-wrapper :is(.px-8) {
+  padding-left: 2rem;
+  padding-right: 2rem
 }
 
 .cartlanding-wrapper :is(.py-1) {
@@ -362,14 +818,75 @@
   padding-bottom: 0.25rem
 }
 
+.cartlanding-wrapper :is(.py-1\.5) {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem
+}
+
+.cartlanding-wrapper :is(.py-12) {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
+.cartlanding-wrapper :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.cartlanding-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
 .cartlanding-wrapper :is(.py-4) {
   padding-top: 1rem;
   padding-bottom: 1rem
 }
 
+.cartlanding-wrapper :is(.py-5) {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem
+}
+
 .cartlanding-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.cartlanding-wrapper :is(.pb-\[3px\]) {
+  padding-bottom: 3px
+}
+
+.cartlanding-wrapper :is(.pl-1) {
+  padding-left: 0.25rem
+}
+
+.cartlanding-wrapper :is(.pl-4) {
+  padding-left: 1rem
+}
+
+.cartlanding-wrapper :is(.pl-9) {
+  padding-left: 2.25rem
+}
+
+.cartlanding-wrapper :is(.pl-\[13px\]) {
+  padding-left: 13px
+}
+
+.cartlanding-wrapper :is(.pr-1) {
+  padding-right: 0.25rem
+}
+
+.cartlanding-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
+}
+
+.cartlanding-wrapper :is(.pt-4) {
+  padding-top: 1rem
+}
+
+.cartlanding-wrapper :is(.pt-\[5px\]) {
+  padding-top: 5px
 }
 
 .cartlanding-wrapper :is(.text-center) {
@@ -386,6 +903,10 @@
 
 .cartlanding-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
+}
+
+.cartlanding-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
 }
 
 .cartlanding-wrapper :is(.text-2xl) {
@@ -406,6 +927,11 @@
 .cartlanding-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.cartlanding-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .cartlanding-wrapper :is(.text-sm) {
@@ -443,6 +969,10 @@
   line-height: 2.5rem
 }
 
+.cartlanding-wrapper :is(.leading-4) {
+  line-height: 1rem
+}
+
 .cartlanding-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -457,6 +987,10 @@
 
 .cartlanding-wrapper :is(.leading-none) {
   line-height: 1
+}
+
+.cartlanding-wrapper :is(.leading-normal) {
+  line-height: 1.5
 }
 
 .cartlanding-wrapper :is(.leading-relaxed) {
@@ -476,9 +1010,24 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.cartlanding-wrapper :is(.text-gray-600) {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity))
+}
+
+.cartlanding-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .cartlanding-wrapper :is(.text-gray-900) {
@@ -491,17 +1040,47 @@
   color: rgb(165 180 252 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-red-500) {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.cartlanding-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .cartlanding-wrapper :is(.underline) {
   text-decoration-line: underline
 }
 
+.cartlanding-wrapper :is(.line-through) {
+  text-decoration-line: line-through
+}
+
+.cartlanding-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.cartlanding-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
 .cartlanding-wrapper :is(.outline) {
   outline-style: solid
+}
+
+.cartlanding-wrapper :is(.outline-1) {
+  outline-width: 1px
 }
 
 .cartlanding-wrapper :is(.outline-2) {
@@ -512,12 +1091,25 @@
   outline-offset: -1px
 }
 
+.cartlanding-wrapper :is(.outline-gray-200) {
+  outline-color: #e5e7eb
+}
+
 .cartlanding-wrapper :is(.outline-gray-300) {
   outline-color: #d1d5db
 }
 
 .cartlanding-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
+}
+
+.cartlanding-wrapper :is(.blur) {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.cartlanding-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 .cartlanding-wrapper :is(.transition) {
@@ -528,9 +1120,41 @@
   transition-duration: 150ms
 }
 
+.cartlanding-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
+}
+
 @media (min-width: 640px) {
+  .cartlanding-wrapper :is(.sm\:m-\[0px\]) {
+    margin: 0px
+  }
+
+  .cartlanding-wrapper :is(.sm\:block) {
+    display: block
+  }
+
+  .cartlanding-wrapper :is(.sm\:h-\[3\.5rem\]) {
+    height: 3.5rem
+  }
+
+  .cartlanding-wrapper :is(.sm\:w-48) {
+    width: 12rem
+  }
+
+  .cartlanding-wrapper :is(.sm\:w-64) {
+    width: 16rem
+  }
+
+  .cartlanding-wrapper :is(.sm\:w-\[7\.5rem\]) {
+    width: 7.5rem
+  }
+
   .cartlanding-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
     width: calc(50% - 10px)
+  }
+
+  .cartlanding-wrapper :is(.sm\:max-w-\[70\%\]) {
+    max-width: 70%
   }
 
   .cartlanding-wrapper :is(.sm\:flex-row) {
@@ -540,11 +1164,97 @@
   .cartlanding-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
   }
+
+  .cartlanding-wrapper :is(.sm\:p-6) {
+    padding: 1.5rem
+  }
+
+  .cartlanding-wrapper :is(.sm\:pl-\[0px\]) {
+    padding-left: 0px
+  }
+}
+
+@media (min-width: 768px) {
+  .cartlanding-wrapper :is(.md\:flex) {
+    display: flex
+  }
+
+  .cartlanding-wrapper :is(.md\:hidden) {
+    display: none
+  }
+
+  .cartlanding-wrapper :is(.md\:h-10) {
+    height: 2.5rem
+  }
+
+  .cartlanding-wrapper :is(.md\:h-24) {
+    height: 6rem
+  }
+
+  .cartlanding-wrapper :is(.md\:w-24) {
+    width: 6rem
+  }
+
+  .cartlanding-wrapper :is(.md\:w-80) {
+    width: 20rem
+  }
+
+  .cartlanding-wrapper :is(.md\:w-\[1358px\]) {
+    width: 1358px
+  }
+
+  .cartlanding-wrapper :is(.md\:w-\[305px\]) {
+    width: 305px
+  }
+
+  .cartlanding-wrapper :is(.md\:w-\[640px\]) {
+    width: 640px
+  }
+
+  .cartlanding-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .cartlanding-wrapper :is(.md\:flex-nowrap) {
+    flex-wrap: nowrap
+  }
+
+  .cartlanding-wrapper :is(.md\:items-center) {
+    align-items: center
+  }
+
+  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
+  }
+
+  .cartlanding-wrapper :is(.md\:pt-0) {
+    padding-top: 0px
+  }
 }
 
 @media (min-width: 1024px) {
+  .cartlanding-wrapper :is(.lg\:w-\[600px\]) {
+    width: 600px
+  }
+
   .cartlanding-wrapper :is(.lg\:w-\[calc\(33\.33\%-13\.33px\)\]) {
     width: calc(33.33% - 13.33px)
+  }
+
+  .cartlanding-wrapper :is(.lg\:min-w-\[415px\]) {
+    min-width: 415px
+  }
+
+  .cartlanding-wrapper :is(.lg\:flex-row) {
+    flex-direction: row
+  }
+
+  .cartlanding-wrapper :is(.lg\:items-center) {
+    align-items: center
+  }
+
+  .cartlanding-wrapper :is(.lg\:justify-normal) {
+    justify-content: normal
   }
 }
 
@@ -552,4 +1262,36 @@
   .cartlanding-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+
+  .cartlanding-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
+  stroke: currentColor
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
+  stroke: #4b5563
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
+  stroke: #fff
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[3px\] svg>use) {
+  stroke-width: 3px
+}
+
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

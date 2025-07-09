@@ -342,11 +342,6 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
-.login-wrapper :is(.hover\:text-danaherpurple-500:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
 .login-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))

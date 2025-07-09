@@ -33,12 +33,17 @@ const fileMappings = [
     content: [
       './blocks/cartlanding/cartlanding.js',
       './blocks/cartlanding/cartItem.js',
-      './blocks/cartlanding/addproduct.js',
+      './blocks/cartlanding/addproducts.js',
       './blocks/cartlanding/mycart.js',
       './blocks/cartlanding/price.js',
       './blocks/cartlanding/recommendedproducts.js',
       './blocks/cartlanding/emptyCart.js',
       './blocks/cartlanding/cartDetails.js',
+      './blocks/cartlanding/grid-data.js',
+      './blocks/cartlanding/listData.js',
+      './blocks/cartlanding/noProduct.js',
+      './blocks/cartlanding/related-products.js',
+
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',

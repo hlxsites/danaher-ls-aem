@@ -11,10 +11,11 @@ import {
   postApiData,
 } from '../../scripts/api-utils.js';
 
-import addProducts from './addproducts.js';
-import {
-  updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
-} from './cartSharedFile.js';
+import {addProducts} from './addproducts.js';
+// import {
+//   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
+// } from './cartSharedFile.js';
+import { updateCartQuantity, getProductDetailObject, productData, updateBasketDetails } from './cartSharedFile.js';
 
 export const cartItemsValue = [];
 
