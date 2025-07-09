@@ -33,12 +33,18 @@ const fileMappings = [
     content: [
       './blocks/cartlanding/cartlanding.js',
       './blocks/cartlanding/cartItem.js',
-      './blocks/cartlanding/addproduct.js',
+      './blocks/cartlanding/addproducts.js',
       './blocks/cartlanding/mycart.js',
       './blocks/cartlanding/price.js',
       './blocks/cartlanding/recommendedproducts.js',
       './blocks/cartlanding/emptyCart.js',
       './blocks/cartlanding/cartDetails.js',
+      './blocks/cartlanding/grid-data.js',
+      './blocks/cartlanding/listData.js',
+      './blocks/cartlanding/noProduct.js',
+      './blocks/cartlanding/related-products.js',
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js',
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',
@@ -330,12 +336,16 @@ const fileMappings = [
       './blocks/checkout/paymentModule.js',
       './blocks/checkout/shippingAddress.js',
       './blocks/checkout/shippingMethods.js',
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js',
+      './blocks/cartlanding/cartlanding.js',
+      './blocks/cartlanding/cartItem.js',
     ],
     output: './blocks/checkout/checkout.css',
     wrapper: 'checkout',
   },
   {
-    content: './blocks/dashboard/dashboard.js',
+    content: ['./blocks/dashboard/dashboard.js', './scripts/common-utils.js'],
     output: './blocks/dashboard/dashboard.css',
     wrapper: 'dashboard-wrapper',
   },
@@ -501,9 +511,7 @@ const fileMappings = [
 const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
-fileMappings.forEach(({
-  content, input, output, wrapper,
-}) => {
+fileMappings.forEach(({ content, input, output, wrapper }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
   const command = `npx tailwindcss ${
     input ? `-i ${input}` : './styles/proxy-tailwind.css'

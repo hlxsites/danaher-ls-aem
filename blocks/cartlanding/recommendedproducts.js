@@ -1,13 +1,30 @@
 import { addItemToCart, recommendedProduct } from './myCartService.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
-import { div, span, button } from '../../scripts/dom-builder.js';
-import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+import {
+  div,
+  h3,
+  input,
+  label,
+  span,
+  button,
+  fieldset,
+  ul,
+  li,
+  a,
+  img,
+  p,
+} from '../../scripts/dom-builder.js';
+import { getProductsForCategories } from '../../scripts/commerce.js';
+import {
+  makePublicUrl,
+  imageHelper,
+  generateUUID,
+} from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { updateCheckoutSummary } from '../../scripts/cart-checkout-utils.js';
 
 export const updateCartButton = (itemID) => {
   const addCartButton = document.getElementById(itemID);
-  // console.log('responseee', addCartButton);
+  console.log('responseee', addCartButton);
   if (addCartButton) {
     addCartButton.innerHTML = 'Added';
   }
@@ -20,14 +37,16 @@ export const recommendedProducts = () => {
   });
   const productsCategories = recommendedProduct;
 
+  let cardsPerPage = getCardsPerPage();
+  let currentIndex = 0;
+
   function getCardsPerPage() {
     if (window.innerWidth < 640) return 1;
     if (window.innerWidth < 1024) return 2;
     if (window.innerWidth < 1280) return 3;
     return 4;
   }
-  let cardsPerPage = getCardsPerPage();
-  let currentIndex = 0;
+
   const carouselContainer = div({
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
   });
@@ -49,7 +68,17 @@ export const recommendedProducts = () => {
       class:
         'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
     },
-    'Others also bought',
+    'Others also bought'
+  );
+
+  // Browse Link
+  const browseLink = a(
+    {
+      href: '#',
+      class:
+        'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug hover:underline whitespace-nowrap',
+    },
+    'Browse 120 Products →'
   );
 
   // Outer container holding both arrows and toggle (gap between them)
@@ -70,7 +99,7 @@ export const recommendedProducts = () => {
     div({
       class:
         'w-7 h-7 left-[5px] top-[5px] absolute outline outline-2 outline-offset-[-1px] outline-gray-300',
-    }),
+    })
   );
 
   const nextDiv = div(
@@ -81,7 +110,7 @@ export const recommendedProducts = () => {
     div({
       class:
         'w-7 h-7 left-[5px] top-[5px] absolute outline outline-2 outline-offset-[-1px] outline-violet-600',
-    }),
+    })
   );
 
   arrowGroup.append(prevDiv, nextDiv);
@@ -90,6 +119,40 @@ export const recommendedProducts = () => {
   const viewModeGroup = div({
     class: 'flex justify-start items-center',
   });
+
+  // List Button
+  const listBtn = div(
+    {
+      class:
+        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+    },
+    div(
+      {
+        class: 'w-5 h-5 relative overflow-hidden',
+      },
+      span({
+        class:
+          'icon icon-icons8-delete w-6 h-6 absolute  fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
+      })
+    )
+  );
+
+  // Grid Button
+  const gridBtn = div(
+    {
+      class:
+        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+    },
+    div(
+      {
+        class: 'w-5 h-5 relative overflow-hidden',
+      },
+      span({
+        class:
+          'icon icon-icons8-delete w-6 h-6 absolute  fill-current text-white [&_svg>use]:stroke-white',
+      })
+    )
+  );
 
   // viewModeGroup.append(listBtn, gridBtn);
 
@@ -108,7 +171,7 @@ export const recommendedProducts = () => {
 
     const cardsToDisplay = productsCategories.slice(
       currentIndex,
-      currentIndex + cardsPerPage,
+      currentIndex + cardsPerPage
     );
     cardsToDisplay.forEach((item) => {
       const card = div({
@@ -121,11 +184,11 @@ export const recommendedProducts = () => {
         item.name,
         {
           href: makePublicUrl(
-            'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+            'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg'
           ),
           title: item.name,
           class: ' h-40 object-cover',
-        },
+        }
       );
 
       const addToCartButton = button(
@@ -140,20 +203,18 @@ export const recommendedProducts = () => {
           price: item.salePrice.value,
           quantity: 0,
         },
-        'Add to Cart',
+        'Add to Cart'
       );
 
       addToCartButton.addEventListener('click', async (event) => {
         showPreLoader();
         const itemId = event.target.attributes;
-        const res = await addItemToCart(itemId);
+        const res = await addItemToCart(itemId, 'recommended-product');
 
-        if (res) {
-          if (res.status === 'success') {
+        if (res)
+          if (res.status == 'success') {
             removePreLoader();
-            await updateCheckoutSummary();
           }
-        }
       });
 
       const itemContainer = div(
@@ -165,7 +226,7 @@ export const recommendedProducts = () => {
             class:
               'relative w-full h-full flex flex-col cursor-pointer transition z-10',
           },
-          image,
+          image
         ),
         div(
           {
@@ -176,14 +237,14 @@ export const recommendedProducts = () => {
               class:
                 'description text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4',
             },
-            item.name,
+            item.name
           ),
           div(
             {
               class: 'h-[70px] text-gray-500 text-base font-extralight',
             },
-            `SKU: ${item.sku}`,
-          ),
+            `SKU: ${item.sku}`
+          )
         ),
         div({
           class: 'w-24 h-10 left-[63px] top-[57px] bg-white',
@@ -194,16 +255,18 @@ export const recommendedProducts = () => {
           },
           span(
             {
-              class: 'text-gray-900 text-2xl font-bold  leading-loose',
+              class:
+                "text-gray-900 text-2xl font-bold font-['TWK_Lausanne_Pan'] leading-loose",
             },
-            `$${item.salePrice.value}`,
+            `$${item.salePrice.value}`
           ),
           span(
             {
-              class: 'text-gray-900 text-base font-extralight  leading-snug',
+              class:
+                "text-gray-900 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
             },
-            '(USD)',
-          ),
+            '(USD)'
+          )
         ),
 
         div(
@@ -215,10 +278,10 @@ export const recommendedProducts = () => {
               class:
                 'w-11 h-10 px-4 border-solid border-2 inline-flex  justify-between items-center',
             },
-            item.minOrderQuantity,
+            item.minOrderQuantity
           ),
-          addToCartButton,
-        ),
+          addToCartButton
+        )
       );
       card.append(itemContainer);
       carouselCards.append(card);
@@ -229,8 +292,8 @@ export const recommendedProducts = () => {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
           stroke="${
-  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            currentIndex > 0 ? '#7523FF' : '#D1D5DB'
+          }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
 
@@ -238,10 +301,10 @@ export const recommendedProducts = () => {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
           stroke="${
-  currentIndex + cardsPerPage < productsCategories.length
-    ? '#7523FF'
-    : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            currentIndex + cardsPerPage < productsCategories.length
+              ? '#7523FF'
+              : '#D1D5DB'
+          }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
   }

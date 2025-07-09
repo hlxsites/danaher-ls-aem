@@ -49,8 +49,8 @@ export function preLoader() {
       id: 'preLoader',
     },
     img({
-      class: ' h-24',
-      src: '/content/dam/loading_icon.gif',
+      class: ' h-[32px]',
+      src: '/icons/loading_icon.gif',
     })
   );
 }

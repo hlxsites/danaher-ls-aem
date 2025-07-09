@@ -5,13 +5,14 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
+  document.querySelector('main')?.classList.add('bg-danahergray-75');
   const authenticationToken = await getAuthenticationToken();
 
   if (
-    authenticationToken?.status === 'error'
-    || authenticationToken.user_type === 'guest'
+    authenticationToken?.status === 'error' ||
+    authenticationToken.user_type === 'guest'
   ) {
-    window.location.href = '/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary';
+    window.location.href = '/us/en/products/cart-checkout/cartlanding';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
@@ -32,7 +33,7 @@ export default async function decorate(block) {
   ::::::::::::::
   */
   const modulesContent = div({
-    class: 'checkout-content flex flex-col gap-16 justify-between  lg:flex-row',
+    class: 'checkout-content flex flex-col gap-5 justify-between  lg:flex-row',
   });
 
   /*
@@ -41,7 +42,8 @@ export default async function decorate(block) {
   ::::::::::::::
   */
   const modulesContainer = div({
-    class: 'checkout-modules-wrapper w-7/10',
+    class:
+      'checkout-modules-wrapper border-1 border-danahergray-75 bg-white w-7/10 px-6',
   });
 
   const progressBar = progressModule();
@@ -64,7 +66,8 @@ export default async function decorate(block) {
       modules.forEach((module) => {
         if (module.getAttribute('id') === 'checkout-details') {
           module.className = '';
-          module.className = 'checkout-summary-wrapper flex justify-center';
+          module.className =
+            'checkout-summary-wrapper border-1 border-danahergray-75 bg-white p-6 flex justify-center';
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);

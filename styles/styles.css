@@ -2880,6 +2880,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 0px;
 }
 
+.h-\[16px\] {
+  height: 16px;
+}
+
 .h-\[93px\] {
   height: 93px;
 }

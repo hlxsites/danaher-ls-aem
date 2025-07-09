@@ -82,6 +82,12 @@ module.exports = {
           margin: '0 auto',
           marginTop: '48px',
         },
+        '.bg-danahergray-75': {
+          backgroundColor: '#f9fafb',
+        },
+        '.border-danahergray-75': {
+          borderColor: '#E5E7EB',
+        },
         '.dhls-arrow-right-icon': {
           height: '1rem',
           width: '1rem',
