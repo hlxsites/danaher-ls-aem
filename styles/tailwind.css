@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-@import "../styles/modal/modal.css";
+@import '../styles/modal/modal.css';
 
 @tailwind base;
 @tailwind components;
@@ -116,12 +116,7 @@
       .carousel-wrapper,
       .page-jump-menu-wrapper,
       .page-tabs-wrapper,
-<<<<<<< HEAD
-      .spline-viewer-wrapper,
-      .tiled-viewer-wrapper
-=======
       .spline-viewer-wrapper
->>>>>>> em1-so-optimized
     ) {
     @apply md:max-w-7xl md:mx-auto;
   }
@@ -580,18 +575,18 @@
     @apply shadow-none rounded-none;
   }
 
-  .page-jump-menu-container li[aria-selected="false"] > a,
-  .page-tabs-container li[aria-selected="false"] > a {
+  .page-jump-menu-container li[aria-selected='false'] > a,
+  .page-tabs-container li[aria-selected='false'] > a {
     @apply bg-white;
   }
 
-  .page-jump-menu-container li[aria-selected="true"] > a,
-  .page-tabs-container li[aria-selected="true"] > a {
+  .page-jump-menu-container li[aria-selected='true'] > a,
+  .page-tabs-container li[aria-selected='true'] > a {
     @apply text-white bg-danaherpurple-500;
   }
 
-  .page-jump-menu-container li[aria-selected="true"] svg,
-  .page-tabs-container li[aria-selected="true"] svg {
+  .page-jump-menu-container li[aria-selected='true'] svg,
+  .page-tabs-container li[aria-selected='true'] svg {
     @apply stroke-white;
   }
 
@@ -602,8 +597,8 @@
 
   .page-jump-menu-container li:hover > a,
   .page-tabs-container li:hover > a,
-  .page-jump-menu-container li[aria-selected="true"] > a,
-  .page-tabs-container li[aria-selected="true"] > a {
+  .page-jump-menu-container li[aria-selected='true'] > a,
+  .page-tabs-container li[aria-selected='true'] > a {
     @apply text-white bg-danaherpurple-500;
   }
 
@@ -614,8 +609,8 @@
 
   .page-jump-menu-container.fixed li:hover > a .icon svg > use,
   .page-tabs-container.fixed li:hover > a .icon svg > use,
-  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use,
-  .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+  .page-jump-menu-container.fixed li[aria-selected='true'] > a .icon svg > use,
+  .page-tabs-container.fixed li[aria-selected='true'] > a .icon svg > use {
     @apply stroke-white;
   }
 
@@ -754,12 +749,6 @@
   .seventythirty .columns-2-cols .container .columns-img-col picture img {
     @apply !w-1/2;
   }
-<<<<<<< HEAD
-
-  button {
-    @apply mt-[10px] bg-purple-600 text-white rounded-full px-[20px] py-[10px] cursor-pointer border-none;
-  }
-
   #checkout-details {
     @apply flex;
   }
@@ -785,16 +774,16 @@
   #shippingAddressListItemsWrapper span:nth-child(1) {
     @apply text-danaherpurple-500 cursor-pointer;
   }
-  [id^="shippingAddressListContentActions-"] {
+  [id^='shippingAddressListContentActions-'] {
     @apply items-start;
   }
-  [id^="shippingAddressListItemActions-"] > div {
+  [id^='shippingAddressListItemActions-'] > div {
     @apply flex gap-4 mt-3 items-center justify-end;
   }
-  [id^="shippingAddressListItemActions-"] > div > span:nth-child(1) {
+  [id^='shippingAddressListItemActions-'] > div > span:nth-child(1) {
     @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
   }
-  [id^="shippingAddressListItemActions-"] > div > span:nth-child(2) {
+  [id^='shippingAddressListItemActions-'] > div > span:nth-child(2) {
     @apply text-black;
   }
   #billingAddressListItemsWrapper {
@@ -813,16 +802,16 @@
   #billingAddressListItemsWrapper span:nth-child(1) {
     @apply text-danaherpurple-500 cursor-pointer;
   }
-  [id^="billingAddressListContentActions-"] {
+  [id^='billingAddressListContentActions-'] {
     @apply items-start;
   }
-  [id^="billingAddressListItemActions-"] > div {
+  [id^='billingAddressListItemActions-'] > div {
     @apply flex gap-4 mt-3 items-center justify-end;
   }
-  [id^="billingAddressListItemActions-"] > div > span:nth-child(1) {
+  [id^='billingAddressListItemActions-'] > div > span:nth-child(1) {
     @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
   }
-  [id^="billingAddressListItemActions-"] > div > span:nth-child(2) {
+  [id^='billingAddressListItemActions-'] > div > span:nth-child(2) {
     @apply text-black;
   }
   #utilityModal #shippingAddressForm {
@@ -857,8 +846,6 @@
   #mainPreLoader {
     @apply fixed w-full backdrop-blur-[3px] z-[1213456789] left-0 top-0 h-[100vh];
   }
-=======
->>>>>>> em1-so-optimized
 }
 
 @layer utilities {
