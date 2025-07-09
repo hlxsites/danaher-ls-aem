@@ -1,15 +1,15 @@
 {
     "definitions": [
       {
-          "title": "Card-List",
-          "id": "card-list",
+          "title": "Embed",
+          "id": "embed",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "Card-List",
-                  "model": "card-list"
+                  "name": "Embed",
+                  "model": "embed"
                 }
               }
             }
@@ -18,4 +18,4 @@
     ],
     "models": [    ],
     "filters": [    ]
-  } 
+  }
