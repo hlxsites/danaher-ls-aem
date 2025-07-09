@@ -40,7 +40,7 @@
               "component": "text",
               "valueType": "string",
               "name": "articleTag",
-              "label": "test:tag",
+              "label": "article:tag",
               "value": ""
             },
              {
