@@ -117,43 +117,46 @@ export function defaultAddress(address, type) {
       },
       div(
         {
-          class: ' flex flex-col ',
+          class: 'flex p-6 border border-danahergray-300 justify-between ',
         },
-        h5(
-          {
-            class: 'font-bold',
-          },
-          address?.companyName2 ?? ''
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          address?.addressLine1 ?? ''
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          address?.city ?? ''
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
-            address?.postalCode ?? ''
-          }`
+        div(
+          {},
+          h5(
+            {
+              class: `font-bold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
+            },
+            address?.companyName2 ?? ''
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            address?.addressLine1 ?? ''
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            address?.city ?? ''
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
+              address?.postalCode ?? ''
+            }`
+          )
         ),
         button(
           {
             'data-type': type,
             'data-action': 'edit',
             class:
-              'flex mt-4 justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
+              'flex justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
-          'Edit / Change'
+          'Edit Address'
         )
       )
     );
@@ -1741,12 +1744,12 @@ get price type if its net or gross
   const summaryModule = div(
     {
       id: 'checkoutSummaryContainer',
-      class:
-        'flex flex-col justify-start items-start gap-4 p-[22px] outline outline-1 outline-offset-[-1px] outline-gray-200',
+      class: 'flex flex-col justify-start items-start gap-4 ',
     },
     div(
       {
-        class: 'p-[22px] flex flex-col justify-start items-start gap-y-6',
+        class:
+          'p-[22px] flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-[5px] justify-start items-start gap-y-6',
         id: 'checkoutSummaryWrapper',
       },
       div(
@@ -1928,30 +1931,31 @@ get price type if its net or gross
           },
           checkoutSummaryKeys.total
         )
-      )
-    ),
-    /*
+      ),
+      /*
  ::::::::::::
  proceed button
  ::::::::::::::::::
    */
-    div(
-      {
-        class: 'p-[22px] flex flex-col justify-center w-full items-start gap-4',
-      },
-      button({
-        class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
-          authenticationToken.user_type === 'guest' ? 'hidden' : ''
-        } `,
-        id: 'proceed-button',
-        'data-tab': 'shippingMethods',
-      }),
       div(
         {
           class:
-            'w-full justify-start text-black-500 text-xs font-normal leading-none',
+            'p-[22px] flex flex-col justify-center w-full items-start gap-4',
         },
-        '*estimated sales tax. Additional tax may apply upon actual calculation of order'
+        button({
+          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+            authenticationToken.user_type === 'guest' ? 'hidden' : ''
+          } `,
+          id: 'proceed-button',
+          'data-tab': 'shippingMethods',
+        }),
+        div(
+          {
+            class:
+              'w-full justify-start text-black-500 text-xs font-normal leading-none',
+          },
+          '*estimated sales tax. Additional tax may apply upon actual calculation of order'
+        )
       )
     )
   );
@@ -2013,7 +2017,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonBillToAddress',
             class:
-              'flex-col w-full border-solid border-2  border-gray-400 px-4 my-4',
+              'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
           },
           div(
             {
@@ -2021,51 +2025,61 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold mb-2 mt-2',
+                class: 'font-bold p-0 mb-3 mt-0',
               },
               'Bill to Address'
             ),
-            h5(
+            div(
               {
-                class: 'font-normal m-0',
+                class: 'p-3 border border-danahergray-300',
               },
-              getUseAddressesResponse?.data?.invoiceToAddress?.companyName2 ??
-                ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1 ??
-                ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.invoiceToAddress?.city ?? ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              `${
-                getUseAddressesResponse?.data?.invoiceToAddress?.mainDivision ??
-                ''
-              }, ${
-                getUseAddressesResponse?.data?.invoiceToAddress?.countryCode ??
-                ''
-              }, ${
-                getUseAddressesResponse?.data?.invoiceToAddress?.postalCode ??
-                ''
-              }`
+              h5(
+                {
+                  class: `font-normal m-0 p-0 ${
+                    getUseAddressesResponse?.data?.invoiceToAddress
+                      ?.companyName2
+                      ? ''
+                      : 'hidden'
+                  }`,
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2 ??
+                  ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1 ??
+                  ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.city ?? ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                `${
+                  getUseAddressesResponse?.data?.invoiceToAddress
+                    ?.mainDivision ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.invoiceToAddress
+                    ?.countryCode ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.invoiceToAddress?.postalCode ??
+                  ''
+                }`
+              )
             )
           )
         );
 
         if (invoiceToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
+            'beforebegin',
             invoiceToAddress
           );
         }
@@ -2080,7 +2094,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonShipAddress',
             class:
-              'flex-col w-full border-solid border-2  border-gray-400 px-4',
+              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
           },
           div(
             {
@@ -2088,50 +2102,55 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold mb-2 mt-2',
+                class: 'font-bold p-0 mb-3 mt-0',
               },
               'Shipping Address'
             ),
-            h5(
+            div(
               {
-                class: 'font-normal m-0',
+                class: 'p-3 border border-danahergray-300',
               },
-              getUseAddressesResponse?.data?.commonShipToAddress
-                ?.companyName2 ?? ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.commonShipToAddress
-                ?.addressLine1 ?? ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.commonShipToAddress?.city ?? ''
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              `${
+              h5(
+                {
+                  class: 'font-normal  m-0 p-0',
+                },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? ''
-              }, ${
+                  ?.companyName2 ?? ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? ''
-              }, ${
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? ''
-              }`
+                  ?.addressLine1 ?? ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? ''
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                `${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.mainDivision ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.countryCode ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.postalCode ?? ''
+                }`
+              )
             )
           )
         );
         if (commonShipToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
+            'beforebegin',
             commonShipToAddress
           );
         }
