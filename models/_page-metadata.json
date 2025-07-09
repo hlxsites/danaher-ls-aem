@@ -39,22 +39,15 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "test:Tag",
-              "label": "test:tag",
-              "value": ""
-            },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "testTag",
+              "name": "articleTag",
               "label": "test:tag",
               "value": ""
             },
              {
               "component": "text",
               "valueType": "string",
-              "name": "test-Tag",
-              "label": "test:tag",
+              "name": "article-Tag",
+              "label": "article:tag",
               "value": ""
             },
             {
