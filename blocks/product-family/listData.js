@@ -1,5 +1,5 @@
 import {
-  div, a, input, span, img,
+  div, a, span, img, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
@@ -12,7 +12,7 @@ import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
 export default function renderProductListCard(item) {
   const card = div({
     class:
-      'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
+      'lg:w-[963px] lg:h-[227px]  outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
   });
 
   const fallbackImagePath = '/content/dam/danaher/products/fallbackImage.jpeg';
@@ -115,6 +115,28 @@ export default function renderProductListCard(item) {
     ),
   );
 
+  const actionButtons = div({
+    class: 'self-stretch inline-flex justify-start items-center gap-3',
+  });
+
+  actionButtons.append(
+    button(
+      {
+        class:
+          'show-modal-btn cursor-pointer flex-1 px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+      },
+      span(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Quote',
+      ),
+    ),
+  );
+
+  // Append Quote button to mobileDescSection for mobile view
+  mobileDescSection.append(actionButtons);
+
   decorateIcons(mobileDescSection);
   mobileContentSection.append(mobileTitleAndImage, mobileDescSection);
 
@@ -187,90 +209,38 @@ export default function renderProductListCard(item) {
     desktopContentSection,
   );
 
-  // Right Section: Pricing and Action Buttons (Visible on both Mobile and Desktop)
+  // Right Section: Action Buttons (Visible only in Desktop)
   const rightSection = div({
-    class: 'w-full md:w-64 p-4 bg-gray-50 flex flex-col gap-4',
+    class: 'w-full md:w-64 h-full p-6 bg-gray-50 hidden md:flex flex-col gap-4',
   });
 
-  const price = item.salePrice?.value || 99999.99;
-  const availability = item.availability || 78;
-  const uom = item.packingUnit || '1/Bundle';
-  const minQty = item.minOrderQuantity || 1;
+  // Action Buttons for desktop view (same as mobile but in rightSection)
+  const desktopActionButtons = div({
+    class: 'self-stretch inline-flex justify-start items-center gap-3',
+  });
 
-  const pricingDetails = div(
-    { class: 'flex flex-col gap-2' },
-    div(
-      { class: 'text-right text-black text-2xl font-medium leading-loose' },
-      `$${price.toLocaleString()}`,
-    ),
-    div(
-      { class: 'flex justify-between items-center w-full' },
-      div(
-        { class: 'text-black text-sm font-extralight leading-snug' },
-        'Availability:',
-      ),
-      div(
-        { class: 'text-black text-sm font-extralight leading-snug' },
-        availability,
-        span(
-          { class: 'text-black text-sm font-bold leading-snug' },
-          ' Available',
-        ),
-      ),
-    ),
-    div(
-      { class: 'flex justify-between items-center w-full' },
-      div(
-        { class: 'text-black text-sm font-extralight leading-snug' },
-        'Unit of Measure:',
-      ),
-      div({ class: 'text-black text-sm font-bold leading-snug' }, uom),
-    ),
-    div(
-      { class: 'flex justify-between items-center w-full' },
-      div(
-        { class: 'text-black text-sm font-extralight leading-snug' },
-        'Min. Order Qty:',
-      ),
-      div({ class: 'text-black text-sm font-bold leading-snug' }, minQty),
-    ),
-  );
-
-  const actionButtons = div(
-    { class: 'flex flex-col gap-2' },
-    div(
-      { class: 'flex items-center gap-2' },
-      input({
-        type: 'number',
-        value: '1',
-        min: '1',
+  desktopActionButtons.append(
+    button(
+      {
         class:
-          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
-      }),
-      a(
+          'show-modal-btn cursor-pointer flex-1 px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+      },
+      span(
         {
-          href: makePublicUrl(item.path || item.clickUri),
-          class:
-            'w-20 px-4 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
+          class: 'inherit text-base font-medium leading-snug',
         },
-        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
-      ),
-      div(
-        {
-          class:
-            'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden',
-        },
-        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote'),
+        'Quote',
       ),
     ),
   );
 
-  rightSection.append(pricingDetails, actionButtons);
+  rightSection.append(desktopActionButtons);
 
   // Assemble the card
   card.append(leftSection, rightSection);
 
-  decorateModals(card);
+  decorateModals(desktopActionButtons);
+  decorateModals(actionButtons);
 
   return card;
 }

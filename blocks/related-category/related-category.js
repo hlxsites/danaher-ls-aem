@@ -9,7 +9,7 @@ async function getCategoryInfo(category) {
   if (api) {
     try {
       const res = await fetch(
-        'https://lifesciences.danaher.com/us/en/products-index.json',
+        `https://${window.DanaherConfig.host}/us/en/products-index.json`,
       );
       if (!res.ok) {
         return {};

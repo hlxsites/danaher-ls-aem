@@ -1,6 +1,4 @@
-import {
-  div, p, a, input, span, img,
-} from '../../scripts/dom-builder.js';
+import { div, p, a, span, img, button } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { makePublicUrl, decorateModals } from '../../scripts/scripts.js';
 
@@ -34,82 +32,59 @@ export default function renderProductGridCard(item) {
 
   const imageElement = createImageWithFallback(
     item.raw.images?.[0],
-    item.title,
+    item.title
   );
 
   const titleElement = div(
     { class: 'p-3' },
     p(
       { class: 'text-black text-xl font-medium leading-7 line-clamp-2' },
-      (item.title || '').trim().replace(/<[^>]*>/g, ''),
-    ),
+      (item.title || '').trim().replace(/<[^>]*>/g, '')
+    )
   );
 
   const contentWrapper = div({
-    class: 'flex flex-col justify-start items-start w-full flex-grow',
+    class: 'flex flex-col justify-center items-start w-full h-20',
   });
 
   contentWrapper.append(titleElement);
 
-  const pricingDetails = div({
-    class: 'self-stretch inline-flex flex-col justify-start items-end gap-6',
-  });
-
-  const price = item.salePrice?.value || 99999.99;
-  const uom = item.packingUnit || '1/Bundle';
-  const minQty = item.minOrderQuantity || 1;
-
-  pricingDetails.append(
+  const pricingAndActions = div(
+    {
+      class: 'self-stretch flex flex-col justify-between h-full px-4 py-3',
+    },
     div(
       {
-        class: 'text-right justify-start text-black text-2xl font-medium',
+        class: 'self-stretch inline-flex justify-start gap-3 flex-1',
       },
-      `$${price.toLocaleString()}`,
+      div(
+        { class: 'flex-1 inline-flex flex-col justify-start items-start' },
+        div(
+          {
+            class:
+              'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
+          },
+          item?.raw?.description.trim().replace(/<[^>]*>/g, '')
+        )
+      )
     ),
     div(
-      { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
-      div(
-        { class: 'flex justify-between items-center w-full' },
-        div(
-          { class: 'text-black text-base font-extralight leading-snug' },
-          'Unit of Measure:',
-        ),
-        div({ class: 'text-black text-base font-bold leading-snug' }, uom),
-      ),
-      div(
-        { class: 'flex justify-between items-center w-full' },
-        div(
-          { class: 'text-black text-base font-extralight leading-snug' },
-          'Min. Order Qty:',
-        ),
-        div({ class: 'text-black text-base font-bold leading-snug' }, minQty),
-      ),
-    ),
-    div(
-      { class: 'inline-flex justify-start items-center ml-3 gap-3' },
-      input({
-        type: 'number',
-        value: '1',
-        min: '1',
-        class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
-      }),
-      a(
-        {
-          href: makePublicUrl(item.path || item.clickUri),
-          class:
-            'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
-        },
-        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
-      ),
-      div(
+      {
+        class: 'self-stretch inline-flex justify-start items-center gap-3 pt-6',
+      },
+      button(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote'),
-      ),
-    ),
+        div(
+          {
+            class: 'inherit text-base font-medium leading-snug',
+          },
+          'Quote'
+        )
+      )
+    )
   );
 
   const viewDetailsButton = div(
@@ -124,14 +99,14 @@ export default function renderProductGridCard(item) {
       span({
         class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-      }),
-    ),
+      })
+    )
   );
 
   decorateIcons(viewDetailsButton);
 
-  const bgWrapper = div({ class: 'bg-gray-50 px-4 py-3' });
-  bgWrapper.append(pricingDetails);
+  const bgWrapper = div({ class: 'bg-gray-50 h-[191px]' });
+  bgWrapper.append(pricingAndActions);
   card.append(imageElement, contentWrapper, bgWrapper, viewDetailsButton);
 
   decorateModals(card);

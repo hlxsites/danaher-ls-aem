@@ -212,7 +212,8 @@ export default function renderListCard(item) {
   );
 
   let rightSection;
-  if (item.showCart && item.price !== undefined) {
+  // if (item.showCart && item.price !== undefined) {
+  if (item.showCart && item.price === 'abc123') {
     rightSection = div({
       class:
         'self-stretch w-full md:w-80 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4',

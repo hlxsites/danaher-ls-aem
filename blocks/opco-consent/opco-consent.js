@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { div, button, h2, h3, h4, span, p } from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { div, button, h2, h3, h4, span, p } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 // ======================
 // CONFIGURATION
@@ -8,16 +8,16 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 const CONFIG = {
   debug: true, // Set to false in production
   allowedDomains: [
-    "https://stage.lifesciences.danaher.com",
-    "https://lifesciences.danaher.com",
-    "http://localhost",
-    "http://127.0.0.1",
+    'https://stage.lifesciences.danaher.com',
+    'https://lifesciences.danaher.com',
+    'http://localhost',
+    'http://127.0.0.1',
   ],
   ketchScripts: {
     production:
-      "https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js",
+      'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage:
-      "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js",
+      'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js',
   },
 };
 
@@ -25,35 +25,35 @@ const CONFIG = {
 // UTILITIES
 // ======================
 function debugLog(...args) {
-  if (CONFIG.debug) console.log("[DEBUG]", ...args);
+  if (CONFIG.debug) console.log('[DEBUG]', ...args);
 }
 
 function isEnvironment(env) {
   const host = window.location.host;
-  if (env === "production") return host === "lifesciences.danaher.com";
-  if (env === "stage") return host.includes("stage.lifesciences.danaher.com");
-  return host.includes("localhost") || host.includes("127.0.0.1");
+  if (env === 'production') return host === 'lifesciences.danaher.com';
+  if (env === 'stage') return host.includes('stage.lifesciences.danaher.com');
+  return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
 function getStorageKey() {
-  return isEnvironment("production") ? "danaher_id" : "danaher_test_id";
+  return isEnvironment('production') ? 'danaher_id' : 'danaher_test_id';
 }
 
 function obfuscateEmail(email) {
-  return btoa(email.split("").reverse().join(""));
+  return btoa(email.split('').reverse().join(''));
 }
 
 function deobfuscateEmail(obfuscated) {
-  return atob(obfuscated).split("").reverse().join("");
+  return atob(obfuscated).split('').reverse().join('');
 }
 
 async function hashEmail(email) {
   const encoder = new TextEncoder();
   const data = encoder.encode(email);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
 }
 
 // ======================
@@ -65,15 +65,15 @@ function initializeKetch() {
     window.semaphore.push(arguments);
   };
 
-  const script = document.createElement("script");
-  script.src = isEnvironment("production")
+  const script = document.createElement('script');
+  script.src = isEnvironment('production')
     ? CONFIG.ketchScripts.production
     : CONFIG.ketchScripts.stage;
   script.defer = true;
   script.async = true;
 
-  script.onload = () => debugLog("Ketch script loaded successfully");
-  script.onerror = () => console.error("Ketch script failed to load");
+  script.onload = () => debugLog('Ketch script loaded successfully');
+  script.onerror = () => console.error('Ketch script failed to load');
 
   document.head.appendChild(script);
 }
@@ -81,20 +81,20 @@ function initializeKetch() {
 async function updateConsent(email, hashId) {
   try {
     const response = await fetch(
-      "https://" +
+      'https://' +
         `${window.location.host}` +
-        "/content/danaher/services/boomi/opcopreferences",
+        '/content/danaher/services/boomi/opcopreferences',
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
-        mode: "cors",
+        mode: 'cors',
       }
     );
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.text();
   } catch (error) {
-    console.error("Boomi API Error:", error);
+    console.error('Boomi API Error:', error);
     throw error;
   }
 }
@@ -103,12 +103,12 @@ async function updateConsent(email, hashId) {
 // UI COMPONENTS
 // ======================
 function showModal(message, isSuccess = true) {
-  const modalId = "consent-modal";
+  const modalId = 'consent-modal';
   let modal = document.getElementById(modalId);
 
   if (modal) document.body.removeChild(modal);
 
-  modal = document.createElement("div");
+  modal = document.createElement('div');
   modal.id = modalId;
   modal.style.cssText = `
     position: fixed;
@@ -124,19 +124,19 @@ function showModal(message, isSuccess = true) {
   `;
 
   const content = div(
-    { class: "bg-white rounded-lg p-6 w-full max-w-md text-center" },
-    h4({ class: "text-xl mb-auto" }, message),
+    { class: 'bg-white rounded-lg p-6 w-full max-w-md text-center' },
+    h4({ class: 'text-xl mb-auto' }, message),
     button(
       {
         class: `mb-4 px-4 py-2 mb-2 rounded ${
-          isSuccess ? "bg-danaherpurple-800" : "bg-danaherpurple-800"
+          isSuccess ? 'bg-danaherpurple-800' : 'bg-danaherpurple-800'
         } text-white`,
         onClick: () => {
           document.body.removeChild(modal);
           window.location.reload();
         },
       },
-      "OK"
+      'OK'
     )
   );
 
@@ -148,13 +148,13 @@ function showModal(message, isSuccess = true) {
 // EVENT HANDLERS
 // ======================
 function handleKetchEvents(reason) {
-  debugLog("Ketch event:", reason);
+  debugLog('Ketch event:', reason);
 
   const storageKey = getStorageKey();
   const hashId = localStorage.getItem(storageKey);
-  const obfuscatedEmail = localStorage.getItem("reference1");
+  const obfuscatedEmail = localStorage.getItem('reference1');
 
-  debugLog("Storage contents:", {
+  debugLog('Storage contents:', {
     storageKey,
     hashId,
     obfuscatedEmail,
@@ -162,9 +162,9 @@ function handleKetchEvents(reason) {
   });
 
   if (!hashId || !obfuscatedEmail) {
-    console.error("Missing storage data:", { hashId, obfuscatedEmail });
+    console.error('Missing storage data:', { hashId, obfuscatedEmail });
     showModal(
-      "Failed to save preferences. Please refresh and try again.",
+      'Failed to save preferences. Please refresh and try again.',
       false
     );
     return;
@@ -173,16 +173,16 @@ function handleKetchEvents(reason) {
   try {
     const email = deobfuscateEmail(obfuscatedEmail);
 
-    if (reason === "setSubscriptions") {
+    if (reason === 'setSubscriptions') {
       updateConsent(email, hashId)
-        .then(() => showModal("Preferences saved successfully"))
-        .catch(() => showModal("Preferences saved locally", false));
-    } else if (reason === "closeWithoutSettingConsent") {
-      showModal("No changes were made");
+        .then(() => showModal('Preferences saved successfully'))
+        .catch(() => showModal('Preferences saved locally', false));
+    } else if (reason === 'closeWithoutSettingConsent') {
+      showModal('No changes were made');
     }
   } catch (error) {
-    console.error("Error handling consent:", error);
-    showModal("Error processing your request", false);
+    console.error('Error handling consent:', error);
+    showModal('Error processing your request', false);
   }
 }
 
@@ -192,63 +192,63 @@ function handleKetchEvents(reason) {
 function modifyElements() {
   document
     .querySelectorAll(
-      ".ketch-flex.ketch-flex-col.ketch-gap-5:not([data-modified])"
+      '.ketch-flex.ketch-flex-col.ketch-gap-5:not([data-modified])'
     )
     .forEach((node) => {
       let selectionList = node.querySelector(
-        ".ketch-flex.ketch-flex-wrap.ketch-gap-6"
+        '.ketch-flex.ketch-flex-wrap.ketch-gap-6'
       );
 
-      node.dataset.modified = "true";
-      let img = document.createElement("img");
-      let paraElement = node.querySelector(".ketch-m-0");
+      node.dataset.modified = 'true';
+      let img = document.createElement('img');
+      let paraElement = node.querySelector('.ketch-m-0');
 
       const opCoMapping = {
-        "Danaher Cross OpCo Test": "danaher.png",
-        "Abcam Test": "abcam.png",
-        "Aldevron Test": "aldevron-4c.png",
-        "Beckman Coulter Dignostics Test": "beckmancoulter.png",
-        "Beckman Coulter Test": "beckmancoulter.png",
-        "Beckman LS Test": "beckmancoulterls.png",
-        "Beckman Coulter Life Sciences Test": "beckmancoulterls.png",
-        "Cepheid Test": "cepheid.png",
-        "Cytiva Test": "cytiva.png",
-        "Danaher Life Sciences Test": "danaher.png",
-        "Genedata Test": "genedata.png",
-        "HemoCue Test": "HemoCue.png",
-        "IDBS Test": "idbs-4c.png",
-        "IDT Test": "idt.png",
-        "Leica Microsystems Test": "leica-microsystems-4c.png",
-        "Leica Biosystems Test": "leica-biosystems.png",
-        "Mammotome Test": "mammotome.png",
-        "Molecular Devices Test": "molecular-devices-4c.png",
-        "Pall Test": "pall.png",
-        "Phenomenex Test": "phenomenex.png",
-        "Radiometer Test": "radiometer.png",
-        "Sciex Test": "sciex-4c.png",
-        "Danaher Cross OpCo": "danaher.png",
-        Abcam: "abcam.png",
-        Aldevron: "aldevron-4c.png",
-        "Beckman Coulter Dignostics": "beckmancoulter.png",
-        "Beckman Coulter Life Sciences": "beckmancoulterls.png",
-        Cepheid: "cepheid.png",
-        Cytiva: "cytiva.png",
-        "Danaher Life Sciences": "danaher.png",
-        Genedata: "genedata.png",
-        HemoCue: "HemoCue.png",
-        IDBS: "idbs-4c.png",
-        IDT: "idt.png",
-        "Leica Microsystems": "leica-microsystems-4c.png",
-        "Leica Biosystems": "leica-biosystems.png",
-        Mammotome: "mammotome.png",
-        "Molecular Devices": "molecular-devices-4c.png",
-        Pall: "pall.png",
-        Phenomenex: "phenomenex.png",
-        Radiometer: "radiometer.png",
-        Sciex: "sciex-4c.png",
+        'Danaher Cross OpCo Test': 'danaher.png',
+        'Abcam Test': 'abcam.png',
+        'Aldevron Test': 'aldevron-4c.png',
+        'Beckman Coulter Dignostics Test': 'beckmancoulter.png',
+        'Beckman Coulter Test': 'beckmancoulter.png',
+        'Beckman LS Test': 'beckmancoulterls.png',
+        'Beckman Coulter Life Sciences Test': 'beckmancoulterls.png',
+        'Cepheid Test': 'cepheid.png',
+        'Cytiva Test': 'cytiva.png',
+        'Danaher Life Sciences Test': 'danaher.png',
+        'Genedata Test': 'genedata.png',
+        'HemoCue Test': 'HemoCue.png',
+        'IDBS Test': 'idbs-4c.png',
+        'IDT Test': 'idt.png',
+        'Leica Microsystems Test': 'leica-microsystems-4c.png',
+        'Leica Biosystems Test': 'leica-biosystems.png',
+        'Mammotome Test': 'mammotome.png',
+        'Molecular Devices Test': 'molecular-devices-4c.png',
+        'Pall Test': 'pall.png',
+        'Phenomenex Test': 'phenomenex.png',
+        'Radiometer Test': 'radiometer.png',
+        'Sciex Test': 'sciex-4c.png',
+        'Danaher Cross OpCo': 'danaher.png',
+        Abcam: 'abcam.png',
+        Aldevron: 'aldevron-4c.png',
+        'Beckman Coulter Dignostics': 'beckmancoulter.png',
+        'Beckman Coulter Life Sciences': 'beckmancoulterls.png',
+        Cepheid: 'cepheid.png',
+        Cytiva: 'cytiva.png',
+        'Danaher Life Sciences': 'danaher.png',
+        Genedata: 'genedata.png',
+        HemoCue: 'HemoCue.png',
+        IDBS: 'idbs-4c.png',
+        IDT: 'idt.png',
+        'Leica Microsystems': 'leica-microsystems-4c.png',
+        'Leica Biosystems': 'leica-biosystems.png',
+        Mammotome: 'mammotome.png',
+        'Molecular Devices': 'molecular-devices-4c.png',
+        Pall: 'pall.png',
+        Phenomenex: 'phenomenex.png',
+        Radiometer: 'radiometer.png',
+        Sciex: 'sciex-4c.png',
       };
 
-      let opCo = paraElement?.textContent.trim() || "";
+      let opCo = paraElement?.textContent.trim() || '';
       if (selectionList) {
         selectionList
           .querySelectorAll(`label[aria-label="Subscribe to ${opCo} via Mail"]`)
@@ -261,35 +261,35 @@ function modifyElements() {
     const logoName = opCoMapping[opCo] || 'logo-danaherls';
     imageDiv.append(span({ class: `icon icon-${logoName}.png brand-left-logo`, style: 'width:100%;' }));
     decorateIcons(imageDiv); */
-      const imageDiv = div({ class: "ketch-w-15" });
-      const logoName = opCoMapping[opCo] || "danaher.png";
+      const imageDiv = div({ class: 'ketch-w-15' });
+      const logoName = opCoMapping[opCo] || 'danaher.png';
       const logoUrl = `/icons/${logoName}`;
-      const logoImg = document.createElement("img");
+      const logoImg = document.createElement('img');
       logoImg.src = logoUrl;
       logoImg.alt = opCo;
-      logoImg.className = "brand-left-logo";
+      logoImg.className = 'brand-left-logo';
       //logoImg.style.width = "100%";
       imageDiv.appendChild(logoImg);
 
-      const buttonDiv = div({ class: "ketch-w-6" });
+      const buttonDiv = div({ class: 'ketch-w-6' });
 
       const divEl = node.querySelector(
-        "div.ketch-flex.ketch-items-center.ketch-justify-between.ketch-gap-5"
+        'div.ketch-flex.ketch-items-center.ketch-justify-between.ketch-gap-5'
       );
-      const labelEl = divEl.querySelector("label");
-      labelEl?.classList.remove("ketch-w-[134px]");
+      const labelEl = divEl.querySelector('label');
+      labelEl?.classList.remove('ketch-w-[134px]');
       buttonDiv.appendChild(labelEl);
 
-      const contentDiv = div({ class: "ketch-w-79" });
+      const contentDiv = div({ class: 'ketch-w-79' });
       contentDiv.append(
         divEl,
-        node.querySelector("div.ketch-flex.ketch-flex-wrap.ketch-gap-6")
+        node.querySelector('div.ketch-flex.ketch-flex-wrap.ketch-gap-6')
       );
       node.prepend(imageDiv);
       node.append(contentDiv);
       node.append(buttonDiv);
-      node.classList.remove("ketch-flex-col");
-      node.classList.add("product");
+      node.classList.remove('ketch-flex-col');
+      node.classList.add('product');
     });
 }
 
@@ -307,11 +307,11 @@ export default async function decorate(block) {
   initializeKetch();
 
   // 2. Set up event handler
-  ketch("on", "hideExperience", handleKetchEvents);
+  ketch('on', 'hideExperience', handleKetchEvents);
 
   // 3. Configure Ketch UI
-  ketch("showPreferences", {
-    tab: "subscriptionsTab",
+  ketch('showPreferences', {
+    tab: 'subscriptionsTab',
     showOverviewTab: false,
     showConsentsTab: false,
     showSubscriptionsTab: true,
@@ -319,38 +319,39 @@ export default async function decorate(block) {
 
   // 4. Process email parameter if present
   const url = new URL(window.location.href);
-  const emailParam = url.searchParams.get("emailid");
+  const emailParamRaw = url.searchParams.get('emailid');
+  const emailParam = emailParamRaw ? emailParamRaw.toLowerCase() : null;
 
   if (
     emailParam &&
     CONFIG.allowedDomains.some((domain) => url.href.startsWith(domain))
   ) {
     try {
-      debugLog("Processing email parameter");
+      debugLog('Processing email parameter');
       const storageKey = getStorageKey();
       const emailHash = await hashEmail(emailParam);
       const obfuscatedEmail = obfuscateEmail(emailParam);
 
-      localStorage.setItem("reference1", obfuscatedEmail);
+      localStorage.setItem('reference1', obfuscatedEmail);
       localStorage.setItem(storageKey, emailHash);
 
-      debugLog("Stored data:", {
+      debugLog('Stored data:', {
         email: obfuscatedEmail,
         hashId: emailHash,
         storageKey,
       });
 
       // Clean URL
-      url.searchParams.delete("emailid");
+      url.searchParams.delete('emailid');
       window.history.replaceState({}, document.title, url.toString());
     } catch (error) {
-      console.error("Email processing failed:", error);
+      console.error('Email processing failed:', error);
     }
   }
 
   // 5. Add debug styles if needed
   if (CONFIG.debug) {
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.textContent = `
       /* #lanyard_root * {
         --ketch-debug-outline: 1px solid red;
