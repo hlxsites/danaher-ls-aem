@@ -710,6 +710,8 @@ const updateWorkflowName = (value, ariaPressed) => {
   } else if (!ariaPressed) {
     clearValuesAfterCurrent(workflowName, value);
     workflowName.add(value);
+  } else if (ariaPressed) {
+    workflowName.delete(value);
   } else {
     workflowName.clear();
   }
@@ -1222,19 +1224,24 @@ export async function decorateProductList(block, blockId) {
           searchWrapper?.classList.remove('hidden');
           decorateIcons(parent);
         });
+        // Rotate the expandAll chevron icon onclick of expand all
+        const chevron = expandAll.querySelector('.icon-chevron-down');
+        if (chevron) {
+          chevron.classList.add('transform', 'rotate-180', 'hover:[&_svg>use]:stroke-danaherpurple-800');
+        }
       },
     },
     button(
       {
         class:
-          'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug',
+          'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
       'Expand All',
       div(
         { class: 'relative mb-1 flex items-center' },
         span({
           class:
-            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
+            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
         }),
       ),
     ),
