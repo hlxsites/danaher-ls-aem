@@ -65,9 +65,6 @@ export function getAuthorization() {
   }
   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
   const parsedToken = JSON.parse(tokenInStore);
-  console.log(' siteID :  ', siteID);
-  console.log(' hostName :  ', hostName);
-  console.log(' env :  ', env);
   if (localStorage.getItem('authToken')) {
     authHeader.append(
       'Authorization',
@@ -85,8 +82,6 @@ export function getAuthorization() {
     const apiToken = getCookie(`${siteID}_${env}_apiToken`);
     authHeader.append('authentication-token', apiToken);
   }
-  console.log(' authHeader : commerce.js ', authHeader);
-
   return authHeader;
 }
 /**
