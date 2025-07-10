@@ -221,7 +221,7 @@ export default async function decorate(block) {
 
     if (hasValidPrice) {
       const brandName = (response[0]?.raw?.opco || '').trim();
-      let brandLabel = 'Buy Now on external site';
+      /* let brandLabel = 'Buy Now on external site';
 
       switch (brandName.toLowerCase()) {
         case 'abcam':
@@ -239,15 +239,41 @@ export default async function decorate(block) {
         default:
           brandLabel = 'Buy Now on external site';
           break;
-      }
+      } */
 
       let brandButton = null;
+      const rfqLabelRaw = response[0]?.raw?.rfqlabel || '';
+      const externallinkRaw = response[0]?.raw?.externallink;
+      let btnLabel = '';
+      let btnHref = '';
       if (showBuyNow) {
+        if (rfqLabelRaw.includes('|')) {
+          const [labelPart, actionPart] = rfqLabelRaw.split('|');
+          btnLabel = labelPart.trim();
+          const actionValue = actionPart.trim().toLowerCase();
+
+          if (actionValue === 'true' && externallinkRaw) {
+            btnHref = `${externallinkRaw}?utm_source=dhls_website`;
+          } else if (actionValue.startsWith('http')) {
+            btnHref = actionPart.trim();
+          }
+        } else {
+          btnLabel = rfqLabelRaw.trim();
+        }
+        // If still no label, fallback to default
+        if (!btnLabel) {
+          btnLabel = 'Buy Now'; // fallback label
+        }
+
         const btn = document.createElement('button');
         btn.textContent = brandLabel;
         btn.classList.add(
           ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '),
         );
+
+        if (btnHref) {
+          btn.addEventListener('click', () => window.open(btnHref, '_blank'));
+        }
 
         if (brandURL) {
           btn.addEventListener('click', () => window.open(brandURL, '_blank'));
