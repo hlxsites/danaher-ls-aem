@@ -9,7 +9,9 @@ import { getProductDetailObject } from './cartSharedFile.js';
 
 export const cartItem = async () => {
   let getProductDetailsObject;
-  if (window.location.href.includes('assay-kits')){
+  const params = new URLSearchParams(window.location.search);
+  console.log("params", params.get("orderId"));
+  if (params.get("orderId")) {
     getProductDetailsObject = JSON.parse(sessionStorage.getItem("cartItemsDetails"));
     console.log("getProductDetailsObject", getProductDetailsObject);
   }

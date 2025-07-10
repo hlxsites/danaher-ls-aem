@@ -158,7 +158,7 @@ export const addProducts = async () => {
       },
       div(
         {
-          class: "justify-start text-black text-3xl font-normal",
+          class: "justify-start text-black text-3xl font-bold",
         },
         "Want to add more products?"
       ),

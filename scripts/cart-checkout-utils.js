@@ -81,7 +81,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   //   hr({
   //     class: `w-full border-black-200`,
   //   }))
-  const logoDiv = div(
+  const logoDivInner = div(
     {
       class:
         "w-full self-stretch py-3 bg-gray-100 border-t border-gray-300 inline-flex justify-start items-center gap-1",
@@ -124,7 +124,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       "Total"
     )
   );
-  return logoDiv;
+  return logoDivInner;
 };
 
 export const divider = (val) => hr({
