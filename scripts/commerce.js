@@ -23,6 +23,33 @@ export function getCommerceBase() {
 /**
  * Returns the user authorization used for commerce API calls
  */
+// export function getAuthorization() {
+//   const authHeader = new Headers();
+//   const siteID = window.DanaherConfig?.siteID;
+//   const hostName = window.location.hostname;
+//   let env;
+//   if (hostName.includes('local')) {
+//     env = 'local';
+//   } else if (hostName.includes('dev')) {
+//     env = 'dev';
+//   } else if (hostName.includes('stage')) {
+//     env = 'stage';
+//   } else {
+//     env = 'prod';
+//   }
+//   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+//   if (localStorage.getItem('authToken')) {
+//     authHeader.append(
+//       'Authorization',
+//       `Bearer ${localStorage.getItem('authToken')}`,
+//     );
+//   }
+//   if (tokenInStore) {
+//     authHeader.append('authentication-token', tokenInStore);
+//   }
+//   return authHeader;
+// }
+
 export function getAuthorization() {
   const authHeader = new Headers();
   const siteID = window.DanaherConfig?.siteID;
@@ -38,14 +65,23 @@ export function getAuthorization() {
     env = 'prod';
   }
   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+  const parsedToken = JSON.parse(tokenInStore);
   if (localStorage.getItem('authToken')) {
     authHeader.append(
       'Authorization',
       `Bearer ${localStorage.getItem('authToken')}`,
     );
-  }
-  if (tokenInStore) {
-    authHeader.append('authentication-token', tokenInStore);
+  } else if (getCookie('ProfileData')) {
+    const { customer_token: apiToken } = getCookie('ProfileData');
+    authHeader.append('authentication-token', apiToken);
+  } else if (
+    parsedToken
+    && parsedToken?.expiry_time > new Date().getTime() / 1000
+  ) {
+    authHeader.append('authentication-token', parsedToken.token);
+  } else if (getCookie(`${siteID}_${env}_apiToken`)) {
+    const apiToken = getCookie(`${siteID}_${env}_apiToken`);
+    authHeader.append('authentication-token', apiToken);
   }
   return authHeader;
 }
