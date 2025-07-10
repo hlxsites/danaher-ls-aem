@@ -15,6 +15,7 @@
       "button",
       "title",
       "columns",
+      "card-list",
       "takeway",
       "product-banner",
       "product-category",
@@ -25,6 +26,7 @@
       "call-to-action",
       "accordion",
       "recent-articles",
+      "embed",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -46,7 +48,11 @@
       "offer-advertisement",
       "related-category",
       "product-hero-content",
-      "product-info-list"
+      "product-info-list",
+      "table",
+      "testimonial",
+      "tags-list",
+      "related-articles"
     ]
   },
   {
