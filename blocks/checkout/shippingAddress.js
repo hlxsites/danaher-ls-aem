@@ -111,7 +111,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             },
             h5(
               {
-                class: 'font-bold',
+                class: 'font-bold m-0 p-0',
               },
               typeof item.companyName2 !== 'undefined' ? item.companyName2 : ''
             ),
@@ -137,7 +137,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
           ),
           div(
             {
-              class: `${type}-address-list-item-actions`,
+              class: `${type}-address-list-item-actions flex flex-col justify-between`,
               id: `${type}AddressListItemActions-${index}`,
             },
             div(
@@ -146,21 +146,21 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               },
               span(
                 {
-                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex mt-4 justify-start  text-base font-bold`,
+                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex  justify-start  text-base font-bold`,
                   'data-address': JSON.stringify(item),
                 },
                 'Edit'
               ),
               span(
                 {
-                  class: 'flex mt-4  text-danaherpurple-500',
+                  class: 'flex   text-danaherpurple-500',
                 },
                 '|'
               ),
               span(
                 {
                   class:
-                    'flex mt-4 justify-start text-base font-bold text-danaherpurple-500 cursor-pointer',
+                    'flex  justify-start text-base font-bold text-danaherpurple-500 cursor-pointer',
                   'data-address': JSON.stringify(item),
                 },
                 'Copy'
@@ -169,7 +169,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             button(
               {
                 id: item.id,
-                class: `${type}-address-use-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
+                class: `${type}-address-use-button text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
               },
               'Use address'
             )
@@ -427,7 +427,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
+              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
             id: `addNew${capitalizeFirstLetter(type)}AddressButton`,
           },
           'Add new address'
@@ -435,7 +435,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             id: `clear${capitalizeFirstLetter(type)}AddressListSearch`,
           },
           'Clear Search'
@@ -568,7 +568,7 @@ export const addressListModal = async (type) => {
   });
   const addressItems = div({
     class:
-      'max-h-97  overflow-auto flex  flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
+      'max-h-97 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
     id: `${type}AddressListItemsWrapper`,
   });
   showPreLoader();
