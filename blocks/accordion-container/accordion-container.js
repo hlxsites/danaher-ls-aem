@@ -153,45 +153,49 @@ export default async function decorate(block) {
       const firstParagraph = paragraphs[0];
       const question = firstParagraph?.textContent.trim() || '';
 
-      element.children[0].firstElementChild.remove();
+      element.children[0]?.firstElementChild?.remove();
       const allChildren = Array.from(element.children);
+      element.querySelectorAll('a')?.forEach((aEle) => {
+        if (aEle) aEle.classList.add(...'!text-black !underline !decoration-danaherpurple-500 hover:bg-danaherpurple-500 hover:!text-white'.split(' '));
+      });
 
       const answer = allChildren.map((child) => child.outerHTML).join('');
 
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
+  if (accordionContainerTitle.trim() !== '' && dynamicData.length > 0) {
+    const dynamicAccordionItems = dynamicData.map((data, index) => {
+      const uuid = generateUUID();
+      return createAccordionBlock(
+        data.question,
+        [data.answer],
+        null,
+        uuid,
+        div(),
+        index,
+        customUUID,
+      );
+    });
 
-  const dynamicAccordionItems = dynamicData.map((data, index) => {
-    const uuid = generateUUID();
-    return createAccordionBlock(
-      data.question,
-      [data.answer],
-      null,
-      uuid,
-      div(),
-      index,
-      customUUID,
+    const layoutContainer = div({
+      class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
+    });
+    const faqTextContainer = div(
+      { class: 'lg:w-[400px]' },
+      h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
     );
-  });
+    const accordionContainer = div(
+      { class: 'lg:w-[840px] flex flex-col' },
+      ...dynamicAccordionItems,
+    );
 
-  const layoutContainer = div({
-    class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
-  });
-  const faqTextContainer = div(
-    { class: 'lg:w-[400px]' },
-    h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
-  );
-  const accordionContainer = div(
-    { class: 'lg:w-[840px] flex flex-col' },
-    ...dynamicAccordionItems,
-  );
+    layoutContainer.append(faqTextContainer, accordionContainer);
+    accordionContainerWrapper.append(layoutContainer);
 
-  layoutContainer.append(faqTextContainer, accordionContainer);
-  accordionContainerWrapper.append(layoutContainer);
-
-  decorateIcons(accordionContainerWrapper);
-  block.append(accordionContainerWrapper);
+    decorateIcons(accordionContainerWrapper);
+    block.append(accordionContainerWrapper);
+  }
 
   [...block.children].forEach((child) => {
     if (!child.contains(accordionContainerWrapper)) {

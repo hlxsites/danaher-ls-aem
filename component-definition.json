@@ -129,6 +129,21 @@
           }
         },
         {
+          "title": "Banner",
+          "id": "banner",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Banner",
+                  "model": "banner"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Body Banner",
           "id": "body-banner",
           "plugins": {
@@ -138,6 +153,36 @@
                 "template": {
                   "name": "Body Banner",
                   "model": "body-banner"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Breadcrumb",
+          "id": "breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Breadcrumb",
+                  "model": "breadcrumb"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Card-List",
+          "id": "card-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Card-List",
+                  "model": "card-list"
                 }
               }
             }
@@ -199,6 +244,21 @@
                 "template": {
                   "name": "Dual Carousel",
                   "model": "dual-carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Embed",
+          "id": "embed",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Embed",
+                  "model": "embed"
                 }
               }
             }
@@ -478,6 +538,36 @@
           }
         },
         {
+          "title": "Recent-Articles",
+          "id": "recent-articles",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Recent-Articles",
+                  "model": "recent-articles"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Related-Articles",
+          "id": "related-articles",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Related-Articles",
+                  "model": "related-articles"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Related Category",
           "id": "related-category",
           "plugins": {
@@ -554,6 +644,21 @@
           }
         },
         {
+          "title": "Table",
+          "id": "table",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Table",
+                  "model": "table"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Tabs-Container",
           "id": "tabs-container",
           "plugins": {
@@ -564,6 +669,51 @@
                   "name": "Tabs-Container",
                   "model": "tabs-container",
                   "filter": "tabs-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Tags-List",
+          "id": "tags-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Tags-List",
+                  "model": "tags-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Takeway",
+          "id": "takeway",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Takeway",
+                  "model": "takeway"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Testimonial",
+          "id": "testimonial",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Testimonial",
+                  "model": "testimonial"
                 }
               }
             }

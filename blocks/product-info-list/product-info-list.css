@@ -86,6 +86,24 @@
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important
 }
 
+.product-info-list-wrapper :is(.\!underline) {
+  text-decoration-line: underline !important
+}
+
+.product-info-list-wrapper :is(.\!decoration-danaherpurple-500) {
+  text-decoration-color: #7523FF !important
+}
+
+.product-info-list-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.product-info-list-wrapper :is(.hover\:\!text-white:hover) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important
+}
+
 @media (min-width: 1024px) {
   .product-info-list-wrapper :is(.lg\:w-\[400px\]) {
     width: 400px

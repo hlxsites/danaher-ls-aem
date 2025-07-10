@@ -41,7 +41,7 @@ export function preLoader() {
     },
     img({
       class: ' h-24',
-      src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif',
+      src: '/content/dam/loading_icon.gif',
     }),
   );
 }
@@ -168,7 +168,7 @@ export async function getProductInfo(id, needInterShop = true) {
   if (api) {
     try {
       const coveoResponse = await getApiData(
-        `https://lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
+        `https://${window.DanaherConfig.host}/us/en/product-data/productInfo/?product=${id}`,
       );
       if (coveoResponse?.status === 'success') {
         let productData = {};

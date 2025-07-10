@@ -250,6 +250,25 @@
     ]
   },
   {
+    "id": "banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "banner",
+        "value": "",
+        "label": "Banner"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "body-banner",
     "fields": [
       {
@@ -311,6 +330,16 @@
         "name": "right-bg-color",
         "value": "",
         "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   },
@@ -426,6 +455,13 @@
   {
     "id": "columns",
     "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Style",
+        "valueType": "string"
+      },
       {
         "component": "text",
         "valueType": "number",
@@ -1059,6 +1095,10 @@
         "label": "Description"
       }
     ]
+  },
+  {
+    "id": "recent-articles",
+    "fields": []
   },
   {
     "id": "related-category",
