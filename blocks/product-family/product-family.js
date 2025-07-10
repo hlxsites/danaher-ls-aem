@@ -1212,22 +1212,32 @@ export async function decorateProductList(block, blockId) {
         'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
         const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
+        const isAllExpanded = Array.from(facetButtons).every(
+          (btn) => btn.getAttribute('aria-expanded') === 'true',
+        );
+
         facetButtons.forEach((btn) => {
-          btn.setAttribute('aria-expanded', 'true');
+          const shouldExpand = !isAllExpanded;
+          btn.setAttribute('aria-expanded', shouldExpand.toString());
           const parent = btn.closest('div.facet');
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-plus-gray');
-          icon.classList.add('icon-minus-gray');
-          contents.classList.remove('hidden');
-          searchWrapper?.classList.remove('hidden');
+          icon.classList.toggle('icon-plus-gray', !shouldExpand);
+          icon.classList.toggle('icon-minus-gray', shouldExpand);
+          contents.classList.toggle('hidden', !shouldExpand);
+          searchWrapper?.classList.toggle('hidden', !shouldExpand);
           decorateIcons(parent);
         });
-        // Rotate the expandAll chevron icon onclick of expand all
+
+        const toggleButton = expandAll.querySelector('button');
         const chevron = expandAll.querySelector('.icon-chevron-down');
-        if (chevron) {
-          chevron.classList.add('transform', 'rotate-180', 'hover:[&_svg>use]:stroke-danaherpurple-800');
+        if (isAllExpanded) {
+          toggleButton.childNodes[0].textContent = 'Expand All';
+          chevron.classList.remove('transform', 'rotate-180');
+        } else {
+          toggleButton.childNodes[0].textContent = 'Collapse All';
+          chevron.classList.add('transform', 'rotate-180');
         }
       },
     },
