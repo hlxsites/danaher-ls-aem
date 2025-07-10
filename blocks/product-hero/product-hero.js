@@ -295,7 +295,7 @@ export default async function decorate(block) {
           {
             class: 'w-64 justify-start text-gray-700 text-base font-extralight',
           },
-          productInfo.data.sku,
+          productInfo?.data?.sku,
         ),
       ),
       div(
@@ -320,7 +320,7 @@ export default async function decorate(block) {
         {
           class: 'justify-start text-black text-4xl font-normal',
         },
-        `$${productInfo.data.salePrice.value}`,
+        `$${productInfo?.data?.salePrice?.value}`,
       ),
       div(
         {
@@ -345,7 +345,7 @@ export default async function decorate(block) {
             {
               class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.availability ? 'EA' : 'EA',
+            productInfo?.data?.availability ? 'EA' : 'EA',
           ),
         ),
 
@@ -368,9 +368,9 @@ export default async function decorate(block) {
             {
               class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.packingUnit === ''
+            productInfo?.data?.packingUnit === ''
               ? 'EA'
-              : productInfo.data.packingUnit,
+              : productInfo?.data?.packingUnit,
           ),
         ),
 
@@ -393,7 +393,7 @@ export default async function decorate(block) {
             {
               class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.minOrderQuantity,
+            productInfo?.data?.minOrderQuantity,
           ),
         ),
       ),
@@ -418,7 +418,7 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer,
+          productInfo?.data?.manufacturer,
         ),
       ),
       div(
@@ -435,7 +435,7 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer,
+          productInfo?.data?.manufacturer,
         ),
       ),
     );
@@ -482,15 +482,15 @@ export default async function decorate(block) {
       }
 
       const modalInput = input({
-        id: productInfo.data.lineItemId,
+        id: productInfo?.data?.lineItemId,
         class:
           'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
         type: 'number',
-        min: productInfo.data.minOrderQuantity,
+        min: productInfo?.data?.minOrderQuantity,
         max:
-          productInfo.data.maxOrderQuantity == 0
+          productInfo?.data?.maxOrderQuantity == 0
             ? 99
-            : productInfo.data.maxOrderQuantity,
+            : productInfo?.data?.maxOrderQuantity,
         name: 'item-quantity',
         value: 1,
       });
@@ -503,12 +503,12 @@ export default async function decorate(block) {
           {
             class:
               'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-            sku: productInfo.data.sku,
-            productName: productInfo.data.productName,
-            minOrderQuantity: productInfo.data.minOrderQuantity,
-            manufacturer: productInfo.data.manufacturer,
-            maxOrderQuantity: productInfo.data.maxOrderQuantity,
-            price: productInfo.data.salePrice.value,
+            sku: productInfo?.data?.sku,
+            productName: productInfo?.data?.productName,
+            minOrderQuantity: productInfo?.data?.minOrderQuantity,
+            manufacturer: productInfo?.data?.manufacturer,
+            maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
+            price: productInfo?.data?.salePrice?.value,
             quantity: 0,
           },
           'Buy Now',
@@ -518,7 +518,7 @@ export default async function decorate(block) {
       modalInput.addEventListener('change', (event) => {
         // const selectedDiv = document.getElementById
         // (productInfo.data.lineItemId); // or any div reference
-        const inputElement = document.getElementById(productInfo.data.lineItemId);
+        const inputElement = document.getElementById(productInfo?.data?.lineItemId);
         const productItem = inputElement.parentElement;
         console.log('productItem', inputElement);
         enteredValue = event.target.value;
@@ -569,7 +569,7 @@ export default async function decorate(block) {
           class:
             'w-full self-stretch inline-flex justify-start items-end gap-3',
         },
-        productInfo.data.salePrice?.value != 0
+        productInfo?.data.salePrice?.value != 0
           && response[0]?.raw?.objecttype === 'Product'
           ? addToCart
           : '',
