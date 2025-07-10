@@ -378,6 +378,46 @@ const fileMappings = [
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',
   },
+  {
+    content: [
+      './blocks/cartlanding/cartlanding.js',
+      './blocks/cartlanding/cartItem.js',
+      './blocks/cartlanding/addproducts.js',
+      './blocks/cartlanding/mycart.js',
+      './blocks/cartlanding/price.js',
+      './blocks/cartlanding/recommendedproducts.js',
+      './blocks/cartlanding/emptyCart.js',
+      './blocks/cartlanding/cartDetails.js',
+      './blocks/cartlanding/grid-data.js',
+      './blocks/cartlanding/listData.js',
+      './blocks/cartlanding/noProduct.js',
+      './blocks/cartlanding/related-products.js',
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js',
+    ],
+    output: './blocks/cartlanding/cartlanding.css',
+    wrapper: 'cartlanding-wrapper',
+  },
+  {
+    content: './blocks/order-submit/order-submit.js',
+    output: './blocks/order-submit/order-submit.css',
+    wrapper: 'order-submit-wrapper',
+  },
+  {
+    content: [
+      './blocks/checkout/checkout.js',
+      './blocks/checkout/checkoutUtilities.js',
+      './blocks/checkout/paymentModule.js',
+      './blocks/checkout/shippingAddress.js',
+      './blocks/checkout/shippingMethods.js',
+      './scripts/cart-checkout-utils.js',
+      './scripts/common-utils.js',
+      './blocks/cartlanding/cartlanding.js',
+      './blocks/cartlanding/cartItem.js',
+    ],
+    output: './blocks/checkout/checkout.css',
+    wrapper: 'checkout',
+  },
 ];
 
 const watch = process.argv[2];

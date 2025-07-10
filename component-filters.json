@@ -46,7 +46,10 @@
       "offer-advertisement",
       "related-category",
       "product-hero-content",
-      "product-info-list"
+      "product-info-list",
+      "cartlanding",
+      "checkout",
+      "order-sibmit"
     ]
   },
   {
