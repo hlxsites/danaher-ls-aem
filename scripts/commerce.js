@@ -41,7 +41,7 @@ export function getCommerceBase() {
 //   if (localStorage.getItem('authToken')) {
 //     authHeader.append(
 //       'Authorization',
-//       `Bearer ${localStorage.getItem('authToken')}`
+//       `Bearer ${localStorage.getItem('authToken')}`,
 //     );
 //   }
 //   if (tokenInStore) {
@@ -49,6 +49,7 @@ export function getCommerceBase() {
 //   }
 //   return authHeader;
 // }
+
 export function getAuthorization() {
   const authHeader = new Headers();
   const siteID = window.DanaherConfig?.siteID;

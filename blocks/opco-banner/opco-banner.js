@@ -368,7 +368,7 @@ export default async function decorate(block) {
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self'
+          linkHref?.includes('http') ? '_blank' : '_self'
         );
       });
       contentWrapper.append(
