@@ -8,6 +8,7 @@
   {
     "id": "section",
     "components": [
+      "article-info",
       "breadcrumb",
       "banner",
       "text",
