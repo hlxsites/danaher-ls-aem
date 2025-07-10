@@ -133,6 +133,15 @@ async function getAuthToken() {
         body: formData,
       }
     );
+    // const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
+    // const authRequest = await fetch(`https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/token`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //     'Authorization' : 'Basic c3VtaXQubGFrYXdkZUBkaGxzY29udHJhY3RvcnMuY29tOiFJbnRlclNob3AwMCExMjM0NQ=='
+    //    },
+    //   body: formData,
+    // });
     if (authRequest.ok) {
       const hostName = window.location.hostname;
       const env = hostName.includes('local')
@@ -144,10 +153,8 @@ async function getAuthToken() {
         : 'prod';
       const data = await authRequest.json();
       sessionStorage.setItem(`${siteID}_${env}_apiToken`, JSON.stringify(data));
-      sessionStorage.setItem(
-        `${siteID}_${env}_refresh-token`,
-        data.refresh_token
-      );
+      sessionStorage.setItem(`${siteID}_${env}_apiToken`, JSON.stringify(data));
+      //localStorage.setItem(`authToken`, data.access_token);
     }
   }
 }
