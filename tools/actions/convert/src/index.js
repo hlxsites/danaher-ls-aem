@@ -195,7 +195,6 @@ function skipConverter(path) {
   if (!path) return false;
   if (path.includes('.json')) return true;
   if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
-    console.log('Inside the emarketplace');
     const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
     path.includes(convertPath)
   );
