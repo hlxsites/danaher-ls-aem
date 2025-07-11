@@ -27,19 +27,10 @@
             "multi": false
           },
           {
-            "component": "date",
-            "valueType": "date",
-            "name": "creationdate",
-            "label": "Creation Date",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
-          },
-          {
-            "component": "time",
-            "valueType": "time",
-            "name": "time",
-            "label": "Time",
+            "component": "text",
+            "valueType": "string",
+            "name": "description",
+            "label": "Description",
             "value": ""
           }
         ]
