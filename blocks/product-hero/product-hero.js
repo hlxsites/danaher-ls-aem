@@ -220,27 +220,6 @@ export default async function decorate(block) {
     }
 
     if (hasValidPrice) {
-      /* const brandName = (response[0]?.raw?.opco || '').trim();
-       let brandLabel = 'Buy Now on external site';
-
-      switch (brandName.toLowerCase()) {
-        case 'abcam':
-          brandLabel = 'Buy Now on abcam.com';
-          break;
-        case 'idt':
-          brandLabel = 'Buy Now on idtdna.com';
-          break;
-        case 'leica biosystems':
-          brandLabel = 'Buy Now on leicabiosystems.com';
-          break;
-        case 'beckman coulter':
-          brandLabel = 'Buy Now on beckman.com';
-          break;
-        default:
-          brandLabel = 'Buy Now on external site';
-          break;
-      } */
-
       let brandButton = null;
       const rfqLabelRaw = response[0]?.raw?.buynowlabel || '';
       const externallinkRaw = response[0]?.raw?.externallink;
