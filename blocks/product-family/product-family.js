@@ -302,7 +302,8 @@ function iterateChildren(filter, node, searchQuery = '') {
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
-  if (!filter.values && filter.facetId !== 'opco') {
+  // Skip rendering the facet if it has no values for 'opco' or 'workflowname'
+  if ((filter.facetId === 'opco' || filter.facetId === 'workflowname') && (!filter.values || filter.values.length === 0)) {
     return null;
   }
 
@@ -380,37 +381,19 @@ const renderFacet = (filter, isFirst = false) => {
     });
 
     if (filter.facetId === 'workflowname') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = iterateChildren(filter, valueObj);
-          if (item) {
-            originalItems.append(item.cloneNode(true));
-            itemsContainer.append(item);
-          }
-        });
-      } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No process steps available',
-        );
-        originalItems.append(noItems.cloneNode(true));
-        itemsContainer.append(noItems);
-      }
-    } else if (filter.facetId === 'opco') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = facetItem(filter, valueObj);
+      filter.values.forEach((valueObj) => {
+        const item = iterateChildren(filter, valueObj);
+        if (item) {
           originalItems.append(item.cloneNode(true));
           itemsContainer.append(item);
-        });
-      } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No brands available',
-        );
-        originalItems.append(noItems.cloneNode(true));
-        itemsContainer.append(noItems);
-      }
+        }
+      });
+    } else if (filter.facetId === 'opco') {
+      filter.values.forEach((valueObj) => {
+        const item = facetItem(filter, valueObj);
+        originalItems.append(item.cloneNode(true));
+        itemsContainer.append(item);
+      });
     }
 
     contents.append(originalItems, itemsContainer);
@@ -467,29 +450,17 @@ const renderFacet = (filter, isFirst = false) => {
       }
     });
   } else {
-    // Render facet items or a fallback message for facets without search
+    // Render facet items for facets without search
     if (filter.facetId === 'workflowname') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = iterateChildren(filter, valueObj);
-          if (item) contents.append(item);
-        });
-      } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No process steps available'),
-        );
-      }
+      filter.values.forEach((valueObj) => {
+        const item = iterateChildren(filter, valueObj);
+        if (item) contents.append(item);
+      });
     }
     if (filter.facetId === 'opco') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          contents.append(facetItem(filter, valueObj));
-        });
-      } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No brands available'),
-        );
-      }
+      filter.values.forEach((valueObj) => {
+        contents.append(facetItem(filter, valueObj));
+      });
     }
   }
 
@@ -1212,22 +1183,32 @@ export async function decorateProductList(block, blockId) {
         'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
         const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
+        const isAllExpanded = Array.from(facetButtons).every(
+          (btn) => btn.getAttribute('aria-expanded') === 'true',
+        );
+
         facetButtons.forEach((btn) => {
-          btn.setAttribute('aria-expanded', 'true');
+          const shouldExpand = !isAllExpanded;
+          btn.setAttribute('aria-expanded', shouldExpand.toString());
           const parent = btn.closest('div.facet');
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-plus-gray');
-          icon.classList.add('icon-minus-gray');
-          contents.classList.remove('hidden');
-          searchWrapper?.classList.remove('hidden');
+          icon.classList.toggle('icon-plus-gray', !shouldExpand);
+          icon.classList.toggle('icon-minus-gray', shouldExpand);
+          contents.classList.toggle('hidden', !shouldExpand);
+          searchWrapper?.classList.toggle('hidden', !shouldExpand);
           decorateIcons(parent);
         });
-        // Rotate the expandAll chevron icon onclick of expand all
+
+        const toggleButton = expandAll.querySelector('button');
         const chevron = expandAll.querySelector('.icon-chevron-down');
-        if (chevron) {
-          chevron.classList.add('transform', 'rotate-180', 'hover:[&_svg>use]:stroke-danaherpurple-800');
+        if (isAllExpanded) {
+          toggleButton.childNodes[0].textContent = 'Expand All';
+          chevron.classList.remove('transform', 'rotate-180');
+        } else {
+          toggleButton.childNodes[0].textContent = 'Collapse All';
+          chevron.classList.add('transform', 'rotate-180');
         }
       },
     },
