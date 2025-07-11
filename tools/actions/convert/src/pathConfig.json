@@ -1,6 +1,7 @@
 {
     "convertPaths": [
-        "/us/en/products.html",
-        "/us/en/products/2d-3d-cell-culture-systems.html"
+        "/us/en/products/family",
+        "/us/en/products/sku",
+        "/us/en/products/product-coveo"
     ]
 }
