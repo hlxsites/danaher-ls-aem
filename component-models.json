@@ -243,7 +243,7 @@
       {
         "component": "date-time",
         "valueType": "date-time",
-        "name": "creationdate",
+        "name": "publishdate",
         "label": "Creation Date",
         "placeholder": "YYYY-MM-DD",
         "displayFormat": null,
@@ -253,7 +253,7 @@
       {
         "component": "date-time",
         "valueType": "date-time",
-        "name": "updatedate",
+        "name": "readingtime",
         "label": "Update Date",
         "placeholder": "YYYY-MM-DD",
         "displayFormat": null,
