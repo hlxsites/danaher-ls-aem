@@ -194,7 +194,7 @@ function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('.json')) return true;
-  if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+  if( path.includes('us/en/products.html') && !path.includes('/topics-jck1/') ) {
     const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
     path.includes(convertPath)
   );
