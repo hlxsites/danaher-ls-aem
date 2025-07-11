@@ -263,7 +263,7 @@ export default function decorate(block) {
 
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref?.includes('http') ? '_blank' : '_self',
       );
     });
 

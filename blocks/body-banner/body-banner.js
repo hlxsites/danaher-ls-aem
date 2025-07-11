@@ -119,7 +119,7 @@ export default function decorate(block) {
     );
     const linkHref = link?.getAttribute('href');
 
-    link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
+    link.setAttribute('target', linkHref?.includes('http') ? '_blank' : '_self');
   });
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
