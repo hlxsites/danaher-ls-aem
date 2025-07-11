@@ -127,7 +127,7 @@ export default function decorate(block) {
     );
     const linkHref = link?.getAttribute('href');
 
-    link.setAttribute('target', linkHref.includes('http') ? '_blank' : '_self');
+    link.setAttribute('target', linkHref?.includes('http') ? '_blank' : '_self');
   });
   // RIGHT COLUMN
   const rightCol = div({
@@ -206,7 +206,7 @@ export default function decorate(block) {
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self',
+          linkHref?.includes('http') ? '_blank' : '_self',
         );
       });
       rightCol.appendChild(container);
