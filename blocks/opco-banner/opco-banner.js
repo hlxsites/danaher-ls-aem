@@ -91,7 +91,7 @@ export default async function decorate(block) {
           a(
             {
               href: `/us/en/products/brands/${brandLink}`,
-              target: linkTarget.includes('http') ? '_blank' : '_self',
+              target: linkTarget?.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
@@ -167,7 +167,7 @@ export default async function decorate(block) {
 
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
     leftContent.append(leftDescription);
@@ -180,9 +180,9 @@ export default async function decorate(block) {
   if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
     let opcoTarget;
 
-    if (opcoBannerButtonUrl?.includes('http')) {
+    if (opcoBannerButtonUrl.includes('http')) {
       opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';
-    } else if (opcoBannerButtonUrl?.includes('#')) {
+    } else if (opcoBannerButtonUrl.includes('#')) {
       opcoTarget = '_self';
     } else {
       opcoTarget = opcoBannerButtonTarget === 'true' ? '_blank' : '_self';

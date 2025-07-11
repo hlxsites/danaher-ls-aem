@@ -1,6 +1,4 @@
-import {
-  a, p, span, img,
-} from '../../scripts/dom-builder.js';
+import { a, p, span, img } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 /**
@@ -27,14 +25,14 @@ export default function renderGridCard(item) {
         class:
           'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
       },
-      item?.brand?.replace(/<[^>]*>/g, '') || '',
+      item?.brand?.replace(/<[^>]*>/g, '') || ''
     ),
     p(
       {
         class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
-      item?.title?.replace(/<[^>]*>/g, '') || '',
+      item?.title?.replace(/<[^>]*>/g, '') || ''
     ),
     a(
       {
@@ -47,8 +45,8 @@ export default function renderGridCard(item) {
       span({
         class:
           'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
-    ),
+      })
+    )
   );
   decorateIcons(card);
 

@@ -1,6 +1,4 @@
-import {
-  div, p, a, img, span,
-} from '../../scripts/dom-builder.js';
+import { div, p, a, img, span } from '../../scripts/dom-builder.js';
 import { getProductInfo } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -8,7 +6,7 @@ async function createCarousel(
   side,
   carouselTitle,
   carouselProducts,
-  carouselLinkText,
+  carouselLinkText
 ) {
   const bgColor = side === 'left' ? 'bg-gray-100' : 'bg-[#E5E7EB]';
   const carouselWrapper = div({
@@ -26,7 +24,7 @@ async function createCarousel(
     span({
       class:
         'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+    })
   );
 
   const carouselRightArrow = div(
@@ -37,14 +35,14 @@ async function createCarousel(
     span({
       class:
         'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+    })
   );
   const carouselTitleWrapper = div(
     {
       class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center`,
     },
     p({ class: 'text-lg font-semibold text-gray-800' }, carouselTitle),
-    div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
+    div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow)
   );
   decorateIcons(carouselTitleWrapper);
 
@@ -53,7 +51,7 @@ async function createCarousel(
     const card = a(
       {
         href: product?.url,
-        target: product?.url.includes('http') ? '_blank' : '_self',
+        target: product?.url?.includes('http') ? '_blank' : '_self',
         class:
           'flex-shrink-0 hover:shadow-md  cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
       },
@@ -66,19 +64,19 @@ async function createCarousel(
         {
           class: 'text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
         },
-        product?.brand ?? '',
+        product?.brand ?? ''
       ),
       p(
         {
           class:
             'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
         },
-        product?.title || '',
+        product?.title || ''
       ),
       a(
         {
           href: product?.url,
-          target: product?.url.includes('http') ? '_blank' : '_self',
+          target: product?.url?.includes('http') ? '_blank' : '_self',
           class:
             'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },
@@ -86,18 +84,18 @@ async function createCarousel(
 
         carouselLinkText
           ? span({
-            class:
+              class:
                 'icon icon-arrow-right size-6 dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-          })
-          : '',
-      ),
+            })
+          : ''
+      )
     );
     const cardImage = card.querySelector('img');
 
     if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
       cardImage.setAttribute(
         'src',
-        '/content/dam/danaher/products/fallbackImage.jpeg',
+        '/content/dam/danaher/products/fallbackImage.jpeg'
       );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
@@ -129,7 +127,7 @@ async function createCarousel(
         .querySelector('span')
         ?.classList.remove(
           '[&_svg>use]:stroke-gray-300',
-          'pointer-events-none',
+          'pointer-events-none'
         );
       carouselLeftArrow
         .querySelector('span')
@@ -147,7 +145,7 @@ async function createCarousel(
         .querySelector('span')
         ?.classList.remove(
           '[&_svg>use]:stroke-gray-300',
-          'pointer-events-none',
+          'pointer-events-none'
         );
       carouselRightArrow
         .querySelector('span')
@@ -171,7 +169,8 @@ async function createCarousel(
   });
 
   carouselRightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
+    if (currentIndex < totalCards - visibleCards)
+      scrollToIndex(currentIndex + visibleCards);
   });
 
   setTimeout(updateArrows, 100);
@@ -206,7 +205,8 @@ export default async function decorate(block) {
   const leftCarouselProductIds = leftCarouselProductIdsRaw
     ? leftCarouselProductIdsRaw.split(',')
     : [];
-  const leftCarouselLinkText = leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
+  const leftCarouselLinkText =
+    leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, '') || 'Continue';
   const rightCarouselTitle = rightTitle?.textContent
     .trim()
     .replace(/<[^>]*>/g, '');
@@ -218,15 +218,16 @@ export default async function decorate(block) {
     ? rightCarouselProductIdsRaw.split(',')
     : [];
 
-  const rightCarouselLinkText = rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '')
-    || 'View Details';
+  const rightCarouselLinkText =
+    rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, '') ||
+    'View Details';
 
   let leftCarouselProducts = '';
   let leftCarouselScrollWrapper = '';
   if (leftCarouselProductIds?.length > 0) {
     leftCarouselProducts = (
       await Promise.allSettled(
-        leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
+        leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
       )
     )
       .filter((product) => product.status !== 'error')
@@ -242,8 +243,8 @@ export default async function decorate(block) {
         'left',
         leftCarouselTitle ?? '',
         leftCarouselProducts ?? '',
-        leftCarouselLinkText ?? '',
-      ),
+        leftCarouselLinkText ?? ''
+      )
     );
   }
 
@@ -252,7 +253,7 @@ export default async function decorate(block) {
   if (rightCarouselProductIds?.length > 0) {
     rightCarouselProducts = (
       await Promise.allSettled(
-        rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
+        rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
       )
     )
       .filter((product) => product.status !== 'error')
@@ -268,8 +269,8 @@ export default async function decorate(block) {
         'right',
         rightCarouselTitle ?? '',
         rightCarouselProducts ?? '',
-        rightCarouselLinkText ?? '',
-      ),
+        rightCarouselLinkText ?? ''
+      )
     );
   }
 
@@ -281,11 +282,11 @@ export default async function decorate(block) {
   }
   dualCarouselWrapper.append(
     leftCarouselScrollWrapper,
-    rightCarouselScrollWrapper,
+    rightCarouselScrollWrapper
   );
   decorateIcons(dualCarouselWrapper);
   const arrowLeftIcon = document.querySelector(
-    '#icons-sprite-Arrow-circle-left path',
+    '#icons-sprite-Arrow-circle-left path'
   );
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute('fill', 'white');

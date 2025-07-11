@@ -33,7 +33,7 @@ export default function decorate(block) {
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -64,7 +64,7 @@ export default function decorate(block) {
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self'
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
   }
