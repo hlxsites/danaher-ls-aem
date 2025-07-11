@@ -21,12 +21,6 @@
         "id": "article-info",
         "fields": [
           {
-            "component": "reference",
-            "name": "image",
-            "label": "Image",
-            "multi": false
-          },
-          {
             "component": "text",
             "valueType": "string",
             "name": "description",
@@ -38,7 +32,7 @@
     ],
     "filters": [
       {
-        "id": "",
+        "id": "article-info",
         "components": [   ] 
       }
     ]
