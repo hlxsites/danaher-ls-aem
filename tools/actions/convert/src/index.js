@@ -194,18 +194,20 @@ function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('.json')) return true;
-  if( path.includes('/us/en/products/2d-3d-cell-culture-systems.html') && !path.includes('/topics-jck1/') ) {
-    const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
-    path.includes(convertPath)
-  );
-    if (!pathsToConvert) {
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
-  }
+  
+  //TODO-We need use this logic for EDS pages
+  // if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+  //   const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
+  //   path.includes(convertPath)
+  // );
+  //   if (!pathsToConvert) {
+  //     return true;
+  //   }
+  //   else 
+  //   {
+  //     return false;
+  //   }
+  // }
 
   if (path.includes('/us/en/blog-eds/')) return true;
   if (path.includes('/us/en/news-eds/')) return true;
