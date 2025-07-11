@@ -30,12 +30,12 @@ export default function decorate(block) {
         'underline',
         'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
-        'hover:text-white',
+        'hover:text-white'
       );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -61,12 +61,12 @@ export default function decorate(block) {
         'underline',
         'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
-        'hover:text-white',
+        'hover:text-white'
       );
       const linkHref = link?.getAttribute('href');
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
   }
@@ -80,7 +80,7 @@ export default function decorate(block) {
       class:
         'flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
-    simpleTextWrapper,
+    simpleTextWrapper
   );
   block.textContent = '';
   block.append(container);

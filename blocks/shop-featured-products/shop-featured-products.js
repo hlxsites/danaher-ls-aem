@@ -1,6 +1,4 @@
-import {
-  div, p, img, span, a, h2,
-} from '../../scripts/dom-builder.js';
+import { div, p, img, span, a, h2 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
@@ -57,7 +55,8 @@ export default function decorate(block) {
   });
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
-  const sectionHeading = bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
+  const sectionHeading =
+    bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
 
   const carouselHead = div({
     class: 'w-full flex sm:flex-row justify-between  gap-3 pb-6',
@@ -72,8 +71,8 @@ export default function decorate(block) {
         class:
           'text-black text-2xl font-medium leading-[2.5rem] whitespace-nowrap',
       },
-      sectionHeading ?? '',
-    ),
+      sectionHeading ?? ''
+    )
   );
 
   const arrows = div({
@@ -88,7 +87,7 @@ export default function decorate(block) {
     span({
       class:
         'icon icon-Arrow-circle-left   cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+    })
   );
   const nextDiv = div(
     {
@@ -98,7 +97,7 @@ export default function decorate(block) {
     span({
       class:
         'icon icon-Arrow-circle-right cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+    })
   );
   // === RIGHT CAROUSEL SECTION ===
   const items = opcoBannerItems;
@@ -199,8 +198,8 @@ export default function decorate(block) {
           src: productImage?.getAttribute('src') || fallbackImage,
           alt: productImage?.getAttribute('alt') || productTitle,
           class: 'w-full h-full object-contain max-h-[450px]',
-        }),
-      ),
+        })
+      )
     );
 
     // === Right Text Section ===
@@ -218,21 +217,21 @@ export default function decorate(block) {
             class:
               'text-white text-base font-normal m-0 px-0 py-0 flex justify-left items-center gap-2',
           },
-          brandTitle,
+          brandTitle
         ),
 
         h2(
           {
             class: 'text-white text-2xl m-0 leading-loose font-normal ',
           },
-          productTitle,
+          productTitle
         ),
 
         p(
           {
             class: 'text-white text-base m-0 font-semibold leading-snug ',
           },
-          productSubHeading,
+          productSubHeading
         ),
 
         div({
@@ -246,9 +245,9 @@ export default function decorate(block) {
             class:
               'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },
-          productButtonLabel,
-        ),
-      ),
+          productButtonLabel
+        )
+      )
     );
     if (productDescription) {
       rightSection
@@ -263,7 +262,7 @@ export default function decorate(block) {
 
       link.setAttribute(
         'target',
-        linkHref.includes('http') ? '_blank' : '_self',
+        linkHref?.includes('http') ? '_blank' : '_self'
       );
     });
 
@@ -276,7 +275,7 @@ export default function decorate(block) {
         style: index === 0 ? '' : 'display: none;',
       },
       leftSection,
-      rightSection,
+      rightSection
     );
 
     slides.push(slide);
@@ -287,7 +286,7 @@ export default function decorate(block) {
       class:
         'bg-gray-100 flex flex-col md:flex-row items-center  gap-6 relative',
     },
-    ...slides,
+    ...slides
   );
   const container = div(
     {
@@ -295,7 +294,7 @@ export default function decorate(block) {
         'w-full hidden gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
     carouselHead,
-    carouselOuter,
+    carouselOuter
   );
   if (items?.length === 0) {
     // container?.classList.add("hidden");
