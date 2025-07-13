@@ -238,7 +238,7 @@
     ]
   },
   {
-    "id": "articleinfo",
+    "id": "article-info",
     "fields": [
       {
         "component": "date",
