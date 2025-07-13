@@ -15,9 +15,6 @@
         },
         {
           "...": "./_button.json#/definitions"
-        },
-        {
-          "...": "./_breadcrumb.json#/definitions"
         }
       ]
     },
