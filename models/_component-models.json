@@ -15,6 +15,9 @@
     "...": "./_button.json#/models"
   },
   {
+    "...": "./_breadcrumb.json#/models"
+  },
+  {
     "...": "./_section.json#/models"
   },
   {
