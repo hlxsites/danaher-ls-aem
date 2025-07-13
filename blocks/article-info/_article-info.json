@@ -22,7 +22,7 @@
         "fields": [
            {
             "component": "date-time",
-            "valueType": "string",
+            "valueType": "date",
             "name": "publishdate",
             "label": "Publish Date",
             "required": true,
