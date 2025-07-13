@@ -39,5 +39,10 @@
         ]
       }
     ],
-    "filters": [    ]
+    "filters": [
+      {
+        "id": "article-info",
+        "components": [   ] 
+      }
+    ]
   }
