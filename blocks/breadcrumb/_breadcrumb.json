@@ -25,19 +25,7 @@
           "name": "rootLabel",
           "label": "Root Label",
           "valueType": "string"
-          },
-          {
-          "component": "boolean",
-          "name": "showHidden",
-          "label": "Show hidden pages",
-          "valueType": "boolean"
-          },
-          {
-          "component": "boolean",
-          "name": "hideCurrent",
-          "label": "Hide current page",
-          "valueType": "boolean"
-          }   
+          } 
         ]
       }
     ],
