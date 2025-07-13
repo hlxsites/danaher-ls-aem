@@ -241,14 +241,14 @@
     "id": "article-info",
     "fields": [
       {
-        "component": "date",
-        "name": "publishDate",
+        "component": "date-time",
+        "name": "PublishDate",
         "label": "Publish Date",
-        "valueType": "date"
+        "valueType": "string"
       },
       {
         "component": "number",
-        "name": "readingTime",
+        "name": "ReadingTime",
         "label": "Reading Time (minutes)",
         "valueType": "number"
       }
