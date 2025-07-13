@@ -21,7 +21,7 @@
         "id": "article-info",
         "fields": [
           {
-          "component": "date-time",
+          "component": "date",
           "name": "publishDate",
           "label": "Publish Date",
           "valueType": "string"
