@@ -238,21 +238,21 @@
     ]
   },
   {
-    "id": "article-info",
+    "id": "articleinfo",
     "fields": [
       {
         "component": "date",
         "valueType": "string",
         "name": "publishDate",
         "label": "Publish Date",
-        "value": "publishDate"
+        "value": ""
       },
       {
         "component": "number",
         "valueType": "number",
         "name": "readingTime",
         "label": "Reading Time",
-        "value": "readingTime"
+        "value": ""
       }
     ]
   },
