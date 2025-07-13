@@ -13,5 +13,28 @@
       }
     }
   ],
-  "models": []
+  "models": [
+    {
+    "id": "text",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "boolean",
+        "name": "LinkTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
+        "component": "boolean",
+        "name": "LinkTarget",
+        "value": true,
+        "label": "Open link in same tab?"
+      }
+    ]
+    }
+  ]
 }
