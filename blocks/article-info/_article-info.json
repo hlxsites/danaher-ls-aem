@@ -21,14 +21,14 @@
         "id": "article-info",
         "fields": [
           {
-          "component": "date-time",
-          "name": "publishdate",
+          "component": "date",
+          "name": "publishDate",
           "label": "Publish Date",
-          "valueType": "string"
+          "valueType": "date"
           },
           {
           "component": "number",
-          "name": "readingtime",
+          "name": "readingTime",
           "label": "Reading Time (minutes)",
           "valueType": "number"
           }
