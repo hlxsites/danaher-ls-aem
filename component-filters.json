@@ -83,6 +83,12 @@
     "components": []
   },
   {
+    "id": "card-list",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "cards-item"
