@@ -363,7 +363,7 @@
       },
       {
         "component": "boolean",
-        "name": "showHidden",
+        "name": "show",
         "label": "Show hidden pages",
         "valueType": "boolean"
       },
