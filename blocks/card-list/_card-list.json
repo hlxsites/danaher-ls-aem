@@ -22,9 +22,9 @@
         "fields": [{
             "component": "text",
             "valueType": "string",
-            "name": "title",
+            "name": "tagName",
             "value": "",
-            "label": "Title"
+            "label": "Tag Name"
           }]
       }
         ],
