@@ -79,6 +79,10 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "components": []
+  },
+  {
     "id": "cards",
     "components": [
       "cards-item"
