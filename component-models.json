@@ -241,16 +241,11 @@
     "id": "article-info",
     "fields": [
       {
-        "component": "date-time",
-        "name": "PublishDate",
-        "label": "Publish Date",
-        "valueType": "string"
-      },
-      {
-        "component": "number",
-        "name": "ReadingTime",
-        "label": "Reading Time (minutes)",
-        "valueType": "number"
+        "component": "text",
+        "valueType": "string",
+        "name": "Text",
+        "label": "Text",
+        "value": ""
       }
     ]
   },
