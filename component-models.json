@@ -243,14 +243,14 @@
       {
         "component": "date-time",
         "valueType": "date",
-        "name": "publishDate",
+        "name": "publishdate",
         "label": "Publish Date",
         "value": ""
       },
       {
         "component": "number",
         "valueType": "number",
-        "name": "readingTime",
+        "name": "timetoread",
         "label": "Reading Time",
         "value": ""
       }
