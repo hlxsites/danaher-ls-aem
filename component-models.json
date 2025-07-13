@@ -243,15 +243,17 @@
       {
         "component": "date",
         "valueType": "string",
-        "name": "publishDate",
+        "name": "publishdate",
         "label": "Publish Date",
+        "required": true,
         "value": ""
       },
       {
         "component": "number",
         "valueType": "number",
-        "name": "readingTime",
+        "name": "readingtime",
         "label": "Reading Time",
+        "required": false,
         "value": ""
       }
     ]
