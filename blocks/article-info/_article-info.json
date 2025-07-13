@@ -21,24 +21,16 @@
         "id": "article-info",
         "fields": [
           {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "publishdate",
-            "label": "Creation Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
+          "component": "date-picker",
+          "name": "publishDate",
+          "label": "Publish Date",
+          "valueType": "string"
           },
           {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "readingtime",
-            "label": "Update Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
+          "component": "number-input",
+          "name": "readingTime",
+          "label": "Reading Time (minutes)",
+          "valueType": "number"
           }
         ]
       }
