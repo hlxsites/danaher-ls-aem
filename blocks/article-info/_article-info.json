@@ -21,11 +21,18 @@
         "id": "article-info",
         "fields": [
            {
-            "component": "text",
+            "component": "date",
             "valueType": "string",
-            "name": "Text",
-            "label": "Text",
-            "value": ""
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": "publishDate"
+           },
+           {
+            "component": "number",
+            "valueType": "number",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": "readingTime"
            }
         ]
       }
