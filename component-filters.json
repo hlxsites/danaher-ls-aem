@@ -63,10 +63,6 @@
     ]
   },
   {
-    "id": "article-info",
-    "components": []
-  },
-  {
     "id": "articles-list",
     "components": [
       ""
