@@ -22,13 +22,13 @@
         "fields": [
           {
           "component": "date",
-          "name": "publishDate",
+          "name": "publishdate",
           "label": "Publish Date",
           "valueType": "string"
           },
           {
           "component": "number",
-          "name": "readingTime",
+          "name": "readingtime",
           "label": "Reading Time (minutes)",
           "valueType": "number"
           }
