@@ -23,15 +23,15 @@
            {
             "component": "date-time",
             "valueType": "date",
-            "name": "publishdate",
+            "name": "publishDate",
             "label": "Publish Date",
             "required": true,
             "value": ""
            },
            {
             "component": "number",
-            "valueType": "number",
-            "name": "readingtime",
+            "valueType": "string",
+            "name": "readingTime",
             "label": "Reading Time",
             "required": false,
             "value": ""
