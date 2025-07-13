@@ -241,13 +241,13 @@
     "id": "article-info",
     "fields": [
       {
-        "component": "date-picker",
+        "component": "date-time",
         "name": "publishDate",
         "label": "Publish Date",
         "valueType": "string"
       },
       {
-        "component": "number-input",
+        "component": "number",
         "name": "readingTime",
         "label": "Reading Time (minutes)",
         "valueType": "number"
