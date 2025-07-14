@@ -48,8 +48,8 @@ const shippingMethodsModule = async () => {
       h2({}, 'Confirm your shipping method(s)'),
       p(
         {},
-        'Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.'
-      )
+        'Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.',
+      ),
     );
     // const moduleOpcos = div(
     //   {
@@ -86,23 +86,23 @@ const shippingMethodsModule = async () => {
               class:
                 'w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
             },
-            'Ship for me'
+            'Ship for me',
           ),
           button(
             {
               class:
                 'm-0 text-xl hover:bg-danaherpurple-500 font-extralight  border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             },
-            'Use my carrier'
-          )
+            'Use my carrier',
+          ),
         ),
         p(
           {
             class: 'w-full',
           },
-          'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.'
-        )
-      )
+          'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
+        ),
+      ),
     );
     /*
   ::::::::::::::
@@ -117,8 +117,8 @@ const shippingMethodsModule = async () => {
   ::::::::::::::
   */
     if (
-      getCurrentBasketDetails?.status === 'success' &&
-      getCurrentBasketDetails?.data?.data?.attributes
+      getCurrentBasketDetails?.status === 'success'
+      && getCurrentBasketDetails?.data?.data?.attributes
     ) {
       const getNotes = getCurrentBasketDetails.data.data.attributes[0];
 
@@ -140,7 +140,7 @@ const shippingMethodsModule = async () => {
           {
             class: 'text-extralight',
           },
-          'Notes'
+          'Notes',
         ),
         textarea(
           {
@@ -157,9 +157,9 @@ const shippingMethodsModule = async () => {
             placeholder: 'Add a note',
             value: `${basketShippingNotes}`,
           },
-          `${basketShippingNotes}`
-        )
-      )
+          `${basketShippingNotes}`,
+        ),
+      ),
     );
     if (moduleContent) {
       if (moduleHeader) moduleContent.append(moduleHeader);
@@ -182,8 +182,7 @@ const shippingMethodsModule = async () => {
         moduleContent.append(showCartItems);
       }
       // if (moduleOpcos) moduleContent.append(moduleOpcos);
-      if (moduleToggleButtonsWrapper)
-        moduleContent.append(moduleToggleButtonsWrapper);
+      if (moduleToggleButtonsWrapper) moduleContent.append(moduleToggleButtonsWrapper);
 
       /*
        ::::::::::::::
@@ -193,7 +192,7 @@ const shippingMethodsModule = async () => {
       const shippingMethods = await getShippingMethods();
       if (shippingMethods?.data.length > 0) {
         const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
-          '#modulesMethodsItemsWrapper'
+          '#modulesMethodsItemsWrapper',
         );
 
         if (modulesMethodsWrapper) {
@@ -202,12 +201,10 @@ const shippingMethodsModule = async () => {
 
           if (getCurrentBasketDetails?.data?.data?.commonShippingMethod) {
             highlightDefaultShippingMethod = 'border-danaherpurple-500';
-            checkDefaultShippingMethod =
-              getCurrentBasketDetails?.data?.data?.commonShippingMethod;
+            checkDefaultShippingMethod = getCurrentBasketDetails?.data?.data?.commonShippingMethod;
           }
           if (getCurrentBasketDetails?.status === 'success') {
-            const defaultShippingMethodIcon =
-              '<svg class="absolute right-2 bottom-2" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1543 16L13.1543 18L17.1543 14M23.1543 16C23.1543 20.9706 19.1249 25 14.1543 25C9.18373 25 5.1543 20.9706 5.1543 16C5.1543 11.0294 9.18373 7 14.1543 7C19.1249 7 23.1543 11.0294 23.1543 16Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            const defaultShippingMethodIcon = '<svg class="absolute right-2 bottom-2" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1543 16L13.1543 18L17.1543 14M23.1543 16C23.1543 20.9706 19.1249 25 14.1543 25C9.18373 25 5.1543 20.9706 5.1543 16C5.1543 11.0294 9.18373 7 14.1543 7C19.1249 7 23.1543 11.0294 23.1543 16Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             /*
              ::::::::::::::::::
              generates shipping methods cards
@@ -227,13 +224,13 @@ const shippingMethodsModule = async () => {
                   {
                     class: 'font-bold text-sm',
                   },
-                  method.name || ''
+                  method.name || '',
                 ),
                 p(
                   {
                     class: 'text-extralight text-sm',
                   },
-                  method.description || ''
+                  method.description || '',
                 ),
                 p(
                   {
@@ -243,15 +240,15 @@ const shippingMethodsModule = async () => {
                     method.shippingCosts[
                       checkoutPriceType === 'net' ? 'net' : 'gross'
                     ].value
-                  }` || ''
-                )
+                  }` || '',
+                ),
               );
               if (methodData) {
                 if (defaultShippingMethodIcon) {
                   if (method.id === checkDefaultShippingMethod) {
                     methodData.insertAdjacentHTML(
                       'beforeend',
-                      defaultShippingMethodIcon
+                      defaultShippingMethodIcon,
                     );
                   }
                 }
@@ -273,7 +270,7 @@ const shippingMethodsModule = async () => {
                   if (selectedMethod?.id) {
                     showPreLoader();
                     const setShippingMethodResponse = await setShippingMethod(
-                      selectedMethod?.id
+                      selectedMethod?.id,
                     );
                     if (setShippingMethodResponse) {
                       let highlightShippingMethod = false;
@@ -284,19 +281,18 @@ const shippingMethodsModule = async () => {
                            :::::::::::::::::::::::::::::::
                            */
                         await updateBasketDetails();
-                        const getAllShippingMethods =
-                          modulesMethodsWrapper.querySelectorAll(
-                            '.shippingMethod'
-                          );
+                        const getAllShippingMethods = modulesMethodsWrapper.querySelectorAll(
+                          '.shippingMethod',
+                        );
                         if (getAllShippingMethods) {
                           getAllShippingMethods.forEach((method) => {
                             if (
                               method.classList.contains(
-                                'border-danaherpurple-500'
+                                'border-danaherpurple-500',
                               )
                             ) {
                               method.classList.remove(
-                                'border-danaherpurple-500'
+                                'border-danaherpurple-500',
                               );
                             }
                             if (method.querySelector('svg')) {
@@ -309,20 +305,19 @@ const shippingMethodsModule = async () => {
                             highlight selected shipping method
                             ::::::::::::::
                             */
-                        highlightShippingMethod =
-                          modulesMethodsWrapper.querySelector(
-                            `#${selectedMethod?.id}`
-                          );
+                        highlightShippingMethod = modulesMethodsWrapper.querySelector(
+                          `#${selectedMethod?.id}`,
+                        );
 
                         if (highlightShippingMethod) {
                           await updateCheckoutSummary();
                           highlightShippingMethod.classList.add(
-                            'border-danaherpurple-500'
+                            'border-danaherpurple-500',
                           );
                           if (defaultShippingMethodIcon) {
                             highlightShippingMethod.insertAdjacentHTML(
                               'beforeend',
-                              defaultShippingMethodIcon
+                              defaultShippingMethodIcon,
                             );
                           }
                           removePreLoader();
@@ -344,7 +339,7 @@ const shippingMethodsModule = async () => {
     return moduleContent;
   } catch (error) {
     return div(
-      h5({ class: 'text-red' }, 'Error Loading Shipping Address Module.')
+      h5({ class: 'text-red' }, 'Error Loading Shipping Address Module.'),
     );
   }
 };

@@ -95,45 +95,44 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
         {
           class: 'justify-start text-black text-base font-bold truncate',
         },
-        opcoBe[0]
-      )
+        opcoBe[0],
+      ),
     ),
     div(
       {
         class: 'w-64 justify-start text-black text-base font-bold',
         id: `product-Quantity-${opcoBe[0]}`,
       },
-      `${itemToBeDisplayed[opcoBe].length} Items`
+      `${itemToBeDisplayed[opcoBe].length} Items`,
     ),
     div(
       {
         class:
           'hidden sm:block w-24 justify-start text-black text-base font-bold',
       },
-      'QTY'
+      'QTY',
     ),
     div(
       {
         class:
           'hidden sm:block w-48 justify-start text-black text-base font-bold',
       },
-      'Unit Price'
+      'Unit Price',
     ),
     div(
       {
         class:
           'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
       },
-      'Total'
-    )
+      'Total',
+    ),
   );
   return logoDivInner;
 };
 
-export const divider = (val) =>
-  hr({
-    class: `w-full border-black-${val}`,
-  });
+export const divider = (val) => hr({
+  class: `w-full border-black-${val}`,
+});
 
 /*
 ::::::::::::::
@@ -142,7 +141,7 @@ default shipping/billing address if available when user lands on checkout page
 */
 export function defaultAddress(address, type) {
   const getDefaultAddressWrapper = document.querySelector(
-    `#default${capitalizeFirstLetter(type)}Address`
+    `#default${capitalizeFirstLetter(type)}Address`,
   );
   if (getDefaultAddressWrapper) {
     getDefaultAddressWrapper.remove();
@@ -163,19 +162,19 @@ export function defaultAddress(address, type) {
             {
               class: `font-bold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
             },
-            address?.companyName2 ?? ''
+            address?.companyName2 ?? '',
           ),
           p(
             {
               class: 'text-black text-base font-extralight',
             },
-            address?.addressLine1 ?? ''
+            address?.addressLine1 ?? '',
           ),
           p(
             {
               class: 'text-black text-base font-extralight',
             },
-            address?.city ?? ''
+            address?.city ?? '',
           ),
           p(
             {
@@ -183,8 +182,8 @@ export function defaultAddress(address, type) {
             },
             `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
               address?.postalCode ?? ''
-            }`
-          )
+            }`,
+          ),
         ),
         button(
           {
@@ -194,9 +193,9 @@ export function defaultAddress(address, type) {
               'flex justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
-          'Edit Address'
-        )
-      )
+          'Edit Address',
+        ),
+      ),
     );
 
     return defaultAddressContainer;
@@ -230,13 +229,13 @@ export async function setShippingNotes(shippingNotesPayload) {
     const response = await postApiData(
       url,
       JSON.stringify(shippingNotesPayload),
-      defaultHeaders
+      defaultHeaders,
     );
 
     if (response?.status === 'success') {
       sessionStorage.setItem(
         'useShippingNotes',
-        JSON.stringify({ status: 'success', data: response.data.data.value })
+        JSON.stringify({ status: 'success', data: response.data.data.value }),
       );
       return { status: 'success', data: response.data.data.value };
     }
@@ -269,7 +268,7 @@ export async function updateShippingNotes(shippingNotesPayload) {
     const response = await patchApiData(
       url,
       JSON.stringify(shippingNotesPayload),
-      defaultHeaders
+      defaultHeaders,
     );
 
     if (response?.status === 'success') {
@@ -278,7 +277,7 @@ export async function updateShippingNotes(shippingNotesPayload) {
         JSON.stringify({
           status: 'success',
           data: response?.data?.data?.value ?? '',
-        })
+        }),
       );
       return { status: 'success', data: response?.data?.data?.value ?? '' };
     }
@@ -332,7 +331,7 @@ export async function getAddressDetails(addressURI) {
     defaultHeaders.append('Content-Type', 'Application/json');
     defaultHeaders.append(
       'authentication-token',
-      authenticationToken.access_token
+      authenticationToken.access_token,
     );
     const response = await getApiData(url, defaultHeaders);
     return response.status === 'success' ? response.data : [];
@@ -357,15 +356,14 @@ export async function setUseAddressObject(response) {
     if (response?.data?.invoiceToAddress) {
       const invoiceToAddressURI = response.data.invoiceToAddress.split(':')[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${invoiceToAddressURI}`
+        `customers/-/addresses/${invoiceToAddressURI}`,
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
     if (response?.data?.commonShipToAddress) {
-      const commonShipToAddressURI =
-        response.data.commonShipToAddress.split(':')[4];
+      const commonShipToAddressURI = response.data.commonShipToAddress.split(':')[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${commonShipToAddressURI}`
+        `customers/-/addresses/${commonShipToAddressURI}`,
       );
       Object.assign(useAddressObject, {
         commonShipToAddress: addressDetails,
@@ -405,12 +403,12 @@ export const setUseAddress = async (id, type) => {
     defaultHeaders.append('Content-Type', 'Application/json');
     defaultHeaders.append(
       'authentication-token',
-      authenticationToken.access_token
+      authenticationToken.access_token,
     );
     const response = await patchApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders
+      defaultHeaders,
     );
 
     if (response?.status === 'success') {
@@ -461,8 +459,7 @@ export async function getBasketDetails() {
     if (response.status === 'success') {
       sessionStorage.setItem('basketData', JSON.stringify(response));
       if (response.data.invoiceToAddress) {
-        const setUseBillingAddress =
-          response.data.invoiceToAddress.split(':')[4];
+        const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
         await setUseAddress(setUseBillingAddress, 'billing');
       }
     }
@@ -486,7 +483,7 @@ export const getShippingMethods = async () => {
     const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
       const shippingMethods = JSON.parse(
-        sessionStorage.getItem('shippingMethods')
+        sessionStorage.getItem('shippingMethods'),
       );
       if (shippingMethods?.status === 'success') return await shippingMethods;
       sessionStorage.removeItem('shippingMethods');
@@ -495,18 +492,18 @@ export const getShippingMethods = async () => {
       defaultHeaders.append('Content-Type', 'Application/json');
       defaultHeaders.append(
         'authentication-token',
-        authenticationToken.access_token
+        authenticationToken.access_token,
       );
       defaultHeaders.append(
         'Accept',
-        'application/vnd.intershop.basket.v1+json'
+        'application/vnd.intershop.basket.v1+json',
       );
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
         sessionStorage.setItem(
           'shippingMethods',
-          JSON.stringify({ status: 'success', data: response.data.data })
+          JSON.stringify({ status: 'success', data: response.data.data }),
         );
         return { status: 'success', data: response.data.data };
       }
@@ -543,7 +540,7 @@ export const setShippingMethod = async (methodId) => {
     const response = await patchApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders
+      defaultHeaders,
     );
 
     if (response?.status === 'success') {
@@ -552,7 +549,7 @@ export const setShippingMethod = async (methodId) => {
         JSON.stringify({
           status: 'success',
           data: response?.data?.data?.commonShippingMethod ?? '',
-        })
+        }),
       );
       return {
         status: 'success',
@@ -582,7 +579,7 @@ export async function updateAddresses() {
   defaultHeaders.append('Content-Type', 'Application/json');
   defaultHeaders.append(
     'authentication-token',
-    authenticationToken.access_token
+    authenticationToken.access_token,
   );
   try {
     const response = await getApiData(url, defaultHeaders);
@@ -591,12 +588,12 @@ export async function updateAddresses() {
       response.data.elements.map((address) => {
         const addressURI = address.uri.split('addresses')[1];
         return getAddressDetails(`customers/-/addresses${addressURI}`);
-      })
+      }),
     );
     if (addressDetailsList) {
       sessionStorage.setItem(
         'addressList',
-        JSON.stringify({ status: 'success', data: addressDetailsList })
+        JSON.stringify({ status: 'success', data: addressDetailsList }),
       );
       return { status: 'success', data: addressDetailsList };
     }
@@ -624,9 +621,7 @@ export async function addressList(type) {
   const getAddressesData = await getAddresses();
 
   if (getAddressesData.status === 'success') {
-    return getAddressesData.data.filter((adr) =>
-      type === 'billing' ? adr.usage[0] === true : adr.usage[1] === true
-    );
+    return getAddressesData.data.filter((adr) => (type === 'billing' ? adr.usage[0] === true : adr.usage[1] === true));
   }
   return [];
 }
@@ -643,7 +638,7 @@ export const buildCountryStateSelectBox = (
   required,
   dtName,
   itemsList,
-  selected = ''
+  selected = '',
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
 
@@ -651,15 +646,14 @@ export const buildCountryStateSelectBox = (
   if (itemsList.length > 0) {
     selectOptions = itemsList.map((item) => {
       const value = item.id;
-      const options =
-        selected === value
-          ? option({ value, selected }, item.name)
-          : option({ value }, item.name);
+      const options = selected === value
+        ? option({ value, selected }, item.name)
+        : option({ value }, item.name);
       return options;
     });
   }
   selectOptions.unshift(
-    option({ value: '', selected: true }, 'Select an option')
+    option({ value: '', selected: true }, 'Select an option'),
   );
 
   return div(
@@ -670,7 +664,7 @@ export const buildCountryStateSelectBox = (
         class: 'font-normal text-sm leading-4',
       },
       field,
-      dataRequired
+      dataRequired,
     ),
     select(
       {
@@ -681,13 +675,13 @@ export const buildCountryStateSelectBox = (
         class:
           'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
       },
-      ...selectOptions
+      ...selectOptions,
     ),
     span({
       id: 'msg',
       'data-name': dtName,
       class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    })
+    }),
   );
 };
 
@@ -706,13 +700,13 @@ export async function updateAddressToDefault(data) {
   defaultHeaders.append('Content-Type', 'Application/json');
   defaultHeaders.append(
     'authentication-token',
-    authenticationToken.access_token
+    authenticationToken.access_token,
   );
   try {
     const response = await postApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders
+      defaultHeaders,
     );
     return response;
   } catch (error) {
@@ -736,7 +730,7 @@ export async function getUseAddresses() {
     if (useAddressObjectData?.status === 'success') {
       sessionStorage.setItem(
         'useAddress',
-        JSON.stringify(useAddressObjectData)
+        JSON.stringify(useAddressObjectData),
       );
       return { status: 'success', data: useAddressObjectData };
     }
@@ -755,25 +749,23 @@ export const getPromotionDetails = async (promotionId) => {
   try {
     if (!promotionId) return { status: 'error', data: 'Invalid promotion ID' };
 
-    const autoDiscount =
-      JSON.parse(sessionStorage.getItem('discountDetails')) || {};
+    const autoDiscount = JSON.parse(sessionStorage.getItem('discountDetails')) || {};
     if (autoDiscount?.status === 'success') return autoDiscount;
     const getBasket = await getBasketDetails();
     if (getBasket?.status === 'success') {
-      const getBasketDiscount =
-        getBasket?.data?.data?.discounts?.valueBasedDiscounts;
+      const getBasketDiscount = getBasket?.data?.data?.discounts?.valueBasedDiscounts;
       if (getBasketDiscount) {
         const defaultHeaders = new Headers();
         defaultHeaders.append('Content-Type', 'Application/json');
         const getDiscountDetails = await getApiData(
           `${baseURL}promotions/${promotionId}`,
-          defaultHeaders
+          defaultHeaders,
         );
 
         if (getDiscountDetails?.status === 'success') {
           sessionStorage.setItem(
             'discountDetails',
-            JSON.stringify(getDiscountDetails)
+            JSON.stringify(getDiscountDetails),
           );
           return getDiscountDetails;
         }
@@ -824,16 +816,16 @@ export const taxExemptModal = () => {
             {
               class: 'text-gray-900 text-3xl font-bold',
             },
-            'Tax Exempt'
-          )
-        )
+            'Tax Exempt',
+          ),
+        ),
       ),
       p(
         {
           class: 'text-extralight text-center',
         },
-        'Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX'
-      )
+        'Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX',
+      ),
     ),
     /*
     ::::::::::::::
@@ -851,7 +843,7 @@ export const taxExemptModal = () => {
         },
         span({
           class: 'h-28 w-28',
-        })
+        }),
       ),
       input({
         type: 'file',
@@ -863,15 +855,15 @@ export const taxExemptModal = () => {
         {
           class: 'text-center text-2xl font-500',
         },
-        'Upload File'
+        'Upload File',
       ),
       div(
         {
           class: 'text-red-500 text-md font-500 hidden',
           id: 'taxExemptModalErrorContainer',
         },
-        'Error Uploading File. Only JPG, .PNG, .PDF, .DOC and .DOCX are allowed.'
-      )
+        'Error Uploading File. Only JPG, .PNG, .PDF, .DOC and .DOCX are allowed.',
+      ),
     ),
 
     /*
@@ -891,16 +883,16 @@ export const taxExemptModal = () => {
           {
             class: ' text-black text-md font-extrabold',
           },
-          'Tax Exempt tip.'
-        )
+          'Tax Exempt tip.',
+        ),
       ),
       p(
         {
           class: 'text-extralight',
         },
-        'Please upload a clearly scanned copy of the tax exempt certificate for a quick review process.'
-      )
-    )
+        'Please upload a clearly scanned copy of the tax exempt certificate for a quick review process.',
+      ),
+    ),
   );
   /*
     ::::::::::::::::::::::
@@ -908,8 +900,7 @@ export const taxExemptModal = () => {
      :::::::::::::::::::::::::::::::
     */
   const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file span');
-  cloudFileIcon.innerHTML =
-    '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  cloudFileIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   /*
     ::::::::::::::::::::::
@@ -917,16 +908,14 @@ export const taxExemptModal = () => {
      :::::::::::::::::::::::::::::::
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
-    '.tax-exempt-upload span'
+    '.tax-exempt-upload span',
   );
-  cloudUloadIcon.innerHTML =
-    '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  cloudUloadIcon.innerHTML = '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
 
-  const taxExemptUploadButton =
-    taxExemptWrapper.querySelector('#taxExemptUpload');
+  const taxExemptUploadButton = taxExemptWrapper.querySelector('#taxExemptUpload');
 
   const taxExemptFileInput = taxExemptWrapper.querySelector(
-    '#taxExemptFileInput'
+    '#taxExemptFileInput',
   );
   if (taxExemptUploadButton && taxExemptFileInput) {
     taxExemptUploadButton.addEventListener('click', () => {
@@ -961,14 +950,14 @@ export const taxExemptModal = () => {
                 {
                   class: 'text-black text-md',
                 },
-                'Tax Exempt Document'
+                'Tax Exempt Document',
               ),
               p(
                 {
                   class: 'text-danaherpurple-500 text-md',
                 },
-                fileName
-              )
+                fileName,
+              ),
             ),
             div(
               {
@@ -978,16 +967,16 @@ export const taxExemptModal = () => {
               span({
                 class: 'icon icon-close cursor-pointer',
                 id: 'removeTaxExemptUploadedFile',
-              })
-            )
+              }),
+            ),
           );
 
           const checkoutSummaryTax = document.querySelector(
-            '#checkoutSummaryTax'
+            '#checkoutSummaryTax',
           );
           if (checkoutSummaryTax) {
             const checkoutSummaryTaxExempt = checkoutSummaryTax.querySelector(
-              '#checkoutSummaryTaxExempt'
+              '#checkoutSummaryTaxExempt',
             );
             if (checkoutSummaryTaxExempt) {
               checkoutSummaryTaxExempt.classList.add('hidden');
@@ -999,7 +988,7 @@ export const taxExemptModal = () => {
           }
         } else {
           const taxExemptModalErrorContainer = document.querySelector(
-            '#taxExemptModalErrorContainer'
+            '#taxExemptModalErrorContainer',
           );
           if (taxExemptModalErrorContainer) {
             if (taxExemptModalErrorContainer.classList.contains('hidden')) {
@@ -1012,18 +1001,18 @@ export const taxExemptModal = () => {
         }
 
         const removeTaxExemptUploadedFile = document.querySelector(
-          '#removeTaxExemptUploadedFile'
+          '#removeTaxExemptUploadedFile',
         );
         if (removeTaxExemptUploadedFile) {
           removeTaxExemptUploadedFile.addEventListener('click', (e) => {
             e.preventDefault();
             const taxExemptUploadedFile = document.querySelector(
-              '#taxExemptUploadedFile'
+              '#taxExemptUploadedFile',
             );
             if (taxExemptUploadedFile) {
               taxExemptUploadedFile.remove();
               const checkoutSummaryTaxExempt = document.querySelector(
-                '#checkoutSummaryTaxExempt'
+                '#checkoutSummaryTaxExempt',
               );
               if (checkoutSummaryTaxExempt) {
                 if (checkoutSummaryTaxExempt.classList.contains('hidden')) {
@@ -1031,7 +1020,7 @@ export const taxExemptModal = () => {
                 }
               }
               const checkoutSummaryTax = document.querySelector(
-                '#checkoutSummaryTax'
+                '#checkoutSummaryTax',
               );
               if (checkoutSummaryTax) {
                 if (checkoutSummaryTax.classList.contains('flex-wrap')) {
@@ -1091,8 +1080,8 @@ export const changeStep = async (step) => {
  :::::::::::::
 */
         if (
-          getNotes.name === 'GroupShippingNote' &&
-          getNotes.value.trim() === getShippingNotesField.value.trim()
+          getNotes.name === 'GroupShippingNote'
+          && getNotes.value.trim() === getShippingNotesField.value.trim()
         ) {
           removePreLoader();
         } else {
@@ -1110,7 +1099,7 @@ export const changeStep = async (step) => {
             type: 'String',
           };
           const updateShippingNotesResponse = await updateShippingNotes(
-            shippingNotesPayload
+            shippingNotesPayload,
           );
           if (updateShippingNotesResponse.status === 'error') {
             removePreLoader();
@@ -1137,7 +1126,7 @@ export const changeStep = async (step) => {
           type: 'String',
         };
         const setShippingNotesResponse = await setShippingNotes(
-          shippingNotesPayload
+          shippingNotesPayload,
         );
         if (setShippingNotesResponse.status === 'error') {
           getShippingNotesField.classList.add('border-red-500');
@@ -1153,7 +1142,7 @@ export const changeStep = async (step) => {
     }
   }
   const activateModule = document.querySelector(
-    `#checkout-${currentTab}-module`
+    `#checkout-${currentTab}-module`,
   );
 
   const modules = document.querySelectorAll('.checkout-module');
@@ -1248,8 +1237,8 @@ export async function addressForm(type, data = {}) {
         {
           class: 'justify-start text-black text-2xl font-normal  leading-loose',
         },
-        `Add new ${type} address`
-      )
+        `Add new ${type} address`,
+      ),
     ),
     buildInputElement(
       'firstName',
@@ -1259,7 +1248,7 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'firstName',
-      data ? data.firstName : ''
+      data ? data.firstName : '',
     ),
     buildInputElement(
       'lastName',
@@ -1269,7 +1258,7 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'lastName',
-      data ? data.lastName : ''
+      data ? data.lastName : '',
     ),
     buildInputElement(
       'companyName2',
@@ -1279,7 +1268,7 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'companyName2',
-      data ? data.companyName2 : ''
+      data ? data.companyName2 : '',
     ),
     buildInputElement(
       'addressLine1',
@@ -1289,7 +1278,7 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'addressLine1',
-      data ? data.addressLine1 : ''
+      data ? data.addressLine1 : '',
     ),
     buildInputElement(
       'addressLine2',
@@ -1299,7 +1288,7 @@ export async function addressForm(type, data = {}) {
       false,
       false,
       'addressLine2',
-      data ? data.addressLine2 : ''
+      data ? data.addressLine2 : '',
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
@@ -1309,7 +1298,7 @@ export async function addressForm(type, data = {}) {
       false,
       false,
       `preferred${capitalizeFirstLetter(type)}Address`,
-      true
+      true,
     ),
     buildCountryStateSelectBox(
       'countryCode',
@@ -1318,7 +1307,7 @@ export async function addressForm(type, data = {}) {
       true,
       'countryCode',
       countriesList,
-      data?.countryCode ?? ''
+      data?.countryCode ?? '',
     ),
     buildCountryStateSelectBox(
       'mainDivision',
@@ -1327,7 +1316,7 @@ export async function addressForm(type, data = {}) {
       true,
       'mainDivision',
       statesList,
-      data?.mainDivision ?? ''
+      data?.mainDivision ?? '',
     ),
     buildInputElement(
       'city',
@@ -1337,7 +1326,7 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'city',
-      data ? data.city : ''
+      data ? data.city : '',
     ),
     buildInputElement(
       'postalCode',
@@ -1347,13 +1336,13 @@ export async function addressForm(type, data = {}) {
       false,
       true,
       'postalCode',
-      data ? data.postalCode : ''
+      data ? data.postalCode : '',
     ),
     buildButton(
       'Save',
       `save${capitalizeFirstLetter(type)}Address`,
-      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6'
-    )
+      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+    ),
   );
   /*
 ::::::::::::::::
@@ -1361,7 +1350,7 @@ get save address buttonl...
 :::::::::::::::::
 */
   const saveAddressButton = adressForm.querySelector(
-    `#save${capitalizeFirstLetter(type)}Address`
+    `#save${capitalizeFirstLetter(type)}Address`,
   );
   /*
 ::::::::::::::::
@@ -1417,13 +1406,13 @@ get counrty field and attach change event listener to populate states based on c
 
       if (
         !formToSubmit.classList.contains(
-          `default${capitalizeFirstLetter(type)}AddressFormModal`
+          `default${capitalizeFirstLetter(type)}AddressFormModal`,
         )
       ) {
         if (data) {
           removeObjectKey(
             formObject,
-            `preferred${capitalizeFirstLetter(type)}Address`
+            `preferred${capitalizeFirstLetter(type)}Address`,
           );
           Object.assign(formObject, {
             id: data.id,
@@ -1456,21 +1445,21 @@ get counrty field and attach change event listener to populate states based on c
         `${type}AddressForm`,
         'customers/-/myAddresses',
         method,
-        formObject
+        formObject,
       );
 
       if (addAddressResponse?.status === 'success') {
         if (addAddressResponse?.data?.type === 'Link') {
           formToSubmit.classList.add('hidden');
           const showDefaultAddress = document.querySelector(
-            `#${type}AddressHeader`
+            `#${type}AddressHeader`,
           );
 
           const shippingAsBillingAddressCheckBox = document.querySelector(
-            '#shippingAsBillingAddress'
+            '#shippingAsBillingAddress',
           );
           shippingAsBillingAddressCheckBox?.parentElement.removeAttribute(
-            'style'
+            'style',
           );
 
           saveAddressButton.insertAdjacentElement(
@@ -1479,13 +1468,13 @@ get counrty field and attach change event listener to populate states based on c
               {
                 class: 'text-green-500 font-medium pl-6 text-ll',
               },
-              'Address Added Successfully.'
-            )
+              'Address Added Successfully.',
+            ),
           );
 
           if (
             formToSubmit.classList.contains(
-              `default${capitalizeFirstLetter(type)}AddressFormModal`
+              `default${capitalizeFirstLetter(type)}AddressFormModal`,
             )
           ) {
             /*
@@ -1497,7 +1486,7 @@ get counrty field and attach change event listener to populate states based on c
               const addressURI = addAddressResponse.data.title.split(':')[4];
               const address = await getAddressDetails(
                 `customers/-/addresses/${addressURI}`,
-                type
+                type,
               );
               const renderDefaultAddress = defaultAddress(address, type);
               if (showDefaultAddress && renderDefaultAddress) {
@@ -1508,7 +1497,7 @@ get counrty field and attach change event listener to populate states based on c
                   */
                 showDefaultAddress.insertAdjacentElement(
                   'afterend',
-                  renderDefaultAddress
+                  renderDefaultAddress,
                 );
                 if (renderDefaultAddress.classList.contains('hidden')) {
                   renderDefaultAddress.classList.remove('hidden');
@@ -1544,8 +1533,8 @@ get counrty field and attach change event listener to populate states based on c
              ::::::::::::::
              */
         } else if (
-          addAddressResponse &&
-          addAddressResponse.data.type === 'Address'
+          addAddressResponse
+          && addAddressResponse.data.type === 'Address'
         ) {
           formToSubmit.classList.add('hidden');
 
@@ -1555,8 +1544,8 @@ get counrty field and attach change event listener to populate states based on c
               {
                 class: 'text-green-500 font-medium pl-6 text-l',
               },
-              'Address Updated Successfully.'
-            )
+              'Address Updated Successfully.',
+            ),
           );
 
           /*
@@ -1573,8 +1562,8 @@ get counrty field and attach change event listener to populate states based on c
                 id: 'addressFormErrorMessage',
                 class: 'text-red-500 font-medium pl-6 text-l text-center',
               },
-              'Error submitting address.'
-            )
+              'Error submitting address.',
+            ),
           );
         }
         /*
@@ -1597,8 +1586,8 @@ get counrty field and attach change event listener to populate states based on c
               class: 'text-red-500 pl-6 font-medium text-l',
               id: 'addressFormErrorMessage',
             },
-            addAddressResponse?.data
-          )
+            addAddressResponse?.data,
+          ),
         );
 
         /*
@@ -1616,8 +1605,8 @@ get counrty field and attach change event listener to populate states based on c
             id: 'addressFormErrorMessage',
             class: 'text-red-500 pl-6 font-medium text-l',
           },
-          error.message
-        )
+          error.message,
+        ),
       );
 
       /*
@@ -1665,19 +1654,16 @@ get price type if its net or gross
   let checkoutSummaryData = false;
   if (getCheckoutSummaryData?.status === 'success') {
     checkoutSummaryData = getCheckoutSummaryData.data.data;
-    discountCode =
-      getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0] ??
-      '';
-    discountDetails =
-      getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`] ??
-      '';
+    discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+    discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
+      ?? '';
     discountPromoCode = discountDetails?.promotion ?? '';
     discountLabelData = await getPromotionDetails(discountPromoCode);
 
     if (discountLabelData?.status === 'success') {
       discountLabel = discountLabelData?.data?.name ?? '';
-      discountPrice =
-        discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+      discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
     }
   }
 
@@ -1731,8 +1717,8 @@ get price type if its net or gross
       : '$0',
     tax: checkoutSummaryData?.totals?.grandTotal
       ? `${currencyCode} ${
-          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
-        }`
+        checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+      }`
       : '$0',
     discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
     discountLabel,
@@ -1747,14 +1733,14 @@ get price type if its net or gross
       {
         class: 'w-80 justify-start text-black text-3xl font-bold  leading-10',
       },
-      'Let’s get started'
+      'Let’s get started',
     ),
 
     button(
       {
         class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
       },
-      'Login / Create Account'
+      'Login / Create Account',
     ),
     // button(
     //   {
@@ -1768,11 +1754,10 @@ get price type if its net or gross
     }),
     div({
       class: '',
-    })
+    }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href =
-      '/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary';
+    window.location.href = '/us/en/eds-stage-test/cart-checkout/login.html?ref=em1-checkout-payment-module';
   });
   /*
   :::::::::::::
@@ -1808,7 +1793,7 @@ get price type if its net or gross
             {
               class: ' justify-start text-black text-base font-bold ',
             },
-            'Subtotal'
+            'Subtotal',
           ),
           span(
             {
@@ -1819,19 +1804,19 @@ get price type if its net or gross
               {
                 class: '',
               },
-              checkoutSummaryKeys.itemTotal
+              checkoutSummaryKeys.itemTotal,
             ),
             strong(
               {
                 class:
                   'line-through decoration-danaherpurple-500 text-extralight font-normal',
               },
-              checkoutSummaryKeys.undiscountedItemTotal !==
-                checkoutSummaryKeys.itemTotal
+              checkoutSummaryKeys.undiscountedItemTotal
+                !== checkoutSummaryKeys.itemTotal
                 ? checkoutSummaryKeys.undiscountedItemTotal
-                : ''
-            )
-          )
+                : '',
+            ),
+          ),
         ),
         /*
  ::::::::::::
@@ -1847,7 +1832,7 @@ get price type if its net or gross
               class:
                 ' justify-start text-black text-base text-right font-extralight ',
             },
-            'Discount'
+            'Discount',
           ),
           div(
             {
@@ -1857,16 +1842,16 @@ get price type if its net or gross
               {
                 class: 'text-right text-black text-base font-extralight ',
               },
-              checkoutSummaryKeys.discountPrice
+              checkoutSummaryKeys.discountPrice,
             ),
             span(
               {
                 class:
                   ' w-80 text-right  text-gray-500 text-xs font-normal leading-none',
               },
-              checkoutSummaryKeys.discountLabel
-            )
-          )
+              checkoutSummaryKeys.discountLabel,
+            ),
+          ),
         ),
         /*
  ::::::::::::
@@ -1887,7 +1872,7 @@ get price type if its net or gross
                 class:
                   'w-20 justify-start text-black text-base font-extralight ',
               },
-              'Sales Tax*'
+              'Sales Tax*',
             ),
             span(
               {
@@ -1895,16 +1880,16 @@ get price type if its net or gross
                 class:
                   'text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline',
               },
-              'Tax exempt?'
-            )
+              'Tax exempt?',
+            ),
           ),
           span(
             {
               class:
                 ' text-right justify-start text-black text-base font-extralight ',
             },
-            checkoutSummaryKeys.tax
-          )
+            checkoutSummaryKeys.tax,
+          ),
         ),
         /*
  ::::::::::::
@@ -1920,7 +1905,7 @@ get price type if its net or gross
             {
               class: 'w-20 justify-start text-black text-base font-extralight ',
             },
-            'Shipping*'
+            'Shipping*',
           ),
           span(
             {
@@ -1931,20 +1916,20 @@ get price type if its net or gross
               {
                 class: '',
               },
-              checkoutSummaryKeys.shippingTotal
+              checkoutSummaryKeys.shippingTotal,
             ),
             strong(
               {
                 class:
                   'line-through decoration-danaherpurple-500 text-extralight font-normal',
               },
-              checkoutSummaryKeys.undiscountedShippingTotal !==
-                checkoutSummaryKeys.shippingTotal
+              checkoutSummaryKeys.undiscountedShippingTotal
+                !== checkoutSummaryKeys.shippingTotal
                 ? checkoutSummaryKeys.undiscountedShippingTotal
-                : ''
-            )
-          )
-        )
+                : '',
+            ),
+          ),
+        ),
       ),
       /*
  ::::::::::::
@@ -1961,14 +1946,14 @@ get price type if its net or gross
           {
             class: ' justify-start text-black text-xl font-bold ',
           },
-          `Total (${checkoutSummaryKeys.totalLineItems} items)`
+          `Total (${checkoutSummaryKeys.totalLineItems} items)`,
         ),
         span(
           {
             class: ' text-right justify-start text-black text-xl font-bold ',
           },
-          checkoutSummaryKeys.total
-        )
+          checkoutSummaryKeys.total,
+        ),
       ),
       /*
  ::::::::::::
@@ -1992,10 +1977,10 @@ get price type if its net or gross
             class:
               'w-full justify-start text-black-500 text-xs font-normal leading-none',
           },
-          '*estimated sales tax. Additional tax may apply upon actual calculation of order'
-        )
-      )
-    )
+          '*estimated sales tax. Additional tax may apply upon actual calculation of order',
+        ),
+      ),
+    ),
   );
 
   /*
@@ -2013,28 +1998,28 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.href.includes('cartlanding')) {
-        window.location.href = '/us/en/eds-stage-test/cart-checkout/checkout';
+        window.location.href = '/us/en/eds-stage-test/cart-checkout/checkout?ref=em1-checkout-payment-module';
       } else {
         changeStep(e);
       }
     });
   }
   const checkoutSummaryWrapper = summaryModule.querySelector(
-    '#checkoutSummaryWrapper'
+    '#checkoutSummaryWrapper',
   );
   if (checkoutSummaryWrapper) {
     if (window.location.href.includes('cartlanding')) {
       if (!userLoggedInStatus) {
         checkoutSummaryWrapper.insertAdjacentElement(
           'afterbegin',
-          loggedOutUserDiv
+          loggedOutUserDiv,
         );
       } else {
         checkoutSummaryWrapper.insertAdjacentElement(
           'afterbegin',
           div({
             class: 'h-[0px]',
-          })
+          }),
         );
       }
     }
@@ -2047,9 +2032,9 @@ get price type if its net or gross
  ::::::::::::::::::
    */
       if (
-        getUseAddressesResponse?.data?.invoiceToAddress &&
-        getUseAddressesResponse?.data?.invoiceToAddress?.id !==
-          getUseAddressesResponse?.data?.commonShipToAddress?.id
+        getUseAddressesResponse?.data?.invoiceToAddress
+        && getUseAddressesResponse?.data?.invoiceToAddress?.id
+          !== getUseAddressesResponse?.data?.commonShipToAddress?.id
       ) {
         const invoiceToAddress = div(
           {
@@ -2065,7 +2050,7 @@ get price type if its net or gross
               {
                 class: 'font-bold p-0 mb-3 mt-0',
               },
-              'Bill to Address'
+              'Bill to Address',
             ),
             div(
               {
@@ -2080,21 +2065,21 @@ get price type if its net or gross
                       : 'hidden'
                   }`,
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2 ??
-                  ''
+                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                  ?? '',
               ),
               p(
                 {
                   class: 'text-black text-base font-extralight m-0 p-0',
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1 ??
-                  ''
+                getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
+                  ?? '',
               ),
               p(
                 {
                   class: 'text-black text-base font-extralight m-0 p-0',
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.city ?? ''
+                getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
               ),
               p(
                 {
@@ -2107,18 +2092,18 @@ get price type if its net or gross
                   getUseAddressesResponse?.data?.invoiceToAddress
                     ?.countryCode ?? ''
                 }, ${
-                  getUseAddressesResponse?.data?.invoiceToAddress?.postalCode ??
-                  ''
-                }`
-              )
-            )
-          )
+                  getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
+                  ?? ''
+                }`,
+              ),
+            ),
+          ),
         );
 
         if (invoiceToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
-            invoiceToAddress
+            invoiceToAddress,
           );
         }
       }
@@ -2142,7 +2127,7 @@ get price type if its net or gross
               {
                 class: 'font-bold p-0 mb-3 mt-0',
               },
-              'Shipping Address'
+              'Shipping Address',
             ),
             div(
               {
@@ -2153,20 +2138,20 @@ get price type if its net or gross
                   class: 'font-normal  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.companyName2 ?? ''
+                  ?.companyName2 ?? '',
               ),
               p(
                 {
                   class: 'text-black text-base font-extralight m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine1 ?? ''
+                  ?.addressLine1 ?? '',
               ),
               p(
                 {
                   class: 'text-black text-base font-extralight m-0 p-0',
                 },
-                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? ''
+                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
               ),
               p(
                 {
@@ -2181,23 +2166,22 @@ get price type if its net or gross
                 }, ${
                   getUseAddressesResponse?.data?.commonShipToAddress
                     ?.postalCode ?? ''
-                }`
-              )
-            )
-          )
+                }`,
+              ),
+            ),
+          ),
         );
         if (commonShipToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
-            commonShipToAddress
+            commonShipToAddress,
           );
         }
       }
     }
   }
 
-  const showShippingModalButton =
-    summaryModule.querySelector('#showShippingModal');
+  const showShippingModalButton = summaryModule.querySelector('#showShippingModal');
   if (showShippingModalButton) {
     showShippingModalButton.addEventListener('click', (e) => {
       e.preventDefault();
@@ -2207,7 +2191,7 @@ get price type if its net or gross
   }
   if (summaryModule) {
     const checkoutSummaryTaxExempt = summaryModule.querySelector(
-      '#checkoutSummaryTaxExempt'
+      '#checkoutSummaryTaxExempt',
     );
     if (checkoutSummaryTaxExempt) {
       checkoutSummaryTaxExempt.addEventListener('click', () => {
@@ -2221,7 +2205,7 @@ get price type if its net or gross
 
 export async function updateCheckoutSummary() {
   const checkoutSummaryWrapper = document.querySelector(
-    '#checkoutSummaryContainer'
+    '#checkoutSummaryContainer',
   );
   if (checkoutSummaryWrapper) {
     const updatedCheckoutSummary = await checkoutSummary();
@@ -2242,7 +2226,7 @@ export const cartItemsContainer = (cartItemValue) => {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
-        type: type,
+        type,
       };
       const response = await updateCartItemQuantity(item);
       if (response == 'success') {
@@ -2255,16 +2239,16 @@ export const cartItemsContainer = (cartItemValue) => {
               const str = `product-Quantity-${opcoBe[0]}`;
               const parts = str.split('-');
               const logodivId = document.getElementById(
-                `product-Quantity-${opcoBe[0]}`
+                `product-Quantity-${opcoBe[0]}`,
               );
               console.log(
                 '${itemToBeDisplayed[opcoBe].length',
-                itemToBeDisplayed[opcoBe[0]].length
+                itemToBeDisplayed[opcoBe[0]].length,
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
               } Items`;
-            }
+            },
           );
         }
         removePreLoader();
@@ -2275,9 +2259,9 @@ export const cartItemsContainer = (cartItemValue) => {
     } else {
       const item = {
         lineItemId: cartItemValue.lineItemId,
-        value: value,
+        value,
         manufacturer: cartItemValue.manufacturer,
-        type: type,
+        type,
       };
       const response = await updateCartItemQuantity(item);
       if (response == 'success') {
@@ -2297,7 +2281,7 @@ export const cartItemsContainer = (cartItemValue) => {
     span({
       id: `delteItem-${cartItemValue.sku}`,
       class: 'icon icon-icons8-delete cart-delete',
-    })
+    }),
   );
   modalCloseButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
@@ -2326,13 +2310,13 @@ export const cartItemsContainer = (cartItemValue) => {
       console.log('minnn');
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
       console.log('max');
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else {
       productItem.style.border = '';
@@ -2345,11 +2329,11 @@ export const cartItemsContainer = (cartItemValue) => {
     cartItemValue.productName,
     {
       href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg'
+        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
       ),
       title: cartItemValue.productName,
       class: 'justify-center',
-    }
+    },
   );
   // const itemContainer = div(
   //   {
@@ -2502,8 +2486,8 @@ export const cartItemsContainer = (cartItemValue) => {
             src: cartItemValue.images
               ? cartItemValue.images[0].effectiveUrl
               : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
-          })
-        )
+          }),
+        ),
       ),
       div(
         {
@@ -2516,16 +2500,16 @@ export const cartItemsContainer = (cartItemValue) => {
             class:
               'w-full justify-start items-center text-black text-base font-bold',
           },
-          cartItemValue.productName
+          cartItemValue.productName,
         ),
         div(
           {
             class:
               'w-full justify-start items-center text-gray-500 text-sm font-normal ',
           },
-          cartItemValue.sku
-        )
-      )
+          cartItemValue.sku,
+        ),
+      ),
     ),
     div(
       {
@@ -2535,7 +2519,7 @@ export const cartItemsContainer = (cartItemValue) => {
         {
           class: 'w-24 justify-start text-black text-base font-bold',
         },
-        modalInput
+        modalInput,
       ),
       div(
         {
@@ -2547,24 +2531,24 @@ export const cartItemsContainer = (cartItemValue) => {
             class:
               'w-full justify-start text-gray-500 text-base font-bold item line-through',
           },
-          `$${cartItemValue.salePrice.value}`
+          `$${cartItemValue.salePrice.value}`,
         ),
         div(
           {
             class: 'w-full justify-start text-black text-base',
           },
-          `$${cartItemValue.salePrice.value}`
-        )
+          `$${cartItemValue.salePrice.value}`,
+        ),
       ),
       div(
         {
           class:
             'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
         },
-        `$${cartItemValue.salePrice.value}`
+        `$${cartItemValue.salePrice.value}`,
       ),
-      modalCloseButton
-    )
+      modalCloseButton,
+    ),
   );
   decorateIcons(itemsscontainer);
   return itemsscontainer;

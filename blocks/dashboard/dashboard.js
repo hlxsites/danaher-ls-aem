@@ -1,4 +1,6 @@
-import { div, h1, p, span, a } from '../../scripts/dom-builder.js';
+import {
+  div, h1, p, span, a,
+} from '../../scripts/dom-builder.js';
 import {
   showPreLoader,
   removePreLoader,
@@ -21,7 +23,7 @@ export default async function decorate(block) {
   userData = JSON.parse(authenticationToken.user_data);
 
   const dashboardTitle = block.querySelector(
-    "[data-aue-prop='dashboardTitle']"
+    "[data-aue-prop='dashboardTitle']",
   );
 
   const wrapper = div({
@@ -50,23 +52,23 @@ export default async function decorate(block) {
             class: 'text-white !text-4xl font-medium leading-[48px]',
           },
           userData?.userData?.firstName?.charAt(0).toUpperCase(),
-          userData?.userData?.lastName?.charAt(0).toUpperCase()
-        )
+          userData?.userData?.lastName?.charAt(0).toUpperCase(),
+        ),
       ),
       p(
         {
           class: 'text-xl text-black font-medium leading-7',
         },
         `${capitalizeFirstLetter(
-          userData?.userData?.firstName
-        )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`
+          userData?.userData?.firstName,
+        )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`,
       ),
       p(
         {
           class: 'text-sm  text-black font-medium leading-tight',
         },
-        capitalizeFirstLetter(userData?.customerData?.companyName)
-      )
+        capitalizeFirstLetter(userData?.customerData?.companyName),
+      ),
     ),
     div({
       class: 'w-full bg-gray-100 h-[2px]',
@@ -75,7 +77,7 @@ export default async function decorate(block) {
       { class: 'w-full px-6 flex flex-col' },
       a(
         {
-          href: '/us/en/eds-stage-test/cart-checkout/cartlanding',
+          href: '/us/en/eds-stage-test/cart-checkout/cartlanding?ref=em1-checkout-payment-module',
           class:
             'w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },
@@ -103,7 +105,7 @@ export default async function decorate(block) {
       {
         class: 'p-0 m-0',
       },
-      dashboardTitle ?? ''
+      dashboardTitle ?? '',
     ),
     div(
       {
@@ -125,15 +127,15 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            '14'
+            '14',
           ),
           p(
             {
               class: 'text-black',
             },
-            'Open Order'
-          )
-        )
+            'Open Order',
+          ),
+        ),
       ),
       div(
         {
@@ -151,17 +153,17 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            '25'
+            '25',
           ),
           p(
             {
               class: 'text-black',
             },
-            'Requested Quote Item'
-          )
-        )
-      )
-    )
+            'Requested Quote Item',
+          ),
+        ),
+      ),
+    ),
   );
   wrapper.append(sidebar, content);
 

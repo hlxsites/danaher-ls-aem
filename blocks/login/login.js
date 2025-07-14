@@ -77,11 +77,11 @@ export default async function decorate(block) {
         ?.trim()
         .replace(/<[^>]*>/g, '') || '',
     loginFormSubmitButtonLabel:
-      loginFormSubmitButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '') ||
-      'Submit',
+      loginFormSubmitButtonLabel?.textContent?.trim().replace(/<[^>]*>/g, '')
+      || 'Submit',
     loginFormNewAccountText:
-      loginFormNewAccountText?.textContent?.trim().replace(/<[^>]*>/g, '') ||
-      '',
+      loginFormNewAccountText?.textContent?.trim().replace(/<[^>]*>/g, '')
+      || '',
     loginFormNewAccountButtonLabel:
       loginFormNewAccountButtonLabel?.textContent
         ?.trim()
@@ -91,8 +91,8 @@ export default async function decorate(block) {
         ?.trim()
         .replace(/<[^>]*>/g, '') || '',
     backgroundImage:
-      backgroundImage?.src ??
-      'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+      backgroundImage?.src
+      ?? 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
   };
 
   const contentWrapper = div(
@@ -103,14 +103,14 @@ export default async function decorate(block) {
       {
         class: 'text-black text-center !text-4xl !font-medium leading-[48px]',
       },
-      contentObject.loginHeading
+      contentObject.loginHeading,
     ),
     p(
       {
         class: 'text-black text-center text-2xl font-medium leading-loose',
       },
-      contentObject.loginSubHeading
-    )
+      contentObject.loginSubHeading,
+    ),
   );
   const loginForm = form(
     {
@@ -124,13 +124,13 @@ export default async function decorate(block) {
       {
         class: 'text-4xl font-medium text-black leading-[48px] m-0 p-0',
       },
-      contentObject.loginFormTitle
+      contentObject.loginFormTitle,
     ),
     p(
       {
         class: 'justify-start text-black text-2xl font-normal  leading-loose',
       },
-      contentObject.loginFormSubHeading
+      contentObject.loginFormSubHeading,
     ),
     buildInputElement(
       'userName',
@@ -140,7 +140,7 @@ export default async function decorate(block) {
       false,
       true,
       'userName',
-      ''
+      '',
     ),
     buildInputElement(
       'password',
@@ -150,7 +150,7 @@ export default async function decorate(block) {
       false,
       true,
       'password',
-      ''
+      '',
     ),
     div({
       id: 'formCheckboxWrapper',
@@ -166,8 +166,8 @@ export default async function decorate(block) {
           href: contentObject.loginFormForgotPasswordLink,
           class: 'text-danaherpurple-500 font-semibold text-base leading-snug',
         },
-        contentObject.loginFormForgotPasswordLabel
-      )
+        contentObject.loginFormForgotPasswordLabel,
+      ),
     ),
     p({
       id: 'formResponse',
@@ -177,7 +177,7 @@ export default async function decorate(block) {
     buildButton(
       contentObject.loginFormSubmitButtonLabel,
       'login',
-      'proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6'
+      'proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
     ),
     div(
       {
@@ -193,12 +193,12 @@ export default async function decorate(block) {
           class:
             'justify-start text-gray-500 text-base font-medium leading-normal',
         },
-        'OR'
+        'OR',
       ),
       div({
         class:
           'flex-1 h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-300',
-      })
+      }),
     ),
     div(
       {
@@ -208,16 +208,16 @@ export default async function decorate(block) {
         {
           class: 'text-base font-extralight leading-snug text-neutral-500',
         },
-        contentObject.loginFormNewAccountText
+        contentObject.loginFormNewAccountText,
       ),
       a(
         {
           href: contentObject.loginFormNewAccountButtonLink,
           class: 'text-danaherpurple-500 font-semibold text-base leading-snug',
         },
-        contentObject.loginFormNewAccountButtonLabel
-      )
-    )
+        contentObject.loginFormNewAccountButtonLabel,
+      ),
+    ),
   );
   loginForm
     .querySelector('#formCheckboxWrapper')
@@ -231,7 +231,7 @@ export default async function decorate(block) {
       'border-b',
       'hover:text-white',
       'hover:bg-danaherpurple-500',
-      'border-danaherpurple-500'
+      'border-danaherpurple-500',
     );
   });
   const loginFormInputWrapper = loginForm.querySelectorAll('.field-wrapper');
@@ -245,8 +245,7 @@ export default async function decorate(block) {
   if (loginFormInput) {
     loginFormInput.forEach((inp) => {
       inp.className = '';
-      inp.className =
-        'self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden';
+      inp.className = 'self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden';
     });
   }
   const formWrapper = div({
@@ -261,7 +260,7 @@ export default async function decorate(block) {
     img({
       src: './media_1432d4ece3aa7b62fce1ec23cc1955601ce3c6212.svg?width=750&format=svg&optimize=medium',
       class: 'w-36 h-20',
-    })
+    }),
   );
   formWrapper.append(logoImage, loginForm);
   const loginButton = loginForm.querySelector('#login');
@@ -306,7 +305,7 @@ export default async function decorate(block) {
           formResponse.classList.remove('text-red-700');
         }
         formResponse.textContent = 'Login Successfull';
-        window.location.href = '/us/en/eds-stage-test/cart-checkout/dashboard';
+        window.location.href = '/us/en/eds-stage-test/cart-checkout/dashboard?ref=em1-checkout-payment-module';
         return true;
       }
       formResponse.classList.remove('hidden');

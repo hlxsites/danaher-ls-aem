@@ -9,10 +9,10 @@ export default async function decorate(block) {
   const authenticationToken = await getAuthenticationToken();
 
   if (
-    authenticationToken?.status === 'error' ||
-    authenticationToken.user_type === 'guest'
+    authenticationToken?.status === 'error'
+    || authenticationToken.user_type === 'guest'
   ) {
-    window.location.href = '/us/en/eds-stage-test/cart-checkout/cartlanding';
+    window.location.href = '/us/en/eds-stage-test/cart-checkout/cartlanding?ref=em1-checkout-payment-module';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
@@ -66,8 +66,7 @@ export default async function decorate(block) {
       modules.forEach((module) => {
         if (module.getAttribute('id') === 'checkout-details') {
           module.className = '';
-          module.className =
-            'checkout-summary-wrapper h-max flex justify-center';
+          module.className = 'checkout-summary-wrapper h-max flex justify-center';
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);

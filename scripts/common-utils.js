@@ -71,7 +71,7 @@ const generatePreloader = div(
     class: 'hidden',
     id: 'mainPreLoader',
   },
-  preLoader()
+  preLoader(),
 );
 const getMainDiv = document.querySelector('body');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
@@ -111,7 +111,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
       {
         class: 'modal-body py-6 pb-6',
       },
-      content
+      content,
     );
   }
   let cancelButton = '';
@@ -121,7 +121,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
         class: 'mt-6 text-danaherpurple-500 cursor-pointer',
         id: 'closeUtilityModal',
       },
-      'Cancel'
+      'Cancel',
     );
     if (content && modalBody) {
       const getModalButtonWrapper = modalBody.querySelector('.button-wrapper');
@@ -129,7 +129,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
         getModalButtonWrapper.classList.add(
           'flex',
           'justify-between',
-          'items-center'
+          'items-center',
         );
         getModalButtonWrapper.append(cancelButton);
       }
@@ -147,7 +147,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
       },
       span({
         class: 'icon icon-close cursor-pointer',
-      })
+      }),
     );
     modalCloseButton.addEventListener('click', (e) => {
       e.preventDefault();
@@ -177,7 +177,7 @@ export async function getProductInfo(id, needInterShop = true) {
   if (api) {
     try {
       const coveoResponse = await getApiData(
-        `https://${window.DanaherConfig.host}/us/en/product-data/productInfo/?product=${id}`
+        `https://${window.DanaherConfig.host}/us/en/product-data/productInfo/?product=${id}`,
       );
       if (coveoResponse?.status === 'success') {
         let productData = {};
@@ -197,15 +197,14 @@ export async function getProductInfo(id, needInterShop = true) {
         if (needInterShop) {
           const intershopProductId = id.slice(0, id.lastIndexOf('-'));
           const intershopData = await getApiData(
-            `${baseURL}products/${intershopProductId}`
+            `${baseURL}products/${intershopProductId}`,
           );
 
           if (intershopData?.status === 'success') {
             const shopData = intershopData.data;
 
             const showCart = shopData?.attributes?.some(
-              (attr) =>
-                attr.name === 'show_add_to_cart' && attr.value === 'True'
+              (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
             );
 
             productData = {
@@ -611,13 +610,13 @@ export async function submitForm(id, action, method, data) {
       defaultHeaders.append('Content-Type', 'Application/json');
       defaultHeaders.append(
         'authentication-token',
-        authenticationToken.access_token
+        authenticationToken.access_token,
       );
       const requestedMethod = method === 'POST' ? postApiData : putApiData;
       const submitFormResponse = await requestedMethod(
         url,
         JSON.stringify(data),
-        defaultHeaders
+        defaultHeaders,
       );
       return submitFormResponse;
     }
@@ -701,7 +700,7 @@ export async function getStates(countryCode) {
     defaultHeaders.append('Content-Type', 'Application/json');
     defaultHeaders.append(
       'authentication-token',
-      authenticationToken.access_token
+      authenticationToken.access_token,
     );
     const response = await getApiData(url, defaultHeaders);
     if (response.status === 'success') {
@@ -759,18 +758,17 @@ inbuilt and custom dom functions
 
 */
 
-export const buildButton = (buttonLabel, id, classes) =>
-  div(
-    { class: 'space-y-2 button-wrapper mt-6 flex items-center' },
-    button(
-      {
-        type: 'button',
-        class: classes,
-        id,
-      },
-      buttonLabel
-    )
-  );
+export const buildButton = (buttonLabel, id, classes) => div(
+  { class: 'space-y-2 button-wrapper mt-6 flex items-center' },
+  button(
+    {
+      type: 'button',
+      class: classes,
+      id,
+    },
+    buttonLabel,
+  ),
+);
 
 export const buildInputElement = (
   fieldLable,
@@ -780,7 +778,7 @@ export const buildInputElement = (
   autoCmplte,
   required,
   dtName,
-  value = ''
+  value = '',
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   const hiddenField = inputType === 'hidden' ? 'hidden' : '';
@@ -794,7 +792,7 @@ export const buildInputElement = (
         class: 'font-normal text-sm leading-4',
       },
       field,
-      dataRequired
+      dataRequired,
     ),
     input({
       type: inputType,
@@ -811,7 +809,7 @@ export const buildInputElement = (
       id: 'msg',
       'data-name': dtName,
       class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    })
+    }),
   );
 };
 
@@ -828,7 +826,7 @@ export const buildSearchWithIcon = (
   autoCmplte,
   required,
   dtName,
-  placeholder
+  placeholder,
 ) => {
   const searchElement = div(
     {
@@ -852,13 +850,13 @@ export const buildSearchWithIcon = (
         class:
           ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
         'aria-label': dtName,
-      })
+      }),
     ),
     span({
       id: 'msg',
       'data-name': dtName,
       class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    })
+    }),
   );
   decorateIcons(searchElement);
   return searchElement;
@@ -874,7 +872,7 @@ export const buildSelectBox = (
   inputName,
   required,
   dtName,
-  itemsList
+  itemsList,
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   let options = [];
@@ -893,7 +891,7 @@ export const buildSelectBox = (
         class: 'font-normal text-sm leading-4',
       },
       field,
-      dataRequired
+      dataRequired,
     ),
     select(
       {
@@ -904,13 +902,13 @@ export const buildSelectBox = (
         class:
           'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
       },
-      options
+      options,
     ),
     span({
       id: 'msg',
       'data-name': dtName,
       class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    })
+    }),
   );
 };
 export function createDropdown(itemsList) {
@@ -923,13 +921,13 @@ export function createDropdown(itemsList) {
   const list = document.createElement('ul');
   list.classList.add(
     ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700  shadow'.split(
-      ' '
-    )
+      ' ',
+    ),
   );
   items.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(
-      ...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' ')
+      ...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '),
     );
     li.textContent = item;
     list.append(li);
@@ -943,7 +941,7 @@ export function buildSelectElement(
   inputType,
   inputId,
   dataName,
-  inputList
+  inputList,
 ) {
   const selectIcon = div(
     { class: 'space-y-2' },
@@ -953,7 +951,7 @@ export function buildSelectElement(
         class: 'font-normal text-sm leading-4',
       },
       fieldName,
-      span({ class: 'text-red-500' }, '*')
+      span({ class: 'text-red-500' }, '*'),
     ),
     div(
       { class: 'relative bg-white' },
@@ -969,15 +967,15 @@ export function buildSelectElement(
             'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
-        span({ class: 'icon icon-dropdown w-3 h-3' })
+        span({ class: 'icon icon-dropdown w-3 h-3' }),
       ),
       createDropdown(inputList),
       span({
         id: 'msg',
         'data-name': dataName,
         class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-      })
-    )
+      }),
+    ),
   );
   return selectIcon;
 }
@@ -990,24 +988,23 @@ export const buildBillingCheckboxElement = (
   fieldValue,
   required,
   extraClasses = '',
-  hidden = ''
-) =>
-  div(
-    { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
-    input({
-      type: inputType,
-      name: inputName,
-      class: 'input-focus-checkbox',
-      id: inputName,
-      value: fieldValue,
-      'data-required': required,
-      'aria-label': fieldLable,
-    }),
-    label(
-      {
-        for: fieldLable,
-        class: 'pl-2',
-      },
-      field
-    )
-  );
+  hidden = '',
+) => div(
+  { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
+  input({
+    type: inputType,
+    name: inputName,
+    class: 'input-focus-checkbox',
+    id: inputName,
+    value: fieldValue,
+    'data-required': required,
+    'aria-label': fieldLable,
+  }),
+  label(
+    {
+      for: fieldLable,
+      class: 'pl-2',
+    },
+    field,
+  ),
+);

@@ -1,4 +1,6 @@
-import { div, p, h2, button } from '../../scripts/dom-builder.js';
+import {
+  div, p, h2, button,
+} from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { shippingAddressModule } from './shippingAddress.js';
 import shippingMethodsModule from './shippingMethods.js';
@@ -45,7 +47,7 @@ export const createModule = (id, isActive, content, buttons) => {
         id: 'proceed-button',
         'data-tab': buttonData.tab,
       },
-      buttonData.text
+      buttonData.text,
     );
 
     proceedButton.addEventListener('click', (event) => {
@@ -94,8 +96,8 @@ export const loadModule = async (module) => {
     const loadPaymentModule = await paymentModule();
     moduleContent.append(loadPaymentModule);
   }
-  //moduleHeader.append(moduleTitle);
-  //moduleHeader.append(moduleDescription);
+  // moduleHeader.append(moduleTitle);
+  // moduleHeader.append(moduleDescription);
 
   moduleWrapper.append(moduleHeader);
 
@@ -140,8 +142,7 @@ export const progressModule = () => {
     'data-tab': 'shippingAddress',
     'data-activeTab': 'shippingAddress',
   });
-  address.innerHTML =
-    '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
+  address.innerHTML = '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
 
   const shipping = div({
     class: 'checkout-step cursor-pointer relative',
@@ -149,8 +150,7 @@ export const progressModule = () => {
     'data-tab': 'shippingMethods',
     'data-activeTab': 'shippingMethods',
   });
-  shipping.innerHTML =
-    '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
+  shipping.innerHTML = '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
 
   const payment = div({
     class: ' checkout-step cursor-pointer relative',
@@ -158,8 +158,7 @@ export const progressModule = () => {
     'data-tab': 'payment',
     'data-activeTab': 'paymentMethods',
   });
-  payment.innerHTML =
-    '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
+  payment.innerHTML = '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
 
   /*
  ::::::::::::::
@@ -203,14 +202,14 @@ export const initializeModules = async () => {
       'checkout-shippingAddress-module',
       true,
       getShippingAddressModule,
-      []
+      [],
     ),
     createModule('checkout-details', false, detailsModule, []),
     createModule(
       'checkout-shippingMethods-module',
       false,
       getShippingMethodsModule,
-      []
+      [],
     ),
     createModule('checkout-payment-module', false, paymentModuleContent, []),
   ];
