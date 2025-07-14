@@ -1,6 +1,7 @@
 import {
-  h2, h5, div, p,
+  h2, h5, div, p, span
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
