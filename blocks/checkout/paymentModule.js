@@ -17,7 +17,7 @@ const paymentModule = async () => {
     const moduleContent = div({});
     const moduleHeader = div(
       {
-        class: 'border-b relative flex flex-col pt-6 pb-6 mb-4',
+        class: 'relative flex flex-col pb-6',
       },
       h2({}, 'Choose your payment method'),
       p(
