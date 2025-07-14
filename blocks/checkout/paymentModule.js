@@ -41,7 +41,7 @@ const paymentModule = async () => {
       },
       div(
         {
-        class: 'border-solid border-gray-300 flex gap-2',
+        class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
         input({
           name: `credit-card`,
@@ -62,7 +62,7 @@ const paymentModule = async () => {
     );
     const invoiceWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex gap-2',
+        class: 'border-solid border-gray-300 flex gap-2 items-center',
       },
       input({
         name: `invoiceWrapper`,
