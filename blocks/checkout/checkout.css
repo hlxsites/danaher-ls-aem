@@ -355,6 +355,10 @@
   width: 100%
 }
 
+.checkout :is(.w-\[30rem\]) {
+  width: 30rem
+}
+
 .checkout :is(.min-w-\[320px\]) {
   min-width: 320px
 }
@@ -746,6 +750,10 @@
   text-align: right
 }
 
+.checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
 .checkout :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -819,6 +827,10 @@
 
 .checkout :is(.leading-none) {
   line-height: 1
+}
+
+.checkout :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .checkout :is(.text-black) {

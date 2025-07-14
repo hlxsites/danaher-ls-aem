@@ -53,6 +53,12 @@
   scrollbar-width: none
 }
 
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .border-danahergray-75 {
   border-color: #E5E7EB
 }
@@ -542,6 +548,14 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
+}
+
+.cartlanding-wrapper :is(.w-\[30rem\]) {
+  width: 30rem
+}
+
+.cartlanding-wrapper :is(.w-\[737px\]) {
+  width: 737px
 }
 
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
@@ -1481,6 +1495,11 @@
 
   .cartlanding-wrapper :is(.lg\:justify-normal) {
     justify-content: normal
+  }
+
+  .cartlanding-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
   }
 }
 
