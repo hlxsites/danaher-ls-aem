@@ -12,7 +12,7 @@ export default async function decorate(block) {
     authenticationToken?.status === 'error' ||
     authenticationToken.user_type === 'guest'
   ) {
-    window.location.href = '/us/en/products/cart-checkout/cartlanding';
+    window.location.href = '/us/en/eds-stage-test/cart-checkout/cartlanding';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
