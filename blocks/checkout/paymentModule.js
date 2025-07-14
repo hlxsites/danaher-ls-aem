@@ -1,3 +1,4 @@
+import { buildInputElement } from '../../scripts/common-utils.js';
 import { h2, h5, div, p, span, input } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -45,12 +46,17 @@ const paymentModule = async () => {
         {
           class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
-        input({
-          name: `paymentMethod`,
-          type: 'radio',
-          id: `credit-card`,
-          class: '',
-        }),
+      buildInputElement(  
+        'Invoice',
+        'Invoice',
+        'radio',
+        'paymentMethod',
+        true,
+        false,
+        'mt-6',
+        false,
+        false,
+        ),
         span(
           {
             class: 'text-base font-semibold',
@@ -67,12 +73,17 @@ const paymentModule = async () => {
         class:
           'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
       },
-      input({
-        name: `paymentMethod`,
-        type: 'radio',
-        id: `invoiceWrapper`,
-        class: '',
-      }),
+      buildInputElement(  
+        'Invoice',
+        'Invoice',
+        'radio',
+        'paymentMethod',
+        true,
+        false,
+        'mt-6',
+        false,
+        false,
+        ),
       span(
         {
           class: 'text-base font-semibold',
