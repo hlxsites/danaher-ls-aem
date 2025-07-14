@@ -1,5 +1,5 @@
 import {
-  h2, h5, div, p, span
+  h2, h5, div, p, span, input
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -60,6 +60,7 @@ const paymentModule = async () => {
     );
 
     paymentMethodsWrapper.append(cardsWrapper,invoiceWrapper);
+    decorateIcons(paymentMethodsWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
   } catch (error) {
