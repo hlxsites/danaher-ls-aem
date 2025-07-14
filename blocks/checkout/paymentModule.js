@@ -87,7 +87,7 @@ const paymentModule = async () => {
         const inputElement = inp?.querySelector('input');
         if(inputElement)
         {
-          inputElement.className = '';
+          inputElement.className = 'm-0 p-0';
         }
         inp?.classList.add('flex', 'flex-row-reverse', 'items-center','gap-2');
         const inpu = inp?.querySelector('label');
