@@ -61,7 +61,6 @@ const paymentModule = async () => {
 
     paymentMethodsWrapper.append(cardsWrapper,invoiceWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
-    decorateIcons(cardsWrapper);
     return moduleContent;
   } catch (error) {
     return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));
