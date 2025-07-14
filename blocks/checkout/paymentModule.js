@@ -56,12 +56,6 @@ const paymentModule = async () => {
         'mt-6',
         false,
         false,
-        ),
-        span(
-          {
-            class: 'text-base font-semibold',
-          },
-          'Credit Card'
         )
       ),
       span({
@@ -83,13 +77,7 @@ const paymentModule = async () => {
         'mt-6',
         false,
         false,
-        ),
-      span(
-        {
-          class: 'text-base font-semibold',
-        },
-        'Invoice'
-      )
+        )
     );
 
     paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
