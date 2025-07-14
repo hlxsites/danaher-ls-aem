@@ -1378,8 +1378,6 @@ export async function decorateProductList(block, blockId) {
 }
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block?.querySelector('p')?.textContent || '';
   decorateProductList(block, blockId);
 }
