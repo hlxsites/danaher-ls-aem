@@ -32,12 +32,12 @@ const paymentModule = async () => {
 
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
-      class: 'flex flex-col border-2  w-full p-4',
+      class: 'flex flex-col w-full',
     });
 
     const cardsWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex justify-between',
+        class: 'border-solid border-gray-300 flex justify-between p-4 border-2 ',
       },
       div(
         {
@@ -62,7 +62,7 @@ const paymentModule = async () => {
     );
     const invoiceWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex gap-2 items-center',
+        class: 'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 ',
       },
       input({
         name: `invoiceWrapper`,
