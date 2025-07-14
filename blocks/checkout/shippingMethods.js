@@ -43,7 +43,7 @@ const shippingMethodsModule = async () => {
     const moduleHeader = div(
       {
         class:
-          'border-b relative border-black border-solid flex flex-col pt-6 pb-6 mb-4',
+          'border-b relative border-black border-solid flex flex-col pb-6',
       },
       h2({}, 'Confirm your shipping method(s)'),
       p(
