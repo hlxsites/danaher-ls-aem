@@ -49,7 +49,7 @@ const paymentModule = async () => {
           name: `paymentMethod`,
           type: 'radio',
           id: `credit-card`,
-          class: 'peer',
+          class: '',
         }),
         span(
           {
@@ -71,7 +71,7 @@ const paymentModule = async () => {
         name: `paymentMethod`,
         type: 'radio',
         id: `invoiceWrapper`,
-        class: 'peer',
+        class: '',
       }),
       span(
         {
