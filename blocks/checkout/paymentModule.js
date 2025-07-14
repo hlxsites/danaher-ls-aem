@@ -50,7 +50,7 @@ const paymentModule = async () => {
           class: 'peer',
         }),
         span({
-
+        class: 'text-base font-semibold'
         }, 'Credit Card')
       ),
       div(
@@ -70,7 +70,9 @@ const paymentModule = async () => {
         id: `invoiceWrapper`,
         class: 'peer',
       }),
-      span({}, 'Invoice')
+      span({
+        class: 'text-base font-semibold'
+      }, 'Invoice')
     );
 
     paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);

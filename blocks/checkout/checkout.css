@@ -809,6 +809,10 @@
   font-weight: 200
 }
 
+.checkout :is(.font-semibold) {
+  font-weight: 700
+}
+
 .checkout :is(.leading-10) {
   line-height: 2.5rem
 }
