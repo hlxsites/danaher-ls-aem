@@ -21,7 +21,7 @@ const paymentModule = async () => {
       h2(
         {
           class:
-            'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0',
+            'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0 pb-6',
         },
         'Choose your payment method'
       ),

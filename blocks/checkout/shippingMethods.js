@@ -45,7 +45,7 @@ const shippingMethodsModule = async () => {
           'relative flex flex-col mb-6',
       },
       h2({
-        class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0'
+        class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0  pb-6'
       }, 'Confirm your shipping method(s)'),
       p(
         {},
