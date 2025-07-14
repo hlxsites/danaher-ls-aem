@@ -80,19 +80,20 @@ const paymentModule = async () => {
       )
     );
 
-    cardsWrapper?.querySelector('.field-wrapper')?.classList.add('flex','flex-row-reverse','items-center');
-    invoiceWrapper?.querySelector('.field-wrapper')?.classList.add('flex','flex-row-reverse','items-center');
     paymentMethodsWrapper?.append(cardsWrapper, invoiceWrapper);
-    paymentMethodsWrapper?.querySelectorAll('field-wrapper')?.forEach((inp) => {
-      const inpu = inp?.querySelector('label');
-      if (inpu?.classList.contains('font-normal')) {
-        inpu?.classList.remove('font-normal');
-      }
-      if (inpu?.classList.contains('text-sm')) {
-        inpu?.classList.remove('text-sm');
-      }
-      inpu?.classList.add('text-base', 'font-semibold');
-    });
+    paymentMethodsWrapper
+      ?.querySelectorAll('.field-wrapper')
+      ?.forEach((inp) => {
+        inp?.classList.add('flex', 'flex-row-reverse', 'items-center');
+        const inpu = inp?.querySelector('label');
+        if (inpu?.classList.contains('font-normal')) {
+          inpu?.classList.remove('font-normal');
+        }
+        if (inpu?.classList.contains('text-sm')) {
+          inpu?.classList.remove('text-sm');
+        }
+        inpu?.classList.add('text-base', 'font-semibold');
+      });
     decorateIcons(cardsWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
