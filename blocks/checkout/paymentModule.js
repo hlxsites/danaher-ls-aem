@@ -46,7 +46,7 @@ const paymentModule = async () => {
           class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
         input({
-          name: `credit-card`,
+          name: `paymentMethod`,
           type: 'radio',
           id: `credit-card`,
           class: 'peer',
@@ -68,7 +68,7 @@ const paymentModule = async () => {
           'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
       },
       input({
-        name: `invoiceWrapper`,
+        name: `paymentMethod`,
         type: 'radio',
         id: `invoiceWrapper`,
         class: 'peer',
