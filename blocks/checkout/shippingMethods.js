@@ -3,7 +3,6 @@ import {
   h5,
   div,
   p,
-  img,
   textarea,
   button,
 } from '../../scripts/dom-builder.js';
