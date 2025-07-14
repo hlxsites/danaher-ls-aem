@@ -1,6 +1,4 @@
-import {
-  h2, h5, div, p, span, input
-} from '../../scripts/dom-builder.js';
+import { h2, h5, div, p, span, input } from '../../scripts/dom-builder.js';
 
 /*
  :::::::::::::::
@@ -21,44 +19,61 @@ const paymentModule = async () => {
       },
       h2(
         {
-          class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0'
-        }, 
-        'Choose your payment method'),
-        p(
-          {},
-          'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
-        ),
+          class:
+            'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0',
+        },
+        'Choose your payment method'
+      ),
+      p(
+        {},
+        'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.'
+      )
     );
 
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
-      class: 'border-solid flex flex-col border-2 border-gray-300 w-full',
+      class: 'flex flex-col border-2  w-full p-4',
     });
 
-    const cardsWrapper = div({
-    },input({
-        name: `credit-card`,
-        type: 'radio',
-        id: `credit-card`,
-        class: 'peer',
-      }),
+    const cardsWrapper = div(
+      {
+        class: 'border-solid border-gray-300 flex justify-between',
+      },
       div(
-        { 
-        }, span({
-          class: 'icon icon-payment-cards'
+        {
+        class: 'border-solid border-gray-300 flex gap-2',
+        },
+        input({
+          name: `credit-card`,
+          type: 'radio',
+          id: `credit-card`,
+          class: 'peer',
+        }),
+        span({
+
+        }, 'Credit Card')
+      ),
+      div(
+        {},
+        span({
+          class: 'icon icon-payment-cards',
         })
       )
     );
-    const invoiceWrapper = div({
-    },input({
+    const invoiceWrapper = div(
+      {
+        class: 'border-solid border-gray-300 flex gap-2',
+      },
+      input({
         name: `invoiceWrapper`,
         type: 'radio',
         id: `invoiceWrapper`,
         class: 'peer',
       }),
+      span({}, 'Invoice')
     );
 
-    paymentMethodsWrapper.append(cardsWrapper,invoiceWrapper);
+    paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
   } catch (error) {
