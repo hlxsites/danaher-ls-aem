@@ -48,7 +48,7 @@ const paymentModule = async () => {
         },
       buildInputElement(  
         'creditCard',
-        'creditCard',
+        'Credit Card',
         'radio',
         'paymentMethod',
         true,
@@ -75,7 +75,7 @@ const paymentModule = async () => {
       },
       buildInputElement(  
         'invoice',
-        'invoice',
+        'Invoice',
         'radio',
         'paymentMethod',
         true,
