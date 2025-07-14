@@ -47,8 +47,8 @@ const paymentModule = async () => {
           class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
       buildInputElement(  
-        'Invoice',
-        'Invoice',
+        'creditCard',
+        'creditCard',
         'radio',
         'paymentMethod',
         true,
@@ -74,8 +74,8 @@ const paymentModule = async () => {
           'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
       },
       buildInputElement(  
-        'Invoice',
-        'Invoice',
+        'invoice',
+        'invoice',
         'radio',
         'paymentMethod',
         true,

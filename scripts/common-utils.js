@@ -798,7 +798,7 @@ export const buildInputElement = (
       type: inputType,
       name: inputName,
       value,
-      id: inputName,
+      id: fieldLable,
       autocomplete: autoCmplte,
       'data-required': required,
       class:
