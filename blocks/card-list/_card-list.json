@@ -16,6 +16,24 @@
           }
         }
     ],
-    "models": [    ],
-    "filters": [    ]
+    "models": [
+      {
+        "id": "card-list",
+        "fields": [{
+            "component": "text",
+            "valueType": "string",
+            "name": "tagName",
+            "value": "",
+            "label": "Tag Name"
+          }]
+      }
+        ],
+    "filters": [
+      {
+      "id": "card-list",
+      "components": [
+        ""
+        ]
+      }
+    ]
   } 

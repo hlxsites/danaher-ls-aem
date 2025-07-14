@@ -63,6 +63,10 @@
     ]
   },
   {
+    "id": "article-info",
+    "components": []
+  },
+  {
     "id": "articles-list",
     "components": [
       ""
@@ -70,6 +74,16 @@
   },
   {
     "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "components": []
+  },
+  {
+    "id": "card-list",
     "components": [
       ""
     ]

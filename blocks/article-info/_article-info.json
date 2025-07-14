@@ -16,6 +16,31 @@
           }
         }
     ],
-    "models": [    ],
-    "filters": [    ]
+    "models": [
+      {
+        "id": "article-info",
+        "fields": [
+           {
+            "component": "date-time",
+            "valueType": "date",
+            "name": "publishdate",
+            "label": "Publish Date",
+            "value": ""
+           },
+           {
+            "component": "number",
+            "valueType": "number",
+            "name": "timetoread",
+            "label": "Reading Time",
+            "value": ""
+           }
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "id": "article-info",
+        "components": [   ] 
+      }
+    ]
   }
