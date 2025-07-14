@@ -1,4 +1,6 @@
-import { div, img, a, button, input, span } from '../../scripts/dom-builder.js';
+import {
+  div, img, a, button, input, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals } from '../../scripts/scripts.js';
 // Helper function to create a badge based on item.carrierFree
@@ -13,8 +15,8 @@ function createCarrierFreeBadge(carrierFreeText) {
         class:
           'text-center justify-start text-violet-600 text-sm font-normal leading-tight',
       },
-      carrierFreeText
-    )
+      carrierFreeText,
+    ),
   );
 }
 
@@ -24,9 +26,8 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered list card element.
  */
 export default function renderListCard(item) {
-  const imageUrl =
-    item?.images?.[0] ||
-    'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const imageUrl = item?.images?.[0]
+    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({
     class:
       'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
@@ -58,8 +59,8 @@ export default function renderListCard(item) {
           'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
         src: imageUrl,
         alt: item.title || '',
-      })
-    )
+      }),
+    ),
   );
 
   imageSection.append(imageWrapper);
@@ -84,8 +85,8 @@ export default function renderListCard(item) {
         class:
           'self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2',
       },
-      (item.title || '').trim().replace(/<[^>]*>/g, '')
-    )
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   mobileTitleSection.append(mobileTitleWrapper);
@@ -106,9 +107,9 @@ export default function renderListCard(item) {
             class:
               'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
           },
-          (item.description || '').trim().replace(/<[^>]*>/g, '')
-        )
-      )
+          (item.description || '').trim().replace(/<[^>]*>/g, ''),
+        ),
+      ),
     ),
     a(
       {
@@ -121,8 +122,8 @@ export default function renderListCard(item) {
       span({
         class:
           'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      })
-    )
+      }),
+    ),
   );
   decorateIcons(mobileDescSection);
 
@@ -149,9 +150,9 @@ export default function renderListCard(item) {
           class:
             'self-stretch justify-start text-black text-xl font-normal leading-7',
         },
-        (item.title || '').trim().replace(/<[^>]*>/g, '')
-      )
-    )
+        (item.title || '').trim().replace(/<[^>]*>/g, ''),
+      ),
+    ),
   );
 
   desktopTitleAndDesc.append(
@@ -165,10 +166,10 @@ export default function renderListCard(item) {
             class:
               'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
           },
-          (item.description || '').trim().replace(/<[^>]*>/g, '')
-        )
-      )
-    )
+          (item.description || '').trim().replace(/<[^>]*>/g, ''),
+        ),
+      ),
+    ),
   );
 
   // Bottom section with View Details link - SEPARATED
@@ -184,8 +185,8 @@ export default function renderListCard(item) {
       span({
         class:
           'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      })
-    )
+      }),
+    ),
   );
 
   decorateIcons(desktopViewDetails);
@@ -194,7 +195,7 @@ export default function renderListCard(item) {
     imageSection,
     mobileContentSection,
     mobileDescSection,
-    desktopContentSection
+    desktopContentSection,
   );
 
   let rightSection;
@@ -208,7 +209,7 @@ export default function renderListCard(item) {
       {
         class: 'w-64 text-right justify-start text-black text-2xl font-normal',
       },
-      `$${item.price.toLocaleString()}.00`
+      `$${item.price.toLocaleString()}.00`,
     );
 
     const pricingDetails = div({ class: 'w-64 flex flex-col gap-1' });
@@ -217,35 +218,35 @@ export default function renderListCard(item) {
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Availability:'
+          'Availability:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          `${item?.availability || ''} Available`
-        )
+          `${item?.availability || ''} Available`,
+        ),
       ),
       div(
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Unit of Measure:'
+          'Unit of Measure:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.uom || ''
-        )
+          item?.uom || '',
+        ),
       ),
       div(
         { class: 'flex justify-between items-center' },
         div(
           { class: 'text-black text-base font-extralight leading-snug' },
-          'Min. Order Qty:'
+          'Min. Order Qty:',
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.minQty || ''
-        )
-      )
+          item?.minQty || '',
+        ),
+      ),
     );
 
     const actionButtons = div({
@@ -270,8 +271,8 @@ export default function renderListCard(item) {
             class:
               'justify-start text-white text-base font-normal leading-snug',
           },
-          'Buy'
-        )
+          'Buy',
+        ),
       ),
       button(
         {
@@ -282,9 +283,9 @@ export default function renderListCard(item) {
           {
             class: 'text-violet-600 text-base font-normal leading-snug',
           },
-          'Quote'
-        )
-      )
+          'Quote',
+        ),
+      ),
     );
 
     rightSection.append(price, pricingDetails, actionButtons);
@@ -311,8 +312,8 @@ export default function renderListCard(item) {
               class:
                 'justify-start text-white text-base font-normal leading-snug',
             },
-            'Price & Availability'
-          )
+            'Price & Availability',
+          ),
         ),
         button(
           {
@@ -323,9 +324,9 @@ export default function renderListCard(item) {
             {
               class: 'text-violet-600 text-base font-normal leading-snug',
             },
-            'Quote'
-          )
-        )
+            'Quote',
+          ),
+        ),
       );
     } else {
       actionButtons.append(
@@ -338,9 +339,9 @@ export default function renderListCard(item) {
             {
               class: 'text-violet-600 text-base font-normal leading-snug',
             },
-            'Quote'
-          )
-        )
+            'Quote',
+          ),
+        ),
       );
     }
 
@@ -352,8 +353,7 @@ export default function renderListCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src =
-          'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };

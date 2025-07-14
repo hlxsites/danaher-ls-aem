@@ -34,6 +34,7 @@ const fileMappings = [
       './blocks/cartlanding/cartlanding.js',
       './blocks/cartlanding/cartItem.js',
       './blocks/cartlanding/addproducts.js',
+      './blocks/cartlanding/addproducts.js',
       './blocks/cartlanding/mycart.js',
       './blocks/cartlanding/price.js',
       './blocks/cartlanding/recommendedproducts.js',
@@ -48,6 +49,11 @@ const fileMappings = [
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',
+  },
+  {
+    content: './blocks/order-submit/order-submit.js',
+    output: './blocks/order-submit/order-submit.css',
+    wrapper: 'order-submit-wrapper',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',

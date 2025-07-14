@@ -43,6 +43,44 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
+  console.log('logo div calledddddd');
+  // const logoDiv = div({}, hr({
+  //     class: `w-full border-black-300`,
+  //   }),
+  //   div(
+  //     {
+  //       class: "w-full px-4 py-3 inline-flex justify-between items-center",
+  //       id: imgsrc,
+  //     },
+  //     div(
+  //       {
+  //         class:
+  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       img({
+  //         class: "",
+  //         src: `/icons/${imgsrc}.png`,
+  //       })
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       opcoBe[0]
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+  //         id: `product-Quantity-${opcoBe[0]}`,
+  //       },
+  //       `${itemToBeDisplayed[opcoBe].length} Items`
+  //     )
+  //   ),
+  //   hr({
+  //     class: `w-full border-black-200`,
+  //   }))
   const logoDivInner = div(
     {
       class:
@@ -2269,7 +2307,7 @@ export const cartItemsContainer = (cartItemValue) => {
   const modalInput = input({
     // id: cartItemValue.lineItemId,
     class:
-      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
+      'w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center',
     type: 'number',
     min: cartItemValue.minOrderQuantity,
     max:
@@ -2470,7 +2508,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class:
-            'sm:w-64 w-[11rem] justify-start text-black text-base font-bold',
+            'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
           // id: `product-Quantity-${opcoBe[0]}`,
         },
         div(

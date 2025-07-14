@@ -49,9 +49,9 @@ export function preLoader() {
       id: 'preLoader',
     },
     img({
-      class: 'h-24',
+      class: ' h-24',
       src: '/icons/loading_icon.gif',
-    })
+    }),
   );
 }
 

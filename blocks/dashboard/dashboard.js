@@ -79,9 +79,20 @@ export default async function decorate(block) {
           class:
             'w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },
-        'View Cart'
-      )
-    )
+        'View Cart',
+      ),
+    ),
+    div(
+      { class: 'w-full px-6 flex flex-col' },
+      a(
+        {
+          href: '/us/en/products/cart-checkout/orderSubmit?orderId=10000123',
+          class:
+            'w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+        },
+        'View Order Submit',
+      ),
+    ),
   );
   const content = div(
     {

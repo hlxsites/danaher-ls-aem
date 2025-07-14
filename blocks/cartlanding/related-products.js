@@ -18,7 +18,7 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function relatedProducts(headingText, productIds) {
+export default async function relatedProducts(headingText, productIds)  {
   // block?.parentElement?.parentElement?.removeAttribute('class');
   // block?.parentElement?.parentElement?.removeAttribute('style');
 
@@ -52,8 +52,7 @@ export default async function relatedProducts(headingText, productIds) {
   //   '[data-aue-prop="subscribe"]',
   // )?.textContent;
   const carouselContainer = div({
-    class:
-      'carousel-container w-[1358px] flex flex-col gap-y-6 w-full justify-center',
+    class: 'carousel-container w-[1358px] flex flex-col gap-y-6 w-full justify-center',
   });
   const carouselHead = div({
     class: 'w-[1280px] flex flex-row justify-between md:h-10',
@@ -67,8 +66,8 @@ export default async function relatedProducts(headingText, productIds) {
       {
         class: 'text-black text-2xl font-bold leading-loose',
       },
-      headingText ?? ''
-    )
+      headingText ?? '',
+    ),
     // a(
     //   {
     //     href: linkUrl ?? '#',
@@ -83,7 +82,7 @@ export default async function relatedProducts(headingText, productIds) {
     //           'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
     //     })
     //     : '',
-    // ),
+    // ), 
   );
   decorateIcons(leftGroup);
 
@@ -100,7 +99,7 @@ export default async function relatedProducts(headingText, productIds) {
     span({
       class:
         'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
-    })
+    }),
   );
   const nextDiv = div(
     {
@@ -110,7 +109,7 @@ export default async function relatedProducts(headingText, productIds) {
     span({
       class:
         'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500',
-    })
+    }),
   );
   arrowGroup.append(prevDiv, nextDiv);
   decorateIcons(arrowGroup);
@@ -128,8 +127,8 @@ export default async function relatedProducts(headingText, productIds) {
       span({
         class:
           'icon icon-view-list w-5 h-5 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
-      })
-    )
+      }),
+    ),
   );
   const gridBtn = div(
     {
@@ -141,8 +140,8 @@ export default async function relatedProducts(headingText, productIds) {
       span({
         class:
           'icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white',
-      })
-    )
+      }),
+    ),
   );
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
@@ -166,7 +165,7 @@ export default async function relatedProducts(headingText, productIds) {
       productIds.map(async (sku) => getProductInfo(sku, false))
     )
   )
-    .filter((product) => product.status !== 'error')
+    .filter((product) => product.status !== "error")
     .map((product) => product.value);
 
   /**
@@ -190,7 +189,7 @@ export default async function relatedProducts(headingText, productIds) {
     spanEle?.classList.toggle('pointer-events-none', !isEnabled);
     spanEle?.classList.toggle(
       '[&_svg>use]:stroke-danaherpurple-500',
-      isEnabled
+      isEnabled,
     );
   }
 
@@ -211,21 +210,17 @@ export default async function relatedProducts(headingText, productIds) {
       } else {
         cardsToDisplay = products.slice(
           currentIndex,
-          currentIndex + cardsPerPageGrid
+          currentIndex + cardsPerPageGrid,
         );
         arrowGroup.style.display = 'flex'; // Show carousel arrows
       }
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
+      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderListCard(item))
-      );
+      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = products.length < 7 ? 'none' : 'flex';
       arrowGroup.style.display = 'none';
 
@@ -264,7 +259,7 @@ export default async function relatedProducts(headingText, productIds) {
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
                 prevEnabled ? 'text-gray-700' : 'text-violet-600'
               } [&_svg>use]:stroke-current`,
-            })
+            }),
           ),
           div(
             {
@@ -272,9 +267,9 @@ export default async function relatedProducts(headingText, productIds) {
                 prevEnabled ? 'gray-700' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
-            'Previous'
-          )
-        )
+            'Previous',
+          ),
+        ),
       );
       decorateIcons(prevButton);
       prevButton.addEventListener('click', () => {
@@ -292,7 +287,7 @@ export default async function relatedProducts(headingText, productIds) {
       const maxVisiblePages = 5;
       let startPage = Math.max(
         1,
-        currentPage - Math.floor(maxVisiblePages / 2)
+        currentPage - Math.floor(maxVisiblePages / 2),
       );
       const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
       if (endPage - startPage + 1 < maxVisiblePages) {
@@ -323,9 +318,9 @@ export default async function relatedProducts(headingText, productIds) {
                   currentPage === page ? 'violet-600' : 'gray-700'
                 } text-sm font-medium leading-tight`,
               },
-              page.toString()
-            )
-          )
+              page.toString(),
+            ),
+          ),
         );
         pageNumber.addEventListener('click', () => {
           currentPage = page;
@@ -354,10 +349,10 @@ export default async function relatedProducts(headingText, productIds) {
                     class:
                       'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
                   },
-                  '...'
-                )
-              )
-            )
+                  '...',
+                ),
+              ),
+            ),
           );
         }
       }
@@ -383,10 +378,10 @@ export default async function relatedProducts(headingText, productIds) {
                   class:
                     'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
                 },
-                '...'
-              )
-            )
-          )
+                '...',
+              ),
+            ),
+          ),
         );
       }
 
@@ -415,7 +410,7 @@ export default async function relatedProducts(headingText, productIds) {
                 nextEnabled ? 'gray-700' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
-            'Next'
+            'Next',
           ),
           div(
             { class: 'w-5 h-5 relative overflow-hidden' },
@@ -423,9 +418,9 @@ export default async function relatedProducts(headingText, productIds) {
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
                 nextEnabled ? 'text-gray-700' : 'text-violet-600'
               } [&_svg>use]:stroke-current`,
-            })
-          )
-        )
+            }),
+          ),
+        ),
       );
       decorateIcons(nextButton);
       nextButton.addEventListener('click', () => {
@@ -464,8 +459,8 @@ export default async function relatedProducts(headingText, productIds) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
     } else if (
-      !isGridView &&
-      currentPage < Math.ceil(products.length / cardsPerPageList)
+      !isGridView
+      && currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
       currentPage += 1;
       updateCarousel();
@@ -481,36 +476,36 @@ export default async function relatedProducts(headingText, productIds) {
 
     gridBtn.classList.replace(
       toGridView ? 'bg-white' : 'bg-violet-600',
-      toGridView ? 'bg-violet-600' : 'bg-white'
+      toGridView ? 'bg-violet-600' : 'bg-white',
     );
     gridBtn
       .querySelector('.icon')
       .classList.replace(
         toGridView ? 'text-gray-600' : 'text-white',
-        toGridView ? 'text-white' : 'text-gray-600'
+        toGridView ? 'text-white' : 'text-gray-600',
       );
     gridBtn
       .querySelector('.icon')
       .classList.replace(
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600'
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
       );
 
     listBtn.classList.replace(
       toGridView ? 'bg-violet-600' : 'bg-white',
-      toGridView ? 'bg-white' : 'bg-violet-600'
+      toGridView ? 'bg-white' : 'bg-violet-600',
     );
     listBtn
       .querySelector('.icon')
       .classList.replace(
         toGridView ? 'text-white' : 'text-gray-600',
-        toGridView ? 'text-gray-600' : 'text-white'
+        toGridView ? 'text-gray-600' : 'text-white',
       );
     listBtn
       .querySelector('.icon')
       .classList.replace(
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white'
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
 
     updateCarousel();

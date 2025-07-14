@@ -55,7 +55,8 @@
       "product-info-list",
       "dashboard",
       "checkout",
-      "cartlanding"
+      "cartlanding",
+      "ordersubmit"
     ]
   },
   {
