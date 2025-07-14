@@ -383,6 +383,10 @@
   cursor: pointer
 }
 
+.checkout :is(.flex-row-reverse) {
+  flex-direction: row-reverse
+}
+
 .checkout :is(.flex-col) {
   flex-direction: column
 }

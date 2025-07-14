@@ -80,7 +80,13 @@ const paymentModule = async () => {
         )
     );
 
+    cardsWrapper.querySelector('div')?.classList.add('flex flex-row-reverse');
+    invoiceWrapper.querySelector('div')?.classList.add('flex flex-row-reverse');
     paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
+    paymentMethodsWrapper.querySelectorAll('input')?.forEach((inp)=>
+    {
+      inp?.querySelector('label')?.classList.add('text-base','font-semibold');
+    });
     decorateIcons(cardsWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
