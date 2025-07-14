@@ -17,13 +17,17 @@ const paymentModule = async () => {
     const moduleContent = div({});
     const moduleHeader = div(
       {
-        class: 'relative flex flex-col pb-6',
+        class: 'relative flex flex-col mb-6',
       },
-      h2({}, 'Choose your payment method'),
-      p(
-        {},
-        'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
-      ),
+      h2(
+        {
+          class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0'
+        }, 
+        'Choose your payment method'),
+        p(
+          {},
+          'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
+        ),
     );
 
     const paymentMethodsWrapper = div({

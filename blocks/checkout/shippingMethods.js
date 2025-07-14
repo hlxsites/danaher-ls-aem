@@ -43,9 +43,11 @@ const shippingMethodsModule = async () => {
     const moduleHeader = div(
       {
         class:
-          'border-b relative border-black border-solid flex flex-col pb-6 p-0 m-0',
+          'relative flex flex-col mb-6',
       },
-      h2({}, 'Confirm your shipping method(s)'),
+      h2({
+        class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0'
+      }, 'Confirm your shipping method(s)'),
       p(
         {},
         'Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.',
