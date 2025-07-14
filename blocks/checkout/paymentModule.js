@@ -84,7 +84,8 @@ const paymentModule = async () => {
     paymentMethodsWrapper
       ?.querySelectorAll('.field-wrapper')
       ?.forEach((inp) => {
-        inp?.querySelector('input')?.className = '';
+        const inputElement = inp?.querySelector('input');
+        inputElement?.className = '';
         inp?.classList.add('flex', 'flex-row-reverse', 'items-center','gap-2');
         const inpu = inp?.querySelector('label');
         if (inpu?.classList.contains('font-normal')) {
