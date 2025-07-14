@@ -359,6 +359,10 @@
   width: 30rem
 }
 
+.checkout :is(.w-\[176px\]) {
+  width: 176px
+}
+
 .checkout :is(.min-w-\[320px\]) {
   min-width: 320px
 }

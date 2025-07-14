@@ -38,11 +38,12 @@ const paymentModule = async () => {
 
     const cardsWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex justify-between p-4 border-2 ',
+        class:
+          'border-solid border-gray-300 flex justify-between p-4 border-2 items-center',
       },
       div(
         {
-        class: 'border-solid border-gray-300 flex gap-2 items-center',
+          class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
         input({
           name: `credit-card`,
@@ -50,20 +51,21 @@ const paymentModule = async () => {
           id: `credit-card`,
           class: 'peer',
         }),
-        span({
-        class: 'text-base font-semibold'
-        }, 'Credit Card')
+        span(
+          {
+            class: 'text-base font-semibold',
+          },
+          'Credit Card'
+        )
       ),
-      div(
-        {},
-        span({
-          class: 'icon icon-payment-cards',
-        })
-      )
+      span({
+        class: 'icon icon-payment-cards w-[176px]',
+      })
     );
     const invoiceWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 ',
+        class:
+          'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
       },
       input({
         name: `invoiceWrapper`,
@@ -71,9 +73,12 @@ const paymentModule = async () => {
         id: `invoiceWrapper`,
         class: 'peer',
       }),
-      span({
-        class: 'text-base font-semibold'
-      }, 'Invoice')
+      span(
+        {
+          class: 'text-base font-semibold',
+        },
+        'Invoice'
+      )
     );
 
     paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
