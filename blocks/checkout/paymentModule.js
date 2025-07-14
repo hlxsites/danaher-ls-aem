@@ -85,7 +85,16 @@ const paymentModule = async () => {
     paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
     paymentMethodsWrapper.querySelectorAll('input')?.forEach((inp)=>
     {
-      inp?.querySelector('label')?.classList.add('text-base','font-semibold');
+      const inpu= inp?.querySelector('label');
+      if(inpu?.classList.contains('font-normal'))
+      {
+        inpu?.classList.remove('font-normal')
+      }
+      if(inpu?.classList.contains('text-sm'))
+      {
+        inpu?.classList.remove('text-sm')
+      }
+      inpu?.classList.add('text-base','font-semibold');
     });
     decorateIcons(cardsWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
