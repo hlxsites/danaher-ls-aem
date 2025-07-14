@@ -62,7 +62,7 @@ const paymentModule = async () => {
     );
     const invoiceWrapper = div(
       {
-        class: 'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 ',
+        class: 'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 ',
       },
       input({
         name: `invoiceWrapper`,

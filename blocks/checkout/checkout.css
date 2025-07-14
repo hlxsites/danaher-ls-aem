@@ -531,6 +531,10 @@
   border-top-width: 1px
 }
 
+.checkout :is(.border-t-0) {
+  border-top-width: 0px
+}
+
 .checkout :is(.border-solid) {
   border-style: solid
 }
