@@ -46,16 +46,16 @@ const paymentModule = async () => {
         {
           class: 'border-solid border-gray-300 flex gap-2 items-center',
         },
-      buildInputElement(  
-        'creditCard',
-        'Credit Card',
-        'radio',
-        'paymentMethod',
-        true,
-        false,
-        'mt-6',
-        false,
-        false,
+        buildInputElement(
+          'creditCard',
+          'Credit Card',
+          'radio',
+          'paymentMethod',
+          true,
+          false,
+          'mt-6',
+          false,
+          false
         )
       ),
       span({
@@ -67,7 +67,7 @@ const paymentModule = async () => {
         class:
           'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
       },
-      buildInputElement(  
+      buildInputElement(
         'invoice',
         'Invoice',
         'radio',
@@ -76,25 +76,22 @@ const paymentModule = async () => {
         false,
         'mt-6',
         false,
-        false,
-        )
+        false
+      )
     );
 
-    cardsWrapper.querySelector('div')?.classList.add('flex flex-row-reverse');
-    invoiceWrapper.querySelector('div')?.classList.add('flex flex-row-reverse');
-    paymentMethodsWrapper.append(cardsWrapper, invoiceWrapper);
-    paymentMethodsWrapper.querySelectorAll('input')?.forEach((inp)=>
-    {
-      const inpu= inp?.querySelector('label');
-      if(inpu?.classList.contains('font-normal'))
-      {
-        inpu?.classList.remove('font-normal')
+    cardsWrapper?.querySelector('div')?.classList.add('flex','flex-row-reverse');
+    invoiceWrapper?.querySelector('div')?.classList.add('flex','flex-row-reverse');
+    paymentMethodsWrapper?.append(cardsWrapper, invoiceWrapper);
+    paymentMethodsWrapper?.querySelectorAll('input')?.forEach((inp) => {
+      const inpu = inp?.querySelector('label');
+      if (inpu?.classList.contains('font-normal')) {
+        inpu?.classList.remove('font-normal');
       }
-      if(inpu?.classList.contains('text-sm'))
-      {
-        inpu?.classList.remove('text-sm')
+      if (inpu?.classList.contains('text-sm')) {
+        inpu?.classList.remove('text-sm');
       }
-      inpu?.classList.add('text-base','font-semibold');
+      inpu?.classList.add('text-base', 'font-semibold');
     });
     decorateIcons(cardsWrapper);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
