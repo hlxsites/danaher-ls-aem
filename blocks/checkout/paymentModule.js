@@ -80,8 +80,8 @@ const paymentModule = async () => {
       )
     );
 
-    cardsWrapper?.querySelector('div')?.classList.add('flex','flex-row-reverse');
-    invoiceWrapper?.querySelector('div')?.classList.add('flex','flex-row-reverse');
+    cardsWrapper?.querySelector('div > div')?.classList.add('flex','flex-row-reverse','items-center');
+    invoiceWrapper?.querySelector('div')?.classList.add('flex','flex-row-reverse','items-center');
     paymentMethodsWrapper?.append(cardsWrapper, invoiceWrapper);
     paymentMethodsWrapper?.querySelectorAll('input')?.forEach((inp) => {
       const inpu = inp?.querySelector('label');
