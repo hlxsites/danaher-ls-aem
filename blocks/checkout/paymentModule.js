@@ -1,6 +1,7 @@
 import {
   h2, h5, div, p,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
  :::::::::::::::
@@ -35,8 +36,32 @@ const paymentModule = async () => {
       class: 'border-solid flex flex-col border-2 border-gray-300 w-full',
     });
 
-    moduleContent?.append(moduleHeader, paymentMethodsWrapper);
+    const cardsWrapper = div({
+    },input({
+        name: `credit-card`,
+        type: 'radio',
+        id: `credit-card`,
+        class: 'peer',
+      }),
+      div(
+        { 
+        }, span({
+          class: 'icon icon-payment-cards'
+        })
+      )
+    );
+    const invoiceWrapper = div({
+    },input({
+        name: `invoiceWrapper`,
+        type: 'radio',
+        id: `invoiceWrapper`,
+        class: 'peer',
+      }),
+    );
 
+    paymentMethodsWrapper.append(cardsWrapper,invoiceWrapper);
+    moduleContent?.append(moduleHeader, paymentMethodsWrapper);
+    decorateIcons(cardsWrapper);
     return moduleContent;
   } catch (error) {
     return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));
