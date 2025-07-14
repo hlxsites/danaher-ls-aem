@@ -181,7 +181,7 @@ export default async function decorate(block) {
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(h1({ class: 'title' }, h1Value || response[0]?.raw.titlelsig));
+    defaultContent.prepend(h1({ class: 'title' }, response[0]?.raw.titlelsig || h1Value));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
