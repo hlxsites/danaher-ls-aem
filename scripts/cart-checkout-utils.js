@@ -43,7 +43,6 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  console.log('logo div calledddddd');
   // const logoDiv = div({}, hr({
   //     class: `w-full border-black-300`,
   //   }),
@@ -2218,9 +2217,7 @@ export async function updateCheckoutSummary() {
 }
 
 export const cartItemsContainer = (cartItemValue) => {
-  console.log('cart item value', cartItemValue);
   const modifyCart = async (type, element, value) => {
-    console.log(element);
     showPreLoader();
     if (type == 'delete-item') {
       const item = {
@@ -2235,15 +2232,10 @@ export const cartItemsContainer = (cartItemValue) => {
           const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              console.log('opcoBe', opcoBe.length);
               const str = `product-Quantity-${opcoBe[0]}`;
               const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
-              );
-              console.log(
-                '${itemToBeDisplayed[opcoBe].length',
-                itemToBeDisplayed[opcoBe[0]].length,
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
@@ -2285,7 +2277,6 @@ export const cartItemsContainer = (cartItemValue) => {
   );
   modalCloseButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
-    console.log('Clicked on item with ID: ', input);
     modifyCart('delete-item', input, '');
   });
   const modalInput = input({
@@ -2303,17 +2294,14 @@ export const cartItemsContainer = (cartItemValue) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
     const input = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
-    console.log('productItem', input);
 
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
-      console.log('minnn');
       productItem.style.border = '2px solid red';
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
-      console.log('max');
       productItem.style.border = '2px solid red';
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,

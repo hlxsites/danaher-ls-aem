@@ -181,32 +181,20 @@ export const sessionObject = async (
   lineItemId,
   manufacturer,
 ) => {
-  console.log(
-    'type, quantity, lineItemId, manufacturer',
-    type,
-    quantity,
-    lineItemId,
-    manufacturer,
-  );
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
-    console.log(getProductDetailsObject.data);
     const foundObject = getProductDetailsObject.data.find((obj) => obj.hasOwnProperty(manufacturer));
 
     if (foundObject) {
-      console.log('Found an object with the key', foundObject);
       const result = foundObject[manufacturer].find(
         (obj) => obj.lineItemId === lineItemId,
       );
       if (result) {
-        console.log('resulttt', result);
         if (type == 'delete-item') {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
-          console.log('resulttt', foundObject[manufacturer].length);
           if (foundObject[manufacturer].length == 0) {
             const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-            console.log('manufacturer index', manufacturerIndex);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
             sessionStorage.removeItem('productDetailObject');
             sessionStorage.setItem(
@@ -215,14 +203,8 @@ export const sessionObject = async (
             );
             return 'success';
           }
-          console.log('index', foundObject[manufacturer]);
           const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-          console.log(
-            'getProductDetailsObject.data.indexOf(foundObject)',
-            getProductDetailsObject.data[manufacturerIndex][manufacturer],
-          );
           getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-          console.log(getProductDetailsObject);
           sessionStorage.removeItem('productDetailObject');
           sessionStorage.setItem(
             'productDetailObject',
@@ -233,14 +215,8 @@ export const sessionObject = async (
         result.itemQuantity = quantity;
         const index = foundObject[manufacturer].indexOf(result);
         foundObject[manufacturer][index] = result;
-        console.log('resulttt', foundObject[manufacturer]);
         const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-        console.log(
-          'getProductDetailsObject.data.indexOf(foundObject)',
-          getProductDetailsObject.data[manufacturerIndex][manufacturer],
-        );
         getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-        console.log(getProductDetailsObject);
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.setItem(
           'productDetailObject',
@@ -249,7 +225,6 @@ export const sessionObject = async (
         return 'success';
       }
     } else {
-      console.log('No object with the key\' was found.');
       return "No object with the key' was found";
     }
   }
@@ -270,16 +245,10 @@ export const updateProductQuantityValue = async (
       manufacturer,
     );
     if (response) {
-      console.log('sucess response');
-      console.log('sucess response', quantityElement);
       quantityElement.remove();
       const manufacturerElement = document.getElementById(manufacturer);
       const manufacturerDiv = document.getElementById(opco);
-      console.log('quantity element', manufacturerElement);
-      console.log('manufacturerDiv', manufacturerDiv);
       const hr = manufacturerElement.querySelector('hr');
-      console.log('hr', hr);
-      console.log('child nodesssss', manufacturerElement.children.length);
       if (manufacturerElement.children.length == 1) {
         manufacturerDiv.parentElement.remove();
         manufacturerDiv.remove();
@@ -289,9 +258,7 @@ export const updateProductQuantityValue = async (
     }
     return response;
   }
-  console.log('quantity n lineItemId', quantity, lineItemId);
   const quantityElement = document.getElementById(lineItemId);
-  console.log('quantity element', quantityElement);
   const response = await sessionObject(
     type,
     quantity,

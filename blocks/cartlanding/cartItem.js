@@ -10,14 +10,11 @@ import { getProductDetailObject } from './cartSharedFile.js';
 export const cartItem = async () => {
   let getProductDetailsObject;
   const params = new URLSearchParams(window.location.search);
-  console.log('params', params.get('orderId'));
   if (params.get('orderId')) {
     getProductDetailsObject = JSON.parse(sessionStorage.getItem('cartItemsDetails'));
-    console.log('getProductDetailsObject', getProductDetailsObject);
   } else {
     const productObject = await getProductDetailObject();
     getProductDetailsObject = productObject.data;
-    console.log('getProductDetailsObject', getProductDetailsObject);
   }
 
   const cartItemContainer = div({
@@ -39,14 +36,12 @@ export const cartItem = async () => {
     getProductDetailsObject.forEach((itemToBeDisplayed) => {
       const opcoBe = Object.keys(itemToBeDisplayed);
       const imgsrc = opcoBe[0].split(' ')[0];
-      console.log('itemToBeDisplayed[opcoBe] :', opcoBe[0].split(' ')[0]);
       const cartItemDisplayContainer = div({
         class: '',
         id: opcoBe[0],
       });
 
       const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-      console.log('logoDivDisplay 461', logoDivDisplay);
       // cartListContainer.append(divider(300));
       cartListContainer.append(logoDivDisplay);
       // cartListContainer.append(divider(200));

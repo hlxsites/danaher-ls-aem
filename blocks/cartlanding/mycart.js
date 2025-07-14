@@ -26,7 +26,6 @@ export const prodQuantity = (totalProductQuantity) => div(
 
 export const updateCartQuantity = (newQuantity) => {
   const cartItems = document.querySelectorAll('#cartItemContainer');
-  console.log('new quantity', newQuantity);
   if (cartItems) {
     const myCartListContainer = document.getElementById('myCartListContainer');
     const myCartEmptyContainer = document.getElementById(
@@ -50,7 +49,6 @@ export const updateCartQuantity = (newQuantity) => {
 
 export const mycart = async () => {
   const basketDetail = await getBasketDetails();
-  if (basketDetail) console.log('basketdetaill', basketDetail);
   let totalProductQuantity;
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
