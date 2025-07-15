@@ -39,13 +39,13 @@ const paymentModule = async () => {
     let cardsWrapper = div({ class: 'hidden' });
     let invoiceWrapper = div({ class: 'hidden' });
     const allPaymentMethods = await getPaymentMethods();
-    allPaymentMethods?.data?.forEach((pm) => {
+    allPaymentMethods?.data?.forEach((pm, ind) => {
       if (pm?.displayName === 'Stripe') {
         cardsWrapper.innerHTML = '';
         cardsWrapper = div(
           {
             class:
-              'border-solid border-gray-300 flex justify-between p-4 border-2 items-center',
+              `border-solid border-gray-300 flex justify-between p-4 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-center`,
           },
           div(
             {
@@ -75,7 +75,7 @@ const paymentModule = async () => {
         invoiceWrapper = div(
           {
             class:
-              'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
+              `border-solid border-gray-300 flex gap-2 items-center p-4 border-2 ${ind > 0 ? 'border-t-0 ' : ''} items-center`,
           },
           buildInputElement(
             'invoice',
