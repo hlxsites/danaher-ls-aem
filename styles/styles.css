@@ -485,7 +485,7 @@ h1,
 h1 {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
 }
 
 @media (min-width: 768px) {
@@ -497,7 +497,7 @@ h1 {
 
 h2 {
   font-size: 1.5rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 2.25rem !important;
 }
 
@@ -510,7 +510,7 @@ h2 {
 
 h3 {
   font-size: 1.25rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 2rem !important;
 }
 
@@ -523,7 +523,7 @@ h3 {
 
 h4 {
   font-size: 1.125rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 1.75rem !important;
 }
 
@@ -553,7 +553,7 @@ main .default-content-wrapper h2,
   padding-top: 1rem;
   font-size: 1.875rem;
   line-height: 2.25rem;
-  font-weight: 400;
+  font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
@@ -895,7 +895,7 @@ main
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1.125rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity));
@@ -1021,7 +1021,7 @@ main .default-content-wrapper p.button-container > a {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1.125rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity));
@@ -1577,14 +1577,14 @@ main .top-border > div.columns-wrapper:first-child {
 
 .productdetail main .columns p > strong {
   font-size: 1.125rem !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 1.25rem !important;
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
 }
 
 .container-two-col .col-left h2 strong {
-  font-weight: 400 !important;
+  font-weight: 500 !important;
 }
 
 .productdetail main .columns p {
@@ -2962,7 +2962,7 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 }
 
 .font-medium {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .font-normal {
