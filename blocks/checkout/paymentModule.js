@@ -114,7 +114,7 @@ const paymentModule = async () => {
         if (!eventTarget.checked) {
           if(eventTarget?.id === 'invoice')
           {
-            const 
+            
           }
           c.target.checked = true;
         }else
