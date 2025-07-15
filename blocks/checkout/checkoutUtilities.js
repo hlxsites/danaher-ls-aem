@@ -1,5 +1,5 @@
 import {
-  div, p, h2, button,
+  div, button,
 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { shippingAddressModule } from './shippingAddress.js';

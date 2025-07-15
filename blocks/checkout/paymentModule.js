@@ -1,6 +1,7 @@
 import { buildInputElement } from '../../scripts/common-utils.js';
 import { h2, h5, div, p, span, input } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
 
 /*
  :::::::::::::::
@@ -31,7 +32,12 @@ const paymentModule = async () => {
         'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.'
       )
     );
-
+    const allPaymentMethods = await getPaymentMethods();
+    if(allPaymentMethods)
+    {
+      console.log(' all payment methods  : ', allPaymentMethods);
+      
+    }
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
       class: 'flex flex-col w-full',
@@ -105,9 +111,15 @@ const paymentModule = async () => {
       setTimeout(async () => {
         c.preventDefault();
         const eventTarget = c.target;
-          console.log(' radio checked : ', eventTarget.checked);
         if (!eventTarget.checked) {
-          console.log(' radio clicked : ', eventTarget.checked);
+          if(eventTarget?.id === 'invoice')
+          {
+            const 
+          }
+          c.target.checked = true;
+        }else
+        {
+          c.target.checked = false;
         }
       },0);
   });

@@ -513,6 +513,40 @@ export const getShippingMethods = async () => {
     return { status: 'error', data: error.message };
   }
 };
+/*
+ :::::::::::::::::::::::::::::
+ get payment  methods
+  ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export const getPaymentMethods = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const fetchPaymentMethods = JSON.parse(sessionStorage.getItem('paymentMethods'));
+    if (fetchPaymentMethods.status === 'success') {
+        return fetchPaymentMethods;
+    }  const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+    const response = await getApiData(url, defaultHeaders);
+      if (response.status === 'success') {
+        sessionStorage.setItem(
+          'paymentMethods',
+          JSON.stringify({ status: 'success', data: response.data.data }),
+        );
+        return { status: 'success', data: response.data.data };
+      }
+    return { status: 'error', data: 'Error getting Payment methods:' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+};
 
 /*
  :::::::::::::::::::::::::::::
