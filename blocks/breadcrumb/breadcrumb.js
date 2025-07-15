@@ -33,6 +33,13 @@ async function getItems() {
 }
 
 export default async function decorate(block) {
+  if (body.dataset.breadcrumbRendered === 'true') {
+    block.remove(); 
+    return;
+  }
+  
+  body.dataset.breadcrumbRendered = 'true';
+  
   if (!block.querySelector('div > ul')) {
     const items = await getItems();
     const listItems = items.map((item) => li({}, a({ href: item.href }, item.title)));
