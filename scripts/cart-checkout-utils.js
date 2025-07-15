@@ -525,7 +525,7 @@ export const getPaymentMethods = async () => {
   }
   try {
     const fetchPaymentMethods = JSON.parse(sessionStorage.getItem('paymentMethods'));
-    if (fetchPaymentMethods.status === 'success') {
+    if (fetchPaymentMethods?.status === 'success') {
         return fetchPaymentMethods;
     }  const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
       const defaultHeaders = new Headers();
@@ -535,12 +535,12 @@ export const getPaymentMethods = async () => {
         authenticationToken.access_token,
       );
     const response = await getApiData(url, defaultHeaders);
-      if (response.status === 'success') {
+      if (response?.status === 'success') {
         sessionStorage.setItem(
           'paymentMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
-        return { status: 'success', data: response.data.data };
+        return { status: 'success', data: 'Error getting Payment methods:' };
       }
     return { status: 'error', data: 'Error getting Payment methods:' };
   } catch (error) {
