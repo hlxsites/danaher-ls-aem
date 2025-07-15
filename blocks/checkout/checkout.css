@@ -210,6 +210,10 @@
   margin-top: 50px
 }
 
+.checkout :is(.\!mt-0) {
+  margin-top: 0px !important
+}
+
 .checkout :is(.box-border) {
   box-sizing: border-box
 }
