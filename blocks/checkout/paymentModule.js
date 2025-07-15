@@ -32,97 +32,109 @@ const paymentModule = async () => {
         'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.'
       )
     );
-    const allPaymentMethods = await getPaymentMethods();
-    if(allPaymentMethods)
-    {
-      console.log(' all payment methods  : ', allPaymentMethods);
-      
-    }
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
-      class: 'flex flex-col w-full',
+      class: 'flex flex-col w-full hidden',
     });
-
-    const cardsWrapper = div(
-      {
-        class:
-          'border-solid border-gray-300 flex justify-between p-4 border-2 items-center',
-      },
-      div(
-        {
-          class: 'border-solid border-gray-300 flex gap-2 items-center',
-        },
-        buildInputElement(
-          'creditCard',
-          'Credit Card',
-          'radio',
-          'paymentMethod',
-          true,
-          false,
-          'mt-6',
-          false,
-          false
-        )
-      ),
-      span({
-        class: 'icon icon-payment-cards w-[176px]',
-      })
-    );
-    const invoiceWrapper = div(
-      {
-        class:
-          'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
-      },
-      buildInputElement(
-        'invoice',
-        'Invoice',
-        'radio',
-        'paymentMethod',
-        true,
-        false,
-        'mt-6',
-        false,
-        false
-      )
-    );
-
-    paymentMethodsWrapper?.append(cardsWrapper, invoiceWrapper);
-    paymentMethodsWrapper
-      ?.querySelectorAll('.field-wrapper')
-      ?.forEach((inp) => {
-        const inputElement = inp?.querySelector('input');
-        if(inputElement)
-        {
-          inputElement.className = '';
-          inputElement.classList.add('!mt-0');
-        }
-        inp?.classList.add('flex', 'flex-row-reverse', 'items-center','gap-2');
-        const inpu = inp?.querySelector('label');
-        if (inpu?.classList.contains('font-normal')) {
-          inpu?.classList.remove('font-normal');
-        }
-        if (inpu?.classList.contains('text-sm')) {
-          inpu?.classList.remove('text-sm');
-        }
-        inpu?.classList.add('text-base', 'font-semibold');
-      });
-    decorateIcons(cardsWrapper);
-    paymentMethodsWrapper?.addEventListener('click', async (c) => {
-      setTimeout(async () => {
-        c.preventDefault();
-        const eventTarget = c.target;
-        if (!eventTarget.checked) {
-          if(eventTarget?.id === 'invoice')
+    let cardsWrapper = div({ class: 'hidden' });
+    let invoiceWrapper = div({ class: 'hidden' });
+    const allPaymentMethods = await getPaymentMethods();
+    allPaymentMethods?.data?.forEach((pm) => {
+      if (pm?.displayName === 'Stripe') {
+        cardsWrapper.innerHTML = '';
+        cardsWrapper = div(
           {
-            
+            class:
+              'border-solid border-gray-300 flex justify-between p-4 border-2 items-center',
+          },
+          div(
+            {
+              class: 'border-solid border-gray-300 flex gap-2 items-center',
+            },
+            buildInputElement(
+              'creditCard',
+              pm?.displayName,
+              'radio',
+              'paymentMethod',
+              true,
+              false,
+              'mt-6',
+              false,
+              false
+            )
+          ),
+          span({
+            class: 'icon icon-payment-cards w-[176px]',
+          })
+        );
+
+        paymentMethodsWrapper?.append(cardsWrapper);
+      }
+      if (pm?.displayName === 'Invoice') {
+        invoiceWrapper.innerHTML = '';
+        invoiceWrapper = div(
+          {
+            class:
+              'border-solid border-gray-300 flex gap-2 items-center p-4 border-2 border-t-0 items-center',
+          },
+          buildInputElement(
+            'invoice',
+            'Invoice',
+            'radio',
+            'paymentMethod',
+            true,
+            false,
+            'mt-6',
+            false,
+            false
+          )
+        );
+        paymentMethodsWrapper?.append(invoiceWrapper);
+      }
+    });
+    if (allPaymentMethods?.data?.length > 0) {
+      if(paymentMethodsWrapper?.classList.contains('hidden'))
+      {
+        paymentMethodsWrapper.classList.remove('hidden');
+      }
+      paymentMethodsWrapper
+        ?.querySelectorAll('.field-wrapper')
+        ?.forEach((inp) => {
+          const inputElement = inp?.querySelector('input');
+          if (inputElement) {
+            inputElement.className = '';
+            inputElement.classList.add('!mt-0');
           }
-          c.target.checked = true;
-        }else
-        {
-          c.target.checked = false;
-        }
-      },0);
-  });
+          inp?.classList.add(
+            'flex',
+            'flex-row-reverse',
+            'items-center',
+            'gap-2'
+          );
+          const inpu = inp?.querySelector('label');
+          if (inpu?.classList.contains('font-normal')) {
+            inpu?.classList.remove('font-normal');
+          }
+          if (inpu?.classList.contains('text-sm')) {
+            inpu?.classList.remove('text-sm');
+          }
+          inpu?.classList.add('text-base', 'font-semibold');
+        });
+      decorateIcons(cardsWrapper);
+      paymentMethodsWrapper?.addEventListener('click', async (c) => {
+        setTimeout(async () => {
+          c.preventDefault();
+          const eventTarget = c.target;
+          if (!eventTarget.checked) {
+            if (eventTarget?.id === 'invoice') {
+            }
+            c.target.checked = true;
+          } else {
+            c.target.checked = false;
+          }
+        }, 0);
+      });
+    }
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
   } catch (error) {

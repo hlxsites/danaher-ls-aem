@@ -527,7 +527,8 @@ export const getPaymentMethods = async () => {
     const fetchPaymentMethods = JSON.parse(sessionStorage.getItem('paymentMethods'));
     if (fetchPaymentMethods?.status === 'success') {
         return fetchPaymentMethods;
-    }  const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+    }  
+    const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
       defaultHeaders.append(
