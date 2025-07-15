@@ -105,8 +105,9 @@ const paymentModule = async () => {
       setTimeout(async () => {
         c.preventDefault();
         const eventTarget = c.target;
+          console.log(' radio checked : ', eventTarget.checked);
         if (!eventTarget.checked) {
-          console.log(' radio clicked : ', eventTarget.id);
+          console.log(' radio clicked : ', eventTarget.checked);
         }
       },0);
   });
