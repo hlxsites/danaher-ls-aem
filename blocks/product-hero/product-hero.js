@@ -168,7 +168,6 @@ export default async function decorate(block) {
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
-
   /* currency formatter */
   function formatMoney(number) {
     return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -181,9 +180,10 @@ export default async function decorate(block) {
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(h1({ class: 'title' }, response[0]?.raw.titlelsig || h1Value));
+    defaultContent.prepend(h1({ class: 'title' }, h1Value || response[0]?.raw.titlelsig));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
-    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
+    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname || ''));
+
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
     addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(' '));
@@ -219,59 +219,66 @@ export default async function decorate(block) {
       defaultContent.append(rfqParent);
     }
 
-    if (hasValidPrice) {
-      let brandButton = null;
-      const rfqLabelRaw = response[0]?.raw?.buynowlabel || '';
-      const externallinkRaw = response[0]?.raw?.externallink;
-      let btnLabel = '';
-      let btnHref = '';
-      if (showBuyNow) {
-        if (rfqLabelRaw.includes('|')) {
-          const [labelPart, actionPart] = rfqLabelRaw.split('|');
-          btnLabel = labelPart.trim();
-          const actionValue = actionPart.trim().toLowerCase();
+    // Buy Now logic decoupled
+    let brandButton = null;
+    const rfqLabelRaw = response[0]?.raw?.buynowlabel || '';
+    const externallinkRaw = response[0]?.raw?.externallink;
+    let btnLabel = '';
+    let btnHref = '';
 
-          if (actionValue === 'true' && externallinkRaw) {
-            btnHref = `${externallinkRaw}?utm_source=dhls_website`;
-          } else if (actionValue.startsWith('http')) {
-            btnHref = actionPart.trim();
-          }
-        } else {
-          btnLabel = rfqLabelRaw.trim();
+    if (showBuyNow) {
+      if (rfqLabelRaw.includes('|')) {
+        const [labelPart, actionPart] = rfqLabelRaw.split('|');
+        btnLabel = labelPart.trim();
+        const actionValue = actionPart.trim().toLowerCase();
+
+        if (actionValue === 'true' && externallinkRaw) {
+          btnHref = `${externallinkRaw}?utm_source=dhls_website`;
+        } else if (actionValue.startsWith('http')) {
+          btnHref = actionPart.trim();
         }
-        // If still no label, fallback to default
-        if (!btnLabel) {
-          btnLabel = 'Buy Now'; // fallback label
-        }
-
-        const btn = document.createElement('button');
-        btn.textContent = btnLabel;
-        btn.classList.add(
-          ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '),
-        );
-
-        if (btnHref) {
-          btn.addEventListener('click', () => window.open(btnHref, '_blank'));
-        }
-
-        if (brandURL) {
-          btn.addEventListener('click', () => window.open(brandURL, '_blank'));
-        }
-
-        brandButton = div({ class: 'flex gap-4 items-stretch add-buynow-btn' }, btn);
+      } else {
+        btnLabel = rfqLabelRaw.trim();
       }
 
-      const brandStartPriceChildren = [
+      if (!btnLabel) {
+        btnLabel = 'Buy Now';
+      }
+
+      const btn = document.createElement('button');
+      btn.textContent = btnLabel;
+      btn.classList.add(
+        ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '),
+      );
+
+      btn.addEventListener('click', () => {
+        if (btnHref) {
+          window.open(btnHref, '_blank');
+        } else if (brandURL) {
+          window.open(brandURL, '_blank');
+        }
+      });
+
+      brandButton = div({ class: 'flex gap-4 items-stretch add-buynow-btn' }, btn);
+    }
+
+    // Price display (only if valid price)
+    const brandStartPriceChildren = [];
+
+    if (hasValidPrice) {
+      brandStartPriceChildren.push(
         div(
           { class: 'price-info' },
           p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
           p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
         ),
-      ];
+      );
+    }
 
-      if (brandButton) brandStartPriceChildren.push(brandButton);
-      if (rfqParent) brandStartPriceChildren.push(rfqParent);
+    if (brandButton) brandStartPriceChildren.push(brandButton);
+    if (rfqParent) brandStartPriceChildren.push(rfqParent);
 
+    if (brandStartPriceChildren.length > 0) {
       const brandStartPrice = div(
         { class: 'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center' },
         ...brandStartPriceChildren,
@@ -310,6 +317,7 @@ export default async function decorate(block) {
         infoDiv,
       ),
     );
+
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
     block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
