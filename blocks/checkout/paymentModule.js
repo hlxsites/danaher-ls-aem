@@ -101,6 +101,15 @@ const paymentModule = async () => {
         inpu?.classList.add('text-base', 'font-semibold');
       });
     decorateIcons(cardsWrapper);
+    paymentMethodsWrapper?.addEventListener('click', async (c) => {
+      setTimeout(async () => {
+        c.preventDefault();
+        const eventTarget = c.target;
+        if (!eventTarget.checked) {
+          console.log(' radio clicked : ', eventTarget.id);
+        }
+      },0);
+  });
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
     return moduleContent;
   } catch (error) {
