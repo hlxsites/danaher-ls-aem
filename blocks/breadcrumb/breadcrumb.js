@@ -34,7 +34,6 @@ async function getItems() {
 
 export default async function decorate(block) {
   if (document.querySelector('.breadcrumb-rendered')) {
-    console.warn('Breadcrumb block already rendered. Skipping duplicate.');
     return;
   }
   if (!block.querySelector('div > ul')) {
