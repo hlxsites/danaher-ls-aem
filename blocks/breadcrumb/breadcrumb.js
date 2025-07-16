@@ -33,6 +33,9 @@ async function getItems() {
 }
 
 export default async function decorate(block) {
+  if (document.querySelector('.breadcrumb-rendered')) {
+    return;
+  }
   if (!block.querySelector('div > ul')) {
     const items = await getItems();
     const listItems = items.map((item) => li({}, a({ href: item.href }, item.title)));
