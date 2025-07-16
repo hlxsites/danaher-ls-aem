@@ -59,11 +59,6 @@ export default async function decorate(block) {
     // get the content
     const fragment = await getFragmentFromFile('/fragments/footer.html');
     block.innerHTML = '';
-    if (
-      fragment
-      && (!window.location.href.includes('login')
-        || !window.location.href.includes('register'))
-    ) {
       document.querySelector('.footer').parentElement.className
         += ' bg-danaherpurple-50';
       document.querySelector('.footer').className
@@ -75,7 +70,6 @@ export default async function decorate(block) {
           generateStickyFooter([item]);
         } else block.append(item);
       });
-    }
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
