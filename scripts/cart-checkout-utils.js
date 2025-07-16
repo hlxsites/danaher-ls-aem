@@ -1791,7 +1791,7 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href = '/us/en/eds-stage-test/cart-checkout/login.html?ref=em1-checkout-payment-module';
+    window.location.href = '/us/en/e-buy/login.html?ref=em1-checkout-payment-module';
   });
   /*
   :::::::::::::
@@ -2032,7 +2032,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.href.includes('cartlanding')) {
-        window.location.href = '/us/en/eds-stage-test/cart-checkout/checkout?ref=em1-checkout-payment-module';
+        window.location.href = '/us/en/e-buy/checkout?ref=em1-checkout-payment-module';
       } else {
         changeStep(e);
       }

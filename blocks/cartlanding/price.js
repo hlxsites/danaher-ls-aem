@@ -256,7 +256,7 @@ export const price = async () => {
     'Checkout',
   );
   checkoutButton.addEventListener('click', () => {
-    window.location.href = '/us/en/eds-stage-test/cart-checkout/checkout.html?ref=em1-checkout-payment-module';
+    window.location.href = '/us/en/e-buy/checkout.html?ref=em1-checkout-payment-module';
   });
 
   const disclaimer = div(
