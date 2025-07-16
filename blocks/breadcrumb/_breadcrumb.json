@@ -21,8 +21,8 @@
         "id": "breadcrumb",
         "fields": [
           {
-          "component": "text-input",
-          "name": "rootLabel",
+          "component": "text",
+          "name": "title",
           "label": "Root Label",
           "valueType": "string"
           },
