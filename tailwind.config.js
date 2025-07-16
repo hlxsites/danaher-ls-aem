@@ -234,7 +234,7 @@ module.exports = {
       },
       fontWeight: {
         normal: "200",
-        medium: "400",
+        dhlsMedium: "400",
         semibold: "700",
       },
       screens: {
