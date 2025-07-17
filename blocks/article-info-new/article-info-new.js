@@ -17,6 +17,7 @@ export default function decorate(block) {
   const expectedPublishFormat = new Date();
 
   const authorName_1 = authorName?.innerHTML;
+  console.log('authorName_1', authorName_1);
 
   block.append(
     div(
