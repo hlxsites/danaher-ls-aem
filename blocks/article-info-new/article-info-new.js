@@ -1,7 +1,6 @@
 import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
-import { getBlockConfig } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   block.innerHTML = '';
