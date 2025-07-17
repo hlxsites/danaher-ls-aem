@@ -6,8 +6,15 @@ import { getBlockConfig } from '../../scripts/lib-franklin.js';
 export default async function decorate(block) {
   block.innerHTML = '';
 
+  const blockPath = block.closest('.block')?.dataset?.blockName || 'article-info-new';
+
+  // Load JSON manually
+  const jsonPath = `${window.location.pathname}${blockPath}/component-models.json`;
+  let config = {};
+
+
   // Load properties from component-models.json
-  const config = await getBlockConfig(block);
+  const res = await fetch(jsonPath);
 
   const authorName = config.authorName || '';
   const authorJobTitle = config.authorTitle || '';
