@@ -55,7 +55,7 @@
 	],
     "filters": [
       {
-        "id": "breadcrumb",
+        "id": "table",
         "components": [   ]
       } 
     ]
