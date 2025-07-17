@@ -108,6 +108,6 @@ export default async function decorate(block) {
   breadcrumbWrapper.append(entries);
   const breadcrumbSection = breadcrumbWrapper.parentElement;
   const breadcrumbElement = document.querySelector('breadcrumb');
-  breadcrumbElement.appendChild(breadcrumbWrapper);
+ breadcrumbWrapper ?  breadcrumbElement.appendChild(breadcrumbWrapper) : '';
   breadcrumbSection.remove();
 }

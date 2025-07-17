@@ -48,8 +48,7 @@ export default async function decorate(block) {
   });
   if (
     currentPath.includes('products.html')
-    || currentPath.includes('/shop-page')
-    || currentPath.includes('/shop-home')
+    || currentPath.includes('products-eds')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 

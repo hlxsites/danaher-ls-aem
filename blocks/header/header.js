@@ -933,7 +933,7 @@ export default async function decorate(block) {
 
   block.append(headerBlock);
   block.append(flyout);
-  const authHeader = getAuthorization();
+  const authHeader = '';
   if (
     authHeader
     && (authHeader.has('authentication-token') || authHeader.has('Authorization'))
@@ -947,10 +947,12 @@ export default async function decorate(block) {
   //   loading breadcrumb   ....
 if (!window.location.pathname.includes('blog') && window.location.pathname.includes('products-eds')) {
   const bred = document.querySelector('breadcrumb');
-  const edsBreadcrumbWrapper = document.createElement('div');
-  edsBreadcrumbWrapper.classList.add('block', 'breadcrumb-wrapper');
-  bred.prepend(edsBreadcrumbWrapper);
-
+  const edsBreadcrumbWrapper = div(
+    {
+      class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200'
+    }
+  );
+  bred.append(edsBreadcrumbWrapper);
   import('../breadcrumb/breadcrumb.js')
     .then((loadedBreadcrumb) => {
       loadedBreadcrumb.default(edsBreadcrumbWrapper);      
