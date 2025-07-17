@@ -187,6 +187,10 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "components": []
+  },
+  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",

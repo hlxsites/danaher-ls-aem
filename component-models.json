@@ -1335,6 +1335,41 @@
     ]
   },
   {
+    "id": "table",
+    "fields": [
+      {
+        "component": "text-input",
+        "name": "tableTitle",
+        "label": "Table Title",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "table",
+        "name": "tableData",
+        "label": "Table Data",
+        "valueType": "array",
+        "multi": false,
+        "fields": [
+          {
+            "component": "text-input",
+            "name": "column1",
+            "label": "Column 1",
+            "valueType": "string",
+            "multi": false
+          },
+          {
+            "component": "text-input",
+            "name": "column2",
+            "label": "Column 2",
+            "valueType": "string",
+            "multi": false
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "tabs-container",
     "fields": [
       {
