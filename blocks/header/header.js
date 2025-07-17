@@ -910,6 +910,8 @@ async function getQuote(headerBlock, authHeader) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+  
+
   const resp = await fetch('/fragments/header/master.plain.html');
   const html = await resp.text();
 
@@ -941,6 +943,25 @@ export default async function decorate(block) {
   document
     .querySelector('div.search-icon')
     ?.addEventListener('click', toggleSearchBoxMobile);
+
+  //   loading breadcrumb   ....
+if (!window.location.pathname.includes('blog') && window.location.pathname.includes('products-eds')) {
+  const bred = document.querySelector('breadcrumb');
+  const edsBreadcrumbWrapper = document.createElement('div');
+  edsBreadcrumbWrapper.classList.add('block', 'breadcrumb-wrapper');
+  bred.prepend(edsBreadcrumbWrapper);
+
+  import('../breadcrumb/breadcrumb.js')
+    .then((loadedBreadcrumb) => {
+      loadedBreadcrumb.default(edsBreadcrumbWrapper);      
+    })
+    .catch((error) => {
+      console.error('Failed to load breadcrumb module:', error);
+    });
+}
+  //   loading breadcrumb ends  ....
+  
+
 
   return block;
 }
