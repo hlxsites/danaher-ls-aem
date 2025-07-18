@@ -56,7 +56,7 @@ export default async function decorate(block) {
   *
   */
 
-    if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products.html/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
+    if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
       const elementAnchorContent = element.querySelector('a');
       let formattedElement = elementContent
@@ -116,7 +116,7 @@ export default async function decorate(block) {
     },
   );
   breadcrumbWrapper.innerHTML = '';
-  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products.html/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
+  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
     bredWrap.append(entries);
     breadcrumbWrapper.append(bredWrap);
   } else {
