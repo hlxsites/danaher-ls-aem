@@ -35,13 +35,6 @@
   margin-top: 2rem
 }
 
-.top-purchased-products-wrapper :is(.\!line-clamp-3) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important
-}
-
 .top-purchased-products-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;

@@ -119,7 +119,7 @@
 }
 
 .learn-more-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .learn-more-wrapper :is(.font-semibold) {

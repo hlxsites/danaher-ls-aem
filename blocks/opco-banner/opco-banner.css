@@ -298,11 +298,6 @@
      object-fit: contain
 }
 
-.opco-banner-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
-}
-
 .opco-banner-wrapper :is(.p-10) {
   padding: 2.5rem
 }
@@ -390,7 +385,7 @@
 }
 
 .opco-banner-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .opco-banner-wrapper :is(.font-normal) {
