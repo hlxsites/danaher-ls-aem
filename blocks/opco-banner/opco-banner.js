@@ -31,9 +31,11 @@ export default async function decorate(block) {
   const baseUrl = `https://${window.DanaherConfig.host}`;
 
   const currentPath = window.location.href;
-
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+const blockGrandParent = block?.parentElement?.parentElement;
+if(blockGrandParent)
+{
+  blockGrandParent.style.padding = '0';
+}
 
   const opcoBannerTitle = bannerTitle;
   const opcoBannerHeading = bannerHeading;
@@ -469,10 +471,16 @@ export default async function decorate(block) {
     right,
   );
 
+const isEditor = document.querySelector('.adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(container)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }

@@ -101,11 +101,16 @@ export default function decorate(block) {
     opcoGridWrapper.append(cardWrapper);
   });
   decorateIcons(opcoGridWrapper);
+const isEditor = document.querySelector('.adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(opcoGridWrapper);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(opcoGridWrapper)) {
-      child.style.display = 'none';
-    }
-  });
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(opcoGridWrapper)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }

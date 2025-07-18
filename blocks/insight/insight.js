@@ -218,10 +218,16 @@ export default function decorate(block) {
   eyesection.appendChild(wrapper);
   decorateIcons(eyesection);
   decorateModals(eyesection);
+const isEditor = document.querySelector('.adobe-ue-edit');
+  if (!isEditor) {
+    block.textContent = '';
+  }
   block.append(eyesection);
-  [...block.children].forEach((child) => {
-    if (!child.contains(eyesection)) {
-      child.style.display = 'none';
-    }
-  });
+  if (isEditor) {
+    [...block.children].forEach((child) => {
+      if (!child.contains(eyesection)) {
+        child.style.display = 'none';
+      }
+    });
+  }
 }

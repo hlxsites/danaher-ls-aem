@@ -189,8 +189,11 @@ export default async function decorate(block) {
     rightProductIds,
   ] = block.children;
 
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+const blockGrandParent = block?.parentElement?.parentElement;
+if(blockGrandParent)
+{
+  blockGrandParent.style.padding = '0';
+}
 
   const dualCarouselWrapper = div({
     class:
