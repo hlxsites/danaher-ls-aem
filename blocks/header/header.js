@@ -940,35 +940,33 @@ export default async function decorate(block) {
   block.append(headerBlock);
   block.append(flyout);
 
-  //   loading breadcrumb   .... 
+  //   loading breadcrumb   ....
 
-    const includeEdsUrls = ['products-eds']; 
+  const includeEdsUrls = ['products-eds'];
 
-    const excludeAemUrls = ['blog']; 
+  const excludeAemUrls = ['blog'];
 
-if (!excludeAemUrls.some(excludePath => window.location.pathname.includes(excludePath)) && includeEdsUrls.some(includePath => window.location.pathname.includes(includePath))) { 
+  if (!excludeAemUrls.some((excludePath) => window.location.pathname.includes(excludePath)) && includeEdsUrls.some((includePath) => window.location.pathname.includes(includePath))) {
+    const bred = document.querySelector('breadcrumb');
+    const edsBreadcrumbWrapper = div(
+      {
+        class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
+      },
+    );
+    bred.append(edsBreadcrumbWrapper);
+    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
 
-  const bred = document.querySelector('breadcrumb'); 
-  const edsBreadcrumbWrapper = div( 
-    { 
-      class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200' 
-    } 
-  ); 
-  bred.append(edsBreadcrumbWrapper); 
-  loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+    import('../breadcrumb/breadcrumb.js')
+      .then((loadedBreadcrumb) => {
+        loadedBreadcrumb.default(edsBreadcrumbWrapper);
+      })
+      .catch((error) => {
+        console.error('Failed to load breadcrumb module:', error);
+      });
+  }
 
-  import('../breadcrumb/breadcrumb.js') 
-    .then((loadedBreadcrumb) => { 
-      loadedBreadcrumb.default(edsBreadcrumbWrapper);       
-    }) 
-    .catch((error) => { 
-      console.error('Failed to load breadcrumb module:', error); 
-    }); 
-} 
+  //   loading breadcrumb ends  ....
 
-  //   loading breadcrumb ends  .... 
-
-  
   const authHeader = getAuthorization();
   if (
     authHeader
