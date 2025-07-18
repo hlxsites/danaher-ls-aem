@@ -71,15 +71,13 @@ export default async function decorate(block) {
     const allBrands = Array.from(brandMap.entries())
       .map(([name, path]) => ({ name, path }))
       .sort((asr, b) => asr.name.localeCompare(b.name));
-      let productsTag = '';
-      if(window.location.pathname.includes('products.html'))
-        {
-          productsTag = 'products';
-        }
-      if(window.location.pathname.includes('products-eds.html'))
-        {
-          productsTag = 'products-eds';
-        }
+    let productsTag = '';
+    if (window.location.pathname.includes('products.html')) {
+      productsTag = 'products';
+    }
+    if (window.location.pathname.includes('products-eds.html')) {
+      productsTag = 'products-eds';
+    }
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 

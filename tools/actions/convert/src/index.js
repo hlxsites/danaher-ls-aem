@@ -196,7 +196,8 @@ function skipConverter(path) {
   if (path.includes('.json')) return true;
   
   //TODO-We need use this logic for EDS pages
-  // if( path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+
+  //   if(path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
   //   const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
   //   path.includes(convertPath)
   // );
@@ -208,6 +209,19 @@ function skipConverter(path) {
   //     return false;
   //   }
   // }
+
+  if(path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
+    const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
+    path.includes(convertPath)
+  );
+    if (pathsToConvert) {
+      return false;
+    }
+  }
+
+  if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') ) && !path.includes('/topics-jck1/') ) {    
+      return true;
+  }
 
   if (path.includes('/us/en/blog-eds/')) return true;
   if (path.includes('/us/en/news-eds/')) return true;
