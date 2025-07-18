@@ -71,7 +71,13 @@ export default async function decorate(block) {
     const allBrands = Array.from(brandMap.entries())
       .map(([name, path]) => ({ name, path }))
       .sort((asr, b) => asr.name.localeCompare(b.name));
-
+    let productsTag = '';
+    if (window.location.pathname.includes('products.html')) {
+      productsTag = 'products';
+    }
+    if (window.location.pathname.includes('products-eds.html')) {
+      productsTag = 'products-eds';
+    }
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
@@ -86,7 +92,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products-eds/brands/${brandLink}`,
+              href: `/us/en/${productsTag}/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
