@@ -328,12 +328,11 @@ export default async function decorate(block) {
     }else
     {
       contentWrapper.append(
-        div(
-          {
-          class: `opacity-0  w-[300px] h-[184px] object-contain`,
-          }
-      ))
-    }
+        div({
+            class: `opacity-0  w-[300px] h-[184px] object-contain`,
+         }
+       ))
+     }
 
     if (opcoBannerItemTitle) {
       contentWrapper.append(
