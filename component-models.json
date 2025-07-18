@@ -1352,16 +1352,16 @@
         "multi": false,
         "fields": [
           {
-            "component": "text-input",
-            "name": "column1",
-            "label": "Column 1",
+            "component": "text",
+            "name": "rows",
+            "label": "Rows",
             "valueType": "string",
             "multi": false
           },
           {
-            "component": "text-input",
-            "name": "column2",
-            "label": "Column 2",
+            "component": "text",
+            "name": "columns",
+            "label": "Columns",
             "valueType": "string",
             "multi": false
           }
