@@ -291,14 +291,20 @@ export default async function decorate(block) {
     relatedProductsDiv.removeAttribute('style');
 
     const productCategories = localStorage.getItem('product-categories');
-    const parsedProductCategoryData = productCategories ? JSON.parse(productCategories) : { results: [] };
+    const parsedProductCategoryData = productCategories ? JSON.parse(productCategories) : { results: ['valita-titer','polar','dmi1-for-core-cell-culture-uk','skyland-pims','mica','m5-microlc-systems','exionlc-2-systems','dmi1-for-core-cell-culture'] };
     const skus = parsedProductCategoryData.results.map((prod) => {
-      const url = prod.Uri || '';
-      const parts = url.split('://');
-      const productCode = parts[1]?.replace(/\/$/, '') || '';
-      return productCode;
+      if (typeof prod === 'object' && prod.Uri) {
+        const url = prod.Uri;
+        const parts = url.split('://');
+        const productCode = parts[1]?.replace(/\/$/, '') || '';
+        return productCode;
+      } else if (typeof prod === 'string') {
+        return prod;
+      }
+      return null;
     }).filter(Boolean);
     console.log('sku:', skus);
+    
 
     const relatedProd = await relatedProducts('Related Products', skus);
     relatedProductsDiv.append(relatedProd);
@@ -342,8 +348,7 @@ export default async function decorate(block) {
         'text-base',
         'font-bold',
         'border-l',
-        'text-danaherpurple-500',
-        'border-danaherpurple-500',
+        'border-violet-500',
         'border-gray-500',
       );
       console.log('Active tab set:', currentTab);

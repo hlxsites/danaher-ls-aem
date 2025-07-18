@@ -9,13 +9,13 @@ import {
 } from '../../scripts/common-utils.js';
 
 /**
- * Determines the number of cards to display per page in grid view based on window width.
- * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
+ * Determines the number of cards to display per page in grid view.
+ * @returns {number} - Number of cards per page (2 for mobile, 4 for tablet, 6 for desktop).
  */
 function getCardsPerPageGrid() {
-  if (window.innerWidth < 640) return 1;
-  if (window.innerWidth < 1024) return 2;
-  return 4;
+  if (window.innerWidth < 640) return 2;
+  if (window.innerWidth < 1024) return 4;
+  return 6;
 }
 
 /**
@@ -23,8 +23,8 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function relatedProducts(headingText, productIds) {
-//   block?.parentElement?.parentElement?.removeAttribute('class');
-//   block?.parentElement?.parentElement?.removeAttribute('style');
+  //   block?.parentElement?.parentElement?.removeAttribute('class');
+  //   block?.parentElement?.parentElement?.removeAttribute('style');
 
   const topSellingWrapper = div({
     class:
@@ -47,17 +47,16 @@ export default async function relatedProducts(headingText, productIds) {
   //     .filter(Boolean);
 
   let cardsPerPageGrid = getCardsPerPageGrid();
-  const cardsPerPageList = 7;
+  const cardsPerPageList = 6;
   let currentPage = 1;
-  let currentIndex = 0;
   let isGridView = true;
 
-  const carouselContainer = div({
-    class: 'carousel-container flex flex-col w-full justify-center',
+  const container = div({
+    class: 'container flex flex-col w-full justify-center',
   });
-  const carouselHead = div({
+  const head = div({
     class:
-      'w-full flex flex-row justify-between items-center gap-3 mb-4 md:h-10 px-5 md:px-0',
+      'w-full flex flex-row justify-between gap-3 mb-4 md:h-10',
   });
 
   const leftGroup = div({
@@ -67,7 +66,7 @@ export default async function relatedProducts(headingText, productIds) {
     div(
       {
         class:
-          'w-[49rem] text-black text-2xl font-normal leading-loose break-all md:whitespace-nowrap',
+          'text-black text-2xl font-normal leading-loose',
       },
       headingText ?? '',
     ),
@@ -81,21 +80,10 @@ export default async function relatedProducts(headingText, productIds) {
     // ),
   );
 
-  const arrows = div({
-    class: 'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
+  const controls = div({
+    class: 'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
-  const prevDiv = div({
-    class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
-  const nextDiv = div({
-    class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
-  arrowGroup.append(prevDiv, nextDiv);
-
-  const viewModeGroup = div({ class: 'flex justify-start items-center' });
+  const viewModeGroup = div({ class: 'flex justify-start items-center pt-1 md:pt-0' });
   const listBtn = div(
     {
       class:
@@ -125,11 +113,11 @@ export default async function relatedProducts(headingText, productIds) {
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
 
-  arrows.append(arrowGroup, viewModeGroup);
-  carouselHead.append(leftGroup, arrows);
+  controls.append(viewModeGroup);
+  head.append(leftGroup, controls);
 
-  const carouselCards = div({
-    class: `carousel-cards flex justify-center gap-5 w-full flex-wrap ml-[10rem] ${isGridView ? 'md:flex-nowrap' : ''}`,
+  const cardsContainer = div({
+    class: `cards ${isGridView ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full' : 'flex flex-col gap-5 w-full'}`,
   });
   const paginationContainer = div({
     class:
@@ -146,11 +134,11 @@ export default async function relatedProducts(headingText, productIds) {
    */
   function scrollToFirstCard() {
     setTimeout(() => {
-      const firstCard = carouselCards.querySelector(':first-child');
+      const firstCard = cardsContainer.querySelector(':first-child');
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        carouselCards.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        cardsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
   }
@@ -158,124 +146,106 @@ export default async function relatedProducts(headingText, productIds) {
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
-  function updateCarousel() {
-    carouselCards.innerHTML = '';
-    carouselCards.className = `carousel-cards flex justify-center gap-5 w-full flex-wrap ml-[5rem] ${isGridView ? 'md:flex-nowrap' : ''}`;
+  function updateCards() {
+    cardsContainer.innerHTML = '';
+    cardsContainer.className = `cards ${isGridView ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full' : 'flex flex-col gap-5 w-full'}`;
+
+    let cardsToDisplay = [];
+    let totalPages = 1;
 
     if (isGridView) {
-      const cardsToDisplay = products.slice(
-        currentIndex,
-        currentIndex + cardsPerPageGrid,
-      );
-      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
-      paginationContainer.style.display = 'none';
-      arrowGroup.style.display = 'flex';
+      totalPages = Math.ceil(products.length / cardsPerPageGrid);
+      const startIndex = (currentPage - 1) * cardsPerPageGrid;
+      const endIndex = Math.min(startIndex + cardsPerPageGrid, products.length);
+      cardsToDisplay = products.slice(startIndex, endIndex);
+      cardsToDisplay.forEach((item) => cardsContainer.append(renderGridCard(item)));
+      paginationContainer.style.display = 'flex';
     } else {
+      totalPages = Math.ceil(products.length / cardsPerPageList);
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
-      const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
+      cardsToDisplay = products.slice(startIndex, endIndex);
+      cardsToDisplay.forEach((item) => cardsContainer.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
-      arrowGroup.style.display = 'none';
+    }
 
-      /* Render pagination */
-      paginationContainer.innerHTML = '';
-      const totalPages = Math.ceil(products.length / cardsPerPageList);
-      const paginationWrapper = div({ class: 'self-stretch h-9 relative w-full' });
-      const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
-      const contentWrapper = div({
-        class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
-      });
+    /* Render pagination */
+    paginationContainer.innerHTML = '';
+    const paginationWrapper = div({ class: 'self-stretch h-9 relative w-full' });
+    const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
+    const contentWrapper = div({
+      class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
+    });
 
-      // Previous Button
-      const prevEnabled = currentPage > 1;
-      const prevButton = div({
-        'data-direction': 'Previous',
-        'data-state': prevEnabled ? 'Default' : 'Disabled',
+    // Previous Button
+    const prevEnabled = currentPage > 1;
+    const prevButton = div({
+      'data-direction': 'Previous',
+      'data-state': prevEnabled ? 'Default' : 'Disabled',
+      class: 'inline-flex flex-col justify-start items-start',
+    });
+    prevButton.append(
+      div({ class: 'self-stretch h-0.5 bg-transparent' }),
+      div(
+        {
+          class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
+        },
+        div(
+          { class: 'w-5 h-5 relative overflow-hidden' },
+          span({
+            class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-violet-600' : 'text-gray-700'} [&_svg>use]:stroke-current`,
+          }),
+        ),
+        div({
+          class: `justify-start text-${prevEnabled ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, 'Previous'),
+      ),
+    );
+    decorateIcons(prevButton);
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= 1;
+        updateCards();
+        scrollToFirstCard();
+      }
+    });
+
+    // Page Numbers
+    const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    // Helper function to create page number buttons
+    const createPageNumber = (page) => {
+      const pageNumber = div({
+        'data-current': currentPage === page ? 'True' : 'False',
+        'data-state': 'Default',
         class: 'inline-flex flex-col justify-start items-start',
       });
-      prevButton.append(
-        div({ class: 'self-stretch h-0.5 bg-transparent' }),
+      pageNumber.append(
+        div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
         div(
-          {
-            class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
-          },
-          div(
-            { class: 'w-5 h-5 relative overflow-hidden' },
-            span({
-              class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
-            }),
-          ),
+          { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
           div({
-            class: `justify-start text-${prevEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
-          }, 'Previous'),
+            class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+          }, page.toString()),
         ),
       );
-      decorateIcons(prevButton);
-      prevButton.addEventListener('click', () => {
-        if (currentPage > 1) {
-          currentPage -= 1;
-          updateCarousel();
-          scrollToFirstCard();
-        }
+      pageNumber.addEventListener('click', () => {
+        currentPage = page;
+        updateCards();
+        scrollToFirstCard();
       });
+      return pageNumber;
+    };
 
-      // Page Numbers
-      const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
-      const maxVisiblePages = 5;
-      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-      const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-      if (endPage - startPage + 1 < maxVisiblePages) {
-        startPage = Math.max(1, endPage - maxVisiblePages + 1);
-      }
-
-      // Helper function to create page number buttons
-      const createPageNumber = (page) => {
-        const pageNumber = div({
-          'data-current': currentPage === page ? 'True' : 'False',
-          'data-state': 'Default',
-          class: 'inline-flex flex-col justify-start items-start',
-        });
-        pageNumber.append(
-          div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
-          div(
-            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
-            div({
-              class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
-            }, page.toString()),
-          ),
-        );
-        pageNumber.addEventListener('click', () => {
-          currentPage = page;
-          updateCarousel();
-          scrollToFirstCard();
-        });
-        return pageNumber;
-      };
-
-      if (startPage > 1) {
-        pageNumbersContainer.append(createPageNumber(1));
-        if (startPage > 2) {
-          pageNumbersContainer.append(
-            div(
-              {
-                class: 'inline-flex flex-col justify-start items-start',
-              },
-              div({ class: 'self-stretch h-0.5 bg-transparent' }),
-              div(
-                { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
-                div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
-              ),
-            ),
-          );
-        }
-      }
-
-      for (let i = startPage; i <= endPage; i += 1) {
-        pageNumbersContainer.append(createPageNumber(i));
-      }
-
-      if (endPage < totalPages - 1) {
+    if (startPage > 1) {
+      pageNumbersContainer.append(createPageNumber(1));
+      if (startPage > 2) {
         pageNumbersContainer.append(
           div(
             {
@@ -289,95 +259,72 @@ export default async function relatedProducts(headingText, productIds) {
           ),
         );
       }
+    }
 
-      if (endPage < totalPages) {
-        pageNumbersContainer.append(createPageNumber(totalPages));
-      }
+    for (let i = startPage; i <= endPage; i += 1) {
+      pageNumbersContainer.append(createPageNumber(i));
+    }
 
-      // Next Button
-      const nextEnabled = currentPage < totalPages;
-      const nextButton = div({
-        'data-direction': 'Next',
-        'data-state': nextEnabled ? 'Default' : 'Disabled',
-        class: 'inline-flex flex-col justify-start items-start',
-      });
-      nextButton.append(
-        div({ class: 'self-stretch h-0.5 bg-transparent' }),
+    if (endPage < totalPages - 1) {
+      pageNumbersContainer.append(
         div(
           {
-            class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
+            class: 'inline-flex flex-col justify-start items-start',
           },
-          div({
-            class: `justify-start text-${nextEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
-          }, 'Next'),
+          div({ class: 'self-stretch h-0.5 bg-transparent' }),
           div(
-            { class: 'w-5 h-5 relative overflow-hidden' },
-            span({
-              class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
-            }),
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+            div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
           ),
         ),
       );
-      decorateIcons(nextButton);
-      nextButton.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-          currentPage += 1;
-          updateCarousel();
-          scrollToFirstCard();
-        }
-      });
-      contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
-      paginationWrapper.append(grayLine, contentWrapper);
-      paginationContainer.append(paginationWrapper);
     }
 
-    const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
-    const nextEnabled = isGridView
-      ? currentIndex + cardsPerPageGrid < products.length
-      : currentPage < Math.ceil(products.length / cardsPerPageList);
+    if (endPage < totalPages) {
+      pageNumbersContainer.append(createPageNumber(totalPages));
+    }
 
-    prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${prevEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-
-    nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${nextEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
+    // Next Button
+    const nextEnabled = currentPage < totalPages;
+    const nextButton = div({
+      'data-direction': 'Next',
+      'data-state': nextEnabled ? 'Default' : 'Disabled',
+      class: 'inline-flex flex-col justify-start items-start',
+    });
+    nextButton.append(
+      div({ class: 'self-stretch h-0.5 bg-transparent' }),
+      div(
+        {
+          class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
+        },
+        div({
+          class: `justify-start text-${nextEnabled ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, 'Next'),
+        div(
+          { class: 'w-5 h-5 relative overflow-hidden' },
+          span({
+            class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-violet-600' : 'text-gray-700'} [&_svg>use]:stroke-current`,
+          }),
+        ),
+      ),
+    );
+    decorateIcons(nextButton);
+    nextButton.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage += 1;
+        updateCards();
+        scrollToFirstCard();
+      }
+    });
+    contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
+    paginationWrapper.append(grayLine, contentWrapper);
+    paginationContainer.append(paginationWrapper);
   }
-
-  // Event Listeners for Navigation
-  prevDiv.addEventListener('click', () => {
-    if (isGridView && currentIndex > 0) {
-      currentIndex -= cardsPerPageGrid;
-      updateCarousel();
-    } else if (!isGridView && currentPage > 1) {
-      currentPage -= 1;
-      updateCarousel();
-    }
-  });
-
-  nextDiv.addEventListener('click', () => {
-    if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
-      currentIndex += cardsPerPageGrid;
-      updateCarousel();
-    } else if (
-      !isGridView
-      && currentPage < Math.ceil(products.length / cardsPerPageList)
-    ) {
-      currentPage += 1;
-      updateCarousel();
-    }
-  });
 
   // Toggle between grid and list view
   const toggleView = (toGridView) => {
     isGridView = toGridView;
     currentPage = 1;
-    currentIndex = 0;
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn.classList.replace(
@@ -414,7 +361,7 @@ export default async function relatedProducts(headingText, productIds) {
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
 
-    updateCarousel();
+    updateCards();
   };
 
   listBtn.addEventListener('click', () => toggleView(false));
@@ -424,14 +371,14 @@ export default async function relatedProducts(headingText, productIds) {
     const newCardsPerPageGrid = getCardsPerPageGrid();
     if (newCardsPerPageGrid !== cardsPerPageGrid) {
       cardsPerPageGrid = newCardsPerPageGrid;
-      currentIndex = 0;
-      updateCarousel();
+      currentPage = 1;
+      updateCards();
     }
   });
 
-  updateCarousel();
-  carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-  topSellingWrapper.append(carouselContainer);
+  updateCards();
+  container.append(head, cardsContainer, paginationContainer);
+  topSellingWrapper.append(container);
   //   block.innerHTML = '';
   //   block.append(topSellingWrapper);
   return topSellingWrapper;
