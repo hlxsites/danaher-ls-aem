@@ -931,6 +931,34 @@ export default async function decorate(block) {
 
   block.append(headerBlock);
   block.append(flyout);
+
+  //   loading breadcrumb   .... 
+
+    const includeEdsUrls = ['products-eds']; 
+
+    const excludeAemUrls = ['blog']; 
+
+if (!excludeAemUrls.some(excludePath => window.location.pathname.includes(excludePath)) && includeEdsUrls.some(includePath => window.location.pathname.includes(includePath))) { 
+
+  const bred = document.querySelector('breadcrumb'); 
+  const edsBreadcrumbWrapper = div( 
+    { 
+      class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200' 
+    } 
+  ); 
+  bred.append(edsBreadcrumbWrapper); 
+  import('../breadcrumb/breadcrumb.js') 
+    .then((loadedBreadcrumb) => { 
+      loadedBreadcrumb.default(edsBreadcrumbWrapper);       
+    }) 
+    .catch((error) => { 
+      console.error('Failed to load breadcrumb module:', error); 
+    }); 
+} 
+
+  //   loading breadcrumb ends  .... 
+
+  
   const authHeader = getAuthorization();
   if (
     authHeader
