@@ -40,7 +40,6 @@ export default async function decorate(block) {
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
       const absImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
-      console.log('abs image: ', absImg);
       
       return div(
         {
@@ -54,7 +53,7 @@ export default async function decorate(block) {
         image
           && img({
             src:
-              absImg || '/content/dam/danaher/system/icons/preview-image.png',
+             !absImg.includes('about:error') ? absImg : '/content/dam/danaher/system/icons/preview-image.png',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
