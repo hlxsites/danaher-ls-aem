@@ -48,7 +48,13 @@ export default async function decorate(block) {
   entries.prepend(homeIconLi);
 
   Array.from(entries.children).forEach((element, index, arr) => {
-    // ............ eds retrofit code starts ...................
+  /*
+  *
+  :::::::::::
+    eds breadcrumb retrofit starts
+  ::::::::::::::
+  *
+  */
 
     if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products.html/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
@@ -64,6 +70,11 @@ export default async function decorate(block) {
           formattedElement = 'Our Brands';
         }
       }
+      if (formattedElement.toLowerCase() === 'products-eds') {
+        if (elementAnchorContent) {
+          formattedElement = 'Products';
+        }
+      }
       if (window.location.pathname.includes('brands')) {
         if (index === arr.length - 1) {
           formattedElement = `Products - ${formattedElement}`;
@@ -72,7 +83,13 @@ export default async function decorate(block) {
       elementAnchorContent.textContent = formattedElement;
     }
 
-    // ............ eds retrofit code ends ...................
+    /*
+  *
+  :::::::::::
+    eds breadcrumb retrofit ends
+  ::::::::::::::
+  *
+  */
 
     element.classList.add(
       ...'flex items-center gap-x-3 text-sm font-medium text-gray-500 whitespace-nowrap hover:text-gray-700'.split(

@@ -940,13 +940,15 @@ export default async function decorate(block) {
   block.append(headerBlock);
   block.append(flyout);
 
-  //   loading breadcrumb   ....
+  /*
+  *
+  :::::::::::
+    eds breadcrumb retrofit starts
+  ::::::::::::::
+  *
+  */
 
-  const includeEdsUrls = ['products-eds'];
-
-  const excludeAemUrls = ['blog'];
-
-  if (!excludeAemUrls.some((excludePath) => window.location.pathname.includes(excludePath)) && includeEdsUrls.some((includePath) => window.location.pathname.includes(includePath))) {
+  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products.html/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
     const bred = document.querySelector('breadcrumb');
     const edsBreadcrumbWrapper = div(
       {
@@ -965,7 +967,13 @@ export default async function decorate(block) {
       });
   }
 
-  //   loading breadcrumb ends  ....
+  /*
+  *
+  :::::::::::
+    eds breadcrumb retrofit ends
+  ::::::::::::::
+  *
+  */
 
   const authHeader = getAuthorization();
   if (
