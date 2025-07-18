@@ -904,6 +904,14 @@ async function getQuote(headerBlock, authHeader) {
     console.warn('Failed to load quote cart');
   }
 }
+function loadBreadcrumbCSS(href) {
+  if (!document.querySelector(`link[href="${href}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+}
 
 /**
  * decorates the header, mainly the nav
@@ -947,6 +955,8 @@ if (!excludeAemUrls.some(excludePath => window.location.pathname.includes(exclud
     } 
   ); 
   bred.append(edsBreadcrumbWrapper); 
+  loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+
   import('../breadcrumb/breadcrumb.js') 
     .then((loadedBreadcrumb) => { 
       loadedBreadcrumb.default(edsBreadcrumbWrapper);       
