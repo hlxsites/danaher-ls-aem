@@ -86,7 +86,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${brandLink}`,
+              href: `/us/en/products-eds/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
