@@ -39,8 +39,7 @@ export default async function decorate(block) {
       const title = item.title || '';
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
-      const absImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
-      
+      const absImg = image?.startsWith('http') ? image : `${baseUrl}${image}`;
       return div(
         {
           class:
