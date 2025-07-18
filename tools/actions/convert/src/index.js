@@ -210,13 +210,8 @@ function skipConverter(path) {
   //   }
   // }
 
-  if(path.includes('us/en/products') && !path.includes('/topics-jck1/') ) {
-    const pathsToConvert = pathConfig.convertPaths.some(convertPath =>
-    path.includes(convertPath)
-  );
-    if (pathsToConvert) {
+  if((path.includes('us/en/products/family') || path.includes('us/en/products/sku')|| path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
       return false;
-    }
   }
 
   if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') ) && !path.includes('/topics-jck1/') ) {    
