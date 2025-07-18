@@ -121,7 +121,7 @@ export default async function decorate(block) {
     breadcrumbWrapper.append(bredWrap);
   } else {
     breadcrumbWrapper.classList.add(
-      ...'!flex border-b border-gray-200'.split(' '),
+      ...'!flex bg-white border-b border-gray-200'.split(' '),
     );
     breadcrumbWrapper.append(entries);
   }
