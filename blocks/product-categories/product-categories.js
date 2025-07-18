@@ -52,7 +52,7 @@ export default async function decorate(block) {
         image
           && img({
             src:
-             !absImg.includes('about:error') ? absImg : '/content/dam/danaher/products/fallbackImage.jpeg',
+             !absImg.includes('error') ? absImg : '/content/dam/danaher/products/fallbackImage.jpeg',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
