@@ -411,6 +411,11 @@
   border-color: rgb(75 85 99 / var(--tw-border-opacity))
 }
 
+.header-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
 .header-wrapper :is(.bg-black) {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity))
@@ -580,7 +585,7 @@
 }
 
 .header-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.font-semibold) {
@@ -713,7 +718,7 @@
 }
 
 .header-wrapper :is(.hover\:font-medium:hover) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.hover\:text-black:hover) {
