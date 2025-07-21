@@ -40,46 +40,44 @@ export default async function decorate(block) {
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
       const absImg = image?.startsWith('http') ? image : `${baseUrl}${image}`;
-      if (title) {
-        return div(
-          {
-            class:
+      return div(
+        {
+          class:
             'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
-            onclick: () => window.open(
-              clickUri,
-              clickUri?.includes('http') ? '_blank' : '_self',
-            ),
-          },
-          image
+          onclick: () => window.open(
+            clickUri,
+            clickUri?.includes('http') ? '_blank' : '_self',
+          ),
+        },
+        image
           && img({
             src:
              !absImg.includes('error') ? absImg : '/content/dam/danaher/products/fallbackImage.jpeg',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
-          p(
-            {
-              class:
+        p(
+          {
+            class:
               'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
-            },
-            title,
-          ),
-          a(
-            {
-              href: clickUri,
-              target: clickUri?.includes('http') ? '_blank' : '_self',
-              rel: 'noopener noreferrer',
-              class:
+          },
+          title,
+        ),
+        a(
+          {
+            href: clickUri,
+            target: clickUri?.includes('http') ? '_blank' : '_self',
+            rel: 'noopener noreferrer',
+            class:
               'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
-            },
-            'Browse Products',
-            span({
-              class:
+          },
+          'Browse Products',
+          span({
+            class:
               'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-            }),
-          ),
-        );
-      }
+          }),
+        ),
+      );
     };
 
     const sectionWrapper = div({
@@ -109,7 +107,7 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        if (item.type === 'Category') {
+        if (item.type === 'Category' && item.title !== '' && item.brand !== '') {
           grid.appendChild(createCard(item));
           decorateIcons(grid);
         }
