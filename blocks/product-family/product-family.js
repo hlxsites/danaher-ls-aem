@@ -1019,7 +1019,7 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
@@ -1039,9 +1039,6 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
   productCount.textContent = `${response.totalCount} Products Available`;
 
@@ -1111,15 +1108,14 @@ async function updateProductDisplay() {
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
-  const productsToDisplay = products.slice(startIndex, endIndex);
-  productsToDisplay.forEach((item) => {
+  products.forEach((item) => {
     productsWrapper.append(
       isGridView ? renderProductGridCard(item) : renderProductListCard(item),
     );
   });
 
   productContainer.append(productsWrapper);
-  renderPagination(products.length, paginationContainerWrapper);
+  renderPagination(response.totalCount, paginationContainerWrapper);
 }
 
 /**
@@ -1135,7 +1131,7 @@ export async function decorateProductList(block, blockId) {
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
