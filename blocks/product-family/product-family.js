@@ -760,8 +760,10 @@ function scrollToFirstCard() {
       : null;
     if (firstCard) {
       firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      firstCard.classList.add('scroll-mt-32');
     } else {
       // Fallback: scroll productContainer to top
+      productContainer.classList.add('scroll-mt-32');
       productContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, 100);
@@ -812,7 +814,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-            prevEnabled ? 'danaherpurple-500' : 'text-gray-400'
+            prevEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
           } [&_svg>use]:stroke-current`,
         }),
       ),
@@ -830,6 +832,9 @@ function renderPagination(totalProducts, paginationWrapper) {
   prevButton.addEventListener('click', () => {
     if (currentPage > 1) {
       currentPage -= 1;
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', currentPage);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     }
@@ -837,13 +842,22 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   // Page Numbers
   const pageNumbersContainer = div({
-    class: 'flex justify-center items-start gap-2 z-10',
+    class: 'flex justify-center items-start gap-2 z-10 hidden md:flex',
   });
-  const maxVisiblePages = 5;
-  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-  if (endPage - startPage + 1 < maxVisiblePages) {
-    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  let startPage = 1;
+  let endPage = totalPages;
+
+  if (totalPages >= 5) {
+    if (currentPage <= 3) {
+      startPage = 1;
+      endPage = currentPage + 2;
+    } else if (currentPage >= totalPages - 2) {
+      startPage = currentPage - 2;
+      endPage = totalPages;
+    } else {
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
+    }
   }
 
   // Helper function to create page number buttons
@@ -876,6 +890,10 @@ function renderPagination(totalProducts, paginationWrapper) {
     );
     pageNumber.addEventListener('click', () => {
       currentPage = page;
+      // Update hash with page param using URL API
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     });
@@ -978,6 +996,9 @@ function renderPagination(totalProducts, paginationWrapper) {
   nextButton.addEventListener('click', () => {
     if (currentPage < totalPages) {
       currentPage += 1;
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', currentPage);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     }
@@ -998,7 +1019,7 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
@@ -1018,9 +1039,6 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
   productCount.textContent = `${response.totalCount} Products Available`;
 
@@ -1090,15 +1108,14 @@ async function updateProductDisplay() {
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
-  const productsToDisplay = products.slice(startIndex, endIndex);
-  productsToDisplay.forEach((item) => {
+  products.forEach((item) => {
     productsWrapper.append(
       isGridView ? renderProductGridCard(item) : renderProductListCard(item),
     );
   });
 
   productContainer.append(productsWrapper);
-  renderPagination(products.length, paginationContainerWrapper);
+  renderPagination(response.totalCount, paginationContainerWrapper);
 }
 
 /**
@@ -1114,7 +1131,7 @@ export async function decorateProductList(block, blockId) {
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };

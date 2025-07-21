@@ -810,7 +810,7 @@
 }
 
 .product-family-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .product-family-wrapper :is(.\!leading-10) {

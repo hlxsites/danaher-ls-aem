@@ -11,6 +11,9 @@ import {
 
 import { getApiData } from './api-utils.js';
 
+const GRID_ITEMS_PER_PAGE = 21;
+const LIST_ITEMS_PER_PAGE = 7;
+
 export function getCommerceBase() {
   return window.DanaherConfig !== undefined
     ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
@@ -341,7 +344,11 @@ function getAnalytics(extraParams = {}) {
   return analytics;
 }
 
-function buildProductsApiPayload(extraParams = {}) {
+function buildProductsApiPayload(
+  extraParams = {},
+  itemsPerPage = GRID_ITEMS_PER_PAGE,
+  pageNumber = 1,
+) {
   const searchHistory = JSON.parse(
     localStorage.getItem('__coveo.analytics.history') || '[]',
   );
@@ -362,9 +369,9 @@ function buildProductsApiPayload(extraParams = {}) {
         .build(),
     )
     .withFieldsToInclude(['images', 'description', 'collection', 'source'])
-    .withFirstResult(0)
+    .withFirstResult((pageNumber - 1) * itemsPerPage)
     .withLocale('en')
-    .withNumberOfResults(48)
+    .withNumberOfResults(itemsPerPage)
     .withQueryPipeline('Danaher LifeSciences Category Product Listing')
     .withReferrer(document.referrer)
     .withSearchHub('DanaherLifeSciencesCategoryProductListing')
@@ -489,7 +496,11 @@ function queryToObject(str) {
   return buildObject(parts)[0];
 }
 
-export async function getProductsForCategories(extraParams = {}) {
+export async function getProductsForCategories(
+  extraParams = {},
+  isGridView = true,
+  currentPage = 1,
+) {
   const analyticsPayload = getAnalytics({
     originContext: 'Search',
   });
@@ -528,11 +539,12 @@ export async function getProductsForCategories(extraParams = {}) {
     });
   }
 
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const payload = buildProductsApiPayload({
     analytics: analyticsPayload,
     tab: 'Categories',
     facets,
-  });
+  }, itemsPerPage, currentPage);
 
   return fetchAndHandleResponse('product-categories', payload);
 }
