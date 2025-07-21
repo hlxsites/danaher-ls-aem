@@ -58,9 +58,9 @@ export default async function decorate(block) {
 
     if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
+      
       const elementAnchor = element.querySelector('a');
-      const elementHref = element.querySelector('a')?.getAttribute('href')?.replace(/\.html/,'');
-      elementAnchor?.setAttribute('href',elementHref);
+
       const elementAnchorContent = element.querySelector('a');
       let formattedElement = elementContent
         .split(' ')
@@ -69,6 +69,7 @@ export default async function decorate(block) {
         )
         .join(' ') || '';
       if (formattedElement.toLowerCase() === 'brands') {
+      elementAnchor?.setAttribute('href','products.html');
         if (elementAnchorContent) {
           formattedElement = 'Our Brands';
         }
