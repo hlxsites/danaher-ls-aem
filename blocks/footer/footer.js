@@ -61,8 +61,6 @@ export default async function decorate(block) {
     block.innerHTML = '';
     if (
       fragment
-      && (!window.location.href.includes('login')
-        || !window.location.href.includes('register'))
     ) {
       document.querySelector('.footer').parentElement.className
         += ' bg-danaherpurple-50';

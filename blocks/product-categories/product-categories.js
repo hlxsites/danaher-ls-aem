@@ -39,8 +39,7 @@ export default async function decorate(block) {
       const title = item.title || '';
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
-      const absImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
-
+      const absImg = image?.startsWith('http') ? image : `${baseUrl}${image}`;
       return div(
         {
           class:
@@ -53,7 +52,7 @@ export default async function decorate(block) {
         image
           && img({
             src:
-              absImg || '/content/dam/danaher/system/icons/preview-image.png',
+             !absImg.includes('error') ? absImg : '/content/dam/danaher/products/fallbackImage.jpeg',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
@@ -108,7 +107,7 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        if (item.type === 'Category') {
+        if (item.type === 'Category' && item.title !== '' && item.brand !== '') {
           grid.appendChild(createCard(item));
           decorateIcons(grid);
         }

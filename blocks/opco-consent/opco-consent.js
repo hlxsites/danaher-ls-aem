@@ -293,7 +293,9 @@ export default async function decorate(block) {
 
   // 4. Process email parameter if present
   const url = new URL(window.location.href);
+
   const emailParamRaw = url.searchParams.get('emailid');
+  
   const emailParam = emailParamRaw ? emailParamRaw.toLowerCase() : null;
 
   if (emailParam && CONFIG.allowedDomains.some(domain => url.href.startsWith(domain))) {
