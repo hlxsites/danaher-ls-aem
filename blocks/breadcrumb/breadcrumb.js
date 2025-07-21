@@ -58,6 +58,9 @@ export default async function decorate(block) {
 
     if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
+      const elementAnchor = element.querySelector('a');
+      const elementHref = element.querySelector('a')?.getAttribute('href')?.replace(/\.html/,'');
+      elementAnchor?.setAttribute('href',elementHref);
       const elementAnchorContent = element.querySelector('a');
       let formattedElement = elementContent
         .split(' ')
@@ -103,6 +106,7 @@ export default async function decorate(block) {
     anchor.setAttribute('tabindex', '-1');
     if (entries.children.length - 1 !== index) element.innerHTML = "<svg class='w-6 h-5/6 flex-shrink-0 text-gray-300' viewBox='0 0 24 44' preserveAspectRatio='none' fill='currentColor' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' data-acsb-hidden='true' data-acsb-force-hidden='true' data-di-rand='1697196048881'><path d='M.293 0l22 22-22 22h1.414l22-22-22-22H.293z'></path></svg>";
     element.prepend(anchor);
+    
 
     // special handling for template pages
     if (TEMPLATE_PATH_PATTERN.test(anchor.href)) {
@@ -127,6 +131,6 @@ export default async function decorate(block) {
   }
   const breadcrumbSection = breadcrumbWrapper.parentElement;
   const breadcrumbElement = document.querySelector('breadcrumb');
-  breadcrumbWrapper ? breadcrumbElement.appendChild(breadcrumbWrapper) : '';
+  breadcrumbElement.appendChild(breadcrumbWrapper);
   breadcrumbSection.remove();
 }
