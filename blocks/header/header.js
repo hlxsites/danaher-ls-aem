@@ -904,6 +904,14 @@ async function getQuote(headerBlock, authHeader) {
     console.warn('Failed to load quote cart');
   }
 }
+/*
+  *
+  :::::::::::
+  function to load required css
+  breadcrumb EDS supportive code starts
+  ::::::::::::::
+  *
+  */
 function loadBreadcrumbCSS(href) {
   if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement('link');
@@ -912,6 +920,13 @@ function loadBreadcrumbCSS(href) {
     document.head.appendChild(link);
   }
 }
+/*
+  *
+  :::::::::::
+   function to load required css ends
+  ::::::::::::::
+  *
+  */
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -942,7 +957,7 @@ export default async function decorate(block) {
   /*
   *
   :::::::::::
-    eds breadcrumb retrofit starts
+    breadcrumb EDS supportive code  starts
   ::::::::::::::
   *
   */
@@ -969,7 +984,7 @@ export default async function decorate(block) {
   /*
   *
   :::::::::::
-    eds breadcrumb retrofit ends
+    breadcrumb EDS supportive code ends
   ::::::::::::::
   *
   */

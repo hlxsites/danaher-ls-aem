@@ -50,7 +50,7 @@ export default async function decorate(block) {
   /*
   *
   :::::::::::
-    eds breadcrumb retrofit starts
+     breadcrumb EDS supportive code starts
   ::::::::::::::
   *
   */
@@ -86,7 +86,7 @@ export default async function decorate(block) {
     /*
   *
   :::::::::::
-    eds breadcrumb retrofit ends
+     breadcrumb EDS supportive code ends
   ::::::::::::::
   *
   */
