@@ -25,6 +25,14 @@ export default async function decorate(block) {
   });
     pdp_tab_wrapper.classList.add('pdppp');
     console.log("pdp_tab_wrapper", pdp_tab_wrapper);
+
+    const main = block.closest('main');
+  const pageTabsContainer = main.querySelector('.page-tabs-container');
+  console.log('page tabs container', pageTabsContainer);
+  pageTabsContainer.classList.add('border-r', 'border-gray-500');
+  const pageTabsWrapper = main.querySelector('.page-tabs-wrapper');
+  pageTabsWrapper.style.marginLeft = 'auto';
+  const sections = main.querySelectorAll('.section.page-tab');
   block.innerHTML = '';
   block.appendChild(pdp_tab_wrapper);
 }
