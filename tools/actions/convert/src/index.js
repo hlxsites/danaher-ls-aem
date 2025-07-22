@@ -21,7 +21,7 @@ import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 // eslint-disable-next-line
-import pathConfig from './pathConfig.json' with { type: 'json' };
+//import pathConfig from './pathConfig.json' with { type: 'json' };
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -214,7 +214,7 @@ function skipConverter(path) {
       return false;
   }
 
-  if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/assay-kits') ) && !path.includes('/topics-jck1/') ) {    
+  if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/assay-kits')) && !path.includes('/topics-jck1/') ) {    
       return true;
   }
 
