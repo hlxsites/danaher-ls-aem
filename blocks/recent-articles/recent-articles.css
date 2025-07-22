@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .recent-articles-wrapper :is(.my-0) {
   margin-top: 0px;
   margin-bottom: 0px
@@ -139,7 +144,7 @@
 }
 
 .recent-articles-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .recent-articles-wrapper :is(.font-normal) {

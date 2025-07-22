@@ -44,6 +44,11 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .simple-text-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -100,16 +105,16 @@
   padding-bottom: 0px
 }
 
+.simple-text-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
 .simple-text-wrapper :is(.pl-0) {
   padding-left: 0px
 }
 
 .simple-text-wrapper :is(.pr-0) {
   padding-right: 0px
-}
-
-.simple-text-wrapper :is(.pb-4) {
-  padding-bottom: 1rem
 }
 
 .simple-text-wrapper :is(.text-3xl) {
@@ -123,7 +128,7 @@
 }
 
 .simple-text-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .simple-text-wrapper :is(.font-normal) {

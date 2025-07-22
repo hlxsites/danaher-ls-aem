@@ -1,57 +1,10 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
-@media (min-width: 1760px) {
-  .container {
-    max-width: 1760px
-  }
-}
-
-.product-banner-wrapper :is(.absolute) {
-  position: absolute
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
 }
 
 .product-banner-wrapper :is(.relative) {
   position: relative
-}
-
-.product-banner-wrapper :is(.bottom-0) {
-  bottom: 0px
-}
-
-.product-banner-wrapper :is(.right-0) {
-  right: 0px
 }
 
 .product-banner-wrapper :is(.mx-auto) {
@@ -71,26 +24,6 @@
   margin-top: 2rem
 }
 
-.product-banner-wrapper :is(.mb-0) {
-  margin-bottom: 0px
-}
-
-.product-banner-wrapper :is(.mr-2) {
-  margin-right: 0.5rem
-}
-
-.product-banner-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
-}
-
-.product-banner-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
-.product-banner-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
-}
-
 .product-banner-wrapper :is(.line-clamp-6) {
   overflow: hidden;
   display: -webkit-box;
@@ -104,10 +37,6 @@
 
 .product-banner-wrapper :is(.inline-block) {
   display: inline-block
-}
-
-.product-banner-wrapper :is(.inline) {
-  display: inline
 }
 
 .product-banner-wrapper :is(.flex) {
@@ -146,10 +75,6 @@
   cursor: pointer
 }
 
-.product-banner-wrapper :is(.flex-row) {
-  flex-direction: row
-}
-
 .product-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -160,10 +85,6 @@
 
 .product-banner-wrapper :is(.items-center) {
   align-items: center
-}
-
-.product-banner-wrapper :is(.items-baseline) {
-  align-items: baseline
 }
 
 .product-banner-wrapper :is(.justify-start) {
@@ -180,22 +101,6 @@
 
 .product-banner-wrapper :is(.gap-6) {
   gap: 1.5rem
-}
-
-.product-banner-wrapper :is(.gap-2) {
-  gap: 0.5rem
-}
-
-.product-banner-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
-.product-banner-wrapper :is(.gap-0) {
-  gap: 0px
-}
-
-.product-banner-wrapper :is(.gap-0\.5) {
-  gap: 0.125rem
 }
 
 .product-banner-wrapper :is(.gap-x-6) {
@@ -240,11 +145,6 @@
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
-.product-banner-wrapper :is(.bg-white) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -281,10 +181,6 @@
   padding-top: 1.5rem
 }
 
-.product-banner-wrapper :is(.pl-\[9px\]) {
-  padding-left: 9px
-}
-
 .product-banner-wrapper :is(.text-right) {
   text-align: right
 }
@@ -308,7 +204,7 @@
 }
 
 .product-banner-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .product-banner-wrapper :is(.leading-\[48px\]) {
@@ -340,12 +236,6 @@
 
 .product-banner-wrapper :is(.decoration-danaherpurple-500) {
   text-decoration-color: #7523FF
-}
-
-.product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .product-banner-wrapper :is(.transition) {

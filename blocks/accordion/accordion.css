@@ -5,6 +5,11 @@
   line-height: 1.75rem
 }
 
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .accordion-wrapper :is(.absolute) {
   position: absolute
 }
@@ -170,7 +175,7 @@
 }
 
 .accordion-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .accordion-wrapper :is(.font-semibold) {

@@ -4,6 +4,11 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .separator-line-wrapper :is(.block) {
   display: block
 }

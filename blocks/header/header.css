@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .header-wrapper :is(.fixed) {
   position: fixed
 }
@@ -406,14 +411,14 @@
   border-color: rgb(0 0 0 / var(--tw-border-opacity))
 }
 
-.header-wrapper :is(.border-gray-600) {
-  --tw-border-opacity: 1;
-  border-color: rgb(75 85 99 / var(--tw-border-opacity))
-}
-
 .header-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.header-wrapper :is(.border-gray-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity))
 }
 
 .header-wrapper :is(.bg-black) {
@@ -683,6 +688,11 @@
 
 .hover\:bg-danaherpurple-50:hover {
   background-color: #EADEFF
+}
+
+.dhls-container .hover\:font-medium:hover {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
 }
 
 .\[\&\>li\.active\]\:bg-danaherpurple-50>li.active {

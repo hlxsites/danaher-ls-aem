@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400
+}
+
 .offer-banner-wrapper :is(.mx-5) {
   margin-left: 1.25rem;
   margin-right: 1.25rem
@@ -90,7 +95,7 @@
 }
 
 .offer-banner-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .offer-banner-wrapper :is(.font-semibold) {

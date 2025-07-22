@@ -482,6 +482,11 @@ h1,
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dhls-container h1 {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
+}
+
 h1 {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
@@ -493,6 +498,11 @@ h1 {
     font-size: 2.5rem !important;
     line-height: 3rem !important;
   }
+}
+
+.dhls-container h2 {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
 }
 
 h2 {
@@ -508,6 +518,11 @@ h2 {
   }
 }
 
+.dhls-container h3 {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
+}
+
 h3 {
   font-size: 1.25rem !important;
   font-weight: 500 !important;
@@ -519,6 +534,11 @@ h3 {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
+}
+
+.dhls-container h4 {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
 }
 
 h4 {
@@ -545,6 +565,13 @@ main .default-content-wrapper h1 {
   font-weight: 800;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.dhls-container main .default-content-wrapper h2,.dhls-container 
+  main .default-content-wrapper h3,.dhls-container 
+  main .default-content-wrapper h4 {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400;
 }
 
 main .default-content-wrapper h2,
@@ -700,6 +727,11 @@ main .default-content-wrapper h2,
 
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none;
+}
+
+.dhls-container .font-medium {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400;
 }
 
 body.appear {
@@ -883,6 +915,11 @@ main
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
+.dhls-container .btn-outline-primary {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400;
+}
+
 .btn-outline-primary {
   margin-top: 1.5rem;
   border-radius: 9999px;
@@ -1007,6 +1044,11 @@ main .default-content-wrapper p a:hover {
 main .default-content-wrapper p {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.dhls-container main .default-content-wrapper p.button-container > a {
+  font-family: TWK Lausanne EDS;
+  font-weight: 400;
 }
 
 main .default-content-wrapper p.button-container > a {
@@ -1575,12 +1617,22 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
+.dhls-container .productdetail main .columns p > strong {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
+}
+
 .productdetail main .columns p > strong {
   font-size: 1.125rem !important;
   font-weight: 500 !important;
   line-height: 1.25rem !important;
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
+}
+
+.dhls-container .container-two-col .col-left h2 strong {
+  font-family: TWK Lausanne EDS !important;
+  font-weight: 400 !important;
 }
 
 .container-two-col .col-left h2 strong {
