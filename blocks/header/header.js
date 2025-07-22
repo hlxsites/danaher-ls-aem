@@ -917,7 +917,29 @@ async function getQuote(headerBlock, authHeader) {
     console.warn('Failed to load quote cart');
   }
 }
-
+/*
+  *
+  :::::::::::
+  function to load required css
+  breadcrumb EDS supportive code starts
+  ::::::::::::::
+  *
+  */
+function loadBreadcrumbCSS(href) {
+  if (!document.querySelector(`link[href="${href}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+}
+/*
+  *
+  :::::::::::
+   function to load required css ends
+  ::::::::::::::
+  *
+  */
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -944,6 +966,42 @@ export default async function decorate(block) {
 
   block.append(headerBlock);
   block.append(flyout);
+
+  /*
+  *
+  :::::::::::
+    breadcrumb EDS supportive code  starts
+  ::::::::::::::
+  *
+  */
+
+  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
+    const bred = document.querySelector('breadcrumb');
+    const edsBreadcrumbWrapper = div(
+      {
+        class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
+      },
+    );
+    bred.append(edsBreadcrumbWrapper);
+    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+
+    import('../breadcrumb/breadcrumb.js')
+      .then((loadedBreadcrumb) => {
+        loadedBreadcrumb.default(edsBreadcrumbWrapper);
+      })
+      .catch((error) => {
+        console.error('Failed to load breadcrumb module:', error);
+      });
+  }
+
+  /*
+  *
+  :::::::::::
+    breadcrumb EDS supportive code ends
+  ::::::::::::::
+  *
+  */
+
   const authHeader = getAuthorization();
   if (
     authHeader

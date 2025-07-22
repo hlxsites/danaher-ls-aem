@@ -238,6 +238,80 @@
     ]
   },
   {
+    "id": "article-info-new",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "authorName",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "authorTitle",
+        "label": "Author Title",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "Picture",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleOpco",
+        "label": "Article Opco",
+        "value": ""
+      },
+      {
+        "component": "date-time",
+        "valueType": "date",
+        "name": "publishDate",
+        "label": "Date",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readingTime",
+        "label": "Reading Time",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-info",
+    "fields": [
+      {
+        "component": "date-time",
+        "valueType": "date",
+        "name": "publishdate",
+        "label": "Publish Date",
+        "value": ""
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "timetoread",
+        "label": "Reading Time",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "articles-list",
     "fields": [
       {
@@ -330,6 +404,41 @@
         "name": "right-bg-color",
         "value": "",
         "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Root Label",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "showHidden",
+        "label": "Show hidden pages",
+        "valueType": "boolean"
+      },
+      {
+        "component": "boolean",
+        "name": "hideCurrent",
+        "label": "Hide current page",
+        "valueType": "boolean"
+      }
+    ]
+  },
+  {
+    "id": "card-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tagName",
+        "value": "",
+        "label": "Tag Name"
       }
     ]
   },
@@ -1216,100 +1325,8 @@
     ]
   },
   {
-    "id": "register",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerHeading",
-        "value": "",
-        "label": "Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerSubHeading",
-        "value": "",
-        "label": "Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormTitle",
-        "value": "",
-        "label": "Form Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormSubHeading",
-        "value": "",
-        "label": "Form Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormFirstNameLabel",
-        "value": "",
-        "label": "First Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormLastNameLabel",
-        "value": "",
-        "label": "Last Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormCompanyNameLabel",
-        "value": "",
-        "label": "Company Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormEmailLabel",
-        "value": "",
-        "label": "Email Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormPasswordLabel",
-        "value": "",
-        "label": "Password Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormConfirmPasswordLabel",
-        "value": "",
-        "label": "Confirm Password Field Label"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "registerFormCheckboxText",
-        "value": "",
-        "label": "Form Checkbox Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormSubmitButtonLabel",
-        "value": "",
-        "label": "Submit Button Label"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "backgroundImage",
-        "label": "Background Image",
-        "multi": false
-      }
-    ]
+    "id": "recent-articles",
+    "fields": []
   },
   {
     "id": "related-category",

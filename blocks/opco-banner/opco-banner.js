@@ -49,9 +49,7 @@ export default async function decorate(block) {
   });
   if (
     currentPath.includes('products.html')
-    || currentPath.includes('/shop-page')
-    || currentPath.includes('/shop-home')
-    || currentPath.includes('/products-eds1.html')
+    || currentPath.includes('products-eds.html')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
@@ -74,7 +72,13 @@ export default async function decorate(block) {
     const allBrands = Array.from(brandMap.entries())
       .map(([name, path]) => ({ name, path }))
       .sort((asr, b) => asr.name.localeCompare(b.name));
-
+    let productsTag = '';
+    if (window.location.pathname.includes('products.html')) {
+      productsTag = 'products';
+    }
+    if (window.location.pathname.includes('products-eds.html')) {
+      productsTag = 'products-eds';
+    }
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
@@ -89,7 +93,7 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${brandLink}`,
+              href: `/us/en/${productsTag}/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
                 'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
@@ -322,6 +326,12 @@ export default async function decorate(block) {
           } w-[300px] h-[184px] object-contain`,
         }),
       );
+    } else {
+      contentWrapper.append(
+        div({
+          class: 'opacity-0  w-[300px] h-[184px] object-contain',
+        }),
+      );
     }
 
     if (opcoBannerItemTitle) {
@@ -367,7 +377,7 @@ export default async function decorate(block) {
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self',
+          linkHref?.includes('http') ? '_blank' : '_self',
         );
       });
       contentWrapper.append(

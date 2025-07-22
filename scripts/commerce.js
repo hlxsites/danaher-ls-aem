@@ -11,18 +11,50 @@ import {
 
 import { getApiData } from './api-utils.js';
 
+const GRID_ITEMS_PER_PAGE = 21;
+const LIST_ITEMS_PER_PAGE = 7;
+
+export function getCommerceBase() {
+  return window.DanaherConfig !== undefined
+    ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
+    : 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
+}
 // export function getCommerceBase() {
 //   return window.DanaherConfig !== undefined
 //     ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
 //     : 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 // }
-export function getCommerceBase() {
-  return 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/';
-}
 
 /**
  * Returns the user authorization used for commerce API calls
  */
+// export function getAuthorization() {
+//   const authHeader = new Headers();
+//   const siteID = window.DanaherConfig?.siteID;
+//   const hostName = window.location.hostname;
+//   let env;
+//   if (hostName.includes('local')) {
+//     env = 'local';
+//   } else if (hostName.includes('dev')) {
+//     env = 'dev';
+//   } else if (hostName.includes('stage')) {
+//     env = 'stage';
+//   } else {
+//     env = 'prod';
+//   }
+//   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+//   if (localStorage.getItem('authToken')) {
+//     authHeader.append(
+//       'Authorization',
+//       `Bearer ${localStorage.getItem('authToken')}`,
+//     );
+//   }
+//   if (tokenInStore) {
+//     authHeader.append('authentication-token', tokenInStore);
+//   }
+//   return authHeader;
+// }
+
 export function getAuthorization() {
   const authHeader = new Headers();
   const siteID = window.DanaherConfig?.siteID;
@@ -38,14 +70,23 @@ export function getAuthorization() {
     env = 'prod';
   }
   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+  const parsedToken = JSON.parse(tokenInStore);
   if (localStorage.getItem('authToken')) {
     authHeader.append(
       'Authorization',
       `Bearer ${localStorage.getItem('authToken')}`,
     );
-  }
-  if (tokenInStore) {
-    authHeader.append('authentication-token', tokenInStore);
+  } else if (getCookie('ProfileData')) {
+    const { customer_token: apiToken } = getCookie('ProfileData');
+    authHeader.append('authentication-token', apiToken);
+  } else if (
+    parsedToken
+    && parsedToken?.expiry_time > new Date().getTime() / 1000
+  ) {
+    authHeader.append('authentication-token', parsedToken.token);
+  } else if (getCookie(`${siteID}_${env}_apiToken`)) {
+    const apiToken = getCookie(`${siteID}_${env}_apiToken`);
+    authHeader.append('authentication-token', apiToken);
   }
   return authHeader;
 }
@@ -305,7 +346,11 @@ function getAnalytics(extraParams = {}) {
   return analytics;
 }
 
-function buildProductsApiPayload(extraParams = {}) {
+function buildProductsApiPayload(
+  extraParams = {},
+  itemsPerPage = GRID_ITEMS_PER_PAGE,
+  pageNumber = 1,
+) {
   const searchHistory = JSON.parse(
     localStorage.getItem('__coveo.analytics.history') || '[]',
   );
@@ -326,9 +371,9 @@ function buildProductsApiPayload(extraParams = {}) {
         .build(),
     )
     .withFieldsToInclude(['images', 'description', 'collection', 'source'])
-    .withFirstResult(0)
+    .withFirstResult((pageNumber - 1) * itemsPerPage)
     .withLocale('en')
-    .withNumberOfResults(48)
+    .withNumberOfResults(itemsPerPage)
     .withQueryPipeline('Danaher LifeSciences Category Product Listing')
     .withReferrer(document.referrer)
     .withSearchHub('DanaherLifeSciencesCategoryProductListing')
@@ -453,7 +498,11 @@ function queryToObject(str) {
   return buildObject(parts)[0];
 }
 
-export async function getProductsForCategories(extraParams = {}) {
+export async function getProductsForCategories(
+  extraParams = {},
+  isGridView = true,
+  currentPage = 1,
+) {
   const analyticsPayload = getAnalytics({
     originContext: 'Search',
   });
@@ -492,11 +541,12 @@ export async function getProductsForCategories(extraParams = {}) {
     });
   }
 
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const payload = buildProductsApiPayload({
     analytics: analyticsPayload,
     tab: 'Categories',
     facets,
-  });
+  }, itemsPerPage, currentPage);
 
   return fetchAndHandleResponse('product-categories', payload);
 }

@@ -37,6 +37,8 @@
     {
       "id": "section",
     "components": [
+      "article-info",
+      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -44,10 +46,7 @@
       "button",
       "title",
       "columns",
-      "dashboard",
-      "takeway",
-      "checkout",
-      "order-status",
+      "card-list",
       "takeway",
       "product-banner",
       "product-category",
@@ -60,6 +59,7 @@
       "register",
       "accordion",
       "recent-articles",
+      "embed",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -82,10 +82,10 @@
       "related-category",
       "product-hero-content",
       "product-info-list",
-      "dashboard",
-      "checkout",
-      "cartlanding",
-      "ordersubmit"
+      "table",
+      "testimonial",
+      "tags-list",
+      "related-articles"
     ]
     }
   ]

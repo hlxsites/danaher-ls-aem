@@ -16,6 +16,35 @@
           }
         }
     ],
-    "models": [    ],
-    "filters": [    ]
+    "models": [  
+      {  
+        "id": "breadcrumb",
+        "fields": [
+          {
+          "component": "text",
+          "name": "title",
+          "label": "Root Label",
+          "valueType": "string"
+          },
+          {
+          "component": "boolean",
+          "name": "showHidden",
+          "label": "Show hidden pages",
+          "valueType": "boolean"
+          },
+          {
+          "component": "boolean",
+          "name": "hideCurrent",
+          "label": "Hide current page",
+          "valueType": "boolean"
+          }   
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "id": "breadcrumb",
+        "components": [   ]
+      } 
+    ]
   }
