@@ -123,6 +123,11 @@ const fileMappings = [
     wrapper: 'page-jump-menu-wrapper',
   },
   {
+    content: './blocks/pdp-product-hero/pdp-product-hero.js',
+    output: './blocks/pdp-product-hero/pdp-product-hero.css',
+    wrapper: 'pdp-product-hero-wrapper',
+  },
+  {
     content: './blocks/page-tabs/page-tabs.js',
     output: './blocks/page-tabs/page-tabs.css',
     wrapper: 'page-tabs-wrapper',

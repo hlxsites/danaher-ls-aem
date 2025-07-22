@@ -1,0 +1,27 @@
+{
+    "definitions": [
+      {
+        "title": "PDP Product Hero",
+        "id": "pdp-product-hero",
+        "plugins": {
+          "xwalk": {
+            "page": {
+              "resourceType": "core/franklin/components/block/v1/block",
+              "template": {
+                "name": "PDP Product Hero",
+                "model": "pdp-product-hero"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "models": [
+        {
+          "id": "pdp-product-hero",
+          "fields": []
+        }
+    ],
+    "filters": []
+  }
+  
