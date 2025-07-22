@@ -33,7 +33,10 @@
   h6 {
     @apply mt-4 mb-2 text-danahergray-900 antialiased;
   }
-
+  p
+  {
+    @apply font-normal;
+  }
   h1 {
     @apply md:!leading-12 !font-medium !text-3xl md:!text-4xl2;
   }

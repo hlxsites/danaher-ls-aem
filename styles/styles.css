@@ -482,6 +482,10 @@ h1,
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  font-weight: 200;
+}
+
 h1 {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
