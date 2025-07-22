@@ -2,20 +2,20 @@ import { div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
 export default function productCta() {
-  //   const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
-  //   const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
-  //   const descriptionEl = block.querySelector(
-  //     '[data-aue-prop="brand-description"]',
-  //   );
-  //   const offerUrl = window.open("https://stage.lifesciences.danaher.com/", "_blank");
-  //   const buttonEl = block.querySelector('[data-aue-prop="quote-label"]');
+//   const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
+//   const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
+//   const descriptionEl = block.querySelector(
+//     '[data-aue-prop="brand-description"]',
+//   );
+//   const offerUrl = window.open("https://stage.lifesciences.danaher.com/", "_blank");
+//   const buttonEl = block.querySelector('[data-aue-prop="quote-label"]');
   const title = 'Can’t find what you need?';
+  // const bgColor = 'bg-gray-100';
   const buttonContent = 'Request a quote';
   const description = "Don't worry, we're here to help! Request a quote now and let our team of experts assist you in finding the perfect solution. We're committed to meeting your unique needs and providing the products you require.";
   const bannerSection = div(
     {
-      class:
-        'py-10  flex flex-col md:flex-row items-center gap-16  mx-auto rounded-md',
+      class: 'py-10  flex flex-col md:flex-row items-center gap-16  mx-auto rounded-md',
     },
 
     div(

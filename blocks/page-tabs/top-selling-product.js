@@ -17,6 +17,35 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function topSellingProducts(headingText, productIds) {
+  // block?.parentElement?.parentElement?.removeAttribute("class");
+  // block?.parentElement?.parentElement?.removeAttribute("style");
+  // const wrapper = block.closest(".top-selling-products-wrapper");
+  // if (wrapper) {
+  //   wrapper.classList.add("w-full", "md:px-10");
+  // }
+
+  // const headingText = block
+  //   .querySelector('[data-aue-prop="titleText"]')
+  //   ?.textContent.trim()
+  //   .replace(/<[^>]*>/g, "");
+  // const linkText = block
+  //   .querySelector('[data-aue-prop="card_hrefText"]')
+  //   ?.textContent.trim()
+  //   .replace(/<[^>]*>/g, "");
+  // const linkUrl = block
+  //   .querySelector('[data-aue-prop="card_hrefUrl"]')
+  //   ?.textContent.trim()
+  //   .replace(/<[^>]*>/g, "");
+  // const rawIds =
+  //   block
+  //     .querySelector('[data-aue-prop="productid"]')
+  //     ?.textContent.trim()
+  //     .replace(/<[^>]*>/g, "") || "";
+  // const productIds = productIDs
+  //   .split(",")
+  //   .map((id) => id.trim())
+  //   .filter(Boolean);
+
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
   let currentPage = 1;
@@ -42,18 +71,18 @@ export default async function topSellingProducts(headingText, productIds) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-medium leading-loose ',
+        class: 'text-black text-2xl font-medium leading-[2.5rem]',
       },
       headingText ?? '',
     ),
     // a(
     //   {
-    //     href: linkUrl ?? '#',
+    //     href: linkUrl ?? "#",
     //     class:
-    //       'text-danaherpurple-500 text-base font-semibold leading-snug hover:underline',
+    //       "text-danaherpurple-500 text-base font-semibold leading-snug hover:underline",
     //   },
-    //   linkText ?? '',
-    // ),
+    //   linkText ?? ""
+    // )
   );
 
   const arrows = div({
@@ -272,11 +301,11 @@ export default async function topSellingProducts(headingText, productIds) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-  //   block.append(blockWrapper);
+  // block.append(blockWrapper);
   return blockWrapper;
-  //   [...block.children].forEach((child) => {
-  //     if (!child.classList.contains('top-selling-rendered')) {
-  //       child.style.display = 'none';
-  //     }
-  //   });
+  // [...block.children].forEach((child) => {
+  //   if (!child.classList.contains("top-selling-rendered")) {
+  //     child.style.display = "none";
+  //   }
+  // });
 }

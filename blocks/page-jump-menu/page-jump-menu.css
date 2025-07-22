@@ -1,9 +1,82 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .page-jump-menu-wrapper :is(.relative) {
   position: relative
 }
 
+.page-jump-menu-wrapper :is(.sticky) {
+  position: sticky
+}
+
+.page-jump-menu-wrapper :is(.inset-x-0) {
+  left: 0px;
+  right: 0px
+}
+
+.page-jump-menu-wrapper :is(.top-\[83px\]) {
+  top: 83px
+}
+
+.page-jump-menu-wrapper :is(.top-\[87px\]) {
+  top: 87px
+}
+
 .page-jump-menu-wrapper :is(.z-10) {
   z-index: 10
+}
+
+.page-jump-menu-wrapper :is(.z-50) {
+  z-index: 50
+}
+
+.page-jump-menu-wrapper :is(.ml-\[-4px\]) {
+  margin-left: -4px
+}
+
+.page-jump-menu-wrapper :is(.ml-\[auto\]) {
+  margin-left: auto
+}
+
+.page-jump-menu-wrapper :is(.mr-\[auto\]) {
+  margin-right: auto
 }
 
 .page-jump-menu-wrapper :is(.mb-2) {
@@ -22,12 +95,24 @@
   display: flex
 }
 
+.page-jump-menu-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
 .page-jump-menu-wrapper :is(.hidden) {
   display: none
 }
 
 .page-jump-menu-wrapper :is(.h-8) {
   height: 2rem
+}
+
+.page-jump-menu-wrapper :is(.w-\[1000px\]) {
+  width: 1000px
+}
+
+.page-jump-menu-wrapper :is(.w-\[300px\]) {
+  width: 300px
 }
 
 .page-jump-menu-wrapper :is(.w-48) {
@@ -38,6 +123,18 @@
   width: 2rem
 }
 
+.page-jump-menu-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
+.page-jump-menu-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.page-jump-menu-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
 .page-jump-menu-wrapper :is(.gap-x-2) {
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem
@@ -45,6 +142,24 @@
 
 .page-jump-menu-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.page-jump-menu-wrapper :is(.border-l) {
+  border-left-width: 1px
+}
+
+.page-jump-menu-wrapper :is(.border-r) {
+  border-right-width: 1px
+}
+
+.page-jump-menu-wrapper :is(.border-gray-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity))
+}
+
+.page-jump-menu-wrapper :is(.border-violet-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(139 92 246 / var(--tw-border-opacity))
 }
 
 .page-jump-menu-wrapper :is(.bg-danaherlightblue-50) {
@@ -75,9 +190,23 @@
   stroke-width: 1
 }
 
+.page-jump-menu-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
 .page-jump-menu-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
+}
+
+.page-jump-menu-wrapper :is(.py-4) {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.page-jump-menu-wrapper :is(.pl-\[20px\]) {
+  padding-left: 20px
 }
 
 .page-jump-menu-wrapper :is(.pl-3) {
@@ -86,6 +215,11 @@
 
 .page-jump-menu-wrapper :is(.pr-2) {
   padding-right: 0.5rem
+}
+
+.page-jump-menu-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .page-jump-menu-wrapper :is(.text-sm) {
@@ -103,6 +237,11 @@
 
 .page-jump-menu-wrapper :is(.tracking-wider) {
   letter-spacing: 0.05em
+}
+
+.page-jump-menu-wrapper :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .page-jump-menu-wrapper :is(.text-danaherblack-500) {
@@ -134,6 +273,21 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+@media (min-width: 768px) {
+  .page-jump-menu-wrapper :is(.\[\&_\.page-tabs-wrapper\]\:md\:max-w-7xl .page-tabs-wrapper) {
+    max-width: 80rem
+  }
+
+  .page-jump-menu-wrapper :is(.\[\&_\.page-tabs-wrapper\]\:md\:max-w-max .page-tabs-wrapper) {
+    max-width: -moz-max-content;
+    max-width: max-content
+  }
+}
+
+.page-jump-menu-wrapper :is(.\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down) {
+  display: none
+}
+
 .page-jump-menu-wrapper :is(.\[\&_svg\]\:stroke-danaherpurple-500 svg) {
   stroke: #7523FF
 }
@@ -157,4 +311,26 @@
 
 .page-jump-menu-wrapper :is(.group:hover .\[\&_svg\]\:group-hover\:stroke-white svg) {
   stroke: #fff
+}
+
+.page-jump-menu-wrapper :is(.\[\&_ul\>li\>a\]\:h-full ul>li>a) {
+  height: 100%
+}
+
+.page-jump-menu-wrapper :is(.\[\&_ul\>li\>a\]\:flex-row ul>li>a) {
+  flex-direction: row
+}
+
+.page-jump-menu-wrapper :is(.\[\&_ul\>li\>a\]\:items-start ul>li>a) {
+  align-items: flex-start
+}
+
+.page-jump-menu-wrapper :is(.\[\&_ul\>li\>a\]\:justify-center ul>li>a) {
+  justify-content: center
+}
+
+.page-jump-menu-wrapper :is(.\[\&_ul\]\:divide-x ul > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)))
 }
