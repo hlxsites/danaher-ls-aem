@@ -25,7 +25,6 @@ export default async function decorate(block) {
     }, 
         p({ class: 'text-danaherpurple-500' }, 'Specification')
     );
-    pdp_tab_wrapper.classList.add('pdppp');
     console.log("pdp_tab_wrapper", pdp_tab_wrapper);
 
     const main = block.closest('main');
