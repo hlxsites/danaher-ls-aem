@@ -901,7 +901,7 @@ async function getQuote(headerBlock, authHeader) {
     }
   } else if (quoteRequest.status !== 404) {
     // eslint-disable-next-line no-console
-    log.warn('Failed to load quote cart');
+    console.warn('Failed to load quote cart');
   }
 }
 /*
@@ -977,7 +977,7 @@ export default async function decorate(block) {
         loadedBreadcrumb.default(edsBreadcrumbWrapper);
       })
       .catch((error) => {
-        log.error('Failed to load breadcrumb module:', error);
+        console.error('Failed to load breadcrumb module:', error);
       });
   }
 
