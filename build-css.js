@@ -123,6 +123,11 @@ const fileMappings = [
     wrapper: 'page-jump-menu-wrapper',
   },
   {
+    content: './blocks/pdp-page-tabs/pdp-page-tabs.js',
+    output: './blocks/pdp-page-tabs/pdp-page-tabs.css',
+    wrapper: 'pdp-page-tabs-wrapper',
+  },
+  {
     content: './blocks/page-tabs/page-tabs.js',
     output: './blocks/page-tabs/page-tabs.css',
     wrapper: 'page-tabs-wrapper',

@@ -19,10 +19,12 @@ export default async function decorate(block) {
       heading.textContent = title;
     }
   });
-  const pdp_tab_wrapper = div({
-    class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0'
-  });
+    const pdp_tab_wrapper = div({
+        class:
+            'dhls-container bg-aqua mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0'
+    }, 
+        p({ class: 'text-danaherpurple-500' }, 'Specification')
+    );
     pdp_tab_wrapper.classList.add('pdppp');
     console.log("pdp_tab_wrapper", pdp_tab_wrapper);
 
