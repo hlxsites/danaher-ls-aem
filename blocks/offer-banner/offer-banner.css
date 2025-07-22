@@ -11,6 +11,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .offer-banner-wrapper :is(.mx-5) {
   margin-left: 1.25rem;
   margin-right: 1.25rem

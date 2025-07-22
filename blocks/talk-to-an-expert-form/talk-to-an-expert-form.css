@@ -45,6 +45,10 @@
   line-height: 1.75rem
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .talk-to-an-expert-form-wrapper :is(.absolute) {
   position: absolute
 }

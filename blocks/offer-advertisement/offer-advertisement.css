@@ -4,6 +4,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .offer-advertisement-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto

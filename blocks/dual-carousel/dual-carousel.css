@@ -11,6 +11,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }

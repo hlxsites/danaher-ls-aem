@@ -1,3 +1,7 @@
+.font-medium p {
+  font-weight: 400
+}
+
 .article-info-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }

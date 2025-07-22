@@ -48,6 +48,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .opco-banner-wrapper :is(.absolute) {
   position: absolute
 }
@@ -296,11 +300,6 @@
 .opco-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.opco-banner-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
 }
 
 .opco-banner-wrapper :is(.p-10) {

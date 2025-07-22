@@ -1,3 +1,7 @@
+.font-medium p {
+  font-weight: 400
+}
+
 .header-wrapper :is(.fixed) {
   position: fixed
 }
@@ -406,14 +410,14 @@
   border-color: rgb(0 0 0 / var(--tw-border-opacity))
 }
 
-.header-wrapper :is(.border-gray-600) {
-  --tw-border-opacity: 1;
-  border-color: rgb(75 85 99 / var(--tw-border-opacity))
-}
-
 .header-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.header-wrapper :is(.border-gray-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity))
 }
 
 .header-wrapper :is(.bg-black) {
@@ -585,7 +589,7 @@
 }
 
 .header-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .header-wrapper :is(.font-semibold) {
@@ -685,6 +689,10 @@
   background-color: #EADEFF
 }
 
+.hover\:font-medium:hover p {
+  font-weight: 400
+}
+
 .\[\&\>li\.active\]\:bg-danaherpurple-50>li.active {
   background-color: #EADEFF
 }
@@ -718,7 +726,7 @@
 }
 
 .header-wrapper :is(.hover\:font-medium:hover) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .header-wrapper :is(.hover\:text-black:hover) {

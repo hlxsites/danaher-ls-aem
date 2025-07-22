@@ -6,6 +6,10 @@
   opacity: 0
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .workflow-tabs-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto

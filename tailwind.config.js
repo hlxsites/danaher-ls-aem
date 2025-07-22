@@ -88,6 +88,9 @@ module.exports = {
           marginTop: "2px",
           marginLeft: "4px",
         },
+        ".font-medium p": {
+          fontWeight: "400"
+        },
       });
     }),
   ],

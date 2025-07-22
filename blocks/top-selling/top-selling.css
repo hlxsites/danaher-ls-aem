@@ -52,6 +52,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .top-selling-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -95,10 +99,6 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-wrapper :is(.ml-3) {
-  margin-left: 0.75rem
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -173,10 +173,6 @@
 
 .top-selling-wrapper :is(.h-px) {
   height: 1px
-}
-
-.top-selling-wrapper :is(.h-40) {
-  height: 10rem
 }
 
 .top-selling-wrapper :is(.min-h-\[485px\]) {
@@ -681,10 +677,6 @@
 }
 
 @media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[305px\]) {
-    width: 305px
-  }
-
   .top-selling-wrapper :is(.lg\:justify-normal) {
     justify-content: normal
   }

@@ -44,6 +44,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .simple-text-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -100,16 +104,16 @@
   padding-bottom: 0px
 }
 
+.simple-text-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
 .simple-text-wrapper :is(.pl-0) {
   padding-left: 0px
 }
 
 .simple-text-wrapper :is(.pr-0) {
   padding-right: 0px
-}
-
-.simple-text-wrapper :is(.pb-4) {
-  padding-bottom: 1rem
 }
 
 .simple-text-wrapper :is(.text-3xl) {

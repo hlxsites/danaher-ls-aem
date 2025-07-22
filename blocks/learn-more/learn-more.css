@@ -11,6 +11,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .learn-more-wrapper :is(.mb-12) {
   margin-bottom: 3rem
 }

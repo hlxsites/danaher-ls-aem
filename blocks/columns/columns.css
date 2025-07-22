@@ -78,6 +78,10 @@
   background-color: #7523FF;
 }
 
+.font-medium p {
+  font-weight: 400;
+}
+
 .columns-wrapper :is(.absolute) {
   position: absolute;
 }

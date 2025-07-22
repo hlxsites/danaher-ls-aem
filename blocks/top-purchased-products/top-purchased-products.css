@@ -15,6 +15,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .top-purchased-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }

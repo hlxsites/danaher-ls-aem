@@ -32,6 +32,10 @@
   scrollbar-width: none;
 }
 
+.font-medium p {
+  font-weight: 400;
+}
+
 .carousel-wrapper :is(.sr-only) {
   position: absolute;
   width: 1px;

@@ -44,6 +44,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .shop-featured-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }

@@ -1,3 +1,7 @@
+.font-medium p {
+  font-weight: 400
+}
+
 .product-specifications-wrapper :is(.my-auto) {
   margin-top: auto;
   margin-bottom: auto

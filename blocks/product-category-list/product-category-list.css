@@ -42,6 +42,10 @@
   background-color: #EADEFF
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .product-category-list-wrapper :is(.relative) {
   position: relative
 }

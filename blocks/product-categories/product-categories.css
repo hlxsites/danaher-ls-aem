@@ -11,6 +11,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .product-categories-wrapper :is(.\!m-0) {
   margin: 0px !important
 }

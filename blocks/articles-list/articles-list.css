@@ -58,6 +58,10 @@
   margin-left: 4px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .articles-list-wrapper :is(.relative) {
   position: relative
 }
@@ -233,15 +237,6 @@
 .articles-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.articles-list-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.articles-list-wrapper :is(.font-bold) {
-  font-weight: 700
 }
 
 .articles-list-wrapper :is(.font-extralight) {

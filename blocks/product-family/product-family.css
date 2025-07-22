@@ -48,6 +48,10 @@
   margin-top: 48px
 }
 
+.font-medium p {
+  font-weight: 400
+}
+
 .product-family-wrapper :is(.visible) {
   visibility: visible
 }
@@ -810,7 +814,7 @@
 }
 
 .product-family-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .product-family-wrapper :is(.\!leading-10) {
