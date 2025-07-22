@@ -962,7 +962,7 @@ export default async function decorate(block) {
   *
   */
 
-  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
+  if ((window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
     const bred = document.querySelector('breadcrumb');
     const edsBreadcrumbWrapper = div(
       {

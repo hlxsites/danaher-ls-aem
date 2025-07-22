@@ -1,10 +1,7 @@
 export default function decorate(block) {
   const main = document.querySelector('main');
-  console.log('main', main);
   const content = main.querySelector('div');
-  console.log('content', content);
   const innerContent = content?.querySelector('div');
-  console.log('innerContent', innerContent);
   if (!innerContent) return;
 
   const classes = [
@@ -37,7 +34,6 @@ export default function decorate(block) {
     readingTime,
   };
 
-  console.log('publishDate', publishDate);
   // Format or set publish date
   let date;
   if (articleInfo.publishDate) {
