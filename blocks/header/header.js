@@ -901,7 +901,7 @@ async function getQuote(headerBlock, authHeader) {
     }
   } else if (quoteRequest.status !== 404) {
     // eslint-disable-next-line no-console
-    console.warn('Failed to load quote cart');
+    log.warn('Failed to load quote cart');
   }
 }
 /*
@@ -962,7 +962,7 @@ export default async function decorate(block) {
   *
   */
 
-  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
+  if ((window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
     const bred = document.querySelector('breadcrumb');
     const edsBreadcrumbWrapper = div(
       {
@@ -977,7 +977,7 @@ export default async function decorate(block) {
         loadedBreadcrumb.default(edsBreadcrumbWrapper);
       })
       .catch((error) => {
-        console.error('Failed to load breadcrumb module:', error);
+        log.error('Failed to load breadcrumb module:', error);
       });
   }
 
