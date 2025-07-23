@@ -383,6 +383,26 @@ const fileMappings = [
     output: './blocks/pdp-page-tabs/pdp-page-tabs.css',
     wrapper: 'pdp-page-tabs-wrapper',
   },
+  {
+    content: './blocks/pdp-description/pdp-description.js',
+    output: './blocks/pdp-description/pdp-description.css',
+    wrapper: 'pdp-description-wrapper',
+  },
+  {
+    content: './blocks/pdp-hero/pdp-hero.js',
+    output: './blocks/pdp-hero/pdp-hero.css',
+    wrapper: 'pdp-hero-wrapper',
+  },
+  {
+    content: './blocks/pdp-bundle-list/pdp-bundle-list.js',
+    output: './blocks/pdp-bundle-list/pdp-bundle-list.css',
+    wrapper: 'pdp-bundle-list-wrapper',
+  },
+  {
+    content: './blocks/pdp-specifications/pdp-specifications.js',
+    output: './blocks/pdp-specifications/pdp-specifications.css',
+    wrapper: 'pdp-specifications-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

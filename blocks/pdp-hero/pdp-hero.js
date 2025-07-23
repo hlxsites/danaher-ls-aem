@@ -1,5 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  block.append(div({ class: 'block-pdp-page-tabs' }, 'Page Tabs'));
+  block.append(div({ class: 'block-pdp-hero' }, 'PDP hero'));
 }
