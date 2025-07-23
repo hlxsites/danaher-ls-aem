@@ -44,6 +44,16 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.dhls-container .\!font-medium {
+  font-weight: 400 !important;
+  font-family: TWK Lausanne EDS !important
+}
+
 .product-hero-content-wrapper :is(.relative) {
   position: relative
 }
@@ -68,12 +78,12 @@
   display: flex
 }
 
-.product-hero-content-wrapper :is(.w-full) {
-  width: 100%
-}
-
 .product-hero-content-wrapper :is(.w-\[18px\]) {
   width: 18px
+}
+
+.product-hero-content-wrapper :is(.w-full) {
+  width: 100%
 }
 
 .product-hero-content-wrapper :is(.flex-1) {
@@ -106,10 +116,6 @@
 
 .product-hero-content-wrapper :is(.gap-3) {
   gap: 0.75rem
-}
-
-.product-hero-content-wrapper :is(.gap-4) {
-  gap: 1rem
 }
 
 .product-hero-content-wrapper :is(.gap-6) {
@@ -176,7 +182,7 @@
 }
 
 .product-hero-content-wrapper :is(.\!font-medium) {
-  font-weight: 400 !important
+  font-weight: 500 !important
 }
 
 .product-hero-content-wrapper :is(.font-bold) {
@@ -200,11 +206,6 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.product-hero-content-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
 .product-hero-content-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
@@ -216,10 +217,6 @@
 }
 
 @media (min-width: 768px) {
-  .product-hero-content-wrapper :is(.md\:w-96) {
-    width: 24rem
-  }
-
   .product-hero-content-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }

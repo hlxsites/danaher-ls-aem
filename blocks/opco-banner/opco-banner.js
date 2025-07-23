@@ -195,7 +195,7 @@ export default async function decorate(block) {
         href: opcoBannerButtonUrl,
         target: opcoTarget,
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-base font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
       },
       opcoBannerButtonLabel,
     );

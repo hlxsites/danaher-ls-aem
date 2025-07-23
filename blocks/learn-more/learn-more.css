@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .learn-more-wrapper :is(.mb-12) {
   margin-bottom: 3rem
 }
@@ -119,7 +124,7 @@
 }
 
 .learn-more-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .learn-more-wrapper :is(.font-semibold) {
