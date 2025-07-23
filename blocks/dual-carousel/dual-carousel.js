@@ -43,7 +43,7 @@ async function createCarousel(
     {
       class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center`,
     },
-    p({ class: 'text-lg font-semibold text-gray-800' }, carouselTitle),
+    p({ class: 'text-2xl font-semibold text-gray-800' }, carouselTitle),
     div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
   );
   decorateIcons(carouselTitleWrapper);

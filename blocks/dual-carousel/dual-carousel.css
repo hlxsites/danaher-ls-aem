@@ -204,8 +204,13 @@
   line-height: 1.75rem
 }
 
+.dual-carousel-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
 .dual-carousel-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .dual-carousel-wrapper :is(.font-semibold) {
