@@ -91,7 +91,7 @@ export default async function decorate(block) {
             authoredTitle ? '' : 'mb-6'
           }`,
         },
-        authoredTitle || 'All Categories',
+        authoredTitle || 'Categories',
       ),
     );
 
