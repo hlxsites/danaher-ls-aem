@@ -48,6 +48,9 @@ const TEMPLATE_LIST = {
       './schema.js',
     ],
   },
+  pdp: {
+    templateName: 'pdp',
+  },
   processstep: 'processstep',
   topic: 'topic',
   library: 'library',

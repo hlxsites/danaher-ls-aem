@@ -378,6 +378,11 @@ const fileMappings = [
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',
   },
+  {
+    content: './blocks/pdp-page-tabs/pdp-page-tabs.js',
+    output: './blocks/pdp-page-tabs/pdp-page-tabs.css',
+    wrapper: 'pdp-page-tabs-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
