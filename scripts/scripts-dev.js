@@ -909,7 +909,7 @@ async function designPdp() {
 
   const heroSection = sections[1];
 
-  const flexWrapper = div({class: 'flex'});
+  const flexWrapper = div({ class: 'flex' });
 
   const tabsWrapper = div();
   const restWrapper = div();
