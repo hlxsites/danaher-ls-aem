@@ -64,7 +64,7 @@ async function createCarousel(
       }),
       p(
         {
-          class: 'text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
+          class: 'text-sm !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
         },
         product?.brand ?? '',
       ),

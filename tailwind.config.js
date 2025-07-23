@@ -221,6 +221,7 @@ module.exports = {
       fontFamily: {
         sans: [
           "TWK Lausanne",
+          "TWK Lausanne EDS",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
