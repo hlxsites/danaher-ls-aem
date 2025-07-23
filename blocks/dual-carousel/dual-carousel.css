@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -184,14 +189,14 @@
   padding-top: 0px
 }
 
+.dual-carousel-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
 .dual-carousel-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.dual-carousel-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
 }
 
 .dual-carousel-wrapper :is(.text-sm) {
@@ -202,11 +207,6 @@
 .dual-carousel-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.dual-carousel-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
 }
 
 .dual-carousel-wrapper :is(.font-medium) {

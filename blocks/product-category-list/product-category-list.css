@@ -42,6 +42,11 @@
   background-color: #EADEFF
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .product-category-list-wrapper :is(.relative) {
   position: relative
 }
@@ -258,7 +263,7 @@
 }
 
 .product-category-list-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .product-category-list-wrapper :is(.font-semibold) {

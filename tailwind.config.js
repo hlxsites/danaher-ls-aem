@@ -88,6 +88,10 @@ module.exports = {
           marginTop: "2px",
           marginLeft: "4px",
         },
+        ".dhls-container .font-medium": {
+          fontWeight: "400",
+          fontFamily: "TWK Lausanne EDS",
+        },
       });
     }),
   ],
