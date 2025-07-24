@@ -88,10 +88,10 @@ export default async function decorate(block) {
       h2(
         {
           class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
-            authoredTitle ? '' : 'mb-6'
+            authoredTitle ? '' : ''
           }`,
         },
-        authoredTitle || 'All Categories',
+        authoredTitle || 'Categories',
       ),
     );
 
