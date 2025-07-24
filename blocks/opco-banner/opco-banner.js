@@ -431,36 +431,59 @@ export default async function decorate(block) {
   const updateSlides = (dir) => {
     const total = realSlideCount;
 
+    const carouselTrack = document.getElementById('rigthCarouselTrack');
+
     currentIndex += dir;
 
-    const carouselTrack = document.getElementById('rigthCarouselTrack');
+    // Smooth transition for visible shift
 
     carouselTrack.style.transition = 'transform 0.7s ease-in-out';
 
     carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-    if (currentIndex === 0) {
-      carouselTrack.style.transition = 'none';
-      currentIndex = total;
-      carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-    } else if (currentIndex === slides.length - 1 || currentIndex >= slides.length) {
-      carouselTrack.style.transition = 'none';
 
-      currentIndex = 1;
+    // Listen once for transition end
 
-      carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
+    const onTransitionEnd = () => {
+      carouselTrack.removeEventListener('transitionend', onTransitionEnd);
 
-    const displayIndex = currentIndex === 0 ? total : currentIndex === slides.length - 1 ? 1 : currentIndex;
+      // Jump instantly (no animation) to real first/last slide if on clone
 
-    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
+      if (currentIndex === 0) {
+        carouselTrack.style.transition = 'none';
 
-    if (getSlides?.classList.contains('hasBg')) {
+        currentIndex = total;
+
+        carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else if (currentIndex === slides.length - 1 || currentIndex >= slides.length) {
+        carouselTrack.style.transition = 'none';
+
+        currentIndex = 1;
+
+        carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+    };
+
+    carouselTrack.addEventListener('transitionend', onTransitionEnd);
+
+    // Update slide count display
+
+    const displayIndex = currentIndex === 0
+      ? total
+      : currentIndex === slides.length - 1
+        ? 1
+        : currentIndex;
+
+    const getSlide = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
+
+    if (getSlide?.classList.contains('hasBg')) {
       numberIndicator.style.color = '#fff';
     } else {
       numberIndicator.style.color = '';
     }
+
     numberIndicator.textContent = `${displayIndex}/${total}`;
   };
+
   const controls = div(
     {
       id: 'opcoBannerControls',
