@@ -470,7 +470,7 @@ export default async function decorate(block) {
     button(
       {
         class:
-          'w-8 bg-danaherpurple-50 p-2.5 h-8 border transition-colors duration-200 rounded-full text-danaherpurple-500 flex justify-center items-center',
+          'w-8 bg-danaherpurple-50 p-2.5 h-8 border transition-colors duration-0 rounded-full text-danaherpurple-500 flex justify-center items-center',
         onclick: () => updateSlides(-1),
       },
       span({
