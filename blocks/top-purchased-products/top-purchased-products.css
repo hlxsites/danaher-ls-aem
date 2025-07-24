@@ -99,6 +99,10 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
+.top-purchased-products-wrapper :is(.\!transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
+}
+
 .top-purchased-products-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -364,16 +368,32 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.top-purchased-products-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+.top-purchased-products-wrapper :is(.transition-transform) {
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
 }
 
-.top-purchased-products-wrapper :is(.duration-500) {
-  transition-duration: 500ms
+.top-purchased-products-wrapper :is(.\!transition-transform) {
+  transition-property: transform !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important
+}
+
+.top-purchased-products-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
+.top-purchased-products-wrapper :is(.\!duration-1000) {
+  transition-duration: 1000ms !important
+}
+
+.top-purchased-products-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.top-purchased-products-wrapper :is(.\!ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important
 }
 
 .top-purchased-products-wrapper :is(.hover\:scale-105:hover) {

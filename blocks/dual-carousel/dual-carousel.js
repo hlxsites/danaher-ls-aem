@@ -16,7 +16,7 @@ async function createCarousel(
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
   });
   const carouselContent = div({
-    class: `${side}CarouselItems flex gap-[22px]`,
+    class: `${side}CarouselItems flex gap-[22px] duration-1000 ease-in-out transition-transform transform`,
   });
   const carouselLeftArrow = div(
     {

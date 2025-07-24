@@ -415,7 +415,7 @@ export default async function decorate(block) {
         'data-index': index,
         class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
           opcoBannerItems.length > 1 ? '' : 'justify-center'
-        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
+        } carousel-slide p-10 flex min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative !duration-1000 !ease-in-out !transition-transform !transform`,
         style: index === 0 ? '' : 'display: none;',
       },
       contentWrapper,
