@@ -879,7 +879,7 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.append(
       div(
-        { class: 'product-hero-content' },
+        { class: 'pdp-product-hero-content' },
         div({ class: 'hero-default-content w-full' }, defaultContent),
         verticalImageGallery,
       ),

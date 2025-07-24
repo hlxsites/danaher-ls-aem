@@ -334,11 +334,6 @@
   line-height: 1.75rem;
 }
 
-.pdp-product-hero-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .pdp-product-hero-wrapper :is(.font-bold) {
   font-weight: 700;
 }
