@@ -15,12 +15,6 @@ export default function decorate(block) {
     offerBannerLinkLabel,
     offerBannerBgColor,
   ] = block.children;
-console.log('offerBannerTitle:  ',offerBannerTitle);
-console.log('offerBannerImage:  ',offerBannerImage);
-console.log('offerBannerLink:  ',offerBannerLink);
-console.log('offerBannerLinkTarget:  ',offerBannerLinkTarget);
-console.log('offerBannerLinkLabel:  ',offerBannerLinkLabel);
-console.log('offerBannerBgColor:  ',offerBannerBgColor);
 
   const titleEl = offerBannerTitle?.textContent.trim() || '';
   const imgEl = offerBannerImage?.querySelector('img');
@@ -65,7 +59,7 @@ console.log('offerBannerBgColor:  ',offerBannerBgColor);
         ? a(
           {
             href: linkTextEl || '#',
-            target: linkTargetEl,
+            target: linkTargetEl || '_self',
             class:
                 'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
           },
