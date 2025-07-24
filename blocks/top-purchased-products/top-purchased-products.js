@@ -171,7 +171,8 @@ export default async function decorate(block) {
 
     scrollIndex += direction;
 
-    scrollIndex = Math.max(0, Math.min(scrollIndex, Math.ceil(products.length / cardsPerPageGrid) - 1));
+    const maxIndex = Math.ceil(products.length / cardsPerPageGrid) - 1;
+    scrollIndex = Math.max(0, Math.min(scrollIndex, maxIndex));
 
     track.scrollTo({
 

@@ -467,11 +467,15 @@ export default async function decorate(block) {
 
     // Update slide count display
 
-    const displayIndex = currentIndex === 0
-      ? total
-      : currentIndex === slides.length - 1
-        ? 1
-        : currentIndex;
+    let displayIndex;
+
+    if (currentIndex === 0) {
+      displayIndex = total;
+    } else if (currentIndex === slides.length - 1) {
+      displayIndex = 1;
+    } else {
+      displayIndex = currentIndex;
+    }
 
     const getSlide = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
 
