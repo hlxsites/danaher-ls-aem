@@ -54,7 +54,7 @@ export default async function decorate(block) {
   ::::::::::::::
   *
   */
-    if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && index > 1) {
+    if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds') || window.location.pathname.includes('e-buy')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
 
       const elementAnchorContent = element.querySelector('a');
@@ -116,7 +116,7 @@ export default async function decorate(block) {
     },
   );
   breadcrumbWrapper.innerHTML = '';
-  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds'))) {
+  if ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds') || window.location.pathname.includes('e-buy'))) {
     bredWrap.append(entries);
     breadcrumbWrapper.append(bredWrap);
   } else {

@@ -1,14 +1,23 @@
 import { buildInputElement } from '../../scripts/common-utils.js';
-import { h2, h5, div, p, span, input } from '../../scripts/dom-builder.js';
+import {
+  h2, h5, div, p, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { putApiData } from '../../scripts/api-utils.js';
 import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
-
+import { getCommerceBase } from '../../scripts/commerce.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 /*
  :::::::::::::::
  generates the shipping address module for the checkout module/page
  ::::::::::::::
  */
 const paymentModule = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized.' };
+  }
+  const baseURL = getCommerceBase();
   /*
   ::::::::::::::
   get price type if its net or gross.
@@ -25,12 +34,12 @@ const paymentModule = async () => {
           class:
             'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0 pb-6',
         },
-        'Choose your payment method'
+        'Choose your payment method',
       ),
       p(
         {},
-        'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.'
-      )
+        'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
+      ),
     );
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
@@ -60,12 +69,12 @@ const paymentModule = async () => {
               false,
               'mt-6',
               false,
-              false
-            )
+              false,
+            ),
           ),
           span({
             class: 'icon icon-payment-cards w-[176px]',
-          })
+          }),
         );
 
         paymentMethodsWrapper?.append(cardsWrapper);
@@ -86,15 +95,14 @@ const paymentModule = async () => {
             false,
             'mt-6',
             false,
-            false
-          )
+            false,
+          ),
         );
         paymentMethodsWrapper?.append(invoiceWrapper);
       }
     });
     if (allPaymentMethods?.data?.length > 0) {
-      if(paymentMethodsWrapper?.classList.contains('hidden'))
-      {
+      if (paymentMethodsWrapper?.classList.contains('hidden')) {
         paymentMethodsWrapper.classList.remove('hidden');
       }
       paymentMethodsWrapper
@@ -109,7 +117,7 @@ const paymentModule = async () => {
             'flex',
             'flex-row-reverse',
             'items-center',
-            'gap-2'
+            'gap-2',
           );
           const inpu = inp?.querySelector('label');
           if (inpu?.classList.contains('font-normal')) {
@@ -127,6 +135,16 @@ const paymentModule = async () => {
           const eventTarget = c.target;
           if (!eventTarget.checked) {
             if (eventTarget?.id === 'invoice') {
+              const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+              const defaultHeaders = new Headers();
+              defaultHeaders.append('Content-Type', 'Application/json');
+              defaultHeaders.append(
+                'authentication-token',
+                authenticationToken.access_token,
+              );
+              const data = JSON.stringify({ paymentInstrument: 'Invoice' });
+              const settingPaymentMethod = await putApiData(url, data, defaultHeaders);
+              console.log('settingPaymentMethod: ', settingPaymentMethod);
             }
             c.target.checked = true;
           } else {
