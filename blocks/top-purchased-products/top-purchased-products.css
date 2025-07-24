@@ -87,8 +87,28 @@
   width: 100%
 }
 
+.top-purchased-products-wrapper :is(.w-\[246px\]) {
+  width: 246px
+}
+
 .top-purchased-products-wrapper :is(.min-w-\[264px\]) {
   min-width: 264px
+}
+
+.top-purchased-products-wrapper :is(.min-w-\[305px\]) {
+  min-width: 305px
+}
+
+.top-purchased-products-wrapper :is(.max-w-\[264px\]) {
+  max-width: 264px
+}
+
+.top-purchased-products-wrapper :is(.max-w-\[305px\]) {
+  max-width: 305px
+}
+
+.top-purchased-products-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
 }
 
 .top-purchased-products-wrapper :is(.flex-grow) {
@@ -169,6 +189,18 @@
 
 .top-purchased-products-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.top-purchased-products-wrapper :is(.overflow-x-hidden) {
+  overflow-x: hidden
+}
+
+.top-purchased-products-wrapper :is(.overflow-y-visible) {
+  overflow-y: visible
+}
+
+.top-purchased-products-wrapper :is(.scroll-smooth) {
+  scroll-behavior: smooth
 }
 
 .top-purchased-products-wrapper :is(.\!break-words) {
