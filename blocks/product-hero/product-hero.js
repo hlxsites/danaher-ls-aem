@@ -264,8 +264,9 @@ export default async function decorate(block) {
 
     // Price display (only if valid price)
     const brandStartPriceChildren = [];
+    const showListPrice = response[0]?.raw?.hidelistprice !== true;
 
-    if (hasValidPrice) {
+    if (hasValidPrice && showListPrice) {
       brandStartPriceChildren.push(
         div(
           { class: 'price-info' },
