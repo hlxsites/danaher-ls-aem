@@ -61,6 +61,10 @@
   position: relative
 }
 
+.opco-banner-wrapper :is(.inset-0) {
+  inset: 0px
+}
+
 .opco-banner-wrapper :is(.bottom-6) {
   bottom: 1.5rem
 }
@@ -71,6 +75,10 @@
 
 .opco-banner-wrapper :is(.z-10) {
   z-index: 10
+}
+
+.opco-banner-wrapper :is(.z-0) {
+  z-index: 0
 }
 
 .opco-banner-wrapper :is(.m-0) {
@@ -159,6 +167,10 @@
   width: 100%
 }
 
+.opco-banner-wrapper :is(.min-w-full) {
+  min-width: 100%
+}
+
 .opco-banner-wrapper :is(.max-w-\[344px\]) {
   max-width: 344px
 }
@@ -180,8 +192,16 @@
   max-width: max-content
 }
 
+.opco-banner-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
 .opco-banner-wrapper :is(.\!transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
+}
+
+.opco-banner-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .opco-banner-wrapper :is(.flex-col) {
@@ -222,6 +242,10 @@
 
 .opco-banner-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.opco-banner-wrapper :is(.overflow-hidden) {
+  overflow: hidden
 }
 
 .opco-banner-wrapper :is(.text-clip) {
@@ -461,6 +485,10 @@
   opacity: 0
 }
 
+.opco-banner-wrapper :is(.opacity-100) {
+  opacity: 1
+}
+
 .opco-banner-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -481,12 +509,50 @@
   transition-duration: 150ms
 }
 
+.opco-banner-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.transition-opacity) {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.transition-colors) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
 .opco-banner-wrapper :is(.\!duration-1000) {
   transition-duration: 1000ms !important
 }
 
+.opco-banner-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
+.opco-banner-wrapper :is(.duration-700) {
+  transition-duration: 700ms
+}
+
+.opco-banner-wrapper :is(.duration-0) {
+  transition-duration: 0s
+}
+
+.opco-banner-wrapper :is(.duration-200) {
+  transition-duration: 200ms
+}
+
 .opco-banner-wrapper :is(.\!ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important
+}
+
+.opco-banner-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .opco-banner-wrapper :is(.hover\:bg-danaherpurple-500:hover) {

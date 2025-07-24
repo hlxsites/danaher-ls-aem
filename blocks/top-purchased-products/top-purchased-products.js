@@ -44,7 +44,7 @@ export default async function decorate(block) {
   });
   const carouselContainer = div({
     class:
-      'carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center',
+      'carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center duration-1000 ease-in-out transition-transform transform',
   });
   const carouselHead = div({
     class:
@@ -123,7 +123,7 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
+    class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full duration-1000 ease-in-out transition-transform transform',
   });
   const paginationContainer = div({
     class:

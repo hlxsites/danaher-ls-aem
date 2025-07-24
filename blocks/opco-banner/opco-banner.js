@@ -211,63 +211,21 @@ export default async function decorate(block) {
 
   // === RIGHT CAROUSEL SECTION ===
   const slides = [];
-  let currentIndex = 0;
 
-  // === CAROUSEL CONTROLS ===
+  let realSlideCount = 0;
+
   const numberIndicator = span(
+
     {
-      class:
-        'controlsContentText justify-start text-black text-base font-bold leading-snug',
+
+      class: 'controlsContentText duration-0 ease-in-out justify-start text-black text-base font-bold leading-snug',
+
     },
-    `1/${slides.length}`,
+
+    '1/0',
+
   );
 
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    if (slides) {
-      slides[currentIndex].style.display = 'none';
-    }
-    currentIndex = (currentIndex + dir + total) % total;
-    if (slides[currentIndex]) {
-      slides[currentIndex].style.display = 'flex';
-    }
-    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
-
-    if (getSlides && getSlides.classList.contains('hasBg')) {
-      numberIndicator.style.color = '#fff';
-    } else {
-      numberIndicator.style.color = '';
-    }
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-  const controls = div(
-    {
-      id: 'opcoBannerControls',
-      class:
-        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4',
-    },
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 p-2.5 h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(-1),
-      },
-      span({
-        class: 'icon icon-arrow-left-icon',
-      }),
-    ),
-    numberIndicator,
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(1),
-      },
-      span({
-        class: 'icon icon-arrow-right-icon',
-      }),
-    ),
-  );
   opcoBannerItems.forEach((item, index) => {
     let itemTitle;
     let itemSubHeading;
@@ -415,8 +373,7 @@ export default async function decorate(block) {
         'data-index': index,
         class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
           opcoBannerItems.length > 1 ? '' : 'justify-center'
-        } carousel-slide p-10 flex min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative !duration-1000 !ease-in-out !transition-transform !transform`,
-        style: index === 0 ? '' : 'display: none;',
+        } flex-shrink-0 carousel-slide p-10 flex min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative !duration-1000 !ease-in-out !transition-transform !transform`,
       },
       contentWrapper,
       overlayWrapper,
@@ -456,16 +413,100 @@ export default async function decorate(block) {
         numberIndicator.textContent = `1/${index + 1}`;
       }
       slides.push(slide);
+      realSlideCount += 1;
     }
   });
+  // Add clones for infinite scroll
+
+  const firstClone = slides[0].cloneNode(true);
+
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+
+  slides.unshift(lastClone);
+
+  slides.push(firstClone);
+
+  let currentIndex = 1;
+
+  const updateSlides = (dir) => {
+    const total = realSlideCount;
+
+    currentIndex += dir;
+
+    const carouselTrack = document.getElementById('rigthCarouselTrack');
+
+    carouselTrack.style.transition = 'transform 0.7s ease-in-out';
+
+    carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    console.log('currentIndex : ', currentIndex);
+    if (currentIndex === 0) {
+      carouselTrack.style.transition = 'none';
+      currentIndex = total;
+      carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+    } else if (currentIndex === slides.length - 1 || currentIndex >= slides.length) {
+      carouselTrack.style.transition = 'none';
+
+      currentIndex = 1;
+
+      carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    const displayIndex = currentIndex === 0 ? total : currentIndex === slides.length - 1 ? 1 : currentIndex;
+
+    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
+
+    if (getSlides?.classList.contains('hasBg')) {
+      numberIndicator.style.color = '#fff';
+    } else {
+      numberIndicator.style.color = '';
+    }
+    numberIndicator.textContent = `${displayIndex}/${total}`;
+  };
+  const controls = div(
+    {
+      id: 'opcoBannerControls',
+      class:
+        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4 w-full',
+    },
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 p-2.5 h-8 border transition-colors duration-200 rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(-1),
+      },
+      span({
+        class: 'icon icon-arrow-left-icon',
+      }),
+    ),
+    numberIndicator,
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(1),
+      },
+      span({
+        class: 'icon icon-arrow-right-icon',
+      }),
+    ),
+  );
+
   decorateIcons(controls);
   const right = div(
     {
       id: 'opcoBannerCarouselOuter',
       class:
-        'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
+        'md:w-1/2 w-full bg-gray-100 overflow-hidden flex   flex-col items-center  gap-6 relative  duration-1000 ease-in-out transition-transform transform',
     },
-    ...slides,
+    div(
+      {
+        id: 'rigthCarouselTrack',
+        style: `transform: translateX(-${currentIndex * 100}%);`,
+        class: 'flex duration-1000 ease-in-out transition-transform transform',
+      },
+      ...slides,
+    ),
     opcoBannerItems.length > 1 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
