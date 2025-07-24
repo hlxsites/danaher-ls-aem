@@ -48,6 +48,9 @@ const TEMPLATE_LIST = {
       './schema.js',
     ],
   },
+  pdp: {
+    templateName: 'pdp',
+  },
   processstep: 'processstep',
   topic: 'topic',
   library: 'library',
@@ -900,6 +903,27 @@ function loadUTMprams() {
 }
 // UTM Paramaters check - end
 
+async function designPdp() {
+  const main = document.querySelector('main');
+  const sections = Array.from(main.querySelectorAll('.section'));
+
+  const heroSection = sections[1];
+
+  const flexWrapper = div({class: 'flex lg:max-w-screen-xl mx-auto'});
+
+  const tabsWrapper = div();
+  const restWrapper = div();
+  sections.slice(2).forEach((section) => {
+    if (section.classList.contains('pdp-page-tabs-container')) {
+      tabsWrapper.appendChild(section);
+    } else {
+      restWrapper.appendChild(section);
+    }
+  });
+  flexWrapper.appendChild(tabsWrapper);
+  flexWrapper.appendChild(restWrapper);
+  heroSection.after(flexWrapper);
+}
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -967,6 +991,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  await designPdp();
   loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
 }

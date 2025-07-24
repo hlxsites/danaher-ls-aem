@@ -43,7 +43,7 @@ async function createCarousel(
     {
       class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center`,
     },
-    p({ class: 'text-lg font-semibold text-gray-800' }, carouselTitle),
+    p({ class: 'text-2xl font-medium text-gray-800' }, carouselTitle),
     div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
   );
   decorateIcons(carouselTitleWrapper);
@@ -64,7 +64,7 @@ async function createCarousel(
       }),
       p(
         {
-          class: 'text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
+          class: 'text-sm !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
         },
         product?.brand ?? '',
       ),

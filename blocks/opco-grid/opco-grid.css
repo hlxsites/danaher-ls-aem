@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .opco-grid-wrapper :is(.relative) {
   position: relative
 }
@@ -222,7 +227,7 @@
 }
 
 .opco-grid-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .opco-grid-wrapper :is(.font-normal) {

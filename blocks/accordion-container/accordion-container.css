@@ -4,6 +4,11 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .accordion-container-wrapper :is(.absolute) {
   position: absolute
 }
@@ -174,7 +179,7 @@
 }
 
 .accordion-container-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .accordion-container-wrapper :is(.font-semibold) {
@@ -183,6 +188,11 @@
 
 .accordion-container-wrapper :is(.leading-7) {
   line-height: 1.75rem
+}
+
+.accordion-container-wrapper :is(.\!text-black) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important
 }
 
 .accordion-container-wrapper :is(.text-black) {
@@ -200,25 +210,20 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
-.accordion-container-wrapper :is(.\!text-black) {
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important
+.accordion-container-wrapper :is(.\!underline) {
+  text-decoration-line: underline !important
 }
 
 .accordion-container-wrapper :is(.underline) {
   text-decoration-line: underline
 }
 
-.accordion-container-wrapper :is(.\!underline) {
-  text-decoration-line: underline !important
+.accordion-container-wrapper :is(.\!decoration-danaherpurple-500) {
+  text-decoration-color: #7523FF !important
 }
 
 .accordion-container-wrapper :is(.decoration-black) {
   text-decoration-color: #000
-}
-
-.accordion-container-wrapper :is(.\!decoration-danaherpurple-500) {
-  text-decoration-color: #7523FF !important
 }
 
 .accordion-container-wrapper :is(.opacity-0) {
@@ -253,14 +258,14 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
-.accordion-container-wrapper :is(.hover\:text-danaherpurple-500:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
 .accordion-container-wrapper :is(.hover\:\!text-white:hover) {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important
+}
+
+.accordion-container-wrapper :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .accordion-container-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {

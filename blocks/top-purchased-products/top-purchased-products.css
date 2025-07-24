@@ -15,6 +15,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .top-purchased-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -33,13 +38,6 @@
 
 .top-purchased-products-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-purchased-products-wrapper :is(.\!line-clamp-3) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important
 }
 
 .top-purchased-products-wrapper :is(.\!line-clamp-2) {
@@ -302,7 +300,7 @@
 }
 
 .top-purchased-products-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .top-purchased-products-wrapper :is(.leading-7) {
