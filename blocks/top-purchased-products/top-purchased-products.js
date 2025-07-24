@@ -105,11 +105,11 @@ export default async function decorate(block) {
 
     id: 'carouselTrack',
 
-    class: 'flex gap-5 overflow-hidden p-2',
+    class: 'flex gap-5 overflow-hidden py-2',
 
   });
 
-  const carouselCards = div({ class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full duration-1000 ease-in-out transition-transform transform' }, track);
+  const carouselCards = div({ class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full duration-1000 ease-in-out transition-transform transform ' }, track);
 
   const paginationContainer = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full', style: 'display: none;' });
 
