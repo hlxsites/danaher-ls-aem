@@ -909,10 +909,10 @@ async function designPdp() {
 
   const heroSection = sections[1];
 
-  const flexWrapper = div({class: 'flex lg:max-w-screen-xl mx-auto'});
+  const flexWrapper = div({class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto'});
 
-  const tabsWrapper = div();
-  const restWrapper = div();
+  const tabsWrapper = div({class: 'tabs-left-parent sticky top-8 md:top-16 h-fit z-10'});
+  const restWrapper = div({class: 'tabs-right-parent border-l border-gray-200 flex-1'});
   sections.slice(2).forEach((section) => {
     if (section.classList.contains('pdp-page-tabs-container')) {
       tabsWrapper.appendChild(section);
