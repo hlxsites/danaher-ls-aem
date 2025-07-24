@@ -17,6 +17,20 @@ import {
   decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getPdpDetails } from "../../scripts/coveo/controller/controllers.js";
+import { searchEngine } from "../../scripts/coveo/engine.js";
+
+function waitForSearchResults() {
+  return new Promise((resolve, reject) => {
+    const respone = searchEngine.subscribe(() => {
+      const results = searchEngine.state.search.results;
+      if (results && results.length > 0) {
+        respone();
+        resolve(results[0]);
+      }
+    });
+  });
+}
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -150,15 +164,23 @@ export default async function decorate(block) {
       currency: 'USD',
     });
   }
+  await getPdpDetails("mica");
+  const result = await waitForSearchResults();
+  const pdpResponse = result.raw;
+
+ // console.log("pdpResponse:", pdpResponse);
+
 
   const response = await getProductResponse();
 
   if (response?.length > 0) {
+     console.log("result:", result); 
+  
     console.log('respnseee', response);
-    const productInfo = await getProductDetails(response[0]?.raw?.sku);
+    const productInfo = await getProductDetails(result?.raw?.sku);
     console.log('product Info', productInfo);
-    const allImages = response[0]?.raw.images;
-    const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
+    const allImages = result?.raw.images;
+    const verticalImageGallery = imageSlider(allImages, result?.Title);
     const defaultContent = div({
       class:
         'self-stretch inline-flex flex-col justify-start items-start gap-9 ',
@@ -201,7 +223,7 @@ export default async function decorate(block) {
         {
           class: 'self-stretch justify-start text-black text-4xl font-normal',
         },
-        response[0]?.raw.titlelsig,
+        result?.raw.titlelsig,
       ),
       div(
         {
@@ -221,7 +243,7 @@ export default async function decorate(block) {
             class:
               'self-stretch justify-start text-black text-base font-extralight',
           },
-          response[0]?.raw.richdescription,
+          result?.raw?.richdescription.replace(/<[^>]*>/g, ''),
         ),
       ),
     );
@@ -371,12 +393,12 @@ export default async function decorate(block) {
         ),
       );
       if (
-        response[0]?.raw?.objecttype === 'Product'
-        || response[0]?.raw?.objecttype === 'Bundle'
+        result?.raw?.objecttype === 'Product'
+        || result?.raw?.objecttype === 'Bundle'
       ) {
         rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => {
-          addToQuote(response[0]);
+          addToQuote(result);
         });
       } else {
         rfqParent = p(
@@ -468,7 +490,7 @@ export default async function decorate(block) {
             'w-full self-stretch inline-flex justify-start items-end gap-3',
         },
         productInfo?.data?.salePrice?.value != 0
-          && response[0]?.raw?.objecttype === 'Product'
+          && result?.raw?.objecttype === 'Product'
           ? addToCart
           : '',
         rfqParent,
@@ -478,8 +500,8 @@ export default async function decorate(block) {
         class: 'self-stretch flex flex-col justify-start items-start gap-5',
       });
       if (
-        response[0]?.raw?.objecttype === 'Product'
-      || response[0]?.raw?.objecttype === 'Bundle'
+        result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle'
       ) {
         priceInfoDiv.append(infoTab);
         priceInfoDiv.append(shipInfo);
@@ -489,8 +511,8 @@ export default async function decorate(block) {
       defaultContent.append(priceInfoDiv);
       /* brandname checking and displaying buy now btn */
 
-      const brandName = response[0]?.raw?.opco || null;
-      const showskupricelistusd = response[0]?.raw.listpriceusd;
+      const brandName = result?.raw?.opco || null;
+      const showskupricelistusd = result?.raw.listpriceusd;
 
       const currncyFormat = Number(showskupricelistusd);
 
@@ -502,8 +524,8 @@ export default async function decorate(block) {
         ),
       );
 
-      const brandURL = response[0]?.raw?.externallink
-        ? `${response[0].raw.externallink}?utm_source=dhls_website`
+      const brandURL = result?.raw?.externallink
+        ? `${result.raw.externallink}?utm_source=dhls_website`
         : null;
       brandButton.addEventListener('click', () => {
         window.open(brandURL, '_blank');
@@ -560,12 +582,12 @@ export default async function decorate(block) {
     );
     const externalButton = div(
       { class: 'inline-flex cursor-pointer justify-center items-center' },
-      `To learn more visit ${response[0]?.raw.opco} `,
+      `To learn more visit ${result?.raw.opco} `,
       externalLink,
     );
-    const clickableLink = response[0].raw.externallink
-      ? response[0].raw.externallink
-      : response[0].raw.clickableuri;
+    const clickableLink = result.raw.externallink
+      ? result.raw.externallink
+      : result.raw.clickableuri;
     const externalURL = `${clickableLink}?utm_source=dhls_website`;
     externalButton.addEventListener('click', () => {
       window.open(externalURL, '_blank');
@@ -785,7 +807,7 @@ export default async function decorate(block) {
     //   window.open(externalURL, "_blank");
     // });
 
-    if (response[0]?.raw?.objecttype === 'Family') {
+    if (result?.raw?.objecttype === 'Family') {
       defaultContent.append(
         div(
           {
@@ -811,7 +833,7 @@ export default async function decorate(block) {
           infoDiv,
         ),
       );
-    } else if (response[0]?.raw?.objecttype === 'Bundle') {
+    } else if (result?.raw?.objecttype === 'Bundle') {
       defaultContent.append(
         div(
           {
@@ -870,7 +892,7 @@ export default async function decorate(block) {
     const categoriesDiv = div({
       class: 'px-4 py-4 inline-flex justify-start items-start gap-2',
     });
-    response[0]?.raw?.categories?.forEach((category) => {
+    result?.raw?.categories?.forEach((category) => {
       categoriesDiv.append(categoryDiv(category));
     });
 
