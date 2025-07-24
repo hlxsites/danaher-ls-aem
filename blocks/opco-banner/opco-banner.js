@@ -438,8 +438,6 @@ export default async function decorate(block) {
     carouselTrack.style.transition = 'transform 0.7s ease-in-out';
 
     carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-    console.log('currentIndex : ', currentIndex);
     if (currentIndex === 0) {
       carouselTrack.style.transition = 'none';
       currentIndex = total;
