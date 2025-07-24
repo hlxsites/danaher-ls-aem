@@ -3,8 +3,10 @@ import { div } from '../../scripts/dom-builder.js';
 import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 
-export default async function buildAutoBlocks() {
-  // const main = document.querySelector('main');
+function loadPdpBlocks() {
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  console.log(response.raw.sku);
+
   const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
   const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
   const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
@@ -20,27 +22,30 @@ export default async function buildAutoBlocks() {
   document.querySelector('main').append(pdpHeroBlock);
   document.querySelector('main').append(pdpPageTabsBlock);
   document.querySelector('main').append(pdpDescriptionBlock);
-  document.querySelector('main').append(pdpBundleList);
   document.querySelector('main').append(pdpSpecificationsBlock);
+  document.querySelector('main').append(pdpBundleList);
+}
 
+export default async function buildAutoBlocks() {
   const productSlug = new URL(window.location.href).pathname.split('/').pop();
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  
   if (response && response?.raw.sku === productSlug) {
+    loadPdpBlocks();
     return;
   }
   localStorage.removeItem('eds-product-details');
-  await getPdpDetails(productSlug);
 
-  searchEngine.subscribe(() => {
-    // const title = searchEngine.state.search.results[0]?.raw?.title;
-    if (searchEngine.state.search.results[0]) {
-      console.log(searchEngine.state.search.results[0]?.raw);
-    }
-    if (searchEngine.state.search.results.length > 0) {
-      localStorage.setItem(
-        'eds-product-details',
-        JSON.stringify(searchEngine.state.search.results[0]),
-      );
-    }
+  await getPdpDetails(productSlug);
+  await new Promise((resolve) => {
+    const unsubscribe = searchEngine.subscribe(() => {
+      const results = searchEngine.state.search.results;
+      if (results.length > 0) {
+        localStorage.setItem('eds-product-details', JSON.stringify(results[0]));
+        unsubscribe();
+        resolve();
+      }
+    });
   });
+  loadPdpBlocks();
 }
