@@ -15,7 +15,7 @@ export default function renderGridCard(item) {
       href: item?.url,
       target: item?.url?.includes('http') ? '_blank' : '_self',
       class:
-        'w-full flex-shrink-0 hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105   min-w-[305px] max-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
+        'w-full relative flex-shrink-0 hover:shadow-md origin-start transform cursor-pointer transition duration-500 hover:scale-105 sm:min-w-[100%]  md:min-w-[303px] sm:max-w-[305px] md:max-w-[303px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
     },
     img({
       src: imageUrl,

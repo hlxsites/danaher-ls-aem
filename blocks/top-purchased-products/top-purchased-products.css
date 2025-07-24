@@ -191,6 +191,10 @@
   overflow: hidden
 }
 
+.top-purchased-products-wrapper :is(.overflow-visible) {
+  overflow: visible
+}
+
 .top-purchased-products-wrapper :is(.overflow-x-hidden) {
   overflow-x: hidden
 }
@@ -268,6 +272,14 @@
 
 .top-purchased-products-wrapper :is(.\!p-0) {
   padding: 0px !important
+}
+
+.top-purchased-products-wrapper :is(.p-2) {
+  padding: 0.5rem
+}
+
+.top-purchased-products-wrapper :is(.p-1) {
+  padding: 0.25rem
 }
 
 .top-purchased-products-wrapper :is(.\!px-3) {
@@ -462,6 +474,18 @@
     width: calc(50% - 10px)
   }
 
+  .top-purchased-products-wrapper :is(.sm\:min-w-\[100\%\]) {
+    min-width: 100%
+  }
+
+  .top-purchased-products-wrapper :is(.sm\:max-w-\[305px\]) {
+    max-width: 305px
+  }
+
+  .top-purchased-products-wrapper :is(.sm\:max-w-\[100\%\]) {
+    max-width: 100%
+  }
+
   .top-purchased-products-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
@@ -474,6 +498,22 @@
 @media (min-width: 768px) {
   .top-purchased-products-wrapper :is(.md\:w-72) {
     width: 18rem
+  }
+
+  .top-purchased-products-wrapper :is(.md\:min-w-\[305px\]) {
+    min-width: 305px
+  }
+
+  .top-purchased-products-wrapper :is(.md\:min-w-\[303px\]) {
+    min-width: 303px
+  }
+
+  .top-purchased-products-wrapper :is(.md\:max-w-\[305px\]) {
+    max-width: 305px
+  }
+
+  .top-purchased-products-wrapper :is(.md\:max-w-\[303px\]) {
+    max-width: 303px
   }
 
   .top-purchased-products-wrapper :is(.md\:px-10) {

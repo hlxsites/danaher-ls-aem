@@ -295,7 +295,7 @@ export default async function decorate(block) {
       contentWrapper.append(
         h2(
           {
-            class: 'text-3xl leading-10 font-medium text-black text-center',
+            class: 'text-3xl  leading-10 font-medium text-black text-center',
           },
           opcoBannerItemTitle,
         ),
@@ -524,7 +524,7 @@ export default async function decorate(block) {
       {
         id: 'rigthCarouselTrack',
         style: `transform: translateX(-${currentIndex * 100}%);`,
-        class: 'flex duration-1000 ease-in-out transition-transform transform',
+        class: 'flex duration-1000 w-[100%] md:w-auto ease-in-out transition-transform transform',
       },
       ...slides,
     ),
