@@ -383,8 +383,7 @@ export default async function decorate(block) {
       overlayWrapper?.classList.remove('hidden');
       slide.style.padding = '2.5rem';
       slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundSize = 'contain';
       slide.style.backgroundPosition = 'center';
       slide.querySelectorAll('.text-center')?.forEach((it) => {
         it.style.color = '#fff';
