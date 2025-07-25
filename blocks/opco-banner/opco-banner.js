@@ -95,7 +95,7 @@ export default async function decorate(block) {
               href: `/us/en/${productsTag}/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
-                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+                'leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
             linkLabel,
           ),
