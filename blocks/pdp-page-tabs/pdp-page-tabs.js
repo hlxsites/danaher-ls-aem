@@ -4,7 +4,7 @@ import { div, p } from '../../scripts/dom-builder.js';
 const tabMap = {
   Description: '#description-tab',
   Specifications: '#specifications-tab',
-  'Product Part List': '#bundle-list-tab',
+  'Product Parts List': '#bundle-list-tab',
   Products: '#products-tab',
   Resources: '#resources-tab',
   Citations: '#citations-tab',
@@ -140,7 +140,7 @@ export default async function decorate(block) {
   }
   // Bundle part list
   if (response?.raw?.bundlepreviewjson !== undefined && response?.raw?.bundlepreviewjson?.trim() !== '') {
-    tabsList.push('Product Part List');
+    tabsList.push('Product Parts List');
   }
 
   const tabsDiv = div({ class: 'tabs-parent flex flex-row md:flex-col overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden' });

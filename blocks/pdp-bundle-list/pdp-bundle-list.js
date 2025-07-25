@@ -7,21 +7,23 @@ export default async function decorate(block) {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
     try {
-      block.append(div(
-        { class: 'grid grid-cols-12 text-base font-bold text-black gap-y-4 pb-2 border-b' },
-        div(
-          { class: 'col-span-8 lg:col-span-10' },
-          p({ class: 'text-base font-bold leading-6' }, 'Products'),
-        ),
-        div(
-          { class: 'col-span-4 md:col-span-2 lg:col-span-1 flex justify-center' },
-          p({ class: 'text-base font-bold leading-6' }, 'QTY'),
-        ),
-        div(
-          { class: 'hidden md:flex justify-center col-span-2 lg:col-span-1' },
-          p({ class: 'text-base font-bold leading-6' }, 'Details'),
-        ),
-      ));
+      block.append(
+      //   div(
+      //   { class: 'grid grid-cols-12 text-base font-bold text-black gap-y-4 pb-2 border-b' },
+      //   div(
+      //     { class: 'col-span-8 lg:col-span-10' },
+      //     p({ class: 'text-base font-bold leading-6' }, 'Products'),
+      //   ),
+      //   div(
+      //     { class: 'col-span-4 md:col-span-2 lg:col-span-1 flex justify-center' },
+      //     p({ class: 'text-base font-bold leading-6' }, 'QTY'),
+      //   ),
+      //   div(
+      //     { class: 'hidden md:flex justify-center col-span-2 lg:col-span-1' },
+      //     p({ class: 'text-base font-bold leading-6' }, 'Details'),
+      //   ),
+      // )
+    );
       const bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
       bundleDetails.forEach((product) => {
         block.append(div(
@@ -50,6 +52,6 @@ export default async function decorate(block) {
       console.error(e);
     }
   }
-  block.prepend(div({ class: 'text-2xl text-black py-6' }, 'Products Parts List'));
-  block.classList.add(...'border-b border-gray-200 !pb-6'.split(' '));
+  block.prepend(div({ class: 'text-2xl text-black py-6' }, 'Product Parts List'));
+  block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }

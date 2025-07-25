@@ -47,9 +47,9 @@ export default async function decorate(block) {
         attrWrapper.append(tableContainer);
       });
       block.innerHTML = '';
-      block.append(div({ class: 'text-2xl text-black py-6' }, 'Specification'));
+      block.append(div({ class: 'text-2xl text-black py-6' }, 'Specifications'));
       block.append(attrWrapper);
     }
   }
-  block.classList.add(...'border-b border-gray-200 !pb-6'.split(' '));
+  block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
