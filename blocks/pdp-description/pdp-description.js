@@ -5,5 +5,5 @@ export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'description-tab';
   block.innerHTML = response?.raw?.richlongdescription || '';
-  block.append(div({ class: 'block-pdp-description' }, 'PDP Description'));
+  block.prepend(div({ class: 'text-2xl text-black pt-6' }, 'Description'));
 }

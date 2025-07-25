@@ -29,7 +29,7 @@ function loadPdpBlocks() {
 export default async function buildAutoBlocks() {
   const productSlug = new URL(window.location.href).pathname.split('/').pop();
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
-  
+
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
     return;
@@ -39,7 +39,7 @@ export default async function buildAutoBlocks() {
   await getPdpDetails(productSlug);
   await new Promise((resolve) => {
     const unsubscribe = searchEngine.subscribe(() => {
-      const results = searchEngine.state.search.results;
+      const { results } = searchEngine.state.search;
       if (results.length > 0) {
         localStorage.setItem('eds-product-details', JSON.stringify(results[0]));
         unsubscribe();

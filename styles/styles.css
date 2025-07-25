@@ -2443,6 +2443,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 83px;
 }
 
+.top-\[200px\] {
+  top: 200px;
+}
+
 .top-8 {
   top: 2rem;
 }
@@ -2527,6 +2531,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-top: -1px;
 }
 
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -2592,6 +2600,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .h-fit {
@@ -2744,6 +2756,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -2792,6 +2808,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-r {
+  border-right-width: 1px;
 }
 
 .border-l {
@@ -3283,6 +3303,10 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
+  .md\:top-\[200px\] {
+    top: 200px;
+  }
+
   .md\:top-16 {
     top: 4rem;
   }

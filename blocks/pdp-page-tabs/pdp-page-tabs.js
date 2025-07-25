@@ -138,7 +138,7 @@ export default async function decorate(block) {
         { class: 'shrink-0 px-6 py-4 md:relative flex flex-col-reverse md:flex-row justify-start items-center gap-3' },
         div({ class: `${index === 0 ? 'bg-danaherpurple-500 rounded-[5px]' : ''} w-12 h-1 md:w-1 md:h-12 md:left-0 md:top-[2px] md:absolute` }),
         p({
-          class: `p-tab ${index === 0 ? 'text-danaherpurple-500 font-bold' : 'text-black font-medium'}  cursor-pointer`,
+          class: `p-tab ${index === 0 ? 'text-danaherpurple-500 font-bold' : 'text-black font-medium'}  text-base cursor-pointer`,
           onclick(event) {
             updatePageTabs(event);
           },

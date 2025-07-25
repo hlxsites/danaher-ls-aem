@@ -1,9 +1,9 @@
 import { div, p, img } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
- block.replaceChildren();
- block.id = 'bundle-list-tab';
-const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  block.replaceChildren();
+  block.id = 'bundle-list-tab';
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
     try {
       block.append(div(
@@ -49,4 +49,5 @@ const response = JSON.parse(localStorage.getItem('eds-product-details'));
       console.error(e);
     }
   }
+  block.prepend(div({ class: 'text-2xl text-black py-6' }, 'Products Parts List'));
 }
