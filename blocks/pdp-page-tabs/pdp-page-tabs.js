@@ -2,9 +2,12 @@ import { div, p } from '../../scripts/dom-builder.js';
 
 // Highlight the tabs on selection and scroll to specific section
 const tabMap = {
-  Description: '#description-tab',
-  Specifications: '#specifications-tab',
+  'Description': '#description-tab',
+  'Specifications': '#specifications-tab',
   'Product Part List': '#bundle-list-tab',
+	'Products': '#products-tab',
+  'Resources': '#resources-tab',
+  'Citations': '#citations-tab',
 };
 
 let lastScrollY = window.scrollY;
@@ -114,7 +117,6 @@ function updatePageTabs(event) {
 
 export default async function decorate(block) {
   block.classList.add('bg-white');
-  block.append(div({ class: 'block-pdp-page-tabs' }, 'Page Tabs'));
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
 
@@ -125,6 +127,14 @@ export default async function decorate(block) {
   // Specification
   if (response?.raw?.attributejson !== undefined && response?.raw?.attributejson?.trim() !== '') {
     tabsList.push('Specifications');
+  }
+  //Products
+  if(response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
+    tabsList.push('Products');
+  }
+  //Resources
+  if(response?.raw?.numresources) {
+    tabsList.push('Resources');
   }
   // Bundle part list
   if (response?.raw?.bundlepreviewjson !== undefined && response?.raw?.bundlepreviewjson?.trim() !== '') {

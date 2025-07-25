@@ -1003,6 +1003,10 @@
     "fields": []
   },
   {
+    "id": "pdp-citations",
+    "fields": []
+  },
+  {
     "id": "pdp-description",
     "fields": []
   },
@@ -1012,6 +1016,14 @@
   },
   {
     "id": "pdp-page-tabs",
+    "fields": []
+  },
+  {
+    "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-resources",
     "fields": []
   },
   {

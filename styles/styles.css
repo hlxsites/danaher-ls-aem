@@ -2439,16 +2439,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 1.5rem;
 }
 
-.top-\[83px\] {
-  top: 83px;
-}
-
-.top-\[200px\] {
-  top: 200px;
-}
-
 .top-8 {
   top: 2rem;
+}
+
+.top-\[83px\] {
+  top: 83px;
 }
 
 .z-10 {
@@ -2531,10 +2527,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-top: -1px;
 }
 
-.ml-6 {
-  margin-left: 1.5rem;
-}
-
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -2598,21 +2590,13 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 12rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
-}
-
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
 }
 
-.max-h-screen {
-  max-height: 100vh;
+.h-full {
+  height: 100%;
 }
 
 .\!w-full {
@@ -2756,16 +2740,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.self-start {
-  align-self: flex-start;
-}
-
 .overflow-hidden {
   overflow: hidden;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
 
 .scroll-auto {
@@ -2810,10 +2786,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-width: 2px;
 }
 
-.border-r {
-  border-right-width: 1px;
-}
-
 .border-l {
   border-left-width: 1px;
 }
@@ -2821,6 +2793,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .border-gray-300 {
@@ -2831,11 +2808,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .bg-black {
@@ -3303,10 +3275,6 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
-  .md\:top-\[200px\] {
-    top: 200px;
-  }
-
   .md\:top-16 {
     top: 4rem;
   }
