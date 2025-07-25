@@ -999,6 +999,38 @@
     "fields": []
   },
   {
+    "id": "pdp-bundle-list",
+    "fields": []
+  },
+  {
+    "id": "pdp-citations",
+    "fields": []
+  },
+  {
+    "id": "pdp-description",
+    "fields": []
+  },
+  {
+    "id": "pdp-hero",
+    "fields": []
+  },
+  {
+    "id": "pdp-page-tabs",
+    "fields": []
+  },
+  {
+    "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-resources",
+    "fields": []
+  },
+  {
+    "id": "pdp-specifications",
+    "fields": []
+  },
+  {
     "id": "product-banner",
     "fields": [
       {
