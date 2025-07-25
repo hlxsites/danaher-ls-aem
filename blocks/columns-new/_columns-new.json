@@ -1,0 +1,73 @@
+{
+  "definitions": [
+    {
+      "title": "Columns_new",
+      "id": "columns-new",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "columns": "3",
+              "rows": "1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-new",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "value": "",
+          "label": "Style",
+          "valueType": "string",
+          "options": [
+            { "label": "2 Col Equal", "value": "2-col-equal" },
+            { "label": "2 Col 30/70", "value": "2-col-30-70" },
+            { "label": "3 Col Equal", "value": "3-col-equal" },
+            { "label": "3 Col 25/25/50", "value": "3-col-25-25-50" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns",
+      "components": [
+        "column"
+      ]
+    },
+    {
+      "id": "column",
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title",
+        "article-info-new",
+        "videos",
+        "form"
+      ]
+    }
+  ]
+}

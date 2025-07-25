@@ -108,6 +108,24 @@
       "image",
       "button",
       "title",
+      "article-info-new",
+      "videos",
+      "form"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title",
       "article-info-new"
     ]
   },
@@ -188,7 +206,7 @@
     ]
   },
   {
-    "id": "table",
+    "id": "table-new",
     "components": [
       "table-row"
     ]
