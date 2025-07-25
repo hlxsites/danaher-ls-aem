@@ -2704,6 +2704,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -2739,6 +2743,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .top-1\/2 {
   top: 50%;
+}
+
+.top-16 {
+  top: 4rem;
 }
 
 .top-6 {
@@ -2890,6 +2898,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .h-48 {
   height: 12rem;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-full {
@@ -3083,9 +3096,18 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-width: 2px;
 }
 
+.border-l {
+  border-left-width: 1px;
+}
+
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .border-gray-300 {
@@ -3563,8 +3585,16 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
+  .md\:top-32 {
+    top: 8rem;
+  }
+
   .md\:mt-4 {
     margin-top: 1rem;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:pb-10 {
