@@ -16,20 +16,7 @@ import {
   decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
-import { searchEngine } from '../../scripts/coveo/engine.js';
 
-function waitForSearchResults() {
-  return new Promise((resolve, reject) => {
-    const respone = searchEngine.subscribe(() => {
-      const { results } = searchEngine.state.search;
-      if (results && results.length > 0) {
-        respone();
-        resolve(results[0]);
-      }
-    });
-  });
-}
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -163,9 +150,7 @@ export default async function decorate(block) {
       currency: 'USD',
     });
   }
-  // await getPdpDetails("test-ad-488-125-bundle");
-  await getPdpDetails('mica');
-  const result = await waitForSearchResults();
+  const result = JSON.parse(localStorage.getItem('eds-product-details'));
 
   console.log('result:', result);
   const productInfo = await getProductDetails(result?.raw?.sku);

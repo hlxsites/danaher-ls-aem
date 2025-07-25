@@ -10,6 +10,11 @@
   background-color: #7523FF;
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS;
+}
+
 .pdp-hero-wrapper :is(.relative) {
   position: relative;
 }
@@ -108,10 +113,6 @@
 
 .pdp-hero-wrapper :is(.w-\[4rem\]) {
   width: 4rem;
-}
-
-.pdp-hero-wrapper :is(.w-\[692px\]) {
-  width: 692px;
 }
 
 .pdp-hero-wrapper :is(.w-\[7rem\]) {
@@ -346,8 +347,28 @@
   font-weight: 200;
 }
 
+.pdp-hero-wrapper :is(.font-semibold) {
+  font-weight: 700;
+}
+
+.pdp-hero-wrapper :is(.font-medium) {
+  font-weight: 500;
+}
+
 .pdp-hero-wrapper :is(.leading-none) {
   line-height: 1;
+}
+
+.pdp-hero-wrapper :is(.leading-10) {
+  line-height: 2.5rem;
+}
+
+.pdp-hero-wrapper :is(.leading-snug) {
+  line-height: 1.375;
+}
+
+.pdp-hero-wrapper :is(.leading-normal) {
+  line-height: 1.5;
 }
 
 .pdp-hero-wrapper :is(.text-black) {
@@ -419,6 +440,10 @@
 }
 
 @media (min-width: 768px) {
+  .pdp-hero-wrapper :is(.md\:w-\[692px\]) {
+    width: 692px;
+  }
+
   .pdp-hero-wrapper :is(.md\:flex-row) {
     flex-direction: row;
   }
@@ -429,6 +454,11 @@
 
   .pdp-hero-wrapper :is(.md\:justify-start) {
     justify-content: flex-start;
+  }
+
+  .pdp-hero-wrapper :is(.md\:px-4) {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .pdp-hero-wrapper :is(.md\:opacity-100) {
