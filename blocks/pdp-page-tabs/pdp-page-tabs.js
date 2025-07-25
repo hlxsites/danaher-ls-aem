@@ -2,12 +2,12 @@ import { div, p } from '../../scripts/dom-builder.js';
 
 // Highlight the tabs on selection and scroll to specific section
 const tabMap = {
-  'Description': '#description-tab',
-  'Specifications': '#specifications-tab',
+  Description: '#description-tab',
+  Specifications: '#specifications-tab',
   'Product Part List': '#bundle-list-tab',
-	'Products': '#products-tab',
-  'Resources': '#resources-tab',
-  'Citations': '#citations-tab',
+  Products: '#products-tab',
+  Resources: '#resources-tab',
+  Citations: '#citations-tab',
 };
 
 let lastScrollY = window.scrollY;
@@ -118,7 +118,7 @@ function updatePageTabs(event) {
 export default async function decorate(block) {
   block.classList.add('bg-white');
   block.parentElement.parentElement.style.padding = '0px';
-  //block.parentElement.parentElement.style.paddingRight = '0px';
+  // block.parentElement.parentElement.style.paddingRight = '0px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
 
@@ -130,12 +130,12 @@ export default async function decorate(block) {
   if (response?.raw?.attributejson !== undefined && response?.raw?.attributejson?.trim() !== '') {
     tabsList.push('Specifications');
   }
-  //Products
-  if(response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
+  // Products
+  if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
     tabsList.push('Products');
   }
-  //Resources
-  if(response?.raw?.numresources) {
+  // Resources
+  if (response?.raw?.numresources) {
     tabsList.push('Resources');
   }
   // Bundle part list

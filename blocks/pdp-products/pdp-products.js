@@ -1,4 +1,4 @@
-import { div } from "../../scripts/dom-builder.js";
+import { div } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   block.id = 'products-tab';
