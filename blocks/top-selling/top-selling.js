@@ -203,7 +203,7 @@ export default async function decorate(block) {
    */
   function updateCarousel() {
     slideWrapper.innerHTML = '';
-    slideWrapper.className = `slide-wrapper w-full py-2 flex transition-transform duration-1000 ease-in-out gap-5 ${
+    slideWrapper.className = `slide-wrapper w-full py-2 flex ${isGridView ? 'transition-transform duration-1000 ease-in-out' : ''} gap-5 ${
       isGridView ? 'flex-row' : 'flex-col'
     }`;
     carouselCards.className = `carousel-cards ${isGridView ? 'overflow-hidden' : ''}  flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
