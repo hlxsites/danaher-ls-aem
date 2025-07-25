@@ -71,6 +71,10 @@
   height: 3rem;
 }
 
+.pdp-hero-wrapper :is(.h-9) {
+  height: 2.25rem;
+}
+
 .pdp-hero-wrapper :is(.w-12) {
   width: 3rem;
 }
@@ -121,6 +125,10 @@
 
 .pdp-hero-wrapper :is(.w-full) {
   width: 100%;
+}
+
+.pdp-hero-wrapper :is(.w-9) {
+  width: 2.25rem;
 }
 
 .pdp-hero-wrapper :is(.flex-1) {
@@ -335,6 +343,10 @@
   line-height: 1.75rem;
 }
 
+.pdp-hero-wrapper :is(.text-\[18px\]) {
+  font-size: 18px;
+}
+
 .pdp-hero-wrapper :is(.font-bold) {
   font-weight: 700;
 }
@@ -389,6 +401,11 @@
 .pdp-hero-wrapper :is(.text-violet-900) {
   --tw-text-opacity: 1;
   color: rgb(76 29 149 / var(--tw-text-opacity));
+}
+
+.pdp-hero-wrapper :is(.text-danaherpurple-800) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
 }
 
 .pdp-hero-wrapper :is(.\!no-underline) {

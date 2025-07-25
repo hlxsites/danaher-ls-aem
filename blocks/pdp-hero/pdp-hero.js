@@ -197,6 +197,12 @@ export default async function decorate(block) {
     },
     div(
       {
+        class: 'self-stretch justify-start text-danaherpurple-800 text-[18px] font-medium leading-normal',
+      },
+      result?.raw.opco,
+    ),
+    div(
+      {
         class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
       },
       result?.raw.titlelsig,
@@ -539,20 +545,20 @@ export default async function decorate(block) {
   });
   const globeImg = div(
     {
-      class: 'w-[3rem] h-[3rem] relative overflow-hidden',
+      class: 'w-9 h-9 relative overflow-hidden',
     },
     span({
       class:
-          'icon icon-Globe-alt w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-Globe-alt w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const externalLink = div(
     {
-      class: 'w-[3rem] h-[3rem] relative overflow-hidden',
+      class: 'w-9 h-9 relative overflow-hidden',
     },
     span({
       class:
-          'icon icon-External-link w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-External-link w-9 h-9 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const externalButton = div(
@@ -570,7 +576,7 @@ export default async function decorate(block) {
   const info = div(
     {
       class:
-          'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
+          'self-stretch inline-flex justify-start items-center gap-3 py-3 cursor-pointer',
     },
     globeImg,
     externalButton,
@@ -580,11 +586,11 @@ export default async function decorate(block) {
 
   const collectionButton = div(
     {
-      class: 'w-8 h-8 overflow-hidden',
+      class: 'w-9 h-9 overflow-hidden',
     },
     span({
       class:
-          'icon icon-Collection w-8 h-8 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const rectangleButton = div(
@@ -602,16 +608,16 @@ export default async function decorate(block) {
     },
     span({
       class:
-          'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const clipBoard = div(
     {
-      class: 'w-[4rem] h-[3rem] relative overflow-hidden',
+      class: 'w-9 h-9 relative overflow-hidden',
     },
     span({
       class:
-          'icon icon-ClipboardList w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-ClipboardList w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const categoryLink = div(
@@ -654,7 +660,7 @@ export default async function decorate(block) {
       },
       span({
         class:
-            'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
+            'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -696,11 +702,11 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'w-[4rem] h-[3rem] relative overflow-hidden',
+          class: 'w-9 h-9 relative overflow-hidden',
         },
         span({
           class:
-              'icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+              'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
         }),
       ),
       div(
