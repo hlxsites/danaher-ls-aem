@@ -3,26 +3,6 @@
   font-family: TWK Lausanne EDS
 }
 
-.dhls-container .text-xs {
-  font-size: 12px
-}
-
-.dhls-container .text-sm {
-  font-size: 14px
-}
-
-.dhls-container .text-base {
-  font-size: 16px
-}
-
-.dhls-container .text-lg {
-  font-size: 18px
-}
-
-.dhls-container .text-2xl {
-  font-size: 24px
-}
-
 .header-wrapper :is(.fixed) {
   position: fixed
 }

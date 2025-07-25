@@ -3,14 +3,6 @@
   font-family: TWK Lausanne EDS
 }
 
-.dhls-container .text-sm {
-  font-size: 14px
-}
-
-.dhls-container .text-lg {
-  font-size: 18px
-}
-
 .article-info-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }

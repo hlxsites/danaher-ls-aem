@@ -1,11 +1,3 @@
-.dhls-container .\!text-lg {
-  font-size: 18px !important
-}
-
-.dhls-container .\!text-4xl {
-  font-size: 40px !important
-}
-
 .banner :is(.relative) {
   position: relative
 }

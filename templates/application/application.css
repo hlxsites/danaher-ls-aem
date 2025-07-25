@@ -14,10 +14,6 @@
   padding-bottom: 0.5rem;
 }
 
-.dhls-container .application .default-content-wrapper h1 {
-  font-size: 32px;
-}
-
 .application .default-content-wrapper h1 {
   padding-bottom: 0.75rem;
   text-align: center;
@@ -60,10 +56,6 @@
 .application main .columns > div div > p:not(.button-container) a:hover {
   color: rgb(255 255 255);
   background-color: #7523FF;
-}
-
-.dhls-container .application main .columns > div div > p:not(.button-container) {
-  font-size: 16px;
 }
 
 .application main .columns > div div > p:not(.button-container) {

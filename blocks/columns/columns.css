@@ -83,22 +83,6 @@
   font-family: TWK Lausanne EDS;
 }
 
-.dhls-container .\!text-sm {
-  font-size: 14px !important;
-}
-
-.dhls-container .text-sm {
-  font-size: 14px;
-}
-
-.dhls-container .text-base {
-  font-size: 16px;
-}
-
-.dhls-container .text-lg {
-  font-size: 18px;
-}
-
 .columns-wrapper :is(.absolute) {
   position: absolute;
 }

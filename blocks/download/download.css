@@ -2,18 +2,6 @@
   background-color: #EADEFF
 }
 
-.dhls-container .text-xs {
-  font-size: 12px
-}
-
-.dhls-container .text-sm {
-  font-size: 14px
-}
-
-.dhls-container .text-base {
-  font-size: 16px
-}
-
 .download-wrapper :is(.\!mb-0) {
   margin-bottom: 0px !important
 }

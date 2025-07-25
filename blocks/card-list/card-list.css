@@ -61,22 +61,6 @@
   font-family: TWK Lausanne EDS
 }
 
-.dhls-container .text-sm {
-  font-size: 14px
-}
-
-.dhls-container .text-base {
-  font-size: 16px
-}
-
-.dhls-container .\!text-lg {
-  font-size: 18px !important
-}
-
-.dhls-container .\!text-xl {
-  font-size: 20px !important
-}
-
 .card-list-wrapper :is(.relative) {
   position: relative
 }

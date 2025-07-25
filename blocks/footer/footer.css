@@ -19,10 +19,6 @@
   background-color: #7523FF;
 }
 
-.dhls-container .text-base {
-  font-size: 16px;
-}
-
 .footer-wrapper :is(.sr-only) {
   position: absolute;
   width: 1px;

@@ -24,10 +24,6 @@
   font-family: TWK Lausanne EDS;
 }
 
-.dhls-container .text-lg {
-  font-size: 18px;
-}
-
 .logo-clouds-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1;
 }

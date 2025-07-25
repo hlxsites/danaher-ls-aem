@@ -1,7 +1,3 @@
-.dhls-container .text-xl {
-  font-size: 20px
-}
-
 .blog-hero-wrapper :is(.my-2) {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem

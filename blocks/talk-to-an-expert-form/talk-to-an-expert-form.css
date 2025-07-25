@@ -50,14 +50,6 @@
   font-family: TWK Lausanne EDS
 }
 
-.dhls-container .text-sm {
-  font-size: 14px
-}
-
-.dhls-container .text-base {
-  font-size: 16px
-}
-
 .talk-to-an-expert-form-wrapper :is(.absolute) {
   position: absolute
 }
