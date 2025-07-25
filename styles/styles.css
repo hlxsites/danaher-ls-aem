@@ -485,6 +485,7 @@ h1,
 .dhls-container h1 {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
+  font-size: 32px !important;
 }
 
 h1 {
@@ -503,6 +504,7 @@ h1 {
 .dhls-container h2 {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
+  font-size: 24px !important;
 }
 
 h2 {
@@ -512,6 +514,10 @@ h2 {
 }
 
 @media (min-width: 768px) {
+  .dhls-container h2 {
+    font-size: 32px !important;
+  }
+
   h2 {
     font-size: 1.875rem !important;
     line-height: 2.25rem !important;
@@ -521,6 +527,7 @@ h2 {
 .dhls-container h3 {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
+  font-size: 20px !important;
 }
 
 h3 {
@@ -530,6 +537,10 @@ h3 {
 }
 
 @media (min-width: 768px) {
+  .dhls-container h3 {
+    font-size: 24px !important;
+  }
+
   h3 {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
@@ -539,6 +550,7 @@ h3 {
 .dhls-container h4 {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
+  font-size: 18px !important;
 }
 
 h4 {
@@ -547,16 +559,28 @@ h4 {
   line-height: 1.75rem !important;
 }
 
+.dhls-container h5 {
+  font-size: 18px;
+}
+
 h5 {
   font-size: 1.125rem;
   font-weight: 200;
   line-height: 1.75rem;
 }
 
+.dhls-container h6 {
+  font-size: 16px;
+}
+
 h6 {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 200;
+}
+
+.dhls-container main .default-content-wrapper h1 {
+  font-size: 40px;
 }
 
 main .default-content-wrapper h1 {
@@ -572,6 +596,7 @@ main .default-content-wrapper h1 {
   main .default-content-wrapper h4 {
   font-weight: 400;
   font-family: TWK Lausanne EDS;
+  font-size: 32px;
 }
 
 main .default-content-wrapper h2,
@@ -734,6 +759,30 @@ main .default-content-wrapper h2,
   font-family: TWK Lausanne EDS;
 }
 
+.dhls-container .text-xs {
+  font-size: 12px;
+}
+
+.dhls-container .text-sm {
+  font-size: 14px;
+}
+
+.dhls-container .text-base {
+  font-size: 16px;
+}
+
+.dhls-container .text-2xl {
+  font-size: 24px;
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px !important;
+}
+
+.dhls-container .text-4xl {
+  font-size: 40px !important;
+}
+
 body.appear {
   display: block;
 }
@@ -756,6 +805,10 @@ body.appear {
 
 .columns.features-card-left > div > div.icon svg > div.card > .left-content {
   padding-right: 0.75rem;
+}
+
+.dhls-container .productdetail main .columns.columns-2-cols .icon svg {
+  font-size: 16px;
 }
 
 .productdetail main .columns.columns-2-cols .icon svg {
@@ -821,6 +874,10 @@ main
     margin-right: auto;
     max-width: 80rem;
   }
+}
+
+.dhls-container .btn {
+  font-size: 16px;
 }
 
 .btn {
@@ -918,6 +975,7 @@ main
 .dhls-container .btn-outline-primary {
   font-weight: 400;
   font-family: TWK Lausanne EDS;
+  font-size: 18px;
 }
 
 .btn-outline-primary {
@@ -966,6 +1024,10 @@ main
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.dhls-container .container-two-col .col-right {
+  font-size: 16px;
+}
+
 .container-two-col .col-right {
   font-size: 1rem;
   line-height: 1.75rem;
@@ -995,6 +1057,10 @@ main
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dhls-container .container-two-col .col-right h2 {
+  font-size: 20px !important;
 }
 
 .container-two-col .col-right h2 {
@@ -1041,6 +1107,10 @@ main .default-content-wrapper p a:hover {
   background-color: #7523FF;
 }
 
+.dhls-container main .default-content-wrapper p {
+  font-size: 18px;
+}
+
 main .default-content-wrapper p {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1049,6 +1119,7 @@ main .default-content-wrapper p {
 .dhls-container main .default-content-wrapper p.button-container > a {
   font-weight: 400;
   font-family: TWK Lausanne EDS;
+  font-size: 18px;
 }
 
 main .default-content-wrapper p.button-container > a {
@@ -1109,6 +1180,11 @@ main .default-content-wrapper ol a:hover,
   main .default-content-wrapper ul a:hover {
   color: rgb(255 255 255);
   background-color: #7523FF;
+}
+
+.dhls-container main .default-content-wrapper ol,.dhls-container 
+  main .default-content-wrapper ul {
+  font-size: 16px;
 }
 
 main .default-content-wrapper ol,
@@ -1225,6 +1301,10 @@ header {
   .topichub main > .side-nav-container + .section {
     padding-top: 1rem;
   }
+}
+
+.dhls-container .topic main p:not(.show-modal-btn) {
+  font-size: 18px;
 }
 
 .topic main p:not(.show-modal-btn) {
@@ -1351,6 +1431,9 @@ header {
   .columns.features-card-left > div > div.t-line > div.card > .left-content::after {
     padding-right: 0.75rem;
   }
+  .dhls-container .productdetail main .columns.columns-2-cols .t-line::after {
+    font-size: 16px;
+  }
   .productdetail main .columns.columns-2-cols .t-line::after {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -1430,6 +1513,10 @@ header {
   }
 }
 
+.dhls-container .appear mobilemenu > div.mobile-jump-menu select.selected-tab {
+  font-size: 16px;
+}
+
 .appear mobilemenu > div.mobile-jump-menu select.selected-tab {
   display: block;
   width: auto;
@@ -1449,6 +1536,10 @@ header {
 .appear mobilemenu > div.mobile-jump-menu select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.dhls-container .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  font-size: 18px;
 }
 
 .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
@@ -1528,10 +1619,18 @@ main .top-border > div.columns-wrapper:first-child {
   }
 }
 
+.dhls-container .blog main .section.default-content-wrapper > p {
+  font-size: 16px;
+}
+
 .blog main .section.default-content-wrapper > p {
   margin-top: 0.75rem;
   font-size: 1rem;
   line-height: 1.75rem;
+}
+
+.dhls-container .blog main .columns h2 {
+  font-size: 20px;
 }
 
 .blog main .columns h2 {
@@ -1541,6 +1640,10 @@ main .top-border > div.columns-wrapper:first-child {
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.dhls-container .blog main .columns > div > div > p:not(.button-container) {
+  font-size: 16px;
 }
 
 .blog main .columns > div > div > p:not(.button-container) {
@@ -1604,6 +1707,16 @@ main .top-border > div.columns-wrapper:first-child {
   margin-bottom: 0.5rem;
 }
 
+.dhls-container .productdetail
+    main
+    .columns.columns-2-cols
+    .picdiv
+    p:not(picture)
+    + p:last-child,.dhls-container 
+  .productdetail main .columns p.embed-vimeo ~ p {
+  font-size: 14px;
+}
+
 .productdetail
     main
     .columns.columns-2-cols
@@ -1620,6 +1733,7 @@ main .top-border > div.columns-wrapper:first-child {
 .dhls-container .productdetail main .columns p > strong {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
+  font-size: 18px !important;
 }
 
 .productdetail main .columns p > strong {
@@ -1639,12 +1753,20 @@ main .top-border > div.columns-wrapper:first-child {
   font-weight: 500 !important;
 }
 
+.dhls-container .productdetail main .columns p {
+  font-size: 16px !important;
+}
+
 .productdetail main .columns p {
   padding-top: 0.5rem;
   font-size: 1rem !important;
   line-height: 1.5rem !important;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.dhls-container .productdetail main .columns.columns-2-cols .h-full {
+  font-size: 16px;
 }
 
 .productdetail main .columns.columns-2-cols .h-full {
@@ -1726,6 +1848,10 @@ main .section.product-hero-container {
   padding-right: 0.75rem;
 }
 
+.dhls-container .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
+  font-size: 16px;
+}
+
 .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -1741,6 +1867,10 @@ main .section.product-hero-container {
   text-align: left;
 }
 
+.dhls-container .product-hero .hero-default-content > div .category-name {
+  font-size: 14px;
+}
+
 .product-hero .hero-default-content > div .category-name {
   font-size: 0.875rem;
   font-weight: 200;
@@ -1754,6 +1884,11 @@ main .section.product-hero-container {
   margin-bottom: 0.75rem;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.dhls-container .product-hero .hero-default-content > div ul,.dhls-container 
+  .product-hero .hero-default-content > div p {
+  font-size: 16px;
 }
 
 .product-hero .hero-default-content > div ul,
@@ -1802,6 +1937,10 @@ main .section.product-hero-container {
   display: flex;
 }
 
+.dhls-container .product-hero .hero-default-content > div .brand-price p.start-price {
+  font-size: 32px !important;
+}
+
 .product-hero .hero-default-content > div .brand-price p.start-price {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
@@ -1812,6 +1951,10 @@ main .section.product-hero-container {
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+}
+
+.dhls-container .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
+  font-size: 16px;
 }
 
 .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
@@ -1931,6 +2074,10 @@ main .section.product-hero-container {
   width: max-content;
 }
 
+.dhls-container .product-hero .vertical-gallery-container .view-more {
+  font-size: 14px;
+}
+
 .product-hero .vertical-gallery-container .view-more {
   display: flex;
   flex-direction: column;
@@ -1983,6 +2130,11 @@ main .section.product-hero-container {
   .category .default-content-wrapper p {
     width: 75%;
   }
+}
+
+.dhls-container .category .default-content-wrapper h2,.dhls-container 
+  .category .accordion-wrapper h2 {
+  font-size: 24px;
 }
 
 .category .default-content-wrapper h2,
@@ -3166,6 +3318,12 @@ main .section.top-border {
 
 /* stylelint-disable selector-type-no-unknown */
 
+@media (min-width: 640px) {
+  .dhls-container .sm\:text-sm {
+    font-size: 14px;
+  }
+}
+
 .columns.features-card-left > div > .\[\&_ul\>li\>a\]\:h-full ul>li>adiv > .card {
   display: flex;
   flex-direction: row;
@@ -3174,6 +3332,10 @@ main .section.top-border {
 
 .columns.features-card-left > div > .\[\&_ul\>li\>a\]\:h-full ul>li>adiv > div.card > .left-content {
   padding-right: 0.75rem;
+}
+
+.dhls-container .productdetail main .columns.columns-2-cols .\[\&_ul\>li\>a\]\:h-full ul>li>a {
+  font-size: 16px;
 }
 
 .productdetail main .columns.columns-2-cols .\[\&_ul\>li\>a\]\:h-full ul>li>a {

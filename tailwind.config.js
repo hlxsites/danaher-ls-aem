@@ -92,6 +92,30 @@ module.exports = {
           fontWeight: "400",
           fontFamily: "TWK Lausanne EDS",
         },
+        ".dhls-container .text-xs": {
+          fontSize: "12px",
+        },
+        ".dhls-container .text-sm": {
+          fontSize: "14px",
+        },
+        ".dhls-container .text-base": {
+          fontSize: "16px",
+        },
+        ".dhls-container .text-lg": {
+          fontSize: "18px",
+        },
+        ".dhls-container .text-xl": {
+          fontSize: "20px",
+        },
+        ".dhls-container .text-2xl": {
+          fontSize: "24px",
+        },
+        ".dhls-container .text-3xl": {
+          fontSize: "32px !important",
+        },
+        ".dhls-container .text-4xl": {
+          fontSize: "40px !important",
+        },
       });
     }),
   ],

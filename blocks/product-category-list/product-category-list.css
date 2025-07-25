@@ -47,6 +47,10 @@
   font-family: TWK Lausanne EDS
 }
 
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
 .product-category-list-wrapper :is(.relative) {
   position: relative
 }

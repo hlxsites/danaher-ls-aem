@@ -1,3 +1,19 @@
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .text-base {
+  font-size: 16px
+}
+
+.dhls-container .text-lg {
+  font-size: 18px
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px !important
+}
+
 .cards-wrapper :is(.relative) {
   position: relative
 }

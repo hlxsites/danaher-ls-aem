@@ -1,3 +1,7 @@
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
 .page-jump-menu-wrapper :is(.relative) {
   position: relative
 }

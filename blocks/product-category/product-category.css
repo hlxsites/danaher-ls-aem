@@ -38,6 +38,14 @@
   }
 }
 
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .\!text-lg {
+  font-size: 18px !important
+}
+
 .product-category-wrapper :is(.relative) {
   position: relative
 }

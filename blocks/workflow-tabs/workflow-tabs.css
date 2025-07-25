@@ -11,6 +11,10 @@
   font-family: TWK Lausanne EDS
 }
 
+.dhls-container .text-xs {
+  font-size: 12px
+}
+
 .workflow-tabs-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto

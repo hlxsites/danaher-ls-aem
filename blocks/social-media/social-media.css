@@ -1,3 +1,7 @@
+.dhls-container .text-base {
+  font-size: 16px
+}
+
 .social-media-wrapper :is(.relative) {
   position: relative
 }

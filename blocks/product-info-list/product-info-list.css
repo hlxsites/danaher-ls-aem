@@ -14,6 +14,38 @@
   font-family: TWK Lausanne EDS !important
 }
 
+.dhls-container .text-xs {
+  font-size: 12px
+}
+
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .text-base {
+  font-size: 16px
+}
+
+.dhls-container .text-lg {
+  font-size: 18px
+}
+
+.dhls-container .text-xl {
+  font-size: 20px
+}
+
+.dhls-container .text-2xl {
+  font-size: 24px
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px !important
+}
+
+.dhls-container .text-4xl {
+  font-size: 40px !important
+}
+
 .product-info-list-wrapper :is(.\!mb-3) {
   margin-bottom: 0.75rem !important
 }
