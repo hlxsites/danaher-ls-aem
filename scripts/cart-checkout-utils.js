@@ -312,6 +312,61 @@ export const createBasket = async () => {
   }
 };
 /*
+:::::::::::::::::::::::::::
+ Function to validate basket
+  :::::::::::::::::::::::::::
+*/
+export const validateBasket = async (vaildateModule) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/validations`;
+  let validateData = {};
+  if (vaildateModule === 'address') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+      ],
+    };
+  }
+  if (vaildateModule === 'shipping') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+        'Shipping',
+      ],
+    };
+  }
+  if (vaildateModule === 'payment') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'Payment',
+      ],
+    };
+  }
+  const data = JSON.stringify(validateData);
+  try {
+    return await postApiData(url, data, defaultHeader);
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
  :::::::::::::::::::::::::::::
  get single adress details based on address id
  ::::::::::::::::::::::::::::::::::::::::::::

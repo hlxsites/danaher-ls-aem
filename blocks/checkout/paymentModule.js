@@ -135,7 +135,7 @@ const paymentModule = async () => {
           const eventTarget = c.target;
           if (!eventTarget.checked) {
             if (eventTarget?.id === 'invoice') {
-              const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+              const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
               const defaultHeaders = new Headers();
               defaultHeaders.append('Content-Type', 'Application/json');
               defaultHeaders.append(

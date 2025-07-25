@@ -55,12 +55,9 @@
   margin-top: 48px
 }
 
-.bg-danahergray-75 {
-  background-color: #f9fafb
-}
-
-.border-danahergray-75 {
-  border-color: #E5E7EB
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
 }
 
 .checkout :is(.fixed) {
