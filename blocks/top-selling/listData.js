@@ -49,7 +49,7 @@ export default function renderListCard(item) {
   const imageUrl = item?.images?.[0] || '';
   const card = div({
     class:
-      'hover:scale-105 hover:shadow-md !duration-1000 !ease-in-out !transition-transform !transform self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
+      'hover:shadow-md !duration-1000 !ease-in-out !transition-transform !transform self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
   });
 
   const leftSection = div({

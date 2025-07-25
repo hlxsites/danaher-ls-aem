@@ -144,7 +144,7 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: `carousel-cards overflow-hidden flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
+    class: `carousel-cards flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`,
   });
@@ -206,7 +206,7 @@ export default async function decorate(block) {
     slideWrapper.className = `slide-wrapper py-2 flex transition-transform duration-1000 ease-in-out gap-5 ${
       isGridView ? 'flex-row' : 'flex-col'
     }`;
-    carouselCards.className = `carousel-cards overflow-hidden flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
+    carouselCards.className = `carousel-cards ${isGridView ? 'overflow-hidden' : ''}  flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`;
 
