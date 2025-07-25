@@ -104,10 +104,6 @@
   text-align: left
 }
 
-.learn-more-wrapper :is(.text-center) {
-  text-align: center
-}
-
 .learn-more-wrapper :is(.text-right) {
   text-align: right
 }
