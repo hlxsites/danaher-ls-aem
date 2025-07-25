@@ -82,7 +82,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .opco-banner-wrapper :is(.visible) {
@@ -415,10 +415,6 @@
 
 .opco-banner-wrapper :is(.text-\[16px\]) {
   font-size: 16px
-}
-
-.opco-banner-wrapper :is(.text-\[18px\]) {
-  font-size: 18px
 }
 
 .opco-banner-wrapper :is(.text-base) {

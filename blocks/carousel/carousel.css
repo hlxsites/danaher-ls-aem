@@ -396,7 +396,7 @@
 
 @media (min-width: 768px) {
   .dhls-container .md\:text-4xl {
-    font-size: 40px;
+    font-size: 40px !important;
   }
 }
 

@@ -85,7 +85,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .insight-wrapper :is(.\!m-0) {

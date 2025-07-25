@@ -114,7 +114,7 @@ module.exports = {
           fontSize: "32px",
         },
         ".dhls-container .text-4xl": {
-          fontSize: "40px",
+          fontSize: "40px !important",
         },
       });
     }),

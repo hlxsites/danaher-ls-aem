@@ -38,7 +38,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .offer-advertisement-wrapper :is(.mx-auto) {

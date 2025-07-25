@@ -78,7 +78,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .shop-featured-products-wrapper :is(.pointer-events-none) {

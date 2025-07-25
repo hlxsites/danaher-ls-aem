@@ -85,7 +85,7 @@
 
 @media (min-width: 640px) {
   .dhls-container .sm\:text-4xl {
-    font-size: 40px
+    font-size: 40px !important
   }
 
   .stats-wrapper :is(.sm\:mt-4) {

@@ -47,7 +47,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .body-banner-wrapper :is(.m-0) {

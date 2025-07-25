@@ -45,7 +45,7 @@
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px
+  font-size: 40px !important
 }
 
 .dual-carousel-wrapper :is(.pointer-events-none) {

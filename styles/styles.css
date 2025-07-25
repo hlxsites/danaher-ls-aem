@@ -485,7 +485,7 @@ h1,
 .dhls-container h1 {
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
-  font-size: 40px !important;
+  font-size: 32px !important;
 }
 
 h1 {
@@ -780,7 +780,7 @@ main .default-content-wrapper h2,
 }
 
 .dhls-container .text-4xl {
-  font-size: 40px;
+  font-size: 40px !important;
 }
 
 body.appear {
