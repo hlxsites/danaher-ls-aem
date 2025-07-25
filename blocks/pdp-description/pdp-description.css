@@ -30,10 +30,6 @@
   padding-bottom: 1.5rem
 }
 
-.pdp-description-wrapper :is(.pt-6) {
-  padding-top: 1.5rem
-}
-
 .pdp-description-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

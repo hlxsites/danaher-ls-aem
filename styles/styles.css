@@ -2435,20 +2435,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 50%;
 }
 
+.top-16 {
+  top: 4rem;
+}
+
 .top-6 {
   top: 1.5rem;
 }
 
-.top-8 {
-  top: 2rem;
-}
-
 .top-\[83px\] {
   top: 83px;
-}
-
-.top-16 {
-  top: 4rem;
 }
 
 .z-10 {
@@ -2727,11 +2723,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .gap-4 {
   gap: 1rem;
-}
-
-.gap-x-5 {
-  -moz-column-gap: 1.25rem;
-       column-gap: 1.25rem;
 }
 
 .gap-x-6 {
@@ -3284,10 +3275,6 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
-  .md\:top-16 {
-    top: 4rem;
-  }
-
   .md\:top-32 {
     top: 8rem;
   }
