@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .learn-more-wrapper :is(.mb-12) {
   margin-bottom: 3rem
 }
@@ -95,6 +100,10 @@
   padding-right: 1.25rem
 }
 
+.learn-more-wrapper :is(.text-left) {
+  text-align: left
+}
+
 .learn-more-wrapper :is(.text-center) {
   text-align: center
 }
@@ -119,7 +128,7 @@
 }
 
 .learn-more-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .learn-more-wrapper :is(.font-semibold) {

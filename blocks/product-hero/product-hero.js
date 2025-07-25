@@ -329,7 +329,10 @@ export default async function decorate(block) {
     // Price display (only if valid price)
     const brandStartPriceChildren = [];
 
-    if (hasValidPrice) {
+    const hideListPrice = response[0]?.raw?.hidelistprice?.toString().toLowerCase() === 'true';
+    const showListPrice = !hideListPrice;
+
+    if (hasValidPrice && showListPrice) {
       brandStartPriceChildren.push(
         div(
           { class: 'price-info' },

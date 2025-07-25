@@ -82,17 +82,15 @@ module.exports = {
           margin: '0 auto',
           marginTop: '48px',
         },
-        '.bg-danahergray-75': {
-          backgroundColor: '#f9fafb',
+        ".dhls-arrow-right-icon": {
+          height: "1rem",
+          width: "1rem",
+          marginTop: "2px",
+          marginLeft: "4px",
         },
-        '.border-danahergray-75': {
-          borderColor: '#E5E7EB',
-        },
-        '.dhls-arrow-right-icon': {
-          height: '1rem',
-          width: '1rem',
-          marginTop: '2px',
-          marginLeft: '4px',
+        ".dhls-container .font-medium": {
+          fontWeight: "400",
+          fontFamily: "TWK Lausanne EDS",
         },
       });
     }),
@@ -222,10 +220,11 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'TWK Lausanne',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
+          "TWK Lausanne",
+          "TWK Lausanne EDS",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
           '"Segoe UI"',
           'Roboto',
           '"Helvetica Neue"',

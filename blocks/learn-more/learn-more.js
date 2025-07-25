@@ -89,6 +89,7 @@ export default function decorate(block) {
     'text-black',
     'text-base',
     'text-black',
+    'text-left',
     'leading-snug',
     'items-start',
   );
@@ -132,6 +133,7 @@ export default function decorate(block) {
     'text-black',
     'text-base',
     'text-black',
+    'text-left',
     'leading-snug',
     'items-start',
   );
@@ -196,7 +198,7 @@ export default function decorate(block) {
 
   let browseSection = '';
   if (addressSectionContent) {
-    addressSection = div({ class: 'text-center md:text-left mt-2' });
+    addressSection = div({ class: 'md:text-left mt-2' });
     addressSection?.append(addressSectionContent);
   }
   if (callSectionContent) {

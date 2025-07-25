@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .header-wrapper :is(.fixed) {
   position: fixed
 }
@@ -683,6 +688,11 @@
 
 .hover\:bg-danaherpurple-50:hover {
   background-color: #EADEFF
+}
+
+.dhls-container .hover\:font-medium:hover {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
 }
 
 .\[\&\>li\.active\]\:bg-danaherpurple-50>li.active {

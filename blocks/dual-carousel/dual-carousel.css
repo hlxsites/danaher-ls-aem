@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -184,14 +189,14 @@
   padding-top: 0px
 }
 
+.dual-carousel-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
 .dual-carousel-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.dual-carousel-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
 }
 
 .dual-carousel-wrapper :is(.text-sm) {
@@ -205,7 +210,7 @@
 }
 
 .dual-carousel-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .dual-carousel-wrapper :is(.font-semibold) {
@@ -248,8 +253,22 @@
   transition-duration: 150ms
 }
 
+.dual-carousel-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.dual-carousel-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
 .dual-carousel-wrapper :is(.duration-500) {
   transition-duration: 500ms
+}
+
+.dual-carousel-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .dual-carousel-wrapper :is(.hover\:scale-105:hover) {

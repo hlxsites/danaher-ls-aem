@@ -19,6 +19,11 @@
   background-color: #7523FF;
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS;
+}
+
 .logo-clouds-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1;
 }
@@ -175,7 +180,7 @@
 }
 
 .logo-clouds-wrapper :is(.font-medium) {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .logo-clouds-wrapper :is(.leading-7) {
