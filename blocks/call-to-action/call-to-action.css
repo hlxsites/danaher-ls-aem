@@ -15,6 +15,18 @@
   font-family: TWK Lausanne EDS;
 }
 
+.dhls-container .text-base {
+  font-size: 16px;
+}
+
+.dhls-container .text-lg {
+  font-size: 18px;
+}
+
+.dhls-container .text-2xl {
+  font-size: 24px;
+}
+
 .call-to-action-wrapper :is(.m-0) {
   margin: 0px;
 }
@@ -146,6 +158,10 @@
 }
 
 @media (min-width: 640px) {
+  .dhls-container .sm\:text-3xl {
+    font-size: 32px;
+  }
+
   .call-to-action-wrapper :is(.sm\:text-3xl) {
     font-size: 1.875rem;
     line-height: 2.25rem;

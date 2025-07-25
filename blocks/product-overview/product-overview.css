@@ -19,6 +19,10 @@
   background-color: #7523FF;
 }
 
+.dhls-container .text-lg {
+  font-size: 18px;
+}
+
 .product-overview-wrapper :is(.block) {
   display: block;
 }

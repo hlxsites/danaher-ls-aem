@@ -56,6 +56,38 @@
   font-family: TWK Lausanne EDS
 }
 
+.dhls-container .text-xs {
+  font-size: 12px
+}
+
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .text-base {
+  font-size: 16px
+}
+
+.dhls-container .text-lg {
+  font-size: 18px
+}
+
+.dhls-container .text-xl {
+  font-size: 20px
+}
+
+.dhls-container .text-2xl {
+  font-size: 24px
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px
+}
+
+.dhls-container .text-4xl {
+  font-size: 40px
+}
+
 .insight-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
@@ -232,6 +264,12 @@
 
 .insight-wrapper :is(.decoration-danaherpurple-500) {
   text-decoration-color: #7523FF
+}
+
+@media (min-width: 768px) {
+  .dhls-container .md\:text-3xl {
+    font-size: 32px
+  }
 }
 
 .insight-wrapper :is(.hover\:bg-danaherpurple-500:hover) {

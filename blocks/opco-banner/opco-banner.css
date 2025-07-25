@@ -53,6 +53,38 @@
   font-family: TWK Lausanne EDS
 }
 
+.dhls-container .text-xs {
+  font-size: 12px
+}
+
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .text-base {
+  font-size: 16px
+}
+
+.dhls-container .text-lg {
+  font-size: 18px
+}
+
+.dhls-container .text-xl {
+  font-size: 20px
+}
+
+.dhls-container .text-2xl {
+  font-size: 24px
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px
+}
+
+.dhls-container .text-4xl {
+  font-size: 40px
+}
+
 .opco-banner-wrapper :is(.visible) {
   visibility: visible
 }
@@ -65,10 +97,6 @@
   position: relative
 }
 
-.opco-banner-wrapper :is(.inset-0) {
-  inset: 0px
-}
-
 .opco-banner-wrapper :is(.bottom-6) {
   bottom: 1.5rem
 }
@@ -79,10 +107,6 @@
 
 .opco-banner-wrapper :is(.z-10) {
   z-index: 10
-}
-
-.opco-banner-wrapper :is(.z-0) {
-  z-index: 0
 }
 
 .opco-banner-wrapper :is(.m-0) {
@@ -159,6 +183,10 @@
   width: 2rem
 }
 
+.opco-banner-wrapper :is(.w-\[100\%\]) {
+  width: 100%
+}
+
 .opco-banner-wrapper :is(.w-\[172px\]) {
   width: 172px
 }
@@ -169,14 +197,6 @@
 
 .opco-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.opco-banner-wrapper :is(.w-\[100\%\]) {
-  width: 100%
-}
-
-.opco-banner-wrapper :is(.min-w-full) {
-  min-width: 100%
 }
 
 .opco-banner-wrapper :is(.max-w-\[344px\]) {
@@ -198,10 +218,6 @@
 .opco-banner-wrapper :is(.max-w-max) {
   max-width: -moz-max-content;
   max-width: max-content
-}
-
-.opco-banner-wrapper :is(.max-w-\[95\%\]) {
-  max-width: 95%
 }
 
 .opco-banner-wrapper :is(.flex-shrink-0) {
@@ -359,18 +375,6 @@
   padding: 1.5rem
 }
 
-.opco-banner-wrapper :is(.p-4) {
-  padding: 1rem
-}
-
-.opco-banner-wrapper :is(.p-5) {
-  padding: 1.25rem
-}
-
-.opco-banner-wrapper :is(.p-7) {
-  padding: 1.75rem
-}
-
 .opco-banner-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
@@ -389,16 +393,6 @@
 .opco-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
-}
-
-.opco-banner-wrapper :is(.py-7) {
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem
-}
-
-.opco-banner-wrapper :is(.px-7) {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem
 }
 
 .opco-banner-wrapper :is(.pb-4) {
@@ -519,10 +513,6 @@
   opacity: 0
 }
 
-.opco-banner-wrapper :is(.opacity-100) {
-  opacity: 1
-}
-
 .opco-banner-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -543,20 +533,14 @@
   transition-duration: 150ms
 }
 
-.opco-banner-wrapper :is(.transition-transform) {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.opco-banner-wrapper :is(.transition-opacity) {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
 .opco-banner-wrapper :is(.transition-colors) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.transition-transform) {
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
 }
@@ -565,20 +549,12 @@
   transition-duration: 1000ms !important
 }
 
-.opco-banner-wrapper :is(.duration-1000) {
-  transition-duration: 1000ms
-}
-
-.opco-banner-wrapper :is(.duration-700) {
-  transition-duration: 700ms
-}
-
 .opco-banner-wrapper :is(.duration-0) {
   transition-duration: 0s
 }
 
-.opco-banner-wrapper :is(.duration-200) {
-  transition-duration: 200ms
+.opco-banner-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
 }
 
 .opco-banner-wrapper :is(.\!ease-in-out) {
@@ -604,12 +580,6 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-@media (min-width: 640px) {
-  .opco-banner-wrapper :is(.sm\:p-4) {
-    padding: 1rem
-  }
-}
-
 @media (min-width: 768px) {
   .opco-banner-wrapper :is(.md\:mb-8) {
     margin-bottom: 2rem
@@ -627,21 +597,8 @@
     width: auto
   }
 
-  .opco-banner-wrapper :is(.md\:max-w-\[100\%\]) {
-    max-width: 100%
-  }
-
   .opco-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .opco-banner-wrapper :is(.md\:p-0) {
-    padding: 0px
-  }
-
-  .opco-banner-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
   }
 }
 

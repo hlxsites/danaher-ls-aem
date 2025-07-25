@@ -1,3 +1,7 @@
+.dhls-container .text-2xl {
+  font-size: 24px
+}
+
 .hero-wrapper :is(.fixed) {
   position: fixed
 }

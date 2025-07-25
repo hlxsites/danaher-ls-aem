@@ -1,3 +1,7 @@
+.dhls-container .text-xs {
+  font-size: 12px
+}
+
 .product-citations-wrapper :is(.float-none) {
   float: none
 }

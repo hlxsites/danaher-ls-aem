@@ -3,6 +3,14 @@
   font-family: TWK Lausanne EDS
 }
 
+.dhls-container .text-sm {
+  font-size: 14px
+}
+
+.dhls-container .text-xl {
+  font-size: 20px
+}
+
 .product-specifications-wrapper :is(.my-auto) {
   margin-top: auto;
   margin-bottom: auto

@@ -1,3 +1,11 @@
+.dhls-container .text-lg {
+  font-size: 18px
+}
+
+.dhls-container .text-3xl {
+  font-size: 32px
+}
+
 .marketo-form-wrapper :is(.relative) {
   position: relative
 }
