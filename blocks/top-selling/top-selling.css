@@ -216,6 +216,10 @@
   min-width: 331px
 }
 
+.top-selling-wrapper :is(.min-w-\[100\%\]) {
+  min-width: 100%
+}
+
 .top-selling-wrapper :is(.max-w-\[150px\]) {
   max-width: 150px
 }
@@ -695,6 +699,18 @@
 }
 
 @media (min-width: 640px) {
+  .top-selling-wrapper :is(.sm\:min-w-full) {
+    min-width: 100%
+  }
+
+  .top-selling-wrapper :is(.sm\:min-w-\[100\%\]) {
+    min-width: 100%
+  }
+
+  .top-selling-wrapper :is(.sm\:flex-shrink-0) {
+    flex-shrink: 0
+  }
+
   .top-selling-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
   }
