@@ -197,7 +197,7 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: 'self-stretch justify-start text-black text-4xl font-normal',
+        class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
       },
       result?.raw.titlelsig,
     ),
@@ -207,7 +207,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'w-64 justify-start text-gray-700 text-base font-extralight',
+          class: 'justify-start text-gray-700 text-base font-extralight leading-snug',
         },
         productInfo?.data?.sku,
       ),
@@ -217,7 +217,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-              'self-stretch justify-start text-black text-base font-extralight',
+              'self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
         result?.raw?.richdescription.replace(/<[^>]*>/g, ''),
       ),
@@ -556,7 +556,7 @@ export default async function decorate(block) {
     }),
   );
   const externalButton = div(
-    { class: 'flex cursor-pointer justify-center items-center' },
+    { class: 'flex cursor-pointer justify-center items-center text-base font-extralight leading-snug' },
     `To learn more visit ${result?.raw.opco} `,
     externalLink,
   );
@@ -633,7 +633,7 @@ export default async function decorate(block) {
         },
         div(
           {
-            class: 'justify-start text-black text-base',
+            class: 'justify-start text-black text-base font-extralight leading-snug',
           },
           'See all products in this family',
         ),
@@ -852,7 +852,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-              'text-center justify-start text-violet-600 text-lg font-normal ',
+              'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
         },
         category,
       ),
