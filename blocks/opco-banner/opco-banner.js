@@ -476,7 +476,7 @@ export default async function decorate(block) {
       displayIndex = currentIndex;
     }
 
-    const getSlide = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
+    const getSlide = document.querySelector(`#opcoBannerSlide${displayIndex - 1}`);
 
     if (getSlide?.classList.contains('hasBg')) {
       numberIndicator.style.color = '#fff';
