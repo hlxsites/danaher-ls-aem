@@ -25,6 +25,30 @@
     @apply max-w-full w-auto h-auto;
   }
 
+  .dhls-container .text-xs{
+    font-size: 12px !important;
+  }
+  .dhls-container .text-sm{
+    font-size: 14px !important;
+  }
+  .dhls-container .text-base{
+    font-size: 16px !important;
+  }
+  .dhls-container .text-lg{
+    font-size: 18px !important;
+  }
+  .dhls-container .text-xl{
+    font-size: 20px !important;
+  }
+  .dhls-container .text-2xl{
+    font-size: 24px !important;
+  }
+  .dhls-container .text-3xl{
+    font-size: 32px !important;
+  }
+  .dhls-container .text-4xl{
+    font-size: 40px !important;
+  }
   h1,
   h2,
   h3,
