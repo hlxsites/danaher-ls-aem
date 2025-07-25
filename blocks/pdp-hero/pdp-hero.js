@@ -227,7 +227,7 @@ export default async function decorate(block) {
       ),
       div(
         {
-          class: 'w-[692px] h-5 flex flex-col justify-start items-start',
+          class: 'md:w-[692px] h-5 flex flex-col justify-start items-start',
         },
         div(
           {
@@ -812,7 +812,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'w-[692px] inline-flex justify-start items-center gap-6 flex-col',
+              'md:w-[692px] inline-flex justify-start items-center gap-6 flex-col',
           },
           div(
             {
@@ -828,7 +828,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
+              'md:w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
           infoDiv,
         ),
@@ -838,7 +838,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'w-[692px] inline-flex justify-start items-center gap-6 flex-col',
+              'md:w-[692px] inline-flex justify-start items-center gap-6 flex-col',
           },
           bundleTab,
         ),
@@ -847,7 +847,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
+              'md:w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
           infoDiv,
         ),
@@ -857,7 +857,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center  ',
+              'md:w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center  ',
           },
           div(
             {
@@ -890,7 +890,7 @@ export default async function decorate(block) {
     };
 
     const categoriesDiv = div({
-      class: 'px-4 py-4 inline-flex justify-start items-start gap-2',
+      class: 'md:w-[692px] flex-wrap px-4 py-4 inline-flex justify-start items-start gap-2',
     });
     result?.raw?.categories?.forEach((category) => {
       categoriesDiv.append(categoryDiv(category));
