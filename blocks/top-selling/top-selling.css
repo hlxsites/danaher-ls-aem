@@ -61,6 +61,10 @@
   pointer-events: none
 }
 
+.top-selling-wrapper :is(.visible) {
+  visibility: visible
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
@@ -91,6 +95,10 @@
 
 .top-selling-wrapper :is(.z-10) {
   z-index: 10
+}
+
+.top-selling-wrapper :is(.m-\[2px\]) {
+  margin: 2px
 }
 
 .top-selling-wrapper :is(.mx-auto) {
@@ -228,6 +236,10 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
 }
 
+.top-selling-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
 .top-selling-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -352,6 +364,10 @@
 
 .top-selling-wrapper :is(.rounded-tr-\[20px\]) {
   border-top-right-radius: 20px
+}
+
+.top-selling-wrapper :is(.rounded-br) {
+  border-bottom-right-radius: 0.25rem
 }
 
 .top-selling-wrapper :is(.border) {
@@ -565,6 +581,10 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.top-selling-wrapper :is(.opacity-100) {
+  opacity: 1
+}
+
 .top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
@@ -611,12 +631,36 @@
   transition-duration: 150ms !important
 }
 
+.top-selling-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.top-selling-wrapper :is(.transition-opacity) {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
 .top-selling-wrapper :is(.\!duration-1000) {
   transition-duration: 1000ms !important
 }
 
+.top-selling-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
+.top-selling-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
 .top-selling-wrapper :is(.\!ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important
+}
+
+.top-selling-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .top-selling-wrapper :is(.hover\:scale-105:hover) {
