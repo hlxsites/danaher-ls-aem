@@ -16,7 +16,7 @@ async function createCarousel(
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
   });
   const carouselContent = div({
-    class: `${side}CarouselItems flex gap-[22px]`,
+    class: `${side}CarouselItems flex gap-[22px] duration-1000 ease-in-out transition-transform transform`,
   });
   const carouselLeftArrow = div(
     {
@@ -55,7 +55,7 @@ async function createCarousel(
         href: product?.url,
         target: product?.url?.includes('http') ? '_blank' : '_self',
         class:
-          'flex-shrink-0 hover:shadow-md  cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+          'flex-shrink-0 hover:shadow-md transform transition duration-500  cursor-pointer hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
       },
       img({
         src: product?.images?.[0],

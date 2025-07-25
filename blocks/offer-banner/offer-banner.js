@@ -13,18 +13,21 @@ export default function decorate(block) {
     offerBannerLink,
     offerBannerLinkTarget,
     offerBannerLinkLabel,
+    offerBannerBgColor,
   ] = block.children;
 
-  const titleEl = offerBannerTitle.textContent.trim() || '';
-  const imgEl = offerBannerImage.querySelector('img');
-  const linkTextEl = offerBannerLink.textContent.trim() || '';
-  const linkLabelEl = offerBannerLinkTarget.textContent.trim() || '';
-  const bgColorEl = offerBannerLinkLabel.textContent.trim() || '#E5E7EB';
+  const titleEl = offerBannerTitle?.textContent.trim() || '';
+  const imgEl = offerBannerImage?.querySelector('img');
+  const linkTextEl = offerBannerLink?.textContent.trim() || '';
+  const linkTarget = offerBannerLinkTarget?.textContent?.trim() || '';
+  const linkLabelEl = offerBannerLinkLabel?.textContent.trim() || '';
+  const bgColorEl = offerBannerBgColor.textContent.trim() || '#E5E7EB';
 
   const title = titleEl;
   const imgSrc = imgEl?.getAttribute('src').replace(/<[^>]*>/g, '') || '';
   const imgAlt = imgEl?.getAttribute('alt') || 'Banner image';
   const linkText = linkTextEl;
+  const linkTargetEl = linkTarget ? '_blank' : '_self';
   const linkLabel = linkLabelEl;
   const bgColor = bgColorEl;
 
@@ -56,13 +59,14 @@ export default function decorate(block) {
         ? a(
           {
             href: linkTextEl || '#',
+            target: linkTargetEl || '_self',
             class:
                 'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
           },
           linkLabel || '',
           span({
             class:
-                'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+                'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
           }),
         )
         : '',
