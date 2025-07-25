@@ -185,7 +185,7 @@ export default async function decorate(block) {
               class:
                 'text-center justify-start text-violet-900 text-lg font-normal',
             },
-            
+
           ),
         ),
       ),
@@ -451,7 +451,6 @@ export default async function decorate(block) {
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
         console.log('item  id', item);
-        
       });
       const addToCart = div(
         {
@@ -885,6 +884,5 @@ export default async function decorate(block) {
       ),
     );
     decorateModals(block);
-   
   }
 }

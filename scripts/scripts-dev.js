@@ -909,7 +909,7 @@ async function designPdp() {
 
   const heroSection = sections[1];
 
-  const flexWrapper = div({class: 'flex lg:max-w-screen-xl mx-auto'});
+  const flexWrapper = div({ class: 'flex lg:max-w-screen-xl mx-auto' });
 
   const tabsWrapper = div();
   const restWrapper = div();

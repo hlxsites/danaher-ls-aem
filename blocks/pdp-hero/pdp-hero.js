@@ -17,13 +17,13 @@ import {
   decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getPdpDetails } from "../../scripts/coveo/controller/controllers.js";
-import { searchEngine } from "../../scripts/coveo/engine.js";
+import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
+import { searchEngine } from '../../scripts/coveo/engine.js';
 
 function waitForSearchResults() {
   return new Promise((resolve, reject) => {
     const respone = searchEngine.subscribe(() => {
-      const results = searchEngine.state.search.results;
+      const { results } = searchEngine.state.search;
       if (results && results.length > 0) {
         respone();
         resolve(results[0]);
@@ -164,18 +164,17 @@ export default async function decorate(block) {
       currency: 'USD',
     });
   }
-  await getPdpDetails("mica");
+  await getPdpDetails('mica');
   const result = await waitForSearchResults();
   const pdpResponse = result.raw;
 
- // console.log("pdpResponse:", pdpResponse);
-
+  // console.log("pdpResponse:", pdpResponse);
 
   const response = await getProductResponse();
 
   if (response?.length > 0) {
-     console.log("result:", result); 
-  
+    console.log('result:', result);
+
     console.log('respnseee', response);
     const productInfo = await getProductDetails(result?.raw?.sku);
     console.log('product Info', productInfo);
@@ -207,7 +206,7 @@ export default async function decorate(block) {
               class:
                 'text-center justify-start text-violet-900 text-lg font-normal',
             },
-            
+
           ),
         ),
       ),
@@ -473,7 +472,6 @@ export default async function decorate(block) {
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
         console.log('item  id', item);
-        
       });
       const addToCart = div(
         {
@@ -907,6 +905,5 @@ export default async function decorate(block) {
       ),
     );
     decorateModals(block);
-   
   }
 }
