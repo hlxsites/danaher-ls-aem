@@ -3,6 +3,7 @@ import { div, p, img } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'bundle-list-tab';
+  block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
     try {
@@ -50,4 +51,5 @@ export default async function decorate(block) {
     }
   }
   block.prepend(div({ class: 'text-2xl text-black py-6' }, 'Products Parts List'));
+  block.classList.add(...'border-b border-gray-200 !pb-6'.split(' '));
 }

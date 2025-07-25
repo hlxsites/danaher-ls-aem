@@ -117,6 +117,8 @@ function updatePageTabs(event) {
 
 export default async function decorate(block) {
   block.classList.add('bg-white');
+  block.parentElement.parentElement.style.padding = '0px';
+  //block.parentElement.parentElement.style.paddingRight = '0px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
 

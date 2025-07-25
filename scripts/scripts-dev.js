@@ -911,7 +911,7 @@ async function designPdp() {
 
   const flexWrapper = div({ class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto' });
 
-  const tabsWrapper = div({ class: 'tabs-left-parent sticky top-8 md:top-16 h-fit z-10' });
+  const tabsWrapper = div({ class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10' });
   const restWrapper = div({ class: 'tabs-right-parent border-l border-gray-200 flex-1' });
   sections.slice(2).forEach((section) => {
     if (section.classList.contains('pdp-page-tabs-container')) {

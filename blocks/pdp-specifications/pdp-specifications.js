@@ -3,6 +3,7 @@ import { div, p } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'specifications-tab';
+  block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
 
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== undefined && response !== null) {
@@ -50,4 +51,5 @@ export default async function decorate(block) {
       block.append(attrWrapper);
     }
   }
+  block.classList.add(...'border-b border-gray-200 !pb-6'.split(' '));
 }
