@@ -245,11 +245,12 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "model": "columns-new",
-                "template": {
-                  "rows": "1"
-                },
                 "class": {
                   "$ref": "layoutType"
+                },
+                "template": {
+                  "columns": "2",
+                  "rows": "1"
                 }
               }
             }
