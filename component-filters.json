@@ -159,6 +159,14 @@
     ]
   },
   {
+    "id": "embed",
+    "components": [
+      "video",
+      "pdf",
+      "iframe"
+    ]
+  },
+  {
     "id": "form",
     "components": []
   },
