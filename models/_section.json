@@ -83,7 +83,12 @@
       "table",
       "testimonial",
       "tags-list",
-      "related-articles"
+      "related-articles",
+      "columns-new",
+      "videos",
+      "table",
+      "image",
+      "form"
     ]
     }
   ]
