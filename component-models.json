@@ -451,8 +451,7 @@
             "label": "70/30 Split",
             "value": "seventythirty"
           }
-        ],
-        "default": "columns-2-cols"
+        ]
       },
       {
         "component": "select",
@@ -467,8 +466,7 @@
             "label": "White",
             "value": "text-white"
           }
-        ],
-        "default": "text-danahergray-900"
+        ]
       },
       {
         "name": "columns",
