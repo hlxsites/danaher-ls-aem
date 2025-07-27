@@ -245,7 +245,9 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
-                  "columns": "3",
+                  "layout": {
+                    "$ref": "layoutType"
+                  },
                   "rows": "1"
                 }
               }
