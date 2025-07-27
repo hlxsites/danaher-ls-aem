@@ -44,9 +44,25 @@ function postAction(formEl, videoEl) {
 
 function formStyle(formEl) {
   const tmpName = getMetadata('template');
-  const allFormInputFields = formEl?.querySelectorAll('input:not([type="submit"])');
+
+  // Inputs except submit, checkbox, radio (text, email, number, password, date, url, tel)
+  const allTextInputs = formEl?.querySelectorAll(
+    'input:not([type="submit"]):not([type="checkbox"]):not([type="radio"])'
+  );
+
+  // Checkbox and radio inputs
+  const allCheckboxes = formEl?.querySelectorAll('input[type="checkbox"]');
+  const allRadios = formEl?.querySelectorAll('input[type="radio"]');
+
+  // Select fields
   const allFormSelectFields = formEl?.querySelectorAll('select');
+
+  // Textarea fields
+  const allTextareas = formEl?.querySelectorAll('textarea');
+
+  // Submit button
   const submitFormField = formEl?.querySelector('input[type="submit"]');
+
   if (tmpName === 'training') {
     submitFormField.value = placeholders.elouqaformTraining;
     const textContentInTraining = div();
@@ -54,21 +70,46 @@ function formStyle(formEl) {
     textContentInTraining.classList.add('mt-6', 'text-[11px]', 'font-medium');
     submitFormField.parentNode.insertBefore(textContentInTraining, submitFormField.nextSibling);
   }
+
+  // Style submit button
   submitFormField.classList.add(
-    ...'bg-[#378089] rounded-full text-white w-full tracking-wide py-2 text-base'.split(' '),
+    ...'bg-[#378089] rounded-full text-white w-full tracking-wide py-2 text-base'.split(' ')
   );
-  allFormInputFields.forEach((inputField) => {
+
+  // Style text inputs
+  allTextInputs.forEach((inputField) => {
     inputField.classList.add(
       ...'block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500'.split(
-        ' ',
-      ),
+        ' '
+      )
     );
   });
+
+  // Style checkboxes
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.classList.add('mr-2', 'align-middle');
+  });
+
+  // Style radio buttons
+  allRadios.forEach((radio) => {
+    radio.classList.add('mr-2', 'align-middle');
+  });
+
+  // Style select dropdowns
   allFormSelectFields.forEach((selectField) => {
     selectField.classList.add(
       ...'block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500'.split(
-        ' ',
-      ),
+        ' '
+      )
+    );
+  });
+
+  // Style textareas
+  allTextareas.forEach((textarea) => {
+    textarea.classList.add(
+      ...'block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 resize-y'.split(
+        ' '
+      )
     );
   });
 }
@@ -81,14 +122,16 @@ export default async function decorate(block) {
   const tmpName = getMetadata('template');
   if (tmpName === 'training') {
     const hidebutton = block.querySelector('.button-container.button-primary');
-    hidebutton.style.display = 'none';
+    if (hidebutton) {
+      hidebutton.style.display = 'none';
+    }
   }
   block.classList.add(...'relative px-6 lg:px-8 py-8 lg:py-12 mx-auto max-w-7xl xl:px-0'.split(' '));
   try {
     const videoLink = block.querySelector('a');
     if (sessionStorage.getItem('ELOUQA')) {
       block.querySelector('div:not(a)')?.remove();
-      videoLink.title = 'video';
+      if (videoLink) videoLink.title = 'video';
       postFormAction(videoLink);
     } else {
       if (block.classList.contains('cols-2')) {
@@ -108,7 +151,7 @@ export default async function decorate(block) {
         formEl.prepend(p({ class: 'font-bold text-center text-2xl mt-0 mb-6' }, headingText));
         const descriptionEl = block.querySelector('div p').parentElement.parentElement;
         descriptionEl.classList.add('basis-3/5', 'pl-4');
-        descriptionEl.nextElementSibling.remove();
+        descriptionEl.nextElementSibling?.remove();
       }
       if (fragmentCSS) {
         const fragmentStyle = document.createElement('style');
@@ -134,7 +177,6 @@ export default async function decorate(block) {
       formEl?.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!formEl.querySelector('.LV_invalid_field')) {
-          const tmpName = getMetadata('template');
           let videoLink = null;
           if (tmpName === 'training') {
             const buttonContainer = block.querySelector('.button-container.button-primary');
@@ -152,7 +194,6 @@ export default async function decorate(block) {
       });
     }
   } catch (e) {
-    // block.textContent = '';
     // eslint-disable-next-line no-console
     console.warn(`cannot load snippet at ${e}`);
   }

@@ -627,16 +627,113 @@
       {
         "component": "richtext",
         "name": "description",
-        "value": "",
         "label": "Description",
-        "valueType": "string"
+        "valueType": "string",
+        "value": ""
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "video_link",
-        "value": "",
-        "label": "Video Link"
+        "label": "Video Link",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "text_input",
+        "label": "Text Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "email",
+        "name": "email_input",
+        "label": "Email Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "number",
+        "name": "number_input",
+        "label": "Number Input",
+        "valueType": "number",
+        "value": null
+      },
+      {
+        "component": "password",
+        "name": "password_input",
+        "label": "Password Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "date",
+        "name": "date_input",
+        "label": "Date Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "tel",
+        "name": "tel_input",
+        "label": "Telephone Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "url",
+        "name": "url_input",
+        "label": "URL Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "textarea",
+        "name": "textarea_input",
+        "label": "Textarea Input",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "select_input",
+        "label": "Select Input",
+        "options": [
+          {
+            "name": "Option 1",
+            "value": "option1"
+          },
+          {
+            "name": "Option 2",
+            "value": "option2"
+          }
+        ],
+        "valueType": "string",
+        "value": "option1"
+      },
+      {
+        "component": "checkbox",
+        "name": "checkbox_input",
+        "label": "Checkbox Input",
+        "valueType": "boolean",
+        "value": false
+      },
+      {
+        "component": "radio",
+        "name": "radio_input",
+        "label": "Radio Input",
+        "options": [
+          {
+            "name": "Radio 1",
+            "value": "radio1"
+          },
+          {
+            "name": "Radio 2",
+            "value": "radio2"
+          }
+        ],
+        "valueType": "string",
+        "value": "radio1"
       }
     ]
   },
