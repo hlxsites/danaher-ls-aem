@@ -431,9 +431,9 @@
     "id": "columns-new",
     "fields": [
       {
-        "name": "variant",
-        "type": "enum",
-        "label": "Column Layout",
+        "component": "select",
+        "name": "type",
+        "label": "Column Type",
         "options": [
           {
             "label": "Two Column",
@@ -455,8 +455,8 @@
         "default": "columns-2-cols"
       },
       {
-        "name": "textColor",
-        "type": "enum",
+        "component": "select",
+        "name": "type",
         "label": "Text Color",
         "options": [
           {
