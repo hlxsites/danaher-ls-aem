@@ -599,7 +599,7 @@
         "default": false
       },
       {
-        "component": "enum",
+        "component": "select",
         "name": "type",
         "type": "enum",
         "label": "Media Type",
