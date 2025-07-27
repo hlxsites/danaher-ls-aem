@@ -432,7 +432,7 @@
     "fields": [
       {
         "component": "select",
-        "name": "type",
+        "name": "layoutType",
         "label": "Column Type",
         "options": [
           {
@@ -456,7 +456,7 @@
       },
       {
         "component": "select",
-        "name": "type",
+        "name": "textColor",
         "label": "Text Color",
         "options": [
           {

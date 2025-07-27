@@ -22,7 +22,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "type",
+          "name": "layoutType",
           "label": "Column Type",
           "options": [
             { "label": "Two Column", "value": "columns-2-cols" },
@@ -34,7 +34,7 @@
         },
         {
           "component": "select",
-          "name": "type",
+          "name": "textColor",
           "label": "Text Color",
           "options": [
             { "label": "Default", "value": "text-danahergray-900" },
