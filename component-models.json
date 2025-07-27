@@ -1786,7 +1786,7 @@
     ]
   },
   {
-    "id": "hero-video",
+    "id": "videos",
     "fields": [
       {
         "component": "multiselect",
