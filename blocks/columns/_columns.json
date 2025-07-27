@@ -12,7 +12,6 @@
               "$ref": "layoutType"
             },
             "template": {
-              "columns": "2",
               "rows": "1"
             }
           }
@@ -26,7 +25,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "layoutType",
+          "name": "type",
           "label": "Column Type",
           "options": [
             { "label": "Two Column", "value": "columns-2-cols" },
@@ -37,7 +36,7 @@
         },
         {
           "component": "select",
-          "name": "textColor",
+          "name": "type",
           "label": "Text Color",
           "options": [
             { "label": "Default", "value": "text-danahergray-900" },

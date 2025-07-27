@@ -268,7 +268,6 @@
                   "$ref": "layoutType"
                 },
                 "template": {
-                  "columns": "2",
                   "rows": "1"
                 }
               }
