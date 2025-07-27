@@ -479,19 +479,19 @@
         "label": "Column Type",
         "options": [
           {
-            "label": "Two Column",
+            "name": "Two Column",
             "value": "columns-2-cols"
           },
           {
-            "label": "Three Column",
+            "name": "Three Column",
             "value": "columns-3-cols"
           },
           {
-            "label": "30/70 Split",
+            "name": "30/70 Split",
             "value": "thirtyseventy"
           },
           {
-            "label": "70/30 Split",
+            "name": "70/30 Split",
             "value": "seventythirty"
           }
         ]
@@ -502,11 +502,11 @@
         "label": "Text Color",
         "options": [
           {
-            "label": "Default",
+            "name": "Default",
             "value": "text-danahergray-900"
           },
           {
-            "label": "White",
+            "name": "White",
             "value": "text-white"
           }
         ]
