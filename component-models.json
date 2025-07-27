@@ -474,25 +474,42 @@
     "id": "columns",
     "fields": [
       {
-        "component": "multiselect",
-        "name": "classes",
-        "value": "",
-        "label": "Style",
-        "valueType": "string"
+        "component": "select",
+        "name": "layoutType",
+        "label": "Column Type",
+        "options": [
+          {
+            "label": "Two Column",
+            "value": "columns-2-cols"
+          },
+          {
+            "label": "Three Column",
+            "value": "columns-3-cols"
+          },
+          {
+            "label": "30/70 Split",
+            "value": "thirtyseventy"
+          },
+          {
+            "label": "70/30 Split",
+            "value": "seventythirty"
+          }
+        ]
       },
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "columns",
-        "value": "",
-        "label": "Columns"
-      },
-      {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "component": "select",
+        "name": "textColor",
+        "label": "Text Color",
+        "options": [
+          {
+            "label": "Default",
+            "value": "text-danahergray-900"
+          },
+          {
+            "label": "White",
+            "value": "text-white"
+          }
+        ]
       }
     ]
   },

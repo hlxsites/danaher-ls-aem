@@ -115,17 +115,13 @@
   {
     "id": "columns",
     "components": [
-      "column"
-    ]
-  },
-  {
-    "id": "column",
-    "components": [
       "text",
       "image",
       "button",
       "title",
-      "article-info-new"
+      "article-info-new",
+      "embed",
+      "form"
     ]
   },
   {
