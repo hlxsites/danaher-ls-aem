@@ -51,11 +51,7 @@
   "filters": [
     {
       "id": "embed",
-      "components": [
-        "video",
-        "pdf",
-        "iframe"
-      ]
+      "components": [      ]
     }
   ]
 }
