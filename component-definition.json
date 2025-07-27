@@ -243,7 +243,7 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/columns/v1/columns",
+                "resourceType": "core/franklin/components/columns-new/v1/columns-new",
                 "model": "columns-new",
                 "class": {
                   "$ref": "layoutType"
