@@ -23,7 +23,7 @@
       "fields": [
         {
           "component": "select",
-          "name": "type",
+          "name": "layoutType",
           "label": "Column Type",
           "options": [
             { "name": "Two Column", "value": "columns-2-cols" },

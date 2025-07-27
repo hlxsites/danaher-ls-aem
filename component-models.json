@@ -475,7 +475,7 @@
     "fields": [
       {
         "component": "select",
-        "name": "type",
+        "name": "layoutType",
         "label": "Column Type",
         "options": [
           {
