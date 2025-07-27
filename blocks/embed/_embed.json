@@ -37,16 +37,14 @@
         {
           "component": "select",
           "name": "type",
-          "type": "enum",
-          "label": "Media Type",
+          "label": "Type",
           "options": [
-            { "label": "YouTube", "value": "youtube" },
-            { "label": "Vimeo", "value": "vimeo" },
-            { "label": "Vidyard", "value": "vidyard" },
-            { "label": "PDF", "value": "pdf" },
-            { "label": "Other", "value": "default" }
-          ],
-          "default": "default"
+            { "name": "YouTube", "value": "youtube" },
+            { "name": "Vimeo", "value": "vimeo" },
+            { "name": "Vidyard", "value": "vidyard" },
+            { "name": "PDF", "value": "pdf" },
+            { "name": "Other", "value": "default" }
+          ]
         }
       ]
     }

@@ -601,31 +601,29 @@
       {
         "component": "select",
         "name": "type",
-        "type": "enum",
-        "label": "Media Type",
+        "label": "Type",
         "options": [
           {
-            "label": "YouTube",
+            "name": "YouTube",
             "value": "youtube"
           },
           {
-            "label": "Vimeo",
+            "name": "Vimeo",
             "value": "vimeo"
           },
           {
-            "label": "Vidyard",
+            "name": "Vidyard",
             "value": "vidyard"
           },
           {
-            "label": "PDF",
+            "name": "PDF",
             "value": "pdf"
           },
           {
-            "label": "Other",
+            "name": "Other",
             "value": "default"
           }
-        ],
-        "default": "default"
+        ]
       }
     ]
   },
