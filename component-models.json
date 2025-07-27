@@ -585,10 +585,47 @@
     "id": "embed",
     "fields": [
       {
+        "component": "text",
         "name": "url",
         "type": "string",
         "label": "Media URL",
         "required": true
+      },
+      {
+        "component": "boolean",
+        "name": "autoplay",
+        "type": "boolean",
+        "label": "Autoplay",
+        "default": false
+      },
+      {
+        "component": "enum",
+        "name": "type",
+        "type": "enum",
+        "label": "Media Type",
+        "options": [
+          {
+            "label": "YouTube",
+            "value": "youtube"
+          },
+          {
+            "label": "Vimeo",
+            "value": "vimeo"
+          },
+          {
+            "label": "Vidyard",
+            "value": "vidyard"
+          },
+          {
+            "label": "PDF",
+            "value": "pdf"
+          },
+          {
+            "label": "Other",
+            "value": "default"
+          }
+        ],
+        "default": "default"
       }
     ]
   },

@@ -160,7 +160,11 @@
   },
   {
     "id": "embed",
-    "components": []
+    "components": [
+      "video",
+      "pdf",
+      "iframe"
+    ]
   },
   {
     "id": "form",
