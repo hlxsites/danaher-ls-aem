@@ -246,10 +246,10 @@
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "model": "columns-new",
                 "template": {
-                  "layout": {
-                    "$ref": "layoutType"
-                  },
                   "rows": "1"
+                },
+                "class": {
+                  "$ref": "layoutType"
                 }
               }
             }

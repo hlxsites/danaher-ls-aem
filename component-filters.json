@@ -103,19 +103,14 @@
   {
     "id": "columns-new",
     "components": [
-      "column"
-    ]
-  },
-  {
-    "id": "columns-new",
-    "components": [
       "text",
       "image",
       "button",
       "title",
       "article-info-new",
       "videos",
-      "form"
+      "form",
+      "column"
     ]
   },
   {
