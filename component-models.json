@@ -467,42 +467,6 @@
             "value": "text-white"
           }
         ]
-      },
-      {
-        "name": "columns",
-        "type": "array",
-        "label": "Columns",
-        "items": {
-          "type": "object",
-          "label": "Column",
-          "fields": [
-            {
-              "name": "image",
-              "type": "image",
-              "label": "Image"
-            },
-            {
-              "name": "heading",
-              "type": "string",
-              "label": "Heading"
-            },
-            {
-              "name": "body",
-              "type": "richtext",
-              "label": "Body Text"
-            },
-            {
-              "name": "cta",
-              "type": "link",
-              "label": "CTA"
-            },
-            {
-              "name": "backgroundColor",
-              "type": "string",
-              "label": "Background Color"
-            }
-          ]
-        }
       }
     ]
   },
