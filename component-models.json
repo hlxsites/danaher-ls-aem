@@ -452,21 +452,6 @@
             "value": "seventythirty"
           }
         ]
-      },
-      {
-        "component": "select",
-        "name": "textColor",
-        "label": "Text Color",
-        "options": [
-          {
-            "label": "Default",
-            "value": "text-danahergray-900"
-          },
-          {
-            "label": "White",
-            "value": "text-white"
-          }
-        ]
       }
     ]
   },
