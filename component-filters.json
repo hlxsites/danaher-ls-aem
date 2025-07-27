@@ -96,13 +96,31 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "columns-new",
     "components": [
       "column"
     ]
   },
   {
-    "id": "column",
+    "id": "columns-new",
+    "options": [
+      {
+        "label": "Two Column",
+        "value": "columns-2-cols"
+      },
+      {
+        "label": "Three Column",
+        "value": "columns-3-cols"
+      },
+      {
+        "label": "30/70 Split",
+        "value": "thirtyseventy"
+      },
+      {
+        "label": "70/30 Split",
+        "value": "seventythirty"
+      }
+    ],
     "components": [
       "text",
       "image",

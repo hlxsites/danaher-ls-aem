@@ -1,116 +1,5 @@
 [
   {
-    "id": "page-metadata",
-    "fields": [
-      {
-        "component": "container",
-        "label": "Fieldset",
-        "fields": [
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "label": "Title",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "description",
-            "label": "Description",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "keywords",
-            "multi": true,
-            "label": "Keywords",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "article:Tag",
-            "label": "article:tag",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "path",
-            "label": ":path",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "template",
-            "label": "Template",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "brand",
-            "label": "Brand",
-            "value": ""
-          },
-          {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "creationdate",
-            "label": "Creation Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
-          },
-          {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "updatedate",
-            "label": "Update Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "fullcategory",
-            "label": "Full Category",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "viewport",
-            "label": "View Port",
-            "value": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "image",
-    "fields": [
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
-      }
-    ]
-  },
-  {
     "id": "title",
     "fields": [
       {
@@ -408,6 +297,16 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "card-list",
     "fields": [
       {
@@ -532,43 +431,80 @@
     "id": "columns-new",
     "fields": [
       {
-        "component": "multiselect",
-        "name": "classes",
-        "value": "",
-        "label": "Style",
-        "valueType": "string",
+        "name": "variant",
+        "type": "enum",
+        "label": "Column Layout",
         "options": [
           {
-            "label": "2 Col Equal",
-            "value": "2-col-equal"
+            "label": "Two Column",
+            "value": "columns-2-cols"
           },
           {
-            "label": "2 Col 30/70",
-            "value": "2-col-30-70"
+            "label": "Three Column",
+            "value": "columns-3-cols"
           },
           {
-            "label": "3 Col Equal",
-            "value": "3-col-equal"
+            "label": "30/70 Split",
+            "value": "thirtyseventy"
           },
           {
-            "label": "3 Col 25/25/50",
-            "value": "3-col-25-25-50"
+            "label": "70/30 Split",
+            "value": "seventythirty"
           }
-        ]
+        ],
+        "default": "columns-2-cols"
       },
       {
-        "component": "text",
-        "valueType": "number",
+        "name": "textColor",
+        "type": "enum",
+        "label": "Text Color",
+        "options": [
+          {
+            "label": "Default",
+            "value": "text-danahergray-900"
+          },
+          {
+            "label": "White",
+            "value": "text-white"
+          }
+        ],
+        "default": "text-danahergray-900"
+      },
+      {
         "name": "columns",
-        "value": "",
-        "label": "Columns"
-      },
-      {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "type": "array",
+        "label": "Columns",
+        "items": {
+          "type": "object",
+          "label": "Column",
+          "fields": [
+            {
+              "name": "image",
+              "type": "image",
+              "label": "Image"
+            },
+            {
+              "name": "heading",
+              "type": "string",
+              "label": "Heading"
+            },
+            {
+              "name": "body",
+              "type": "richtext",
+              "label": "Body Text"
+            },
+            {
+              "name": "cta",
+              "type": "link",
+              "label": "CTA"
+            },
+            {
+              "name": "backgroundColor",
+              "type": "string",
+              "label": "Background Color"
+            }
+          ]
+        }
       }
     ]
   },
@@ -676,6 +612,22 @@
         "name": "video_link",
         "value": "",
         "label": "Video Link"
+      }
+    ]
+  },
+  {
+    "id": "image",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
       }
     ]
   },
