@@ -15,12 +15,7 @@ export default function decorate(block) {
   innerContent.classList.add(...classes);
 
   const wrapper = block.closest('.article-info-new-wrapper') || block;
-  // const infoBlock = wrapper.querySelector('.article-info-new');
-
-  // const wrapper = document.querySelector('.article-info-new-wrapper');
-  // if (!wrapper) return;
-
-  const infoBlock = wrapper.querySelector('.article-info-new');
+  const infoBlock = wrapper.querySelector('.article-info-new') || block;
   if (!infoBlock) return;
 
   const paragraphs = infoBlock.querySelectorAll('p');
@@ -62,4 +57,11 @@ export default function decorate(block) {
   if (section && !section.contains(block)) {
     section.appendChild(block);
   }
+}
+
+export function initArticleInfoNew() {
+  // Run decorate for all .article-info-new blocks found anywhere on page
+  document.querySelectorAll('.article-info-new').forEach((block) => {
+    decorate(block);
+  });
 }
