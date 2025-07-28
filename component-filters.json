@@ -52,6 +52,7 @@
       "product-hero-content",
       "product-info-list",
       "table",
+      "form",
       "testimonial",
       "tags-list",
       "related-articles"
@@ -126,6 +127,10 @@
       "pdf",
       "iframe"
     ]
+  },
+  {
+    "id": "form",
+    "components": []
   },
   {
     "id": "insight",
