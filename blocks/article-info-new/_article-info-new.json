@@ -58,7 +58,7 @@
            },           
            {
             "component": "date-time",
-            "valueType": "date-time",
+            "valueType": "date",
             "name": "publishDate",
             "label": "Date", 
             "displayFormat": null,
