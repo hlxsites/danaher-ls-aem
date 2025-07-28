@@ -476,7 +476,7 @@
       {
         "component": "multiselect",
         "name": "classes",
-        "label": "Style",
+        "label": "Select Ratio",
         "valueType": "string",
         "options": [
           {
@@ -498,6 +498,14 @@
           {
             "name": "75/25 Split",
             "value": "seventyfivetwentyfive"
+          },
+          {
+            "name": "40/60 Split",
+            "value": "fortysixty"
+          },
+          {
+            "name": "60/40 Split",
+            "value": "sixtyforty"
           },
           {
             "name": "Text White",

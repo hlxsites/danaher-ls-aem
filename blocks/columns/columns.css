@@ -60,4 +60,20 @@
   .columns.twentyfiveseventyfive > div:nth-child(2) {
     width: 75%;
   }
+
+  /* 60/40 layout */
+  .columns.sixtyforty > div:nth-child(1) {
+    width: 60%;
+  }
+  .columns.sixtyforty > div:nth-child(2) {
+    width: 40%;
+  }
+
+  /* 40/60 layout */
+  .columns.fortysixty > div:nth-child(1) {
+    width: 40%;
+  }
+  .columns.fortysixty > div:nth-child(2) {
+    width: 60%;
+  }
 }
