@@ -595,7 +595,7 @@ export const getPaymentMethods = async () => {
         'paymentMethods',
         JSON.stringify({ status: 'success', data: response.data.data }),
       );
-      return { status: 'success', data: 'Error getting Payment methods:' };
+      return { status: 'success', data: response.data.data };
     }
     return { status: 'error', data: 'Error getting Payment methods:' };
   } catch (error) {
@@ -1181,7 +1181,7 @@ export const changeStep = async (step) => {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
       
       if (submittingOrder?.data?.data?.documentNumber) {
-        window.location.href = `/us/en/e-buy/checkout/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
       }
     }
   }
