@@ -138,6 +138,8 @@ async function addToQuote(product) {
 }
 
 export default async function decorate(block) {
+  console.log('pdp-hero block:', block.parentElement.parentElement);
+  block.parentElement.parentElement.classList.add('!p-0');
   const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
@@ -213,7 +215,7 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: 'justify-start text-black text-4xl font-normal',
+        class: 'justify-start text-black text-4xl font-normal py-3',
       },
       `$${productInfo?.data?.salePrice?.value}`,
     ),
@@ -222,27 +224,28 @@ export default async function decorate(block) {
         class: 'flex-1 py-3 flex justify-start items-start gap-4 flex-col md:flex-row',
       },
 
-      div({
-        class:
-          'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
-      }),
-      div(
-        {
-          class: 'inline-flex flex-col justify-center gap-2 items-start',
-        },
-        div(
-          {
-            class: 'justify-start text-black text-base font-extralight',
-          },
-          'Availability',
-        ),
-        div(
-          {
-            class: 'text-right justify-start text-black text-base font-bold ',
-          },
-          productInfo?.data?.availability ? productInfo?.data?.availability : '',
-        ),
-      ),
+      //For future implementation
+      // div({
+      //   class:
+      //     'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
+      // }),
+      // div(
+      //   {
+      //     class: 'inline-flex flex-col justify-center gap-2 items-start',
+      //   },
+      //   div(
+      //     {
+      //       class: 'justify-start text-black text-base font-extralight',
+      //     },
+      //     'Availability',
+      //   ),
+      //   div(
+      //     {
+      //       class: 'text-right justify-start text-black text-base font-bold ',
+      //     },
+      //     productInfo?.data?.availability ? productInfo?.data?.availability : '',
+      //   ),
+      // ),
 
       div({
         class:
@@ -333,23 +336,23 @@ export default async function decorate(block) {
     ),
   );
 
-  const rfqEl = block.querySelector(':scope > div:nth-child(1)');
-  let rfqParent;
-  const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-  if (addCartBtnEl) {
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-  }
-  if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
-    rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
-    if (result?.raw?.objecttype === 'Product' || result?.raw?.objecttype === 'Bundle') {
-      rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
-      rfqParent.addEventListener('click', () => {
-        addToQuote(result);
-      });
-    } else {
-      rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
-    }
-  }
+  // const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+  // let rfqParent;
+  // const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
+  // if (addCartBtnEl) {
+  //   addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+  // }
+  // if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
+  //   rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+  //   if (result?.raw?.objecttype === 'Product' || result?.raw?.objecttype === 'Bundle') {
+  //     rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
+  //     rfqParent.addEventListener('click', () => {
+  //       addToQuote(result);
+  //     });
+  //   } else {
+  //     rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
+  //   }
+  // }
 
   const modalInput = input({
     id: productInfo?.data?.lineItemId || 'default-id',
@@ -361,76 +364,114 @@ export default async function decorate(block) {
     value: 1,
   });
 
-  const buyButton = div(
-    {
-      class: 'flex justify-start items-start gap-3',
-    },
-    button(
-      {
-        class:
-              'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-        sku: productInfo?.data?.sku,
-        productName: productInfo?.data?.productName,
-        minOrderQuantity: productInfo?.data?.minOrderQuantity,
-        manufacturer: productInfo?.data?.manufacturer,
-        maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
-        price: productInfo?.data?.salePrice?.value,
-        quantity: 0,
-      },
-      'Buy Now',
-    ),
-  );
-  let enteredValue = 0;
-  modalInput.addEventListener('change', (event) => {
-    // const selectedDiv = document.getElementById
-    // (productInfo.data.lineItemId); // or any div reference
-    const inputElement = document.getElementById(productInfo?.data?.lineItemId);
-    const productItem = inputElement.parentElement;
-    console.log('productItem', inputElement);
-    enteredValue = event.target.value;
-    console.log('enteredValue', enteredValue);
-    if (enteredValue < Number(inputElement.min)) {
-      console.log('minnn');
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-      );
-    } else if (enteredValue > Number(input.max)) {
-      console.log('max');
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-      );
-    } else {
-      productItem.style.border = '';
-      // modifyCart("quantity-added", input, event.target.value);
-    }
-    // modifyCart("quantity-added", event.target.value);
-  });
-  buyButton.addEventListener('click', async (event) => {
-    showPreLoader();
-    const item = event.target.attributes;
-    if (enteredValue == 0) enteredValue = 1;
-    item.enteredValue = Number(enteredValue);
-    console.log('item  id', item);
-  });
-  const addToCart = div(
-    {
-      class: 'self-stretch inline-flex justify-start items-end gap-3',
-    },
-    modalInput,
-    buyButton,
-  );
-  decorateIcons(addToCart);
-  // defaultContent.append(rfqParent);
-  const buttonTab = div(
+  const pricingQuoteButton = div(
     {
       class:
-            'w-full self-stretch inline-flex justify-start items-end gap-3',
+              'inline-flex justify-start items-center gap-3',
     },
-    ...(productInfo?.data?.salePrice?.value != 0 && result?.raw?.objecttype === 'Product' ? [addToCart] : []),
-    ...(rfqParent ? [rfqParent] : []),
+    input({
+      type: 'number',
+      value: '1',
+      min: '1',
+      class:
+              'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+    }),
+    a(
+      {
+        class:
+                'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+      },
+      span(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Buy Now',
+      ),
+    ),
+    div(
+      {
+        class:
+                'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+      },
+      span(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Quote',
+      ),
+    ),
   );
+
+  // const buyButton = div(
+  //   {
+  //     class: 'flex justify-start items-start gap-3',
+  //   },
+  //   button(
+  //     {
+  //       class:
+  //             'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+  //       sku: productInfo?.data?.sku,
+  //       productName: productInfo?.data?.productName,
+  //       minOrderQuantity: productInfo?.data?.minOrderQuantity,
+  //       manufacturer: productInfo?.data?.manufacturer,
+  //       maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
+  //       price: productInfo?.data?.salePrice?.value,
+  //       quantity: 0,
+  //     },
+  //     'Buy Now',
+  //   ),
+  // );
+  // let enteredValue = 0;
+  // modalInput.addEventListener('change', (event) => {
+  //   // const selectedDiv = document.getElementById
+  //   // (productInfo.data.lineItemId); // or any div reference
+  //   const inputElement = document.getElementById(productInfo?.data?.lineItemId);
+  //   const productItem = inputElement.parentElement;
+  //   console.log('productItem', inputElement);
+  //   enteredValue = event.target.value;
+  //   console.log('enteredValue', enteredValue);
+  //   if (enteredValue < Number(inputElement.min)) {
+  //     console.log('minnn');
+  //     productItem.style.border = '2px solid red';
+  //     alert(
+  //       `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+  //     );
+  //   } else if (enteredValue > Number(input.max)) {
+  //     console.log('max');
+  //     productItem.style.border = '2px solid red';
+  //     alert(
+  //       `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+  //     );
+  //   } else {
+  //     productItem.style.border = '';
+  //     // modifyCart("quantity-added", input, event.target.value);
+  //   }
+  //   // modifyCart("quantity-added", event.target.value);
+  // });
+  // buyButton.addEventListener('click', async (event) => {
+  //   showPreLoader();
+  //   const item = event.target.attributes;
+  //   if (enteredValue == 0) enteredValue = 1;
+  //   item.enteredValue = Number(enteredValue);
+  //   console.log('item  id', item);
+  // });
+  // const addToCart = div(
+  //   {
+  //     class: 'self-stretch inline-flex justify-start items-end gap-3',
+  //   },
+  //   modalInput,
+  //   buyButton,
+  // );
+  // decorateIcons(addToCart);
+  // // defaultContent.append(rfqParent);
+  // const buttonTab = div(
+  //   {
+  //     class:
+  //           'w-full self-stretch inline-flex justify-start items-end gap-3',
+  //   },
+  //   ...(productInfo?.data?.salePrice?.value != 0 && result?.raw?.objecttype === 'Product' ? [addToCart] : []),
+  //   ...(rfqParent ? [rfqParent] : []),
+  // );
 
   const priceInfoDiv = div({
     class: 'self-stretch flex flex-col justify-start items-start gap-5',
@@ -440,12 +481,20 @@ export default async function decorate(block) {
     priceInfoDiv.append(shipInfo);
   }
 
-  priceInfoDiv.append(buttonTab);
+  // priceInfoDiv.append(buttonTab);
   if (
     result?.raw?.objecttype === 'Product'
       || result?.raw?.objecttype === 'Bundle'
   ) {
     defaultContent.append(priceInfoDiv);
+  }
+
+  if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
+    priceInfoDiv.append(quoteButton);
+  }
+
+  if (result?.raw?.objecttype === 'Product') {
+    priceInfoDiv.append(pricingQuoteButton);
   }
   /* brandname checking and displaying buy now btn */
 
@@ -735,50 +784,50 @@ export default async function decorate(block) {
   //   window.open(externalURL, "_blank");
   // });
 
-  const pricingQuoteButton = div(
-    {
-      class:
-              'px-4 py-3 inline-flex justify-start items-center gap-3',
-    },
-    input({
-      type: 'number',
-      value: '1',
-      min: '1',
-      class:
-              'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
-    }),
-    a(
-      {
-        class:
-                'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
-      },
-      span(
-        {
-          class: 'inherit text-base font-medium leading-snug',
-        },
-        'Buy Now',
-      ),
-    ),
-    div(
-      {
-        class:
-                'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-      },
-      span(
-        {
-          class: 'inherit text-base font-medium leading-snug',
-        },
-        'Quote',
-      ),
-    ),
-  );
-  if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
-    defaultContent.append(quoteButton);
-  }
+  // const pricingQuoteButton = div(
+  //   {
+  //     class:
+  //             'inline-flex justify-start items-center gap-3',
+  //   },
+  //   input({
+  //     type: 'number',
+  //     value: '1',
+  //     min: '1',
+  //     class:
+  //             'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+  //   }),
+  //   a(
+  //     {
+  //       class:
+  //               'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+  //     },
+  //     span(
+  //       {
+  //         class: 'inherit text-base font-medium leading-snug',
+  //       },
+  //       'Buy Now',
+  //     ),
+  //   ),
+  //   div(
+  //     {
+  //       class:
+  //               'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+  //     },
+  //     span(
+  //       {
+  //         class: 'inherit text-base font-medium leading-snug',
+  //       },
+  //       'Quote',
+  //     ),
+  //   ),
+  // );
+  // if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
+  //   defaultContent.append(quoteButton);
+  // }
 
-  if (result?.raw?.objecttype === 'Product') {
-    defaultContent.append(pricingQuoteButton);
-  }
+  // if (result?.raw?.objecttype === 'Product') {
+  //   defaultContent.append(pricingQuoteButton);
+  // }
 
   if (result?.raw?.objecttype === 'Family') {
     defaultContent.append(

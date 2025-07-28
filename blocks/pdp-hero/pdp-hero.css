@@ -55,6 +55,10 @@
   margin-top: -256px;
 }
 
+.pdp-hero-wrapper :is(.mt-44) {
+  margin-top: 11rem;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }
@@ -397,6 +401,14 @@
 
 .pdp-hero-wrapper :is(.fill-current) {
   fill: currentColor;
+}
+
+.pdp-hero-wrapper :is(.p-0) {
+  padding: 0px;
+}
+
+.pdp-hero-wrapper :is(.\!p-0) {
+  padding: 0px !important;
 }
 
 .pdp-hero-wrapper :is(.px-4) {
