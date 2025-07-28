@@ -4,12 +4,6 @@ import {
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  if (block.children.length === 1 && block.firstElementChild.children.length > 1) {
-  const row = block.firstElementChild;
-  const columns = [...row.children];
-  row.remove(); // remove the wrapper
-  columns.forEach((col) => block.appendChild(col));
-  }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
