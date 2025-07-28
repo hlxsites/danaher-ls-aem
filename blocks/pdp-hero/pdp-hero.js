@@ -554,7 +554,7 @@ export default async function decorate(block) {
   );
   const externalLink = div(
     {
-      class: 'w-9 h-9 relative overflow-hidden',
+      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden',
     },
     span({
       class:
@@ -562,7 +562,7 @@ export default async function decorate(block) {
     }),
   );
   const externalButton = div(
-    { class: 'flex cursor-pointer justify-center items-center text-base font-extralight leading-snug' },
+    { class: 'flex justify-center items-center text-base font-extralight leading-snug' },
     `To learn more visit ${result?.raw.opco} `,
     externalLink,
   );
@@ -586,7 +586,7 @@ export default async function decorate(block) {
 
   const collectionButton = div(
     {
-      class: 'w-9 h-9 overflow-hidden',
+      class: 'w-9 h-9',
     },
     span({
       class:
@@ -622,11 +622,8 @@ export default async function decorate(block) {
   );
   const categoryLink = div(
     {
-      class: 'w-full inline-flex flex-col ',
+      class: 'w-full inline-flex flex-col group',
     },
-    // div({
-    //     class: "w-full inline-flex flex-col"
-    //   },
     div(
       {
         class:
@@ -635,13 +632,13 @@ export default async function decorate(block) {
       collectionButton,
       div(
         {
-          class: 'w-full inline-flex flex-col ',
+          class: 'w-full inline-flex flex-col',
         },
         div(
           {
             class: 'justify-start text-black text-base font-extralight leading-snug',
           },
-          'See all products in this family',
+          'See all product Family in this line',
         ),
         div(
           {
@@ -649,7 +646,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-                'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -660,7 +657,7 @@ export default async function decorate(block) {
       },
       span({
         class:
-            'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -669,22 +666,10 @@ export default async function decorate(block) {
 
   categoryLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const sections = main.querySelectorAll('.section.page-tab');
-    const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
-    if (tabSections) {
-      console.log('tabSections', tabSections);
-      const currentTab = window.location.hash?.replace('#', '')
-      || tabSections[0].getAttribute('aria-labelledby');
-      console.log('current tab: ', tabSections[0].getAttribute('aria-labelledby'));
-      sections.forEach((section) => {
-        section.style.paddingTop = '0px';
-        if (currentTab === section.getAttribute('aria-labelledby')) {
-          section.style.paddingTop = '110px';
-          section.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }
-      });
+    const tabsSuperParent = main.querySelector('.tabs-super-parent');
+    if (tabsSuperParent) {
+      tabsSuperParent.scrollIntoView({ behavior: 'smooth' });
+      tabsSuperParent.classList.add('mt-32');
     }
   });
 
@@ -728,17 +713,17 @@ export default async function decorate(block) {
   });
   const bundleLink = div(
     {
-      class: 'w-full inline-flex flex-col ',
+      class: 'w-full inline-flex flex-col group',
     },
     div(
       {
         class:
-            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
+        'self-stretch inline-flex justify-start gap-3 cursor-pointer',
       },
       clipBoard,
       div(
         {
-          class: 'w-full inline-flex flex-col ',
+          class: 'w-full inline-flex flex-col',
         },
         div(
           {
@@ -746,19 +731,36 @@ export default async function decorate(block) {
           },
           'See all items in this bundle',
         ),
-        rectangleButton,
+        div(
+          {
+            class: 'w-[190px] h-[1rem]',
+          },
+          span({
+            class:
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+          }),
+        ),
+
+        div(
+          {
+            class: 'w-[190px] inline-flex justify-center items-center', // Changed to w-[190px] to match Rectangle
+          },
+          span({
+            class:
+        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+          }),
+        ),
       ),
     ),
-    chevronButton,
   );
+  console.log('defaultContent', result?.raw?.objecttype, result?.raw?.objecttype === 'Bundle');
 
   // decorateIcons(bundleLink);
   const bundleTab = div(
     {
       class: 'w-full inline-flex gap-6 flex-col md:flex-row',
     },
-    bundleLink,
-    categoryLink,
+    result?.raw?.objecttype === 'Bundle' ? bundleLink : categoryLink,
 
   );
   console.log('bundle tab', bundleTab);

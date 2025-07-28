@@ -23,6 +23,10 @@
   margin-top: 1rem;
 }
 
+.pdp-hero-wrapper :is(.mt-32) {
+  margin-top: 8rem;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }
@@ -129,6 +133,34 @@
 
 .pdp-hero-wrapper :is(.w-9) {
   width: 2.25rem;
+}
+
+.pdp-hero-wrapper :is(.w-48) {
+  width: 12rem;
+}
+
+.pdp-hero-wrapper :is(.w-44) {
+  width: 11rem;
+}
+
+.pdp-hero-wrapper :is(.w-52) {
+  width: 13rem;
+}
+
+.pdp-hero-wrapper :is(.w-\[50\]) {
+  width: 50;
+}
+
+.pdp-hero-wrapper :is(.w-\[50px\]) {
+  width: 50px;
+}
+
+.pdp-hero-wrapper :is(.w-\[200px\]) {
+  width: 200px;
+}
+
+.pdp-hero-wrapper :is(.w-\[190px\]) {
+  width: 190px;
 }
 
 .pdp-hero-wrapper :is(.flex-1) {
@@ -502,5 +534,9 @@
 }
 
 .pdp-hero-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5;
+}
+
+.pdp-hero-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5;
 }
