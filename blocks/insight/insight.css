@@ -270,6 +270,11 @@
     font-size: 1.875rem;
     line-height: 2.25rem
   }
+
+  .insight-wrapper :is(.md\:\!text-3xl) {
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important
+  }
 }
 
 @media (min-width: 1024px) {

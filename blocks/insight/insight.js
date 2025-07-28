@@ -93,7 +93,7 @@ export default function decorate(block) {
   const leftCol = div(
     { class: 'w-full md:w-1/2 pr-0 md:pr-6' },
     h2(
-      { class: 'text-2xl md:text-3xl font-semibold mb-4 mt-0 text-black' },
+      { class: ' md:text-3xl font-semibold mb-4 mt-0 text-black' },
       leftTitle,
     ),
     div({

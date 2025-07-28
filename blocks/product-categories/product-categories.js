@@ -87,7 +87,7 @@ export default async function decorate(block) {
       { class: 'flex flex-col gap-2 mb-6 scroll-mt-32', id: blockId },
       h2(
         {
-          class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
+          class: `text-3xl text-black font-medium m-0 min-h-[40px] ${
             authoredTitle ? '' : ''
           }`,
         },
