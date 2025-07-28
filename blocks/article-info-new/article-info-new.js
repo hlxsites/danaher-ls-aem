@@ -20,15 +20,15 @@ export default function decorate(block) {
   const infoBlock = wrapper.querySelector('.article-info-new');
   if (!infoBlock) return;
 
-  // Grab paragraphs by data attribute so we know which is which
+   // Grab paragraphs by data attribute so we know which is which
   const authorNameEl = infoBlock.querySelector('[data-aue-prop="authorName"]');
   const authorTitleEl = infoBlock.querySelector('[data-aue-prop="authorTitle"]');
   const imageEl = infoBlock.querySelector('[data-aue-prop="image"]');
-  // const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
+  const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
   const articleOpcoEl = infoBlock.querySelector('[data-aue-prop="articleOpco"]');
   const readingTimeEl = infoBlock.querySelector('[data-aue-prop="readingTime"]');
 
-  // Extract raw publish date text from the property element
+   // Extract raw publish date text from the property element
   const rawPublishDate = publishDateEl ? publishDateEl.textContent.trim() : '';
 
   // Format or set publish date for display only
@@ -45,18 +45,11 @@ export default function decorate(block) {
     day: '2-digit',
   });
 
-  // Create or update a separate paragraph element for the formatted date display
   let formattedDateEl = infoBlock.querySelector('[data-aue-prop="formattedPublishDate"]');
-  if (!formattedDateEl) {
-    formattedDateEl = document.createElement('p');
-    formattedDateEl.setAttribute('data-aue-prop', 'formattedPublishDate');
-    formattedDateEl.setAttribute('data-aue-label', 'Formatted Publish Date');
-    formattedDateEl.setAttribute('data-aue-type', 'text');
-    infoBlock.appendChild(formattedDateEl);
-  }
+
   formattedDateEl.textContent = formattedDate;
 
-  // Append block to the section if not already present
+  // Append block to the section
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
