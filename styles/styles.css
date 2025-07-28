@@ -468,27 +468,27 @@ main img {
   max-width: 100%;
 }
 
-.dhls-container .text-xs{
+.dhls-container .text-xs {
   font-size: 12px !important;
 }
 
-.dhls-container .text-sm{
+.dhls-container .text-sm {
   font-size: 14px !important;
 }
 
-.dhls-container .text-base{
+.dhls-container .text-base {
   font-size: 16px !important;
 }
 
-.dhls-container .text-2xl{
+.dhls-container .text-2xl {
   font-size: 24px !important;
 }
 
-.dhls-container .text-3xl{
+.dhls-container .text-3xl {
   font-size: 32px !important;
 }
 
-.dhls-container .text-4xl{
+.dhls-container .text-4xl {
   font-size: 40px !important;
 }
 
@@ -506,7 +506,7 @@ h1,
   -moz-osx-font-smoothing: grayscale;
 }
 
-.dhls-container h1{
+.dhls-container h1 {
   font-size: 32px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -525,7 +525,7 @@ h1 {
   }
 }
 
-.dhls-container h2{
+.dhls-container h2 {
   font-size: 24px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -538,7 +538,7 @@ h2 {
 }
 
 @media (min-width: 768px) {
-  .dhls-container h2{
+  .dhls-container h2 {
     font-size: 32px !important;
   }
 
@@ -548,7 +548,7 @@ h2 {
   }
 }
 
-.dhls-container h3{
+.dhls-container h3 {
   font-size: 20px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -561,7 +561,7 @@ h3 {
 }
 
 @media (min-width: 768px) {
-  .dhls-container h3{
+  .dhls-container h3 {
     font-size: 24px !important;
   }
 
@@ -571,7 +571,7 @@ h3 {
   }
 }
 
-.dhls-container h4{
+.dhls-container h4 {
   font-size: 18px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -583,7 +583,7 @@ h4 {
   line-height: 1.75rem !important;
 }
 
-.dhls-container h5{
+.dhls-container h5 {
   font-size: 18px;
 }
 
@@ -593,7 +593,7 @@ h5 {
   line-height: 1.75rem;
 }
 
-.dhls-container h6{
+.dhls-container h6 {
   font-size: 16px;
 }
 
@@ -603,7 +603,7 @@ h6 {
   font-weight: 200;
 }
 
-.dhls-container main .default-content-wrapper h1{
+.dhls-container main .default-content-wrapper h1 {
   font-size: 40px;
 }
 
@@ -617,7 +617,7 @@ main .default-content-wrapper h1 {
 
 .dhls-container main .default-content-wrapper h2,.dhls-container 
   main .default-content-wrapper h3,.dhls-container 
-  main .default-content-wrapper h4{
+  main .default-content-wrapper h4 {
   font-size: 32px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -807,7 +807,7 @@ body.appear {
   padding-right: 0.75rem;
 }
 
-.dhls-container .productdetail main .columns.columns-2-cols .icon svg{
+.dhls-container .productdetail main .columns.columns-2-cols .icon svg {
   font-size: 16px;
 }
 
@@ -876,7 +876,7 @@ main
   }
 }
 
-.dhls-container .btn{
+.dhls-container .btn {
   font-size: 16px;
 }
 
@@ -972,7 +972,7 @@ main
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.dhls-container .btn-outline-primary{
+.dhls-container .btn-outline-primary {
   font-size: 18px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -1024,7 +1024,7 @@ main
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.dhls-container .container-two-col .col-right{
+.dhls-container .container-two-col .col-right {
   font-size: 16px;
 }
 
@@ -1059,7 +1059,7 @@ main
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.dhls-container .container-two-col .col-right h2{
+.dhls-container .container-two-col .col-right h2 {
   font-size: 20px !important;
 }
 
@@ -1086,7 +1086,7 @@ main
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.dhls-container main .default-content-wrapper p{
+.dhls-container main .default-content-wrapper p {
   font-size: 18px;
 }
 
@@ -1116,7 +1116,7 @@ main .default-content-wrapper p {
   line-height: 1.75rem;
 }
 
-.dhls-container main .default-content-wrapper p.button-container > a{
+.dhls-container main .default-content-wrapper p.button-container > a {
   font-size: 18px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -1160,7 +1160,7 @@ main
 }
 
 .dhls-container main .default-content-wrapper ol,.dhls-container 
-  main .default-content-wrapper ul{
+  main .default-content-wrapper ul {
   font-size: 16px;
 }
 
@@ -1303,7 +1303,7 @@ header {
   }
 }
 
-.dhls-container .topic main p:not(.show-modal-btn){
+.dhls-container .topic main p:not(.show-modal-btn) {
   font-size: 18px;
 }
 
@@ -1431,7 +1431,7 @@ header {
   .columns.features-card-left > div > div.t-line > div.card > .left-content::after {
     padding-right: 0.75rem;
   }
-  .dhls-container .productdetail main .columns.columns-2-cols .t-line::after{
+  .dhls-container .productdetail main .columns.columns-2-cols .t-line::after {
     font-size: 16px;
   }
   .productdetail main .columns.columns-2-cols .t-line::after {
@@ -1513,7 +1513,7 @@ header {
   }
 }
 
-.dhls-container .appear mobilemenu > div.mobile-jump-menu select.selected-tab{
+.dhls-container .appear mobilemenu > div.mobile-jump-menu select.selected-tab {
   font-size: 16px;
 }
 
@@ -1538,7 +1538,7 @@ header {
   outline-offset: 2px;
 }
 
-.dhls-container .columns:not(.columns-2-cols) > div div > p:not(.button-container){
+.dhls-container .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
   font-size: 18px;
 }
 
@@ -1619,7 +1619,7 @@ main .top-border > div.columns-wrapper:first-child {
   }
 }
 
-.dhls-container .blog main .section.default-content-wrapper > p{
+.dhls-container .blog main .section.default-content-wrapper > p {
   font-size: 16px;
 }
 
@@ -1629,7 +1629,7 @@ main .top-border > div.columns-wrapper:first-child {
   line-height: 1.75rem;
 }
 
-.dhls-container .blog main .columns h2{
+.dhls-container .blog main .columns h2 {
   font-size: 20px;
 }
 
@@ -1642,7 +1642,7 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.dhls-container .blog main .columns > div > div > p:not(.button-container){
+.dhls-container .blog main .columns > div > div > p:not(.button-container) {
   font-size: 16px;
 }
 
@@ -1713,7 +1713,7 @@ main .top-border > div.columns-wrapper:first-child {
     .picdiv
     p:not(picture)
     + p:last-child,.dhls-container 
-  .productdetail main .columns p.embed-vimeo ~ p{
+  .productdetail main .columns p.embed-vimeo ~ p {
   font-size: 14px;
 }
 
@@ -1730,7 +1730,7 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
-.dhls-container .productdetail main .columns p > strong{
+.dhls-container .productdetail main .columns p > strong {
   font-size: 18px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -1753,7 +1753,7 @@ main .top-border > div.columns-wrapper:first-child {
   font-weight: 500 !important;
 }
 
-.dhls-container .productdetail main .columns p{
+.dhls-container .productdetail main .columns p {
   font-size: 16px !important;
 }
 
@@ -1765,7 +1765,7 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.dhls-container .productdetail main .columns.columns-2-cols .h-full{
+.dhls-container .productdetail main .columns.columns-2-cols .h-full {
   font-size: 16px;
 }
 
@@ -1848,7 +1848,7 @@ main .section.product-hero-container {
   padding-right: 0.75rem;
 }
 
-.dhls-container .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div{
+.dhls-container .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
   font-size: 16px;
 }
 
@@ -1867,7 +1867,7 @@ main .section.product-hero-container {
   text-align: left;
 }
 
-.dhls-container .product-hero .hero-default-content > div .category-name{
+.dhls-container .product-hero .hero-default-content > div .category-name {
   font-size: 14px;
 }
 
@@ -1887,7 +1887,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .product-hero .hero-default-content > div ul,.dhls-container 
-  .product-hero .hero-default-content > div p{
+  .product-hero .hero-default-content > div p {
   font-size: 16px;
 }
 
@@ -1937,7 +1937,7 @@ main .section.product-hero-container {
   display: flex;
 }
 
-.dhls-container .product-hero .hero-default-content > div .brand-price p.start-price{
+.dhls-container .product-hero .hero-default-content > div .brand-price p.start-price {
   font-size: 32px !important;
 }
 
@@ -1953,7 +1953,7 @@ main .section.product-hero-container {
   justify-content: space-between;
 }
 
-.dhls-container .product-hero .hero-default-content > div .basic-info div > p:nth-child(1){
+.dhls-container .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
   font-size: 16px;
 }
 
@@ -2074,7 +2074,7 @@ main .section.product-hero-container {
   width: max-content;
 }
 
-.dhls-container .product-hero .vertical-gallery-container .view-more{
+.dhls-container .product-hero .vertical-gallery-container .view-more {
   font-size: 14px;
 }
 
@@ -2133,7 +2133,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .category .default-content-wrapper h2,.dhls-container 
-  .category .accordion-wrapper h2{
+  .category .accordion-wrapper h2 {
   font-size: 24px;
 }
 
@@ -3319,7 +3319,7 @@ main .section.top-border {
 /* stylelint-disable selector-type-no-unknown */
 
 @media (min-width: 640px) {
-  .dhls-container .sm\:text-sm{
+  .dhls-container .sm\:text-sm {
     font-size: 14px !important;
   }
 }
@@ -3334,7 +3334,7 @@ main .section.top-border {
   padding-right: 0.75rem;
 }
 
-.dhls-container .productdetail main .columns.columns-2-cols .\[\&_ul\>li\>a\]\:h-full ul>li>a{
+.dhls-container .productdetail main .columns.columns-2-cols .\[\&_ul\>li\>a\]\:h-full ul>li>a {
   font-size: 16px;
 }
 
