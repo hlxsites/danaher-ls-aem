@@ -46,39 +46,32 @@ export default function decorate(block) {
     return acc;
   }, {});
 
-  // Format publish date only if it exists and is valid
-  let formattedDate = '';
-  if (articleInfo.publishDate) {
-    const date = new Date(articleInfo.publishDate);
-    if (!isNaN(date)) {
-      formattedDate = date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-      });
-    }
-    else {
-      // If invalid date, clear it
-      articleInfo.publishDate = '';
-    }
-  }
-  articleInfo.publishDate = formattedDate;
-
-  // Clear existing paragraphs before re-adding with data attributes and content
+  // Clear existing paragraphs before rebuilding
   infoBlock.innerHTML = '';
 
   // Rebuild paragraphs with data-aue-prop and updated content
   for (const [prop, value] of Object.entries(articleInfo)) {
     const p = document.createElement('p');
     p.setAttribute('data-aue-prop', prop);
-    p.textContent = value;
+
+    if (prop === 'publishDate' && value) {
+      const date = new Date(value);
+      if (!isNaN(date)) {
+        // Format the publish date nicely
+        p.textContent = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+        });
+      } else {
+        p.textContent = value; // fallback if invalid date
+      }
+    } else {
+      p.textContent = value;
+    }
+
     infoBlock.appendChild(p);
   }
-
-  if (paragraphs[3]) {
-    paragraphs[3].textContent = formattedDate;
-  }
-
 
   // Append block to the section if not already appended
   const section = main.querySelector('section');
