@@ -60,9 +60,7 @@
             "component": "date-time",
             "valueType": "date",
             "name": "publishDate",
-            "label": "Date", 
-            "displayFormat": null,
-            "valueFormat": null,
+            "label": "Date",
             "value": ""
            },
            {
