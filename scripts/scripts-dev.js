@@ -905,24 +905,38 @@ function loadUTMprams() {
 
 async function designPdp() {
   const main = document.querySelector('main');
-  const sections = Array.from(main.querySelectorAll('.section'));
 
-  const heroSection = sections[1];
+  // Get only the meaningful .section elements (with more specific class names)
+  const sections = Array.from(main.querySelectorAll('.section')).filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
 
-  const flexWrapper = div({ class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto' });
+  const heroSection = sections.find((sec) => sec.classList.contains('pdp-hero-container'));
 
-  const tabsWrapper = div({ class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10' });
-  const restWrapper = div({ class: 'tabs-right-parent border-l border-gray-200 flex-1' });
-  sections.slice(2).forEach((section) => {
+  const flexWrapper = div({
+    class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto',
+  });
+
+  const tabsWrapper = div({
+    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
+  });
+
+  const restWrapper = div({
+    class: 'tabs-right-parent border-l border-gray-200 flex-1',
+  });
+
+  sections.forEach((section) => {
+    if (section === heroSection) return; // Skip hero
+
     if (section.classList.contains('pdp-page-tabs-container')) {
       tabsWrapper.appendChild(section);
     } else {
       restWrapper.appendChild(section);
     }
   });
+
   flexWrapper.appendChild(tabsWrapper);
   flexWrapper.appendChild(restWrapper);
-  heroSection.after(flexWrapper);
+
+  heroSection?.after(flexWrapper);
 }
 /**
  * Loads everything that doesn't need to be delayed.
