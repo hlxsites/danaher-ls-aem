@@ -51,7 +51,7 @@ export default function decorate(block) {
   if (articleInfo.publishDate) {
     date = new Date(articleInfo.publishDate);
   } else {
-    date = new Date();
+    date = null;
   }
 
   const formattedDate = date.toLocaleDateString('en-US', {
