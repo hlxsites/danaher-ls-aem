@@ -8,17 +8,33 @@ export default function decorate(block) {
   // Add column count class
   block.classList.add(`columns-${cols.length}-cols`);
 
-  // Clean slate: reset any layout on the wrapper
+  // Create wrapper layout
   const wrapper = div({
     class: 'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
   });
 
-  // Wrap the block's first child with new layout
   const [leftCol, rightCol] = cols;
 
-  // === TEXT COLUMN ===
-  const textCol = div({ class: 'h-full w-full lg:w-1/2 md:pr-16' });
+  // Determine ratio classes
+  let leftWidth = 'lg:w-1/2';
+  let rightWidth = 'lg:w-1/2';
 
+  if (sectionDiv.classList.contains('thirtyseventy')) {
+    leftWidth = 'lg:w-1/3';
+    rightWidth = 'lg:w-2/3';
+  } else if (sectionDiv.classList.contains('seventythirty')) {
+    leftWidth = 'lg:w-2/3';
+    rightWidth = 'lg:w-1/3';
+  } else if (sectionDiv.classList.contains('twentyfiveseventyfive')) {
+    leftWidth = 'lg:w-1/4';
+    rightWidth = 'lg:w-3/4';
+  } else if (sectionDiv.classList.contains('seventyfivetwentyfive')) {
+    leftWidth = 'lg:w-3/4';
+    rightWidth = 'lg:w-1/4';
+  }
+
+  // === TEXT COLUMN ===
+  const textCol = div({ class: `h-full w-full ${leftWidth} md:pr-16` });
   const textInner = leftCol.querySelector('div');
   if (textInner) textCol.append(...textInner.children);
 
@@ -34,7 +50,7 @@ export default function decorate(block) {
 
   // === IMAGE COLUMN ===
   const imageCol = div({
-    class: 'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56',
+    class: `columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
   });
 
   const picture = rightCol.querySelector('picture');
