@@ -14,19 +14,17 @@ export default function decorate(block) {
   ];
   innerContent.classList.add(...classes);
 
-  // Find wrapper and infoBlock
   const wrapper = document.querySelector('.article-info-new-wrapper');
   if (!wrapper) return;
 
   let infoBlock = wrapper.querySelector('.article-info-new');
   if (!infoBlock) {
-    // Create infoBlock div if missing
     infoBlock = document.createElement('div');
     infoBlock.className = 'article-info-new';
     wrapper.appendChild(infoBlock);
   }
 
-  // Define expected properties in order with example default empty values
+  // Define expected properties
   const articleInfoDefaults = {
     authorName: '',
     authorTitle: '',
@@ -36,22 +34,20 @@ export default function decorate(block) {
     readingTime: '',
   };
 
-  // Extract current <p> elements text to populate values if present
-  const existingParagraphs = infoBlock.querySelectorAll('p');
-  const existingTexts = Array.from(existingParagraphs).map(p => p.textContent.trim());
+  // Extract current property values from <p data-aue-prop="">
+  const propertyEls = infoBlock.querySelectorAll('[data-aue-prop]');
+  const articleInfo = { ...articleInfoDefaults };
 
-  // Fill articleInfo from existing paragraphs if possible
-  const articleInfo = Object.keys(articleInfoDefaults).reduce((acc, prop, i) => {
-    acc[prop] = existingTexts[i] || articleInfoDefaults[prop];
-    return acc;
-  }, {});
+  propertyEls.forEach((el) => {
+    const prop = el.getAttribute('data-aue-prop');
+    articleInfo[prop] = el.textContent.trim();
+  });
 
-  // Format publish date
+  // Parse and format publishDate
   let rawDate = articleInfo.publishDate;
   let date = new Date(rawDate);
   if (isNaN(date.getTime())) {
-    // fallback to today's date if parsing failed
-    date = new Date();
+    date = new Date(); // fallback
   }
 
   const formattedDate = date.toLocaleDateString('en-US', {
@@ -60,13 +56,13 @@ export default function decorate(block) {
     day: '2-digit',
   });
 
-  // Overwrite articleInfo.publishDate with formatted one for display
-  articleInfo.publishDate = formattedDate;
+  // Keep the raw publish date in the property for AEM binding
+  articleInfo.publishDate = rawDate; // NOT formatted
 
-  // Clear existing content before rebuilding
+  // Clear content
   infoBlock.innerHTML = '';
 
-  // Rebuild each <p> with correct data-aue-prop and content
+  // Rebuild <p> tags with properties
   for (const [prop, value] of Object.entries(articleInfo)) {
     const p = document.createElement('p');
     p.setAttribute('data-aue-prop', prop);
@@ -74,9 +70,17 @@ export default function decorate(block) {
     p.setAttribute('data-aue-label', prop);
     p.textContent = value;
     infoBlock.appendChild(p);
+
+    // 👇 Add formatted display for publishDate right after property
+    if (prop === 'publishDate') {
+      const display = document.createElement('p');
+      display.className = 'publish-date-display';
+      display.textContent = formattedDate;
+      infoBlock.appendChild(display);
+    }
   }
 
-  // Append block to the section if not already appended
+  // Append block to section if not already
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
