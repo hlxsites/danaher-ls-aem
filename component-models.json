@@ -278,7 +278,7 @@
       },
       {
         "component": "date-time",
-        "valueType": "date",
+        "valueType": "date-time",
         "name": "publishDate",
         "label": "Date",
         "displayFormat": null,
