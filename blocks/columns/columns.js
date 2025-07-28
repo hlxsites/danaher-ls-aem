@@ -7,6 +7,7 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
+
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
       if (window.location.pathname.includes('/us/en/blog-eds/') || window.location.pathname.includes('/us/en/news-eds/')) {
@@ -28,11 +29,13 @@ export default function decorate(block) {
       }
     }
   });
+
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
     if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
+
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
   });
@@ -117,7 +120,8 @@ export default function decorate(block) {
       }
       if (block.className.includes('columns-2-cols')) {
         if (window.location.pathname.includes('/us/en/blog-eds/') || window.location.pathname.includes('/us/en/news-eds/')) {
-          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
+          // FIXED: Changed lg:flex-col-reverse to lg:flex-row here
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-row justify-items-center'.split(' '));
         } else {
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
         }
