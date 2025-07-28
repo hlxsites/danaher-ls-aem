@@ -24,7 +24,7 @@ export default function decorate(block) {
   const authorNameEl = infoBlock.querySelector('[data-aue-prop="authorName"]');
   const authorTitleEl = infoBlock.querySelector('[data-aue-prop="authorTitle"]');
   const imageEl = infoBlock.querySelector('[data-aue-prop="image"]');
-  const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
+  // const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
   const articleOpcoEl = infoBlock.querySelector('[data-aue-prop="articleOpco"]');
   const readingTimeEl = infoBlock.querySelector('[data-aue-prop="readingTime"]');
 
