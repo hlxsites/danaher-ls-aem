@@ -48,8 +48,22 @@ export default function decorate(block) {
 
   articleInfo.publishDate = formattedDate;
 
+  // Set formatted date text in the paragraph
   if (paragraphs[3]) {
     paragraphs[3].textContent = formattedDate;
+  }
+
+  // ALSO set the value of the input if present, so the form saves the date
+  const publishDateDiv = infoBlock.querySelector('[data-aue-prop="publishDate"]');
+  if (publishDateDiv) {
+    const inputField = publishDateDiv.querySelector('input');
+    if (inputField) {
+      // Convert formattedDate back to yyyy-mm-dd for input[type="date"] value format
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      inputField.value = `${yyyy}-${mm}-${dd}`;
+    }
   }
 
   // Append block to the section
@@ -57,11 +71,4 @@ export default function decorate(block) {
   if (section && !section.contains(block)) {
     section.appendChild(block);
   }
-}
-
-export function initArticleInfoNew() {
-  // Run decorate for all .article-info-new blocks found anywhere on page
-  document.querySelectorAll('.article-info-new').forEach((block) => {
-    decorate(block);
-  });
 }
