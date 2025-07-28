@@ -281,6 +281,8 @@
         "valueType": "date",
         "name": "publishDate",
         "label": "Date",
+        "displayFormat": null,
+        "valueFormat": null,
         "value": ""
       },
       {
