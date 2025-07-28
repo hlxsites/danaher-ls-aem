@@ -1,27 +1,17 @@
 import { div } from '../../scripts/dom-builder.js';
 
-// Utility: Find the innermost container that has real columns (2+ direct DIVs)
-function findRealColumnContainer(el) {
-  const queue = [el];
-  while (queue.length) {
-    const current = queue.shift();
-    const children = [...current.children];
-    if (children.length >= 2 && children.every(c => c.tagName === 'DIV')) {
-      return current;
-    }
-    queue.push(...children);
-  }
-  return el;
-}
-
+// Final, production-safe decorate function
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  const columnContainer = findRealColumnContainer(block);
-  const cols = [...columnContainer.children].filter((el) => el.tagName === 'DIV');
-  block.classList.add(`columns-${cols.length}-cols`);
+
+  // ✅ SEMANTIC COLUMN DETECTION (AEM-safe)
+  const columnNodes = block.querySelectorAll('[data-aue-type="column"]');
+  const columnCount = columnNodes.length;
+  block.classList.add(`columns-${columnCount}-cols`);
+
   const imageAspectRatio = 1.7778;
 
-  columnContainer.querySelectorAll('div').forEach((ele, index) => {
+  block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
       if (window.location.pathname.includes('/us/en/blog-eds/') || window.location.pathname.includes('/us/en/news-eds/')) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
@@ -75,7 +65,7 @@ export default function decorate(block) {
     });
   }
 
-  cols.forEach((row) => {
+  columnNodes.forEach((row) => {
     const img = row.querySelector('img');
     if (img) {
       img.classList.add('w-full');
@@ -109,11 +99,9 @@ export default function decorate(block) {
       svg?.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
     });
 
-    if (block.className.includes('features-card-left')) {
+    if (block.classList.contains('features-card-left')) {
       const pTags = row.querySelectorAll('p');
-      let cardDiv;
-      let leftDiv;
-      let rightDiv;
+      let cardDiv, leftDiv, rightDiv;
       pTags.forEach((element) => {
         if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
           cardDiv = div({ class: 'card' });
@@ -128,20 +116,20 @@ export default function decorate(block) {
       });
     }
 
-    if (block.className.includes('columns-2-cols')) {
+    if (block.classList.contains('columns-2-cols')) {
       if (window.location.pathname.includes('/us/en/blog-eds/') || window.location.pathname.includes('/us/en/news-eds/')) {
-        columnContainer.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-row justify-items-center'.split(' '));
+        row.parentElement?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-row justify-items-center'.split(' '));
       } else {
-        columnContainer.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
+        row.parentElement?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
       }
 
       row.querySelectorAll('p').forEach((element) => {
-        if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
+        if (element.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
           element.parentElement?.classList.add('picdiv');
         }
       });
-    } else if (block.className.includes('columns-3-cols')) {
-      columnContainer.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
+    } else if (block.classList.contains('columns-3-cols')) {
+      row.parentElement?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
       block.querySelector('h4')?.classList.add('font-bold');
     }
 
@@ -150,7 +138,7 @@ export default function decorate(block) {
         item.parentElement.classList.add('link', 'pb-8');
         item.textContent += ' ->';
         item.classList.add(...'text-sm font-bold'.split(' '));
-        if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+        if (sectionDiv.classList.contains('text-white')) item.classList.add('text-white');
         else item.classList.add('text-danaherpurple-500');
       }
     });
