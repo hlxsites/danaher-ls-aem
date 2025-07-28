@@ -613,8 +613,8 @@ async function decorateTemplates(main) {
   try {
     const template = toClassName(getMetadata('template'));
     const templates = Object.keys(TEMPLATE_LIST);
-    if (templates.includes(template)) {
-      const templateObj = TEMPLATE_LIST[template];
+    if (true) {
+      const templateObj = TEMPLATE_LIST.pdp;
       const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
       const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
       const decorator = await Promise.all([
@@ -909,7 +909,7 @@ async function designPdp() {
 
   const heroSection = sections[1];
 
-  const flexWrapper = div({  class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto'  });
+  const flexWrapper = div({ class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto' });
 
   const tabsWrapper = div({ class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10' });
   const restWrapper = div({ class: 'tabs-right-parent border-l border-gray-200 flex-1' });

@@ -4,19 +4,19 @@ import {
   span,
   input,
   button,
+  a,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization,
   getCommerceBase,
   getProductDetails,
 } from '../../scripts/commerce.js';
-import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { showPreLoader } from '../../scripts/common-utils.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -166,31 +166,6 @@ export default async function decorate(block) {
       class: 'self-stretch flex flex-col justify-start items-start gap-2',
     },
   );
-  const skudiv = div(
-    {
-      class: 'self-stretch inline-flex justify-start items-start gap-2',
-    },
-    div(
-      {
-        class: 'w-[19rem] flex justify-start items-center gap-1',
-      },
-      div(
-        {
-          class: 'pr-1 py-1 flex justify-center items-center gap-2.5',
-        },
-        div(
-          {
-            class:
-                'text-center justify-start text-violet-900 text-lg font-normal',
-          },
-
-        ),
-      ),
-    ),
-  );
-
-  headingDiv.append(skudiv);
-  console.log('headingDiv', headingDiv);
   const itemInfoDiv = div(
     {
       class: 'self-stretch flex flex-col justify-start items-start gap-4',
@@ -253,7 +228,7 @@ export default async function decorate(block) {
       }),
       div(
         {
-          class: 'w-24 inline-flex flex-col justify-center gap-2 items-start',
+          class: 'inline-flex flex-col justify-center gap-2 items-start',
         },
         div(
           {
@@ -265,7 +240,7 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold ',
           },
-          productInfo?.data?.availability ? 'EA' : 'EA',
+          productInfo?.data?.availability ? productInfo?.data?.availability : '',
         ),
       ),
 
@@ -288,9 +263,7 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold ',
           },
-          productInfo?.data?.packingUnit === ''
-            ? 'EA'
-            : productInfo?.data?.packingUnit,
+          productInfo?.data?.packingUnit ? `${productInfo?.data?.packingUnit} /Bundle` : '',
         ),
       ),
 
@@ -361,187 +334,170 @@ export default async function decorate(block) {
   );
 
   const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+  let rfqParent;
   const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-  addCartBtnEl.classList.add(
-    ...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(
-      ' ',
-    ),
-  );
+  if (addCartBtnEl) {
+    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+  }
   if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
-    let rfqParent;
-    rfqEl.classList.add(
-      ...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(
-        ' ',
-      ),
-    );
-    if (
-      result?.raw?.objecttype === 'Product'
-        || result?.raw?.objecttype === 'Bundle'
-    ) {
+    rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+    if (result?.raw?.objecttype === 'Product' || result?.raw?.objecttype === 'Bundle') {
       rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
       rfqParent.addEventListener('click', () => {
         addToQuote(result);
       });
     } else {
-      rfqParent = p(
-        { class: 'show-modal-btn lg:w-55 cursor-pointer' },
-        rfqEl,
-      );
-    }
-
-    const modalInput = input({
-      id: productInfo?.data?.lineItemId,
-      class:
-          'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
-      type: 'number',
-      min: productInfo?.data?.minOrderQuantity,
-      max:
-          productInfo?.data?.maxOrderQuantity == 0
-            ? 99
-            : productInfo?.data?.maxOrderQuantity,
-      name: 'item-quantity',
-      value: 1,
-    });
-
-    const buyButton = div(
-      {
-        class: 'flex justify-start items-start gap-3',
-      },
-      button(
-        {
-          class:
-              'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-          sku: productInfo?.data?.sku,
-          productName: productInfo?.data?.productName,
-          minOrderQuantity: productInfo?.data?.minOrderQuantity,
-          manufacturer: productInfo?.data?.manufacturer,
-          maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
-          price: productInfo?.data?.salePrice?.value,
-          quantity: 0,
-        },
-        'Buy Now',
-      ),
-    );
-    let enteredValue = 0;
-    modalInput.addEventListener('change', (event) => {
-      // const selectedDiv = document.getElementById
-      // (productInfo.data.lineItemId); // or any div reference
-      const inputElement = document.getElementById(productInfo?.data?.lineItemId);
-      const productItem = inputElement.parentElement;
-      console.log('productItem', inputElement);
-      enteredValue = event.target.value;
-      console.log('enteredValue', enteredValue);
-      if (enteredValue < Number(inputElement.min)) {
-        console.log('minnn');
-        productItem.style.border = '2px solid red';
-        alert(
-          `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-        );
-      } else if (enteredValue > Number(input.max)) {
-        console.log('max');
-        productItem.style.border = '2px solid red';
-        alert(
-          `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-        );
-      } else {
-        productItem.style.border = '';
-        // modifyCart("quantity-added", input, event.target.value);
-      }
-      // modifyCart("quantity-added", event.target.value);
-    });
-    buyButton.addEventListener('click', async (event) => {
-      showPreLoader();
-      const item = event.target.attributes;
-      if (enteredValue == 0) enteredValue = 1;
-      item.enteredValue = Number(enteredValue);
-      console.log('item  id', item);
-    });
-    const addToCart = div(
-      {
-        class: 'self-stretch inline-flex justify-start items-end gap-3',
-      },
-      modalInput,
-      buyButton,
-    );
-    decorateIcons(addToCart);
-    // defaultContent.append(rfqParent);
-    const buttonTab = div(
-      {
-        class:
-            'w-full self-stretch inline-flex justify-start items-end gap-3',
-      },
-      productInfo?.data?.salePrice?.value != 0
-          && result?.raw?.objecttype === 'Product'
-        ? addToCart
-        : '',
-      rfqParent,
-    );
-
-    const priceInfoDiv = div({
-      class: 'self-stretch flex flex-col justify-start items-start gap-5',
-    });
-    if (
-      result?.raw?.objecttype === 'Product'
-      || result?.raw?.objecttype === 'Bundle'
-    ) {
-      priceInfoDiv.append(infoTab);
-      priceInfoDiv.append(shipInfo);
-    }
-
-    priceInfoDiv.append(buttonTab);
-    defaultContent.append(priceInfoDiv);
-    /* brandname checking and displaying buy now btn */
-
-    const brandName = result?.raw?.opco || null;
-    const showskupricelistusd = result?.raw.listpriceusd;
-
-    const currncyFormat = Number(showskupricelistusd);
-
-    const brandButton = document.createElement('button');
-    brandButton.textContent = 'Buy Now on abcam.com';
-    brandButton.classList.add(
-      ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
-        ' ',
-      ),
-    );
-
-    const brandURL = result?.raw?.externallink
-      ? `${result.raw.externallink}?utm_source=dhls_website`
-      : null;
-    brandButton.addEventListener('click', () => {
-      window.open(brandURL, '_blank');
-    });
-
-    /* eslint eqeqeq: "off" */
-    if (
-      showskupricelistusd
-        && brandName === 'Abcam'
-        && showskupricelistusd != ''
-    ) {
-      const brandStartPrice = div(
-        { class: 'brand-price mt-4 flex divide-x gap-4' },
-        div(
-          p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
-          p(
-            { class: 'start-price leading-none' },
-            `${formatMoney(currncyFormat)}`,
-          ),
-        ),
-        div(
-          {
-            class:
-                'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start',
-          },
-          brandButton,
-        ),
-      );
-      defaultContent.append(brandStartPrice);
-      rfqParent.remove();
+      rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
     }
   }
 
+  const modalInput = input({
+    id: productInfo?.data?.lineItemId || 'default-id',
+    class: 'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
+    type: 'number',
+    min: productInfo?.data?.minOrderQuantity,
+    max: productInfo?.data?.maxOrderQuantity == 0 ? 99 : productInfo?.data?.maxOrderQuantity,
+    name: 'item-quantity',
+    value: 1,
+  });
+
+  const buyButton = div(
+    {
+      class: 'flex justify-start items-start gap-3',
+    },
+    button(
+      {
+        class:
+              'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+        sku: productInfo?.data?.sku,
+        productName: productInfo?.data?.productName,
+        minOrderQuantity: productInfo?.data?.minOrderQuantity,
+        manufacturer: productInfo?.data?.manufacturer,
+        maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
+        price: productInfo?.data?.salePrice?.value,
+        quantity: 0,
+      },
+      'Buy Now',
+    ),
+  );
+  let enteredValue = 0;
+  modalInput.addEventListener('change', (event) => {
+    // const selectedDiv = document.getElementById
+    // (productInfo.data.lineItemId); // or any div reference
+    const inputElement = document.getElementById(productInfo?.data?.lineItemId);
+    const productItem = inputElement.parentElement;
+    console.log('productItem', inputElement);
+    enteredValue = event.target.value;
+    console.log('enteredValue', enteredValue);
+    if (enteredValue < Number(inputElement.min)) {
+      console.log('minnn');
+      productItem.style.border = '2px solid red';
+      alert(
+        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+      );
+    } else if (enteredValue > Number(input.max)) {
+      console.log('max');
+      productItem.style.border = '2px solid red';
+      alert(
+        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+      );
+    } else {
+      productItem.style.border = '';
+      // modifyCart("quantity-added", input, event.target.value);
+    }
+    // modifyCart("quantity-added", event.target.value);
+  });
+  buyButton.addEventListener('click', async (event) => {
+    showPreLoader();
+    const item = event.target.attributes;
+    if (enteredValue == 0) enteredValue = 1;
+    item.enteredValue = Number(enteredValue);
+    console.log('item  id', item);
+  });
+  const addToCart = div(
+    {
+      class: 'self-stretch inline-flex justify-start items-end gap-3',
+    },
+    modalInput,
+    buyButton,
+  );
+  decorateIcons(addToCart);
+  // defaultContent.append(rfqParent);
+  const buttonTab = div(
+    {
+      class:
+            'w-full self-stretch inline-flex justify-start items-end gap-3',
+    },
+    ...(productInfo?.data?.salePrice?.value != 0 && result?.raw?.objecttype === 'Product' ? [addToCart] : []),
+    ...(rfqParent ? [rfqParent] : []),
+  );
+
+  const priceInfoDiv = div({
+    class: 'self-stretch flex flex-col justify-start items-start gap-5',
+  });
+  {
+    priceInfoDiv.append(infoTab);
+    priceInfoDiv.append(shipInfo);
+  }
+
+  priceInfoDiv.append(buttonTab);
+  if (
+    result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle'
+  ) {
+    defaultContent.append(priceInfoDiv);
+  }
+  /* brandname checking and displaying buy now btn */
+
+  const brandName = result?.raw?.opco || null;
+  const showskupricelistusd = result?.raw.listpriceusd;
+
+  const currncyFormat = Number(showskupricelistusd);
+
+  const brandButton = document.createElement('button');
+  brandButton.textContent = 'Buy Now on abcam.com';
+  brandButton.classList.add(
+    ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
+      ' ',
+    ),
+  );
+
+  const brandURL = result?.raw?.externallink
+    ? `${result.raw.externallink}?utm_source=dhls_website`
+    : null;
+  brandButton.addEventListener('click', () => {
+    window.open(brandURL, '_blank');
+  });
+
+  /* eslint eqeqeq: "off" */
+  if (
+    showskupricelistusd
+        && brandName === 'Abcam'
+        && showskupricelistusd != ''
+  ) {
+    const brandStartPrice = div(
+      { class: 'brand-price mt-4 flex divide-x gap-4' },
+      div(
+        p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
+        p(
+          { class: 'start-price leading-none' },
+          `${formatMoney(currncyFormat)}`,
+        ),
+      ),
+      div(
+        {
+          class:
+                'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start',
+        },
+        brandButton,
+      ),
+    );
+    defaultContent.append(brandStartPrice);
+    if (rfqParent) rfqParent.remove();
+  }
+
   const infoDiv = div({
-    clas: '',
+    class: '',
   });
   const globeImg = div(
     {
@@ -562,7 +518,7 @@ export default async function decorate(block) {
     }),
   );
   const externalButton = div(
-    { class: 'flex justify-center items-center text-base font-extralight leading-snug' },
+    { class: 'flex justify-center items-center text-base font-extralight leading-snug gap-3' },
     `To learn more visit ${result?.raw.opco} `,
     externalLink,
   );
@@ -584,6 +540,21 @@ export default async function decorate(block) {
   decorateIcons(info);
   infoDiv.prepend(info);
 
+  const quoteButton = button(
+    {
+      class:
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+    },
+    div(
+      {
+        class: 'inherit text-base font-medium leading-snug',
+      },
+      'Request a Quote',
+    ),
+  );
+
+  decorateModals(quoteButton);
+
   const collectionButton = div(
     {
       class: 'w-9 h-9',
@@ -591,33 +562,6 @@ export default async function decorate(block) {
     span({
       class:
           'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
-  );
-  const rectangleButton = div(
-    {
-      class: 'w-56 h-[1rem]',
-    },
-    span({
-      class:
-          'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
-  );
-  const chevronButton = div(
-    {
-      class: 'w-full inline-flex justify-center items-center',
-    },
-    span({
-      class:
-          'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
-  );
-  const clipBoard = div(
-    {
-      class: 'w-9 h-9 relative overflow-hidden',
-    },
-    span({
-      class:
-          'icon icon-ClipboardList w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const categoryLink = div(
@@ -675,11 +619,8 @@ export default async function decorate(block) {
 
   const categoryLinkSku = div(
     {
-      class: 'inline-flex flex-col justify-start',
+      class: 'inline-flex flex-col justify-start py-3',
     },
-    // div({
-    //     class: "w-full inline-flex flex-col"
-    //   },
     div(
       {
         class:
@@ -687,7 +628,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'w-9 h-9 relative overflow-hidden',
+          class: 'w-9 h-9 relative',
         },
         span({
           class:
@@ -711,6 +652,15 @@ export default async function decorate(block) {
   categoryLinkSku.addEventListener('click', () => {
     window.open(externalURL, '_blank');
   });
+
+  const clipBoard = div(
+    {
+      class: 'w-9 h-9 relative',
+    },
+    span({
+      class: 'icon icon-ClipboardList w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
+  );
   const bundleLink = div(
     {
       class: 'w-full inline-flex flex-col group',
@@ -753,7 +703,6 @@ export default async function decorate(block) {
       ),
     ),
   );
-  console.log('defaultContent', result?.raw?.objecttype, result?.raw?.objecttype === 'Bundle');
 
   // decorateIcons(bundleLink);
   const bundleTab = div(
@@ -763,17 +712,14 @@ export default async function decorate(block) {
     result?.raw?.objecttype === 'Bundle' ? bundleLink : categoryLink,
 
   );
-  console.log('bundle tab', bundleTab);
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
     const sections = main.querySelectorAll('.section.page-tab');
     const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
     if (tabSections) {
-      console.log('tabSections', tabSections);
       const currentTab = window.location.hash?.replace('#', '')
       || tabSections[0].getAttribute('aria-labelledby');
-      console.log('current tab: ', tabSections[0].getAttribute('aria-labelledby'));
       sections.forEach((section) => {
         section.style.paddingTop = '0px';
         if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -785,10 +731,54 @@ export default async function decorate(block) {
       });
     }
   });
-  console.log('bundle tab after', bundleTab);
   // categoryLink.addEventListener("click", () => {
   //   window.open(externalURL, "_blank");
   // });
+
+  const pricingQuoteButton = div(
+    {
+      class:
+              'px-4 py-3 inline-flex justify-start items-center gap-3',
+    },
+    input({
+      type: 'number',
+      value: '1',
+      min: '1',
+      class:
+              'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+    }),
+    a(
+      {
+        class:
+                'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+      },
+      span(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Buy Now',
+      ),
+    ),
+    div(
+      {
+        class:
+                'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+      },
+      span(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Quote',
+      ),
+    ),
+  );
+  if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
+    defaultContent.append(quoteButton);
+  }
+
+  if (result?.raw?.objecttype === 'Product') {
+    defaultContent.append(pricingQuoteButton);
+  }
 
   if (result?.raw?.objecttype === 'Family') {
     defaultContent.append(
@@ -869,7 +859,7 @@ export default async function decorate(block) {
   };
 
   const categoriesDiv = div({
-    class: 'md:w-[692px] flex-wrap md:px-4 py-4 inline-flex justify-start items-start gap-2',
+    class: 'md:w-[692px] flex-wrap py-4 inline-flex justify-start items-start gap-2',
   });
   result?.raw?.categories?.forEach((category) => {
     categoriesDiv.append(categoryDiv(category));
