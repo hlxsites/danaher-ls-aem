@@ -5,23 +5,18 @@ export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
 
+  // Add column count class
   block.classList.add(`columns-new-${cols.length}-cols`);
 
+  // Create wrapper layout
   const wrapper = div({
-    class: 'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
+    class:
+      'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
   });
 
   const [leftCol, rightCol] = cols;
 
-  // Detect and unwrap article-info-new if it's inside a <p>
-  leftCol.querySelectorAll('p').forEach((p) => {
-    const articleBlock = p.querySelector('.article-info-new');
-    if (articleBlock) {
-      p.replaceWith(...p.childNodes); // unwrap
-    }
-  });
-
-  // Determine ratio
+  // Determine ratio classes
   let leftWidth = 'lg:w-1/2';
   let rightWidth = 'lg:w-1/2';
 
@@ -50,14 +45,43 @@ export default function decorate(block) {
   const textInner = leftCol.querySelector('div');
   if (textInner) textCol.append(...textInner.children);
 
-  // Call decorate for any article-info-new blocks
-  textCol.querySelectorAll('.article-info-new').forEach((block) => {
-    decorateArticleInfo(block);
+  // Inject default article-info-new data if missing
+  const articleBlock = textCol.querySelector('.article-info-new');
+  if (articleBlock && articleBlock.children.length === 0) {
+    const today = new Date();
+    const isoDate = today.toISOString(); // This will be formatted by decorateArticleInfo
+
+    articleBlock.innerHTML = `
+      <p>John Smith</p>
+      <p>Editor</p>
+      <p>image.jpg</p>
+      <p>${isoDate}</p>
+      <p>Danaher</p>
+      <p>2 mins</p>
+    `;
+  }
+
+  // Call decorate from article-info-new
+  if (articleBlock) {
+    decorateArticleInfo(articleBlock);
+  }
+
+  // Headline styling
+  textCol.querySelectorAll('h1, h2').forEach((h) => {
+    h.classList.add(...'pb-4 text-danahergray-900 text-4xl font-semibold'.split(' '));
+  });
+
+  // Button styling
+  textCol.querySelectorAll('a[title="Button"]').forEach((a) => {
+    a.classList.add(
+      ...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(' ')
+    );
   });
 
   // === IMAGE COLUMN ===
   const imageCol = div({
-    class: `columns-new-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
+    class:
+      `columns-new-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
   });
 
   const picture = rightCol.querySelector('picture');
@@ -69,32 +93,10 @@ export default function decorate(block) {
     imageCol.append(picture);
   }
 
-  // Format date if present
-  const publishDateElem = textCol.querySelector('[data-aue-prop="publishDate"]');
-  if (publishDateElem) {
-    const rawDate = publishDateElem.textContent.trim();
-    const parsedDate = new Date(rawDate);
-    if (!isNaN(parsedDate)) {
-      const formatted = parsedDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-      });
-      publishDateElem.textContent = formatted;
-    }
-  }
-
-  // Apply styles
-  textCol.querySelectorAll('h1, h2').forEach((h) => {
-    h.classList.add(...'pb-4 text-danahergray-900 text-4xl font-semibold'.split(' '));
-  });
-
-  textCol.querySelectorAll('a[title="Button"]').forEach((a) => {
-    a.classList.add(...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(' '));
-  });
-
-  // Final: clear and append wrapper
-  block.innerHTML = '';
+  // Append columns into wrapper
   wrapper.append(textCol, imageCol);
+
+  // Replace block content with new wrapper
+  block.textContent = '';
   block.append(wrapper);
 }
