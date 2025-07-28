@@ -316,7 +316,7 @@ export const createBasket = async () => {
  Function to validate basket
   :::::::::::::::::::::::::::
 */
-export const validateBasket = async (vaildateModule) => {
+export const validateBasket = async (validateData) => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -326,37 +326,35 @@ export const validateBasket = async (vaildateModule) => {
     'Authentication-Token': authenticationToken.access_token,
   });
   const url = `${baseURL}/baskets/current/validations`;
-  let validateData = {};
-  if (vaildateModule === 'address') {
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'InvoiceAddress',
-        'ShippingAddress',
-        'Addresses',
-      ],
-    };
-  }
-  if (vaildateModule === 'shipping') {
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'InvoiceAddress',
-        'ShippingAddress',
-        'Addresses',
-        'Shipping',
-      ],
-    };
-  }
-  if (vaildateModule === 'payment') {
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'Payment',
-      ],
-    };
-  }
   const data = JSON.stringify(validateData);
+  try {
+    return await postApiData(url, data, defaultHeader);
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+:::::::::::::::::::::::::::
+ Function to submit Order
+  :::::::::::::::::::::::::::
+*/
+export const submitOrder = async (basket) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+  const data = JSON.stringify({
+    basket,
+    termsAndConditionsAccepted: true,
+  });
   try {
     return await postApiData(url, data, defaultHeader);
   } catch (error) {
@@ -1136,8 +1134,56 @@ export const taxExemptModal = () => {
 *
  */
 export const changeStep = async (step) => {
+  showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
+  let validateTab = '';
+  if (activeTab === 'paymentMethods') {
+    validateTab = 'submitOrder';
+  } else {
+    validateTab = activeTab;
+  }
+  let validateData = '';
+  console.log('loading module: ', validateTab);
+
+  if (validateTab === 'shippingMethods') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+      ],
+    };
+  }
+  if (validateTab === 'paymentMethods') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+        'Shipping',
+      ],
+    };
+  }
+  if (validateTab === 'submitOrder') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'Payment',
+      ],
+    };
+  }
+  const validatingBasket = await validateBasket(validateData);
+  if (validatingBasket?.status === 'error') alert('validate basket');
+  if (validateTab === 'submitOrder') {
+    const getBasketForOrder = await getBasketDetails();
+    if (getBasketForOrder?.status === 'success') {
+      const submittingOrder = await submitOrder(getBasketForOrder?.data?.id);
+      console.log('submitting Order : ', submittingOrder);
+    }
+  }
   if (activeTab && activeTab === 'shippingMethods') {
     const getShippingNotesField = document.querySelector('#shippingNotes');
 
@@ -1283,6 +1329,7 @@ export const changeStep = async (step) => {
       proceedButton.setAttribute('data-activeTab', 'shippingAddress');
       proceedButton.textContent = 'Proceed to Shipping';
   }
+  removePreLoader();
   return {};
 };
 

@@ -69,8 +69,8 @@ export const mycart = async () => {
     id: 'myCartListContainer',
   });
   if (
-    basketDetail.status == 'error'
-    || basketDetail.data.totalProductQuantity == 0
+    basketDetail.status === 'error'
+    || basketDetail.data.totalProductQuantity === 0
   ) {
     if (myCartEmptyContainer.classList.contains('hidden')) {
       myCartEmptyContainer.classList.remove('hidden');
