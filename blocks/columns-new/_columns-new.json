@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Columns-New",
+      "title": "Columns",
       "id": "columns-new",
       "plugins": {
         "xwalk": {
