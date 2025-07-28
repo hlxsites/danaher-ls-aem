@@ -14,7 +14,7 @@ Function to update current basket details
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href = '/us/en/e-buy/login.html?ref=em1-checkout-payment-module';
+    window.location.href = '/us/en/e-buy/login';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({

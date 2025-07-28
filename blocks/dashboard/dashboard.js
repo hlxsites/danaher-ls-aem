@@ -77,7 +77,7 @@ export default async function decorate(block) {
       { class: 'w-full px-6 flex flex-col' },
       a(
         {
-          href: '/us/en/e-buy/cartlanding?ref=em1-checkout-payment-module',
+          href: '/us/en/e-buy/cartlanding',
           class:
             'w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },
