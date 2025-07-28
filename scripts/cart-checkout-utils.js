@@ -2365,14 +2365,15 @@ export async function updateCheckoutSummary() {
 export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
-    if (type == 'delete-item') {
+    if (type === 'delete-item') {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response == 'success') {
+      if (response === 'success') {
+        await updateCheckoutSummary();
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
@@ -2388,6 +2389,8 @@ export const cartItemsContainer = (cartItemValue) => {
               } Items`;
             },
           );
+
+          await updateCheckoutSummary();
         }
         removePreLoader();
       } else {
@@ -2402,7 +2405,8 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response == 'success') {
+      if (response === 'success') {
+        await updateCheckoutSummary();
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
