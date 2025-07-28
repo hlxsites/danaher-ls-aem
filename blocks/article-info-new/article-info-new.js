@@ -4,60 +4,65 @@ export default function decorate(block) {
   const innerContent = content?.querySelector('div');
   if (!innerContent) return;
 
-  innerContent.classList.add(
+  // Add layout classes
+  const classes = [
     'items-center',
     'flex',
     'justify-start',
     'my-4',
     'w-full',
     'col-span-2',
-  );
+  ];
+  innerContent.classList.add(...classes);
 
+  // Get wrapper and article info block
   const wrapper = document.querySelector('.article-info-new-wrapper');
   if (!wrapper) return;
 
   let infoBlock = wrapper.querySelector('.article-info-new');
-  if (!infoBlock) return;
+  if (!infoBlock) {
+    infoBlock = document.createElement('div');
+    infoBlock.className = 'article-info-new';
+    wrapper.appendChild(infoBlock);
+  }
 
-  // Get all props
-  const props = {
-    authorName: '',
-    authorTitle: '',
-    image: '',
-    publishDate: '',
-    articleOpco: '',
-    readingTime: '',
-  };
+  // Get all existing <p> elements
+  const paragraphs = infoBlock.querySelectorAll('p');
 
-  // Extract values from existing <p data-aue-prop>
-  Object.keys(props).forEach((prop) => {
-    const el = infoBlock.querySelector(`[data-aue-prop="${prop}"]`);
-    props[prop] = el?.textContent.trim() || '';
+  // Build articleInfo from existing paragraphs
+  const articleInfo = {};
+  paragraphs.forEach((p) => {
+    const prop = p.getAttribute('data-aue-prop');
+    if (prop) {
+      articleInfo[prop] = p.textContent.trim();
+    }
   });
 
-  // Format the publish date for display only (do not overwrite data-aue-prop)
-  const rawDate = props.publishDate;
-  const parsedDate = new Date(rawDate);
-  const formattedDate = isNaN(parsedDate)
-    ? ''
-    : parsedDate.toLocaleDateString('en-US', {
+  // Safely format publishDate for display, but keep original value
+  let formattedDate = '';
+  let rawDate = articleInfo.publishDate;
+
+  if (rawDate) {
+    const parsed = new Date(rawDate);
+    if (!isNaN(parsed)) {
+      formattedDate = parsed.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: '2-digit',
       });
-
-  // Add formatted date display (after the real property)
-  if (rawDate && !infoBlock.querySelector('.formatted-publish-date')) {
-    const display = document.createElement('p');
-    display.className = 'formatted-publish-date';
-    display.textContent = formattedDate;
-    const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
-    if (publishDateEl) {
-      publishDateEl.insertAdjacentElement('afterend', display);
     }
   }
 
-  // Append block to section if not already added
+  // Don't clear original properties — just append formatted display
+  const existingFormatted = infoBlock.querySelector('.formatted-publish-date');
+  if (!existingFormatted && formattedDate) {
+    const dateDisplay = document.createElement('p');
+    dateDisplay.className = 'formatted-publish-date';
+    dateDisplay.textContent = formattedDate;
+    infoBlock.appendChild(dateDisplay);
+  }
+
+  // Append block to section if not already present
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
