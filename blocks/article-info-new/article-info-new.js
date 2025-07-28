@@ -57,6 +57,10 @@ export default function decorate(block) {
         day: '2-digit',
       });
     }
+    else {
+      // If invalid date, clear it
+      articleInfo.publishDate = '';
+    }
   }
   articleInfo.publishDate = formattedDate;
 
