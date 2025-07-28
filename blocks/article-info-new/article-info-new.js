@@ -75,6 +75,11 @@ export default function decorate(block) {
     infoBlock.appendChild(p);
   }
 
+  if (paragraphs[3]) {
+    paragraphs[3].textContent = formattedDate;
+  }
+
+
   // Append block to the section if not already appended
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
