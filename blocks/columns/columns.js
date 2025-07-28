@@ -1,4 +1,4 @@
-import articleInfoNewDecorate from '../article-info-new/article-info-new.js';
+import { decorate as decorateArticleInfoNew } from '../article-info-new/article-info-new.js';
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -77,6 +77,6 @@ export default function decorate(block) {
   block.append(wrapper);
 
   wrapper.querySelectorAll('.article-info-new').forEach((articleBlock) => {
-    articleInfoNewDecorate(articleBlock);
+    decorateArticleInfoNew(articleBlock);
   });
 }
