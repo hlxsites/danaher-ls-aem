@@ -1179,10 +1179,9 @@ export const changeStep = async (step) => {
     const getBasketForOrder = await getBasketDetails();
     if (getBasketForOrder?.status === 'success') {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-      console.log('submited order: ', submittingOrder);
       
-      if (submittingOrder?.data?.documentNumber) {
-        window.location.href = `/us/en/e-buy/checkout/ordersubmit?orderId=${submittingOrder?.data?.documentNumber}`;
+      if (submittingOrder?.data?.data?.documentNumber) {
+        window.location.href = `/us/en/e-buy/checkout/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
       }
     }
   }
