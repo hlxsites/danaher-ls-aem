@@ -50,9 +50,7 @@ export default function decorate(block) {
   let date;
   if (articleInfo.publishDate) {
     date = new Date(articleInfo.publishDate);
-  } else {
-    date = null;
-  }
+  } 
 
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
