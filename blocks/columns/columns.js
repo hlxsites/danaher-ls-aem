@@ -1,5 +1,22 @@
 import { div } from '../../scripts/dom-builder.js';
-import { decorate as decorateArticleInfoNew } from '../article-info-new/article-info-new.js';
+
+// Format article-info-new block inside columns
+function formatArticleInfoNewDates(container) {
+  const dateEl = container.querySelector('[data-aue-prop="publishDate"]');
+  if (!dateEl) return;
+
+  const rawDate = dateEl.textContent.trim();
+  const parsedDate = new Date(rawDate);
+
+  if (!isNaN(parsedDate)) {
+    const formattedDate = parsedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    });
+    dateEl.textContent = formattedDate;
+  }
+}
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
@@ -13,6 +30,7 @@ export default function decorate(block) {
 
   const [leftCol, rightCol] = cols;
 
+  // Ratio handling
   let leftWidth = 'lg:w-1/2';
   let rightWidth = 'lg:w-1/2';
 
@@ -36,23 +54,34 @@ export default function decorate(block) {
     rightWidth = 'lg:w-3/5';
   }
 
+  // === TEXT COLUMN ===
   const textCol = div({ class: `h-full w-full ${leftWidth} md:pr-16` });
   const textInner = leftCol.querySelector('div');
-  if (textInner) textCol.append(...textInner.children);
+  if (textInner) {
+    textCol.append(...textInner.children);
 
+    // Format date if article-info-new exists
+    const articleInfo = textCol.querySelector('.article-info-new');
+    if (articleInfo) formatArticleInfoNewDates(articleInfo);
+  }
+
+  // Headline styling
   textCol.querySelectorAll('h1, h2').forEach((h) => {
-    h.classList.add(...'pb-4 text-danahergray-900 text-4xl font-semibold'.split(' '));
+    h.classList.add(
+      'pb-4', 'text-danahergray-900', 'text-4xl', 'font-semibold'
+    );
   });
 
+  // Button styling
   textCol.querySelectorAll('a[title="Button"]').forEach((a) => {
-    a.classList.add(...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(' '));
+    a.classList.add(
+      'btn', 'btn-outline-primary', 'rounded-full',
+      'text-danaherpurple-500', 'border', 'border-danaherpurple-500',
+      'px-6', 'py-3', 'mt-4', 'inline-block'
+    );
   });
 
-  // Initialize article-info-new block formatting (date etc.)
-  textCol.querySelectorAll('.article-info-new').forEach((articleBlock) => {
-    decorateArticleInfoNew(articleBlock);
-  });
-
+  // === IMAGE COLUMN ===
   const imageCol = div({
     class: `columns-new-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
   });
@@ -61,13 +90,13 @@ export default function decorate(block) {
   if (picture) {
     const img = picture.querySelector('img');
     if (img) {
-      img.classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
+      img.classList.add('absolute', 'bottom-0', 'h-full', 'w-full', 'object-cover');
     }
     imageCol.append(picture);
   }
 
+  // Final assembly
   wrapper.append(textCol, imageCol);
-
   block.textContent = '';
   block.append(wrapper);
 }
