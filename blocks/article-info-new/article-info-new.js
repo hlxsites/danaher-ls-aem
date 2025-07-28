@@ -14,43 +14,51 @@ export default function decorate(block) {
   ];
   innerContent.classList.add(...classes);
 
-  const wrapper = block.closest('.article-info-new-wrapper') || block;
-  const infoBlock = wrapper.querySelector('.article-info-new') || block;
+  const wrapper = document.querySelector('.article-info-new-wrapper');
+  if (!wrapper) return;
+
+  const infoBlock = wrapper.querySelector('.article-info-new');
   if (!infoBlock) return;
 
-  // Find the publishDate div that holds the ISO string
-  const publishDateDiv = infoBlock.querySelector('[data-aue-prop="publishDate"]');
-  if (!publishDateDiv) return;
+  const paragraphs = infoBlock.querySelectorAll('p');
+  const values = Array.from(paragraphs).map((p) => p.textContent.trim());
 
-  // Get the ISO date string
-  const isoDateStr = publishDateDiv.textContent.trim();
+  const [authorName, authorTitle, image, publishDate, articleOpco, readingTime] = values;
+
+  const articleInfo = {
+    authorName,
+    authorTitle,
+    image,
+    publishDate,
+    articleOpco,
+    readingTime,
+  };
+
+  // Format or set publish date
   let date;
-  if (isoDateStr) {
-    date = new Date(isoDateStr);
+  if (articleInfo.publishDate) {
+    date = new Date(articleInfo.publishDate);
   } else {
     date = new Date();
   }
 
-  // Format the date nicely for display
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: '2-digit',
   });
 
-  // KEEP the original ISO string in the publishDate div (for CMS data binding)
-  publishDateDiv.textContent = isoDateStr;
+  articleInfo.publishDate = formattedDate;
 
-  // Add or update a sibling or child element that shows the formatted date visually
-  let displayDateSpan = infoBlock.querySelector('.formatted-publish-date');
-  if (!displayDateSpan) {
-    displayDateSpan = document.createElement('span');
-    displayDateSpan.className = 'formatted-publish-date';
-    publishDateDiv.insertAdjacentElement('afterend', displayDateSpan);
+  if (paragraphs[3]) {
+    paragraphs[3].textContent = formattedDate;
   }
-  displayDateSpan.textContent = formattedDate;
 
-  // Append block to the section if needed
+  const publishDatePropElement = infoBlock.querySelector('[data-aue-prop="publishDate"]');
+  if (publishDatePropElement) {
+    publishDatePropElement.textContent = formattedDate;
+  }
+  // Append block to the section
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
