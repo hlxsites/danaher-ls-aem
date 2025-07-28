@@ -341,18 +341,20 @@ export const validateBasket = async (validateData) => {
  Function to submit Order
   :::::::::::::::::::::::::::
 */
-export const submitOrder = async (basket) => {
+export const submitOrder = async (basketId) => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
     'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.order.v1+json',
     'Authentication-Token': authenticationToken.access_token,
   });
+  console.log(' basket: ', basketId);
   const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
   const data = JSON.stringify({
-    basket,
+    basket: basketId,
     termsAndConditionsAccepted: true,
   });
   try {
@@ -1137,16 +1139,10 @@ export const changeStep = async (step) => {
   showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
-  let validateTab = '';
-  if (activeTab === 'paymentMethods') {
-    validateTab = 'submitOrder';
-  } else {
-    validateTab = activeTab;
-  }
   let validateData = '';
-  console.log('loading module: ', validateTab);
+  console.log('loading module: ', currentTab);
 
-  if (validateTab === 'shippingMethods') {
+  if (currentTab === 'shippingMethods') {
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1156,7 +1152,7 @@ export const changeStep = async (step) => {
       ],
     };
   }
-  if (validateTab === 'paymentMethods') {
+  if (currentTab === 'payment') {
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1167,7 +1163,7 @@ export const changeStep = async (step) => {
       ],
     };
   }
-  if (validateTab === 'submitOrder') {
+  if (currentTab === 'submitOrder') {
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1176,12 +1172,18 @@ export const changeStep = async (step) => {
     };
   }
   const validatingBasket = await validateBasket(validateData);
-  if (validatingBasket?.status === 'error') alert('validate basket');
-  if (validateTab === 'submitOrder') {
+  if (validatingBasket?.status === 'error') {
+    alert('In-valid basket');
+    removePreLoader();
+    return false;
+  }
+  if (currentTab === 'submitOrder') {
     const getBasketForOrder = await getBasketDetails();
     if (getBasketForOrder?.status === 'success') {
-      const submittingOrder = await submitOrder(getBasketForOrder?.data?.id);
-      console.log('submitting Order : ', submittingOrder);
+      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+      if (submittingOrder?.data?.documentNumber) {
+        window.location.href = `/order-status?orderId=${submittingOrder?.data?.documentNumber}`;
+      }
     }
   }
   if (activeTab && activeTab === 'shippingMethods') {
@@ -1321,6 +1323,12 @@ export const changeStep = async (step) => {
     case 'payment':
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
+      proceedButton.setAttribute('data-tab', 'submitOrder');
+      break;
+    case 'submitOrder':
+      segment2.style.width = '50%';
+      proceedButton.setAttribute('data-tab', 'submitOrder');
+      proceedButton.setAttribute('data-activeTab', 'submitOrder');
       break;
     default:
       segment1.style.width = '0';
@@ -2107,6 +2115,7 @@ get price type if its net or gross
           } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
+          'data-activetab': 'shippingAddress',
         }),
         div(
           {
