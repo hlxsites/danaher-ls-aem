@@ -17,6 +17,7 @@
       "button",
       "title",
       "columns",
+      "columns-new",
       "card-list",
       "takeway",
       "product-banner",
@@ -96,7 +97,7 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "columns-new",
     "components": [
       "column"
     ]
@@ -108,13 +109,23 @@
       "image",
       "button",
       "title",
-      "article-info-new"
+      "article-info-new",
+      "embed",
+      "form"
     ]
   },
   {
     "id": "dual-carousel",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "embed",
+    "components": [
+      "video",
+      "pdf",
+      "iframe"
     ]
   },
   {
