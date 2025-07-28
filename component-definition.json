@@ -268,7 +268,8 @@
                   "class": {
                     "$ref": "layoutType"
                   },
-                  "rows": "1"
+                  "rows": "1",
+                  "columns": "2"
                 }
               }
             }
