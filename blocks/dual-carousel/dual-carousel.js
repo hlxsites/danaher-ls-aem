@@ -180,6 +180,7 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
+  block.style.display = 'none';
   const [
     leftTitle,
     leftLinkLable,
@@ -189,8 +190,8 @@ export default async function decorate(block) {
     rightProductIds,
   ] = block.children;
 
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   const dualCarouselWrapper = div({
     class:
@@ -291,5 +292,6 @@ export default async function decorate(block) {
     arrowLeftIcon.setAttribute('fill', 'white');
   }
   block.textContent = '';
+  block.style = '';
   block.append(dualCarouselWrapper);
 }
