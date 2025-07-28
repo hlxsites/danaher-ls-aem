@@ -17,7 +17,6 @@
       "button",
       "title",
       "columns",
-      "columns-new",
       "card-list",
       "takeway",
       "product-banner",
@@ -97,7 +96,7 @@
     ]
   },
   {
-    "id": "columns-new",
+    "id": "columns",
     "components": [
       "column"
     ]
