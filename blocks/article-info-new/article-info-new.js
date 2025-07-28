@@ -46,11 +46,11 @@ export default function decorate(block) {
     return acc;
   }, {});
 
-  // Format publish date if present or set to today
-  let date;
-  if (articleInfo.publishDate) {
-    date = new Date(articleInfo.publishDate);
-  } else {
+  // Format publish date
+  let rawDate = articleInfo.publishDate;
+  let date = new Date(rawDate);
+  if (isNaN(date.getTime())) {
+    // fallback to today's date if parsing failed
     date = new Date();
   }
 
@@ -59,15 +59,19 @@ export default function decorate(block) {
     month: 'short',
     day: '2-digit',
   });
+
+  // Overwrite articleInfo.publishDate with formatted one for display
   articleInfo.publishDate = formattedDate;
 
-  // Clear existing paragraphs before re-adding with data attributes and content
+  // Clear existing content before rebuilding
   infoBlock.innerHTML = '';
 
-  // Rebuild paragraphs with data-aue-prop and updated content
+  // Rebuild each <p> with correct data-aue-prop and content
   for (const [prop, value] of Object.entries(articleInfo)) {
     const p = document.createElement('p');
     p.setAttribute('data-aue-prop', prop);
+    p.setAttribute('data-aue-type', 'text');
+    p.setAttribute('data-aue-label', prop);
     p.textContent = value;
     infoBlock.appendChild(p);
   }
