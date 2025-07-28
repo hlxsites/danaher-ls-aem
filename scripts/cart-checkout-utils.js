@@ -1182,7 +1182,7 @@ export const changeStep = async (step) => {
     if (getBasketForOrder?.status === 'success') {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
       if (submittingOrder?.data?.documentNumber) {
-        window.location.href = `/order-status?orderId=${submittingOrder?.data?.documentNumber}`;
+        window.location.href = `/order-submit?orderId=${submittingOrder?.data?.documentNumber}`;
       }
     }
   }
