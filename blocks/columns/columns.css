@@ -1,40 +1,63 @@
-/* Container for the columns */
+/* Base: container and vertical stack */
 .columns-wrapper > div {
   display: flex;
-  flex-direction: column; /* Stack vertically by default */
+  flex-direction: column; /* Stack vertically on small screens */
   gap: 1.5rem; /* Space between columns */
 }
 
-/* On large screens (min-width 1024px), arrange side-by-side */
-@media (min-width: 1024px) {
-  .columns-wrapper > div {
-    flex-direction: row;
-  }
-}
-
-/* Each column fills full width on small screens */
+/* Each column takes full width by default */
 .columns-wrapper > div > div {
   width: 100%;
-}
-
-/* Each column takes half width on large screens */
-@media (min-width: 1024px) {
-  .columns-wrapper > div > div {
-    width: 50%;
-  }
-}
-
-/* Optional: prevent columns from shrinking too small */
-.columns-wrapper > div > div {
   min-width: 0;
+  padding: 0.5rem; /* Optional padding */
 }
 
-/* Optional: align text inside columns */
+/* Text alignment utility */
 .columns-wrapper > div > div.align-text-center {
   text-align: center;
 }
 
-/* If you want some padding or margin */
-.columns-wrapper > div > div {
-  padding: 0.5rem;
+/* --- Responsive: Side-by-side layout on lg screens (min-width: 1024px) --- */
+@media (min-width: 1024px) {
+  .columns-wrapper > div {
+    flex-direction: row;
+  }
+
+  /* Default: fiftyfifty */
+  .section.fiftyfifty .columns-wrapper > div > div:nth-child(1),
+  .section.fiftyfifty .columns-wrapper > div > div:nth-child(2) {
+    width: 50%;
+  }
+
+  /* thirtyseventy */
+  .section.thirtyseventy .columns-wrapper > div > div:nth-child(1) {
+    width: 33.3333%;
+  }
+  .section.thirtyseventy .columns-wrapper > div > div:nth-child(2) {
+    width: 66.6667%;
+  }
+
+  /* seventythirty */
+  .section.seventythirty .columns-wrapper > div > div:nth-child(1) {
+    width: 66.6667%;
+  }
+  .section.seventythirty .columns-wrapper > div > div:nth-child(2) {
+    width: 33.3333%;
+  }
+
+  /* twentyfiveseventyfive */
+  .section.twentyfiveseventyfive .columns-wrapper > div > div:nth-child(1) {
+    width: 25%;
+  }
+  .section.twentyfiveseventyfive .columns-wrapper > div > div:nth-child(2) {
+    width: 75%;
+  }
+
+  /* seventyfivetwentyfive */
+  .section.seventyfivetwentyfive .columns-wrapper > div > div:nth-child(1) {
+    width: 75%;
+  }
+  .section.seventyfivetwentyfive .columns-wrapper > div > div:nth-child(2) {
+    width: 25%;
+  }
 }
