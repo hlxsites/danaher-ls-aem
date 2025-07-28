@@ -211,8 +211,13 @@
   line-height: 1.75rem
 }
 
+.product-categories-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .product-categories-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .product-categories-wrapper :is(.font-semibold) {

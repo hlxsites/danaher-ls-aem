@@ -96,7 +96,7 @@ export default async function decorate(block) {
               href: `/us/en/${productsTag}/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
-                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+                'leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
             linkLabel,
           ),
@@ -145,7 +145,7 @@ export default async function decorate(block) {
   if (opcoBannerDescription) {
     const leftDescription = div({
       id: 'opcoBannerDescription',
-      class: 'text-[18px] leading-[22px] font-normal text-black w-full',
+      class: 'text-base leading-[22px] font-normal text-black w-full',
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
@@ -384,8 +384,7 @@ export default async function decorate(block) {
       overlayWrapper?.classList.remove('hidden');
       slide.style.padding = '2.5rem';
       slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundSize = 'contain';
       slide.style.backgroundPosition = 'center';
       slide.querySelectorAll('.text-center')?.forEach((it) => {
         it.style.color = '#fff';
