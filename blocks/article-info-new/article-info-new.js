@@ -20,24 +20,21 @@ export default function decorate(block) {
   const infoBlock = wrapper.querySelector('.article-info-new');
   if (!infoBlock) return;
 
-  const paragraphs = infoBlock.querySelectorAll('p');
-  const values = Array.from(paragraphs).map((p) => p.textContent.trim());
+  // Grab paragraphs by data attribute so we know which is which
+  const authorNameEl = infoBlock.querySelector('[data-aue-prop="authorName"]');
+  const authorTitleEl = infoBlock.querySelector('[data-aue-prop="authorTitle"]');
+  const imageEl = infoBlock.querySelector('[data-aue-prop="image"]');
+  const publishDateEl = infoBlock.querySelector('[data-aue-prop="publishDate"]');
+  const articleOpcoEl = infoBlock.querySelector('[data-aue-prop="articleOpco"]');
+  const readingTimeEl = infoBlock.querySelector('[data-aue-prop="readingTime"]');
 
-  const [authorName, authorTitle, image, publishDate, articleOpco, readingTime] = values;
+  // Extract raw publish date text from the property element
+  const rawPublishDate = publishDateEl ? publishDateEl.textContent.trim() : '';
 
-  const articleInfo = {
-    authorName,
-    authorTitle,
-    image,
-    publishDate,
-    articleOpco,
-    readingTime,
-  };
-
-  // Format or set publish date
+  // Format or set publish date for display only
   let date;
-  if (articleInfo.publishDate) {
-    date = new Date(articleInfo.publishDate);
+  if (rawPublishDate) {
+    date = new Date(rawPublishDate);
   } else {
     date = new Date();
   }
@@ -48,17 +45,18 @@ export default function decorate(block) {
     day: '2-digit',
   });
 
-  articleInfo.publishDate = formattedDate;
-
-  if (paragraphs[3]) {
-    paragraphs[3].textContent = formattedDate;
+  // Create or update a separate paragraph element for the formatted date display
+  let formattedDateEl = infoBlock.querySelector('[data-aue-prop="formattedPublishDate"]');
+  if (!formattedDateEl) {
+    formattedDateEl = document.createElement('p');
+    formattedDateEl.setAttribute('data-aue-prop', 'formattedPublishDate');
+    formattedDateEl.setAttribute('data-aue-label', 'Formatted Publish Date');
+    formattedDateEl.setAttribute('data-aue-type', 'text');
+    infoBlock.appendChild(formattedDateEl);
   }
+  formattedDateEl.textContent = formattedDate;
 
-  const publishDatePropElement = infoBlock.querySelector('[data-aue-prop="publishDate"]');
-  if (publishDatePropElement) {
-    publishDatePropElement.textContent = formattedDate;
-  }
-  // Append block to the section
+  // Append block to the section if not already present
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
