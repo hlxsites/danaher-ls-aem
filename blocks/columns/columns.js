@@ -4,10 +4,11 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
 
-  // ✅ SEMANTIC COLUMN DETECTION (AEM-safe)
-  const columnNodes = block.querySelectorAll('[data-aue-type="column"]');
-  const columnCount = columnNodes.length;
+  // ✅ Robust AEM column detection (based on container label)
+  const columnNodes = block.querySelectorAll('[data-aue-type="container"][data-aue-label="Column"]');
+  const columnCount = columnNodes.length || 1; // Fallback to 1
   block.classList.add(`columns-${columnCount}-cols`);
+
 
   const imageAspectRatio = 1.7778;
 
