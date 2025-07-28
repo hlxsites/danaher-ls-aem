@@ -3,7 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
-  const imageAspectRatio = 1.7778;
+  // const imageAspectRatio = 1.7778;
 
   // Add column count class
   block.classList.add(`columns-${cols.length}-cols`);
