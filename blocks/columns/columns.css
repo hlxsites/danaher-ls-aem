@@ -1,73 +1,40 @@
-/* ========== Column Layout Base ========== */
-.columns-wrapper {
+/* Container for the columns */
+.columns-wrapper > div {
   display: flex;
-  flex-wrap: wrap;
-  max-width: 100%;
-  margin: 0 auto;
+  flex-direction: column; /* Stack vertically by default */
+  gap: 1.5rem; /* Space between columns */
 }
 
-.columns.block {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.columns.block > div {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-/* ========== Ratio Classes ========== */
-
-/* 50/50 Split */
-.columns.block.fiftyfifty > div > div:nth-child(1),
-.columns.block.fiftyfifty > div > div:nth-child(2) {
-  width: 100%;
-}
-
+/* On large screens (min-width 1024px), arrange side-by-side */
 @media (min-width: 1024px) {
-  .columns.block.fiftyfifty > div > div:nth-child(1),
-  .columns.block.fiftyfifty > div > div:nth-child(2) {
+  .columns-wrapper > div {
+    flex-direction: row;
+  }
+}
+
+/* Each column fills full width on small screens */
+.columns-wrapper > div > div {
+  width: 100%;
+}
+
+/* Each column takes half width on large screens */
+@media (min-width: 1024px) {
+  .columns-wrapper > div > div {
     width: 50%;
   }
 }
 
-/* 70/30 Split */
-.columns.block.seventythirty > div > div:nth-child(1) {
-  width: 100%;
-}
-.columns.block.seventythirty > div > div:nth-child(2) {
-  width: 100%;
+/* Optional: prevent columns from shrinking too small */
+.columns-wrapper > div > div {
+  min-width: 0;
 }
 
-@media (min-width: 1024px) {
-  .columns.block.seventythirty > div > div:nth-child(1) {
-    width: 70%;
-  }
-  .columns.block.seventythirty > div > div:nth-child(2) {
-    width: 30%;
-  }
+/* Optional: align text inside columns */
+.columns-wrapper > div > div.align-text-center {
+  text-align: center;
 }
 
-/* 30/70 Split */
-.columns.block.thirtyseventy > div > div:nth-child(1) {
-  width: 100%;
-}
-.columns.block.thirtyseventy > div > div:nth-child(2) {
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .columns.block.thirtyseventy > div > div:nth-child(1) {
-    width: 30%;
-  }
-  .columns.block.thirtyseventy > div > div:nth-child(2) {
-    width: 70%;
-  }
-}
-
-/* Optional Text Color Class */
-.columns.block.text-white {
-  color: white;
+/* If you want some padding or margin */
+.columns-wrapper > div > div {
+  padding: 0.5rem;
 }
