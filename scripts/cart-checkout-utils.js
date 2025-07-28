@@ -351,7 +351,6 @@ export const submitOrder = async (basketId) => {
     Accept: 'application/vnd.intershop.order.v1+json',
     'Authentication-Token': authenticationToken.access_token,
   });
-  console.log(' basket: ', basketId);
   const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
   const data = JSON.stringify({
     basket: basketId,
@@ -1182,7 +1181,7 @@ export const changeStep = async (step) => {
     if (getBasketForOrder?.status === 'success') {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
       if (submittingOrder?.data?.documentNumber) {
-        window.location.href = `/order-submit?orderId=${submittingOrder?.data?.documentNumber}`;
+        window.location.href = `/us/en/e-buy/checkout/ordersubmit?orderId=${submittingOrder?.data?.documentNumber}`;
       }
     }
   }
@@ -2362,7 +2361,7 @@ export async function updateCheckoutSummary() {
   return { status: 'error', data: 'Error updating checkout summary' };
 }
 
-export const cartItemsContainer = (cartItemValue) => {
+export const cartItemsContainer = async (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
     if (type === 'delete-item') {
