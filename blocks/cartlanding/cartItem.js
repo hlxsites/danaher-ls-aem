@@ -52,7 +52,7 @@ export const cartItem = async () => {
       cartListContainer.append(logoDivDisplay);
       // cartListContainer.append(divider(200));
       itemToBeDisplayed[opcoBe].forEach((item) => {
-          cartItemDisplayContainer.append(divider(200));
+        cartItemDisplayContainer.append(divider(200));
         cartItemDisplayContainer.append(cartItemsContainer(item));
       
       });

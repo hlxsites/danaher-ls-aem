@@ -348,7 +348,11 @@ const fileMappings = [
     wrapper: 'checkout',
   },
   {
-    content: './blocks/dashboard/dashboard.js',
+    content: ['./blocks/dashboard/dashboard.js',
+             './blocks/dashboard/orderStatus.js', 
+             './blocks/dashboard/dashboardutils.js',
+             './blocks/dashboard/recentOrder.js'
+              ],
     output: './blocks/dashboard/dashboard.css',
     wrapper: 'dashboard-wrapper',
   },
