@@ -103,6 +103,12 @@
   {
     "id": "columns-new",
     "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
       "text",
       "image",
       "button",
@@ -125,9 +131,7 @@
       "image",
       "button",
       "title",
-      "article-info-new",
-      "embed",
-      "form"
+      "article-info-new"
     ]
   },
   {

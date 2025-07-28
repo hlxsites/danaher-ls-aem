@@ -244,11 +244,11 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
-                "model": "columns-new",
                 "template": {
                   "class": {
-                    "$ref": "layoutType"
-                  }
+                    "$ref": "classes"
+                  },
+                  "rows": "2"
                 }
               }
             }
@@ -262,10 +262,8 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
-                  "class": {
-                    "$ref": "classes"
-                  },
-                  "rows": "2"
+                  "columns": "2",
+                  "rows": "1"
                 }
               }
             }
