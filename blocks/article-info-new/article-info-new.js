@@ -26,7 +26,7 @@ export default function decorate(block) {
     wrapper.appendChild(infoBlock);
   }
 
-  // Define expected properties in order with example default empty values
+  // Define expected properties with default empty values
   const articleInfoDefaults = {
     authorName: '',
     authorTitle: '',
@@ -40,23 +40,24 @@ export default function decorate(block) {
   const existingParagraphs = infoBlock.querySelectorAll('p');
   const existingTexts = Array.from(existingParagraphs).map(p => p.textContent.trim());
 
-  // Fill articleInfo from existing paragraphs if possible
+  // Fill articleInfo from existing paragraphs or defaults
   const articleInfo = Object.keys(articleInfoDefaults).reduce((acc, prop, i) => {
     acc[prop] = existingTexts[i] || articleInfoDefaults[prop];
     return acc;
   }, {});
 
-  // Format publish date if present or set to today
-  let date;
+  // Format publish date only if it exists and is valid
+  let formattedDate = '';
   if (articleInfo.publishDate) {
-    date = new Date(articleInfo.publishDate);
-  } 
-
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-  });
+    const date = new Date(articleInfo.publishDate);
+    if (!isNaN(date)) {
+      formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+      });
+    }
+  }
   articleInfo.publishDate = formattedDate;
 
   // Clear existing paragraphs before re-adding with data attributes and content
