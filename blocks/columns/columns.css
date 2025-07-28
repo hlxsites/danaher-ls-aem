@@ -1,63 +1,63 @@
-/* Base: container and vertical stack */
+/* Default vertical layout for smaller screens */
 .columns-wrapper > div {
   display: flex;
-  flex-direction: column; /* Stack vertically on small screens */
-  gap: 1.5rem; /* Space between columns */
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-/* Each column takes full width by default */
+/* Reset widths */
 .columns-wrapper > div > div {
   width: 100%;
   min-width: 0;
-  padding: 0.5rem; /* Optional padding */
+  padding: 0.5rem;
 }
 
-/* Text alignment utility */
+/* Center alignment utility */
 .columns-wrapper > div > div.align-text-center {
   text-align: center;
 }
 
-/* --- Responsive: Side-by-side layout on lg screens (min-width: 1024px) --- */
+/* Large screens layout */
 @media (min-width: 1024px) {
   .columns-wrapper > div {
     flex-direction: row;
   }
 
-  /* Default: fiftyfifty */
-  .section.fiftyfifty .columns-wrapper > div > div:nth-child(1),
-  .section.fiftyfifty .columns-wrapper > div > div:nth-child(2) {
+  /* 50/50 layout */
+  .columns.fiftyfifty > div:nth-child(1),
+  .columns.fiftyfifty > div:nth-child(2) {
     width: 50%;
   }
 
-  /* thirtyseventy */
-  .section.thirtyseventy .columns-wrapper > div > div:nth-child(1) {
-    width: 33.3333%;
+  /* 70/30 layout */
+  .columns.seventythirty > div:nth-child(1) {
+    width: 70%;
   }
-  .section.thirtyseventy .columns-wrapper > div > div:nth-child(2) {
-    width: 66.6667%;
-  }
-
-  /* seventythirty */
-  .section.seventythirty .columns-wrapper > div > div:nth-child(1) {
-    width: 66.6667%;
-  }
-  .section.seventythirty .columns-wrapper > div > div:nth-child(2) {
-    width: 33.3333%;
+  .columns.seventythirty > div:nth-child(2) {
+    width: 30%;
   }
 
-  /* twentyfiveseventyfive */
-  .section.twentyfiveseventyfive .columns-wrapper > div > div:nth-child(1) {
-    width: 25%;
+  /* 30/70 layout */
+  .columns.thirtyseventy > div:nth-child(1) {
+    width: 30%;
   }
-  .section.twentyfiveseventyfive .columns-wrapper > div > div:nth-child(2) {
+  .columns.thirtyseventy > div:nth-child(2) {
+    width: 70%;
+  }
+
+  /* 75/25 layout */
+  .columns.seventyfivetwentyfive > div:nth-child(1) {
     width: 75%;
   }
-
-  /* seventyfivetwentyfive */
-  .section.seventyfivetwentyfive .columns-wrapper > div > div:nth-child(1) {
-    width: 75%;
-  }
-  .section.seventyfivetwentyfive .columns-wrapper > div > div:nth-child(2) {
+  .columns.seventyfivetwentyfive > div:nth-child(2) {
     width: 25%;
+  }
+
+  /* 25/75 layout */
+  .columns.twentyfiveseventyfive > div:nth-child(1) {
+    width: 25%;
+  }
+  .columns.twentyfiveseventyfive > div:nth-child(2) {
+    width: 75%;
   }
 }
