@@ -12,7 +12,7 @@ export default async function decorate(block) {
     authenticationToken?.status === 'error'
     || authenticationToken.user_type === 'guest'
   ) {
-    //window.location.href = '/us/en/e-buy/cartlanding?ref=em1-checkout-payment-module';
+    // window.location.href = '/us/en/e-buy/cartlanding?ref=em1-checkout-payment-module';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
