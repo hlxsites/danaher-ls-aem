@@ -16,8 +16,8 @@ function getCardsPerPageGrid() {
 
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
-
   block?.parentElement?.parentElement?.removeAttribute('style');
+  block.style.display = 'none';
 
   const wrapper = block.closest('.top-selling-products-wrapper');
 
@@ -210,7 +210,7 @@ export default async function decorate(block) {
   blockWrapper.append(carouselContainer);
 
   block.textContent = '';
-
+  block.style = '';
   block.append(blockWrapper);
 
   scrollCarousel(0);
