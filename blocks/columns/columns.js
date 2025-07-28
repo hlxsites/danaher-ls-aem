@@ -4,8 +4,12 @@ import {
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  const cols = [...block.firstElementChild.children];
+  const flexWrapper = block.querySelector('div');
+  const cols = flexWrapper ? [...flexWrapper.children] : [];
   block.classList.add(`columns-${cols.length}-cols`);
+
+  // const cols = [...block.firstElementChild.children];
+  // block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
 
   block.querySelectorAll('div').forEach((ele, index) => {
