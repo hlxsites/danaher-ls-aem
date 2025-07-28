@@ -267,7 +267,15 @@
                 "template": {
                   "class": {
                     "$ref": "layoutType"
-                  }
+                  },
+                  "items": [
+                    {
+                      "resourceType": "core/franklin/components/column/v1/column"
+                    },
+                    {
+                      "resourceType": "core/franklin/components/column/v1/column"
+                    }
+                  ]
                 }
               }
             }
