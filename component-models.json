@@ -529,7 +529,7 @@
     ]
   },
   {
-    "id": "columns-new",
+    "id": "columns",
     "fields": [
       {
         "component": "multiselect",

@@ -1,8 +1,8 @@
 {
   "definitions": [
     {
-      "title": "Columns-New",
-      "id": "columns-new",
+      "title": "Columns",
+      "id": "columns",
       "plugins": {
         "xwalk": {
           "page": {
@@ -18,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "columns-new",
+      "id": "columns",
       "fields": [
         {
           "component": "multiselect",
@@ -40,7 +40,7 @@
   ],
   "filters": [
     {
-      "id": "columns-new",
+      "id": "columns",
       "components": ["column"]
     },
     {
