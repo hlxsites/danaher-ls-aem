@@ -4,7 +4,6 @@ export default function decorate(block) {
   const innerContent = content?.querySelector('div');
   if (!innerContent) return;
 
-  // Add layout classes
   const classes = [
     'items-center',
     'flex',
@@ -15,54 +14,65 @@ export default function decorate(block) {
   ];
   innerContent.classList.add(...classes);
 
-  // Get wrapper and article info block
+  // Find wrapper and infoBlock
   const wrapper = document.querySelector('.article-info-new-wrapper');
   if (!wrapper) return;
 
   let infoBlock = wrapper.querySelector('.article-info-new');
   if (!infoBlock) {
+    // Create infoBlock div if missing
     infoBlock = document.createElement('div');
     infoBlock.className = 'article-info-new';
     wrapper.appendChild(infoBlock);
   }
 
-  // Get all existing <p> elements
-  const paragraphs = infoBlock.querySelectorAll('p');
+  // Define expected properties in order with example default empty values
+  const articleInfoDefaults = {
+    authorName: '',
+    authorTitle: '',
+    image: '',
+    publishDate: '',
+    articleOpco: '',
+    readingTime: '',
+  };
 
-  // Build articleInfo from existing paragraphs
-  const articleInfo = {};
-  paragraphs.forEach((p) => {
-    const prop = p.getAttribute('data-aue-prop');
-    if (prop) {
-      articleInfo[prop] = p.textContent.trim();
-    }
+  // Extract current <p> elements text to populate values if present
+  const existingParagraphs = infoBlock.querySelectorAll('p');
+  const existingTexts = Array.from(existingParagraphs).map(p => p.textContent.trim());
+
+  // Fill articleInfo from existing paragraphs if possible
+  const articleInfo = Object.keys(articleInfoDefaults).reduce((acc, prop, i) => {
+    acc[prop] = existingTexts[i] || articleInfoDefaults[prop];
+    return acc;
+  }, {});
+
+  // Format publish date if present or set to today
+  let date;
+  if (articleInfo.publishDate) {
+    date = new Date(articleInfo.publishDate);
+  } else {
+    date = new Date();
+  }
+
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
   });
+  articleInfo.publishDate = formattedDate;
 
-  // Safely format publishDate for display, but keep original value
-  let formattedDate = '';
-  let rawDate = articleInfo.publishDate;
+  // Clear existing paragraphs before re-adding with data attributes and content
+  infoBlock.innerHTML = '';
 
-  if (rawDate) {
-    const parsed = new Date(rawDate);
-    if (!isNaN(parsed)) {
-      formattedDate = parsed.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-      });
-    }
+  // Rebuild paragraphs with data-aue-prop and updated content
+  for (const [prop, value] of Object.entries(articleInfo)) {
+    const p = document.createElement('p');
+    p.setAttribute('data-aue-prop', prop);
+    p.textContent = value;
+    infoBlock.appendChild(p);
   }
 
-  // Don't clear original properties — just append formatted display
-  const existingFormatted = infoBlock.querySelector('.formatted-publish-date');
-  if (!existingFormatted && formattedDate) {
-    const dateDisplay = document.createElement('p');
-    dateDisplay.className = 'formatted-publish-date';
-    dateDisplay.textContent = formattedDate;
-    infoBlock.appendChild(dateDisplay);
-  }
-
-  // Append block to section if not already present
+  // Append block to the section if not already appended
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
