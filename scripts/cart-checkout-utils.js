@@ -1139,7 +1139,6 @@ export const changeStep = async (step) => {
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
   let validateData = '';
-  console.log('loading module: ', currentTab);
 
   if (currentTab === 'shippingMethods') {
     validateData = {
@@ -1180,7 +1179,7 @@ export const changeStep = async (step) => {
     const getBasketForOrder = await getBasketDetails();
     if (getBasketForOrder?.status === 'success') {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-      console.log('submited order: ',submittingOrder?.data?.documentNumber);
+      console.log('submited order: ', submittingOrder);
       
       if (submittingOrder?.data?.documentNumber) {
         window.location.href = `/us/en/e-buy/checkout/ordersubmit?orderId=${submittingOrder?.data?.documentNumber}`;

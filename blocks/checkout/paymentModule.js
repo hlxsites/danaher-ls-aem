@@ -1,4 +1,4 @@
-import { buildInputElement } from '../../scripts/common-utils.js';
+import { buildInputElement, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import {
   h2, h5, div, p, span,
 } from '../../scripts/dom-builder.js';
@@ -130,6 +130,7 @@ const paymentModule = async () => {
         });
       decorateIcons(cardsWrapper);
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
+        showPreLoader();
         setTimeout(async () => {
           c.preventDefault();
           const eventTarget = c.target;
@@ -150,6 +151,7 @@ const paymentModule = async () => {
           } else {
             c.target.checked = false;
           }
+          removePreLoader();
         }, 0);
       });
     }
