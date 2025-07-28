@@ -9,7 +9,7 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "model": "columns",
             "template": {
-              "class": { "$ref": "layoutType" },
+              "class": "columns-2-cols",
               "items": [
                  { "resourceType": "core/franklin/components/column/v1/column" },
                  { "resourceType": "core/franklin/components/column/v1/column" }
