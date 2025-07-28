@@ -238,19 +238,17 @@
           }
         },
         {
-          "title": "Columns-new",
-          "id": "columns-new",
+          "title": "Columns",
+          "id": "columns",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
-                "model": "columns-new",
-                "class": {
-                  "$ref": "layoutType"
-                },
+                "model": "columns",
                 "template": {
-                  "columns": "2",
-                  "rows": "1"
+                  "class": {
+                    "$ref": "layoutType"
+                  }
                 }
               }
             }
@@ -263,11 +261,9 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
-                "model": "columns",
                 "template": {
-                  "class": {
-                    "$ref": "layoutType"
-                  }
+                  "columns": "2",
+                  "rows": "1"
                 }
               }
             }

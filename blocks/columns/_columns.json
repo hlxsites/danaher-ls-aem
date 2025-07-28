@@ -7,9 +7,9 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
-            "model": "columns",
             "template": {
-              "class": { "$ref": "layoutType" }
+              "columns": "2",
+              "rows": "1"
             }
           }
         }
@@ -21,24 +21,36 @@
       "id": "columns",
       "fields": [
         {
-          "component": "select",
-          "name": "layoutType",
-          "label": "Column Type",
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Style",
+          "valueType": "string",
           "options": [
-            { "name": "Two Column", "value": "columns-2-cols" },
-            { "name": "Three Column", "value": "columns-3-cols" },
+            { "name": "70/30 Split", "value": "seventythirty" },
             { "name": "30/70 Split", "value": "thirtyseventy" },
-            { "name": "70/30 Split", "value": "seventythirty" }
+            { "name": "50/50 Split", "value": "fiftyfifty" },
+            { "name": "Text White", "value": "text-white" },
+            { "name": "Bottom Border Right", "value": "bottom-border-right" },
+            { "name": "Background Color Right", "value": "bg-color-right" }
           ]
         },
         {
           "component": "select",
-          "name": "type",
-          "label": "Text Color",
+          "name": "columns",
+          "label": "Number of Columns",
+          "valueType": "string",
           "options": [
-            { "name": "Default", "value": "text-danahergray-900" },
-            { "name": "White", "value": "text-white" }
+            { "name": "1 Column", "value": "columns-1-cols" },
+            { "name": "2 Columns", "value": "columns-2-cols" },
+            { "name": "3 Columns", "value": "columns-3-cols" }
           ]
+        },
+        {
+          "component": "text",
+          "name": "rows",
+          "label": "Rows",
+          "valueType": "number",
+          "value": ""
         }
       ]
     }
@@ -46,6 +58,12 @@
   "filters": [
     {
       "id": "columns",
+      "components": [
+        "column"
+      ]
+    },
+    {
+      "id": "column",
       "components": [
         "text",
         "image",

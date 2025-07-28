@@ -428,49 +428,6 @@
     ]
   },
   {
-    "id": "columns-new",
-    "fields": [
-      {
-        "component": "select",
-        "name": "layoutType",
-        "label": "Column Type",
-        "options": [
-          {
-            "label": "Two Column",
-            "value": "columns-2-cols"
-          },
-          {
-            "label": "Three Column",
-            "value": "columns-3-cols"
-          },
-          {
-            "label": "30/70 Split",
-            "value": "thirtyseventy"
-          },
-          {
-            "label": "70/30 Split",
-            "value": "seventythirty"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "textColor",
-        "label": "Text Color",
-        "options": [
-          {
-            "label": "Default",
-            "value": "text-danahergray-900"
-          },
-          {
-            "label": "White",
-            "value": "text-white"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "columns",
     "fields": [
       {
@@ -510,6 +467,70 @@
             "value": "text-white"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "70/30 Split",
+            "value": "seventythirty"
+          },
+          {
+            "name": "30/70 Split",
+            "value": "thirtyseventy"
+          },
+          {
+            "name": "50/50 Split",
+            "value": "fiftyfifty"
+          },
+          {
+            "name": "Text White",
+            "value": "text-white"
+          },
+          {
+            "name": "Bottom Border Right",
+            "value": "bottom-border-right"
+          },
+          {
+            "name": "Background Color Right",
+            "value": "bg-color-right"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "columns",
+        "label": "Number of Columns",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "1 Column",
+            "value": "columns-1-cols"
+          },
+          {
+            "name": "2 Columns",
+            "value": "columns-2-cols"
+          },
+          {
+            "name": "3 Columns",
+            "value": "columns-3-cols"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "rows",
+        "label": "Rows",
+        "valueType": "number",
+        "value": ""
       }
     ]
   },

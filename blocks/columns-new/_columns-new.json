@@ -1,19 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Columns-new",
-      "id": "columns-new",
+      "title": "Columns",
+      "id": "columns",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
-            "model": "columns-new",
-            "class": {
-              "$ref": "layoutType"
-            },
+            "model": "columns",
             "template": {
-              "columns": "2",
-              "rows": "1"
+              "class": { "$ref": "layoutType" }
             }
           }
         }
@@ -22,26 +18,26 @@
   ],
   "models": [
     {
-      "id": "columns-new",
+      "id": "columns",
       "fields": [
         {
           "component": "select",
           "name": "layoutType",
           "label": "Column Type",
           "options": [
-            { "label": "Two Column", "value": "columns-2-cols" },
-            { "label": "Three Column", "value": "columns-3-cols" },
-            { "label": "30/70 Split", "value": "thirtyseventy" },
-            { "label": "70/30 Split", "value": "seventythirty" }
+            { "name": "Two Column", "value": "columns-2-cols" },
+            { "name": "Three Column", "value": "columns-3-cols" },
+            { "name": "30/70 Split", "value": "thirtyseventy" },
+            { "name": "70/30 Split", "value": "seventythirty" }
           ]
         },
         {
           "component": "select",
-          "name": "textColor",
+          "name": "type",
           "label": "Text Color",
           "options": [
-            { "label": "Default", "value": "text-danahergray-900" },
-            { "label": "White", "value": "text-white" }
+            { "name": "Default", "value": "text-danahergray-900" },
+            { "name": "White", "value": "text-white" }
           ]
         }
       ]
@@ -49,7 +45,7 @@
   ],
   "filters": [
     {
-      "id": "columns-new",
+      "id": "columns",
       "components": [
         "text",
         "image",

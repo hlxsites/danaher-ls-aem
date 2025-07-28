@@ -101,7 +101,7 @@
     ]
   },
   {
-    "id": "columns-new",
+    "id": "columns",
     "components": [
       "text",
       "image",
@@ -114,6 +114,12 @@
   },
   {
     "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
     "components": [
       "text",
       "image",
