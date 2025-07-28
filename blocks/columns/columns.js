@@ -1,4 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
+import decorateArticleInfo from '../article-info-new/article-info-new.js';
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
@@ -91,6 +92,11 @@ export default function decorate(block) {
 
   // Append columns into wrapper
   wrapper.append(textCol, imageCol);
+
+  const articleBlock = block.querySelector('.article-info-new');
+  if (articleBlock) {
+  decorateArticleInfo(articleBlock);
+  }
 
   // Replace block content with new wrapper
   block.textContent = '';
