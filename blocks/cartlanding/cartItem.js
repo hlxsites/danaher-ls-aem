@@ -42,12 +42,13 @@ export const cartItem = async () => {
       });
 
       const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
+
       // cartListContainer.append(divider(300));
       cartListContainer.append(logoDivDisplay);
       // cartListContainer.append(divider(200));
-      itemToBeDisplayed[opcoBe].forEach((item) => {
+      itemToBeDisplayed[opcoBe].forEach(async (item) => {
         cartItemDisplayContainer.append(divider(200));
-        cartItemDisplayContainer.append(cartItemsContainer(item));
+        cartItemDisplayContainer.append(await cartItemsContainer(item));
       });
       cartListContainer.append(cartItemDisplayContainer);
       // cartListContainer.append(divider(300));

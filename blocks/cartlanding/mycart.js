@@ -137,7 +137,7 @@ export const mycart = async () => {
   const priceContainer = await checkoutSummary();
   const searchBlock = await addProducts();
   const cartItems = await cartItem();
-
+  
   if (cartItems.hasChildNodes() === false) {
     myCartListContainer.classList.add('hidden');
     myCartEmptyContainer.classList.remove('hidden');
