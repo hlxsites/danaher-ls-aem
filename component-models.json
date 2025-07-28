@@ -492,45 +492,34 @@
             "value": "fiftyfifty"
           },
           {
+            "name": "25/75 Split",
+            "value": "twentyfiveseventyfive"
+          },
+          {
+            "name": "75/25 Split",
+            "value": "seventyfivetwentyfive"
+          },
+          {
             "name": "Text White",
             "value": "text-white"
           },
           {
-            "name": "Bottom Border Right",
+            "name": "Image Right Border",
             "value": "bottom-border-right"
           },
           {
-            "name": "Background Color Right",
+            "name": "Red Background Right",
             "value": "bg-color-right"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "columns",
-        "label": "Number of Columns",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "1 Column",
-            "value": "columns-1-cols"
           },
           {
-            "name": "2 Columns",
-            "value": "columns-2-cols"
+            "name": "Center Content",
+            "value": "itemscenter"
           },
           {
-            "name": "3 Columns",
-            "value": "columns-3-cols"
+            "name": "Features Card Left",
+            "value": "features-card-left"
           }
         ]
-      },
-      {
-        "component": "text",
-        "name": "rows",
-        "label": "Rows",
-        "valueType": "number",
-        "value": ""
       }
     ]
   },

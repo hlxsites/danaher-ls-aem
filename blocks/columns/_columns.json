@@ -7,12 +7,12 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
-             "template": {
+            "template": {
               "class": { "$ref": "classes" }
-            }
             }
           }
         }
+      }
     }
   ],
   "models": [
@@ -28,28 +28,14 @@
             { "name": "70/30 Split", "value": "seventythirty" },
             { "name": "30/70 Split", "value": "thirtyseventy" },
             { "name": "50/50 Split", "value": "fiftyfifty" },
+            { "name": "25/75 Split", "value": "twentyfiveseventyfive" },
+            { "name": "75/25 Split", "value": "seventyfivetwentyfive" },
             { "name": "Text White", "value": "text-white" },
-            { "name": "Bottom Border Right", "value": "bottom-border-right" },
-            { "name": "Background Color Right", "value": "bg-color-right" }
+            { "name": "Image Right Border", "value": "bottom-border-right" },
+            { "name": "Red Background Right", "value": "bg-color-right" },
+            { "name": "Center Content", "value": "itemscenter" },
+            { "name": "Features Card Left", "value": "features-card-left" }
           ]
-        },
-        {
-          "component": "select",
-          "name": "columns",
-          "label": "Number of Columns",
-          "valueType": "string",
-          "options": [
-            { "name": "1 Column", "value": "columns-1-cols" },
-            { "name": "2 Columns", "value": "columns-2-cols" },
-            { "name": "3 Columns", "value": "columns-3-cols" }
-          ]
-        },
-        {
-          "component": "text",
-          "name": "rows",
-          "label": "Rows",
-          "valueType": "number",
-          "value": ""
         }
       ]
     }
@@ -57,9 +43,7 @@
   "filters": [
     {
       "id": "columns",
-      "components": [
-        "column"
-      ]
+      "components": ["column"]
     },
     {
       "id": "column",
