@@ -1,4 +1,6 @@
-import { div, p, img } from '../../scripts/dom-builder.js';
+import {
+  div, p, img,
+} from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   block.replaceChildren();
@@ -7,45 +9,61 @@ export default async function decorate(block) {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
     try {
-      block.append(
-      //   div(
-      //   { class: 'grid grid-cols-12 text-base font-bold text-black gap-y-4 pb-2 border-b' },
-      //   div(
-      //     { class: 'col-span-8 lg:col-span-10' },
-      //     p({ class: 'text-base font-bold leading-6' }, 'Products'),
-      //   ),
-      //   div(
-      //     { class: 'col-span-4 md:col-span-2 lg:col-span-1 flex justify-center' },
-      //     p({ class: 'text-base font-bold leading-6' }, 'QTY'),
-      //   ),
-      //   div(
-      //     { class: 'hidden md:flex justify-center col-span-2 lg:col-span-1' },
-      //     p({ class: 'text-base font-bold leading-6' }, 'Details'),
-      //   ),
-      // )
-    );
       const bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
+
       bundleDetails.forEach((product) => {
-        block.append(div(
-          { class: 'grid grid-cols-12 text-sm text-black gap-y-4 border-b' },
+        const wrapper = div({
+          class: 'p-4 bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col md:flex-row justify-start items-start md:items-center gap-6 md:gap-12 w-full',
+        });
+
+        const leftSection = div({
+          class: 'flex md:flex-1 flex-row md:items-center gap-3.5 w-full md:w-auto',
+        });
+
+        const imageBox = div(
+          {
+            class: 'w-[90px] h-[90px] p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center',
+          },
+          img({
+            src: product.image,
+            alt: product.title,
+            class: 'w-full h-full object-contain',
+          }),
+        );
+
+        const infoBox = div(
+          {
+            class: 'flex flex-col justify-start items-start gap-2 md:w-auto w-48',
+          },
+          p({ class: 'text-black text-base font-bold leading-snug break-all' }, product.title),
+          p({ class: 'text-gray-500 text-sm leading-tight break-all' }, product.sku),
           div(
-            { class: 'flex flex-row col-span-8 lg:col-span-10 pt-4 pb-4' },
-            img({ src: `${product.image}`, alt: `${product.title}`, class: 'w-4 h-4 rounded-md shadow-lg' }),
-            div(
-              { class: 'flex flex-row items-start pl-4' },
-              p(`${product.title}`),
-              p({ class: 'text-xs' }, `${product.sku}`),
-            ),
+            {
+              class: 'block md:hidden flex-col justify-start items-start',
+            },
+            p({ class: 'text-black text-base font-bold leading-snug' }, `${product.quantity || 1}`),
+            p({ class: 'text-gray-500 text-sm leading-tight' }, 'QTY'),
           ),
+          div({ class: 'block md:hidden text-violet-600 text-base font-bold leading-snug' }, 'View →'),
+        );
+
+        leftSection.append(imageBox, infoBox);
+        wrapper.append(leftSection);
+
+        wrapper.append(
           div(
-            { class: 'col-span-4 md:col-span-2 lg:col-span-1 flex justify-center pt-4 pb-4' },
-            p({ class: '!content-center' }, `${product.quantity ? product.quantity : 1}`),
+            {
+              class: 'hidden md:flex flex-col justify-start items-start',
+            },
+            p({ class: 'text-black text-base font-bold leading-snug' }, `${product.quantity || 1}`),
+            p({ class: 'text-gray-500 text-sm leading-tight' }, 'QTY'),
           ),
-          div(
-            { class: 'hidden md:flex justify-center col-span-2 lg:col-span-1 pt-4 pb-4' },
-            p('--'),
-          ),
-        ));
+          div({
+            class: 'hidden md:block text-violet-600 text-base font-bold leading-snug',
+          }, 'View →'),
+        );
+
+        block.append(wrapper);
       });
     } catch (e) {
       // eslint-disable-next-line no-console
