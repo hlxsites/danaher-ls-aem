@@ -6,7 +6,7 @@ export default function decorate(block) {
   // const imageAspectRatio = 1.7778;
 
   // Add column count class
-  block.classList.add(`columns-${cols.length}-cols`);
+  block.classList.add(`columns-new-${cols.length}-cols`);
 
   // Create wrapper layout
   const wrapper = div({
@@ -56,7 +56,7 @@ export default function decorate(block) {
 
   // === IMAGE COLUMN ===
   const imageCol = div({
-    class: `columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
+    class: `columns-new-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${rightWidth} lg:mt-56`,
   });
 
   const picture = rightCol.querySelector('picture');
