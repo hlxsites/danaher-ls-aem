@@ -1,17 +1,17 @@
-import { decorate as decorateArticleInfoNew } from '../article-info-new/article-info-new.js';
 import { div } from '../../scripts/dom-builder.js';
+import { decorate as decorateArticleInfoNew } from './article-info-new.js'; // Adjust path as needed
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
-  // const imageAspectRatio = 1.7778;
 
   // Add column count class
   block.classList.add(`columns-new-${cols.length}-cols`);
 
   // Create wrapper layout
   const wrapper = div({
-    class: 'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
+    class:
+      'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
   });
 
   const [leftCol, rightCol] = cols;
@@ -52,7 +52,11 @@ export default function decorate(block) {
 
   // Button styling
   textCol.querySelectorAll('a[title="Button"]').forEach((a) => {
-    a.classList.add(...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(' '));
+    a.classList.add(
+      ...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(
+        ' '
+      )
+    );
   });
 
   // === IMAGE COLUMN ===
@@ -76,6 +80,7 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(wrapper);
 
+  // Decorate any .article-info-new blocks inside this wrapper (after append)
   wrapper.querySelectorAll('.article-info-new').forEach((articleBlock) => {
     decorateArticleInfoNew(articleBlock);
   });
