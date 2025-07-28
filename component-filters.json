@@ -151,6 +151,12 @@
     ]
   },
   {
+    "id": "order-submit",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "product-categories",
     "components": [
       ""
