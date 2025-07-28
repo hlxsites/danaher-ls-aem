@@ -267,7 +267,8 @@
                 "template": {
                   "class": {
                     "$ref": "layoutType"
-                  }
+                  },
+                  "rows": "1"
                 }
               }
             }
