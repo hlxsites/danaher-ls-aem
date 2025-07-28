@@ -5,46 +5,51 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   const imageAspectRatio = 1.7778;
 
-  // Clear and rebuild block
-  block.classList.add('columns-2-cols', 'block');
-  const originalCols = cols.map(c => c);
-  block.innerHTML = '';
+  // Add column count class
+  block.classList.add(`columns-${cols.length}-cols`);
 
-  const isTwentyFive = sectionDiv.classList.contains('twentyfiveseventyfive');
-  const isSeventyFive = sectionDiv.classList.contains('seventyfivetwentyfive');
-
+  // Clean slate: reset any layout on the wrapper
   const wrapper = div({
-    class: 'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-center ms-center',
+    class: 'align-text-center w-full h-full container max-w-7xl mx-auto flex flex-col lg:flex-row gap-x-12 justify-center items-center',
   });
 
-  // LEFT COLUMN
-  const leftCol = div({
-    class: `h-full ${isTwentyFive ? 'lg:w-1/4' : isSeventyFive ? 'lg:w-3/4' : 'lg:w-1/2'} md:pr-16`,
+  // Wrap the block's first child with new layout
+  const [leftCol, rightCol] = cols;
+
+  // === TEXT COLUMN ===
+  const textCol = div({ class: 'h-full w-full lg:w-1/2 md:pr-16' });
+
+  const textInner = leftCol.querySelector('div');
+  if (textInner) textCol.append(...textInner.children);
+
+  // Headline styling
+  textCol.querySelectorAll('h1, h2').forEach((h) => {
+    h.classList.add(...'pb-4 text-danahergray-900 text-4xl font-semibold'.split(' '));
   });
 
-  if (originalCols[0]) {
-    // Add content directly without wrapping <p><div>
-    leftCol.appendChild(originalCols[0]);
-
-    // Add headline class
-    const h1 = leftCol.querySelector('h1');
-    if (h1) h1.classList.add('pb-4', 'text-danahergray-900');
-  }
-
-  // RIGHT COLUMN (Image)
-  const rightCol = div({
-    class: `columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 ${isTwentyFive ? 'lg:w-3/4' : isSeventyFive ? 'lg:w-1/4' : 'lg:w-1/2'} lg:mt-56`,
+  // Button styling
+  textCol.querySelectorAll('a[title="Button"]').forEach((a) => {
+    a.classList.add(...'btn btn-outline-primary rounded-full text-danaherpurple-500 border border-danaherpurple-500 px-6 py-3 mt-4 inline-block'.split(' '));
   });
 
-  if (originalCols[1]) {
-    rightCol.appendChild(originalCols[1]);
-    const pic = originalCols[1].querySelector('picture');
-    const img = pic?.querySelector('img');
+  // === IMAGE COLUMN ===
+  const imageCol = div({
+    class: 'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56',
+  });
+
+  const picture = rightCol.querySelector('picture');
+  if (picture) {
+    const img = picture.querySelector('img');
     if (img) {
-      img.classList.add('absolute', 'bottom-0', 'h-full', 'w-full', 'object-cover');
+      img.classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
     }
+    imageCol.append(picture);
   }
 
-  wrapper.append(leftCol, rightCol);
-  block.appendChild(wrapper);
+  // Append columns into wrapper
+  wrapper.append(textCol, imageCol);
+
+  // Replace block content with new wrapper
+  block.textContent = '';
+  block.append(wrapper);
 }
