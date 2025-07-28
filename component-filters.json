@@ -101,7 +101,7 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "columns-new",
     "components": [
       "text",
       "image",

@@ -238,13 +238,13 @@
           }
         },
         {
-          "title": "Columns",
-          "id": "columns",
+          "title": "Columns-New",
+          "id": "columns-new",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
-                "model": "columns",
+                "model": "columns-new",
                 "template": {
                   "class": {
                     "$ref": "layoutType"
