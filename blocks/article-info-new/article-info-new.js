@@ -45,7 +45,10 @@ export default function decorate(block) {
     day: '2-digit',
   });
 
+  console.log('formattedDate', formattedDate);
+
   let formattedDateEl = infoBlock.querySelector('[data-aue-prop="formattedPublishDate"]');
+  console.log('formattedDateEl', formattedDateEl);
 
   formattedDateEl.textContent = formattedDate;
 
