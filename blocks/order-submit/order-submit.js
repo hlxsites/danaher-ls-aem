@@ -63,6 +63,8 @@ const orderSubmitted = async () => {
 };
 
 export default async function decorate(block) {
+  console.log(' block ');
+  
   const params = new URLSearchParams(window.location.search);
   console.log('params', params.get('orderId'));
   if (params.get('orderId')) {
