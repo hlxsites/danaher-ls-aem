@@ -24,7 +24,7 @@
    main img {
      @apply max-w-full w-auto h-auto;
    }
-   
+
   .checkout-container
   {
     background: #e5e7eb;

@@ -2,10 +2,6 @@
   margin-left: 25px
 }
 
-.order-submit-wrapper :is(.block) {
-  display: block
-}
-
 .order-submit-wrapper :is(.flex) {
   display: flex
 }

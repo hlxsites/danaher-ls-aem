@@ -102,6 +102,7 @@ module.exports = {
   },
   safelist: [
     "appear",
+    "checkout-container",
     "btn",
     "bg-danaherlightblue-50",
     "bottom-border-right",
