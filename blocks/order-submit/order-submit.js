@@ -7,7 +7,7 @@ import { postApiData } from '../../scripts/api-utils.js';
 
 const orderSubmitted = async () => {
   const basketData = sessionStorage.getItem('basketData');
-  const basketId = JSON.parse(basketData.data);
+  const basketId = JSON.parse(basketData);
   console.log('basketId', basketId);
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -62,15 +62,13 @@ const orderSubmitted = async () => {
   }
 };
 
-export default async function decorate(block) {
-  console.log(' block ');
-  
+export const orderConfirmed = async () => {
   const params = new URLSearchParams(window.location.search);
   console.log('params', params.get('orderId'));
   if (params.get('orderId')) {
     let orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
-    orderDetails?.data?.attributes.forEach((item) => {
+    orderDetails.data.attributes.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
         notes = item.value;
       }
@@ -121,7 +119,7 @@ export default async function decorate(block) {
           class:
             'self-stretch justify-start text-gray-900 text-3xl font-semibold leading-10',
         },
-        `Order number: ${orderDetails?.data?.documentNumber}`,
+        `Order number: ${orderDetails.data.documentNumber}`,
       ),
       div(
         {
@@ -289,7 +287,7 @@ export default async function decorate(block) {
                   class:
                     'self-stretch inline-flex justify-start items-center gap-6',
                 },
-                notes !== ''
+                notes != ''
                   ? notesValue()
                   : '',
               ),
@@ -337,11 +335,11 @@ export default async function decorate(block) {
     deleteButtondiv.forEach((element) => {
       element.parentElement.remove();
     });
-    block.append(orderConfirmationWrapper);
-  } else {
-    const noPageFound = div({
-      class: 'justify-start text-4xl font-bold leading-[48px]',
-    }, '404: PAGE NOT FOUND');
-    block.append(noPageFound);
+    return orderConfirmationWrapper;
   }
-}
+
+  const noPageFound = div({
+    class: 'justify-start text-4xl font-bold leading-[48px]',
+  }, '404: PAGE NOT FOUND');
+  return noPageFound;
+};

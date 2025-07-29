@@ -24,7 +24,12 @@
    main img {
      @apply max-w-full w-auto h-auto;
    }
- 
+   
+  .checkout-container
+  {
+    background: #e5e7eb;
+  }
+
    .dhls-container .text-xs {
     font-size: 12px !important;
   }
