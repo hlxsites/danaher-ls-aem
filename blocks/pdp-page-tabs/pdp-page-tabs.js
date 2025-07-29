@@ -1,17 +1,11 @@
 import { div, p } from '../../scripts/dom-builder.js';
 
-// Highlight the tabs on selection and scroll to specific section
-const tabMap = {
-  Description: '#description-tab',
-  Specifications: '#specifications-tab',
-  'Product Parts List': '#bundle-list-tab',
-  Products: '#products-tab',
-  Resources: '#resources-tab',
-  Citations: '#citations-tab',
-};
-
+// Global tracking for scroll behavior
 let lastScrollY = window.scrollY;
 let isManualScroll = false;
+
+// This will be set dynamically inside decorate()
+let dynamicTabMap = {};
 
 function highlightActiveTab(forcedLabel = null) {
   if (isManualScroll && !forcedLabel) return;
@@ -23,7 +17,7 @@ function highlightActiveTab(forcedLabel = null) {
 
   const allTabs = document.querySelectorAll('.p-tab');
 
-  const tabEntries = Object.entries(tabMap)
+  const tabEntries = Object.entries(dynamicTabMap)
     .map(([label, selector]) => {
       const section = document.querySelector(selector);
       return section
@@ -94,7 +88,7 @@ function highlightActiveTab(forcedLabel = null) {
 
 function updatePageTabs(event) {
   const label = event.target.textContent.trim();
-  const targetId = tabMap[label];
+  const targetId = dynamicTabMap[label];
   const targetEl = document.querySelector(targetId);
 
   if (targetEl) {
@@ -118,43 +112,61 @@ function updatePageTabs(event) {
 export default async function decorate(block) {
   block.classList.add('bg-white');
   block.parentElement.parentElement.style.padding = '0px';
-  // block.parentElement.parentElement.style.paddingRight = '0px';
+
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
 
-  // Description
-  if (response?.raw?.richlongdescription !== undefined && response?.raw?.richlongdescription?.trim() !== '') {
-    tabsList.push('Description');
-  }
-  // Specification
-  if (response?.raw?.attributejson !== undefined && response?.raw?.attributejson?.trim() !== '') {
-    tabsList.push('Specifications');
-  }
-  // Products
-  if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
-    tabsList.push('Products');
-  }
-  // Resources
-  if (response?.raw?.numresources) {
-    tabsList.push('Resources');
-  }
-  // Bundle part list
-  if (response?.raw?.bundlepreviewjson !== undefined && response?.raw?.bundlepreviewjson?.trim() !== '') {
-    tabsList.push('Product Parts List');
-  }
+  // Decide tabs based on available data
+  if (response?.raw?.richlongdescription?.trim()) tabsList.push('Description');
+  if (response?.raw?.attributejson?.trim()) tabsList.push('Specifications');
+  if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) tabsList.push('Products');
+  if (response?.raw?.numresources) tabsList.push('Resources');
+  if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
 
-  const tabsDiv = div({ class: 'tabs-parent flex flex-row md:flex-col overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden' });
+  // Full map of label to section ID
+  const fullTabMap = {
+    Description: '#description-tab',
+    Specifications: '#specifications-tab',
+    'Product Parts List': '#bundle-list-tab',
+    Products: '#products-tab',
+    Resources: '#resources-tab',
+    Citations: '#citations-tab',
+  };
+
+  // Dynamically build tab map based on actual tabs available
+  dynamicTabMap = Object.fromEntries(
+    tabsList.map((label) => [label, fullTabMap[label]]),
+  );
+
+  // Build UI
+  const tabsDiv = div({
+    class:
+      'tabs-parent flex flex-row md:flex-col overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
+  });
+
   tabsList.forEach((tab, index) => {
     tabsDiv.append(
       div(
-        { class: 'shrink-0 px-6 py-4 md:relative flex flex-col-reverse md:flex-row justify-start items-center gap-3' },
-        div({ class: `${index === 0 ? 'bg-danaherpurple-500 rounded-[5px]' : ''} w-12 h-1 md:w-1 md:h-12 md:left-0 md:top-[2px] md:absolute` }),
-        p({
-          class: `p-tab ${index === 0 ? 'text-danaherpurple-500 font-bold' : 'text-black font-medium'}  text-base cursor-pointer`,
-          onclick(event) {
-            updatePageTabs(event);
+        {
+          class:
+            'shrink-0 px-6 py-4 md:relative flex flex-col-reverse md:flex-row justify-start items-center gap-3',
+        },
+        div({
+          class: `${
+            index === 0 ? 'bg-danaherpurple-500 rounded-[5px]' : ''
+          } w-12 h-1 md:w-1 md:h-12 md:left-0 md:top-[2px] md:absolute`,
+        }),
+        p(
+          {
+            class: `p-tab ${
+              index === 0
+                ? 'text-danaherpurple-500 font-bold'
+                : 'text-black font-medium'
+            } text-base cursor-pointer`,
+            onclick: updatePageTabs,
           },
-        }, tab),
+          tab,
+        ),
       ),
     );
   });
@@ -163,8 +175,10 @@ export default async function decorate(block) {
     { class: 'super-parent md:w-48 overflow-x-auto' },
     tabsDiv,
   );
+
   block.replaceChildren();
   block.append(pageTabsSuperParent);
+
   window.addEventListener('scroll', () => {
     highlightActiveTab();
   });
