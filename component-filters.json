@@ -109,13 +109,23 @@
       "image",
       "button",
       "title",
-      "article-info-new"
+      "article-info-new",
+      "embed",
+      "form"
     ]
   },
   {
     "id": "dual-carousel",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "embed",
+    "components": [
+      "video",
+      "pdf",
+      "iframe"
     ]
   },
   {
