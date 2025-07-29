@@ -88,19 +88,11 @@ function imageSlider(allImages, productName = 'product') {
 }
 
 export default async function decorate(block) {
-  block.parentElement.parentElement.classList.add('!p-0');
+  block.parentElement.parentElement.style.padding = '0';
   const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
-
-  /* currency formatter */
-  // function formatMoney(number) {
-  //   return number.toLocaleString('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD',
-  //   });
-  // }
   const result = JSON.parse(localStorage.getItem('eds-product-details'));
 
   const productInfo = await getProductDetails(result?.raw?.sku);
@@ -171,7 +163,7 @@ export default async function decorate(block) {
 
   const infoTab = div(
     {
-      class: 'self-stretch inline-flex justify-start items-center gap-9',
+      class: 'self-stretch md:flex justify-start items-center gap-9',
     },
     div(
       {

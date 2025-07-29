@@ -259,6 +259,10 @@
   padding: 0px !important;
 }
 
+.pdp-hero-wrapper :is(.p-0) {
+  padding: 0px;
+}
+
 .pdp-hero-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -292,6 +296,10 @@
 .pdp-hero-wrapper :is(.py-4) {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.pdp-hero-wrapper :is(.\!pb-0) {
+  padding-bottom: 0px !important;
 }
 
 .pdp-hero-wrapper :is(.text-center) {
@@ -429,6 +437,10 @@
 }
 
 @media (min-width: 768px) {
+  .pdp-hero-wrapper :is(.md\:flex) {
+    display: flex;
+  }
+
   .pdp-hero-wrapper :is(.md\:inline-flex) {
     display: inline-flex;
   }
@@ -439,6 +451,18 @@
 
   .pdp-hero-wrapper :is(.md\:flex-row) {
     flex-direction: row;
+  }
+
+  .pdp-hero-wrapper :is(.md\:items-center) {
+    align-items: center;
+  }
+
+  .pdp-hero-wrapper :is(.md\:justify-start) {
+    justify-content: flex-start;
+  }
+
+  .pdp-hero-wrapper :is(.md\:gap-9) {
+    gap: 2.25rem;
   }
 }
 
