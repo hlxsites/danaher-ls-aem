@@ -133,7 +133,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: 'md:w-[692px] h-5 flex flex-col justify-start items-start',
+        class: 'md:w-[692px] flex flex-col justify-start items-start',
       },
       div(
         {
