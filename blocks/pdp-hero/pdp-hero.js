@@ -131,7 +131,8 @@ export default async function decorate(block) {
         {
           class: 'justify-start text-gray-700 text-base font-extralight leading-snug',
         },
-        productInfo?.data?.sku,
+        result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
       ),
     ),
     div(
@@ -545,9 +546,9 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const bundleTab = main.querySelector('#bundle-list-tab');
-    if (bundleTab) {
-      bundleTab.scrollIntoView({ behavior: 'smooth' });
+    const bundleTabList = main.querySelector('#bundle-list-tab');
+    if (bundleTabList) {
+      bundleTabList.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
@@ -632,8 +633,10 @@ export default async function decorate(block) {
   const categoriesDiv = div({
     class: 'md:w-[692px] flex-wrap py-4 inline-flex justify-start items-start gap-2',
   });
-  result?.raw?.categories?.forEach((category) => {
-    categoriesDiv.append(categoryDiv(category));
+  result?.raw?.categoriesname?.forEach((category) => {
+    // If category contains '|', split and use the last part
+    const lastLevel = category.includes('|') ? category.split('|').pop().trim() : category;
+    categoriesDiv.append(categoryDiv(lastLevel));
   });
 
   defaultContent.append(categoriesDiv);

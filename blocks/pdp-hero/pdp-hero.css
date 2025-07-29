@@ -145,6 +145,10 @@
   width: 1px;
 }
 
+.pdp-hero-wrapper :is(.w-8) {
+  width: 2rem;
+}
+
 .pdp-hero-wrapper :is(.flex-1) {
   flex: 1 1 0%;
 }
