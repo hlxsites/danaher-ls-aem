@@ -222,10 +222,14 @@ function skipConverter(path) {
   */
 
  //This condition check will removed
-  if (!window.location.host.startsWith('lifesciences.danaher.com')) {
-    if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) {
-      return true;
+  if(!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
+    if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
+        return false;
     }
+    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands')) && !path.includes('/topics-jck1/')) {    
+        return true;
+    }
+    if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true; 
   }
 
   if (path.includes('/us/en/blog-eds/')) return true;
