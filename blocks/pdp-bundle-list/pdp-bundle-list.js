@@ -44,7 +44,7 @@ export default async function decorate(block) {
             p({ class: 'text-black text-base font-bold leading-snug' }, `${product.quantity || 1}`),
             p({ class: 'text-gray-500 text-sm leading-tight' }, 'QTY'),
           ),
-          div({ class: 'block md:hidden text-violet-600 text-base font-bold leading-snug' }, 'View →'),
+          div({ class: 'block md:hidden cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug' }, 'View →'),
         );
 
         leftSection.append(imageBox, infoBox);
@@ -59,7 +59,7 @@ export default async function decorate(block) {
             p({ class: 'text-gray-500 text-sm leading-tight' }, 'QTY'),
           ),
           div({
-            class: 'hidden md:block text-violet-600 text-base font-bold leading-snug',
+            class: 'hidden md:block cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug',
           }, 'View →'),
         );
 
