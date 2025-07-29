@@ -7,7 +7,7 @@ import { postApiData } from '../../scripts/api-utils.js';
 
 const orderSubmitted = async () => {
   const basketData = sessionStorage.getItem('basketData');
-  const basketId = JSON.parse(basketData);
+  const basketId = JSON.parse(basketData.data);
   console.log('basketId', basketId);
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -70,7 +70,7 @@ export default async function decorate(block) {
   if (params.get('orderId')) {
     let orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
-    orderDetails.data.attributes.forEach((item) => {
+    orderDetails?.data?.attributes.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
         notes = item.value;
       }
@@ -121,7 +121,7 @@ export default async function decorate(block) {
           class:
             'self-stretch justify-start text-gray-900 text-3xl font-semibold leading-10',
         },
-        `Order number: ${orderDetails.data.documentNumber}`,
+        `Order number: ${orderDetails?.data?.documentNumber}`,
       ),
       div(
         {
