@@ -35,6 +35,10 @@
   display: block;
 }
 
+.pdp-hero-wrapper :is(.inline-block) {
+  display: inline-block;
+}
+
 .pdp-hero-wrapper :is(.flex) {
   display: flex;
 }
@@ -421,6 +425,18 @@
 }
 
 @media (min-width: 768px) {
+  .pdp-hero-wrapper :is(.md\:visible) {
+    visibility: visible;
+  }
+
+  .pdp-hero-wrapper :is(.md\:flex) {
+    display: flex;
+  }
+
+  .pdp-hero-wrapper :is(.md\:inline-flex) {
+    display: inline-flex;
+  }
+
   .pdp-hero-wrapper :is(.md\:w-\[692px\]) {
     width: 692px;
   }

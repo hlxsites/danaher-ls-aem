@@ -331,20 +331,20 @@ export default async function decorate(block) {
     priceInfoDiv.append(pricingQuoteButton);
   }
 
-  const brandButton = document.createElement('button');
-  brandButton.textContent = 'Buy Now on abcam.com';
-  brandButton.classList.add(
-    ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
-      ' ',
-    ),
-  );
+  // const brandButton = document.createElement('button');
+  // brandButton.textContent = 'Buy Now on abcam.com';
+  // brandButton.classList.add(
+  //   ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
+  //     ' ',
+  //   ),
+  // );
 
-  const brandURL = result?.raw?.externallink
-    ? `${result.raw.externallink}?utm_source=dhls_website`
-    : null;
-  brandButton.addEventListener('click', () => {
-    window.open(brandURL, '_blank');
-  });
+  // const brandURL = result?.raw?.externallink
+  //   ? `${result.raw.externallink}?utm_source=dhls_website`
+  //   : null;
+  // brandButton.addEventListener('click', () => {
+  //   window.open(brandURL, '_blank');
+  // });
   const infoDiv = div({
     class: '',
   });
@@ -551,12 +551,11 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const bundleListTab = main.querySelector('#bundle-list-tab')
+    const bundleListTab = main.querySelector('#bundle-list-tab');
     if (bundleListTab) {
       bundleListTab.scrollIntoView({ behavior: 'smooth' });
-      bundleListTab.style.paddingTop = '110px'
+      bundleListTab.style.paddingTop = '110px';
     }
-    
   });
 
   if (result?.raw?.objecttype === 'Family') {
