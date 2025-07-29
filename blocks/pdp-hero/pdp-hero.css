@@ -59,6 +59,10 @@
   margin-top: 11rem;
 }
 
+.pdp-hero-wrapper :is(.mt-\[-10px\]) {
+  margin-top: -10px;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }

@@ -209,6 +209,20 @@ export default async function decorate(block) {
   headingDiv.append(itemInfoDiv);
   defaultContent.append(headingDiv);
 
+    const quoteButton = button(
+    {
+      class:
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+    },
+    div(
+      {
+        class: 'inherit text-base font-medium leading-snug',
+      },
+      'Request a Quote',
+    ),
+  );
+
+
   const infoTab = div(
     {
       class: 'self-stretch inline-flex justify-start items-start md:items-center gap-9 flex-col md:flex-row',
@@ -492,6 +506,12 @@ export default async function decorate(block) {
   if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
     priceInfoDiv.append(quoteButton);
   }
+  if (
+    result?.raw?.objecttype === 'Family'
+  ) {
+    defaultContent.append(quoteButton);
+  }
+
 
   if (result?.raw?.objecttype === 'Product') {
     priceInfoDiv.append(pricingQuoteButton);
@@ -589,18 +609,6 @@ export default async function decorate(block) {
   decorateIcons(info);
   infoDiv.prepend(info);
 
-  const quoteButton = button(
-    {
-      class:
-              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-    },
-    div(
-      {
-        class: 'inherit text-base font-medium leading-snug',
-      },
-      'Request a Quote',
-    ),
-  );
 
   decorateModals(quoteButton);
 
@@ -635,7 +643,7 @@ export default async function decorate(block) {
         ),
         div(
           {
-            class: 'w-56 h-[1rem]',
+            class: 'w-56 h-[1rem] mt-[-10px]',
           },
           span({
             class:
@@ -732,7 +740,7 @@ export default async function decorate(block) {
         ),
         div(
           {
-            class: 'w-[190px] h-[1rem]',
+            class: 'w-[190px] h-[1rem] mt-[-10px]',
           },
           span({
             class:
@@ -742,7 +750,7 @@ export default async function decorate(block) {
 
         div(
           {
-            class: 'w-[190px] inline-flex justify-center items-center', // Changed to w-[190px] to match Rectangle
+            class: 'w-[190px] inline-flex justify-center items-center',
           },
           span({
             class:
