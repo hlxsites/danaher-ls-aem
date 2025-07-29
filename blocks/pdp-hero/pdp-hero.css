@@ -31,6 +31,10 @@
   margin-top: 22px;
 }
 
+.pdp-hero-wrapper :is(.mt-12) {
+  margin-top: 3rem;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }

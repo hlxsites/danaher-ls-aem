@@ -446,10 +446,9 @@ export default async function decorate(block) {
 
   categoryLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const tabsSuperParent = main.querySelector('.tabs-super-parent');
-    if (tabsSuperParent) {
-      tabsSuperParent.scrollIntoView({ behavior: 'smooth' });
-      tabsSuperParent.classList.add('mt-32');
+    const product_Tab = main.querySelector('#products-tab');
+    if (product_Tab) {
+      product_Tab.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
