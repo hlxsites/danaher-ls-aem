@@ -56,17 +56,18 @@ export default function decorate(block) {
 
     if (prop === 'publishDate' && value) {
       const date = new Date(value);
-      p.textContent = Number.isNaN(date)
-        ? date.toLocaleDateString('en-US', {
+      if (!Number.isNaN(date.getTime())) {
+        p.textContent = date.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
           day: '2-digit',
-        })
-        : value;
+        });
+      } else {
+        p.textContent = value;
+      }
     } else {
       p.textContent = value;
     }
-
     infoBlock.appendChild(p);
   });
 
