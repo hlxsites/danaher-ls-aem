@@ -88,19 +88,11 @@ function imageSlider(allImages, productName = 'product') {
 }
 
 export default async function decorate(block) {
-  block.parentElement.parentElement.classList.add('!p-0');
+  block.parentElement.parentElement.style.padding = '0';
   const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
-
-  /* currency formatter */
-  // function formatMoney(number) {
-  //   return number.toLocaleString('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD',
-  //   });
-  // }
   const result = JSON.parse(localStorage.getItem('eds-product-details'));
 
   const productInfo = await getProductDetails(result?.raw?.sku);
@@ -133,7 +125,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: 'md:w-[692px] flex flex-col justify-start items-start',
+        class: 'md:w-[692px] h-5 flex flex-col justify-start items-start',
       },
       div(
         {
@@ -171,7 +163,7 @@ export default async function decorate(block) {
 
   const infoTab = div(
     {
-      class: 'self-stretch inline-flex justify-start items-center gap-9',
+      class: 'self-stretch md:flex justify-start items-center gap-9',
     },
     div(
       {
@@ -446,10 +438,9 @@ export default async function decorate(block) {
 
   categoryLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const tabsSuperParent = main.querySelector('.tabs-super-parent');
-    if (tabsSuperParent) {
-      tabsSuperParent.scrollIntoView({ behavior: 'smooth' });
-      tabsSuperParent.style.paddingTop = '110px';
+    const productTab = main.querySelector('#products-tab');
+    if (productTab) {
+      productTab.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
@@ -551,10 +542,9 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const bundleListTab = main.querySelector('#bundle-list-tab');
-    if (bundleListTab) {
-      bundleListTab.scrollIntoView({ behavior: 'smooth' });
-      bundleListTab.style.paddingTop = '110px';
+    const bundleTab = main.querySelector('#bundle-list-tab');
+    if (bundleTab) {
+      bundleTab.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
