@@ -912,7 +912,7 @@ async function designPdp() {
   const heroSection = sections.find((sec) => sec.classList.contains('pdp-hero-container'));
 
   const flexWrapper = div({
-    class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto',
+    class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto pt-12',
   });
 
   const tabsWrapper = div({

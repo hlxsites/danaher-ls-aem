@@ -23,10 +23,6 @@
   }
 }
 
-.dhls-container .productbrandhome .columns > div div > p:not(.button-container) {
-  font-size: 16px
-}
-
 .productbrandhome .columns > div div > p:not(.button-container) {
   font-size: 1rem;
   font-weight: 200;
@@ -42,10 +38,6 @@
        column-gap: 1.5rem
 }
 
-.dhls-container .productbrandhome .columns h2 {
-  font-size: 32px
-}
-
 .productbrandhome .columns h2 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -57,20 +49,12 @@
   color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
-.dhls-container .productbrandhome main .columns > div > div > p:not(.button-container) {
-  font-size: 16px
-}
-
 .productbrandhome main .columns > div > div > p:not(.button-container) {
   margin-top: 0.75rem;
   font-size: 1rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.dhls-container .productbrandhome main .cols-3 > div > div > p:not(.button-container) {
-  font-size: 16px
 }
 
 .productbrandhome main .cols-3 > div > div > p:not(.button-container) {
@@ -83,10 +67,6 @@
 
 .productbrandhome main .columns > div > div > h3 {
   margin-top: 0px !important
-}
-
-.dhls-container .productbrandhome main .section.default-content-wrapper > p {
-  font-size: 16px
 }
 
 .productbrandhome main .section.default-content-wrapper > p {
