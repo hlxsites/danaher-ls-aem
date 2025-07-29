@@ -1,17 +1,13 @@
 import {
   div,
-  p,
   span,
   input,
   button,
   a,
 } from '../../scripts/dom-builder.js';
 import {
-  getAuthorization,
-  getCommerceBase,
   getProductDetails,
 } from '../../scripts/commerce.js';
-import { showPreLoader } from '../../scripts/common-utils.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
@@ -91,54 +87,7 @@ function imageSlider(allImages, productName = 'product') {
   );
 }
 
-async function addToQuote(product) {
-  try {
-    const baseURL = getCommerceBase();
-    const authHeader = getAuthorization();
-    if (
-      authHeader
-      && (authHeader.has('authentication-token')
-        || authHeader.has('Authorization'))
-    ) {
-      const quote = await fetch(`${baseURL}/rfqcart/-`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...Object.fromEntries(authHeader),
-        },
-        body: JSON.stringify({
-          quantity: {
-            type: 'Quantity',
-            value: 1,
-            unit: 'N/A',
-          },
-          productSKU: product?.raw?.sku,
-          image: product?.raw?.images?.[0],
-          brand: product?.raw?.opco,
-          referrer: window.location.href,
-          referrerTitle: document.title
-            .replace('| Danaher Lifesciences', '')
-            .replace('| Danaher Life Sciences', '')
-            .trim(),
-        }),
-      });
-      const { default: getToast } = await import('../../scripts/toast.js');
-      if (quote.status === 200) {
-        const responseJson = await quote.json();
-        const addedProduct = responseJson?.items?.slice(-1)?.at(0);
-        await getToast('quote-toast', addedProduct);
-      } else {
-        await getToast('quote-toast', null);
-      }
-    }
-  } catch (error) {
-    const { default: getToast } = await import('../../scripts/toast.js');
-    await getToast('quote-toast', null);
-  }
-}
-
 export default async function decorate(block) {
-  console.log('pdp-hero block:', block.parentElement.parentElement);
   block.parentElement.parentElement.classList.add('!p-0');
   const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
@@ -146,17 +95,15 @@ export default async function decorate(block) {
   titleEl?.parentElement.parentElement.remove();
 
   /* currency formatter */
-  function formatMoney(number) {
-    return number.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-  }
+  // function formatMoney(number) {
+  //   return number.toLocaleString('en-US', {
+  //     style: 'currency',
+  //     currency: 'USD',
+  //   });
+  // }
   const result = JSON.parse(localStorage.getItem('eds-product-details'));
 
-  console.log('result:', result);
   const productInfo = await getProductDetails(result?.raw?.sku);
-  console.log('product Info', productInfo);
   const allImages = result?.raw.images;
   const verticalImageGallery = imageSlider(allImages, result?.Title);
   const defaultContent = div({
@@ -209,7 +156,7 @@ export default async function decorate(block) {
   headingDiv.append(itemInfoDiv);
   defaultContent.append(headingDiv);
 
-    const quoteButton = button(
+  const quoteButton = button(
     {
       class:
               'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
@@ -221,7 +168,6 @@ export default async function decorate(block) {
       'Request a Quote',
     ),
   );
-
 
   const infoTab = div(
     {
@@ -238,10 +184,11 @@ export default async function decorate(block) {
         class: 'flex-1 py-3 flex justify-start items-start gap-4 flex-col md:flex-row',
       },
 
-      //For future implementation
+      // For future implementation
       // div({
       //   class:
-      //     'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
+      //     'w-12 h-0 origin-top-left rotate-90 outline outline-1
+      // outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
       // }),
       // div(
       //   {
@@ -350,34 +297,6 @@ export default async function decorate(block) {
     ),
   );
 
-  // const rfqEl = block.querySelector(':scope > div:nth-child(1)');
-  // let rfqParent;
-  // const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-  // if (addCartBtnEl) {
-  //   addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-  // }
-  // if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
-  //   rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
-  //   if (result?.raw?.objecttype === 'Product' || result?.raw?.objecttype === 'Bundle') {
-  //     rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
-  //     rfqParent.addEventListener('click', () => {
-  //       addToQuote(result);
-  //     });
-  //   } else {
-  //     rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
-  //   }
-  // }
-
-  const modalInput = input({
-    id: productInfo?.data?.lineItemId || 'default-id',
-    class: 'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
-    type: 'number',
-    min: productInfo?.data?.minOrderQuantity,
-    max: productInfo?.data?.maxOrderQuantity == 0 ? 99 : productInfo?.data?.maxOrderQuantity,
-    name: 'item-quantity',
-    value: 1,
-  });
-
   const pricingQuoteButton = div(
     {
       class:
@@ -416,86 +335,11 @@ export default async function decorate(block) {
     ),
   );
 
-  // const buyButton = div(
-  //   {
-  //     class: 'flex justify-start items-start gap-3',
-  //   },
-  //   button(
-  //     {
-  //       class:
-  //             'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-  //       sku: productInfo?.data?.sku,
-  //       productName: productInfo?.data?.productName,
-  //       minOrderQuantity: productInfo?.data?.minOrderQuantity,
-  //       manufacturer: productInfo?.data?.manufacturer,
-  //       maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
-  //       price: productInfo?.data?.salePrice?.value,
-  //       quantity: 0,
-  //     },
-  //     'Buy Now',
-  //   ),
-  // );
-  // let enteredValue = 0;
-  // modalInput.addEventListener('change', (event) => {
-  //   // const selectedDiv = document.getElementById
-  //   // (productInfo.data.lineItemId); // or any div reference
-  //   const inputElement = document.getElementById(productInfo?.data?.lineItemId);
-  //   const productItem = inputElement.parentElement;
-  //   console.log('productItem', inputElement);
-  //   enteredValue = event.target.value;
-  //   console.log('enteredValue', enteredValue);
-  //   if (enteredValue < Number(inputElement.min)) {
-  //     console.log('minnn');
-  //     productItem.style.border = '2px solid red';
-  //     alert(
-  //       `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-  //     );
-  //   } else if (enteredValue > Number(input.max)) {
-  //     console.log('max');
-  //     productItem.style.border = '2px solid red';
-  //     alert(
-  //       `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
-  //     );
-  //   } else {
-  //     productItem.style.border = '';
-  //     // modifyCart("quantity-added", input, event.target.value);
-  //   }
-  //   // modifyCart("quantity-added", event.target.value);
-  // });
-  // buyButton.addEventListener('click', async (event) => {
-  //   showPreLoader();
-  //   const item = event.target.attributes;
-  //   if (enteredValue == 0) enteredValue = 1;
-  //   item.enteredValue = Number(enteredValue);
-  //   console.log('item  id', item);
-  // });
-  // const addToCart = div(
-  //   {
-  //     class: 'self-stretch inline-flex justify-start items-end gap-3',
-  //   },
-  //   modalInput,
-  //   buyButton,
-  // );
-  // decorateIcons(addToCart);
-  // // defaultContent.append(rfqParent);
-  // const buttonTab = div(
-  //   {
-  //     class:
-  //           'w-full self-stretch inline-flex justify-start items-end gap-3',
-  //   },
-  //   ...(productInfo?.data?.salePrice?.value != 0 && result?.raw?.objecttype === 'Product' ? [addToCart] : []),
-  //   ...(rfqParent ? [rfqParent] : []),
-  // );
-
   const priceInfoDiv = div({
     class: 'self-stretch flex flex-col justify-start items-start gap-5',
   });
-  {
-    priceInfoDiv.append(infoTab);
-    priceInfoDiv.append(shipInfo);
-  }
+  priceInfoDiv.append(infoTab, shipInfo);
 
-  // priceInfoDiv.append(buttonTab);
   if (
     result?.raw?.objecttype === 'Product'
       || result?.raw?.objecttype === 'Bundle'
@@ -512,16 +356,9 @@ export default async function decorate(block) {
     defaultContent.append(quoteButton);
   }
 
-
   if (result?.raw?.objecttype === 'Product') {
     priceInfoDiv.append(pricingQuoteButton);
   }
-  /* brandname checking and displaying buy now btn */
-
-  const brandName = result?.raw?.opco || null;
-  const showskupricelistusd = result?.raw.listpriceusd;
-
-  const currncyFormat = Number(showskupricelistusd);
 
   const brandButton = document.createElement('button');
   brandButton.textContent = 'Buy Now on abcam.com';
@@ -537,34 +374,6 @@ export default async function decorate(block) {
   brandButton.addEventListener('click', () => {
     window.open(brandURL, '_blank');
   });
-
-  /* eslint eqeqeq: "off" */
-  if (
-    showskupricelistusd
-        && brandName === 'Abcam'
-        && showskupricelistusd != ''
-  ) {
-    const brandStartPrice = div(
-      { class: 'brand-price mt-4 flex divide-x gap-4' },
-      div(
-        p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
-        p(
-          { class: 'start-price leading-none' },
-          `${formatMoney(currncyFormat)}`,
-        ),
-      ),
-      div(
-        {
-          class:
-                'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start',
-        },
-        brandButton,
-      ),
-    );
-    defaultContent.append(brandStartPrice);
-    if (rfqParent) rfqParent.remove();
-  }
-
   const infoDiv = div({
     class: '',
   });
@@ -608,7 +417,6 @@ export default async function decorate(block) {
   );
   decorateIcons(info);
   infoDiv.prepend(info);
-
 
   decorateModals(quoteButton);
 
@@ -788,54 +596,6 @@ export default async function decorate(block) {
       });
     }
   });
-  // categoryLink.addEventListener("click", () => {
-  //   window.open(externalURL, "_blank");
-  // });
-
-  // const pricingQuoteButton = div(
-  //   {
-  //     class:
-  //             'inline-flex justify-start items-center gap-3',
-  //   },
-  //   input({
-  //     type: 'number',
-  //     value: '1',
-  //     min: '1',
-  //     class:
-  //             'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
-  //   }),
-  //   a(
-  //     {
-  //       class:
-  //               'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
-  //     },
-  //     span(
-  //       {
-  //         class: 'inherit text-base font-medium leading-snug',
-  //       },
-  //       'Buy Now',
-  //     ),
-  //   ),
-  //   div(
-  //     {
-  //       class:
-  //               'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-  //     },
-  //     span(
-  //       {
-  //         class: 'inherit text-base font-medium leading-snug',
-  //       },
-  //       'Quote',
-  //     ),
-  //   ),
-  // );
-  // if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
-  //   defaultContent.append(quoteButton);
-  // }
-
-  // if (result?.raw?.objecttype === 'Product') {
-  //   defaultContent.append(pricingQuoteButton);
-  // }
 
   if (result?.raw?.objecttype === 'Family') {
     defaultContent.append(
