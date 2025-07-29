@@ -171,86 +171,57 @@ export default async function decorate(block) {
 
   const infoTab = div(
     {
-      class: 'self-stretch inline-flex justify-start items-start md:items-center gap-9 flex-col md:flex-row',
+      class: 'self-stretch inline-flex justify-start items-center gap-9',
     },
     div(
       {
-        class: 'justify-start text-black text-4xl font-normal py-3',
+        class: 'justify-start text-black text-4xl font-normal ',
       },
       `$${productInfo?.data?.salePrice?.value}`,
     ),
     div(
       {
-        class: 'flex-1 py-3 flex justify-start items-start gap-4 flex-col md:flex-row',
+        class: 'flex-1 py-3 flex justify-start items-start gap-4',
       },
 
-      // For future implementation
-      // div({
-      //   class:
-      //     'w-12 h-0 origin-top-left rotate-90 outline outline-1
-      // outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
-      // }),
-      // div(
-      //   {
-      //     class: 'inline-flex flex-col justify-center gap-2 items-start',
-      //   },
-      //   div(
-      //     {
-      //       class: 'justify-start text-black text-base font-extralight',
-      //     },
-      //     'Availability',
-      //   ),
-      //   div(
-      //     {
-      //       class: 'text-right justify-start text-black text-base font-bold ',
-      //     },
-      //     productInfo?.data?.availability ? productInfo?.data?.availability : '',
-      //   ),
-      // ),
-
       div({
-        class:
-          'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
+        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
-          class:
-            'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
+          class: 'w-28 inline-flex flex-col justify-center items-start gap-2',
         },
         div(
           {
-            class: 'justify-start text-black text-base font-extralight ',
+            class: 'w-28 justify-start text-black text-base font-extralight',
           },
           'Unit of Measure',
         ),
         div(
           {
-            class: 'text-right justify-start text-black text-base font-bold ',
+            class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo?.data?.packingUnit ? `${productInfo?.data?.packingUnit} /Bundle` : '',
+          productInfo?.data?.packingUnit ? `${productInfo.data.packingUnit} /Bundle` : '',
         ),
       ),
-
       div({
-        class:
-          'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
+        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
-          class:
-            'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
+          class: 'w-28 inline-flex flex-col justify-center items-start gap-2',
         },
         div(
           {
-            class: 'justify-start text-black text-base font-extralight',
+            class: 'w-28 justify-start text-black text-base font-extralight',
           },
           'Min. Order Qty',
         ),
         div(
           {
-            class: 'text-right justify-start text-black text-base font-bold ',
+            class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo?.data?.minOrderQuantity,
+          productInfo?.data?.minOrderQuantity || '',
         ),
       ),
     ),
