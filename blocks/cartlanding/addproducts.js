@@ -85,6 +85,7 @@ export const addProducts = async () => {
     dtName,
     placeholder,
   ) => {
+    console.log('palceholder', placeholder);
     const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
     const searchElement = div(
       {
@@ -129,7 +130,9 @@ export const addProducts = async () => {
 
   async function handleSearchInput(e) {
     const clearIcon = document.querySelector('span.searchbox-clear');
+    console.log('clearIcon', clearIcon);
     const inputValue = document.getElementById('searchInput');
+    console.log('inputValue', inputValue.value);
     if (inputValue.value) {
       clearIcon.classList.add('cursor-pointer');
       clearIcon.classList.remove('hidden');
@@ -225,6 +228,7 @@ export const addProducts = async () => {
   const onClickCoveoResponse = async () => {
     showPreLoader();
     const inputValue = document.getElementById('searchInput').value;
+    console.log('inputValue', inputValue);
     const searchValue = {
       value: inputValue,
     };
@@ -233,10 +237,12 @@ export const addProducts = async () => {
       'searchboxSubmit',
       'cartlanding',
     );
+    console.log('result', searchResponse);
     skuarray = [];
     const skuids = searchResponse.results?.map((item) => {
       skuarray.push(item.raw.sku);
     });
+    console.log('skuarray', skuarray);
     if (skuarray.length > 0) {
       const productSearched = await relatedProducts(
         `${searchResponse.totalCount} Products Available`,
@@ -246,6 +252,7 @@ export const addProducts = async () => {
 
       if (re) {
         re.append(productSearched);
+        console.log('re', re);
         const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
         if (div.length > 1) {
           div[0].remove();

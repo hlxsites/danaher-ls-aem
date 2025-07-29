@@ -88,7 +88,6 @@ export const orderConfirmed = async () => {
         );
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
-
       }
     }
     const orderConfirmationWrapper = div({

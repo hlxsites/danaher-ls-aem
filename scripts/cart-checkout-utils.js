@@ -1179,7 +1179,7 @@ export const changeStep = async (step) => {
     const getBasketForOrder = await getBasketDetails();
     if (getBasketForOrder?.status === 'success') {
       const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-      
+
       if (submittingOrder?.data?.data?.documentNumber) {
         window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
       }
@@ -2361,10 +2361,10 @@ export async function updateCheckoutSummary() {
   return { status: 'error', data: 'Error updating checkout summary' };
 }
 
-export const cartItemsContainer = async (cartItemValue) => {
+export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
-    if (type === 'delete-item') {
+    if (type == 'delete-item') {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
@@ -2372,25 +2372,28 @@ export const cartItemsContainer = async (cartItemValue) => {
       };
       const response = await updateCartItemQuantity(item);
       if (response === 'success') {
-        await updateCheckoutSummary();
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
+              console.log('opcoBe', opcoBe.length);
               const str = `product-Quantity-${opcoBe[0]}`;
               const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
+              );
+              console.log(
+                '${itemToBeDisplayed[opcoBe].length',
+                itemToBeDisplayed[opcoBe[0]].length,
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
               } Items`;
             },
           );
-
-          await updateCheckoutSummary();
         }
+        await updateCheckoutSummary();
         removePreLoader();
       } else {
         alert(response);
@@ -2426,6 +2429,7 @@ export const cartItemsContainer = async (cartItemValue) => {
   );
   modalCloseButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
+    console.log('Clicked on item with ID: ', input);
     modifyCart('delete-item', input, '');
   });
   const modalInput = input({
@@ -2435,7 +2439,7 @@ export const cartItemsContainer = async (cartItemValue) => {
     type: 'number',
     min: cartItemValue.minOrderQuantity,
     max:
-      cartItemValue.maxOrderQuantity == 0 ? 99 : cartItemValue.maxOrderQuantity,
+      cartItemValue.maxOrderQuantity === 0 ? 99 : cartItemValue.maxOrderQuantity,
     name: 'item-quantity',
     value: cartItemValue.itemQuantity,
   });
@@ -2451,6 +2455,7 @@ export const cartItemsContainer = async (cartItemValue) => {
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
+      console.log('max');
       productItem.style.border = '2px solid red';
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
@@ -2610,32 +2615,26 @@ export const cartItemsContainer = async (cartItemValue) => {
       },
       div(
         {
-          class:
-            'w-28 p-2 flex justify-start items-center gap-3 border border-solid border-gray-300',
+          class: 'w-28 p-2 flex justify-start items-center gap-3 border border-solid border-gray-300',
         },
         div(
           {
-            class:
-              'justify-start text-black text-base font-bold truncate m-[5px]',
+            class: 'justify-start text-black text-base font-bold truncate m-[5px]',
           },
           img({
             class: 'w-full h-auto',
-            src: cartItemValue.images
-              ? cartItemValue.images[0].effectiveUrl
-              : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+            src: cartItemValue.images ? cartItemValue.images[0].effectiveUrl : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
           }),
         ),
       ),
       div(
         {
-          class:
-            'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
-          // id: `product-Quantity-${opcoBe[0]}`,
+          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
+        // id: `product-Quantity-${opcoBe[0]}`,
         },
         div(
           {
-            class:
-              'w-full justify-start items-center text-black text-base font-bold',
+            class: 'w-full justify-start items-center text-black text-base font-bold',
           },
           cartItemValue.productName,
         ),
@@ -2646,6 +2645,7 @@ export const cartItemsContainer = async (cartItemValue) => {
           },
           cartItemValue.sku,
         ),
+
       ),
     ),
     div(
@@ -2660,32 +2660,32 @@ export const cartItemsContainer = async (cartItemValue) => {
       ),
       div(
         {
-          class:
-            'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
         },
         div(
           {
             class:
-              'w-full justify-start text-gray-500 text-base font-bold item line-through',
+            'w-full justify-start text-gray-500 text-base font-bold item line-through',
           },
           `$${cartItemValue.salePrice.value}`,
         ),
         div(
           {
-            class: 'w-full justify-start text-black text-base',
+            class:
+            'w-full justify-start text-black text-base',
           },
           `$${cartItemValue.salePrice.value}`,
         ),
       ),
       div(
         {
-          class:
-            'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
+          class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
         },
         `$${cartItemValue.salePrice.value}`,
       ),
       modalCloseButton,
     ),
+
   );
   decorateIcons(itemsscontainer);
   return itemsscontainer;
