@@ -37,6 +37,9 @@ export default function decorate(block) {
   } else if (sectionDiv.classList.contains('fortysixty')) {
     leftWidth = 'lg:w-2/5';
     rightWidth = 'lg:w-3/5';
+  } else if (sectionDiv.classList.contains('fiftyfifty')) {
+    leftWidth = 'lg:w-1/2';
+    rightWidth = 'lg:w-1/2';
   }
 
   // === TEXT COLUMN ===
