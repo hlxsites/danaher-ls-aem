@@ -226,7 +226,7 @@ function skipConverter(path) {
     if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
         return false;
     }
-    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands')) && !path.includes('/topics-jck1/')) {    
+    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/assay-kits')) && !path.includes('/topics-jck1/')) {    
         return true;
     }
     if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true; 
