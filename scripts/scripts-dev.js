@@ -29,7 +29,7 @@ if (window.location.hostname.includes('lifesciences.danaher.com')) {
   }
 }
 
-const LCP_BLOCKS = ['breadcrumb', 'pdp-hero', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: {
     templateName: 'blog',
