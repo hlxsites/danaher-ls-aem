@@ -167,17 +167,17 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: 'justify-start text-black text-4xl font-normal ',
+        class: 'justify-start text-black text-4xl font-normal md:block',
       },
       `$${productInfo?.data?.salePrice?.value}`,
     ),
     div(
       {
-        class: 'flex-1 py-3 flex justify-start items-start gap-4',
+        class: 'flex-1 py-3 flex justify-start items-start',
       },
 
       div({
-        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        class: 'w-12 h-0 hidden md:block flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
@@ -197,7 +197,7 @@ export default async function decorate(block) {
         ),
       ),
       div({
-        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        class: 'w-12 h-0 flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
