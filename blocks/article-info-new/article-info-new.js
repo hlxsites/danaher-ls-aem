@@ -14,64 +14,47 @@ export default function decorate(block) {
   ];
   innerContent.classList.add(...classes);
 
-  // Find wrapper and infoBlock
   const wrapper = document.querySelector('.article-info-new-wrapper');
   if (!wrapper) return;
 
-  let infoBlock = wrapper.querySelector('.article-info-new');
-  if (!infoBlock) {
-    // Create infoBlock div if missing
-    infoBlock = document.createElement('div');
-    infoBlock.className = 'article-info-new';
-    wrapper.appendChild(infoBlock);
-  }
+  const infoBlock = wrapper.querySelector('.article-info-new');
+  if (!infoBlock) return;
 
-  // Define expected properties with default empty values
-  const articleInfoDefaults = {
-    authorName: '',
-    authorTitle: '',
-    image: '',
-    publishDate: '',
-    articleOpco: '',
-    readingTime: '',
+  const paragraphs = infoBlock.querySelectorAll('p');
+  const values = Array.from(paragraphs).map((p) => p.textContent.trim());
+
+  const [authorName, authorTitle, image, publishDate, articleOpco, readingTime] = values;
+
+  const articleInfo = {
+    authorName,
+    authorTitle,
+    image,
+    publishDate,
+    articleOpco,
+    readingTime,
   };
 
-  // Extract current <p> elements text to populate values if present
-  const existingParagraphs = infoBlock.querySelectorAll('p');
-  const existingTexts = Array.from(existingParagraphs).map((p) => p.textContent.trim());
+  // Format or set publish date
+  let date;
+  if (articleInfo.publishDate) {
+    date = new Date(articleInfo.publishDate);
+  } else {
+    date = new Date();
+  }
 
-  // Fill articleInfo from existing paragraphs or defaults
-  const articleInfo = Object.keys(articleInfoDefaults).reduce((acc, prop, i) => {
-    acc[prop] = existingTexts[i] || articleInfoDefaults[prop];
-    return acc;
-  }, {});
-
-  // Clear existing paragraphs before rebuilding
-  infoBlock.innerHTML = '';
-
-  // Rebuild paragraphs with data-aue-prop and updated content
-  Object.entries(articleInfo).forEach(([prop, value]) => {
-    const p = document.createElement('p');
-    p.setAttribute('data-aue-prop', prop);
-
-    if (prop === 'publishDate' && value) {
-      const date = new Date(value);
-      if (!Number.isNaN(date.getTime())) {
-        p.textContent = date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: '2-digit',
-        });
-      } else {
-        p.textContent = value;
-      }
-    } else {
-      p.textContent = value;
-    }
-    infoBlock.appendChild(p);
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
   });
 
-  // Append block to the section if not already appended
+  articleInfo.publishDate = formattedDate;
+
+  if (paragraphs[3]) {
+    paragraphs[3].textContent = formattedDate;
+  }
+
+  // Append block to the section
   const section = main.querySelector('section');
   if (section && !section.contains(block)) {
     section.appendChild(block);
