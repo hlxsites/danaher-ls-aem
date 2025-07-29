@@ -449,7 +449,7 @@ export default async function decorate(block) {
     const tabsSuperParent = main.querySelector('.tabs-super-parent');
     if (tabsSuperParent) {
       tabsSuperParent.scrollIntoView({ behavior: 'smooth' });
-      tabsSuperParent.classList.add('mt-32');
+      tabsSuperParent.style.paddingTop = '110px';
     }
   });
 
@@ -551,21 +551,12 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const sections = main.querySelectorAll('.section.page-tab');
-    const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
-    if (tabSections) {
-      const currentTab = window.location.hash?.replace('#', '')
-      || tabSections[0].getAttribute('aria-labelledby');
-      sections.forEach((section) => {
-        section.style.paddingTop = '0px';
-        if (currentTab === section.getAttribute('aria-labelledby')) {
-          section.style.paddingTop = '110px';
-          section.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }
-      });
+    const bundleListTab = main.querySelector('#bundle-list-tab')
+    if (bundleListTab) {
+      bundleListTab.scrollIntoView({ behavior: 'smooth' });
+      bundleListTab.style.paddingTop = '110px'
     }
+    
   });
 
   if (result?.raw?.objecttype === 'Family') {
