@@ -55,7 +55,9 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "pdp-page-tabs"
+      "pdp-product-hero",
+      "pdp-page-tabs",
+      "pdp-hero"
     ]
   },
   {
