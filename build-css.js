@@ -378,6 +378,46 @@ const fileMappings = [
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',
   },
+  {
+    content: './blocks/pdp-page-tabs/pdp-page-tabs.js',
+    output: './blocks/pdp-page-tabs/pdp-page-tabs.css',
+    wrapper: 'pdp-page-tabs-wrapper',
+  },
+  {
+    content: './blocks/pdp-description/pdp-description.js',
+    output: './blocks/pdp-description/pdp-description.css',
+    wrapper: 'pdp-description-wrapper',
+  },
+  {
+    content: './blocks/pdp-hero/pdp-hero.js',
+    output: './blocks/pdp-hero/pdp-hero.css',
+    wrapper: 'pdp-hero-wrapper',
+  },
+  {
+    content: './blocks/pdp-bundle-list/pdp-bundle-list.js',
+    output: './blocks/pdp-bundle-list/pdp-bundle-list.css',
+    wrapper: 'pdp-bundle-list-wrapper',
+  },
+  {
+    content: './blocks/pdp-specifications/pdp-specifications.js',
+    output: './blocks/pdp-specifications/pdp-specifications.css',
+    wrapper: 'pdp-specifications-wrapper',
+  },
+  {
+    content: './blocks/pdp-products/pdp-products.js',
+    output: './blocks/pdp-products/pdp-products.css',
+    wrapper: 'pdp-products-wrapper',
+  },
+  {
+    content: './blocks/pdp-resources/pdp-resources.js',
+    output: './blocks/pdp-resources/pdp-resources.css',
+    wrapper: 'pdp-resources-wrapper',
+  },
+  {
+    content: './blocks/pdp-citations/pdp-citations.js',
+    output: './blocks/pdp-citations/pdp-citations.css',
+    wrapper: 'pdp-citations-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

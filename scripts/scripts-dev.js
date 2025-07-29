@@ -48,6 +48,9 @@ const TEMPLATE_LIST = {
       './schema.js',
     ],
   },
+  pdp: {
+    templateName: 'pdp',
+  },
   processstep: 'processstep',
   topic: 'topic',
   library: 'library',
@@ -900,6 +903,41 @@ function loadUTMprams() {
 }
 // UTM Paramaters check - end
 
+async function designPdp() {
+  const main = document.querySelector('main');
+
+  // Get only the meaningful .section elements (with more specific class names)
+  const sections = Array.from(main.querySelectorAll('.section')).filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
+
+  const heroSection = sections.find((sec) => sec.classList.contains('pdp-hero-container'));
+
+  const flexWrapper = div({
+    class: 'tabs-super-parent flex flex-col md:flex-row lg:max-w-screen-xl mx-auto pt-12',
+  });
+
+  const tabsWrapper = div({
+    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
+  });
+
+  const restWrapper = div({
+    class: 'tabs-right-parent border-l border-gray-200 flex-1',
+  });
+
+  sections.forEach((section) => {
+    if (section === heroSection) return; // Skip hero
+
+    if (section.classList.contains('pdp-page-tabs-container')) {
+      tabsWrapper.appendChild(section);
+    } else {
+      restWrapper.appendChild(section);
+    }
+  });
+
+  flexWrapper.appendChild(tabsWrapper);
+  flexWrapper.appendChild(restWrapper);
+
+  heroSection?.after(flexWrapper);
+}
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -967,6 +1005,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  await designPdp();
   loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
 }
