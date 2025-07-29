@@ -38,7 +38,7 @@ export default function decorate(block) {
 
   // Extract current <p> elements text to populate values if present
   const existingParagraphs = infoBlock.querySelectorAll('p');
-  const existingTexts = Array.from(existingParagraphs).map(p => p.textContent.trim());
+  const existingTexts = Array.from(existingParagraphs).map((p) => p.textContent.trim());
 
   // Fill articleInfo from existing paragraphs or defaults
   const articleInfo = Object.keys(articleInfoDefaults).reduce((acc, prop, i) => {
@@ -50,28 +50,25 @@ export default function decorate(block) {
   infoBlock.innerHTML = '';
 
   // Rebuild paragraphs with data-aue-prop and updated content
-  for (const [prop, value] of Object.entries(articleInfo)) {
+  Object.entries(articleInfo).forEach(([prop, value]) => {
     const p = document.createElement('p');
     p.setAttribute('data-aue-prop', prop);
 
     if (prop === 'publishDate' && value) {
       const date = new Date(value);
-      if (!isNaN(date)) {
-        // Format the publish date nicely
-        p.textContent = date.toLocaleDateString('en-US', {
+      p.textContent = Number.isNaN(date)
+        ? date.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
           day: '2-digit',
-        });
-      } else {
-        p.textContent = value; // fallback if invalid date
-      }
+        })
+        : value;
     } else {
       p.textContent = value;
     }
 
     infoBlock.appendChild(p);
-  }
+  });
 
   // Append block to the section if not already appended
   const section = main.querySelector('section');
