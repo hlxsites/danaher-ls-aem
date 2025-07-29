@@ -590,7 +590,7 @@
 }
 
 .header-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.font-semibold) {
@@ -728,7 +728,7 @@
 }
 
 .header-wrapper :is(.hover\:font-medium:hover) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.hover\:text-black:hover) {

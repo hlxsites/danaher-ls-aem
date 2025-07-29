@@ -11,6 +11,16 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.dhls-container .\!font-medium {
+  font-weight: 400 !important;
+  font-family: TWK Lausanne EDS !important
+}
+
 .register-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -214,7 +224,7 @@
 }
 
 .register-wrapper :is(.\!font-medium) {
-  font-weight: 400 !important
+  font-weight: 500 !important
 }
 
 .register-wrapper :is(.font-extralight) {
@@ -222,7 +232,7 @@
 }
 
 .register-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .register-wrapper :is(.font-normal) {

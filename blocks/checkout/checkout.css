@@ -806,7 +806,7 @@
 }
 
 .checkout :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .checkout :is(.font-normal) {

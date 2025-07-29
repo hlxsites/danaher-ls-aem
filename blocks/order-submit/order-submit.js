@@ -8,6 +8,7 @@ import { postApiData } from '../../scripts/api-utils.js';
 const orderSubmitted = async () => {
   const basketData = sessionStorage.getItem('basketData');
   const basketId = JSON.parse(basketData);
+  console.log('basketId', basketId);
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -23,6 +24,7 @@ const orderSubmitted = async () => {
     basket: basketId.id,
     termsAndConditionsAccepted: true,
   };
+  console.log('data', data);
   try {
     const response = await postApiData(
       url,
@@ -30,6 +32,7 @@ const orderSubmitted = async () => {
       defaultHeader,
     );
     if (response) {
+      console.log('response', response.data);
       sessionStorage.setItem(
         'orderSubmitDetails',
         JSON.stringify(response.data),
@@ -59,8 +62,9 @@ const orderSubmitted = async () => {
   }
 };
 
-export const orderConfirmed = async () => {
+export default async function decorate(block) {
   const params = new URLSearchParams(window.location.search);
+  console.log('params', params.get('orderId'));
   if (params.get('orderId')) {
     let orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
@@ -82,12 +86,18 @@ export const orderConfirmed = async () => {
         const cartItemsDetails = JSON.parse(
           sessionStorage.getItem('productDetailObject'),
         );
+        console.log('cartItemsDetails', cartItemsDetails);
         sessionStorage.setItem(
           'cartItemsDetails',
           JSON.stringify(cartItemsDetails),
         );
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        console.log(
+          'productDetailObject',
+          JSON.parse(sessionStorage.getItem('productDetailObject')),
+        );
+        console.log('orderDetailssss', orderDetails);
       }
     }
     const orderConfirmationWrapper = div({
@@ -277,7 +287,7 @@ export const orderConfirmed = async () => {
                   class:
                     'self-stretch inline-flex justify-start items-center gap-6',
                 },
-                notes != ''
+                notes !== ''
                   ? notesValue()
                   : '',
               ),
@@ -315,6 +325,7 @@ export const orderConfirmed = async () => {
 
     orderConfirmationWrapper.append(orderDescription);
     orderConfirmationWrapper.append(cartItemsWrapper);
+    console.log('queryselector', cartItemsWrapper.querySelectorAll('input'));
     const inputElements = cartItemsWrapper.querySelectorAll('input');
     inputElements.forEach((element) => {
       element.style.border = 'none';
@@ -324,11 +335,11 @@ export const orderConfirmed = async () => {
     deleteButtondiv.forEach((element) => {
       element.parentElement.remove();
     });
-    return orderConfirmationWrapper;
+    block.append(orderConfirmationWrapper);
+  } else {
+    const noPageFound = div({
+      class: 'justify-start text-4xl font-bold leading-[48px]',
+    }, '404: PAGE NOT FOUND');
+    block.append(noPageFound);
   }
-
-  const noPageFound = div({
-    class: 'justify-start text-4xl font-bold leading-[48px]',
-  }, '404: PAGE NOT FOUND');
-  return noPageFound;
-};
+}
