@@ -125,7 +125,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: 'md:w-[692px] h-5 flex flex-col justify-start items-start',
+        class: 'md:w-[692px] flex flex-col justify-start items-start',
       },
       div(
         {
@@ -193,7 +193,7 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo?.data?.packingUnit ? `${productInfo.data.packingUnit} /Bundle` : '',
+          productInfo?.data?.packingUnit ? `${productInfo.data.packingUnit} /Bundle` : '-',
         ),
       ),
       div({
@@ -342,7 +342,7 @@ export default async function decorate(block) {
   });
   const globeImg = div(
     {
-      class: 'w-9 h-9 relative overflow-hidden',
+      class: 'w-9 h-9 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
@@ -351,7 +351,7 @@ export default async function decorate(block) {
   );
   const externalLink = div(
     {
-      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden',
+      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden cursor-pointer',
     },
     span({
       class:
@@ -359,7 +359,7 @@ export default async function decorate(block) {
     }),
   );
   const externalButton = div(
-    { class: 'flex justify-center items-center text-base font-extralight leading-snug gap-3' },
+    { class: 'flex justify-center items-center text-base font-extralight leading-snug gap-3 hover:text-danaherpurple-800' },
     `To learn more visit ${result?.raw.opco} `,
     externalLink,
   );
@@ -370,10 +370,13 @@ export default async function decorate(block) {
   externalButton.addEventListener('click', () => {
     window.open(externalURL, '_blank');
   });
+  globeImg.addEventListener('click', () => {
+    window.open(externalURL, '_blank');
+  });
   const info = div(
     {
       class:
-          'self-stretch inline-flex justify-start items-center gap-3 py-3 cursor-pointer',
+        'self-stretch inline-flex justify-start items-center gap-3 py-3 cursor-pointer',
     },
     globeImg,
     externalButton,

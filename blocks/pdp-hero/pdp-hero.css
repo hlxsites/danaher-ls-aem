@@ -460,6 +460,12 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.pdp-hero-wrapper :is(.transition-colors) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .pdp-hero-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
@@ -470,9 +476,18 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
+.pdp-hero-wrapper :is(.hover\:stroke-danaherpurple-800:hover) {
+  stroke: #4000A5;
+}
+
 .pdp-hero-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.pdp-hero-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {
