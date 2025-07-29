@@ -962,7 +962,7 @@ export default async function decorate(block) {
   *
   */
 
-  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || ((window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits')) && window.DanaherConfig.host.includes('stage.lifesciences')) || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) {
+  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || ((window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
     const bred = document.querySelector('breadcrumb');
     const edsBreadcrumbWrapper = div(
       {
