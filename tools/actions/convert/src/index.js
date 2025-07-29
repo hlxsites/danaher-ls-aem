@@ -208,7 +208,7 @@ function skipConverter(path) {
   //     return false;
   //   }
   // }
-
+/*
   if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
       return false;
   }
@@ -220,7 +220,7 @@ function skipConverter(path) {
   if (path.includes('/us/en/products-eds')) return true;
   if (path.includes('/us/en/e-buy')) return true;
 
-  
+  */
   if (path.includes('/us/en/blog-eds/')) return true;
   if (path.includes('/us/en/news-eds/')) return true;
   // skip the converter for pages like **/products/*/topics/**
