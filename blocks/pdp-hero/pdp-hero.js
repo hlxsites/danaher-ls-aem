@@ -142,7 +142,9 @@ export default async function decorate(block) {
           class:
               'self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
-        result?.raw?.richdescription.replace(/<[^>]*>/g, ''),
+        result?.raw?.richdescription
+          ? result.raw.richdescription.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ')
+          : '',
       ),
     ),
   );
