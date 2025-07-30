@@ -15,8 +15,8 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
   block.style.display = 'none';
 
   const wrapper = block.closest('.top-selling-products-wrapper');

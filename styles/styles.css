@@ -1697,13 +1697,6 @@ main .top-border > div.columns-wrapper:first-child {
   max-width: 80rem;
 }
 
-@media (min-width: 1024px) {
-  .blog main .columns-wrapper {
-    height: 20rem;
-    overflow-y: scroll;
-  }
-}
-
 .productdetail main .columns p.embed-vimeo {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
