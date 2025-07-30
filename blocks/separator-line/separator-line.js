@@ -6,7 +6,8 @@ export default function decorate(block) {
 
   const [heightInput, bgColorInput] = block.children;
   const bgColorContainer = bgColorInput?.textContent?.trim() || '#D1D5DB';
-  const separatorHeight = heightInput?.textContent?.trim() || '1';
+  const separatorHeightInput = heightInput?.textContent?.trim() || '1';
+  const separatorHeight = !Number.isNaN(parseFloat(separatorHeightInput)) ? separatorHeightInput : '1';
 
   const bgColor = bgColorContainer;
   const height = separatorHeight;
@@ -15,12 +16,6 @@ export default function decorate(block) {
     style: `background-color: ${bgColor};height: ${height}px`,
     class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
   });
-  block.innerHtml = '';
+  block.textContent = '';
   block.appendChild(separatorSection);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(separatorSection)) {
-      child.style.display = 'none';
-    }
-  });
 }
