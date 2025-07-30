@@ -2570,6 +2570,7 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 #shippingAddressListItemsWrapper {
   max-height: 25rem;
+  gap: 1.5rem;
   overflow: auto;
   padding-top: 2rem;
   padding-bottom: 2rem;
