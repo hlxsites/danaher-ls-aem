@@ -12,8 +12,7 @@ export default async function decorate(block) {
     authenticationToken?.status === 'error'
     || authenticationToken.user_type === 'guest'
   ) {
-     window.location.href = '/us/en/e-buy/login';
-     //return { status: 'error', data: 'Unauthorized access.' };
+    window.location.href = '/us/en/e-buy/cartlanding';
   }
   block.innerHtml = '';
 
