@@ -8,8 +8,8 @@ export default async function decorate(block) {
   const maxCards = 28;
 
   const [productCategoryId, blockTitle, blockBrand] = block.children;
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   document.documentElement.style.scrollBehavior = 'smooth';
   const blockId = productCategoryId?.querySelector('p')?.textContent?.trim() || '';
