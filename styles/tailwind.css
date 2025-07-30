@@ -57,6 +57,10 @@
     font-size: 40px !important;
   }
   
+  #mainPreLoader {
+  @apply fixed left-0 top-0 z-[1213456789] h-screen w-full backdrop-blur-sm backdrop-filter;
+  }
+
    h1,
    h2,
    h3,

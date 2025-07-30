@@ -73,7 +73,7 @@ const generatePreloader = div(
   },
   preLoader(),
 );
-const getMainDiv = document.querySelector('body');
+const getMainDiv = document.querySelector('main');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
 /*
  ::::::::::::::::::::::::
