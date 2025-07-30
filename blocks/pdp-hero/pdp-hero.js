@@ -418,7 +418,7 @@ export default async function decorate(block) {
           },
           'See all product Family in this line',
         ),
-       div(
+        div(
           {
             class: 'w-56 h-[1px] mt-[-2px] bg-danaherpurple-500 group-hover:bg-danaherpurple-800 rounded-full',
           },

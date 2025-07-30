@@ -18,6 +18,7 @@ function toggleDetails(event) {
 export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
   const [
     productBannerTitle,
     productBannerLink,
