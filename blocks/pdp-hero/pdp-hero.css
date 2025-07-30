@@ -61,6 +61,10 @@
   margin-top: 26px;
 }
 
+.pdp-hero-wrapper :is(.mt-\[-2px\]) {
+  margin-top: -2px;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }
@@ -117,6 +121,14 @@
   height: 1px;
 }
 
+.pdp-hero-wrapper :is(.h-6) {
+  height: 1.5rem;
+}
+
+.pdp-hero-wrapper :is(.h-\[2px\]) {
+  height: 2px;
+}
+
 .pdp-hero-wrapper :is(.w-12) {
   width: 3rem;
 }
@@ -163,6 +175,10 @@
 
 .pdp-hero-wrapper :is(.w-8) {
   width: 2rem;
+}
+
+.pdp-hero-wrapper :is(.w-\[186px\]) {
+  width: 186px;
 }
 
 .pdp-hero-wrapper :is(.flex-1) {
@@ -455,6 +471,10 @@
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.pdp-hero-wrapper :is(.underline) {
+  text-decoration-line: underline;
+}
+
 .pdp-hero-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -517,6 +537,11 @@
 .pdp-hero-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity));
+}
+
+.pdp-hero-wrapper :is(.group:hover .group-hover\:bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 768px) {

@@ -76,13 +76,13 @@ function highlightActiveTab(forcedLabel = null) {
       indicator.classList.toggle('rounded-[5px]', isActive);
     }
 
-    if (isActive && window.innerWidth < 768) {
-      tab.parentElement.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
-    }
+    // if (isActive && window.innerWidth < 768) {
+    //   tab.parentElement.scrollIntoView({
+    //     behavior: 'smooth',
+    //     inline: 'center',
+    //     block: 'nearest',
+    //   });
+    // }
   });
 }
 
