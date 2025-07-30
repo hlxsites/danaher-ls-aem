@@ -2942,6 +2942,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 83px;
 }
 
+.left-\[48\%\] {
+  left: 48%;
+}
+
 .z-10 {
   z-index: 10;
 }

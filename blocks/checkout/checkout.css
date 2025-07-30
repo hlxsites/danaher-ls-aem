@@ -116,6 +116,10 @@
   top: 49px
 }
 
+.checkout :is(.left-\[48\%\]) {
+  left: 48%
+}
+
 .checkout :is(.z-10) {
   z-index: 10
 }

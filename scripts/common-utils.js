@@ -45,7 +45,7 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        ' flex w-full relative top-1/2 left-[48%] justify-start items-center',
       id: 'preLoader',
     },
     img({
