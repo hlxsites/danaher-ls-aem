@@ -32,7 +32,7 @@ function highlightActiveTab(forcedLabel = null) {
 
   let activeLabel = forcedLabel;
 
-  if (!activeLabel) {
+  if (!activeLabel && tabEntries.length > 0) {
     let matched = false;
 
     for (let i = 0; i < tabEntries.length; i += 1) {
@@ -52,16 +52,20 @@ function highlightActiveTab(forcedLabel = null) {
       }
     }
 
-    if (!matched && scrollY < tabEntries[0]?.top) {
-      activeLabel = tabEntries[0]?.label;
+    // Keep first tab active when above first section
+    if (!matched && scrollY < tabEntries[0].top) {
+      activeLabel = tabEntries[0].label;
+      matched = true;
     }
 
-    if (!matched && scrollY >= tabEntries[tabEntries.length - 1]?.bottom) {
-      activeLabel = tabEntries[tabEntries.length - 1]?.label;
+    // No active tab when below the last section
+    if (!matched) {
+      activeLabel = null;
     }
   }
 
-  allTabs.forEach((tab) => {
+  // Update tab styles
+  allTabs.forEach((tab, index) => {
     const label = tab.textContent.trim();
     const isActive = label === activeLabel;
 
@@ -76,7 +80,14 @@ function highlightActiveTab(forcedLabel = null) {
       indicator.classList.toggle('rounded-[5px]', isActive);
     }
 
-    if (isActive && window.innerWidth < 768) {
+    // Only scroll into view if:
+    // 1. Mobile view
+    // 2. Active tab is NOT the first tab when above the section
+    if (
+      isActive
+      && window.innerWidth < 768
+      && !(index === 0 && scrollY < tabEntries[0].top)
+    ) {
       tab.parentElement.scrollIntoView({
         behavior: 'smooth',
         inline: 'center',
