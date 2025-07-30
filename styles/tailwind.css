@@ -419,7 +419,7 @@
    }
  
    .blog main .columns-wrapper {
-     @apply max-w-7xl w-full mx-auto lg:h-80 lg:overflow-y-scroll;
+     @apply max-w-7xl w-full mx-auto lg:min-h-80;
    }
  
    .productdetail main .columns p.embed-vimeo {
