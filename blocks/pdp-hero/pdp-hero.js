@@ -88,19 +88,11 @@ function imageSlider(allImages, productName = 'product') {
 }
 
 export default async function decorate(block) {
-  block.parentElement.parentElement.classList.add('!p-0');
+  block.parentElement.parentElement.style.padding = '0';
   const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
-
-  /* currency formatter */
-  // function formatMoney(number) {
-  //   return number.toLocaleString('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD',
-  //   });
-  // }
   const result = JSON.parse(localStorage.getItem('eds-product-details'));
 
   const productInfo = await getProductDetails(result?.raw?.sku);
@@ -139,7 +131,8 @@ export default async function decorate(block) {
         {
           class: 'justify-start text-gray-700 text-base font-extralight leading-snug',
         },
-        productInfo?.data?.sku,
+        result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
       ),
     ),
     div(
@@ -171,21 +164,21 @@ export default async function decorate(block) {
 
   const infoTab = div(
     {
-      class: 'self-stretch inline-flex justify-start items-center gap-9',
+      class: 'self-stretch md:flex justify-start items-center gap-9',
     },
     div(
       {
-        class: 'justify-start text-black text-4xl font-normal ',
+        class: 'justify-start text-black text-4xl font-normal md:block',
       },
       `$${productInfo?.data?.salePrice?.value}`,
     ),
     div(
       {
-        class: 'flex-1 py-3 flex justify-start items-start gap-4',
+        class: 'flex-1 py-3 flex justify-start items-start',
       },
 
       div({
-        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        class: 'w-12 h-0 hidden md:block flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
@@ -201,11 +194,11 @@ export default async function decorate(block) {
           {
             class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo?.data?.packingUnit ? `${productInfo.data.packingUnit} /Bundle` : '',
+          productInfo?.data?.packingUnit ? `${productInfo.data.packingUnit} /Bundle` : '-',
         ),
       ),
       div({
-        class: 'w-12 h-0 flex-grow-0 mt-[22px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        class: 'w-12 h-0 flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
@@ -350,7 +343,7 @@ export default async function decorate(block) {
   });
   const globeImg = div(
     {
-      class: 'w-9 h-9 relative overflow-hidden',
+      class: 'w-9 h-9 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
@@ -359,7 +352,7 @@ export default async function decorate(block) {
   );
   const externalLink = div(
     {
-      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden',
+      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden cursor-pointer',
     },
     span({
       class:
@@ -367,7 +360,7 @@ export default async function decorate(block) {
     }),
   );
   const externalButton = div(
-    { class: 'flex justify-center items-center text-base font-extralight leading-snug gap-3' },
+    { class: 'flex justify-center items-center text-base font-extralight leading-snug gap-3 hover:text-danaherpurple-800' },
     `To learn more visit ${result?.raw.opco} `,
     externalLink,
   );
@@ -378,10 +371,13 @@ export default async function decorate(block) {
   externalButton.addEventListener('click', () => {
     window.open(externalURL, '_blank');
   });
+  globeImg.addEventListener('click', () => {
+    window.open(externalURL, '_blank');
+  });
   const info = div(
     {
       class:
-          'self-stretch inline-flex justify-start items-center gap-3 py-3 cursor-pointer',
+        'self-stretch inline-flex justify-start items-center gap-3 py-3 cursor-pointer',
     },
     globeImg,
     externalButton,
@@ -446,10 +442,9 @@ export default async function decorate(block) {
 
   categoryLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const tabsSuperParent = main.querySelector('.tabs-super-parent');
-    if (tabsSuperParent) {
-      tabsSuperParent.scrollIntoView({ behavior: 'smooth' });
-      tabsSuperParent.style.paddingTop = '110px';
+    const productTab = main.querySelector('#products-tab');
+    if (productTab) {
+      productTab.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
@@ -551,10 +546,9 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const bundleListTab = main.querySelector('#bundle-list-tab');
-    if (bundleListTab) {
-      bundleListTab.scrollIntoView({ behavior: 'smooth' });
-      bundleListTab.style.paddingTop = '110px';
+    const bundleTabList = main.querySelector('#bundle-list-tab');
+    if (bundleTabList) {
+      bundleTabList.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
@@ -639,8 +633,10 @@ export default async function decorate(block) {
   const categoriesDiv = div({
     class: 'md:w-[692px] flex-wrap py-4 inline-flex justify-start items-start gap-2',
   });
-  result?.raw?.categories?.forEach((category) => {
-    categoriesDiv.append(categoryDiv(category));
+  result?.raw?.categoriesname?.forEach((category) => {
+    // If category contains '|', split and use the last part
+    const lastLevel = category.includes('|') ? category.split('|').pop().trim() : category;
+    categoriesDiv.append(categoryDiv(lastLevel));
   });
 
   defaultContent.append(categoriesDiv);
