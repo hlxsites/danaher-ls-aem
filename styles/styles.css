@@ -3318,11 +3318,6 @@ main .section.top-border {
 
 /* stylelint-disable selector-type-no-unknown */
 
-main .breadcrumb-container
-{
-  display: none !important;
-}
-
 @media (min-width: 640px) {
   .dhls-container .sm\:text-sm {
     font-size: 14px !important;

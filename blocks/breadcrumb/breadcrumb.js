@@ -137,6 +137,8 @@ export default async function decorate(block) {
   }
   const breadcrumbElement = document.querySelector('breadcrumb');
   if (breadcrumbElement && breadcrumbElement !== breadcrumbWrapper) {
+    const breadcrumbSection = breadcrumbWrapper.parentElement;
     breadcrumbElement.appendChild(breadcrumbWrapper);
+    breadcrumbSection.remove();
   }
 }
