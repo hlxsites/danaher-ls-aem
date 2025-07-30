@@ -294,7 +294,7 @@ export default async function decorate(block) {
         {
           class: 'inherit text-base font-medium leading-snug',
         },
-        'Quote',
+        'Request a Quote',
       ),
     ),
   );
@@ -418,11 +418,11 @@ export default async function decorate(block) {
         ),
         div(
           {
-            class: 'w-56 h-[1rem] mt-[-10px]',
+            class: 'w-56 h-[1px] mt-[-10px]',
           },
           span({
             class:
-            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -433,7 +433,7 @@ export default async function decorate(block) {
       },
       span({
         class:
-        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+        'icon icon-chevron-down w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500  group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -518,7 +518,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
 
@@ -528,7 +528,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -617,12 +617,12 @@ export default async function decorate(block) {
     const list = div(
       {
         class:
-            'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
+            'px-4 py-1 bg-danaherpurple-50 flex justify-center items-center gap-2.5 cursor-pointer',
       },
       div(
         {
           class:
-              'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
+              'text-center justify-start text-danaherpurple-600 text-lg leading-normal font-medium',
         },
         category,
       ),

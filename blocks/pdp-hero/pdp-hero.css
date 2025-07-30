@@ -1,3 +1,7 @@
+.bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .btn-outline-trending-brand {
   color: #7523FF;
   background-color: rgb(255 255 255);
@@ -99,6 +103,18 @@
 
 .pdp-hero-wrapper :is(.h-\[1rem\]) {
   height: 1rem;
+}
+
+.pdp-hero-wrapper :is(.h-1) {
+  height: 0.25rem;
+}
+
+.pdp-hero-wrapper :is(.h-\[1px\]) {
+  height: 1px;
+}
+
+.pdp-hero-wrapper :is(.h-px) {
+  height: 1px;
 }
 
 .pdp-hero-wrapper :is(.w-12) {
@@ -294,8 +310,17 @@
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
+.pdp-hero-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity));
+}
+
 .pdp-hero-wrapper :is(.fill-current) {
   fill: currentColor;
+}
+
+.pdp-hero-wrapper :is(.stroke-violet-400) {
+  stroke: #a78bfa;
 }
 
 .pdp-hero-wrapper :is(.\!p-0) {
