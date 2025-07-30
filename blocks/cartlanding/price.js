@@ -4,7 +4,6 @@ import { getAuthenticationToken } from "../../scripts/token-utils.js";
 export const price = async () => {
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
-  console.log("authenticationToken ", authenticationToken.access_token)
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -14,7 +13,6 @@ export const price = async () => {
   else {
     userLoggedInStatus = false
   }
-  console.log("userLoggedInStatus", userLoggedInStatus);
   
   const priceContainerWrapper = div({
     class: "inline-flex flex-col",

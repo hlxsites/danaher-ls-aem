@@ -14,17 +14,14 @@ import {
   img,
   p,
 } from '../../scripts/dom-builder.js';
-import { getProductsForCategories } from '../../scripts/commerce.js';
 import {
   makePublicUrl,
   imageHelper,
-  generateUUID,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export const updateCartButton = (itemID) => {
   const addCartButton = document.getElementById(itemID);
-  console.log('responseee', addCartButton);
   if (addCartButton) {
     addCartButton.innerHTML = 'Added';
   }

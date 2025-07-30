@@ -1032,9 +1032,7 @@ export const recommendedProduct = [
 export async function updateCart(newItem) {
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
-    console.log('getProductDetailsObject', getProductDetailsObject);
     const response = getProductDetailsObject.data.map((itemToBeDisplayed) => {
-      console.log('itemToBeDisplayed', itemToBeDisplayed);
       const opcoBe = Object.keys(itemToBeDisplayed);
       const imgsrc = opcoBe[0].split(' ')[0];
       if (newItem[0].data.manufacturer == opcoBe[0]) {
@@ -1047,10 +1045,8 @@ export async function updateCart(newItem) {
           quantityElement.innerHTML = ` ${itemToBeDisplayed[opcoBe].length} Items`;
           return cartContainer;
         }
-        console.log('inside else');
         const cartItemContainer = document.getElementById('cartItemContainer');
         if (cartItemContainer.hasChildNodes() === false) {
-          console.log('inside if');
           const cartListContainer = div({
             class: 'w-full',
             id: 'cartListContainer',
@@ -1065,7 +1061,6 @@ export async function updateCart(newItem) {
           });
 
           const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-          console.log('logoDivDisplay: 381', logoDivDisplay);
           // cartListContainer.append(divider(300));
           cartListContainer.append(logoDivDisplay);
           // cartListContainer.append(divider(200));
@@ -1076,7 +1071,6 @@ export async function updateCart(newItem) {
 
           cartListContainer.append(cartItemDisplayContainer);
           // cartListContainer.append(divider(300));
-          console.log('cartItemDisplayContainer 181: ', cartItemContainer);
           const dividerMain = hr({
             class: 'w-full border-black-400',
           });
@@ -1088,14 +1082,12 @@ export async function updateCart(newItem) {
           return cartItemContainer;
         }
         const cartListContainer = document.getElementById('cartListContainer');
-        console.log('inside else', cartListContainer);
         const cartItemDisplayContainer = div({
           class: 'w-full',
           id: opcoBe[0],
         });
 
         const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-        console.log('logoDivDisplay 411', logoDivDisplay);
         // cartListContainer.append(divider(300));
         cartListContainer.append(logoDivDisplay);
         // cartListContainer.append(divider(200));
@@ -1108,7 +1100,6 @@ export async function updateCart(newItem) {
         return cartItemContainer;
       }
     });
-    console.log('responseeee', response);
     if (response[0] == undefined) return response[1];
     return response[0];
   }

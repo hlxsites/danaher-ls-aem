@@ -51,7 +51,7 @@ export const updateCartQuantity = (newQuantity) => {
 
 export const mycart = async () => {
   let basketDetail = await getBasketDetails();
-  if (basketDetail) console.log("basketdetaill", basketDetail);
+//  if (basketDetail) console.log("basketdetaill", basketDetail);
   let totalProductQuantity;
   const basketData = JSON.parse(sessionStorage.getItem("basketData"));
 

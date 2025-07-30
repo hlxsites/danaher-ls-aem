@@ -43,7 +43,6 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  console.log('logo div calledddddd');
   // const logoDiv = div({}, hr({
   //     class: `w-full border-black-300`,
   //   }),
