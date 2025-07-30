@@ -16,8 +16,8 @@ function toggleDetails(event) {
 }
 
 export default function productBannerDecorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   const [
     productBannerTitle,
@@ -40,7 +40,7 @@ export default function productBannerDecorate(block) {
   document.documentElement.style.scrollBehavior = 'smooth';
   const productBannerWrapper = div({
     class:
-      'flex flex-col md:flex-row gap-6 max-w-[1358px] mx-auto px-5 md:px-[39px]',
+      'flex flex-col md:flex-row gap-6 dhls-container !mt-0',
   });
 
   // Check if details is non-empty (not just whitespace)

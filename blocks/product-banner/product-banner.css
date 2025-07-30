@@ -1,3 +1,9 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .dhls-container .font-medium {
   font-weight: 400;
   font-family: TWK Lausanne EDS
@@ -7,9 +13,8 @@
   position: relative
 }
 
-.product-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.product-banner-wrapper :is(.\!mt-0) {
+  margin-top: 0px !important
 }
 
 .product-banner-wrapper :is(.mb-3) {
@@ -61,10 +66,6 @@
 
 .product-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-banner-wrapper :is(.max-w-\[1358px\]) {
-  max-width: 1358px
 }
 
 .product-banner-wrapper :is(.basis-1\/2) {
@@ -148,11 +149,6 @@
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.product-banner-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .product-banner-wrapper :is(.px-6) {
@@ -269,11 +265,6 @@
 @media (min-width: 768px) {
   .product-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .product-banner-wrapper :is(.md\:px-\[39px\]) {
-    padding-left: 39px;
-    padding-right: 39px
   }
 
   .product-banner-wrapper :is(.md\:pt-12) {
