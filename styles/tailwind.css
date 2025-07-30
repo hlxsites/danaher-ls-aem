@@ -798,3 +798,8 @@
     @apply absolute invisible opacity-0 left-0 right-0;
   }
 }
+
+main .breadcrumb-container
+{
+  display: none !important;
+}
