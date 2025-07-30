@@ -556,7 +556,7 @@
 
 .checkout :is(.border-danahergray-75) {
   --tw-border-opacity: 1;
-  border-color: rgb(249 250 251 / var(--tw-border-opacity))
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .checkout :is(.border-danaherpurple-500) {

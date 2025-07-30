@@ -419,7 +419,7 @@
    }
  
    .blog main .columns-wrapper {
-     @apply max-w-7xl w-full mx-auto lg:min-h-80;
+     @apply max-w-7xl w-full mx-auto lg:min-h-[20rem] lg:overflow-y-scroll;
    }
  
    .productdetail main .columns p.embed-vimeo {
@@ -676,7 +676,7 @@
    }
  
    .appear breadcrumb {
-     @apply block h-14 lg:h-[45px] bg-[#F9FAFB] border-b-1 border-danahergray-75;
+     @apply block h-14 lg:h-[45px] bg-[#F9FAFB] border-b border-solid border-danahergray-75;
    }
 
    .appear .bg-checkout {
