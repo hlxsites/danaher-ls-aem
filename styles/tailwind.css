@@ -419,7 +419,7 @@
   }
 
   .blog main .columns-wrapper {
-    @apply max-w-7xl w-full mx-auto;
+    @apply max-w-7xl w-full mx-auto lg:min-h-[20rem];
   }
 
   .productdetail main .columns p.embed-vimeo {
