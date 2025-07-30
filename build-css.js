@@ -533,7 +533,6 @@ fileMappings.forEach(({
       return;
     }
     // eslint-disable-next-line no-console
-    console.log(stdout);
     // eslint-disable-next-line no-console
     console.error(stderr);
   });

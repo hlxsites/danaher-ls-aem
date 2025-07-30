@@ -554,6 +554,11 @@
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
+.checkout :is(.border-danahergray-75) {
+  --tw-border-opacity: 1;
+  border-color: rgb(249 250 251 / var(--tw-border-opacity))
+}
+
 .checkout :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
@@ -582,6 +587,11 @@
 .checkout :is(.bg-black) {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity))
+}
+
+.checkout :is(.bg-danahergray-75) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
 .checkout :is(.bg-danaherlightblue-50) {

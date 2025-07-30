@@ -25,12 +25,7 @@
      @apply max-w-full w-auto h-auto;
    }
 
-  .checkout-container
-  {
-    background: #e5e7eb;
-  }
-
-   .dhls-container .text-xs {
+  .dhls-container .text-xs {
     font-size: 12px !important;
   }
 
@@ -803,7 +798,10 @@
      @apply absolute invisible opacity-0 left-0 right-0;
    }
  }
- 
+  .checkout-container
+  {
+    background: #e5e7eb;
+  }
  .checkout-progress-bar {
    display: flex;
    align-items: center;

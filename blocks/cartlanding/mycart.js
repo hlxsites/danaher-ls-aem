@@ -28,7 +28,6 @@ export const prodQuantity = (totalProductQuantity) => {
 
 export const updateCartQuantity = (newQuantity) => {
   const cartItems = document.querySelectorAll("#cartItemContainer");
-  console.log("new quantity", newQuantity)
   if (cartItems) {
     const myCartListContainer = document.getElementById("myCartListContainer");
     const myCartEmptyContainer = document.getElementById(

@@ -102,7 +102,6 @@ module.exports = {
   },
   safelist: [
     "appear",
-    "checkout-container",
     "btn",
     "bg-danaherlightblue-50",
     "bottom-border-right",
@@ -139,6 +138,7 @@ module.exports = {
           900: "#014254",
         },
         danahergray: {
+          75: "#F9FAFB",
           100: "#F3F4F6",
           150: "#767676",
           200: "#616161",

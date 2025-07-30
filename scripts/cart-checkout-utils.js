@@ -43,6 +43,7 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
+  console.log('logo div calledddddd');
   // const logoDiv = div({}, hr({
   //     class: `w-full border-black-300`,
   //   }),
@@ -106,22 +107,19 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
     ),
     div(
       {
-        class:
-          'hidden sm:block w-24 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-24 justify-start text-black text-base font-bold',
       },
       'QTY',
     ),
     div(
       {
-        class:
-          'hidden sm:block w-48 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-48 justify-start text-black text-base font-bold',
       },
       'Unit Price',
     ),
     div(
       {
-        class:
-          'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
       },
       'Total',
     ),
@@ -357,7 +355,38 @@ export const submitOrder = async (basketId) => {
     termsAndConditionsAccepted: true,
   });
   try {
-    return await postApiData(url, data, defaultHeader);
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      sessionStorage.setItem(
+        'orderSubmitDetails',
+        JSON.stringify(response.data),
+      );
+      const cartItemsDetails = JSON.parse(
+        sessionStorage.getItem('productDetailObject'),
+      );
+      sessionStorage.setItem(
+        'cartItemsDetails',
+        JSON.stringify(cartItemsDetails),
+      );
+      const userOrderDetails = JSON.parse(
+        sessionStorage.getItem('userOrderDetails'),
+      );
+      if (!userOrderDetails) {
+        const orderIdArray = [];
+        orderIdArray.push(response.data.data.id);
+        sessionStorage.setItem(
+          'userOrderDetails',
+          JSON.stringify(orderIdArray),
+        );
+      } else {
+        userOrderDetails.push(response.data.data.id);
+        sessionStorage.setItem(
+          'userOrderDetails',
+          JSON.stringify(userOrderDetails),
+        );
+      }
+      return response;
+    }
   } catch (error) {
     return {
       data: error.message,
@@ -2377,15 +2406,10 @@ export const cartItemsContainer = (cartItemValue) => {
           const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              console.log('opcoBe', opcoBe.length);
               const str = `product-Quantity-${opcoBe[0]}`;
               const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
-              );
-              console.log(
-                '${itemToBeDisplayed[opcoBe].length',
-                itemToBeDisplayed[opcoBe[0]].length,
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
@@ -2429,7 +2453,6 @@ export const cartItemsContainer = (cartItemValue) => {
   );
   modalCloseButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
-    console.log('Clicked on item with ID: ', input);
     modifyCart('delete-item', input, '');
   });
   const modalInput = input({
@@ -2455,7 +2478,6 @@ export const cartItemsContainer = (cartItemValue) => {
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
-      console.log('max');
       productItem.style.border = '2px solid red';
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
