@@ -122,6 +122,7 @@ export default async function decorate(block) {
   if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) tabsList.push('Products');
   if (response?.raw?.numresources) tabsList.push('Resources');
   if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
+  tabsList.push('Citations');
 
   // Full map of label to section ID
   const fullTabMap = {
