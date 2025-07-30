@@ -1,144 +1,145 @@
-import { div, button, hr, a, span } from "../../scripts/dom-builder.js";
-import { getAuthenticationToken } from "../../scripts/token-utils.js";
+import {
+  div, button, hr, a, span,
+} from '../../scripts/dom-builder.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export const price = async () => {
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
+    return { status: 'error', data: 'Unauthorized access.' };
   }
-  if(authenticationToken.access_token){
+  if (authenticationToken.access_token) {
     userLoggedInStatus = true;
+  } else {
+    userLoggedInStatus = false;
   }
-  else {
-    userLoggedInStatus = false
-  }
-  
+
   const priceContainerWrapper = div({
-    class: "inline-flex flex-col",
+    class: 'inline-flex flex-col',
   });
   const priceContainer = div(
     {
-      class: "inline-flex flex-col gap-4",
+      class: 'inline-flex flex-col gap-4',
     },
     div(
       {
-        class: "inline-flex justify-between",
+        class: 'inline-flex justify-between',
       },
       div(
         {
-          class: "text-black text-base font-bold ",
+          class: 'text-black text-base font-bold ',
         },
-        "Subtotal"
+        'Subtotal',
       ),
       div(
         {
-          class: " text-right text-black text-base font-bold ",
+          class: ' text-right text-black text-base font-bold ',
         },
-        "$5,657.49"
-      )
+        '$5,657.49',
+      ),
     ),
     div(
       {
-        class: "inline-flex justify-between",
+        class: 'inline-flex justify-between',
       },
       div(
         {
-          class: "text-black text-base",
+          class: 'text-black text-base',
         },
-        "Discount"
+        'Discount',
       ),
       div(
         {
-          class: " text-right text-black text-base",
+          class: ' text-right text-black text-base',
         },
-        "$434.34"
-      )
+        '$434.34',
+      ),
     ),
     div(
       {
         class:
-          "w-80 text-right justify-start text-gray-500 text-xs font-normal",
+          'w-80 text-right justify-start text-gray-500 text-xs font-normal',
       },
-      "10% off first order"
+      '10% off first order',
     ),
     div(
       {
-        class: "inline-flex justify-between",
+        class: 'inline-flex justify-between',
       },
       div(
         {
-          class: "w-20 justify-start text-black text-base font-extralight",
+          class: 'w-20 justify-start text-black text-base font-extralight',
         },
-        "Sales Tax*"
+        'Sales Tax*',
       ),
       div(
         {
           class:
             "text-right justify-start text-indigo-300 text-sm font-normal font-['Inter'] underline leading-tight",
         },
-        "Tax exempt?"
+        'Tax exempt?',
       ),
-     div(
-    { class: 'self-stretch p-3 flex justify-start items-center' },
-    a(
-      {
-        href: "item.url",
-        class: 'dhlsLink text-base font-bold leading-snug',
-      },
-      'View Details',
-      // span({
-      //   class:
-      //     'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      // }),
-    ),
-  ),
+      div(
+        { class: 'self-stretch p-3 flex justify-start items-center' },
+        a(
+          {
+            href: 'item.url',
+            class: 'dhlsLink text-base font-bold leading-snug',
+          },
+          'View Details',
+          // span({
+          //   class:
+          //     'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          // }),
+        ),
+      ),
       div(
         {
           class:
-            "w-40 text-right justify-start text-black text-base font-extralight",
+            'w-40 text-right justify-start text-black text-base font-extralight',
         },
-        "$92.60"
-      )
+        '$92.60',
+      ),
     ),
     div(
       {
-        class: "inline-flex justify-between",
+        class: 'inline-flex justify-between',
       },
       div(
         {
-          class: "text-black text-base",
+          class: 'text-black text-base',
         },
-        "Shipping"
+        'Shipping',
       ),
       div(
         {
-          class: " text-right text-black text-base",
+          class: ' text-right text-black text-base',
         },
-        "$32.80"
-      )
+        '$32.80',
+      ),
     ),
     div({
-      class: "border-black-300",
+      class: 'border-black-300',
     }),
     div(
       {
-        class: "inline-flex justify-between",
+        class: 'inline-flex justify-between',
       },
       div(
         {
           class:
-            "w-40 justify-start text-black text-xl font-bold leading-relaxed",
+            'w-40 justify-start text-black text-xl font-bold leading-relaxed',
         },
-        "Total (3 items)"
+        'Total (3 items)',
       ),
       div(
         {
-          class: "w-40 text-right justify-start text-black text-xl font-bold",
+          class: 'w-40 text-right justify-start text-black text-xl font-bold',
         },
-        "$5287.47"
-      )
-    )
+        '$5287.47',
+      ),
+    ),
   );
 
   // const pricingTotal = div(
@@ -226,85 +227,85 @@ export const price = async () => {
   // );
 
   const divider = hr({
-    class: "w-80 border-black-300",
+    class: 'w-80 border-black-300',
   });
 
   const total = div(
     {
-      class: "inline-flex justify-between",
+      class: 'inline-flex justify-between',
     },
     div(
       {
         class:
-          "w-40 justify-start text-black text-xl font-bold leading-relaxed",
+          'w-40 justify-start text-black text-xl font-bold leading-relaxed',
       },
-      "Total (3 items)"
+      'Total (3 items)',
     ),
     div(
       {
-        class: "w-40 text-right justify-start text-black text-xl font-bold",
+        class: 'w-40 text-right justify-start text-black text-xl font-bold',
       },
-      "$5287.47"
-    )
+      '$5287.47',
+    ),
   );
 
   const checkoutButton = button(
     {
-      class: "font-medium rounded-full px-6",
+      class: 'font-medium rounded-full px-6',
     },
-    "Checkout"
+    'Checkout',
   );
-  checkoutButton.addEventListener("click", function() {
-    window.location.href = "https://stage.lifesciences.danaher.com/us/en/eds-stage-test/checkout.html?ref=em1-t112-checkout-summary";
-    });
+  checkoutButton.addEventListener('click', () => {
+    window.location.href = 'https://stage.lifesciences.danaher.com/us/en/eds-stage-test/checkout.html?ref=em1-t112-checkout-summary';
+  });
 
   const disclaimer = div(
     {
       class:
         "w-80 p-6 justify-start text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
     },
-    "*estimated sales tax. Additional tax may apply upon actual calculation of order"
+    '*estimated sales tax. Additional tax may apply upon actual calculation of order',
   );
 
   const loggedOutUserDiv = div(
     {
-      class: "inline-flex flex-col gap-4",
+      class: 'inline-flex flex-col gap-4',
     },
     div(
       {
         class:
           "w-80 justify-start text-black text-3xl font-bold font-['TWK_Lausanne_Pan'] leading-10",
       },
-      "Let’s get started"
+      'Let’s get started',
     ),
 
     button(
       {
-        class: "h-12 rounded-full px-6 dhlsBtn",
+        class: 'h-12 rounded-full px-6 dhlsBtn',
       },
-      "Login / Create Account"
+      'Login / Create Account',
     ),
     button(
       {
-        class: "dhlsBtn btn btn-outline-primary border-solid border-purple rounded-full px-6",
+        class: 'dhlsBtn btn btn-outline-primary border-solid border-purple rounded-full px-6',
       },
-      "Checkout as Guest"
+      'Checkout as Guest',
     ),
     hr({
-      class:"border-black-300"
+      class: 'border-black-300',
     }),
     div({
-      class:""
-    })
+      class: '',
+    }),
 
   );
 
   if (userLoggedInStatus) {
     priceContainerWrapper.append(priceContainer);
-    priceContainerWrapper.append(checkoutButton);    
+    priceContainerWrapper.append(checkoutButton);
   } else {
     priceContainerWrapper.append(loggedOutUserDiv);
-    priceContainerWrapper.append(priceContainer);  
+    priceContainerWrapper.append(priceContainer);
   }
   priceContainerWrapper.append(disclaimer);
   return priceContainerWrapper;

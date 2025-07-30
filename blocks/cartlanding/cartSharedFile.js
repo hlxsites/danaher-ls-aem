@@ -179,59 +179,50 @@ export const sessionObject = async (
   type,
   quantity,
   lineItemId,
-  manufacturer
+  manufacturer,
 ) => {
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
-    const foundObject = getProductDetailsObject.data.find((obj) =>
-      obj.hasOwnProperty(manufacturer)
-    );
+    const foundObject = getProductDetailsObject.data.find((obj) => obj.hasOwnProperty(manufacturer));
 
     if (foundObject) {
       const result = foundObject[manufacturer].find(
-        (obj) => obj.lineItemId === lineItemId
+        (obj) => obj.lineItemId === lineItemId,
       );
       if (result) {
-        if (type == "delete-item") {
+        if (type == 'delete-item') {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
           if (foundObject[manufacturer].length == 0) {
-            const manufacturerIndex =
-              getProductDetailsObject.data.indexOf(foundObject);
+            const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
-            sessionStorage.removeItem("productDetailObject");
+            sessionStorage.removeItem('productDetailObject');
             sessionStorage.setItem(
-              "productDetailObject",
-              JSON.stringify(getProductDetailsObject.data)
+              'productDetailObject',
+              JSON.stringify(getProductDetailsObject.data),
             );
-            return "success";
-          } else {
-            const manufacturerIndex =
-              getProductDetailsObject.data.indexOf(foundObject);
-            getProductDetailsObject.data[manufacturerIndex][manufacturer] =
-              foundObject[manufacturer];
-            sessionStorage.removeItem("productDetailObject");
-            sessionStorage.setItem(
-              "productDetailObject",
-              JSON.stringify(getProductDetailsObject.data)
-            );
-            return "success";
+            return 'success';
           }
-        } else {
-          result.itemQuantity = quantity;
-          const index = foundObject[manufacturer].indexOf(result);
-          foundObject[manufacturer][index] = result;
-          const manufacturerIndex =
-            getProductDetailsObject.data.indexOf(foundObject);
-          getProductDetailsObject.data[manufacturerIndex][manufacturer] =
-            foundObject[manufacturer];
-          sessionStorage.removeItem("productDetailObject");
+          const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
+          getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
+          sessionStorage.removeItem('productDetailObject');
           sessionStorage.setItem(
-            "productDetailObject",
-            JSON.stringify(getProductDetailsObject.data)
+            'productDetailObject',
+            JSON.stringify(getProductDetailsObject.data),
           );
-          return "success";
+          return 'success';
         }
+        result.itemQuantity = quantity;
+        const index = foundObject[manufacturer].indexOf(result);
+        foundObject[manufacturer][index] = result;
+        const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
+        getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
+        sessionStorage.removeItem('productDetailObject');
+        sessionStorage.setItem(
+          'productDetailObject',
+          JSON.stringify(getProductDetailsObject.data),
+        );
+        return 'success';
       }
     } else {
       return "No object with the key' was found";
@@ -242,22 +233,22 @@ export const updateProductQuantityValue = async (
   type,
   quantity,
   lineItemId,
-  manufacturer
+  manufacturer,
 ) => {
-  if (type == "delete-item") {
+  if (type == 'delete-item') {
     const quantityElement = document.getElementById(lineItemId);
-    const opco = manufacturer.split(" ")[0];
+    const opco = manufacturer.split(' ')[0];
     const response = await sessionObject(
       type,
       quantity,
       lineItemId,
-      manufacturer
+      manufacturer,
     );
     if (response) {
       quantityElement.remove();
       const manufacturerElement = document.getElementById(manufacturer);
       const manufacturerDiv = document.getElementById(opco);
-      const hr = manufacturerElement.querySelector("hr");
+      const hr = manufacturerElement.querySelector('hr');
       if (manufacturerElement.children.length == 1) {
         manufacturerDiv.parentElement.remove();
         manufacturerDiv.remove();
@@ -266,16 +257,15 @@ export const updateProductQuantityValue = async (
       }
     }
     return response;
-  } else {
-    const quantityElement = document.getElementById(lineItemId);
-    const response = await sessionObject(
-      type,
-      quantity,
-      lineItemId,
-      manufacturer
-    );
-    return response;
   }
+  const quantityElement = document.getElementById(lineItemId);
+  const response = await sessionObject(
+    type,
+    quantity,
+    lineItemId,
+    manufacturer,
+  );
+  return response;
 };
 
 export const updateCartQuantity = (newQuantity) => {

@@ -48,7 +48,7 @@ const paymentModule = async () => {
     let cardsWrapper = div({ class: 'hidden' });
     let invoiceWrapper = div({ class: 'hidden' });
     const allPaymentMethods = await getPaymentMethods();
-    
+
     allPaymentMethods?.data?.forEach((pm, ind) => {
       if (pm?.displayName === 'Stripe') {
         cardsWrapper.innerHTML = '';
@@ -103,7 +103,6 @@ const paymentModule = async () => {
       }
     });
     if (allPaymentMethods?.data?.length > 0) {
-      
       if (paymentMethodsWrapper?.classList.contains('hidden')) {
         paymentMethodsWrapper.classList.remove('hidden');
       }

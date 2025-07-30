@@ -13,7 +13,6 @@ export const cartItem = async () => {
 
   if (params.get('orderId')) {
     getProductDetailsObject = JSON.parse(sessionStorage.getItem('cartItemsDetails'));
-    
   } else {
     const productObject = await getProductDetailObject();
     getProductDetailsObject = productObject.data;
