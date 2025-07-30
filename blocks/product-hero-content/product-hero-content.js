@@ -5,8 +5,8 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.margin = '0';
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block.firstElementChild?.firstElementChild?.firstElementChild?.textContent.trim() || '';
   const productHeroContentWrapper = div({
     class:

@@ -16,8 +16,8 @@ function toggleDetails(event) {
 }
 
 export default function productBannerDecorate(block) {
-  block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.margin = '0';
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const [
     productBannerTitle,
     productBannerLink,
