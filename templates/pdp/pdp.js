@@ -45,6 +45,9 @@ function loadPdpBlocks() {
     document.querySelector('main').append(pdpBundleList);
   }
 
+  const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
+  document.querySelector('main').append(pdpCitations);
+
   //    const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
   //    const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
   //    const pdpYouMayAlsoNeeded = div(buildBlock('pdp-you-may-also-needed', { elems: [] }));
