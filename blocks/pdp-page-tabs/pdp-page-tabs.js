@@ -76,7 +76,9 @@ function highlightActiveTab(forcedLabel = null) {
       indicator.classList.toggle('rounded-[5px]', isActive);
     }
 
-    if (isActive && window.innerWidth < 768) {
+    // Ensure the active tab is visible within the scrollable tabs container on mobile
+    if (isActive && window.innerWidth < 768
+       && tab.parentElement.scrollWidth > tab.parentElement.clientWidth) {
       tab.parentElement.scrollIntoView({
         behavior: 'smooth',
         inline: 'center',
@@ -85,7 +87,6 @@ function highlightActiveTab(forcedLabel = null) {
     }
   });
 }
-
 function updatePageTabs(event) {
   const label = event.target.textContent.trim();
   const targetId = dynamicTabMap[label];

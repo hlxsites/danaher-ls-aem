@@ -142,7 +142,9 @@ export default async function decorate(block) {
           class:
               'self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
-        result?.raw?.richdescription.replace(/<[^>]*>/g, ''),
+        result?.raw?.richdescription
+          ? result.raw.richdescription.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ')
+          : '',
       ),
     ),
   );
@@ -294,7 +296,7 @@ export default async function decorate(block) {
         {
           class: 'inherit text-base font-medium leading-snug',
         },
-        'Quote',
+        'Request a Quote',
       ),
     ),
   );
@@ -352,11 +354,11 @@ export default async function decorate(block) {
   );
   const externalLink = div(
     {
-      class: 'w-9 h-9 relative flex items-center justify-center overflow-hidden cursor-pointer',
+      class: 'relative flex items-center justify-center overflow-hidden cursor-pointer',
     },
     span({
       class:
-          'icon icon-External-link w-9 h-9 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-External-link w-6 h-6 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const externalButton = div(
@@ -418,23 +420,19 @@ export default async function decorate(block) {
         ),
         div(
           {
-            class: 'w-56 h-[1rem] mt-[-10px]',
+            class: 'w-56 h-[1px] mt-[-2px] bg-danaherpurple-500 group-hover:bg-danaherpurple-800 rounded-full',
+          },
+        ),
+        div(
+          {
+            class: 'inline-flex justify-center items-center',
           },
           span({
             class:
-            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-chevron-down w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
-    ),
-    div(
-      {
-        class: 'inline-flex justify-center items-center',
-      },
-      span({
-        class:
-        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-      }),
     ),
   );
 
@@ -514,21 +512,16 @@ export default async function decorate(block) {
         ),
         div(
           {
-            class: 'w-[190px] h-[1rem] mt-[-10px]',
+            class: 'w-[186px] h-[1px] mt-[-2px] bg-danaherpurple-500 group-hover:bg-danaherpurple-800 rounded-full',
           },
-          span({
-            class:
-            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-          }),
         ),
-
         div(
           {
             class: 'w-[190px] inline-flex justify-center items-center',
           },
           span({
             class:
-        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-chevron-down w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -617,12 +610,12 @@ export default async function decorate(block) {
     const list = div(
       {
         class:
-            'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
+            'px-4 py-1 bg-danaherpurple-50 flex justify-center items-center gap-2.5 cursor-pointer',
       },
       div(
         {
           class:
-              'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
+              'text-center justify-start text-danaherpurple-600 text-lg leading-normal font-medium',
         },
         category,
       ),
