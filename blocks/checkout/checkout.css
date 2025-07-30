@@ -272,12 +272,28 @@
   height: max-content
 }
 
+.checkout :is(.h-\[320px\]) {
+  height: 320px
+}
+
+.checkout :is(.h-\[600px\]) {
+  height: 600px
+}
+
 .checkout :is(.max-h-48) {
   max-height: 12rem
 }
 
 .checkout :is(.max-h-97) {
   max-height: 25rem
+}
+
+.checkout :is(.max-h-\[30px\]) {
+  max-height: 30px
+}
+
+.checkout :is(.max-h-\[320px\]) {
+  max-height: 320px
 }
 
 .checkout :is(.w-11) {
