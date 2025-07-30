@@ -1,11 +1,11 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { showPreLoader } from '../../scripts/common-utils.js';
+import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
-  document.querySelector('main')?.classList.add('bg-danahergray-75');
+  document.querySelector('main')?.classList.add('bg-checkout');
   const authenticationToken = await getAuthenticationToken();
 
   if (
@@ -72,6 +72,7 @@ export default async function decorate(block) {
           modulesContainer.appendChild(module);
         }
       });
+      removePreLoader();
     })
     .catch((error) => ({
       status: 'error',

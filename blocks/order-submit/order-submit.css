@@ -34,6 +34,10 @@
   width: 775px
 }
 
+.order-submit-wrapper :is(.w-full) {
+  width: 100%
+}
+
 .order-submit-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -117,10 +121,6 @@
 
 .order-submit-wrapper :is(.p-6) {
   padding: 1.5rem
-}
-
-.order-submit-wrapper :is(.p-9) {
-  padding: 2.25rem
 }
 
 .order-submit-wrapper :is(.px-10) {

@@ -678,6 +678,10 @@
    .appear breadcrumb {
      @apply block h-14 lg:h-[45px] bg-[#F9FAFB] border-b-1 border-danahergray-75;
    }
+
+   .appear .bg-checkout {
+     @apply bg-[#F9FAFB];
+   }
  
    main
      .section
@@ -798,10 +802,7 @@
      @apply absolute invisible opacity-0 left-0 right-0;
    }
  }
-  .checkout-container
-  {
-    background: #e5e7eb;
-  }
+
  .checkout-progress-bar {
    display: flex;
    align-items: center;

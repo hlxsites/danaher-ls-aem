@@ -2018,7 +2018,7 @@ get price type if its net or gross
             span(
               {
                 class:
-                  ' w-80 text-right  text-gray-500 text-xs font-normal leading-none',
+                  ' w-full text-right  text-gray-500 text-xs font-normal leading-none',
               },
               checkoutSummaryKeys.discountLabel,
             ),
@@ -2138,7 +2138,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
-            authenticationToken.user_type === 'guest' ? 'hidden' : ''
+            ((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
           } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',

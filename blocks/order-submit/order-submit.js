@@ -283,7 +283,7 @@ export default async function decorate(block) {
                   class:
                     'self-stretch inline-flex justify-start items-center gap-6',
                 },
-                notes != ''
+                notes !== ''
                   ? notesValue()
                   : '',
               ),
@@ -297,21 +297,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'self-stretch outline outline-1 outline-gray-200 flex flex-col justify-start items-start gap-6',
-            },
-            addressContainer('Shipping Address'),
-          ),
-          div(
-            {
-              class:
-                'self-stretch outline outline-1 outline-gray-200 flex flex-col justify-start items-start gap-6',
-            },
-            addressContainer('Billing Address'),
-          ),
-          div(
-            {
-              class:
-                'w-96 p-9 bg-white border-l outline outline-1 outline-gray-200 flex flex-col justify-start items-start gap-9',
+                'w-full flex flex-col justify-start items-start gap-9',
             },
             checkoutSummaryContainer,
           ),
