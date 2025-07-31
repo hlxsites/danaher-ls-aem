@@ -31,7 +31,7 @@ export default async function decorate(block) {
     .filter(({ brand }) => {
       const match = brandName && brandName !== '' && brand
         ? brandName.toLowerCase() === brand.toLowerCase()
-        : true;
+        : false;
       return match;
     })
     .filter(({ type }) => type.toLowerCase() === articleType)
