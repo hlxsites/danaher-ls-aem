@@ -2399,7 +2399,7 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
@@ -2430,8 +2430,11 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response.status === 'success') {
         await updateCheckoutSummary();
+        const totalPrice = document.getElementById("total-price");
+        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
+        totalPrice.innerHTML= totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2441,7 +2444,7 @@ export const cartItemsContainer = (cartItemValue) => {
       }
     }
   };
-  const modalCloseButton = button(
+  const deleteButton = button(
     {
       class: 'sm:w-[7.5rem] sm:h-[3.5rem] bg-white',
     },
@@ -2450,11 +2453,11 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'icon icon-icons8-delete cart-delete',
     }),
   );
-  modalCloseButton.addEventListener('click', (event) => {
+  deleteButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
     modifyCart('delete-item', input, '');
   });
-  const modalInput = input({
+  const inputBox = input({
     // id: cartItemValue.lineItemId,
     class:
       'w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center',
@@ -2465,7 +2468,7 @@ export const cartItemsContainer = (cartItemValue) => {
     name: 'item-quantity',
     value: cartItemValue.itemQuantity,
   });
-  modalInput.addEventListener('change', (event) => {
+  inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
     const input = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
@@ -2498,6 +2501,50 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'justify-center',
     },
   );
+  const unitPriceDiv = () =>{
+    if(cartItemValue.listPrice.value != cartItemValue.salePrice.value ){
+      return  div(
+      {
+        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+      },
+     div(
+        {
+          class:
+            "w-full justify-start text-gray-500 text-base font-bold item line-through",
+        },
+        `$${cartItemValue.listPrice.value}`
+      ),
+      div(
+        {
+          class:
+            "w-full justify-start text-black text-base",
+        },
+       `$${cartItemValue.salePrice.value}`
+      )
+    )
+    }
+    else {
+      return  div(
+      {
+        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+      },
+    //  div(
+    //     {
+    //       class:
+    //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+    //     },
+    //     `$${cartItemValue.listPrice.value}`
+    //   ),
+      div(
+        {
+          class:
+            "w-full justify-start text-black text-base",
+        },
+       `$${cartItemValue.salePrice.value}`
+      )
+    )
+    }
+  }
   // const itemContainer = div(
   //   {
   //     class: "flex w-full justify-between items-center",
@@ -2531,7 +2578,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     {
   //       class: "",
   //     },
-  //     modalInput
+  //     inputBox
   //   ),
   //   div(
   //     {
@@ -2539,7 +2586,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     },
   //     `$${cartItemValue.salePrice.value}`
   //   ),
-  //   modalCloseButton
+  //   deleteButton
   // );
   // const itemContainer = div(
   //   {
@@ -2589,7 +2636,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     // div({
   //     //     class:"justify-start text-gray-700 text-base font-normal"
   //     // }, "2")
-  //     modalInput
+  //     inputBox
   //     // )
   //   ),
   //   div(
@@ -2621,7 +2668,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //   ),
   //   div(
   //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
-  //     modalCloseButton
+  //     deleteButton
   //   )
   // );
   const itemsscontainer = div(
@@ -2677,34 +2724,36 @@ export const cartItemsContainer = (cartItemValue) => {
         {
           class: 'w-24 justify-start text-black text-base font-bold',
         },
-        modalInput,
+        inputBox,
       ),
-      div(
-        {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
-        },
-        div(
-          {
-            class:
-            'w-full justify-start text-gray-500 text-base font-bold item line-through',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-        div(
-          {
-            class:
-            'w-full justify-start text-black text-base',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-      ),
+      // div(
+      //   {
+      //     class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+      //   },
+      //   div(
+      //     {
+      //       class:
+      //       'w-full justify-start text-gray-500 text-base font-bold item line-through',
+      //     },
+      //     `$${cartItemValue.salePrice.value}`,
+      //   ),
+      //   div(
+      //     {
+      //       class:
+      //       'w-full justify-start text-black text-base',
+      //     },
+      //     `$${cartItemValue.salePrice.value}`,
+      //   ),
+      // ),
+      unitPriceDiv(),
       div(
         {
           class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
+          id: "total-price"
         },
-        `$${cartItemValue.salePrice.value}`,
+        `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),
-      modalCloseButton,
+      deleteButton,
     ),
 
   );

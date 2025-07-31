@@ -190,10 +190,10 @@ export const sessionObject = async (
         (obj) => obj.lineItemId === lineItemId,
       );
       if (result) {
-        if (type == 'delete-item') {
+        if (type === 'delete-item') {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
-          if (foundObject[manufacturer].length == 0) {
+          if (foundObject[manufacturer].length === 0) {
             const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
             sessionStorage.removeItem('productDetailObject');
@@ -222,7 +222,10 @@ export const sessionObject = async (
           'productDetailObject',
           JSON.stringify(getProductDetailsObject.data),
         );
-        return 'success';
+        return {
+          data: getProductDetailsObject.data[manufacturerIndex][manufacturer],
+          status: 'success',
+        };
       }
     } else {
       return "No object with the key' was found";
@@ -235,7 +238,7 @@ export const updateProductQuantityValue = async (
   lineItemId,
   manufacturer,
 ) => {
-  if (type == 'delete-item') {
+  if (type === 'delete-item') {
     const quantityElement = document.getElementById(lineItemId);
     const opco = manufacturer.split(' ')[0];
     const response = await sessionObject(
@@ -249,7 +252,7 @@ export const updateProductQuantityValue = async (
       const manufacturerElement = document.getElementById(manufacturer);
       const manufacturerDiv = document.getElementById(opco);
       const hr = manufacturerElement.querySelector('hr');
-      if (manufacturerElement.children.length == 1) {
+      if (manufacturerElement.children.length === 1) {
         manufacturerDiv.parentElement.remove();
         manufacturerDiv.remove();
         hr.remove();

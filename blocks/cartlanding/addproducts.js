@@ -258,7 +258,7 @@ export const addProducts = async () => {
       const re = document.getElementById('productSearchcontainer');
       re.append(noProducts(inputValue));
       const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
-      if (div.length == 1) div[0].remove();
+      if (div.length === 1) div[0].remove();
       removePreLoader();
     }
   };
