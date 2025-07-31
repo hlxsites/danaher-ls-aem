@@ -2432,9 +2432,9 @@ export const cartItemsContainer = (cartItemValue) => {
       const response = await updateCartItemQuantity(item);
       if (response.status === 'success') {
         await updateCheckoutSummary();
-        const totalPrice = document.getElementById("total-price");
+        const totalPrice = document.getElementById('total-price');
         const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
-        totalPrice.innerHTML= totalPricValue;
+        totalPrice.innerHTML = totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2501,50 +2501,49 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'justify-center',
     },
   );
-  const unitPriceDiv = () =>{
-    if(cartItemValue.listPrice.value != cartItemValue.salePrice.value ){
-      return  div(
+  const unitPriceDiv = () => {
+    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
+      return div(
+        {
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+        },
+        div(
+          {
+            class:
+            'w-full justify-start text-gray-500 text-base font-bold item line-through',
+          },
+          `$${cartItemValue.listPrice.value}`,
+        ),
+        div(
+          {
+            class:
+            'w-full justify-start text-black text-base',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+      );
+    }
+
+    return div(
       {
-        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
       },
-     div(
+      //  div(
+      //     {
+      //       class:
+      //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+      //     },
+      //     `$${cartItemValue.listPrice.value}`
+      //   ),
+      div(
         {
           class:
-            "w-full justify-start text-gray-500 text-base font-bold item line-through",
+            'w-full justify-start text-black text-base',
         },
-        `$${cartItemValue.listPrice.value}`
+        `$${cartItemValue.salePrice.value}`,
       ),
-      div(
-        {
-          class:
-            "w-full justify-start text-black text-base",
-        },
-       `$${cartItemValue.salePrice.value}`
-      )
-    )
-    }
-    else {
-      return  div(
-      {
-        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
-      },
-    //  div(
-    //     {
-    //       class:
-    //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
-    //     },
-    //     `$${cartItemValue.listPrice.value}`
-    //   ),
-      div(
-        {
-          class:
-            "w-full justify-start text-black text-base",
-        },
-       `$${cartItemValue.salePrice.value}`
-      )
-    )
-    }
-  }
+    );
+  };
   // const itemContainer = div(
   //   {
   //     class: "flex w-full justify-between items-center",
@@ -2749,7 +2748,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
-          id: "total-price"
+          id: 'total-price',
         },
         `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),
