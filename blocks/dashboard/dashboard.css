@@ -32,8 +32,8 @@
   inset: 0px
 }
 
-.dashboard-wrapper :is(.left-\[46\%\]) {
-  left: 46%
+.dashboard-wrapper :is(.left-\[48\%\]) {
+  left: 48%
 }
 
 .dashboard-wrapper :is(.right-10) {
@@ -46,10 +46,6 @@
 
 .dashboard-wrapper :is(.top-6) {
   top: 1.5rem
-}
-
-.dashboard-wrapper :is(.left-\[48\%\]) {
-  left: 48%
 }
 
 .dashboard-wrapper :is(.z-10) {
