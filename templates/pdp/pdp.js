@@ -48,6 +48,17 @@ function loadPdpBlocks() {
   const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
   document.querySelector('main').append(pdpCitations);
 
+   const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+  document.querySelector('main').append(pdpFaqs);
+  
+  const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
+  document.querySelector('main').append(pdpRelatedProducts);
+
+  const pdpCarousel = div(buildBlock('pdp-carousel', { elems: [] }));
+  document.querySelector('main').append(pdpCarousel);
+
+
+
   //    const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
   //    const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
   //    const pdpYouMayAlsoNeeded = div(buildBlock('pdp-you-may-also-needed', { elems: [] }));

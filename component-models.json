@@ -1066,11 +1066,19 @@
     "fields": []
   },
   {
+    "id": "pdp-carousel",
+    "fields": []
+  },
+  {
     "id": "pdp-citations",
     "fields": []
   },
   {
     "id": "pdp-description",
+    "fields": []
+  },
+  {
+    "id": "pdp-faqs",
     "fields": []
   },
   {
@@ -1083,6 +1091,10 @@
   },
   {
     "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-related-products",
     "fields": []
   },
   {
