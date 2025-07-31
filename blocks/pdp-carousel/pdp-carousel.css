@@ -1,3 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -28,12 +68,33 @@
   position: relative
 }
 
+.pdp-carousel-wrapper :is(.col-span-1) {
+  grid-column: span 1 / span 1
+}
+
 .pdp-carousel-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
 
+.pdp-carousel-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .pdp-carousel-wrapper :is(.mt-8) {
   margin-top: 2rem
+}
+
+.pdp-carousel-wrapper :is(.mb-3) {
+  margin-bottom: 0.75rem
+}
+
+.pdp-carousel-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
+}
+
+.pdp-carousel-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
 }
 
 .pdp-carousel-wrapper :is(.\!line-clamp-2) {
@@ -41,6 +102,20 @@
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
   -webkit-line-clamp: 2 !important
+}
+
+.pdp-carousel-wrapper :is(.\!line-clamp-3) {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important
+}
+
+.pdp-carousel-wrapper :is(.line-clamp-4) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
 }
 
 .pdp-carousel-wrapper :is(.block) {
@@ -71,6 +146,14 @@
   height: 164px
 }
 
+.pdp-carousel-wrapper :is(.\!h-14) {
+  height: 3.5rem !important
+}
+
+.pdp-carousel-wrapper :is(.\!h-20) {
+  height: 5rem !important
+}
+
 .pdp-carousel-wrapper :is(.w-5) {
   width: 1.25rem
 }
@@ -81,6 +164,14 @@
 
 .pdp-carousel-wrapper :is(.w-full) {
   width: 100%
+}
+
+.pdp-carousel-wrapper :is(.max-w-7xl) {
+  max-width: 80rem
+}
+
+.pdp-carousel-wrapper :is(.max-w-xl) {
+  max-width: 36rem
 }
 
 .pdp-carousel-wrapper :is(.flex-shrink-0) {
@@ -101,6 +192,10 @@
 
 .pdp-carousel-wrapper :is(.resize) {
   resize: both
+}
+
+.pdp-carousel-wrapper :is(.grid-cols-1) {
+  grid-template-columns: repeat(1, minmax(0, 1fr))
 }
 
 .pdp-carousel-wrapper :is(.flex-col) {
@@ -135,6 +230,10 @@
   justify-content: space-between
 }
 
+.pdp-carousel-wrapper :is(.justify-items-center) {
+  justify-items: center
+}
+
 .pdp-carousel-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
@@ -155,6 +254,12 @@
   gap: 1.5rem
 }
 
+.pdp-carousel-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+
 .pdp-carousel-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -165,6 +270,18 @@
 
 .pdp-carousel-wrapper :is(.\!break-words) {
   overflow-wrap: break-word !important
+}
+
+.pdp-carousel-wrapper :is(.break-words) {
+  overflow-wrap: break-word
+}
+
+.pdp-carousel-wrapper :is(.\!rounded-full) {
+  border-radius: 9999px !important
+}
+
+.pdp-carousel-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
 }
 
 .pdp-carousel-wrapper :is(.rounded-bl-\[20px\]) {
@@ -185,6 +302,10 @@
 
 .pdp-carousel-wrapper :is(.border) {
   border-width: 1px
+}
+
+.pdp-carousel-wrapper :is(.border-8) {
+  border-width: 8px
 }
 
 .pdp-carousel-wrapper :is(.border-gray-300) {
@@ -255,6 +376,31 @@
   padding-bottom: 1.5rem
 }
 
+.pdp-carousel-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.pdp-carousel-wrapper :is(.\!px-7) {
+  padding-left: 1.75rem !important;
+  padding-right: 1.75rem !important
+}
+
+.pdp-carousel-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.pdp-carousel-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.pdp-carousel-wrapper :is(.py-5) {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem
+}
+
 .pdp-carousel-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
@@ -269,6 +415,10 @@
 
 .pdp-carousel-wrapper :is(.pt-0) {
   padding-top: 0px
+}
+
+.pdp-carousel-wrapper :is(.pt-8) {
+  padding-top: 2rem
 }
 
 .pdp-carousel-wrapper :is(.text-2xl) {
@@ -291,12 +441,21 @@
   line-height: 1.75rem
 }
 
+.pdp-carousel-wrapper :is(.\!text-lg) {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important
+}
+
 .pdp-carousel-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
 .pdp-carousel-wrapper :is(.font-medium) {
   font-weight: 500
+}
+
+.pdp-carousel-wrapper :is(.\!font-semibold) {
+  font-weight: 700 !important
 }
 
 .pdp-carousel-wrapper :is(.leading-7) {
@@ -338,6 +497,22 @@
 .pdp-carousel-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.pdp-carousel-wrapper :is(.\!text-danahergray-900) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(17 24 39 / var(--tw-text-opacity)) !important
+}
+
+.pdp-carousel-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.pdp-carousel-wrapper :is(.shadow-lg) {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .pdp-carousel-wrapper :is(.outline) {
@@ -386,6 +561,12 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
+.pdp-carousel-wrapper :is(.hover\:scale-105:hover) {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
 .pdp-carousel-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
@@ -410,12 +591,21 @@
     max-width: 305px
   }
 
+  .pdp-carousel-wrapper :is(.sm\:grid-cols-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
   .pdp-carousel-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
 
   .pdp-carousel-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
+  }
+
+  .pdp-carousel-wrapper :is(.sm\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
 
@@ -441,6 +631,10 @@
 @media (min-width: 1024px) {
   .pdp-carousel-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
+  }
+
+  .pdp-carousel-wrapper :is(.lg\:grid-cols-4) {
+    grid-template-columns: repeat(4, minmax(0, 1fr))
   }
 
   .pdp-carousel-wrapper :is(.lg\:px-10) {

@@ -9,13 +9,14 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  const imageUrl = item.images?.[0];
+  const imageUrl = item.image || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+
   const card = a(
     {
-      href: item?.url,
-      target: item?.url?.includes('http') ? '_blank' : '_self',
+      href: item?.clickUri,
+      target: item?.clickUri?.includes('http') ? '_blank' : '_self',
       class:
-        'w-full relative flex-shrink-0 object-co hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%]  md:min-w-[305px] sm:max-w-[305px] md:max-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
+        'w-full relative flex-shrink-0 object-contain hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%] md:min-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300 flex flex-col justify-start items-start gap-3',
     },
     img({
       src: imageUrl,
@@ -25,16 +26,16 @@ export default function renderGridCard(item) {
     p(
       {
         class:
-          'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
+          'text-xl !m-0 !p-0 !px-3 text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
       },
       item?.title?.replace(/<[^>]*>/g, '') || '',
     ),
-    a(
+    span(
       {
-        href: item?.url,
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        href: item?.clickUri,
+        target: item?.clickUri?.includes('http') ? '_blank' : '_self',
         class:
-          'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
+          'text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3 self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug',
       },
       'View Details',
       span({
