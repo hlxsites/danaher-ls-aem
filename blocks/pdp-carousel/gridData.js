@@ -9,7 +9,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  const imageUrl = item.image || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const imageUrl = item.image;
 
   const card = a(
     {
