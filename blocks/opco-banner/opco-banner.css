@@ -139,6 +139,10 @@
   height: 100%
 }
 
+.opco-banner-wrapper :is(.max-h-\[172px\]) {
+  max-height: 172px
+}
+
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
   min-height: 400px
 }
