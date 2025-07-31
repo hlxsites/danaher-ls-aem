@@ -1100,7 +1100,7 @@ export async function updateCart(newItem) {
         return cartItemContainer;
       }
     });
-    if (response[0] == undefined) return response[1];
+    if (response[0] === undefined) return response[1];
     return response[0];
   }
 }
