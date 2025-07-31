@@ -305,7 +305,7 @@ export default async function decorate(block) {
           formResponse.classList.remove('text-red-700');
         }
         formResponse.textContent = 'Login Successfull';
-        window.location.href = '/us/en/products/cart-checkout/dashboard';
+        window.location.href = '/us/en/e-buy/dashboard';
         return true;
       }
       formResponse.classList.remove('hidden');

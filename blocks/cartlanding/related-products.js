@@ -18,7 +18,7 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function relatedProducts(headingText, productIds)  {
+export default async function relatedProducts(headingText, productIds) {
   // block?.parentElement?.parentElement?.removeAttribute('class');
   // block?.parentElement?.parentElement?.removeAttribute('style');
 
@@ -82,7 +82,7 @@ export default async function relatedProducts(headingText, productIds)  {
     //           'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
     //     })
     //     : '',
-    // ), 
+    // ),
   );
   decorateIcons(leftGroup);
 
@@ -162,10 +162,10 @@ export default async function relatedProducts(headingText, productIds)  {
 
   const products = (
     await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false))
+      productIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
-    .filter((product) => product.status !== "error")
+    .filter((product) => product.status !== 'error')
     .map((product) => product.value);
 
   /**

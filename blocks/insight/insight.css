@@ -51,6 +51,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .insight-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
@@ -182,11 +187,6 @@
 
 .insight-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.insight-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
 }
 
 .insight-wrapper :is(.text-base) {

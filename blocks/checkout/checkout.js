@@ -1,18 +1,18 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { showPreLoader } from '../../scripts/common-utils.js';
+import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
+  document.querySelector('main')?.classList.add('bg-checkout');
   const authenticationToken = await getAuthenticationToken();
 
   if (
     authenticationToken?.status === 'error'
     || authenticationToken.user_type === 'guest'
   ) {
-    window.location.href = '/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary';
-    // return { status: 'error', data: 'Unauthorized access.' };
+    window.location.href = '/us/en/e-buy/cartlanding';
   }
   block.innerHtml = '';
 
@@ -32,7 +32,7 @@ export default async function decorate(block) {
   ::::::::::::::
   */
   const modulesContent = div({
-    class: 'checkout-content flex flex-col gap-16 justify-between  lg:flex-row',
+    class: 'checkout-content flex flex-col gap-5 justify-between  lg:flex-row',
   });
 
   /*
@@ -41,7 +41,8 @@ export default async function decorate(block) {
   ::::::::::::::
   */
   const modulesContainer = div({
-    class: 'checkout-modules-wrapper w-7/10',
+    class:
+      'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-7/10 p-6',
   });
 
   const progressBar = progressModule();
@@ -64,12 +65,13 @@ export default async function decorate(block) {
       modules.forEach((module) => {
         if (module.getAttribute('id') === 'checkout-details') {
           module.className = '';
-          module.className = 'checkout-summary-wrapper flex justify-center';
+          module.className = 'checkout-summary-wrapper h-max flex justify-center';
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);
         }
       });
+      removePreLoader();
     })
     .catch((error) => ({
       status: 'error',

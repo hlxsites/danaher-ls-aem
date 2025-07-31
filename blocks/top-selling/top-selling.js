@@ -21,6 +21,7 @@ function getCardsPerPageGrid() {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+  block.style.display = 'none';
 
   const topSellingWrapper = div({
     class:
@@ -148,15 +149,25 @@ export default async function decorate(block) {
       isGridView ? 'md:flex-nowrap' : ''
     }`,
   });
+  const slideWrapper = div({
+    class: 'slide-wrapper py-2 flex transition-transform duration-1000 ease-in-out',
+  });
+  carouselCards.append(slideWrapper);
+
   const paginationContainer = div({
     class:
       'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
     style: 'display: none;',
   });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error' && product.title?.trim(),
+  const results = await Promise.allSettled(
+    // making false as we don't need intershop data for top selling products as of now
+    productIds.map((id) => getProductInfo(id, false)),
   );
+
+  const products = results
+    .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
+    .map((result) => result.value);
 
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
@@ -168,7 +179,7 @@ export default async function decorate(block) {
    */
   function scrollToFirstCard() {
     setTimeout(() => {
-      const firstCard = carouselCards.querySelector(':first-child');
+      const firstCard = slideWrapper.querySelector(':first-child');
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
@@ -192,30 +203,39 @@ export default async function decorate(block) {
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
   function updateCarousel() {
-    carouselCards.innerHTML = '';
-    carouselCards.className = `carousel-cards flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
+    slideWrapper.innerHTML = '';
+    slideWrapper.className = `slide-wrapper w-full py-2 flex ${isGridView ? 'transition-transform duration-1000 ease-in-out' : ''} gap-5 ${
+      isGridView ? 'flex-row' : 'flex-col'
+    }`;
+    carouselCards.className = `carousel-cards ${isGridView ? 'overflow-hidden' : ''}  flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`;
 
     if (isGridView) {
-      let cardsToDisplay;
-      if (products.length < 5) {
-        cardsToDisplay = products; // Show all cards if fewer than 4
-        arrowGroup.style.display = 'none'; // Hide carousel arrows
+      if (products.length === 0) {
+        arrowGroup.style.display = 'none';
+        slideWrapper.style.transform = 'translateX(0)';
       } else {
-        cardsToDisplay = products.slice(
-          currentIndex,
-          currentIndex + cardsPerPageGrid,
-        );
-        arrowGroup.style.display = 'flex'; // Show carousel arrows
+        // Render all cards for continuous sliding
+        products.forEach((item) => slideWrapper.append(renderGridCard(item)));
+        arrowGroup.style.display = products.length <= cardsPerPageGrid ? 'none' : 'flex';
+
+        // Calculate transform for sliding
+        const card = slideWrapper.children[0];
+        if (card) {
+          const cardWidth = card.offsetWidth + 20; // Include gap-5 (20px)
+          slideWrapper.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        } else {
+          slideWrapper.style.transform = 'translateX(0)';
+        }
       }
-      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
+      cardsToDisplay.forEach((item) => slideWrapper.append(renderListCard(item)));
+      slideWrapper.style.transform = 'translateX(0)';
       paginationContainer.style.display = products.length < 7 ? 'none' : 'flex';
       arrowGroup.style.display = 'none';
 
@@ -522,5 +542,6 @@ export default async function decorate(block) {
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   topSellingWrapper.append(carouselContainer);
   block.innerHTML = '';
+  block.style = '';
   block.append(topSellingWrapper);
 }

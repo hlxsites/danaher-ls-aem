@@ -302,7 +302,8 @@ function iterateChildren(filter, node, searchQuery = '') {
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
-  if (!filter.values && filter.facetId !== 'opco') {
+  // Skip rendering the facet if it has no values for 'opco' or 'workflowname'
+  if ((filter.facetId === 'opco' || filter.facetId === 'workflowname') && (!filter.values || filter.values.length === 0)) {
     return null;
   }
 
@@ -339,7 +340,7 @@ const renderFacet = (filter, isFirst = false) => {
   const contents = fieldset({
     class: `facet-contents flex flex-col justify-start items-start gap-4 ${
       isFirst ? '' : 'hidden'
-    } min-h-[100px]`,
+    }`,
   });
 
   // Add search bar for workflowname and opco
@@ -380,37 +381,19 @@ const renderFacet = (filter, isFirst = false) => {
     });
 
     if (filter.facetId === 'workflowname') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = iterateChildren(filter, valueObj);
-          if (item) {
-            originalItems.append(item.cloneNode(true));
-            itemsContainer.append(item);
-          }
-        });
-      } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No process steps available',
-        );
-        originalItems.append(noItems.cloneNode(true));
-        itemsContainer.append(noItems);
-      }
-    } else if (filter.facetId === 'opco') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = facetItem(filter, valueObj);
+      filter.values.forEach((valueObj) => {
+        const item = iterateChildren(filter, valueObj);
+        if (item) {
           originalItems.append(item.cloneNode(true));
           itemsContainer.append(item);
-        });
-      } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No brands available',
-        );
-        originalItems.append(noItems.cloneNode(true));
-        itemsContainer.append(noItems);
-      }
+        }
+      });
+    } else if (filter.facetId === 'opco') {
+      filter.values.forEach((valueObj) => {
+        const item = facetItem(filter, valueObj);
+        originalItems.append(item.cloneNode(true));
+        itemsContainer.append(item);
+      });
     }
 
     contents.append(originalItems, itemsContainer);
@@ -467,29 +450,17 @@ const renderFacet = (filter, isFirst = false) => {
       }
     });
   } else {
-    // Render facet items or a fallback message for facets without search
+    // Render facet items for facets without search
     if (filter.facetId === 'workflowname') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          const item = iterateChildren(filter, valueObj);
-          if (item) contents.append(item);
-        });
-      } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No process steps available'),
-        );
-      }
+      filter.values.forEach((valueObj) => {
+        const item = iterateChildren(filter, valueObj);
+        if (item) contents.append(item);
+      });
     }
     if (filter.facetId === 'opco') {
-      if (filter.values && filter.values.length > 0) {
-        filter.values.forEach((valueObj) => {
-          contents.append(facetItem(filter, valueObj));
-        });
-      } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No brands available'),
-        );
-      }
+      filter.values.forEach((valueObj) => {
+        contents.append(facetItem(filter, valueObj));
+      });
     }
   }
 
@@ -710,6 +681,8 @@ const updateWorkflowName = (value, ariaPressed) => {
   } else if (!ariaPressed) {
     clearValuesAfterCurrent(workflowName, value);
     workflowName.add(value);
+  } else if (ariaPressed) {
+    workflowName.delete(value);
   } else {
     workflowName.clear();
   }
@@ -787,8 +760,10 @@ function scrollToFirstCard() {
       : null;
     if (firstCard) {
       firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      firstCard.classList.add('scroll-mt-32');
     } else {
       // Fallback: scroll productContainer to top
+      productContainer.classList.add('scroll-mt-32');
       productContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, 100);
@@ -839,7 +814,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-            prevEnabled ? 'danaherpurple-500' : 'text-gray-400'
+            prevEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
           } [&_svg>use]:stroke-current`,
         }),
       ),
@@ -857,6 +832,9 @@ function renderPagination(totalProducts, paginationWrapper) {
   prevButton.addEventListener('click', () => {
     if (currentPage > 1) {
       currentPage -= 1;
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', currentPage);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     }
@@ -864,13 +842,22 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   // Page Numbers
   const pageNumbersContainer = div({
-    class: 'flex justify-center items-start gap-2 z-10',
+    class: 'flex justify-center items-start gap-2 z-10 hidden md:flex',
   });
-  const maxVisiblePages = 5;
-  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-  if (endPage - startPage + 1 < maxVisiblePages) {
-    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  let startPage = 1;
+  let endPage = totalPages;
+
+  if (totalPages >= 5) {
+    if (currentPage <= 3) {
+      startPage = 1;
+      endPage = currentPage + 2;
+    } else if (currentPage >= totalPages - 2) {
+      startPage = currentPage - 2;
+      endPage = totalPages;
+    } else {
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
+    }
   }
 
   // Helper function to create page number buttons
@@ -903,6 +890,10 @@ function renderPagination(totalProducts, paginationWrapper) {
     );
     pageNumber.addEventListener('click', () => {
       currentPage = page;
+      // Update hash with page param using URL API
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     });
@@ -1005,6 +996,9 @@ function renderPagination(totalProducts, paginationWrapper) {
   nextButton.addEventListener('click', () => {
     if (currentPage < totalPages) {
       currentPage += 1;
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('page', currentPage);
+      window.history.replaceState({}, '', newUrl.toString());
       updateProductDisplay();
       scrollToFirstCard();
     }
@@ -1025,7 +1019,7 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
@@ -1045,9 +1039,6 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
   productCount.textContent = `${response.totalCount} Products Available`;
 
@@ -1117,15 +1108,14 @@ async function updateProductDisplay() {
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
-  const productsToDisplay = products.slice(startIndex, endIndex);
-  productsToDisplay.forEach((item) => {
+  products.forEach((item) => {
     productsWrapper.append(
       isGridView ? renderProductGridCard(item) : renderProductListCard(item),
     );
   });
 
   productContainer.append(productsWrapper);
-  renderPagination(products.length, paginationContainerWrapper);
+  renderPagination(response.totalCount, paginationContainerWrapper);
 }
 
 /**
@@ -1141,7 +1131,7 @@ export async function decorateProductList(block, blockId) {
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
   let response;
   try {
-    response = await getProductsForCategories(params);
+    response = await getProductsForCategories(params, isGridView, currentPage);
   } catch (err) {
     console.error('Error fetching products:', err);
     response = { results: [], facets: [], totalCount: 0 };
@@ -1210,31 +1200,46 @@ export async function decorateProductList(block, blockId) {
         'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
         const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
+        const isAllExpanded = Array.from(facetButtons).every(
+          (btn) => btn.getAttribute('aria-expanded') === 'true',
+        );
+
         facetButtons.forEach((btn) => {
-          btn.setAttribute('aria-expanded', 'true');
+          const shouldExpand = !isAllExpanded;
+          btn.setAttribute('aria-expanded', shouldExpand.toString());
           const parent = btn.closest('div.facet');
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-plus-gray');
-          icon.classList.add('icon-minus-gray');
-          contents.classList.remove('hidden');
-          searchWrapper?.classList.remove('hidden');
+          icon.classList.toggle('icon-plus-gray', !shouldExpand);
+          icon.classList.toggle('icon-minus-gray', shouldExpand);
+          contents.classList.toggle('hidden', !shouldExpand);
+          searchWrapper?.classList.toggle('hidden', !shouldExpand);
           decorateIcons(parent);
         });
+
+        const toggleButton = expandAll.querySelector('button');
+        const chevron = expandAll.querySelector('.icon-chevron-down');
+        if (isAllExpanded) {
+          toggleButton.childNodes[0].textContent = 'Expand All';
+          chevron.classList.remove('transform', 'rotate-180');
+        } else {
+          toggleButton.childNodes[0].textContent = 'Collapse All';
+          chevron.classList.add('transform', 'rotate-180');
+        }
       },
     },
     button(
       {
         class:
-          'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug',
+          'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
       'Expand All',
       div(
         { class: 'relative mb-1 flex items-center' },
         span({
           class:
-            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
+            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
         }),
       ),
     ),
@@ -1390,8 +1395,6 @@ export async function decorateProductList(block, blockId) {
 }
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block?.querySelector('p')?.textContent || '';
   decorateProductList(block, blockId);
 }

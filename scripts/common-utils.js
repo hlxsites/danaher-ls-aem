@@ -45,7 +45,7 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        ' flex w-full relative top-1/2 left-[48%] justify-start items-center',
       id: 'preLoader',
     },
     img({
@@ -73,7 +73,7 @@ const generatePreloader = div(
   },
   preLoader(),
 );
-const getMainDiv = document.querySelector('body');
+const getMainDiv = document.querySelector('main');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
 /*
  ::::::::::::::::::::::::
@@ -798,7 +798,7 @@ export const buildInputElement = (
       type: inputType,
       name: inputName,
       value,
-      id: inputName,
+      id: fieldLable,
       autocomplete: autoCmplte,
       'data-required': required,
       class:

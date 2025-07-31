@@ -44,6 +44,16 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.dhls-container .\!font-medium {
+  font-weight: 400 !important;
+  font-family: TWK Lausanne EDS !important
+}
+
 .product-hero-content-wrapper :is(.relative) {
   position: relative
 }
@@ -172,7 +182,7 @@
 }
 
 .product-hero-content-wrapper :is(.\!font-medium) {
-  font-weight: 400 !important
+  font-weight: 500 !important
 }
 
 .product-hero-content-wrapper :is(.font-bold) {

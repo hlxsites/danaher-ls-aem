@@ -64,74 +64,6 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             defaultBgClass = `is-default-${type}-address`;
           }
         }
-        const addressListItem = div(
-          {
-            class: `:hover:bg-gray-100 flex justify-between ${type}-address-list-item ${defaultBgClass}`,
-          },
-          div(
-            {
-              class: `flex flex-col ${type}-address-list-item-content`,
-              id: `${type}AddressListContentActions-${index}`,
-            },
-            h5(
-              {
-                class: 'font-bold',
-              },
-              typeof item.companyName2 !== 'undefined' ? item.companyName2 : '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              item.addressLine1,
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              item.city,
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`,
-            ),
-            div(
-              {
-                class: 'flex gap-4',
-              },
-              span(
-                {
-                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4`,
-                  'data-address': JSON.stringify(item),
-                },
-                'Edit',
-              ),
-              span(
-                {
-                  class:
-                    'flex mt-4 justify-start  text-base font-bold text-danaherpurple-500 cursor-pointer',
-                  'data-address': JSON.stringify(item),
-                },
-                'Copy',
-              ),
-            ),
-          ),
-          div(
-            {
-              class: `${type}-address-list-item-actions`,
-              id: `${type}AddressListItemActions-${index}`,
-            },
-            button(
-              {
-                id: item.id,
-                class: `${type}-address-use-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
-              },
-              'Use address',
-            ),
-          ),
-        );
 
         /*
         ::::::::::::::
@@ -162,12 +94,89 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             },
             span(
               {
-                class: 'text-md text-danaherpurple-500 ',
+                class:
+                  'text-md text-danaherpurple-500 hover:text-danaherpurple-800',
               },
-              'Make Default',
+              'Make this my default address',
             ),
           );
         }
+
+        const addressListItem = div(
+          {
+            class: `:hover:bg-gray-100 flex justify-between p-6 border border-danahergray-300  ${type}-address-list-item ${defaultBgClass}`,
+          },
+          div(
+            {
+              class: `flex flex-col ${type}-address-list-item-content`,
+              id: `${type}AddressListContentActions-${index}`,
+            },
+            h5(
+              {
+                class: 'font-bold m-0 p-0',
+              },
+              typeof item.companyName2 !== 'undefined' ? item.companyName2 : '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              item.addressLine1,
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              item.city,
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`,
+            ),
+            makeDefaultButton,
+          ),
+          div(
+            {
+              class: `${type}-address-list-item-actions flex flex-col justify-between`,
+              id: `${type}AddressListItemActions-${index}`,
+            },
+            div(
+              {
+                class: 'flex gap-2 items-center',
+              },
+              span(
+                {
+                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex  justify-start  text-base font-bold`,
+                  'data-address': JSON.stringify(item),
+                },
+                'Edit',
+              ),
+              span(
+                {
+                  class: 'flex   text-danaherpurple-500',
+                },
+                '|',
+              ),
+              span(
+                {
+                  class:
+                    'flex  justify-start text-base font-bold text-danaherpurple-500 cursor-pointer',
+                  'data-address': JSON.stringify(item),
+                },
+                'Copy',
+              ),
+            ),
+            button(
+              {
+                id: item.id,
+                class: `${type}-address-use-button text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
+              },
+              'Use address',
+            ),
+          ),
+        );
 
         /*
 :::::::::::::::::::::::::::::
@@ -193,7 +202,7 @@ click use address button to set the address as default for current order
               {
                 id: 'checkoutSummaryCommonBillToAddress',
                 class:
-                  'flex-col w-full border-solid border-2 rounded border-gray-400 px-4',
+                  'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
               },
               div(
                 {
@@ -201,44 +210,54 @@ click use address button to set the address as default for current order
                 },
                 h5(
                   {
-                    class: 'font-bold mb-2 mt-2',
+                    class: 'font-bold p-0 mb-3 mt-0',
                   },
                   'Bill to Address',
                 ),
-                h5(
+                div(
                   {
-                    class: 'font-normal m-0',
+                    class: 'p-3 border border-danahergray-300',
                   },
-                  useAddressButtonResponse?.data?.invoiceToAddress
-                    ?.companyName2 ?? '',
-                ),
-                p(
-                  {
-                    class: 'text-black text-base font-extralight',
-                  },
-                  useAddressButtonResponse?.data?.invoiceToAddress
-                    ?.addressLine1 ?? '',
-                ),
-                p(
-                  {
-                    class: 'text-black text-base font-extralight',
-                  },
-                  useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
-                ),
-                p(
-                  {
-                    class: 'text-black text-base font-extralight',
-                  },
-                  `${
+                  h5(
+                    {
+                      class: `font-normal m-0 p-0 ${
+                        useAddressButtonResponse?.data?.invoiceToAddress
+                          ?.companyName2
+                          ? ''
+                          : 'hidden'
+                      }`,
+                    },
                     useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.mainDivision ?? ''
-                  }, ${
+                      ?.companyName2 ?? '',
+                  ),
+                  p(
+                    {
+                      class: 'text-black text-base font-extralight',
+                    },
                     useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.countryCode ?? ''
-                  }, ${
-                    useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.postalCode ?? ''
-                  }`,
+                      ?.addressLine1 ?? '',
+                  ),
+                  p(
+                    {
+                      class: 'text-black text-base font-extralight',
+                    },
+                    useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
+                  ),
+                  p(
+                    {
+                      class: 'text-black text-base font-extralight',
+                    },
+                    `${
+                      useAddressButtonResponse?.data?.invoiceToAddress
+                        ?.mainDivision ?? ''
+                    }, ${
+                      useAddressButtonResponse?.data?.invoiceToAddress
+                        ?.countryCode ?? ''
+                    }, ${
+                      useAddressButtonResponse?.data?.invoiceToAddress
+                        ?.postalCode ?? ''
+                    }`,
+                  ),
                 ),
               ),
             );
@@ -249,7 +268,7 @@ click use address button to set the address as default for current order
               ?.querySelector('#checkoutSummaryCommonBillToAddress')
               ?.remove();
             checkoutSummaryWrapper?.insertAdjacentElement(
-              'afterbegin',
+              'beforebegin',
               invoiceToAddress,
             );
             const renderDefaultAddress = defaultAddress(
@@ -301,13 +320,13 @@ click use address button to set the address as default for current order
           }
         });
 
-        const listItem = addressListItem.querySelector(
-          `.${type}-address-list-item-actions`,
-        );
+        // const listItem = addressListItem.querySelector(
+        //   `.${type}-address-list-item-actions`
+        // );
 
-        if (listItem) {
-          listItem.append(makeDefaultButton);
-        }
+        // if (listItem) {
+        //   // listItem.append(makeDefaultButton);
+        // }
         addressItems.append(addressListItem);
       }
     });
@@ -410,7 +429,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
+              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
             id: `addNew${capitalizeFirstLetter(type)}AddressButton`,
           },
           'Add new address',
@@ -418,7 +437,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             id: `clear${capitalizeFirstLetter(type)}AddressListSearch`,
           },
           'Clear Search',
@@ -551,7 +570,7 @@ export const addressListModal = async (type) => {
   });
   const addressItems = div({
     class:
-      'py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
+      'max-h-97 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
     id: `${type}AddressListItemsWrapper`,
   });
   showPreLoader();
@@ -692,13 +711,13 @@ export const shippingAddressModule = async () => {
   const moduleContent = div({});
   const moduleShippingDetails = div(
     {
-      class:
-        'border-b relative border-black border-solid flex flex-col pt-6 pb-4 mb-4',
+      class: 'relative flex flex-col mb-6',
       id: 'shippingAddressHeader',
     },
     h2(
       {
-        class: 'text-black text-left text-4xl font-normal leading-[48px]',
+        class:
+          'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0  pb-6',
       },
       'Shipping address',
     ),
@@ -726,7 +745,7 @@ export const shippingAddressModule = async () => {
         class:
           'self-stretch justify-start text-black text-base font-extralight  ',
       },
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id commodo erat, et vulputate lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+      'Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process.',
     ),
   );
   /*
@@ -741,7 +760,7 @@ export const shippingAddressModule = async () => {
     'shippingAsBillingAddress',
     true,
     false,
-    'border-t border-black border-solid pt-6 mt-4',
+    'mt-6',
     false,
     false,
   );
@@ -1145,7 +1164,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
       );
     }
     // :::::::::::: remove preloader :::::::::::::
-    removePreLoader();
+    // removePreLoader();
 
     // :::::::::::::: close utility modal ::::::::::::::
     closeUtilityModal();

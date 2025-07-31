@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .article-info-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }
@@ -113,7 +118,7 @@
 }
 
 .article-info-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .article-info-wrapper :is(.leading-6) {

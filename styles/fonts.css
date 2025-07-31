@@ -33,6 +33,14 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+  src: url("../fonts/TWKLausannePan-200.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TWK Lausanne EDS";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
   src: url("../fonts/TWKLausannePan-400.woff2") format("woff2");
 }
 

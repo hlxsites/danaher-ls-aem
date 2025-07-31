@@ -3,7 +3,6 @@ import {
   h5,
   div,
   p,
-  img,
   textarea,
   button,
 } from '../../scripts/dom-builder.js';
@@ -12,7 +11,7 @@ import {
   removePreLoader,
   showPreLoader,
 } from '../../scripts/common-utils.js';
-
+import cartItem from '../cartlanding/cartItem.js';
 import {
   getBasketDetails,
   getShippingMethods,
@@ -43,32 +42,34 @@ const shippingMethodsModule = async () => {
     const moduleHeader = div(
       {
         class:
-          'border-b relative border-black border-solid flex flex-col pt-6 pb-6 mb-4',
+          'relative flex flex-col mb-6',
       },
-      h2({}, 'Confirm your shipping method(s)'),
+      h2({
+        class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0  pb-6',
+      }, 'Confirm your shipping method(s)'),
       p(
         {},
         'Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.',
       ),
     );
-    const moduleOpcos = div(
-      {
-        class:
-          'flex items-center justify-between mb-[30px] border-b border-danaherpurple-100 border-solid pb-6 mb-9 mt-9',
-      },
-      div(
-        {
-          class: 'flex',
-        },
-        img({
-          src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-4c.png',
-        }),
-        img({
-          src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-4c.png',
-        }),
-      ),
-      div({}, p({ class: 'font-bold' }, '3 items')),
-    );
+    // const moduleOpcos = div(
+    //   {
+    //     class:
+    //       'flex items-center justify-between mb-[30px] border-b border-danaherpurple-100 border-solid pb-6 mb-9 mt-9',
+    //   },
+    //   div(
+    //     {
+    //       class: 'flex',
+    //     },
+    //     img({
+    //       src: '/icons/sciex-4c.png',
+    //     }),
+    //     img({
+    //       src: '/icons/sciex-4c.png',
+    //     })
+    //   ),
+    //   div({}, p({ class: 'font-bold' }, '3 items'))
+    // );
     const moduleToggleButtonsWrapper = div(
       {
         class: 'flex justify-between mt-[50px]',
@@ -163,7 +164,25 @@ const shippingMethodsModule = async () => {
     );
     if (moduleContent) {
       if (moduleHeader) moduleContent.append(moduleHeader);
-      if (moduleOpcos) moduleContent.append(moduleOpcos);
+      const showCartItems = await cartItem();
+      if (showCartItems) {
+        showCartItems.querySelectorAll('button')?.forEach((btn) => {
+          btn.remove();
+        });
+        showCartItems.querySelectorAll('input')?.forEach((inp) => {
+          inp.removeAttribute('type');
+          if (inp.classList.contains('border-solid')) {
+            inp.classList.remove('border-solid');
+          }
+          inp.classList.add('focus:outline-none');
+          inp.classList.add('outline-none');
+          if (inp.classList.contains('border-2')) {
+            inp.classList.remove('border-2');
+          }
+        });
+        moduleContent.append(showCartItems);
+      }
+      // if (moduleOpcos) moduleContent.append(moduleOpcos);
       if (moduleToggleButtonsWrapper) moduleContent.append(moduleToggleButtonsWrapper);
 
       /*
@@ -196,10 +215,10 @@ const shippingMethodsModule = async () => {
               const methodData = div(
                 {
                   id: method.id,
-                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2 rounded-lg border-gray-400 p-4 ${
+                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2  p-4 ${
                     method.id === checkDefaultShippingMethod
                       ? highlightDefaultShippingMethod
-                      : ''
+                      : 'border-gray-400'
                   }`,
                 },
                 p(

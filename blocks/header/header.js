@@ -116,63 +116,51 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-export async function submitSearchQuery(searchInput, actionCause = "", page="") {
-  if(page === "cartlanding"){
-    console.log("searchInput", searchInput)
+export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  if (page === 'cartlanding') {
     const searchTerm = searchInput.value.trim();
     if (searchTerm) {
-      const requestPayload = getCoveoApiPayload(searchTerm, "search");
-      console.log("requestPayload", requestPayload);
-      const triggerRequestPayload = getCoveoApiPayload(searchTerm, "trigger");
-      console.log("triggerRequestPayload", triggerRequestPayload);
-      requestPayload.analytics.actionCause =
-        actionCause ||
-        searchInput.getAttribute("data-action-cause") ||
-        "searchFromLink";
-      const resp = await makeCoveoApiRequest("/rest/search/v2", "searchKey", requestPayload); 
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
       return resp;
-  }
-  else{
-  let searchLocation = "/us/en/search.html";
-    const redirectList = [];
-    console.log("searchInput", searchInput)
-    const searchTerm = searchInput.value.trim();
-    if (searchTerm) {
-      const requestPayload = getCoveoApiPayload(searchTerm, "search");
-      console.log("requestPayload", requestPayload);
-      const triggerRequestPayload = getCoveoApiPayload(searchTerm, "trigger");
-      console.log("triggerRequestPayload", triggerRequestPayload);
-      requestPayload.analytics.actionCause =
-        actionCause ||
-        searchInput.getAttribute("data-action-cause") ||
-        "searchFromLink";
-      await makeCoveoApiRequest("/rest/search/v2", "searchKey", requestPayload);    
-      const triggerResponseData = await makeCoveoApiRequest(
-        "/rest/search/v2/plan",
-        "searchKey",
-        triggerRequestPayload
-      );
-      console.log("triggerResponseData", triggerResponseData);
-      const { preprocessingOutput } = triggerResponseData;
-      const { triggers } = preprocessingOutput;
-      console.log("trgger", triggers);
-      if (triggers != null && triggers.length > 0) {
-        triggers.forEach(({ content, type }) => {
-          if (type === "redirect") {
-            redirectList.push(content);
-          }
-        });
-      }
-      setRecentSearches(searchTerm);
-      searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
-    }
-    console.log("redirect", redirectList)
-    if (redirectList.length > 0) {
-      const [redirect] = redirectList;
-      window.location = redirect;
     } else {
-      window.location = searchLocation;
-    }
+      let searchLocation = '/us/en/search.html';
+      const redirectList = [];
+      const searchTerm = searchInput.value.trim();
+      if (searchTerm) {
+        const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+        const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
+        requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+        await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+        const triggerResponseData = await makeCoveoApiRequest(
+          '/rest/search/v2/plan',
+          'searchKey',
+          triggerRequestPayload,
+        );
+        const { preprocessingOutput } = triggerResponseData;
+        const { triggers } = preprocessingOutput;
+        if (triggers != null && triggers.length > 0) {
+          triggers.forEach(({ content, type }) => {
+            if (type === 'redirect') {
+              redirectList.push(content);
+            }
+          });
+        }
+        setRecentSearches(searchTerm);
+        searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+      }
+      if (redirectList.length > 0) {
+        const [redirect] = redirectList;
+        window.location = redirect;
+      } else {
+        window.location = searchLocation;
+      }
     }
   }
 }
@@ -929,7 +917,29 @@ async function getQuote(headerBlock, authHeader) {
     console.warn('Failed to load quote cart');
   }
 }
-
+/*
+  *
+  :::::::::::
+  function to load required css
+  breadcrumb EDS supportive code starts
+  ::::::::::::::
+  *
+  */
+function loadBreadcrumbCSS(href) {
+  if (!document.querySelector(`link[href="${href}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+}
+/*
+  *
+  :::::::::::
+   function to load required css ends
+  ::::::::::::::
+  *
+  */
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -956,6 +966,42 @@ export default async function decorate(block) {
 
   block.append(headerBlock);
   block.append(flyout);
+
+  /*
+  *
+  :::::::::::
+    breadcrumb EDS supportive code  starts
+  ::::::::::::::
+  *
+  */
+
+  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
+    const bred = document.querySelector('breadcrumb');
+    const edsBreadcrumbWrapper = div(
+      {
+        class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
+      },
+    );
+    bred.append(edsBreadcrumbWrapper);
+    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+
+    import('../breadcrumb/breadcrumb.js')
+      .then((loadedBreadcrumb) => {
+        loadedBreadcrumb.default(edsBreadcrumbWrapper);
+      })
+      .catch((error) => {
+        console.error('Failed to load breadcrumb module:', error);
+      });
+  }
+
+  /*
+  *
+  :::::::::::
+    breadcrumb EDS supportive code ends
+  ::::::::::::::
+  *
+  */
+
   const authHeader = getAuthorization();
   if (
     authHeader

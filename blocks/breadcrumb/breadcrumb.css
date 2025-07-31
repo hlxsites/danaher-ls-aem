@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .breadcrumb-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -17,6 +22,10 @@
 
 .breadcrumb-wrapper :is(.block) {
   display: block
+}
+
+.breadcrumb-wrapper :is(.\!flex) {
+  display: flex !important
 }
 
 .breadcrumb-wrapper :is(.flex) {
@@ -112,7 +121,7 @@
 }
 
 .breadcrumb-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .breadcrumb-wrapper :is(.text-gray-300) {

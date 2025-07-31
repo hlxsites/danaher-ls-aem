@@ -34,6 +34,7 @@ const fileMappings = [
       './blocks/cartlanding/cartlanding.js',
       './blocks/cartlanding/cartItem.js',
       './blocks/cartlanding/addproducts.js',
+      './blocks/cartlanding/addproducts.js',
       './blocks/cartlanding/mycart.js',
       './blocks/cartlanding/price.js',
       './blocks/cartlanding/recommendedproducts.js',
@@ -44,7 +45,7 @@ const fileMappings = [
       './blocks/cartlanding/noProduct.js',
       './blocks/cartlanding/related-products.js',
       './scripts/cart-checkout-utils.js',
-      './scripts/common-utils.js'
+      './scripts/common-utils.js',
     ],
     output: './blocks/cartlanding/cartlanding.css',
     wrapper: 'cartlanding-wrapper',
@@ -342,7 +343,9 @@ const fileMappings = [
       './blocks/checkout/shippingAddress.js',
       './blocks/checkout/shippingMethods.js',
       './scripts/cart-checkout-utils.js',
-      './scripts/common-utils.js'
+      './scripts/common-utils.js',
+      './blocks/cartlanding/cartlanding.js',
+      './blocks/cartlanding/cartItem.js',
     ],
     output: './blocks/checkout/checkout.css',
     wrapper: 'checkout',
@@ -351,6 +354,7 @@ const fileMappings = [
     content: ['./blocks/dashboard/dashboard.js',
              './blocks/dashboard/orderStatus.js', 
              './blocks/dashboard/dashboardutils.js',
+             './scripts/common-utils.js',
              './blocks/dashboard/recentOrder.js'
               ],
     output: './blocks/dashboard/dashboard.css',
@@ -534,7 +538,6 @@ fileMappings.forEach(({
       return;
     }
     // eslint-disable-next-line no-console
-    console.log(stdout);
     // eslint-disable-next-line no-console
     console.error(stderr);
   });

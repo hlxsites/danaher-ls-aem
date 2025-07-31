@@ -6,6 +6,11 @@
   opacity: 0
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .workflow-tabs-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -139,7 +144,7 @@
 }
 
 .workflow-tabs-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .workflow-tabs-wrapper :is(.capitalize) {

@@ -1,13 +1,23 @@
+import { buildInputElement, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import {
-  h2, h5, div, p,
+  h2, h5, div, p, span,
 } from '../../scripts/dom-builder.js';
-
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { putApiData } from '../../scripts/api-utils.js';
+import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
+import { getCommerceBase } from '../../scripts/commerce.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 /*
  :::::::::::::::
  generates the shipping address module for the checkout module/page
  ::::::::::::::
  */
 const paymentModule = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized.' };
+  }
+  const baseURL = getCommerceBase();
   /*
   ::::::::::::::
   get price type if its net or gross.
@@ -17,22 +27,135 @@ const paymentModule = async () => {
     const moduleContent = div({});
     const moduleHeader = div(
       {
-        class: 'border-b relative flex flex-col pt-6 pb-6 mb-4',
+        class: 'relative flex flex-col mb-6',
       },
-      h2({}, 'Choose your payment method'),
+      h2(
+        {
+          class:
+            'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0 pb-6',
+        },
+        'Choose your payment method',
+      ),
       p(
         {},
         'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
       ),
     );
-
     const paymentMethodsWrapper = div({
       id: 'paymentMethodsWrapper',
-      class: 'border-solid flex flex-col border-2 border-gray-300 w-full',
+      class: 'flex flex-col w-full hidden',
     });
+    let cardsWrapper = div({ class: 'hidden' });
+    let invoiceWrapper = div({ class: 'hidden' });
+    const allPaymentMethods = await getPaymentMethods();
 
+    allPaymentMethods?.data?.forEach((pm, ind) => {
+      if (pm?.displayName === 'Stripe') {
+        cardsWrapper.innerHTML = '';
+        cardsWrapper = div(
+          {
+            class:
+              `border-solid border-gray-300 flex justify-between p-4 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-center`,
+          },
+          div(
+            {
+              class: 'border-solid border-gray-300 flex gap-2 items-center',
+            },
+            buildInputElement(
+              'creditCard',
+              pm?.displayName,
+              'radio',
+              'paymentMethod',
+              true,
+              false,
+              'mt-6',
+              false,
+              false,
+            ),
+          ),
+          span({
+            class: 'icon icon-payment-cards w-[176px]',
+          }),
+        );
+
+        paymentMethodsWrapper?.append(cardsWrapper);
+      }
+      if (pm?.displayName === 'Invoice') {
+        invoiceWrapper.innerHTML = '';
+        invoiceWrapper = div(
+          {
+            class:
+              `border-solid border-gray-300 flex gap-2 items-center p-4 border-2 ${ind > 0 ? 'border-t-0 ' : ''} items-center`,
+          },
+          buildInputElement(
+            'invoice',
+            'Invoice',
+            'radio',
+            'paymentMethod',
+            true,
+            false,
+            'mt-6',
+            false,
+            false,
+          ),
+        );
+        paymentMethodsWrapper?.append(invoiceWrapper);
+      }
+    });
+    if (allPaymentMethods?.data?.length > 0) {
+      if (paymentMethodsWrapper?.classList.contains('hidden')) {
+        paymentMethodsWrapper.classList.remove('hidden');
+      }
+      paymentMethodsWrapper
+        ?.querySelectorAll('.field-wrapper')
+        ?.forEach((inp) => {
+          const inputElement = inp?.querySelector('input');
+          if (inputElement) {
+            inputElement.className = '';
+            inputElement.classList.add('!mt-0');
+          }
+          inp?.classList.add(
+            'flex',
+            'flex-row-reverse',
+            'items-center',
+            'gap-2',
+          );
+          const inpu = inp?.querySelector('label');
+          if (inpu?.classList.contains('font-normal')) {
+            inpu?.classList.remove('font-normal');
+          }
+          if (inpu?.classList.contains('text-sm')) {
+            inpu?.classList.remove('text-sm');
+          }
+          inpu?.classList.add('text-base', 'font-semibold');
+        });
+      decorateIcons(cardsWrapper);
+      paymentMethodsWrapper?.addEventListener('click', async (c) => {
+        showPreLoader();
+        setTimeout(async () => {
+          c.preventDefault();
+          const eventTarget = c.target;
+          if (!eventTarget.checked) {
+            if (eventTarget?.id === 'invoice') {
+              const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
+              const defaultHeaders = new Headers();
+              defaultHeaders.append('Content-Type', 'Application/json');
+              defaultHeaders.append(
+                'authentication-token',
+                authenticationToken.access_token,
+              );
+              const data = JSON.stringify({ paymentInstrument: 'Invoice' });
+              await putApiData(url, data, defaultHeaders);
+            }
+            c.target.checked = true;
+          } else {
+            c.target.checked = false;
+          }
+          removePreLoader();
+        }, 0);
+      });
+    }
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
-
     return moduleContent;
   } catch (error) {
     return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));

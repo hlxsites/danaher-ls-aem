@@ -49,9 +49,7 @@ export default async function decorate(block) {
   });
   if (
     currentPath.includes('products.html')
-    || currentPath.includes('/shop-page')
-    || currentPath.includes('/shop-home')
-    || currentPath.includes('/products-eds1.html')
+    || currentPath.includes('products-eds.html')
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
@@ -74,7 +72,13 @@ export default async function decorate(block) {
     const allBrands = Array.from(brandMap.entries())
       .map(([name, path]) => ({ name, path }))
       .sort((asr, b) => asr.name.localeCompare(b.name));
-
+    let productsTag = '';
+    if (window.location.pathname.includes('products.html')) {
+      productsTag = 'products';
+    }
+    if (window.location.pathname.includes('products-eds.html')) {
+      productsTag = 'products-eds';
+    }
     allBrands.forEach((pills) => {
       const linkLabel = pills?.name || '';
 
@@ -89,10 +93,10 @@ export default async function decorate(block) {
         linkWrapper.appendChild(
           a(
             {
-              href: `/us/en/products/brands/${brandLink}`,
+              href: `/us/en/${productsTag}/brands/${brandLink}`,
               target: linkTarget.includes('http') ? '_blank' : '_self',
               class:
-                'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+                'leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
             linkLabel,
           ),
@@ -141,7 +145,7 @@ export default async function decorate(block) {
   if (opcoBannerDescription) {
     const leftDescription = div({
       id: 'opcoBannerDescription',
-      class: 'text-[18px] leading-[22px] font-normal text-black w-full',
+      class: 'text-base leading-[22px] font-normal text-black w-full',
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
@@ -192,7 +196,7 @@ export default async function decorate(block) {
         href: opcoBannerButtonUrl,
         target: opcoTarget,
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-base font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
       },
       opcoBannerButtonLabel,
     );
@@ -208,63 +212,21 @@ export default async function decorate(block) {
 
   // === RIGHT CAROUSEL SECTION ===
   const slides = [];
-  let currentIndex = 0;
 
-  // === CAROUSEL CONTROLS ===
+  let realSlideCount = 0;
+
   const numberIndicator = span(
+
     {
-      class:
-        'controlsContentText justify-start text-black text-base font-bold leading-snug',
+
+      class: 'controlsContentText duration-0 ease-in-out justify-start text-black text-base font-bold leading-snug',
+
     },
-    `1/${slides.length}`,
+
+    '1/0',
+
   );
 
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    if (slides) {
-      slides[currentIndex].style.display = 'none';
-    }
-    currentIndex = (currentIndex + dir + total) % total;
-    if (slides[currentIndex]) {
-      slides[currentIndex].style.display = 'flex';
-    }
-    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
-
-    if (getSlides && getSlides.classList.contains('hasBg')) {
-      numberIndicator.style.color = '#fff';
-    } else {
-      numberIndicator.style.color = '';
-    }
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-  const controls = div(
-    {
-      id: 'opcoBannerControls',
-      class:
-        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4',
-    },
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 p-2.5 h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(-1),
-      },
-      span({
-        class: 'icon icon-arrow-left-icon',
-      }),
-    ),
-    numberIndicator,
-    button(
-      {
-        class:
-          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(1),
-      },
-      span({
-        class: 'icon icon-arrow-right-icon',
-      }),
-    ),
-  );
   opcoBannerItems.forEach((item, index) => {
     let itemTitle;
     let itemSubHeading;
@@ -322,13 +284,19 @@ export default async function decorate(block) {
           } w-[300px] h-[184px] object-contain`,
         }),
       );
+    } else {
+      contentWrapper.append(
+        div({
+          class: 'opacity-0  w-[300px] h-[184px] object-contain',
+        }),
+      );
     }
 
     if (opcoBannerItemTitle) {
       contentWrapper.append(
         h2(
           {
-            class: 'text-3xl leading-10 font-medium text-black text-center',
+            class: 'text-3xl  leading-10 font-medium text-black text-center',
           },
           opcoBannerItemTitle,
         ),
@@ -367,7 +335,7 @@ export default async function decorate(block) {
 
         link.setAttribute(
           'target',
-          linkHref.includes('http') ? '_blank' : '_self',
+          linkHref?.includes('http') ? '_blank' : '_self',
         );
       });
       contentWrapper.append(
@@ -406,8 +374,7 @@ export default async function decorate(block) {
         'data-index': index,
         class: ` ${opcoBannerItemBgImage ? 'hasBg ' : ' '} ${
           opcoBannerItems.length > 1 ? '' : 'justify-center'
-        } carousel-slide p-10 flex  min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative`,
-        style: index === 0 ? '' : 'display: none;',
+        } flex-shrink-0 carousel-slide p-10 flex min-h-[650px] md:min-h-[600px] flex-col items-center w-full relative !duration-1000 !ease-in-out !transition-transform !transform`,
       },
       contentWrapper,
       overlayWrapper,
@@ -417,8 +384,7 @@ export default async function decorate(block) {
       overlayWrapper?.classList.remove('hidden');
       slide.style.padding = '2.5rem';
       slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundSize = 'contain';
       slide.style.backgroundPosition = 'center';
       slide.querySelectorAll('.text-center')?.forEach((it) => {
         it.style.color = '#fff';
@@ -447,16 +413,125 @@ export default async function decorate(block) {
         numberIndicator.textContent = `1/${index + 1}`;
       }
       slides.push(slide);
+      realSlideCount += 1;
     }
   });
+  // Add clones for infinite scroll
+
+  const firstClone = slides[0].cloneNode(true);
+
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+
+  slides.unshift(lastClone);
+
+  slides.push(firstClone);
+
+  let currentIndex = 1;
+
+  const updateSlides = (dir) => {
+    const total = realSlideCount;
+
+    const carouselTrack = document.getElementById('rigthCarouselTrack');
+
+    currentIndex += dir;
+
+    // Smooth transition for visible shift
+
+    carouselTrack.style.transition = 'transform 0.7s ease-in-out';
+
+    carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Listen once for transition end
+
+    const onTransitionEnd = () => {
+      carouselTrack.removeEventListener('transitionend', onTransitionEnd);
+
+      // Jump instantly (no animation) to real first/last slide if on clone
+
+      if (currentIndex === 0) {
+        carouselTrack.style.transition = 'none';
+
+        currentIndex = total;
+
+        carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else if (currentIndex === slides.length - 1 || currentIndex >= slides.length) {
+        carouselTrack.style.transition = 'none';
+
+        currentIndex = 1;
+
+        carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+    };
+
+    carouselTrack.addEventListener('transitionend', onTransitionEnd);
+
+    // Update slide count display
+
+    let displayIndex;
+
+    if (currentIndex === 0) {
+      displayIndex = total;
+    } else if (currentIndex === slides.length - 1) {
+      displayIndex = 1;
+    } else {
+      displayIndex = currentIndex;
+    }
+
+    const getSlide = document.querySelector(`#opcoBannerSlide${currentIndex - 1}`);
+
+    if (getSlide?.classList.contains('hasBg')) {
+      numberIndicator.style.color = '#fff';
+    } else {
+      numberIndicator.style.color = '';
+    }
+
+    numberIndicator.textContent = `${displayIndex}/${total}`;
+  };
+
+  const controls = div(
+    {
+      id: 'opcoBannerControls',
+      class:
+        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4 w-full',
+    },
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 p-2.5 h-8 border transition-colors duration-0 rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(-1),
+      },
+      span({
+        class: 'icon icon-arrow-left-icon',
+      }),
+    ),
+    numberIndicator,
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(1),
+      },
+      span({
+        class: 'icon icon-arrow-right-icon',
+      }),
+    ),
+  );
+
   decorateIcons(controls);
   const right = div(
     {
       id: 'opcoBannerCarouselOuter',
       class:
-        'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
+        'md:w-1/2 w-full bg-gray-100 overflow-hidden flex   flex-col items-center  gap-6 relative  duration-1000 ease-in-out transition-transform transform',
     },
-    ...slides,
+    div(
+      {
+        id: 'rigthCarouselTrack',
+        style: `transform: translateX(-${currentIndex * 100}%);`,
+        class: 'flex duration-1000 w-[100%] md:w-auto ease-in-out transition-transform transform',
+      },
+      ...slides,
+    ),
     opcoBannerItems.length > 1 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');

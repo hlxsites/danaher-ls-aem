@@ -15,7 +15,7 @@ export default function renderGridCard(item) {
       href: item?.url,
       target: item?.url?.includes('http') ? '_blank' : '_self',
       class:
-        'w-full hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
+        'w-full relative flex-shrink-0 object-co hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%]  md:min-w-[305px] sm:max-w-[305px] md:max-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
     },
     img({
       src: imageUrl,
@@ -32,7 +32,7 @@ export default function renderGridCard(item) {
     p(
       {
         class:
-          'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+          'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
       },
       item?.title?.replace(/<[^>]*>/g, '') || '',
     ),

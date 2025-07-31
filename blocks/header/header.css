@@ -1,3 +1,8 @@
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .header-wrapper :is(.fixed) {
   position: fixed
 }
@@ -406,6 +411,11 @@
   border-color: rgb(0 0 0 / var(--tw-border-opacity))
 }
 
+.header-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
 .header-wrapper :is(.border-gray-600) {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity))
@@ -580,7 +590,7 @@
 }
 
 .header-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.font-semibold) {
@@ -680,6 +690,11 @@
   background-color: #EADEFF
 }
 
+.dhls-container .hover\:font-medium:hover {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .\[\&\>li\.active\]\:bg-danaherpurple-50>li.active {
   background-color: #EADEFF
 }
@@ -713,7 +728,7 @@
 }
 
 .header-wrapper :is(.hover\:font-medium:hover) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .header-wrapper :is(.hover\:text-black:hover) {

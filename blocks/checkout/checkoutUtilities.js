@@ -1,5 +1,5 @@
 import {
-  div, p, h2, button,
+  div, button,
 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { shippingAddressModule } from './shippingAddress.js';
@@ -76,8 +76,8 @@ export const loadModule = async (module) => {
   const moduleHeader = div({
     class: `checkout-${module}-header`,
   });
-  const moduleTitle = h2({});
-  const moduleDescription = p({});
+  // const moduleTitle = h2({});
+  // const moduleDescription = p({});
   if (module === 'shippingAddress') {
     const loadShippingAddressModule = await shippingAddressModule();
 
@@ -96,8 +96,8 @@ export const loadModule = async (module) => {
     const loadPaymentModule = await paymentModule();
     moduleContent.append(loadPaymentModule);
   }
-  moduleHeader.append(moduleTitle);
-  moduleHeader.append(moduleDescription);
+  // moduleHeader.append(moduleTitle);
+  // moduleHeader.append(moduleDescription);
 
   moduleWrapper.append(moduleHeader);
 

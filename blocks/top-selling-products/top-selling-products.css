@@ -15,6 +15,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .top-selling-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -282,7 +287,7 @@
 }
 
 .top-selling-products-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .top-selling-products-wrapper :is(.font-semibold) {

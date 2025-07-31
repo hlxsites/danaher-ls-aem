@@ -46,7 +46,61 @@ export default async function decorate(block) {
   homeIconLi.className = 'flex items-center gap-x-3 text-sm font-medium text-gray-500 whitespace-nowrap hover:text-gray-700';
   homeIconLi.innerHTML = '<a href="/" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 h-5 w-5" data-di-rand="1697430026535"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"></path><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"></path></svg></a>';
   entries.prepend(homeIconLi);
-  Array.from(entries.children).forEach((element, index) => {
+  Array.from(entries.children).forEach((element, index, arr) => {
+  /*
+  *
+  :::::::::::
+     breadcrumb EDS supportive code starts
+  ::::::::::::::
+  *
+  */
+    if ((window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('stage.lifesciences'))) && index > 1) {
+      const elementContent = element.textContent.trim().replace(/-/g, ' ');
+
+      const elementAnchorContent = element.querySelector('a');
+      let formattedElement = elementContent
+        .split(' ')
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+        )
+        .join(' ') || '';
+      if (formattedElement.toLowerCase() === 'brands') {
+        elementAnchorContent?.setAttribute('href', '/us/en/products.html');
+        if (elementAnchorContent) {
+          formattedElement = 'Our Brands';
+        }
+      }
+      if (formattedElement.toLowerCase() === 'products-eds') {
+        if (elementAnchorContent) {
+          formattedElement = 'Products';
+        }
+      }
+      if (formattedElement.toLowerCase() === 'news-eds') {
+        if (elementAnchorContent) {
+          formattedElement = 'News';
+        }
+      }
+      if (formattedElement.toLowerCase() === 'blog-eds') {
+        if (elementAnchorContent) {
+          formattedElement = 'Blog';
+        }
+      }
+      if (window.location.pathname.includes('brands')) {
+        if (index === arr.length - 1) {
+          formattedElement = `Products - ${formattedElement}`;
+        }
+      }
+      elementAnchorContent.textContent = formattedElement;
+    }
+
+    /*
+  *
+  :::::::::::
+     breadcrumb EDS supportive code ends
+  ::::::::::::::
+  *
+  */
+
     element.classList.add(
       ...'flex items-center gap-x-3 text-sm font-medium text-gray-500 whitespace-nowrap hover:text-gray-700'.split(
         ' ',
@@ -66,13 +120,23 @@ export default async function decorate(block) {
     }
   });
   const breadcrumbWrapper = block.parentElement;
-  breadcrumbWrapper.classList.add(
-    ...'flex bg-white border-b border-gray-200'.split(' '),
+  const bredWrap = div(
+    {
+      class: 'breadcrumb-wrapper !flex border-b border-gray-200',
+    },
   );
   breadcrumbWrapper.innerHTML = '';
-  breadcrumbWrapper.append(entries);
-  const breadcrumbSection = breadcrumbWrapper.parentElement;
+  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
+    bredWrap.append(entries);
+    breadcrumbWrapper.append(bredWrap);
+  } else {
+    breadcrumbWrapper.classList.add(
+      ...'!flex bg-white border-b border-gray-200'.split(' '),
+    );
+    breadcrumbWrapper.append(entries);
+  }
   const breadcrumbElement = document.querySelector('breadcrumb');
-  breadcrumbElement.appendChild(breadcrumbWrapper);
-  breadcrumbSection.remove();
+  if (breadcrumbElement && breadcrumbElement !== breadcrumbWrapper) {
+    breadcrumbElement.appendChild(breadcrumbWrapper);
+  }
 }

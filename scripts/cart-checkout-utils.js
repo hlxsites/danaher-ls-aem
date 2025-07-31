@@ -43,7 +43,6 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  console.log("logo div calledddddd")
   // const logoDiv = div({}, hr({
   //     class: `w-full border-black-300`,
   //   }),
@@ -84,45 +83,45 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   const logoDivInner = div(
     {
       class:
-        "w-full self-stretch py-3 bg-gray-100 border-t border-gray-300 inline-flex justify-start items-center gap-1",
+        'w-full self-stretch py-3 bg-gray-100 border-t border-gray-300 inline-flex justify-start items-center gap-1',
     },
     div(
       {
-        class: "w-28 px-5 flex justify-start items-center gap-3",
+        class: 'w-28 px-5 flex justify-start items-center gap-3',
         id: imgsrc,
       },
       div(
         {
-          class: "justify-start text-black text-base font-bold truncate",
+          class: 'justify-start text-black text-base font-bold truncate',
         },
-        opcoBe[0]
-      )
+        opcoBe[0],
+      ),
     ),
     div(
       {
-        class: "w-64 justify-start text-black text-base font-bold",
+        class: 'w-64 justify-start text-black text-base font-bold',
         id: `product-Quantity-${opcoBe[0]}`,
       },
-      `${itemToBeDisplayed[opcoBe].length} Items`
+      `${itemToBeDisplayed[opcoBe].length} Items`,
     ),
     div(
       {
-        class: "hidden sm:block w-24 justify-start text-black text-base font-bold",
+        class: 'hidden sm:block w-24 justify-start text-black text-base font-bold',
       },
-      "QTY"
+      'QTY',
     ),
     div(
       {
-        class: "hidden sm:block w-48 justify-start text-black text-base font-bold",
+        class: 'hidden sm:block w-48 justify-start text-black text-base font-bold',
       },
-      "Unit Price"
+      'Unit Price',
     ),
     div(
       {
-        class: "hidden sm:block w-[3rem] justify-start text-black text-base font-bold",
+        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
       },
-      "Total"
-    )
+      'Total',
+    ),
   );
   return logoDivInner;
 };
@@ -151,43 +150,46 @@ export function defaultAddress(address, type) {
       },
       div(
         {
-          class: ' flex flex-col ',
+          class: 'flex p-6 border border-danahergray-300 justify-between ',
         },
-        h5(
-          {
-            class: 'font-bold',
-          },
-          address?.companyName2 ?? '',
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          address?.addressLine1 ?? '',
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          address?.city ?? '',
-        ),
-        p(
-          {
-            class: 'text-black text-base font-extralight',
-          },
-          `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
-            address?.postalCode ?? ''
-          }`,
+        div(
+          {},
+          h5(
+            {
+              class: `font-bold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
+            },
+            address?.companyName2 ?? '',
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            address?.addressLine1 ?? '',
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            address?.city ?? '',
+          ),
+          p(
+            {
+              class: 'text-black text-base font-extralight',
+            },
+            `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
+              address?.postalCode ?? ''
+            }`,
+          ),
         ),
         button(
           {
             'data-type': type,
             'data-action': 'edit',
             class:
-              'flex mt-4 justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
+              'flex justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
-          'Edit / Change',
+          'Edit Address',
         ),
       ),
     );
@@ -299,6 +301,91 @@ export const createBasket = async () => {
   const data = JSON.stringify({});
   try {
     return await postApiData(url, data, defaultHeader);
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+:::::::::::::::::::::::::::
+ Function to validate basket
+  :::::::::::::::::::::::::::
+*/
+export const validateBasket = async (validateData) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/validations`;
+  const data = JSON.stringify(validateData);
+  try {
+    return await postApiData(url, data, defaultHeader);
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+:::::::::::::::::::::::::::
+ Function to submit Order
+  :::::::::::::::::::::::::::
+*/
+export const submitOrder = async (basketId) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.order.v1+json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+  const data = JSON.stringify({
+    basket: basketId,
+    termsAndConditionsAccepted: true,
+  });
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      sessionStorage.setItem(
+        'orderSubmitDetails',
+        JSON.stringify(response.data),
+      );
+      const cartItemsDetails = JSON.parse(
+        sessionStorage.getItem('productDetailObject'),
+      );
+      sessionStorage.setItem(
+        'cartItemsDetails',
+        JSON.stringify(cartItemsDetails),
+      );
+      const userOrderDetails = JSON.parse(
+        sessionStorage.getItem('userOrderDetails'),
+      );
+      if (!userOrderDetails) {
+        const orderIdArray = [];
+        orderIdArray.push(response.data.data.id);
+        sessionStorage.setItem(
+          'userOrderDetails',
+          JSON.stringify(orderIdArray),
+        );
+      } else {
+        userOrderDetails.push(response.data.data.id);
+        sessionStorage.setItem(
+          'userOrderDetails',
+          JSON.stringify(userOrderDetails),
+        );
+      }
+      return response;
+    }
   } catch (error) {
     return {
       data: error.message,
@@ -504,6 +591,41 @@ export const getShippingMethods = async () => {
       return { status: 'error', data: '' };
     }
     return { status: 'error', data: 'Error getting shipping methods:' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+};
+/*
+ :::::::::::::::::::::::::::::
+ get payment  methods
+  ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export const getPaymentMethods = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const fetchPaymentMethods = JSON.parse(sessionStorage.getItem('paymentMethods'));
+    if (fetchPaymentMethods?.status === 'success') {
+      return fetchPaymentMethods;
+    }
+    const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append(
+      'authentication-token',
+      authenticationToken.access_token,
+    );
+    const response = await getApiData(url, defaultHeaders);
+    if (response?.status === 'success') {
+      sessionStorage.setItem(
+        'paymentMethods',
+        JSON.stringify({ status: 'success', data: response.data.data }),
+      );
+      return { status: 'success', data: response.data.data };
+    }
+    return { status: 'error', data: 'Error getting Payment methods:' };
   } catch (error) {
     return { status: 'error', data: error.message };
   }
@@ -1041,8 +1163,56 @@ export const taxExemptModal = () => {
 *
  */
 export const changeStep = async (step) => {
+  showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
+  let validateData = '';
+
+  if (currentTab === 'shippingMethods') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+      ],
+    };
+  }
+  if (currentTab === 'payment') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'InvoiceAddress',
+        'ShippingAddress',
+        'Addresses',
+        'Shipping',
+      ],
+    };
+  }
+  if (currentTab === 'submitOrder') {
+    validateData = {
+      adjustmentsAllowed: true,
+      scopes: [
+        'Payment',
+      ],
+    };
+  }
+  const validatingBasket = await validateBasket(validateData);
+  if (validatingBasket?.status === 'error') {
+    alert('In-valid basket');
+    removePreLoader();
+    return false;
+  }
+  if (currentTab === 'submitOrder') {
+    const getBasketForOrder = await getBasketDetails();
+    if (getBasketForOrder?.status === 'success') {
+      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+
+      if (submittingOrder?.data?.data?.documentNumber) {
+        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+      }
+    }
+  }
   if (activeTab && activeTab === 'shippingMethods') {
     const getShippingNotesField = document.querySelector('#shippingNotes');
 
@@ -1180,6 +1350,12 @@ export const changeStep = async (step) => {
     case 'payment':
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
+      proceedButton.setAttribute('data-tab', 'submitOrder');
+      break;
+    case 'submitOrder':
+      segment2.style.width = '50%';
+      proceedButton.setAttribute('data-tab', 'submitOrder');
+      proceedButton.setAttribute('data-activeTab', 'submitOrder');
       break;
     default:
       segment1.style.width = '0';
@@ -1188,6 +1364,7 @@ export const changeStep = async (step) => {
       proceedButton.setAttribute('data-activeTab', 'shippingAddress');
       proceedButton.textContent = 'Proceed to Shipping';
   }
+  removePreLoader();
   return {};
 };
 
@@ -1751,7 +1928,7 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href = '/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary';
+    window.location.href = '/us/en/e-buy/login';
   });
   /*
   :::::::::::::
@@ -1761,11 +1938,12 @@ get price type if its net or gross
   const summaryModule = div(
     {
       id: 'checkoutSummaryContainer',
-      class: 'flex flex-col justify-start items-start gap-4 p-[22px] outline outline-1 outline-offset-[-1px] outline-gray-200',
+      class: 'flex flex-col justify-start items-start gap-4 ',
     },
     div(
       {
-        class: 'p-[22px] flex flex-col justify-start items-start gap-y-6',
+        class:
+          'p-[22px] flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-[5px] justify-start items-start gap-y-6',
         id: 'checkoutSummaryWrapper',
       },
       div(
@@ -1840,7 +2018,7 @@ get price type if its net or gross
             span(
               {
                 class:
-                  ' w-80 text-right  text-gray-500 text-xs font-normal leading-none',
+                  ' w-full text-right  text-gray-500 text-xs font-normal leading-none',
               },
               checkoutSummaryKeys.discountLabel,
             ),
@@ -1948,29 +2126,31 @@ get price type if its net or gross
           checkoutSummaryKeys.total,
         ),
       ),
-    ),
-    /*
+      /*
  ::::::::::::
  proceed button
  ::::::::::::::::::
    */
-    div(
-      {
-        class: 'p-[22px] flex flex-col justify-center w-full items-start gap-4',
-      },
-      button({
-        class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
-          authenticationToken.user_type === 'guest' ? 'hidden' : ''
-        } `,
-        id: 'proceed-button',
-        'data-tab': 'shippingMethods',
-      }),
       div(
         {
           class:
-            'w-full justify-start text-black-500 text-xs font-normal leading-none',
+            'p-[22px] flex flex-col justify-center w-full items-start gap-4',
         },
-        '*estimated sales tax. Additional tax may apply upon actual calculation of order',
+        button({
+          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+            ((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
+          } `,
+          id: 'proceed-button',
+          'data-tab': 'shippingMethods',
+          'data-activetab': 'shippingAddress',
+        }),
+        div(
+          {
+            class:
+              'w-full justify-start text-black-500 text-xs font-normal leading-none',
+          },
+          '*estimated sales tax. Additional tax may apply upon actual calculation of order',
+        ),
       ),
     ),
   );
@@ -1990,7 +2170,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.href.includes('cartlanding')) {
-        window.location.href = '/us/en/products/cart-checkout/checkout';
+        window.location.href = '/us/en/e-buy/checkout';
       } else {
         changeStep(e);
       }
@@ -2032,7 +2212,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonBillToAddress',
             class:
-              'flex-col w-full border-solid border-2  border-gray-400 px-4 my-4',
+              'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
           },
           div(
             {
@@ -2040,51 +2220,61 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold mb-2 mt-2',
+                class: 'font-bold p-0 mb-3 mt-0',
               },
               'Bill to Address',
             ),
-            h5(
+            div(
               {
-                class: 'font-normal m-0',
+                class: 'p-3 border border-danahergray-300',
               },
-              getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
-                ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
-                ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              `${
-                getUseAddressesResponse?.data?.invoiceToAddress?.mainDivision
-                ?? ''
-              }, ${
-                getUseAddressesResponse?.data?.invoiceToAddress?.countryCode
-                ?? ''
-              }, ${
-                getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
-                ?? ''
-              }`,
+              h5(
+                {
+                  class: `font-normal m-0 p-0 ${
+                    getUseAddressesResponse?.data?.invoiceToAddress
+                      ?.companyName2
+                      ? ''
+                      : 'hidden'
+                  }`,
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                  ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
+                  ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                `${
+                  getUseAddressesResponse?.data?.invoiceToAddress
+                    ?.mainDivision ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.invoiceToAddress
+                    ?.countryCode ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
+                  ?? ''
+                }`,
+              ),
             ),
           ),
         );
 
         if (invoiceToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
+            'beforebegin',
             invoiceToAddress,
           );
         }
@@ -2099,7 +2289,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonShipAddress',
             class:
-              'flex-col w-full border-solid border-2  border-gray-400 px-4',
+              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
           },
           div(
             {
@@ -2107,50 +2297,55 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold mb-2 mt-2',
+                class: 'font-bold p-0 mb-3 mt-0',
               },
               'Shipping Address',
             ),
-            h5(
+            div(
               {
-                class: 'font-normal m-0',
+                class: 'p-3 border border-danahergray-300',
               },
-              getUseAddressesResponse?.data?.commonShipToAddress
-                ?.companyName2 ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.commonShipToAddress
-                ?.addressLine1 ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
-            ),
-            p(
-              {
-                class: 'text-black text-base font-extralight',
-              },
-              `${
+              h5(
+                {
+                  class: 'font-normal  m-0 p-0',
+                },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? ''
-              }, ${
+                  ?.companyName2 ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
                 getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? ''
-              }, ${
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? ''
-              }`,
+                  ?.addressLine1 ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base font-extralight m-0 p-0',
+                },
+                `${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.mainDivision ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.countryCode ?? ''
+                }, ${
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.postalCode ?? ''
+                }`,
+              ),
             ),
           ),
         );
         if (commonShipToAddress) {
           checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
+            'beforebegin',
             commonShipToAddress,
           );
         }
@@ -2195,39 +2390,33 @@ export async function updateCheckoutSummary() {
 }
 
 export const cartItemsContainer = (cartItemValue) => {
-  console.log("cart item value", cartItemValue);
   const modifyCart = async (type, element, value) => {
-    console.log(element);
     showPreLoader();
-    if (type == "delete-item") {
+    if (type == 'delete-item') {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
-        type: type,
+        type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response == "success") {
+      if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              console.log("opcoBe", opcoBe.length);
               const str = `product-Quantity-${opcoBe[0]}`;
-              const parts = str.split("-");
+              const parts = str.split('-');
               const logodivId = document.getElementById(
-                `product-Quantity-${opcoBe[0]}`
-              );
-              console.log(
-                "${itemToBeDisplayed[opcoBe].length",
-                itemToBeDisplayed[opcoBe[0]].length
+                `product-Quantity-${opcoBe[0]}`,
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
               } Items`;
-            }
+            },
           );
         }
+        await updateCheckoutSummary();
         removePreLoader();
       } else {
         alert(response);
@@ -2236,12 +2425,16 @@ export const cartItemsContainer = (cartItemValue) => {
     } else {
       const item = {
         lineItemId: cartItemValue.lineItemId,
-        value: value,
+        value,
         manufacturer: cartItemValue.manufacturer,
-        type: type,
+        type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response == "success") {
+      if (response.status === 'success') {
+        await updateCheckoutSummary();
+        const totalPrice = document.getElementById("total-price");
+        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
+        totalPrice.innerHTML= totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2251,67 +2444,107 @@ export const cartItemsContainer = (cartItemValue) => {
       }
     }
   };
-  const modalCloseButton = button(
+  const deleteButton = button(
     {
-      class: "sm:w-[7.5rem] sm:h-[3.5rem] bg-white",
+      class: 'sm:w-[7.5rem] sm:h-[3.5rem] bg-white',
     },
     span({
       id: `delteItem-${cartItemValue.sku}`,
-      class: "icon icon-icons8-delete cart-delete",
-    })
+      class: 'icon icon-icons8-delete cart-delete',
+    }),
   );
-  modalCloseButton.addEventListener("click", (event) => {
+  deleteButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
-    console.log("Clicked on item with ID: ", input);
-    modifyCart("delete-item", input, "");
+    modifyCart('delete-item', input, '');
   });
-  const modalInput = input({
+  const inputBox = input({
     // id: cartItemValue.lineItemId,
     class:
-      "w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center",
-    type: "number",
+      'w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center',
+    type: 'number',
     min: cartItemValue.minOrderQuantity,
     max:
-      cartItemValue.maxOrderQuantity == 0 ? 99 : cartItemValue.maxOrderQuantity,
-    name: "item-quantity",
+      cartItemValue.maxOrderQuantity === 0 ? 99 : cartItemValue.maxOrderQuantity,
+    name: 'item-quantity',
     value: cartItemValue.itemQuantity,
   });
-  modalInput.addEventListener("change", (event) => {
+  inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const input = selectedDiv.querySelector("input");
+    const input = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
-    console.log("productItem", input);
 
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
-      console.log("minnn");
-      productItem.style.border = "2px solid red";
+      productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
-      console.log("max");
-      productItem.style.border = "2px solid red";
+      productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else {
-      productItem.style.border = "";
-      modifyCart("quantity-added", input, event.target.value);
+      productItem.style.border = '';
+      modifyCart('quantity-added', input, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
   const image = imageHelper(
-    "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg",
+    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
     cartItemValue.productName,
     {
       href: makePublicUrl(
-        "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg"
+        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
       ),
       title: cartItemValue.productName,
-      class: "justify-center",
-    }
+      class: 'justify-center',
+    },
   );
+  const unitPriceDiv = () =>{
+    if(cartItemValue.listPrice.value != cartItemValue.salePrice.value ){
+      return  div(
+      {
+        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+      },
+     div(
+        {
+          class:
+            "w-full justify-start text-gray-500 text-base font-bold item line-through",
+        },
+        `$${cartItemValue.listPrice.value}`
+      ),
+      div(
+        {
+          class:
+            "w-full justify-start text-black text-base",
+        },
+       `$${cartItemValue.salePrice.value}`
+      )
+    )
+    }
+    else {
+      return  div(
+      {
+        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+      },
+    //  div(
+    //     {
+    //       class:
+    //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+    //     },
+    //     `$${cartItemValue.listPrice.value}`
+    //   ),
+      div(
+        {
+          class:
+            "w-full justify-start text-black text-base",
+        },
+       `$${cartItemValue.salePrice.value}`
+      )
+    )
+    }
+  }
   // const itemContainer = div(
   //   {
   //     class: "flex w-full justify-between items-center",
@@ -2345,7 +2578,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     {
   //       class: "",
   //     },
-  //     modalInput
+  //     inputBox
   //   ),
   //   div(
   //     {
@@ -2353,7 +2586,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     },
   //     `$${cartItemValue.salePrice.value}`
   //   ),
-  //   modalCloseButton
+  //   deleteButton
   // );
   // const itemContainer = div(
   //   {
@@ -2403,7 +2636,7 @@ export const cartItemsContainer = (cartItemValue) => {
   //     // div({
   //     //     class:"justify-start text-gray-700 text-base font-normal"
   //     // }, "2")
-  //     modalInput
+  //     inputBox
   //     // )
   //   ),
   //   div(
@@ -2435,89 +2668,94 @@ export const cartItemsContainer = (cartItemValue) => {
   //   ),
   //   div(
   //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
-  //     modalCloseButton
+  //     deleteButton
   //   )
   // );
   const itemsscontainer = div(
     {
       class:
-        "w-full py-3 border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1",
-        id: cartItemValue.lineItemId,
-    },
-    div({
-      class:"py-3 inline-flex gap-2 "
+        'w-full py-3 border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1',
+      id: cartItemValue.lineItemId,
     },
     div(
       {
-        class: "w-28 p-2 flex justify-start items-center gap-3 border border-solid border-gray-300",
+        class: 'py-3 inline-flex gap-2 ',
       },
       div(
         {
-          class: "justify-start text-black text-base font-bold truncate m-[5px]",
+          class: 'w-28 p-2 flex justify-start items-center gap-3 border border-solid border-gray-300',
         },
-        img({
-            class: "w-full h-auto",
-            src: cartItemValue.images ? cartItemValue.images[0].effectiveUrl : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble" ,
-        })
-      )
-    ),
-    div(
-      {
-        class: "sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold",
-        // id: `product-Quantity-${opcoBe[0]}`,
-      },
         div(
           {
-            class: "w-full justify-start items-center text-black text-base font-bold",
+            class: 'justify-start text-black text-base font-bold truncate m-[5px]',
           },
-          cartItemValue.productName
+          img({
+            class: 'w-full h-auto',
+            src: cartItemValue.images ? cartItemValue.images[0].effectiveUrl : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+          }),
+        ),
+      ),
+      div(
+        {
+          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
+        // id: `product-Quantity-${opcoBe[0]}`,
+        },
+        div(
+          {
+            class: 'w-full justify-start items-center text-black text-base font-bold',
+          },
+          cartItemValue.productName,
         ),
         div(
           {
             class:
-              "w-full justify-start items-center text-gray-500 text-sm font-normal ",
+              'w-full justify-start items-center text-gray-500 text-sm font-normal ',
           },
-          cartItemValue.sku
-        )
-      
-    ),
-  ),
-    div({
-      class: "sm:pl-[0px] pl-[13px] inline-flex justify-start items-center"
-    }, div(
-      {
-        class: "w-24 justify-start text-black text-base font-bold",
-      },
-     modalInput
+          cartItemValue.sku,
+        ),
+
+      ),
     ),
     div(
       {
-        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
+        class: 'sm:pl-[0px] pl-[13px] inline-flex justify-start items-center',
       },
-     div(
-        {
-          class:
-            "w-full justify-start text-gray-500 text-base font-bold item line-through",
-        },
-        `$${cartItemValue.salePrice.value}`
-      ),
       div(
         {
-          class:
-            "w-full justify-start text-black text-base",
+          class: 'w-24 justify-start text-black text-base font-bold',
         },
-       `$${cartItemValue.salePrice.value}`
-      )
+        inputBox,
+      ),
+      // div(
+      //   {
+      //     class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+      //   },
+      //   div(
+      //     {
+      //       class:
+      //       'w-full justify-start text-gray-500 text-base font-bold item line-through',
+      //     },
+      //     `$${cartItemValue.salePrice.value}`,
+      //   ),
+      //   div(
+      //     {
+      //       class:
+      //       'w-full justify-start text-black text-base',
+      //     },
+      //     `$${cartItemValue.salePrice.value}`,
+      //   ),
+      // ),
+      unitPriceDiv(),
+      div(
+        {
+          class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
+          id: "total-price"
+        },
+        `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
+      ),
+      deleteButton,
     ),
-    div(
-      {
-        class: "w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]",
-      },
-      `$${cartItemValue.salePrice.value}`
-    ),
-    modalCloseButton)
-    
-  
+
   );
   decorateIcons(itemsscontainer);
   return itemsscontainer;

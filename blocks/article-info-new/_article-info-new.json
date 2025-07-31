@@ -1,0 +1,82 @@
+{
+    "definitions": [
+      {
+          "title": "Article-Info-New",
+          "id": "article-info-new",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Article-Info-New",
+                  "model": "article-info-new"
+                }
+              }
+            }
+          }
+        }
+    ],
+    "models": [
+      {
+        "id": "article-info-new",
+        "fields": [
+           {
+            "component": "text",
+            "valueType": "string",
+            "name": "authorName",
+            "label": "Author Name",
+            "value": ""
+           },
+           {
+            "component": "text",
+            "valueType": "string",
+            "name": "authorTitle",
+            "label": "Author Title",
+            "value": ""
+           },
+           {
+            "component": "reference",
+            "valueType": "Picture",
+            "name": "image",
+            "label": "Image",
+            "multi": false,
+            "value": ""
+           },
+           {
+            "component": "text",
+            "valueType": "string",
+            "name": "imageAlt",
+            "label": "Alt Text",
+            "value": ""
+           },
+           {
+            "component": "text",
+            "valueType": "string",
+            "name": "articleOpco",
+            "label": "Article Opco",
+            "value": ""
+           },           
+           {
+            "component": "date-time",
+            "valueType": "date",
+            "name": "publishDate",
+            "label": "Date",     
+            "value": ""
+           },
+           {
+            "component": "text",
+            "valueType": "string",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": ""
+           }
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "id": "article-info-new",
+        "components": [   ] 
+      }
+    ]
+  }

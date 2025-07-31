@@ -48,6 +48,11 @@
   margin-top: 48px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .product-family-wrapper :is(.visible) {
   visibility: visible
 }
@@ -268,10 +273,6 @@
   height: 1px
 }
 
-.product-family-wrapper :is(.min-h-\[100px\]) {
-  min-height: 100px
-}
-
 .product-family-wrapper :is(.min-h-fit) {
   min-height: -moz-fit-content;
   min-height: fit-content
@@ -376,6 +377,15 @@
 
 .product-family-wrapper :is(.flex-shrink-0) {
   flex-shrink: 0
+}
+
+.product-family-wrapper :is(.rotate-180) {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.product-family-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 @keyframes pulse {
@@ -805,7 +815,7 @@
 }
 
 .product-family-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .product-family-wrapper :is(.\!leading-10) {

@@ -11,6 +11,11 @@
   margin-left: 4px
 }
 
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
 .product-categories-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
@@ -186,9 +191,9 @@
   padding-bottom: 0.75rem !important
 }
 
-.product-categories-wrapper :is(.\!text-3xl) {
-  font-size: 1.875rem !important;
-  line-height: 2.25rem !important
+.product-categories-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .product-categories-wrapper :is(.text-base) {
@@ -207,7 +212,7 @@
 }
 
 .product-categories-wrapper :is(.font-medium) {
-  font-weight: 400
+  font-weight: 500
 }
 
 .product-categories-wrapper :is(.font-semibold) {
