@@ -123,7 +123,7 @@ export default async function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'max-w-[294px] max-h-[100px] object-contain mb-2 md:mb-8 h-auto',
+        class: 'max-w-[294px] max-h-[120px] object-contain mb-2 md:mb-8 h-auto',
       }),
     );
   }
