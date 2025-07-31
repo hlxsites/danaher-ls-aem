@@ -25,13 +25,6 @@ export default function renderGridCard(item) {
     p(
       {
         class:
-          'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
-      },
-      item?.brand?.replace(/<[^>]*>/g, '') || '',
-    ),
-    p(
-      {
-        class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
       },
       item?.title?.replace(/<[^>]*>/g, '') || '',
