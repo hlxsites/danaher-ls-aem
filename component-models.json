@@ -1066,6 +1066,25 @@
     "fields": []
   },
   {
+    "id": "pdp-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs (comma separated)"
+      }
+    ]
+  },
+  {
     "id": "pdp-citations",
     "fields": []
   },
