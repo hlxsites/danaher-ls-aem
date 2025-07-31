@@ -167,6 +167,10 @@
   width: 100%
 }
 
+.opco-banner-wrapper :is(.w-\[294px\]) {
+  width: 294px
+}
+
 .opco-banner-wrapper :is(.max-w-\[344px\]) {
   max-width: 344px
 }
