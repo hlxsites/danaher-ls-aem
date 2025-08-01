@@ -3766,6 +3766,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding-top: 1.5rem;
 }
 
+.pt-0 {
+  padding-top: 0px;
+}
+
 .text-left {
   text-align: left;
 }
