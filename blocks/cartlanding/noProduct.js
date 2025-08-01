@@ -49,9 +49,9 @@ export const noProducts = (searchedWord) => {
           class:
             'self-stretch text-center justify-start text-black text-base font-extralight',
         },
-        "Check for typos, spelling errors, search by part number or try a different keyword"
-      )
-    )
+        'Check for typos, spelling errors, search by part number or try a different keyword',
+      ),
+    ),
   );
 
   return noProductDiv;
