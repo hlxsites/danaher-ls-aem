@@ -6,7 +6,7 @@ on:
     - cron:  '0 0 * * *'
   push:
     branches: 
-      - main
+      - em1-converter-ebuy
 
 jobs:
   # undeploy any action in the "convert" package that is older then 5 days
