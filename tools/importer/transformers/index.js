@@ -9,7 +9,6 @@ import carousel from './carousel.js';
 import logoCloud from './logoCloud.js';
 import heroVideo from './heroVideo.js';
 import breadcrumb from './breadcrumb.js';
-import login from './login.js';
 import cards from './cards.js';
 import eventCards from './eventCards.js';
 import columns from './columns.js';
@@ -64,7 +63,6 @@ export const transformers = [
   logoCloud,
   heroVideo,
   breadcrumb,
-  login,
   cards,
   eventCards,
   heading,
