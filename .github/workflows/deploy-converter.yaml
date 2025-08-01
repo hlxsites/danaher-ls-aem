@@ -20,7 +20,7 @@ on:
       - converter.yaml
       - package-lock.json
     branches:
-      - main
+      - em1-converter-ebuy
 
 jobs:
   # undeploy action in the "convert" package with the name of the current branch
