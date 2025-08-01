@@ -5,7 +5,7 @@
 on:
   create:
     branches:
-      - main
+      - em1-converter-ebuy
 jobs:
   cleanup:
     runs-on: ubuntu-latest
