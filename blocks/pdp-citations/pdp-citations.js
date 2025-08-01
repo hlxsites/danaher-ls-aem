@@ -27,4 +27,5 @@ export default async function decorate(block) {
   loadScript('https://cdn.bioz.com/assets/jquery-2.2.4.js', attrs);
   loadScript('https://cdn.bioz.com/assets/bioz-w-api-6.0.min.js', attrs);
   // }
+  block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }

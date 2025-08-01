@@ -1067,22 +1067,7 @@
   },
   {
     "id": "pdp-carousel",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "titleText",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "productid",
-        "value": "",
-        "label": "Product IDs (comma separated)"
-      }
-    ]
+    "fields": []
   },
   {
     "id": "pdp-citations",
@@ -1090,6 +1075,10 @@
   },
   {
     "id": "pdp-description",
+    "fields": []
+  },
+  {
+    "id": "pdp-faqs",
     "fields": []
   },
   {
@@ -1102,6 +1091,10 @@
   },
   {
     "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-related-products",
     "fields": []
   },
   {

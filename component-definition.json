@@ -450,14 +450,14 @@
           }
         },
         {
-          "title": "PDP-Carousel",
+          "title": "Pdp Carousel",
           "id": "pdp-carousel",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "PDP Carousel",
+                  "name": "Pdp Carousel",
                   "model": "pdp-carousel"
                 }
               }
@@ -489,6 +489,21 @@
                 "template": {
                   "name": "PDP Description",
                   "model": "pdp-description"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp FAQs",
+          "id": "pdp-faqs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp FAQs",
+                  "model": "pdp-faqs"
                 }
               }
             }
@@ -534,6 +549,21 @@
                 "template": {
                   "name": "Pdp Products",
                   "model": "pdp-products"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Related Products",
+          "id": "pdp-related-products",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Related Products",
+                  "model": "pdp-related-products"
                 }
               }
             }

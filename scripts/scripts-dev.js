@@ -22,6 +22,39 @@ import {
   img,
 } from './dom-builder.js';
 
+import { opcoMapping } from './opco-mapping.js';
+
+function normalizeSlugRedirect() {
+  const path = window.location.pathname;
+  const regex = /^\/us\/en\/products\/sku\/(\d+)-(.+)\.html$/;
+  const match = path.match(regex);
+
+  if (match) {
+    const sku = match[1];
+    const rawSlug = match[2].toLowerCase();
+
+    // Build slugAliasToKey from opcoMapping dynamically
+    const slugAliasToKey = {};
+    Object.entries(opcoMapping).forEach(([key, value]) => {
+      const alias = value.toLowerCase().replace(/\s+/g, '-');
+      slugAliasToKey[alias] = key;
+    });
+
+    const opcoKey = slugAliasToKey[rawSlug];
+
+    if (opcoKey) {
+      const correctSlug = `/us/en/products/sku/${sku}-${opcoKey}.html`;
+      if (path !== correctSlug) {
+        window.location.replace(correctSlug);
+      }
+    }
+  }
+}
+
+window.addEventListener('load', () => {
+  normalizeSlugRedirect();
+});
+
 // if the page url does not have .html, then add .html to the url
 if (window.location.hostname.includes('lifesciences.danaher.com')) {
   if (!window.location.pathname.endsWith('.html') && window.location.pathname !== '/') {
@@ -902,14 +935,17 @@ function loadUTMprams() {
   });
 }
 // UTM Paramaters check - end
-
 async function designPdp() {
   const main = document.querySelector('main');
 
-  // Get only the meaningful .section elements (with more specific class names)
-  const sections = Array.from(main.querySelectorAll('.section')).filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
+  const allSections = Array.from(main.querySelectorAll('.section'));
+  const meaningfulSections = allSections.filter((section) =>
+    Array.from(section.classList).some((cls) => cls.startsWith('pdp-'))
+  );
 
-  const heroSection = sections.find((sec) => sec.classList.contains('pdp-hero-container'));
+  const heroSection = meaningfulSections.find((sec) =>
+    sec.classList.contains('pdp-hero-container')
+  );
 
   const flexWrapper = div({
     class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
@@ -923,20 +959,48 @@ async function designPdp() {
     class: 'tabs-right-parent border-l border-gray-200 flex-1',
   });
 
-  sections.forEach((section) => {
-    if (section === heroSection) return; // Skip hero
+  // Define tabbed content section classes
+  const tabContentClasses = new Set([
+    'pdp-page-tabs-container',
+    'pdp-description-container',
+    'pdp-specifications-container',
+    'pdp-related-products-container',
+    'pdp-bundle-list-container',
+    'pdp-citations-container',
+    'pdp-products-container',
+    'pdp-resources-container',
+    'pdp-faqs-container',
+    // Add more as needed
+  ]);
+
+  const afterFlexSections = [];
+
+  meaningfulSections.forEach((section) => {
+    if (section === heroSection) return;
+
+    const hasTabbedClass = Array.from(section.classList).some((cls) =>
+      tabContentClasses.has(cls)
+    );
 
     if (section.classList.contains('pdp-page-tabs-container')) {
       tabsWrapper.appendChild(section);
-    } else {
+    } else if (hasTabbedClass) {
       restWrapper.appendChild(section);
+    } else {
+      afterFlexSections.push(section);
     }
   });
 
   flexWrapper.appendChild(tabsWrapper);
   flexWrapper.appendChild(restWrapper);
 
+  // Insert flex wrapper after hero section
   heroSection?.after(flexWrapper);
+
+  // Insert other sections (e.g., pdp-faqs, pdp-carousel) after flexWrapper
+  afterFlexSections.forEach((section) => {
+    flexWrapper.after(section);
+  });
 }
 /**
  * Loads everything that doesn't need to be delayed.

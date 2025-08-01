@@ -1,15 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Pdp Carousel",
-      "id": "pdp-carousel",
+      "title": "Pdp Related Products",
+      "id": "pdp-related-products",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Pdp Carousel",
-              "model": "pdp-carousel"
+              "name": "Pdp Related Products",
+              "model": "pdp-related-products"
             }
           }
         }
@@ -18,7 +18,7 @@
   ],
   "models": [
       {
-        "id": "pdp-carousel",
+        "id": "pdp-related-products",
         "fields": []
       }
   ],

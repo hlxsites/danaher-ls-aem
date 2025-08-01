@@ -134,6 +134,8 @@ export default async function decorate(block) {
   if (response?.raw?.numresources) tabsList.push('Resources');
   if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
   tabsList.push('Citations');
+  tabsList.push('FAQs');
+  tabsList.push('Related Products');
 
   // Full map of label to section ID
   const fullTabMap = {
@@ -143,6 +145,8 @@ export default async function decorate(block) {
     Products: '#products-tab',
     Resources: '#resources-tab',
     Citations: '#citations-tab',
+    FAQs: '#faqs-tab',
+    'Related Products': '#related-products-tab'
   };
 
   // Dynamically build tab map based on actual tabs available
