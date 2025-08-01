@@ -422,7 +422,7 @@ const fileMappings = [
     content: './blocks/pdp-faqs/pdp-faqs.js',
     output: './blocks/pdp-faqs/pdp-faqs.css',
     wrapper: 'pdp-faqs-wrapper',
-  },  
+  },
   {
     content: [
       './blocks/pdp-carousel/pdp-carousel.js',
