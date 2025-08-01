@@ -1066,6 +1066,10 @@
   padding-right: 0.25rem
 }
 
+.cartlanding-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
 .cartlanding-wrapper :is(.pt-1) {
   padding-top: 0.25rem
 }
@@ -1080,10 +1084,6 @@
 
 .cartlanding-wrapper :is(.pt-\[5px\]) {
   padding-top: 5px
-}
-
-.cartlanding-wrapper :is(.pt-0) {
-  padding-top: 0px
 }
 
 .cartlanding-wrapper :is(.text-center) {
