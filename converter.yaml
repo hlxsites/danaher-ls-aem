@@ -1,7 +1,7 @@
 # the origin to fetch content from
 origin: https://author-p93411-e849501.adobeaemcloud.com/
 suffix: ".html?wcmmode=disabled"
-internalHost: https://em1-checkout-payment-module--danaher-ls-aem--hlxsites.hlx.live
+internalHost: https://em1-converter-ebuy--danaher-ls-aem--hlxsites.hlx.live
 host: https://author-p93411-e849501.adobeaemcloud.com/
 # the live urls of the content
 # this is used to make absolute links to the urls domain reliatve
