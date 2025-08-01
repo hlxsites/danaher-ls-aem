@@ -789,6 +789,104 @@
    .seventythirty .columns-2-cols .container .columns-img-col picture img {
      @apply !w-1/2;
    }
+   
+  #checkout-details {
+    @apply flex;
+  }
+  #taxExemptWrapper {
+    @apply gap-8;
+  }
+  #searchWithicon input {
+    @apply min-w-[320px] h-10 rounded-md pl-9;
+  }
+  #shippingAddressListItemsWrapper {
+    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+    [&::-webkit-scrollbar-track]:bg-gray-100
+    [&::-webkit-scrollbar-thumb]:bg-gray-300
+    dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+  }
+  #shippingAddressListItemsWrapper > div {
+    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+  }
+  #shippingAddressListItemsWrapper > div:hover {
+    @apply bg-gray-100;
+  }
+  #shippingAddressListItemsWrapper span:nth-child(1) {
+    @apply text-danaherpurple-500 cursor-pointer;
+  }
+  [id^="shippingAddressListContentActions-"] {
+    @apply items-start;
+  }
+  [id^="shippingAddressListItemActions-"] > div {
+    @apply flex gap-4 mt-3 items-center justify-end;
+  }
+  [id^="shippingAddressListItemActions-"] > div > span:nth-child(1) {
+    @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  [id^="shippingAddressListItemActions-"] > div > span:nth-child(2) {
+    @apply text-black;
+  }
+  #billingAddressListItemsWrapper {
+    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+    [&::-webkit-scrollbar-track]:bg-gray-100
+    [&::-webkit-scrollbar-thumb]:bg-gray-300
+    dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+  }
+  #billingAddressListItemsWrapper > div {
+    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+  }
+  #billingAddressListItemsWrapper > div:hover {
+    @apply bg-gray-100;
+  }
+  #billingAddressListItemsWrapper span:nth-child(1) {
+    @apply text-danaherpurple-500 cursor-pointer;
+  }
+  [id^="billingAddressListContentActions-"] {
+    @apply items-start;
+  }
+  [id^="billingAddressListItemActions-"] > div {
+    @apply flex gap-4 mt-3 items-center justify-end;
+  }
+  [id^="billingAddressListItemActions-"] > div > span:nth-child(1) {
+    @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  [id^="billingAddressListItemActions-"] > div > span:nth-child(2) {
+    @apply text-black;
+  }
+  #utilityModal #shippingAddressForm {
+    @apply flex gap-4 flex-wrap;
+  }
+  #utilityModal #shippingAddressForm .space-y-2 {
+    @apply w-[48%] mt-0;
+  }
+  #utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
+    @apply w-full;
+  }
+  #utilityModal #shippingAddressForm .form-title,
+  #utilityModal #shippingAddressForm .button-wrapper {
+    @apply w-full;
+  }
+  #utilityModal #billingAddressForm {
+    @apply flex gap-4 flex-wrap;
+  }
+  #utilityModal #billingAddressForm .space-y-2 {
+    @apply w-[48%] mt-0;
+  }
+  #utilityModal #billingAddressForm .space-y-2:nth-child(4) {
+    @apply w-full;
+  }
+  #utilityModal #billingAddressForm .form-title,
+  #utilityModal #billingAddressForm .button-wrapper {
+    @apply w-full;
+  }
+  #plusCircleIcon {
+    @apply fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  #mainPreLoader {
+    @apply fixed w-full backdrop-blur-[3px] z-[1213456789] left-0 top-0 h-[100vh];
+  }
  }
  
  @layer utilities {
