@@ -1199,9 +1199,9 @@ export const changeStep = async (step) => {
   }
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
-    alert('In-valid basket');
+    //alert('In-valid basket');
     removePreLoader();
-    return false;
+    //return false;
   }
   if (currentTab === 'submitOrder') {
     const getBasketForOrder = await getBasketDetails();
@@ -1948,7 +1948,7 @@ get price type if its net or gross
       },
       div(
         {
-          class: ' flex flex-col justify-start items-start gap-4',
+          class: 'w-full flex flex-col justify-start items-start gap-4',
         },
         div(
           {
@@ -2110,7 +2110,7 @@ get price type if its net or gross
       div(
         {
           class:
-            'checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid mb-4 pt-6',
+            'checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid pt-6',
           id: 'checkoutSummaryTotal',
         },
         span(
@@ -2134,7 +2134,7 @@ get price type if its net or gross
       div(
         {
           class:
-            'p-[22px] flex flex-col justify-center w-full items-start gap-4',
+            'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
           class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${

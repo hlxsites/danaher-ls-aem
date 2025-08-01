@@ -84,8 +84,8 @@
   left: -4px
 }
 
-.checkout :is(.left-\[46\%\]) {
-  left: 46%
+.checkout :is(.left-\[48\%\]) {
+  left: 48%
 }
 
 .checkout :is(.left-\[747px\]) {
@@ -114,6 +114,10 @@
 
 .checkout :is(.top-\[49px\]) {
   top: 49px
+}
+
+.checkout :is(.left-\[46\%\]) {
+  left: 46%
 }
 
 .checkout :is(.z-10) {

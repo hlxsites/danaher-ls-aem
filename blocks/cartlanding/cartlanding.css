@@ -107,8 +107,8 @@
   left: -4px
 }
 
-.cartlanding-wrapper :is(.left-\[46\%\]) {
-  left: 46%
+.cartlanding-wrapper :is(.left-\[48\%\]) {
+  left: 48%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -163,6 +163,10 @@
   top: 5px
 }
 
+.cartlanding-wrapper :is(.left-\[46\%\]) {
+  left: 46%
+}
+
 .cartlanding-wrapper :is(.z-0) {
   z-index: 0
 }
@@ -185,6 +189,11 @@
 
 .cartlanding-wrapper :is(.m-\[7px\]) {
   margin: 7px
+}
+
+.cartlanding-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
 }
 
 .cartlanding-wrapper :is(.mb-3) {
@@ -391,6 +400,10 @@
   height: 1px
 }
 
+.cartlanding-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .cartlanding-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -559,8 +572,16 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.w-8) {
+  width: 2rem
+}
+
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
+}
+
+.cartlanding-wrapper :is(.min-w-\[100\%\]) {
+  min-width: 100%
 }
 
 .cartlanding-wrapper :is(.max-w-\[100\%\]) {
@@ -585,6 +606,10 @@
 
 .cartlanding-wrapper :is(.flex-grow) {
   flex-grow: 1
+}
+
+.cartlanding-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .cartlanding-wrapper :is(.cursor-pointer) {
@@ -689,6 +714,10 @@
 
 .cartlanding-wrapper :is(.gap-\[4rem\]) {
   gap: 4rem
+}
+
+.cartlanding-wrapper :is(.gap-0) {
+  gap: 0px
 }
 
 .cartlanding-wrapper :is(.gap-y-6) {
@@ -1082,6 +1111,14 @@
   padding-top: 5px
 }
 
+.cartlanding-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
+.cartlanding-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
+}
+
 .cartlanding-wrapper :is(.text-center) {
   text-align: center
 }
@@ -1257,6 +1294,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -1315,6 +1357,14 @@
   outline-color: #7c3aed
 }
 
+.cartlanding-wrapper :is(.outline-\[\#7523FF\]) {
+  outline-color: #7523FF
+}
+
+.cartlanding-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .cartlanding-wrapper :is(.ring) {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -1338,6 +1388,24 @@
   transition-duration: 150ms
 }
 
+.cartlanding-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.cartlanding-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
+.cartlanding-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
+.cartlanding-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
 .hover\:bg-danaherpurple-50:hover {
   background-color: #EADEFF
 }
@@ -1347,13 +1415,34 @@
   background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
+.cartlanding-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.cartlanding-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
 .cartlanding-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.hover\:text-white:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
+}
+
+.cartlanding-wrapper :is(.hover\:shadow-md:hover) {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .cartlanding-wrapper :is(.focus\:outline-none:focus) {
@@ -1457,6 +1546,10 @@
     width: 640px
   }
 
+  .cartlanding-wrapper :is(.md\:min-w-\[305px\]) {
+    min-width: 305px
+  }
+
   .cartlanding-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
@@ -1507,6 +1600,11 @@
     padding-left: 2.5rem;
     padding-right: 2.5rem
   }
+
+  .cartlanding-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
 @media (min-width: 1280px) {
@@ -1517,6 +1615,10 @@
   .cartlanding-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
+}
+
+.cartlanding-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
@@ -1544,5 +1646,13 @@
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
 }
