@@ -17,8 +17,8 @@ import {
 } from '../../scripts/common-utils.js';
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
   const [
     heading,
     subHeading,
