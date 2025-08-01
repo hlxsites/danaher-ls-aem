@@ -208,7 +208,7 @@ function skipConverter(path) {
   //     return false;
   //   }
   // }
-/*
+
   if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
       return false;
   }
@@ -219,22 +219,22 @@ function skipConverter(path) {
   if (path.includes('/us/en/products-eds')) return true;
   if (path.includes('/us/en/e-buy')) return true;
 
-  */
+  
 
  //This condition check will removed
-  if(!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
-    if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
-        return false;
-    }
-    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/assay-kits')) && !path.includes('/topics-jck1/')) {    
-        return true;
-    }
-    if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true;
-  }
+  // if(!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
+  //   if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
+  //       return false;
+  //   }
+  //   if((path.includes('us/en/products.html') || path.includes('us/en/products/brands') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/assay-kits')) && !path.includes('/topics-jck1/')) {    
+  //       return true;
+  //   }
+  //   if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true;
+  // }
 
-  if (path.includes('/us/en/blog-eds/')) return true;
-  if (path.includes('/us/en/news-eds/')) return true;
-  if (path.includes('/us/en/videos-eds/')) return true;
+  // if (path.includes('/us/en/blog-eds/')) return true;
+  // if (path.includes('/us/en/news-eds/')) return true;
+  // if (path.includes('/us/en/videos-eds/')) return true;
   // skip the converter for pages like **/products/*/topics/**
   const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
   return regex.test(path);
