@@ -1948,7 +1948,7 @@ get price type if its net or gross
       },
       div(
         {
-          class: ' flex flex-col justify-start items-start gap-4',
+          class: 'w-full flex flex-col justify-start items-start gap-4',
         },
         div(
           {
@@ -2134,7 +2134,7 @@ get price type if its net or gross
       div(
         {
           class:
-            'p-[22px] flex flex-col justify-center w-full items-start gap-4',
+            'p-[22px] pt-0 flex flex-col justify-center w-full items-start gap-4',
         },
         button({
           class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
