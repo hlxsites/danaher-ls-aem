@@ -125,7 +125,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: 'md:w-[692px] flex flex-col justify-start items-start',
+        class: ' flex flex-col justify-start items-start',
       },
       div(
         {
@@ -557,7 +557,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          'md:w-[692px] inline-flex justify-start items-center gap-6 flex-col',
+          ' inline-flex justify-start items-center gap-6 flex-col',
         },
         div(
           {
@@ -572,7 +572,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          'w-full md:w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6',
+          'w-full  border-t border-b border-gray-300 inline-flex justify-start items-center gap-6',
         },
         infoDiv,
       ),
@@ -582,7 +582,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          'md:w-[692px] inline-flex justify-start items-center gap-6 flex-col',
+          ' inline-flex justify-start items-center gap-6 flex-col',
         },
         bundleTab,
       ),
@@ -591,7 +591,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          'w-full md:w-[692px] border-t border-b border-gray-300 flex justify-start items-center gap-6',
+          'w-full  border-t border-b border-gray-300 flex justify-start items-center gap-6',
         },
         infoDiv, // Full-width border for Bundle
       ),
@@ -601,7 +601,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          'md:w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center',
+          ' border-t border-b border-gray-300 inline-flex justify-start items-center',
         },
         div(
           {
@@ -631,7 +631,7 @@ export default async function decorate(block) {
   };
 
   const categoriesDiv = div({
-    class: 'md:w-[692px] flex-wrap py-4 inline-flex justify-start items-start gap-2',
+    class: ' flex-wrap py-4 inline-flex justify-start items-start gap-2',
   });
   result?.raw?.categoriesname?.forEach((category) => {
     // If category contains '|', split and use the last part
