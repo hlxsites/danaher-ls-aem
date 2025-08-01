@@ -22,38 +22,38 @@ import {
   img,
 } from './dom-builder.js';
 
-import { opcoMapping } from './opco-mapping.js';
+// import { opcoMapping } from './opco-mapping.js';
 
-function normalizeSlugRedirect() {
-  const path = window.location.pathname;
-  const regex = /^\/us\/en\/products\/sku\/(\d+)-(.+)\.html$/;
-  const match = path.match(regex);
+// function normalizeSlugRedirect() {
+//   const path = window.location.pathname;
+//   const regex = /^\/us\/en\/products\/sku\/(\d+)-(.+)\.html$/;
+//   const match = path.match(regex);
 
-  if (match) {
-    const sku = match[1];
-    const rawSlug = match[2].toLowerCase();
+//   if (match) {
+//     const sku = match[1];
+//     const rawSlug = match[2].toLowerCase();
 
-    // Build slugAliasToKey from opcoMapping dynamically
-    const slugAliasToKey = {};
-    Object.entries(opcoMapping).forEach(([key, value]) => {
-      const alias = value.toLowerCase().replace(/\s+/g, '-');
-      slugAliasToKey[alias] = key;
-    });
+//     // Build slugAliasToKey from opcoMapping dynamically
+//     const slugAliasToKey = {};
+//     Object.entries(opcoMapping).forEach(([key, value]) => {
+//       const alias = value.toLowerCase().replace(/\s+/g, '-');
+//       slugAliasToKey[alias] = key;
+//     });
 
-    const opcoKey = slugAliasToKey[rawSlug];
+//     const opcoKey = slugAliasToKey[rawSlug];
 
-    if (opcoKey) {
-      const correctSlug = `/us/en/products/sku/${sku}-${opcoKey}.html`;
-      if (path !== correctSlug) {
-        window.location.replace(correctSlug);
-      }
-    }
-  }
-}
+//     if (opcoKey) {
+//       const correctSlug = `/us/en/products/sku/${sku}-${opcoKey}.html`;
+//       if (path !== correctSlug) {
+//         window.location.replace(correctSlug);
+//       }
+//     }
+//   }
+// }
 
-window.addEventListener('load', () => {
-  normalizeSlugRedirect();
-});
+// window.addEventListener('load', () => {
+//   normalizeSlugRedirect();
+// });
 
 // if the page url does not have .html, then add .html to the url
 if (window.location.hostname.includes('lifesciences.danaher.com')) {
