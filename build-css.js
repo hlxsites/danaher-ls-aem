@@ -432,11 +432,6 @@ const fileMappings = [
     wrapper: 'pdp-faqs-wrapper',
   },
   {
-    content: './blocks/pdp-carousel/pdp-carousel.js',
-    output: './blocks/pdp-carousel/pdp-carousel.css',
-    wrapper: 'pdp-carousel-wrapper',
-  },
-  {
     content: './blocks/pdp-related-products/pdp-related-products.js',
     output: './blocks/pdp-related-products/pdp-related-products.css',
     wrapper: 'pdp-related-products-wrapper',
