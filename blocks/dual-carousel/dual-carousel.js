@@ -191,6 +191,7 @@ export default async function decorate(block) {
   ] = block.children;
 
   block.parentElement.parentElement.style.padding = '0';
+  
   block.parentElement.parentElement.style.margin = '0';
 
   const dualCarouselWrapper = div({
