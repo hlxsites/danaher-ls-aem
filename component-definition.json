@@ -265,6 +265,100 @@
           }
         },
         {
+          "title": "Title",
+          "id": "title",
+          "plugins": {},
+          "model": {
+            "fields": [
+              {
+                "component": "text",
+                "name": "text",
+                "label": "Title text",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "Image",
+          "id": "image",
+          "plugins": {},
+          "model": {
+            "fields": [
+              {
+                "component": "image",
+                "name": "src",
+                "label": "Image Source",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "Text",
+          "id": "text",
+          "plugins": {},
+          "model": {
+            "fields": [
+              {
+                "component": "textarea",
+                "name": "content",
+                "label": "Text content",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "Button",
+          "id": "button",
+          "plugins": {},
+          "model": {
+            "fields": [
+              {
+                "component": "text",
+                "name": "label",
+                "label": "Button Label",
+                "valueType": "string",
+                "value": ""
+              },
+              {
+                "component": "url",
+                "name": "url",
+                "label": "Button URL",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "Article Info",
+          "id": "article-info",
+          "plugins": {},
+          "model": {
+            "fields": [
+              {
+                "component": "text",
+                "name": "author",
+                "label": "Author",
+                "valueType": "string",
+                "value": ""
+              },
+              {
+                "component": "date",
+                "name": "publishedDate",
+                "label": "Published Date",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {

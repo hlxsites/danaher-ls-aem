@@ -498,18 +498,32 @@
     "id": "columns",
     "fields": [
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "columns",
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
         "value": "",
-        "label": "Columns"
+        "options": [
+          "columns-2-cols",
+          "columns-3-cols",
+          "align-text-top",
+          "align-text-center",
+          "text-white"
+        ]
       },
       {
         "component": "text",
+        "name": "columns",
+        "label": "Number of Columns",
         "valueType": "number",
+        "value": 2
+      },
+      {
+        "component": "text",
         "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "label": "Number of Rows",
+        "valueType": "number",
+        "value": 1
       }
     ]
   },

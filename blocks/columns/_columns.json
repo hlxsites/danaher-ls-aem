@@ -14,6 +14,100 @@
           }
         }
       }
+    },
+    {
+      "title": "Title",
+      "id": "title",
+      "plugins": {},
+      "model": {
+        "fields": [
+          {
+            "component": "text",
+            "name": "text",
+            "label": "Title text",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Image",
+      "id": "image",
+      "plugins": {},
+      "model": {
+        "fields": [
+          {
+            "component": "image",
+            "name": "src",
+            "label": "Image Source",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Text",
+      "id": "text",
+      "plugins": {},
+      "model": {
+        "fields": [
+          {
+            "component": "textarea",
+            "name": "content",
+            "label": "Text content",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Button",
+      "id": "button",
+      "plugins": {},
+      "model": {
+        "fields": [
+          {
+            "component": "text",
+            "name": "label",
+            "label": "Button Label",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "component": "url",
+            "name": "url",
+            "label": "Button URL",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Article Info",
+      "id": "article-info",
+      "plugins": {},
+      "model": {
+        "fields": [
+          {
+            "component": "text",
+            "name": "author",
+            "label": "Author",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "component": "date",
+            "name": "publishedDate",
+            "label": "Published Date",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
+      }
     }
   ],
   "models": [
@@ -21,18 +115,32 @@
       "id": "columns",
       "fields": [
         {
-          "component": "text",
-          "valueType": "number",
-          "name": "columns",
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Style",
+          "valueType": "string",
           "value": "",
-          "label": "Columns"
+          "options": [
+            "columns-2-cols",
+            "columns-3-cols",
+            "align-text-top",
+            "align-text-center",
+            "text-white"
+          ]
         },
         {
           "component": "text",
+          "name": "columns",
+          "label": "Number of Columns",
           "valueType": "number",
+          "value": 2
+        },
+        {
+          "component": "text",
           "name": "rows",
-          "value": "",
-          "label": "Rows"
+          "label": "Number of Rows",
+          "valueType": "number",
+          "value": 1
         }
       ]
     }
@@ -47,11 +155,42 @@
     {
       "id": "column",
       "components": [
-        "image",
         "title",
+        "image",
         "text",
+        "button",
         "article-info"
       ]
     }
-  ]
+  ],
+  "content": {
+    "columns": [
+      [
+        {
+          "component": "title",
+          "text": "Standardizing Organoids for Drug Discovery"
+        },
+        {
+          "component": "image",
+          "src": "/content/dam/danaher/lifesciences/blog/organoids-drug-discovery-hero.jpg"
+        }
+      ],
+      [
+        {
+          "component": "text",
+          "content": "Organoids are miniature 3D structures that mimic organs, revolutionizing drug discovery by providing more predictive models."
+        },
+        {
+          "component": "button",
+          "label": "Read More",
+          "url": "/us/en/blog/standardizing-organoids-drug-discovery-molecular-devices.html"
+        },
+        {
+          "component": "article-info",
+          "author": "Jane Doe",
+          "publishedDate": "2025-07-15"
+        }
+      ]
+    ]
+  }
 }

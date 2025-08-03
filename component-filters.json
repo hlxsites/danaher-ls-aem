@@ -107,9 +107,10 @@
   {
     "id": "column",
     "components": [
-      "image",
       "title",
+      "image",
       "text",
+      "button",
       "article-info"
     ]
   },
