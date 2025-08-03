@@ -107,15 +107,10 @@
   {
     "id": "column",
     "components": [
-      "text",
       "image",
-      "button",
       "title",
-      "article-info",
-      "list",
-      "icon",
-      "form",
-      "link"
+      "text",
+      "article-info"
     ]
   },
   {

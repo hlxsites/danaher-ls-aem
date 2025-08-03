@@ -21,26 +21,6 @@
       "id": "columns",
       "fields": [
         {
-          "component": "multiselect",
-          "name": "classes",
-          "value": "",
-          "label": "Style",
-          "valueType": "string",
-          "options": [
-            "align-text-top",
-            "align-text-center",
-            "bottom-border-right",
-            "bg-color-right",
-            "features-card-left",
-            "itemscenter",
-            "thirtyseventy",
-            "seventythirty",
-            "text-white",
-            "columns-2-cols",
-            "columns-3-cols"
-          ]
-        },
-        {
           "component": "text",
           "valueType": "number",
           "name": "columns",
@@ -53,24 +33,6 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
-        },
-        {
-          "component": "checkbox",
-          "name": "includeImage",
-          "value": false,
-          "label": "Include Image Column"
-        },
-        {
-          "component": "checkbox",
-          "name": "hasForm",
-          "value": false,
-          "label": "Include Form"
-        },
-        {
-          "component": "checkbox",
-          "name": "isBlogLayout",
-          "value": false,
-          "label": "Blog/News Layout"
         }
       ]
     }
@@ -85,15 +47,10 @@
     {
       "id": "column",
       "components": [
-        "text",
         "image",
-        "button",
         "title",
-        "article-info",
-        "list",
-        "icon",
-        "form",
-        "link"
+        "text",
+        "article-info"
       ]
     }
   ]
