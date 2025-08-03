@@ -8,8 +8,8 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "class": { "$ref": "classes" },
-              "rows": "2"
+              "columns": "2",
+              "rows": "1"
             }
           }
         }
@@ -23,17 +23,54 @@
         {
           "component": "multiselect",
           "name": "classes",
-          "label": "Select Ratio",
+          "value": "",
+          "label": "Style",
           "valueType": "string",
           "options": [
-            { "name": "70/30 Split", "value": "seventythirty" },
-            { "name": "30/70 Split", "value": "thirtyseventy" },
-            { "name": "50/50 Split", "value": "fiftyfifty" },
-            { "name": "25/75 Split", "value": "twentyfiveseventyfive" },
-            { "name": "75/25 Split", "value": "seventyfivetwentyfive" },
-            { "name": "40/60 Split", "value": "fortysixty" },
-            { "name": "60/40 Split", "value": "sixtyforty" }
+            "align-text-top",
+            "align-text-center",
+            "bottom-border-right",
+            "bg-color-right",
+            "features-card-left",
+            "itemscenter",
+            "thirtyseventy",
+            "seventythirty",
+            "text-white",
+            "columns-2-cols",
+            "columns-3-cols"
           ]
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
+        },
+        {
+          "component": "checkbox",
+          "name": "includeImage",
+          "value": false,
+          "label": "Include Image Column"
+        },
+        {
+          "component": "checkbox",
+          "name": "hasForm",
+          "value": false,
+          "label": "Include Form"
+        },
+        {
+          "component": "checkbox",
+          "name": "isBlogLayout",
+          "value": false,
+          "label": "Blog/News Layout"
         }
       ]
     }
@@ -41,7 +78,9 @@
   "filters": [
     {
       "id": "columns",
-      "components": ["column"]
+      "components": [
+        "column"
+      ]
     },
     {
       "id": "column",
@@ -50,9 +89,11 @@
         "image",
         "button",
         "title",
-        "article-info-new",
-        "embed",
-        "form"
+        "article-info",
+        "list",
+        "icon",
+        "form",
+        "link"
       ]
     }
   ]
