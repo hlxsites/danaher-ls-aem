@@ -762,35 +762,38 @@ const transformRelatedArticles = (main, document) => {
   });
 };
 
-const transformCardList = (main, document) => {
+  const transformCardList = (main, document) => {
   main.querySelectorAll('div.card-list.block').forEach((cardListBlock) => {
-    // Find card item wrappers (your screenshot shows them inside a flex-wrap container)
-    const rawCardsContainer = cardListBlock.querySelector('div.flex.flex-wrap');
-    if (!rawCardsContainer) return;
+    // Get filters (if present)
+    const filtersContainer = cardListBlock.querySelector('.flex.flex-wrap');
+    const filters = filtersContainer ? filtersContainer.cloneNode(true) : null;
 
-    const rawCards = Array.from(rawCardsContainer.children);
-    if (!rawCards.length) return;
+    // Get the <ul> card container
+    const ul = cardListBlock.querySelector('ul');
+    if (!ul) return;
 
-    // Build new card-list structure
+    const cards = Array.from(ul.children);
+    if (!cards.length) return;
+
     const cardListContainer = document.createElement('ul');
-    cardListContainer.className = 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3';
+    cardListContainer.className = ul.className;
 
-    rawCards.forEach((cardEl) => {
+    cards.forEach((card) => {
       const li = document.createElement('li');
       li.className = 'card-item';
 
       const cardContent = document.createElement('div');
       cardContent.className = 'card-content';
 
-      const img = cardEl.querySelector('img');
+      const img = card.querySelector('img');
       if (img) {
         const clonedImg = img.cloneNode(true);
         clonedImg.className = 'w-full object-cover';
         cardContent.appendChild(clonedImg);
       }
 
-      const title = cardEl.querySelector('h5')?.textContent.trim();
-      const link = cardEl.querySelector('a');
+      const title = card.querySelector('a')?.textContent.trim();
+      const link = card.querySelector('a');
       if (link && title) {
         const titleLink = document.createElement('a');
         titleLink.href = link.href;
@@ -799,7 +802,7 @@ const transformCardList = (main, document) => {
         cardContent.appendChild(titleLink);
       }
 
-      const meta = cardEl.querySelector('small')?.textContent.trim();
+      const meta = card.querySelector('p.text-sm')?.textContent.trim();
       if (meta) {
         const metaPara = document.createElement('p');
         metaPara.textContent = meta;
@@ -807,7 +810,7 @@ const transformCardList = (main, document) => {
         cardContent.appendChild(metaPara);
       }
 
-      const desc = cardEl.querySelector('p')?.textContent.trim();
+      const desc = card.querySelector('p.text-base')?.textContent.trim();
       if (desc) {
         const descPara = document.createElement('p');
         descPara.textContent = desc;
@@ -819,11 +822,24 @@ const transformCardList = (main, document) => {
       cardListContainer.appendChild(li);
     });
 
-    // Replace old card list content
+    // Get pagination (if present)
+    const pagination = cardListBlock.querySelector('nav');
+    const paginationClone = pagination ? pagination.cloneNode(true) : null;
+
+    // Build final structure
+    const newBlockWrapper = document.createElement('div');
+    newBlockWrapper.className = 'card-list block';
+
+    if (filters) newBlockWrapper.appendChild(filters);
+    newBlockWrapper.appendChild(cardListContainer);
+    if (paginationClone) newBlockWrapper.appendChild(paginationClone);
+
+    // Replace old content
     cardListBlock.innerHTML = '';
-    cardListBlock.appendChild(cardListContainer);
+    cardListBlock.appendChild(newBlockWrapper);
   });
 };
+
 
 
 const transformArticleInfo = (main, document) => {
