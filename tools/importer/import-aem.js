@@ -323,100 +323,36 @@ const transformTagsList = (main, document) => {
 
 /*** Columns Wrapper Start */
 
-function transformColumns(main, document) {
-  if (!main) return;
+const transformColumns = (main, document) => {
+  main.querySelectorAll('div.columns.block').forEach((columnsBlock) => {
+    const section = columnsBlock.closest('.section');
+    const columns = [...columnsBlock.firstElementChild.children];
+    const blockClasses = columnsBlock.className.split(' ').filter((c) => c !== 'block' && c !== 'columns');
 
-  const columnWrappers = main.querySelectorAll('.columns-wrapper');
+    // Build Universal Editor columns structure
+    const transformedBlock = document.createElement('div');
+    transformedBlock.className = 'block columns';
+    if (blockClasses.length) transformedBlock.classList.add(...blockClasses);
 
-  columnWrappers.forEach(wrapper => {
-    const block = wrapper.querySelector('.columns.block.columns-2-cols');
-    if (!block) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'columns-wrapper';
 
-    const innerWrapper = block.querySelector('.align-text-center');
-    if (!innerWrapper) return;
+    columns.forEach((column) => {
+      const newCol = document.createElement('div');
+      newCol.className = 'column';
 
-    const children = innerWrapper.querySelectorAll(':scope > div');
-    if (children.length !== 2) return;
-
-    let imageCol = null;
-    let textCol = null;
-
-    // Detect which column contains the image
-    children.forEach(col => {
-      if (col.querySelector('picture') && !imageCol) {
-        imageCol = col;
-      } else {
-        textCol = col;
-      }
-    });
-
-    // Create Section and Columns wrapper
-    const section = document.createElement('div');
-    section.className = 'section';
-
-    const columns = document.createElement('div');
-    columns.className = 'columns';
-
-    // Helper to create a column block
-    function createColumnBlock(...elements) {
-      const column = document.createElement('div');
-      column.className = 'column';
-      elements.forEach(el => el && column.appendChild(el));
-      return column;
-    }
-
-    // Add image column
-    if (imageCol && imageCol.querySelector('picture')) {
-      const img = imageCol.querySelector('picture').cloneNode(true);
-      const imgWrapper = document.createElement('div');
-      imgWrapper.className = 'image';
-      imgWrapper.appendChild(img);
-      columns.appendChild(createColumnBlock(imgWrapper));
-    }
-
-    // Add text column
-    if (textCol) {
-      const columnContents = [];
-
-      const heading = textCol.querySelector('h1, h2, h3, h4, h5, h6');
-      if (heading) {
-        const title = document.createElement('div');
-        title.className = 'title';
-        title.appendChild(heading.cloneNode(true));
-        columnContents.push(title);
-      }
-
-      const paragraphs = textCol.querySelectorAll('p');
-      paragraphs.forEach(p => {
-        if (p.textContent.trim()) {
-          const text = document.createElement('div');
-          text.className = 'text';
-          const pClone = document.createElement('p');
-          pClone.textContent = p.textContent;
-          text.appendChild(pClone);
-          columnContents.push(text);
-        }
+      // Move children from old column to new column container
+      Array.from(column.childNodes).forEach((child) => {
+        newCol.appendChild(child);
       });
 
-      if (columnContents.length) {
-        columns.appendChild(createColumnBlock(...columnContents));
-      }
-    }
+      wrapper.appendChild(newCol);
+    });
 
-    // If any column was added, append the structure
-    if (columns.children.length) {
-      section.appendChild(columns);
-      main.appendChild(section);
-    }
-
-    wrapper.remove();
+    transformedBlock.appendChild(wrapper);
+    columnsBlock.replaceWith(transformedBlock);
   });
-}
-
-window.addEventListener('load', () => {
-  const main = document.querySelector('main');
-  transformColumns(main, document);
-});
+};
 
 
 /*** Columns Wrapper End */
@@ -762,83 +698,83 @@ const transformRelatedArticles = (main, document) => {
   });
 };
 
-  const transformCardList = (main, document) => {
-  main.querySelectorAll('div.card-list.block').forEach((cardListBlock) => {
-    // Get filters (if present)
-    const filtersContainer = cardListBlock.querySelector('.flex.flex-wrap');
-    const filters = filtersContainer ? filtersContainer.cloneNode(true) : null;
+//   const transformCardList = (main, document) => {
+//   main.querySelectorAll('div.card-list.block').forEach((cardListBlock) => {
+//     // Get filters (if present)
+//     const filtersContainer = cardListBlock.querySelector('.flex.flex-wrap');
+//     const filters = filtersContainer ? filtersContainer.cloneNode(true) : null;
 
-    // Get the <ul> card container
-    const ul = cardListBlock.querySelector('ul');
-    if (!ul) return;
+//     // Get the <ul> card container
+//     const ul = cardListBlock.querySelector('ul');
+//     if (!ul) return;
 
-    const cards = Array.from(ul.children);
-    if (!cards.length) return;
+//     const cards = Array.from(ul.children);
+//     if (!cards.length) return;
 
-    const cardListContainer = document.createElement('ul');
-    cardListContainer.className = ul.className;
+//     const cardListContainer = document.createElement('ul');
+//     cardListContainer.className = ul.className;
 
-    cards.forEach((card) => {
-      const li = document.createElement('li');
-      li.className = 'card-item';
+//     cards.forEach((card) => {
+//       const li = document.createElement('li');
+//       li.className = 'card-item';
 
-      const cardContent = document.createElement('div');
-      cardContent.className = 'card-content';
+//       const cardContent = document.createElement('div');
+//       cardContent.className = 'card-content';
 
-      const img = card.querySelector('img');
-      if (img) {
-        const clonedImg = img.cloneNode(true);
-        clonedImg.className = 'w-full object-cover';
-        cardContent.appendChild(clonedImg);
-      }
+//       const img = card.querySelector('img');
+//       if (img) {
+//         const clonedImg = img.cloneNode(true);
+//         clonedImg.className = 'w-full object-cover';
+//         cardContent.appendChild(clonedImg);
+//       }
 
-      const title = card.querySelector('a')?.textContent.trim();
-      const link = card.querySelector('a');
-      if (link && title) {
-        const titleLink = document.createElement('a');
-        titleLink.href = link.href;
-        titleLink.textContent = title;
-        titleLink.className = 'block mt-2 font-semibold text-lg text-blue-700 hover:underline';
-        cardContent.appendChild(titleLink);
-      }
+//       const title = card.querySelector('a')?.textContent.trim();
+//       const link = card.querySelector('a');
+//       if (link && title) {
+//         const titleLink = document.createElement('a');
+//         titleLink.href = link.href;
+//         titleLink.textContent = title;
+//         titleLink.className = 'block mt-2 font-semibold text-lg text-blue-700 hover:underline';
+//         cardContent.appendChild(titleLink);
+//       }
 
-      const meta = card.querySelector('p.text-sm')?.textContent.trim();
-      if (meta) {
-        const metaPara = document.createElement('p');
-        metaPara.textContent = meta;
-        metaPara.className = 'text-sm text-gray-500 mt-1';
-        cardContent.appendChild(metaPara);
-      }
+//       const meta = card.querySelector('p.text-sm')?.textContent.trim();
+//       if (meta) {
+//         const metaPara = document.createElement('p');
+//         metaPara.textContent = meta;
+//         metaPara.className = 'text-sm text-gray-500 mt-1';
+//         cardContent.appendChild(metaPara);
+//       }
 
-      const desc = card.querySelector('p.text-base')?.textContent.trim();
-      if (desc) {
-        const descPara = document.createElement('p');
-        descPara.textContent = desc;
-        descPara.className = 'text-base mt-2';
-        cardContent.appendChild(descPara);
-      }
+//       const desc = card.querySelector('p.text-base')?.textContent.trim();
+//       if (desc) {
+//         const descPara = document.createElement('p');
+//         descPara.textContent = desc;
+//         descPara.className = 'text-base mt-2';
+//         cardContent.appendChild(descPara);
+//       }
 
-      li.appendChild(cardContent);
-      cardListContainer.appendChild(li);
-    });
+//       li.appendChild(cardContent);
+//       cardListContainer.appendChild(li);
+//     });
 
-    // Get pagination (if present)
-    const pagination = cardListBlock.querySelector('nav');
-    const paginationClone = pagination ? pagination.cloneNode(true) : null;
+//     // Get pagination (if present)
+//     const pagination = cardListBlock.querySelector('nav');
+//     const paginationClone = pagination ? pagination.cloneNode(true) : null;
 
-    // Build final structure
-    const newBlockWrapper = document.createElement('div');
-    newBlockWrapper.className = 'card-list block';
+//     // Build final structure
+//     const newBlockWrapper = document.createElement('div');
+//     newBlockWrapper.className = 'card-list block';
 
-    if (filters) newBlockWrapper.appendChild(filters);
-    newBlockWrapper.appendChild(cardListContainer);
-    if (paginationClone) newBlockWrapper.appendChild(paginationClone);
+//     if (filters) newBlockWrapper.appendChild(filters);
+//     newBlockWrapper.appendChild(cardListContainer);
+//     if (paginationClone) newBlockWrapper.appendChild(paginationClone);
 
-    // Replace old content
-    cardListBlock.innerHTML = '';
-    cardListBlock.appendChild(newBlockWrapper);
-  });
-};
+//     // Replace old content
+//     cardListBlock.innerHTML = '';
+//     cardListBlock.appendChild(newBlockWrapper);
+//   });
+// };
 
 
 
@@ -941,7 +877,7 @@ export default {
     transformArticleInfo(main, document);
     transformTagsList(main, document);
     transformRelatedArticles(main, document);
-    transformCardList(main, document);
+    // transformCardList(main, document);
 
     const metadata = getMetadata(document);
     const metadataBlock = createBlock(document, {
