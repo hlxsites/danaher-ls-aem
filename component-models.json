@@ -1,100 +1,5 @@
 [
   {
-    "id": "page-metadata",
-    "fields": [
-      {
-        "component": "container",
-        "label": "Fieldset",
-        "fields": [
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "label": "Title",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "description",
-            "label": "Description",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "keywords",
-            "multi": true,
-            "label": "Keywords",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "article:Tag",
-            "label": "article:tag",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "path",
-            "label": ":path",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "template",
-            "label": "Template",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "brand",
-            "label": "Brand",
-            "value": ""
-          },
-          {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "creationdate",
-            "label": "Creation Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
-          },
-          {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "updatedate",
-            "label": "Update Date",
-            "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
-            "valueFormat": null,
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "fullcategory",
-            "label": "Full Category",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "viewport",
-            "label": "View Port",
-            "value": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "image",
     "fields": [
       {
@@ -410,14 +315,73 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "card-list",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
         "name": "tagName",
-        "value": "",
-        "label": "Tag Name"
+        "value": "topics",
+        "label": "Tag Category (e.g. topics, solutions)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "options": [
+          {
+            "label": "Default (Articles)",
+            "value": ""
+          },
+          {
+            "label": "Application",
+            "value": "application"
+          },
+          {
+            "label": "Info",
+            "value": "info"
+          },
+          {
+            "label": "Library",
+            "value": "library"
+          },
+          {
+            "label": "New Lab",
+            "value": "new-lab"
+          }
+        ]
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "pagination",
+        "label": "Enable Pagination",
+        "value": true
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "filters",
+        "label": "Enable Filters",
+        "value": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceIndex",
+        "label": "Custom Index Path",
+        "value": "/us/en/article-index.json"
       }
     ]
   },
