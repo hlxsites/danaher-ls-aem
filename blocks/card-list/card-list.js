@@ -10,243 +10,198 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-let tagName = '';
-switch (getMetadata('template')) {
-  case 'wsaw':
-    tagName = 'solutions';
-    break;
-  case 'promotions':
-    tagName = 'topics';
-    break;
-  default:
-    tagName = 'topics';
-}
+// -------------------------
+// CONFIG / METADATA
+// -------------------------
+const template = getMetadata('template');
+const tagNameMap = { wsaw: 'solutions', promotions: 'topics' };
+const tagName = tagNameMap[template] || 'topics';
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
-const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
+let indexTemplate = window.location.href.includes('new-lab') ? 'new-lab' : template;
+const indexTypeMap = { wsaw: 'wsaw', 'new-lab': 'promotions' };
+const indexType = indexTypeMap[indexTemplate] || 'article';
 
-const createTopicUrl = (currentUrl, keyword = '') => {
-  if (currentUrl.indexOf(tagName) > -1) {
-    return currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
-  }
-  return `${currentUrl.replace('.html', '')}/${tagName}/${toClassName(keyword).toLowerCase()}`;
+const getSelectionFromUrl = () =>
+  window.location.pathname.includes(tagName)
+    ? toClassName(window.location.pathname.replace('.html', '').split('/').pop())
+    : '';
+
+const getPageFromUrl = () =>
+  parseInt(toClassName(new URLSearchParams(window.location.search).get('page')), 10) || 1;
+
+const createTopicUrl = (base, keyword = '') => {
+  const keywordSlug = toClassName(keyword).toLowerCase();
+  return base.includes(tagName)
+    ? `${base.substring(0, base.lastIndexOf('/') + 1)}${keywordSlug}`
+    : `${base.replace('.html', '')}/${tagName}/${keywordSlug}`;
 };
 
 const patchBannerHeading = () => {
-  document.querySelector('body .banner h1').textContent = getMetadata('heading');
+  const heading = getMetadata('heading');
+  if (heading) {
+    const el = document.querySelector('body .banner h1');
+    if (el) el.textContent = heading;
+  }
 };
 
+// -------------------------
+// PAGINATION
+// -------------------------
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
-  const link = a(
-    {
-      href: newUrl.toString(),
-      class:
-        'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700',
-    },
-    label || page,
-  );
-  if (current) {
-    link.setAttribute('aria-current', 'page');
-    link.classList.add('text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2');
-  } else {
-    link.classList.add('text-danahergray-700');
-  }
+  const classes = [
+    'font-medium', 'text-sm', 'leading-5', 'pt-4', 'px-4',
+    'items-center', 'inline-flex',
+    ...(current
+      ? ['text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2']
+      : ['text-danahergray-700']),
+  ];
+  const link = a({ href: newUrl.toString(), class: classes.join(' ') }, label || page);
+  if (current) link.setAttribute('aria-current', 'page');
   return link;
 };
 
 const createPagination = (entries, page, limit) => {
-  const paginationNav = document.createElement('nav');
-  paginationNav.className = 'flex items-center justify-between border-t py-4 md:py-0 mt-8 md:mt-12';
+  if (entries.length <= limit) return div();
 
-  if (entries.length > limit) {
-    const maxPages = Math.ceil(entries.length / limit);
-    const paginationPrev = div({ class: 'flex flex-1 w-0 -mt-px' });
-    const paginationPages = div({ class: 'hidden md:flex grow justify-center w-0 -mt-px' });
-    const paginationNext = div({ class: 'flex flex-1 w-0 -mt-px justify-end' });
+  const maxPages = Math.ceil(entries.length / limit);
+  const paginationPrev = div({ class: 'flex flex-1 w-0 -mt-px' });
+  const paginationPages = div({ class: 'hidden md:flex grow justify-center w-0 -mt-px' });
+  const paginationNext = div({ class: 'flex flex-1 w-0 -mt-px justify-end' });
 
-    if (page > 1) {
-      paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
-    }
-    for (let i = 1; i <= maxPages; i += 1) {
-      if (i === 1 || i === maxPages || (i >= page - 2 && i <= page + 2)) {
-        paginationPages.append(createPaginationLink(i, i, i === page));
-      } else if (
-        paginationPages.lastChild && !paginationPages.lastChild.classList.contains('ellipsis')
-      ) {
-        paginationPages.append(
-          span(
-            { class: 'ellipsis font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' },
-            '...',
-          ),
-        );
-      }
-    }
-    if (page < maxPages) {
-      paginationNext.append(createPaginationLink(page + 1, 'Next →'));
-    }
+  if (page > 1) paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
 
-    paginationNav.append(paginationPrev, paginationPages, paginationNext);
+  for (let i = 1; i <= maxPages; i++) {
+    if (i === 1 || i === maxPages || (i >= page - 2 && i <= page + 2)) {
+      paginationPages.append(createPaginationLink(i, i, i === page));
+    } else if (
+      paginationPages.lastChild && !paginationPages.lastChild.classList.contains('ellipsis')
+    ) {
+      paginationPages.append(
+        span({ class: 'ellipsis font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'),
+      );
+    }
   }
-  const listPagination = div({ class: 'mx-auto' }, paginationNav);
-  return listPagination;
+
+  if (page < maxPages) paginationNext.append(createPaginationLink(page + 1, 'Next →'));
+
+  return div({ class: 'mx-auto flex items-center justify-between border-t py-4 md:py-0 mt-8 md:mt-12' },
+    paginationPrev, paginationPages, paginationNext);
 };
 
+// -------------------------
+// FILTERS
+// -------------------------
 export function createFilters(articles, viewAll = false) {
-  // collect tag filters
-  const allKeywords = articles.map((item) => {
-    // Check if item[tagName] exists
-    if (item[tagName]) {
-      return item[tagName].replace(/,\s*/g, ',').split(',');
-    }
-    return [];
-  });
-  const keywords = new Set([].concat(...allKeywords));
-  keywords.delete('');
-  keywords.delete('Blog'); // filter out generic blog tag
-  keywords.delete('News'); // filter out generic news tag
+  const allTags = new Set(
+    articles.flatMap(article =>
+      article[tagName]?.replace(/,\s*/g, ',').split(',') || []
+    ).filter(tag => tag && tag !== 'Blog' && tag !== 'News')
+  );
 
-  // render tag cloud
-  const newUrl = new URL(window.location);
-  newUrl.searchParams.delete('page');
-  if (window.location.pathname.indexOf(tagName) > -1) {
-    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf(`/${tagName}/`));
+  const url = new URL(window.location);
+  url.searchParams.delete('page');
+  if (window.location.pathname.includes(tagName)) {
+    url.pathname = window.location.pathname.split(`/${tagName}/`)[0];
   }
-  const tags = viewAll ? div(
-    { class: 'flex flex-wrap gap-2 gap-y-0 mb-4' },
-    a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
-        href: makePublicUrl(newUrl.toString()),
-      },
-      'View All',
-    ),
-  ) : div({ class: 'flex flex-wrap gap-2 gap-y-0 mb-4' });
 
-  [...keywords].sort().forEach((keyword) => {
-    let currentUrl;
-    if (viewAll) {
-      currentUrl = window.location.pathname;
-    } else {
-      currentUrl = window.location.pathname.split('/');
-      currentUrl.pop();
-      currentUrl = currentUrl.join('/');
-    }
-    newUrl.pathname = createTopicUrl(currentUrl, keyword);
-    const tagAnchor = a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
-        href: makePublicUrl(newUrl.toString()),
-      },
-      keyword,
-    );
-    tags.append(tagAnchor);
+  const tags = div({ class: 'flex flex-wrap gap-2 gap-y-0 mb-4' });
+
+  if (viewAll) {
+    tags.append(a({
+      class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+      href: makePublicUrl(url.toString()),
+    }, 'View All'));
+  }
+
+  [...allTags].sort().forEach(tag => {
+    const base = viewAll ? window.location.pathname : window.location.pathname.split('/').slice(0, -1).join('/');
+    url.pathname = createTopicUrl(base, tag);
+    const tagEl = a({
+      class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+      href: makePublicUrl(url.toString()),
+    }, tag);
+    tags.append(tagEl);
   });
-  [...tags.children].forEach((tag) => {
-    const url = new URL(tag.href);
-    if (url.pathname === window.location.pathname) {
+
+  [...tags.children].forEach(tag => {
+    const tagUrl = new URL(tag.href);
+    if (tagUrl.pathname === window.location.pathname) {
       tag.classList.add('bg-danaherpurple-500', 'text-white');
       tag.setAttribute('aria-current', 'tag');
-    } else {
-      tag.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
     }
   });
 
-  // patch banner heading with selected tag only on topics pages
-  if (getMetadata('heading') && window.location.pathname.indexOf(tagName) > -1) {
-    patchBannerHeading();
-  }
-
+  patchBannerHeading();
   return tags;
 }
 
-let indexTemplate = getMetadata('template');
-if (window.location.href.includes('new-lab')) {
-  indexTemplate = 'new-lab';
-}
-
+// -------------------------
+// MAIN BLOCK
+// -------------------------
 export default async function decorate(block) {
-  let indexType = '';
-  switch (indexTemplate) {
-    case 'wsaw':
-      indexType = 'wsaw';
-      break;
-    case 'new-lab':
-      indexType = 'promotions';
-      break;
-    default:
-      indexType = 'article';
-  }
-
-  block.setAttribute('id', 'card-list');
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
-  block.textContent = '';
-  // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
-  // fetch and sort all articles
+  block.setAttribute('id', 'card-list');
+  block.textContent = '';
+
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
-    .filter(({ type }) => type.toLowerCase() === articleType)
-    .filter((article) => {
-      if (article.path) return !article.path.includes('/topics-template');
-      return true;
-    })
+    .filter(({ type }) => type?.toLowerCase() === articleType)
+    .filter(({ path }) => !path?.includes('/topics-template'))
     .all();
 
-  let filteredArticles = articles;
-  const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
-  if (activeTagFilter) {
-    filteredArticles = articles.filter(
-      (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
+  let filtered = [...articles];
+
+  const tagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
+  if (tagFilter) {
+    filtered = filtered.filter(a =>
+      toClassName(a[tagName])?.toLowerCase().includes(tagFilter)
     );
   }
-  if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
-  // render cards application style
-  if (articleType === 'application' || articleType === 'info') {
-    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    const cardList = ul({
-      class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-    });
-    filteredArticles.forEach((article) => {
-      cardList.appendChild(createApplicationCard(article));
-    });
-    block.append(cardList);
-  // render cards article style
-  } else {
-    if (articleType === 'library') {
-      filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    } else {
-      filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+
+  if (articleType !== 'new-lab') buildItemListSchema(filtered, 'resources');
+
+  // -------------------------
+  // CARD LIST GENERATION
+  // -------------------------
+  const page = getPageFromUrl();
+  const limit = 18;
+  const start = (page - 1) * limit;
+  const paginatedArticles = filtered.slice(start, start + limit);
+
+  const gridClass =
+    articleType === 'application' || articleType === 'info'
+      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+
+  const cardList = ul({
+    class: `container grid max-w-7xl w-full mx-auto gap-6 ${gridClass} px-4 sm:px-0 justify-items-center mt-3 mb-3`,
+  });
+
+  paginatedArticles.forEach((article, idx) => {
+    let card;
+    switch (articleType) {
+      case 'library':
+        card = createLibraryCard(article, idx === 0);
+        break;
+      case 'new-lab':
+        card = createLabCard(article, idx === 0);
+        break;
+      case 'application':
+      case 'info':
+        card = createApplicationCard(article);
+        break;
+      default:
+        card = createArticleCard(article, idx === 0);
     }
+    cardList.appendChild(card);
+  });
 
-    let page = parseInt(getPageFromUrl(), 10);
-    page = Number.isNaN(page) ? 1 : page;
-    const limitPerPage = 18;
-    const start = (page - 1) * limitPerPage;
-    const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+  const filters = createFilters(articles, true);
+  const pagination = createPagination(filtered, page, limit);
 
-    const cardList = ul({
-      class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-    });
-    articlesToDisplay.forEach((article, index) => {
-      if (articleType === 'library') {
-        cardList.appendChild(createLibraryCard(article, index === 0));
-      } if (articleType === 'new-lab') {
-        cardList.appendChild(createLabCard(article, index === 0));
-      } else if (articleType !== 'library') {
-        cardList.appendChild(createArticleCard(article, index === 0));
-      }
-    });
-
-    // render pagination and filters
-    const filterTags = createFilters(articles, true);
-    const paginationElements = createPagination(filteredArticles, page, limitPerPage);
-    block.append(filterTags, cardList, paginationElements);
-  }
+  block.append(filters, cardList, pagination);
 }
