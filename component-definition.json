@@ -336,23 +336,61 @@
           }
         },
         {
-          "title": "Article Info",
+          "title": "Article-Info",
           "id": "article-info",
           "plugins": {},
           "model": {
             "fields": [
               {
                 "component": "text",
-                "name": "author",
-                "label": "Author",
                 "valueType": "string",
+                "name": "authorName",
+                "label": "Author Name",
                 "value": ""
               },
               {
-                "component": "date",
-                "name": "publishedDate",
-                "label": "Published Date",
+                "component": "text",
                 "valueType": "string",
+                "name": "authorTitle",
+                "label": "Author Title",
+                "value": ""
+              },
+              {
+                "component": "reference",
+                "valueType": "Picture",
+                "name": "image",
+                "label": "Image",
+                "multi": false,
+                "value": ""
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "imageAlt",
+                "label": "Alt Text",
+                "value": ""
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "articleOpco",
+                "label": "Article Opco",
+                "value": ""
+              },
+              {
+                "component": "date-time",
+                "valueType": "date-time",
+                "name": "publishDate",
+                "label": "Date",
+                "displayFormat": null,
+                "valueFormat": null,
+                "value": ""
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "readingTime",
+                "label": "Reading Time",
                 "value": ""
               }
             ]
