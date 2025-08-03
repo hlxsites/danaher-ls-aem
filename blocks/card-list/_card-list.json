@@ -33,11 +33,11 @@
           "name": "articleType",
           "label": "Article Type",
           "options": [
-            { "label": "Default (Articles)", "value": "" },
-            { "label": "Application", "value": "application" },
-            { "label": "Info", "value": "info" },
-            { "label": "Library", "value": "library" },
-            { "label": "New Lab", "value": "new-lab" }
+            { "name": "Default (Articles)", "value": "" },
+            { "name": "Application", "value": "application" },
+            { "name": "Info", "value": "info" },
+            { "name": "Library", "value": "library" },
+            { "name": "New Lab", "value": "new-lab" }
           ]
         },
         {

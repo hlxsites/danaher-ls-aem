@@ -341,23 +341,23 @@
         "label": "Article Type",
         "options": [
           {
-            "label": "Default (Articles)",
+            "name": "Default (Articles)",
             "value": ""
           },
           {
-            "label": "Application",
+            "name": "Application",
             "value": "application"
           },
           {
-            "label": "Info",
+            "name": "Info",
             "value": "info"
           },
           {
-            "label": "Library",
+            "name": "Library",
             "value": "library"
           },
           {
-            "label": "New Lab",
+            "name": "New Lab",
             "value": "new-lab"
           }
         ]
