@@ -10,55 +10,42 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-// -------------------------
-// CONFIG / METADATA
-// -------------------------
-const template = getMetadata('template');
-const tagNameMap = { wsaw: 'solutions', promotions: 'topics' };
-const tagName = tagNameMap[template] || 'topics';
-
-let indexTemplate = window.location.href.includes('new-lab') ? 'new-lab' : template;
-const indexTypeMap = { wsaw: 'wsaw', 'new-lab': 'promotions' };
-const indexType = indexTypeMap[indexTemplate] || 'article';
-
-const getSelectionFromUrl = () =>
+// Helpers
+const getSelectionFromUrl = (tagName) => (
   window.location.pathname.includes(tagName)
     ? toClassName(window.location.pathname.replace('.html', '').split('/').pop())
-    : '';
-
-const getPageFromUrl = () =>
-  parseInt(toClassName(new URLSearchParams(window.location.search).get('page')), 10) || 1;
-
-const createTopicUrl = (base, keyword = '') => {
-  const keywordSlug = toClassName(keyword).toLowerCase();
-  return base.includes(tagName)
-    ? `${base.substring(0, base.lastIndexOf('/') + 1)}${keywordSlug}`
-    : `${base.replace('.html', '')}/${tagName}/${keywordSlug}`;
+    : ''
+);
+const getPageFromUrl = () => parseInt(toClassName(new URLSearchParams(window.location.search).get('page')), 10) || 1;
+const createTopicUrl = (currentUrl, keyword = '', tagName = '') => {
+  if (currentUrl.includes(tagName)) {
+    return `${currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1)}${toClassName(keyword)}`;
+  }
+  return `${currentUrl.replace('.html', '')}/${tagName}/${toClassName(keyword)}`;
 };
-
 const patchBannerHeading = () => {
   const heading = getMetadata('heading');
   if (heading) {
-    const el = document.querySelector('body .banner h1');
-    if (el) el.textContent = heading;
+    const h1 = document.querySelector('body .banner h1');
+    if (h1) h1.textContent = heading;
   }
 };
 
-// -------------------------
-// PAGINATION
-// -------------------------
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
-  const classes = [
-    'font-medium', 'text-sm', 'leading-5', 'pt-4', 'px-4',
-    'items-center', 'inline-flex',
-    ...(current
-      ? ['text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2']
-      : ['text-danahergray-700']),
-  ];
-  const link = a({ href: newUrl.toString(), class: classes.join(' ') }, label || page);
-  if (current) link.setAttribute('aria-current', 'page');
+  const link = a({
+    href: newUrl.toString(),
+    class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700',
+  }, label || page);
+
+  if (current) {
+    link.setAttribute('aria-current', 'page');
+    link.classList.add('text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2');
+  } else {
+    link.classList.add('text-danahergray-700');
+  }
+
   return link;
 };
 
@@ -70,138 +57,164 @@ const createPagination = (entries, page, limit) => {
   const paginationPages = div({ class: 'hidden md:flex grow justify-center w-0 -mt-px' });
   const paginationNext = div({ class: 'flex flex-1 w-0 -mt-px justify-end' });
 
-  if (page > 1) paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
+  if (page > 1) {
+    paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
+  }
 
-  for (let i = 1; i <= maxPages; i++) {
+  for (let i = 1; i <= maxPages; i += 1) {
     if (i === 1 || i === maxPages || (i >= page - 2 && i <= page + 2)) {
       paginationPages.append(createPaginationLink(i, i, i === page));
     } else if (
       paginationPages.lastChild && !paginationPages.lastChild.classList.contains('ellipsis')
     ) {
       paginationPages.append(
-        span({ class: 'ellipsis font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'),
+        span(
+          { class: 'ellipsis font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' },
+          '...',
+        ),
       );
     }
   }
 
-  if (page < maxPages) paginationNext.append(createPaginationLink(page + 1, 'Next →'));
+  if (page < maxPages) {
+    paginationNext.append(createPaginationLink(page + 1, 'Next →'));
+  }
 
-  return div({ class: 'mx-auto flex items-center justify-between border-t py-4 md:py-0 mt-8 md:mt-12' },
-    paginationPrev, paginationPages, paginationNext);
+  return div({ class: 'mx-auto' },
+    div({ class: 'flex items-center justify-between border-t py-4 md:py-0 mt-8 md:mt-12' },
+      paginationPrev, paginationPages, paginationNext,
+    ),
+  );
 };
 
-// -------------------------
-// FILTERS
-// -------------------------
-export function createFilters(articles, viewAll = false) {
-  const allTags = new Set(
-    articles.flatMap(article =>
-      article[tagName]?.replace(/,\s*/g, ',').split(',') || []
-    ).filter(tag => tag && tag !== 'Blog' && tag !== 'News')
+export function createFilters(articles, tagName, viewAll = false) {
+  const allKeywords = articles.flatMap((item) =>
+    item[tagName]?.replace(/,\s*/g, ',').split(',') || [],
   );
 
-  const url = new URL(window.location);
-  url.searchParams.delete('page');
+  const keywords = new Set(allKeywords);
+  keywords.delete('');
+  keywords.delete('Blog');
+  keywords.delete('News');
+
+  const newUrl = new URL(window.location);
+  newUrl.searchParams.delete('page');
   if (window.location.pathname.includes(tagName)) {
-    url.pathname = window.location.pathname.split(`/${tagName}/`)[0];
+    newUrl.pathname = window.location.pathname.split(`/${tagName}/`)[0];
   }
 
   const tags = div({ class: 'flex flex-wrap gap-2 gap-y-0 mb-4' });
 
   if (viewAll) {
-    tags.append(a({
-      class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
-      href: makePublicUrl(url.toString()),
-    }, 'View All'));
+    tags.append(
+      a({
+        href: makePublicUrl(newUrl.toString()),
+        class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+      }, 'View All'),
+    );
   }
 
-  [...allTags].sort().forEach(tag => {
-    const base = viewAll ? window.location.pathname : window.location.pathname.split('/').slice(0, -1).join('/');
-    url.pathname = createTopicUrl(base, tag);
-    const tagEl = a({
-      class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
-      href: makePublicUrl(url.toString()),
-    }, tag);
-    tags.append(tagEl);
-  });
+  [...keywords].sort().forEach((keyword) => {
+    const currentUrl = viewAll ? window.location.pathname : window.location.pathname.split('/').slice(0, -1).join('/');
+    newUrl.pathname = createTopicUrl(currentUrl, keyword, tagName);
+    const tag = a({
+      href: makePublicUrl(newUrl.toString()),
+      class: 'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold hover:text-white hover:bg-danaherpurple-500',
+    }, keyword);
 
-  [...tags.children].forEach(tag => {
-    const tagUrl = new URL(tag.href);
-    if (tagUrl.pathname === window.location.pathname) {
+    const url = new URL(tag.href);
+    if (url.pathname === window.location.pathname) {
       tag.classList.add('bg-danaherpurple-500', 'text-white');
       tag.setAttribute('aria-current', 'tag');
+    } else {
+      tag.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
     }
+
+    tags.append(tag);
   });
 
   patchBannerHeading();
   return tags;
 }
 
-// -------------------------
-// MAIN BLOCK
-// -------------------------
+// ⬇️ FINAL decorate function
 export default async function decorate(block) {
-  const articleType = block.classList.length > 2 ? block.classList[1] : '';
-  if (articleType) block.classList.remove(articleType);
+  // Get config from dataset (UE injected)
+  const {
+    tagName: dataTag = 'topics',
+    articleType: dataType = '',
+    pagination: rawPagination = 'true',
+    filters: rawFilters = 'true',
+    sourceIndex = '/us/en/article-index.json',
+  } = block.dataset;
 
-  block.setAttribute('id', 'card-list');
+  const tagName = dataTag;
+  const articleType = dataType.toLowerCase();
+  const enablePagination = rawPagination === 'true';
+  const enableFilters = rawFilters === 'true';
+
+  block.id = 'card-list';
   block.textContent = '';
 
-  const articles = await ffetch(`/us/en/${indexType}-index.json`)
+  const articles = await ffetch(sourceIndex)
     .chunks(500)
-    .filter(({ type }) => type?.toLowerCase() === articleType)
-    .filter(({ path }) => !path?.includes('/topics-template'))
+    .filter(({ type }) => type.toLowerCase() === articleType)
+    .filter((article) => !article.path?.includes('/topics-template'))
     .all();
 
-  let filtered = [...articles];
+  // filter by tag if applicable
+  const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl(tagName) : '';
+  const filteredArticles = activeTagFilter
+    ? articles.filter((item) => toClassName(item[tagName] || '').includes(activeTagFilter))
+    : articles;
 
-  const tagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
-  if (tagFilter) {
-    filtered = filtered.filter(a =>
-      toClassName(a[tagName])?.toLowerCase().includes(tagFilter)
-    );
+  if (articleType !== 'new-lab') {
+    buildItemListSchema(filteredArticles, 'resources');
   }
 
-  if (articleType !== 'new-lab') buildItemListSchema(filtered, 'resources');
+  const filtersEl = enableFilters ? createFilters(articles, tagName, true) : div();
 
-  // -------------------------
-  // CARD LIST GENERATION
-  // -------------------------
-  const page = getPageFromUrl();
-  const limit = 18;
-  const start = (page - 1) * limit;
-  const paginatedArticles = filtered.slice(start, start + limit);
-
-  const gridClass =
-    articleType === 'application' || articleType === 'info'
-      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-
-  const cardList = ul({
-    class: `container grid max-w-7xl w-full mx-auto gap-6 ${gridClass} px-4 sm:px-0 justify-items-center mt-3 mb-3`,
-  });
-
-  paginatedArticles.forEach((article, idx) => {
-    let card;
-    switch (articleType) {
-      case 'library':
-        card = createLibraryCard(article, idx === 0);
-        break;
-      case 'new-lab':
-        card = createLabCard(article, idx === 0);
-        break;
-      case 'application':
-      case 'info':
-        card = createApplicationCard(article);
-        break;
-      default:
-        card = createArticleCard(article, idx === 0);
+  // Sort + Render Cards
+  let cardList;
+  let paginationEl = div();
+  if (['application', 'info'].includes(articleType)) {
+    filteredArticles.sort((a, b) => a.title.localeCompare(b.title));
+    cardList = ul({
+      class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    filteredArticles.forEach((article) => {
+      cardList.append(createApplicationCard(article));
+    });
+  } else {
+    if (articleType === 'library') {
+      filteredArticles.sort((a, b) => a.title.localeCompare(b.title));
+    } else {
+      filteredArticles.sort((a, b) => b.publishDate - a.publishDate);
     }
-    cardList.appendChild(card);
-  });
 
-  const filters = createFilters(articles, true);
-  const pagination = createPagination(filtered, page, limit);
+    const page = getPageFromUrl();
+    const limit = 18;
+    const start = (page - 1) * limit;
+    const displayArticles = filteredArticles.slice(start, start + limit);
 
-  block.append(filters, cardList, pagination);
+    cardList = ul({
+      class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+
+    displayArticles.forEach((article, idx) => {
+      if (articleType === 'library') {
+        cardList.append(createLibraryCard(article, idx === 0));
+      } else if (articleType === 'new-lab') {
+        cardList.append(createLabCard(article, idx === 0));
+      } else {
+        cardList.append(createArticleCard(article, idx === 0));
+      }
+    });
+
+    if (enablePagination) {
+      paginationEl = createPagination(filteredArticles, page, limit);
+    }
+  }
+
+  block.append(filtersEl, cardList, paginationEl);
 }
