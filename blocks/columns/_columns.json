@@ -162,35 +162,5 @@
         "article-info"
       ]
     }
-  ],
-  "content": {
-    "columns": [
-      [
-        {
-          "component": "title",
-          "text": "Standardizing Organoids for Drug Discovery"
-        },
-        {
-          "component": "image",
-          "src": "/content/dam/danaher/lifesciences/blog/organoids-drug-discovery-hero.jpg"
-        }
-      ],
-      [
-        {
-          "component": "text",
-          "content": "Organoids are miniature 3D structures that mimic organs, revolutionizing drug discovery by providing more predictive models."
-        },
-        {
-          "component": "button",
-          "label": "Read More",
-          "url": "/us/en/blog/standardizing-organoids-drug-discovery-molecular-devices.html"
-        },
-        {
-          "component": "article-info",
-          "author": "Jane Doe",
-          "publishedDate": "2025-07-15"
-        }
-      ]
-    ]
-  }
+  ]
 }
