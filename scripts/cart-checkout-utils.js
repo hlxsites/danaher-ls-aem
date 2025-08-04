@@ -2376,8 +2376,6 @@ get price type if its net or gross
 }
 
 export async function updateCheckoutSummary() {
-  console.log('updating checkout summarey: ');
-  
   const checkoutSummaryWrapper = document.querySelector(
     '#checkoutSummaryContainer',
   );
@@ -2394,7 +2392,7 @@ export async function updateCheckoutSummary() {
 export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
-    if (type == 'delete-item') {
+    if (type === 'delete-item') {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
@@ -2404,11 +2402,11 @@ export const cartItemsContainer = (cartItemValue) => {
       if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
-          const response = getProductDetailsObject.data.map(
+          getProductDetailsObject.data.forEach(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              const str = `product-Quantity-${opcoBe[0]}`;
-              const parts = str.split('-');
+              // const str = `product-Quantity-${opcoBe[0]}`;
+              // const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
@@ -2456,8 +2454,8 @@ export const cartItemsContainer = (cartItemValue) => {
     }),
   );
   deleteButton.addEventListener('click', (event) => {
-    const input = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', input, '');
+    const inputValue = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', inputValue, '');
   });
   const inputBox = input({
     // id: cartItemValue.lineItemId,
@@ -2472,37 +2470,26 @@ export const cartItemsContainer = (cartItemValue) => {
   });
   inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const input = selectedDiv.querySelector('input');
-    const productItem = input.parentElement.parentElement;
+    const inputItem = selectedDiv.querySelector('input');
+    const productItem = inputItem.parentElement.parentElement;
 
     const enteredValue = event.target.value;
-    if (enteredValue < Number(input.min)) {
+    if (enteredValue < Number(inputItem.min)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
       );
-    } else if (enteredValue > Number(input.max)) {
+    } else if (enteredValue > Number(inputItem.max)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', input, event.target.value);
+      modifyCart('quantity-added', inputItem, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
-  const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-    cartItemValue.productName,
-    {
-      href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-      ),
-      title: cartItemValue.productName,
-      class: 'justify-center',
-    },
-  );
   const unitPriceDiv = () => {
     if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
       return div(
