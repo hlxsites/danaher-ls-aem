@@ -2,7 +2,7 @@ import { div } from '../../scripts/dom-builder.js';
 import cartItem from '../cartlanding/cartItem.js';
 import { checkoutSummary } from '../../scripts/cart-checkout-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
-import { baseURL } from '../../scripts/common-utils.js';
+import { baseURL, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { postApiData } from '../../scripts/api-utils.js';
 
 const orderSubmitted = async () => {
@@ -60,6 +60,7 @@ const orderSubmitted = async () => {
 };
 
 export default async function decorate(block) {
+  showPreLoader();
   const params = new URLSearchParams(window.location.search);
   if (params.get('orderId')) {
     let orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
@@ -316,11 +317,13 @@ export default async function decorate(block) {
     deleteButtondiv.forEach((element) => {
       element.parentElement.remove();
     });
+    removePreLoader();
     block.append(orderConfirmationWrapper);
   } else {
     const noPageFound = div({
       class: 'justify-start text-4xl font-bold leading-[48px]',
     }, '404: PAGE NOT FOUND');
+    removePreLoader();
     block.append(noPageFound);
   }
 }
