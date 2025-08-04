@@ -104,7 +104,7 @@ export default async function decorate(block) {
   }
   // === LEFT SECTION ===
   const leftContent = div({
-    class: 'flex flex-col gap-4 max-w-[567px]',
+    class: 'flex flex-col gap-4 max-w-[567px] items-start',
   });
 
   if (opcoBannerTitle) {
@@ -123,7 +123,7 @@ export default async function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[172px] mb-2 md:mb-8 h-auto',
+        class: 'max-w-[294px] max-h-[120px] object-contain mb-2 md:mb-8 h-auto',
       }),
     );
   }

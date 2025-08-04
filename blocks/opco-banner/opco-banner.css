@@ -139,6 +139,22 @@
   height: 100%
 }
 
+.opco-banner-wrapper :is(.max-h-\[172px\]) {
+  max-height: 172px
+}
+
+.opco-banner-wrapper :is(.max-h-\[80px\]) {
+  max-height: 80px
+}
+
+.opco-banner-wrapper :is(.max-h-\[120px\]) {
+  max-height: 120px
+}
+
+.opco-banner-wrapper :is(.max-h-\[100px\]) {
+  max-height: 100px
+}
+
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
   min-height: 400px
 }
@@ -167,6 +183,10 @@
   width: 100%
 }
 
+.opco-banner-wrapper :is(.w-\[294px\]) {
+  width: 294px
+}
+
 .opco-banner-wrapper :is(.max-w-\[344px\]) {
   max-width: 344px
 }
@@ -186,6 +206,10 @@
 .opco-banner-wrapper :is(.max-w-max) {
   max-width: -moz-max-content;
   max-width: max-content
+}
+
+.opco-banner-wrapper :is(.max-w-\[294px\]) {
+  max-width: 294px
 }
 
 .opco-banner-wrapper :is(.flex-shrink-0) {
