@@ -424,7 +424,10 @@ const fileMappings = [
     wrapper: 'pdp-faqs-wrapper',
   },
   {
-    content: './blocks/pdp-carousel/pdp-carousel.js',
+    content: [
+      './blocks/pdp-carousel/pdp-carousel.js',
+      './blocks/pdp-carousel/gridData.js',
+    ],
     output: './blocks/pdp-carousel/pdp-carousel.css',
     wrapper: 'pdp-carousel-wrapper',
   },
