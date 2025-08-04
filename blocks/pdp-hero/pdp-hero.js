@@ -601,7 +601,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-          ' border-t border-b border-gray-300 inline-flex justify-start items-center',
+          'w-full border-t border-b border-gray-300 inline-flex justify-start items-center',
         },
         div(
           {
