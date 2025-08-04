@@ -48,6 +48,14 @@
   top: 1.5rem
 }
 
+.dashboard-wrapper :is(.left-\[48\%\]) {
+  left: 48%
+}
+
+.dashboard-wrapper :is(.top-\[40\%\]) {
+  top: 40%
+}
+
 .dashboard-wrapper :is(.z-10) {
   z-index: 10
 }

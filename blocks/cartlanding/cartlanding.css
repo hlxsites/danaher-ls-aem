@@ -163,6 +163,14 @@
   top: 5px
 }
 
+.cartlanding-wrapper :is(.left-\[48\%\]) {
+  left: 48%
+}
+
+.cartlanding-wrapper :is(.top-\[40\%\]) {
+  top: 40%
+}
+
 .cartlanding-wrapper :is(.z-0) {
   z-index: 0
 }
