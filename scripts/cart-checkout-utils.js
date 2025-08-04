@@ -2453,7 +2453,7 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'icon icon-icons8-delete cart-delete',
     }),
   );
-  deleteButton.addEventListener('click', (event) => {
+  deleteButton.addEventListener('click', () => {
     const inputValue = document.getElementById(cartItemValue.lineItemId);
     modifyCart('delete-item', inputValue, '');
   });
