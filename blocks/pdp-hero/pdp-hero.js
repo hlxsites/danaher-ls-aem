@@ -294,7 +294,7 @@ export default async function decorate(block) {
         {
           class: 'inherit text-base font-medium leading-snug',
         },
-        'Quote',
+        'Request a Quote',
       ),
     ),
   );
