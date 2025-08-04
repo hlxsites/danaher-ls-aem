@@ -2399,7 +2399,7 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
@@ -2430,8 +2430,11 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response.status === 'success') {
         await updateCheckoutSummary();
+        const totalPrice = document.getElementById('total-price');
+        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
+        totalPrice.innerHTML = totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2441,7 +2444,7 @@ export const cartItemsContainer = (cartItemValue) => {
       }
     }
   };
-  const modalCloseButton = button(
+  const deleteButton = button(
     {
       class: 'sm:w-[7.5rem] sm:h-[3.5rem] bg-white',
     },
@@ -2450,11 +2453,11 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'icon icon-icons8-delete cart-delete',
     }),
   );
-  modalCloseButton.addEventListener('click', (event) => {
+  deleteButton.addEventListener('click', (event) => {
     const input = document.getElementById(cartItemValue.lineItemId);
     modifyCart('delete-item', input, '');
   });
-  const modalInput = input({
+  const inputBox = input({
     // id: cartItemValue.lineItemId,
     class:
       'w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center',
@@ -2465,7 +2468,7 @@ export const cartItemsContainer = (cartItemValue) => {
     name: 'item-quantity',
     value: cartItemValue.itemQuantity,
   });
-  modalInput.addEventListener('change', (event) => {
+  inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
     const input = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
@@ -2498,132 +2501,50 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'justify-center',
     },
   );
-  // const itemContainer = div(
-  //   {
-  //     class: "flex w-full justify-between items-center",
-  //     id: cartItemValue.lineItemId,
-  //   },
-  //   div(
-  //     {
-  //       class:
-  //         "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
-  //     },
-  //     image
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-96",
-  //     },
-  //     div(
-  //       {
-  //         class: "",
-  //       },
-  //       cartItemValue.productName
-  //     ),
-  //     div(
-  //       {
-  //         class: " text-gray-500 text-base font-extralight",
-  //       },
-  //       `SKU: ${cartItemValue.sku}`
-  //     )
-  //   ),
-  //   div(
-  //     {
-  //       class: "",
-  //     },
-  //     modalInput
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-11 text-right text-black text-base font-bold",
-  //     },
-  //     `$${cartItemValue.salePrice.value}`
-  //   ),
-  //   modalCloseButton
-  // );
-  // const itemContainer = div(
-  //   {
-  //     class:
-  //       "w-full self-stretch p-4 relative inline-flex justify-start items-center",
-  //   },
-  //   div(
-  //     { class: "inline-flex justify-start items-center gap-3.5" },
-  //     div(
-  //       {
-  //         class:
-  //           "w-28 p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-start items-center gap-2.5",
-  //       },
-  //       // div(
-  //       //   {
-  //       //     class: "w-16 self-stretch relative overflow-hidden",
-  //       //   },
-  //         image
-  //         // img({
-  //         //   class: "w-20 h-28 left-[-4px] top-[-24px] absolute",
-  //         //   src: `/images/wesee/dummy.png `,
-  //         // })
-  //       // )
-  //     ),
-  //     div(
-  //       { class: "w-64 inline-flex flex-col justify-start items-start" },
-  //       div(
-  //         {
-  //           class: "self-stretch justify-start text-black text-base font-bold",
-  //         },
-  //         cartItemValue.productName
-  //       ),
-  //       div(
-  //         {
-  //           class:
-  //             "self-stretch justify-start text-gray-500 text-sm font-normal ",
-  //         },
-  //         cartItemValue.sku
-  //       )
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-11 inline-flex flex-col justify-start items-start" },
-  //     // div({
-  //     //     class:"w-11 h-10 px-4 py-3 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center overflow-hidden"
-  //     // },
-  //     // div({
-  //     //     class:"justify-start text-gray-700 text-base font-normal"
-  //     // }, "2")
-  //     modalInput
-  //     // )
-  //   ),
-  //   div(
-  //     { class: "w-44 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       `$${cartItemValue.salePrice.value}`
-  //     ),
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-gray-500 text-base",
-  //       },
-  //       " $100.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-28 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       "$200.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
-  //     modalCloseButton
-  //   )
-  // );
+  const unitPriceDiv = () => {
+    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
+      return div(
+        {
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+        },
+        div(
+          {
+            class:
+            'w-full justify-start text-gray-500 text-base font-bold item line-through',
+          },
+          `$${cartItemValue.listPrice.value}`,
+        ),
+        div(
+          {
+            class:
+            'w-full justify-start text-black text-base',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+      );
+    }
+
+    return div(
+      {
+        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+      },
+      //  div(
+      //     {
+      //       class:
+      //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+      //     },
+      //     `$${cartItemValue.listPrice.value}`
+      //   ),
+      div(
+        {
+          class:
+            'w-full justify-start text-black text-base',
+        },
+        `$${cartItemValue.salePrice.value}`,
+      ),
+    );
+  };
+
   const itemsscontainer = div(
     {
       class:
@@ -2677,34 +2598,18 @@ export const cartItemsContainer = (cartItemValue) => {
         {
           class: 'w-24 justify-start text-black text-base font-bold',
         },
-        modalInput,
+        inputBox,
       ),
-      div(
-        {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
-        },
-        div(
-          {
-            class:
-            'w-full justify-start text-gray-500 text-base font-bold item line-through',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-        div(
-          {
-            class:
-            'w-full justify-start text-black text-base',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-      ),
+
+      unitPriceDiv(),
       div(
         {
           class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
+          id: 'total-price',
         },
-        `$${cartItemValue.salePrice.value}`,
+        `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),
-      modalCloseButton,
+      deleteButton,
     ),
 
   );

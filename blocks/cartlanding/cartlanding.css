@@ -107,8 +107,8 @@
   left: -4px
 }
 
-.cartlanding-wrapper :is(.left-\[48\%\]) {
-  left: 48%
+.cartlanding-wrapper :is(.left-\[46\%\]) {
+  left: 46%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
