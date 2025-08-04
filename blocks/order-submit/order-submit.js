@@ -323,9 +323,4 @@ export default async function decorate(block) {
     }, '404: PAGE NOT FOUND');
     block.append(noPageFound);
   }
-
-  const noPageFound = div({
-    class: 'justify-start text-4xl font-bold leading-[48px]',
-  }, '404: PAGE NOT FOUND');
-  block.append(noPageFound);
 }
