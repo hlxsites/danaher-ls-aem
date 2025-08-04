@@ -54,7 +54,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   //     div(
   //       {
   //         class:
-  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //           "w-24 justify-start text-black text-base font-semibold font-['TWK_Lausanne_Pan'] leading-snug",
   //       },
   //       img({
   //         class: "",
@@ -64,7 +64,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   //     div(
   //       {
   //         class:
-  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //           "w-[30rem] justify-start text-black text-base font-semibold font-['TWK_Lausanne_Pan'] leading-snug",
   //       },
   //       opcoBe[0]
   //     ),
@@ -92,33 +92,33 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       },
       div(
         {
-          class: 'justify-start text-black text-base font-bold truncate',
+          class: 'justify-start text-black text-base font-semibold truncate',
         },
         opcoBe[0],
       ),
     ),
     div(
       {
-        class: 'w-64 justify-start text-black text-base font-bold',
+        class: 'w-64 justify-start text-black text-base font-semibold',
         id: `product-Quantity-${opcoBe[0]}`,
       },
       `${itemToBeDisplayed[opcoBe].length} Items`,
     ),
     div(
       {
-        class: 'hidden sm:block w-24 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-24 justify-start text-black text-base font-semibold',
       },
       'QTY',
     ),
     div(
       {
-        class: 'hidden sm:block w-48 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-48 justify-start text-black text-base font-semibold',
       },
       'Unit Price',
     ),
     div(
       {
-        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-semibold',
       },
       'Total',
     ),
@@ -156,7 +156,7 @@ export function defaultAddress(address, type) {
           {},
           h5(
             {
-              class: `font-bold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
+              class: `font-semibold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
             },
             address?.companyName2 ?? '',
           ),
@@ -186,7 +186,7 @@ export function defaultAddress(address, type) {
             'data-type': type,
             'data-action': 'edit',
             class:
-              'flex justify-start bg-white editAddressButton text-danaherpurple-500 hover:text-danaherpurple-800 p-0 pl-0 text-base font-bold',
+              'flex justify-start bg-white editAddressButton text-danaherpurple-500 hover:text-danaherpurple-800 p-0 pl-0 text-base font-semibold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
           'Edit Address',
@@ -930,7 +930,7 @@ export const taxExemptModal = () => {
           }),
           p(
             {
-              class: 'text-gray-900 text-3xl font-bold',
+              class: 'text-gray-900 text-3xl font-semibold',
             },
             'Tax Exempt',
           ),
@@ -1901,7 +1901,7 @@ get price type if its net or gross
     },
     div(
       {
-        class: 'w-80 justify-start text-black text-3xl font-bold  leading-10',
+        class: 'w-80 justify-start text-black text-3xl font-semibold  leading-10',
       },
       'Let’s get started',
     ),
@@ -1961,14 +1961,14 @@ get price type if its net or gross
  ::::::::::::::::::
    */ span(
             {
-              class: ' justify-start text-black text-base font-bold ',
+              class: ' justify-start text-black text-base font-semibold ',
             },
             'Subtotal',
           ),
           span(
             {
               class:
-                ' text-right flex flex-col justify-start text-black text-base font-bold ',
+                ' text-right flex flex-col justify-start text-black text-base font-semibold ',
             },
             strong(
               {
@@ -2114,13 +2114,13 @@ get price type if its net or gross
         },
         span(
           {
-            class: ' justify-start text-black text-xl font-bold ',
+            class: ' justify-start text-black text-xl font-semibold ',
           },
           `Total (${checkoutSummaryKeys.totalLineItems} items)`,
         ),
         span(
           {
-            class: ' text-right justify-start text-black text-xl font-bold ',
+            class: ' text-right justify-start text-black text-xl font-semibold ',
           },
           checkoutSummaryKeys.total,
         ),
@@ -2219,7 +2219,7 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold p-0 mb-3 mt-0 text-base',
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
               },
               'Bill to Address',
             ),
@@ -2296,7 +2296,7 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold p-0 mb-3 mt-0',
+                class: 'font-semibold p-0 mb-3 mt-0',
               },
               'Shipping Address',
             ),
@@ -2493,12 +2493,12 @@ export const cartItemsContainer = (cartItemValue) => {
     if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
       return div(
         {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
         },
         div(
           {
             class:
-            'w-full justify-start text-gray-500 text-base font-bold item line-through',
+            'w-full justify-start text-gray-500 text-base font-semibold item line-through',
           },
           `$${cartItemValue.listPrice.value}`,
         ),
@@ -2514,12 +2514,12 @@ export const cartItemsContainer = (cartItemValue) => {
 
     return div(
       {
-        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
       },
       //  div(
       //     {
       //       class:
-      //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+      //         "w-full justify-start text-gray-500 text-base font-semibold item line-through",
       //     },
       //     `$${cartItemValue.listPrice.value}`
       //   ),
@@ -2549,7 +2549,7 @@ export const cartItemsContainer = (cartItemValue) => {
         },
         div(
           {
-            class: 'justify-start text-black text-base font-bold truncate m-[5px]',
+            class: 'justify-start text-black text-base font-semibold truncate m-[5px]',
           },
           img({
             class: 'w-full h-auto',
@@ -2559,12 +2559,12 @@ export const cartItemsContainer = (cartItemValue) => {
       ),
       div(
         {
-          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
+          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-semibold',
         // id: `product-Quantity-${opcoBe[0]}`,
         },
         div(
           {
-            class: 'w-full justify-start items-center text-black text-base font-bold',
+            class: 'w-full justify-start items-center text-black text-base font-semibold',
           },
           cartItemValue.productName,
         ),
@@ -2584,7 +2584,7 @@ export const cartItemsContainer = (cartItemValue) => {
       },
       div(
         {
-          class: 'w-24 justify-start text-black text-base font-bold',
+          class: 'w-24 justify-start text-black text-base font-semibold',
         },
         inputBox,
       ),
@@ -2592,7 +2592,7 @@ export const cartItemsContainer = (cartItemValue) => {
       unitPriceDiv(),
       div(
         {
-          class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
+          class: 'w-[59px] justify-start text-black text-base font-semibold sm:m-[0px] m-[7px]',
           id: 'total-price',
         },
         `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,

@@ -68,7 +68,7 @@ const shippingMethodsModule = async () => {
     //       src: '/icons/sciex-4c.png',
     //     })
     //   ),
-    //   div({}, p({ class: 'font-bold' }, '3 items'))
+    //   div({}, p({ class: 'font-semibold' }, '3 items'))
     // );
     const moduleToggleButtonsWrapper = div(
       {
@@ -223,7 +223,7 @@ const shippingMethodsModule = async () => {
                 },
                 p(
                   {
-                    class: 'font-bold text-sm',
+                    class: 'font-semibold text-sm',
                   },
                   method.name || '',
                 ),

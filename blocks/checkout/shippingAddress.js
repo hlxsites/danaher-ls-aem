@@ -114,7 +114,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             },
             h5(
               {
-                class: 'font-bold m-0 p-0',
+                class: 'font-semibold m-0 p-0',
               },
               typeof item.companyName2 !== 'undefined' ? item.companyName2 : '',
             ),
@@ -149,7 +149,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               },
               span(
                 {
-                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex hover:text-danaherpurple-800 justify-start  text-base font-bold`,
+                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex hover:text-danaherpurple-800 justify-start  text-base font-semibold`,
                   'data-address': JSON.stringify(item),
                 },
                 'Edit',
@@ -163,7 +163,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               span(
                 {
                   class:
-                    'flex  justify-start text-base font-bold text-danaherpurple-500 hover:text-danaherpurple-800 cursor-pointer',
+                    'flex  justify-start text-base font-semibold text-danaherpurple-500 hover:text-danaherpurple-800 cursor-pointer',
                   'data-address': JSON.stringify(item),
                 },
                 'Copy',
@@ -211,7 +211,7 @@ click use address button to set the address as default for current order
             //     },
             //     h5(
             //       {
-            //         class: 'font-bold p-0 mb-3 mt-0',
+            //         class: 'font-semibold p-0 mb-3 mt-0',
             //       },
             //       'Bill to Address',
             //     ),
@@ -728,7 +728,7 @@ export const shippingAddressModule = async () => {
     p(
       {
         class:
-          'self-stretch justify-start text-black text-base   ',
+          'self-stretch justify-start text-black text-base font-normal ',
       },
       'Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process.',
     ),

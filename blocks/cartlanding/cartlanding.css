@@ -1121,6 +1121,10 @@
   font-weight: 200
 }
 
+.cartlanding-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
 .cartlanding-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
