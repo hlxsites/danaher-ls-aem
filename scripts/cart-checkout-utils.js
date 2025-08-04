@@ -1590,6 +1590,8 @@ get counrty field and attach change event listener to populate states based on c
             type: 'MyAddress',
             urn: data.urn,
           });
+        } else {
+          delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
         }
       }
 
