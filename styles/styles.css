@@ -469,30 +469,42 @@ main img {
 }
 
 .dhls-container .text-xs {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 12px !important;
 }
 
 .dhls-container .text-sm {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 14px !important;
 }
 
 .dhls-container .text-base {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 16px !important;
 }
 
+.dhls-container .text-lg {
+  font-family: 'TWK Lausanne EDS' !important;
+  font-size: 18px !important;
+}
+
 .dhls-container .text-xl {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 20px !important;
 }
 
 .dhls-container .text-2xl {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 24px !important;
 }
 
 .dhls-container .text-3xl {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 32px !important;
 }
 
 .dhls-container .text-4xl {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 40px !important;
 }
 
@@ -558,6 +570,7 @@ h1,
 }
 
 .dhls-container h1 {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 32px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -577,6 +590,7 @@ h1 {
 }
 
 .dhls-container h2 {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 24px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -590,6 +604,7 @@ h2 {
 
 @media (min-width: 768px) {
   .dhls-container h2 {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 32px !important;
   }
 
@@ -600,6 +615,7 @@ h2 {
 }
 
 .dhls-container h3 {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 20px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -613,6 +629,7 @@ h3 {
 
 @media (min-width: 768px) {
   .dhls-container h3 {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 24px !important;
   }
 
@@ -623,6 +640,7 @@ h3 {
 }
 
 .dhls-container h4 {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 18px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -635,6 +653,7 @@ h4 {
 }
 
 .dhls-container h5 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
 }
 
@@ -645,6 +664,7 @@ h5 {
 }
 
 .dhls-container h6 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -655,6 +675,7 @@ h6 {
 }
 
 .dhls-container main .default-content-wrapper h1 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 40px;
 }
 
@@ -669,6 +690,7 @@ main .default-content-wrapper h1 {
 .dhls-container main .default-content-wrapper h2,.dhls-container 
    main .default-content-wrapper h3,.dhls-container 
    main .default-content-wrapper h4 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 32px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -840,6 +862,12 @@ main .default-content-wrapper h2,
   scrollbar-width: none;
 }
 
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px;
+}
+
 .dhls-container .font-medium {
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -870,6 +898,7 @@ body.appear {
 }
 
 .dhls-container .productdetail main .columns.columns-2-cols .icon svg {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -939,6 +968,7 @@ main
 }
 
 .dhls-container .btn {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -994,6 +1024,7 @@ main
 }
 
 .dhls-container .btn-lg {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
 }
 
@@ -1046,6 +1077,7 @@ main
 }
 
 .dhls-container .btn-outline-primary {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -1098,6 +1130,7 @@ main
 }
 
 .dhls-container .container-two-col .col-right {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1133,6 +1166,7 @@ main
 }
 
 .dhls-container .container-two-col .col-right h2 {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 20px !important;
 }
 
@@ -1160,6 +1194,7 @@ main
 }
 
 .dhls-container main .default-content-wrapper p {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
 }
 
@@ -1190,6 +1225,7 @@ main .default-content-wrapper p {
 }
 
 .dhls-container main .default-content-wrapper p.button-container > a {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
   font-weight: 400;
   font-family: TWK Lausanne EDS;
@@ -1234,6 +1270,7 @@ main
 
 .dhls-container main .default-content-wrapper ol,.dhls-container 
    main .default-content-wrapper ul {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1377,6 +1414,7 @@ header {
 }
 
 .dhls-container .topic main p:not(.show-modal-btn) {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
 }
 
@@ -1505,6 +1543,7 @@ header {
     padding-right: 0.75rem;
   }
   .dhls-container .productdetail main .columns.columns-2-cols .t-line::after {
+    font-family: 'TWK Lausanne EDS';
     font-size: 16px;
   }
   .productdetail main .columns.columns-2-cols .t-line::after {
@@ -1587,6 +1626,7 @@ header {
 }
 
 .dhls-container .appear mobilemenu > div.mobile-jump-menu select.selected-tab {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1612,6 +1652,7 @@ header {
 }
 
 .dhls-container .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  font-family: 'TWK Lausanne EDS';
   font-size: 18px;
 }
 
@@ -1693,6 +1734,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .blog main .section.default-content-wrapper > p {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1703,6 +1745,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .blog main .columns h2 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 20px;
 }
 
@@ -1716,6 +1759,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .blog main .columns > div > div > p:not(.button-container) {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1787,6 +1831,7 @@ main .top-border > div.columns-wrapper:first-child {
      p:not(picture)
      + p:last-child,.dhls-container 
    .productdetail main .columns p.embed-vimeo ~ p {
+  font-family: 'TWK Lausanne EDS';
   font-size: 14px;
 }
 
@@ -1804,6 +1849,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .productdetail main .columns p > strong {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 18px !important;
   font-weight: 400 !important;
   font-family: TWK Lausanne EDS !important;
@@ -1827,6 +1873,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .productdetail main .columns p {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 16px !important;
 }
 
@@ -1839,6 +1886,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .dhls-container .productdetail main .columns.columns-2-cols .h-full {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1922,6 +1970,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -1941,6 +1990,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .product-hero .hero-default-content > div .category-name {
+  font-family: 'TWK Lausanne EDS';
   font-size: 14px;
 }
 
@@ -1961,6 +2011,7 @@ main .section.product-hero-container {
 
 .dhls-container .product-hero .hero-default-content > div ul,.dhls-container 
    .product-hero .hero-default-content > div p {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -2011,6 +2062,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .product-hero .hero-default-content > div .brand-price p.start-price {
+  font-family: 'TWK Lausanne EDS' !important;
   font-size: 32px !important;
 }
 
@@ -2027,6 +2079,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 
@@ -2148,6 +2201,7 @@ main .section.product-hero-container {
 }
 
 .dhls-container .product-hero .vertical-gallery-container .view-more {
+  font-family: 'TWK Lausanne EDS';
   font-size: 14px;
 }
 
@@ -2207,6 +2261,7 @@ main .section.product-hero-container {
 
 .dhls-container .category .default-content-wrapper h2,.dhls-container 
    .category .accordion-wrapper h2 {
+  font-family: 'TWK Lausanne EDS';
   font-size: 24px;
 }
 
@@ -2617,6 +2672,7 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 #shippingAddressListItemsWrapper {
   max-height: 25rem;
+  gap: 1.5rem;
   overflow: auto;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -3256,6 +3312,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   max-width: 80rem;
 }
 
+.max-w-\[792px\] {
+  max-width: 792px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -3820,10 +3880,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   font-weight: 800;
 }
 
-.font-extralight {
-  font-weight: 200;
-}
-
 .font-medium {
   font-weight: 500;
 }
@@ -4103,6 +4159,7 @@ main .section.top-border {
 
 @media (min-width: 640px) {
   .dhls-container .sm\:text-sm {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 14px !important;
   }
 }
@@ -4122,6 +4179,7 @@ main .section.top-border {
 }
 
 .dhls-container .productdetail main .columns.columns-2-cols .\[\&_ul\>li\>a\]\:h-full ul>li>a {
+  font-family: 'TWK Lausanne EDS';
   font-size: 16px;
 }
 

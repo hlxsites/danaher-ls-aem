@@ -162,19 +162,19 @@ export function defaultAddress(address, type) {
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             address?.addressLine1 ?? '',
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             address?.city ?? '',
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
               address?.postalCode ?? ''
@@ -789,7 +789,7 @@ export const buildCountryStateSelectBox = (
         name: inputName,
         'data-required': required,
         class:
-          'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-300',
       },
       ...selectOptions,
     ),
@@ -1512,7 +1512,7 @@ export async function addressForm(type, data = {}) {
     buildButton(
       'Save',
       `save${capitalizeFirstLetter(type)}Address`,
-      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+      ' proceed-button text-xl  border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
     ),
   );
   /*
@@ -2000,7 +2000,7 @@ get price type if its net or gross
           span(
             {
               class:
-                ' justify-start text-black text-base text-right font-extralight ',
+                ' justify-start text-black text-base text-right  ',
             },
             'Discount',
           ),
@@ -2010,7 +2010,7 @@ get price type if its net or gross
             },
             span(
               {
-                class: 'text-right text-black text-base font-extralight ',
+                class: 'text-right text-black text-base  ',
               },
               checkoutSummaryKeys.discountPrice,
             ),
@@ -2040,7 +2040,7 @@ get price type if its net or gross
             span(
               {
                 class:
-                  'w-20 justify-start text-black text-base font-extralight ',
+                  'w-20 justify-start text-black text-base  ',
               },
               'Sales Tax*',
             ),
@@ -2056,7 +2056,7 @@ get price type if its net or gross
           span(
             {
               class:
-                ' text-right justify-start text-black text-base font-extralight ',
+                ' text-right justify-start text-black text-base  ',
             },
             checkoutSummaryKeys.tax,
           ),
@@ -2073,14 +2073,14 @@ get price type if its net or gross
           },
           span(
             {
-              class: 'w-20 justify-start text-black text-base font-extralight ',
+              class: 'w-20 justify-start text-black text-base  ',
             },
             'Shipping*',
           ),
           span(
             {
               class:
-                ' text-right flex flex-col justify-start text-black text-base font-extralight ',
+                ' text-right flex flex-col justify-start text-black text-base  ',
             },
             strong(
               {
@@ -2136,7 +2136,7 @@ get price type if its net or gross
             'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
             ((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
           } `,
           id: 'proceed-button',
@@ -2241,20 +2241,20 @@ get price type if its net or gross
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
                   ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 `${
                   getUseAddressesResponse?.data?.invoiceToAddress
@@ -2313,20 +2313,20 @@ get price type if its net or gross
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress
                   ?.addressLine1 ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 `${
                   getUseAddressesResponse?.data?.commonShipToAddress

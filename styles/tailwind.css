@@ -26,34 +26,42 @@
    }
 
   .dhls-container .text-xs {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 12px !important;
   }
 
   .dhls-container .text-sm {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 14px !important;
   }
 
   .dhls-container .text-base {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 16px !important;
   }
 
   .dhls-container .text-lg {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 18px !important;
   }
 
   .dhls-container .text-xl {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 20px !important;
   }
 
   .dhls-container .text-2xl {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 24px !important;
   }
 
   .dhls-container .text-3xl {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 32px !important;
   }
 
   .dhls-container .text-4xl {
+    font-family: 'TWK Lausanne EDS' !important;
     font-size: 40px !important;
   }
   
@@ -804,7 +812,7 @@
     [&::-webkit-scrollbar-track]:bg-gray-100
     [&::-webkit-scrollbar-thumb]:bg-gray-300
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 gap-6;
   }
   #shippingAddressListItemsWrapper > div {
     @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;

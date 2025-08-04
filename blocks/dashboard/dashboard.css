@@ -160,6 +160,10 @@
   max-width: 36rem
 }
 
+.dashboard-wrapper :is(.max-w-\[792px\]) {
+  max-width: 792px
+}
+
 .dashboard-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }

@@ -120,19 +120,19 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             ),
             p(
               {
-                class: 'text-black text-base font-extralight',
+                class: 'text-black text-base ',
               },
               item.addressLine1,
             ),
             p(
               {
-                class: 'text-black text-base font-extralight',
+                class: 'text-black text-base ',
               },
               item.city,
             ),
             p(
               {
-                class: 'text-black text-base font-extralight',
+                class: 'text-black text-base ',
               },
               `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`,
             ),
@@ -172,7 +172,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             button(
               {
                 id: item.id,
-                class: `${type}-address-use-button text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
+                class: `${type}-address-use-button text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
               },
               'Use address',
             ),
@@ -233,20 +233,20 @@ click use address button to set the address as default for current order
             //       ),
             //       p(
             //         {
-            //           class: 'text-black text-base font-extralight',
+            //           class: 'text-black text-base ',
             //         },
             //         useAddressButtonResponse?.data?.invoiceToAddress
             //           ?.addressLine1 ?? '',
             //       ),
             //       p(
             //         {
-            //           class: 'text-black text-base font-extralight',
+            //           class: 'text-black text-base ',
             //         },
             //         useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
             //       ),
             //       p(
             //         {
-            //           class: 'text-black text-base font-extralight',
+            //           class: 'text-black text-base ',
             //         },
             //         `${
             //           useAddressButtonResponse?.data?.invoiceToAddress
@@ -438,7 +438,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
+              'text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
             id: `addNew${capitalizeFirstLetter(type)}AddressButton`,
           },
           'Add new address',
@@ -446,7 +446,7 @@ click use address button to set the address as default for current order
         button(
           {
             class:
-              'text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+              'text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             id: `clear${capitalizeFirstLetter(type)}AddressListSearch`,
           },
           'Clear Search',
@@ -515,12 +515,6 @@ export const addressListModal = async (type) => {
       },
       'My Addresses',
     ),
-    p(
-      {
-        class: 'text-extralight text-sm',
-      },
-      'Select an address below',
-    ),
     div(
       {
         class: 'flex justify-between items-center my-4 py-4',
@@ -541,13 +535,13 @@ export const addressListModal = async (type) => {
           class: 'flex justify-between gap-2',
           id: `${type}AddressListAddButton`,
         },
-        span({
-          class: 'icon icon-plus-circle',
-          id: 'plusCircleIcon',
-        }),
-        p(
+        // span({
+        //   class: 'icon icon-plus-circle',
+        //   id: 'plusCircleIcon',
+        // }),
+        button(
           {
-            class: 'flex justify-between text-danaherpurple-500 cursor-pointer hover:text-danaherpurple-800',
+            class: 'flex w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6',
           },
           'Add New Address',
         ),
@@ -734,7 +728,7 @@ export const shippingAddressModule = async () => {
     p(
       {
         class:
-          'self-stretch justify-start text-black text-base font-extralight  ',
+          'self-stretch justify-start text-black text-base   ',
       },
       'Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process.',
     ),
@@ -753,7 +747,7 @@ export const shippingAddressModule = async () => {
     p(
       {
         class:
-          'self-stretch justify-start text-black text-base font-extralight  ',
+          'self-stretch justify-start text-black text-base   ',
       },
       'Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process.',
     ),
@@ -1071,7 +1065,7 @@ export const shippingAddressModule = async () => {
       button(
         {
           class:
-            'w-xl text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+            'w-xl text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },
         'Add Billing Address',
       ),
