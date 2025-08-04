@@ -2434,7 +2434,7 @@ export const cartItemsContainer = (cartItemValue) => {
         await updateCheckoutSummary();
         const totalPrice = document.getElementById('total-price');
         const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
-        totalPrice.innerHTML = totalPricValue;
+        totalPrice.innerHTML = `$${totalPricValue}`;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
