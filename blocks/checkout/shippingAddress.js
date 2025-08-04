@@ -96,7 +96,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             span(
               {
                 class:
-                  'text-md text-danaherpurple-500 hover:text-danaherpurple-800',
+                  'text-md text-danaherpurple-500 hover:!text-danaherpurple-800',
               },
               'Make this my default address',
             ),
@@ -149,21 +149,21 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               },
               span(
                 {
-                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex  justify-start  text-base font-bold`,
+                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex hover:text-danaherpurple-800 justify-start  text-base font-bold`,
                   'data-address': JSON.stringify(item),
                 },
                 'Edit',
               ),
               span(
                 {
-                  class: 'flex   text-danaherpurple-500',
+                  class: 'flex text-danaherpurple-500',
                 },
                 '|',
               ),
               span(
                 {
                   class:
-                    'flex  justify-start text-base font-bold text-danaherpurple-500 cursor-pointer',
+                    'flex  justify-start text-base font-bold text-danaherpurple-500 hover:text-danaherpurple-800 cursor-pointer',
                   'data-address': JSON.stringify(item),
                 },
                 'Copy',
@@ -547,7 +547,7 @@ export const addressListModal = async (type) => {
         }),
         p(
           {
-            class: 'flex justify-between text-danaherpurple-500 cursor-pointer',
+            class: 'flex justify-between text-danaherpurple-500 cursor-pointer hover:text-danaherpurple-800',
           },
           'Add New Address',
         ),
@@ -606,8 +606,11 @@ export const addressListModal = async (type) => {
       e.preventDefault();
 
       const searchTerm = e.target.value.toLowerCase();
+      console.log('searchTerm : ', searchTerm);
+      
 
       const searchedAddress = addressListData.filter((ad) => {
+        const lowerCaseCompanyName = ad?.companyName2?.toLowerCase();
         const lowerCaseAddressLine1 = ad?.addressLine1?.toLowerCase();
         const lowerCasefirstName = ad?.firstName?.toLowerCase();
         const lowerCaselastName = ad?.lastName?.toLowerCase();
@@ -619,6 +622,7 @@ export const addressListModal = async (type) => {
         const lowerCasepostalCode = ad?.postalCode;
         return (
           lowerCaseAddressLine1?.includes(searchTerm)
+          || lowerCaseCompanyName?.includes(searchTerm)
           || lowerCasefirstName?.includes(searchTerm)
           || lowerCaselastName?.includes(searchTerm)
           || lowerCasestreet?.includes(searchTerm)

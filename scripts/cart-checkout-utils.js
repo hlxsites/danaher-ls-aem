@@ -186,7 +186,7 @@ export function defaultAddress(address, type) {
             'data-type': type,
             'data-action': 'edit',
             class:
-              'flex justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
+              'flex justify-start bg-white editAddressButton text-danaherpurple-500 hover:text-danaherpurple-800 p-0 pl-0 text-base font-bold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
           'Edit Address',

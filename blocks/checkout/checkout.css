@@ -992,6 +992,11 @@
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
+.checkout :is(.hover\:\!text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(64 0 165 / var(--tw-text-opacity)) !important
+}
+
 .checkout :is(.focus\:outline-none:focus) {
   outline: 2px solid transparent;
   outline-offset: 2px
