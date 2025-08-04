@@ -8,45 +8,49 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "class": { "$ref": "classes" },
               "columns": "2",
               "rows": "1"
             }
           }
         }
       }
-    },
+    }
+  ],
+  "models": [
     {
-      "title": "Title",
-      "id": "title",
-      "model": {
-        "fields": [
-          {
-            "component": "text",
-            "name": "text",
-            "label": "Title text",
-            "valueType": "string",
-            "value": ""
+      "id": "columns",
+      "fields": [
+        {
+          "title": "Title",
+          "id": "title",
+          "model": {
+            "fields": [
+              {
+                "component": "text",
+                "name": "text",
+                "label": "Title text",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
           }
-        ]
-      }
-    },
-    {
-      "title": "Image",
-      "id": "image",
-      "model": {
-        "fields": [
-          {
-            "component": "image",
-            "name": "src",
-            "label": "Image Source",
-            "valueType": "string",
-            "value": ""
+        },
+        {
+          "title": "Image",
+          "id": "image",
+          "model": {
+            "fields": [
+              {
+                "component": "image",
+                "name": "src",
+                "label": "Image Source",
+                "valueType": "string",
+                "value": ""
+              }
+            ]
           }
-        ]
-      }
-    },
-    {
+        },
+        {
       "title": "Text",
       "id": "text",
       "model": {
@@ -142,37 +146,8 @@
            }
         ]
       }
-    }
-  ],
-  "models": [
-    {
-      "id": "columns",
-      "fields": [
-        {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Style",
-          "valueType": "string",
-          "options": [
-             { "name": "2 columns", "value": "columns-2-cols" },
-             { "name": "3 columns", "value": "columns-3-cols" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "2 columns",
-          "label": "Column Ratio (2 columns)",
-          "valueType": "string",
-          "options": [
-            { "name": "30:70", "value": "thirtyseventy" },
-            { "name": "70:30", "value": "seventythirty" }
-          ],
-          "condition": {
-            "when": "classes",
-            "is": "columns-2-cols"
-          }
-        }
-      ]
+    }   
+    ]
     }
   ],
   "filters": [
