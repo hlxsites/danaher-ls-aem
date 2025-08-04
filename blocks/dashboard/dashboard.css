@@ -32,24 +32,16 @@
   inset: 0px
 }
 
-.dashboard-wrapper :is(.left-\[46\%\]) {
-  left: 46%
+.dashboard-wrapper :is(.left-\[48\%\]) {
+  left: 48%
 }
 
 .dashboard-wrapper :is(.right-10) {
   right: 2.5rem
 }
 
-.dashboard-wrapper :is(.top-1\/2) {
-  top: 50%
-}
-
 .dashboard-wrapper :is(.top-6) {
   top: 1.5rem
-}
-
-.dashboard-wrapper :is(.left-\[48\%\]) {
-  left: 48%
 }
 
 .dashboard-wrapper :is(.top-\[40\%\]) {
@@ -154,10 +146,6 @@
 
 .dashboard-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
-}
-
-.dashboard-wrapper :is(.max-w-xl) {
-  max-width: 36rem
 }
 
 .dashboard-wrapper :is(.max-w-\[792px\]) {

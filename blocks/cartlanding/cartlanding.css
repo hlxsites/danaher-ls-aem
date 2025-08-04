@@ -103,12 +103,8 @@
   left: 0.5rem
 }
 
-.cartlanding-wrapper :is(.left-\[-4px\]) {
-  left: -4px
-}
-
-.cartlanding-wrapper :is(.left-\[46\%\]) {
-  left: 46%
+.cartlanding-wrapper :is(.left-\[48\%\]) {
+  left: 48%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -123,10 +119,6 @@
   left: 63px
 }
 
-.cartlanding-wrapper :is(.left-\[747px\]) {
-  left: 747px
-}
-
 .cartlanding-wrapper :is(.right-0) {
   right: 0px
 }
@@ -139,20 +131,12 @@
   top: 0px
 }
 
-.cartlanding-wrapper :is(.top-1\/2) {
-  top: 50%
-}
-
 .cartlanding-wrapper :is(.top-6) {
   top: 1.5rem
 }
 
-.cartlanding-wrapper :is(.top-\[-24px\]) {
-  top: -24px
-}
-
-.cartlanding-wrapper :is(.top-\[49px\]) {
-  top: 49px
+.cartlanding-wrapper :is(.top-\[40\%\]) {
+  top: 40%
 }
 
 .cartlanding-wrapper :is(.top-\[57px\]) {
@@ -161,14 +145,6 @@
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
-}
-
-.cartlanding-wrapper :is(.left-\[48\%\]) {
-  left: 48%
-}
-
-.cartlanding-wrapper :is(.top-\[40\%\]) {
-  top: 40%
 }
 
 .cartlanding-wrapper :is(.z-0) {
@@ -383,10 +359,6 @@
   height: 70px
 }
 
-.cartlanding-wrapper :is(.h-\[93px\]) {
-  height: 93px
-}
-
 .cartlanding-wrapper :is(.h-auto) {
   height: auto
 }
@@ -443,10 +415,6 @@
   width: 10rem
 }
 
-.cartlanding-wrapper :is(.w-44) {
-  width: 11rem
-}
-
 .cartlanding-wrapper :is(.w-48) {
   width: 12rem
 }
@@ -473,10 +441,6 @@
 
 .cartlanding-wrapper :is(.w-80) {
   width: 20rem
-}
-
-.cartlanding-wrapper :is(.w-96) {
-  width: 24rem
 }
 
 .cartlanding-wrapper :is(.w-\[11rem\]) {
@@ -547,10 +511,6 @@
   width: 737px
 }
 
-.cartlanding-wrapper :is(.w-\[73px\]) {
-  width: 73px
-}
-
 .cartlanding-wrapper :is(.w-\[75px\]) {
   width: 75px
 }
@@ -583,12 +543,12 @@
   max-width: 70%
 }
 
-.cartlanding-wrapper :is(.max-w-xl) {
-  max-width: 36rem
-}
-
 .cartlanding-wrapper :is(.max-w-\[792px\]) {
   max-width: 792px
+}
+
+.cartlanding-wrapper :is(.max-w-xl) {
+  max-width: 36rem
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -673,10 +633,6 @@
 
 .cartlanding-wrapper :is(.gap-3) {
   gap: 0.75rem
-}
-
-.cartlanding-wrapper :is(.gap-3\.5) {
-  gap: 0.875rem
 }
 
 .cartlanding-wrapper :is(.gap-4) {
@@ -818,11 +774,6 @@
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
-.cartlanding-wrapper :is(.border-danahergray-75) {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
-}
-
 .cartlanding-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
@@ -929,10 +880,6 @@
 
 .cartlanding-wrapper :is(.p-2) {
   padding: 0.5rem
-}
-
-.cartlanding-wrapper :is(.p-2\.5) {
-  padding: 0.625rem
 }
 
 .cartlanding-wrapper :is(.p-3) {
