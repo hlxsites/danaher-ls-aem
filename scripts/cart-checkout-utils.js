@@ -1199,9 +1199,9 @@ export const changeStep = async (step) => {
   }
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
-    //alert('In-valid basket');
+    // alert('In-valid basket');
     removePreLoader();
-    //return false;
+    // return false;
   }
   if (currentTab === 'submitOrder') {
     const getBasketForOrder = await getBasketDetails();
