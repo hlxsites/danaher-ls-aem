@@ -2296,7 +2296,7 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-semibold p-0 mb-3 mt-0',
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
               },
               'Shipping Address',
             ),

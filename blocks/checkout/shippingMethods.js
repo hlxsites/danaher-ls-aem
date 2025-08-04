@@ -11,14 +11,118 @@ import {
   removePreLoader,
   showPreLoader,
 } from '../../scripts/common-utils.js';
-import cartItem from '../cartlanding/cartItem.js';
+import { cartItem } from '../cartlanding/cartItem.js';
 import {
   getBasketDetails,
   getShippingMethods,
   setShippingMethod,
   updateCheckoutSummary,
+  setShippingNotes,
+  updateShippingNotes,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
+
+async function setShippingNotesOnBlur() {
+  const getShippingNotesField = document.querySelector('#shippingNotes');
+
+  if (getShippingNotesField) {
+    showPreLoader();
+    if (getShippingNotesField.value.trim() === '') {
+      getShippingNotesField.classList.add('border-red-500');
+      removePreLoader();
+      return false;
+    }
+    /*
+ :::::::::::::
+ get current basket details
+ :::::::::::::
+*/
+    const getCurrentBasketDetails = await getBasketDetails();
+
+    /*
+ :::::::::::::
+ check if basket has the shipping notes attribute
+ :::::::::::::
+*/
+    if (getCurrentBasketDetails?.data?.data?.attributes) {
+      const getNotes = getCurrentBasketDetails.data.data.attributes[0];
+
+      /*
+ :::::::::::::
+ check if notes with same value esists
+ :::::::::::::
+*/
+      if (
+        getNotes.name === 'GroupShippingNote'
+          && getNotes.value.trim() === getShippingNotesField.value.trim()
+      ) {
+        removePreLoader();
+      } else {
+        /*
+ :::::::::::::
+ if basket has the shipping notes attribute and has value. Update the shipping notes
+ :::::::::::::
+*/
+        if (getShippingNotesField.classList.contains('border-red-500')) {
+          getShippingNotesField.classList.remove('border-red-500');
+        }
+        const shippingNotesPayload = {
+          name: 'GroupShippingNote',
+          value: getShippingNotesField.value,
+          type: 'String',
+        };
+        const updateShippingNotesResponse = await updateShippingNotes(
+          shippingNotesPayload,
+        );
+        if (updateShippingNotesResponse.status === 'error') {
+          removePreLoader();
+          getShippingNotesField.classList.add('border-red-500');
+          return false;
+        }
+        if (updateShippingNotesResponse.status === 'success') {
+          getShippingNotesField.classList.add('border-green-500', 'border-3');
+          setTimeout(() => {
+            getShippingNotesField.classList.remove('border-green-500');
+            getShippingNotesField.classList.remove('border-3');
+          }, 3000);
+          await updateBasketDetails();
+          removePreLoader();
+        }
+      }
+    } else {
+      /*
+ :::::::::::::
+ if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
+ :::::::::::::
+*/
+      if (getShippingNotesField.classList.contains('border-red-500')) {
+        getShippingNotesField.classList.remove('border-red-500');
+      }
+      const shippingNotesPayload = {
+        name: 'GroupShippingNote',
+        value: getShippingNotesField.value,
+        type: 'String',
+      };
+      const setShippingNotesResponse = await setShippingNotes(
+        shippingNotesPayload,
+      );
+      if (setShippingNotesResponse.status === 'error') {
+        getShippingNotesField.classList.add('border-red-500');
+      }
+      if (setShippingNotesResponse.status === 'success') {
+        getShippingNotesField.classList.add('border-green-500');
+        setTimeout(() => {
+          getShippingNotesField.classList.remove('border-green-500');
+        }, 3000);
+        await updateBasketDetails();
+        removePreLoader();
+      }
+    }
+    // return false;
+  } else {
+    // return false;
+  }
+}
 
 /*
  :::::::::::::::
@@ -52,24 +156,7 @@ const shippingMethodsModule = async () => {
         'Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.',
       ),
     );
-    // const moduleOpcos = div(
-    //   {
-    //     class:
-    //       'flex items-center justify-between mb-[30px] border-b border-danaherpurple-100 border-solid pb-6 mb-9 mt-9',
-    //   },
-    //   div(
-    //     {
-    //       class: 'flex',
-    //     },
-    //     img({
-    //       src: '/icons/sciex-4c.png',
-    //     }),
-    //     img({
-    //       src: '/icons/sciex-4c.png',
-    //     })
-    //   ),
-    //   div({}, p({ class: 'font-semibold' }, '3 items'))
-    // );
+
     const moduleToggleButtonsWrapper = div(
       {
         class: 'flex justify-between mt-[50px]',
@@ -85,14 +172,14 @@ const shippingMethodsModule = async () => {
           button(
             {
               class:
-                'w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
+                'w-lg text-white text-l text-uppercase  btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
             },
             'Ship for me',
           ),
           button(
             {
               class:
-                'm-0 text-xl hover:bg-danaherpurple-500 font-extralight  border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+                'm-0 text-xl hover:bg-danaherpurple-500   border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             },
             'Use my carrier',
           ),
@@ -152,7 +239,7 @@ const shippingMethodsModule = async () => {
             rows: '3',
             cols: '50',
             class:
-              'input-focus text-base w-full block px-2 rounded py-4 font-extralight border border-solid border-gray-400',
+              'input-focus outline-none text-base w-full block px-2 rounded py-4  border border-solid border-gray-400',
             'aria-label': 'notes',
             label: 'Notes',
             placeholder: 'Add a note',
@@ -162,6 +249,9 @@ const shippingMethodsModule = async () => {
         ),
       ),
     );
+
+    const getShippingNotesField = modulesMethodsWrapper?.querySelector('#shippingNotes');
+    getShippingNotesField?.addEventListener('blur', setShippingNotesOnBlur);
     if (moduleContent) {
       if (moduleHeader) moduleContent.append(moduleHeader);
       const showCartItems = await cartItem();
