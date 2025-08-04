@@ -35,6 +35,10 @@ function renderSideNav(sideNavItems) {
 }
 
 export default async function decorate(block) {
+  const elToClean = document.querySelector('.bg-danaherlightblue-50.side-nav-container');
+  if (elToClean) {
+    elToClean.classList.remove('bg-danaherlightblue-50');
+  }
   let sideNavItems = [];
   let sideNavTitle = 'Side Navigation';
   let selectedNavItem = null;
