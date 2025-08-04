@@ -2692,7 +2692,7 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 [id^="shippingAddressListItemActions-"] > div > span:nth-child(1) {

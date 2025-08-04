@@ -90,13 +90,13 @@ const renderAddressList = (addressItems, addressListArray, type) => {
         } else {
           makeDefaultButton = div(
             {
-              class: `relative text-right not-default-${type}-address`,
+              class: `relative text-right not-default-${type}-address mt-6`,
               'data-address': JSON.stringify(item),
             },
             span(
               {
                 class:
-                  'text-md text-danaherpurple-500 hover:text-danaherpurple-800',
+                  'text-base text-danaherpurple-500 hover:text-danaherpurple-800',
               },
               'Make this my default address',
             ),
@@ -145,7 +145,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             },
             div(
               {
-                class: 'flex gap-2 items-center',
+                class: 'flex items-center',
               },
               span(
                 {

@@ -472,6 +472,10 @@
   gap: 30px
 }
 
+.checkout :is(.gap-\[8px\]) {
+  gap: 8px
+}
+
 .checkout :is(.gap-y-6) {
   row-gap: 1.5rem
 }

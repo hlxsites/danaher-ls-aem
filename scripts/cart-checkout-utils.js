@@ -1581,10 +1581,7 @@ get counrty field and attach change event listener to populate states based on c
         )
       ) {
         if (data) {
-          removeObjectKey(
-            formObject,
-            `preferred${capitalizeFirstLetter(type)}Address`,
-          );
+          delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
           Object.assign(formObject, {
             id: data.id,
             type: 'MyAddress',
