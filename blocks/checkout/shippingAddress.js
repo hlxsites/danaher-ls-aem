@@ -37,6 +37,7 @@ import {
   setUseAddress,
   updateAddresses,
   updateAddressToDefault,
+  updateCheckoutSummary,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 /*
@@ -198,79 +199,79 @@ click use address button to set the address as default for current order
           );
 
           if (useAddressButtonResponse?.status === 'success') {
-            const invoiceToAddress = div(
-              {
-                id: 'checkoutSummaryCommonBillToAddress',
-                class:
-                  'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
-              },
-              div(
-                {
-                  class: ' flex flex-col pb-2',
-                },
-                h5(
-                  {
-                    class: 'font-bold p-0 mb-3 mt-0',
-                  },
-                  'Bill to Address',
-                ),
-                div(
-                  {
-                    class: 'p-3 border border-danahergray-300',
-                  },
-                  h5(
-                    {
-                      class: `font-normal m-0 p-0 ${
-                        useAddressButtonResponse?.data?.invoiceToAddress
-                          ?.companyName2
-                          ? ''
-                          : 'hidden'
-                      }`,
-                    },
-                    useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.companyName2 ?? '',
-                  ),
-                  p(
-                    {
-                      class: 'text-black text-base font-extralight',
-                    },
-                    useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.addressLine1 ?? '',
-                  ),
-                  p(
-                    {
-                      class: 'text-black text-base font-extralight',
-                    },
-                    useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
-                  ),
-                  p(
-                    {
-                      class: 'text-black text-base font-extralight',
-                    },
-                    `${
-                      useAddressButtonResponse?.data?.invoiceToAddress
-                        ?.mainDivision ?? ''
-                    }, ${
-                      useAddressButtonResponse?.data?.invoiceToAddress
-                        ?.countryCode ?? ''
-                    }, ${
-                      useAddressButtonResponse?.data?.invoiceToAddress
-                        ?.postalCode ?? ''
-                    }`,
-                  ),
-                ),
-              ),
-            );
-            const checkoutSummaryWrapper = document.querySelector(
-              '#checkoutSummaryWrapper',
-            );
-            checkoutSummaryWrapper
-              ?.querySelector('#checkoutSummaryCommonBillToAddress')
-              ?.remove();
-            checkoutSummaryWrapper?.insertAdjacentElement(
-              'beforebegin',
-              invoiceToAddress,
-            );
+            // const invoiceToAddress = div(
+            //   {
+            //     id: 'checkoutSummaryCommonBillToAddress',
+            //     class:
+            //       'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
+            //   },
+            //   div(
+            //     {
+            //       class: ' flex flex-col pb-2',
+            //     },
+            //     h5(
+            //       {
+            //         class: 'font-bold p-0 mb-3 mt-0',
+            //       },
+            //       'Bill to Address',
+            //     ),
+            //     div(
+            //       {
+            //         class: 'p-3 border border-danahergray-300',
+            //       },
+            //       h5(
+            //         {
+            //           class: `font-normal m-0 p-0 ${
+            //             useAddressButtonResponse?.data?.invoiceToAddress
+            //               ?.companyName2
+            //               ? ''
+            //               : 'hidden'
+            //           }`,
+            //         },
+            //         useAddressButtonResponse?.data?.invoiceToAddress
+            //           ?.companyName2 ?? '',
+            //       ),
+            //       p(
+            //         {
+            //           class: 'text-black text-base font-extralight',
+            //         },
+            //         useAddressButtonResponse?.data?.invoiceToAddress
+            //           ?.addressLine1 ?? '',
+            //       ),
+            //       p(
+            //         {
+            //           class: 'text-black text-base font-extralight',
+            //         },
+            //         useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
+            //       ),
+            //       p(
+            //         {
+            //           class: 'text-black text-base font-extralight',
+            //         },
+            //         `${
+            //           useAddressButtonResponse?.data?.invoiceToAddress
+            //             ?.mainDivision ?? ''
+            //         }, ${
+            //           useAddressButtonResponse?.data?.invoiceToAddress
+            //             ?.countryCode ?? ''
+            //         }, ${
+            //           useAddressButtonResponse?.data?.invoiceToAddress
+            //             ?.postalCode ?? ''
+            //         }`,
+            //       ),
+            //     ),
+            //   ),
+            // );
+            // const checkoutSummaryWrapper = document.querySelector(
+            //   '#checkoutSummaryWrapper',
+            // );
+            // checkoutSummaryWrapper
+            //   ?.querySelector('#checkoutSummaryCommonBillToAddress')
+            //   ?.remove();
+            // checkoutSummaryWrapper?.insertAdjacentElement(
+            //   'beforebegin',
+            //   invoiceToAddress,
+            // );
             const renderDefaultAddress = defaultAddress(
               type === 'shipping'
                 ? useAddressButtonResponse.data?.commonShipToAddress
@@ -307,6 +308,14 @@ click use address button to set the address as default for current order
             ::::::::::::::
             */
             await updateBasketDetails();
+            /*
+            ::::::::::::::
+            update checkout summary module
+            ::::::::::::::
+            */
+            await updateCheckoutSummary();
+
+            // remove preloader
             removePreLoader();
             /*
             ::::::::::::::

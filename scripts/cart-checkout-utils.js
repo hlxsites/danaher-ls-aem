@@ -2376,6 +2376,8 @@ get price type if its net or gross
 }
 
 export async function updateCheckoutSummary() {
+  console.log('updating checkout summarey: ');
+  
   const checkoutSummaryWrapper = document.querySelector(
     '#checkoutSummaryContainer',
   );
