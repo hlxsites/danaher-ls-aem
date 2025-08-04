@@ -2678,6 +2678,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
+#shippingAddressListItemsWrapper span:nth-child(1):hover {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
+}
+
 [id^="shippingAddressListContentActions-"] {
   align-items: flex-start;
 }
@@ -2944,16 +2949,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   left: 0px;
 }
 
-.left-\[-4px\] {
-  left: -4px;
-}
-
-.left-\[46\%\] {
-  left: 46%;
-}
-
-.left-\[747px\] {
-  left: 747px;
+.left-\[48\%\] {
+  left: 48%;
 }
 
 .right-0 {
@@ -2968,32 +2965,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 0px;
 }
 
-.top-1\/2 {
-  top: 50%;
-}
-
 .top-6 {
   top: 1.5rem;
 }
 
-.top-\[-24px\] {
-  top: -24px;
-}
-
-.top-\[49px\] {
-  top: 49px;
+.top-\[40\%\] {
+  top: 40%;
 }
 
 .top-\[83px\] {
   top: 83px;
-}
-
-.left-\[48\%\] {
-  left: 48%;
-}
-
-.top-\[40\%\] {
-  top: 40%;
 }
 
 .z-10 {
@@ -3171,16 +3152,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 12rem;
 }
 
-.h-6 {
-  height: 1.5rem;
-}
-
 .h-\[0px\] {
   height: 0px;
-}
-
-.h-\[93px\] {
-  height: 93px;
 }
 
 .h-auto {
@@ -3203,14 +3176,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 2.5rem;
 }
 
-.w-11 {
-  width: 2.75rem;
-}
-
-.w-16 {
-  width: 4rem;
-}
-
 .w-20 {
   width: 5rem;
 }
@@ -3231,16 +3196,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 1rem;
 }
 
-.w-44 {
-  width: 11rem;
-}
-
 .w-48 {
   width: 12rem;
-}
-
-.w-6 {
-  width: 1.5rem;
 }
 
 .w-64 {
@@ -3253,10 +3210,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-80 {
   width: 20rem;
-}
-
-.w-96 {
-  width: 24rem;
 }
 
 .w-\[11rem\] {
@@ -3281,10 +3234,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-\[5rem\] {
   width: 5rem;
-}
-
-.w-\[73px\] {
-  width: 73px;
 }
 
 .w-auto {
@@ -3373,10 +3322,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   align-items: flex-start;
 }
 
-.items-end {
-  align-items: flex-end;
-}
-
 .items-center {
   align-items: center;
 }
@@ -3409,16 +3354,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   gap: 0.5rem;
 }
 
-.gap-2\.5 {
-  gap: 0.625rem;
-}
-
 .gap-3 {
   gap: 0.75rem;
-}
-
-.gap-3\.5 {
-  gap: 0.875rem;
 }
 
 .gap-4 {
@@ -3662,10 +3599,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .p-2 {
   padding: 0.5rem;
-}
-
-.p-2\.5 {
-  padding: 0.625rem;
 }
 
 .p-3 {
@@ -4036,12 +3969,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\] {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -4064,22 +3991,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.outline {
-  outline-style: solid;
-}
-
-.outline-1 {
-  outline-width: 1px;
-}
-
-.outline-offset-\[-1px\] {
-  outline-offset: -1px;
-}
-
-.outline-gray-300 {
-  outline-color: #d1d5db;
 }
 
 .ring {

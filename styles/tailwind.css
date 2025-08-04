@@ -815,6 +815,9 @@
   #shippingAddressListItemsWrapper span:nth-child(1) {
     @apply text-danaherpurple-500 cursor-pointer;
   }
+  #shippingAddressListItemsWrapper span:nth-child(1):hover {
+    @apply text-danaherpurple-800;
+  }
   [id^="shippingAddressListContentActions-"] {
     @apply items-start;
   }

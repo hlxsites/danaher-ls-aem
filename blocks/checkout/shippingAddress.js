@@ -96,7 +96,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             span(
               {
                 class:
-                  'text-md text-danaherpurple-500 hover:!text-danaherpurple-800',
+                  'text-md text-danaherpurple-500 hover:text-danaherpurple-800',
               },
               'Make this my default address',
             ),
@@ -348,7 +348,7 @@ click use address button to set the address as default for current order
       ) {
         const getParent = event.target.parentElement;
         if (getParent.classList.contains(`not-default-${type}-address`)) {
-          if (event.target.textContent === 'Make Default') {
+          if (event.target.textContent === 'Make this my default address') {
             showPreLoader();
             const setAddressDetails = JSON.parse(
               getParent.getAttribute('data-address'),
