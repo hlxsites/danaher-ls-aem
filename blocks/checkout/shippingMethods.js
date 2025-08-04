@@ -80,10 +80,10 @@ async function setShippingNotesOnBlur() {
           return false;
         }
         if (updateShippingNotesResponse.status === 'success') {
-          getShippingNotesField.classList.add('border-green-500', 'border-3');
+          getShippingNotesField.classList.add('border-green-500', 'border-2');
           setTimeout(() => {
             getShippingNotesField.classList.remove('border-green-500');
-            getShippingNotesField.classList.remove('border-3');
+            getShippingNotesField.classList.remove('border-2');
           }, 3000);
           await updateBasketDetails();
           removePreLoader();
