@@ -606,9 +606,6 @@ export const addressListModal = async (type) => {
       e.preventDefault();
 
       const searchTerm = e.target.value.toLowerCase();
-      console.log('searchTerm : ', searchTerm);
-      
-
       const searchedAddress = addressListData.filter((ad) => {
         const lowerCaseCompanyName = ad?.companyName2?.toLowerCase();
         const lowerCaseAddressLine1 = ad?.addressLine1?.toLowerCase();
