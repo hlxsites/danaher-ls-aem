@@ -865,7 +865,7 @@
     @apply w-[48%] mt-0;
   }
   #utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
-    @apply w-full;
+    @apply w-[98.5%];
   }
   #utilityModal #shippingAddressForm .form-title,
   #utilityModal #shippingAddressForm .button-wrapper {

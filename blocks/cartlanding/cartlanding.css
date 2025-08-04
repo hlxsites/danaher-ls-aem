@@ -547,10 +547,6 @@
   max-width: 792px
 }
 
-.cartlanding-wrapper :is(.max-w-xl) {
-  max-width: 36rem
-}
-
 .cartlanding-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }
@@ -1023,6 +1019,10 @@
 
 .cartlanding-wrapper :is(.pr-1) {
   padding-right: 0.25rem
+}
+
+.cartlanding-wrapper :is(.pr-3) {
+  padding-right: 0.75rem
 }
 
 .cartlanding-wrapper :is(.pt-1) {

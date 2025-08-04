@@ -118,7 +118,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   if (hasCancelButton) {
     cancelButton = span(
       {
-        class: 'mt-6 text-danaherpurple-500 cursor-pointer',
+        class: 'mt-6 text-danaherpurple-500 cursor-pointer pr-3',
         id: 'closeUtilityModal',
       },
       'Cancel',

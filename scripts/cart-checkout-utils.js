@@ -1396,7 +1396,7 @@ export async function addressForm(type, data = {}) {
   const adressForm = form(
     {
       id: `${type}AddressForm`,
-      class: `${type}-address-form text-sm w-full max-w-xl box-border overflow-hidden rounded-xl`,
+      class: `${type}-address-form text-sm w-full box-border overflow-hidden rounded-xl`,
       action: '',
       method: 'POST',
     },

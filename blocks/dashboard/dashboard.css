@@ -339,6 +339,10 @@
   padding-left: 2.25rem
 }
 
+.dashboard-wrapper :is(.pr-3) {
+  padding-right: 0.75rem
+}
+
 .dashboard-wrapper :is(.pt-0) {
   padding-top: 0px
 }

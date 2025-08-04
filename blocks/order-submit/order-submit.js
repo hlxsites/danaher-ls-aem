@@ -1,5 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
-import cartItem from '../cartlanding/cartItem.js';
+import { cartItem } from '../cartlanding/cartItem.js';
 import { checkoutSummary } from '../../scripts/cart-checkout-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { baseURL, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';

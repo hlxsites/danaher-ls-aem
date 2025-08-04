@@ -1140,6 +1140,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
           const shippingAsBillingAddressCheckBox = moduleContent.querySelector(
             '#shippingAsBillingAddress',
           );
+
           if (
             shippingAsBillingAddressCheckBox
             && !getUseAddressesResponse?.data?.commonShipToAddress
