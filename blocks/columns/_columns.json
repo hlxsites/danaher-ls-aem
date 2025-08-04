@@ -19,7 +19,6 @@
     {
       "title": "Title",
       "id": "title",
-      "plugins": {},
       "model": {
         "fields": [
           {
@@ -35,7 +34,6 @@
     {
       "title": "Image",
       "id": "image",
-      "plugins": {},
       "model": {
         "fields": [
           {
@@ -51,7 +49,6 @@
     {
       "title": "Text",
       "id": "text",
-      "plugins": {},
       "model": {
         "fields": [
           {
@@ -67,7 +64,6 @@
     {
       "title": "Button",
       "id": "button",
-      "plugins": {},
       "model": {
         "fields": [
           {
@@ -90,7 +86,6 @@
     {
       "title": "Article-Info",
       "id": "article-info",
-      "plugins": {},
       "model": {
         "fields": [
           {
@@ -158,13 +153,9 @@
           "name": "classes",
           "label": "Style",
           "valueType": "string",
-          "value": "",
           "options": [
-            "columns-2-cols",
-            "columns-3-cols",
-            "align-text-top",
-            "align-text-center",
-            "text-white"
+             { "name": "2 columns", "value": "columns-2-cols" },
+             { "name": "3 columns", "value": "columns-3-cols" }
           ]
         },
         {

@@ -270,7 +270,6 @@
         {
           "title": "Title",
           "id": "title",
-          "plugins": {},
           "model": {
             "fields": [
               {
@@ -286,7 +285,6 @@
         {
           "title": "Image",
           "id": "image",
-          "plugins": {},
           "model": {
             "fields": [
               {
@@ -302,7 +300,6 @@
         {
           "title": "Text",
           "id": "text",
-          "plugins": {},
           "model": {
             "fields": [
               {
@@ -318,7 +315,6 @@
         {
           "title": "Button",
           "id": "button",
-          "plugins": {},
           "model": {
             "fields": [
               {
@@ -341,7 +337,6 @@
         {
           "title": "Article-Info",
           "id": "article-info",
-          "plugins": {},
           "model": {
             "fields": [
               {
