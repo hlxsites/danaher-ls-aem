@@ -1,69 +1,13 @@
 import { div } from '../../scripts/dom-builder.js';
 import { cartItem } from '../cartlanding/cartItem.js';
 import { checkoutSummary } from '../../scripts/cart-checkout-utils.js';
-import { getAuthenticationToken } from '../../scripts/token-utils.js';
-import { baseURL, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
-import { postApiData } from '../../scripts/api-utils.js';
-
-const orderSubmitted = async () => {
-  const basketData = sessionStorage.getItem('basketData');
-  const basketId = JSON.parse(basketData);
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const token = authenticationToken.access_token;
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': token,
-    Accept: 'application/vnd.intershop.order.v1+json',
-  });
-  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token='{{token}}'`;
-  const data = {
-    basket: basketId.id,
-    termsAndConditionsAccepted: true,
-  };
-  try {
-    const response = await postApiData(
-      url,
-      JSON.stringify(data),
-      defaultHeader,
-    );
-    if (response) {
-      sessionStorage.setItem(
-        'orderSubmitDetails',
-        JSON.stringify(response.data),
-      );
-      const userOrderDetails = JSON.parse(
-        sessionStorage.getItem('userOrderDetails'),
-      );
-      if (!userOrderDetails) {
-        const orderIdArray = [];
-        orderIdArray.push(response.data.data.id);
-        sessionStorage.setItem(
-          'userOrderDetails',
-          JSON.stringify(orderIdArray),
-        );
-      } else {
-        userOrderDetails.push(response.data.data.id);
-        sessionStorage.setItem(
-          'userOrderDetails',
-          JSON.stringify(userOrderDetails),
-        );
-      }
-
-      return response;
-    }
-  } catch (error) {
-    console.log('error', error);
-  }
-};
+import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
   const params = new URLSearchParams(window.location.search);
   if (params.get('orderId')) {
-    let orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
+    const orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
     orderDetails.data.attributes.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
@@ -71,31 +15,6 @@ export default async function decorate(block) {
       }
     });
 
-    if (!orderDetails) {
-      const resp = await orderSubmitted();
-      if (resp?.status === 'success') {
-        orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
-        orderDetails.data.attributes.forEach((item) => {
-          if (item.name === 'GroupShippingNote') {
-            notes = item.value;
-          }
-        });
-        const cartItemsDetails = JSON.parse(
-          sessionStorage.getItem('productDetailObject'),
-        );
-        sessionStorage.setItem(
-          'cartItemsDetails',
-          JSON.stringify(cartItemsDetails),
-        );
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
-        console.log(
-          'productDetailObject',
-          JSON.parse(sessionStorage.getItem('productDetailObject')),
-        );
-        console.log('orderDetailssss', orderDetails);
-      }
-    }
     const orderConfirmationWrapper = div({
       class:
         'self-stretch px-10 py-14 bg-gray-50 inline-flex flex-col justify-start items-start gap-5',
@@ -149,74 +68,6 @@ export default async function decorate(block) {
       );
 
       return notesDiv;
-    };
-    const addressContainer = (address) => {
-      const addressDiv = div(
-        {
-          class:
-            'self-stretch p-6 bg-white flex flex-col justify-start items-start gap-6',
-        },
-        div(
-          {
-            class: 'self-stretch flex flex-col justify-start items-start gap-3',
-          },
-          div(
-            {
-              class:
-                'self-stretch flex flex-col justify-start items-start gap-3',
-            },
-            div(
-              {
-                class: 'self-stretch inline-flex justify-start items-start',
-              },
-              div({
-                class: 'justify-start text-black text-3xl font-bold leading-7',
-              }),
-              address,
-            ),
-            div(
-              {
-                class:
-                  'self-stretch p-3 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 inline-flex justify-start items-start gap-6',
-              },
-              div(
-                {
-                  class: 'flex inline-flex flex-col justify-start items-start',
-                },
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-xl font-bold',
-                  },
-                  'Company Headquarters',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  '1459 Main street',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  'Suite 205',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  'New York, NY 10992',
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-      return addressDiv;
     };
     const cartItemsWrapper = div(
       {

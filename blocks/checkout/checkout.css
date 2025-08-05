@@ -316,10 +316,6 @@
   max-width: 792px
 }
 
-.checkout :is(.max-w-xl) {
-  max-width: 36rem
-}
-
 .checkout :is(.flex-1) {
   flex: 1 1 0%
 }
@@ -663,16 +659,16 @@
   padding-left: 13px
 }
 
+.checkout :is(.pr-3) {
+  padding-right: 0.75rem
+}
+
 .checkout :is(.pt-0) {
   padding-top: 0px
 }
 
 .checkout :is(.pt-6) {
   padding-top: 1.5rem
-}
-
-.checkout :is(.pr-3) {
-  padding-right: 0.75rem
 }
 
 .checkout :is(.text-left) {

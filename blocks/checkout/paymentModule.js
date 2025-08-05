@@ -54,8 +54,9 @@ const paymentModule = async () => {
         cardsWrapper.innerHTML = '';
         cardsWrapper = div(
           {
+            id: `paymentMethod${pm?.displayName}`,
             class:
-              `border-solid border-gray-300 flex justify-between p-4 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-center`,
+              `border-solid border-gray-300 flex  justify-between p-4 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-start`,
           },
           div(
             {
@@ -69,8 +70,7 @@ const paymentModule = async () => {
               true,
               false,
               'mt-6',
-              false,
-              false,
+              'creditCard',
             ),
           ),
           span({
@@ -81,11 +81,34 @@ const paymentModule = async () => {
         paymentMethodsWrapper?.append(cardsWrapper);
       }
       if (pm?.displayName === 'Invoice') {
+        const invoiceNumberWrapper = div(
+          {
+            id: 'invoiceNumberWrapper',
+            class: 'flex-col flex p-6 w-full items-start bg-checkout hidden',
+          },
+        );
+        const invoiceNumber = buildInputElement(
+          'invoiceNumber',
+          'Invoice Number',
+          'text',
+          'invoiceNumber',
+          false,
+          false,
+          'invoiceNumber',
+          '',
+        );
+        invoiceNumber.className = '';
+        invoiceNumber.classList.add('w-full');
+        invoiceNumber?.querySelector('input')?.classList?.add('outline-none');
+        invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
+        invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
+        invoiceNumberWrapper.append(invoiceNumber);
         invoiceWrapper.innerHTML = '';
         invoiceWrapper = div(
           {
+            id: `paymentMethod${pm?.displayName}`,
             class:
-              `border-solid border-gray-300 flex gap-2 items-center p-4 border-2 ${ind > 0 ? 'border-t-0 ' : ''} items-center`,
+              `border-solid border-gray-300 flex flex-col gap-3 items-start p-4 border-2 ${ind > 0 ? 'border-t-0 ' : ''} items-start`,
           },
           buildInputElement(
             'invoice',
@@ -95,10 +118,10 @@ const paymentModule = async () => {
             true,
             false,
             'mt-6',
-            false,
-            false,
+            'invoice',
           ),
         );
+        invoiceWrapper.append(invoiceNumberWrapper);
         paymentMethodsWrapper?.append(invoiceWrapper);
       }
     });
@@ -131,12 +154,14 @@ const paymentModule = async () => {
         });
       decorateIcons(cardsWrapper);
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
-        showPreLoader();
         setTimeout(async () => {
           c.preventDefault();
           const eventTarget = c.target;
+          const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
           if (!eventTarget.checked) {
             if (eventTarget?.id === 'invoice') {
+              showPreLoader();
+              getInvoiceNumberWrapper?.classList.remove('hidden');
               const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
               const defaultHeaders = new Headers();
               defaultHeaders.append('Content-Type', 'Application/json');
@@ -147,8 +172,13 @@ const paymentModule = async () => {
               const data = JSON.stringify({ paymentInstrument: 'Invoice' });
               await putApiData(url, data, defaultHeaders);
             }
+            if (eventTarget?.id === 'creditCard') {
+              showPreLoader();
+              getInvoiceNumberWrapper?.classList.add('hidden');
+            }
             c.target.checked = true;
           } else {
+            getInvoiceNumberWrapper?.classList.add('hidden');
             c.target.checked = false;
           }
           removePreLoader();

@@ -806,6 +806,9 @@ export const shippingAddressModule = async () => {
    ::::::::::::::
    */
         const getCurrentBasketDetails = await getBasketDetails();
+        if (getCurrentBasketDetails.data.totalProductQuantity === 0) {
+          window.location.href = '/us/en/e-buy/cartlanding';
+        }
         /*
     *
      ::::::::::::::::::::::::
@@ -1145,8 +1148,8 @@ show default billing address else mark shippingAsBilling checkbox as checked
             shippingAsBillingAddressCheckBox
             && !getUseAddressesResponse?.data?.commonShipToAddress
           ) {
-            shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
-            shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
+            // shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
+            // shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
           }
         } else {
           defaultBillingAddress.classList.add('hidden');

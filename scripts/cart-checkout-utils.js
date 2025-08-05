@@ -386,6 +386,10 @@ export const submitOrder = async (basketId) => {
       }
       return response;
     }
+    return {
+      data: response,
+      status: 'error',
+    };
   } catch (error) {
     return {
       data: error.message,
@@ -1156,6 +1160,92 @@ export const taxExemptModal = () => {
 *
 *
  ::::::::::::::
+ function to create PO number if its not present in the Baket
+ ::::::::::::::
+*
+*
+*
+ */
+
+export const createPoNumber = async (invoiceNumber) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.basket.v1+json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/attributes`;
+  const data = JSON.stringify({
+    name: 'ReferenceNo',
+    value: invoiceNumber,
+    type: 'String',
+  });
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      return response;
+    }
+    return {
+      data: response,
+      status: 'error',
+    };
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+*
+*
+ ::::::::::::::
+ function to update PO number if its not present in the Baket
+ ::::::::::::::
+*
+*
+*
+ */
+
+export const updatePoNumber = async (invoiceNumber) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.basket.v1+json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/attributes/ReferenceNo`;
+  const data = JSON.stringify({
+    name: 'ReferenceNo',
+    value: invoiceNumber,
+    type: 'String',
+  });
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      return response;
+    }
+    return {
+      data: response,
+      status: 'error',
+    };
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+*
+*
+ ::::::::::::::
  handle the interaction when user click on proceed button or the steps icons
  ::::::::::::::
 *
@@ -1204,12 +1294,32 @@ export const changeStep = async (step) => {
     // return false;
   }
   if (currentTab === 'submitOrder') {
-    const getBasketForOrder = await getBasketDetails();
-    if (getBasketForOrder?.status === 'success') {
-      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-
-      if (submittingOrder?.data?.data?.documentNumber) {
-        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+    const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    if (getSelectedPaymentMethod?.value === 'invoice') {
+      const invoiceNumber = document.querySelector('#invoiceNumber');
+      if (invoiceNumber?.value !== '') {
+        const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
+        if (creatingInvoiceNumber?.status === 'success') {
+          const getBasketForOrder = await getBasketDetails();
+          if (getBasketForOrder?.status === 'success') {
+            const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+            if (submittingOrder?.data?.data?.documentNumber) {
+              sessionStorage.removeItem('productDetailObject');
+              sessionStorage.removeItem('basketData');
+              window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+            }
+          }
+        }
+      } else {
+        const getBasketForOrder = await getBasketDetails();
+        if (getBasketForOrder?.status === 'success') {
+          const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+          if (submittingOrder?.data?.data?.documentNumber) {
+            sessionStorage.removeItem('productDetailObject');
+            sessionStorage.removeItem('basketData');
+            window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+          }
+        }
       }
     }
   }

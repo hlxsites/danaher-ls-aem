@@ -10,7 +10,7 @@ export default async function decorate(block) {
 
   if (
     authenticationToken?.status === 'error'
-    || authenticationToken.user_type === 'guest'
+    || authenticationToken.user_type === 'guest' || !sessionStorage.getItem('basketData')
   ) {
     window.location.href = '/us/en/e-buy/cartlanding';
   }
