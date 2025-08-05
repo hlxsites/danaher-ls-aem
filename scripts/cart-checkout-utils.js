@@ -2035,7 +2035,6 @@ get price type if its net or gross
   */
   let checkoutSummaryKeys = {};
   if (orderId !== '') {
-    console.log('checkout summary data: ', checkoutSummaryData);
     checkoutSummaryKeys = {
       totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
       undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
@@ -2054,17 +2053,12 @@ get price type if its net or gross
       total: checkoutSummaryData?.totals?.orderTotal
         ? getOrderTotalValue('orderTotal')
         : '$0',
-      tax: checkoutSummaryData?.totals?.orderTotal
-        ? `${currencyCode} ${
-          checkoutSummaryData?.totals?.orderTotal?.tax?.value ?? ''
-        }`
-        : '$0',
+      tax: '$0',
       taxExempt: checkoutSummaryData?.taxExempt,
       discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
       discountLabel,
       totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
     };
-    console.log('checkout summary keys: ', checkoutSummaryKeys);
   } else {
     checkoutSummaryKeys = {
       totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
@@ -2129,6 +2123,9 @@ get price type if its net or gross
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
     window.location.href = '/us/en/e-buy/login';
   });
+
+  const isHiddenTaxExempt = orderId && checkoutSummaryKeys?.taxExempt === false;
+
   /*
   :::::::::::::
   generate checkout summary  module
@@ -2248,7 +2245,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  `text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${ orderId ? checkoutSummaryKeys?.taxExempt === false ? 'hidden' : '' : '' }`,
+                  `text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${isHiddenTaxExempt ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),
