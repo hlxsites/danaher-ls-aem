@@ -1303,10 +1303,10 @@ export const changeStep = async (step) => {
           const getBasketForOrder = await getBasketDetails();
           if (getBasketForOrder?.status === 'success') {
             const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-            if (submittingOrder?.data?.data?.documentNumber) {
+            if (submittingOrder?.data?.data?.id) {
               sessionStorage.removeItem('productDetailObject');
               sessionStorage.removeItem('basketData');
-              window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+              window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
             }
           }
         }
@@ -1314,10 +1314,10 @@ export const changeStep = async (step) => {
         const getBasketForOrder = await getBasketDetails();
         if (getBasketForOrder?.status === 'success') {
           const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
-          if (submittingOrder?.data?.data?.documentNumber) {
+          if (submittingOrder?.data?.data?.id) {
             sessionStorage.removeItem('productDetailObject');
             sessionStorage.removeItem('basketData');
-            window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+            window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
           }
         }
       }
@@ -1901,6 +1901,31 @@ get counrty field and attach change event listener to populate states based on c
   return adressForm;
 }
 
+const getOrderDetails = async (orderId) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const token = authenticationToken.access_token;
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': token,
+  });
+  const url = `${baseURL}/orders/${orderId}`;
+  try {
+    const response = await getApiData(
+      url,
+      defaultHeader,
+    );
+    if (response?.status === 'success') {
+      return response;
+    }
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 /*
 *
 *
@@ -1910,7 +1935,7 @@ get counrty field and attach change event listener to populate states based on c
  *
  *
  */
-export async function checkoutSummary() {
+export async function checkoutSummary(orderId = '') {
   /*
  ::::::::::::::::
  store config to use some predefined set of rules/values
@@ -1924,7 +1949,7 @@ get price type if its net or gross
 */
   const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? 'net';
   const currencyCode = '$';
-  const getCheckoutSummaryData = await getBasketDetails();
+  let getCheckoutSummaryData = '';
   let discountCode = '';
   let discountLabelData = '';
   let discountDetails = '';
@@ -1932,22 +1957,42 @@ get price type if its net or gross
   let discountLabel = '';
   let discountPrice = '';
   let checkoutSummaryData = false;
-  if (getCheckoutSummaryData?.status === 'success') {
-    checkoutSummaryData = getCheckoutSummaryData.data.data;
-    discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
-      ?? '';
-    discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
-      ?? '';
-    discountPromoCode = discountDetails?.promotion ?? '';
-    discountLabelData = await getPromotionDetails(discountPromoCode);
+  let userLoggedInStatus = false;
+  if (orderId !== '') {
+    getCheckoutSummaryData = await getOrderDetails(orderId);
 
-    if (discountLabelData?.status === 'success') {
-      discountLabel = discountLabelData?.data?.name ?? '';
-      discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+    if (getCheckoutSummaryData?.status === 'success') {
+      checkoutSummaryData = getCheckoutSummaryData.data;
+      discountCode = getCheckoutSummaryData?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+      discountDetails = getCheckoutSummaryData?.included?.discounts[`${discountCode}`]
+      ?? '';
+      discountPromoCode = discountDetails?.promotion ?? '';
+      discountLabelData = await getPromotionDetails(discountPromoCode);
+
+      if (discountLabelData?.status === 'success') {
+        discountLabel = discountLabelData?.data?.name ?? '';
+        discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+      }
+    }
+  } else {
+    getCheckoutSummaryData = await getApiData();
+    if (getCheckoutSummaryData?.status === 'success') {
+      checkoutSummaryData = getCheckoutSummaryData.data.data;
+      discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+      discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
+      ?? '';
+      discountPromoCode = discountDetails?.promotion ?? '';
+      discountLabelData = await getPromotionDetails(discountPromoCode);
+
+      if (discountLabelData?.status === 'success') {
+        discountLabel = discountLabelData?.data?.name ?? '';
+        discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+      }
     }
   }
 
-  let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -1971,40 +2016,85 @@ get price type if its net or gross
     }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '';
   };
+  /*
+::::::::::::::
+ common function to get key value from checout order object
+ ::::::::::::::::::::::::::::
+  */
+  const getOrderTotalValue = (type) => {
+    const totalValue = `${
+      checkoutSummaryData?.totals[type].value ?? ''
+    }`;
+    return totalValue > 0 ? `${currencyCode}${totalValue}` : '';
+  };
 
   /*
   ::::::::::::::
   map the data from checkout summary (basket) to the keys.
   ::::::::::::::
   */
-  const checkoutSummaryKeys = {
-    totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
-    undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
-      ? getTotalValue('undiscountedItemTotal')
-      : '',
-    itemTotal: checkoutSummaryData?.totals?.itemTotal
-      ? getTotalValue('itemTotal')
-      : '$0',
-    undiscountedShippingTotal: checkoutSummaryData?.totals
-      ?.undiscountedShippingTotal
-      ? getTotalValue('undiscountedShippingTotal')
-      : '',
-    shippingTotal: checkoutSummaryData?.totals?.shippingTotal
-      ? getTotalValue('shippingTotal')
-      : '$0',
-    total: checkoutSummaryData?.totals?.grandTotal
-      ? getTotalValue('grandTotal')
-      : '$0',
-    tax: checkoutSummaryData?.totals?.grandTotal
-      ? `${currencyCode} ${
-        checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
-      }`
-      : '$0',
-    discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
-    discountLabel,
-    totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
-  };
-
+  let checkoutSummaryKeys = {};
+  if (orderId !== '') {
+    console.log('checkout summary data: ', checkoutSummaryData);
+    checkoutSummaryKeys = {
+      totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
+      undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+        ? getOrderTotalValue('undiscountedItemTotal')
+        : '',
+      itemTotal: checkoutSummaryData?.totals?.itemTotal
+        ? getOrderTotalValue('itemTotal')
+        : '$0',
+      undiscountedShippingTotal: checkoutSummaryData?.totals
+        ?.undiscountedShippingTotal
+        ? getOrderTotalValue('undiscountedShippingTotal')
+        : '',
+      shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+        ? getOrderTotalValue('shippingTotal')
+        : '$0',
+      total: checkoutSummaryData?.totals?.orderTotal
+        ? getOrderTotalValue('orderTotal')
+        : '$0',
+      tax: checkoutSummaryData?.totals?.orderTotal
+        ? `${currencyCode} ${
+          checkoutSummaryData?.totals?.orderTotal?.tax?.value ?? ''
+        }`
+        : '$0',
+      taxExempt: checkoutSummaryData?.taxExempt,
+      discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
+      discountLabel,
+      totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
+    };
+    console.log('checkout summary keys: ', checkoutSummaryKeys);
+  } else {
+    checkoutSummaryKeys = {
+      totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
+      undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+        ? getTotalValue('undiscountedItemTotal')
+        : '',
+      itemTotal: checkoutSummaryData?.totals?.itemTotal
+        ? getTotalValue('itemTotal')
+        : '$0',
+      undiscountedShippingTotal: checkoutSummaryData?.totals
+        ?.undiscountedShippingTotal
+        ? getTotalValue('undiscountedShippingTotal')
+        : '',
+      shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+        ? getTotalValue('shippingTotal')
+        : '$0',
+      total: checkoutSummaryData?.totals?.grandTotal
+        ? getTotalValue('grandTotal')
+        : '$0',
+      tax: checkoutSummaryData?.totals?.grandTotal
+        ? `${currencyCode} ${
+          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+        }`
+        : '$0',
+      taxExempt: '',
+      discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
+      discountLabel,
+      totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
+    };
+  }
   const loggedOutUserDiv = div(
     {
       class: 'inline-flex flex-col gap-4',
@@ -2158,7 +2248,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  'text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline',
+                  `text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${ orderId ? checkoutSummaryKeys?.taxExempt === false ? 'hidden' : '' : '' }`,
               },
               'Tax exempt?',
             ),

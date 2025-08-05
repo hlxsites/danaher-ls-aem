@@ -6,7 +6,8 @@ import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 export default async function decorate(block) {
   showPreLoader();
   const params = new URLSearchParams(window.location.search);
-  if (params.get('orderId')) {
+  const orderId = params.get('orderId');
+  if (orderId) {
     const orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
     orderDetails.data.attributes.forEach((item) => {
@@ -44,7 +45,7 @@ export default async function decorate(block) {
         'Congratulations! Your order is submitted. Get ready for the excitement as we process your purchase. Thank you for choosing us – your satisfaction is our top priority!',
       ),
     );
-    const checkoutSummaryContainer = await checkoutSummary();
+    const checkoutSummaryContainer = await checkoutSummary(orderId);
 
     const cartItems = await cartItem();
     const notesValue = () => {
