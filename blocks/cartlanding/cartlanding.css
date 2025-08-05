@@ -527,6 +527,18 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.w-\[150px\]) {
+  width: 150px
+}
+
+.cartlanding-wrapper :is(.w-\[80px\]) {
+  width: 80px
+}
+
+.cartlanding-wrapper :is(.w-\[120px\]) {
+  width: 120px
+}
+
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
 }
