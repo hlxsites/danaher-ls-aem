@@ -84,7 +84,7 @@ async function setShippingNotesOnBlur() {
           setTimeout(() => {
             getShippingNotesField.classList.remove('border-green-500');
             getShippingNotesField.classList.remove('border-2');
-          }, 3000);
+          }, 1500);
           await updateBasketDetails();
           removePreLoader();
         }

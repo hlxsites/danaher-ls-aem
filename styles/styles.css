@@ -2872,7 +2872,7 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 }
 
 #utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
-  width: 100%;
+  width: 98.5%;
 }
 
 #utilityModal #shippingAddressForm .form-title,

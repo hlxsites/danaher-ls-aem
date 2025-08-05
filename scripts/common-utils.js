@@ -97,7 +97,7 @@ export function closeUtilityModal() {
 export function createModal(content, hasCancelButton, hasCloseButton) {
   const modalWrapper = div({
     class:
-      'inset-0 dhls-container fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
+      'inset-0  fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
     id: 'utilityModal',
   });
   const modalContainer = div({

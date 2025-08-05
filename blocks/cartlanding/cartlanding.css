@@ -527,6 +527,10 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.\!w-full) {
+  width: 100% !important
+}
+
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
 }
@@ -545,6 +549,18 @@
 
 .cartlanding-wrapper :is(.max-w-\[792px\]) {
   max-width: 792px
+}
+
+.cartlanding-wrapper :is(.\!max-w-\[792px\]) {
+  max-width: 792px !important
+}
+
+.cartlanding-wrapper :is(.max-w-full) {
+  max-width: 100%
+}
+
+.cartlanding-wrapper :is(.\!max-w-\[100\%\]) {
+  max-width: 100% !important
 }
 
 .cartlanding-wrapper :is(.flex-1) {

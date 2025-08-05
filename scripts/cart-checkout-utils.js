@@ -1252,6 +1252,12 @@ export const changeStep = async (step) => {
   }
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
+    if (currentTab === 'payment') {
+      alert('Basket Not Found');
+      window.location.href = '/us/en/e-buy/cartlanding';
+      removePreLoader();
+      return false;
+    }
     if (currentTab === 'submitOrder') {
       const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
       const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
@@ -1317,6 +1323,7 @@ export const changeStep = async (step) => {
           if (getBasketForOrder?.status === 'success') {
             const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
             if (submittingOrder?.data?.data?.id) {
+              sessionStorage.removeItem('submittedOrderData');
               sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
               sessionStorage.removeItem('productDetailObject');
               sessionStorage.removeItem('basketData');
@@ -1329,6 +1336,7 @@ export const changeStep = async (step) => {
         if (getBasketForOrder?.status === 'success') {
           const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
           if (submittingOrder?.data?.data?.id) {
+            sessionStorage.removeItem('submittedOrderData');
             sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
             sessionStorage.removeItem('productDetailObject');
             sessionStorage.removeItem('basketData');
