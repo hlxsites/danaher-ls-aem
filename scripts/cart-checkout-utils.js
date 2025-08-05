@@ -2600,7 +2600,7 @@ export async function updateCheckoutSummary() {
 }
 
 export const cartItemsContainer = (cartItemValue) => {
-  const modifyCart = async (type, element, value) => {
+  const modifyCart = async (type, element, value, eventParent) => {
     showPreLoader();
     if (type === 'delete-item') {
       const item = {
@@ -2642,8 +2642,11 @@ export const cartItemsContainer = (cartItemValue) => {
       const response = await updateCartItemQuantity(item);
       if (response.status === 'success') {
         await updateCheckoutSummary();
-        const totalPrice = document.getElementById('total-price');
-        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
+        const totalpriceElement = eventParent.querySelector('.total-price');
+        const unitPriceElement = eventParent.querySelector('.unit-price');
+        const numericValue = Number(unitPriceElement.textContent.replace('$', ''));
+        const totalPrice = totalpriceElement;
+        const totalPricValue = item.value * numericValue;
         totalPrice.innerHTML = `$${totalPricValue}`;
         removePreLoader();
         element.blur(); // Removes focus from the input
@@ -2679,6 +2682,8 @@ export const cartItemsContainer = (cartItemValue) => {
     value: cartItemValue.itemQuantity,
   });
   inputBox.addEventListener('change', (event) => {
+    const eventParent = event.target.parentElement.parentElement.parentElement;
+
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
     const inputItem = selectedDiv.querySelector('input');
     const productItem = inputItem.parentElement.parentElement;
@@ -2696,27 +2701,27 @@ export const cartItemsContainer = (cartItemValue) => {
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', inputItem, event.target.value);
+      modifyCart('quantity-added', inputItem, event.target.value, eventParent);
     }
     // modifyCart("quantity-added", event.target.value);
   });
   const unitPriceDiv = () => {
-    if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
+    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
       return div(
         {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
+          class: 'w-[150px] justify-start text-black text-base font-semibold',
         },
         div(
           {
             class:
-            'w-full justify-start text-gray-500 text-base font-semibold item line-through',
+            'w-[150px] justify-start text-gray-500 text-base font-semibold item line-through',
           },
           `$${cartItemValue.listPrice.value}`,
         ),
         div(
           {
             class:
-            'w-full justify-start text-black text-base',
+            'unit-price w-[150px] justify-start text-black text-base',
           },
           `$${cartItemValue.salePrice.value}`,
         ),
@@ -2725,7 +2730,7 @@ export const cartItemsContainer = (cartItemValue) => {
 
     return div(
       {
-        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
+        class: 'w-[150px] justify-start text-black text-base font-semibold',
       },
       //  div(
       //     {
@@ -2737,7 +2742,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class:
-            'w-full justify-start text-black text-base',
+            'unit-price w-[150px] justify-start text-black text-base',
         },
         `$${cartItemValue.salePrice.value}`,
       ),
@@ -2803,8 +2808,8 @@ export const cartItemsContainer = (cartItemValue) => {
       unitPriceDiv(),
       div(
         {
-          class: 'w-[59px] justify-start text-black text-base font-semibold sm:m-[0px] m-[7px]',
-          id: 'total-price',
+          class: 'total-price w-[80px] justify-start text-black text-base font-semibold sm:m-[0px] m-[7px]',
+          // id: 'total-price',
         },
         `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),

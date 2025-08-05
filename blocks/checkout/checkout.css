@@ -308,6 +308,14 @@
   width: 100% !important
 }
 
+.checkout :is(.w-\[150px\]) {
+  width: 150px
+}
+
+.checkout :is(.w-\[80px\]) {
+  width: 80px
+}
+
 .checkout :is(.min-w-\[320px\]) {
   min-width: 320px
 }
