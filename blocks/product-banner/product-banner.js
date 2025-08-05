@@ -165,7 +165,11 @@ export default function productBannerDecorate(block) {
     const paragraphs = longDescription.querySelectorAll('p');
     paragraphs.forEach((p) => {
       p.classList.add('mb-3');
+      p.querySelectorAll('strong').forEach((strong) => {
+        strong.classList.add('font-bold');
+      });
     });
+
     if (paragraphs.length > 0) {
       paragraphs[paragraphs.length - 1].classList.remove('mb-3');
     }
