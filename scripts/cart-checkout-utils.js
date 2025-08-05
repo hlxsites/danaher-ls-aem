@@ -2747,7 +2747,7 @@ export const cartItemsContainer = (cartItemValue) => {
   const itemsscontainer = div(
     {
       class:
-        'w-full py-3 border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1',
+        'w-full py-3 cart-item-wrapper border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1',
       id: cartItemValue.lineItemId,
     },
     div(

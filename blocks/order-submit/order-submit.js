@@ -159,6 +159,11 @@ export default async function decorate(block) {
     );
 
     orderConfirmationWrapper.append(orderDescription);
+    cartItemsWrapper?.querySelector('#cartListContainer')?.querySelectorAll('.cart-item-wrapper')?.forEach((item) => {
+      if (item?.classList.contains('flex-col')) {
+        item?.classList.remove('flex-col');
+      }
+    });
     orderConfirmationWrapper.append(cartItemsWrapper);
     const inputElements = cartItemsWrapper.querySelectorAll('input');
     inputElements.forEach((element) => {
