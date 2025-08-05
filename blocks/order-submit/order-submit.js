@@ -1,5 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
-import cartItem from '../cartlanding/cartItem.js';
+import { cartItem } from '../cartlanding/cartItem.js';
 import { checkoutSummary } from '../../scripts/cart-checkout-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { baseURL } from '../../scripts/common-utils.js';
@@ -149,74 +149,7 @@ export default async function decorate(block) {
 
       return notesDiv;
     };
-    const addressContainer = (address) => {
-      const addressDiv = div(
-        {
-          class:
-            'self-stretch p-6 bg-white flex flex-col justify-start items-start gap-6',
-        },
-        div(
-          {
-            class: 'self-stretch flex flex-col justify-start items-start gap-3',
-          },
-          div(
-            {
-              class:
-                'self-stretch flex flex-col justify-start items-start gap-3',
-            },
-            div(
-              {
-                class: 'self-stretch inline-flex justify-start items-start',
-              },
-              div({
-                class: 'justify-start text-black text-3xl font-bold leading-7',
-              }),
-              address,
-            ),
-            div(
-              {
-                class:
-                  'self-stretch p-3 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 inline-flex justify-start items-start gap-6',
-              },
-              div(
-                {
-                  class: 'flex inline-flex flex-col justify-start items-start',
-                },
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-xl font-bold',
-                  },
-                  'Company Headquarters',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  '1459 Main street',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  'Suite 205',
-                ),
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-base font-extralight',
-                  },
-                  'New York, NY 10992',
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-      return addressDiv;
-    };
+
     const cartItemsWrapper = div(
       {
         class: 'self-stretch flex flex-col justify-start items-start gap-9',

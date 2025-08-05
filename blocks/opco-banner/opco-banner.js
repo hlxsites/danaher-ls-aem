@@ -32,9 +32,8 @@ export default async function decorate(block) {
   const baseUrl = `https://${window.DanaherConfig.host}`;
 
   const currentPath = window.location.href;
-
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   const opcoBannerTitle = bannerTitle;
   const opcoBannerHeading = bannerHeading;

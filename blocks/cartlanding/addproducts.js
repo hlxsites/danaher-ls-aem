@@ -6,74 +6,11 @@ import {
   submitSearchQuery,
 } from '../header/header.js';
 import relatedProducts from './related-products.js';
-import { noProducts } from './noProduct.js';
+import noProducts from './noProduct.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 // import { buildSearchWithIcon } from "../../scripts/common-utils.js";
 
-export const addProducts = async () => {
-  // const productContainer = div(
-  //   {
-  //     class: "",
-  //   },
-  //   div(
-  //     {
-  //       class:
-  //         "w-[683px] mt-12 justify-start text-black text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
-  //     },
-  //     "Want to add more products?"
-  //   ),
-  //   div(
-  //     {
-  //       class:
-  //         "self-stretch justify-start text-black text-base font-extralight",
-  //     },
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum semper mollis. Integer pharetra dui sed urna cursus, eu pretium tortor sodales. "
-  //   ),
-  //   div({
-  //     class: "w-24 h-10 left-[63px] top-[57px]  bg-white",
-  //   }),
-  //   div(
-  //     {
-  //       class:
-  //         "w-80 justify-start text-gray-700 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-  //     },
-  //     "Search for a product"
-  //   ),
-  //   div({
-  //     class: "w-10 h-4 left-[63px] top-[57px]  bg-white",
-  //   }),
-  //   div(
-  //     {
-  //       class: "inline-flex gap-2 bg-white",
-  //     },
-  //     div(
-  //       {
-  //         class:
-  //           "w-[75px] h-10 px-6 border-solid border-2 rounded-md inline-flex justify-between items-center",
-  //       },
-  //       div(
-  //         {
-  //           class: "",
-  //         },
-  //         "🔍"
-  //       ),
-  //       div({
-  //         class: "flex-1 justify-start text-gray-500 font-extralight text-base ",
-
-  //       }, "Search by name or SKU ID")
-  //     ),
-  //     button(
-  //       {
-  //         class: "h-10 btn btn-lg font-medium btn-primary-purple rounded-full m-0",
-  //       },
-  //       "Get started"
-  //     )
-  //   ),
-
-  //   div({
-  //     class: "w-24 h-10 left-[63px] top-[57px]  bg-white",
-  //   })
-  // );
+const addProducts = async () => {
   let skuarray = [];
   const buildSearchWithIcon = (
     lable,
@@ -85,7 +22,7 @@ export const addProducts = async () => {
     dtName,
     placeholder,
   ) => {
-    const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+    // const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
     const searchElement = div(
       {
         class: 'space-y-2 field-wrapper relative',
@@ -122,25 +59,23 @@ export const addProducts = async () => {
       // })
     );
     decorateIcons(searchElement);
-
+    async function handleSearchInput() {
+      const clearIcon = document.querySelector('span.searchbox-clear');
+      const inputValue = document.getElementById('searchInput');
+      if (inputValue.value) {
+        clearIcon.classList.add('cursor-pointer');
+        clearIcon.classList.remove('hidden');
+      } else {
+        clearIcon.classList.add('hidden');
+      }
+      clearIcon.addEventListener('click', () => {
+        inputValue.value = '';
+        clearIcon.classList.add('hidden');
+      });
+    }
     searchElement.addEventListener('input', handleSearchInput);
     return searchElement;
   };
-
-  async function handleSearchInput(e) {
-    const clearIcon = document.querySelector('span.searchbox-clear');
-    const inputValue = document.getElementById('searchInput');
-    if (inputValue.value) {
-      clearIcon.classList.add('cursor-pointer');
-      clearIcon.classList.remove('hidden');
-    } else {
-      clearIcon.classList.add('hidden');
-    }
-    clearIcon.addEventListener('click', () => {
-      inputValue.value = '';
-      clearIcon.classList.add('hidden');
-    });
-  }
 
   const productSearchcontainer = div({
     class: 'w-[1358px]',
@@ -186,16 +121,6 @@ export const addProducts = async () => {
           {
             class: 'inline-flex lg:flex-row flex-col justify-center items-right lg:items-center  gap-4',
           },
-          //  span({
-          //     class: ' icon icon-search absolute mt-2 ml-2',
-          // }),
-          // input({
-          //   type: "text",
-          //   placeholder: "Search by name and SKU ID",
-          //   class:
-          //     "w-[350px] h-[35px] bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 px-6 py-3 text-lg",
-          //   id: "searchInput",
-          // }),
           buildSearchWithIcon(
             '',
             '',
@@ -234,9 +159,7 @@ export const addProducts = async () => {
       'cartlanding',
     );
     skuarray = [];
-    const skuids = searchResponse.results?.map((item) => {
-      skuarray.push(item.raw.sku);
-    });
+    // const skuids = searchResponse.results?.map((item) => skuarray.push(item.raw.sku));
     if (skuarray.length > 0) {
       const productSearched = await relatedProducts(
         `${searchResponse.totalCount} Products Available`,
@@ -246,9 +169,9 @@ export const addProducts = async () => {
 
       if (re) {
         re.append(productSearched);
-        const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
-        if (div.length > 1) {
-          div[0].remove();
+        const topSellingDiv = document.querySelectorAll('.top-selling-rendered');
+        if (topSellingDiv.length > 1) {
+          topSellingDiv[0].remove();
         }
         const noProductFoundDiv = document.querySelector('.no-product-found');
         if (noProductFoundDiv) noProductFoundDiv.remove();
@@ -257,8 +180,8 @@ export const addProducts = async () => {
     } else {
       const re = document.getElementById('productSearchcontainer');
       re.append(noProducts(inputValue));
-      const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
-      if (div.length === 1) div[0].remove();
+      const topSellingRenderedDiv = document.querySelectorAll('.top-selling-rendered');
+      if (topSellingRenderedDiv.length === 1) topSellingRenderedDiv[0].remove();
       removePreLoader();
     }
   };
@@ -270,3 +193,4 @@ export const addProducts = async () => {
 
   return productSearchcontainer;
 };
+export default addProducts;

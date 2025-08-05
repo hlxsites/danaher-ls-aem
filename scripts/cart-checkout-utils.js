@@ -37,49 +37,11 @@ import {
   updateBasketDetails,
   getProductDetailObject,
 } from '../blocks/cartlanding/cartSharedFile.js';
-import { makePublicUrl, imageHelper } from './scripts.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  // const logoDiv = div({}, hr({
-  //     class: `w-full border-black-300`,
-  //   }),
-  //   div(
-  //     {
-  //       class: "w-full px-4 py-3 inline-flex justify-between items-center",
-  //       id: imgsrc,
-  //     },
-  //     div(
-  //       {
-  //         class:
-  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-  //       },
-  //       img({
-  //         class: "",
-  //         src: `/icons/${imgsrc}.png`,
-  //       })
-  //     ),
-  //     div(
-  //       {
-  //         class:
-  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-  //       },
-  //       opcoBe[0]
-  //     ),
-  //     div(
-  //       {
-  //         class:
-  //           "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-  //         id: `product-Quantity-${opcoBe[0]}`,
-  //       },
-  //       `${itemToBeDisplayed[opcoBe].length} Items`
-  //     )
-  //   ),
-  //   hr({
-  //     class: `w-full border-black-200`,
-  //   }))
   const logoDivInner = div(
     {
       class:
@@ -2392,7 +2354,7 @@ export async function updateCheckoutSummary() {
 export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
-    if (type == 'delete-item') {
+    if (type === 'delete-item') {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
@@ -2402,11 +2364,10 @@ export const cartItemsContainer = (cartItemValue) => {
       if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
-          const response = getProductDetailsObject.data.map(
+          getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              const str = `product-Quantity-${opcoBe[0]}`;
-              const parts = str.split('-');
+              // const str = `product-Quantity-${opcoBe[0]}`;
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
@@ -2432,9 +2393,9 @@ export const cartItemsContainer = (cartItemValue) => {
       const response = await updateCartItemQuantity(item);
       if (response.status === 'success') {
         await updateCheckoutSummary();
-        const totalPrice = document.getElementById("total-price");
+        const totalPrice = document.getElementById('total-price');
         const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
-        totalPrice.innerHTML= totalPricValue;
+        totalPrice.innerHTML = totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2453,9 +2414,9 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'icon icon-icons8-delete cart-delete',
     }),
   );
-  deleteButton.addEventListener('click', (event) => {
-    const input = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', input, '');
+  deleteButton.addEventListener('click', () => {
+    const inputEl = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', inputEl, '');
   });
   const inputBox = input({
     // id: cartItemValue.lineItemId,
@@ -2470,207 +2431,71 @@ export const cartItemsContainer = (cartItemValue) => {
   });
   inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const input = selectedDiv.querySelector('input');
-    const productItem = input.parentElement.parentElement;
+    const inputElement = selectedDiv.querySelector('input');
+    const productItem = inputElement.parentElement.parentElement;
 
     const enteredValue = event.target.value;
-    if (enteredValue < Number(input.min)) {
+    if (enteredValue < Number(inputElement.min)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
       );
-    } else if (enteredValue > Number(input.max)) {
+    } else if (enteredValue > Number(inputElement.max)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', input, event.target.value);
+      modifyCart('quantity-added', inputElement, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
-  const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-    cartItemValue.productName,
-    {
-      href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-      ),
-      title: cartItemValue.productName,
-      class: 'justify-center',
-    },
-  );
-  const unitPriceDiv = () =>{
-    if(cartItemValue.listPrice.value != cartItemValue.salePrice.value ){
-      return  div(
-      {
-        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
-      },
-     div(
+
+  const unitPriceDiv = () => {
+    if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
+      return div(
         {
-          class:
-            "w-full justify-start text-gray-500 text-base font-bold item line-through",
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
         },
-        `$${cartItemValue.listPrice.value}`
-      ),
+        div(
+          {
+            class:
+            'w-full justify-start text-gray-500 text-base font-bold item line-through',
+          },
+          `$${cartItemValue.listPrice.value}`,
+        ),
+        div(
+          {
+            class:
+            'w-full justify-start text-black text-base',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+      );
+    }
+
+    return div(
+      {
+        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+      },
+      //  div(
+      //     {
+      //       class:
+      //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
+      //     },
+      //     `$${cartItemValue.listPrice.value}`
+      //   ),
       div(
         {
           class:
-            "w-full justify-start text-black text-base",
+            'w-full justify-start text-black text-base',
         },
-       `$${cartItemValue.salePrice.value}`
-      )
-    )
-    }
-    else {
-      return  div(
-      {
-        class: "sm:w-48 w-[5rem] justify-start text-black text-base font-bold",
-      },
-    //  div(
-    //     {
-    //       class:
-    //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
-    //     },
-    //     `$${cartItemValue.listPrice.value}`
-    //   ),
-      div(
-        {
-          class:
-            "w-full justify-start text-black text-base",
-        },
-       `$${cartItemValue.salePrice.value}`
-      )
-    )
-    }
-  }
-  // const itemContainer = div(
-  //   {
-  //     class: "flex w-full justify-between items-center",
-  //     id: cartItemValue.lineItemId,
-  //   },
-  //   div(
-  //     {
-  //       class:
-  //         "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
-  //     },
-  //     image
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-96",
-  //     },
-  //     div(
-  //       {
-  //         class: "",
-  //       },
-  //       cartItemValue.productName
-  //     ),
-  //     div(
-  //       {
-  //         class: " text-gray-500 text-base font-extralight",
-  //       },
-  //       `SKU: ${cartItemValue.sku}`
-  //     )
-  //   ),
-  //   div(
-  //     {
-  //       class: "",
-  //     },
-  //     inputBox
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-11 text-right text-black text-base font-bold",
-  //     },
-  //     `$${cartItemValue.salePrice.value}`
-  //   ),
-  //   deleteButton
-  // );
-  // const itemContainer = div(
-  //   {
-  //     class:
-  //       "w-full self-stretch p-4 relative inline-flex justify-start items-center",
-  //   },
-  //   div(
-  //     { class: "inline-flex justify-start items-center gap-3.5" },
-  //     div(
-  //       {
-  //         class:
-  //           "w-28 p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-start items-center gap-2.5",
-  //       },
-  //       // div(
-  //       //   {
-  //       //     class: "w-16 self-stretch relative overflow-hidden",
-  //       //   },
-  //         image
-  //         // img({
-  //         //   class: "w-20 h-28 left-[-4px] top-[-24px] absolute",
-  //         //   src: `/images/wesee/dummy.png `,
-  //         // })
-  //       // )
-  //     ),
-  //     div(
-  //       { class: "w-64 inline-flex flex-col justify-start items-start" },
-  //       div(
-  //         {
-  //           class: "self-stretch justify-start text-black text-base font-bold",
-  //         },
-  //         cartItemValue.productName
-  //       ),
-  //       div(
-  //         {
-  //           class:
-  //             "self-stretch justify-start text-gray-500 text-sm font-normal ",
-  //         },
-  //         cartItemValue.sku
-  //       )
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-11 inline-flex flex-col justify-start items-start" },
-  //     // div({
-  //     //     class:"w-11 h-10 px-4 py-3 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center overflow-hidden"
-  //     // },
-  //     // div({
-  //     //     class:"justify-start text-gray-700 text-base font-normal"
-  //     // }, "2")
-  //     inputBox
-  //     // )
-  //   ),
-  //   div(
-  //     { class: "w-44 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       `$${cartItemValue.salePrice.value}`
-  //     ),
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-gray-500 text-base",
-  //       },
-  //       " $100.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-28 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       "$200.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
-  //     deleteButton
-  //   )
-  // );
+        `$${cartItemValue.salePrice.value}`,
+      ),
+    );
+  };
+
   const itemsscontainer = div(
     {
       class:
@@ -2749,7 +2574,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
-          id: "total-price"
+          id: 'total-price',
         },
         `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),

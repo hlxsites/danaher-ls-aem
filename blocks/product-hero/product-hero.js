@@ -1,19 +1,15 @@
 import {
-  div, p, span, input, button,
+  div, p, span, a, h1,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization,
   getCommerceBase,
   getProductResponse,
-  getProductDetails,
 } from '../../scripts/commerce.js';
-import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
-import { addItemToCart } from '../cartlanding/myCartService.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
 } from '../../scripts/scripts.js';
-import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -233,7 +229,7 @@ export default async function decorate(block) {
   const response = await getProductResponse();
 
   if (response?.length > 0) {
-    const productInfo = await getProductDetails(response[0]?.raw?.sku);
+    // const productInfo = await getProductDetails(response[0]?.raw?.sku);
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();

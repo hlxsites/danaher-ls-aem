@@ -185,11 +185,9 @@ export default async function decorate(block) {
     leftTitle,
     leftLinkLable,
     leftProductIds,
-    leftProductsEndPoint,
     rightTitle,
     rightLinkLabel,
     rightProductIds,
-    rightProductsEndPoint,
   ] = block.children;
 
   block.parentElement.parentElement.style.padding = '0';

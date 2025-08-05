@@ -2,7 +2,7 @@ import {
   div, h1, p, button, hr, img,
 } from '../../scripts/dom-builder.js';
 
-export const emptyCart = () => {
+const emptyCart = () => {
   const container = div({
     class: 'inline-flex flex-col justify-center w-[1358px]',
   });
@@ -99,3 +99,4 @@ export const emptyCart = () => {
   container.appendChild(browseSection);
   return container;
 };
+export default emptyCart;

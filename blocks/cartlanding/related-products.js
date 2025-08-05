@@ -1,4 +1,4 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './grid-data.js';
 import renderListCard from './listData.js';
@@ -68,21 +68,6 @@ export default async function relatedProducts(headingText, productIds) {
       },
       headingText ?? '',
     ),
-    // a(
-    //   {
-    //     href: linkUrl ?? '#',
-    //     class:
-    //       'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
-    //     target: `${openNewTab ? '_blank' : '_self'}`,
-    //   },
-    //   linkText ?? '',
-    //   linkText?.length
-    //     ? span({
-    //       class:
-    //           'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
-    //     })
-    //     : '',
-    // ),
   );
   decorateIcons(leftGroup);
 

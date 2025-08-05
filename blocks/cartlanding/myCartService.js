@@ -11,7 +11,7 @@ import {
   postApiData,
 } from '../../scripts/api-utils.js';
 
-import { addProducts } from './addproducts.js';
+import addProducts from './addproducts.js';
 // import {
 //   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
 // } from './cartSharedFile.js';
@@ -1035,7 +1035,7 @@ export async function updateCart(newItem) {
     const response = getProductDetailsObject.data.map((itemToBeDisplayed) => {
       const opcoBe = Object.keys(itemToBeDisplayed);
       const imgsrc = opcoBe[0].split(' ')[0];
-      if (newItem[0].data.manufacturer == opcoBe[0]) {
+      if (newItem[0].data.manufacturer === opcoBe[0]) {
         const quantityElement = document.getElementById(
           `product-Quantity-${opcoBe[0]}`,
         );

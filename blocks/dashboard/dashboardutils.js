@@ -1,14 +1,14 @@
-import { div, span } from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { getAuthenticationToken } from "../../scripts/token-utils.js";
-import { dynamicTableContent } from "./orderStatus.js";
-import { baseURL } from "../../scripts/common-utils.js";
-import { getApiData } from "../../scripts/api-utils.js";
-import { removePreLoader, showPreLoader } from "../../scripts/common-utils.js";
- let currentPage = 1;
-export function renderPagination(totalProducts, paginationWrapper) {   
+import { div, span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { dynamicTableContent } from './orderStatus.js';
+import { baseURL, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
+import { getApiData } from '../../scripts/api-utils.js';
+
+let currentPage = 1;
+export function renderPagination(totalProducts, paginationWrapper) {
   paginationWrapper.innerHTML = '';
-//   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
+  //   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const totalPages = Math.ceil(totalProducts / 10);
   if (totalPages <= 1) {
     paginationWrapper.style.display = 'none';
@@ -28,6 +28,42 @@ export function renderPagination(totalProducts, paginationWrapper) {
       'w-full left-0 top-0 absolute flex justify-between items-center px-4',
   });
 
+  const getUrlValues = async (newUrl, page) => {
+    showPreLoader();
+    const tbody = document.querySelector('tbody');
+    tbody.remove();
+    const orderTableContainer = document.getElementById('orderTable');
+    const orderWrapperContainer = document.getElementById('orderWrapper');
+    const url = newUrl.search;
+    const urlParams = new URLSearchParams(url);
+    newUrl.searchParams.set('page', page);
+    window.history.replaceState({}, '', newUrl);
+    const authenticationToken = await getAuthenticationToken();
+    if (!authenticationToken) {
+      return { status: 'error', data: 'Unauthorized access.' };
+    }
+    const token = authenticationToken.access_token;
+    const defaultHeader = new Headers({
+      'Authentication-Token': token,
+      Accept: 'application/vnd.intershop.order.v1+json',
+    });
+    const apiUrl = `${baseURL}orders?page[limit]=10&offset=${11}&include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
+    const response = await getApiData(apiUrl, defaultHeader);
+    if (response) {
+      const orderDetailResponse = response.data;
+      const dynamicTableContentt = await dynamicTableContent(orderDetailResponse.data);
+      orderTableContainer.append(dynamicTableContentt);
+      const paginationWrapper = div({
+        class: '',
+      });
+      const pagination = renderPagination(17, paginationWrapper);
+      paginationWrapper.append(pagination);
+      orderWrapperContainer.append(paginationWrapper);
+      removePreLoader();
+    } else {
+      console.log('inside else');
+    }
+  };
   // Previous Button
   const prevEnabled = currentPage > 1;
   const prevButton = div({
@@ -118,7 +154,7 @@ export function renderPagination(totalProducts, paginationWrapper) {
         ),
       ),
     );
-    pageNumber.addEventListener("click", () => {
+    pageNumber.addEventListener('click', () => {
       currentPage = page;
       const newUrl = new URL(window.location);
       getUrlValues(newUrl, page);
@@ -229,44 +265,4 @@ export function renderPagination(totalProducts, paginationWrapper) {
   contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
   localPaginationContainer.append(grayLine, contentWrapper);
   return localPaginationContainer;
-
 }
-
-const getUrlValues = async (newUrl, page) => {
-showPreLoader();
-  const tbody = document.querySelector('tbody');
-  tbody.remove();
-  const orderTableContainer = document.getElementById("orderTable");
-  const orderWrapperContainer = document.getElementById("orderWrapper");
-  const url = newUrl.search;
-  const urlParams = new URLSearchParams(url);
-  const pageValue = urlParams.get("page");
-  newUrl.searchParams.set("page", page);
-  window.history.replaceState({}, "", newUrl);
-  const authenticationToken = await getAuthenticationToken();
-    if (!authenticationToken) {
-      return { status: "error", data: "Unauthorized access." };
-    }
-    const token = authenticationToken.access_token;
-    const defaultHeader = new Headers({
-      "Authentication-Token": token,
-      "Accept": "application/vnd.intershop.order.v1+json"
-    });
-    const apiUrl = `${baseURL}orders?page[limit]=10&offset=${11}&include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
-    const response = await getApiData(apiUrl, defaultHeader);
-      if (response) {
-        const orderDetailResponse = response.data;
-        const dynamicTableContentt = await dynamicTableContent(orderDetailResponse.data);
-        orderTableContainer.append(dynamicTableContentt);
-        const paginationWrapper = div({
-            class: ""  
-        });
-        const pagination = renderPagination(17, paginationWrapper);
-        paginationWrapper.append(pagination);
-        orderWrapperContainer.append(paginationWrapper);
-        removePreLoader();
-    }
-        else{
-            console.log("inside else")
-        }
-};

@@ -49,12 +49,12 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
 export default function decorate(block) {
   const [bannerTitle, ...shopFeaturedBannerItems] = block.children;
 
-  // const opcoBannerItems = [];
-  // [...block.children].forEach((child, index) => {
-  //   if (index > 0) {
-  //     opcoBannerItems.push(child);
-  //   }
-  // });
+  const opcoBannerItems = [];
+  [...block.children].forEach((child, index) => {
+    if (index > 0) {
+      opcoBannerItems.push(child);
+    }
+  });
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const sectionHeading = bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';

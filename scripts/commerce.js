@@ -11,14 +11,17 @@ import {
 
 import { getApiData } from './api-utils.js';
 
-// export function getCommerceBase() {
-//   return window.DanaherConfig !== undefined
-//     ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
-//     : 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
-// }
+const GRID_ITEMS_PER_PAGE = 21;
+const LIST_ITEMS_PER_PAGE = 7;
+
 export function getCommerceBase() {
-  return 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/';
+  return window.DanaherConfig !== undefined
+    ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath
+    : 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 }
+// export function getCommerceBase() {
+//   return 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/';
+// }
 
 /**
  * Returns the user authorization used for commerce API calls
@@ -169,7 +172,7 @@ export const getProductDetails = async (product) => {
     }
   } catch (error) {
     // eslint-disable-next-line
-    console.log('error', error);
+    console.log("error", error);
   }
 };
 

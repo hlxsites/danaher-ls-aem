@@ -352,11 +352,11 @@ const fileMappings = [
   },
   {
     content: ['./blocks/dashboard/dashboard.js',
-             './blocks/dashboard/orderStatus.js', 
-             './blocks/dashboard/dashboardutils.js',
-             './scripts/common-utils.js',
-             './blocks/dashboard/recentOrder.js'
-              ],
+      './blocks/dashboard/orderStatus.js',
+      './blocks/dashboard/dashboardutils.js',
+      './scripts/common-utils.js',
+      './blocks/dashboard/recentOrder.js',
+    ],
     output: './blocks/dashboard/dashboard.css',
     wrapper: 'dashboard-wrapper',
   },

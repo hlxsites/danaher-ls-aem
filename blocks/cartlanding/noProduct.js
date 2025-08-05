@@ -1,7 +1,7 @@
 import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export const noProducts = (searchedWord) => {
+const noProducts = (searchedWord) => {
   const cubeButton = div(
     {
       class: 'w-full relative overflow-hidden',
@@ -49,10 +49,11 @@ export const noProducts = (searchedWord) => {
           class:
             'self-stretch text-center justify-start text-black text-base font-extralight',
         },
-        "Check for typos, spelling errors, search by part number or try a different keyword"
-      )
-    )
+        'Check for typos, spelling errors, search by part number or try a different keyword',
+      ),
+    ),
   );
 
   return noProductDiv;
 };
+export default noProducts;

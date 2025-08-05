@@ -223,8 +223,8 @@ export const sessionObject = async (
           JSON.stringify(getProductDetailsObject.data),
         );
         return {
-          data:  getProductDetailsObject.data[manufacturerIndex][manufacturer],
-          status: "success"
+          data: getProductDetailsObject.data[manufacturerIndex][manufacturer],
+          status: 'success',
         };
       }
     } else {
@@ -261,7 +261,7 @@ export const updateProductQuantityValue = async (
     }
     return response;
   }
-  const quantityElement = document.getElementById(lineItemId);
+  // const quantityElement = document.getElementById(lineItemId);
   const response = await sessionObject(
     type,
     quantity,

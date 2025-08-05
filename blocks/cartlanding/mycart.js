@@ -1,8 +1,8 @@
 import { div } from '../../scripts/dom-builder.js';
 import { cartItem } from './cartItem.js';
-import { emptyCart } from './emptyCart.js';
+import emptyCart from './emptyCart.js';
 import { recommendedProducts } from './recommendedproducts.js';
-import { addProducts } from './addproducts.js';
+import addProducts from './addproducts.js';
 import {
   getBasketDetails,
   checkoutSummary,
@@ -81,8 +81,8 @@ export const mycart = async () => {
     id: 'myCartListContainer',
   });
   if (
-    basketDetail.status == 'error'
-    || basketDetail.data.totalProductQuantity == 0
+    basketDetail.status === 'error'
+    || basketDetail.data.totalProductQuantity === 0
   ) {
     if (myCartEmptyContainer.classList.contains('hidden')) {
       myCartEmptyContainer.classList.remove('hidden');
