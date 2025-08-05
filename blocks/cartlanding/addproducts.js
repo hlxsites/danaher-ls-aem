@@ -180,8 +180,8 @@ const addProducts = async () => {
     } else {
       const re = document.getElementById('productSearchcontainer');
       re.append(noProducts(inputValue));
-      const topSellingRenderedDiv = document.querySelectorAll('.top-selling-rendered');
-      if (topSellingRenderedDiv.length === 1) topSellingRenderedDiv[0].remove();
+      const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
+      if (div.length == 1) div[0].remove();
       removePreLoader();
     }
   };

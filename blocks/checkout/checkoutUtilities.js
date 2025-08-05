@@ -148,7 +148,7 @@ export const progressModule = () => {
     class: 'checkout-step cursor-pointer relative',
     id: 'checkout-shippingMethods',
     'data-tab': 'shippingMethods',
-    'data-activeTab': 'shippingMethods',
+    'data-activeTab': 'shippingAddress',
   });
   shipping.innerHTML = '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
 

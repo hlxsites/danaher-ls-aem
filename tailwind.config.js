@@ -104,7 +104,6 @@ module.exports = {
     "appear",
     "btn",
     "bg-danaherlightblue-50",
-    "danahergray-75",
     "bottom-border-right",
     "bg-color-right",
     "top-border",
@@ -139,7 +138,6 @@ module.exports = {
           900: "#014254",
         },
         danahergray: {
-          75: "#E5E7EB",
           100: "#F3F4F6",
           150: "#767676",
           200: "#616161",

@@ -42,6 +42,43 @@ const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
+  // const logoDiv = div({}, hr({
+  //     class: `w-full border-black-300`,
+  //   }),
+  //   div(
+  //     {
+  //       class: "w-full px-4 py-3 inline-flex justify-between items-center",
+  //       id: imgsrc,
+  //     },
+  //     div(
+  //       {
+  //         class:
+  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       img({
+  //         class: "",
+  //         src: `/icons/${imgsrc}.png`,
+  //       })
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //       },
+  //       opcoBe[0]
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+  //         id: `product-Quantity-${opcoBe[0]}`,
+  //       },
+  //       `${itemToBeDisplayed[opcoBe].length} Items`
+  //     )
+  //   ),
+  //   hr({
+  //     class: `w-full border-black-200`,
+  //   }))
   const logoDivInner = div(
     {
       class:
@@ -54,33 +91,33 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       },
       div(
         {
-          class: 'justify-start text-black text-base font-bold truncate',
+          class: 'justify-start text-black text-base font-semibold truncate',
         },
         opcoBe[0],
       ),
     ),
     div(
       {
-        class: 'w-64 justify-start text-black text-base font-bold',
+        class: 'w-64 justify-start text-black text-base font-semibold',
         id: `product-Quantity-${opcoBe[0]}`,
       },
       `${itemToBeDisplayed[opcoBe].length} Items`,
     ),
     div(
       {
-        class: 'hidden sm:block w-24 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-24 justify-start text-black text-base font-semibold',
       },
       'QTY',
     ),
     div(
       {
-        class: 'hidden sm:block w-48 justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-48 justify-start text-black text-base font-semibold',
       },
       'Unit Price',
     ),
     div(
       {
-        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-bold',
+        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-semibold',
       },
       'Total',
     ),
@@ -118,25 +155,25 @@ export function defaultAddress(address, type) {
           {},
           h5(
             {
-              class: `font-bold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
+              class: `font-semibold m-0 ${address?.companyName2 ? '' : 'hidden'}`,
             },
             address?.companyName2 ?? '',
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             address?.addressLine1 ?? '',
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             address?.city ?? '',
           ),
           p(
             {
-              class: 'text-black text-base font-extralight',
+              class: 'text-black text-base ',
             },
             `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
               address?.postalCode ?? ''
@@ -148,7 +185,7 @@ export function defaultAddress(address, type) {
             'data-type': type,
             'data-action': 'edit',
             class:
-              'flex justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
+              'flex justify-start bg-white editAddressButton text-danaherpurple-500 hover:text-danaherpurple-800 p-0 pl-0 text-base font-semibold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
           'Edit Address',
@@ -751,7 +788,7 @@ export const buildCountryStateSelectBox = (
         name: inputName,
         'data-required': required,
         class:
-          'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-300',
       },
       ...selectOptions,
     ),
@@ -892,7 +929,7 @@ export const taxExemptModal = () => {
           }),
           p(
             {
-              class: 'text-gray-900 text-3xl font-bold',
+              class: 'text-gray-900 text-3xl font-semibold',
             },
             'Tax Exempt',
           ),
@@ -1161,9 +1198,9 @@ export const changeStep = async (step) => {
   }
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
-    alert('In-valid basket');
+    // alert('In-valid basket');
     removePreLoader();
-    return false;
+    // return false;
   }
   if (currentTab === 'submitOrder') {
     const getBasketForOrder = await getBasketDetails();
@@ -1358,7 +1395,7 @@ export async function addressForm(type, data = {}) {
   const adressForm = form(
     {
       id: `${type}AddressForm`,
-      class: `${type}-address-form text-sm w-full max-w-xl box-border overflow-hidden rounded-xl`,
+      class: `${type}-address-form text-sm w-full box-border overflow-hidden rounded-xl`,
       action: '',
       method: 'POST',
     },
@@ -1474,7 +1511,7 @@ export async function addressForm(type, data = {}) {
     buildButton(
       'Save',
       `save${capitalizeFirstLetter(type)}Address`,
-      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+      ' proceed-button text-xl  border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
     ),
   );
   /*
@@ -1543,15 +1580,14 @@ get counrty field and attach change event listener to populate states based on c
         )
       ) {
         if (data) {
-          removeObjectKey(
-            formObject,
-            `preferred${capitalizeFirstLetter(type)}Address`,
-          );
+          delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
           Object.assign(formObject, {
             id: data.id,
             type: 'MyAddress',
             urn: data.urn,
           });
+        } else {
+          delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
         }
       }
 
@@ -1864,7 +1900,7 @@ get price type if its net or gross
     },
     div(
       {
-        class: 'w-80 justify-start text-black text-3xl font-bold  leading-10',
+        class: 'w-80 justify-start text-black text-3xl font-semibold  leading-10',
       },
       'Let’s get started',
     ),
@@ -1910,7 +1946,7 @@ get price type if its net or gross
       },
       div(
         {
-          class: ' flex flex-col justify-start items-start gap-4',
+          class: 'w-full flex flex-col justify-start items-start gap-4',
         },
         div(
           {
@@ -1924,14 +1960,14 @@ get price type if its net or gross
  ::::::::::::::::::
    */ span(
             {
-              class: ' justify-start text-black text-base font-bold ',
+              class: ' justify-start text-black text-base font-semibold ',
             },
             'Subtotal',
           ),
           span(
             {
               class:
-                ' text-right flex flex-col justify-start text-black text-base font-bold ',
+                ' text-right flex flex-col justify-start text-black text-base font-semibold ',
             },
             strong(
               {
@@ -1963,7 +1999,7 @@ get price type if its net or gross
           span(
             {
               class:
-                ' justify-start text-black text-base text-right font-extralight ',
+                ' justify-start text-black text-base text-right  ',
             },
             'Discount',
           ),
@@ -1973,7 +2009,7 @@ get price type if its net or gross
             },
             span(
               {
-                class: 'text-right text-black text-base font-extralight ',
+                class: 'text-right text-black text-base  ',
               },
               checkoutSummaryKeys.discountPrice,
             ),
@@ -2003,7 +2039,7 @@ get price type if its net or gross
             span(
               {
                 class:
-                  'w-20 justify-start text-black text-base font-extralight ',
+                  'w-20 justify-start text-black text-base  ',
               },
               'Sales Tax*',
             ),
@@ -2019,7 +2055,7 @@ get price type if its net or gross
           span(
             {
               class:
-                ' text-right justify-start text-black text-base font-extralight ',
+                ' text-right justify-start text-black text-base  ',
             },
             checkoutSummaryKeys.tax,
           ),
@@ -2036,14 +2072,14 @@ get price type if its net or gross
           },
           span(
             {
-              class: 'w-20 justify-start text-black text-base font-extralight ',
+              class: 'w-20 justify-start text-black text-base  ',
             },
             'Shipping*',
           ),
           span(
             {
               class:
-                ' text-right flex flex-col justify-start text-black text-base font-extralight ',
+                ' text-right flex flex-col justify-start text-black text-base  ',
             },
             strong(
               {
@@ -2072,18 +2108,18 @@ get price type if its net or gross
       div(
         {
           class:
-            'checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid mb-4 pt-6',
+            'checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid pt-6',
           id: 'checkoutSummaryTotal',
         },
         span(
           {
-            class: ' justify-start text-black text-xl font-bold ',
+            class: ' justify-start text-black text-xl font-semibold ',
           },
           `Total (${checkoutSummaryKeys.totalLineItems} items)`,
         ),
         span(
           {
-            class: ' text-right justify-start text-black text-xl font-bold ',
+            class: ' text-right justify-start text-black text-xl font-semibold ',
           },
           checkoutSummaryKeys.total,
         ),
@@ -2096,10 +2132,10 @@ get price type if its net or gross
       div(
         {
           class:
-            'p-[22px] flex flex-col justify-center w-full items-start gap-4',
+            'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
             ((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
           } `,
           id: 'proceed-button',
@@ -2182,7 +2218,7 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold p-0 mb-3 mt-0',
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
               },
               'Bill to Address',
             ),
@@ -2204,20 +2240,20 @@ get price type if its net or gross
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
                   ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 `${
                   getUseAddressesResponse?.data?.invoiceToAddress
@@ -2259,7 +2295,7 @@ get price type if its net or gross
             },
             h5(
               {
-                class: 'font-bold p-0 mb-3 mt-0',
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
               },
               'Shipping Address',
             ),
@@ -2276,20 +2312,20 @@ get price type if its net or gross
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress
                   ?.addressLine1 ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
               ),
               p(
                 {
-                  class: 'text-black text-base font-extralight m-0 p-0',
+                  class: 'text-black text-base  m-0 p-0',
                 },
                 `${
                   getUseAddressesResponse?.data?.commonShipToAddress
@@ -2364,10 +2400,11 @@ export const cartItemsContainer = (cartItemValue) => {
       if (response.status === 'success') {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
-          getProductDetailsObject.data.map(
+          const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              // const str = `product-Quantity-${opcoBe[0]}`;
+              const str = `product-Quantity-${opcoBe[0]}`;
+              const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
@@ -2393,9 +2430,6 @@ export const cartItemsContainer = (cartItemValue) => {
       const response = await updateCartItemQuantity(item);
       if (response.status === 'success') {
         await updateCheckoutSummary();
-        const totalPrice = document.getElementById('total-price');
-        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
-        totalPrice.innerHTML = totalPricValue;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2414,9 +2448,9 @@ export const cartItemsContainer = (cartItemValue) => {
       class: 'icon icon-icons8-delete cart-delete',
     }),
   );
-  deleteButton.addEventListener('click', () => {
-    const inputEl = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', inputEl, '');
+  modalCloseButton.addEventListener('click', (event) => {
+    const input = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', input, '');
   });
   const inputBox = input({
     // id: cartItemValue.lineItemId,
@@ -2431,71 +2465,163 @@ export const cartItemsContainer = (cartItemValue) => {
   });
   inputBox.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const inputElement = selectedDiv.querySelector('input');
-    const productItem = inputElement.parentElement.parentElement;
+    const input = selectedDiv.querySelector('input');
+    const productItem = input.parentElement.parentElement;
 
     const enteredValue = event.target.value;
-    if (enteredValue < Number(inputElement.min)) {
+    if (enteredValue < Number(input.min)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
-    } else if (enteredValue > Number(inputElement.max)) {
+    } else if (enteredValue > Number(input.max)) {
       productItem.style.border = '2px solid red';
       alert(
-        `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', inputElement, event.target.value);
+      modifyCart('quantity-added', input, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
-
-  const unitPriceDiv = () => {
-    if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
-      return div(
-        {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
-        },
-        div(
-          {
-            class:
-            'w-full justify-start text-gray-500 text-base font-bold item line-through',
-          },
-          `$${cartItemValue.listPrice.value}`,
-        ),
-        div(
-          {
-            class:
-            'w-full justify-start text-black text-base',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-      );
-    }
-
-    return div(
-      {
-        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
-      },
-      //  div(
-      //     {
-      //       class:
-      //         "w-full justify-start text-gray-500 text-base font-bold item line-through",
-      //     },
-      //     `$${cartItemValue.listPrice.value}`
-      //   ),
-      div(
-        {
-          class:
-            'w-full justify-start text-black text-base',
-        },
-        `$${cartItemValue.salePrice.value}`,
+  const image = imageHelper(
+    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+    cartItemValue.productName,
+    {
+      href: makePublicUrl(
+        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
       ),
-    );
-  };
-
+      title: cartItemValue.productName,
+      class: 'justify-center',
+    },
+  );
+  // const itemContainer = div(
+  //   {
+  //     class: "flex w-full justify-between items-center",
+  //     id: cartItemValue.lineItemId,
+  //   },
+  //   div(
+  //     {
+  //       class:
+  //         "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
+  //     },
+  //     image
+  //   ),
+  //   div(
+  //     {
+  //       class: "w-96",
+  //     },
+  //     div(
+  //       {
+  //         class: "",
+  //       },
+  //       cartItemValue.productName
+  //     ),
+  //     div(
+  //       {
+  //         class: " text-gray-500 text-base font-extralight",
+  //       },
+  //       `SKU: ${cartItemValue.sku}`
+  //     )
+  //   ),
+  //   div(
+  //     {
+  //       class: "",
+  //     },
+  //     modalInput
+  //   ),
+  //   div(
+  //     {
+  //       class: "w-11 text-right text-black text-base font-bold",
+  //     },
+  //     `$${cartItemValue.salePrice.value}`
+  //   ),
+  //   modalCloseButton
+  // );
+  // const itemContainer = div(
+  //   {
+  //     class:
+  //       "w-full self-stretch p-4 relative inline-flex justify-start items-center",
+  //   },
+  //   div(
+  //     { class: "inline-flex justify-start items-center gap-3.5" },
+  //     div(
+  //       {
+  //         class:
+  //           "w-28 p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-start items-center gap-2.5",
+  //       },
+  //       // div(
+  //       //   {
+  //       //     class: "w-16 self-stretch relative overflow-hidden",
+  //       //   },
+  //         image
+  //         // img({
+  //         //   class: "w-20 h-28 left-[-4px] top-[-24px] absolute",
+  //         //   src: `/images/wesee/dummy.png `,
+  //         // })
+  //       // )
+  //     ),
+  //     div(
+  //       { class: "w-64 inline-flex flex-col justify-start items-start" },
+  //       div(
+  //         {
+  //           class: "self-stretch justify-start text-black text-base font-bold",
+  //         },
+  //         cartItemValue.productName
+  //       ),
+  //       div(
+  //         {
+  //           class:
+  //             "self-stretch justify-start text-gray-500 text-sm font-normal ",
+  //         },
+  //         cartItemValue.sku
+  //       )
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-11 inline-flex flex-col justify-start items-start" },
+  //     // div({
+  //     //     class:"w-11 h-10 px-4 py-3 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center overflow-hidden"
+  //     // },
+  //     // div({
+  //     //     class:"justify-start text-gray-700 text-base font-normal"
+  //     // }, "2")
+  //     modalInput
+  //     // )
+  //   ),
+  //   div(
+  //     { class: "w-44 inline-flex flex-col justify-start items-end" },
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-black text-base font-bold",
+  //       },
+  //       `$${cartItemValue.salePrice.value}`
+  //     ),
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-gray-500 text-base",
+  //       },
+  //       " $100.00"
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-28 inline-flex flex-col justify-start items-end" },
+  //     div(
+  //       {
+  //         class:
+  //           "self-stretch text-right justify-start text-black text-base font-bold",
+  //       },
+  //       "$200.00"
+  //     )
+  //   ),
+  //   div(
+  //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
+  //     modalCloseButton
+  //   )
+  // );
   const itemsscontainer = div(
     {
       class:
@@ -2512,7 +2638,7 @@ export const cartItemsContainer = (cartItemValue) => {
         },
         div(
           {
-            class: 'justify-start text-black text-base font-bold truncate m-[5px]',
+            class: 'justify-start text-black text-base font-semibold truncate m-[5px]',
           },
           img({
             class: 'w-full h-auto',
@@ -2522,12 +2648,12 @@ export const cartItemsContainer = (cartItemValue) => {
       ),
       div(
         {
-          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-bold',
+          class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-semibold',
         // id: `product-Quantity-${opcoBe[0]}`,
         },
         div(
           {
-            class: 'w-full justify-start items-center text-black text-base font-bold',
+            class: 'w-full justify-start items-center text-black text-base font-semibold',
           },
           cartItemValue.productName,
         ),
@@ -2547,36 +2673,34 @@ export const cartItemsContainer = (cartItemValue) => {
       },
       div(
         {
-          class: 'w-24 justify-start text-black text-base font-bold',
+          class: 'w-24 justify-start text-black text-base font-semibold',
         },
         inputBox,
       ),
-      // div(
-      //   {
-      //     class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
-      //   },
-      //   div(
-      //     {
-      //       class:
-      //       'w-full justify-start text-gray-500 text-base font-bold item line-through',
-      //     },
-      //     `$${cartItemValue.salePrice.value}`,
-      //   ),
-      //   div(
-      //     {
-      //       class:
-      //       'w-full justify-start text-black text-base',
-      //     },
-      //     `$${cartItemValue.salePrice.value}`,
-      //   ),
-      // ),
-      unitPriceDiv(),
+      div(
+        {
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+        },
+        div(
+          {
+            class:
+            'w-full justify-start text-gray-500 text-base font-bold item line-through',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+        div(
+          {
+            class:
+            'w-full justify-start text-black text-base',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+      ),
       div(
         {
           class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
-          id: 'total-price',
         },
-        `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
+        `$${cartItemValue.salePrice.value}`,
       ),
       deleteButton,
     ),

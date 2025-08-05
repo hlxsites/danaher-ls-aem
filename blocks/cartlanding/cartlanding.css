@@ -107,8 +107,8 @@
   left: -4px
 }
 
-.cartlanding-wrapper :is(.left-\[48\%\]) {
-  left: 48%
+.cartlanding-wrapper :is(.left-\[46\%\]) {
+  left: 46%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -209,10 +209,6 @@
 
 .cartlanding-wrapper :is(.mt-1) {
   margin-top: 0.25rem
-}
-
-.cartlanding-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .cartlanding-wrapper :is(.mt-2) {
@@ -319,10 +315,6 @@
   height: 0.75rem
 }
 
-.cartlanding-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .cartlanding-wrapper :is(.h-40) {
   height: 10rem
 }
@@ -361,10 +353,6 @@
 
 .cartlanding-wrapper :is(.h-\[26px\]) {
   height: 26px
-}
-
-.cartlanding-wrapper :is(.h-\[35px\]) {
-  height: 35px
 }
 
 .cartlanding-wrapper :is(.h-\[60px\]) {
@@ -511,10 +499,6 @@
   width: 331px
 }
 
-.cartlanding-wrapper :is(.w-\[350px\]) {
-  width: 350px
-}
-
 .cartlanding-wrapper :is(.w-\[3rem\]) {
   width: 3rem
 }
@@ -531,20 +515,12 @@
   width: 5rem
 }
 
-.cartlanding-wrapper :is(.w-\[683px\]) {
-  width: 683px
-}
-
 .cartlanding-wrapper :is(.w-\[737px\]) {
   width: 737px
 }
 
 .cartlanding-wrapper :is(.w-\[73px\]) {
   width: 73px
-}
-
-.cartlanding-wrapper :is(.w-\[75px\]) {
-  width: 75px
 }
 
 .cartlanding-wrapper :is(.w-\[855px\]) {
@@ -575,8 +551,8 @@
   max-width: 70%
 }
 
-.cartlanding-wrapper :is(.max-w-xl) {
-  max-width: 36rem
+.cartlanding-wrapper :is(.max-w-\[792px\]) {
+  max-width: 792px
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -804,11 +780,6 @@
 .cartlanding-wrapper :is(.border-danahergray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
-}
-
-.cartlanding-wrapper :is(.border-danahergray-75) {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .cartlanding-wrapper :is(.border-gray-200) {
@@ -1066,6 +1037,10 @@
   padding-right: 0.25rem
 }
 
+.cartlanding-wrapper :is(.pr-3) {
+  padding-right: 0.75rem
+}
+
 .cartlanding-wrapper :is(.pt-1) {
   padding-top: 0.25rem
 }
@@ -1122,11 +1097,6 @@
   line-height: 1.5rem
 }
 
-.cartlanding-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
-}
-
 .cartlanding-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -1160,6 +1130,10 @@
 
 .cartlanding-wrapper :is(.font-normal) {
   font-weight: 200
+}
+
+.cartlanding-wrapper :is(.font-semibold) {
+  font-weight: 700
 }
 
 .cartlanding-wrapper :is(.leading-10) {
@@ -1352,10 +1326,6 @@
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
-.cartlanding-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
 .cartlanding-wrapper :is(.focus\:outline-none:focus) {
   outline: 2px solid transparent;
   outline-offset: 2px
@@ -1469,10 +1439,6 @@
     align-items: center
   }
 
-  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
-    white-space: nowrap
-  }
-
   .cartlanding-wrapper :is(.md\:pt-0) {
     padding-top: 0px
   }
@@ -1537,10 +1503,6 @@
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[3px\] svg>use) {
-  stroke-width: 3px
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {

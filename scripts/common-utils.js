@@ -45,7 +45,7 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[48%] justify-start items-center',
+        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
     img({
@@ -97,11 +97,11 @@ export function closeUtilityModal() {
 export function createModal(content, hasCancelButton, hasCloseButton) {
   const modalWrapper = div({
     class:
-      'inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
+      'inset-0 dhls-container fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
     id: 'utilityModal',
   });
   const modalContainer = div({
-    class: 'relative max-w-xl w-full items-center bg-white p-8',
+    class: 'relative max-w-[792px] w-full items-center bg-white p-8',
     id: 'utilityModalWrapper',
   });
 
@@ -118,7 +118,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   if (hasCancelButton) {
     cancelButton = span(
       {
-        class: 'mt-6 text-danaherpurple-500 cursor-pointer',
+        class: 'mt-6 text-danaherpurple-500 cursor-pointer pr-3',
         id: 'closeUtilityModal',
       },
       'Cancel',
@@ -802,7 +802,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
-        'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300  px-3 py-2',
+        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-300  px-3 py-2',
       'aria-label': dtName,
     }),
     span({
@@ -848,7 +848,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
-          ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
+          ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-300',
         'aria-label': dtName,
       }),
     ),
@@ -900,7 +900,7 @@ export const buildSelectBox = (
         name: inputName,
         'data-required': required,
         class:
-          'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-300',
       },
       options,
     ),
@@ -964,7 +964,7 @@ export function buildSelectElement(
         {
           for: inputId,
           class:
-            'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
+            'w-full flex justify-between items-center p-4 text-base text-gray-600  border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
         span({ class: 'icon icon-dropdown w-3 h-3' }),
