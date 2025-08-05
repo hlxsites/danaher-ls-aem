@@ -714,7 +714,7 @@
     flex-direction: row;
   }
 
-   .columns-wrapper :is(.lg\:flex-row-reverse) {
+  .columns-wrapper :is(.lg\:flex-row-reverse) {
     flex-direction: row-reverse;
   }
 
