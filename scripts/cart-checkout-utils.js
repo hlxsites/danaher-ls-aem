@@ -2701,7 +2701,7 @@ export const cartItemsContainer = (cartItemValue) => {
     // modifyCart("quantity-added", event.target.value);
   });
   const unitPriceDiv = () => {
-    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
+    if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
       return div(
         {
           class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
