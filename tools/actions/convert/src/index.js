@@ -221,6 +221,9 @@ function skipConverter(path) {
 
   */
 
+    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands')) && !path.includes('/topics-jck1/')) {    
+        return true;
+    }
  //This condition check will removed
   if(!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
     if((path.includes('us/en/products/family') || path.includes('us/en/products/sku') || path.includes('us/en/products/bundle')) && !path.includes('/topics-jck1/')) {
