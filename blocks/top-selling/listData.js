@@ -33,7 +33,7 @@ export default function renderListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain',
+        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
       onclick: () => window.open(
