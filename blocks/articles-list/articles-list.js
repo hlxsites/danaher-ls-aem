@@ -8,7 +8,7 @@ import createLabCard from '../card-list/newLabCard.js';
 
 export default async function decorate(block) {
   block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.margin = '0';
+  block.parentElement.parentElement.style.margin = '0 auto';
   const brandName = getMetadata('brand');
   const pageType = block.classList.length > 2 ? block.classList[1] : '';
   if (pageType) block.classList.remove(pageType);
