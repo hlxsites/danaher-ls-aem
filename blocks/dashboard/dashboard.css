@@ -144,32 +144,12 @@
   width: 100%
 }
 
-.dashboard-wrapper :is(.\!w-full) {
-  width: 100% !important
-}
-
 .dashboard-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
 }
 
 .dashboard-wrapper :is(.max-w-\[792px\]) {
   max-width: 792px
-}
-
-.dashboard-wrapper :is(.\!max-w-\[792px\]) {
-  max-width: 792px !important
-}
-
-.dashboard-wrapper :is(.max-w-full) {
-  max-width: 100%
-}
-
-.dashboard-wrapper :is(.max-w-\[100\%\]) {
-  max-width: 100%
-}
-
-.dashboard-wrapper :is(.\!max-w-\[100\%\]) {
-  max-width: 100% !important
 }
 
 .dashboard-wrapper :is(.cursor-pointer) {
@@ -238,9 +218,9 @@
   border-style: solid
 }
 
-.dashboard-wrapper :is(.border-danaherblue-500) {
+.dashboard-wrapper :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
-  border-color: rgb(0 74 89 / var(--tw-border-opacity))
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .dashboard-wrapper :is(.border-gray-300) {
@@ -251,11 +231,6 @@
 .dashboard-wrapper :is(.border-white) {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity))
-}
-
-.dashboard-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .dashboard-wrapper :is(.bg-black) {
@@ -390,10 +365,6 @@
 .dashboard-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.dashboard-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .dashboard-wrapper :is(.font-medium) {

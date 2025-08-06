@@ -459,6 +459,10 @@
   width: 1358px
 }
 
+.cartlanding-wrapper :is(.w-\[150px\]) {
+  width: 150px
+}
+
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -473,10 +477,6 @@
 
 .cartlanding-wrapper :is(.w-\[300px\]) {
   width: 300px
-}
-
-.cartlanding-wrapper :is(.w-\[30rem\]) {
-  width: 30rem
 }
 
 .cartlanding-wrapper :is(.w-\[331px\]) {
@@ -495,14 +495,6 @@
   width: 40rem
 }
 
-.cartlanding-wrapper :is(.w-\[59px\]) {
-  width: 59px
-}
-
-.cartlanding-wrapper :is(.w-\[5rem\]) {
-  width: 5rem
-}
-
 .cartlanding-wrapper :is(.w-\[683px\]) {
   width: 683px
 }
@@ -515,6 +507,10 @@
   width: 75px
 }
 
+.cartlanding-wrapper :is(.w-\[80px\]) {
+  width: 80px
+}
+
 .cartlanding-wrapper :is(.w-\[855px\]) {
   width: 855px
 }
@@ -525,18 +521,6 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
-}
-
-.cartlanding-wrapper :is(.\!w-full) {
-  width: 100% !important
-}
-
-.cartlanding-wrapper :is(.w-\[150px\]) {
-  width: 150px
-}
-
-.cartlanding-wrapper :is(.w-\[80px\]) {
-  width: 80px
 }
 
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
@@ -557,18 +541,6 @@
 
 .cartlanding-wrapper :is(.max-w-\[792px\]) {
   max-width: 792px
-}
-
-.cartlanding-wrapper :is(.\!max-w-\[792px\]) {
-  max-width: 792px !important
-}
-
-.cartlanding-wrapper :is(.max-w-full) {
-  max-width: 100%
-}
-
-.cartlanding-wrapper :is(.\!max-w-\[100\%\]) {
-  max-width: 100% !important
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -1368,10 +1340,6 @@
 
   .cartlanding-wrapper :is(.sm\:h-\[3\.5rem\]) {
     height: 3.5rem
-  }
-
-  .cartlanding-wrapper :is(.sm\:w-48) {
-    width: 12rem
   }
 
   .cartlanding-wrapper :is(.sm\:w-64) {

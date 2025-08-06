@@ -276,6 +276,10 @@
   width: 11rem
 }
 
+.checkout :is(.w-\[150px\]) {
+  width: 150px
+}
+
 .checkout :is(.w-\[176px\]) {
   width: 176px
 }
@@ -284,36 +288,16 @@
   width: 3.5rem
 }
 
-.checkout :is(.w-\[30rem\]) {
-  width: 30rem
-}
-
 .checkout :is(.w-\[3rem\]) {
   width: 3rem
 }
 
-.checkout :is(.w-\[59px\]) {
-  width: 59px
-}
-
-.checkout :is(.w-\[5rem\]) {
-  width: 5rem
+.checkout :is(.w-\[80px\]) {
+  width: 80px
 }
 
 .checkout :is(.w-full) {
   width: 100%
-}
-
-.checkout :is(.\!w-full) {
-  width: 100% !important
-}
-
-.checkout :is(.w-\[150px\]) {
-  width: 150px
-}
-
-.checkout :is(.w-\[80px\]) {
-  width: 80px
 }
 
 .checkout :is(.min-w-\[320px\]) {
@@ -326,22 +310,6 @@
 
 .checkout :is(.max-w-\[792px\]) {
   max-width: 792px
-}
-
-.checkout :is(.\!max-w-\[792px\]) {
-  max-width: 792px !important
-}
-
-.checkout :is(.max-w-full) {
-  max-width: 100%
-}
-
-.checkout :is(.max-w-\[100\%\]) {
-  max-width: 100%
-}
-
-.checkout :is(.\!max-w-\[100\%\]) {
-  max-width: 100% !important
 }
 
 .checkout :is(.flex-1) {
@@ -711,10 +679,6 @@
   text-align: right
 }
 
-.checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .checkout :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -784,10 +748,6 @@
 
 .checkout :is(.leading-none) {
   line-height: 1
-}
-
-.checkout :is(.leading-snug) {
-  line-height: 1.375
 }
 
 .checkout :is(.text-black) {
@@ -943,10 +903,6 @@
 
   .checkout :is(.sm\:h-\[3\.5rem\]) {
     height: 3.5rem
-  }
-
-  .checkout :is(.sm\:w-48) {
-    width: 12rem
   }
 
   .checkout :is(.sm\:w-64) {
