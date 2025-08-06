@@ -316,6 +316,10 @@
   flex: 1 1 0%
 }
 
+.checkout :is(.flex-none) {
+  flex: none
+}
+
 .checkout :is(.cursor-pointer) {
   cursor: pointer
 }

@@ -49,6 +49,75 @@ const paymentModule = async () => {
     let invoiceWrapper = div({ class: 'hidden' });
     const allPaymentMethods = await getPaymentMethods();
 
+    const invoiceNumber = buildInputElement(
+      'invoiceNumber',
+      'Invoice Number',
+      'text',
+      'invoiceNumber',
+      false,
+      false,
+      'invoiceNumber',
+      '',
+    );
+    invoiceNumber.className = '';
+    invoiceNumber.classList.add('w-full');
+    invoiceNumber?.querySelector('input')?.classList?.add('outline-none');
+    invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
+    invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
+
+    const cardsContainer = div(
+      {
+        class: 'flex-col flex p-6 w-full items-start bg-checkout',
+      },
+    );
+    const savedCardsWrapper = div(
+      {
+        class: 'saved-cards-wrapper',
+      },
+    );
+
+    const newCardsWrapper = div(
+      {
+        class: 'no-cards-wrapper flex-1 flex-col flex  gap-2 w-full items-start bg-checkout',
+      },
+      buildInputElement(
+        'sameAsShipping',
+        'Same as shipping Address',
+        'radio',
+        'sameAsShipping',
+        true,
+        false,
+        'mt-6',
+        'sameAsShipping',
+      ),
+      buildInputElement(
+        'sameAsBilling',
+        'Same as bill to Address',
+        'radio',
+        'sameAsBilling',
+        true,
+        false,
+        'mt-6',
+        'sameAsBilling',
+      ),
+      buildInputElement(
+        'newAddress',
+        'New Address',
+        'radio',
+        'newAddress',
+        true,
+        false,
+        'mt-6',
+        'newAddress',
+      ),
+    );
+    newCardsWrapper?.querySelectorAll('label')?.forEach((item) => {
+      item?.classList?.remove('font-semibold');
+      item?.classList?.remove?.classList?.add('font-normal');
+    });
+
+    cardsContainer.append(newCardsWrapper);
+    cardsContainer.append(savedCardsWrapper);
     allPaymentMethods?.data?.forEach((pm, ind) => {
       if (pm?.displayName === 'Stripe') {
         cardsWrapper.innerHTML = '';
@@ -56,28 +125,34 @@ const paymentModule = async () => {
           {
             id: `paymentMethod${pm?.displayName}`,
             class:
-              `border-solid border-gray-300 flex  justify-between p-4 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-start`,
+              `border-solid border-gray-300 flex-col gap-2 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-start`,
           },
           div(
             {
-              class: 'border-solid border-gray-300 flex gap-2 items-center',
+              class: 'flex p-4 justify-between',
             },
-            buildInputElement(
-              'creditCard',
-              pm?.displayName,
-              'radio',
-              'paymentMethod',
-              true,
-              false,
-              'mt-6',
-              'creditCard',
+            div(
+              {
+                class: 'border-solid border-gray-300 flex gap-2 flex-none items-center',
+              },
+              buildInputElement(
+                'creditCard',
+                pm?.displayName,
+                'radio',
+                'paymentMethod',
+                true,
+                false,
+                'mt-6',
+                'creditCard',
+              ),
             ),
+            span({
+              class: 'icon flex-none icon-payment-cards w-[176px]',
+            }),
           ),
-          span({
-            class: 'icon icon-payment-cards w-[176px]',
-          }),
         );
 
+        cardsWrapper.append(cardsContainer);
         paymentMethodsWrapper?.append(cardsWrapper);
       }
       if (pm?.displayName === 'Invoice') {
@@ -87,21 +162,6 @@ const paymentModule = async () => {
             class: 'flex-col flex p-6 w-full items-start bg-checkout hidden',
           },
         );
-        const invoiceNumber = buildInputElement(
-          'invoiceNumber',
-          'Invoice Number',
-          'text',
-          'invoiceNumber',
-          false,
-          false,
-          'invoiceNumber',
-          '',
-        );
-        invoiceNumber.className = '';
-        invoiceNumber.classList.add('w-full');
-        invoiceNumber?.querySelector('input')?.classList?.add('outline-none');
-        invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
-        invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
         invoiceNumberWrapper.append(invoiceNumber);
         invoiceWrapper.innerHTML = '';
         invoiceWrapper = div(

@@ -358,6 +358,33 @@ export const submitOrder = async (basketId) => {
     };
   }
 };
+
+/*
+ :::::::::::::::::::::::::::::
+ get saved cards for payment
+ ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export async function getSavedCards() {
+  const authenticationToken = await getAuthenticationToken();
+
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append(
+      'authentication-token',
+      authenticationToken.access_token,
+    );
+    const response = await getApiData(url, defaultHeaders);
+    return response.status === 'success' ? response.data : { status: 'error', data: 'Not Saved Cards Found' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
 /*
  :::::::::::::::::::::::::::::
  get single adress details based on address id
@@ -1366,7 +1393,7 @@ export const changeStep = async (step) => {
  check if basket has the shipping notes attribute
  :::::::::::::
 */
-      if (getCurrentBasketDetails?.data?.data?.attributes) {
+      if (getCurrentBasketDetails?.data?.data?.attributes[0]?.name) {
         const getNotes = getCurrentBasketDetails.data.data.attributes[0];
 
         /*
