@@ -42,10 +42,10 @@ export default function renderListCard(item) {
       ),
     });
 
-    imageElement.addEventListener('error', () => {
-      imageElement.src = fallbackImagePath;
-      imageElement.alt = 'Product image not available';
-    });
+    // imageElement.addEventListener('error', () => {
+    //   imageElement.src = fallbackImagePath;
+    //   imageElement.alt = 'Product image not available';
+    // });
 
     return imageElement;
   };
