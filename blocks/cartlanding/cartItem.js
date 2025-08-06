@@ -1,5 +1,4 @@
-import { div, hr } from '../../scripts/dom-builder.js';
-import { addProducts } from './addproducts.js';
+import { div } from '../../scripts/dom-builder.js';
 import {
   logoDiv,
   divider,
@@ -26,10 +25,6 @@ export const cartItem = async () => {
     class: '',
     id: 'cartListContainer',
   });
-  const addProductListContainer = div({
-    class: '',
-    id: 'addProductListContainer',
-  });
   if (getProductDetailsObject?.length > 0) {
     // console.log("cartItem Value", getProductDetailsObject.data);
 
@@ -52,10 +47,6 @@ export const cartItem = async () => {
       });
       cartListContainer.append(cartItemDisplayContainer);
       // cartListContainer.append(divider(300));
-    });
-
-    const dividerMain = hr({
-      class: 'w-full border-black-400',
     });
 
     // addProductListContainer.append(addProducts());

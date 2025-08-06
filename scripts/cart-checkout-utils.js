@@ -23,7 +23,6 @@ import {
   submitForm,
   getStates,
   getCountries,
-  removeObjectKey,
   removePreLoader,
   showPreLoader,
   closeUtilityModal,
@@ -37,7 +36,6 @@ import {
   updateBasketDetails,
   getProductDetailObject,
 } from '../blocks/cartlanding/cartSharedFile.js';
-import { makePublicUrl, imageHelper } from './scripts.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -2691,11 +2689,13 @@ export const cartItemsContainer = (cartItemValue) => {
     const enteredValue = event.target.value;
     if (enteredValue < Number(inputItem.min)) {
       productItem.style.border = '2px solid red';
+      // eslint-disable-next-line no-alert
       alert(
         `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
       );
     } else if (enteredValue > Number(inputItem.max)) {
       productItem.style.border = '2px solid red';
+      // eslint-disable-next-line no-alert
       alert(
         `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
       );
@@ -2706,7 +2706,7 @@ export const cartItemsContainer = (cartItemValue) => {
     // modifyCart("quantity-added", event.target.value);
   });
   const unitPriceDiv = () => {
-    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
+    if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
       return div(
         {
           class: 'w-[150px] justify-start text-black text-base font-semibold',
