@@ -87,7 +87,9 @@ export default async function decorate(block) {
       }
       if (window.location.pathname.includes('brands')) {
         if (index === arr.length - 1) {
-          // formattedElement = formattedElement;
+          formattedElement = document.title && document.title.trim()
+            ? document.title.split('|')[0].trim()
+            : elementContent.split('|')[0].trim();
         }
       }
       elementAnchorContent.textContent = formattedElement;
