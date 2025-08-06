@@ -44,8 +44,13 @@ async function setShippingNotesOnBlur() {
  check if basket has the shipping notes attribute
  :::::::::::::
 */
-    if (getCurrentBasketDetails?.data?.data?.attributes) {
-      const getNotes = getCurrentBasketDetails.data.data.attributes[0];
+    if (getCurrentBasketDetails?.data?.data?.attributes?.some(
+      (attr) => attr?.name === 'GroupShippingNote',
+    )
+    ) {
+      const getNotes = getCurrentBasketDetails.data.data.attributes?.find(
+        (attr) => attr?.name === 'GroupShippingNote',
+      );
 
       /*
  :::::::::::::
