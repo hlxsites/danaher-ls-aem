@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
@@ -87,7 +88,7 @@ export default async function decorate(block) {
       }
       if (window.location.pathname.includes('brands')) {
         if (index === arr.length - 1) {
-          formattedElement = `Products - ${formattedElement}`;
+          formattedElement = getMetadata('title');
         }
       }
       elementAnchorContent.textContent = formattedElement;
