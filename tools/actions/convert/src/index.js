@@ -221,7 +221,7 @@ function skipConverter(path) {
 
   */
 
-    if((path.includes('us/en/products.html') || path.includes('us/en/products/brands')) && !path.includes('/topics-jck1/')) {    
+    if(path.includes('us/en/products/brands') && !path.includes('/topics-jck1/')) {    
         return true;
     }
  //This condition check will removed
