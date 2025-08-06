@@ -326,9 +326,9 @@ async function loadForm(row, tags) {
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
           buildCheckboxElement('DHLS_Interest', 'Email', 'checkbox', 'Email_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Text Messages (SMS)', 'checkbox', 'SMS_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Phone Calls', 'checkbox', 'Phone_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Post', 'checkbox', 'Post_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'SMS', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Phone', 'checkbox', 'Phone_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Direct Mail', 'checkbox', 'Post_Opt_In', 'true', false),
         ),
       ),
       input(
@@ -409,7 +409,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
@@ -467,7 +467,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
@@ -510,7 +510,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
