@@ -96,14 +96,13 @@ export default async function decorate(block) {
   const currentSection = block?.closest('.section');
   const nextSection = currentSection?.nextElementSibling;
   if (!currentSection || !nextSection) return;
-   const parentWrapper = currentSection.querySelector('.default-content-wrapper');
-   const nestedWrapper = parentWrapper?.querySelector('.default-content-wrapper');
+  const parentWrapper = currentSection.querySelector('.default-content-wrapper');
+  const nestedWrapper = parentWrapper?.querySelector('.default-content-wrapper');
 
   if (!nestedWrapper) return;
   const productCardWrapper = nextSection.querySelector('.product-card-wrapper');
   if (nestedWrapper && productCardWrapper) {
-  productCardWrapper.prepend(nestedWrapper);
+    productCardWrapper.prepend(nestedWrapper);
   }
   block?.parentElement?.parentElement?.nextElementSibling?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 lg:pt-6 px-0 stretch'.split(' '));
-  return block;
 }

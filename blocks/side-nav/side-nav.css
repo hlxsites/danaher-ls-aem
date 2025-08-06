@@ -1,5 +1,49 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .bg-danaherpurple-50 {
   background-color: #EADEFF
+}
+
+.side-nav-wrapper :is(.col-span-8) {
+  grid-column: span 8 / span 8
 }
 
 .side-nav-wrapper :is(.mb-2) {
@@ -8,6 +52,10 @@
 
 .side-nav-wrapper :is(.block) {
   display: block
+}
+
+.side-nav-wrapper :is(.\!block) {
+  display: block !important
 }
 
 .side-nav-wrapper :is(.flex) {
