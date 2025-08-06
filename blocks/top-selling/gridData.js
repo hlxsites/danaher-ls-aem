@@ -47,7 +47,7 @@ export default function renderGridCard(item) {
       alt: alt || 'Product image',
       class: 'w-full h-[164px] object-contain cursor-pointer',
       onclick: () => window.open(
-        item?.url,
+        item?.url || '#',
         item?.url?.includes('http') ? '_blank' : '_self',
       ),
     });
