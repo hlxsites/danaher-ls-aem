@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
 
 const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
