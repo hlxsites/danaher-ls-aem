@@ -99,6 +99,17 @@ function createAccordionBlock(
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
 
+  const liElements = panel.querySelectorAll('p,ul,li,a');
+    console.log(liElements);
+      liElements.forEach((liEle) => {
+        const strongElements = liEle.querySelectorAll('strong');
+        if (strongElements?.length) {
+          strongElements.forEach((strong) => {
+            strong.classList.add('font-bold');
+          });
+        }
+      });
+
   panel.querySelectorAll('a').forEach((link) => {
     link.classList.remove('btn', 'btn-outline-primary');
     link.classList.add(
