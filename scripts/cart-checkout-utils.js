@@ -1514,11 +1514,13 @@ export const changeStep = async (step) => {
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
+      proceedButton.textContent = 'Place your order';
       break;
     case 'submitOrder':
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.setAttribute('data-activeTab', 'submitOrder');
+      proceedButton.textContent = 'Place your order';
       break;
     default:
       segment1.style.width = '0';
