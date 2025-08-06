@@ -37,7 +37,7 @@ export default function renderListCard(item) {
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
       onclick: () => window.open(
-        item.url,
+        item?.url,
         item?.url?.includes('http') ? '_blank' : '_self',
       ),
     });
