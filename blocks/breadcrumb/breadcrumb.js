@@ -54,7 +54,7 @@ export default async function decorate(block) {
   ::::::::::::::
   *
   */
-    if ((window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('stage.lifesciences'))) && index > 1) {
+    if ((window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products/brands')) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
 
       const elementAnchorContent = element.querySelector('a');
@@ -128,7 +128,7 @@ export default async function decorate(block) {
     },
   );
   breadcrumbWrapper.innerHTML = '';
-  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || ((window.location.pathname.includes('products.html') || window.location.pathname.includes('products/brands') || window.location.pathname.includes('products/antibodies') || window.location.pathname.includes('products/assay-kits') || window.location.pathname.includes('products-eds.html') || window.location.pathname.includes('e-buy') || window.location.pathname.includes('products-eds/brands') || window.location.pathname.includes('products-eds')) && window.DanaherConfig.host.includes('lifesciences'))) {
+  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products/brands')) {
     bredWrap.append(entries);
     breadcrumbWrapper.append(bredWrap);
   } else {
