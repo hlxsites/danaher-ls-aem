@@ -45,13 +45,17 @@ export default function renderGridCard(item) {
     const imageElement = img({
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
-      class: 'w-full h-[164px] object-contain',
+      class: 'w-full h-[164px] object-contain cursor-pointer',
+      onclick: () => window.open(
+        item.url,
+        item?.url?.includes('http') ? '_blank' : '_self',
+      ),
     });
 
-    imageElement.addEventListener('error', () => {
-      imageElement.src = fallbackImagePath;
-      imageElement.alt = 'Product image not available';
-    });
+    // imageElement.addEventListener('error', () => {
+    //   imageElement.src = fallbackImagePath;
+    //   imageElement.alt = 'Product image not available';
+    // });
 
     return imageElement;
   };
