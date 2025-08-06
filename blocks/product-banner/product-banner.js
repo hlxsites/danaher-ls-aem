@@ -98,13 +98,12 @@ export default function productBannerDecorate(block) {
   });
 
   const tempContainerBold = tempContainer.querySelectorAll('p,ul,li,a');
-    tempContainerBold.forEach((p) => {
-      p.classList.add('mb-3');
-      p.querySelectorAll('strong').forEach((strong) => {
-        strong.classList.add('font-bold');
-      });
+  tempContainerBold.forEach((p) => {
+    p.classList.add('mb-3');
+    p.querySelectorAll('strong').forEach((strong) => {
+      strong.classList.add('font-bold');
     });
-
+  });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
     // Remove any class that starts with 'btn'
@@ -178,7 +177,6 @@ export default function productBannerDecorate(block) {
         strong.classList.add('font-bold');
       });
     });
-
 
     if (longDescriptionBold.length > 0) {
       longDescriptionBold[longDescriptionBold.length - 1].classList.remove('mb-3');
