@@ -66,23 +66,34 @@ p {
   color: #333;
 }
 
-/* Dropdown wrapper for arrow styling */
+/* Fix SVG or image arrow size inside dropdowns */
+.select-wrapper svg,
+.select-wrapper img,
+.embedded-form-wrapper svg {
+  width: 12px !important;
+  height: 12px !important;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Adjust dropdown wrapper so arrow fits nicely */
 .select-wrapper {
   position: relative;
   flex: 1;
 }
 
-/* Make select fill width */
+/* Make select fill width, hide default arrow */
 .select-wrapper select {
   width: 100%;
-  appearance: none; /* remove default arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 2rem; /* space for arrow */
+  padding-right: 2rem; /* enough space for custom arrow */
   cursor: pointer;
 }
 
-/* Custom dropdown arrow */
+/* Custom arrow using CSS */
 .select-wrapper::after {
   content: "▼";
   position: absolute;
@@ -93,6 +104,7 @@ p {
   font-size: 0.75rem;
   color: #333;
 }
+
 
 /* Scrollable dropdown max height */
 .max-h-48 {
