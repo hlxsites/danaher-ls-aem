@@ -1,117 +1,104 @@
-/* Form group vertical layout with spacing */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+/* === Form Container & Layout === */
+form,
+.form-wrapper,
+.form-section,
+.form-container,
+.form-block,
+form * {
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
   gap: 0.25rem;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* Labels */
+/* === Form Group (Label + Input) === */
+.form-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
 .form-group label {
   font-weight: 600;
+  margin-bottom: 0.25rem;
+  white-space: normal; /* allow wrap */
   text-align: left;
-  white-space: nowrap;
+  align-self: flex-start;
 }
 
-/* Inputs, selects, textareas full width */
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.5rem 1rem 0.5rem 0.5rem; /* space on right for arrow in select */
+/* === Inputs, selects, textarea === */
+input,
+select,
+textarea {
+  width: 100% !important;
+  padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  height: 40px; /* consistent height for inputs and selects */
-  line-height: 1.2;
+  outline-offset: 2px;
+  transition: border-color 0.3s ease;
 }
 
-/* Textarea height override */
-.form-group textarea {
-  height: 100px; /* taller for multi-line */
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  resize: vertical;
-}
-
-/* On focus border highlight */
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #7523FF;
   outline: none;
 }
 
-/* Select wrapper to position custom arrow */
+/* === Custom dropdown wrapper === */
 .select-wrapper {
   position: relative;
   width: 100%;
+  display: block;
 }
 
-/* Hide native select arrow */
+/* Remove default arrow, add custom SVG background arrow */
 .select-wrapper select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-  padding-right: 2rem; /* space for custom arrow */
-  height: 40px;
-}
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
 
-.select-wrapper {
-  position: relative;
-  flex: 1;
-  display: inline-block;
-  width: 100%;
-}
-
-.select-wrapper select {
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding: 0.5rem 2rem 0.5rem 0.5rem; /* right padding for arrow */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  box-sizing: border-box;
-  background-color: white;
-
-  /* Hide default arrow */
   background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 12px 12px;
+  padding-right: 2rem !important;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
+/* Remove any ::after arrow content */
 .select-wrapper::after {
-  content: none !important; /* remove old arrow */
+  content: none !important;
 }
 
+/* === Checkbox styles === */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #7523FF;
+  cursor: pointer;
+}
 
-
-/* Checkbox alignment */
-.checkbox-wrapper,
 input[type="checkbox"] + label,
+.checkbox-wrapper,
+.checkbox-row,
 .checkbox-label {
   display: flex !important;
   align-items: center !important;
   gap: 8px;
   margin: 0.5rem 0;
   cursor: pointer;
+  text-align: left;
 }
 
-/* Checkbox input size */
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  accent-color: #7523FF;
-}
-
-/* Legal text and disclaimer */
+/* === Legal text, disclaimers, notes === */
 .form-disclaimer,
 .form-note,
 .form-legal,
@@ -123,4 +110,61 @@ p {
   font-size: 14px;
   line-height: 1.6;
   color: #333;
+}
+
+/* === Submit Button === */
+button[type="submit"],
+input[type="submit"] {
+  background-color: #d56618;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 150px;
+  text-align: center;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: #b25214;
+}
+
+/* === Textarea specific fix === */
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* === Scrollable dropdown fix === */
+.max-h-48 {
+  max-height: 12rem;
+}
+
+.overflow-scroll {
+  overflow-y: auto;
+}
+
+/* === Misc Fixes for embedded forms === */
+.embedded-form-wrapper label,
+.embedded-form-wrapper input,
+.embedded-form-wrapper select,
+.embedded-form-wrapper textarea {
+  text-align: left !important;
+}
+
+/* Clear margin below selects */
+.form-block select,
+.form-block .select-dropdown-label {
+  margin-bottom: 0.5rem;
+}
+
+/* Remove extra space around dropdown containers */
+.embedded-form-wrapper .dropdown-container {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
