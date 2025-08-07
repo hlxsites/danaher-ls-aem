@@ -58,10 +58,18 @@ export default async function decorate(block) {
   }
 
   // Move any leftover <style> tags from block to head (if needed)
+  // const styles = block.querySelectorAll('style');
+  // styles.forEach(style => {
+  //   if (!document.head.contains(style)) {
+  //     document.head.appendChild(style.cloneNode(true));
+  //   }
+  // });
   const styles = block.querySelectorAll('style');
   styles.forEach(style => {
-    if (!document.head.contains(style)) {
-      document.head.appendChild(style.cloneNode(true));
-    }
-  });
+  const exists = [...document.head.querySelectorAll('style')].some(s => s.textContent === style.textContent);
+  if (!exists) {
+    document.head.appendChild(style.cloneNode(true));
+  }
+});
+
 }
