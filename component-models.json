@@ -767,7 +767,7 @@
     "id": "form",
     "fields": [
       {
-        "component": "textarea",
+        "component": "text",
         "name": "script",
         "type": "string",
         "label": "Embedded Form Script",
