@@ -10,14 +10,28 @@ export default async function decorate(block) {
   textarea.innerHTML = raw;
   let decodedHtml = textarea.value;
 
-  // Remove <component async :is="'script'"> ... </component> blocks
-  // Using regex - be careful with nested tags, this assumes no nesting inside those tags
-  decodedHtml = decodedHtml.replace(/<component[^>]*async[^>]*:is=['"]script['"][^>]*>[\s\S]*?<\/component>/gi, '');
+  // Create a DOM parser to manipulate the HTML
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(decodedHtml, 'text/html');
 
-  // Inject cleaned HTML
+  // Find all <component async :is="'script'"> elements
+  const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
+
+  // Extract and concatenate all JS code inside those <component> tags
+  let combinedScript = '';
+  componentScripts.forEach(component => {
+    combinedScript += component.textContent + '\n';
+    // Remove the component from DOM so it won't render
+    component.remove();
+  });
+
+  // Serialize the cleaned HTML back to string
+  decodedHtml = doc.body.innerHTML;
+
+  // Inject cleaned HTML into the block
   block.innerHTML = decodedHtml;
 
-  // Execute <script> tags
+  // Execute any regular <script> tags inside injected HTML
   const scripts = block.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
@@ -29,6 +43,13 @@ export default async function decorate(block) {
     }
     oldScript.parentNode.replaceChild(newScript, oldScript);
   });
+
+  // Execute the extracted JS from <component> tags manually
+  if (combinedScript.trim()) {
+    const scriptTag = document.createElement('script');
+    scriptTag.textContent = combinedScript;
+    document.body.appendChild(scriptTag);
+  }
 
   // Move <style> tags to <head>
   const styles = block.querySelectorAll('style');
