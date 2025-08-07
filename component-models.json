@@ -503,11 +503,11 @@
         "component": "select",
         "options": [
           {
-            "label": "2 Columns",
+            "name": "2 Columns",
             "value": "2"
           },
           {
-            "label": "3 Columns",
+            "name": "3 Columns",
             "value": "3"
           }
         ],

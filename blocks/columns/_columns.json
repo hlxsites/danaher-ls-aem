@@ -72,8 +72,8 @@
           "id": "columnsCount",
           "component": "select",
           "options": [
-            { "label": "2 Columns", "value": "2" },
-            { "label": "3 Columns", "value": "3" }
+            { "name": "2 Columns", "value": "2" },
+            { "name": "3 Columns", "value": "3" }
           ],
           "valueType": "string",
           "value": "2"
