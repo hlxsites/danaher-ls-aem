@@ -498,24 +498,48 @@
     "id": "carousel",
     "fields": [
       {
-        "component": "text",
-        "name": "leftHeading",
-        "label": "Left Heading"
+        "component": "group",
+        "name": "leftContent",
+        "label": "Left Content",
+        "fields": [
+          {
+            "component": "text",
+            "name": "heading",
+            "label": "Heading"
+          },
+          {
+            "component": "richtext",
+            "name": "description",
+            "label": "Description"
+          },
+          {
+            "component": "text",
+            "name": "ctaText",
+            "label": "CTA Text"
+          },
+          {
+            "component": "url",
+            "name": "ctaLink",
+            "label": "CTA Link"
+          }
+        ]
       },
       {
-        "component": "richtext",
-        "name": "leftDescription",
-        "label": "Left Description"
-      },
-      {
-        "component": "image",
-        "name": "rightImage",
-        "label": "Right Image"
-      },
-      {
-        "component": "richtext",
-        "name": "rightText",
-        "label": "Right Text or Table"
+        "component": "group",
+        "name": "rightContent",
+        "label": "Right Content",
+        "fields": [
+          {
+            "component": "image",
+            "name": "image",
+            "label": "Image"
+          },
+          {
+            "component": "richtext",
+            "name": "text",
+            "label": "Text or Table"
+          }
+        ]
       }
     ]
   },
