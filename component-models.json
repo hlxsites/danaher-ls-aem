@@ -791,11 +791,9 @@
         "label": "Fields",
         "name": "fields",
         "component": "array",
-        "type": "array",
         "minItems": 1,
         "maxItems": 20,
         "items": {
-          "type": "object",
           "fields": [
             {
               "label": "Label",

@@ -45,12 +45,10 @@
         {
           "label": "Fields",
           "name": "fields",
-          "component": "array",
-          "type": "array",                    
+          "component": "array",                   
           "minItems": 1,
           "maxItems": 20,
-          "items": {
-            "type": "object",                  
+          "items": {                  
             "fields": [
               {
                 "label": "Label",
