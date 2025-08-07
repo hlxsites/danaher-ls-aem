@@ -49,6 +49,16 @@ p {
   accent-color: #7523FF;
 }
 
+/* Fix SVG arrow size */
+.embedded-form-wrapper svg {
+  width: 10px !important;
+  height: 10px !important;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+
 /* Dropdown logic */
 .prior {
   position: absolute;
