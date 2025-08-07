@@ -5,23 +5,24 @@ export default async function decorate(block) {
     return;
   }
 
+  // Decode HTML entities
   const textarea = document.createElement('textarea');
   textarea.innerHTML = raw;
   let decodedHtml = textarea.value;
 
+  // Parse decoded HTML
   const parser = new DOMParser();
   const doc = parser.parseFromString(decodedHtml, 'text/html');
 
-  // Handle <component :is="'style'">
+  // --- Extract inline component styles ---
   const componentStyles = doc.querySelectorAll('component[\\:is="\'style\'"]');
+  let capturedStyles = '';
   componentStyles.forEach(component => {
-    const styleTag = document.createElement('style');
-    styleTag.textContent = component.textContent;
-    document.head.appendChild(styleTag);
+    capturedStyles += component.textContent + '\n';
     component.remove();
   });
 
-  // Handle <component async :is="'script'">
+  // --- Extract component scripts ---
   const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
   let combinedScript = '';
   componentScripts.forEach(component => {
@@ -29,10 +30,32 @@ export default async function decorate(block) {
     component.remove();
   });
 
-  // Set content
+  // --- Inject decoded HTML into the block ---
   block.innerHTML = doc.body.innerHTML;
 
-  // Execute scripts
+  // --- Wrap content in a unique class for style scoping ---
+  block.classList.add('embedded-form-wrapper');
+
+  // --- Inject captured styles (scoped or global) ---
+  if (capturedStyles.trim()) {
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+/* Scoped styles for form */
+.embedded-form-wrapper {
+  text-align: left;
+}
+.embedded-form-wrapper * {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+/* Original captured styles */
+${capturedStyles}
+`;
+    document.head.appendChild(styleTag);
+  }
+
+  // --- Handle <script> tags inside the content ---
   const scripts = block.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
@@ -45,13 +68,14 @@ export default async function decorate(block) {
     oldScript.parentNode.replaceChild(newScript, oldScript);
   });
 
+  // --- Run extracted <component :is="script"> scripts ---
   if (combinedScript.trim()) {
     const scriptTag = document.createElement('script');
     scriptTag.textContent = combinedScript;
     document.body.appendChild(scriptTag);
   }
 
-  // Move any leftover inline styles to head
+  // --- Move any remaining <style> inside block to head ---
   const styles = block.querySelectorAll('style');
   styles.forEach(style => {
     if (!document.head.contains(style)) {
