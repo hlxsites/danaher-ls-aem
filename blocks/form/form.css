@@ -1,3 +1,39 @@
+/* Align form text to left */
+form, .form-wrapper, .form-section, .form-container, .form-block, form * {
+  text-align: left !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+/* Checkbox and label alignment */
+input[type="checkbox"] + label,
+.checkbox-wrapper,
+.checkbox-row,
+.checkbox-label {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 8px;
+  line-height: 1.5;
+  text-align: left !important;
+  margin: 0.5rem 0;
+}
+
+/* Paragraphs, legal copy */
+.form-disclaimer,
+.form-note,
+.form-legal,
+.legal-text,
+.disclaimer,
+p {
+  text-align: left !important;
+  margin-top: 1rem;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Optional: input field focus styles */
 .input-focus:focus {
   border: 1px solid #7523FF !important;
   outline: none;
@@ -8,13 +44,21 @@
   margin-bottom: 14px;
   width: 16px;
   height: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px;
+  radius: 4px;
   accent-color: #7523FF;
 }
 
-.prior:checked ~ .prior-checked-block {
-  display: block;
+/* Dropdown logic */
+.prior {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.prior:checked ~ .prior-checked\:block {
+  display: block !important;
 }
 
 .max-h-48 {
@@ -22,5 +66,5 @@
 }
 
 .overflow-scroll {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
