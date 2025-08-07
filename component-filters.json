@@ -142,8 +142,8 @@
   {
     "id": "fields",
     "components": [
-      "label",
-      "name",
+      "firstName",
+      "lastName",
       "type",
       "required",
       "options"

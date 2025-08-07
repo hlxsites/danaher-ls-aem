@@ -796,15 +796,15 @@
         "items": {
           "fields": [
             {
-              "label": "Label",
-              "name": "label",
+              "label": "First Name",
+              "name": "firstName",
               "component": "text",
               "valueType": "string",
               "value": ""
             },
             {
-              "label": "Field Name",
-              "name": "name",
+              "label": "Last Name",
+              "name": "lastName",
               "component": "text",
               "valueType": "string",
               "value": ""
