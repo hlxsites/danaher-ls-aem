@@ -767,14 +767,11 @@
     "id": "form",
     "fields": [
       {
-        "component": "code",
-        "name": "embeddedHtml",
+        "component": "richtext",
+        "name": "script",
         "type": "string",
-        "label": "Paste Embed Code Here",
-        "required": true,
-        "options": {
-          "language": "html"
-        }
+        "label": "Embedded Form Script",
+        "required": true
       }
     ]
   },

@@ -21,15 +21,12 @@
       "id": "form",
       "fields": [
         {
-      "component": "code",
-      "name": "embeddedHtml",
-      "type": "string",
-      "label": "Paste Embed Code Here",
-      "required": true,
-      "options": {
-        "language": "html"
-      }
-    }
+          "component": "richtext",
+          "name": "script",
+          "type": "string",
+          "label": "Embedded Form Script",
+          "required": true
+        }
       ]
     }
   ],
