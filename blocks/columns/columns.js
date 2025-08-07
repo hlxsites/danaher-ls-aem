@@ -774,18 +774,31 @@ export default function decorate(block) {
 
       const embed = row.querySelector('.embed');
       if (embed) {
-        // Option 1: If embed is a URL, create an iframe
+        // Try to get the URL from the embed element (text or data attribute)
+        let url = '';
+        // If using a data attribute
         if (embed.dataset && embed.dataset.url) {
-          const iframe = document.createElement('iframe');
-          iframe.src = embed.dataset.url;
-          iframe.width = "100%";
-          iframe.height = "400";
-          iframe.setAttribute('frameborder', '0');
-          embed.appendChild(iframe);
+          url = embed.dataset.url;
+        } else {
+          // Otherwise, try to get the text content (trim to remove whitespace)
+          url = embed.textContent.trim();
         }
-        // Option 2: If embed is raw HTML, just append
-        row.appendChild(embed);
+
+  // Only proceed if the URL looks like a video link
+      if (url.startsWith('http')) {
+        // Clear the embed element
+        embed.innerHTML = '';
+        // Create the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.width = "100%";
+        iframe.height = "400";
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', '');
+        // Append the iframe to the embed element
+        embed.appendChild(iframe);
       }
+    }
     });
   });
 }
