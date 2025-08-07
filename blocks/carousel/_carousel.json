@@ -21,54 +21,67 @@
       "id": "carousel",
       "fields": [
         {
-          "component": "text",
-          "name": "left_subheading",
-          "label": "Left Side Subheading",
-          "description": "Small heading above the main heading"
+          "component": "group",
+          "name": "leftContent",
+          "label": "Left Content",
+          "fields": [
+            {
+              "component": "text",
+              "name": "subheading",
+              "label": "Subheading",
+              "description": "Small heading above the main heading"
+            },
+            {
+              "component": "text",
+              "name": "heading",
+              "label": "Heading",
+              "description": "Main large heading text"
+            },
+            {
+              "component": "text",
+              "name": "productInfo",
+              "label": "Product Info",
+              "description": "Small text below the heading"
+            },
+            {
+              "component": "group",
+              "name": "buttons",
+              "label": "Buttons",
+              "description": "Add up to two buttons",
+              "fields": [
+                {
+                  "component": "url",
+                  "name": "link",
+                  "label": "Button Link"
+                },
+                {
+                  "component": "text",
+                  "name": "text",
+                  "label": "Button Text"
+                }
+              ],
+              "max": 2,
+              "min": 1
+            }
+          ]
         },
         {
-          "component": "text",
-          "name": "left_main_heading",
-          "label": "Left Side Main Heading",
-          "description": "Main large heading text"
-        },
-        {
-          "component": "text",
-          "name": "left_product_info",
-          "label": "Left Side Product Info",
-          "description": "Small text below the main heading"
-        },
-        {
-          "component": "url",
-          "name": "left_cta_1_link",
-          "label": "Left CTA 1 Link"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_1_text",
-          "label": "Left CTA 1 Text"
-        },
-        {
-          "component": "url",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_2_text",
-          "label": "Left CTA 2 Text"
-        },
-
-        {
-          "component": "image",
-          "name": "right_image",
-          "label": "Right Side Image"
-        },
-        {
-          "component": "richtext",
-          "name": "right_text_table",
-          "label": "Right Side Text or Table",
-          "description": "Add rich text or table content here"
+          "component": "group",
+          "name": "rightContent",
+          "label": "Right Content",
+          "fields": [
+            {
+              "component": "image",
+              "name": "image",
+              "label": "Image"
+            },
+            {
+              "component": "richtext",
+              "name": "richTextTable",
+              "label": "Text or Table",
+              "description": "Rich text or table content"
+            }
+          ]
         }
       ]
     }
@@ -76,7 +89,9 @@
   "filters": [
     {
       "id": "carousel",
-      "components": ["carousel"]
+      "components": [
+        "carousel"
+      ]
     }
   ]
 }
