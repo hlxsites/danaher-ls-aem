@@ -2,21 +2,25 @@
   border: 1px solid #7523FF !important;
   outline: none;
 }
+
 .input-focus-checkbox {
   margin-top: 14px;
   margin-bottom: 14px;
   width: 16px;
   height: 16px;
-  border: 1px;
+  border: 1px solid #ccc;
   border-radius: 4px;
   accent-color: #7523FF;
 }
-.prior:checked ~ .prior-checked\:block {
+
+.prior:checked ~ .prior-checked-block {
   display: block;
 }
+
 .max-h-48 {
   max-height: 12rem;
 }
+
 .overflow-scroll {
   overflow-y: scroll;
 }
