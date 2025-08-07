@@ -20,13 +20,13 @@
     {
       "id": "form",
       "fields": [
-        {
-          "component": "richtext",
-          "name": "script",
-          "type": "string",
-          "label": "Embedded Form Script",
-          "required": true
-        }
+       {
+      "component": "code",
+      "name": "scriptCode",
+      "type": "string",
+      "label": "Embedded Script",
+      "required": false
+    }
       ]
     }
   ],

@@ -1,31 +1,14 @@
-function decodeHtmlEntities(text) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = text;
-  return txt.value;
-}
-
 export default async function decorate(block) {
-  // Inject the form HTML first as before
-  const rawHtml = block.textContent || block.innerText || '';
-  block.innerHTML = rawHtml;
+  // Find embedded scripts marked with data-script attribute
+  const scriptBlocks = block.querySelectorAll('script[data-script]');
 
-  // Run embedded <component async is="script"> tags
-  const scripts = block.querySelectorAll('component[async][is="script"]');
-  scripts.forEach((script) => {
+  scriptBlocks.forEach((scriptBlock) => {
     try {
-      // Decode HTML entities before executing script text
-      const decodedScript = decodeHtmlEntities(script.innerText);
-      new Function(decodedScript)();
+      const code = scriptBlock.textContent || scriptBlock.innerText;
+      // Execute the code safely using Function constructor
+      new Function(code)();
     } catch (e) {
       console.error('Script execution error:', e);
     }
-  });
-
-  // Inject styles
-  const styles = block.querySelectorAll('component[is="style"]');
-  styles.forEach((styleComponent) => {
-    const styleEl = document.createElement('style');
-    styleEl.innerText = styleComponent.innerText;
-    document.head.appendChild(styleEl);
   });
 }
