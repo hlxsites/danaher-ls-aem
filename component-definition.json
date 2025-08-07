@@ -341,6 +341,20 @@
           }
         },
         {
+          "title": "Form",
+          "id": "form",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/form/v1/form",
+                "template": {
+                  "fields": "{{fields}}"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Insight",
           "id": "insight",
           "plugins": {
