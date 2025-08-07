@@ -771,6 +771,21 @@ export default function decorate(block) {
           }
         }
       }
+
+      const embed = row.querySelector('.embed');
+      if (embed) {
+        // Option 1: If embed is a URL, create an iframe
+        if (embed.dataset && embed.dataset.url) {
+          const iframe = document.createElement('iframe');
+          iframe.src = embed.dataset.url;
+          iframe.width = "100%";
+          iframe.height = "400";
+          iframe.setAttribute('frameborder', '0');
+          embed.appendChild(iframe);
+        }
+        // Option 2: If embed is raw HTML, just append
+        row.appendChild(embed);
+      }
     });
   });
 }
