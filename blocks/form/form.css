@@ -68,10 +68,15 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  font-size: 0.75rem;
+  font-size: 0.75rem !important;  /* force small font size */
   color: #333;
+  font-weight: normal !important; /* normal weight */
+  line-height: 1;
   user-select: none;
+  width: auto;
+  height: auto;
 }
+
 
 /* Checkbox alignment */
 .checkbox-wrapper,
