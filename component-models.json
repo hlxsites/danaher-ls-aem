@@ -767,114 +767,11 @@
     "id": "form",
     "fields": [
       {
-        "component": "group",
-        "layout": "two-column",
-        "fields": [
-          {
-            "component": "text",
-            "name": "First_Name",
-            "type": "string",
-            "label": "First name",
-            "required": true
-          },
-          {
-            "component": "text",
-            "name": "Last_Name",
-            "type": "string",
-            "label": "Last name",
-            "required": true
-          },
-          {
-            "component": "text",
-            "name": "Email_Address",
-            "type": "string",
-            "label": "Email address",
-            "required": true
-          },
-          {
-            "component": "text",
-            "name": "Phone_Number",
-            "type": "string",
-            "label": "Phone number"
-          },
-          {
-            "component": "text",
-            "name": "Company_Name",
-            "type": "string",
-            "label": "Company name",
-            "required": true
-          },
-          {
-            "component": "select",
-            "name": "Job_Role",
-            "label": "Job Role",
-            "required": true,
-            "options": [
-              {
-                "name": "Select",
-                "value": ""
-              },
-              {
-                "name": "Graduate Student",
-                "value": "Graduate Student"
-              },
-              {
-                "name": "Academia",
-                "value": "Academia"
-              },
-              {
-                "name": "Industry",
-                "value": "Industry"
-              },
-              {
-                "name": "Other",
-                "value": "Other"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "name": "Country",
-            "label": "Country",
-            "required": true,
-            "options": [
-              {
-                "name": "Select",
-                "value": ""
-              },
-              {
-                "name": "Yemen",
-                "value": "Yemen"
-              },
-              {
-                "name": "Zambia",
-                "value": "Zambia"
-              },
-              {
-                "name": "Zimbabwe",
-                "value": "Zimbabwe"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "name": "Postal_Code",
-            "type": "string",
-            "label": "ZIP / Postal Code",
-            "required": true
-          }
-        ]
-      },
-      {
-        "component": "textarea",
-        "name": "OpCo_Comments",
+        "component": "richtext",
+        "name": "html",
         "type": "string",
-        "label": "Additional information (please provide as many details as possible)"
-      },
-      {
-        "component": "checkbox",
-        "name": "Email_Opt_In",
-        "label": "I would like to receive more information via email about products and services offered by DH Life Sciences, LLC."
+        "label": "Embedded Form HTML",
+        "required": true
       }
     ]
   },
