@@ -21,7 +21,7 @@
       "id": "form",
       "fields": [
         {
-          "component": "textarea",
+          "component": "code",
           "name": "script",
           "type": "string",
           "label": "Embedded Form Script",
@@ -33,7 +33,7 @@
   "filters": [
     {
       "id": "form",
-      "components": [      ]
+      "components": ["form"]
     }
   ]
 }
