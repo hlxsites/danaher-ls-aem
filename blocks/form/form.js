@@ -1,79 +1,102 @@
-import { loadScript, toClassName } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Get model data from block.model (preferred) or fallback to dataset
   const model = block.model || {};
-  const formTitle = model.formTitle || block.dataset.formTitle || 'Talk to an Expert';
-  const successUrl = model.successUrl || block.dataset.successUrl || 'https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html';
-  const errorUrl = model.errorUrl || block.dataset.errorUrl || 'https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm';
+  const formTitle = model.formTitle || 'Talk to an Expert';
+  const successUrl = model.successUrl || '';
+  const errorUrl = model.errorUrl || '';
   const fields = model.fields || [];
 
-  // Build dynamic fields HTML
-  let fieldsHtml = '';
-  fields.forEach((field) => {
-    if (field.type === 'text' || field.type === 'email' || field.type === 'tel') {
-      fieldsHtml += `
-        <div class="form-field">
-          <label for="${field.name}">${field.label}${field.required ? ' <span class="required">*</span>' : ''}</label>
-          <input type="${field.type}" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} />
-        </div>
-      `;
-    } else if (field.type === 'textarea') {
-      fieldsHtml += `
-        <div class="form-field">
-          <label for="${field.name}">${field.label}${field.required ? ' <span class="required">*</span>' : ''}</label>
-          <textarea id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}></textarea>
-        </div>
-      `;
-    } else if (field.type === 'select') {
-      const options = (field.options || '').split('\n').map(opt => `<option value="${opt.trim()}">${opt.trim()}</option>`).join('');
-      fieldsHtml += `
-        <div class="form-field">
-          <label for="${field.name}">${field.label}${field.required ? ' <span class="required">*</span>' : ''}</label>
-          <select id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
-            ${options}
-          </select>
-        </div>
-      `;
-    } else if (field.type === 'checkbox') {
-      fieldsHtml += `
-        <div class="form-field">
-          <label>
-            <input type="checkbox" name="${field.name}" ${field.required ? 'required' : ''} />
-            ${field.label}
-          </label>
-        </div>
-      `;
-    }
-    // Add more types as needed
+  const formWrapper = div({ class: 'form-wrapper' });
+  const form = document.createElement('form');
+  form.method = 'post';
+  form.name = 'TTAE';
+  form.id = 'TTAE';
+  form.action = 'https://cl.s13.exct.net/DEManager.aspx';
+
+  // Hidden fields
+  const hiddenFields = [
+    { name: '_clientID', value: '546006278' },
+    { name: '_deExternalKey', value: 'TTAE' },
+    { name: '_action', value: 'add' },
+    { name: '_returnXML', value: '1' },
+    { name: 'Inquiry_Type', value: formTitle },
+    { name: '_successURL', value: successUrl },
+    { name: '_errorURL', value: errorUrl },
+  ];
+  hiddenFields.forEach(({ name, value }) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
   });
 
-  block.innerHTML = `
-    <div style="margin-top:-5rem;" class="relative my-2 mx-0 md:ml-2">
-      <form action="https://cl.s13.exct.net/DEManager.aspx" id="TTAE" name="TTAE" method="post"
-        style="background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);"
-        class="text-sm w-full max-w-4xl box-border overflow-hidden rounded-xl my-0 mx-auto p-6" tabindex="0">
-        <input type="hidden" name="_clientID" value="546006278" />
-        <input type="hidden" name="_deExternalKey" value="TTAE" />
-        <input type="hidden" name="_action" value="add" />
-        <input type="hidden" name="_returnXML" value="1" />
-        <input type="hidden" name="Inquiry_Type" value="${formTitle}" />
-        <input type="hidden" name="Inquiry_Number" value="">
-        <input type="hidden" name="UTM_Content" value="">
-        <input type="hidden" name="UTM_Campaign" value="">
-        <input type="hidden" name="UTM_Medium" value="">
-        <input type="hidden" name="UTM_Term" value="">
-        <input type="hidden" name="UTM_Source" value="">
-        <input type="hidden" name="UTM_NLC" value="">
-        <input type="hidden" name="Job_Role" data-required="true" value="">
-        <input type="hidden" name="Country" data-required="true" value="">
-        <input type="hidden" name="Page_Track_URL" value="">
-        <input type="hidden" name="_successURL" value="${successUrl}" />
-        <input type="hidden" name="_errorURL" value="${errorUrl}" />
-        ${fieldsHtml}
-        <input type="submit" value="Submit" class="btn border-2 px-8 mt-5 my-auto mr-auto btn-trending-brand">
-      </form>
-    </div>
-  `;
+  // Dynamic fields from model
+  fields.forEach((field) => {
+    const fieldWrapper = div({ class: 'form-field' });
+
+    if (field.type !== 'checkbox') {
+      const label = document.createElement('label');
+      label.setAttribute('for', field.name);
+      label.textContent = field.label || '';
+      if (field.required) label.innerHTML += ' <span class="required">*</span>';
+      fieldWrapper.appendChild(label);
+    }
+
+    let input;
+    switch (field.type) {
+      case 'textarea':
+        input = document.createElement('textarea');
+        break;
+      case 'select':
+        input = document.createElement('select');
+        (field.options || '').split('\n').forEach(opt => {
+          const option = document.createElement('option');
+          option.value = opt.trim();
+          option.textContent = opt.trim();
+          input.appendChild(option);
+        });
+        break;
+      case 'checkbox':
+        input = document.createElement('input');
+        input.type = 'checkbox';
+        input.name = field.name;
+        input.id = field.name;
+        if (field.required) input.required = true;
+
+        const label = document.createElement('label');
+        label.htmlFor = field.name;
+        label.innerHTML = ` ${field.label || ''}`;
+        label.prepend(input);
+
+        fieldWrapper.appendChild(label);
+        form.appendChild(fieldWrapper);
+        return;
+
+      default:
+        input = document.createElement('input');
+        input.type = field.type || 'text';
+        break;
+    }
+
+    input.name = field.name;
+    input.id = field.name;
+    if (field.required) input.required = true;
+
+    fieldWrapper.appendChild(input);
+    form.appendChild(fieldWrapper);
+  });
+
+  // Submit
+  const submit = document.createElement('input');
+  submit.type = 'submit';
+  submit.value = 'Submit';
+  submit.className = 'submit-button';
+  form.appendChild(submit);
+
+  // Append form
+  formWrapper.appendChild(form);
+  block.innerHTML = '';
+  block.appendChild(formWrapper);
 }
