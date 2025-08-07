@@ -257,7 +257,7 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
-                  "columns": "2",
+                  "columns": "{{columnsCount}}",
                   "rows": "1"
                 }
               }

@@ -101,11 +101,11 @@
   {
     "id": "columns",
     "components": [
-      "column"
+      "columnsList"
     ]
   },
   {
-    "id": "column",
+    "id": "columnsList",
     "components": [
       "title",
       "image",
