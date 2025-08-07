@@ -22,24 +22,46 @@
       "fields": [
         {
           "component": "text",
-          "name": "left_heading",
-          "label": "Left Heading"
+          "name": "left_column1_heading",
+          "label": "Left Column 1 Heading"
         },
         {
           "component": "richtext",
-          "name": "left_description",
-          "label": "Left Description"
+          "name": "left_column1_description",
+          "label": "Left Column 1 Description"
         },
         {
           "component": "url",
-          "name": "left_cta_link",
-          "label": "Left CTA Link"
+          "name": "left_column1_cta_link",
+          "label": "Left Column 1 CTA Link"
         },
         {
           "component": "text",
-          "name": "left_cta_text",
-          "label": "Left CTA Text"
+          "name": "left_column1_cta_text",
+          "label": "Left Column 1 CTA Text"
         },
+
+        {
+          "component": "text",
+          "name": "left_column2_heading",
+          "label": "Left Column 2 Heading"
+        },
+        {
+          "component": "richtext",
+          "name": "left_column2_description",
+          "label": "Left Column 2 Description"
+        },
+        {
+          "component": "url",
+          "name": "left_column2_cta_link",
+          "label": "Left Column 2 CTA Link"
+        },
+        {
+          "component": "text",
+          "name": "left_column2_cta_text",
+          "label": "Left Column 2 CTA Text"
+        },
+
         {
           "component": "image",
           "name": "right_image",
