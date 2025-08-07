@@ -8,8 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "columns": "{{columnsCount}}",
-              "rows": "1"
+              "columns": "{{columnsCount}}"
             }
           }
         }
