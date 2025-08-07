@@ -1,82 +1,52 @@
-import { decorateIcons, loadScript } from '../../scripts/lib-franklin.js';
-import { getFragmentFromFile } from '../../scripts/scripts.js';
+import { loadScript, toClassName } from '../../scripts/lib-franklin.js';
+import { div } from '../../scripts/dom-builder.js';
 
-function loadAccessibe() {
-  loadScript('../../scripts/lib-accessibe.js');
-}
+export default function decorate(block) {
+  // Read config from block dataset or JSON if needed
+  const formTitle = block.dataset.formTitle || 'Talk to an Expert';
+  const successUrl = block.dataset.successUrl || 'https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html';
+  const errorUrl = block.dataset.errorUrl || 'https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm';
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  block.innerHTML = `
+    <div style="margin-top:-5rem;" class="relative my-2 mx-0 md:ml-2">
+      <form action="https://cl.s13.exct.net/DEManager.aspx" id="TTAE" name="TTAE" method="post"
+        style="background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);"
+        class="text-sm w-full max-w-4xl box-border overflow-hidden rounded-xl my-0 mx-auto p-6" tabindex="0">
+        <input type="hidden" name="_clientID" value="546006278" />
+        <input type="hidden" name="_deExternalKey" value="TTAE" />
+        <input type="hidden" name="_action" value="add" />
+        <input type="hidden" name="_returnXML" value="1" />
+        <input type="hidden" name="Inquiry_Type" value="${formTitle}" />
+        <input type="hidden" name="Inquiry_Number" value="">
+        <input type="hidden" name="UTM_Content" value="">
+        <input type="hidden" name="UTM_Campaign" value="">
+        <input type="hidden" name="UTM_Medium" value="">
+        <input type="hidden" name="UTM_Term" value="">
+        <input type="hidden" name="UTM_Source" value="">
+        <input type="hidden" name="UTM_NLC" value="">
+        <input type="hidden" name="Job_Role" data-required="true" value="">
+        <input type="hidden" name="Country" data-required="true" value="">
+        <input type="hidden" name="Page_Track_URL" value="">
+        <input type="hidden" name="_successURL" value="${successUrl}" />
+        <input type="hidden" name="_errorURL" value="${errorUrl}" />
+        <!-- ...form fields as in your HTML... -->
+      </form>
+    </div>
+  `;
 
-function generateStickyFooter(stickyFooter) {
-  const stickyFooterClone = stickyFooter[0].cloneNode(true);
-  stickyFooterClone.classList.add(
-    ...'fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10'.split(
-      ' ',
-    ),
-  );
-  const firstButton = stickyFooterClone.querySelectorAll(
-    'button:not(.accessibility), a',
-  );
-  firstButton.forEach((btn, index) => {
-    if (index === 0) btn?.classList.add('rounded-l-full');
-    else btn?.classList.add('rounded-r-full');
-    btn?.classList.add(
-      ...'gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-500'.split(
-        ' ',
-      ),
-    );
-  });
-  stickyFooterClone
-    .querySelector('svg.users')
-    ?.classList.add('fill-transparent');
-  stickyFooterClone
-    .querySelector('button.accessibility')
-    ?.classList.add(
-      ...'gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-500'.split(
-        ' ',
-      ),
-    );
-  const accessibeBtn = stickyFooterClone.children[stickyFooterClone.children.length - 1];
-  const topBtn = stickyFooterClone.querySelector('button.scroll-top');
-  topBtn.addEventListener('click', scrollToTop);
-  stickyFooter[0].remove();
-  accessibeBtn.addEventListener('click', loadAccessibe);
-  stickyFooterClone.append(accessibeBtn);
-  decorateIcons(
-    stickyFooterClone.querySelector('button.accessibility')?.firstElementChild,
-  );
-  document.querySelector('footer').appendChild(stickyFooterClone);
-}
-
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
-export default async function decorate(block) {
-  try {
-    // get the content
-    const fragment = await getFragmentFromFile('/fragments/footer.html');
-    block.innerHTML = '';
-    if (
-      fragment
-    ) {
-      document.querySelector('.footer').parentElement.className
-        += ' bg-danaherpurple-50';
-      document.querySelector('.footer').className
-        += ' max-w-7xl mx-auto py-6 px-6 sm:px-6 lg:px-8 divide-y divide-danaherpurple-500 print:hidden';
-      const parser = new DOMParser();
-      const fragmentHtml = parser.parseFromString(fragment, 'text/html');
-      [...fragmentHtml.body.children].forEach((item) => {
-        if (item.className === 'sticky-footer') {
-          generateStickyFooter([item]);
-        } else block.append(item);
+  // Add dropdown, validation, and UTM logic
+  // (Paste your <script> logic here, but wrap in a function and call after block.innerHTML)
+  // Example:
+  setTimeout(() => {
+    document.querySelectorAll('input#Job_Role + label + ul > li').forEach(function (el) {
+      el.addEventListener('click', function () {
+        const dropdownInput = document.querySelector('input[name="Job_Role"]');
+        dropdownInput.value = el.innerText === 'Select' ? '' : el.innerText;
+        const dropdownLabel = document.querySelector('input#Job_Role + label');
+        dropdownLabel.children[0].innerHTML = el.innerText;
+        dropdownLabel.click();
       });
-    }
-  } catch (e) {
-    block.textContent = '';
-    // eslint-disable-next-line no-console
-    console.warn(`cannot load snippet at ${e}`);
-  }
+    });
+    // ...repeat for Country, validation, UTM, etc...
+  }, 0);
 }
