@@ -133,14 +133,17 @@
   {
     "id": "form",
     "components": [
+      "formTitle",
+      "successUrl",
+      "errorUrl",
       "fields"
     ]
   },
   {
     "id": "fields",
     "components": [
-      "firstName",
-      "lastName",
+      "label",
+      "name",
       "type",
       "required",
       "options"

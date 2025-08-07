@@ -8,7 +8,9 @@
           "page": {
             "resourceType": "core/franklin/components/form/v1/form",
             "template": {
-               "class": { "$ref": "classes" }
+              "name": "Form",
+              "model": "form",
+              "fields": "{{fields}}"
             }
           }
         }
@@ -19,51 +21,49 @@
     {
       "id": "form",
       "fields": [
-       {
+        {
+          "label": "Form Title",
+          "name": "formTitle",
+          "component": "text",
+          "valueType": "string",
+          "value": "Talk to an Expert"
+        },
+        {
+          "label": "Success URL",
+          "name": "successUrl",
+          "component": "text",
+          "valueType": "string",
+          "value": "https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html"
+        },
+        {
+          "label": "Error URL",
+          "name": "errorUrl",
+          "component": "text",
+          "valueType": "string",
+          "value": "https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm"
+        },
+        {
           "label": "Fields",
-          "name": "classes",
-          "component": "multiselect",                
-            "options": [
+          "name": "fields",
+          "component": "array",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "fields": [
               {
-                "label": "First Name",
-                "name": "firstName",
+                "label": "Label",
+                "name": "label",
                 "component": "text",
                 "valueType": "string",
                 "value": ""
               },
               {
-                "label": "Last Name",
-                "name": "lastName",
+                "label": "Field Name",
+                "name": "name",
                 "component": "text",
                 "valueType": "string",
-                "value": ""
-              },
-              {
-                "label": "Email Address",
-                "name": "emailAddress",
-                "component": "text",
-                "valueType": "string",
-                "value": ""
-              },
-              {
-                "label": "Phone Number",
-                "name": "phoneNumber",
-                "component": "number",
-                "valueType": "number",
-                "value": ""
-              },
-              {
-                "label": "Company Name",
-                "name": "companyName",
-                "component": "text",
-                "valueType": "string",
-                "value": ""
-              },
-              {
-                "label": "Postal Code",
-                "name": "postalCode",
-                "component": "text",
-                "valueType": "number",
                 "value": ""
               },
               {
@@ -97,6 +97,7 @@
                 "value": ""
               }
             ]
+          }
         }
       ]
     }
@@ -104,13 +105,18 @@
   "filters": [
     {
       "id": "form",
-      "components": ["fields"]
+      "components": [
+        "formTitle",
+        "successUrl",
+        "errorUrl",
+        "fields"
+      ]
     },
     {
       "id": "fields",
       "components": [
-        "firstName",
-        "lastName",
+        "label",
+        "name",
         "type",
         "required",
         "options"
