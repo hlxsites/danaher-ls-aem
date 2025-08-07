@@ -111,7 +111,8 @@
       "image",
       "text",
       "button",
-      "article-info"
+      "article-info",
+      "embed"
     ]
   },
   {
