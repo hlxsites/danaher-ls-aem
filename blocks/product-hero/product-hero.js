@@ -101,10 +101,10 @@ function addBundleDetails(title, bundleDetails) {
         ),
       ));
 
-      bundleProducts.querySelectorAll('img').forEach((img) => {
-        img.className = 'rounded-md shadow-lg w-16 h-16';
-        img.height = '64';
-        img.width = '64';
+      bundleProducts.querySelectorAll('img').forEach((bImg) => {
+        bImg.className = 'rounded-md shadow-lg w-16 h-16';
+        bImg.height = '64';
+        bImg.width = '64';
       });
     }
     if (index === 3) bundleProducts.append(div({ class: 'block relative w-full mt-[-256px] h-[17rem]', style: 'background: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #F3F4F6 92.07%);' }));
