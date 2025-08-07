@@ -166,6 +166,54 @@ p {
   margin-bottom: 1.5rem;
 }
 
+/* Container fix for dropdown to limit height and properly display */
+.embedded-form-wrapper select,
+.embedded-form-wrapper .select-dropdown-label {
+  max-height: 40px; /* reasonable height for dropdown */
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Fix dropdown scroll area inside */
+.embedded-form-wrapper select {
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 40px;
+}
+
+/* Fix SVG icon size inside dropdown label */
+.embedded-form-wrapper svg {
+  width: 12px !important;
+  height: 12px !important;
+  flex-shrink: 0;
+}
+
+/* Text left alignment for all form labels and fields */
+.embedded-form-wrapper label,
+.embedded-form-wrapper input,
+.embedded-form-wrapper select,
+.embedded-form-wrapper textarea {
+  text-align: left !important;
+}
+
+/* Fix spacing around selects */
+.form-block select,
+.form-block .select-dropdown-label {
+  margin-bottom: 0.5rem;
+}
+
+/* Remove extra blank space below dropdown */
+.embedded-form-wrapper .dropdown-container {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 
 /* Checkbox and label aligned horizontally */
 .checkbox-wrapper,
