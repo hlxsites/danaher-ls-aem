@@ -21,63 +21,6 @@
       "id": "carousel",
       "fields": [
         {
-          "component": "list",
-          "name": "slides",
-          "label": "Slides",
-          "item": {
-            "component": "group",
-            "fields": [
-              {
-                "component": "group",
-                "name": "leftContent",
-                "label": "Left Content",
-                "fields": [
-                  {
-                    "component": "text",
-                    "name": "headline",
-                    "label": "Headline",
-                    "required": true
-                  },
-                  {
-                    "component": "textarea",
-                    "name": "subheadline",
-                    "label": "Subheadline"
-                  },
-                  {
-                    "component": "textarea",
-                    "name": "bodyText",
-                    "label": "Body Text"
-                  },
-                  {
-                    "component": "list",
-                    "name": "buttons",
-                    "label": "Buttons",
-                    "item": {
-                      "component": "group",
-                      "fields": [
-                        {
-                          "component": "text",
-                          "name": "text",
-                          "label": "Button Text",
-                          "required": true
-                        },
-                        {
-                          "component": "text",
-                          "name": "url",
-                          "label": "Button URL",
-                          "required": true
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "component": "group",
-                "name": "rightContent",
-                "label": "Right Content",
-                "fields": [
-                  {
                     "component": "image",
                     "name": "image",
                     "label": "Image"
@@ -89,12 +32,7 @@
                   }
                 ]
               }
-            ]
-          }
-        }
-      ]
-    }
-  ],
+            ],
   "filters": [
     {
       "id": "carousel",
