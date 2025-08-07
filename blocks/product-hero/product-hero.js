@@ -38,7 +38,12 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
+  let slideContent = '';
+  if (allImages[0].includes('.pdf')) {
+    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture('/content/dam/danaher/products/fallbackImage.jpeg', `${productName} - image`, true));
+  } else {
+    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
+  }
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
