@@ -65,6 +65,34 @@
                 "value": ""
               },
               {
+                "label": "Email Address",
+                "name": "emailAddress",
+                "component": "text",
+                "valueType": "string",
+                "value": ""
+              },
+              {
+                "label": "Phone Number",
+                "name": "phoneNumber",
+                "component": "number",
+                "valueType": "number",
+                "value": ""
+              },
+              {
+                "label": "Company Name",
+                "name": "companyName",
+                "component": "text",
+                "valueType": "string",
+                "value": ""
+              },
+              {
+                "label": "Postal Code",
+                "name": "postalCode",
+                "component": "text",
+                "valueType": "string",
+                "value": ""
+              },
+              {
                 "label": "Type",
                 "name": "type",
                 "component": "select",
