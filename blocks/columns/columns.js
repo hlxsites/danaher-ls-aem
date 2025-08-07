@@ -611,6 +611,20 @@ export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
 
+// Apply ratio classes to the column wrappers
+  if (cols.length === 2) {
+    if (sectionDiv && sectionDiv.className.includes('seventythirty')) {
+      cols[0].classList.add('lg:w-2/3', 'w-full');
+      cols[1].classList.add('lg:w-1/3', 'w-full');
+    } else if (sectionDiv && sectionDiv.className.includes('thirtyseventy')) {
+      cols[0].classList.add('lg:w-1/3', 'w-full');
+      cols[1].classList.add('lg:w-2/3', 'w-full');
+    } else {
+      cols[0].classList.add('lg:w-1/2', 'w-full');
+      cols[1].classList.add('lg:w-1/2', 'w-full');
+    }
+  }
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
