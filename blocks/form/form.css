@@ -58,6 +58,24 @@ p {
   flex-shrink: 0;
 }
 
+/* Dropdown alignment fix */
+.dropdown-label,
+.select-dropdown-label {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  text-align: left !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  width: 100%;
+}
+
+.dropdown-label span,
+.select-dropdown-label span {
+  text-align: left !important;
+  flex-grow: 1;
+}
+
 
 /* Dropdown logic */
 .prior {
