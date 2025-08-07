@@ -60,22 +60,36 @@
   height: 40px;
 }
 
-/* Custom dropdown arrow */
-.select-wrapper::after {
-  content: "▼";
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  font-size: 0.75rem !important;  /* force small font size */
-  color: #333;
-  font-weight: normal !important; /* normal weight */
-  line-height: 1;
-  user-select: none;
-  width: auto;
-  height: auto;
+.select-wrapper {
+  position: relative;
+  flex: 1;
+  display: inline-block;
+  width: 100%;
 }
+
+.select-wrapper select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.5rem 2rem 0.5rem 0.5rem; /* right padding for arrow */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+
+  /* Hide default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px 12px;
+}
+
+.select-wrapper::after {
+  content: none !important; /* remove old arrow */
+}
+
 
 
 /* Checkbox alignment */
