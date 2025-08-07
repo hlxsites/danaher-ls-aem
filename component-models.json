@@ -501,44 +501,47 @@
         "component": "group",
         "name": "leftContent",
         "label": "Left Content",
+        "type": "object",
         "fields": [
           {
             "component": "text",
             "name": "subheading",
-            "label": "Subheading",
-            "description": "Small heading above the main heading"
+            "type": "string",
+            "label": "Subheading"
           },
           {
             "component": "text",
             "name": "heading",
-            "label": "Heading",
-            "description": "Main large heading text"
+            "type": "string",
+            "label": "Heading"
           },
           {
             "component": "text",
             "name": "productInfo",
-            "label": "Product Info",
-            "description": "Small text below the heading"
+            "type": "string",
+            "label": "Product Info"
           },
           {
             "component": "group",
             "name": "buttons",
             "label": "Buttons",
-            "description": "Add up to two buttons",
+            "type": "array",
+            "min": 1,
+            "max": 2,
             "fields": [
               {
                 "component": "url",
                 "name": "link",
+                "type": "string",
                 "label": "Button Link"
               },
               {
                 "component": "text",
                 "name": "text",
+                "type": "string",
                 "label": "Button Text"
               }
-            ],
-            "max": 2,
-            "min": 1
+            ]
           }
         ]
       },
@@ -546,17 +549,19 @@
         "component": "group",
         "name": "rightContent",
         "label": "Right Content",
+        "type": "object",
         "fields": [
           {
             "component": "image",
             "name": "image",
+            "type": "string",
             "label": "Image"
           },
           {
             "component": "richtext",
             "name": "richTextTable",
-            "label": "Text or Table",
-            "description": "Rich text or table content"
+            "type": "string",
+            "label": "Text or Table"
           }
         ]
       }
