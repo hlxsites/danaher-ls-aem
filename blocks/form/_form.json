@@ -9,7 +9,8 @@
             "resourceType": "core/franklin/components/form/v1/form",
             "template": {
               "name": "Form",
-              "model": "form"
+              "model": "form",
+              "fields": "{{fields}}"
             }
           }
         }
