@@ -10,28 +10,34 @@ export default async function decorate(block) {
   textarea.innerHTML = raw;
   let decodedHtml = textarea.value;
 
-  // Create a DOM parser to manipulate the HTML
+  // Parse decoded HTML
   const parser = new DOMParser();
   const doc = parser.parseFromString(decodedHtml, 'text/html');
 
-  // Find all <component async :is="'script'"> elements
+  // --- Handle <component async :is="'script'"> ---
   const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
-
-  // Extract and concatenate all JS code inside those <component> tags
   let combinedScript = '';
   componentScripts.forEach(component => {
     combinedScript += component.textContent + '\n';
-    // Remove the component from DOM so it won't render
     component.remove();
   });
 
-  // Serialize the cleaned HTML back to string
+  // --- Handle <component :is="'style'"> ---
+  const componentStyles = doc.querySelectorAll('component[\\:is="\'style\'"]');
+  componentStyles.forEach(component => {
+    const styleTag = document.createElement('style');
+    styleTag.textContent = component.textContent;
+    document.head.appendChild(styleTag);
+    component.remove();
+  });
+
+  // Serialize cleaned HTML back
   decodedHtml = doc.body.innerHTML;
 
-  // Inject cleaned HTML into the block
+  // Inject cleaned HTML
   block.innerHTML = decodedHtml;
 
-  // Execute any regular <script> tags inside injected HTML
+  // Execute normal <script> tags in injected HTML
   const scripts = block.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
@@ -44,14 +50,14 @@ export default async function decorate(block) {
     oldScript.parentNode.replaceChild(newScript, oldScript);
   });
 
-  // Execute the extracted JS from <component> tags manually
+  // Execute extracted <component> script code
   if (combinedScript.trim()) {
     const scriptTag = document.createElement('script');
     scriptTag.textContent = combinedScript;
     document.body.appendChild(scriptTag);
   }
 
-  // Move <style> tags to <head>
+  // Move any remaining <style> tags from block to head (if needed)
   const styles = block.querySelectorAll('style');
   styles.forEach(style => {
     if (!document.head.contains(style)) {
