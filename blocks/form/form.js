@@ -14,7 +14,7 @@ export default async function decorate(block) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(decodedHtml, 'text/html');
 
-  // Extract inline component styles
+  // Extract component styles and remove them from doc
   const componentStyles = doc.querySelectorAll('component[\\:is="\'style\'"]');
   let capturedStyles = '';
   componentStyles.forEach(component => {
@@ -22,7 +22,14 @@ export default async function decorate(block) {
     component.remove();
   });
 
-  // Extract component scripts
+  // Extract <style> tags inside decoded HTML
+  const inlineStyles = [...doc.querySelectorAll('style')];
+  inlineStyles.forEach(style => {
+    capturedStyles += style.textContent + '\n';
+    style.remove();
+  });
+
+  // Extract component scripts and remove them
   const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
   let combinedScript = '';
   componentScripts.forEach(component => {
@@ -30,13 +37,29 @@ export default async function decorate(block) {
     component.remove();
   });
 
-  // Inject decoded HTML into the block
+  // Inject decoded HTML (without styles/scripts) into block
   block.innerHTML = doc.body.innerHTML;
 
   // Add wrapper class for scoping
   block.classList.add('embedded-form-wrapper');
 
-  // Custom styles scoped inside embedded-form-wrapper
+  // Helper function: scope CSS selectors by prefixing with .embedded-form-wrapper
+  function scopeCss(cssText, scopeSelector) {
+    // Simple prefixer: add scopeSelector before each selector block
+    // This is a naive implementation, for complex CSS consider a CSS parser
+    return cssText.replace(/(^|})(\s*[^{}]+){/g, (match, g1, selectors) => {
+      // For multiple selectors separated by comma, prefix each
+      const scopedSelectors = selectors.split(',')
+        .map(s => `${scopeSelector} ${s.trim()}`)
+        .join(', ');
+      return `${g1} ${scopedSelectors} {`;
+    });
+  }
+
+  // Scope captured styles
+  const scopedStyles = scopeCss(capturedStyles, '.embedded-form-wrapper');
+
+  // Your custom fallback styles (optional, you can keep or remove)
   const customStyles = `
 .embedded-form-wrapper {
   text-align: left !important;
@@ -50,104 +73,13 @@ export default async function decorate(block) {
   justify-content: flex-start !important;
   align-items: flex-start !important;
 }
+...
+`; // (Insert your full customStyles here as before)
 
-.embedded-form-wrapper .form-group {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  margin-bottom: 1.5rem !important;
-  width: 100% !important;
-}
-.embedded-form-wrapper label {
-  font-weight: 600 !important;
-  margin-bottom: 0.25rem !important;
-  white-space: normal !important;
-  text-align: left !important;
-  width: 100% !important;
-}
-.embedded-form-wrapper .select-wrapper {
-  position: relative !important;
-  width: 100% !important;
-}
-.embedded-form-wrapper .select-wrapper select {
-  width: 100% !important;
-  padding: 0.5rem 2rem 0.5rem 0.5rem !important;
-  font-size: 1rem !important;
-  border: 1px solid #ccc !important;
-  border-radius: 4px !important;
-  appearance: none !important;
-  background-color: white !important;
-  cursor: pointer !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
-}
-.embedded-form-wrapper .select-wrapper::after {
-  content: "" !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  top: 50% !important;
-  right: 0.75rem !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin-top: -3px !important;
-  border-left: 6px solid transparent !important;
-  border-right: 6px solid transparent !important;
-  border-top: 6px solid #333 !important;
-  z-index: 2 !important;
-}
-.embedded-form-wrapper .select-wrapper select:focus {
-  border-color: #7523FF !important;
-  outline: none !important;
-}
-.embedded-form-wrapper input[type="text"],
-.embedded-form-wrapper textarea {
-  width: 100% !important;
-  padding: 0.5rem !important;
-  font-size: 1rem !important;
-  border: 1px solid #ccc !important;
-  border-radius: 4px !important;
-  box-sizing: border-box !important;
-}
-.embedded-form-wrapper textarea {
-  min-height: 80px !important;
-  resize: vertical !important;
-}
-.embedded-form-wrapper input[type="checkbox"] {
-  width: 16px !important;
-  height: 16px !important;
-  accent-color: #7523FF !important;
-  margin: 0 !important;
-}
-.embedded-form-wrapper button[type="submit"],
-.embedded-form-wrapper input[type="submit"] {
-  background-color: #d56618 !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 3px !important;
-  padding: 0.6rem 1rem !important;
-  font-size: 1rem !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  margin-top: 1rem !important;
-  width: 150px !important;
-  text-align: center !important;
-  transition: background-color 0.3s ease !important;
-}
-.embedded-form-wrapper button[type="submit"]:hover,
-.embedded-form-wrapper input[type="submit"]:hover {
-  background-color: #b25214 !important;
-}
-`;
-
-  // Append custom styles to captured styles
-  capturedStyles += customStyles;
-
-  // Inject captured styles after block content is present
-  if (capturedStyles.trim()) {
-    const styleTag = document.createElement('style');
-    styleTag.appendChild(document.createTextNode(capturedStyles));
-    document.head.appendChild(styleTag);
-  }
+  // Inject scoped styles + your custom styles into a style tag
+  const styleTag = document.createElement('style');
+  styleTag.appendChild(document.createTextNode(scopedStyles + '\n' + customStyles));
+  document.head.appendChild(styleTag);
 
   // Handle any <script> tags inside content
   const scripts = block.querySelectorAll('script');
@@ -169,15 +101,7 @@ export default async function decorate(block) {
     document.body.appendChild(scriptTag);
   }
 
-  // Move any remaining <style> inside block to head
-  const styles = block.querySelectorAll('style');
-  styles.forEach(style => {
-    if (!document.head.contains(style)) {
-      document.head.appendChild(style.cloneNode(true));
-    }
-  });
-
-  // Debug: log if form elements exist inside the block
+  // Debug: warn if no form elements found
   if (!block.querySelector('select, input, textarea, button')) {
     console.warn('No form elements found inside the block after decoration');
   }
