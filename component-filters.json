@@ -131,19 +131,13 @@
     ]
   },
   {
-    "id": "form",
-    "components": [
-      "formTitle",
-      "successUrl",
-      "errorUrl",
-      "fields"
-    ]
-  },
-  {
     "id": "fields",
     "components": [
       "firstName",
-      "lastName",
+      "emailAddress",
+      "phoneNumber",
+      "companyName",
+      "postalCode",
       "type",
       "required",
       "options"

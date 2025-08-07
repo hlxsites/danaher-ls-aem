@@ -8,8 +8,6 @@
           "page": {
             "resourceType": "core/franklin/components/form/v1/form",
             "template": {
-              "name": "Form",
-              "model": "form",
               "fields": "{{fields}}"
             }
           }
@@ -19,7 +17,7 @@
   ],
   "models": [
     {
-      "id": "form",
+      "id": "fields",
       "fields": [
         {
           "label": "Form Title",
@@ -130,19 +128,13 @@
   ],
   "filters": [
     {
-      "id": "form",
-      "components": [
-        "formTitle",
-        "successUrl",
-        "errorUrl",
-        "fields"
-      ]
-    },
-    {
       "id": "fields",
       "components": [
         "firstName",
-        "lastName",
+        "emailAddress",
+        "phoneNumber",
+        "companyName",
+        "postalCode",
         "type",
         "required",
         "options"
