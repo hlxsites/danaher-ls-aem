@@ -89,7 +89,7 @@ export default async function decorate(block) {
     loginFormNewAccountButtonLink:
       loginFormNewAccountButtonLink?.textContent
         ?.trim()
-        .replace(/<[^>]*>/g, '') || '',
+        .replace(/<[^>]*>/g, '') || 'https://em1-checkout-payment-module--danaher-ls-aem--hlxsites.hlx.page/us/en/e-buy/register',
     backgroundImage:
       backgroundImage?.src
       ?? 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
@@ -112,7 +112,6 @@ export default async function decorate(block) {
       contentObject.loginSubHeading,
     ),
   );
-  console.log('contentObject: ', contentObject);
   
   const loginForm = form(
     {
