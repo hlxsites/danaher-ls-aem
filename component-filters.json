@@ -131,9 +131,9 @@
     ]
   },
   {
-    "id": "form",
+    "id": "form-fragment",
     "components": [
-      "form"
+      "form-fragment"
     ]
   },
   {
