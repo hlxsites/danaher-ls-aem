@@ -1,22 +1,21 @@
-.input-focus:focus {
-  border: 1px solid #7523FF !important;
-  outline: none;
-}
-.input-focus-checkbox {
-  margin-top: 14px;
-  margin-bottom: 14px;
-  width: 16px;
-  height: 16px;
-  border: 1px;
-  border-radius: 4px;
-  accent-color: #7523FF;
-}
-.prior:checked ~ .prior-checked\:block {
-  display: block;
-}
-.max-h-48 {
-  max-height: 12rem;
-}
-.overflow-scroll {
-  overflow-y: scroll;
-}
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%206'%3E%3Cpath%20fill='none'%20stroke='%23000'%20stroke-width='2'%20d='M1%201l4%204%204-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.65rem auto;
+  }
