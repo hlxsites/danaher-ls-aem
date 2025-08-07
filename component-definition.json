@@ -348,9 +348,9 @@
               "page": {
                 "resourceType": "core/franklin/components/form/v1/form",
                 "template": {
-                  "name": "Form",
-                  "model": "form",
-                  "fields": "{{fields}}"
+                  "class": {
+                    "$ref": "classes"
+                  }
                 }
               }
             }

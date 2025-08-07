@@ -768,9 +768,9 @@
     "fields": [
       {
         "label": "Fields",
-        "name": "fields",
+        "name": "classes",
         "component": "multiselect",
-        "fields": [
+        "options": [
           {
             "label": "First Name",
             "name": "firstName",

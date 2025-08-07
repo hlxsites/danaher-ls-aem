@@ -8,9 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/form/v1/form",
             "template": {
-              "name": "Form",
-              "model": "form",
-              "fields": "{{fields}}"
+               "class": { "$ref": "classes" }
             }
           }
         }
@@ -23,9 +21,9 @@
       "fields": [
        {
           "label": "Fields",
-          "name": "fields",
+          "name": "classes",
           "component": "multiselect",                
-            "fields": [
+            "options": [
               {
                 "label": "First Name",
                 "name": "firstName",
