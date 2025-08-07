@@ -1,5 +1,5 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, p, span, hr, h1, img,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
@@ -40,7 +40,7 @@ function loadMore() {
 function imageSlider(allImages, productName = 'product') {
   let slideContent = '';
   if (allImages[0].includes('.pdf')) {
-    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture('/content/dam/danaher/products/fallbackImage.jpeg', `${productName} - image`, true));
+    slideContent = div({ class: 'image-content' }, img({ src: '/content/dam/danaher/products/fallbackImage.jpeg' }));
   } else {
     slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
   }
