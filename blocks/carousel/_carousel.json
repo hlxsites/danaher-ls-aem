@@ -1,0 +1,99 @@
+{
+  "definitions": [
+    {
+      "title": "Carousel",
+      "id": "carousel",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Carousel",
+              "model": "carousel"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "carousel",
+      "fields": [
+        {
+          "component": "number",
+          "name": "slideDelay",
+          "type": "integer",
+          "label": "Slide Delay (ms)",
+          "default": 3000,
+          "required": true
+        },
+        {
+          "component": "number",
+          "name": "slideTransition",
+          "type": "integer",
+          "label": "Slide Transition Duration (ms)",
+          "default": 1000,
+          "required": true
+        },
+        {
+          "component": "boolean",
+          "name": "autoPlay",
+          "type": "boolean",
+          "label": "Auto Play Slides",
+          "default": true
+        },
+        {
+          "component": "string",
+          "name": "wrapperClass",
+          "type": "string",
+          "label": "Wrapper Class Names",
+          "default": "relative w-full"
+        },
+        {
+          "component": "string",
+          "name": "blockClass",
+          "type": "string",
+          "label": "Block Class Names",
+          "default": "relative min-h-[30rem] md:min-h-[37rem] grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 scroll-smooth"
+        },
+        {
+          "component": "string",
+          "name": "blockInlineStyle",
+          "type": "string",
+          "label": "Block Inline Style",
+          "default": "grid-auto-columns: 100%"
+        },
+        {
+          "component": "string",
+          "name": "navigationPrevButtonClass",
+          "type": "string",
+          "label": "Navigation Previous Button Classes",
+          "default": "flex items-center justify-center h-full cursor-pointer group focus:outline-none"
+        },
+        {
+          "component": "string",
+          "name": "navigationNextButtonClass",
+          "type": "string",
+          "label": "Navigation Next Button Classes",
+          "default": "flex items-center justify-center h-full cursor-pointer group focus:outline-none"
+        },
+        {
+          "component": "string",
+          "name": "paginationClass",
+          "type": "string",
+          "label": "Pagination Classes",
+          "default": "carousel-paginate text-base font-bold"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "carousel",
+      "components": [
+        "carousel"
+      ]
+    }
+  ]
+}
