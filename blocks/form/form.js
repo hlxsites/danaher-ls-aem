@@ -64,4 +64,65 @@ export default async function decorate(block) {
       document.head.appendChild(style.cloneNode(true));
     }
   });
+
+  // ✅ Inject additional CSS for form alignment and styling
+  if (!document.getElementById('custom-dropdown-styles')) {
+    const styleEl = document.createElement('style');
+    styleEl.id = 'custom-dropdown-styles';
+    styleEl.textContent = `
+      /* Form field enhancements */
+      .prior {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .prior:checked ~ .prior-checked\\:block {
+        display: block !important;
+      }
+      .max-h-48 {
+        max-height: 12rem;
+      }
+      .overflow-scroll {
+        overflow-y: auto;
+      }
+      .input-focus:focus {
+        border: 1px solid #7523FF !important;
+        outline: none;
+      }
+      .input-focus-checkbox {
+        margin-top: 14px;
+        margin-bottom: 14px;
+        width: 16px;
+        height: 16px;
+        border: 1px;
+        radius: 4px;
+        accent-color: #7523FF;
+      }
+
+      /* ✅ Force label + text alignment to the left */
+      label,
+      .form-label,
+      .form-text,
+      .form-checkbox-label {
+        text-align: left !important;
+        display: block;
+      }
+
+      /* Checkbox label alignment fix */
+      .checkbox-wrapper,
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-align: left;
+      }
+
+      /* Optional: for consistent form spacing */
+      .form-section {
+        margin-bottom: 1rem;
+      }
+    `;
+    document.head.appendChild(styleEl);
+  }
 }
