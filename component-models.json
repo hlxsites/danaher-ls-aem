@@ -768,10 +768,13 @@
     "fields": [
       {
         "component": "code",
-        "name": "scriptCode",
+        "name": "embeddedHtml",
         "type": "string",
-        "label": "Embedded Script",
-        "required": false
+        "label": "Paste Embed Code Here",
+        "required": true,
+        "options": {
+          "language": "html"
+        }
       }
     ]
   },
