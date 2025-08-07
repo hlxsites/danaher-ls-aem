@@ -133,7 +133,11 @@
   {
     "id": "form",
     "components": [
-      "form"
+      "text",
+      "select",
+      "textarea",
+      "checkbox",
+      "group"
     ]
   },
   {

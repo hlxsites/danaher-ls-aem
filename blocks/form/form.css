@@ -14,3 +14,14 @@
   background-size: 10px;
   padding-right: 2.5rem;
 }
+
+.group.two-column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.group.two-column > * {
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 200px;
+}
