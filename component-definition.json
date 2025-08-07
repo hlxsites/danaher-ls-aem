@@ -346,7 +346,7 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/form/v1/form",
+                "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "fields": "{{fields}}"
                 }
