@@ -498,48 +498,34 @@
     "id": "carousel",
     "fields": [
       {
-        "component": "group",
-        "name": "leftContent",
-        "label": "Left Content",
-        "fields": [
-          {
-            "component": "text",
-            "name": "heading",
-            "label": "Heading"
-          },
-          {
-            "component": "richtext",
-            "name": "description",
-            "label": "Description"
-          },
-          {
-            "component": "text",
-            "name": "ctaText",
-            "label": "CTA Text"
-          },
-          {
-            "component": "url",
-            "name": "ctaLink",
-            "label": "CTA Link"
-          }
-        ]
+        "component": "text",
+        "name": "left_heading",
+        "label": "Left Heading"
       },
       {
-        "component": "group",
-        "name": "rightContent",
-        "label": "Right Content",
-        "fields": [
-          {
-            "component": "image",
-            "name": "image",
-            "label": "Image"
-          },
-          {
-            "component": "richtext",
-            "name": "text",
-            "label": "Text or Table"
-          }
-        ]
+        "component": "richtext",
+        "name": "left_description",
+        "label": "Left Description"
+      },
+      {
+        "component": "url",
+        "name": "left_cta_link",
+        "label": "Left CTA Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_text",
+        "label": "Left CTA Text"
+      },
+      {
+        "component": "image",
+        "name": "right_image",
+        "label": "Right Image"
+      },
+      {
+        "component": "richtext",
+        "name": "right_text",
+        "label": "Right Text or Table"
       }
     ]
   },
