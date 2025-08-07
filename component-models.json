@@ -764,7 +764,7 @@
     ]
   },
   {
-    "id": "formEmbed",
+    "id": "form",
     "fields": [
       {
         "component": "richtext",

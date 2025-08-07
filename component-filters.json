@@ -131,7 +131,7 @@
     ]
   },
   {
-    "id": "formEmbed",
+    "id": "form",
     "components": [
       "form"
     ]

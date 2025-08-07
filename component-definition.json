@@ -341,15 +341,15 @@
           }
         },
         {
-          "title": "Form Embed",
-          "id": "formEmbed",
+          "title": "Form",
+          "id": "form",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "FormEmbed",
-                  "model": "formEmbed"
+                  "name": "Form",
+                  "model": "form"
                 }
               }
             }
