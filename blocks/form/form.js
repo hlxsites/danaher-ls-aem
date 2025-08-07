@@ -69,60 +69,87 @@ export default async function decorate(block) {
   if (!document.getElementById('custom-dropdown-styles')) {
     const styleEl = document.createElement('style');
     styleEl.id = 'custom-dropdown-styles';
-    styleEl.textContent = `
-      /* Form field enhancements */
-      .prior {
-        position: absolute;
-        left: -9999px;
-        opacity: 0;
-        pointer-events: none;
-      }
-      .prior:checked ~ .prior-checked\\:block {
-        display: block !important;
-      }
-      .max-h-48 {
-        max-height: 12rem;
-      }
-      .overflow-scroll {
-        overflow-y: auto;
-      }
-      .input-focus:focus {
-        border: 1px solid #7523FF !important;
-        outline: none;
-      }
-      .input-focus-checkbox {
-        margin-top: 14px;
-        margin-bottom: 14px;
-        width: 16px;
-        height: 16px;
-        border: 1px;
-        radius: 4px;
-        accent-color: #7523FF;
-      }
+   styleEl.textContent = `
+  /* Base improvements */
+  .prior {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .prior:checked ~ .prior-checked\\:block {
+    display: block !important;
+  }
+  .max-h-48 {
+    max-height: 12rem;
+  }
+  .overflow-scroll {
+    overflow-y: auto;
+  }
+  .input-focus:focus {
+    border: 1px solid #7523FF !important;
+    outline: none;
+  }
+  .input-focus-checkbox {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    width: 16px;
+    height: 16px;
+    border: 1px;
+    radius: 4px;
+    accent-color: #7523FF;
+  }
 
-      /* ✅ Force label + text alignment to the left */
-      label,
-      .form-label,
-      .form-text,
-      .form-checkbox-label {
-        text-align: left !important;
-        display: block;
-      }
+  /* ✅ TEXT ALIGN LEFT ENFORCEMENT */
+  .form-section,
+  .form-wrapper,
+  .form-block,
+  .form-container,
+  form,
+  form * {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
 
-      /* Checkbox label alignment fix */
-      .checkbox-wrapper,
-      .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-align: left;
-      }
+  /* Fix for checkbox + label */
+  .checkbox-wrapper,
+  .checkbox-row,
+  .checkbox-container,
+  .checkbox-label,
+  input[type="checkbox"] + label,
+  label[for] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    gap: 8px;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+  }
 
-      /* Optional: for consistent form spacing */
-      .form-section {
-        margin-bottom: 1rem;
-      }
-    `;
+  /* Legal text / paragraph alignment */
+  .form-disclaimer,
+  .form-note,
+  .form-legal,
+  .legal-text,
+  .disclaimer {
+    text-align: left !important;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: #333;
+  }
+
+  /* Optional: space between fields */
+  .form-section,
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+`;
+   /* Checkbox label alignment fix */
+   
     document.head.appendChild(styleEl);
   }
 }
