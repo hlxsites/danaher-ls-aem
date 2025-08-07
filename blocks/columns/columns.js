@@ -623,6 +623,7 @@ export default function decorate(block) {
       cols[0].classList.add('lg:w-1/2', 'w-full');
       cols[1].classList.add('lg:w-1/2', 'w-full');
     }
+    block.firstElementChild.classList.add('flex', 'flex-col', 'gap-x-12', 'gap-y-4', 'lg:flex-row', 'justify-items-center');
   }
 
   block.classList.add(`columns-${cols.length}-cols`);
