@@ -16,6 +16,7 @@ import {
   getCommerceBase,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
+import { includeProdEdsPaths, includeStageEdsPaths } from '../../scripts/delayed.js';
 
 const baseURL = getCommerceBase();
 
@@ -962,7 +963,7 @@ export default async function decorate(block) {
   *
   */
 
-  if (window.location.pathname.includes('news-eds') || window.location.pathname.includes('news-eds.html') || window.location.pathname.includes('blog-eds.html') || window.location.pathname.includes('blog-eds') || window.location.pathname.includes('products/brands')) {
+  if (includeProdEdsPaths.some((prodPath) => window.location.pathname.includes(prodPath)) || (includeStageEdsPaths.some((stagePath) => window.location.pathname.includes(stagePath)) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
     const bred = document.querySelector('breadcrumb');
     const edsBreadcrumbWrapper = div(
       {
