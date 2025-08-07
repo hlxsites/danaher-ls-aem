@@ -21,28 +21,6 @@
       "id": "carousel",
       "fields": [
         {
-          "component": "number",
-          "name": "slideDelay",
-          "label": "Slide Delay (ms)",
-          "type": "integer",
-          "default": 3000,
-          "required": true
-        },
-        {
-          "component": "number",
-          "name": "slideTransition",
-          "label": "Slide Transition Duration (ms)",
-          "type": "integer",
-          "default": 1000,
-          "required": true
-        },
-        {
-          "component": "boolean",
-          "name": "autoPlay",
-          "label": "Auto Play Slides",
-          "default": true
-        },
-        {
           "component": "list",
           "name": "slides",
           "label": "Slides",
@@ -50,48 +28,72 @@
             "component": "group",
             "fields": [
               {
-                "component": "text",
-                "name": "headline",
-                "label": "Headline",
-                "required": true
-              },
-              {
-                "component": "textarea",
-                "name": "subheadline",
-                "label": "Subheadline"
-              },
-              {
-                "component": "textarea",
-                "name": "bodyText",
-                "label": "Body Text"
-              },
-              {
-                "component": "list",
-                "name": "buttons",
-                "label": "Buttons",
-                "item": {
-                  "component": "group",
-                  "fields": [
-                    {
-                      "component": "text",
-                      "name": "text",
-                      "label": "Button Text",
-                      "required": true
-                    },
-                    {
-                      "component": "text",
-                      "name": "url",
-                      "label": "Button URL",
-                      "required": true
-                    },
-                    {
-                      "component": "boolean",
-                      "name": "primary",
-                      "label": "Primary Button",
-                      "default": false
+                "component": "group",
+                "name": "leftContent",
+                "label": "Left Content",
+                "fields": [
+                  {
+                    "component": "text",
+                    "name": "headline",
+                    "label": "Headline",
+                    "required": true
+                  },
+                  {
+                    "component": "textarea",
+                    "name": "subheadline",
+                    "label": "Subheadline"
+                  },
+                  {
+                    "component": "textarea",
+                    "name": "bodyText",
+                    "label": "Body Text"
+                  },
+                  {
+                    "component": "list",
+                    "name": "buttons",
+                    "label": "Buttons",
+                    "item": {
+                      "component": "group",
+                      "fields": [
+                        {
+                          "component": "text",
+                          "name": "text",
+                          "label": "Button Text",
+                          "required": true
+                        },
+                        {
+                          "component": "text",
+                          "name": "url",
+                          "label": "Button URL",
+                          "required": true
+                        },
+                        {
+                          "component": "boolean",
+                          "name": "primary",
+                          "label": "Primary Button",
+                          "default": false
+                        }
+                      ]
                     }
-                  ]
-                }
+                  }
+                ]
+              },
+              {
+                "component": "group",
+                "name": "rightContent",
+                "label": "Right Content",
+                "fields": [
+                  {
+                    "component": "image",
+                    "name": "image",
+                    "label": "Image"
+                  },
+                  {
+                    "component": "richtext",
+                    "name": "richText",
+                    "label": "Rich Text / Table"
+                  }
+                ]
               }
             ]
           }
