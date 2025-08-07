@@ -767,127 +767,104 @@
     "id": "form",
     "fields": [
       {
-        "label": "Form Title",
-        "name": "formTitle",
-        "component": "text",
-        "valueType": "string",
-        "value": "Talk to an Expert"
-      },
-      {
-        "label": "Success URL",
-        "name": "successUrl",
-        "component": "text",
-        "valueType": "string",
-        "value": "https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html"
-      },
-      {
-        "label": "Error URL",
-        "name": "errorUrl",
-        "component": "text",
-        "valueType": "string",
-        "value": "https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm"
-      },
-      {
         "label": "Fields",
         "name": "fields",
         "component": "multiselect",
-        "items": {
-          "fields": [
-            {
-              "label": "First Name",
-              "name": "firstName",
-              "component": "text",
-              "valueType": "string",
-              "value": ""
-            },
-            {
-              "label": "Last Name",
-              "name": "lastName",
-              "component": "text",
-              "valueType": "string",
-              "value": ""
-            },
-            {
-              "label": "Email Address",
-              "name": "emailAddress",
-              "component": "text",
-              "valueType": "string",
-              "value": ""
-            },
-            {
-              "label": "Phone Number",
-              "name": "phoneNumber",
-              "component": "number",
-              "valueType": "number",
-              "value": ""
-            },
-            {
-              "label": "Company Name",
-              "name": "companyName",
-              "component": "text",
-              "valueType": "string",
-              "value": ""
-            },
-            {
-              "label": "Postal Code",
-              "name": "postalCode",
-              "component": "text",
-              "valueType": "number",
-              "value": ""
-            },
-            {
-              "label": "Type",
-              "name": "type",
-              "component": "select",
-              "options": [
-                {
-                  "name": "Text",
-                  "value": "text"
-                },
-                {
-                  "name": "Email",
-                  "value": "email"
-                },
-                {
-                  "name": "Phone",
-                  "value": "tel"
-                },
-                {
-                  "name": "Textarea",
-                  "value": "textarea"
-                },
-                {
-                  "name": "Select",
-                  "value": "select"
-                },
-                {
-                  "name": "Checkbox",
-                  "value": "checkbox"
-                },
-                {
-                  "name": "Hidden",
-                  "value": "hidden"
-                }
-              ],
-              "valueType": "string",
-              "value": "text"
-            },
-            {
-              "label": "Required",
-              "name": "required",
-              "component": "checkbox",
-              "valueType": "boolean",
-              "value": false
-            },
-            {
-              "label": "Options (for select)",
-              "name": "options",
-              "component": "textarea",
-              "valueType": "string",
-              "value": ""
-            }
-          ]
-        }
+        "fields": [
+          {
+            "label": "First Name",
+            "name": "firstName",
+            "component": "text",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "label": "Last Name",
+            "name": "lastName",
+            "component": "text",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "label": "Email Address",
+            "name": "emailAddress",
+            "component": "text",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "label": "Phone Number",
+            "name": "phoneNumber",
+            "component": "number",
+            "valueType": "number",
+            "value": ""
+          },
+          {
+            "label": "Company Name",
+            "name": "companyName",
+            "component": "text",
+            "valueType": "string",
+            "value": ""
+          },
+          {
+            "label": "Postal Code",
+            "name": "postalCode",
+            "component": "text",
+            "valueType": "number",
+            "value": ""
+          },
+          {
+            "label": "Type",
+            "name": "type",
+            "component": "select",
+            "options": [
+              {
+                "name": "Text",
+                "value": "text"
+              },
+              {
+                "name": "Email",
+                "value": "email"
+              },
+              {
+                "name": "Phone",
+                "value": "tel"
+              },
+              {
+                "name": "Textarea",
+                "value": "textarea"
+              },
+              {
+                "name": "Select",
+                "value": "select"
+              },
+              {
+                "name": "Checkbox",
+                "value": "checkbox"
+              },
+              {
+                "name": "Hidden",
+                "value": "hidden"
+              }
+            ],
+            "valueType": "string",
+            "value": "text"
+          },
+          {
+            "label": "Required",
+            "name": "required",
+            "component": "checkbox",
+            "valueType": "boolean",
+            "value": false
+          },
+          {
+            "label": "Options (for select)",
+            "name": "options",
+            "component": "textarea",
+            "valueType": "string",
+            "value": ""
+          }
+        ]
       }
     ]
   },

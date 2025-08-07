@@ -21,32 +21,10 @@
     {
       "id": "form",
       "fields": [
-        {
-          "label": "Form Title",
-          "name": "formTitle",
-          "component": "text",
-          "valueType": "string",
-          "value": "Talk to an Expert"
-        },
-        {
-          "label": "Success URL",
-          "name": "successUrl",
-          "component": "text",
-          "valueType": "string",
-          "value": "https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html"
-        },
-        {
-          "label": "Error URL",
-          "name": "errorUrl",
-          "component": "text",
-          "valueType": "string",
-          "value": "https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm"
-        },
-        {
+       {
           "label": "Fields",
           "name": "fields",
-          "component": "multiselect",
-          "items": {                  
+          "component": "multiselect",                
             "fields": [
               {
                 "label": "First Name",
@@ -121,7 +99,6 @@
                 "value": ""
               }
             ]
-          }
         }
       ]
     }
