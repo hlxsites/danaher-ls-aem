@@ -1,32 +1,32 @@
-/* Container for each label + input/select */
+/* Container for each label + input/select - vertical stack with spacing */
 .form-group {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem; /* space between label and field */
-  margin-bottom: 1.25rem; /* spacing between rows */
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.5rem; /* spacing between rows */
+  gap: 0.25rem;
 }
 
-/* Labels get fixed width and left text */
+/* Labels left aligned, bold */
 .form-group label {
-  flex: 0 0 150px; /* fixed width for labels */
-  text-align: left;
   font-weight: 600;
-  white-space: nowrap; /* prevent label wrap */
+  text-align: left;
+  white-space: nowrap; /* optional: prevents wrapping */
 }
 
-/* Inputs and selects take remaining width */
+/* Inputs, selects, textareas full width with padding and border */
 .form-group input,
 .form-group select,
 .form-group textarea {
-  flex: 1;
+  width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
-/* On focus */
+/* On focus: highlight border */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -34,62 +34,19 @@
   outline: none;
 }
 
-/* === Form Text & Label Left Alignment === */
-form,
-.form-wrapper,
-.form-section,
-.form-container,
-.form-block,
-form * {
-  text-align: left !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.25rem;
-}
-
-/* Align labels and inputs in a vertical stack */
-form label,
-.form-wrapper label,
-.form-section label,
-.form-container label,
-.form-block label {
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-  align-self: flex-start;
-}
-
-/* Inputs, selects, textareas full width */
-form input,
-form select,
-form textarea,
-.form-wrapper input,
-.form-wrapper select,
-.form-wrapper textarea {
-  width: 100% !important;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* === Checkbox and label alignment */
+/* Checkbox and label horizontally aligned with gap */
 input[type="checkbox"] + label,
 .checkbox-wrapper,
 .checkbox-row,
 .checkbox-label {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
   gap: 8px;
-  line-height: 1.5;
-  text-align: left !important;
   margin: 0.5rem 0;
+  cursor: pointer;
 }
 
-/* Checkbox input size */
+/* Checkbox input size and accent color */
 input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -97,7 +54,7 @@ input[type="checkbox"] {
   accent-color: #7523FF;
 }
 
-/* === Paragraphs, legal copy left align */
+/* Paragraphs, legal copy left aligned */
 .form-disclaimer,
 .form-note,
 .form-legal,
@@ -111,170 +68,27 @@ p {
   color: #333;
 }
 
-/* === Input focus styles */
-.input-focus:focus {
-  border: 1px solid #7523FF !important;
-  outline: none;
-}
-
-/* === Fix dropdown icon size */
-.select-wrapper svg,
-.select-wrapper img,
-.embedded-form-wrapper svg {
-  width: 12px !important;
-  height: 12px !important;
-  display: inline-block;
-  vertical-align: middle;
-  flex-shrink: 0;
-}
-
-/* === Dropdown wrapper styles */
+/* Fix dropdown container and custom arrow */
 .select-wrapper {
   position: relative;
-  flex: 1;
+  width: 100%;
 }
 
-/* Make select fill width and hide default arrow */
+/* Select fills width, hides native arrow */
 .select-wrapper select {
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 2rem; /* space for arrow */
-  cursor: pointer;
-  box-sizing: border-box;
-  border-radius: 4px;
+  padding: 0.5rem 2rem 0.5rem 0.5rem; /* space for arrow on right */
+  font-size: 1rem;
   border: 1px solid #ccc;
-  padding: 0.5rem;
-}
-
-/* Custom small arrow for dropdown */
-.select-wrapper::after {
-  content: "▼";
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  font-size: 0.75rem;
-  color: #333;
-}
-
-/* === Optional: space between form sections */
-.form-section,
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-/* Container fix for dropdown to limit height and properly display */
-.embedded-form-wrapper select,
-.embedded-form-wrapper .select-dropdown-label {
-  max-height: 40px; /* reasonable height for dropdown */
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
   box-sizing: border-box;
-  padding: 0 1rem;
-  font-size: 14px;
-  line-height: 1.5;
 }
 
-/* Fix dropdown scroll area inside */
-.embedded-form-wrapper select {
-  overflow-y: auto !important;
-  height: auto !important;
-  min-height: 40px;
-}
-
-/* Fix SVG icon size inside dropdown label */
-.embedded-form-wrapper svg {
-  width: 12px !important;
-  height: 12px !important;
-  flex-shrink: 0;
-}
-
-/* Text left alignment for all form labels and fields */
-.embedded-form-wrapper label,
-.embedded-form-wrapper input,
-.embedded-form-wrapper select,
-.embedded-form-wrapper textarea {
-  text-align: left !important;
-}
-
-/* Fix spacing around selects */
-.form-block select,
-.form-block .select-dropdown-label {
-  margin-bottom: 0.5rem;
-}
-
-/* Remove extra blank space below dropdown */
-.embedded-form-wrapper .dropdown-container {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-
-/* Checkbox and label aligned horizontally */
-.checkbox-wrapper,
-.checkbox-row,
-.checkbox-label,
-input[type="checkbox"] + label {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px;
-  margin: 0.5rem 0;
-  cursor: pointer;
-}
-
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #7523FF;
-}
-
-/* Legal text and disclaimers */
-.form-disclaimer,
-.form-note,
-.form-legal,
-.legal-text,
-.disclaimer,
-p {
-  text-align: left;
-  margin-top: 1rem;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Fix SVG or image arrow size inside dropdowns */
-.select-wrapper svg,
-.select-wrapper img,
-.embedded-form-wrapper svg {
-  width: 12px !important;
-  height: 12px !important;
-  display: inline-block;
-  vertical-align: middle;
-  flex-shrink: 0;
-}
-
-/* Adjust dropdown wrapper so arrow fits nicely */
-.select-wrapper {
-  position: relative;
-  flex: 1;
-}
-
-/* Make select fill width, hide default arrow */
-.select-wrapper select {
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 2rem; /* enough space for custom arrow */
-  cursor: pointer;
-}
-
-/* Custom arrow using CSS */
+/* Custom small arrow on right */
 .select-wrapper::after {
   content: "▼";
   position: absolute;
@@ -284,19 +98,29 @@ p {
   pointer-events: none;
   font-size: 0.75rem;
   color: #333;
+  user-select: none;
 }
 
+/* Fix SVG icon size inside embedded forms */
+.embedded-form-wrapper svg {
+  width: 12px !important;
+  height: 12px !important;
+  flex-shrink: 0;
+}
 
 /* Scrollable dropdown max height */
 .max-h-48 {
   max-height: 12rem;
-}
-
-.overflow-scroll {
   overflow-y: auto;
 }
 
-/* Hidden radio/checkbox for dropdown logic */
+/* Optional: additional input focus style */
+.input-focus:focus {
+  border-color: #7523FF !important;
+  outline: none;
+}
+
+/* Hide offscreen inputs for logic */
 .prior {
   position: absolute;
   left: -9999px;
