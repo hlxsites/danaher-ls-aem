@@ -40,14 +40,12 @@ export default async function decorate(block) {
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
       const absImg = image?.startsWith('http') ? image : `${baseUrl}${image}`;
-      return div(
+      return a(
         {
+          href: clickUri,
+          target: clickUri?.includes('http') ? '_blank' : '_self',
           class:
             'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
-          onclick: () => window.open(
-            clickUri,
-            clickUri?.includes('http') ? '_blank' : '_self',
-          ),
         },
         image
           && img({

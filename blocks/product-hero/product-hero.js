@@ -1,5 +1,5 @@
 import {
-  a, div, p, span, hr, h1, img,
+  a, div, p, span, hr, h1, img
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
