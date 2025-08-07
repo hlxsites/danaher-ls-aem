@@ -499,53 +499,52 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_column1_heading",
-        "label": "Left Column 1 Heading"
+        "name": "left_subheading",
+        "label": "Left Side Subheading",
+        "description": "Small heading above the main heading"
       },
       {
-        "component": "richtext",
-        "name": "left_column1_description",
-        "label": "Left Column 1 Description"
+        "component": "text",
+        "name": "left_main_heading",
+        "label": "Left Side Main Heading",
+        "description": "Main large heading text"
+      },
+      {
+        "component": "text",
+        "name": "left_product_info",
+        "label": "Left Side Product Info",
+        "description": "Small text below the main heading"
       },
       {
         "component": "url",
-        "name": "left_column1_cta_link",
-        "label": "Left Column 1 CTA Link"
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
       },
       {
         "component": "text",
-        "name": "left_column1_cta_text",
-        "label": "Left Column 1 CTA Text"
-      },
-      {
-        "component": "text",
-        "name": "left_column2_heading",
-        "label": "Left Column 2 Heading"
-      },
-      {
-        "component": "richtext",
-        "name": "left_column2_description",
-        "label": "Left Column 2 Description"
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
       },
       {
         "component": "url",
-        "name": "left_column2_cta_link",
-        "label": "Left Column 2 CTA Link"
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
       },
       {
         "component": "text",
-        "name": "left_column2_cta_text",
-        "label": "Left Column 2 CTA Text"
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Text"
       },
       {
         "component": "image",
         "name": "right_image",
-        "label": "Right Image"
+        "label": "Right Side Image"
       },
       {
         "component": "richtext",
-        "name": "right_text",
-        "label": "Right Text or Table"
+        "name": "right_text_table",
+        "label": "Right Side Text or Table",
+        "description": "Add rich text or table content here"
       }
     ]
   },
