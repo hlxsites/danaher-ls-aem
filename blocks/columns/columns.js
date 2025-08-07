@@ -610,6 +610,7 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
@@ -772,33 +773,47 @@ export default function decorate(block) {
         }
       }
 
-      const embed = row.querySelector('.embed');
-      if (embed) {
-        // Try to get the URL from the embed element (text or data attribute)
-        let url = '';
-        // If using a data attribute
-        if (embed.dataset && embed.dataset.url) {
-          url = embed.dataset.url;
-        } else {
-          // Otherwise, try to get the text content (trim to remove whitespace)
-          url = embed.textContent.trim();
-        }
+   const embed = row.querySelector('.embed');
+if (embed) {
+  let url = '';
+  if (embed.dataset && embed.dataset.url) {
+    url = embed.dataset.url.trim();
+  } else {
+    url = embed.textContent.trim();
+  }
 
-  // Only proceed if the URL looks like a video link
-      if (url.startsWith('http')) {
-        // Clear the embed element
-        embed.innerHTML = '';
-        // Create the iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.width = "100%";
-        iframe.height = "400";
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allowfullscreen', '');
-        // Append the iframe to the embed element
-        embed.appendChild(iframe);
-      }
+  // Convert Vimeo and YouTube URLs to embed format
+  if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+    const match = url.match(/vimeo\.com\/(\d+)/);
+    if (match) url = `https://player.vimeo.com/video/${match[1]}`;
+  }
+  if (url.includes('youtube.com/watch')) {
+    const match = url.match(/v=([^&]+)/);
+    if (match) url = `https://www.youtube.com/embed/${match[1]}`;
+  }
+  if (url.includes('youtu.be/')) {
+    const match = url.match(/youtu\.be\/([^?&]+)/);
+    if (match) url = `https://www.youtube.com/embed/${match[1]}`;
+  }
+
+  if (url.startsWith('http')) {
+    // If embed is a <p>, replace with a <div>
+    if (embed.tagName.toLowerCase() === 'p') {
+      const div = document.createElement('div');
+      div.className = embed.className;
+      embed.replaceWith(div);
+      embed = div;
     }
+    embed.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.width = "100%";
+    iframe.height = "400";
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allowfullscreen', '');
+    embed.appendChild(iframe);
+  }
+}
     });
   });
 }
