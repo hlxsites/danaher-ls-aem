@@ -1,16 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Form",
-      "id": "form",
+      "title": "Form Embed",
+      "id": "formEmbed",
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/form/v1/form",
+            "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Form",
-              "model": "form",
-              "fields": "{{fields}}"
+              "name": "FormEmbed",
+              "model": "formEmbed"
             }
           }
         }
@@ -19,170 +18,23 @@
   ],
   "models": [
     {
-      "id": "form",
+      "id": "formEmbed",
       "fields": [
         {
-          "label": "Form Title",
-          "name": "formTitle",
-          "component": "text",
-          "valueType": "string",
-          "value": "Talk to an Expert"
-        },
-        {
-          "label": "Success URL",
-          "name": "successUrl",
-          "component": "text",
-          "valueType": "string",
-          "value": "https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html"
-        },
-        {
-          "label": "Error URL",
-          "name": "errorUrl",
-          "component": "text",
-          "valueType": "string",
-          "value": "https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm"
-        },
-        {
-          "label": "Fields",
-          "name": "fields",
-          "component": "array",
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "component": "object",
-            "type": "object",
-            "fields": [
-              {
-                "label": "Label",
-                "name": "label",
-                "component": "text",
-                "valueType": "string"
-              },
-              {
-                "label": "Field Name",
-                "name": "name",
-                "component": "text",
-                "valueType": "string"
-              },
-              {
-                "label": "Type",
-                "name": "type",
-                "component": "select",
-                "valueType": "string",
-                "options": [
-                  { "name": "Text", "value": "text" },
-                  { "name": "Email", "value": "email" },
-                  { "name": "Phone", "value": "tel" },
-                  { "name": "Textarea", "value": "textarea" },
-                  { "name": "Select", "value": "select" },
-                  { "name": "Checkbox", "value": "checkbox" },
-                  { "name": "Hidden", "value": "hidden" }
-                ],
-                "value": "text"
-              },
-              {
-                "label": "Required",
-                "name": "required",
-                "component": "checkbox",
-                "valueType": "boolean",
-                "value": false
-              },
-              {
-                "label": "Options (for select)",
-                "name": "options",
-                "component": "textarea",
-                "valueType": "string",
-                "value": ""
-              }
-            ]
-          },
-          "value": [
-            {
-              "label": "First name",
-              "name": "firstName",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Last name",
-              "name": "lastName",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Email address",
-              "name": "emailAddress",
-              "type": "email",
-              "required": true
-            },
-            {
-              "label": "Phone number",
-              "name": "phoneNumber",
-              "type": "tel",
-              "required": false
-            },
-            {
-              "label": "Company name",
-              "name": "companyName",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Job Role",
-              "name": "jobRole",
-              "type": "select",
-              "required": true,
-              "options": "Senior Scientist\nManager\nDirector\nOther"
-            },
-            {
-              "label": "Country",
-              "name": "country",
-              "type": "select",
-              "required": true,
-              "options": "Select\nUSA\nCanada\nUK\nGermany\nOther"
-            },
-            {
-              "label": "ZIP / Postal Code",
-              "name": "postalCode",
-              "type": "text",
-              "required": true
-            },
-            {
-              "label": "Additional information (please provide as many details as possible):",
-              "name": "additionalInfo",
-              "type": "textarea",
-              "required": false
-            },
-            {
-              "label": "I would like to receive more information via email about products and services offered by DH Life Sciences, LLC.",
-              "name": "marketingOptIn",
-              "type": "checkbox",
-              "required": false
-            }
-          ]
+          "component": "richtext",
+          "name": "html",
+          "type": "string",
+          "label": "Embedded Form HTML",
+          "required": true
         }
       ]
     }
   ],
   "filters": [
     {
-      "id": "form",
+      "id": "formEmbed",
       "components": [
-        "formTitle",
-        "successUrl",
-        "errorUrl",
-        "fields"
-      ]
-    },
-    {
-      "id": "fields",
-      "components": [
-        "label",
-        "name",
-        "type",
-        "required",
-        "options"
+        "form"
       ]
     }
   ]

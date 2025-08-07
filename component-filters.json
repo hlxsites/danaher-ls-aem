@@ -131,22 +131,9 @@
     ]
   },
   {
-    "id": "form",
+    "id": "formEmbed",
     "components": [
-      "formTitle",
-      "successUrl",
-      "errorUrl",
-      "fields"
-    ]
-  },
-  {
-    "id": "fields",
-    "components": [
-      "label",
-      "name",
-      "type",
-      "required",
-      "options"
+      "form"
     ]
   },
   {
