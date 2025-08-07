@@ -764,10 +764,10 @@
     ]
   },
   {
-    "id": "form-fragment",
+    "id": "form",
     "fields": [
       {
-        "component": "code",
+        "component": "richtext",
         "name": "script",
         "type": "string",
         "label": "Embedded Form Script",
