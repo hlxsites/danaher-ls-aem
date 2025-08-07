@@ -767,10 +767,10 @@
     "id": "form",
     "fields": [
       {
-        "component": "richtext",
-        "name": "html",
+        "component": "code",
+        "name": "script",
         "type": "string",
-        "label": "Embedded Form HTML",
+        "label": "Embedded Form Script",
         "required": true
       }
     ]

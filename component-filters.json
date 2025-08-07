@@ -132,9 +132,7 @@
   },
   {
     "id": "form",
-    "components": [
-      "form"
-    ]
+    "components": []
   },
   {
     "id": "insight",
