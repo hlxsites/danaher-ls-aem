@@ -50,26 +50,26 @@
           "minItems": 1,
           "maxItems": 20,
           "items": {
+            "component": "object",
             "type": "object",
             "fields": [
               {
                 "label": "Label",
                 "name": "label",
                 "component": "text",
-                "valueType": "string",
-                "value": ""
+                "valueType": "string"
               },
               {
                 "label": "Field Name",
                 "name": "name",
                 "component": "text",
-                "valueType": "string",
-                "value": ""
+                "valueType": "string"
               },
               {
                 "label": "Type",
                 "name": "type",
                 "component": "select",
+                "valueType": "string",
                 "options": [
                   { "name": "Text", "value": "text" },
                   { "name": "Email", "value": "email" },
@@ -79,7 +79,6 @@
                   { "name": "Checkbox", "value": "checkbox" },
                   { "name": "Hidden", "value": "hidden" }
                 ],
-                "valueType": "string",
                 "value": "text"
               },
               {
