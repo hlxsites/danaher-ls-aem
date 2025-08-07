@@ -1,22 +1,18 @@
 export default async function decorate(block) {
-  // ✅ Step 1: Skip rewriting block HTML from textContent (avoids rendering issues)
-  // If you're dynamically injecting HTML, do it from a trusted source, not textContent
-  // Commented out due to breaking structured form layout:
-  // const rawHtml = block.textContent || block.innerText;
-  // block.innerHTML = rawHtml;
+  // ✅ DO NOT overwrite block.innerHTML with raw text!
+  // The form markup should already exist in the block.
 
-  // ✅ Step 2: Run embedded <component async is="script"> tags safely
+  // ✅ Step 1: Run embedded <component async is="script"> tags safely
   const scripts = block.querySelectorAll('component[async][is="script"]');
   scripts.forEach((script) => {
     try {
-      // Executes the JavaScript code within the component
-      new Function(script.textContent)();
+      new Function(script.textContent)(); // safer than eval
     } catch (e) {
       console.error('Script execution error:', e);
     }
   });
 
-  // ✅ Step 3: Inject styles from <component is="style"> into <head>
+  // ✅ Step 2: Inject styles from <component is="style">
   const styles = block.querySelectorAll('component[is="style"]');
   styles.forEach((styleComponent) => {
     const styleEl = document.createElement('style');
@@ -24,8 +20,7 @@ export default async function decorate(block) {
     document.head.appendChild(styleEl);
   });
 
-  // ✅ Optional: Apply enhancement logic to form fields (e.g., styling, accessibility, etc.)
-  // Example: Autofocus the first input field
+  // ✅ Step 3: Optionally focus the first input to improve UX
   const firstInput = block.querySelector('input, select, textarea');
   if (firstInput) firstInput.focus();
 }
