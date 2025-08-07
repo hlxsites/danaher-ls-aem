@@ -43,7 +43,7 @@ export default function renderGridCard(item) {
   // Create image with fallback functionality
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
-      src: src || fallbackImagePath,
+      src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
       class: 'w-full h-[164px] object-contain cursor-pointer',
       onclick: () => window.open(

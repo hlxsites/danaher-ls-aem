@@ -4,6 +4,67 @@ import { setCookie, isOTEnabled } from "./scripts.js";
 import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { getMetadata } from "./lib-franklin.js";
 
+/*
+  *
+  :::::::::::
+     include function to add utm params in the url(s)
+  ::::::::::::::
+  *
+  */
+function initUtmParamsUtm() {
+  var hyperLink;
+  const regex = "/content/danaher/ls";
+  if (document.getElementsByTagName("a")) {
+    hyperLink = document.getElementsByTagName("a");
+    for (let i = 0; i < hyperLink.length; ++i) {
+      if (
+        hyperLink[i].getAttribute("href") != null &&
+        !hyperLink[i].getAttribute("href").includes("lifesciences.danaher.com")
+      ) {
+        if (
+          hyperLink[i].getAttribute("href").startsWith("http") ||
+          hyperLink[i].getAttribute("href").startsWith("https") ||
+          hyperLink[i].getAttribute("href").startsWith("ftp://")
+        ) {
+          if (
+            hyperLink[i]
+              .getAttribute("href")
+              .includes("utm_source=dhls_website") ||
+            hyperLink[i].getAttribute("href") == "#" ||
+            hyperLink[i].getAttribute("href").startsWith("mailto:") ||
+            hyperLink[i].getAttribute("href").includes("/content/danaher/ls")
+          ) {
+            //Nothing to add/update
+          } else if (hyperLink[i].getAttribute("href").includes("?")) {
+            hyperLink[i].setAttribute(
+              "href",
+              hyperLink[i].getAttribute("href") + "&utm_source=dhls_website"
+            );
+          } else {
+            hyperLink[i].setAttribute(
+              "href",
+              hyperLink[i].getAttribute("href") + "?utm_source=dhls_website"
+            );
+          }
+        } else if (
+          hyperLink[i].getAttribute("href").startsWith("/content/danaher/ls")
+        ) {
+          hyperLink[i].setAttribute(
+            "href",
+            hyperLink[i].getAttribute("href").replace(regex, "")
+          );
+        }
+      }
+    }
+  } else {
+    hyperLink = null;
+  }
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initUtmParamsUtm);
+} else {
+  initUtmParamsUtm();
+}
  /*
   *
   :::::::::::
