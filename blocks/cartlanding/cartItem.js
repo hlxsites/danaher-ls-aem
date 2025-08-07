@@ -18,7 +18,7 @@ export const cartItem = async () => {
   }
 
   const cartItemContainer = div({
-    class: 'w-full sm:p-6 p-[0px] outline outline-1 outline-offset-[-1px] outline-gray-200 ',
+    class: 'w-full sm:p-6 p-[0px] outline outline-1 outline-offset-[-1px] outline-gray-200 bg-white ',
     id: 'cartItemContainer',
   });
   const cartListContainer = div({

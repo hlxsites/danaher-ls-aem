@@ -728,8 +728,12 @@ shipping address list will get it from the api under my-account -  get addresses
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
 
-  if (getAddressesData.status === 'success') {
-    return getAddressesData.data.filter((adr) => (type === 'billing' ? adr.usage[0] === true : adr.usage[1] === true));
+  if (getAddressesData?.status === 'success') {
+    return getAddressesData?.data?.filter((adr) => {
+      const usage = adr?.usage;
+      if (!Array.isArray(usage)) return [];
+      return type === 'billing' ? adr?.usage[0] === true : adr?.usage[1] === true;
+    });
   }
   return [];
 }

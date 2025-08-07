@@ -835,7 +835,7 @@
     [&::-webkit-scrollbar-track]:bg-gray-100
     [&::-webkit-scrollbar-thumb]:bg-gray-300
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 gap-6;
   }
   #billingAddressListItemsWrapper > div {
     @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
