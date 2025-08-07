@@ -764,7 +764,7 @@
     ]
   },
   {
-    "id": "fields",
+    "id": "form",
     "fields": [
       {
         "label": "Form Title",
@@ -834,7 +834,7 @@
               "label": "Postal Code",
               "name": "postalCode",
               "component": "text",
-              "valueType": "string",
+              "valueType": "number",
               "value": ""
             },
             {

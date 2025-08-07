@@ -131,13 +131,16 @@
     ]
   },
   {
+    "id": "form",
+    "components": [
+      "fields"
+    ]
+  },
+  {
     "id": "fields",
     "components": [
       "firstName",
-      "emailAddress",
-      "phoneNumber",
-      "companyName",
-      "postalCode",
+      "lastName",
       "type",
       "required",
       "options"

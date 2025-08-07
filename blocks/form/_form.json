@@ -8,6 +8,8 @@
           "page": {
             "resourceType": "core/franklin/components/form/v1/form",
             "template": {
+              "name": "Form",
+              "model": "form",
               "fields": "{{fields}}"
             }
           }
@@ -17,7 +19,7 @@
   ],
   "models": [
     {
-      "id": "fields",
+      "id": "form",
       "fields": [
         {
           "label": "Form Title",
@@ -87,7 +89,7 @@
                 "label": "Postal Code",
                 "name": "postalCode",
                 "component": "text",
-                "valueType": "string",
+                "valueType": "number",
                 "value": ""
               },
               {
@@ -128,13 +130,14 @@
   ],
   "filters": [
     {
+      "id": "form",
+      "components": ["fields"]
+    },
+    {
       "id": "fields",
       "components": [
         "firstName",
-        "emailAddress",
-        "phoneNumber",
-        "companyName",
-        "postalCode",
+        "lastName",
         "type",
         "required",
         "options"
