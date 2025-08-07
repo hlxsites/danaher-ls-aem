@@ -349,14 +349,12 @@ export default async function decorate(block) {
 
     if (opcoBannerItemButtonLabel && ctaUrl) {
       contentWrapper.append(
-        button(
+        a(
           {
+            href: ctaUrl || '#',
+            target: opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
             class:
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
-            onclick: () => window.open(
-              ctaUrl,
-              opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
-            ),
           },
           opcoBannerItemButtonLabel,
         ),
