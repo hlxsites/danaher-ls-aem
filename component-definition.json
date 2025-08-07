@@ -350,6 +350,7 @@
                 "template": {
                   "name": "Form",
                   "model": "form",
+                  "filter": "form",
                   "fields": "{{fields}}"
                 }
               }
