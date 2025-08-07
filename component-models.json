@@ -495,28 +495,27 @@
     ]
   },
   {
-    "id": "custom-carousel",
+    "id": "carousel",
     "fields": [
       {
         "component": "number",
         "name": "slideDelay",
-        "type": "integer",
         "label": "Slide Delay (ms)",
+        "type": "integer",
         "default": 3000,
         "required": true
       },
       {
         "component": "number",
         "name": "slideTransition",
-        "type": "integer",
         "label": "Slide Transition Duration (ms)",
+        "type": "integer",
         "default": 1000,
         "required": true
       },
       {
         "component": "boolean",
         "name": "autoPlay",
-        "type": "boolean",
         "label": "Auto Play Slides",
         "default": true
       },
@@ -528,18 +527,18 @@
           "component": "group",
           "fields": [
             {
-              "component": "richtext",
+              "component": "text",
               "name": "headline",
               "label": "Headline",
               "required": true
             },
             {
-              "component": "richtext",
+              "component": "textarea",
               "name": "subheadline",
               "label": "Subheadline"
             },
             {
-              "component": "richtext",
+              "component": "textarea",
               "name": "bodyText",
               "label": "Body Text"
             },
@@ -551,13 +550,13 @@
                 "component": "group",
                 "fields": [
                   {
-                    "component": "string",
+                    "component": "text",
                     "name": "text",
                     "label": "Button Text",
                     "required": true
                   },
                   {
-                    "component": "string",
+                    "component": "text",
                     "name": "url",
                     "label": "Button URL",
                     "required": true
@@ -570,34 +569,6 @@
                   }
                 ]
               }
-            },
-            {
-              "component": "object",
-              "name": "table",
-              "label": "Table Data",
-              "fields": [
-                {
-                  "component": "list",
-                  "name": "headers",
-                  "label": "Table Headers",
-                  "item": {
-                    "component": "string"
-                  }
-                },
-                {
-                  "component": "list",
-                  "name": "rows",
-                  "label": "Table Rows",
-                  "item": {
-                    "component": "list",
-                    "name": "cells",
-                    "label": "Row Cells",
-                    "item": {
-                      "component": "string"
-                    }
-                  }
-                }
-              ]
             }
           ]
         }

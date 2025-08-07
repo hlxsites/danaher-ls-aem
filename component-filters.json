@@ -100,9 +100,9 @@
     ]
   },
   {
-    "id": "custom-carousel",
+    "id": "carousel",
     "components": [
-      "custom-carousel"
+      "carousel"
     ]
   },
   {
