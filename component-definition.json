@@ -265,6 +265,53 @@
           }
         },
         {
+          "title": "Columns 3",
+          "id": "columns-3",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+                  "columns": "3",
+                  "rows": "1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Columns Ratio 30/70",
+          "id": "columns-thirtyseventy",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+                  "columns": "2",
+                  "rows": "1",
+                  "ratio": "30/70"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Columns Ratio 70/30",
+          "id": "columns-seventythirty",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+                  "columns": "2",
+                  "rows": "1",
+                  "ratio": "70/30"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {
