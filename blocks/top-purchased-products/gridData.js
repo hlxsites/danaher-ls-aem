@@ -18,7 +18,7 @@ export default function renderGridCard(item) {
         'w-full relative flex-shrink-0 hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%]  md:min-w-[305px] sm:max-w-[305px] md:max-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
     },
     img({
-      src: imageUrl,
+      src: (imageUrl && !imageUrl.toLowerCase().includes('.pdf')) ? imageUrl : '/content/dam/danaher/products/fallbackImage.jpeg',
       alt: item?.title?.replace(/<[^>]*>/g, '') || '',
       class: 'w-full h-[164px] object-contain',
     }),
