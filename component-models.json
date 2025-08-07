@@ -790,9 +790,7 @@
       {
         "label": "Fields",
         "name": "fields",
-        "component": "array",
-        "minItems": 1,
-        "maxItems": 20,
+        "component": "multiselect",
         "items": {
           "fields": [
             {
