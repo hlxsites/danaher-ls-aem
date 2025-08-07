@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { loadScript, sampleRUM } from "./lib-franklin.js";
-import { setCookie, isOTEnabled } from "./scripts.js";
-import { getAuthorization, getCommerceBase } from "./commerce.js";
-import { getMetadata } from "./lib-franklin.js";
+import { loadScript, sampleRUM } from './lib-franklin.js';
+import { setCookie, isOTEnabled } from './scripts.js';
+import { getAuthorization, getCommerceBase } from './commerce.js';
+import { getMetadata } from './lib-franklin.js';
 
 /*
   *
@@ -76,7 +76,7 @@ export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html'
 export const includeStageEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products.html', 'products/antibodies', 'products/assay-kits', 'products-eds.html', 'e-buy', 'products-eds/brands', 'extraction-kits', 'dna-extraction', 'rna-extraction', 'liquid-handlers', 'capillary-electrophoresis-systems', '2d-3d-cell-culture-systems'];
 
 // Core Web Vitals RUM collection
-sampleRUM("cwv");
+sampleRUM('cwv');
 
 let refresh = false;
 const baseURL = getCommerceBase();
@@ -84,7 +84,7 @@ const baseURL = getCommerceBase();
 // add more delayed functionality here
 // google tag manager -start
 function loadGTM() {
-  const scriptTag = document.createElement("script");
+  const scriptTag = document.createElement('script');
   scriptTag.innerHTML = `
       let gtmId = window.DanaherConfig !== undefined ? window.DanaherConfig.gtmID : 'GTM-KCBGM2N';
       // googleTagManager
@@ -115,10 +115,10 @@ window.targetGlobalSettings = {
 function loadAT() {
   function targetPageParams() {
     return {
-      at_property: "6aeb619e-92d9-f4cf-f209-6d88ff58af6a",
+      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
     };
   }
-  loadScript("/scripts/at-lsig.js");
+  loadScript('/scripts/at-lsig.js');
 }
 // Adobe Target - end
 
@@ -126,17 +126,17 @@ function loadAT() {
 
 function sendCoveoEventPage() {
   const usp = new URLSearchParams(window.location.search);
-  const pdfurl = usp.get("pdfurl");
-  const pdftitle = usp.get("title");
+  const pdfurl = usp.get('pdfurl');
+  const pdftitle = usp.get('title');
 
-  let cval = "";
+  let cval = '';
   if (pdfurl != null && pdfurl.length > 0) {
     cval = window.location.origin + pdfurl;
   } else {
     cval = window.location.origin + window.location.pathname;
   }
 
-  let title = "";
+  let title = '';
   if (pdftitle != null && pdftitle.length > 0) {
     title = pdftitle;
   } else {
@@ -144,104 +144,48 @@ function sendCoveoEventPage() {
   }
 
   coveoua(
-    "init",
+    'init',
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`
   );
 
-  coveoua("send", "view", {
-    contentIdKey: "permanentid",
+  coveoua('send', 'view', {
+    contentIdKey: 'permanentid',
     contentIdValue: cval,
-    language: "en",
-    username: "anonymous",
+    language: 'en',
+    username: 'anonymous',
     title: title,
     location: document.location.href,
-    originLevel1: "DanaherMainSearch",
+    originLevel1: 'DanaherMainSearch',
   });
 }
 
 function sendCoveoEventProduct() {
-  coveoua("set", "currencyCode", "USD");
+  coveoua('set', 'currencyCode', 'USD');
   coveoua(
-    "init",
+    'init',
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`
   );
 
-  const cats = document.querySelector(".hero-default-content .categories");
-  let pcats = "";
+  const cats = document.querySelector('.hero-default-content .categories');
+  let pcats = '';
   if (cats != null) {
-    pcats = cats.textContent.replaceAll("|", "/").replaceAll(",", "|");
+    pcats = cats.textContent.replaceAll('|', '/').replaceAll(',', '|');
   }
 
-  coveoua("ec:addProduct", {
-    id: document.querySelector(".hero-default-content .sku")?.textContent,
-    name: document.querySelector(".hero-default-content .title")?.textContent,
+  coveoua('ec:addProduct', {
+    id: document.querySelector('.hero-default-content .sku')?.textContent,
+    name: document.querySelector('.hero-default-content .title')?.textContent,
     category: pcats,
     price: 0,
-    brand: document.querySelector(".hero-default-content .brand")?.textContent,
+    brand: document.querySelector('.hero-default-content .brand')?.textContent,
   });
 
-  coveoua("ec:setAction", "detail");
-  coveoua("send", "event", {
-    searchHub: "DanaherMainSearch",
+  coveoua('ec:setAction', 'detail');
+  coveoua('send', 'event', {
+    searchHub: 'DanaherMainSearch',
   });
-}
-
-
-function initUtmParamsUtm() {
-  var hyperLink;
-  const regex = "/content/danaher/ls";
-  if (document.getElementsByTagName("a")) {
-    hyperLink = document.getElementsByTagName("a");
-    for (let i = 0; i < hyperLink.length; ++i) {
-      if (
-        hyperLink[i].getAttribute("href") != null &&
-        !hyperLink[i].getAttribute("href").includes("lifesciences.danaher.com")
-      ) {
-        if (
-          hyperLink[i].getAttribute("href").startsWith("http") ||
-          hyperLink[i].getAttribute("href").startsWith("https") ||
-          hyperLink[i].getAttribute("href").startsWith("ftp://")
-        ) {
-          if (
-            hyperLink[i]
-              .getAttribute("href")
-              .includes("utm_source=dhls_website") ||
-            hyperLink[i].getAttribute("href") == "#" ||
-            hyperLink[i].getAttribute("href").startsWith("mailto:") ||
-            hyperLink[i].getAttribute("href").includes("/content/danaher/ls")
-          ) {
-            //Nothing to add/update
-          } else if (hyperLink[i].getAttribute("href").includes("?")) {
-            hyperLink[i].setAttribute(
-              "href",
-              hyperLink[i].getAttribute("href") + "&utm_source=dhls_website"
-            );
-          } else {
-            hyperLink[i].setAttribute(
-              "href",
-              hyperLink[i].getAttribute("href") + "?utm_source=dhls_website"
-            );
-          }
-        } else if (
-          hyperLink[i].getAttribute("href").startsWith("/content/danaher/ls")
-        ) {
-          hyperLink[i].setAttribute(
-            "href",
-            hyperLink[i].getAttribute("href").replace(regex, "")
-          );
-        }
-      }
-    }
-  } else {
-    hyperLink = null;
-  }
-}
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initUtmParamsUtm);
-} else {
-  initUtmParamsUtm();
 }
 
 // Coveo Events - end
@@ -282,30 +226,18 @@ async function getAuthToken() {
   if (!refresh) {
     refresh = true;
     const siteID = window.DanaherConfig?.siteID;
-    const formData = "grant_type=anonymous&scope=openid+profile&client_id=";
-    const authRequest = await fetch(
-      `/content/danaher/services/auth/token?id=${siteID}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData,
-      }
-    );
+    const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
+    const authRequest = await fetch(`/content/danaher/services/auth/token?id=${siteID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData,
+    });
     if (authRequest.ok) {
       const hostName = window.location.hostname;
-      const env = hostName.includes("local")
-        ? "local"
-        : hostName.includes("dev")
-        ? "dev"
-        : hostName.includes("stage")
-        ? "stage"
-        : "prod";
+      const env = hostName.includes('local') ? 'local' : hostName.includes('dev') ? 'dev' : hostName.includes('stage') ? 'stage' : 'prod';
       const data = await authRequest.json();
       sessionStorage.setItem(`${siteID}_${env}_apiToken`, JSON.stringify(data));
-      sessionStorage.setItem(
-        `${siteID}_${env}_refresh-token`,
-        data.refresh_token
-      );
+      sessionStorage.setItem(`${siteID}_${env}_refresh-token`, data.refresh_token);
     }
   }
 }
@@ -313,12 +245,12 @@ async function getAuthToken() {
 
 // Loading fathom script - start
 const attrs = JSON.parse('{"data-site": "KGTBOGMR"}');
-loadScript("https://cdn.usefathom.com/script.js", attrs);
+loadScript('https://cdn.usefathom.com/script.js', attrs);
 // Loading fathom script - end
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
-  a = "coveoua";
+  a = 'coveoua';
   c[a] =
     c[a] ||
     function () {
@@ -334,39 +266,39 @@ loadScript("https://cdn.usefathom.com/script.js", attrs);
 })(
   window,
   document,
-  "script",
-  "https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js"
+  'script',
+  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js'
 );
 
 const accessToken =
   window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchKey
-    : "xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b";
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
 const organizationId =
   window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchOrg
-    : "danahernonproduction1892f3fhz";
+    : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
 const authHeader = getAuthorization();
 if (
   !authHeader ||
-  !(authHeader.has("authentication-token") || authHeader.has("Authorization"))
+  !(authHeader.has('authentication-token') || authHeader.has('Authorization'))
 ) {
   getAuthToken();
 }
 
-if (!window.location.hostname.includes("localhost")) {
+if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
   if (isOTEnabled()) {
     if (
-      getMetadata("template") === "ProductDetail" &&
-      document.querySelector("h1")
+      getMetadata('template') === 'ProductDetail' &&
+      document.querySelector('h1')
     ) {
       sendCoveoEventProduct();
-    } else if (getMetadata("template") !== "ProductDetail") {
+    } else if (getMetadata('template') !== 'ProductDetail') {
       sendCoveoEventPage();
     }
   }
