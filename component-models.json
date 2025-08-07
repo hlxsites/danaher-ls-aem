@@ -767,23 +767,23 @@
     "id": "form",
     "fields": [
       {
-        "title": "Form Title",
-        "id": "formTitle",
         "component": "text",
+        "name": "Form Title",
+        "label": "formTitle",
         "valueType": "string",
         "value": "Talk to an Expert"
       },
       {
-        "title": "Success URL",
-        "id": "successUrl",
         "component": "text",
+        "name": "Success URL",
+        "label": "successUrl",
         "valueType": "string",
         "value": "https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html"
       },
       {
-        "title": "Error URL",
-        "id": "errorUrl",
         "component": "text",
+        "name": "Error URL",
+        "label": "errorUrl",
         "valueType": "string",
         "value": "https://help.salesforce.com/s/articleView?id=sf.mc_es_demanager.htm"
       }
