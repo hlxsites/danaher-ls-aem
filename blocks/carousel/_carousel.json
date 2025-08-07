@@ -66,12 +66,6 @@
                           "name": "url",
                           "label": "Button URL",
                           "required": true
-                        },
-                        {
-                          "component": "boolean",
-                          "name": "primary",
-                          "label": "Primary Button",
-                          "default": false
                         }
                       ]
                     }
@@ -90,8 +84,8 @@
                   },
                   {
                     "component": "richtext",
-                    "name": "richText",
-                    "label": "Rich Text / Table"
+                    "name": "richTextTable",
+                    "label": "Text or Table"
                   }
                 ]
               }
