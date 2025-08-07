@@ -21,7 +21,7 @@
       "id": "form",
       "fields": [
         {
-          "component": "richtext",
+          "component": "textarea",
           "name": "script",
           "type": "string",
           "label": "Embedded Form Script",
