@@ -1,32 +1,34 @@
 export default async function decorate(block) {
-  // Step 1: Decode all component content inside the block
-  const components = block.querySelectorAll('component');
+  // 1. Extract HTML (escaped by richtext editor)
+  let rawHtml = block.textContent || block.innerText;
+  if (!rawHtml) {
+    console.warn('No content found in block');
+    return;
+  }
 
-  components.forEach((component) => {
-    const type = component.getAttribute('is');
+  // 2. Decode escaped HTML
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = rawHtml;
+  const decodedHtml = textarea.value;
 
-    // Decode HTML entities
-    const textarea = document.createElement('textarea');
-    textarea.innerHTML = component.innerHTML;
-    const decoded = textarea.value;
+  // 3. Inject into block
+  block.innerHTML = decodedHtml;
 
-    if (type === 'script') {
-      const script = document.createElement('script');
-      script.textContent = decoded;
-      document.body.appendChild(script); // Append to body to execute
-      component.remove(); // Clean up
+  // 4. Run embedded <script> tags
+  const scripts = block.querySelectorAll('script');
+  scripts.forEach((script) => {
+    const newScript = document.createElement('script');
+    if (script.src) {
+      newScript.src = script.src;
+    } else {
+      newScript.textContent = script.textContent;
     }
-
-    if (type === 'style') {
-      const style = document.createElement('style');
-      style.textContent = decoded;
-      document.head.appendChild(style);
-      component.remove(); // Clean up
-    }
+    script.replaceWith(newScript);
   });
 
-  // Step 2: Decode and inject any remaining escaped HTML (like form HTML)
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = block.innerHTML;
-  block.innerHTML = textarea.value;
+  // 5. Move <style> tags to <head> if needed
+  const styles = block.querySelectorAll('style');
+  styles.forEach((style) => {
+    document.head.appendChild(style);
+  });
 }
