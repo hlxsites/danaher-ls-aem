@@ -76,7 +76,11 @@ export default function renderListCard(item) {
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md',
     }),
     a(
-      { title: item.title },
+      {
+        href: item?.url || '#',
+        target: item?.url?.includes('http') ? '_blank' : '_self',
+        title: item.title,
+      },
       createImageWithFallback(imageUrl, item.title || ''),
     ),
   );
