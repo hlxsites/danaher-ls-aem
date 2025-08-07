@@ -14,15 +14,7 @@ export default async function decorate(block) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(decodedHtml, 'text/html');
 
-  // --- Handle <component async :is="'script'"> ---
-  const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
-  let combinedScript = '';
-  componentScripts.forEach(component => {
-    combinedScript += component.textContent + '\n';
-    component.remove();
-  });
-
-  // --- Handle <component :is="'style'"> ---
+  // --- Extract and inject <component :is="'style'"> styles first ---
   const componentStyles = doc.querySelectorAll('component[\\:is="\'style\'"]');
   componentStyles.forEach(component => {
     const styleTag = document.createElement('style');
@@ -31,10 +23,18 @@ export default async function decorate(block) {
     component.remove();
   });
 
+  // --- Handle <component async :is="'script'"> ---
+  const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
+  let combinedScript = '';
+  componentScripts.forEach(component => {
+    combinedScript += component.textContent + '\n';
+    component.remove();
+  });
+
   // Serialize cleaned HTML back
   decodedHtml = doc.body.innerHTML;
 
-  // Inject cleaned HTML
+  // Inject cleaned HTML after styles are in place
   block.innerHTML = decodedHtml;
 
   // Execute normal <script> tags in injected HTML
@@ -57,7 +57,7 @@ export default async function decorate(block) {
     document.body.appendChild(scriptTag);
   }
 
-  // Move any remaining <style> tags from block to head (if needed)
+  // Move any leftover <style> tags from block to head (if needed)
   const styles = block.querySelectorAll('style');
   styles.forEach(style => {
     if (!document.head.contains(style)) {
