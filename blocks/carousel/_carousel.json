@@ -21,25 +21,51 @@
       "id": "carousel",
       "fields": [
         {
-                "component": "group",
-                "name": "rightContent",
-                "label": "Right Content",
-                "fields": [
-                  {
-                    "component": "image",
-                    "name": "image",
-                    "label": "Image"
-                  },
-                  {
-                    "component": "richtext",
-                    "name": "richTextTable",
-                    "label": "Text or Table"
-                  }
-                ]
+          "component": "group",
+          "name": "leftContent",
+          "label": "Left Content",
+          "fields": [
+            {
+              "component": "richtext",
+              "name": "heading",
+              "label": "Heading"
+            },
+            {
+              "component": "richtext",
+              "name": "description",
+              "label": "Description"
+            },
+            {
+              "component": "list",
+              "name": "buttons",
+              "label": "Buttons",
+              "item": {
+                "component": "richtext",
+                "label": "Button"
               }
-            ]
-          }
-        ],
+            }
+          ]
+        },
+        {
+          "component": "group",
+          "name": "rightContent",
+          "label": "Right Content",
+          "fields": [
+            {
+              "component": "image",
+              "name": "image",
+              "label": "Image"
+            },
+            {
+              "component": "richtext",
+              "name": "richTextTable",
+              "label": "Text or Table"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "filters": [
     {
       "id": "carousel",

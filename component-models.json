@@ -499,6 +499,32 @@
     "fields": [
       {
         "component": "group",
+        "name": "leftContent",
+        "label": "Left Content",
+        "fields": [
+          {
+            "component": "richtext",
+            "name": "heading",
+            "label": "Heading"
+          },
+          {
+            "component": "richtext",
+            "name": "description",
+            "label": "Description"
+          },
+          {
+            "component": "list",
+            "name": "buttons",
+            "label": "Buttons",
+            "item": {
+              "component": "richtext",
+              "label": "Button"
+            }
+          }
+        ]
+      },
+      {
+        "component": "group",
         "name": "rightContent",
         "label": "Right Content",
         "fields": [
