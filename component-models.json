@@ -863,70 +863,7 @@
             }
           ]
         },
-        "value": [
-          {
-            "label": "First name",
-            "name": "firstName",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Last name",
-            "name": "lastName",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Email address",
-            "name": "emailAddress",
-            "type": "email",
-            "required": true
-          },
-          {
-            "label": "Phone number",
-            "name": "phoneNumber",
-            "type": "tel",
-            "required": false
-          },
-          {
-            "label": "Company name",
-            "name": "companyName",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Job Role",
-            "name": "jobRole",
-            "type": "select",
-            "required": true,
-            "options": "Senior Scientist\nManager\nDirector\nOther"
-          },
-          {
-            "label": "Country",
-            "name": "country",
-            "type": "select",
-            "required": true,
-            "options": "Select\nUSA\nCanada\nUK\nGermany\nOther"
-          },
-          {
-            "label": "ZIP / Postal Code",
-            "name": "postalCode",
-            "type": "text",
-            "required": true
-          },
-          {
-            "label": "Additional information (please provide as many details as possible):",
-            "name": "additionalInfo",
-            "type": "textarea",
-            "required": false
-          },
-          {
-            "label": "I would like to receive more information via email about products and services offered by DH Life Sciences, LLC.",
-            "name": "marketingOptIn",
-            "type": "checkbox",
-            "required": false
-          }
-        ]
+        "value": []
       }
     ]
   },
