@@ -498,14 +498,21 @@
     "id": "carousel",
     "fields": [
       {
-        "component": "image",
-        "name": "image",
-        "label": "Image"
-      },
-      {
-        "component": "richtext",
-        "name": "richTextTable",
-        "label": "Text or Table"
+        "component": "group",
+        "name": "rightContent",
+        "label": "Right Content",
+        "fields": [
+          {
+            "component": "image",
+            "name": "image",
+            "label": "Image"
+          },
+          {
+            "component": "richtext",
+            "name": "richTextTable",
+            "label": "Text or Table"
+          }
+        ]
       }
     ]
   },
