@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src 'nonce-aem' 'strict-dynamic';"
+        >
         <title>Page not found</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:title" content="Page not found">
-        <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
-        <script type="text/javascript">
+        <script nonce="aem" src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
+        <script nonce="aem" type="text/javascript">
             window.isErrorPage = true;
             window.errorCode = '404';
         </script>
-        <script type="module">
+        <script nonce="aem" type="module">
             import { sampleRUM } from '/scripts/lib-franklin.js';
             window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
         </script>
