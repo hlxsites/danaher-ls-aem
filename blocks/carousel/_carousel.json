@@ -30,7 +30,8 @@
           "component": "text",
           "name": "left_main_heading",
           "label": "Left Side Main Heading",
-          "description": "Main large heading (h2)"
+          "description": "Main large heading (h2)",
+          "options": {"name": "h2", "value": "h2"}
         },
         {
           "component": "text",

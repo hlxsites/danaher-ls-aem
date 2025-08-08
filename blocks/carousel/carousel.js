@@ -3,8 +3,8 @@ import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
 // Default slide settings (you can customize these)
-// const SLIDE_DELAY = 3000;
-// const SLIDE_TRANSITION = 1000;
+const SLIDE_DELAY = 3000;
+const SLIDE_TRANSITION = 1000;
 
 function configureNavigation(elementControls) {
   const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
@@ -51,7 +51,7 @@ export default function decorate(block) {
 
   // Prepare slides: add classes and restructure content
   const slides = [...block.children].map((ele, eleIndex) => {
-    // ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
+    ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
     ele.setAttribute('data-carousel-item', (eleIndex + 1));
 
     const contentEl = ele.querySelector('h2, p');
@@ -62,7 +62,9 @@ export default function decorate(block) {
       content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10'.split(' '));
 
       const heading = content.querySelector('h2');
+      console.log('heading', heading);
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
+      console.log('paragraphs', paragraphs);
       const allBtns = content.querySelectorAll('p.button-container');
 
       if (heading) {
@@ -135,8 +137,8 @@ export default function decorate(block) {
     // Create carousel controls container
     const carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
 
-    // configurePagination(carouselControls, slides.length);
-    // configureNavigation(carouselControls);
+    configurePagination(carouselControls, slides.length);
+    configureNavigation(carouselControls);
 
     block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
 
@@ -158,7 +160,7 @@ export default function decorate(block) {
       new Carousel({
         wrapperEl: uuid,
         mainEl: '.carousel',
-        // delay: SLIDE_DELAY,
+        delay: SLIDE_DELAY,
         previousElAction: 'button[data-carousel-prev]',
         nextElAction: 'button[data-carousel-next]',
         isAutoPlay: true,
