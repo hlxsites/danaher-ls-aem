@@ -499,31 +499,68 @@
     "fields": [
       {
         "component": "text",
-        "name": "paragraphs",
+        "name": "left_subheading",
         "label": "Left Side Subheading",
-        "description": "Small heading above the main heading"
+        "description": "Small heading above the main heading",
+        "defaultValue": "We See a Way to",
+        "ui": {
+          "className": "eyebrow"
+        }
       },
       {
         "component": "text",
-        "name": "heading",
+        "name": "left_main_heading",
         "label": "Left Side Main Heading",
-        "description": "Main large heading text"
+        "description": "Main large heading text",
+        "defaultValue": "reduce experiment execution by 7000 hours",
+        "ui": {
+          "tag": "h2",
+          "className": "lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]"
+        }
       },
       {
         "component": "text",
         "name": "left_product_info",
         "label": "Left Side Product Info",
-        "description": "Small text below the main heading"
+        "description": "Small text below the main heading",
+        "defaultValue": "IDBS | Polar",
+        "ui": {
+          "className": "text-xl font-extralight tracking-tight leading-7 mt-6"
+        }
       },
       {
-        "component": "button",
-        "name": "linkBtn",
-        "label": "Left CTA 1 Button"
-      },
-      {
-        "component": "image",
-        "name": "picture",
-        "label": "Right Side Image"
+        "component": "group",
+        "name": "buttons",
+        "label": "Buttons",
+        "fields": [
+          {
+            "component": "button",
+            "name": "left_cta_1",
+            "label": "Left CTA 1",
+            "defaultValue": {
+              "text": "Talk to an Expert",
+              "link": "/us/en/expert.html"
+            },
+            "ui": {
+              "className": "btn btn-lg font-medium btn-primary-purple rounded-full px-6"
+            }
+          },
+          {
+            "component": "button",
+            "name": "left_cta_2",
+            "label": "Left CTA 2",
+            "defaultValue": {
+              "text": "View Product",
+              "link": "/us/en/products/family/polar.html"
+            },
+            "ui": {
+              "className": "btn btn-lg font-medium btn-outline-trending-brand rounded-full px-6"
+            }
+          }
+        ],
+        "ui": {
+          "className": "flex flex-col md:flex-row gap-5 mt-10"
+        }
       }
     ]
   },
