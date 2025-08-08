@@ -498,142 +498,108 @@
     "id": "carousel",
     "fields": [
       {
-        "component": "text",
+        "type": "string",
         "name": "left_subheading",
-        "label": "Left Side Subheading",
+        "fieldLabel": "Left Side Subheading",
         "description": "Eyebrow style subheading"
       },
       {
-        "component": "text",
+        "type": "string",
         "name": "left_main_heading_text",
-        "label": "Main Heading Text"
+        "fieldLabel": "Main Heading Text"
       },
       {
-        "component": "select",
+        "type": "enumeration",
         "name": "left_main_heading_type",
-        "label": "Heading Tag Type",
-        "options": [
+        "fieldLabel": "Heading Tag Type",
+        "enum": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6"
+        ]
+      },
+      {
+        "type": "string",
+        "name": "left_product_info",
+        "fieldLabel": "Left Side Product Info",
+        "description": "Descriptive paragraph below heading"
+      },
+      {
+        "type": "object",
+        "name": "left_cta_buttons",
+        "fieldLabel": "CTA Buttons Group",
+        "multifield": true,
+        "fields": [
           {
-            "name": "h1",
-            "value": "h1"
+            "type": "string",
+            "name": "link",
+            "fieldLabel": "Button Link"
           },
           {
-            "name": "h2",
-            "value": "h2"
+            "type": "string",
+            "name": "linkText",
+            "fieldLabel": "Button Text"
           },
           {
-            "name": "h3",
-            "value": "h3"
+            "type": "string",
+            "name": "linkTitle",
+            "fieldLabel": "Button Title"
           },
           {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "type": "enumeration",
+            "name": "linkType",
+            "fieldLabel": "Button Type",
+            "enum": [
+              "",
+              "primary",
+              "secondary"
+            ]
           }
         ]
       },
       {
-        "component": "text",
-        "name": "left_product_info",
-        "label": "Left Side Product Info",
-        "description": "Descriptive paragraph below heading"
-      },
-      {
-        "component": "array",
-        "name": "left_cta_buttons",
-        "label": "CTA Buttons Group",
-        "items": {
-          "type": "object",
-          "fields": [
-            {
-              "component": "url",
-              "name": "link",
-              "label": "Button Link"
-            },
-            {
-              "component": "text",
-              "name": "linkText",
-              "label": "Button Text"
-            },
-            {
-              "component": "text",
-              "name": "linkTitle",
-              "label": "Button Title"
-            },
-            {
-              "component": "select",
-              "name": "linkType",
-              "label": "Button Type",
-              "options": [
-                {
-                  "name": "default",
-                  "value": ""
-                },
-                {
-                  "name": "primary",
-                  "value": "primary"
-                },
-                {
-                  "name": "secondary",
-                  "value": "secondary"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "reference",
+        "type": "reference",
         "name": "picture",
-        "label": "Right Side Image",
+        "fieldLabel": "Right Side Image",
         "description": "Picture with styling from decorate"
       },
       {
-        "component": "text",
+        "type": "string",
         "name": "imageAlt",
-        "label": "Right Side Alt Text"
+        "fieldLabel": "Right Side Alt Text"
       },
       {
-        "component": "boolean",
+        "type": "boolean",
         "name": "auto_play",
-        "label": "Enable Auto Play",
-        "description": "Auto play enabled via isAutoPlay flag",
-        "default": ""
+        "fieldLabel": "Enable Auto Play",
+        "description": "Auto play enabled via isAutoPlay flag"
       },
       {
-        "component": "number",
+        "type": "number",
         "name": "slide_delay",
-        "label": "Slide Delay",
-        "description": "Delay between slides in milliseconds",
-        "default": ""
+        "fieldLabel": "Slide Delay",
+        "description": "Delay between slides in milliseconds"
       },
       {
-        "component": "number",
+        "type": "number",
         "name": "slide_transition",
-        "label": "Slide Transition Duration",
-        "description": "Slide transition speed in milliseconds",
-        "default": ""
+        "fieldLabel": "Slide Transition Duration",
+        "description": "Slide transition speed in milliseconds"
       },
       {
-        "component": "boolean",
+        "type": "boolean",
         "name": "show_pagination",
-        "label": "Show Pagination",
-        "description": "Display 1/3 pagination indicator",
-        "default": ""
+        "fieldLabel": "Show Pagination",
+        "description": "Display 1/3 pagination indicator"
       },
       {
-        "component": "boolean",
+        "type": "boolean",
         "name": "show_navigation",
-        "label": "Show Navigation Arrows",
-        "description": "Previous/Next buttons",
-        "default": ""
+        "fieldLabel": "Show Navigation Arrows",
+        "description": "Previous/Next buttons"
       }
     ]
   },
