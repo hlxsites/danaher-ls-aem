@@ -58,7 +58,6 @@
           "name": "left_cta_2_text",
           "label": "Left CTA 2 Text"
         },
-
         {
           "component": "image",
           "name": "right_image",
@@ -76,7 +75,22 @@
   "filters": [
     {
       "id": "carousel",
-      "components": ["carousel"]
+      "components": [
+        "carousel"
+      ]
+    }
+  ],
+  "data": [
+    {
+      "left_subheading": "We See a Way to",
+      "left_main_heading": "reduce experiment execution by 7000 hours",
+      "left_product_info": "IDBS | Polar",
+      "left_cta_1_link": "#talk-to-an-expert",
+      "left_cta_1_text": "Talk to an Expert",
+      "left_cta_2_link": "#view-product",
+      "left_cta_2_text": "View Product",
+      "right_image": "/path/to/image.png",
+      "right_text_table": ""
     }
   ]
 }
