@@ -1,0 +1,81 @@
+.pdp-citations-wrapper :is(.float-none) {
+  float: none
+}
+
+.pdp-citations-wrapper :is(.\!mr-5) {
+  margin-right: 1.25rem !important
+}
+
+.pdp-citations-wrapper :is(.mb-0) {
+  margin-bottom: 0px
+}
+
+.pdp-citations-wrapper :is(.ml-0) {
+  margin-left: 0px
+}
+
+.pdp-citations-wrapper :is(.block) {
+  display: block
+}
+
+.pdp-citations-wrapper :is(.h-3) {
+  height: 0.75rem
+}
+
+.pdp-citations-wrapper :is(.h-48) {
+  height: 12rem
+}
+
+.pdp-citations-wrapper :is(.w-3) {
+  width: 0.75rem
+}
+
+.pdp-citations-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.pdp-citations-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
+.pdp-citations-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.pdp-citations-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.pdp-citations-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.pdp-citations-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.pdp-citations-wrapper :is(.\!pb-6) {
+  padding-bottom: 1.5rem !important
+}
+
+.pdp-citations-wrapper :is(.pb-0) {
+  padding-bottom: 0px
+}
+
+.pdp-citations-wrapper :is(.align-top) {
+  vertical-align: top
+}
+
+.pdp-citations-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.pdp-citations-wrapper :is(.text-danaherblue-900) {
+  --tw-text-opacity: 1;
+  color: rgb(6 28 68 / var(--tw-text-opacity))
+}
