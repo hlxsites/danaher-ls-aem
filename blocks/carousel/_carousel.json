@@ -32,6 +32,9 @@
           "label": "Main Heading (h2)"
         },
         {
+          "id": "text",
+          "fields":[
+          {
           "component": "select",
           "name": "left_main_heading",
           "label": "Title Type",
@@ -42,6 +45,8 @@
               { "name": "h4", "value": "h4" },
               { "name": "h5", "value": "h5" },
               { "name": "h6", "value": "h6" }
+          ]
+        }
           ]
         },
         {
