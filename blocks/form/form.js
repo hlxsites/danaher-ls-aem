@@ -10,45 +10,42 @@ export default async function decorate(block) {
   textarea.innerHTML = raw;
   const decodedHtml = textarea.value;
 
+  // Fix: Replace ":is" with "is" for easier querying
+  const normalizedHtml = decodedHtml.replace(/:is=/g, 'is=');
+
   // Parse decoded HTML
   const parser = new DOMParser();
-  const doc = parser.parseFromString(decodedHtml, 'text/html');
+  const doc = parser.parseFromString(normalizedHtml, 'text/html');
 
-  // Extract component styles and remove them from doc
-  const componentStyles = doc.querySelectorAll('component[\\:is="\'style\'"]');
+  // Extract <component is="style"> tags
+  const componentStyles = doc.querySelectorAll('component[is="style"]');
   let capturedStyles = '';
   componentStyles.forEach(component => {
     capturedStyles += component.textContent + '\n';
     component.remove();
   });
 
-  // Extract <style> tags inside decoded HTML
-  const inlineStyles = [...doc.querySelectorAll('style')];
-  inlineStyles.forEach(style => {
+  // Extract <style> tags
+  doc.querySelectorAll('style').forEach(style => {
     capturedStyles += style.textContent + '\n';
     style.remove();
   });
 
-  // Extract component scripts and remove them
-  const componentScripts = doc.querySelectorAll('component[async][\\:is="\'script\'"]');
+  // Extract <component async is="script">
+  const componentScripts = doc.querySelectorAll('component[async][is="script"]');
   let combinedScript = '';
   componentScripts.forEach(component => {
     combinedScript += component.textContent + '\n';
     component.remove();
   });
 
-  // Inject decoded HTML (without styles/scripts) into block
+  // Inject HTML (without styles/scripts)
   block.innerHTML = doc.body.innerHTML;
-
-  // Add wrapper class for scoping
   block.classList.add('embedded-form-wrapper');
 
-  // Helper function: scope CSS selectors by prefixing with .embedded-form-wrapper
+  // CSS scoping (naive, as before)
   function scopeCss(cssText, scopeSelector) {
-    // Simple prefixer: add scopeSelector before each selector block
-    // This is a naive implementation, for complex CSS consider a CSS parser
     return cssText.replace(/(^|})(\s*[^{}]+){/g, (match, g1, selectors) => {
-      // For multiple selectors separated by comma, prefix each
       const scopedSelectors = selectors.split(',')
         .map(s => `${scopeSelector} ${s.trim()}`)
         .join(', ');
@@ -56,45 +53,28 @@ export default async function decorate(block) {
     });
   }
 
-  // Scope captured styles
-  const scopedStyles = scopeCss(capturedStyles, '.embedded-form-wrapper');
-
-  // Your custom fallback styles (optional, you can keep or remove)
+  // Scope styles and add custom styles
   const customStyles = `
 .embedded-form-wrapper {
   text-align: left !important;
   box-sizing: border-box !important;
 }
-.embedded-form-wrapper *, 
-.embedded-form-wrapper *::before, 
-.embedded-form-wrapper *::after {
-  box-sizing: inherit !important;
-  text-align: left !important;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-}
-...
-`; // (Insert your full customStyles here as before)
+/* ... your other custom styles ... */
+`;
 
-  // Inject scoped styles + your custom styles into a style tag
   const styleTag = document.createElement('style');
-  styleTag.appendChild(document.createTextNode(scopedStyles + '\n' + customStyles));
+  styleTag.appendChild(document.createTextNode(scopeCss(capturedStyles, '.embedded-form-wrapper') + '\n' + customStyles));
   document.head.appendChild(styleTag);
 
-  // Handle any <script> tags inside content
-  const scripts = block.querySelectorAll('script');
-  scripts.forEach(oldScript => {
+  // Re-run <script> tags in HTML
+  block.querySelectorAll('script').forEach(oldScript => {
     const newScript = document.createElement('script');
-    if (oldScript.src) {
-      newScript.src = oldScript.src;
-      newScript.async = false;
-    } else {
-      newScript.textContent = oldScript.textContent;
-    }
+    if (oldScript.src) newScript.src = oldScript.src;
+    newScript.textContent = oldScript.textContent;
     oldScript.parentNode.replaceChild(newScript, oldScript);
   });
 
-  // Run extracted component scripts
+  // Run combined <component async is="script">
   if (combinedScript.trim()) {
     const scriptTag = document.createElement('script');
     scriptTag.textContent = combinedScript;

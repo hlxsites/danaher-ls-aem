@@ -25,7 +25,8 @@
           "name": "script",
           "type": "string",
           "label": "Embedded Form Script",
-          "required": true
+          "required": true,
+          "description": "Paste the complete HTML, JS, and CSS code for the form here."
         }
       ]
     }
