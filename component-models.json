@@ -504,45 +504,38 @@
         "description": "Eyebrow style subheading"
       },
       {
-        "component": "group",
-        "name": "left_main_heading_group",
-        "label": "Left Side Main Heading Group",
-        "fields": [
+        "component": "text",
+        "name": "left_main_heading",
+        "label": "Main Heading (h2)"
+      },
+      {
+        "component": "select",
+        "name": "left_main_heading_type",
+        "label": "Title Type",
+        "options": [
           {
-            "component": "text",
-            "name": "left_main_heading",
-            "label": "Main Heading (h2)"
+            "name": "h1",
+            "value": "h1"
           },
           {
-            "component": "select",
-            "name": "left_main_heading_type",
-            "label": "Title Type",
-            "options": [
-              {
-                "name": "h1",
-                "value": "h1"
-              },
-              {
-                "name": "h2",
-                "value": "h2"
-              },
-              {
-                "name": "h3",
-                "value": "h3"
-              },
-              {
-                "name": "h4",
-                "value": "h4"
-              },
-              {
-                "name": "h5",
-                "value": "h5"
-              },
-              {
-                "name": "h6",
-                "value": "h6"
-              }
-            ]
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
           }
         ]
       },
