@@ -9,6 +9,43 @@
   line-height: 1.75rem;
 }
 
+.button-group {
+  display: flex;
+  gap: 1rem; /* spacing between buttons */
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #6c2bd9;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #5016c5;
+}
+
+.btn-outline {
+  border: 2px solid #6c2bd9;
+  color: #6c2bd9;
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  background-color: #f4f0fc;
+}
+
+
 .eyebrow {
   color: #4000A5;
   font-size: 1.125rem;
