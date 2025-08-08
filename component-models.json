@@ -505,42 +505,37 @@
       },
       {
         "component": "text",
-        "name": "left_main_heading",
-        "label": "Main Heading (h2)"
+        "name": "left_main_heading_text",
+        "label": "Main Heading Text"
       },
       {
-        "id": "text",
-        "fields": [
+        "component": "select",
+        "name": "left_main_heading_type",
+        "label": "Heading Tag Type",
+        "options": [
           {
-            "component": "select",
-            "name": "heading_type",
-            "label": "Heading Tag Type",
-            "options": [
-              {
-                "name": "h1",
-                "value": "h1"
-              },
-              {
-                "name": "h2",
-                "value": "h2"
-              },
-              {
-                "name": "h3",
-                "value": "h3"
-              },
-              {
-                "name": "h4",
-                "value": "h4"
-              },
-              {
-                "name": "h5",
-                "value": "h5"
-              },
-              {
-                "name": "h6",
-                "value": "h6"
-              }
-            ]
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
           }
         ]
       },

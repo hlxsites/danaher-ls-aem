@@ -2,7 +2,6 @@ import Carousel from '../../scripts/carousel.js';
 import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
-// Default slide settings (you can customize these)
 const SLIDE_DELAY = 3000;
 const SLIDE_TRANSITION = 1000;
 
@@ -36,38 +35,48 @@ function configurePagination(carouselControls, totalSlides) {
 }
 
 export default function decorate(block) {
-  // Hide h1 in the grandparent if exists
   block.parentElement?.parentElement?.querySelector('h1')?.classList.add('hidden');
 
-  // Add classes to block for styling
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem] grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 scroll-smooth'.split(' '));
   block.style.gridAutoColumns = '100%';
   block.classList.remove('block');
 
-  // Add padding classes to grandparent if link with title 'link' exists
   if (block.querySelector('a[title="link"]')) {
     block.parentElement?.parentElement?.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
   }
 
-  // Prepare slides: add classes and restructure content
   const slides = [...block.children].map((ele, eleIndex) => {
     ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
     ele.setAttribute('data-carousel-item', (eleIndex + 1));
 
     const contentEl = ele.querySelector('h2, p');
-    console.log('contentEl', contentEl);
     const picture = ele.querySelector('picture');
 
     if (contentEl) {
       const content = contentEl.closest('div');
       content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10'.split(' '));
-      const heading = content.querySelector('h2');
+
+      // 💡 Insert dynamic heading based on JSON fields
+      const allParagraphs = content.querySelectorAll('p');
+      if (allParagraphs.length >= 2) {
+        const headingTextEl = allParagraphs[0];
+        const headingTypeEl = allParagraphs[1];
+
+        const headingText = headingTextEl.textContent.trim();
+        const headingType = headingTypeEl.textContent.trim().toLowerCase();
+        const allowedTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+        const tagName = allowedTags.includes(headingType) ? headingType : 'h2';
+
+        const headingEl = document.createElement(tagName);
+        headingEl.textContent = headingText;
+        headingEl.classList.add(...'lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]'.split(' '));
+
+        headingTypeEl.remove();         // remove type paragraph
+        headingTextEl.replaceWith(headingEl); // insert real heading
+      }
+
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
       const allBtns = content.querySelectorAll('p.button-container');
-
-      if (heading) {
-        heading.classList.add(...'lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]'.split(' '));
-      }
 
       paragraphs.forEach(paragraph => {
         if (!paragraph.querySelector('a[title="link"]')) {
@@ -119,20 +128,15 @@ export default function decorate(block) {
     }
 
     decorateModals(ele);
-
     return { position: eleIndex, el: ele };
   });
 
-  // Make sure we have at least 2 slides and the parent has carousel-wrapper class
   if (block.children.length >= 2 && block.parentElement.classList.contains('carousel-wrapper')) {
     block.parentElement.classList.add('relative', 'w-full');
-
-    // Generate a fixed, easy to debug ID for the wrapper
     const uuid = 'carousel-wrapper';
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
 
-    // Create carousel controls container
     const carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
 
     configurePagination(carouselControls, slides.length);
@@ -145,7 +149,6 @@ export default function decorate(block) {
     }
 
     setTimeout(() => {
-      // Verify elements before initializing carousel
       const wrapperEl = document.getElementById(uuid);
       const mainEl = wrapperEl?.querySelector('.carousel');
 
@@ -154,7 +157,6 @@ export default function decorate(block) {
         return;
       }
 
-      /* eslint-disable no-new */
       new Carousel({
         wrapperEl: uuid,
         mainEl: '.carousel',
@@ -171,6 +173,6 @@ export default function decorate(block) {
           }
         },
       });
-    }, 100); // Reduced timeout to 100ms, adjust as needed
+    }, 100);
   }
 }
