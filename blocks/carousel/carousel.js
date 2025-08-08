@@ -2,8 +2,8 @@ import Carousel from '../../scripts/carousel.js';
 import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
-// const SLIDE_DELAY = 3000;
-// const SLIDE_TRANSITION = 1000;
+const SLIDE_DELAY = 3000;
+const SLIDE_TRANSITION = 1000;
 
 function configureNavigation(elementControls) {
   const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
