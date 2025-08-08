@@ -89,6 +89,10 @@
   border-width: 0;
 }
 
+.carousel-wrapper :is(.fixed) {
+  position: fixed;
+}
+
 .carousel-wrapper :is(.absolute) {
   position: absolute;
 }

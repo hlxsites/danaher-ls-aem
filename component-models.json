@@ -516,9 +516,9 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "aem-content",
-        "name": "left_cta_1_link",
-        "label": "Left CTA 1 Link"
+        "component": "button",
+        "name": "left_cta_1_button",
+        "label": "Left CTA 1 Button"
       },
       {
         "component": "title",
@@ -526,14 +526,14 @@
         "label": "Left CTA 1 Text"
       },
       {
-        "component": "button",
-        "name": "left_cta_1_button",
-        "label": "Left CTA 1 button"
+        "component": "link",
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
       },
       {
-        "component": "aem-content",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
+        "component": "button",
+        "name": "left_cta_1_button",
+        "label": "Left CTA 1 Button"
       },
       {
         "component": "title",
@@ -541,8 +541,13 @@
         "label": "Left CTA 2 Text"
       },
       {
+        "component": "link",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
+      },
+      {
         "component": "reference",
-        "name": "right_image",
+        "name": "picture",
         "label": "Right Side Image",
         "description": "Picture with styling from decorate"
       },
