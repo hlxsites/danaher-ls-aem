@@ -549,62 +549,45 @@
         "component": "array",
         "name": "left_cta_buttons",
         "label": "CTA Buttons Group",
-        "fields": [
-          {
-            "component": "aem-content",
-            "name": "link",
-            "label": "Link"
-          },
-          {
-            "component": "text",
-            "name": "linkText",
-            "label": "Text"
-          },
-          {
-            "component": "text",
-            "name": "linkTitle",
-            "label": "Title"
-          },
-          {
-            "component": "select",
-            "name": "linkType",
-            "label": "Type",
-            "options": [
-              {
-                "name": "default",
-                "value": ""
-              },
-              {
-                "name": "primary",
-                "value": "primary"
-              },
-              {
-                "name": "secondary",
-                "value": "secondary"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "component": "url",
-        "name": "left_cta_1_link",
-        "label": "Left CTA 1 Link"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
-      },
-      {
-        "component": "url",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_2_text",
-        "label": "Left CTA 2 Text"
+        "items": {
+          "type": "object",
+          "fields": [
+            {
+              "component": "url",
+              "name": "link",
+              "label": "Button Link"
+            },
+            {
+              "component": "text",
+              "name": "linkText",
+              "label": "Button Text"
+            },
+            {
+              "component": "text",
+              "name": "linkTitle",
+              "label": "Button Title"
+            },
+            {
+              "component": "select",
+              "name": "linkType",
+              "label": "Button Type",
+              "options": [
+                {
+                  "name": "default",
+                  "value": ""
+                },
+                {
+                  "name": "primary",
+                  "value": "primary"
+                },
+                {
+                  "name": "secondary",
+                  "value": "secondary"
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "component": "reference",
