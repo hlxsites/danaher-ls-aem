@@ -34,7 +34,7 @@
             {
               "component": "text",
               "name": "left_main_heading",
-              "label": "Main large heading (h2)"
+              "label": "Main Heading (h2)"
             },
             {
               "component": "select",
