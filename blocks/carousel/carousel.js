@@ -2,34 +2,34 @@ import Carousel from '../../scripts/carousel.js';
 import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
-const SLIDE_DELAY = 3000;
-const SLIDE_TRANSITION = 1000;
+// const SLIDE_DELAY = 3000;
+// const SLIDE_TRANSITION = 1000;
 
-// function configureNavigation(elementControls) {
-//   const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
-//   previousBtn.innerHTML = `
-//     <span
-//       class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25"
-//     >
-//       <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-//         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" />
-//       </svg>
-//       <span class="sr-only">Previous</span>
-//     </span>
-//   `;
-//   const nextBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-next': '' });
-//   nextBtn.innerHTML = `
-//     <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
-//       <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-//         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
-//       </svg>
-//       <span class="sr-only">Next</span>
-//     </span>
-//   `;
-//   elementControls.prepend(previousBtn);
-//   elementControls.append(nextBtn);
-//   return elementControls;
-// }
+function configureNavigation(elementControls) {
+  const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
+  previousBtn.innerHTML = `
+    <span
+      class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25"
+    >
+      <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" />
+      </svg>
+      <span class="sr-only">Previous</span>
+    </span>
+  `;
+  const nextBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-next': '' });
+  nextBtn.innerHTML = `
+    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
+      <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
+  `;
+  elementControls.prepend(previousBtn);
+  elementControls.append(nextBtn);
+  return elementControls;
+}
 
 function configurePagination(carouselControls, totalSlides) {
   carouselControls.append(span({ class: 'carousel-paginate text-base font-bold' }, `1/${totalSlides}`));
