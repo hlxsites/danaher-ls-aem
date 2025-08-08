@@ -499,45 +499,57 @@
     "fields": [
       {
         "component": "text",
-        "valueType": "string",
-        "name": "leftCarouselTitle",
-        "value": "",
-        "label": "Left Carousel Title"
+        "name": "left_subheading",
+        "label": "Left Side Subheading",
+        "description": "Small heading above the main heading"
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "leftCarouselLinkLabel",
-        "value": "",
-        "label": "Left Carousel Link Label"
+        "name": "left_main_heading",
+        "label": "Left Side Main Heading",
+        "description": "Main large heading text"
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "leftCarouselProductId",
-        "value": "",
-        "label": "Left Carousel Product IDs"
+        "name": "left_product_info",
+        "label": "Left Side Product Info",
+        "description": "Small text below the main heading"
+      },
+      {
+        "component": "button",
+        "name": "left_cta_1_button",
+        "label": "Left CTA 1 Button"
+      },
+      {
+        "component": "url",
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "rightCarouseTitle",
-        "value": "",
-        "label": "Right Carousel Title"
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
+      },
+      {
+        "component": "url",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "rightCarouselLinkLabel",
-        "value": "",
-        "label": "Right Carousel Link Label"
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Text"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "rightCarouselProductId",
-        "value": "",
-        "label": "Right Carousel Product IDs"
+        "component": "image",
+        "name": "right_image",
+        "label": "Right Side Image"
+      },
+      {
+        "component": "richtext",
+        "name": "right_text_table",
+        "label": "Right Side Text or Table",
+        "description": "Add rich text or table content here"
       }
     ]
   },

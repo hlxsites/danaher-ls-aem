@@ -102,7 +102,7 @@
   {
     "id": "carousel",
     "components": [
-      ""
+      "carousel"
     ]
   },
   {
