@@ -504,18 +504,18 @@
         "description": "Eyebrow style subheading"
       },
       {
-        "component": "object",
-        "name": "left_main_heading",
+        "component": "group",
+        "name": "left_main_heading_group",
         "label": "Left Side Main Heading Group",
         "fields": [
           {
             "component": "text",
-            "name": "heading_text",
+            "name": "left_main_heading",
             "label": "Main large heading (h2)"
           },
           {
             "component": "select",
-            "name": "titleType",
+            "name": "left_main_heading_type",
             "label": "Title Type",
             "options": [
               {
