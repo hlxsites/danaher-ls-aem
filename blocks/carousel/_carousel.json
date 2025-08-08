@@ -1,96 +1,75 @@
 {
-  "definitions": [
-    {
-      "title": "Carousel Block",
-      "id": "carousel",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
-            "template": {
-              "name": "Carousel Block",
-              "model": "carousel"
+    "definitions": [
+        {
+            "title": "Carousel",
+            "id": "carousel",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Carousel",
+                    "model": "carousel"
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    }
-  ],
-  "models": [
-    {
-      "id": "carousel",
-      "fields": [
+    ],
+    "models": [
         {
-          "component": "text",
-          "name": "left_subheading",
-          "label": "Left Side Subheading",
-          "description": "Small heading above the main heading"
-        },
-        {
-          "component": "text",
-          "name": "left_main_heading",
-          "label": "Left Side Main Heading",
-          "description": "Main large heading text"
-        },
-        {
-          "component": "text",
-          "name": "left_product_info",
-          "label": "Left Side Product Info",
-          "description": "Small text below the main heading"
-        },
-        {
-          "component": "url",
-          "name": "left_cta_1_link",
-          "label": "Left CTA 1 Link"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_1_text",
-          "label": "Left CTA 1 Text"
-        },
-        {
-          "component": "url",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_2_text",
-          "label": "Left CTA 2 Text"
-        },
-        {
-          "component": "image",
-          "name": "right_image",
-          "label": "Right Side Image"
-        },
-        {
-          "component": "richtext",
-          "name": "right_text_table",
-          "label": "Right Side Text or Table",
-          "description": "Add rich text or table content here"
-        }
-      ]
-    }
-  ],
-  "filters": [
-    {
+            "id": "carousel",
+            "fields": [
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "leftCarouselTitle",
+                "value": "",
+                "label": "Left Carousel Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "leftCarouselLinkLabel",
+                "value": "",
+                "label": "Left Carousel Link Label"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "leftCarouselProductId",
+                "value": "",
+                "label": "Left Carousel Product IDs"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "rightCarouseTitle",
+                "value": "",
+                "label": "Right Carousel Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "rightCarouselLinkLabel",
+                "value": "",
+                "label": "Right Carousel Link Label"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "rightCarouselProductId",
+                "value": "",
+                "label": "Right Carousel Product IDs"
+              }
+            ]
+          }
+    ],
+    "filters": [
+      {
       "id": "carousel",
       "components": [
-        "carousel"
+        ""
       ]
-    }
-  ],
-  "data": [
-    {
-      "left_subheading": "We See a Way to",
-      "left_main_heading": "reduce experiment execution by 7000 hours",
-      "left_product_info": "IDBS | Polar",
-      "left_cta_1_link": "#talk-to-an-expert",
-      "left_cta_1_text": "Talk to an Expert",
-      "left_cta_2_link": "#view-product",
-      "left_cta_2_text": "View Product",
-      "right_image": "/path/to/image.png",
-      "right_text_table": ""
-    }
-  ]
-}
+    }]
+  }

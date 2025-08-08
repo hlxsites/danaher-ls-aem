@@ -499,52 +499,45 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_subheading",
-        "label": "Left Side Subheading",
-        "description": "Small heading above the main heading"
+        "valueType": "string",
+        "name": "leftCarouselTitle",
+        "value": "",
+        "label": "Left Carousel Title"
       },
       {
         "component": "text",
-        "name": "left_main_heading",
-        "label": "Left Side Main Heading",
-        "description": "Main large heading text"
+        "valueType": "string",
+        "name": "leftCarouselLinkLabel",
+        "value": "",
+        "label": "Left Carousel Link Label"
       },
       {
         "component": "text",
-        "name": "left_product_info",
-        "label": "Left Side Product Info",
-        "description": "Small text below the main heading"
-      },
-      {
-        "component": "url",
-        "name": "left_cta_1_link",
-        "label": "Left CTA 1 Link"
+        "valueType": "string",
+        "name": "leftCarouselProductId",
+        "value": "",
+        "label": "Left Carousel Product IDs"
       },
       {
         "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
-      },
-      {
-        "component": "url",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
+        "valueType": "string",
+        "name": "rightCarouseTitle",
+        "value": "",
+        "label": "Right Carousel Title"
       },
       {
         "component": "text",
-        "name": "left_cta_2_text",
-        "label": "Left CTA 2 Text"
+        "valueType": "string",
+        "name": "rightCarouselLinkLabel",
+        "value": "",
+        "label": "Right Carousel Link Label"
       },
       {
-        "component": "image",
-        "name": "right_image",
-        "label": "Right Side Image"
-      },
-      {
-        "component": "richtext",
-        "name": "right_text_table",
-        "label": "Right Side Text or Table",
-        "description": "Add rich text or table content here"
+        "component": "text",
+        "valueType": "string",
+        "name": "rightCarouselProductId",
+        "value": "",
+        "label": "Right Carousel Product IDs"
       }
     ]
   },
