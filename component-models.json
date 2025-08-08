@@ -504,39 +504,45 @@
         "description": "Eyebrow style subheading"
       },
       {
-        "component": "text",
+        "component": "object",
         "name": "left_main_heading",
-        "label": "Left Side Main Heading",
-        "description": "Main large heading (h2)"
-      },
-      {
-        "component": "select",
-        "name": "left_main_heading",
-        "label": "Title Type",
-        "options": [
+        "label": "Left Side Main Heading Group",
+        "fields": [
           {
-            "name": "h1",
-            "value": "h1"
+            "component": "text",
+            "name": "heading_text",
+            "label": "Main large heading (h2)"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "component": "select",
+            "name": "titleType",
+            "label": "Title Type",
+            "options": [
+              {
+                "name": "h1",
+                "value": "h1"
+              },
+              {
+                "name": "h2",
+                "value": "h2"
+              },
+              {
+                "name": "h3",
+                "value": "h3"
+              },
+              {
+                "name": "h4",
+                "value": "h4"
+              },
+              {
+                "name": "h5",
+                "value": "h5"
+              },
+              {
+                "name": "h6",
+                "value": "h6"
+              }
+            ]
           }
         ]
       },
@@ -547,7 +553,9 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "id": "button",
+        "component": "object",
+        "name": "left_cta_buttons",
+        "label": "CTA Buttons Group",
         "fields": [
           {
             "component": "aem-content",
