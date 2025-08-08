@@ -34,7 +34,7 @@
         },
         {
         "component": "select",
-        "name": "titleType",
+        "name": "left_main_heading",
         "label": "Title Type",
         "options": [
           {
