@@ -44,9 +44,14 @@
           "label": "Left CTA 1 Link"
         },
         {
-          "component": "text",
+          "component": "title",
           "name": "left_cta_1_text",
           "label": "Left CTA 1 Text"
+        },
+        {
+          "component": "button",
+          "name": "left_cta_1_button",
+          "label": "Left CTA 1 button"
         },
         {
           "component": "aem-content",
@@ -54,7 +59,7 @@
           "label": "Left CTA 2 Link"
         },
         {
-          "component": "text",
+          "component": "title",
           "name": "left_cta_2_text",
           "label": "Left CTA 2 Text"
         },
