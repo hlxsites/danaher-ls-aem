@@ -55,16 +55,14 @@ export default function decorate(block) {
     ele.setAttribute('data-carousel-item', (eleIndex + 1));
 
     const contentEl = ele.querySelector('h2, p');
+    console.log('contentEl', contentEl);
     const picture = ele.querySelector('picture');
 
     if (contentEl) {
       const content = contentEl.closest('div');
       content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10'.split(' '));
-
       const heading = content.querySelector('h2');
-      console.log('heading', heading);
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
-      console.log('paragraphs', paragraphs);
       const allBtns = content.querySelectorAll('p.button-container');
 
       if (heading) {

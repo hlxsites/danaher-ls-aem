@@ -510,10 +510,80 @@
         "description": "Main large heading (h2)"
       },
       {
+        "component": "select",
+        "name": "titleType",
+        "label": "Title Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "left_product_info",
         "label": "Left Side Product Info",
         "description": "Descriptive paragraph below heading"
+      },
+      {
+        "id": "button",
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "link",
+            "label": "Link"
+          },
+          {
+            "component": "text",
+            "name": "linkText",
+            "label": "Text"
+          },
+          {
+            "component": "text",
+            "name": "linkTitle",
+            "label": "Title"
+          },
+          {
+            "component": "select",
+            "name": "linkType",
+            "label": "Type",
+            "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "primary",
+                "value": "primary"
+              },
+              {
+                "name": "secondary",
+                "value": "secondary"
+              }
+            ]
+          }
+        ]
       },
       {
         "component": "url",
@@ -542,10 +612,9 @@
         "description": "Picture with styling from decorate"
       },
       {
-        "component": "richtext",
-        "name": "right_text_table",
-        "label": "Right Side Text or Table",
-        "description": "Optional rich text or table content"
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Right Side Alt Text"
       },
       {
         "component": "boolean",
