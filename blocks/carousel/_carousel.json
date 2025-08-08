@@ -36,12 +36,12 @@
           "name": "left_main_heading_type",
           "label": "Heading Tag Type",
           "options": [
-              { "name": "h1", "value": "h1" },
-              { "name": "h2", "value": "h2" },
-              { "name": "h3", "value": "h3" },
-              { "name": "h4", "value": "h4" },
-              { "name": "h5", "value": "h5" },
-              { "name": "h6", "value": "h6" }
+            { "name": "h1", "value": "h1" },
+            { "name": "h2", "value": "h2" },
+            { "name": "h3", "value": "h3" },
+            { "name": "h4", "value": "h4" },
+            { "name": "h5", "value": "h5" },
+            { "name": "h6", "value": "h6" }
           ]
         },
         {
@@ -51,7 +51,7 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-          "component": "object",
+          "component": "array",
           "name": "left_cta_buttons",
           "label": "CTA Buttons Group",
           "fields": [

@@ -546,7 +546,7 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "object",
+        "component": "array",
         "name": "left_cta_buttons",
         "label": "CTA Buttons Group",
         "fields": [
