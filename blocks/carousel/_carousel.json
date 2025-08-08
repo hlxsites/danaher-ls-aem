@@ -39,24 +39,24 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-          "component": "text",
-          "name": "left_cta_1_text",
-          "label": "Left CTA 1 Text"
-        },
-        {
-          "component": "aem-content",
+          "component": "link",
           "name": "left_cta_1_link",
           "label": "Left CTA 1 Link"
         },
         {
           "component": "text",
-          "name": "left_cta_2_text",
-          "label": "Left CTA 2 Text"
+          "name": "left_cta_1_text",
+          "label": "Left CTA 1 Text"
         },
         {
-          "component": "aem-content",
+          "component": "link",
           "name": "left_cta_2_link",
           "label": "Left CTA 2 Link"
+        },
+        {
+          "component": "text",
+          "name": "left_cta_2_text",
+          "label": "Left CTA 2 Text"
         },
         {
           "component": "reference",
