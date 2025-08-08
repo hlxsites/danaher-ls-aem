@@ -510,7 +510,7 @@
       },
       {
         "component": "select",
-        "name": "left_main_heading_type",
+        "name": "left_main_heading",
         "label": "Title Type",
         "options": [
           {
