@@ -1,14 +1,14 @@
 {
   "definitions": [
     {
-      "title": "Carousel Block",
+      "title": "Carousel",
       "id": "carousel",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Carousel Block",
+              "name": "Carousel",
               "model": "carousel"
             }
           }
@@ -25,21 +25,14 @@
           "name": "p",
           "label": "Left Side Subheading",
           "description": "Small heading above the main heading",
-          "defaultValue": "We See a Way to",
-          "ui": {
-            "className": "eyebrow"
-          }
+          "defaultValue": ""
         },
         {
           "component": "text",
-          "name": "h2",
+          "name": "heading",
           "label": "Left Side Main Heading",
           "description": "Main large heading text",
-          "defaultValue": "reduce experiment execution by 7000 hours",
-          "ui": {
-            "tag": "h2",
-            "className": "lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]"
-          }
+          "defaultValue": ""
         },
         {
           "component": "text",
