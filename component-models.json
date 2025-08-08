@@ -516,11 +516,6 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "button",
-        "name": "left_cta_1_button",
-        "label": "Left CTA 1 Button"
-      },
-      {
         "component": "title",
         "name": "left_cta_1_text",
         "label": "Left CTA 1 Text"
@@ -529,11 +524,6 @@
         "component": "link",
         "name": "left_cta_1_link",
         "label": "Left CTA 1 Link"
-      },
-      {
-        "component": "button",
-        "name": "left_cta_1_button",
-        "label": "Left CTA 1 Button"
       },
       {
         "component": "title",
