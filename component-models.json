@@ -498,72 +498,53 @@
     "id": "carousel",
     "fields": [
       {
-        "component": "group",
-        "name": "leftContent",
-        "label": "Left Content",
-        "type": "object",
-        "fields": [
-          {
-            "component": "text",
-            "name": "subheading",
-            "type": "string",
-            "label": "Subheading"
-          },
-          {
-            "component": "text",
-            "name": "heading",
-            "type": "string",
-            "label": "Heading"
-          },
-          {
-            "component": "text",
-            "name": "productInfo",
-            "type": "string",
-            "label": "Product Info"
-          },
-          {
-            "component": "group",
-            "name": "buttons",
-            "label": "Buttons",
-            "type": "array",
-            "min": 1,
-            "max": 2,
-            "fields": [
-              {
-                "component": "url",
-                "name": "link",
-                "type": "string",
-                "label": "Button Link"
-              },
-              {
-                "component": "text",
-                "name": "text",
-                "type": "string",
-                "label": "Button Text"
-              }
-            ]
-          }
-        ]
+        "component": "text",
+        "name": "left_subheading",
+        "label": "Left Side Subheading",
+        "description": "Small heading above the main heading"
       },
       {
-        "component": "group",
-        "name": "rightContent",
-        "label": "Right Content",
-        "type": "object",
-        "fields": [
-          {
-            "component": "image",
-            "name": "image",
-            "type": "string",
-            "label": "Image"
-          },
-          {
-            "component": "richtext",
-            "name": "richTextTable",
-            "type": "string",
-            "label": "Text or Table"
-          }
-        ]
+        "component": "text",
+        "name": "left_main_heading",
+        "label": "Left Side Main Heading",
+        "description": "Main large heading text"
+      },
+      {
+        "component": "text",
+        "name": "left_product_info",
+        "label": "Left Side Product Info",
+        "description": "Small text below the main heading"
+      },
+      {
+        "component": "url",
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
+      },
+      {
+        "component": "url",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Text"
+      },
+      {
+        "component": "image",
+        "name": "right_image",
+        "label": "Right Side Image"
+      },
+      {
+        "component": "richtext",
+        "name": "right_text_table",
+        "label": "Right Side Text or Table",
+        "description": "Add rich text or table content here"
       }
     ]
   },
