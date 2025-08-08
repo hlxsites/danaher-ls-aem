@@ -1,150 +1,212 @@
 import Carousel from '../../scripts/carousel.js';
-import { div, h2, p, a, picture, img } from '../../scripts/dom-builder.js';
+import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
+import { div, h2, p, a, picture, img } from '../../scripts/dom-builder.js';
 
-export default function decorateSlidesFromData(block, slidesData) {
-  block.innerHTML = '';
+const SLIDE_DELAY = 3000;
+const SLIDE_TRANSITION = 1000;
 
-  const SLIDE_DEFAULT_DELAY = 3000;
-  const SLIDE_DEFAULT_TRANSITION = 1000;
+function configureNavigation(elementControls) {
+  const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
+  previousBtn.innerHTML = `
+    <span
+      class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25"
+    >
+      <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" />
+      </svg>
+      <span class="sr-only">Previous</span>
+    </span>
+  `;
+  const nextBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-next': '' });
+  nextBtn.innerHTML = `
+    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
+      <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
+  `;
+  elementControls.prepend(previousBtn);
+  elementControls.append(nextBtn);
+  return elementControls;
+}
 
-  // Extract global settings from first slide or defaults
-  const autoPlay = slidesData[0]?.auto_play ?? true;
-  const slideDelay = slidesData[0]?.slide_delay || SLIDE_DEFAULT_DELAY;
-  const slideTransition = slidesData[0]?.slide_transition || SLIDE_DEFAULT_TRANSITION;
-  const showPagination = slidesData[0]?.show_pagination ?? true;
-  const showNavigation = slidesData[0]?.show_navigation ?? true;
+function configurePagination(carouselControls, totalSlides) {
+  carouselControls.append(span({ class: 'carousel-paginate text-base font-bold' }, `1/${totalSlides}`));
+  return carouselControls;
+}
 
-  slidesData.forEach((slide, idx) => {
-    const slideEl = div({
-      class: `card carousel-slider flex snap-start list-none bg-white flex-col`,
-      'data-carousel-item': idx + 1,
-      style: `transition-duration: ${slideTransition}ms;`
-    });
 
-    // Left Column
-    const leftCol = div({ class: 'lg:w-1/2 px-4 lg:px-8 xl:pr-10 flex flex-col justify-center' });
 
-    if (slide.left_subheading) leftCol.append(p({ class: 'eyebrow' }, slide.left_subheading));
-    if (slide.left_main_heading) leftCol.append(h2({ class: 'lg:text-[40px] text-2xl md:text-4xl font-medium leading-tight mt-2' }, slide.left_main_heading));
-    if (slide.left_product_info) leftCol.append(p({ class: 'text-xl font-extralight mt-6 leading-7' }, slide.left_product_info));
+function renderCarouselSlides(json, block) {
+  const slidesData = json.models;
 
-    // CTA buttons container
-    const ctas = div({ class: 'flex flex-col md:flex-row gap-5 mt-10' });
+  slidesData.forEach((slide) => {
+    const {
+      left_subheading,
+      left_main_heading,
+      left_product_info,
+      left_cta_1_text,
+      left_cta_1_link,
+      left_cta_2_text,
+      left_cta_2_link,
+      right_image,
+      right_text_table
+    } = slide;
 
-    if (slide.left_cta_1_text && slide.left_cta_1_link?.url) {
-      const btn1 = a({
-        href: slide.left_cta_1_link.url,
-        title: 'link',
-        class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        target: slide.left_cta_1_link.target || '_self',
-        rel: 'noopener noreferrer',
-      }, slide.left_cta_1_text);
-      ctas.append(btn1);
+    const content = div({ class: 'slide-left' });
+
+    // Subheading (eyebrow)
+    if (left_subheading) {
+      content.append(p({ class: 'eyebrow' }, left_subheading));
     }
 
-    if (slide.left_cta_2_text && slide.left_cta_2_link?.url) {
-      const btn2 = a({
-        href: slide.left_cta_2_link.url,
-        title: 'link',
-        class: 'btn btn-lg font-medium btn-outline-trending-brand rounded-full px-6',
-        target: slide.left_cta_2_link.target || '_self',
-        rel: 'noopener noreferrer',
-      }, slide.left_cta_2_text);
-      ctas.append(btn2);
+    // Heading
+    if (left_main_heading) {
+      content.append(h2({}, left_main_heading));
     }
 
-    if (ctas.children.length > 0) leftCol.append(ctas);
-
-    // Right Column (image or rich text/table)
-    let rightCol = div({ class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 overflow-hidden' });
-
-    if (slide.right_image?.src) {
-      const pic = picture();
-      const imgEl = img({ src: slide.right_image.src, alt: slide.right_image.alt || '', class: 'absolute bottom-0 h-full w-full object-cover' });
-      pic.append(imgEl);
-      rightCol.append(pic);
-    } else if (slide.right_text_table) {
-      // sanitize or trust this content
-      rightCol.innerHTML = slide.right_text_table;
+    // Paragraph
+    if (left_product_info) {
+      content.append(p({}, left_product_info));
     }
 
-    // Slide main container
-    const mainContainer = div({
-      class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden relative flex flex-col lg:flex-row',
-    });
-    mainContainer.append(leftCol, rightCol);
-    slideEl.append(mainContainer);
+    // CTAs
+    const btnContainer = div({ class: 'flex gap-x-4 mt-10' });
 
-    // Modal decoration if any
-    decorateModals(slideEl);
+    if (left_cta_1_link && left_cta_1_text) {
+      btnContainer.append(
+        p({ class: 'button-container' },
+          a({ href: left_cta_1_link, title: 'link' }, left_cta_1_text)
+        )
+      );
+    }
 
-    block.append(slideEl);
+    if (left_cta_2_link && left_cta_2_text) {
+      btnContainer.append(
+        p({ class: 'button-container' },
+          a({ href: left_cta_2_link, title: 'link' }, left_cta_2_text)
+        )
+      );
+    }
+
+    content.append(btnContainer);
+
+    // Right Side (image + optional rich text)
+    const right = div({ class: 'slide-right relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' });
+
+    if (right_image) {
+      const imgTag = img({ src: right_image, alt: '', class: 'absolute bottom-0 h-full w-full object-cover' });
+      const pic = picture({}, imgTag);
+      right.append(pic);
+    }
+
+    // Optional Table/HTML on Right
+    if (right_text_table) {
+      const tableWrapper = div({ class: 'richtext-table', innerHTML: right_text_table });
+      right.append(tableWrapper);
+    }
+
+    // Slide container
+    const slide = div({}, content, right);
+
+    // Append the final slide to the block
+    block.append(slide);
   });
+}
 
-  // Setup carousel controls container
-  const uuid = crypto.randomUUID().substring(0, 6);
-  const parentWrapper = block.parentElement;
-  parentWrapper.setAttribute('id', uuid);
-  parentWrapper.setAttribute('data-carousel', 'slide');
-  parentWrapper.classList.add('relative', 'w-full');
-
-  const controls = div({ class: 'carousel-controls relative max-w-7xl mx-auto' });
-  const controlsInner = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
-
-  if (showPagination) {
-    const paginate = div({ class: 'carousel-paginate text-base font-bold' }, `1/${slidesData.length}`);
-    controlsInner.append(paginate);
-  }
-
-  if (showNavigation) {
-    const prevBtn = div({ class: 'carousel-prev cursor-pointer' });
-    prevBtn.innerHTML = `
-      <button type="button" class="flex items-center justify-center h-full cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
-          <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" />
-          </svg>
-          <span class="sr-only">Previous</span>
-        </span>
-      </button>
-    `;
-    const nextBtn = div({ class: 'carousel-next cursor-pointer' });
-    nextBtn.innerHTML = `
-      <button type="button" class="flex items-center justify-center h-full cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
-          <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
-          </svg>
-          <span class="sr-only">Next</span>
-        </span>
-      </button>
-    `;
-    controlsInner.prepend(prevBtn);
-    controlsInner.append(nextBtn);
-  }
-
-  controls.append(controlsInner);
-  parentWrapper.append(controls);
-
-  // Initialize Carousel instance
-  setTimeout(() => {
-    new Carousel({
-      wrapperEl: uuid,
-      mainEl: 'div.carousel-slider',
-      delay: slideDelay,
-      previousElAction: 'button[data-carousel-prev]',
-      nextElAction: 'button[data-carousel-next]',
-      isAutoPlay: autoPlay,
-      copyChild: 1,
-      onChange: (event) => {
-        if (showPagination) {
-          const currentSlide = event.target.getAttribute('data-carousel-item');
-          const paginateEl = parentWrapper.querySelector('.carousel-paginate');
-          if (paginateEl) paginateEl.textContent = `${parseInt(currentSlide, 10)}/${slidesData.length}`;
+renderCarouselSlides(carouselData, block);
+export default function decorate(block) {
+  block.parentElement.parentElement.querySelector('h1')?.classList.add('hidden');
+  const uuid = crypto.randomUUID(4).substring(0, 6);
+  if (block.querySelector('a[title="link"]')) block.parentElement.parentElement.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
+  block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
+  block.style = 'grid-auto-columns: 100%';
+  block.classList.remove('block');
+  block.classList.add(...'grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 scroll-smooth'.split(' '));
+  const slides = [...block.children].map((ele, eleIndex) => {
+    ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
+    ele.setAttribute('data-carousel-item', (eleIndex + 1));
+    const contentEl = ele.querySelector('h2, p');
+    console.log("contentEl", contentEl);
+    const picture = ele.querySelector('picture');
+    let changedBtn = 0;
+    if (contentEl) {
+      const content = contentEl.closest('div');
+      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10'.split(' '));
+      const heading = content.querySelector('h2');
+      const paragraphs = content.querySelectorAll('p:not(.button-container)');
+      const allBtns = content.querySelectorAll('p.button-container');
+      if (heading) heading.classList.add(...'lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]'.split(' '));
+      paragraphs.forEach((paragraph) => {
+        if (!paragraph.querySelector('a[title="link"]')) {
+          if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'eyebrow'.split(' '));
+          else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
+        } else {
+          const linkBtn = paragraph.querySelector('a[title="link"]');
+          if (linkBtn.title === 'link') paragraph.classList.add(...'btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-10'.split(' '));
         }
+      });
+      if (allBtns.length > 0) {
+        const actions = div({ class: 'flex flex-col md:flex-row gap-5 mt-10' });
+        allBtns.forEach((elBtn) => {
+          if (elBtn.title === 'link') {
+            elBtn.className = 'flex items-center gap-x-2 text-danaherpurple-500 font-bold group';
+            elBtn.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 transition group-hover:translate-x-1" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+            </svg>`;
+          } else {
+            elBtn.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
+            elBtn.className = `btn btn-lg font-medium ${(changedBtn === 0) ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
+            if (elBtn.querySelector('a[href="#request-quote"]')) {
+              const anc = elBtn.querySelector('a[href="#request-quote"]');
+              anc.parentElement.classList.add('show-modal-btn');
+            }
+          }
+          actions.append(elBtn);
+          elBtn.parentElement.remove();
+          changedBtn = 1;
+        });
+        content.append(actions);
       }
-    });
-  }, 100);
-
+      ele.append(div({ class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden' }, content));
+    }
+    if (picture) {
+      picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
+      ele.append(div({ class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
+    }
+    changedBtn = 0;
+    decorateModals(ele);
+    return { position: parseInt(eleIndex, 10), el: ele };
+  }).filter((item) => item);
+  if (block.children.length >= 2 && block.parentElement.className.includes('carousel-wrapper')) {
+    block.parentElement.classList.add(...'relative w-full'.split(' '));
+    block.parentElement.setAttribute('data-carousel', 'slide');
+    block.parentElement.setAttribute('id', uuid);
+    const carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
+    configurePagination(carouselControls, slides.length);
+    configureNavigation(carouselControls);
+    block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
+    if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
+    setTimeout(() => {
+      /* eslint-disable no-new */
+      new Carousel({
+        wrapperEl: uuid,
+        mainEl: '.carousel',
+        delay: SLIDE_DELAY,
+        previousElAction: 'button[data-carousel-prev]',
+        nextElAction: 'button[data-carousel-next]',
+        isAutoPlay: true,
+        copyChild: 1,
+        onChange: (elPosition) => {
+          const currentSlide = elPosition.target.getAttribute('data-carousel-item');
+          const carouselPaginate = block?.parentElement?.querySelector('.carousel-paginate');
+          if (block.children.length > 1 && elPosition && elPosition.target) {
+            if (carouselPaginate) carouselPaginate.innerHTML = `${parseInt(currentSlide, 10)}/${slides.length}`;
+          }
+        },
+      });
+    }, 5000);
+  }
 }
