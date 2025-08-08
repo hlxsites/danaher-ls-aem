@@ -499,7 +499,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_subheading",
+        "name": "p",
         "label": "Left Side Subheading",
         "description": "Small heading above the main heading",
         "defaultValue": "We See a Way to",
@@ -509,7 +509,7 @@
       },
       {
         "component": "text",
-        "name": "left_main_heading",
+        "name": "h2",
         "label": "Left Side Main Heading",
         "description": "Main large heading text",
         "defaultValue": "reduce experiment execution by 7000 hours",
