@@ -4,15 +4,17 @@ import { div, h2, p, a } from '../../scripts/dom-builder.js';
 const SLIDE_TRANSITION = 1000;
 
 export default function decorateSlidesFromData(block, slidesData) {
-  block.innerHTML = ''; // Clear existing block
+  // Clear existing content
+  block.innerHTML = '';
 
   slidesData.forEach((slide, index) => {
-    const slideWrapper = div({
+    // Slide container
+    const slideEl = div({
       class: `card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`,
       'data-carousel-item': index + 1,
     });
 
-    // Left content column
+    // Left column container for text and buttons
     const leftCol = div({ class: 'lg:w-1/2 px-4 lg:px-8 xl:pr-10' });
 
     if (slide.left_subheading) {
@@ -30,45 +32,50 @@ export default function decorateSlidesFromData(block, slidesData) {
       );
     }
     if (slide.left_product_info) {
-      leftCol.append(p({ class: 'text-xl font-extralight tracking-tight leading-7 mt-6' }, slide.left_product_info));
+      leftCol.append(
+        p({ class: 'text-xl font-extralight tracking-tight leading-7 mt-6' }, slide.left_product_info)
+      );
     }
 
     // Buttons container
-    const buttonWrapper = div({ class: 'flex flex-col md:flex-row gap-5 mt-10' });
+    const btnContainer = div({ class: 'flex flex-col md:flex-row gap-5 mt-10' });
 
     if (slide.left_cta_1_text && slide.left_cta_1_link) {
-      const btn1 = div({ class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6' });
-      btn1.append(a({ href: slide.left_cta_1_link, title: 'link', class: 'text-white' }, slide.left_cta_1_text));
-      buttonWrapper.append(btn1);
+      const btn1 = div({
+        class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+      });
+      btn1.append(a({ href: slide.left_cta_1_link, title: 'link' }, slide.left_cta_1_text));
+      btnContainer.append(btn1);
     }
 
     if (slide.left_cta_2_text && slide.left_cta_2_link) {
-      const btn2 = div({ class: 'btn btn-lg font-medium btn-outline-trending-brand rounded-full px-6' });
+      const btn2 = div({
+        class: 'btn btn-lg font-medium btn-outline-trending-brand rounded-full px-6',
+      });
       btn2.append(a({ href: slide.left_cta_2_link, title: 'link' }, slide.left_cta_2_text));
-      buttonWrapper.append(btn2);
+      btnContainer.append(btn2);
     }
 
-    leftCol.append(buttonWrapper);
+    leftCol.append(btnContainer);
 
-    // Right content column (table or other HTML)
+    // Right column container for the table or rich HTML content
     const rightCol = div({
-      class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2',
+      class:
+        'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 overflow-auto',
     });
 
     if (slide.right_text_table) {
-      const tableWrapper = div({ class: 'p-4 md:p-8 overflow-auto' });
-      tableWrapper.innerHTML = slide.right_text_table; // Insert trusted HTML
-      rightCol.append(tableWrapper);
+      rightCol.innerHTML = slide.right_text_table;
     }
 
-    // Layout container (left + right)
-    const layoutContainer = div({
-      class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden relative flex flex-col lg:flex-row',
+    // Main container wrapping left and right side
+    const mainContainer = div({
+      class:
+        'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden relative flex flex-col lg:flex-row',
     });
 
-    layoutContainer.append(leftCol, rightCol);
-
-    slideWrapper.append(layoutContainer);
-    block.append(slideWrapper);
+    mainContainer.append(leftCol, rightCol);
+    slideEl.append(mainContainer);
+    block.append(slideEl);
   });
 }
