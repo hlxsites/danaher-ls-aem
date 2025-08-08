@@ -30,8 +30,7 @@
           "component": "text",
           "name": "left_main_heading",
           "label": "Left Side Main Heading",
-          "description": "Main large heading (h2)",
-          "options": {"name": "h2", "value": "h2"}
+          "description": "Main large heading (h2)"
         },
         {
           "component": "text",
@@ -76,7 +75,7 @@
           "name": "auto_play",
           "label": "Enable Auto Play",
           "description": "Auto play enabled via isAutoPlay flag",
-          "default": true
+          "default": ""
         },
         {
           "component": "number",
@@ -97,14 +96,14 @@
           "name": "show_pagination",
           "label": "Show Pagination",
           "description": "Display 1/3 pagination indicator",
-          "default": true
+          "default": ""
         },
         {
           "component": "boolean",
           "name": "show_navigation",
           "label": "Show Navigation Arrows",
           "description": "Previous/Next buttons",
-          "default": true
+          "default": ""
         }
       ]
     }
