@@ -513,8 +513,8 @@
         "fields": [
           {
             "component": "select",
-            "name": "left_main_heading",
-            "label": "Title Type",
+            "name": "heading_type",
+            "label": "Heading Tag Type",
             "options": [
               {
                 "name": "h1",
