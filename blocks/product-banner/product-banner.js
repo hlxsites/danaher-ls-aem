@@ -97,6 +97,14 @@ export default function productBannerDecorate(block) {
     paragraph.classList.add('text-black');
   });
 
+  const tempContainerBold = tempContainer.querySelectorAll('p,ul,li,a');
+  tempContainerBold.forEach((p) => {
+    p.classList.add('mb-3');
+    p.querySelectorAll('strong').forEach((strong) => {
+      strong.classList.add('font-bold');
+    });
+  });
+
   tempContainer.querySelectorAll('a').forEach((link) => {
     // Remove any class that starts with 'btn'
     [...link.classList].forEach((cls) => {
@@ -162,12 +170,16 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
 
-    const paragraphs = longDescription.querySelectorAll('p');
-    paragraphs.forEach((p) => {
+    const longDescriptionBold = longDescription.querySelectorAll('p,ul,li,a');
+    longDescriptionBold.forEach((p) => {
       p.classList.add('mb-3');
+      p.querySelectorAll('strong').forEach((strong) => {
+        strong.classList.add('font-bold');
+      });
     });
-    if (paragraphs.length > 0) {
-      paragraphs[paragraphs.length - 1].classList.remove('mb-3');
+
+    if (longDescriptionBold.length > 0) {
+      longDescriptionBold[longDescriptionBold.length - 1].classList.remove('mb-3');
     }
 
     longDescription.querySelectorAll('strong').forEach((strong) => {

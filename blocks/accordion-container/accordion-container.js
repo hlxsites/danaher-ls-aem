@@ -13,15 +13,14 @@ function toggleAccordion(blockUUID, activeAccordion) {
     const panel = accordion.querySelector('div[aria-expanded]');
 
     if (accordion.id === activeAccordion.id) {
-      panel?.setAttribute(
-        'aria-expanded',
-        checkbox?.checked ? 'false' : 'true',
-      );
-    }
-
-    if (accordion.id !== activeAccordion.id && checkbox?.checked) {
-      checkbox.click();
-      panel?.setAttribute('aria-expanded', 'false');
+      // Toggle the active accordion
+      const isExpanded = checkbox.checked;
+      checkbox.checked = !isExpanded;
+      panel.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+    } else if (checkbox.checked) {
+      // Close other accordions
+      checkbox.checked = false;
+      panel.setAttribute('aria-expanded', 'false');
     }
   });
 }
@@ -46,6 +45,7 @@ function createAccordionBlock(
   parentElement.id = `accordion-item-${index}`;
 
   const inputId = `accordion-${uuid}-${index}`;
+  const panelId = `panel-${uuid}-${index}`;
 
   const summaryInput = input({
     type: 'checkbox',
@@ -60,7 +60,7 @@ function createAccordionBlock(
     {
       for: inputId,
       title: question,
-      'aria-controls': inputId,
+      'aria-controls': panelId,
       class: `flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer
         peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0
         peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100`,
@@ -87,6 +87,7 @@ function createAccordionBlock(
         grid-rows-[0fr] opacity-0 peer-checked:py-2
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
+      id: panelId,
     },
     div({
       class:
@@ -96,6 +97,16 @@ function createAccordionBlock(
 
   answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
+  });
+
+  const liElements = panel.querySelectorAll('p,ul,li,a');
+  liElements.forEach((liEle) => {
+    const strongElements = liEle.querySelectorAll('strong');
+    if (strongElements?.length) {
+      strongElements.forEach((strong) => {
+        strong.classList.add('font-bold');
+      });
+    }
   });
 
   panel.querySelectorAll('a').forEach((link) => {
@@ -112,7 +123,8 @@ function createAccordionBlock(
     );
   });
 
-  summaryContent.addEventListener('click', () => {
+  summaryContent.addEventListener('click', (event) => {
+    event.preventDefault();
     toggleAccordion(customUUID, parentElement);
     if (image) {
       const selectedImage = document.querySelector(`div[data-id="${uuid}"]`);
@@ -186,7 +198,7 @@ export default async function decorate(block) {
       h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
     );
     const accordionContainer = div(
-      { class: 'lg:w-[840px] flex flex-col' },
+      { class: 'lg:w-[840px] flex flex-col', id: `accordion-${customUUID}` },
       ...dynamicAccordionItems,
     );
 
