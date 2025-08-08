@@ -516,7 +516,7 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "link",
+        "component": "url",
         "name": "left_cta_1_link",
         "label": "Left CTA 1 Link"
       },
@@ -526,7 +526,7 @@
         "label": "Left CTA 1 Text"
       },
       {
-        "component": "link",
+        "component": "url",
         "name": "left_cta_2_link",
         "label": "Left CTA 2 Link"
       },
