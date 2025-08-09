@@ -581,14 +581,6 @@
   text-decoration-line: none;
 }
 
-.columns-wrapper :is(.opacity-0) {
-  opacity: 0;
-}
-
-.columns-wrapper :is(.opacity-100) {
-  opacity: 1;
-}
-
 .columns-wrapper :is(.shadow) {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -615,18 +607,8 @@
   transition-duration: 150ms;
 }
 
-.columns-wrapper :is(.transition-opacity) {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .columns-wrapper :is(.duration-150) {
   transition-duration: 150ms;
-}
-
-.columns-wrapper :is(.duration-700) {
-  transition-duration: 700ms;
 }
 
 .columns-wrapper :is(.ease-in-out) {

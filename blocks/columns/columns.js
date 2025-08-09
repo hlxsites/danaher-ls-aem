@@ -612,25 +612,25 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
 
 // Apply ratio classes to the column wrappers
-  if (cols.length === 2) {
-    if (sectionDiv && sectionDiv.className.includes('seventythirty')) {
-      cols[0].classList.add('lg:w-2/3', 'w-full');
-      cols[1].classList.add('lg:w-1/3', 'w-full');
-    } else if (sectionDiv && sectionDiv.className.includes('thirtyseventy')) {
-      cols[0].classList.add('lg:w-1/3', 'w-full');
-      cols[1].classList.add('lg:w-2/3', 'w-full');
-    } else {
-      cols[0].classList.add('lg:w-1/2', 'w-full');
-      cols[1].classList.add('lg:w-1/2', 'w-full');
-    }
-    block.firstElementChild.classList.add('flex', 'flex-col', 'gap-x-12', 'gap-y-4', 'lg:flex-row', 'justify-items-center');
-  }
+  // if (cols.length === 2) {
+  //   if (sectionDiv && sectionDiv.className.includes('seventythirty')) {
+  //     cols[0].classList.add('lg:w-2/3', 'w-full');
+  //     cols[1].classList.add('lg:w-1/3', 'w-full');
+  //   } else if (sectionDiv && sectionDiv.className.includes('thirtyseventy')) {
+  //     cols[0].classList.add('lg:w-1/3', 'w-full');
+  //     cols[1].classList.add('lg:w-2/3', 'w-full');
+  //   } else {
+  //     cols[0].classList.add('lg:w-1/2', 'w-full');
+  //     cols[1].classList.add('lg:w-1/2', 'w-full');
+  //   }
+  //   block.firstElementChild.classList.add('flex', 'flex-col', 'gap-x-12', 'gap-y-4', 'lg:flex-row', 'justify-items-center');
+  // }
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
-      if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
+      if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/') || window.location.pathname.includes('/us/en/news-eds/')) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
       } else {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
@@ -772,7 +772,7 @@ export default function decorate(block) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
+          if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/') || window.location.pathname.includes('/us/en/news-eds/')) {
             picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {
