@@ -1,43 +1,3 @@
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
-@media (min-width: 1760px) {
-  .container {
-    max-width: 1760px;
-  }
-}
-
 .bg-danaherpurple-50 {
   background-color: #EADEFF;
 }
@@ -89,14 +49,6 @@
   border-width: 0;
 }
 
-.carousel-wrapper :is(.static) {
-  position: static;
-}
-
-.carousel-wrapper :is(.fixed) {
-  position: fixed;
-}
-
 .carousel-wrapper :is(.absolute) {
   position: absolute;
 }
@@ -113,33 +65,13 @@
   bottom: 0px;
 }
 
-.carousel-wrapper :is(.right-0) {
-  right: 0px;
-}
-
 .carousel-wrapper :is(.z-10) {
   z-index: 10;
-}
-
-.carousel-wrapper :is(.m-0) {
-  margin: 0px;
 }
 
 .carousel-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto;
-}
-
-.carousel-wrapper :is(.mt-10) {
-  margin-top: 2.5rem;
-}
-
-.carousel-wrapper :is(.mt-2) {
-  margin-top: 0.5rem;
-}
-
-.carousel-wrapper :is(.mt-6) {
-  margin-top: 1.5rem;
 }
 
 .carousel-wrapper :is(.mb-4) {
@@ -154,28 +86,16 @@
   margin-top: 0px;
 }
 
-.carousel-wrapper :is(.mb-10) {
-  margin-bottom: 2.5rem;
+.carousel-wrapper :is(.mt-10) {
+  margin-top: 2.5rem;
 }
 
-.carousel-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem;
-}
-
-.carousel-wrapper :is(.mt-4) {
-  margin-top: 1rem;
+.carousel-wrapper :is(.mt-6) {
+  margin-top: 1.5rem;
 }
 
 .carousel-wrapper :is(.block) {
   display: block;
-}
-
-.carousel-wrapper :is(.\!block) {
-  display: block !important;
-}
-
-.carousel-wrapper :is(.inline-block) {
-  display: inline-block;
 }
 
 .carousel-wrapper :is(.flex) {
@@ -206,32 +126,16 @@
   height: 2rem;
 }
 
-.carousel-wrapper :is(.h-auto) {
-  height: auto;
-}
-
 .carousel-wrapper :is(.h-full) {
   height: 100%;
-}
-
-.carousel-wrapper :is(.h-5) {
-  height: 1.25rem;
-}
-
-.carousel-wrapper :is(.h-64) {
-  height: 16rem;
-}
-
-.carousel-wrapper :is(.min-h-\[30rem\]) {
-  min-height: 30rem;
 }
 
 .carousel-wrapper :is(.min-h-\[28rem\]) {
   min-height: 28rem;
 }
 
-.carousel-wrapper :is(.min-h-\[40rem\]) {
-  min-height: 40rem;
+.carousel-wrapper :is(.min-h-\[30rem\]) {
+  min-height: 30rem;
 }
 
 .carousel-wrapper :is(.w-3) {
@@ -244,10 +148,6 @@
 
 .carousel-wrapper :is(.w-full) {
   width: 100%;
-}
-
-.carousel-wrapper :is(.w-5) {
-  width: 1.25rem;
 }
 
 .carousel-wrapper :is(.max-w-7xl) {
@@ -278,40 +178,16 @@
   list-style-type: none;
 }
 
-.carousel-wrapper :is(.auto-cols-\[100\%\]) {
-  grid-auto-columns: 100%;
-}
-
 .carousel-wrapper :is(.grid-flow-col) {
   grid-auto-flow: column;
-}
-
-.carousel-wrapper :is(.grid-cols-1) {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.carousel-wrapper :is(.flex-row) {
-  flex-direction: row;
 }
 
 .carousel-wrapper :is(.flex-col) {
   flex-direction: column;
 }
 
-.carousel-wrapper :is(.items-start) {
-  align-items: flex-start;
-}
-
-.carousel-wrapper :is(.items-end) {
-  align-items: flex-end;
-}
-
 .carousel-wrapper :is(.items-center) {
   align-items: center;
-}
-
-.carousel-wrapper :is(.justify-end) {
-  justify-content: flex-end;
 }
 
 .carousel-wrapper :is(.justify-center) {
@@ -326,24 +202,9 @@
   gap: 1.5rem;
 }
 
-.carousel-wrapper :is(.gap-8) {
-  gap: 2rem;
-}
-
 .carousel-wrapper :is(.gap-x-4) {
   -moz-column-gap: 1rem;
        column-gap: 1rem;
-}
-
-.carousel-wrapper :is(.gap-x-2) {
-  -moz-column-gap: 0.5rem;
-       column-gap: 0.5rem;
-}
-
-.carousel-wrapper :is(.space-x-3 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .carousel-wrapper :is(.space-x-2 > :not([hidden]) ~ :not([hidden])) {
@@ -352,8 +213,10 @@
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.carousel-wrapper :is(.overflow-hidden) {
-  overflow: hidden;
+.carousel-wrapper :is(.space-x-3 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .carousel-wrapper :is(.overflow-x-auto) {
@@ -366,14 +229,6 @@
 
 .carousel-wrapper :is(.rounded-full) {
   border-radius: 9999px;
-}
-
-.carousel-wrapper :is(.border) {
-  border-width: 1px;
-}
-
-.carousel-wrapper :is(.border-2) {
-  border-width: 2px;
 }
 
 .carousel-wrapper :is(.border-b) {
@@ -391,15 +246,6 @@
 .carousel-wrapper :is(.border-black) {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
-.carousel-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-}
-
-.carousel-wrapper :is(.border-transparent) {
-  border-color: transparent;
 }
 
 .carousel-wrapper :is(.bg-danaherlightblue-50) {
@@ -427,33 +273,9 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.carousel-wrapper :is(.bg-danaherpurple-500) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-}
-
-.carousel-wrapper :is(.bg-transparent) {
-  background-color: transparent;
-}
-
 .carousel-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.carousel-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.carousel-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.carousel-wrapper :is(.py-8) {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
 }
 
 .carousel-wrapper :is(.\!px-6) {
@@ -466,34 +288,18 @@
   padding-bottom: 4rem !important;
 }
 
-.carousel-wrapper :is(.px-8) {
-  padding-left: 2rem;
-  padding-right: 2rem;
+.carousel-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.carousel-wrapper :is(.py-3) {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+.carousel-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.carousel-wrapper :is(.px-10) {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.carousel-wrapper :is(.py-16) {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.carousel-wrapper :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.carousel-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.carousel-wrapper :is(.text-\[2\.5rem\]) {
+  font-size: 2.5rem;
 }
 
 .carousel-wrapper :is(.text-base) {
@@ -504,15 +310,6 @@
 .carousel-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.carousel-wrapper :is(.text-\[2\.5rem\]) {
-  font-size: 2.5rem;
-}
-
-.carousel-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .carousel-wrapper :is(.font-bold) {
@@ -527,24 +324,12 @@
   font-weight: 500;
 }
 
-.carousel-wrapper :is(.font-semibold) {
-  font-weight: 700;
-}
-
 .carousel-wrapper :is(.lowercase) {
   text-transform: lowercase;
 }
 
 .carousel-wrapper :is(.leading-7) {
   line-height: 1.75rem;
-}
-
-.carousel-wrapper :is(.leading-tight) {
-  line-height: 1.25;
-}
-
-.carousel-wrapper :is(.leading-6) {
-  line-height: 1.5rem;
 }
 
 .carousel-wrapper :is(.leading-\[3rem\]) {
@@ -555,33 +340,14 @@
   letter-spacing: -0.025em;
 }
 
-.carousel-wrapper :is(.tracking-wide) {
-  letter-spacing: 0.025em;
-}
-
-.carousel-wrapper :is(.text-danaherpurple-500) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
 .carousel-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.carousel-wrapper :is(.text-white) {
+.carousel-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.carousel-wrapper :is(.shadow-none) {
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.carousel-wrapper :is(.outline) {
-  outline-style: solid;
+  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .carousel-wrapper :is(.filter) {
@@ -594,47 +360,13 @@
   transition-duration: 150ms;
 }
 
-.carousel-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.carousel-wrapper :is(.transition-colors) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .carousel-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover\:bg-danaherpurple-50:hover {
-  background-color: #EADEFF;
-}
-
-.carousel-wrapper :is(.hover\:bg-danaherpurple-50:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 222 255 / var(--tw-bg-opacity));
 }
 
 .carousel-wrapper :is(.focus\:outline-none:focus) {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.carousel-wrapper :is(.group:hover .group-hover\:translate-x-1) {
-  --tw-translate-x: 0.25rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-@media (min-width: 640px) {
-  .carousel-wrapper :is(.sm\:flex-row) {
-    flex-direction: row;
-  }
 }
 
 @media (min-width: 768px) {
@@ -650,29 +382,16 @@
     height: 35rem;
   }
 
-  .carousel-wrapper :is(.md\:min-h-\[37rem\]) {
-    min-height: 37rem;
-  }
-
   .carousel-wrapper :is(.md\:min-h-\[32rem\]) {
     min-height: 32rem;
   }
 
+  .carousel-wrapper :is(.md\:min-h-\[37rem\]) {
+    min-height: 37rem;
+  }
+
   .carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row;
-  }
-
-  .carousel-wrapper :is(.md\:text-4xl) {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .carousel-wrapper :is(.md\:leading-\[44px\]) {
-    line-height: 44px;
-  }
-
-  .carousel-wrapper :is(.md\:tracking-tight) {
-    letter-spacing: -0.025em;
   }
 }
 
@@ -690,14 +409,6 @@
     right: 0px;
   }
 
-  .carousel-wrapper :is(.lg\:m-auto) {
-    margin: auto;
-  }
-
-  .carousel-wrapper :is(.lg\:h-full) {
-    height: 100%;
-  }
-
   .carousel-wrapper :is(.lg\:min-h-\[32rem\]) {
     min-height: 32rem;
   }
@@ -706,54 +417,14 @@
     width: 50%;
   }
 
-  .carousel-wrapper :is(.lg\:grid-cols-2) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .carousel-wrapper :is(.lg\:flex-row) {
-    flex-direction: row;
-  }
-
   .carousel-wrapper :is(.lg\:px-8) {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .carousel-wrapper :is(.lg\:py-0) {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  .carousel-wrapper :is(.lg\:px-12) {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
-  .carousel-wrapper :is(.lg\:px-16) {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-
-  .carousel-wrapper :is(.lg\:text-\[40px\]) {
-    font-size: 40px;
-  }
-
-  .carousel-wrapper :is(.lg\:text-5xl) {
-    font-size: 3rem;
-    line-height: 1;
   }
 }
 
 @media (min-width: 1280px) {
   .carousel-wrapper :is(.xl\:pr-10) {
     padding-right: 2.5rem;
-  }
-
-  .carousel-wrapper :is(.xl\:pr-20) {
-    padding-right: 5rem;
-  }
-
-  .carousel-wrapper :is(.xl\:pr-24) {
-    padding-right: 6rem;
   }
 }

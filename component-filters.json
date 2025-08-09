@@ -108,6 +108,8 @@
   {
     "id": "columns",
     "components": [
+      "columnsCount",
+      "columnsRatio",
       "columnsList"
     ]
   },

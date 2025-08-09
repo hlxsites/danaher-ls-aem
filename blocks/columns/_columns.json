@@ -8,54 +8,9 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "columns": "{{columnsCount}}"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Columns 3",
-      "id": "columns-3",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns",
-            "template": {
-              "columns": "3",
-              "rows": "1"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Columns Ratio 30/70",
-      "id": "columns-thirtyseventy",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns",
-            "template": {
-              "columns": "2",
+              "columns": "{{columnsCount}}",
               "rows": "1",
-              "ratio": "30/70"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Columns Ratio 70/30",
-      "id": "columns-seventythirty",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns",
-            "template": {
-              "columns": "2",
-              "rows": "1",
-              "ratio": "70/30"
+              "ratio": "{{columnsRatio}}"
             }
           }
         }
@@ -76,6 +31,20 @@
           ],
           "valueType": "string",
           "value": "2"
+        },
+        {
+          "title": "Columns Ratio",
+          "id": "columnsRatio",
+          "component": "select",
+          "options": [
+            { "name": "Equal (50/50)", "value": "" },
+            { "name": "70/30", "value": "70/30", "columnsCount": "2" },
+            { "name": "30/70", "value": "30/70", "columnsCount": "2" },
+            { "name": "Equal (33/33/33)", "value": "", "columnsCount": "3" },
+            { "name": "20/50/30", "value": "20/50/30", "columnsCount": "3" }
+          ],
+          "valueType": "string",
+          "value": ""
         },
         {
           "title": "Columns",
@@ -238,6 +207,8 @@
     {
       "id": "columns",
       "components": [
+        "columnsCount",
+        "columnsRatio",
         "columnsList"
       ]
     },
