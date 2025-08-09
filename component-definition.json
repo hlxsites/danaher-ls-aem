@@ -281,6 +281,47 @@
           }
         },
         {
+          "title": "Column",
+          "id": "column",
+          "fields": [
+            {
+              "title": "Title",
+              "id": "title",
+              "component": "text",
+              "valueType": "string",
+              "value": ""
+            },
+            {
+              "title": "Image",
+              "id": "image",
+              "component": "image",
+              "valueType": "string",
+              "value": ""
+            },
+            {
+              "title": "Text",
+              "id": "text",
+              "component": "textarea",
+              "valueType": "string",
+              "value": ""
+            },
+            {
+              "title": "Button Label",
+              "id": "buttonLabel",
+              "component": "text",
+              "valueType": "string",
+              "value": ""
+            },
+            {
+              "title": "Button URL",
+              "id": "buttonUrl",
+              "component": "url",
+              "valueType": "string",
+              "value": ""
+            }
+          ]
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {

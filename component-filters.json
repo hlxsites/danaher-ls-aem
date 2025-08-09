@@ -119,9 +119,8 @@
       "title",
       "image",
       "text",
-      "button",
-      "article-info",
-      "embed"
+      "buttonLabel",
+      "buttonUrl"
     ]
   },
   {

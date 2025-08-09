@@ -15,6 +15,47 @@
           }
         }
       }
+    },
+    {
+      "title": "Column",
+      "id": "column",
+      "fields": [
+        {
+          "title": "Title",
+          "id": "title",
+          "component": "text",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "title": "Image",
+          "id": "image",
+          "component": "image",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "title": "Text",
+          "id": "text",
+          "component": "textarea",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "title": "Button Label",
+          "id": "buttonLabel",
+          "component": "text",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "title": "Button URL",
+          "id": "buttonUrl",
+          "component": "url",
+          "valueType": "string",
+          "value": ""
+        }
+      ]
     }
   ],
   "models": [
@@ -49,156 +90,13 @@
         {
           "title": "Columns",
           "id": "columnsList",
-          "component": "group",
+          "component": "reference",
+          "referenceType": "column",
           "repeat": {
             "min": 2,
             "max": 3,
             "countField": "columnsCount"
-          },
-          "fields": [
-            {
-              "title": "Title",
-              "id": "title",
-              "model": {
-                "fields": [
-                  {
-                    "component": "text",
-                    "name": "text",
-                    "label": "Title text",
-                    "valueType": "string",
-                    "value": ""
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Image",
-              "id": "image",
-              "model": {
-                "fields": [
-                  {
-                    "component": "image",
-                    "name": "src",
-                    "label": "Image Source",
-                    "valueType": "string",
-                    "value": ""
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Text",
-              "id": "text",
-              "model": {
-                "fields": [
-                  {
-                    "component": "textarea",
-                    "name": "content",
-                    "label": "Text content",
-                    "valueType": "string",
-                    "value": ""
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Button",
-              "id": "button",
-              "model": {
-                "fields": [
-                  {
-                    "component": "text",
-                    "name": "label",
-                    "label": "Button Label",
-                    "valueType": "string",
-                    "value": ""
-                  },
-                  {
-                    "component": "url",
-                    "name": "url",
-                    "label": "Button URL",
-                    "valueType": "string",
-                    "value": ""
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Article-Info",
-              "id": "article-info",
-              "model": {
-                "fields": [
-                  {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "authorName",
-                    "label": "Author Name",
-                    "value": ""
-                  },
-                  {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "authorTitle",
-                    "label": "Author Title",
-                    "value": ""
-                  },
-                  {
-                    "component": "reference",
-                    "valueType": "Picture",
-                    "name": "image",
-                    "label": "Image",
-                    "multi": false,
-                    "value": ""
-                  },
-                  {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "imageAlt",
-                    "label": "Alt Text",
-                    "value": ""
-                  },
-                  {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "articleOpco",
-                    "label": "Article Opco",
-                    "value": ""
-                  },
-                  {
-                    "component": "date-time",
-                    "valueType": "date-time",
-                    "name": "publishDate",
-                    "label": "Date",
-                    "displayFormat": null,
-                    "valueFormat": null,
-                    "value": ""
-                  },
-                  {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "readingTime",
-                    "label": "Reading Time",
-                    "value": ""
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Embed",
-              "id": "embed",
-              "model": {
-                "fields": [
-                  {
-                    "component": "embed",
-                    "name": "embedCode",
-                    "label": "Embed Code",
-                    "valueType": "string",
-                    "value": ""
-                  }
-                ]
-              }
-            }
-          ]
+          }
         }
       ]
     }
@@ -218,9 +116,8 @@
         "title",
         "image",
         "text",
-        "button",
-        "article-info",
-        "embed"
+        "buttonLabel",
+        "buttonUrl"
       ]
     }
   ]
