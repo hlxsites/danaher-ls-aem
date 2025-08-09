@@ -108,19 +108,19 @@
   {
     "id": "columns",
     "components": [
-      "columnsCount",
-      "columnsRatio",
-      "columnsList"
+      "column"
     ]
   },
   {
-    "id": "columnsList",
+    "id": "column",
     "components": [
-      "title",
-      "image",
       "text",
-      "buttonLabel",
-      "buttonUrl"
+      "image",
+      "button",
+      "title",
+      "article-info-new",
+      "embed",
+      "form"
     ]
   },
   {

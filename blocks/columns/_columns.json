@@ -8,54 +8,12 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "columns": "{{columnsCount}}",
-              "rows": "1",
-              "ratio": "{{columnsRatio}}"
+              "class": { "$ref": "classes" },
+              "rows": { "$ref": "rows" }
             }
           }
         }
       }
-    },
-    {
-      "title": "Column",
-      "id": "column",
-      "fields": [
-        {
-          "title": "Title",
-          "id": "title",
-          "component": "text",
-          "valueType": "string",
-          "value": ""
-        },
-        {
-          "title": "Image",
-          "id": "image",
-          "component": "image",
-          "valueType": "string",
-          "value": ""
-        },
-        {
-          "title": "Text",
-          "id": "text",
-          "component": "textarea",
-          "valueType": "string",
-          "value": ""
-        },
-        {
-          "title": "Button Label",
-          "id": "buttonLabel",
-          "component": "text",
-          "valueType": "string",
-          "value": ""
-        },
-        {
-          "title": "Button URL",
-          "id": "buttonUrl",
-          "component": "url",
-          "valueType": "string",
-          "value": ""
-        }
-      ]
     }
   ],
   "models": [
@@ -63,39 +21,34 @@
       "id": "columns",
       "fields": [
         {
-          "title": "Number of Columns",
-          "id": "columnsCount",
           "component": "select",
+          "name": "rows",
+          "label": "Number of Columns",
+          "valueType": "string",
+          "default": "2",
           "options": [
             { "name": "2 Columns", "value": "2" },
             { "name": "3 Columns", "value": "3" }
-          ],
-          "valueType": "string",
-          "value": "2"
+          ]
         },
         {
-          "title": "Columns Ratio",
-          "id": "columnsRatio",
-          "component": "select",
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Select Ratio (only for 2 columns)",
+          "valueType": "string",
+          "default": "fiftyfifty",
           "options": [
-            { "name": "Equal (50/50)", "value": "" },
-            { "name": "70/30", "value": "70/30", "columnsCount": "2" },
-            { "name": "30/70", "value": "30/70", "columnsCount": "2" },
-            { "name": "Equal (33/33/33)", "value": "", "columnsCount": "3" },
-            { "name": "20/50/30", "value": "20/50/30", "columnsCount": "3" }
+            { "name": "70/30 Split", "value": "seventythirty" },
+            { "name": "30/70 Split", "value": "thirtyseventy" },
+            { "name": "50/50 Split", "value": "fiftyfifty" },
+            { "name": "25/75 Split", "value": "twentyfiveseventyfive" },
+            { "name": "75/25 Split", "value": "seventyfivetwentyfive" },
+            { "name": "40/60 Split", "value": "fortysixty" },
+            { "name": "60/40 Split", "value": "sixtyforty" }
           ],
-          "valueType": "string",
-          "value": ""
-        },
-        {
-          "title": "Columns",
-          "id": "columnsList",
-          "component": "reference",
-          "referenceType": "column",
-          "repeat": {
-            "min": 2,
-            "max": 3,
-            "countField": "columnsCount"
+          "condition": {
+            "field": "rows",
+            "equals": "2"
           }
         }
       ]
@@ -104,20 +57,18 @@
   "filters": [
     {
       "id": "columns",
-      "components": [
-        "columnsCount",
-        "columnsRatio",
-        "columnsList"
-      ]
+      "components": ["column"]
     },
     {
-      "id": "columnsList",
+      "id": "column",
       "components": [
-        "title",
-        "image",
         "text",
-        "buttonLabel",
-        "buttonUrl"
+        "image",
+        "button",
+        "title",
+        "article-info-new",
+        "embed",
+        "form"
       ]
     }
   ]
