@@ -379,7 +379,7 @@
           "id": "mini-teaser",
           "plugins": {
             "xwalk": {
-              "page": {
+              "block": {
                 "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
                 "template": {
                   "class": {

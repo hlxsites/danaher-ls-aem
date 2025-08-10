@@ -157,6 +157,12 @@
     ]
   },
   {
+    "id": "sections",
+    "components": [
+      "mini-teaser"
+    ]
+  },
+  {
     "id": "mini-teaser",
     "components": [
       "teaser"
@@ -167,8 +173,7 @@
     "components": [
       "text",
       "image",
-      "button",
-      "title"
+      "link"
     ]
   },
   {
