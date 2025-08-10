@@ -45,21 +45,6 @@
             "field": "rows",
             "equals": "2"
           }
-        },
-        {
-          "title": "Embed",
-          "id": "embed",
-          "model": {
-              "fields": [
-                {
-                  "component": "embed",
-                  "name": "embedCode",
-                  "label": "Embed Code",
-                  "valueType": "string",
-                  "value": ""
-                }
-              ]
-          }
         }
       ]
     }
