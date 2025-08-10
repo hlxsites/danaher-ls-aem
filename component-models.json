@@ -934,60 +934,57 @@
     "id": "mini-teaser",
     "fields": [
       {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Teaser Style",
-        "valueType": "string",
-        "default": [],
-        "options": [
-          {
-            "name": "Add Border",
-            "value": "add-border"
-          }
-        ]
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
       },
       {
-        "component": "repeater",
-        "name": "teasers",
-        "label": "Teasers",
-        "item": {
-          "$ref": "teaser"
-        },
-        "minItems": 3,
-        "maxItems": 4
-      }
-    ]
-  },
-  {
-    "id": "teaser",
-    "fields": [
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      },
       {
         "component": "text",
         "name": "title",
-        "label": "Title",
-        "valueType": "string"
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "label": "Title Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
         "name": "description",
         "label": "Description",
         "valueType": "string"
-      },
-      {
-        "component": "image",
-        "name": "icon",
-        "label": "Icon"
-      },
-      {
-        "component": "text",
-        "name": "iconClass",
-        "label": "Icon CSS Class",
-        "valueType": "string"
-      },
-      {
-        "component": "link",
-        "name": "cta",
-        "label": "Button"
       }
     ]
   },

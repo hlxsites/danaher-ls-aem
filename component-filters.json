@@ -157,23 +157,9 @@
     ]
   },
   {
-    "id": "sections",
-    "components": [
-      "mini-teaser"
-    ]
-  },
-  {
     "id": "mini-teaser",
     "components": [
-      "teaser"
-    ]
-  },
-  {
-    "id": "teaser",
-    "components": [
-      "text",
-      "image",
-      "link"
+      "  "
     ]
   },
   {
