@@ -1,40 +1,12 @@
 {
   "definitions": [
     {
-      "title": "Page",
-      "id": "page",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/page/v1/page",
-            "template": {
-              "sections": { "$ref": "sections" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Section",
-      "id": "section",
-      "plugins": {
-        "xwalk": {
-          "block": {
-            "resourceType": "core/franklin/components/section/v1/section",
-            "template": {
-              "blocks": { "$ref": "blocks" }
-            }
-          }
-        }
-      }
-    },
-    {
       "title": "Mini Teasers",
       "id": "mini-teasers",
       "plugins": {
         "xwalk": {
           "block": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/teaser/v1/teaser",
             "template": {
               "name": "Mini Teasers",
               "model": "mini-teasers"
@@ -45,32 +17,6 @@
     }
   ],
   "models": [
-    {
-      "id": "page",
-      "fields": [
-        {
-          "component": "repeater",
-          "name": "sections",
-          "label": "Sections",
-          "item": {
-            "$ref": "section"
-          }
-        }
-      ]
-    },
-    {
-      "id": "section",
-      "fields": [
-        {
-          "component": "repeater",
-          "name": "blocks",
-          "label": "Blocks",
-          "item": {
-            "$ref": "mini-teasers"
-          }
-        }
-      ]
-    },
     {
       "id": "mini-teasers",
       "fields": [
@@ -114,16 +60,8 @@
   ],
   "filters": [
     {
-      "id": "sections",
-      "components": ["section"]
-    },
-    {
-      "id": "section",
-      "components": ["mini-teasers"]
-    },
-    {
       "id": "mini-teasers",
-      "components": []
+      "components": [""]
     }
   ]
 }

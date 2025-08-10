@@ -157,20 +157,10 @@
     ]
   },
   {
-    "id": "sections",
-    "components": [
-      "section"
-    ]
-  },
-  {
-    "id": "section",
-    "components": [
-      "mini-teasers"
-    ]
-  },
-  {
     "id": "mini-teasers",
-    "components": []
+    "components": [
+      ""
+    ]
   },
   {
     "id": "top-selling",
