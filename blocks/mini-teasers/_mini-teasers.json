@@ -1,0 +1,53 @@
+{
+  "definitions": [
+    {
+      "title": "Mini Teaser",
+      "id": "mini-teaser",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
+            "template": {
+              "class": { "$ref": "classes" },
+              "teasers": { "$ref": "teasers" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mini-teaser",
+      "fields": [
+        {
+          "component": "select",
+          "name": "teasers",
+          "label": "Number of Teasers",
+          "valueType": "string",
+          "default": "3",
+          "options": [
+            { "name": "3 Teasers", "value": "3" },
+            { "name": "4 Teasers", "value": "4" }
+          ]
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Teaser Style",
+          "valueType": "string",
+          "default": "default",
+          "options": [
+            { "name": "Add Border", "value": "add-border" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "mini-teaser",
+      "components": ["  "]
+    }
+  ]
+}

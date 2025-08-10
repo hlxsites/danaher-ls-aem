@@ -931,6 +931,41 @@
     ]
   },
   {
+    "id": "mini-teaser",
+    "fields": [
+      {
+        "component": "select",
+        "name": "teasers",
+        "label": "Number of Teasers",
+        "valueType": "string",
+        "default": "3",
+        "options": [
+          {
+            "name": "3 Teasers",
+            "value": "3"
+          },
+          {
+            "name": "4 Teasers",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Teaser Style",
+        "valueType": "string",
+        "default": "default",
+        "options": [
+          {
+            "name": "Add Border",
+            "value": "add-border"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "offer-advertisement",
     "fields": [
       {
