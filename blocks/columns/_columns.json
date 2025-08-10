@@ -14,20 +14,6 @@
           }
         }
       }
-    },
-    {
-      "title": "Column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/columns/v1/column",
-            "template": {
-              "content": { "$ref": "columnContent" }
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
@@ -59,23 +45,6 @@
             "field": "rows",
             "equals": "2"
           }
-        }
-      ]
-    },
-    {
-      "id": "columnContent",
-      "fields": [
-        {
-          "component": "embed",
-          "name": "embedBlock",
-          "label": "Embed Block",
-          "valueType": "string"
-        },
-        {
-          "component": "form",
-          "name": "formBlock",
-          "label": "Form Block",
-          "valueType": "string"
         }
       ]
     }

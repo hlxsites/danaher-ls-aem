@@ -269,22 +269,6 @@
           }
         },
         {
-          "title": "Column",
-          "id": "column",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/columns/v1/column",
-                "template": {
-                  "content": {
-                    "$ref": "columnContent"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {
