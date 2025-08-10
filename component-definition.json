@@ -360,6 +360,38 @@
           }
         },
         {
+          "title": "Page",
+          "id": "page",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/page/v1/page",
+                "template": {
+                  "sections": {
+                    "$ref": "sections"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Section",
+          "id": "section",
+          "plugins": {
+            "xwalk": {
+              "block": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "blocks": {
+                    "$ref": "blocks"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Mini Teasers",
           "id": "mini-teasers",
           "plugins": {

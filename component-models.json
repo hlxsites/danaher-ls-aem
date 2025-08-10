@@ -1016,6 +1016,32 @@
     ]
   },
   {
+    "id": "page",
+    "fields": [
+      {
+        "component": "repeater",
+        "name": "sections",
+        "label": "Sections",
+        "item": {
+          "$ref": "section"
+        }
+      }
+    ]
+  },
+  {
+    "id": "section",
+    "fields": [
+      {
+        "component": "repeater",
+        "name": "blocks",
+        "label": "Blocks",
+        "item": {
+          "$ref": "mini-teasers"
+        }
+      }
+    ]
+  },
+  {
     "id": "mini-teasers",
     "fields": [
       {
