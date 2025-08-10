@@ -47,7 +47,16 @@
   "filters": [
     {
       "id": "mini-teaser",
-      "components": ["  "]
+      "components": ["teaser"]
+    },
+    {
+      "id": "teaser",
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title"
+      ]
     }
   ]
 }
