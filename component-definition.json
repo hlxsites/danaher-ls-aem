@@ -380,10 +380,14 @@
           "plugins": {
             "xwalk": {
               "block": {
-                "resourceType": "core/franklin/components/teaser/v1/teaser",
+                "resourceType": "core/franklin/components/teaser-block/v1/teaser",
                 "template": {
-                  "name": "Mini Teasers",
-                  "model": "mini-teasers"
+                  "class": {
+                    "$ref": "classes"
+                  },
+                  "teasers": {
+                    "$ref": "teasers"
+                  }
                 }
               }
             }

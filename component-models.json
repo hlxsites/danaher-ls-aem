@@ -934,57 +934,61 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Block Styles",
+        "valueType": "string",
+        "default": [],
+        "options": [
+          {
+            "name": "Add Border",
+            "value": "add-border"
+          }
+        ]
+      },
+      {
+        "component": "repeater",
+        "name": "teasers",
+        "label": "Teasers",
+        "item": {
+          "$ref": "teaser"
+        },
+        "minItems": 3,
+        "maxItems": 4
+      }
+    ]
+  },
+  {
+    "id": "teaser",
+    "fields": [
+      {
+        "component": "image",
+        "name": "icon",
+        "label": "Icon"
       },
       {
         "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
+        "name": "iconClass",
+        "label": "Icon CSS Classes",
+        "valueType": "string",
+        "default": "w-16 h-16 stroke-current"
       },
       {
         "component": "text",
         "name": "title",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "titleType",
-        "label": "Title Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
+        "label": "Title",
+        "valueType": "string"
       },
       {
         "component": "text",
         "name": "description",
         "label": "Description",
         "valueType": "string"
+      },
+      {
+        "component": "link",
+        "name": "cta",
+        "label": "CTA Link"
       }
     ]
   },
