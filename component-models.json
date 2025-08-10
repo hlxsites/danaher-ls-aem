@@ -782,6 +782,23 @@
     ]
   },
   {
+    "id": "columnContent",
+    "fields": [
+      {
+        "component": "embed",
+        "name": "embedBlock",
+        "label": "Embed Block",
+        "valueType": "string"
+      },
+      {
+        "component": "form",
+        "name": "formBlock",
+        "label": "Form Block",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "dual-carousel",
     "fields": [
       {
