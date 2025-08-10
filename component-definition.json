@@ -269,6 +269,10 @@
           }
         },
         {
+          "title": "Column",
+          "id": "column"
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {
