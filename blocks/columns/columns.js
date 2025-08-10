@@ -621,16 +621,62 @@ export default function decorate(block) {
   function getColumns(block) {
     // Try direct children first
     let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
-    if (cols.length === 2) return cols;
+    if (cols.length === 2 || cols.length === 3) return cols;
     // If only one child (a wrapper), look inside it
     if (cols.length === 1) {
       cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
-      if (cols.length === 2) return cols;
+      if (cols.length === 2 || cols.length === 3) return cols;
     }
     return [];
   }
 
   const columns = getColumns(block);
+
+  // --- 3 COLUMN LOGIC ---
+  if (columns.length === 3) {
+    // Remove ALL layout classes from block and columns
+    block.className = '';
+    columns.forEach(col => {
+      col.className = '';
+      col.style.flexBasis = '';
+      col.style.width = '';
+      // Remove any grid/flex class from descendants
+      col.querySelectorAll('*').forEach(child => {
+        child.classList?.remove(
+          'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
+          'order-none', 'block', 'h-48', 'md:h-[27rem]', 'lg:w-1/2', 'columns-img-col',
+          'w-1/2', 'w-1/3', 'w-2/3', 'lg:w-1/3', 'lg:w-2/3', 'container', 'grid', 'flex',
+          'justify-center', 'items-center', 'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3', 'h-full'
+        );
+      });
+    });
+
+    block.classList.add(
+      'w-full', 'min-h-[350px]',
+      'grid', 'gap-x-8', 'gap-y-4',
+      'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
+    );
+    columns.forEach(col => {
+      // Optionally center content vertically/horizontally
+      col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
+      if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
+      // Responsive images
+      col.querySelectorAll('img').forEach(img => {
+        img.removeAttribute('width');
+        img.removeAttribute('height');
+        img.style.maxWidth = '100%';
+        img.style.width = "auto";
+        img.style.width = "100%";
+        img.style.height = "auto";
+        img.style.height = "100%";
+        img.style.objectFit = 'contain';
+        img.style.display = 'block';
+      });
+    });
+
+    // Stop here! Don't apply .container or inner grid for 3-col
+    return;
+  }
 
   if (columns.length === 2) {
     let firstCol = columns[0];
@@ -662,7 +708,7 @@ export default function decorate(block) {
 
     // Flex helpers
     firstCol.classList.add('flex', 'flex-col', 'justify-center');
-    secondCol.classList.add('flex', 'justify-center', 'items-center');
+    // secondCol.classList.add('flex', 'justify-center', 'items-center');
 
     // Optional: image style fix
     const img = secondCol.querySelector('img');
