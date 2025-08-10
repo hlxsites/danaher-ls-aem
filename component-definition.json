@@ -375,21 +375,6 @@
           }
         },
         {
-          "title": "Mini Teasers",
-          "id": "mini-teasers",
-          "plugins": {
-            "xwalk": {
-              "block": {
-                "resourceType": "core/franklin/components/teaser/v1/teaser",
-                "template": {
-                  "name": "Mini Teasers",
-                  "model": "mini-teasers"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Offer Advertisement",
           "id": "offer-advertisement",
           "plugins": {
