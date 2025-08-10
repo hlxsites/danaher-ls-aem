@@ -1,12 +1,12 @@
 {
   "definitions": [
     {
-      "title": "Mini Teasers",
+      "title": "Mini Teaser",
       "id": "mini-teasers",
       "plugins": {
         "xwalk": {
-          "block": {
-            "resourceType": "core/franklin/components/teaser-block/v1/teaser",
+          "page": {
+            "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
             "template": {
               "class": { "$ref": "classes" },
               "teasers": { "$ref": "teasers" }
@@ -21,74 +21,42 @@
       "id": "mini-teasers",
       "fields": [
         {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Block Styles",
+          "component": "select",
+          "name": "teasers",
+          "label": "Number of Teasers",
           "valueType": "string",
-          "default": [],
+          "default": "3",
           "options": [
-            { "name": "Add Border", "value": "add-border" }
+            { "name": "3 Teasers", "value": "3" },
+            { "name": "4 Teasers", "value": "4" }
           ]
         },
         {
-          "component": "repeater",
-          "name": "teasers",
-          "label": "Teasers",
-          "item": {
-            "$ref": "teaser"
-          },
-          "minItems": 3,
-          "maxItems": 4
-        }
-      ]
-    },
-    {
-      "id": "teaser",
-      "fields": [
-        {
-          "component": "image",
-          "name": "icon",
-          "label": "Icon"
-        },
-        {
-          "component": "text",
-          "name": "iconClass",
-          "label": "Icon CSS Classes",
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Teaser Style",
           "valueType": "string",
-          "default": "w-16 h-16 stroke-current"
-        },
-        {
-          "component": "text",
-          "name": "title",
-          "label": "Title",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "name": "description",
-          "label": "Description",
-          "valueType": "string"
-        },
-        {
-          "component": "link",
-          "name": "cta",
-          "label": "CTA Link"
+          "default": "default",
+          "options": [
+            { "name": "Add Border", "value": "add-border" }
+          ]
         }
       ]
     }
   ],
   "filters": [
     {
-      "id": "sections",
-      "components": ["mini-teasers"]
-    },
-    {
       "id": "mini-teasers",
       "components": ["teaser"]
     },
     {
       "id": "teaser",
-      "components": []
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title"
+      ]
     }
   ]
 }

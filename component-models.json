@@ -934,61 +934,34 @@
     "id": "mini-teasers",
     "fields": [
       {
+        "component": "select",
+        "name": "teasers",
+        "label": "Number of Teasers",
+        "valueType": "string",
+        "default": "3",
+        "options": [
+          {
+            "name": "3 Teasers",
+            "value": "3"
+          },
+          {
+            "name": "4 Teasers",
+            "value": "4"
+          }
+        ]
+      },
+      {
         "component": "multiselect",
         "name": "classes",
-        "label": "Block Styles",
+        "label": "Teaser Style",
         "valueType": "string",
-        "default": [],
+        "default": "default",
         "options": [
           {
             "name": "Add Border",
             "value": "add-border"
           }
         ]
-      },
-      {
-        "component": "repeater",
-        "name": "teasers",
-        "label": "Teasers",
-        "item": {
-          "$ref": "teaser"
-        },
-        "minItems": 3,
-        "maxItems": 4
-      }
-    ]
-  },
-  {
-    "id": "teaser",
-    "fields": [
-      {
-        "component": "image",
-        "name": "icon",
-        "label": "Icon"
-      },
-      {
-        "component": "text",
-        "name": "iconClass",
-        "label": "Icon CSS Classes",
-        "valueType": "string",
-        "default": "w-16 h-16 stroke-current"
-      },
-      {
-        "component": "text",
-        "name": "title",
-        "label": "Title",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "description",
-        "label": "Description",
-        "valueType": "string"
-      },
-      {
-        "component": "link",
-        "name": "cta",
-        "label": "CTA Link"
       }
     ]
   },
