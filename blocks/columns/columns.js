@@ -632,6 +632,45 @@ export default function decorate(block) {
 
   const columns = getColumns(block);
 
+  // --- FORM LOGIC INTEGRATION ---
+  columns.forEach((col) => {
+    // IMAGE HANDLING
+    const img = col.querySelector('img');
+    const imageAspectRatio = 16 / 9; // Or set as needed
+    if (img) {
+      img.classList.add('w-full');
+      img.onerror = function () {
+        img.width = this.width;
+        img.height = Math.floor(this.width / imageAspectRatio);
+      };
+    } else if (!block.className.includes('itemscenter')) {
+      // BLOG/NEWS PAGE LAYOUT
+      if (
+        window.location.pathname.includes('/us/en/blog/') ||
+        window.location.pathname.includes('/us/en/news/')
+      ) {
+        col.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
+        col.querySelectorAll('h1').forEach((ele) => {
+          ele.classList.add('pb-4');
+        });
+      } else {
+        col.classList.add('h-full');
+        const aTags = col.querySelectorAll('p > a');
+        const formType = [...aTags].filter((ele) => ele.title === 'Form_Type');
+        if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
+          // You need to implement loadForm elsewhere
+          loadForm(col, aTags);
+        }
+      }
+    }
+
+    // LIST STYLING
+    const ulEle = col.querySelectorAll('div > ul, p > ul');
+    ulEle.forEach((ele) => {
+      ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+    });
+  });
+
   // --- 3 COLUMN LOGIC ---
   if (columns.length === 3) {
     // Remove ALL layout classes from block and columns
@@ -657,10 +696,8 @@ export default function decorate(block) {
       'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
     );
     columns.forEach(col => {
-      // Optionally center content vertically/horizontally
       col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
       if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
-      // Responsive images
       col.querySelectorAll('img').forEach(img => {
         img.removeAttribute('width');
         img.removeAttribute('height');
@@ -678,15 +715,16 @@ export default function decorate(block) {
     return;
   }
 
+  // --- 2 COLUMN LOGIC ---
   if (columns.length === 2) {
     let firstCol = columns[0];
     let secondCol = columns[1];
 
-    // Remove all possible width classes from both columns
     [
       'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
       'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
-      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3'
+      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3',
+      'flex', 'flex-col', 'justify-center', 'items-center'
     ].forEach(cls => {
       firstCol.classList.remove(cls);
       secondCol.classList.remove(cls);
@@ -706,11 +744,14 @@ export default function decorate(block) {
       secondCol.classList.add('lg:w-1/2');
     }
 
-    // Flex helpers
-    firstCol.classList.add('flex', 'flex-col', 'justify-center');
-    // secondCol.classList.add('flex', 'justify-center', 'items-center');
+    // Do NOT center the first (left/text) column: top align only
+    // Optionally, you can add 'w-full', 'h-full' for consistency
+    firstCol.classList.add('w-full', 'h-full');
 
-    // Optional: image style fix
+    // Center the second (right/form) column vertically
+    secondCol.classList.add('flex', 'flex-col', 'justify-center', 'w-full', 'h-full');
+
+    // Optional: image style fix for second col
     const img = secondCol.querySelector('img');
     if (img) {
       img.removeAttribute('width');
@@ -725,7 +766,6 @@ export default function decorate(block) {
     }
   }
 
-  // Add column count class for further styling if needed
   function getColumnCount(block) {
     const directDivs = Array.from(block.children).filter(el => el.tagName === 'DIV');
     if (directDivs.length > 1) return directDivs.length;
@@ -738,19 +778,16 @@ export default function decorate(block) {
   const colCount = getColumnCount(block);
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Style headings
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
     if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
 
-  // Style buttons
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
   });
 
-  // Additional styling for bottom-border-right
   if (block.className.includes('bottom-border-right')) {
     block.querySelectorAll('div > div:nth-child(2) > p > a').forEach((ele, index, arr) => {
       if (index === arr.length - 1) ele.parentElement?.classList.add('border-0');
@@ -758,7 +795,6 @@ export default function decorate(block) {
     });
   }
 
-  // Additional styling for bg-color-right
   if (block.className.includes('bg-color-right')) {
     const divEl = block.querySelector('div > div:nth-child(2)');
     divEl.classList.add('bg-danaherred-800', 'pb-10');
@@ -774,7 +810,6 @@ export default function decorate(block) {
     });
   }
 
-  // Style lists and icons
   block.querySelectorAll('div > ul, p > ul').forEach((ele) => {
     ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
   });
@@ -785,7 +820,6 @@ export default function decorate(block) {
     if (svg) svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
   });
 
-  // Add column container classes for certain layouts
   if (block.className.includes('columns-2-cols')) {
     if (
       window.location.pathname.includes('/us/en/blog/') ||
@@ -806,7 +840,6 @@ export default function decorate(block) {
     block.querySelector('h4')?.classList.add('font-bold');
   }
 
-  // Style links
   block.querySelectorAll('p > a[title="link"]').forEach((item) => {
     item.parentElement.classList.add('link', 'pb-8');
     item.textContent += ' ->';
@@ -815,7 +848,6 @@ export default function decorate(block) {
     else item.classList.add('text-danaherpurple-500');
   });
 
-  // Style images for special layouts
   block.querySelectorAll('picture').forEach((pic) => {
     const picWrapper = pic.closest('div');
     if (picWrapper && picWrapper.children.length === 1) {
@@ -839,7 +871,6 @@ export default function decorate(block) {
     }
   });
 
-  // Style embeds (YouTube, Vimeo)
   block.querySelectorAll('.embed').forEach((embed) => {
     let url = '';
     if (embed.dataset && embed.dataset.url) {
@@ -848,7 +879,6 @@ export default function decorate(block) {
       url = embed.textContent.trim();
     }
 
-    // Convert Vimeo and YouTube URLs to embed format
     if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
       const match = url.match(/vimeo\.com\/(\d+)/);
       if (match) url = `https://player.vimeo.com/video/${match[1]}`;
@@ -863,7 +893,6 @@ export default function decorate(block) {
     }
 
     if (url.startsWith('http')) {
-      // If embed is a <p>, replace with a <div>
       if (embed.tagName.toLowerCase() === 'p') {
         const div = document.createElement('div');
         div.className = embed.className;
