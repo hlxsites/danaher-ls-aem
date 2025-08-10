@@ -14,21 +14,6 @@
           }
         }
       }
-    },
-    {
-      "title": "Column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/column/v1/column",
-            "template": {
-              "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" }
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
@@ -62,11 +47,7 @@
           }
         }
       ]
-    },
-    {
-      "id": "column",
-      "fields": []
-    }
+    }  
   ],
   "filters": [
     {

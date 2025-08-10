@@ -4,6 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
+import decorateFormBlock from '../../blocks/form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -607,6 +608,179 @@ async function loadForm(row, tags) {
 
 /** ********JOIN-TODAY-FORM Ends****************** */
 
+/**
+ * Detects whether a column contains raw HTML (as text) that should be parsed and decorated as a form,
+ * rather than a builder-based or promotion form.
+ */
+function hasRawHtmlForm(col) {
+  const text = col.innerText.trim();
+  // Heuristic: treat as raw HTML if starts with <div or <form or <section, and contains some closing tag
+  return /^<((div|form|section)\b[\s\S]*?>)/i.test(text) && /<\/(div|form|section)>/i.test(text);
+}
+
+// --- Alignment patch for embedded form in column ---
+function alignFormInColumn(block) {
+  const formWrapper = block.querySelector('.embedded-form-wrapper.form-2col-main')
+    || block.querySelector('.form-2col-main')
+    || block.querySelector('.embedded-form-wrapper');
+  if (formWrapper) {
+    [
+      'container', 'mx-auto', 'max-w-4xl', 'max-w-3xl', 'max-w-2xl', 'max-w-xl', 'max-w-lg', 'max-w-md', 'max-w-sm',
+      'px-4', 'px-6', 'px-8', 'px-12'
+    ].forEach(cls => formWrapper.classList.remove(cls));
+    formWrapper.style.maxWidth = 'unset';
+    formWrapper.style.margin = '0';
+    formWrapper.style.width = '100%';
+    formWrapper.style.paddingLeft = '0';
+    formWrapper.style.paddingRight = '0';
+    formWrapper.style.boxSizing = 'border-box';
+  }
+  const formLeft = formWrapper?.querySelector('.form-left');
+  const formRight = formWrapper?.querySelector('.form-right');
+  if (formLeft) {
+    formLeft.style.maxWidth = 'unset';
+    formLeft.style.minWidth = '0';
+    formLeft.style.width = '100%';
+    formLeft.style.margin = '0';
+    formLeft.style.padding = '0';
+    formLeft.style.boxSizing = 'border-box';
+  }
+  if (formRight) {
+    formRight.style.maxWidth = 'unset';
+    formRight.style.minWidth = '0';
+    formRight.style.width = '100%';
+    formRight.style.margin = '0';
+    formRight.style.padding = '0';
+    formRight.style.boxSizing = 'border-box';
+  }
+  const formEl = formWrapper?.querySelector('form');
+  if (formEl) {
+    formEl.style.width = '100%';
+    formEl.style.boxSizing = 'border-box';
+    formEl.style.maxWidth = 'unset';
+    formEl.style.margin = '0';
+  }
+  if (formWrapper) {
+    formWrapper.style.gap = '2.5rem';
+    formWrapper.style.display = 'flex';
+    formWrapper.style.alignItems = 'flex-start';
+  }
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 800px) {
+      .embedded-form-wrapper.form-2col-main {
+        flex-direction: column !important;
+        padding: 1.2rem 0.5rem !important;
+        gap: 0.5rem !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// --- Equalize form field widths and heights for 2-column forms ---
+function forceEqualFormFields(col) {
+  // Find the form in the column
+  const form =
+    col.querySelector('form') ||
+    col.querySelector('.form-2col-main form') ||
+    col.querySelector('.embedded-form-wrapper form');
+  if (!form) return;
+
+  // Make the form a 2-column grid
+  form.style.display = 'grid';
+  form.style.gridTemplateColumns = '1fr 1fr';
+  form.style.gap = '1.5rem 1.2rem';
+  form.style.width = '100%';
+
+  // Select all relevant fields (input, select, .dropdown-label)
+  const fieldSelectors = [
+    'input[type="text"]',
+    'input[type="email"]',
+    'input[type="number"]',
+    'input[type="tel"]',
+    'select',
+    '.dropdown-label'
+  ].join(',');
+
+  form.querySelectorAll(fieldSelectors).forEach(field => {
+    field.style.width = '100%';
+    field.style.height = '48px';
+    field.style.minHeight = '48px';
+    field.style.fontSize = '1rem';
+    field.style.borderRadius = '5px';
+    field.style.boxSizing = 'border-box';
+    field.style.maxWidth = '100%';
+    if (field.parentElement) field.parentElement.style.width = '100%';
+  });
+
+  // Textareas: always full width, min-height, 2-col span
+  form.querySelectorAll('textarea').forEach(area => {
+    area.style.minHeight = '96px';
+    area.style.fontSize = '1rem';
+    area.style.gridColumn = '1 / span 2';
+    area.style.width = '100%';
+    area.style.maxWidth = '100%';
+    area.style.boxSizing = 'border-box';
+    if (area.parentElement) area.parentElement.style.gridColumn = '1 / span 2';
+  });
+
+  // Labels: block and full width
+  form.querySelectorAll('label').forEach(label => {
+    label.style.width = '100%';
+    label.style.display = 'block';
+  });
+
+  // Make any .form-row-full, .form-checkbox-row, .terms, .form-help, .help-block always span 2 columns
+  [
+    '.form-row-full',
+    '.form-checkbox-row',
+    '.terms',
+    '.form-help',
+    '.help-block'
+  ].forEach(sel => {
+    form.querySelectorAll(sel).forEach(el => {
+      el.style.gridColumn = '1 / span 2';
+      el.style.width = '100%';
+    });
+  });
+
+  // Responsive: mobile single column
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 800px) {
+      .form-2col-main form,
+      .embedded-form-wrapper.form-2col-main form,
+      form {
+        grid-template-columns: 1fr !important;
+      }
+      .form-2col-main form textarea,
+      .embedded-form-wrapper.form-2col-main form textarea,
+      form textarea {
+        grid-column: 1 / span 1 !important;
+      }
+      .form-2col-main form .form-row-full,
+      .form-2col-main form .form-checkbox-row,
+      .form-2col-main form .terms,
+      .form-2col-main form .form-help,
+      .form-2col-main form .help-block,
+      .embedded-form-wrapper.form-2col-main form .form-row-full,
+      .embedded-form-wrapper.form-2col-main form .form-checkbox-row,
+      .embedded-form-wrapper.form-2col-main form .terms,
+      .embedded-form-wrapper.form-2col-main form .form-help,
+      .embedded-form-wrapper.form-2col-main form .help-block,
+      form .form-row-full,
+      form .form-checkbox-row,
+      form .terms,
+      form .form-help,
+      form .help-block {
+        grid-column: 1 / span 1 !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
 
@@ -617,12 +791,9 @@ export default function decorate(block) {
 
   block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
 
-  // UNIVERSAL COLUMN DETECTION: works for both direct and wrapped columns
   function getColumns(block) {
-    // Try direct children first
     let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
     if (cols.length === 2 || cols.length === 3) return cols;
-    // If only one child (a wrapper), look inside it
     if (cols.length === 1) {
       cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
       if (cols.length === 2 || cols.length === 3) return cols;
@@ -632,11 +803,10 @@ export default function decorate(block) {
 
   const columns = getColumns(block);
 
-  // --- FORM LOGIC INTEGRATION ---
   columns.forEach((col) => {
     // IMAGE HANDLING
     const img = col.querySelector('img');
-    const imageAspectRatio = 16 / 9; // Or set as needed
+    const imageAspectRatio = 16 / 9;
     if (img) {
       img.classList.add('w-full');
       img.onerror = function () {
@@ -655,13 +825,22 @@ export default function decorate(block) {
         });
       } else {
         col.classList.add('h-full');
+        // Promotion form logic: only call loadForm if p > a with title=Form_Type and textContent=promotion
         const aTags = col.querySelectorAll('p > a');
         const formType = [...aTags].filter((ele) => ele.title === 'Form_Type');
         if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
-          // You need to implement loadForm elsewhere
-          loadForm(col, aTags);
+          if (typeof loadForm === 'function') loadForm(col, aTags);
         }
       }
+    }
+
+    // --- RAW HTML FORM HANDLING ---
+    if (hasRawHtmlForm(col)) {
+      decorateFormBlock(col);
+      setTimeout(() => {
+        alignFormInColumn(col);
+        forceEqualFormFields(col);
+      }, 0);
     }
 
     // LIST STYLING
@@ -673,13 +852,11 @@ export default function decorate(block) {
 
   // --- 3 COLUMN LOGIC ---
   if (columns.length === 3) {
-    // Remove ALL layout classes from block and columns
     block.className = '';
     columns.forEach(col => {
       col.className = '';
       col.style.flexBasis = '';
       col.style.width = '';
-      // Remove any grid/flex class from descendants
       col.querySelectorAll('*').forEach(child => {
         child.classList?.remove(
           'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
@@ -710,8 +887,6 @@ export default function decorate(block) {
         img.style.display = 'block';
       });
     });
-
-    // Stop here! Don't apply .container or inner grid for 3-col
     return;
   }
 
@@ -719,7 +894,6 @@ export default function decorate(block) {
   if (columns.length === 2) {
     let firstCol = columns[0];
     let secondCol = columns[1];
-
     [
       'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
       'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
@@ -730,9 +904,7 @@ export default function decorate(block) {
       secondCol.classList.remove(cls);
     });
 
-    // Detect ratio class on .section OR .columns block
     const classes = sectionDiv.className.split(/\s+/).concat(block.className.split(/\s+/));
-
     if (classes.includes('thirtyseventy')) {
       firstCol.classList.add('lg:w-1/3');
       secondCol.classList.add('lg:w-2/3');
@@ -744,14 +916,9 @@ export default function decorate(block) {
       secondCol.classList.add('lg:w-1/2');
     }
 
-    // Do NOT center the first (left/text) column: top align only
-    // Optionally, you can add 'w-full', 'h-full' for consistency
     firstCol.classList.add('w-full', 'h-full');
-
-    // Center the second (right/form) column vertically
     secondCol.classList.add('flex', 'flex-col', 'justify-center', 'w-full', 'h-full');
 
-    // Optional: image style fix for second col
     const img = secondCol.querySelector('img');
     if (img) {
       img.removeAttribute('width');
@@ -764,7 +931,10 @@ export default function decorate(block) {
       img.style.objectFit = "contain";
       img.style.display = "block";
     }
+    // No generic form-block decorate here! (handled above, only if raw HTML detected)
   }
+
+  // -- The rest of your block logic remains unchanged --
 
   function getColumnCount(block) {
     const directDivs = Array.from(block.children).filter(el => el.tagName === 'DIV');
