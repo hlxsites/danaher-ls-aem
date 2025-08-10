@@ -931,7 +931,7 @@
     ]
   },
   {
-    "id": "mini-teaser",
+    "id": "mini-teasers",
     "fields": [
       {
         "component": "reference",

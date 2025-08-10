@@ -1,15 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Mini Teaser",
-      "id": "mini-teaser",
+      "title": "Mini Teasers",
+      "id": "mini-teasers",
       "plugins": {
         "xwalk": {
           "block": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Mini Teaser",
-              "model": "mini-teaser"
+              "name": "Mini Teasers",
+              "model": "mini-teasers"
             }
           }
         }
@@ -18,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "mini-teaser",
+      "id": "mini-teasers",
       "fields": [
         {
           "component": "reference",
@@ -60,7 +60,7 @@
   ],
   "filters": [
     {
-      "id": "mini-teaser",
+      "id": "mini-teasers",
       "components": [""]
     }
   ]
