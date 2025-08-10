@@ -375,19 +375,15 @@
           }
         },
         {
-          "title": "Mini Teaser",
+          "title": "Mini Teasers",
           "id": "mini-teasers",
           "plugins": {
             "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
+              "block": {
+                "resourceType": "core/franklin/components/teaser/v1/teaser",
                 "template": {
-                  "class": {
-                    "$ref": "classes"
-                  },
-                  "teasers": {
-                    "$ref": "teasers"
-                  }
+                  "name": "Mini Teasers",
+                  "model": "mini-teasers"
                 }
               }
             }

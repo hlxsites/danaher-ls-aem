@@ -1,15 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Mini Teaser",
+      "title": "Mini Teasers",
       "id": "mini-teasers",
       "plugins": {
         "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
+          "block": {
+            "resourceType": "core/franklin/components/teaser/v1/teaser",
             "template": {
-              "class": { "$ref": "classes" },
-              "teasers": { "$ref": "teasers" }
+              "name": "Mini Teasers",
+              "model": "mini-teasers"
             }
           }
         }
@@ -21,25 +21,39 @@
       "id": "mini-teasers",
       "fields": [
         {
+          "component": "reference",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Alt Text"
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title"
+        },
+        {
           "component": "select",
-          "name": "teasers",
-          "label": "Number of Teasers",
-          "valueType": "string",
-          "default": "3",
+          "name": "titleType",
+          "label": "Title Type",
           "options": [
-            { "name": "3 Teasers", "value": "3" },
-            { "name": "4 Teasers", "value": "4" }
+            { "name": "h1", "value": "h1" },
+            { "name": "h2", "value": "h2" },
+            { "name": "h3", "value": "h3" },
+            { "name": "h4", "value": "h4" },
+            { "name": "h5", "value": "h5" },
+            { "name": "h6", "value": "h6" }
           ]
         },
         {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Teaser Style",
-          "valueType": "string",
-          "default": "default",
-          "options": [
-            { "name": "Add Border", "value": "add-border" }
-          ]
+          "component": "text",
+          "name": "description",
+          "label": "Description",
+          "valueType": "string"
         }
       ]
     }
@@ -47,16 +61,7 @@
   "filters": [
     {
       "id": "mini-teasers",
-      "components": ["teaser"]
-    },
-    {
-      "id": "teaser",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title"
-      ]
+      "components": [""]
     }
   ]
 }

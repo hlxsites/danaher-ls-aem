@@ -159,16 +159,7 @@
   {
     "id": "mini-teasers",
     "components": [
-      "teaser"
-    ]
-  },
-  {
-    "id": "teaser",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
+      ""
     ]
   },
   {
