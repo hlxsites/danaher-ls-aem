@@ -29,6 +29,8 @@
       "accordion",
       "recent-articles",
       "embed",
+      "form",
+      "mini-teasers",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -86,13 +88,22 @@
   {
     "id": "card-list",
     "components": [
-      ""
+      "articleCard",
+      "applicationCard",
+      "libraryCard",
+      "labCard"
     ]
   },
   {
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      " "
     ]
   },
   {
@@ -128,6 +139,12 @@
     ]
   },
   {
+    "id": "form",
+    "components": [
+      "form"
+    ]
+  },
+  {
     "id": "insight",
     "components": [
       "insight-item"
@@ -135,6 +152,12 @@
   },
   {
     "id": "learn-more",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "mini-teasers",
     "components": [
       ""
     ]
