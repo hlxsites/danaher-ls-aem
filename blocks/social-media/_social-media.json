@@ -23,7 +23,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "template",
+          "name": "articleType",
           "label": "Article Type",
           "value": ""
         }
