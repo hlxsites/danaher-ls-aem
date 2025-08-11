@@ -67,7 +67,7 @@ const paymentModule = async () => {
 
     const cardsContainer = div(
       {
-        class: 'flex-col flex p-6 hidden w-full items-start bg-checkout',
+        class: 'flex-col flex p-6 w-full items-start bg-checkout',
       },
     );
     const savedCardsWrapper = div(

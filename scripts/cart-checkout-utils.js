@@ -1515,12 +1515,14 @@ export const changeStep = async (step) => {
       proceedButton.setAttribute('data-tab', 'payment');
       break;
     case 'payment':
+      segment1.style.width = '50%';
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.textContent = 'Place your order';
       break;
     case 'submitOrder':
+      segment1.style.width = '50%';
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.setAttribute('data-activeTab', 'submitOrder');
