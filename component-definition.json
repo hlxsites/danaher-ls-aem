@@ -245,7 +245,9 @@
                   "class": {
                     "$ref": "classes"
                   },
-                  "rows": "2"
+                  "rows": {
+                    "$ref": "rows"
+                  }
                 }
               }
             }

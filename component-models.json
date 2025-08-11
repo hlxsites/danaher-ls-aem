@@ -416,8 +416,57 @@
         "component": "text",
         "valueType": "string",
         "name": "tagName",
-        "value": "",
-        "label": "Tag Name"
+        "value": "topics",
+        "label": "Tag Category (e.g. topics, solutions)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "options": [
+          {
+            "name": "Default (Articles)",
+            "value": ""
+          },
+          {
+            "name": "Application",
+            "value": "application"
+          },
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Library",
+            "value": "library"
+          },
+          {
+            "name": "New Lab",
+            "value": "new-lab"
+          }
+        ]
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "pagination",
+        "label": "Enable Pagination",
+        "value": true
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "filters",
+        "label": "Enable Filters",
+        "value": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceIndex",
+        "label": "Custom Index Path",
+        "value": "/us/en/article-index.json"
       }
     ]
   },
@@ -534,10 +583,28 @@
     "id": "columns",
     "fields": [
       {
+        "component": "select",
+        "name": "rows",
+        "label": "Number of Columns",
+        "valueType": "string",
+        "default": "2",
+        "options": [
+          {
+            "name": "2 Columns",
+            "value": "2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "3"
+          }
+        ]
+      },
+      {
         "component": "multiselect",
         "name": "classes",
-        "label": "Select Ratio",
+        "label": "Select Ratio (only for 2 columns)",
         "valueType": "string",
+        "default": "fiftyfifty",
         "options": [
           {
             "name": "70/30 Split",
@@ -546,28 +613,12 @@
           {
             "name": "30/70 Split",
             "value": "thirtyseventy"
-          },
-          {
-            "name": "50/50 Split",
-            "value": "fiftyfifty"
-          },
-          {
-            "name": "25/75 Split",
-            "value": "twentyfiveseventyfive"
-          },
-          {
-            "name": "75/25 Split",
-            "value": "seventyfivetwentyfive"
-          },
-          {
-            "name": "40/60 Split",
-            "value": "fortysixty"
-          },
-          {
-            "name": "60/40 Split",
-            "value": "sixtyforty"
           }
-        ]
+        ],
+        "condition": {
+          "field": "rows",
+          "equals": "2"
+        }
       }
     ]
   },

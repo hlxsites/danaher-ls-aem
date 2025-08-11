@@ -86,7 +86,10 @@
   {
     "id": "card-list",
     "components": [
-      ""
+      "articleCard",
+      "applicationCard",
+      "libraryCard",
+      "labCard"
     ]
   },
   {
@@ -108,9 +111,8 @@
       "image",
       "button",
       "title",
-      "article-info-new",
-      "embed",
-      "form"
+      "article-info",
+      "article-info-new"
     ]
   },
   {
