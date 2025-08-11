@@ -85,6 +85,12 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "components": [
+      "  "
+    ]
+  },
+  {
     "id": "card-list",
     "components": [
       "articleCard",
