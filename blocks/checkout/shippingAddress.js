@@ -827,7 +827,28 @@ export const shippingAddressModule = async () => {
                 'billing',
               );
               if (setAddressAsShipping?.status === 'success') {
-                checkoutSummaryBillAddress?.classList.add('hidden');
+                const renderDefaultAddress = defaultAddress(
+                  getUseAddressesResponse?.data?.commonShipToAddress,
+                  'billing',
+                );
+
+                const getDefaultAddressWrapper = document.querySelector(
+                  '#billingAddressHeader',
+                );
+                if (getDefaultAddressWrapper && renderDefaultAddress) {
+                  /*
+                ::::::::::::::
+                show this address as default billing address
+                :::::::::::::
+                */
+                  getDefaultAddressWrapper.insertAdjacentElement(
+                    'afterend',
+                    renderDefaultAddress,
+                  );
+                  // hide the billing address from checkout summary
+
+                  checkoutSummaryBillAddress?.remove();
+                }
               }
             } else if (
               checkoutSummaryBillAddress?.classList.contains('hidden')
