@@ -24,7 +24,7 @@ export default function decorate(block) {
   const ctaLink = bodyBannerLink?.textContent.trim() || '#';
   const newTab = bodyBannerLinkTarget?.textContent?.trim();
   const ctaText = bodyBannerLinkLabel?.textContent?.trim() || '';
-  const rightColor = bodyBannerBg?.textContent.trim().replace(/<[^>]*>/g, '') || '#660099';
+  const rightColor = bodyBannerBg?.textContent.trim().replace(/<[^>]*>/g, '') || '#4000A5';
 
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;

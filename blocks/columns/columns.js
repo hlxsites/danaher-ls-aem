@@ -326,9 +326,9 @@ async function loadForm(row, tags) {
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
           buildCheckboxElement('DHLS_Interest', 'Email', 'checkbox', 'Email_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Text Messages (SMS)', 'checkbox', 'SMS_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Phone Calls', 'checkbox', 'Phone_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Post', 'checkbox', 'Post_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'SMS', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Phone', 'checkbox', 'Phone_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Direct Mail', 'checkbox', 'Post_Opt_In', 'true', false),
         ),
       ),
       input(
@@ -409,7 +409,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
@@ -424,7 +424,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.',
+          'Interested in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
         buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
@@ -467,7 +467,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
@@ -482,7 +482,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.',
+          'Interested in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
         buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
@@ -510,7 +510,7 @@ async function loadForm(row, tags) {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+          'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
           { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
@@ -525,7 +525,7 @@ async function loadForm(row, tags) {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
-          'Interest in hearing from one of our experts? Select all that apply.',
+          'Interested in hearing from one of our experts? Select all that apply.',
         ),
         buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
         buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
@@ -722,6 +722,8 @@ export default function decorate(block) {
       }
       if (block.className.includes('columns-2-cols')) {
         if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
+        } else {
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
         }
         const pTags = row.querySelectorAll('p');

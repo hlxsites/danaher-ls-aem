@@ -7,8 +7,8 @@ import createCard from '../card-list/articleCard.js';
 import createLabCard from '../card-list/newLabCard.js';
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0 auto';
   const brandName = getMetadata('brand');
   const pageType = block.classList.length > 2 ? block.classList[1] : '';
   if (pageType) block.classList.remove(pageType);
@@ -31,7 +31,7 @@ export default async function decorate(block) {
     .filter(({ brand }) => {
       const match = brandName && brandName !== '' && brand
         ? brandName.toLowerCase() === brand.toLowerCase()
-        : true;
+        : false;
       return match;
     })
     .filter(({ type }) => type.toLowerCase() === articleType)
