@@ -116,10 +116,7 @@
     "components": [
       "text",
       "image",
-      "button",
-      "title",
-      "article-info",
-      "article-info-new"
+      "title"
     ]
   },
   {

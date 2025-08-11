@@ -323,36 +323,73 @@ const transformTagsList = (main, document) => {
 
 /*** Columns Wrapper Start */
 
-const transformColumns = (main, document) => {
+/**
+ * Transform all .columns.block elements in main into JSON for EDS Universal Editor columns schema.
+ * This version matches the schema you provided (rows, classes, columns array).
+ *
+ * @param {HTMLElement} main - The main content container.
+ * @returns {Array<object>} Array of columns block JSON objects.
+ */
+  const transformColumns = (main) => {
+  const results = [];
+
   main.querySelectorAll('div.columns.block').forEach((columnsBlock) => {
-    const section = columnsBlock.closest('.section');
-    const columns = [...columnsBlock.firstElementChild.children];
-    const blockClasses = columnsBlock.className.split(' ').filter((c) => c !== 'block' && c !== 'columns');
+    // Detect block-level classes for ratio, etc.
+    const blockClasses = columnsBlock.className
+      .split(' ')
+      .filter((c) => c !== 'block' && c !== 'columns');
 
-    // Build Universal Editor columns structure
-    const transformedBlock = document.createElement('div');
-    transformedBlock.className = 'block columns';
-    if (blockClasses.length) transformedBlock.classList.add(...blockClasses);
+    // Universal detection: columns can be direct children or wrapped
+    let columnDivs = Array.from(columnsBlock.children).filter(el => el.tagName === 'DIV');
+    if (columnDivs.length === 1) {
+      columnDivs = Array.from(columnDivs[0].children).filter(el => el.tagName === 'DIV');
+    }
+    const rows = columnDivs.length.toString();
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'columns-wrapper';
+    // Classes logic for 2-column layout
+    let classes = [];
+    if (rows === "2") {
+      const classList = [
+        ...columnsBlock.classList,
+        ...(columnsBlock.closest('.section')?.classList || [])
+      ];
+      if (classList.includes('seventythirty')) classes.push('seventythirty');
+      else if (classList.includes('thirtyseventy')) classes.push('thirtyseventy');
+      else classes.push('fiftyfifty');
+    }
 
-    columns.forEach((column) => {
-      const newCol = document.createElement('div');
-      newCol.className = 'column';
-
-      // Move children from old column to new column container
-      Array.from(column.childNodes).forEach((child) => {
-        newCol.appendChild(child);
-      });
-
-      wrapper.appendChild(newCol);
+    // Extract column content: text, image, title (if available)
+    const columns = columnDivs.map(col => {
+      // Try to extract title (if any)
+      const titleEl = col.querySelector('h1,h2,h3,h4,h5,h6');
+      const title = titleEl ? titleEl.textContent.trim() : undefined;
+      // Try to extract image (if any)
+      const imgEl = col.querySelector('img');
+      const image = imgEl ? imgEl.getAttribute('src') : undefined;
+      // Remove title and image from text if present
+      if (titleEl) titleEl.remove();
+      if (imgEl) imgEl.remove();
+      // Remaining HTML as text
+      const text = col.innerHTML.trim();
+      // Build column object (only include non-empty fields)
+      const colObj = {};
+      if (title) colObj.title = title;
+      if (image) colObj.image = image;
+      if (text) colObj.text = text;
+      return colObj;
     });
 
-    transformedBlock.appendChild(wrapper);
-    columnsBlock.replaceWith(transformedBlock);
+    // Compose JSON matching your schema
+    results.push({
+      id: 'columns',
+      rows,
+      classes,
+      columns
+    });
   });
-};
+
+  return results;
+}
 
 
 /*** Columns Wrapper End */
@@ -862,7 +899,7 @@ export default {
 
     // cleanUpHeadings(main, document);
     transformHero(main, document);
-    transformColumns(main, document);
+    transformColumns(main);
     transformPromo(main, document);
     transformQuote(main, document);
     transformFastFacts(main, document);
