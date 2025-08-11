@@ -19,43 +19,7 @@
   "models": [
     {
       "id": "article-info",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "authorName",
-          "label": "Author Name",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "authorJobTitle",
-          "label": "Author Title",
-          "value": ""
-        },
-        {
-          "component": "image",
-          "valueType": "string",
-          "name": "authorImage",
-          "label": "Author Image",
-          "value": ""
-        },
-        {
-          "component": "date-time",
-          "valueType": "date",
-          "name": "publishDate",
-          "label": "Publish Date",
-          "value": ""
-        },
-        {
-          "component": "number",
-          "valueType": "number",
-          "name": "readingTime",
-          "label": "Reading Time (in minutes)",
-          "value": ""
-        }
-      ]
+      "fields": ["  "]
     }
   ],
   "filters": [
