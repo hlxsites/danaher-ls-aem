@@ -179,6 +179,14 @@
     ]
   },
   {
+    "id": "recent-articles",
+    "components": []
+  },
+  {
+    "id": "related-articles",
+    "components": []
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -206,6 +214,10 @@
       "tiny-carousel",
       "tiny-carousel-item"
     ]
+  },
+  {
+    "id": "tags-list",
+    "components": []
   },
   {
     "id": "tiny-carousel",

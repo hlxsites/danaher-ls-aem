@@ -1326,7 +1326,129 @@
   },
   {
     "id": "recent-articles",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Articles List",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "related-articles",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "related-category",
@@ -1484,6 +1606,76 @@
         "value": "",
         "label": "Container Id",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tags-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
       }
     ]
   },
