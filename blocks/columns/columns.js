@@ -608,25 +608,124 @@ async function loadForm(row, tags) {
 
 /** ********JOIN-TODAY-FORM Ends****************** */
 
-/**
- * Detects whether a column contains raw HTML (as text) that should be parsed and decorated as a form,
- * rather than a builder-based or promotion form.
- */
-function hasRawHtmlForm(col) {
-  const text = col.innerText.trim();
-  // Heuristic: treat as raw HTML if starts with <div or <form or <section, and contains some closing tag
-  return /^<((div|form|section)\b[\s\S]*?>)/i.test(text) && /<\/(div|form|section)>/i.test(text);
+// --- Utility: decode HTML entities (for cases like &lt;form ...&gt;) ---
+function decodeHtmlEntities(str) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = str;
+  return txt.value;
 }
 
-// --- Alignment patch for embedded form in column ---
+// --- Utility: Find and rebuild raw HTML forms that are split up in <p> tags, with &nbsp;, <br>, etc ---
+function getRawHtmlFromParagraphs(col) {
+  // Find all <p> that look like they contain raw HTML (i.e. start with <form, <div, <section, etc)
+  const ps = Array.from(col.querySelectorAll('p')).filter(p => {
+    const txt = p.textContent.trim();
+    return txt.startsWith('<form') || txt.startsWith('<div') || txt.startsWith('<section');
+  });
+  if (!ps.length) return null;
+
+  // Concatenate the HTML from all these <p>
+  let html = ps.map(p => p.textContent).join('\n');
+  // Remove &nbsp; and <br> if present
+  html = html.replace(/&nbsp;/g, ' ').replace(/<br\s*\/?>/gi, '\n');
+
+  // Decode entities
+  html = decodeHtmlEntities(html);
+
+  return html;
+}
+
+// --- Utility: Render raw HTML forms (works for both "all-in-p" and single <div> text node cases) ---
+function renderRawHtmlForms(col) {
+  // If there are paragraphs with raw HTML, rebuild and inject
+  const html = getRawHtmlFromParagraphs(col);
+  if (html) {
+    // Remove all <p> child nodes
+    Array.from(col.querySelectorAll('p')).forEach(p => p.remove());
+    // Insert the decoded HTML as real HTML
+    col.innerHTML = html;
+    return;
+  }
+  // Else, fallback to previous logic (for cases with just <div> as a text node)
+  col.querySelectorAll('div').forEach(div => {
+    if (div.childNodes.length === 1 && div.childNodes[0].nodeType === Node.TEXT_NODE) {
+      let raw = div.childNodes[0].textContent.trim();
+      raw = decodeHtmlEntities(raw);
+      if (raw.startsWith('<form') || raw.startsWith('<div') || raw.startsWith('<section')) {
+        div.innerHTML = raw;
+      }
+    }
+  });
+}
+
+// --- Utility: Remove all max-width, centering, etc from form wrappers and form itself ---
+function fixFormColumnWidth(col) {
+  const wrappers = [
+    col.querySelector('.embedded-form-wrapper.form-2col-main'),
+    col.querySelector('.form-2col-main'),
+    col.querySelector('.embedded-form-wrapper'),
+    col.querySelector('form')?.parentElement
+  ].filter(Boolean);
+
+  wrappers.forEach(wrapper => {
+    [
+      ...Array.from(wrapper.classList).filter(cls =>
+        cls.startsWith('max-w-') ||
+        cls.startsWith('w-') ||
+        cls.startsWith('px-') ||
+        cls.startsWith('mx-auto') ||
+        cls.startsWith('my-') ||
+        cls.startsWith('container')
+      ),
+      'mx-auto', 'my-0', 'mx-0', 'px-0', 'px-4', 'px-6', 'px-8', 'px-12', 'container'
+    ].forEach(cls => wrapper.classList.remove(cls));
+    wrapper.style.maxWidth = 'unset';
+    wrapper.style.width = '100%';
+    wrapper.style.margin = '0';
+    wrapper.style.padding = '0';
+    wrapper.style.boxSizing = 'border-box';
+    wrapper.style.display = 'block';
+    wrapper.style.justifyContent = 'unset';
+    wrapper.style.alignItems = 'unset';
+  });
+
+  // Now fix the form itself
+  const form = col.querySelector('form');
+  if (form) {
+    form.style.width = '100%';
+    form.style.maxWidth = 'unset';
+    form.style.margin = '0';
+    form.style.padding = '0';
+    form.style.boxSizing = 'border-box';
+    [
+      ...Array.from(form.classList).filter(cls =>
+        cls.startsWith('max-w-') ||
+        cls.startsWith('w-') ||
+        cls.startsWith('px-') ||
+        cls.startsWith('mx-auto')
+      ),
+      'max-w-4xl', 'max-w-2xl', 'mx-auto', 'px-4', 'px-6', 'px-8', 'px-12'
+    ].forEach(cls => form.classList.remove(cls));
+  }
+}
+
+// --- Utility: Align form and children inside the column ---
 function alignFormInColumn(block) {
-  const formWrapper = block.querySelector('.embedded-form-wrapper.form-2col-main')
-    || block.querySelector('.form-2col-main')
-    || block.querySelector('.embedded-form-wrapper');
+  const formWrapper =
+    block.querySelector('.embedded-form-wrapper.form-2col-main') ||
+    block.querySelector('.form-2col-main') ||
+    block.querySelector('.embedded-form-wrapper');
   if (formWrapper) {
     [
-      'container', 'mx-auto', 'max-w-4xl', 'max-w-3xl', 'max-w-2xl', 'max-w-xl', 'max-w-lg', 'max-w-md', 'max-w-sm',
-      'px-4', 'px-6', 'px-8', 'px-12'
+      ...Array.from(formWrapper.classList).filter(cls =>
+        cls.startsWith('max-w-') ||
+        cls.startsWith('w-') ||
+        cls.startsWith('px-') ||
+        cls.startsWith('mx-auto') ||
+        cls.startsWith('my-') ||
+        cls.startsWith('container')
+      ),
+      'mx-auto', 'my-0', 'mx-0', 'px-0', 'px-4', 'px-6', 'px-8', 'px-12', 'container'
     ].forEach(cls => formWrapper.classList.remove(cls));
     formWrapper.style.maxWidth = 'unset';
     formWrapper.style.margin = '0';
@@ -634,31 +733,38 @@ function alignFormInColumn(block) {
     formWrapper.style.paddingLeft = '0';
     formWrapper.style.paddingRight = '0';
     formWrapper.style.boxSizing = 'border-box';
+    formWrapper.style.display = 'block';
+    formWrapper.style.justifyContent = 'unset';
+    formWrapper.style.alignItems = 'unset';
   }
   const formLeft = formWrapper?.querySelector('.form-left');
   const formRight = formWrapper?.querySelector('.form-right');
-  if (formLeft) {
-    formLeft.style.maxWidth = 'unset';
-    formLeft.style.minWidth = '0';
-    formLeft.style.width = '100%';
-    formLeft.style.margin = '0';
-    formLeft.style.padding = '0';
-    formLeft.style.boxSizing = 'border-box';
-  }
-  if (formRight) {
-    formRight.style.maxWidth = 'unset';
-    formRight.style.minWidth = '0';
-    formRight.style.width = '100%';
-    formRight.style.margin = '0';
-    formRight.style.padding = '0';
-    formRight.style.boxSizing = 'border-box';
-  }
+  [formLeft, formRight].forEach(el => {
+    if (el) {
+      el.style.maxWidth = 'unset';
+      el.style.minWidth = '0';
+      el.style.width = '100%';
+      el.style.margin = '0';
+      el.style.padding = '0';
+      el.style.boxSizing = 'border-box';
+    }
+  });
   const formEl = formWrapper?.querySelector('form');
   if (formEl) {
     formEl.style.width = '100%';
     formEl.style.boxSizing = 'border-box';
     formEl.style.maxWidth = 'unset';
     formEl.style.margin = '0';
+    formEl.style.padding = '0';
+    [
+      ...Array.from(formEl.classList).filter(cls =>
+        cls.startsWith('max-w-') ||
+        cls.startsWith('w-') ||
+        cls.startsWith('px-') ||
+        cls.startsWith('mx-auto')
+      ),
+      'max-w-4xl', 'max-w-2xl', 'mx-auto', 'px-4', 'px-6', 'px-8', 'px-12'
+    ].forEach(cls => formEl.classList.remove(cls));
   }
   if (formWrapper) {
     formWrapper.style.gap = '2.5rem';
@@ -678,60 +784,68 @@ function alignFormInColumn(block) {
   document.head.appendChild(style);
 }
 
-// --- Equalize form field widths and heights for 2-column forms ---
+// --- Utility: Force equal field widths/grid for form fields ---
 function forceEqualFormFields(col) {
-  // Find the form in the column
   const form =
     col.querySelector('form') ||
     col.querySelector('.form-2col-main form') ||
     col.querySelector('.embedded-form-wrapper form');
   if (!form) return;
 
-  // Make the form a 2-column grid
-  form.style.display = 'grid';
-  form.style.gridTemplateColumns = '1fr 1fr';
-  form.style.gap = '1.5rem 1.2rem';
-  form.style.width = '100%';
+  let fieldsWrapper = form.querySelector('.form-fields');
+  let actionsWrapper = form.querySelector('.form-actions');
+  if (!fieldsWrapper) {
+    fieldsWrapper = document.createElement('div');
+    fieldsWrapper.className = 'form-fields';
+    let actions = [];
+    Array.from(form.children).forEach(child => {
+      if (
+        child.matches?.('.form-actions, .form-action, .actions') ||
+        (child.tagName === 'BUTTON' && child.type === 'submit')
+      ) {
+        actions.push(child);
+      } else {
+        fieldsWrapper.appendChild(child);
+      }
+    });
+    form.innerHTML = '';
+    form.appendChild(fieldsWrapper);
+    if (actions.length) {
+      actionsWrapper = document.createElement('div');
+      actionsWrapper.className = 'form-actions';
+      actions.forEach(btn => actionsWrapper.appendChild(btn));
+      form.appendChild(actionsWrapper);
+    }
+  }
 
-  // Select all relevant fields (input, select, .dropdown-label)
+  fieldsWrapper.style.display = 'grid';
+  fieldsWrapper.style.gridTemplateColumns = '1fr 1fr';
+  fieldsWrapper.style.gap = '1.5rem 1.2rem';
+  fieldsWrapper.style.width = '100%';
+
   const fieldSelectors = [
     'input[type="text"]',
     'input[type="email"]',
     'input[type="number"]',
     'input[type="tel"]',
     'select',
+    'textarea',
     '.dropdown-label'
   ].join(',');
-
-  form.querySelectorAll(fieldSelectors).forEach(field => {
+  fieldsWrapper.querySelectorAll(fieldSelectors).forEach(field => {
     field.style.width = '100%';
-    field.style.height = '48px';
-    field.style.minHeight = '48px';
-    field.style.fontSize = '1rem';
-    field.style.borderRadius = '5px';
+    field.style.minWidth = '0';
     field.style.boxSizing = 'border-box';
-    field.style.maxWidth = '100%';
+    if (field.tagName === 'TEXTAREA') {
+      field.style.gridColumn = '1 / span 2';
+      field.style.minHeight = '96px';
+    } else {
+      field.style.height = '48px';
+      field.style.minHeight = '48px';
+    }
     if (field.parentElement) field.parentElement.style.width = '100%';
   });
 
-  // Textareas: always full width, min-height, 2-col span
-  form.querySelectorAll('textarea').forEach(area => {
-    area.style.minHeight = '96px';
-    area.style.fontSize = '1rem';
-    area.style.gridColumn = '1 / span 2';
-    area.style.width = '100%';
-    area.style.maxWidth = '100%';
-    area.style.boxSizing = 'border-box';
-    if (area.parentElement) area.parentElement.style.gridColumn = '1 / span 2';
-  });
-
-  // Labels: block and full width
-  form.querySelectorAll('label').forEach(label => {
-    label.style.width = '100%';
-    label.style.display = 'block';
-  });
-
-  // Make any .form-row-full, .form-checkbox-row, .terms, .form-help, .help-block always span 2 columns
   [
     '.form-row-full',
     '.form-checkbox-row',
@@ -739,150 +853,156 @@ function forceEqualFormFields(col) {
     '.form-help',
     '.help-block'
   ].forEach(sel => {
-    form.querySelectorAll(sel).forEach(el => {
+    fieldsWrapper.querySelectorAll(sel).forEach(el => {
       el.style.gridColumn = '1 / span 2';
       el.style.width = '100%';
     });
   });
 
-  // Responsive: mobile single column
-  const style = document.createElement('style');
-  style.textContent = `
-    @media (max-width: 800px) {
-      .form-2col-main form,
-      .embedded-form-wrapper.form-2col-main form,
-      form {
-        grid-template-columns: 1fr !important;
+  if (!document.getElementById('form-fields-grid-style')) {
+    const style = document.createElement('style');
+    style.id = 'form-fields-grid-style';
+    style.textContent = `
+      @media (max-width: 800px) {
+        .form-fields { grid-template-columns: 1fr !important; }
+        .form-fields textarea { grid-column: 1 / span 1 !important; }
+        .form-fields .form-row-full,
+        .form-fields .form-checkbox-row,
+        .form-fields .terms,
+        .form-fields .form-help,
+        .form-fields .help-block { grid-column: 1 / span 1 !important; }
       }
-      .form-2col-main form textarea,
-      .embedded-form-wrapper.form-2col-main form textarea,
-      form textarea {
-        grid-column: 1 / span 1 !important;
+      .form-actions {
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
       }
-      .form-2col-main form .form-row-full,
-      .form-2col-main form .form-checkbox-row,
-      .form-2col-main form .terms,
-      .form-2col-main form .form-help,
-      .form-2col-main form .help-block,
-      .embedded-form-wrapper.form-2col-main form .form-row-full,
-      .embedded-form-wrapper.form-2col-main form .form-checkbox-row,
-      .embedded-form-wrapper.form-2col-main form .terms,
-      .embedded-form-wrapper.form-2col-main form .form-help,
-      .embedded-form-wrapper.form-2col-main form .help-block,
-      form .form-row-full,
-      form .form-checkbox-row,
-      form .terms,
-      form .form-help,
-      form .help-block {
-        grid-column: 1 / span 1 !important;
+      .form-actions button[type="submit"] {
+        min-width: 200px;
       }
-    }
-  `;
-  document.head.appendChild(style);
+    `;
+    document.head.appendChild(style);
+  }
+
+  // --- Fix for huge dropdown icons ---
+  if (!document.getElementById('fix-dropdown-arrow-style')) {
+    const style = document.createElement('style');
+    style.id = 'fix-dropdown-arrow-style';
+    style.textContent = `
+      select {
+        font-size: 16px !important;
+        background-size: 1.5em auto, 100% !important;
+      }
+      .dropdown-label svg,
+      select + svg,
+      .form-fields svg,
+      .form-fields .dropdown-arrow {
+        width: 1.5em !important;
+        height: 1.5em !important;
+        max-width: 2em !important;
+        max-height: 2em !important;
+      }
+      .form-fields select,
+      .form-fields .dropdown-label,
+      .form-fields .dropdown-label * {
+        font-size: 16px !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
 }
 
 export default function decorate(block) {
-  const sectionDiv = block.closest('.section');
+  block.className = '';
+  block.classList.add('w-full', 'min-h-[350px]', 'columns-block');
 
-  // Unwrap <div> inside <p>
-  block.querySelectorAll('p > div').forEach(div => {
-    div.parentElement.replaceWith(div);
-  });
+  const container = block.querySelector('.container');
+  let columns = container ? Array.from(container.children).filter(el => el.tagName === 'DIV') : [];
+  if (columns.length < 2) columns = Array.from(block.children).filter(el => el.tagName === 'DIV');
 
-  block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
+  // --- Always render raw HTML forms as real DOM before any further logic ---
+  columns.forEach(col => renderRawHtmlForms(col));
 
-  function getColumns(block) {
-    let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
-    if (cols.length === 2 || cols.length === 3) return cols;
-    if (cols.length === 1) {
-      cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
-      if (cols.length === 2 || cols.length === 3) return cols;
+  // --- Robust 2 COL LOGIC: always apply to both columns, even if one is empty ---
+  if (columns.length === 2) {
+    [
+      'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
+      'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
+      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3'
+    ].forEach(cls => {
+      columns[0].classList.remove(cls);
+      columns[1].classList.remove(cls);
+    });
+
+    if (container) {
+      container.className = '';
+      container.classList.add('flex', 'flex-row', 'gap-8', 'w-full', 'columns-row-container');
+    } else {
+      block.classList.add('flex', 'flex-row', 'gap-8', 'columns-row-container');
     }
-    return [];
-  }
 
-  const columns = getColumns(block);
+    columns.forEach(col => {
+      col.classList.remove('items-center', 'items-start', 'items-end');
+      col.classList.add('flex', 'flex-col', 'justify-center', 'w-full', 'h-full');
+    });
 
-  columns.forEach((col) => {
-    // IMAGE HANDLING
-    const img = col.querySelector('img');
-    const imageAspectRatio = 16 / 9;
-    if (img) {
-      img.classList.add('w-full');
-      img.onerror = function () {
-        img.width = this.width;
-        img.height = Math.floor(this.width / imageAspectRatio);
-      };
-    } else if (!block.className.includes('itemscenter')) {
-      // BLOG/NEWS PAGE LAYOUT
-      if (
-        window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/')
-      ) {
-        col.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
-        col.querySelectorAll('h1').forEach((ele) => {
-          ele.classList.add('pb-4');
-        });
-      } else {
-        col.classList.add('h-full');
-        // Promotion form logic: only call loadForm if p > a with title=Form_Type and textContent=promotion
-        const aTags = col.querySelectorAll('p > a');
-        const formType = [...aTags].filter((ele) => ele.title === 'Form_Type');
-        if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
-          if (typeof loadForm === 'function') loadForm(col, aTags);
+    // Ratio logic
+    let ratioClass = '';
+    let parent = block;
+    for (let i = 0; i < 2 && parent; i++) {
+      if (parent.classList.contains('thirtyseventy')) { ratioClass = 'thirtyseventy'; break; }
+      if (parent.classList.contains('seventythirty')) { ratioClass = 'seventythirty'; break; }
+      parent = parent.parentElement;
+    }
+    columns[0].classList.remove('lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3');
+    columns[1].classList.remove('lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3');
+    if (ratioClass === 'thirtyseventy') {
+      columns[0].classList.add('lg:w-1/3');
+      columns[1].classList.add('lg:w-2/3');
+    } else if (ratioClass === 'seventythirty') {
+      columns[0].classList.add('lg:w-2/3');
+      columns[1].classList.add('lg:w-1/3');
+    } else {
+      columns[0].classList.add('lg:w-1/2');
+      columns[1].classList.add('lg:w-1/2');
+    }
+
+    // Image logic for both columns
+    columns.forEach(col => {
+      const img = col.querySelector('img');
+      if (img) {
+        img.removeAttribute('height'); img.removeAttribute('width');
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        img.style.objectFit = 'contain';
+        img.style.display = 'block';
+        if (img.parentElement) {
+          img.parentElement.classList.remove(
+            'columns-img-col', 'order-none', 'relative', 'h-48', 'md:h-[27rem]', 'block',
+            'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:w-1/2', 'lg:mt-56'
+          );
+          img.parentElement.classList.add('columns-img-col');
         }
       }
-    }
-
-    // --- RAW HTML FORM HANDLING ---
-    if (hasRawHtmlForm(col)) {
-      decorateFormBlock(col);
-      setTimeout(() => {
-        alignFormInColumn(col);
-        forceEqualFormFields(col);
-      }, 0);
-    }
-
-    // LIST STYLING
-    const ulEle = col.querySelectorAll('div > ul, p > ul');
-    ulEle.forEach((ele) => {
-      ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
     });
-  });
+  }
 
-  // --- 3 COLUMN LOGIC ---
+  // --- 3 COL LOGIC ---
   if (columns.length === 3) {
-    block.className = '';
-    columns.forEach(col => {
-      col.className = '';
-      col.style.flexBasis = '';
-      col.style.width = '';
-      col.querySelectorAll('*').forEach(child => {
-        child.classList?.remove(
-          'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
-          'order-none', 'block', 'h-48', 'md:h-[27rem]', 'lg:w-1/2', 'columns-img-col',
-          'w-1/2', 'w-1/3', 'w-2/3', 'lg:w-1/3', 'lg:w-2/3', 'container', 'grid', 'flex',
-          'justify-center', 'items-center', 'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3', 'h-full'
-        );
-      });
-    });
-
-    block.classList.add(
-      'w-full', 'min-h-[350px]',
-      'grid', 'gap-x-8', 'gap-y-4',
-      'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
+    (container || block).className = '';
+    (container || block).classList.add(
+      'grid', 'gap-x-8', 'gap-y-4', 'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'w-full', 'columns-grid-container'
     );
     columns.forEach(col => {
+      col.className = '';
       col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
-      if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
       col.querySelectorAll('img').forEach(img => {
         img.removeAttribute('width');
         img.removeAttribute('height');
         img.style.maxWidth = '100%';
-        img.style.width = "auto";
         img.style.width = "100%";
         img.style.height = "auto";
-        img.style.height = "100%";
         img.style.objectFit = 'contain';
         img.style.display = 'block';
       });
@@ -890,165 +1010,36 @@ export default function decorate(block) {
     return;
   }
 
-  // --- 2 COLUMN LOGIC ---
-  if (columns.length === 2) {
-    let firstCol = columns[0];
-    let secondCol = columns[1];
-    [
-      'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
-      'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
-      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3',
-      'flex', 'flex-col', 'justify-center', 'items-center'
-    ].forEach(cls => {
-      firstCol.classList.remove(cls);
-      secondCol.classList.remove(cls);
-    });
-
-    const classes = sectionDiv.className.split(/\s+/).concat(block.className.split(/\s+/));
-    if (classes.includes('thirtyseventy')) {
-      firstCol.classList.add('lg:w-1/3');
-      secondCol.classList.add('lg:w-2/3');
-    } else if (classes.includes('seventythirty')) {
-      firstCol.classList.add('lg:w-2/3');
-      secondCol.classList.add('lg:w-1/3');
-    } else {
-      firstCol.classList.add('lg:w-1/2');
-      secondCol.classList.add('lg:w-1/2');
+  // --- FORMS ---
+  columns.forEach(col => {
+    if (col.querySelector('form')) {
+      fixFormColumnWidth(col);
+      alignFormInColumn(col);
+      forceEqualFormFields(col);
     }
-
-    firstCol.classList.add('w-full', 'h-full');
-    secondCol.classList.add('flex', 'flex-col', 'justify-center', 'w-full', 'h-full');
-
-    const img = secondCol.querySelector('img');
-    if (img) {
-      img.removeAttribute('width');
-      img.removeAttribute('height');
-      img.style.maxWidth = "100%";
-      img.style.width = "auto";
-      img.style.width = "100%";
-      img.style.height = "auto";
-      img.style.height = "100%";
-      img.style.objectFit = "contain";
-      img.style.display = "block";
-    }
-    // No generic form-block decorate here! (handled above, only if raw HTML detected)
-  }
-
-  // -- The rest of your block logic remains unchanged --
-
-  function getColumnCount(block) {
-    const directDivs = Array.from(block.children).filter(el => el.tagName === 'DIV');
-    if (directDivs.length > 1) return directDivs.length;
-    if (directDivs.length === 1) {
-      const innerDivs = Array.from(directDivs[0].children).filter(el => el.tagName === 'DIV');
-      if (innerDivs.length > 1) return innerDivs.length;
-    }
-    return directDivs.length;
-  }
-  const colCount = getColumnCount(block);
-  block.classList.add(`columns-${colCount}-cols`);
-
-  block.querySelectorAll('h2').forEach((ele) => {
-    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
-    if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
-    else ele.classList.add('text-danahergray-900');
   });
 
-  block.querySelectorAll('.button-container > a').forEach((ele) => {
+  // --- LIST, HEADINGS, BUTTONS, ETC (unchanged, add your logic here if needed) ---
+  block.querySelectorAll('div > ul, p > ul').forEach(ele => {
+    ele.classList.add('text-base', 'list-disc', 'pl-10', 'space-y-2', 'text-danahergray-700');
+  });
+  block.querySelectorAll('h2').forEach(ele => {
+    ele.classList.add('my-0', 'lg:my-4', 'font-medium', 'text-4xl2', 'inline-flex', 'leading-10');
+    if (block.closest('.section')?.className.includes('text-white')) ele.classList.add('text-white');
+    else ele.classList.add('text-danahergray-900');
+  });
+  block.querySelectorAll('.button-container > a').forEach(ele => {
     ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
   });
 
-  if (block.className.includes('bottom-border-right')) {
-    block.querySelectorAll('div > div:nth-child(2) > p > a').forEach((ele, index, arr) => {
-      if (index === arr.length - 1) ele.parentElement?.classList.add('border-0');
-      else ele.parentElement?.classList.add(...'border-b border-solid border-black my-6'.split(' '));
-    });
-  }
-
-  if (block.className.includes('bg-color-right')) {
-    const divEl = block.querySelector('div > div:nth-child(2)');
-    divEl.classList.add('bg-danaherred-800', 'pb-10');
-    divEl.querySelectorAll('p').forEach((ele, index, arr) => {
-      if (!ele.className.includes('.button-container')) ele.classList.add(...'py-2 px-6 leading-7 text-base !text-white'.split(' '));
-      ele.classList.add('href-text');
-      if (index === arr.length - 1) {
-        ele.querySelector('a')?.classList.add(...'btn-outline-trending-brand text-lg font-medium rounded-full px-6 py-3 !no-underline'.split(' '));
-      }
-    });
-    divEl.querySelectorAll('h2, h3, h4').forEach((ele) => {
-      ele.classList.add(...'py-2 px-6 !text-white'.split(' '));
-    });
-  }
-
-  block.querySelectorAll('div > ul, p > ul').forEach((ele) => {
-    ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
-  });
-
-  block.querySelectorAll('p > span.icon').forEach((element) => {
-    element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
-    const svg = element.querySelector('svg');
-    if (svg) svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
-  });
-
-  if (block.className.includes('columns-2-cols')) {
-    if (
-      window.location.pathname.includes('/us/en/blog/') ||
-      window.location.pathname.includes('/us/en/news/') ||
-      window.location.pathname.includes('/us/en/news-eds/')
-    ) {
-      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
-    } else {
-      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
-    }
-    block.querySelectorAll('p').forEach((element) => {
-      if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
-        element.parentElement.classList.add('picdiv');
-      }
-    });
-  } else if (block.className.includes('columns-3-cols')) {
-    block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
-    block.querySelector('h4')?.classList.add('font-bold');
-  }
-
-  block.querySelectorAll('p > a[title="link"]').forEach((item) => {
-    item.parentElement.classList.add('link', 'pb-8');
-    item.textContent += ' ->';
-    item.classList.add(...'text-sm font-bold'.split(' '));
-    if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
-    else item.classList.add('text-danaherpurple-500');
-  });
-
-  block.querySelectorAll('picture').forEach((pic) => {
-    const picWrapper = pic.closest('div');
-    if (picWrapper && picWrapper.children.length === 1) {
-      if (
-        window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/') ||
-        window.location.pathname.includes('/us/en/news-eds/')
-      ) {
-        picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
-        pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
-      } else {
-        picWrapper.classList.add('columns-img-col', 'order-none');
-        const seventythirtyEl = picWrapper.parentElement
-          ?.parentElement?.parentElement?.parentElement;
-        if (seventythirtyEl?.querySelector('img')) {
-          pic.querySelector('img').classList.add('block', 'w-1/2');
-        } else {
-          pic.querySelector('img').classList.add('block');
-        }
-      }
-    }
-  });
-
-  block.querySelectorAll('.embed').forEach((embed) => {
+  // --- EMBEDS ---
+  block.querySelectorAll('.embed').forEach(embed => {
     let url = '';
     if (embed.dataset && embed.dataset.url) {
       url = embed.dataset.url.trim();
     } else {
       url = embed.textContent.trim();
     }
-
     if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
       const match = url.match(/vimeo\.com\/(\d+)/);
       if (match) url = `https://player.vimeo.com/video/${match[1]}`;
@@ -1061,7 +1052,6 @@ export default function decorate(block) {
       const match = url.match(/youtu\.be\/([^?&]+)/);
       if (match) url = `https://www.youtube.com/embed/${match[1]}`;
     }
-
     if (url.startsWith('http')) {
       if (embed.tagName.toLowerCase() === 'p') {
         const div = document.createElement('div');
