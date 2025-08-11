@@ -4,6 +4,17 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 /**
+ * Helper to choose the first non-empty value from JSON or fallback to getMetadata.
+ * @param {string|undefined|null} jsonVal
+ * @param {string|undefined|null} metaVal
+ * @returns {string}
+ */
+function fallback(jsonVal, metaVal) {
+  // Use jsonVal if it's defined and not just whitespace, otherwise use metaVal, otherwise empty string
+  return (typeof jsonVal === 'string' && jsonVal.trim()) ? jsonVal : (metaVal ?? '');
+}
+
+/**
  * Decorates the block with article info from JSON or fallback to page metadata.
  * @param {HTMLElement} block - The block to decorate.
  * @param {Object} [json] - Optional JSON data. If not provided, will fallback to getMetadata().
@@ -11,17 +22,14 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 export default function decorate(block, json = null) {
   block.innerHTML = '';
 
-  // Prefer explicit JSON, fallback to getMetadata for backwards compatibility.
-  const data = json || {
-    authorName: getMetadata('authorname') || '',
-    authorJobTitle: getMetadata('authortitle') || '',
-    authorImage: getMetadata('authorimage') || '',
-    publishDate: getMetadata('publishdate') || '',
-    readingTime: getMetadata('readingtime') || '',
+  // Merge json and getMetadata for each property (JSON value preferred if present)
+  const data = {
+    authorName: fallback(json?.authorName, getMetadata('authorname')),
+    authorJobTitle: fallback(json?.authorJobTitle, getMetadata('authortitle')),
+    authorImage: fallback(json?.authorImage, getMetadata('authorimage')),
+    publishDate: fallback(json?.publishDate, getMetadata('publishdate')),
+    readingTime: fallback(json?.readingTime, getMetadata('readingtime')),
   };
-
-  // Debug: Show what data was received
-  // console.log('Article Info Data:', data);
 
   const { authorName, authorJobTitle, publishDate, readingTime, authorImage } = data;
   const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
