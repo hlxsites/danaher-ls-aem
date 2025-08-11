@@ -330,65 +330,66 @@ const transformTagsList = (main, document) => {
  * @param {HTMLElement} main - The main content container.
  * @returns {Array<object>} Array of columns block JSON objects.
  */
-  const transformColumns = (main) => {
-  const results = [];
+  /**
+ * Transform a .columns.block DOM node into JSON model with image, title, and text for each column.
+ *
+ * @param {HTMLElement} columnsBlock - A .columns.block DOM element.
+ * @returns {object} JSON model for the columns block.
+ */
+const transformColumnsBlockToJSON = (columnsBlock) => {
+  // Detect direct children or wrapped columns
+  let columnDivs = Array.from(columnsBlock.children).filter(el => el.tagName === 'DIV');
+  if (columnDivs.length === 1) {
+    columnDivs = Array.from(columnDivs[0].children).filter(el => el.tagName === 'DIV');
+  }
+  const rows = columnDivs.length.toString();
 
-  main.querySelectorAll('div.columns.block').forEach((columnsBlock) => {
-    // Detect block-level classes for ratio, etc.
-    const blockClasses = columnsBlock.className
-      .split(' ')
-      .filter((c) => c !== 'block' && c !== 'columns');
+  // Classes logic for 2-column layouts
+  let classes = [];
+  if (rows === "2") {
+    const classList = [
+      ...columnsBlock.classList,
+      ...(columnsBlock.closest('.section')?.classList || [])
+    ];
+    if (classList.includes('seventythirty')) classes.push('seventythirty');
+    else if (classList.includes('thirtyseventy')) classes.push('thirtyseventy');
+    else classes.push('fiftyfifty');
+  }
 
-    // Universal detection: columns can be direct children or wrapped
-    let columnDivs = Array.from(columnsBlock.children).filter(el => el.tagName === 'DIV');
-    if (columnDivs.length === 1) {
-      columnDivs = Array.from(columnDivs[0].children).filter(el => el.tagName === 'DIV');
+  // Extract image, title, and text for each column
+  const columns = columnDivs.map(col => {
+    // Clone column to avoid modifying the DOM
+    const colClone = col.cloneNode(true);
+
+    // Extract title (first h1-h6)
+    let title = undefined;
+    const titleEl = colClone.querySelector('h1,h2,h3,h4,h5,h6');
+    if (titleEl) {
+      title = titleEl.textContent.trim();
+      titleEl.remove();
     }
-    const rows = columnDivs.length.toString();
 
-    // Classes logic for 2-column layout
-    let classes = [];
-    if (rows === "2") {
-      const classList = [
-        ...columnsBlock.classList,
-        ...(columnsBlock.closest('.section')?.classList || [])
-      ];
-      if (classList.includes('seventythirty')) classes.push('seventythirty');
-      else if (classList.includes('thirtyseventy')) classes.push('thirtyseventy');
-      else classes.push('fiftyfifty');
+    // Extract image (first img)
+    let image = undefined;
+    const imgEl = colClone.querySelector('img');
+    if (imgEl) {
+      image = imgEl.getAttribute('src');
+      imgEl.remove();
     }
 
-    // Extract column content: text, image, title (if available)
-    const columns = columnDivs.map(col => {
-      // Try to extract title (if any)
-      const titleEl = col.querySelector('h1,h2,h3,h4,h5,h6');
-      const title = titleEl ? titleEl.textContent.trim() : undefined;
-      // Try to extract image (if any)
-      const imgEl = col.querySelector('img');
-      const image = imgEl ? imgEl.getAttribute('src') : undefined;
-      // Remove title and image from text if present
-      if (titleEl) titleEl.remove();
-      if (imgEl) imgEl.remove();
-      // Remaining HTML as text
-      const text = col.innerHTML.trim();
-      // Build column object (only include non-empty fields)
-      const colObj = {};
-      if (title) colObj.title = title;
-      if (image) colObj.image = image;
-      if (text) colObj.text = text;
-      return colObj;
-    });
+    // Remaining HTML as text (preserves structure for rich text)
+    const text = colClone.innerHTML.trim();
 
-    // Compose JSON matching your schema
-    results.push({
-      id: 'columns',
-      rows,
-      classes,
-      columns
-    });
+    return { image, title, text };
   });
 
-  return results;
+  // Compose output
+  return {
+    id: "columns",
+    rows,
+    classes,
+    columns
+  };
 }
 
 
@@ -899,7 +900,7 @@ export default {
 
     // cleanUpHeadings(main, document);
     transformHero(main, document);
-    transformColumns(main);
+    transformColumnsBlockToJSON(main);
     transformPromo(main, document);
     transformQuote(main, document);
     transformFastFacts(main, document);
