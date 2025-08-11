@@ -61,7 +61,7 @@
   "filters": [
     {
       "id": "article-info",
-      "components": []
+      "components": ["  "]
     }
   ]
 }
