@@ -203,6 +203,27 @@
     "id": "article-info",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "authorname",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "authortitle",
+        "label": "Author Title",
+        "value": ""
+      },
+      {
+        "component": "image",
+        "valueType": "string",
+        "name": "authorimage",
+        "label": "Author Image",
+        "value": ""
+      },
+      {
         "component": "date-time",
         "valueType": "date",
         "name": "publishdate",
@@ -213,7 +234,7 @@
         "component": "number",
         "valueType": "number",
         "name": "timetoread",
-        "label": "Reading Time",
+        "label": "Reading Time (in minutes)",
         "value": ""
       }
     ]
@@ -692,21 +713,6 @@
         "condition": {
           "field": "rows",
           "equals": "2"
-        }
-      },
-      {
-        "title": "Embed",
-        "id": "embed",
-        "model": {
-          "fields": [
-            {
-              "component": "embed",
-              "name": "embedCode",
-              "label": "Embed Code",
-              "valueType": "string",
-              "value": ""
-            }
-          ]
         }
       }
     ]
