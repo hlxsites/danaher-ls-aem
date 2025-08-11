@@ -59,7 +59,8 @@
       "components": [
         "text",
         "image",
-        "title"
+        "title",
+        "article-info"
       ]
     }
   ]

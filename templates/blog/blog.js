@@ -52,17 +52,17 @@ export default async function buildAutoBlocks() {
   }
 
   section.prepend(
-    // buildBlock('social-media', { elems: [] }),
+    buildBlock('social-media', { elems: [] }),
     buildBlock('columns', columnElements),
-    // buildBlock('article-info', { elems: [] }),
+    buildBlock('article-info', { elems: [] }),
   );
 
-  // const additionalContentSection = document.createElement('div');
-  // // additionalContentSection.append(
-  // //   buildBlock('tags-list', { elems: [] }),
-  // //   buildBlock('related-articles', { elems: [] }),
-  // // );
-  // section.after(additionalContentSection);
+  const additionalContentSection = document.createElement('div');
+  additionalContentSection.append(
+    buildBlock('tags-list', { elems: [] }),
+    buildBlock('related-articles', { elems: [] }),
+  );
+  section.after(additionalContentSection);
 
   buildArticleSchema();
 
