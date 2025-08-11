@@ -4,29 +4,75 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 /**
- * Helper to pick the first non-empty value from JSON or metadata.
- * @param {string|undefined|null} jsonVal
- * @param {string|undefined|null} metaVal
+ * Helper to extract values from JSON field array as per Universal Editor/EDS pattern.
+ * @param {Array} fields
+ * @param {string} name
  * @returns {string}
  */
-function fallback(jsonVal, metaVal) {
-  return (typeof jsonVal === 'string' && jsonVal.trim()) ? jsonVal : (metaVal ?? '');
+function getFieldValue(fields, name) {
+  if (!Array.isArray(fields)) return '';
+  const field = fields.find(f => f.name === name);
+  return field && typeof field.value === 'string' ? field.value : '';
 }
 
 /**
- * Decorates the article info block, using JSON properties if present, or falling back to page metadata.
- * @param {HTMLElement} block - The block element to decorate.
- * @param {Object} [json] - Optional JSON data.
+ * Helper to prioritize JSON model/fields, then JSON flat properties, then metadata.
+ * Accepts either a flat JSON object, or an EDS/Universal Editor model JSON structure.
  */
+function extractArticleInfo(json) {
+  // Case 1: EDS/Universal Editor structure
+  if (json && json.models && Array.isArray(json.models) && json.models[0]?.fields) {
+    const fields = json.models[0].fields;
+    return {
+      authorName: getFieldValue(fields, 'authorName'),
+      authorJobTitle: getFieldValue(fields, 'authorTitle'),
+      authorImage: getFieldValue(fields, 'image'),
+      authorImageAlt: getFieldValue(fields, 'imageAlt'),
+      articleOpco: getFieldValue(fields, 'articleOpco'),
+      publishDate: getFieldValue(fields, 'publishDate'),
+      readingTime: getFieldValue(fields, 'readingTime'),
+    };
+  }
+  // Case 2: Flat JSON
+  if (json && typeof json === 'object') {
+    return {
+      authorName: json.authorName || '',
+      authorJobTitle: json.authorJobTitle || json.authorTitle || '',
+      authorImage: json.authorImage || json.image || '',
+      authorImageAlt: json.authorImageAlt || json.imageAlt || '',
+      articleOpco: json.articleOpco || '',
+      publishDate: json.publishDate || '',
+      readingTime: json.readingTime || '',
+    };
+  }
+  // Case 3: No JSON, fallback to empty
+  return {};
+}
+
+/**
+ * Helper to return the first non-empty value in the fallback chain.
+ */
+function fallback(...args) {
+  for (const val of args) {
+    if (typeof val === 'string' && val.trim()) return val;
+  }
+  return '';
+}
+
 export default function decorate(block, json = null) {
   block.innerHTML = '';
 
-  // Use JSON properties if present, otherwise fallback to getMetadata
-  const authorName = fallback(json?.authorName, getMetadata('authorname'));
-  const authorJobTitle = fallback(json?.authorJobTitle, getMetadata('authortitle'));
-  const publishDate = fallback(json?.publishDate, getMetadata('publishdate'));
-  const readingTime = fallback(json?.readingTime, getMetadata('readingtime'));
-  const authorImage = fallback(json?.authorImage, getMetadata('authorimage'));
+  // Extract values from JSON if available (works for EDS/Universal Editor or flat JSON)
+  const jsonInfo = extractArticleInfo(json);
+
+  // Fallback to metadata if not present in JSON
+  const authorName = fallback(jsonInfo.authorName, getMetadata('authorname'));
+  const authorJobTitle = fallback(jsonInfo.authorJobTitle, getMetadata('authortitle'));
+  const authorImage = fallback(jsonInfo.authorImage, getMetadata('authorimage'));
+  const authorImageAlt = fallback(jsonInfo.authorImageAlt, authorName, getMetadata('authorimagealt'), 'Author image');
+  const articleOpco = fallback(jsonInfo.articleOpco, getMetadata('articleopco'));
+  const publishDate = fallback(jsonInfo.publishDate, getMetadata('publishdate'));
+  const readingTime = fallback(jsonInfo.readingTime, getMetadata('readingtime'));
 
   const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
 
@@ -37,6 +83,13 @@ export default function decorate(block, json = null) {
         { class: 'max-w-4xl mx-auto' },
         div(
           { class: 'items-center flex justify-start my-4 w-full col-span-2' },
+          authorImage
+            ? img({
+                class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7',
+                src: authorImage,
+                alt: authorImageAlt,
+              })
+            : '',
           div(
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
@@ -62,25 +115,7 @@ export default function decorate(block, json = null) {
     ),
   );
 
-  if (authorImage) {
-    const items = block.querySelector('.items-center');
-    if (items) {
-      items.insertBefore(
-        img({
-          class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7',
-          src: authorImage,
-          alt: authorName,
-        }),
-        items.firstChild
-      );
-      const imageEl = block.querySelector('.articleinfo')?.querySelector('.items-center')?.querySelector('img');
-      if (imageEl) {
-        imageEl.remove();
-        block.querySelector('.articleinfo')?.firstChild?.prepend(imageEl);
-      }
-    }
-  }
-
+  // Insert SVG icon for reading time
   const readingIcon = block.querySelector('.reading-icon');
   if (readingIcon) {
     readingIcon.innerHTML = `
