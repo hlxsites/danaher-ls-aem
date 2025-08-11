@@ -27,8 +27,15 @@ export default function decorate(block) {
   const paragraphs = infoBlock.querySelectorAll('p');
   const values = Array.from(paragraphs).map((p) => p.textContent.trim());
 
-  // Adjust indices if paragraph order changes
-  const [authorName, authorJobTitle, authorImage, publishDate, articleOpco, readingTime] = values;
+  // Assign IDs and values
+  const [
+    authorName,
+    authorJobTitle,
+    authorImage,
+    publishDate,
+    articleOpco,
+    readingTime,
+  ] = values;
 
   // Format publish date
   let date = publishDate ? new Date(publishDate) : new Date();
@@ -38,44 +45,55 @@ export default function decorate(block) {
     day: '2-digit',
   });
 
-  // Build article info block in the previous style
+  // Build article info block in the previous style, assign IDs
   block.innerHTML = '';
   block.append(
     div(
-      { class: 'articleinfo' },
+      { class: 'articleinfo', id: 'articleinfo' },
       div(
-        { class: 'max-w-4xl mx-auto' },
+        { class: 'max-w-4xl mx-auto', id: 'articleinfo-container' },
         div(
-          { class: 'items-center flex justify-start my-4 w-full col-span-2' },
+          {
+            class: 'items-center flex justify-start my-4 w-full col-span-2',
+            id: 'author-section',
+          },
           authorImage
             ? img({
                 class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7',
                 src: authorImage,
                 alt: authorName,
+                id: 'authorimage',
               })
             : '',
           div(
-            { class: 'space-y-1 text-lg leading-6' },
+            { class: 'space-y-1 text-lg leading-6', id: 'author-details' },
             div(
-              { class: 'text-danaherblack-500 font-medium' },
+              { class: 'text-danaherblack-500 font-medium', id: 'authorname' },
               authorName
             ),
             div(
-              { class: 'text-sm text-danaherblack-500 w-full' },
+              { class: 'text-sm text-danaherblack-500 w-full', id: 'authorjobtitle' },
               authorJobTitle
             ),
           ),
         ),
         div(
-          { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
-          formattedDate,
-          input({ id: 'publishdate', class: 'hidden', value: publishDate || '' }),
+          {
+            class:
+              'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500',
+            id: 'publishdate-section',
+          },
+          span({ id: 'publishdate' }, formattedDate),
+          input({ id: 'publishdate-hidden', class: 'hidden', value: publishDate || '' }),
         ),
         div(
-          { class: 'items-center flex justify-start col-span-1 my-4' },
-          div({ class: 'reading-icon' }),
+          {
+            class: 'items-center flex justify-start col-span-1 my-4',
+            id: 'readingtime-section',
+          },
+          div({ class: 'reading-icon', id: 'reading-icon' }),
           div(
-            { class: 'text-sm text-danaherblack-500 pl-1' },
+            { class: 'text-sm text-danaherblack-500 pl-1', id: 'readingtime' },
             span(
               { id: 'timetoread' },
               readingTime ? `${readingTime} Mins` : ''
@@ -87,7 +105,7 @@ export default function decorate(block) {
   );
 
   // Insert SVG icon for reading time
-  const readingIcon = block.querySelector('.reading-icon');
+  const readingIcon = block.querySelector('#reading-icon');
   if (readingIcon) {
     readingIcon.innerHTML = `
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
