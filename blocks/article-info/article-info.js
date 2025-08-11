@@ -1,17 +1,16 @@
 import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
-// decorate(block, json) -- where json is an object with article info properties
-export default function decorate(block, json = {}) {
+export default function decorate(block) {
   block.innerHTML = '';
-  // Replace getMetadata with values from json
-  // const authorName = json.authorName || '';
-  // const authorJobTitle = json.authorJobTitle || '';
-  // const publishDate = json.publishDate || '';
-  // const readingTime = json.readingTime || '';
-  // const authorImage = json.authorImage || '';
-  // const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
+  const authorName = getMetadata('authorname');
+  const authorJobTitle = getMetadata('authortitle');
+  const publishDate = getMetadata('publishdate');
+  const readingTime = getMetadata('readingtime');
+  const authorImage = getMetadata('authorimage');
+  const expectedPublishFormat = new Date(publishDate);
 
   block.append(
     div(
@@ -28,9 +27,7 @@ export default function decorate(block, json = {}) {
         ),
         div(
           { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
-          expectedPublishFormat
-            ? `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`
-            : '',
+          `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
           input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
         div(
@@ -38,7 +35,7 @@ export default function decorate(block, json = {}) {
           div({ class: 'reading-icon' }),
           div(
             { class: 'text-sm text-danaherblack-500 pl-1' },
-            span({ id: 'timetoread' }, readingTime ? `${readingTime} Mins` : ''),
+            span({ id: 'timetoread' }, `${readingTime} Mins`),
           ),
         ),
       ),
