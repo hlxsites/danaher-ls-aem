@@ -53,7 +53,7 @@ export default async function buildAutoBlocks() {
 
   section.prepend(
     // buildBlock('social-media', { elems: [] }),
-    // buildBlock('columns', columnElements),
+    buildBlock('columns', columnElements),
     // buildBlock('article-info', { elems: [] }),
   );
 
