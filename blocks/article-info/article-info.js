@@ -3,14 +3,14 @@ import {
 } from '../../scripts/dom-builder.js';
 
 // decorate(block, json) -- where json is an object with article info properties
-export default function decorate(block, json) {
+export default function decorate(block, json = {}) {
   block.innerHTML = '';
   // Replace getMetadata with values from json
-  const authorName = json.authorname || '';
-  const authorJobTitle = json.authortitle || '';
-  const publishDate = json.publishdate || '';
-  const readingTime = json.readingtime || '';
-  const authorImage = json.authorimage || '';
+  const authorName = json.authorName || '';
+  const authorJobTitle = json.authorJobTitle || '';
+  const publishDate = json.publishDate || '';
+  const readingTime = json.readingTime || '';
+  const authorImage = json.authorImage || '';
   const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
 
   block.append(
