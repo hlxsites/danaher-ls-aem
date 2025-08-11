@@ -112,7 +112,7 @@ export default async function decorate(block) {
       contentObject.loginSubHeading,
     ),
   );
-  
+
   const loginForm = form(
     {
       id: 'loginForm',

@@ -299,23 +299,39 @@ export const validateBasket = async (validateData) => {
  Function to submit Order
   :::::::::::::::::::::::::::
 */
-export const submitOrder = async (basketId) => {
+export const submitOrder = async (basketId, paymentMethod) => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    Accept: 'application/vnd.intershop.order.v1+json',
-    'Authentication-Token': authenticationToken.access_token,
-  });
-  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
-  const data = JSON.stringify({
-    basket: basketId,
-    termsAndConditionsAccepted: true,
-  });
   try {
-    const response = await postApiData(url, data, defaultHeader);
+    let response = '';
+    if (paymentMethod === 'invoice') {
+      const defaultHeader = new Headers({
+        'Content-Type': 'Application/json',
+        Accept: 'application/vnd.intershop.order.v1+json',
+        'Authentication-Token': authenticationToken.access_token,
+      });
+      const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+      const data = JSON.stringify({
+        basket: basketId,
+        termsAndConditionsAccepted: true,
+      });
+      response = await postApiData(url, data, defaultHeader);
+    }
+    if (paymentMethod === 'stripe') {
+      const defaultHeader = new Headers({
+        'Content-Type': 'Application/json',
+        Accept: 'application/vnd.intershop.order.v1+json',
+        'Authentication-Token': authenticationToken.access_token,
+      });
+      const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+      const data = JSON.stringify({
+        basket: basketId,
+        termsAndConditionsAccepted: true,
+      });
+      response = await postApiData(url, data, defaultHeader);
+    }
     if (response?.status === 'success') {
       sessionStorage.setItem(
         'orderSubmitDetails',
@@ -1350,7 +1366,7 @@ export const changeStep = async (step) => {
         if (creatingInvoiceNumber?.status === 'success') {
           const getBasketForOrder = await getBasketDetails();
           if (getBasketForOrder?.status === 'success') {
-            const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+            const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
             if (submittingOrder?.data?.data?.id) {
               sessionStorage.removeItem('submittedOrderData');
               sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
@@ -1363,7 +1379,7 @@ export const changeStep = async (step) => {
       } else {
         const getBasketForOrder = await getBasketDetails();
         if (getBasketForOrder?.status === 'success') {
-          const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+          const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
           if (submittingOrder?.data?.data?.id) {
             sessionStorage.removeItem('submittedOrderData');
             sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
@@ -1373,6 +1389,22 @@ export const changeStep = async (step) => {
           }
         }
       }
+    }
+
+    if (getSelectedPaymentMethod?.value === 'stripe') {
+      const formToSubmit = document.querySelector('#newStripeCardForm');
+      const formData = new FormData(formToSubmit);
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      const newStripeCardFormResponse = await submitForm(
+        '#newStripeCardForm',
+        'customers/-/myAddresses',
+        'POST',
+        formObject,
+      );
     }
   }
   if (activeTab && activeTab === 'shippingMethods') {

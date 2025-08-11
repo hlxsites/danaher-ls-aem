@@ -154,7 +154,6 @@ export async function userLogin(type, data = {}) {
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
-
         const basketData = await getBasketDetails();
 
         if (basketData.status === 'success') {

@@ -1,6 +1,9 @@
-import { buildInputElement, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import {
-  h2, h5, div, p, span,
+  buildInputElement, removePreLoader, showNotification, showPreLoader,
+} from '../../scripts/common-utils.js';
+import {
+  h2, h5, div, p, span, form,
+  h3,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { putApiData } from '../../scripts/api-utils.js';
@@ -45,7 +48,7 @@ const paymentModule = async () => {
       id: 'paymentMethodsWrapper',
       class: 'flex flex-col w-full hidden',
     });
-    let cardsWrapper = div({ class: 'hidden' });
+    let stripeCardsWrapper = div({ class: 'hidden' });
     let invoiceWrapper = div({ class: 'hidden' });
     const allPaymentMethods = await getPaymentMethods();
 
@@ -65,97 +68,183 @@ const paymentModule = async () => {
     invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
     invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
 
-    const cardsContainer = div(
+    const stripeCardsContainer = div(
       {
-        class: 'flex-col flex p-6 w-full items-start bg-checkout',
+        id: 'stripeCardsContainer',
+        class: 'flex-col flex p-6 w-full items-start bg-checkout hidden',
       },
     );
-    const savedCardsWrapper = div(
+    const savedStripeCardsWrapper = div(
       {
         class: 'saved-cards-wrapper',
       },
     );
 
-    const newCardsWrapper = div(
+    const newStripeCardsWrapper = div(
       {
-        class: 'no-cards-wrapper flex-1 flex-col flex  gap-2 w-full items-start bg-checkout',
+        class: 'no-cards-wrapper flex-1 flex-col flex  gap-6 w-full items-start bg-checkout',
       },
-      buildInputElement(
-        'sameAsShipping',
-        'Same as shipping Address',
-        'radio',
-        'sameAsShipping',
-        true,
-        false,
-        'mt-6',
-        'sameAsShipping',
-      ),
-      buildInputElement(
-        'sameAsBilling',
-        'Same as bill to Address',
-        'radio',
-        'sameAsBilling',
-        true,
-        false,
-        'mt-6',
-        'sameAsBilling',
-      ),
-      buildInputElement(
-        'newAddress',
-        'New Address',
-        'radio',
-        'newAddress',
-        true,
-        false,
-        'mt-6',
-        'newAddress',
+      div(
+        {
+          class: 'flex flex-col w-full gap-2 items-start',
+        },
+        buildInputElement(
+          'sameAsShipping',
+          'Same as shipping Address',
+          'radio',
+          'stripeAddress',
+          true,
+          false,
+          'mt-6',
+          'sameAsShipping',
+        ),
+        buildInputElement(
+          'sameAsBilling',
+          'Same as bill to Address',
+          'radio',
+          'stripeAddress',
+          true,
+          false,
+          'mt-6',
+          'sameAsBilling',
+        ),
+        buildInputElement(
+          'newAddress',
+          'New Address',
+          'radio',
+          'stripeAddress',
+          true,
+          false,
+          'mt-6',
+          'newAddress',
+        ),
       ),
     );
-    newCardsWrapper?.querySelectorAll('label')?.forEach((item) => {
+
+    const newStripeCardForm = form(
+      {
+        id: 'newStripeCardForm',
+        class:
+        'text-sm w-full bg-white box-border flex flex-col gap-5 p-6 items-start flex flex-col',
+        action: '',
+        method: 'POST',
+      },
+      h3(
+        {
+          class: 'text-2xl font-medium text-black leading-[48px] m-0 p-0',
+        },
+        'Credit Card Information',
+      ),
+      buildInputElement(
+        'name',
+        'Name on Card',
+        'text',
+        'name',
+        false,
+        true,
+        'name',
+        '',
+      ),
+      buildInputElement(
+        'cardNumber',
+        'Card Number',
+        'text',
+        'cardNumber',
+        false,
+        true,
+        'cardNumber',
+        '',
+      ),
+      div(
+        {
+          class: 'w-full flex gap-4',
+        },
+        buildInputElement(
+          'expirationDate',
+          'Expiration Date',
+          'text',
+          'expirationDate',
+          false,
+          true,
+          'expirationDate',
+          '',
+        ),
+        buildInputElement(
+          'cardCvc',
+          'CVC',
+          'text',
+          'cardCvc',
+          false,
+          true,
+          'cardCvc',
+          '',
+        ),
+      ),
+    );
+
+    newStripeCardsWrapper?.querySelectorAll('label')?.forEach((item) => {
       item?.classList?.remove('font-semibold');
       item?.classList?.remove?.classList?.add('font-normal');
     });
 
-    cardsContainer.append(newCardsWrapper);
-    cardsContainer.append(savedCardsWrapper);
+    newStripeCardForm.querySelectorAll('.field-wrapper')?.forEach((fld) => {
+      fld.className = '';
+      const inputField = fld?.querySelector('input');
+      const inputLabel = fld?.querySelector('label');
+      if (inputField.id !== 'expirationDate' && inputField.id !== 'cardCvc') {
+        fld.classList.add('w-full');
+      }
+      if (inputField.id === 'expirationDate') {
+        fld.classList.add('w-[70%]');
+      }
+      if (inputField.id === 'cardCvc') {
+        fld.classList.add('w-[30%]');
+      }
+      inputField?.classList?.add('outline-none');
+      inputLabel?.classList?.remove('font-semibold');
+      inputLabel?.classList?.add('font-normal');
+    });
+    newStripeCardsWrapper.append(newStripeCardForm);
+    stripeCardsContainer.append(newStripeCardsWrapper);
+    stripeCardsContainer.append(savedStripeCardsWrapper);
     allPaymentMethods?.data?.forEach((pm, ind) => {
-      if (pm?.displayName === 'Stripe') {
-        cardsWrapper.innerHTML = '';
-        cardsWrapper = div(
+      if (pm?.id === 'STRIPE_PAYMENT') {
+        stripeCardsWrapper.innerHTML = '';
+        stripeCardsWrapper = div(
           {
             id: `paymentMethod${pm?.displayName}`,
             class:
-              `border-solid border-gray-300 flex-col gap-2 border-2  ${ind > 0 ? 'border-t-0 ' : ''}  items-start`,
+              `border-solid border-gray-300 flex flex-col gap-3 items-start p-4 border-2  items-start  ${ind > 0 ? 'border-t-0 ' : ''}`,
           },
           div(
             {
-              class: 'flex p-4 justify-between',
+              class: 'flex justify-between w-full',
             },
             div(
               {
                 class: 'border-solid border-gray-300 flex gap-2 flex-none items-center',
               },
               buildInputElement(
-                'creditCard',
+                'stripe',
                 pm?.displayName,
                 'radio',
                 'paymentMethod',
                 true,
                 false,
                 'mt-6',
-                'creditCard',
+                'stripe',
               ),
             ),
             span({
-              class: 'icon flex-none icon-payment-cards w-[176px]',
+              class: 'icon flex-none icon-payment-cards max-w-[115px] w-full',
             }),
           ),
         );
 
-        cardsWrapper.append(cardsContainer);
-        paymentMethodsWrapper?.append(cardsWrapper);
+        stripeCardsWrapper.append(stripeCardsContainer);
+        paymentMethodsWrapper?.append(stripeCardsWrapper);
       }
-      if (pm?.displayName === 'Invoice') {
+      if (pm?.id === 'Invoice') {
         const invoiceNumberWrapper = div(
           {
             id: 'invoiceNumberWrapper',
@@ -212,16 +301,19 @@ const paymentModule = async () => {
           }
           inpu?.classList.add('text-base', 'font-semibold');
         });
-      decorateIcons(cardsWrapper);
+      decorateIcons(stripeCardsWrapper);
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
         setTimeout(async () => {
           c.preventDefault();
           const eventTarget = c.target;
           const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
+          const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
           if (!eventTarget.checked) {
+            // handle invoice payment method
             if (eventTarget?.id === 'invoice') {
               showPreLoader();
-              getInvoiceNumberWrapper?.classList.remove('hidden');
+              getInvoiceNumberWrapper?.classList?.remove('hidden');
+              getStripeCardsWrapper?.classList?.add('hidden');
               const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
               const defaultHeaders = new Headers();
               defaultHeaders.append('Content-Type', 'Application/json');
@@ -230,11 +322,35 @@ const paymentModule = async () => {
                 authenticationToken.access_token,
               );
               const data = JSON.stringify({ paymentInstrument: 'Invoice' });
-              await putApiData(url, data, defaultHeaders);
+              const setupInvoice = await putApiData(url, data, defaultHeaders);
+              if (setupInvoice?.status === 'success') {
+                showNotification('Invoice set as payment Method for this Order.', 'success');
+              }
+              if (setupInvoice?.status === 'error') {
+                showNotification('Error setting Invoice as payment Method for this Order.', 'error');
+              }
             }
-            if (eventTarget?.id === 'creditCard') {
+            // handle stripe payment method
+            if (eventTarget?.id === 'stripe') {
               showPreLoader();
+              getStripeCardsWrapper?.classList?.remove('hidden');
               getInvoiceNumberWrapper?.classList.add('hidden');
+              // setup intent when user select the stripe as payment method
+              const url = `${baseURL}baskets/current/setup-intent`;
+              const defaultHeaders = new Headers();
+              defaultHeaders.append('Content-Type', 'Application/json');
+              defaultHeaders.append(
+                'authentication-token',
+                authenticationToken.access_token,
+              );
+              const data = JSON.stringify({ });
+              const setuptIntent = await putApiData(url, data, defaultHeaders);
+              if (setuptIntent.status === 'success') {
+                showNotification('Stripe set as payment Method for this Order.', 'success');
+              }
+              if (setuptIntent.status === 'error') {
+                showNotification('Error setting Stripe set as payment Method for this Order.', 'error');
+              }
             }
             c.target.checked = true;
           } else {

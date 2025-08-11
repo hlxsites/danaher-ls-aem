@@ -9,6 +9,7 @@ import {
 import {
   getStoreConfigurations,
   removePreLoader,
+  showNotification,
   showPreLoader,
 } from '../../scripts/common-utils.js';
 import { cartItem } from '../cartlanding/cartItem.js';
@@ -28,7 +29,7 @@ async function setShippingNotesOnBlur() {
   if (getShippingNotesField) {
     showPreLoader();
     if (getShippingNotesField.value.trim() === '') {
-      getShippingNotesField.classList.add('border-red-500');
+      showNotification('Please update Order Note.', 'error');
       removePreLoader();
       return false;
     }
@@ -68,9 +69,6 @@ async function setShippingNotesOnBlur() {
  if basket has the shipping notes attribute and has value. Update the shipping notes
  :::::::::::::
 */
-        if (getShippingNotesField.classList.contains('border-red-500')) {
-          getShippingNotesField.classList.remove('border-red-500');
-        }
         const shippingNotesPayload = {
           name: 'GroupShippingNote',
           value: getShippingNotesField.value,
@@ -81,15 +79,11 @@ async function setShippingNotesOnBlur() {
         );
         if (updateShippingNotesResponse.status === 'error') {
           removePreLoader();
-          getShippingNotesField.classList.add('border-red-500');
+          showNotification('Error updating order note.', 'error');
           return false;
         }
         if (updateShippingNotesResponse.status === 'success') {
-          getShippingNotesField.classList.add('border-green-500', 'border-2');
-          setTimeout(() => {
-            getShippingNotesField.classList.remove('border-green-500');
-            getShippingNotesField.classList.remove('border-2');
-          }, 1500);
+          showNotification('Order note updated successfully.', 'success');
           await updateBasketDetails();
           removePreLoader();
         }
@@ -100,9 +94,7 @@ async function setShippingNotesOnBlur() {
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
-      if (getShippingNotesField.classList.contains('border-red-500')) {
-        getShippingNotesField.classList.remove('border-red-500');
-      }
+
       const shippingNotesPayload = {
         name: 'GroupShippingNote',
         value: getShippingNotesField.value,
@@ -112,21 +104,17 @@ async function setShippingNotesOnBlur() {
         shippingNotesPayload,
       );
       if (setShippingNotesResponse.status === 'error') {
-        getShippingNotesField.classList.add('border-red-500');
+        showNotification('Error adding Order Note', 'error');
       }
       if (setShippingNotesResponse.status === 'success') {
-        getShippingNotesField.classList.add('border-green-500');
-        setTimeout(() => {
-          getShippingNotesField.classList.remove('border-green-500');
-        }, 3000);
+        showNotification('Order note added successfully.', 'success');
         await updateBasketDetails();
         removePreLoader();
       }
     }
-    // return false;
-  } else {
-    // return false;
+    return {};
   }
+  return {};
 }
 
 /*

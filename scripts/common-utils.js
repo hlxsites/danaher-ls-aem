@@ -8,6 +8,7 @@ import {
   option,
   img,
   p,
+  h3,
 } from './dom-builder.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
@@ -66,6 +67,11 @@ export function removePreLoader() {
     mainPreLoader?.classList.add('hidden');
   });
 }
+/*
+::::::::::::::::::::::
+function to create preloader
+:::::::::::::::::::::::
+*/
 const generatePreloader = div(
   {
     class: 'hidden',
@@ -75,6 +81,74 @@ const generatePreloader = div(
 );
 const getMainDiv = document.querySelector('main');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
+
+/*
+ ::::::::::::::::::::
+function to create notification container
+ :::::::::::::::::
+ */
+export function notificationContainer() {
+  return div(
+    {
+      class:
+        'notification-container',
+      id: 'notificationContainer',
+    },
+    h3({
+      class: 'text-2xl p-0 m-0',
+    }),
+    p({
+      class: 'text-base',
+    }),
+  );
+}
+/*
+::::::::::::::::::::::
+function to append notification container
+:::::::::::::::::::::::
+*/
+const generateNotification = div(
+  {
+    class: 'fixed top-[170px] right-4 max-w-xs bg-blue-600 text-white p-4 rounded shadow-lg z-50 transform -translate-y-full transition-transform duration-1000 ease-in-out hidden',
+    id: 'notificationWrapper',
+  },
+  notificationContainer(),
+);
+getMainDiv.insertAdjacentElement('afterbegin', generateNotification);
+
+/*
+::::::::::::::::::::::
+function to show / hide notification whenever required
+:::::::::::::::::::::::
+*/
+export function showNotification(content, type) {
+  const notificationWrapper = document.querySelector('#notificationWrapper');
+  const notificationTitle = notificationWrapper.querySelector('h3');
+  const notificationContent = notificationWrapper.querySelector('p');
+  if (notificationTitle) {
+    notificationTitle.style.color = type === 'success' ? '#027243' : '#AC2734';
+    notificationTitle.textContent = type.toUpperCase();
+  }
+  if (notificationContent) {
+    notificationContent.textContent = content;
+    notificationWrapper.style.color = type === 'success' ? '#027243' : '#AC2734';
+  }
+  if (type === 'success') {
+    notificationWrapper.querySelector('h3').textContent = 'Success';
+    notificationWrapper.style.backgroundColor = '#F0FFEF';
+    notificationWrapper.style.color = '#027243';
+  }
+  if (type === 'error') {
+    notificationWrapper.style.backgroundColor = '#FFEFEF';
+  }
+
+  notificationWrapper.style.display = 'block';
+  notificationWrapper?.classList?.remove('-translate-y-full');
+  setTimeout(() => {
+    notificationWrapper.classList.add('-translate-y-full');
+    notificationWrapper.style.display = 'none';
+  }, 3000);
+}
 /*
  ::::::::::::::::::::::::
  utility function to close the modal...
