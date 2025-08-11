@@ -72,8 +72,8 @@ if (document.readyState === "loading") {
   ::::::::::::::
   *
   */
-export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands'];
-export const includeStageEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products.html', 'products/antibodies', 'products/assay-kits', 'products-eds.html', 'e-buy', 'products-eds/brands', 'extraction-kits', 'dna-extraction', 'rna-extraction', 'liquid-handlers', 'capillary-electrophoresis-systems', '2d-3d-cell-culture-systems'];
+export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products/2d-3d-cell-culture-systems', 'products/antobodies', 'capillary-electrophoresis-systems', 'cell-lines-lysates', 'extraction-kits'];
+export const includeStageEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products.html', 'products/antibodies', 'products/assay-kits', 'products-eds.html', 'e-buy', 'products-eds/brands', 'extraction-kits', 'dna-extraction', 'rna-extraction', 'liquid-handlers', 'capillary-electrophoresis-systems', '2d-3d-cell-culture-systems', 'cell-lines-lysates', 'biochemicals', 'cell-counters-analyzers', 'cellular-imaging-systems'];
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
