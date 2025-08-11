@@ -23,35 +23,35 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "authorname",
+          "name": "authorName",
           "label": "Author Name",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "authortitle",
+          "name": "authorJobTitle",
           "label": "Author Title",
           "value": ""
         },
         {
           "component": "image",
           "valueType": "string",
-          "name": "authorimage",
+          "name": "authorImage",
           "label": "Author Image",
           "value": ""
         },
         {
           "component": "date-time",
           "valueType": "date",
-          "name": "publishdate",
+          "name": "publishDate",
           "label": "Publish Date",
           "value": ""
         },
         {
           "component": "number",
           "valueType": "number",
-          "name": "timetoread",
+          "name": "readingTime",
           "label": "Reading Time (in minutes)",
           "value": ""
         }
