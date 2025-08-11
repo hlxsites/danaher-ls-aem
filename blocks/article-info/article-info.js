@@ -2,68 +2,16 @@ import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
 
-// Get value from fields array by name
-function getFieldValue(fields, name) {
-  if (!Array.isArray(fields)) return '';
-  const field = fields.find(f => f.name === name);
-  return field && typeof field.value === 'string' ? field.value : '';
-}
-
-// Fallback utility (for flat JSON or fields array only)
-function fallback(...args) {
-  for (const v of args) {
-    if (typeof v === 'string' && v.trim()) return v;
-  }
-  return '';
-}
-
-// Main decorate
 export default function decorate(block, json = null) {
-  console.log('decorate block:', block);
-  console.log('decorate called with json:', json);
   block.innerHTML = '';
 
-  // Extract from EDS/Universal Editor JSON
-  let fields = null;
-  if (json && json.models && Array.isArray(json.models) && json.models[0]?.fields) {
-    fields = json.models[0].fields;
-  }
+  const authorName = json?.authorName || '';
+  const authorJobTitle = json?.authorTitle || '';
+  const publishDate = json?.publishDate || '';
+  const readingTime = json?.readingTime || '';
+  const authorImage = json?.image || '';
+  const articleOpco = json?.articleOpco || '';
 
-  // Extract all possible values, only from JSON (no metadata fallback)
-  const authorName = fallback(
-    fields && getFieldValue(fields, 'authorName'),
-    json?.authorName
-  );
-  const authorJobTitle = fallback(
-    fields && getFieldValue(fields, 'authorTitle'),
-    json?.authorJobTitle || json?.authorTitle
-  );
-  const publishDate = fallback(
-    fields && getFieldValue(fields, 'publishDate'),
-    json?.publishDate
-  );
-  const readingTime = fallback(
-    fields && getFieldValue(fields, 'readingTime'),
-    json?.readingTime
-  );
-  const authorImage = fallback(
-    fields && getFieldValue(fields, 'image'),
-    json?.authorImage || json?.image
-  );
-  const articleOpco = fallback(
-    fields && getFieldValue(fields, 'articleOpco'),
-    json?.articleOpco
-  );
-
-  // Debugging output
-  console.log("authorName", authorName);
-  console.log("authorJobTitle", authorJobTitle);
-  console.log("publishDate", publishDate);
-  console.log("readingTime", readingTime);
-  console.log("authorImage", authorImage);
-  console.log("articleOpco", articleOpco);
-
-  // Format date
   let formattedDate = '';
   if (publishDate) {
     const d = new Date(publishDate);
@@ -86,12 +34,13 @@ export default function decorate(block, json = null) {
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
+            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
           ),
         ),
         div(
           { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
           formattedDate,
-          input({ id: 'publishdate', class: 'hidden', value: publishDate || '' }),
+          input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
         div(
           { class: 'items-center flex justify-start col-span-1 my-4' },
@@ -111,8 +60,14 @@ export default function decorate(block, json = null) {
     </svg>
   `;
 
-  // The rest of your DOM logic
-  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
+  // Optional: move elements around as in original logic
+  const toBeRemoved = [
+    'social-media-wrapper',
+    'columns-wrapper',
+    'article-info-wrapper',
+    'tags-list-wrapper',
+    'related-articles-wrapper',
+  ];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
   if (sectionEl) {
     sectionEl.classList.remove('article-info-container');
