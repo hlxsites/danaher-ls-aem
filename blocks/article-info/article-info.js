@@ -1,21 +1,16 @@
 import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
-// import { getMetadata } from '../../scripts/lib-franklin.js';
-import { getJSONData } from '../../blocks/article-info';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block.innerHTML = '';
-  // const authorName = getMetadata('authorname');
-  // const authorJobTitle = getMetadata('authortitle');
-  // const publishDate = getMetadata('publishdate');
-  // const readingTime = getMetadata('readingtime');
-  // const authorImage = getMetadata('authorimage');
-  // const authorName = getJSONData('authorname');
-  const authorJobTitle = getJSONData('authortitle');
-  const publishDate = getJSONData('publishdate');
-  const readingTime = getJSONData('readingtime');
-  const authorImage = getJSONData('authorimage');
+  const authorName = getMetadata('authorname') || '';
+  const authorJobTitle = getMetadata('authortitle') || '';
+  const articleOpco = getMetadata('brand') || '';
+  const publishDate = getMetadata('publishdate') || '';
+  const readingTime = getMetadata('readingtime') || '';
+  const authorImage = getMetadata('authorimage') || '';
   const expectedPublishFormat = new Date(publishDate);
 
   block.append(
@@ -29,6 +24,10 @@ export default function decorate(block) {
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
+          ),
+          div(
+            { class: 'space-y-1 text-lg leading-6' },
+            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
           ),
         ),
         div(
