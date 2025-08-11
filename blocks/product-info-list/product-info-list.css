@@ -83,6 +83,10 @@
   font-weight: 500 !important
 }
 
+.product-info-list-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
 .product-info-list-wrapper :is(.font-extralight) {
   font-weight: 200
 }

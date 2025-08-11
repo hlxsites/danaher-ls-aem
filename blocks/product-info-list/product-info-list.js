@@ -24,6 +24,13 @@ export default async function decorate(block) {
         ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
       }
     });
+    tempDiv.querySelectorAll('li')?.forEach((liEle) => {
+      if (liEle) {
+        liEle.querySelectorAll('strong').forEach((strong) => {
+          strong.classList.add('font-bold');
+        });
+      }
+    });
     tempDiv?.querySelectorAll('a')?.forEach((aEle) => {
       if (aEle) {
         aEle.classList.add(...'!text-black !underline !decoration-danaherpurple-500 hover:bg-danaherpurple-500 hover:!text-white'.split(' '));
