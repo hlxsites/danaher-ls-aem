@@ -1,24 +1,22 @@
 import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
+// import { getMetadata } from '../../scripts/lib-franklin.js';
+import { getJSONData } from '../../blocks/article-info';
 
-export default function decorate(block, json = null) {
+export default function decorate(block) {
   block.innerHTML = '';
-
-  const authorName = json?.authorName || '';
-  const authorJobTitle = json?.authorTitle || '';
-  const publishDate = json?.publishDate || '';
-  const readingTime = json?.readingTime || '';
-  const authorImage = json?.image || '';
-  const articleOpco = json?.articleOpco || '';
-
-  let formattedDate = '';
-  if (publishDate) {
-    const d = new Date(publishDate);
-    if (!isNaN(d)) {
-      formattedDate = `${d.getDate()} ${d.toLocaleString('default', { month: 'long' })}, ${d.getFullYear()}`;
-    }
-  }
+  // const authorName = getMetadata('authorname');
+  // const authorJobTitle = getMetadata('authortitle');
+  // const publishDate = getMetadata('publishdate');
+  // const readingTime = getMetadata('readingtime');
+  // const authorImage = getMetadata('authorimage');
+  // const authorName = getJSONData('authorname');
+  const authorJobTitle = getJSONData('authortitle');
+  const publishDate = getJSONData('publishdate');
+  const readingTime = getJSONData('readingtime');
+  const authorImage = getJSONData('authorimage');
+  const expectedPublishFormat = new Date(publishDate);
 
   block.append(
     div(
@@ -27,19 +25,15 @@ export default function decorate(block, json = null) {
         { class: 'max-w-4xl mx-auto' },
         div(
           { class: 'items-center flex justify-start my-4 w-full col-span-2' },
-          authorImage
-            ? img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7', src: authorImage, alt: authorName })
-            : '',
           div(
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
-            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
           ),
         ),
         div(
           { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
-          formattedDate,
+          `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
           input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
         div(
@@ -47,12 +41,20 @@ export default function decorate(block, json = null) {
           div({ class: 'reading-icon' }),
           div(
             { class: 'text-sm text-danaherblack-500 pl-1' },
-            span({ id: 'timetoread' }, readingTime ? `${readingTime} Mins` : ''),
+            span({ id: 'timetoread' }, `${readingTime} Mins`),
           ),
         ),
       ),
     ),
   );
+
+  if (authorImage) {
+    const items = block.querySelector('.items-center');
+    items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7', src: authorImage, alt: authorName }), items.firstChild);
+    const imageEl = block.querySelector('.articleinfo')?.querySelector('.items-center')?.querySelector('img');
+    imageEl.remove();
+    block.querySelector('.articleinfo')?.firstChild?.prepend(imageEl);
+  }
 
   block.querySelector('.reading-icon').innerHTML = `
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,29 +62,20 @@ export default function decorate(block, json = null) {
     </svg>
   `;
 
-  // Optional: move elements around as in original logic
-  const toBeRemoved = [
-    'social-media-wrapper',
-    'columns-wrapper',
-    'article-info-wrapper',
-    'tags-list-wrapper',
-    'related-articles-wrapper',
-  ];
+  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
-  if (sectionEl) {
-    sectionEl.classList.remove('article-info-container');
-    const leftSideElements = div({ class: 'mt-4' });
-    Array.from(sectionEl.children).forEach((element) => {
-      if (!toBeRemoved.includes(element.classList[0])) {
-        leftSideElements.append(element);
-      }
-    });
+  sectionEl.classList.remove('article-info-container');
+  const leftSideElements = div({ class: 'mt-4' });
+  Array.from(sectionEl.children).forEach((element) => {
+    if (!toBeRemoved.includes(element.classList[0])) {
+      leftSideElements.append(element);
+    }
+  });
 
-    const divEl = div(
-      { class: 'article-info-container' },
-      sectionEl.querySelector('.article-info-wrapper'),
-      leftSideElements,
-    );
-    sectionEl.querySelector('.columns-wrapper')?.after(divEl);
-  }
+  const divEl = div(
+    { class: 'article-info-container' },
+    sectionEl.querySelector('.article-info-wrapper'),
+    leftSideElements,
+  );
+  sectionEl.querySelector('.columns-wrapper')?.after(divEl);
 }
