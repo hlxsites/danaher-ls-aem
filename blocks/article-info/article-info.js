@@ -6,12 +6,12 @@ import {
 export default function decorate(block, json = {}) {
   block.innerHTML = '';
   // Replace getMetadata with values from json
-  const authorName = json.authorName || '';
-  const authorJobTitle = json.authorJobTitle || '';
-  const publishDate = json.publishDate || '';
-  const readingTime = json.readingTime || '';
-  const authorImage = json.authorImage || '';
-  const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
+  // const authorName = json.authorName || '';
+  // const authorJobTitle = json.authorJobTitle || '';
+  // const publishDate = json.publishDate || '';
+  // const readingTime = json.readingTime || '';
+  // const authorImage = json.authorImage || '';
+  // const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
 
   block.append(
     div(
