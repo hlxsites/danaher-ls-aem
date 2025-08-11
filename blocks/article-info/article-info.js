@@ -1,16 +1,17 @@
 import {
   div, input, span, img,
 } from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
 
-export default function decorate(block) {
+// decorate(block, json) -- where json is an object with article info properties
+export default function decorate(block, json = {}) {
   block.innerHTML = '';
-  const authorName = getMetadata('authorname');
-  const authorJobTitle = getMetadata('authortitle');
-  const publishDate = getMetadata('publishdate');
-  const readingTime = getMetadata('readingtime');
-  const authorImage = getMetadata('authorimage');
-  const expectedPublishFormat = new Date(publishDate);
+  // Replace getMetadata with values from json
+  const authorName = json.authorName || '';
+  const authorJobTitle = json.authorJobTitle || '';
+  const publishDate = json.publishDate || '';
+  const readingTime = json.readingTime || '';
+  const authorImage = json.authorImage || '';
+  const expectedPublishFormat = publishDate ? new Date(publishDate) : null;
 
   block.append(
     div(
@@ -27,7 +28,9 @@ export default function decorate(block) {
         ),
         div(
           { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
-          `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
+          expectedPublishFormat
+            ? `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`
+            : '',
           input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
         div(
@@ -35,7 +38,7 @@ export default function decorate(block) {
           div({ class: 'reading-icon' }),
           div(
             { class: 'text-sm text-danaherblack-500 pl-1' },
-            span({ id: 'timetoread' }, `${readingTime} Mins`),
+            span({ id: 'timetoread' }, readingTime ? `${readingTime} Mins` : ''),
           ),
         ),
       ),
