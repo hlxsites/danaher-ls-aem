@@ -86,7 +86,10 @@
   {
     "id": "card-list",
     "components": [
-      ""
+      "articleCard",
+      "applicationCard",
+      "libraryCard",
+      "labCard"
     ]
   },
   {
@@ -106,11 +109,8 @@
     "components": [
       "text",
       "image",
-      "button",
       "title",
-      "article-info-new",
-      "embed",
-      "form"
+      "article-info"
     ]
   },
   {
@@ -176,6 +176,14 @@
     ]
   },
   {
+    "id": "recent-articles",
+    "components": []
+  },
+  {
+    "id": "related-articles",
+    "components": []
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -194,11 +202,19 @@
     ]
   },
   {
+    "id": "social-media",
+    "components": []
+  },
+  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",
       "tiny-carousel-item"
     ]
+  },
+  {
+    "id": "tags-list",
+    "components": []
   },
   {
     "id": "tiny-carousel",

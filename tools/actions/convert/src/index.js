@@ -235,8 +235,8 @@ function skipConverter(path) {
     if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true;
   }
 
-  if (path.includes('/us/en/blog-eds/')) return true;
-  if (path.includes('/us/en/news-eds/')) return true;
+  if (path.includes('/us/en/blog/')) return true;
+  if (path.includes('/us/en/news/')) return true;
   if (path.includes('/us/en/videos-eds/')) return true;
   // skip the converter for pages like **/products/*/topics/**
   const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
