@@ -6,6 +6,10 @@
   display: block
 }
 
+.pdp-resources-wrapper :is(.table) {
+  display: table
+}
+
 .pdp-resources-wrapper :is(.border-b) {
   border-bottom-width: 1px
 }
