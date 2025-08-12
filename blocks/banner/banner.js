@@ -2,20 +2,15 @@ export default function decorate(block) {
   const main = document.querySelector('main');
   if (!main) return;
 
-  // --- Move any banner blocks that are direct children of main into the top of the first section ---
+  // Move banner blocks as first child of section
   let section = main.querySelector('section');
   if (!section) {
-    // If no section exists, create one and append to main
     section = document.createElement('section');
     main.appendChild(section);
   }
-
-  // Find any banner blocks that are direct children of main (not inside section)
   const bannerBlocks = Array.from(main.children).filter(
     (el) => el.classList && el.classList.contains('banner-block') && el.parentElement === main
   );
-
-  // Also include the current block if it's not already in section
   if (
     block.classList &&
     block.classList.contains('banner-block') &&
@@ -24,13 +19,11 @@ export default function decorate(block) {
   ) {
     bannerBlocks.push(block);
   }
-
-  // Move each banner block into the first section (at the top)
   bannerBlocks.forEach((banner) => {
     section.insertBefore(banner, section.firstChild);
   });
 
-  // --- Banner block decoration logic ---
+  // Banner block styles
   const content = block.querySelector('div');
   const isBlogPath = window.location.pathname.startsWith('/us/en/blog');
   const isNewsPath = window.location.pathname.startsWith('/us/en/news');
@@ -45,36 +38,58 @@ export default function decorate(block) {
     );
   }
 
-  // Common layout styles
-  content.parentNode.classList.add('px-6');
-  content.classList.add(
-    ...'relative min-h-[13rem] h-max w-full flex justify-start items-center'.split(' ')
-  );
+  // Remove vertical padding from wrappers and reduce top margin on banner
+  content.parentNode.classList.remove('px-6', 'py-4', 'py-2', 'py-0');
+  content.parentNode.style.padding = '0';
+  content.parentNode.style.marginTop = '0'; // Make sure no parent margin
+  content.classList.add('relative', 'h-auto', 'w-full', 'flex', 'justify-start', 'items-start');
+  content.classList.remove('py-4', 'py-2', 'py-0');
+  content.style.minHeight = '0';
+  content.style.padding = '0';
+  content.style.marginTop = '0';
 
+  // Tighter inner content, left align, remove vertical spacing
   const innerContent = content?.querySelector('div');
-  const contentH1 = innerContent?.querySelector('h1');
-  const contentH2 = innerContent?.querySelector('h2');
+  if (innerContent) {
+    innerContent.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'text-left');
+    innerContent.classList.remove('p-4', 'p-2', 'p-0');
+    innerContent.style.padding = '0';
+    innerContent.style.textAlign = 'left';
+    innerContent.style.marginTop = '0';
+  }
 
-  // Conditional text color
-  if (isBlogPath || isNewsPath) {
-    innerContent?.classList.add(
-      ...'relative max-w-7xl mx-auto w-full p-4 text-black'.split(' ')
-    );
-    contentH1?.classList.add(
-      ...'!text-4xl font-extrabold tracking-tight text-black'.split(' ')
-    );
-    contentH2?.classList.add(
-      ...'w-full md:w-3/4 !text-lg font-normal tracking-tight text-black'.split(' ')
-    );
-  } else {
-    innerContent?.classList.add(
-      ...'relative max-w-7xl mx-auto w-full p-4 text-white'.split(' ')
-    );
-    contentH1?.classList.add(
-      ...'!text-4xl font-extrabold tracking-tight text-white'.split(' ')
-    );
-    contentH2?.classList.add(
-      ...'w-full md:w-3/4 !text-lg font-normal tracking-tight text-white'.split(' ')
-    );
+  // Headline (h1): only margin-bottom for spacing, left align, no top margin
+  const contentH1 = innerContent?.querySelector('h1');
+  if (contentH1) {
+    contentH1.style.marginTop = '0';
+    contentH1.style.marginBottom = '2rem'; // minimal spacing to next row, adjust if needed
+    contentH1.style.marginLeft = '0';
+    contentH1.style.marginRight = '0';
+    contentH1.style.padding = '0';
+    contentH1.style.textAlign = 'left';
+    contentH1.classList.add('!text-4xl', 'font-extrabold', 'tracking-tight', 'text-left');
+    if (isBlogPath || isNewsPath) {
+      contentH1.classList.add('text-black');
+      contentH1.classList.remove('text-white');
+    } else {
+      contentH1.classList.add('text-white');
+      contentH1.classList.remove('text-black');
+    }
+  }
+
+  // Subtitle (h2): Remove top margin, left align
+  const contentH2 = innerContent?.querySelector('h2');
+  if (contentH2) {
+    contentH2.style.margin = '0';
+    contentH2.style.padding = '0';
+    contentH2.style.textAlign = 'left';
+    contentH2.classList.add('w-full', 'md:w-3/4', '!text-lg', 'font-normal', 'tracking-tight', 'text-left');
+    if (isBlogPath || isNewsPath) {
+      contentH2.classList.add('text-black');
+      contentH2.classList.remove('text-white');
+    } else {
+      contentH2.classList.add('text-white');
+      contentH2.classList.remove('text-black');
+    }
   }
 }
