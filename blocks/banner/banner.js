@@ -1,5 +1,16 @@
 export default function decorate(block) {
   const main = document.querySelector('main');
+  
+  // Find or create a section under main
+  let section = main.querySelector('section');
+  if (!section) {
+    section = document.createElement('section');
+    main.appendChild(section);
+  }
+
+  // Move the banner block inside section
+  section.appendChild(block);
+
   const content = block.querySelector('div');
   const isBlogPath = window.location.pathname.startsWith('/us/en/blog');
   const isNewsPath = window.location.pathname.startsWith('/us/en/news');
@@ -29,6 +40,4 @@ export default function decorate(block) {
     contentH1?.classList.add(...'!text-4xl font-extrabold tracking-tight text-white'.split(' '));
     contentH2?.classList.add(...'w-full md:w-3/4 !text-lg font-normal tracking-tight text-white'.split(' '));
   }
-
-  main.parentNode.insertBefore(block, main);
 }
