@@ -221,7 +221,7 @@ function skipConverter(path) {
 
   */
   // this condition for production
-  if ((path.includes('us/en/products/brands') || path.includes('us/en/products/2d-3d-cell-culture-systems') || path.includes('us/en/products/antobodies') || path.includes('us/en/products/capillary-electrophoresis-systems') || path.includes('us/en/products/cell-lines-lysates') || path.includes('us/en/products/extraction-kits')) && !path.includes('/topics-jck1/')) {
+  if ((path.includes('us/en/products/brands') || path.includes('us/en/products/2d-3d-cell-culture-systems') || path.includes('us/en/products/antibodies') || path.includes('us/en/products/capillary-electrophoresis-systems') || path.includes('us/en/products/cell-lines-lysates') || path.includes('us/en/products/extraction-kits')) && !path.includes('/topics-jck1/')) {
     return true;
   }
   // This condition check is for stage
