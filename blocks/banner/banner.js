@@ -92,4 +92,10 @@ export default function decorate(block) {
       contentH2.classList.remove('text-black');
     }
   }
+const buttonContainer = document.querySelector('.button-container');
+if (buttonContainer) {
+  buttonContainer.remove();
+}
+
+
 }
