@@ -62,7 +62,7 @@ export default function decorate(block) {
   const contentH1 = innerContent?.querySelector('h1');
   if (contentH1) {
     contentH1.style.marginTop = '0';
-    contentH1.style.marginBottom = '0.5rem'; // minimal spacing to next row, adjust if needed
+    contentH1.style.marginBottom = '2rem'; // minimal spacing to next row, adjust if needed
     contentH1.style.marginLeft = '0';
     contentH1.style.marginRight = '0';
     contentH1.style.padding = '0';
