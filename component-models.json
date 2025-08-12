@@ -367,18 +367,84 @@
     "id": "banner",
     "fields": [
       {
+        "component": "select",
+        "valueType": "string",
+        "name": "bannerTag",
+        "value": "",
+        "label": "Banner Tag",
+        "options": [
+          {
+            "label": "H1",
+            "value": "h1"
+          },
+          {
+            "label": "H2",
+            "value": "h2"
+          },
+          {
+            "label": "H3",
+            "value": "h3"
+          },
+          {
+            "label": "H4",
+            "value": "h4"
+          },
+          {
+            "label": "H5",
+            "value": "h5"
+          },
+          {
+            "label": "H6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "banner",
         "value": "",
-        "label": "Banner"
+        "label": "Banner Text"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "descriptionTag",
+        "value": "",
+        "label": "Description Tag",
+        "options": [
+          {
+            "label": "H1",
+            "value": "h1"
+          },
+          {
+            "label": "H2",
+            "value": "h2"
+          },
+          {
+            "label": "H3",
+            "value": "h3"
+          },
+          {
+            "label": "H4",
+            "value": "h4"
+          },
+          {
+            "label": "H5",
+            "value": "h5"
+          },
+          {
+            "label": "H6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "description",
         "value": "",
-        "label": "Description"
+        "label": "Description Text"
       }
     ]
   },
