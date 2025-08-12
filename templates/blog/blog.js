@@ -102,7 +102,17 @@ export default async function buildAutoBlocks() {
   );
 
   section.prepend(
-    buildBlock('columns', columnElements),
+  buildBlock('columns', [
+    {
+      image: document.createElement('img'), // Or a real <img> node
+      title: document.createElement('h1'),
+      // text: document.createElement('p'),
+    }
+  ])
+);
+
+  section.prepend(
+    //buildBlock('columns', columnElements),
     buildBlock('article-info', { elems: [] }),
   );
 
