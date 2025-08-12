@@ -11,12 +11,10 @@ export default function decorate(block) {
   const bannerBlocks = Array.from(main.children).filter(
     (el) => el.classList && el.classList.contains('banner-block') && el.parentElement === main
   );
-  if (
-    block.classList &&
-    block.classList.contains('banner-block') &&
-    block.parentElement === main &&
-    !bannerBlocks.includes(block)
-  ) {
+  if (block.classList && block.classList.contains('banner-block') && block.parentElement === main 
+      && !bannerBlocks.includes(block)
+  ) 
+  {
     bannerBlocks.push(block);
   }
   bannerBlocks.forEach((banner) => {
@@ -91,5 +89,9 @@ export default function decorate(block) {
       contentH2.classList.add('text-white');
       contentH2.classList.remove('text-black');
     }
+  }
+  const buttonContainer = document.querySelector('.button-container');
+    if (buttonContainer) {
+    buttonContainer.remove();
   }
 }
