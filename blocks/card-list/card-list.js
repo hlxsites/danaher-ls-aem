@@ -8,7 +8,6 @@ import createLabCard from './newLabCard.js';
 import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
-import { buildItemListSchema } from '../../scripts/schema.js';
 
 let tagName = '';
 switch (getMetadata('template')) {
