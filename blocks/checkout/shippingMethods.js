@@ -29,8 +29,8 @@ async function setShippingNotesOnBlur() {
   if (getShippingNotesField) {
     showPreLoader();
     if (getShippingNotesField.value.trim() === '') {
-      showNotification('Please update Order Note.', 'error');
       removePreLoader();
+      showNotification('Please update Order Note.', 'error');
       return false;
     }
     /*
@@ -104,7 +104,9 @@ async function setShippingNotesOnBlur() {
         shippingNotesPayload,
       );
       if (setShippingNotesResponse.status === 'error') {
+        removePreLoader();
         showNotification('Error adding Order Note', 'error');
+        return false;
       }
       if (setShippingNotesResponse.status === 'success') {
         showNotification('Order note added successfully.', 'success');
