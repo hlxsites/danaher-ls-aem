@@ -367,6 +367,13 @@
     "id": "banner",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "banner",
+        "value": "",
+        "label": "Banner Text"
+      },
+      {
         "component": "select",
         "valueType": "string",
         "name": "bannerTag",
@@ -402,9 +409,9 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "banner",
+        "name": "description",
         "value": "",
-        "label": "Banner Text"
+        "label": "Description Text"
       },
       {
         "component": "select",
@@ -438,13 +445,6 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "description",
-        "value": "",
-        "label": "Description Text"
       }
     ]
   },
