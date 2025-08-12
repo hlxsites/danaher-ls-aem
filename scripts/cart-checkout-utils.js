@@ -15,7 +15,9 @@ import {
   h5,
   button,
 } from './dom-builder.js';
-import { postApiData, getApiData, patchApiData } from './api-utils.js';
+import {
+  postApiData, getApiData, patchApiData, putApiData,
+} from './api-utils.js';
 import { decorateIcons } from './lib-franklin.js';
 import {
   buildInputElement,
@@ -23,13 +25,13 @@ import {
   submitForm,
   getStates,
   getCountries,
-  removeObjectKey,
   removePreLoader,
   showPreLoader,
   closeUtilityModal,
   capitalizeFirstLetter,
   getStoreConfigurations,
   createModal,
+  showNotification,
 } from './common-utils.js';
 // base url for the intershop api calls
 import {
@@ -53,7 +55,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   //     div(
   //       {
   //         class:
-  //           "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //           "w-24 justify-start text-black text-base font-semibold font-['TWK_Lausanne_Pan'] leading-snug",
   //       },
   //       img({
   //         class: "",
@@ -63,7 +65,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   //     div(
   //       {
   //         class:
-  //           "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //           "w-[30rem] justify-start text-black text-base font-semibold font-['TWK_Lausanne_Pan'] leading-snug",
   //       },
   //       opcoBe[0]
   //     ),
@@ -337,23 +339,39 @@ export const validateBasket = async (validateData) => {
  Function to submit Order
   :::::::::::::::::::::::::::
 */
-export const submitOrder = async (basketId) => {
+export const submitOrder = async (basketId, paymentMethod) => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    Accept: 'application/vnd.intershop.order.v1+json',
-    'Authentication-Token': authenticationToken.access_token,
-  });
-  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
-  const data = JSON.stringify({
-    basket: basketId,
-    termsAndConditionsAccepted: true,
-  });
   try {
-    const response = await postApiData(url, data, defaultHeader);
+    let response = '';
+    if (paymentMethod === 'invoice') {
+      const defaultHeader = new Headers({
+        'Content-Type': 'Application/json',
+        Accept: 'application/vnd.intershop.order.v1+json',
+        'Authentication-Token': authenticationToken.access_token,
+      });
+      const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+      const data = JSON.stringify({
+        basket: basketId,
+        termsAndConditionsAccepted: true,
+      });
+      response = await postApiData(url, data, defaultHeader);
+    }
+    if (paymentMethod === 'stripe') {
+      const defaultHeader = new Headers({
+        'Content-Type': 'Application/json',
+        Accept: 'application/vnd.intershop.order.v1+json',
+        'Authentication-Token': authenticationToken.access_token,
+      });
+      const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+      const data = JSON.stringify({
+        basket: basketId,
+        termsAndConditionsAccepted: true,
+      });
+      response = await postApiData(url, data, defaultHeader);
+    }
     if (response?.status === 'success') {
       sessionStorage.setItem(
         'orderSubmitDetails',
@@ -385,6 +403,10 @@ export const submitOrder = async (basketId) => {
       }
       return response;
     }
+    return {
+      data: response,
+      status: 'error',
+    };
   } catch (error) {
     return {
       data: error.message,
@@ -392,6 +414,33 @@ export const submitOrder = async (basketId) => {
     };
   }
 };
+
+/*
+ :::::::::::::::::::::::::::::
+ get saved cards for payment
+ ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export async function getSavedCards() {
+  const authenticationToken = await getAuthenticationToken();
+
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const url = `${baseURL}baskets/current/eligible-payment-methods?include=paymentInstruments`;
+
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append(
+      'authentication-token',
+      authenticationToken.access_token,
+    );
+    const response = await getApiData(url, defaultHeaders);
+    return response.status === 'success' ? response.data : { status: 'error', data: 'Not Saved Cards Found' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
 /*
  :::::::::::::::::::::::::::::
  get single adress details based on address id
@@ -513,7 +562,7 @@ export const setUseAddress = async (id, type) => {
 Function to get current basket details
 :::::::::::::::::::::::::::
 */
-export async function getBasketDetails() {
+export async function getBasketDetails(userType = null) {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -525,9 +574,33 @@ export async function getBasketDetails() {
   });
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
-  if (basketData?.status === 'success') return basketData;
+  if (basketData?.status === 'success' && userType != 'customer') return basketData;
+
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
+    if (basketData?.status === 'success' && userType === 'customer') {
+      const mergeBasketUrl = `${baseURL}baskets/current/merges`;
+      const mergeData = {
+        sourceBasket: basketData.data.data.id,
+      };
+      const response = await postApiData(
+        mergeBasketUrl,
+        JSON.stringify(mergeData),
+        defaultHeader,
+      );
+
+      if (response?.status === 'success') {
+        const basketResponse = await getApiData(url, defaultHeader);
+
+        if (basketResponse && basketResponse.status === 'success') {
+          sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+
+          return basketResponse;
+        }
+      } else {
+        return { status: 'error', data: 'Error merging basket' };
+      }
+    }
     const basketResponse = await getApiData(url, defaultHeader);
 
     if (basketResponse && basketResponse.status === 'success') {
@@ -735,8 +808,12 @@ shipping address list will get it from the api under my-account -  get addresses
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
 
-  if (getAddressesData.status === 'success') {
-    return getAddressesData.data.filter((adr) => (type === 'billing' ? adr.usage[0] === true : adr.usage[1] === true));
+  if (getAddressesData?.status === 'success') {
+    return getAddressesData?.data?.filter((adr) => {
+      const usage = adr?.usage;
+      if (!Array.isArray(usage)) return [];
+      return type === 'billing' ? adr?.usage[0] === true : adr?.usage[1] === true;
+    });
   }
   return [];
 }
@@ -1155,6 +1232,92 @@ export const taxExemptModal = () => {
 *
 *
  ::::::::::::::
+ function to create PO number if its not present in the Baket
+ ::::::::::::::
+*
+*
+*
+ */
+
+export const createPoNumber = async (invoiceNumber) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.basket.v1+json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/attributes`;
+  const data = JSON.stringify({
+    name: 'ReferenceNo',
+    value: invoiceNumber,
+    type: 'String',
+  });
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      return response;
+    }
+    return {
+      data: response,
+      status: 'error',
+    };
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+*
+*
+ ::::::::::::::
+ function to update PO number if its not present in the Baket
+ ::::::::::::::
+*
+*
+*
+ */
+
+export const updatePoNumber = async (invoiceNumber) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    Accept: 'application/vnd.intershop.basket.v1+json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
+  const url = `${baseURL}/baskets/current/attributes/ReferenceNo`;
+  const data = JSON.stringify({
+    name: 'ReferenceNo',
+    value: invoiceNumber,
+    type: 'String',
+  });
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.status === 'success') {
+      return response;
+    }
+    return {
+      data: response,
+      status: 'error',
+    };
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+*
+*
+ ::::::::::::::
  handle the interaction when user click on proceed button or the steps icons
  ::::::::::::::
 *
@@ -1162,6 +1325,10 @@ export const taxExemptModal = () => {
 *
  */
 export const changeStep = async (step) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
   showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
@@ -1198,17 +1365,186 @@ export const changeStep = async (step) => {
   }
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
+    if (currentTab === 'payment') {
+      // window.location.href = '/us/en/e-buy/cartlanding';
+      removePreLoader();
+      showNotification('Invalid Basket', 'error');
+      return false;
+    }
+    if (currentTab === 'submitOrder') {
+      const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
+      const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
+      if (!checkMethods) {
+        showNotification('Please select Payment Method', 'error');
+        return false;
+      }
+    }
     // alert('In-valid basket');
     removePreLoader();
-    // return false;
+    return false;
+  }
+  if (validatingBasket?.status === 'success') {
+    if (currentTab === 'submitOrder') {
+      const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
+      const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
+      if (!checkMethods) {
+        removePreLoader();
+        showNotification('Please select Payment Method', 'error');
+        return false;
+      }
+    }
   }
   if (currentTab === 'submitOrder') {
-    const getBasketForOrder = await getBasketDetails();
-    if (getBasketForOrder?.status === 'success') {
-      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id);
+    const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    if (getSelectedPaymentMethod?.value === 'invoice') {
+      const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      const data = JSON.stringify({ paymentInstrument: 'Invoice' });
+      const setupInvoice = await putApiData(url, data, defaultHeaders);
+      if (setupInvoice?.status === 'error') {
+        showNotification('Error setting Invoice as payment Method for this Order.', 'error');
+      }
+      if (setupInvoice?.status === 'success') {
+        showNotification('Invoice set as payment Method for this Order.', 'success');
 
-      if (submittingOrder?.data?.data?.documentNumber) {
-        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.documentNumber}`;
+        const invoiceNumber = document.querySelector('#invoiceNumber');
+        if (invoiceNumber?.value !== '') {
+          const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
+          if (creatingInvoiceNumber?.status === 'success') {
+            const getBasketForOrder = await getBasketDetails();
+            if (getBasketForOrder?.status === 'success') {
+              const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
+              if (submittingOrder?.data?.data?.id) {
+                sessionStorage.removeItem('submittedOrderData');
+                sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                sessionStorage.removeItem('productDetailObject');
+                sessionStorage.removeItem('basketData');
+                window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+              }
+            }
+          }
+        } else {
+          const getBasketForOrder = await getBasketDetails();
+          if (getBasketForOrder?.status === 'success') {
+            const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
+            if (submittingOrder?.data?.data?.id) {
+              sessionStorage.removeItem('submittedOrderData');
+              sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+              sessionStorage.removeItem('productDetailObject');
+              sessionStorage.removeItem('basketData');
+              window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+            }
+          }
+        }
+      }
+    }
+
+    if (getSelectedPaymentMethod?.value === 'stripe') {
+      // const formToSubmit = document.querySelector('#newStripeCardForm');
+      // const formData = new FormData(formToSubmit);
+      // const formObject = {};
+      // formData.forEach((value, key) => {
+      //   formObject[key] = value;
+      // });
+
+      // const newStripeCardFormResponse = await submitForm(
+      //   '#newStripeCardForm',
+      //   'customers/-/myAddresses',
+      //   'POST',
+      //   formObject,
+      // );
+      // setup intent when user select the stripe as payment method
+      const url = `${baseURL}baskets/current/setup-intent`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      const data = JSON.stringify({});
+      const setuptIntent = await putApiData(url, data, defaultHeaders);
+
+      if (setuptIntent.status === 'error') {
+        removePreLoader();
+        showNotification('Error setting Stripe.', 'error');
+        return false;
+      }
+      if (setuptIntent.status === 'success') {
+        // showNotification('Stripe set as payment Method for this Order.', 'success');
+
+        // get payment intent
+        const paymentIntentUrl = `${baseURL}baskets/current/payment-intent`;
+        const paymentIntentHeaders = new Headers();
+        paymentIntentHeaders.append('Content-Type', 'Application/json');
+        paymentIntentHeaders.append(
+          'authentication-token',
+          authenticationToken.access_token,
+        );
+        const getPaymentIntent = await getApiData(paymentIntentUrl, paymentIntentHeaders);
+        if (getPaymentIntent?.status === 'success') {
+          console.log(getPaymentIntent);
+
+          // post card payment intent
+          const pIntentUrl = `${baseURL}baskets/current/payment-intent`;
+          const pIntentHeaders = new Headers();
+          pIntentHeaders.append('Content-Type', 'Application/json');
+          pIntentHeaders.append(
+            'authentication-token',
+            authenticationToken.access_token,
+          );
+          const pIntentBody = JSON.stringify({ type: 'card' });
+          const pIntent = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
+          if (pIntent?.status === 'success') {
+            console.log(pIntent);
+
+            // set payment intent
+            const sIntentUrl = `${baseURL}baskets/current/setup-intent`;
+            const sIntentHeaders = new Headers();
+            sIntentHeaders.append('Content-Type', 'Application/json');
+            sIntentHeaders.append(
+              'authentication-token',
+              authenticationToken.access_token,
+            );
+            const sIntentBody = JSON.stringify({});
+            const setupIntent = await postApiData(sIntentUrl, sIntentBody, sIntentHeaders);
+            if (setupIntent?.status === 'success') {
+              console.log(setupIntent);
+
+              // create payment intent
+              const createPIUrl = `${baseURL}baskets/current/payment-instruments?include=paymentMethod`;
+              const createPIHeaders = new Headers();
+              createPIHeaders.append('Content-Type', 'Application/json');
+              pIntentHeaders.append(
+                'authentication-token',
+                authenticationToken.access_token,
+              );
+              const createPIBody = JSON.stringify(
+                {
+                  paymentMethod: 'STRIPE_PAYMENT',
+                  parameters: [
+                    {
+                      name: 'paymentIntentID',
+                      value: `${pIntent?.data?.id}`,
+                    },
+                    {
+                      name: 'token',
+                      value: `${pIntent?.data?.client_secret}`,
+                    },
+                  ],
+                },
+              );
+              const createPI = await postApiData(createPIUrl, createPIBody, createPIHeaders);
+              if (createPI?.status === 'success') {
+                console.log(createPI);
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -1234,8 +1570,13 @@ export const changeStep = async (step) => {
  check if basket has the shipping notes attribute
  :::::::::::::
 */
-      if (getCurrentBasketDetails?.data?.data?.attributes) {
-        const getNotes = getCurrentBasketDetails.data.data.attributes[0];
+      if (getCurrentBasketDetails?.data?.data?.attributes?.some(
+        (attr) => attr?.name === 'GroupShippingNote',
+      )
+      ) {
+        const getNotes = getCurrentBasketDetails.data.data.attributes?.find(
+          (attr) => attr?.name === 'GroupShippingNote',
+        );
 
         /*
  :::::::::::::
@@ -1347,14 +1688,18 @@ export const changeStep = async (step) => {
       proceedButton.setAttribute('data-tab', 'payment');
       break;
     case 'payment':
+      segment1.style.width = '50%';
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
+      proceedButton.textContent = 'Place your order';
       break;
     case 'submitOrder':
+      segment1.style.width = '50%';
       segment2.style.width = '50%';
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.setAttribute('data-activeTab', 'submitOrder');
+      proceedButton.textContent = 'Place your order';
       break;
     default:
       segment1.style.width = '0';
@@ -1790,6 +2135,31 @@ get counrty field and attach change event listener to populate states based on c
   return adressForm;
 }
 
+// const getOrderDetails = async () => {
+// const authenticationToken = await getAuthenticationToken();
+// if (!authenticationToken) {
+//   return { status: 'error', data: 'Unauthorized access.' };
+// }
+// const token = authenticationToken.access_token;
+// const defaultHeader = new Headers({
+//   'Content-Type': 'Application/json',
+//   'Authentication-Token': token,
+// });
+// const url = `${baseURL}/orders/${orderId}`;
+// try {
+//   const response = await getApiData(
+//     url,
+//     defaultHeader,
+//   );
+//   if (response?.status === 'success') {
+//     return response;
+//   }
+//   return response;
+// } catch (error) {
+//   return error;
+// }
+// }
+
 /*
 *
 *
@@ -1799,7 +2169,7 @@ get counrty field and attach change event listener to populate states based on c
  *
  *
  */
-export async function checkoutSummary() {
+export async function checkoutSummary(orderId = '') {
   /*
  ::::::::::::::::
  store config to use some predefined set of rules/values
@@ -1813,7 +2183,7 @@ get price type if its net or gross
 */
   const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? 'net';
   const currencyCode = '$';
-  const getCheckoutSummaryData = await getBasketDetails();
+  let getCheckoutSummaryData = '';
   let discountCode = '';
   let discountLabelData = '';
   let discountDetails = '';
@@ -1821,22 +2191,42 @@ get price type if its net or gross
   let discountLabel = '';
   let discountPrice = '';
   let checkoutSummaryData = false;
-  if (getCheckoutSummaryData?.status === 'success') {
-    checkoutSummaryData = getCheckoutSummaryData.data.data;
-    discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
-      ?? '';
-    discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
-      ?? '';
-    discountPromoCode = discountDetails?.promotion ?? '';
-    discountLabelData = await getPromotionDetails(discountPromoCode);
+  let userLoggedInStatus = false;
+  if (orderId !== '') {
+    getCheckoutSummaryData = JSON.parse(sessionStorage.getItem('submittedOrderData'));
 
-    if (discountLabelData?.status === 'success') {
-      discountLabel = discountLabelData?.data?.name ?? '';
-      discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+    if (getCheckoutSummaryData?.status === 'success') {
+      checkoutSummaryData = getCheckoutSummaryData.data.data;
+      discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+      discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
+      ?? '';
+      discountPromoCode = discountDetails?.promotion ?? '';
+      discountLabelData = await getPromotionDetails(discountPromoCode);
+
+      if (discountLabelData?.status === 'success') {
+        discountLabel = discountLabelData?.data?.name ?? '';
+        discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+      }
+    }
+  } else {
+    getCheckoutSummaryData = await getBasketDetails();
+    if (getCheckoutSummaryData?.status === 'success') {
+      checkoutSummaryData = getCheckoutSummaryData.data.data;
+      discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+      discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
+      ?? '';
+      discountPromoCode = discountDetails?.promotion ?? '';
+      discountLabelData = await getPromotionDetails(discountPromoCode);
+
+      if (discountLabelData?.status === 'success') {
+        discountLabel = discountLabelData?.data?.name ?? '';
+        discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+      }
     }
   }
 
-  let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -1858,7 +2248,7 @@ get price type if its net or gross
         checkoutPriceType === 'net' ? 'net' : 'gross'
       ]?.value ?? ''
     }`;
-    return totalValue > 0 ? `${currencyCode}${totalValue}` : '';
+    return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
   /*
@@ -1866,34 +2256,66 @@ get price type if its net or gross
   map the data from checkout summary (basket) to the keys.
   ::::::::::::::
   */
-  const checkoutSummaryKeys = {
-    totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
-    undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
-      ? getTotalValue('undiscountedItemTotal')
-      : '',
-    itemTotal: checkoutSummaryData?.totals?.itemTotal
-      ? getTotalValue('itemTotal')
-      : '$0',
-    undiscountedShippingTotal: checkoutSummaryData?.totals
-      ?.undiscountedShippingTotal
-      ? getTotalValue('undiscountedShippingTotal')
-      : '',
-    shippingTotal: checkoutSummaryData?.totals?.shippingTotal
-      ? getTotalValue('shippingTotal')
-      : '$0',
-    total: checkoutSummaryData?.totals?.grandTotal
-      ? getTotalValue('grandTotal')
-      : '$0',
-    tax: checkoutSummaryData?.totals?.grandTotal
-      ? `${currencyCode} ${
-        checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
-      }`
-      : '$0',
-    discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
-    discountLabel,
-    totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
-  };
-
+  let checkoutSummaryKeys = {};
+  if (orderId !== '') {
+    checkoutSummaryKeys = {
+      totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
+      undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+        ? getTotalValue('undiscountedItemTotal')
+        : '',
+      itemTotal: checkoutSummaryData?.totals?.itemTotal
+        ? getTotalValue('itemTotal')
+        : '$0',
+      undiscountedShippingTotal: checkoutSummaryData?.totals
+        ?.undiscountedShippingTotal
+        ? getTotalValue('undiscountedShippingTotal')
+        : '',
+      shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+        ? getTotalValue('shippingTotal')
+        : '$0',
+      total: checkoutSummaryData?.totals?.grandTotal
+        ? getTotalValue('grandTotal')
+        : '$0',
+      tax: checkoutSummaryData?.totals?.grandTotal
+        ? `${currencyCode}${
+          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+        }`
+        : '$0',
+      taxExempt: '',
+      discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
+      discountLabel,
+      totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
+    };
+  } else {
+    checkoutSummaryKeys = {
+      totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
+      undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+        ? getTotalValue('undiscountedItemTotal')
+        : '',
+      itemTotal: checkoutSummaryData?.totals?.itemTotal
+        ? getTotalValue('itemTotal')
+        : '$0',
+      undiscountedShippingTotal: checkoutSummaryData?.totals
+        ?.undiscountedShippingTotal
+        ? getTotalValue('undiscountedShippingTotal')
+        : '',
+      shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+        ? getTotalValue('shippingTotal')
+        : '$0',
+      total: checkoutSummaryData?.totals?.grandTotal
+        ? getTotalValue('grandTotal')
+        : '$0',
+      tax: checkoutSummaryData?.totals?.grandTotal
+        ? `${currencyCode}${
+          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+        }`
+        : '$0',
+      taxExempt: '',
+      discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
+      discountLabel,
+      totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
+    };
+  }
   const loggedOutUserDiv = div(
     {
       class: 'inline-flex flex-col gap-4',
@@ -1928,6 +2350,7 @@ get price type if its net or gross
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
     window.location.href = '/us/en/e-buy/login';
   });
+
   /*
   :::::::::::::
   generate checkout summary  module
@@ -2047,7 +2470,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  'text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline',
+                  `text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),
@@ -2388,7 +2811,7 @@ export async function updateCheckoutSummary() {
 }
 
 export const cartItemsContainer = (cartItemValue) => {
-  const modifyCart = async (type, element, value) => {
+  const modifyCart = async (type, element, value, eventParent) => {
     showPreLoader();
     if (type === 'delete-item') {
       const item = {
@@ -2430,6 +2853,9 @@ export const cartItemsContainer = (cartItemValue) => {
       const response = await updateCartItemQuantity(item);
       if (response.status === 'success') {
         await updateCheckoutSummary();
+        const totalPrice = document.getElementById('total-price');
+        const totalPricValue = response.data[0].itemQuantity * response.data[0].salePrice.value;
+        totalPrice.innerHTML = `$${totalPricValue}`;
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -2464,6 +2890,8 @@ export const cartItemsContainer = (cartItemValue) => {
     value: cartItemValue.itemQuantity,
   });
   inputBox.addEventListener('change', (event) => {
+    const eventParent = event.target.parentElement.parentElement.parentElement;
+
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
     const input = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
@@ -2471,161 +2899,70 @@ export const cartItemsContainer = (cartItemValue) => {
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
       productItem.style.border = '2px solid red';
+      // eslint-disable-next-line no-alert
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else if (enteredValue > Number(input.max)) {
       productItem.style.border = '2px solid red';
+      // eslint-disable-next-line no-alert
       alert(
         `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', input, event.target.value);
+      modifyCart('quantity-added', inputItem, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
-  const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-    cartItemValue.productName,
-    {
-      href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+  const unitPriceDiv = () => {
+    if (cartItemValue.listPrice.value != cartItemValue.salePrice.value) {
+      return div(
+        {
+          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
+        },
+        div(
+          {
+            class:
+            'w-full justify-start text-gray-500 text-base font-semibold item line-through',
+          },
+          `$${cartItemValue.listPrice.value}`,
+        ),
+        div(
+          {
+            class:
+            'w-full justify-start text-black text-base',
+          },
+          `$${cartItemValue.salePrice.value}`,
+        ),
+      );
+    }
+
+    return div(
+      {
+        class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-semibold',
+      },
+      //  div(
+      //     {
+      //       class:
+      //         "w-full justify-start text-gray-500 text-base font-semibold item line-through",
+      //     },
+      //     `$${cartItemValue.listPrice.value}`
+      //   ),
+      div(
+        {
+          class:
+            'w-full justify-start text-black text-base',
+        },
+        `$${cartItemValue.salePrice.value}`,
       ),
-      title: cartItemValue.productName,
-      class: 'justify-center',
-    },
-  );
-  // const itemContainer = div(
-  //   {
-  //     class: "flex w-full justify-between items-center",
-  //     id: cartItemValue.lineItemId,
-  //   },
-  //   div(
-  //     {
-  //       class:
-  //         "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
-  //     },
-  //     image
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-96",
-  //     },
-  //     div(
-  //       {
-  //         class: "",
-  //       },
-  //       cartItemValue.productName
-  //     ),
-  //     div(
-  //       {
-  //         class: " text-gray-500 text-base font-extralight",
-  //       },
-  //       `SKU: ${cartItemValue.sku}`
-  //     )
-  //   ),
-  //   div(
-  //     {
-  //       class: "",
-  //     },
-  //     modalInput
-  //   ),
-  //   div(
-  //     {
-  //       class: "w-11 text-right text-black text-base font-bold",
-  //     },
-  //     `$${cartItemValue.salePrice.value}`
-  //   ),
-  //   modalCloseButton
-  // );
-  // const itemContainer = div(
-  //   {
-  //     class:
-  //       "w-full self-stretch p-4 relative inline-flex justify-start items-center",
-  //   },
-  //   div(
-  //     { class: "inline-flex justify-start items-center gap-3.5" },
-  //     div(
-  //       {
-  //         class:
-  //           "w-28 p-2.5 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-start items-center gap-2.5",
-  //       },
-  //       // div(
-  //       //   {
-  //       //     class: "w-16 self-stretch relative overflow-hidden",
-  //       //   },
-  //         image
-  //         // img({
-  //         //   class: "w-20 h-28 left-[-4px] top-[-24px] absolute",
-  //         //   src: `/images/wesee/dummy.png `,
-  //         // })
-  //       // )
-  //     ),
-  //     div(
-  //       { class: "w-64 inline-flex flex-col justify-start items-start" },
-  //       div(
-  //         {
-  //           class: "self-stretch justify-start text-black text-base font-bold",
-  //         },
-  //         cartItemValue.productName
-  //       ),
-  //       div(
-  //         {
-  //           class:
-  //             "self-stretch justify-start text-gray-500 text-sm font-normal ",
-  //         },
-  //         cartItemValue.sku
-  //       )
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-11 inline-flex flex-col justify-start items-start" },
-  //     // div({
-  //     //     class:"w-11 h-10 px-4 py-3 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center overflow-hidden"
-  //     // },
-  //     // div({
-  //     //     class:"justify-start text-gray-700 text-base font-normal"
-  //     // }, "2")
-  //     modalInput
-  //     // )
-  //   ),
-  //   div(
-  //     { class: "w-44 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       `$${cartItemValue.salePrice.value}`
-  //     ),
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-gray-500 text-base",
-  //       },
-  //       " $100.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-28 inline-flex flex-col justify-start items-end" },
-  //     div(
-  //       {
-  //         class:
-  //           "self-stretch text-right justify-start text-black text-base font-bold",
-  //       },
-  //       "$200.00"
-  //     )
-  //   ),
-  //   div(
-  //     { class: "w-6 h-6 left-[747px] top-[49px] absolute overflow-hidden" },
-  //     modalCloseButton
-  //   )
-  // );
+    );
+  };
+
   const itemsscontainer = div(
     {
       class:
-        'w-full py-3 border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1',
+        'w-full py-3 cart-item-wrapper border-t border-gray-300 inline-flex sm:flex-row flex-col justify-start items-center gap-1',
       id: cartItemValue.lineItemId,
     },
     div(
@@ -2679,28 +3016,10 @@ export const cartItemsContainer = (cartItemValue) => {
       ),
       div(
         {
-          class: 'sm:w-48 w-[5rem] justify-start text-black text-base font-bold',
+          class: 'w-[59px] justify-start text-black text-base font-semibold sm:m-[0px] m-[7px]',
+          id: 'total-price',
         },
-        div(
-          {
-            class:
-            'w-full justify-start text-gray-500 text-base font-bold item line-through',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-        div(
-          {
-            class:
-            'w-full justify-start text-black text-base',
-          },
-          `$${cartItemValue.salePrice.value}`,
-        ),
-      ),
-      div(
-        {
-          class: 'w-[59px] justify-start text-black text-base font-bold sm:m-[0px] m-[7px]',
-        },
-        `$${cartItemValue.salePrice.value}`,
+        `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
       ),
       deleteButton,
     ),

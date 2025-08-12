@@ -60,37 +60,37 @@ export default async function decorate(block) {
 
   const contentObject = {
     registerHeading:
-      registerHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      registerHeading?.textContent.trim().replace(/<[^>]*>/g, '') || 'Registration',
     registerSubHeading:
-      registerSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      registerSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || 'Please login to continue to your account.',
     registerFormTitle:
-      registerFormTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      registerFormTitle?.textContent.trim().replace(/<[^>]*>/g, '') || 'Registration',
     registerFormSubHeading:
-      registerFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      registerFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, '') || 'Please login to continue to your account.',
     registerFormEmailLabel:
-      registerFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, '') || '',
+      registerFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, '') || 'Enter email',
     registerFormFirstNameLabel:
       registerFormFirstNameLabel?.textContent.trim().replace(/<[^>]*>/g, '')
-      || '',
+       || 'First name',
     registerFormLastNameLabel:
       registerFormLastNameLabel?.textContent.trim().replace(/<[^>]*>/g, '')
-      || '',
+      || 'Last Name',
     registerFormCompanyNameLabel:
       registerFormCompanyNameLabel?.textContent
         .trim()
-        .replace(/<[^>]*>/g, '') || '',
+        .replace(/<[^>]*>/g, '') || 'Company name',
     registerFormPasswordLabel:
       registerFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, '')
-      || '',
+      || 'Enter password',
     registerFormConfirmPasswordLabel:
       registerFormConfirmPasswordLabel?.textContent
         .trim()
-        .replace(/<[^>]*>/g, '') || '',
-    registerFormCheckboxText: registerFormCheckboxText || '',
+        .replace(/<[^>]*>/g, '') || 'Confirm password',
+    registerFormCheckboxText: registerFormCheckboxText || 'By clicking create my account button, you confirm that you have reviewed and agree with the Terms and Use and the Privacy Policy',
     registerFormSubmitButtonLabel:
       registerFormSubmitButtonLabel?.textContent
         .trim()
-        .replace(/<[^>]*>/g, '') || '',
+        .replace(/<[^>]*>/g, '') || 'Create my account',
     backgroundImage:
       backgroundImage?.src
       ?? 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
@@ -341,7 +341,7 @@ export default async function decorate(block) {
   });
   const registerWrapper = div({
     class:
-      'dhls-container !mt-0 p-0 mx-auto bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row',
+      'dhls-container w-full !mt-0 p-0 mx-auto bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row',
   });
   registerWrapper.append(contentWrapper, formWrapper);
   registerOuter.append(registerWrapper);

@@ -1166,8 +1166,10 @@ export const productDetails = async (getItemsFromBasket) => {
   const getItemFromBasket = getItemsFromBasket.data
     ? getItemsFromBasket.data
     : getItemsFromBasket;
+    console.log(getItemFromBasket);
+    
   const productDetailsList = await Promise.all(
-    getItemFromBasket.map(async (product) => {
+    getItemFromBasket?.map(async (product) => {
       const productDataResponse = await productData(product);
       return productDataResponse;
     }),

@@ -74,6 +74,10 @@
   gap: 2.25rem
 }
 
+.order-submit-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
 .order-submit-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -111,6 +115,10 @@
   padding: 1.5rem
 }
 
+.order-submit-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
 .order-submit-wrapper :is(.px-10) {
   padding-left: 2.5rem;
   padding-right: 2.5rem
@@ -136,6 +144,11 @@
   line-height: 1.5rem
 }
 
+.order-submit-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
 .order-submit-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -158,6 +171,10 @@
 
 .order-submit-wrapper :is(.leading-snug) {
   line-height: 1.375
+}
+
+.order-submit-wrapper :is(.leading-7) {
+  line-height: 1.75rem
 }
 
 .order-submit-wrapper :is(.text-black) {
@@ -189,4 +206,8 @@
 
 .order-submit-wrapper :is(.outline-gray-200) {
   outline-color: #e5e7eb
+}
+
+.order-submit-wrapper :is(.outline-gray-300) {
+  outline-color: #d1d5db
 }

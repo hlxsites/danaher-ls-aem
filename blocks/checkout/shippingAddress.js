@@ -199,79 +199,6 @@ click use address button to set the address as default for current order
           );
 
           if (useAddressButtonResponse?.status === 'success') {
-            // const invoiceToAddress = div(
-            //   {
-            //     id: 'checkoutSummaryCommonBillToAddress',
-            //     class:
-            //       'flex-col w-full border-solid bg-white border border-danahergray-75 p-6',
-            //   },
-            //   div(
-            //     {
-            //       class: ' flex flex-col pb-2',
-            //     },
-            //     h5(
-            //       {
-            //         class: 'font-semibold p-0 mb-3 mt-0',
-            //       },
-            //       'Bill to Address',
-            //     ),
-            //     div(
-            //       {
-            //         class: 'p-3 border border-danahergray-300',
-            //       },
-            //       h5(
-            //         {
-            //           class: `font-normal m-0 p-0 ${
-            //             useAddressButtonResponse?.data?.invoiceToAddress
-            //               ?.companyName2
-            //               ? ''
-            //               : 'hidden'
-            //           }`,
-            //         },
-            //         useAddressButtonResponse?.data?.invoiceToAddress
-            //           ?.companyName2 ?? '',
-            //       ),
-            //       p(
-            //         {
-            //           class: 'text-black text-base ',
-            //         },
-            //         useAddressButtonResponse?.data?.invoiceToAddress
-            //           ?.addressLine1 ?? '',
-            //       ),
-            //       p(
-            //         {
-            //           class: 'text-black text-base ',
-            //         },
-            //         useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
-            //       ),
-            //       p(
-            //         {
-            //           class: 'text-black text-base ',
-            //         },
-            //         `${
-            //           useAddressButtonResponse?.data?.invoiceToAddress
-            //             ?.mainDivision ?? ''
-            //         }, ${
-            //           useAddressButtonResponse?.data?.invoiceToAddress
-            //             ?.countryCode ?? ''
-            //         }, ${
-            //           useAddressButtonResponse?.data?.invoiceToAddress
-            //             ?.postalCode ?? ''
-            //         }`,
-            //       ),
-            //     ),
-            //   ),
-            // );
-            // const checkoutSummaryWrapper = document.querySelector(
-            //   '#checkoutSummaryWrapper',
-            // );
-            // checkoutSummaryWrapper
-            //   ?.querySelector('#checkoutSummaryCommonBillToAddress')
-            //   ?.remove();
-            // checkoutSummaryWrapper?.insertAdjacentElement(
-            //   'beforebegin',
-            //   invoiceToAddress,
-            // );
             const renderDefaultAddress = defaultAddress(
               type === 'shipping'
                 ? useAddressButtonResponse.data?.commonShipToAddress
@@ -806,6 +733,9 @@ export const shippingAddressModule = async () => {
    ::::::::::::::
    */
         const getCurrentBasketDetails = await getBasketDetails();
+        if (getCurrentBasketDetails.data.totalProductQuantity === 0) {
+          window.location.href = '/us/en/e-buy/cartlanding';
+        }
         /*
     *
      ::::::::::::::::::::::::
@@ -897,7 +827,28 @@ export const shippingAddressModule = async () => {
                 'billing',
               );
               if (setAddressAsShipping?.status === 'success') {
-                checkoutSummaryBillAddress?.classList.add('hidden');
+                const renderDefaultAddress = defaultAddress(
+                  getUseAddressesResponse?.data?.commonShipToAddress,
+                  'billing',
+                );
+
+                const getDefaultAddressWrapper = document.querySelector(
+                  '#billingAddressHeader',
+                );
+                if (getDefaultAddressWrapper && renderDefaultAddress) {
+                  /*
+                ::::::::::::::
+                show this address as default billing address
+                :::::::::::::
+                */
+                  getDefaultAddressWrapper.insertAdjacentElement(
+                    'afterend',
+                    renderDefaultAddress,
+                  );
+                  // hide the billing address from checkout summary
+
+                  checkoutSummaryBillAddress?.remove();
+                }
               }
             } else if (
               checkoutSummaryBillAddress?.classList.contains('hidden')
@@ -1145,8 +1096,8 @@ show default billing address else mark shippingAsBilling checkbox as checked
             shippingAsBillingAddressCheckBox
             && !getUseAddressesResponse?.data?.commonShipToAddress
           ) {
-            shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
-            shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
+            // shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
+            // shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
           }
         } else {
           defaultBillingAddress.classList.add('hidden');

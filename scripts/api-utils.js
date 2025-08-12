@@ -37,7 +37,12 @@ async function request(url, method = 'GET', data = {}, headers = {}) {
       if (response.status === 500) errorMessage = 'Server error, unable to get the response.';
       throw new Error(errorMessage);
     }
-    const apiResponse = await response.json();
+    let apiResponse = null;
+    if (response.status === 204) {
+      apiResponse = await response.text();
+    } else {
+      apiResponse = await response.json();
+    }
 
     return { status: 'success', data: apiResponse };
   } catch (error) {
@@ -59,6 +64,7 @@ export async function getApiData(url, headers) {
     return { status: 'error', data: error.message };
   }
 }
+
 /*
  * Sends a POST request to the specified API endpoint with provided data and headers.
  *
@@ -67,7 +73,6 @@ export async function getApiData(url, headers) {
  * @param {Object} headers - Optional headers for the request.
  * @returns {<Object>} - Returns the response object from the API or an error object.
  */
-
 export async function postApiData(url, data, headers) {
   try {
     return await request(url, 'POST', data, headers);
@@ -75,6 +80,7 @@ export async function postApiData(url, data, headers) {
     return { status: 'error', data: error.message };
   }
 }
+
 /*
 ::::::::::::::::::
  patch api data.. make use of the request function
@@ -91,6 +97,7 @@ export async function patchApiData(url, data, headers) {
     return { status: 'error', data: error.message };
   }
 }
+
 /*
 ::::::::::::::::::
  put api data.. make use of the request function

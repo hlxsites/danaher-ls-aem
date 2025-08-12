@@ -458,6 +458,11 @@ const fileMappings = [
     wrapper: 'product-info-list-wrapper',
   },
   {
+    content: ['./blocks/order-submit/order-submit.js', './scripts/cart-checkout-utils.js'],
+    output: './blocks/order-submit/order-submit.css',
+    wrapper: 'order-submit-wrapper',
+  },
+  {
     content: [
       './blocks/top-selling/top-selling.js',
       './blocks/top-selling/listData.js',
