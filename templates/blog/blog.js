@@ -1,8 +1,6 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { buildArticleSchema } from '../../scripts/schema.js';
-import {
-  div,
-} from '../../scripts/dom-builder.js';
+import { div } from '../../scripts/dom-builder.js';
 // eslint-disable-next-line import/named
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
@@ -15,10 +13,10 @@ function moveImageInstrumentation(picture) {
 /**
  * Extracts image, title, and text for a column
  * @param {Element} node
- * @returns {{image: Element|null, title: Element|null, text: Element|null}}
+ * @returns {[Element|null, Element|null, Element|null]} Array for columns block
  */
 function extractColumnContent(node) {
-  if (!node) return { image: null, title: null, text: null };
+  if (!node) return [null, null, null];
 
   const image = node.querySelector('picture, img');
   const title = node.querySelector('h1, h2, h3, h4, h5, h6');
@@ -31,17 +29,34 @@ function extractColumnContent(node) {
     text = document.createElement('div');
     paragraphs.forEach(p => text.appendChild(p.cloneNode(true)));
   }
-  return { image, title, text };
+  return [image, title, text];
 }
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const section = main.querySelector(':scope > div:nth-child(2)');
+  if (!main) {
+    console.error('Auto Blocking failed: <main> not found.');
+    return;
+  }
+  // Try section, then fallback to div
+  let section = main.querySelector(':scope > section, :scope > div');
+  if (!section) {
+    console.error('Auto Blocking failed: No <section> or <div> found as a direct child of <main>.');
+    return;
+  }
+
+  // Defensive: get first three children, check existence
+  const children = Array.from(section.children).slice(0, 3);
+  if (!children.length) {
+    console.warn('Auto Blocking: No children found in section/div.');
+    return;
+  }
+
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-  const firstThreeChildren = Array.from(section.children).slice(0, 3);
-  firstThreeChildren.every((child) => {
+
+  children.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
     } else if (child.tagName === 'P' && !blogHeroP1) {
@@ -53,66 +68,43 @@ export default async function buildAutoBlocks() {
     if (imgElement) return false;
     return true;
   });
-  if (blogH1) section.removeChild(blogH1);
+
+  if (blogH1 && blogH1.parentElement === section) section.removeChild(blogH1);
 
   let columnElements = [];
   let blogHeroImage;
 
   if (blogHeroP2) {
     blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
-    if (blogHeroP1) section.removeChild(blogHeroP1);
-    section.removeChild(blogHeroP2);
+    if (blogHeroP1 && blogHeroP1.parentElement === section) section.removeChild(blogHeroP1);
+    if (blogHeroP2.parentElement === section) section.removeChild(blogHeroP2);
 
-    // Move image instrumentation for analytics
     moveImageInstrumentation(blogHeroImage);
 
-    // Build column object {image, title, text}
-    columnElements.push({
-      image: blogHeroImage,
-      title: blogH1,
-      text: blogHeroP1
-    });
+    columnElements.push([blogHeroImage, blogH1, blogHeroP1]);
   } else if (blogHeroP1) {
     blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
     moveImageInstrumentation(blogHeroImage);
-    section.removeChild(blogHeroP1);
+    if (blogHeroP1.parentElement === section) section.removeChild(blogHeroP1);
 
-    columnElements.push({
-      image: blogHeroImage,
-      title: blogH1,
-      text: null
-    });
+    columnElements.push([blogHeroImage, blogH1, null]);
   } else if (blogH1) {
-    columnElements.push({
-      image: null,
-      title: blogH1,
-      text: null
-    });
+    columnElements.push([null, blogH1, null]);
   }
 
-  // Optionally, handle more columns if your section contains more column divs
-  const moreColumns = Array.from(section.querySelectorAll('.column'));
-  moreColumns.forEach(colNode => {
-    columnElements.push(extractColumnContent(colNode));
-  });
+  // Defensive: If no columns found, log and skip
+  if (!columnElements.length) {
+    console.warn('Auto Blocking: No columns content extracted.');
+    return;
+  }
 
-  // Prepend social-media, columns, article-info blocks
+  // Prepend blocks in reverse order so they appear in the intended order
   section.prepend(
     buildBlock('social-media', { elems: [] }),
   );
 
   section.prepend(
-  buildBlock('columns', [
-    {
-      image: document.createElement('img'), // Or a real <img> node
-      title: document.createElement('h1'),
-      // text: document.createElement('p'),
-    }
-  ])
-);
-
-  section.prepend(
-    //buildBlock('columns', columnElements),
+    buildBlock('columns', columnElements),
     buildBlock('article-info', { elems: [] }),
   );
 
@@ -127,5 +119,7 @@ export default async function buildAutoBlocks() {
   buildArticleSchema();
 
   // Ensure the content section is the first element in main
-  section.parentElement.prepend(section);
+  if (section.parentElement.firstChild !== section) {
+    section.parentElement.prepend(section);
+  }
 }
