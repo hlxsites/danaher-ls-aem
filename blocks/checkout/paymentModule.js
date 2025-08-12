@@ -314,43 +314,13 @@ const paymentModule = async () => {
               showPreLoader();
               getInvoiceNumberWrapper?.classList?.remove('hidden');
               getStripeCardsWrapper?.classList?.add('hidden');
-              const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
-              const defaultHeaders = new Headers();
-              defaultHeaders.append('Content-Type', 'Application/json');
-              defaultHeaders.append(
-                'authentication-token',
-                authenticationToken.access_token,
-              );
-              const data = JSON.stringify({ paymentInstrument: 'Invoice' });
-              const setupInvoice = await putApiData(url, data, defaultHeaders);
-              if (setupInvoice?.status === 'success') {
-                showNotification('Invoice set as payment Method for this Order.', 'success');
-              }
-              if (setupInvoice?.status === 'error') {
-                showNotification('Error setting Invoice as payment Method for this Order.', 'error');
-              }
             }
+
             // handle stripe payment method
             if (eventTarget?.id === 'stripe') {
               showPreLoader();
               getStripeCardsWrapper?.classList?.remove('hidden');
               getInvoiceNumberWrapper?.classList.add('hidden');
-              // setup intent when user select the stripe as payment method
-              const url = `${baseURL}baskets/current/setup-intent`;
-              const defaultHeaders = new Headers();
-              defaultHeaders.append('Content-Type', 'Application/json');
-              defaultHeaders.append(
-                'authentication-token',
-                authenticationToken.access_token,
-              );
-              const data = JSON.stringify({ });
-              const setuptIntent = await putApiData(url, data, defaultHeaders);
-              if (setuptIntent.status === 'success') {
-                showNotification('Stripe set as payment Method for this Order.', 'success');
-              }
-              if (setuptIntent.status === 'error') {
-                showNotification('Error setting Stripe set as payment Method for this Order.', 'error');
-              }
             }
             c.target.checked = true;
           } else {

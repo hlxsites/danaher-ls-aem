@@ -15,7 +15,9 @@ import {
   h5,
   button,
 } from './dom-builder.js';
-import { postApiData, getApiData, patchApiData } from './api-utils.js';
+import {
+  postApiData, getApiData, patchApiData, putApiData,
+} from './api-utils.js';
 import { decorateIcons } from './lib-franklin.js';
 import {
   buildInputElement,
@@ -29,6 +31,7 @@ import {
   capitalizeFirstLetter,
   getStoreConfigurations,
   createModal,
+  showNotification,
 } from './common-utils.js';
 // base url for the intershop api calls
 import {
@@ -522,7 +525,7 @@ export const setUseAddress = async (id, type) => {
 Function to get current basket details
 :::::::::::::::::::::::::::
 */
-export async function getBasketDetails() {
+export async function getBasketDetails(userType = null) {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -534,9 +537,33 @@ export async function getBasketDetails() {
   });
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
-  if (basketData?.status === 'success') return basketData;
+  if (basketData?.status === 'success' && userType != 'customer') return basketData;
+
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
+    if (basketData?.status === 'success' && userType === 'customer') {
+      const mergeBasketUrl = `${baseURL}baskets/current/merges`;
+      const mergeData = {
+        sourceBasket: basketData.data.data.id,
+      };
+      const response = await postApiData(
+        mergeBasketUrl,
+        JSON.stringify(mergeData),
+        defaultHeader,
+      );
+
+      if (response?.status === 'success') {
+        const basketResponse = await getApiData(url, defaultHeader);
+
+        if (basketResponse && basketResponse.status === 'success') {
+          sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+
+          return basketResponse;
+        }
+      } else {
+        return { status: 'error', data: 'Error merging basket' };
+      }
+    }
     const basketResponse = await getApiData(url, defaultHeader);
 
     if (basketResponse && basketResponse.status === 'success') {
@@ -1261,6 +1288,10 @@ export const updatePoNumber = async (invoiceNumber) => {
 *
  */
 export const changeStep = async (step) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
   showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
@@ -1298,72 +1329,69 @@ export const changeStep = async (step) => {
   const validatingBasket = await validateBasket(validateData);
   if (validatingBasket?.status === 'error') {
     if (currentTab === 'payment') {
-      alert('Basket Not Found');
-      window.location.href = '/us/en/e-buy/cartlanding';
+      // window.location.href = '/us/en/e-buy/cartlanding';
       removePreLoader();
+      showNotification('Invalid Basket', 'error');
       return false;
     }
     if (currentTab === 'submitOrder') {
       const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
       const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
       if (!checkMethods) {
-        highlightPaymentMethods.classList.add('border-red-500', 'border', 'border-solid');
-        setTimeout(() => {
-          if (highlightPaymentMethods?.classList.contains('border-red-500')) {
-            highlightPaymentMethods.classList.remove('border-red-500');
-          } if (highlightPaymentMethods?.classList.contains('border')) {
-            highlightPaymentMethods.classList.remove('border');
-          } if (highlightPaymentMethods?.classList.contains('border-solid')) {
-            highlightPaymentMethods.classList.remove('border-solid');
-          }
-        }, 2000);
-      } else {
-        if (highlightPaymentMethods?.classList.contains('border-red-500')) {
-          highlightPaymentMethods.classList.remove('border-red-500');
-        } if (highlightPaymentMethods?.classList.contains('border')) {
-          highlightPaymentMethods.classList.remove('border-1');
-        } if (highlightPaymentMethods?.classList.contains('border-solid')) {
-          highlightPaymentMethods.classList.remove('border-solid');
-        }
+        showNotification('Please select Payment Method', 'error');
+        return false;
       }
     }
     // alert('In-valid basket');
     removePreLoader();
-    // return false;
+    return false;
   }
   if (validatingBasket?.status === 'success') {
     if (currentTab === 'submitOrder') {
       const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
       const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
       if (!checkMethods) {
-        highlightPaymentMethods.classList.add('border-red-500', 'border', 'border-solid');
-        setTimeout(() => {
-          if (highlightPaymentMethods?.classList.contains('border-red-500')) {
-            highlightPaymentMethods.classList.remove('border-red-500');
-          } if (highlightPaymentMethods?.classList.contains('border')) {
-            highlightPaymentMethods.classList.remove('border');
-          } if (highlightPaymentMethods?.classList.contains('border-solid')) {
-            highlightPaymentMethods.classList.remove('border-solid');
-          }
-        }, 2000);
-      } else {
-        if (highlightPaymentMethods?.classList.contains('border-red-500')) {
-          highlightPaymentMethods.classList.remove('border-red-500');
-        } if (highlightPaymentMethods?.classList.contains('border')) {
-          highlightPaymentMethods.classList.remove('border');
-        } if (highlightPaymentMethods?.classList.contains('border-solid')) {
-          highlightPaymentMethods.classList.remove('border-solid');
-        }
+        removePreLoader();
+        showNotification('Please select Payment Method', 'error');
+        return false;
       }
     }
   }
   if (currentTab === 'submitOrder') {
     const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
     if (getSelectedPaymentMethod?.value === 'invoice') {
-      const invoiceNumber = document.querySelector('#invoiceNumber');
-      if (invoiceNumber?.value !== '') {
-        const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
-        if (creatingInvoiceNumber?.status === 'success') {
+      const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      const data = JSON.stringify({ paymentInstrument: 'Invoice' });
+      const setupInvoice = await putApiData(url, data, defaultHeaders);
+      if (setupInvoice?.status === 'error') {
+        showNotification('Error setting Invoice as payment Method for this Order.', 'error');
+      }
+      if (setupInvoice?.status === 'success') {
+        showNotification('Invoice set as payment Method for this Order.', 'success');
+
+        const invoiceNumber = document.querySelector('#invoiceNumber');
+        if (invoiceNumber?.value !== '') {
+          const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
+          if (creatingInvoiceNumber?.status === 'success') {
+            const getBasketForOrder = await getBasketDetails();
+            if (getBasketForOrder?.status === 'success') {
+              const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
+              if (submittingOrder?.data?.data?.id) {
+                sessionStorage.removeItem('submittedOrderData');
+                sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                sessionStorage.removeItem('productDetailObject');
+                sessionStorage.removeItem('basketData');
+                window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+              }
+            }
+          }
+        } else {
           const getBasketForOrder = await getBasketDetails();
           if (getBasketForOrder?.status === 'success') {
             const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
@@ -1376,35 +1404,111 @@ export const changeStep = async (step) => {
             }
           }
         }
-      } else {
-        const getBasketForOrder = await getBasketDetails();
-        if (getBasketForOrder?.status === 'success') {
-          const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
-          if (submittingOrder?.data?.data?.id) {
-            sessionStorage.removeItem('submittedOrderData');
-            sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-            sessionStorage.removeItem('productDetailObject');
-            sessionStorage.removeItem('basketData');
-            window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-          }
-        }
       }
     }
 
     if (getSelectedPaymentMethod?.value === 'stripe') {
-      const formToSubmit = document.querySelector('#newStripeCardForm');
-      const formData = new FormData(formToSubmit);
-      const formObject = {};
-      formData.forEach((value, key) => {
-        formObject[key] = value;
-      });
+      // const formToSubmit = document.querySelector('#newStripeCardForm');
+      // const formData = new FormData(formToSubmit);
+      // const formObject = {};
+      // formData.forEach((value, key) => {
+      //   formObject[key] = value;
+      // });
 
-      const newStripeCardFormResponse = await submitForm(
-        '#newStripeCardForm',
-        'customers/-/myAddresses',
-        'POST',
-        formObject,
+      // const newStripeCardFormResponse = await submitForm(
+      //   '#newStripeCardForm',
+      //   'customers/-/myAddresses',
+      //   'POST',
+      //   formObject,
+      // );
+      // setup intent when user select the stripe as payment method
+      const url = `${baseURL}baskets/current/setup-intent`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
       );
+      const data = JSON.stringify({});
+      const setuptIntent = await putApiData(url, data, defaultHeaders);
+
+      if (setuptIntent.status === 'error') {
+        removePreLoader();
+        showNotification('Error setting Stripe.', 'error');
+        return false;
+      }
+      if (setuptIntent.status === 'success') {
+        // showNotification('Stripe set as payment Method for this Order.', 'success');
+
+        // get payment intent
+        const paymentIntentUrl = `${baseURL}baskets/current/payment-intent`;
+        const paymentIntentHeaders = new Headers();
+        paymentIntentHeaders.append('Content-Type', 'Application/json');
+        paymentIntentHeaders.append(
+          'authentication-token',
+          authenticationToken.access_token,
+        );
+        const getPaymentIntent = await getApiData(paymentIntentUrl, paymentIntentHeaders);
+        if (getPaymentIntent?.status === 'success') {
+          console.log(getPaymentIntent);
+
+          // post card payment intent
+          const pIntentUrl = `${baseURL}baskets/current/payment-intent`;
+          const pIntentHeaders = new Headers();
+          pIntentHeaders.append('Content-Type', 'Application/json');
+          pIntentHeaders.append(
+            'authentication-token',
+            authenticationToken.access_token,
+          );
+          const pIntentBody = JSON.stringify({ type: 'card' });
+          const pIntent = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
+          if (pIntent?.status === 'success') {
+            console.log(pIntent);
+
+            // set payment intent
+            const sIntentUrl = `${baseURL}baskets/current/setup-intent`;
+            const sIntentHeaders = new Headers();
+            sIntentHeaders.append('Content-Type', 'Application/json');
+            sIntentHeaders.append(
+              'authentication-token',
+              authenticationToken.access_token,
+            );
+            const sIntentBody = JSON.stringify({});
+            const setupIntent = await postApiData(sIntentUrl, sIntentBody, sIntentHeaders);
+            if (setupIntent?.status === 'success') {
+              console.log(setupIntent);
+
+              // create payment intent
+              const createPIUrl = `${baseURL}baskets/current/payment-instruments?include=paymentMethod`;
+              const createPIHeaders = new Headers();
+              createPIHeaders.append('Content-Type', 'Application/json');
+              pIntentHeaders.append(
+                'authentication-token',
+                authenticationToken.access_token,
+              );
+              const createPIBody = JSON.stringify(
+                {
+                  paymentMethod: 'STRIPE_PAYMENT',
+                  parameters: [
+                    {
+                      name: 'paymentIntentID',
+                      value: `${pIntent?.data?.id}`,
+                    },
+                    {
+                      name: 'token',
+                      value: `${pIntent?.data?.client_secret}`,
+                    },
+                  ],
+                },
+              );
+              const createPI = await postApiData(createPIUrl, createPIBody, createPIHeaders);
+              if (createPI?.status === 'success') {
+                console.log(createPI);
+              }
+            }
+          }
+        }
+      }
     }
   }
   if (activeTab && activeTab === 'shippingMethods') {

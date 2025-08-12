@@ -102,7 +102,9 @@ export async function userRegister(data = {}) {
 export async function userLogin(type, data = {}) {
   showPreLoader();
   let loginData = {};
+  const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
   sessionStorage.clear();
+  sessionStorage.setItem('basketData', JSON.stringify(getCurrentBasketData));
   try {
     if (type === 'customer' && data) {
       loginData = {
@@ -154,7 +156,7 @@ export async function userLogin(type, data = {}) {
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
-        const basketData = await getBasketDetails();
+        const basketData = await getBasketDetails(type);
 
         if (basketData.status === 'success') {
           const useAddressObject = {};
