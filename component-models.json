@@ -410,13 +410,6 @@
         "label": "Description"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "description",
-        "value": "",
-        "label": "Description Text"
-      },
-      {
         "component": "select",
         "name": "descriptionType",
         "label": "Description Type",
