@@ -10,7 +10,7 @@ export default async function decorate(block) {
   if (orderId) {
     const orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
-    orderDetails.data.attributes.forEach((item) => {
+    orderDetails?.data?.attributes?.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
         notes = item.value;
       }
