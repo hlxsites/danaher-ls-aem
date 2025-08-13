@@ -61,6 +61,8 @@
         "image",
         "title",
         "article-info",
+        "embed",
+        "form",
         "mini-teasers"
       ]
     }

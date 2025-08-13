@@ -79,6 +79,12 @@
     ]
   },
   {
+    "id": "banner",
+    "components": [
+      "  "
+    ]
+  },
+  {
     "id": "body-banner",
     "components": [
       ""
@@ -100,6 +106,12 @@
     ]
   },
   {
+    "id": "carousel",
+    "components": [
+      " "
+    ]
+  },
+  {
     "id": "columns",
     "components": [
       "column"
@@ -112,6 +124,8 @@
       "image",
       "title",
       "article-info",
+      "embed",
+      "form",
       "mini-teasers"
     ]
   },

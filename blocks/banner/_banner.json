@@ -97,5 +97,10 @@
       ]
     }
   ],
-  "filters": [ ]
+  "filters": [
+    {
+      "id": "banner",
+      "components": ["  "]
+    } 
+  ]
 }
