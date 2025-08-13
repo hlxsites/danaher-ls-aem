@@ -304,25 +304,27 @@ export default async function decorate(block) {
     class: 'border-t border-gray-200 p-7 pt-4 flex justify-end items-center bg-white shadow-inner',
   });
   const viewBtn = button({
-    class: 'px-5 py-2 rounded bg-purple-700 text-white font-semibold shadow hover:bg-purple-800 transition',
+    class: 'results-count px-5 py-2 rounded bg-purple-700 text-white font-semibold shadow hover:bg-purple-800 transition',
     type: 'button',
   }, 'View Results (0)');
   panelFooter.append(viewBtn);
   sidePanel.append(panelFooter);
 
-  function updateViewCount() {
-    let total = 0;
-    if (resultList.state.searchResponse
-      && typeof resultList.state.searchResponse.totalCountFiltered === 'number') {
-      total = resultList.state.searchResponse.totalCountFiltered;
-    } else if (resultList.state.searchResponse
-      && typeof resultList.state.searchResponse.totalCount === 'number') {
-      total = resultList.state.searchResponse.totalCount;
-    } else if (Array.isArray(resultList.state.results)) {
-      total = resultList.state.results.length;
+function updateViewCount() {
+  let total = 0;
+  const response = engine.state.search.response;
+
+  if (response) {
+    if (typeof response.totalCountFiltered === 'number') {
+      total = response.totalCountFiltered;
+    } else if (typeof response.totalCount === 'number') {
+      total = response.totalCount;
     }
-    viewBtn.textContent = `View Results (${total})`;
   }
+
+  viewBtn.textContent = `View Results (${total})`;
+}
+
 
   // -----------------------------
   // Drawer open/close
