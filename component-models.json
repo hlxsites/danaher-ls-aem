@@ -932,8 +932,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "miniTeasersText",
-        "label": "Mini Teasers Text"
+        "name": "miniTeasers",
+        "label": "Mini Teasers"
       },
       {
         "component": "select",
