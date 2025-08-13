@@ -35,7 +35,7 @@ export default async function decorate(block) {
           class:
             'self-stretch justify-start text-gray-900 text-3xl font-semibold leading-10',
         },
-        `Order number: ${orderDetails.data.documentNumber}`,
+        `Order number: ${orderDetails?.data?.documentNumber}`,
       ),
       div(
         {
