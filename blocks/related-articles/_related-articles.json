@@ -1,21 +1,97 @@
 {
-    "definitions": [
-      {
-          "title": "Related-Articles",
-          "id": "related-articles",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Related-Articles",
-                  "model": "related-articles"
-                }
-              }
+  "definitions": [
+    {
+      "title": "Related-Articles",
+      "id": "related-articles",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Related-Articles",
+              "model": "related-articles"
             }
           }
         }
-    ],
-    "models": [    ],
-    "filters": [    ]
-  }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "related-articles",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "articleType",
+          "label": "Article Type",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "articleTopics",
+          "label": "Article Topics",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "url",
+          "label": "Current Article URL",
+          "value": ""
+        },
+        {
+          "component": "reference",
+          "valueType": "List",
+          "name": "articles",
+          "label": "Filtered Articles",
+          "multi": true,
+          "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "title",
+              "label": "Title",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "path",
+              "label": "Path",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "type",
+              "label": "Type",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "topics",
+              "label": "Topics",
+              "value": ""
+            },
+            {
+              "component": "date-time",
+              "valueType": "date-time",
+              "name": "publishDate",
+              "label": "Publish Date",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "related-articles",
+      "components": []
+    }
+  ]
+}

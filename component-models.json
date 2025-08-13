@@ -298,16 +298,54 @@
     "id": "article-info",
     "fields": [
       {
-        "component": "date-time",
-        "valueType": "date",
-        "name": "publishdate",
-        "label": "Publish Date",
+        "component": "text",
+        "valueType": "string",
+        "name": "authorName",
+        "label": "Author Name",
         "value": ""
       },
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "timetoread",
+        "component": "text",
+        "valueType": "string",
+        "name": "authorTitle",
+        "label": "Author Title",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "Picture",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleOpco",
+        "label": "Article Opco",
+        "value": ""
+      },
+      {
+        "component": "date-time",
+        "valueType": "date-time",
+        "name": "publishDate",
+        "label": "Date",
+        "displayFormat": null,
+        "valueFormat": null,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readingTime",
         "label": "Reading Time",
         "value": ""
       }
@@ -332,15 +370,75 @@
         "component": "text",
         "valueType": "string",
         "name": "banner",
-        "value": "",
         "label": "Banner"
+      },
+      {
+        "component": "select",
+        "name": "bannerType",
+        "label": "Banner Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "description",
-        "value": "",
         "label": "Description"
+      },
+      {
+        "component": "select",
+        "name": "descriptionType",
+        "label": "Description Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       }
     ]
   },
@@ -416,8 +514,57 @@
         "component": "text",
         "valueType": "string",
         "name": "tagName",
-        "value": "",
-        "label": "Tag Name"
+        "value": "topics",
+        "label": "Tag Category (e.g. topics, solutions)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "options": [
+          {
+            "name": "Default (Articles)",
+            "value": ""
+          },
+          {
+            "name": "Application",
+            "value": "application"
+          },
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Library",
+            "value": "library"
+          },
+          {
+            "name": "New Lab",
+            "value": "new-lab"
+          }
+        ]
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "pagination",
+        "label": "Enable Pagination",
+        "value": true
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "filters",
+        "label": "Enable Filters",
+        "value": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceIndex",
+        "label": "Custom Index Path",
+        "value": "/us/en/article-index.json"
       }
     ]
   },
@@ -534,10 +681,28 @@
     "id": "columns",
     "fields": [
       {
+        "component": "select",
+        "name": "rows",
+        "label": "Number of Columns",
+        "valueType": "string",
+        "default": "2",
+        "options": [
+          {
+            "name": "2 Columns",
+            "value": "2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "3"
+          }
+        ]
+      },
+      {
         "component": "multiselect",
         "name": "classes",
-        "label": "Select Ratio",
+        "label": "Select Ratio (only for 2 columns)",
         "valueType": "string",
+        "default": "fiftyfifty",
         "options": [
           {
             "name": "70/30 Split",
@@ -546,28 +711,12 @@
           {
             "name": "30/70 Split",
             "value": "thirtyseventy"
-          },
-          {
-            "name": "50/50 Split",
-            "value": "fiftyfifty"
-          },
-          {
-            "name": "25/75 Split",
-            "value": "twentyfiveseventyfive"
-          },
-          {
-            "name": "75/25 Split",
-            "value": "seventyfivetwentyfive"
-          },
-          {
-            "name": "40/60 Split",
-            "value": "fortysixty"
-          },
-          {
-            "name": "60/40 Split",
-            "value": "sixtyforty"
           }
-        ]
+        ],
+        "condition": {
+          "field": "rows",
+          "equals": "2"
+        }
       }
     ]
   },
@@ -1281,7 +1430,129 @@
   },
   {
     "id": "recent-articles",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Articles List",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "related-articles",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "related-category",
@@ -1419,6 +1690,18 @@
     ]
   },
   {
+    "id": "social-media",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "tabs-container",
     "fields": [
       {
@@ -1427,6 +1710,76 @@
         "value": "",
         "label": "Container Id",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tags-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
       }
     ]
   },
