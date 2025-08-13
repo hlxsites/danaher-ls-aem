@@ -2,9 +2,11 @@ import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
 import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { loadStripeScript } from '../../scripts/stripe_utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
+  await loadStripeScript('https://js.stripe.com/v3/');
   document.querySelector('main')?.classList.add('bg-checkout');
   const authenticationToken = await getAuthenticationToken();
 

@@ -238,9 +238,9 @@ const shippingMethodsModule = async () => {
             'aria-label': 'notes',
             label: 'Notes',
             placeholder: 'Add a note',
-            value: `${basketShippingNotes}`,
+            value: basketShippingNotes || '',
           },
-          `${basketShippingNotes}`,
+          basketShippingNotes || '',
         ),
       ),
     );

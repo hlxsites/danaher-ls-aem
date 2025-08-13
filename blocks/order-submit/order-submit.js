@@ -10,7 +10,7 @@ export default async function decorate(block) {
   if (orderId) {
     const orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
     let notes = '';
-    orderDetails.data.attributes.forEach((item) => {
+    orderDetails?.data?.attributes?.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
         notes = item.value;
       }
@@ -51,7 +51,8 @@ export default async function decorate(block) {
     const notesValue = () => {
       const notesDiv = div(
         {
-          class: '',
+          class: `${!orderDetails?.data?.attributes[0]?.value ? 'hidden' : ''}
+    }`,
         },
         div(
           {
@@ -64,7 +65,7 @@ export default async function decorate(block) {
             class:
               'w-[744px] justify-start text-gray-700 text-base font-extralight',
           },
-          orderDetails.data.attributes[0].value,
+          orderDetails?.data?.attributes[0]?.value || '',
         ),
       );
 
@@ -115,7 +116,7 @@ export default async function decorate(block) {
                     class:
                       'w-80 justify-start text-gray-700 text-base font-extralight',
                   },
-                  `${orderDetails?.included?.commonShippingMethod?.STD_GROUND?.name}`,
+                  `${ orderDetails?.included?.commonShippingMethod?.STD_GROUND?.name } `,
                 ),
                 div(
                   {

@@ -3,13 +3,15 @@ import {
 } from '../../scripts/common-utils.js';
 import {
   h2, h5, div, p, span, form,
-  h3,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { putApiData } from '../../scripts/api-utils.js';
 import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
+import {
+  loadStripe, getPaymentIntent, postPaymentIntent, createPaymentInstrument, assignPaymentInstrument, setupPaymentIntent,
+} from '../../scripts/stripe_utils.js';
 import { getCommerceBase } from '../../scripts/commerce.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
+
 /*
  :::::::::::::::
  generates the shipping address module for the checkout module/page
@@ -121,63 +123,69 @@ const paymentModule = async () => {
       ),
     );
 
-    const newStripeCardForm = form(
+    const newStripeCardForm = div(
       {
-        id: 'newStripeCardForm',
-        class:
-        'text-sm w-full bg-white box-border flex flex-col gap-5 p-6 items-start flex flex-col',
-        action: '',
-        method: 'POST',
+        id: 'newStripeCardFormWrapper',
+        class: 'bg-white p-6 w-full',
       },
-      h3(
+      form(
         {
-          class: 'text-2xl font-medium text-black leading-[48px] m-0 p-0',
+          id: 'newStripeCardForm',
+          class:
+            'text-sm w-full bg-white box-border flex flex-col gap-5 p-6 items-start flex flex-col',
+          action: '',
+          method: 'POST',
         },
-        'Credit Card Information',
-      ),
-      buildInputElement(
-        'name',
-        'Name on Card',
-        'text',
-        'name',
-        false,
-        true,
-        'name',
-        '',
-      ),
-      buildInputElement(
-        'cardNumber',
-        'Card Number',
-        'text',
-        'cardNumber',
-        false,
-        true,
-        'cardNumber',
-        '',
-      ),
-      div(
-        {
-          class: 'w-full flex gap-4',
-        },
+        // h3(
+        //   {
+        //     class: 'text-2xl font-medium text-black leading-[48px] m-0 p-0',
+        //   },
+        //   'Credit Card Information',
+        // ),
         buildInputElement(
-          'expirationDate',
-          'Expiration Date',
+          'name',
+          'Name on Card',
           'text',
-          'expirationDate',
+          'name',
           false,
           true,
-          'expirationDate',
+          'name',
           '',
         ),
         buildInputElement(
-          'cardCvc',
-          'CVC',
+          'cardNumber',
+          'Card Number',
           'text',
-          'cardCvc',
+          'cardNumber',
           false,
           true,
-          'cardCvc',
+          'cardNumber',
           '',
+        ),
+        div(
+          {
+            class: 'w-full flex gap-4',
+          },
+          buildInputElement(
+            'expirationDate',
+            'Expiration Date',
+            'text',
+            'expirationDate',
+            false,
+            true,
+            'expirationDate',
+            '',
+          ),
+          buildInputElement(
+            'cardCvc',
+            'CVC',
+            'text',
+            'cardCvc',
+            false,
+            true,
+            'cardCvc',
+            '',
+          ),
         ),
       ),
     );
@@ -207,7 +215,7 @@ const paymentModule = async () => {
     newStripeCardsWrapper.append(newStripeCardForm);
     stripeCardsContainer.append(newStripeCardsWrapper);
     stripeCardsContainer.append(savedStripeCardsWrapper);
-    allPaymentMethods?.data?.forEach((pm, ind) => {
+    allPaymentMethods?.data?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
         stripeCardsWrapper = div(
@@ -243,6 +251,67 @@ const paymentModule = async () => {
 
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
+
+        const stripe = await loadStripe();
+
+        const getPI = await getPaymentIntent();
+        if (getPI?.status === 'success') {
+          const postPI = await postPaymentIntent();
+          if (postPI?.status === 'success') {
+            const postPIData = postPI?.data || '';
+            const pIID = postPIData?.id || '';
+            const clientSecret = postPIData?.client_secret || '';
+            if (clientSecret) {
+              const appearance = {
+                theme: 'stripe',
+                variables: {
+                  colorPrimary: '#7523FF',
+                  colorBackground: '#ffffff',
+                  colorText: '#30313d',
+                  colorDanger: '#df1b41',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  spacingUnit: '4px',
+                  borderRadius: '4px',
+                },
+                rules: {
+                  '.AccordionItem': {
+                    border: 'none',
+                    boxShadow: 'none',
+                    paddingLeft: '0',
+                    paddingRight: '0',
+                  },
+                },
+              };
+
+              const options = {
+                setup_future_usage: 'off_session',
+                layout: {
+                  type: 'tabs',
+                  defaultCollapsed: false,
+                  radios: true,
+                  spacedAccordionItems: true,
+                },
+                fields: {
+                  cardDetails: {
+                    cardHolderName: 'auto',
+                  },
+                  billingDetails: {
+                    address: 'never',
+                  },
+                },
+              };
+              const stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
+              window.stripeElements = '';
+              window.stripeElements = stripeElements;
+              sessionStorage.removeItem('stripePIId');
+              sessionStorage.removeItem('stripeCS');
+              sessionStorage.setItem('stripePIId', pIID);
+              sessionStorage.setItem('stripeCS', clientSecret);
+              const paymentElements = stripeElements.create('payment', options);
+              paymentElements.mount('#newStripeCardFormWrapper');
+            }
+          }
+        }
       }
       if (pm?.id === 'Invoice') {
         const invoiceNumberWrapper = div(
@@ -328,6 +397,7 @@ const paymentModule = async () => {
             c.target.checked = false;
           }
           removePreLoader();
+          return true;
         }, 0);
       });
     }

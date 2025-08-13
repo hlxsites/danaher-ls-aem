@@ -1,4 +1,5 @@
 import { getCommerceBase } from './commerce.js';
+
 import {
   div,
   label,
@@ -39,6 +40,9 @@ import {
   updateBasketDetails,
   getProductDetailObject,
 } from '../blocks/cartlanding/cartSharedFile.js';
+import {
+  assignPaymentInstrument, createPaymentInstrument, getPaymentIntent, loadStripe,
+} from './stripe_utils.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -140,8 +144,7 @@ export function defaultAddress(address, type) {
             {
               class: 'text-black text-base ',
             },
-            `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
-              address?.postalCode ?? ''
+            `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${address?.postalCode ?? ''
             }`,
           ),
         ),
@@ -537,7 +540,7 @@ export async function getBasketDetails(userType = null) {
   });
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
-  if (basketData?.status === 'success' && userType != 'customer') return basketData;
+  if (basketData?.status === 'success' && userType !== 'customer') return basketData;
 
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
@@ -1279,6 +1282,63 @@ export const updatePoNumber = async (invoiceNumber) => {
 };
 /*
 *
+add selected card to order
+*
+*
+*/
+
+async function addCardToOrder(data = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const addCardToOrderUrl = `${baseURL}baskets/current/attributes`;
+  const addCardToOrderHeaders = new Headers();
+  addCardToOrderHeaders.append('Content-Type', 'Application/json');
+  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  addCardToOrderHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const addCardToOrderBody = JSON.stringify(data);
+  const response = await postApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+/*
+*
+update selected card to order
+*
+*
+*/
+
+async function updateCardToOrder(data = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const addCardToOrderUrl = `${baseURL}baskets/current/attributes/SelectedCard`;
+  const addCardToOrderHeaders = new Headers();
+  addCardToOrderHeaders.append('Content-Type', 'Application/json');
+  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  addCardToOrderHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const addCardToOrderBody = JSON.stringify(data);
+  const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+
+/*
+*
 *
  ::::::::::::::
  handle the interaction when user click on proceed button or the steps icons
@@ -1332,7 +1392,7 @@ export const changeStep = async (step) => {
       // window.location.href = '/us/en/e-buy/cartlanding';
       removePreLoader();
       showNotification('Invalid Basket', 'error');
-      return false;
+      // return false;
     }
     if (currentTab === 'submitOrder') {
       const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
@@ -1358,6 +1418,7 @@ export const changeStep = async (step) => {
     }
   }
   if (currentTab === 'submitOrder') {
+    const getBasketForOrder = await getBasketDetails();
     const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
     if (getSelectedPaymentMethod?.value === 'invoice') {
       const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
@@ -1379,7 +1440,6 @@ export const changeStep = async (step) => {
         if (invoiceNumber?.value !== '') {
           const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
           if (creatingInvoiceNumber?.status === 'success') {
-            const getBasketForOrder = await getBasketDetails();
             if (getBasketForOrder?.status === 'success') {
               const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
               if (submittingOrder?.data?.data?.id) {
@@ -1392,7 +1452,6 @@ export const changeStep = async (step) => {
             }
           }
         } else {
-          const getBasketForOrder = await getBasketDetails();
           if (getBasketForOrder?.status === 'success') {
             const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
             if (submittingOrder?.data?.data?.id) {
@@ -1401,114 +1460,167 @@ export const changeStep = async (step) => {
               sessionStorage.removeItem('productDetailObject');
               sessionStorage.removeItem('basketData');
               window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+            } else {
+              removePreLoader();
+              showNotification('Error submitting order.', 'error');
+              return false;
             }
           }
+          removePreLoader();
+          showNotification('Error getting basket.', 'error');
+          return false;
         }
       }
     }
 
     if (getSelectedPaymentMethod?.value === 'stripe') {
-      // const formToSubmit = document.querySelector('#newStripeCardForm');
-      // const formData = new FormData(formToSubmit);
-      // const formObject = {};
-      // formData.forEach((value, key) => {
-      //   formObject[key] = value;
-      // });
+      const stripe = await loadStripe();
+      const { stripeElements } = window;
+      const elements = stripeElements;
+      // payment intent ID
+      const pIID = sessionStorage.getItem('stripePIId');
+      // client secret
+      const cS = sessionStorage.getItem('stripeCS');
+      const paymentMethod = 'STRIPE_PAYMENT';
+      const createInstrument = await createPaymentInstrument(paymentMethod, pIID, cS);
+      if (createInstrument?.status === 'success') {
+        console.log('Instrumenting...', createInstrument);
 
-      // const newStripeCardFormResponse = await submitForm(
-      //   '#newStripeCardForm',
-      //   'customers/-/myAddresses',
-      //   'POST',
-      //   formObject,
-      // );
-      // setup intent when user select the stripe as payment method
-      const url = `${baseURL}baskets/current/setup-intent`;
-      const defaultHeaders = new Headers();
-      defaultHeaders.append('Content-Type', 'Application/json');
-      defaultHeaders.append(
-        'authentication-token',
-        authenticationToken.access_token,
-      );
-      const data = JSON.stringify({});
-      const setuptIntent = await putApiData(url, data, defaultHeaders);
+        const instrumentId = createInstrument?.data?.data?.id;
+        if (instrumentId) {
+          const assignInstrument = await assignPaymentInstrument(instrumentId);
+          if (assignInstrument?.status === 'success') {
+            console.log('Assigning...', assignInstrument);
 
-      if (setuptIntent.status === 'error') {
+            const getPI = await getPaymentIntent();
+            if (getPI?.status === 'success') {
+              console.log('Getting Intent...', getPI);
+              const gPIID = JSON.stringify(getPI?.data?.data[0]);
+              if (gPIID) {
+                const addData = {
+                  name: 'SelectedCard',
+                  value: gPIID,
+                  type: 'String',
+                };
+                const addingCardToOrder = await addCardToOrder(addData);
+
+                if (addingCardToOrder?.status === 'success') {
+                  console.log('Adding...', addingCardToOrder);
+                  const confirmPayment = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                      return_url: `${window.location.origin}/checkout`,
+                      payment_method_data: {
+                        billing_details: {
+                          name: 'John Doe', // full name or combine first + last
+                          email: 'john@example.com',
+                          address: {
+                            country: 'US', // required if address collection is disabled
+                            line1: '123 Main St',
+                            city: 'New York',
+                            state: 'NY',
+                            postal_code: '10001',
+                          },
+                        },
+                      },
+                    },
+                    redirect: 'if_required',
+                  });
+                  if (confirmPayment?.error) {
+                    removePreLoader();
+                    showNotification(confirmPayment.error.message, 'error');
+                    return false;
+                  }
+
+                  if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
+                    if (getBasketForOrder?.status === 'success') {
+                      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+                      if (submittingOrder?.data?.data?.id) {
+                        sessionStorage.removeItem('submittedOrderData');
+                        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                        sessionStorage.removeItem('productDetailObject');
+                        sessionStorage.removeItem('basketData');
+                        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+                      } else {
+                        removePreLoader();
+                        showNotification('Error submitting order.', 'error');
+                        return false;
+                      }
+                    }
+                  }
+                  removePreLoader();
+                  showNotification('Error getting basket.', 'error');
+                  return false;
+                }
+                if (addingCardToOrder?.status === 'error') {
+                  const updatingCardToOrder = await updateCardToOrder(addData);
+                  console.log('Updating Card ....', updatingCardToOrder);
+                  const confirmPayment = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                      return_url: `${window.location.origin}/checkout`,
+                      payment_method_data: {
+                        billing_details: {
+                          name: 'John Doe', // full name or combine first + last
+                          email: 'john@example.com',
+                          address: {
+                            country: 'US', // required if address collection is disabled
+                            line1: '123 Main St',
+                            city: 'New York',
+                            state: 'NY',
+                            postal_code: '10001',
+                          },
+                        },
+                      },
+                    },
+                    redirect: 'if_required',
+                  });
+                  if (confirmPayment?.error) {
+                    removePreLoader();
+                    showNotification(confirmPayment.error.message, 'error');
+                    return false;
+                  }
+                  if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
+                    console.log('Payment Confirmed...');
+
+                    const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+                    if (submittingOrder?.data?.data?.id) {
+                      sessionStorage.removeItem('submittedOrderData');
+                      sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                      sessionStorage.removeItem('productDetailObject');
+                      sessionStorage.removeItem('basketData');
+                      window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+                    } else {
+                      removePreLoader();
+                      showNotification('Error submitting order.', 'error');
+                      return false;
+                    }
+                  }
+
+                  removePreLoader();
+                  showNotification('Error getting basket.', 'error');
+                  return false;
+                }
+              }
+              removePreLoader();
+              showNotification('Error Processing Payment.', 'error');
+              return false;
+            }
+            removePreLoader();
+            showNotification('Error Processing Payment.', 'error');
+            return false;
+          }
+          removePreLoader();
+          showNotification('Error Processing Payment.', 'error');
+          return false;
+        }
         removePreLoader();
-        showNotification('Error setting Stripe.', 'error');
+        showNotification('Error Processing Payment.', 'error');
         return false;
       }
-      if (setuptIntent.status === 'success') {
-        // showNotification('Stripe set as payment Method for this Order.', 'success');
-
-        // get payment intent
-        const paymentIntentUrl = `${baseURL}baskets/current/payment-intent`;
-        const paymentIntentHeaders = new Headers();
-        paymentIntentHeaders.append('Content-Type', 'Application/json');
-        paymentIntentHeaders.append(
-          'authentication-token',
-          authenticationToken.access_token,
-        );
-        const getPaymentIntent = await getApiData(paymentIntentUrl, paymentIntentHeaders);
-        if (getPaymentIntent?.status === 'success') {
-          console.log(getPaymentIntent);
-
-          // post card payment intent
-          const pIntentUrl = `${baseURL}baskets/current/payment-intent`;
-          const pIntentHeaders = new Headers();
-          pIntentHeaders.append('Content-Type', 'Application/json');
-          pIntentHeaders.append(
-            'authentication-token',
-            authenticationToken.access_token,
-          );
-          const pIntentBody = JSON.stringify({ type: 'card' });
-          const pIntent = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
-          if (pIntent?.status === 'success') {
-            console.log(pIntent);
-
-            // set payment intent
-            const sIntentUrl = `${baseURL}baskets/current/setup-intent`;
-            const sIntentHeaders = new Headers();
-            sIntentHeaders.append('Content-Type', 'Application/json');
-            sIntentHeaders.append(
-              'authentication-token',
-              authenticationToken.access_token,
-            );
-            const sIntentBody = JSON.stringify({});
-            const setupIntent = await postApiData(sIntentUrl, sIntentBody, sIntentHeaders);
-            if (setupIntent?.status === 'success') {
-              console.log(setupIntent);
-
-              // create payment intent
-              const createPIUrl = `${baseURL}baskets/current/payment-instruments?include=paymentMethod`;
-              const createPIHeaders = new Headers();
-              createPIHeaders.append('Content-Type', 'Application/json');
-              pIntentHeaders.append(
-                'authentication-token',
-                authenticationToken.access_token,
-              );
-              const createPIBody = JSON.stringify(
-                {
-                  paymentMethod: 'STRIPE_PAYMENT',
-                  parameters: [
-                    {
-                      name: 'paymentIntentID',
-                      value: `${pIntent?.data?.id}`,
-                    },
-                    {
-                      name: 'token',
-                      value: `${pIntent?.data?.client_secret}`,
-                    },
-                  ],
-                },
-              );
-              const createPI = await postApiData(createPIUrl, createPIBody, createPIHeaders);
-              if (createPI?.status === 'success') {
-                console.log(createPI);
-              }
-            }
-          }
-        }
-      }
+      removePreLoader();
+      showNotification('Error Processing Payment.', 'error');
+      return false;
     }
   }
   if (activeTab && activeTab === 'shippingMethods') {
@@ -1516,11 +1628,11 @@ export const changeStep = async (step) => {
 
     if (getShippingNotesField) {
       showPreLoader();
-      if (getShippingNotesField.value.trim() === '') {
-        getShippingNotesField.classList.add('border-red-500');
-        removePreLoader();
-        return false;
-      }
+      // check if shipping notes is empty
+      // if (getShippingNotesField.value.trim() === '') {
+      //   removePreLoader();
+      //   return false;
+      // }
       /*
  :::::::::::::
  get current basket details
@@ -1557,9 +1669,7 @@ export const changeStep = async (step) => {
  if basket has the shipping notes attribute and has value. Update the shipping notes
  :::::::::::::
 */
-          if (getShippingNotesField.classList.contains('border-red-500')) {
-            getShippingNotesField.classList.remove('border-red-500');
-          }
+
           const shippingNotesPayload = {
             name: 'GroupShippingNote',
             value: getShippingNotesField.value,
@@ -1570,12 +1680,13 @@ export const changeStep = async (step) => {
           );
           if (updateShippingNotesResponse.status === 'error') {
             removePreLoader();
-            getShippingNotesField.classList.add('border-red-500');
+            showNotification('Error updating shipping Notes.', 'error');
             return false;
           }
           if (updateShippingNotesResponse.status === 'success') {
             await updateBasketDetails();
             removePreLoader();
+            showNotification('Notes updated successfully.', 'success');
           }
         }
       } else {
@@ -1584,9 +1695,7 @@ export const changeStep = async (step) => {
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
-        if (getShippingNotesField.classList.contains('border-red-500')) {
-          getShippingNotesField.classList.remove('border-red-500');
-        }
+
         const shippingNotesPayload = {
           name: 'GroupShippingNote',
           value: getShippingNotesField.value,
@@ -1596,7 +1705,8 @@ export const changeStep = async (step) => {
           shippingNotesPayload,
         );
         if (setShippingNotesResponse.status === 'error') {
-          getShippingNotesField.classList.add('border-red-500');
+          showNotification('Error updating shipping Notes.', 'error');
+          return false;
         }
         if (setShippingNotesResponse.status === 'success') {
           await updateBasketDetails();
@@ -2161,9 +2271,9 @@ get price type if its net or gross
     if (getCheckoutSummaryData?.status === 'success') {
       checkoutSummaryData = getCheckoutSummaryData.data.data;
       discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
-      ?? '';
+        ?? '';
       discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
-      ?? '';
+        ?? '';
       discountPromoCode = discountDetails?.promotion ?? '';
       discountLabelData = await getPromotionDetails(discountPromoCode);
 
@@ -2177,9 +2287,9 @@ get price type if its net or gross
     if (getCheckoutSummaryData?.status === 'success') {
       checkoutSummaryData = getCheckoutSummaryData.data.data;
       discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
-      ?? '';
+        ?? '';
       discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
-      ?? '';
+        ?? '';
       discountPromoCode = discountDetails?.promotion ?? '';
       discountLabelData = await getPromotionDetails(discountPromoCode);
 
@@ -2206,11 +2316,10 @@ get price type if its net or gross
  ::::::::::::::::::::::::::::
   */
   const getTotalValue = (type) => {
-    const totalValue = `${
-      checkoutSummaryData?.totals[type][
-        checkoutPriceType === 'net' ? 'net' : 'gross'
-      ]?.value ?? ''
-    }`;
+    const totalValue = `${checkoutSummaryData?.totals[type][
+      checkoutPriceType === 'net' ? 'net' : 'gross'
+    ]?.value ?? ''
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2240,8 +2349,7 @@ get price type if its net or gross
         ? getTotalValue('grandTotal')
         : '$0',
       tax: checkoutSummaryData?.totals?.grandTotal
-        ? `${currencyCode}${
-          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+        ? `${currencyCode}${checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
         }`
         : '$0',
       taxExempt: '',
@@ -2269,8 +2377,7 @@ get price type if its net or gross
         ? getTotalValue('grandTotal')
         : '$0',
       tax: checkoutSummaryData?.totals?.grandTotal
-        ? `${currencyCode}${
-          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+        ? `${currencyCode}${checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
         }`
         : '$0',
       taxExempt: '',
@@ -2521,9 +2628,8 @@ get price type if its net or gross
             'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
-            ((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2590,7 +2696,7 @@ get price type if its net or gross
       if (
         getUseAddressesResponse?.data?.invoiceToAddress
         && getUseAddressesResponse?.data?.invoiceToAddress?.id
-          !== getUseAddressesResponse?.data?.commonShipToAddress?.id
+        !== getUseAddressesResponse?.data?.commonShipToAddress?.id
       ) {
         const invoiceToAddress = div(
           {
@@ -2614,22 +2720,21 @@ get price type if its net or gross
               },
               h5(
                 {
-                  class: `font-normal m-0 p-0 ${
-                    getUseAddressesResponse?.data?.invoiceToAddress
-                      ?.companyName2
-                      ? ''
-                      : 'hidden'
-                  }`,
+                  class: `font-normal m-0 p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
+                    ?.companyName2
+                    ? ''
+                    : 'hidden'
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
-                  ?? '',
+                ?? '',
               ),
               p(
                 {
                   class: 'text-black text-base  m-0 p-0',
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
-                  ?? '',
+                ?? '',
               ),
               p(
                 {
@@ -2641,15 +2746,12 @@ get price type if its net or gross
                 {
                   class: 'text-black text-base  m-0 p-0',
                 },
-                `${
-                  getUseAddressesResponse?.data?.invoiceToAddress
-                    ?.mainDivision ?? ''
-                }, ${
-                  getUseAddressesResponse?.data?.invoiceToAddress
-                    ?.countryCode ?? ''
-                }, ${
-                  getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
-                  ?? ''
+                `${getUseAddressesResponse?.data?.invoiceToAddress
+                  ?.mainDivision ?? ''
+                }, ${getUseAddressesResponse?.data?.invoiceToAddress
+                  ?.countryCode ?? ''
+                }, ${getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
+                ?? ''
                 }`,
               ),
             ),
@@ -2713,15 +2815,12 @@ get price type if its net or gross
                 {
                   class: 'text-black text-base  m-0 p-0',
                 },
-                `${
-                  getUseAddressesResponse?.data?.commonShipToAddress
-                    ?.mainDivision ?? ''
-                }, ${
-                  getUseAddressesResponse?.data?.commonShipToAddress
-                    ?.countryCode ?? ''
-                }, ${
-                  getUseAddressesResponse?.data?.commonShipToAddress
-                    ?.postalCode ?? ''
+                `${getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.mainDivision ?? ''
+                }, ${getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.countryCode ?? ''
+                }, ${getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.postalCode ?? ''
                 }`,
               ),
             ),
@@ -2794,9 +2893,8 @@ export const cartItemsContainer = (cartItemValue) => {
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
-              logodivId.innerHTML = ` ${
-                itemToBeDisplayed[opcoBe[0]].length
-              } Items`;
+              logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length
+                } Items`;
             },
           );
         }
@@ -2890,14 +2988,14 @@ export const cartItemsContainer = (cartItemValue) => {
         div(
           {
             class:
-            'w-[150px] justify-start text-gray-500 text-base font-semibold item line-through',
+              'w-[150px] justify-start text-gray-500 text-base font-semibold item line-through',
           },
           `$${cartItemValue.listPrice.value}`,
         ),
         div(
           {
             class:
-            'unit-price w-[150px] justify-start text-black text-base',
+              'unit-price w-[150px] justify-start text-black text-base',
           },
           `$${cartItemValue.salePrice.value}`,
         ),
@@ -2952,7 +3050,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class: 'sm:w-64 w-[11rem] flex flex-col justify-center items-center text-black text-base font-semibold',
-        // id: `product-Quantity-${opcoBe[0]}`,
+          // id: `product-Quantity-${opcoBe[0]}`,
         },
         div(
           {
