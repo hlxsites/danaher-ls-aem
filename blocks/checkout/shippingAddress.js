@@ -917,7 +917,7 @@ export const shippingAddressModule = async () => {
      */
     if (
       getUseAddressesResponse?.status === 'success'
-      && getUseAddressesResponse?.data?.commonShipToAddress
+      && getUseAddressesResponse?.data?.commonShipToAddress?.length > 0
     ) {
       const showDefaultShippingAddress = defaultAddress(
         getUseAddressesResponse.data?.commonShipToAddress,
