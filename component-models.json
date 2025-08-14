@@ -372,7 +372,7 @@
     "fields": [
       {
         "component": "select",
-        "name": "item_tabType",
+        "name": "tabType",
         "label": "Type",
         "valueType": "string",
         "options": [
@@ -415,14 +415,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "tab_title",
+        "name": "tab-title",
         "value": "",
         "label": "Tab Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "tab_description",
+        "name": "tab-description",
         "value": "",
         "label": "Tab Description"
       }
