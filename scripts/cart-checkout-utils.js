@@ -1354,11 +1354,11 @@ export const changeStep = async (step) => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  const currentTab = step.target.getAttribute('data-tab');
-  const activeTab = step.target.getAttribute('data-activeTab');
+  const currentTab = step?.target?.getAttribute('data-tab') || step?.getAttribute('data-tab');
+  const activeTab = step?.target?.getAttribute('data-activeTab') || step?.getAttribute('data-activeTab');
   let validateData = '';
-
   if (currentTab === 'shippingMethods') {
+    localStorage.setItem('activeCheckoutTab', currentTab);
     showPreLoader();
     validateData = {
       adjustmentsAllowed: true,
@@ -1369,8 +1369,10 @@ export const changeStep = async (step) => {
       ],
     };
   }
+
   if (currentTab === 'payment') {
     showPreLoader();
+    localStorage.setItem('activeCheckoutTab', currentTab);
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1387,38 +1389,37 @@ export const changeStep = async (step) => {
   let validatingBasket = { status: 'success' };
   if (validateData !== '') {
     validatingBasket = await validateBasket(validateData);
-  }
-  if (validatingBasket?.status === 'error') {
+  } if (validatingBasket?.status === 'error') {
     if (currentTab === 'payment') {
-      // window.location.href = '/us/en/e-buy/cartlanding';
       removePreLoader();
       showNotification('Invalid Basket', 'error');
-      // return false;
+      return false;
     }
+
     if (currentTab === 'submitOrder') {
-      const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
-      const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
+      const checkMethods = document
+        .querySelector('#paymentMethodsWrapper input[type="radio"]:checked');
+
       if (!checkMethods) {
         showNotification('Please select Payment Method', 'error');
         return false;
       }
     }
-    // alert('In-valid basket');
+
     removePreLoader();
+    showNotification('Invalid Basket', 'error');
     return false;
   }
-  if (validatingBasket?.status === 'success') {
-    if (currentTab === 'submitOrder') {
-      const highlightPaymentMethods = document.querySelector('#paymentMethodsWrapper');
-      const checkMethods = highlightPaymentMethods.querySelector('input[type="radio"]:checked');
-      if (!checkMethods) {
-        removePreLoader();
-        showNotification('Please select Payment Method', 'error');
-        return false;
-      }
+
+  if (validatingBasket?.status === 'success' && currentTab === 'submitOrder') {
+    const checkMethods = document
+      .querySelector('#paymentMethodsWrapper input[type="radio"]:checked');
+
+    if (!checkMethods) {
+      removePreLoader();
+      showNotification('Please select Payment Method', 'error');
+      return false;
     }
-  }
-  if (currentTab === 'submitOrder') {
     const getBasketForOrder = await getBasketDetails();
     const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
     if (getSelectedPaymentMethod?.value === 'invoice') {
@@ -1553,103 +1554,6 @@ export const changeStep = async (step) => {
       }
     }
   }
-  if (activeTab && activeTab === 'shippingMethods') {
-    const getShippingNotesField = document.querySelector('#shippingNotes');
-
-    if (getShippingNotesField) {
-      showPreLoader();
-      // check if shipping notes is empty
-      // if (getShippingNotesField.value.trim() === '') {
-      //   removePreLoader();
-      //   return false;
-      // }
-      /*
- :::::::::::::
- get current basket details
- :::::::::::::
-*/
-      const getCurrentBasketDetails = await getBasketDetails();
-
-      /*
- :::::::::::::
- check if basket has the shipping notes attribute
- :::::::::::::
-*/
-      const getCurrentBasketAttributes = getCurrentBasketDetails?.data?.data?.attributes;
-
-      if (getCurrentBasketAttributes?.some(
-        (attr) => attr?.name === 'GroupShippingNote',
-      )
-      ) {
-        const getNotes = getCurrentBasketDetails.data.data.attributes?.find(
-          (attr) => attr?.name === 'GroupShippingNote',
-        );
-
-        /*
- :::::::::::::
- check if notes with same value esists
- :::::::::::::
-*/
-        if (
-          (getNotes?.name === 'GroupShippingNote')
-          && (getNotes?.value?.trim() !== getShippingNotesField?.value?.trim()) && (getShippingNotesField?.value?.trim() !== '')
-        ) {
-          /*
- :::::::::::::
- if basket has the shipping notes attribute and has value. Update the shipping notes
- :::::::::::::
-*/
-          if (getShippingNotesField.value.trim() !== '') {
-            const shippingNotesPayload = {
-              name: 'GroupShippingNote',
-              value: getShippingNotesField.value,
-              type: 'String',
-            };
-            const updateShippingNotesResponse = await updateShippingNotes(
-              shippingNotesPayload,
-            );
-            if (updateShippingNotesResponse.status === 'error') {
-              removePreLoader();
-              showNotification('Error updating shipping Notes.', 'error');
-              return false;
-            }
-            if (updateShippingNotesResponse.status === 'success') {
-              await updateBasketDetails();
-              removePreLoader();
-              showNotification('Notes updated successfully.', 'success');
-            }
-          }
-        }
-      } else {
-        /*
-  :::::::::::::
-  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
-  :::::::::::::
-  */
-        if (getShippingNotesField.value.trim() !== '') {
-          const shippingNotesPayload = {
-            name: 'GroupShippingNote',
-            value: getShippingNotesField.value,
-            type: 'String',
-          };
-          const setShippingNotesResponse = await setShippingNotes(
-            shippingNotesPayload,
-          );
-          if (setShippingNotesResponse.status === 'error') {
-            showNotification('Error updating shipping Notes.', 'error');
-            return false;
-          }
-          if (setShippingNotesResponse.status === 'success') {
-            await updateBasketDetails();
-            removePreLoader();
-          }
-          return true;
-        }
-      }
-    } else {
-      // return false;
-    }
-  }
   const activateModule = document.querySelector(
     `#checkout-${currentTab}-module`,
   );
@@ -1672,6 +1576,9 @@ export const changeStep = async (step) => {
     }
   }
 
+  // Persist active tab in localStorage
+  localStorage.setItem('activeCheckoutTab', currentTab);
+
   /*
   ::::::::::::::
   Update line segments between steps
@@ -1681,6 +1588,14 @@ export const changeStep = async (step) => {
     case 'shippingAddress':
       segment1.style.width = '0';
       segment2.style.width = '0';
+      document.querySelectorAll('.checkout-step')?.forEach((st) => {
+        if (st?.classList.contains('active')) {
+          st.classList.remove('active');
+        }
+        if (st.id === 'checkout-shippingAddress') {
+          st.classList.add('active');
+        }
+      });
       proceedButton.setAttribute('data-tab', 'shippingMethods');
       proceedButton.setAttribute('data-activeTab', 'shippingAddress');
       proceedButton.textContent = 'Proceed to Shipping';
@@ -1688,6 +1603,17 @@ export const changeStep = async (step) => {
     case 'shippingMethods':
       segment1.style.width = '50%';
       segment2.style.width = '0';
+      document.querySelectorAll('.checkout-step')?.forEach((st) => {
+        if (st?.classList.contains('active')) {
+          st.classList.remove('active');
+        }
+        if (st.id === 'checkout-shippingMethods') {
+          st.classList.add('active');
+        }
+        if (st.id === 'checkout-shippingAddress') {
+          st.classList.add('active');
+        }
+      });
       proceedButton.textContent = 'Proceed to Payment';
       proceedButton.setAttribute('data-activeTab', 'shippingMethods');
       proceedButton.setAttribute('data-tab', 'payment');
@@ -1695,6 +1621,12 @@ export const changeStep = async (step) => {
     case 'payment':
       segment1.style.width = '50%';
       segment2.style.width = '50%';
+
+      document.querySelectorAll('.checkout-step')?.forEach((st) => {
+        if (!st?.classList.contains('active')) {
+          st.classList.add('active');
+        }
+      });
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.textContent = 'Place your order';
@@ -1702,6 +1634,11 @@ export const changeStep = async (step) => {
     case 'submitOrder':
       segment1.style.width = '50%';
       segment2.style.width = '50%';
+      document.querySelectorAll('.checkout-step')?.forEach((st) => {
+        if (!st?.classList.contains('active')) {
+          st.classList.add('active');
+        }
+      });
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.setAttribute('data-activeTab', 'submitOrder');
       proceedButton.textContent = 'Place your order';
@@ -2251,7 +2188,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2561,7 +2498,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2656,7 +2593,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
@@ -2826,7 +2763,7 @@ export const cartItemsContainer = (cartItemValue) => {
                 `product-Quantity-${opcoBe[0]}`,
               );
               logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length
-                } Items`;
+              } Items`;
             },
           );
         }

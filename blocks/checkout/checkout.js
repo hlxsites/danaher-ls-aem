@@ -3,6 +3,7 @@ import { progressModule, initializeModules } from './checkoutUtilities.js';
 import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { loadStripeScript } from '../../scripts/stripe_utils.js';
+import { changeStep } from '../../scripts/cart-checkout-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
@@ -48,13 +49,6 @@ export default async function decorate(block) {
   });
 
   const progressBar = progressModule();
-  checkoutWrapper.appendChild(progressBar);
-  /*
-  ::::::::::::::
-  Append container to document body
-  ::::::::::::::
-  */
-  block.appendChild(checkoutWrapper);
 
   /*
   ::::::::::::::
@@ -73,7 +67,18 @@ export default async function decorate(block) {
           modulesContainer.appendChild(module);
         }
       });
-      removePreLoader();
+
+      let loadTab = 'shippingAddress';
+      if (localStorage.getItem('activeCheckoutTab')) {
+        loadTab = localStorage.getItem('activeCheckoutTab');
+      }
+
+      const tabButton = progressBar?.querySelector(`#checkout-${loadTab}`);
+      changeStep(tabButton);
+
+      setTimeout(() => {
+        removePreLoader();
+      }, 2000);
     })
     .catch((error) => ({
       status: 'error',
@@ -81,6 +86,13 @@ export default async function decorate(block) {
     }));
 
   modulesContent.append(modulesContainer);
+  checkoutWrapper.appendChild(progressBar);
   checkoutWrapper.append(modulesContent);
+  /*
+  ::::::::::::::
+  Append container to document body
+  ::::::::::::::
+  */
+  block.appendChild(checkoutWrapper);
   return {};
 }

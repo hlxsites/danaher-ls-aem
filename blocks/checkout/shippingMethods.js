@@ -24,6 +24,7 @@ import {
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
 async function setShippingNotesOnBlur() {
+  showPreLoader();
   const getShippingNotesField = document.querySelector('#shippingNotes');
 
   if (getShippingNotesField) {

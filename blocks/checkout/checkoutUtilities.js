@@ -76,8 +76,6 @@ export const loadModule = async (module) => {
   const moduleHeader = div({
     class: `checkout-${module}-header`,
   });
-  // const moduleTitle = h2({});
-  // const moduleDescription = p({});
   if (module === 'shippingAddress') {
     const loadShippingAddressModule = await shippingAddressModule();
 
@@ -96,8 +94,6 @@ export const loadModule = async (module) => {
     const loadPaymentModule = await paymentModule();
     moduleContent.append(loadPaymentModule);
   }
-  // moduleHeader.append(moduleTitle);
-  // moduleHeader.append(moduleDescription);
 
   moduleWrapper.append(moduleHeader);
 
