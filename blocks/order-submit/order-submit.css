@@ -1,5 +1,53 @@
+.bg-danaherpurple-50 {
+  background-color: #EADEFF
+}
+
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.order-submit-wrapper :is(.m-0) {
+  margin: 0px
+}
+
+.order-submit-wrapper :is(.m-\[5px\]) {
+  margin: 5px
+}
+
+.order-submit-wrapper :is(.m-\[7px\]) {
+  margin: 7px
+}
+
+.order-submit-wrapper :is(.mb-3) {
+  margin-bottom: 0.75rem
+}
+
 .order-submit-wrapper :is(.ml-\[25px\]) {
   margin-left: 25px
+}
+
+.order-submit-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
+.order-submit-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
+}
+
+.order-submit-wrapper :is(.mt-4) {
+  margin-top: 1rem
+}
+
+.order-submit-wrapper :is(.box-border) {
+  box-sizing: border-box
 }
 
 .order-submit-wrapper :is(.block) {
@@ -18,8 +66,44 @@
   display: none
 }
 
+.order-submit-wrapper :is(.h-10) {
+  height: 2.5rem
+}
+
+.order-submit-wrapper :is(.h-12) {
+  height: 3rem
+}
+
+.order-submit-wrapper :is(.h-28) {
+  height: 7rem
+}
+
+.order-submit-wrapper :is(.h-\[0px\]) {
+  height: 0px
+}
+
+.order-submit-wrapper :is(.h-auto) {
+  height: auto
+}
+
+.order-submit-wrapper :is(.w-20) {
+  width: 5rem
+}
+
+.order-submit-wrapper :is(.w-24) {
+  width: 6rem
+}
+
 .order-submit-wrapper :is(.w-28) {
   width: 7rem
+}
+
+.order-submit-wrapper :is(.w-48) {
+  width: 12rem
+}
+
+.order-submit-wrapper :is(.w-64) {
+  width: 16rem
 }
 
 .order-submit-wrapper :is(.w-80) {
@@ -30,6 +114,22 @@
   width: 24rem
 }
 
+.order-submit-wrapper :is(.w-\[11rem\]) {
+  width: 11rem
+}
+
+.order-submit-wrapper :is(.w-\[150px\]) {
+  width: 150px
+}
+
+.order-submit-wrapper :is(.w-\[3\.5rem\]) {
+  width: 3.5rem
+}
+
+.order-submit-wrapper :is(.w-\[3rem\]) {
+  width: 3rem
+}
+
 .order-submit-wrapper :is(.w-\[744px\]) {
   width: 744px
 }
@@ -38,12 +138,28 @@
   width: 775px
 }
 
+.order-submit-wrapper :is(.w-\[80px\]) {
+  width: 80px
+}
+
 .order-submit-wrapper :is(.w-full) {
   width: 100%
 }
 
+.order-submit-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.order-submit-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
 .order-submit-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.order-submit-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
 }
 
 .order-submit-wrapper :is(.items-start) {
@@ -56,6 +172,26 @@
 
 .order-submit-wrapper :is(.justify-start) {
   justify-content: flex-start
+}
+
+.order-submit-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
+.order-submit-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
+.order-submit-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.order-submit-wrapper :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.order-submit-wrapper :is(.gap-3) {
+  gap: 0.75rem
 }
 
 .order-submit-wrapper :is(.gap-4) {
@@ -78,17 +214,103 @@
   gap: 2.25rem
 }
 
+.order-submit-wrapper :is(.gap-\[30px\]) {
+  gap: 30px
+}
+
+.order-submit-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
+.order-submit-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+
 .order-submit-wrapper :is(.self-stretch) {
   align-self: stretch
+}
+
+.order-submit-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.order-submit-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.order-submit-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.order-submit-wrapper :is(.rounded-xl) {
+  border-radius: 0.75rem
 }
 
 .order-submit-wrapper :is(.border) {
   border-width: 1px
 }
 
+.order-submit-wrapper :is(.border-2) {
+  border-width: 2px
+}
+
+.order-submit-wrapper :is(.border-b-\[5px\]) {
+  border-bottom-width: 5px
+}
+
+.order-submit-wrapper :is(.border-l) {
+  border-left-width: 1px
+}
+
+.order-submit-wrapper :is(.border-r) {
+  border-right-width: 1px
+}
+
+.order-submit-wrapper :is(.border-t) {
+  border-top-width: 1px
+}
+
+.order-submit-wrapper :is(.border-solid) {
+  border-style: solid
+}
+
+.order-submit-wrapper :is(.border-danaherblue-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 74 89 / var(--tw-border-opacity))
+}
+
+.order-submit-wrapper :is(.border-danahergray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.order-submit-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.order-submit-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.order-submit-wrapper :is(.border-red-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity))
+}
+
 .order-submit-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.order-submit-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
 .order-submit-wrapper :is(.bg-danaherpurple-800) {
@@ -111,8 +333,32 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.order-submit-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
+.order-submit-wrapper :is(.p-0) {
+  padding: 0px
+}
+
+.order-submit-wrapper :is(.p-2) {
+  padding: 0.5rem
+}
+
+.order-submit-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
+.order-submit-wrapper :is(.p-4) {
+  padding: 1rem
+}
+
 .order-submit-wrapper :is(.p-6) {
   padding: 1.5rem
+}
+
+.order-submit-wrapper :is(.p-\[22px\]) {
+  padding: 22px
 }
 
 .order-submit-wrapper :is(.px-10) {
@@ -120,9 +366,71 @@
   padding-right: 2.5rem
 }
 
+.order-submit-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.order-submit-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.order-submit-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
 .order-submit-wrapper :is(.py-14) {
   padding-top: 3.5rem;
   padding-bottom: 3.5rem
+}
+
+.order-submit-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.order-submit-wrapper :is(.py-4) {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.order-submit-wrapper :is(.pb-2) {
+  padding-bottom: 0.5rem
+}
+
+.order-submit-wrapper :is(.pl-0) {
+  padding-left: 0px
+}
+
+.order-submit-wrapper :is(.pl-4) {
+  padding-left: 1rem
+}
+
+.order-submit-wrapper :is(.pl-6) {
+  padding-left: 1.5rem
+}
+
+.order-submit-wrapper :is(.pl-\[13px\]) {
+  padding-left: 13px
+}
+
+.order-submit-wrapper :is(.pt-6) {
+  padding-top: 1.5rem
+}
+
+.order-submit-wrapper :is(.text-center) {
+  text-align: center
+}
+
+.order-submit-wrapper :is(.text-right) {
+  text-align: right
+}
+
+.order-submit-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
 .order-submit-wrapper :is(.text-3xl) {
@@ -140,11 +448,38 @@
   line-height: 1.5rem
 }
 
+.order-submit-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.order-submit-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.order-submit-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
 .order-submit-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
+.order-submit-wrapper :is(.font-extrabold) {
+  font-weight: 800
+}
+
 .order-submit-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.order-submit-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
+.order-submit-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
@@ -156,8 +491,20 @@
   line-height: 2.5rem
 }
 
+.order-submit-wrapper :is(.leading-4) {
+  line-height: 1rem
+}
+
 .order-submit-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
+}
+
+.order-submit-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
+.order-submit-wrapper :is(.leading-none) {
+  line-height: 1
 }
 
 .order-submit-wrapper :is(.leading-snug) {
@@ -169,6 +516,16 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.order-submit-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.text-gray-500) {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
 .order-submit-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
@@ -177,6 +534,38 @@
 .order-submit-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.text-green-500) {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.text-red-500) {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.order-submit-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
+.order-submit-wrapper :is(.line-through) {
+  text-decoration-line: line-through
+}
+
+.order-submit-wrapper :is(.decoration-danaherpurple-500) {
+  text-decoration-color: #7523FF
 }
 
 .order-submit-wrapper :is(.outline) {
@@ -193,4 +582,56 @@
 
 .order-submit-wrapper :is(.outline-gray-200) {
   outline-color: #e5e7eb
+}
+
+.order-submit-wrapper :is(.blur) {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.order-submit-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.order-submit-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
+@media (min-width: 640px) {
+  .order-submit-wrapper :is(.sm\:m-\[0px\]) {
+    margin: 0px
+  }
+
+  .order-submit-wrapper :is(.sm\:block) {
+    display: block
+  }
+
+  .order-submit-wrapper :is(.sm\:h-\[3\.5rem\]) {
+    height: 3.5rem
+  }
+
+  .order-submit-wrapper :is(.sm\:w-64) {
+    width: 16rem
+  }
+
+  .order-submit-wrapper :is(.sm\:w-\[7\.5rem\]) {
+    width: 7.5rem
+  }
+
+  .order-submit-wrapper :is(.sm\:flex-row) {
+    flex-direction: row
+  }
+
+  .order-submit-wrapper :is(.sm\:pl-\[0px\]) {
+    padding-left: 0px
+  }
+}
+
+.order-submit-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.order-submit-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

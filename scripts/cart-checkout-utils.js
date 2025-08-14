@@ -1354,12 +1354,12 @@ export const changeStep = async (step) => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  showPreLoader();
   const currentTab = step.target.getAttribute('data-tab');
   const activeTab = step.target.getAttribute('data-activeTab');
   let validateData = '';
 
   if (currentTab === 'shippingMethods') {
+    showPreLoader();
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1370,6 +1370,7 @@ export const changeStep = async (step) => {
     };
   }
   if (currentTab === 'payment') {
+    showPreLoader();
     validateData = {
       adjustmentsAllowed: true,
       scopes: [
@@ -1381,12 +1382,7 @@ export const changeStep = async (step) => {
     };
   }
   if (currentTab === 'submitOrder') {
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'Payment',
-      ],
-    };
+    validateData = '';
   }
   let validatingBasket = { status: 'success' };
   if (validateData !== '') {
@@ -1482,7 +1478,7 @@ export const changeStep = async (step) => {
       }
     }
 
-    if (getSelectedPaymentMethod?.value === 'stripe') {
+    if (getSelectedPaymentMethod?.value === 'stripe' && validateBasket?.status === 'success') {
       const stripe = await loadStripe();
       const { stripeElements } = window;
       const elements = stripeElements;
@@ -1563,47 +1559,49 @@ export const changeStep = async (step) => {
                 }
                 if (addingCardToOrder?.status === 'error') {
                   const updatingCardToOrder = await updateCardToOrder(addData);
-                  // console.log('Updating Card ....', updatingCardToOrder);
-                  const confirmPayment = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                      return_url: `${window.location.origin}/checkout`,
-                      payment_method_data: {
-                        billing_details: {
-                          name: 'John Doe', // full name or combine first + last
-                          email: 'john@example.com',
-                          address: {
-                            country: 'US', // required if address collection is disabled
-                            line1: '123 Main St',
-                            city: 'New York',
-                            state: 'NY',
-                            postal_code: '10001',
+                  if (updatingCardToOrder?.status === 'success') {
+                    // console.log('Updating Card ....', updatingCardToOrder);
+                    const confirmPayment = await stripe.confirmPayment({
+                      elements,
+                      confirmParams: {
+                        return_url: `${window.location.origin}/checkout`,
+                        payment_method_data: {
+                          billing_details: {
+                            name: 'John Doe', // full name or combine first + last
+                            email: 'john@example.com',
+                            address: {
+                              country: 'US', // required if address collection is disabled
+                              line1: '123 Main St',
+                              city: 'New York',
+                              state: 'NY',
+                              postal_code: '10001',
+                            },
                           },
                         },
                       },
-                    },
-                    redirect: 'if_required',
-                  });
-                  if (confirmPayment?.error) {
-                    removePreLoader();
-                    showNotification(confirmPayment.error.message, 'error');
-                    return false;
-                  }
-                  if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
-                    // console.log('Payment Confirmed...');
-
-                    const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
-                    if (submittingOrder?.data?.data?.id) {
-                      sessionStorage.removeItem('submittedOrderData');
-                      sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-                      sessionStorage.removeItem('productDetailObject');
-                      sessionStorage.removeItem('basketData');
-                      window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                      return true;
+                      redirect: 'if_required',
+                    });
+                    if (confirmPayment?.error) {
+                      removePreLoader();
+                      showNotification(confirmPayment.error.message, 'error');
+                      return false;
                     }
-                    removePreLoader();
-                    showNotification('Error submitting order.', 'error');
-                    return false;
+                    if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
+                      // console.log('Payment Confirmed...');
+
+                      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+                      if (submittingOrder?.data?.data?.id) {
+                        sessionStorage.removeItem('submittedOrderData');
+                        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                        sessionStorage.removeItem('productDetailObject');
+                        sessionStorage.removeItem('basketData');
+                        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+                        return true;
+                      }
+                      removePreLoader();
+                      showNotification('Error submitting order.', 'error');
+                      return false;
+                    }
                   }
 
                   removePreLoader();
@@ -1654,7 +1652,9 @@ export const changeStep = async (step) => {
  check if basket has the shipping notes attribute
  :::::::::::::
 */
-      if (getCurrentBasketDetails?.data?.data?.attributes?.some(
+      const getCurrentBasketAttributes = getCurrentBasketDetails?.data?.data?.attributes;
+
+      if (getCurrentBasketAttributes?.some(
         (attr) => attr?.name === 'GroupShippingNote',
       )
       ) {
@@ -1668,8 +1668,8 @@ export const changeStep = async (step) => {
  :::::::::::::
 */
         if (
-          getNotes?.name === 'GroupShippingNote'
-          && getNotes?.value?.trim() === getShippingNotesField?.value?.trim() && getShippingNotesField?.value?.trim() !== ''
+          (getNotes?.name === 'GroupShippingNote')
+          && (getNotes?.value?.trim() !== getShippingNotesField?.value?.trim()) && (getShippingNotesField?.value?.trim() !== '')
         ) {
           /*
  :::::::::::::
@@ -1696,33 +1696,32 @@ export const changeStep = async (step) => {
               showNotification('Notes updated successfully.', 'success');
             }
           }
-          removePreLoader();
         }
-        // return {};
-      }
-      /*
-:::::::::::::
-if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
-:::::::::::::
-*/
-      if (getShippingNotesField.value.trim() !== '') {
-        const shippingNotesPayload = {
-          name: 'GroupShippingNote',
-          value: getShippingNotesField.value,
-          type: 'String',
-        };
-        const setShippingNotesResponse = await setShippingNotes(
-          shippingNotesPayload,
-        );
-        if (setShippingNotesResponse.status === 'error') {
-          showNotification('Error updating shipping Notes.', 'error');
-          return false;
+      } else {
+        /*
+  :::::::::::::
+  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
+  :::::::::::::
+  */
+        if (getShippingNotesField.value.trim() !== '') {
+          const shippingNotesPayload = {
+            name: 'GroupShippingNote',
+            value: getShippingNotesField.value,
+            type: 'String',
+          };
+          const setShippingNotesResponse = await setShippingNotes(
+            shippingNotesPayload,
+          );
+          if (setShippingNotesResponse.status === 'error') {
+            showNotification('Error updating shipping Notes.', 'error');
+            return false;
+          }
+          if (setShippingNotesResponse.status === 'success') {
+            await updateBasketDetails();
+            removePreLoader();
+          }
+          return true;
         }
-        if (setShippingNotesResponse.status === 'success') {
-          await updateBasketDetails();
-          removePreLoader();
-        }
-        return true;
       }
     } else {
       // return false;

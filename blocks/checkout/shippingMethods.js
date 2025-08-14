@@ -29,9 +29,8 @@ async function setShippingNotesOnBlur() {
   if (getShippingNotesField) {
     if (getShippingNotesField.value.trim() === '') {
       //showNotification('Please update Order Note.', 'error');
-      return true;
+      return false;
     }
-    showPreLoader();
     /*
  :::::::::::::
  get current basket details
@@ -57,35 +56,38 @@ async function setShippingNotesOnBlur() {
  check if notes with same value esists
  :::::::::::::
 */
+
       if (
         (getNotes.name === 'GroupShippingNote')
-          && (getNotes?.value?.trim() === getShippingNotesField?.value?.trim()) && (getShippingNotesField?.value?.trim() !== '')
+        && (getNotes?.value?.trim() === getShippingNotesField?.value?.trim()) && (getShippingNotesField?.value?.trim() !== '')
       ) {
         removePreLoader();
-      } else {
-        /*
- :::::::::::::
- if basket has the shipping notes attribute and has value. Update the shipping notes
- :::::::::::::
+        return false;
+      }
+      showPreLoader();
+      /*
+:::::::::::::
+if basket has the shipping notes attribute and has value. Update the shipping notes
+:::::::::::::
 */
-        const shippingNotesPayload = {
-          name: 'GroupShippingNote',
-          value: getShippingNotesField.value,
-          type: 'String',
-        };
-        const updateShippingNotesResponse = await updateShippingNotes(
-          shippingNotesPayload,
-        );
-        if (updateShippingNotesResponse.status === 'error') {
-          removePreLoader();
-          showNotification('Error updating order note.', 'error');
-          return false;
-        }
-        if (updateShippingNotesResponse.status === 'success') {
-          showNotification('Order note updated successfully.', 'success');
-          await updateBasketDetails();
-          removePreLoader();
-        }
+      const shippingNotesPayload = {
+        name: 'GroupShippingNote',
+        value: getShippingNotesField.value,
+        type: 'String',
+      };
+      const updateShippingNotesResponse = await updateShippingNotes(
+        shippingNotesPayload,
+      );
+      if (updateShippingNotesResponse?.status === 'error') {
+        removePreLoader();
+        showNotification('Error updating order note.', 'error');
+        return false;
+      }
+      if (updateShippingNotesResponse?.status === 'success') {
+        showNotification('Order note updated successfully.', 'success');
+        await updateBasketDetails();
+        removePreLoader();
+        return true;
       }
     } else {
       /*
@@ -93,7 +95,7 @@ async function setShippingNotesOnBlur() {
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
-
+if(getShippingNotesField?.value?.trim() !== ''){
       const shippingNotesPayload = {
         name: 'GroupShippingNote',
         value: getShippingNotesField.value,
@@ -112,6 +114,7 @@ async function setShippingNotesOnBlur() {
         await updateBasketDetails();
         removePreLoader();
       }
+    }
     }
     return {};
   }
@@ -299,11 +302,10 @@ const shippingMethodsModule = async () => {
               const methodData = div(
                 {
                   id: method.id,
-                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2  p-4 ${
-                    method.id === checkDefaultShippingMethod
+                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                       ? highlightDefaultShippingMethod
                       : 'border-gray-400'
-                  }`,
+                    }`,
                 },
                 p(
                   {
@@ -321,10 +323,9 @@ const shippingMethodsModule = async () => {
                   {
                     class: 'text-extralight text-sm',
                   },
-                  `${currencyCode}${
-                    method.shippingCosts[
-                      checkoutPriceType === 'net' ? 'net' : 'gross'
-                    ].value
+                  `${currencyCode}${method.shippingCosts[
+                    checkoutPriceType === 'net' ? 'net' : 'gross'
+                  ].value
                   }` || '',
                 ),
               );
