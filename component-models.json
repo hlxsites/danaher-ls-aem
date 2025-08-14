@@ -373,7 +373,7 @@
       {
         "component": "select",
         "name": "tabType",
-        "label": "Type",
+        "label": "Product Tab ID",
         "valueType": "string",
         "options": [
           {
@@ -408,23 +408,23 @@
       },
       {
         "component": "boolean",
-        "name": "subscribe",
+        "name": "is-pim-data",
         "value": false,
         "label": "Show PIM data"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "tab-title",
+        "name": "product- tab-title",
         "value": "",
-        "label": "Tab Title"
+        "label": "Product Tab Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "tab-description",
+        "name": "product-tab-content",
         "value": "",
-        "label": "Tab Description"
+        "label": "Product Tab Content"
       }
     ]
   },
