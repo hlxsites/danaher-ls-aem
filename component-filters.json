@@ -89,6 +89,12 @@
     ]
   },
   {
+    "id": "authorable-pdp-tabs",
+    "components": [
+      "authorable-pdp-tabs-item"
+    ]
+  },
+  {
     "id": "banner",
     "components": [
       "  "

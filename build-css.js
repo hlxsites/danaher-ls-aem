@@ -433,6 +433,11 @@ const fileMappings = [
     output: './blocks/pdp-related-products/pdp-related-products.css',
     wrapper: 'pdp-related-products-wrapper',
   },
+  {
+    content: './blocks/authorable-pdp-tabs/authorable-pdp-tabs.js',
+    output: './blocks/authorable-pdp-tabs/authorable-pdp-tabs.css',
+    wrapper: 'authorable-pdp-tabs-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

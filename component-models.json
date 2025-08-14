@@ -364,6 +364,71 @@
     ]
   },
   {
+    "id": "authorable-pdp-tabs",
+    "fields": []
+  },
+  {
+    "id": "authorable-pdp-tabs-item",
+    "fields": [
+      {
+        "component": "select",
+        "name": "item_tabType",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Overview",
+            "value": "overview"
+          },
+          {
+            "name": "Specification",
+            "value": "specification"
+          },
+          {
+            "name": "Resources",
+            "value": "resources"
+          },
+          {
+            "name": "Products",
+            "value": "products"
+          },
+          {
+            "name": "Bundle Parts",
+            "value": "parts"
+          },
+          {
+            "name": "Related Products",
+            "value": "relatedproducts"
+          },
+          {
+            "name": "Citations",
+            "value": "citations"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Show PIM data"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tab_title",
+        "value": "",
+        "label": "Tab Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "tab_description",
+        "value": "",
+        "label": "Tab Description"
+      }
+    ]
+  },
+  {
     "id": "banner",
     "fields": [
       {

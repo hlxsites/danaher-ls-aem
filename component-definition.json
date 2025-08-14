@@ -159,6 +159,37 @@
           }
         },
         {
+          "title": "Authorable PDP tabs",
+          "id": "authorable-pdp-tabs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Authorable PDP tabs",
+                  "model": "authorable-pdp-tabs",
+                  "filter": "authorable-pdp-tabs"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Authorable PDP tabs Item",
+          "id": "authorable-pdp-tabs-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Authorable PDP tabs Item",
+                  "model": "authorable-pdp-tabs-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Banner",
           "id": "banner",
           "plugins": {
