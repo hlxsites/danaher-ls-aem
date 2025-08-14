@@ -28,7 +28,7 @@ async function setShippingNotesOnBlur() {
 
   if (getShippingNotesField) {
     if (getShippingNotesField.value.trim() === '') {
-      //showNotification('Please update Order Note.', 'error');
+      // showNotification('Please update Order Note.', 'error');
       return false;
     }
     /*
@@ -95,26 +95,26 @@ if basket has the shipping notes attribute and has value. Update the shipping no
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
-if(getShippingNotesField?.value?.trim() !== ''){
-      const shippingNotesPayload = {
-        name: 'GroupShippingNote',
-        value: getShippingNotesField.value,
-        type: 'String',
-      };
-      const setShippingNotesResponse = await setShippingNotes(
-        shippingNotesPayload,
-      );
-      if (setShippingNotesResponse.status === 'error') {
-        removePreLoader();
-        showNotification('Error adding Order Note', 'error');
-        return false;
+      if (getShippingNotesField?.value?.trim() !== '') {
+        const shippingNotesPayload = {
+          name: 'GroupShippingNote',
+          value: getShippingNotesField.value,
+          type: 'String',
+        };
+        const setShippingNotesResponse = await setShippingNotes(
+          shippingNotesPayload,
+        );
+        if (setShippingNotesResponse.status === 'error') {
+          removePreLoader();
+          showNotification('Error adding Order Note', 'error');
+          return false;
+        }
+        if (setShippingNotesResponse.status === 'success') {
+          showNotification('Order note added successfully.', 'success');
+          await updateBasketDetails();
+          removePreLoader();
+        }
       }
-      if (setShippingNotesResponse.status === 'success') {
-        showNotification('Order note added successfully.', 'success');
-        await updateBasketDetails();
-        removePreLoader();
-      }
-    }
     }
     return {};
   }
@@ -303,9 +303,9 @@ const shippingMethodsModule = async () => {
                 {
                   id: method.id,
                   class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
-                      ? highlightDefaultShippingMethod
-                      : 'border-gray-400'
-                    }`,
+                    ? highlightDefaultShippingMethod
+                    : 'border-gray-400'
+                  }`,
                 },
                 p(
                   {

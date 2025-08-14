@@ -116,7 +116,7 @@ export default async function decorate(block) {
                     class:
                       'w-80 justify-start text-gray-700 text-base font-extralight',
                   },
-                  `${ orderDetails?.included?.commonShippingMethod?.STD_GROUND?.name } `,
+                  `${orderDetails?.included?.commonShippingMethod?.STD_GROUND?.name} `,
                 ),
                 div(
                   {
