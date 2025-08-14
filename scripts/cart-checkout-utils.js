@@ -1659,43 +1659,44 @@ export const changeStep = async (step) => {
  :::::::::::::
 */
         if (
-          getNotes.name === 'GroupShippingNote'
-          && getNotes.value.trim() === getShippingNotesField.value.trim()
+          getNotes?.name === 'GroupShippingNote'
+          && getNotes?.value?.trim() === getShippingNotesField?.value?.trim() && getShippingNotesField?.value?.trim() !== ''
         ) {
-          removePreLoader();
-        } else {
           /*
  :::::::::::::
  if basket has the shipping notes attribute and has value. Update the shipping notes
  :::::::::::::
 */
-
-          const shippingNotesPayload = {
-            name: 'GroupShippingNote',
-            value: getShippingNotesField.value,
-            type: 'String',
-          };
-          const updateShippingNotesResponse = await updateShippingNotes(
-            shippingNotesPayload,
-          );
-          if (updateShippingNotesResponse.status === 'error') {
-            removePreLoader();
-            showNotification('Error updating shipping Notes.', 'error');
-            return false;
+          if (getShippingNotesField.value.trim() !== '') {
+            const shippingNotesPayload = {
+              name: 'GroupShippingNote',
+              value: getShippingNotesField.value,
+              type: 'String',
+            };
+            const updateShippingNotesResponse = await updateShippingNotes(
+              shippingNotesPayload,
+            );
+            if (updateShippingNotesResponse.status === 'error') {
+              removePreLoader();
+              showNotification('Error updating shipping Notes.', 'error');
+              return false;
+            }
+            if (updateShippingNotesResponse.status === 'success') {
+              await updateBasketDetails();
+              removePreLoader();
+              showNotification('Notes updated successfully.', 'success');
+            }
           }
-          if (updateShippingNotesResponse.status === 'success') {
-            await updateBasketDetails();
-            removePreLoader();
-            showNotification('Notes updated successfully.', 'success');
-          }
+          removePreLoader();
         }
-      } else {
-        /*
- :::::::::::::
- if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
- :::::::::::::
+        //return {};
+      }
+      /*
+:::::::::::::
+if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
+:::::::::::::
 */
-
+      if (getShippingNotesField.value.trim() !== '') {
         const shippingNotesPayload = {
           name: 'GroupShippingNote',
           value: getShippingNotesField.value,
@@ -1712,8 +1713,8 @@ export const changeStep = async (step) => {
           await updateBasketDetails();
           removePreLoader();
         }
+        return true;
       }
-      // return false;
     } else {
       // return false;
     }
