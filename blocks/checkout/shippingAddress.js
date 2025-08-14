@@ -723,6 +723,7 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
+    const getCurrentBasketDetails = await getBasketDetails();
 
     shippingAsBillingAddressInput?.addEventListener('click', async (c) => {
       setTimeout(async () => {
@@ -732,7 +733,6 @@ export const shippingAddressModule = async () => {
    get addresses which are set as use address for the current order
    ::::::::::::::
    */
-        const getCurrentBasketDetails = await getBasketDetails();
         if (getCurrentBasketDetails.data.totalProductQuantity === 0) {
           window.location.href = '/us/en/e-buy/cartlanding';
           return false;
@@ -762,7 +762,7 @@ export const shippingAddressModule = async () => {
     */
 
         if (!c.target.checked) {
-          showDefaultBillingAddress?.classList.add('hidden');
+          // showDefaultBillingAddress?.classList.add('hidden');
 
           showDefaultBillingAddressButton?.classList.add('hidden');
 
@@ -1086,7 +1086,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
         if (
           getUseAddressesResponse?.data?.invoiceToAddress
           && getUseAddressesResponse?.data?.invoiceToAddress?.id
-            !== getUseAddressesResponse?.data?.commonShipToAddress?.id
+          !== getUseAddressesResponse?.data?.commonShipToAddress?.id
         ) {
           defaultBillingAddress.classList.remove('hidden');
           const shippingAsBillingAddressCheckBox = moduleContent.querySelector(
@@ -1100,9 +1100,20 @@ show default billing address else mark shippingAsBilling checkbox as checked
             // shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
             // shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
           }
-        } else {
-          defaultBillingAddress.classList.add('hidden');
+        }
+
+        // defaultBillingAddress.classList.add('hidden');
+        if (
+          getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
+            ':',
+          )[4]
+          === getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
+            ':',
+          )[4]
+        ) {
           if (shippingAsBillingAddressInput) shippingAsBillingAddressInput.checked = 'checked';
+        } else {
+          if (shippingAsBillingAddressInput) shippingAsBillingAddressInput.checked = false;
         }
       }
     } else {

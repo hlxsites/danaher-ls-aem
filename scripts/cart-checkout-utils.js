@@ -113,7 +113,7 @@ export function defaultAddress(address, type) {
   if (address) {
     const defaultAddressContainer = div(
       {
-        class: 'hidden',
+        // class: 'hidden',
         id: `default${capitalizeFirstLetter(type)}Address`,
       },
       div(
@@ -2705,7 +2705,7 @@ get price type if its net or gross
       if (
         getUseAddressesResponse?.data?.invoiceToAddress
         && getUseAddressesResponse?.data?.invoiceToAddress?.id
-        !== getUseAddressesResponse?.data?.commonShipToAddress?.id
+        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && window.location.pathname.includes('checkout')
       ) {
         const invoiceToAddress = div(
           {
@@ -2779,7 +2779,7 @@ get price type if its net or gross
  check if shipping address exists in basket
  ::::::::::::::::::
    */
-      if (getUseAddressesResponse?.data?.commonShipToAddress) {
+      if (getUseAddressesResponse?.data?.commonShipToAddress && window.location.pathname.includes('checkout')) {
         const commonShipToAddress = div(
           {
             id: 'checkoutSummaryCommonShipAddress',
