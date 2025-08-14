@@ -615,14 +615,12 @@ export default function decorate(block) {
     div.parentElement.replaceWith(div);
   });
 
-  block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
+  // block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
 
-  // UNIVERSAL COLUMN DETECTION: works for both direct and wrapped columns
+  // Universal column detection (supports wrappers)
   function getColumns(block) {
-    // Try direct children first
     let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
     if (cols.length === 2 || cols.length === 3) return cols;
-    // If only one child (a wrapper), look inside it
     if (cols.length === 1) {
       cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
       if (cols.length === 2 || cols.length === 3) return cols;
@@ -632,15 +630,30 @@ export default function decorate(block) {
 
   const columns = getColumns(block);
 
+  // Helper: add blog/news alignment container classes
+  function addBlogNewsContainerClasses(container) {
+    container.classList.add(
+      'align-text-center',
+      'w-full',
+      'h-full',
+      'container',
+      'max-w-7xl',
+      'mx-auto',
+      'flex',
+      'flex-col-reverse',
+      'gap-x-12',
+      'lg:flex-col-reverse',
+      'justify-items-center'
+    );
+  }
+
   // --- 3 COLUMN LOGIC ---
   if (columns.length === 3) {
-    // Remove ALL layout classes from block and columns
     block.className = '';
     columns.forEach(col => {
       col.className = '';
       col.style.flexBasis = '';
       col.style.width = '';
-      // Remove any grid/flex class from descendants
       col.querySelectorAll('*').forEach(child => {
         child.classList?.remove(
           'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
@@ -656,11 +669,10 @@ export default function decorate(block) {
       'grid', 'gap-x-8', 'gap-y-4',
       'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
     );
+
     columns.forEach(col => {
-      // Optionally center content vertically/horizontally
       col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
       if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
-      // Responsive images
       col.querySelectorAll('img').forEach(img => {
         img.removeAttribute('width');
         img.removeAttribute('height');
@@ -671,18 +683,56 @@ export default function decorate(block) {
         img.style.height = "100%";
         img.style.objectFit = 'contain';
         img.style.display = 'block';
+        // Add aspect ratio error handler
+        const imageAspectRatio = 1.7778;
+        img.onerror = function () {
+          img.width = this.width;
+          img.height = Math.floor(this.width / imageAspectRatio);
+        };
       });
+      // H1 padding for blog/news
+      if (
+        window.location.pathname.includes('/us/en/blog/') ||
+        window.location.pathname.includes('/us/en/news/')
+      ) {
+        col.querySelectorAll('h1').forEach((ele) => {
+          ele.classList.add('pb-4');
+        });
+      }
     });
 
-    // Stop here! Don't apply .container or inner grid for 3-col
+    // features-card-left logic (if present)
+    if (block.className.includes('features-card-left')) {
+      columns.forEach(row => {
+        const pTags = row.querySelectorAll('p');
+        let cardDiv;
+        let leftDiv;
+        let rightDiv;
+        pTags.forEach((element) => {
+          if (element.firstElementChild?.nodeName?.toLowerCase() === 'span') {
+            cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            leftDiv = document.createElement('div');
+            leftDiv.className = 'left-content';
+            rightDiv = document.createElement('div');
+            rightDiv.className = 'right-content';
+            leftDiv.append(element);
+            cardDiv.append(leftDiv);
+            cardDiv.append(rightDiv);
+            row.append(cardDiv);
+          } else if (rightDiv) rightDiv.append(element);
+        });
+      });
+    }
+
     return;
   }
 
+  // --- 2 COLUMN LOGIC ---
   if (columns.length === 2) {
     let firstCol = columns[0];
     let secondCol = columns[1];
 
-    // Remove all possible width classes from both columns
     [
       'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
       'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
@@ -692,9 +742,8 @@ export default function decorate(block) {
       secondCol.classList.remove(cls);
     });
 
-    // Detect ratio class on .section OR .columns block
+    // Ratio detection
     const classes = sectionDiv.className.split(/\s+/).concat(block.className.split(/\s+/));
-
     if (classes.includes('thirtyseventy')) {
       firstCol.classList.add('lg:w-1/3');
       secondCol.classList.add('lg:w-2/3');
@@ -706,11 +755,26 @@ export default function decorate(block) {
       secondCol.classList.add('lg:w-1/2');
     }
 
-    // Flex helpers
-    firstCol.classList.add('flex', 'flex-col', 'justify-center');
-    // secondCol.classList.add('flex', 'justify-center', 'items-center');
+    // firstCol.classList.add('flex', 'flex-col', 'justify-center');
 
-    // Optional: image style fix
+     // Container logic (Image 5 style takes precedence if present)
+    const isPicDiv = !!firstCol.querySelector('picture');
+    if (isPicDiv) {
+      firstCol.classList.add('lg:w-1/2', 'picdiv');
+      block.firstElementChild?.classList.add(
+        'align-text-top', 'pb-7', 'py-0', 'my-0',
+        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
+        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+      );
+    } else {
+      firstCol.classList.add('lg:w-1/2', 'flex', 'flex-col', 'justify-center');
+      block.firstElementChild?.classList.add(
+        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
+        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+      );
+    }
+
+    // Responsive image style + aspect ratio error handler
     const img = secondCol.querySelector('img');
     if (img) {
       img.removeAttribute('width');
@@ -722,7 +786,36 @@ export default function decorate(block) {
       img.style.height = "100%";
       img.style.objectFit = "contain";
       img.style.display = "block";
+      const imageAspectRatio = 1.7778;
+      img.onerror = function () {
+        img.width = this.width;
+        img.height = Math.floor(this.width / imageAspectRatio);
+      };
     }
+
+    // Promotion form loading
+    const aTag = secondCol.querySelectorAll('p > a');
+    const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
+    if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
+      if (typeof loadForm === 'function') {
+        loadForm(secondCol, aTag);
+      }
+    }
+
+    // Blog/news column classes
+    if (
+      window.location.pathname.includes('/us/en/blog/') ||
+      window.location.pathname.includes('/us/en/news/')
+    ) {
+      addBlogNewsContainerClasses(block.firstElementChild);
+      firstCol.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
+      secondCol.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
+      firstCol.querySelectorAll('h1').forEach((ele) => ele.classList.add('pb-4'));
+      secondCol.querySelectorAll('h1').forEach((ele) => ele.classList.add('pb-4'));
+    } else {
+      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
+    }
+    // picture column logic already handled below
   }
 
   // Add column count class for further styling if needed
@@ -786,22 +879,7 @@ export default function decorate(block) {
   });
 
   // Add column container classes for certain layouts
-  if (block.className.includes('columns-2-cols')) {
-    if (
-      window.location.pathname.includes('/us/en/blog/') ||
-      window.location.pathname.includes('/us/en/news/') ||
-      window.location.pathname.includes('/us/en/news-eds/')
-    ) {
-      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
-    } else {
-      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
-    }
-    block.querySelectorAll('p').forEach((element) => {
-      if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
-        element.parentElement.classList.add('picdiv');
-      }
-    });
-  } else if (block.className.includes('columns-3-cols')) {
+  if (block.className.includes('columns-3-cols')) {
     block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
     block.querySelector('h4')?.classList.add('font-bold');
   }
@@ -821,8 +899,7 @@ export default function decorate(block) {
     if (picWrapper && picWrapper.children.length === 1) {
       if (
         window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/') ||
-        window.location.pathname.includes('/us/en/news-eds/')
+        window.location.pathname.includes('/us/en/news/')
       ) {
         picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
         pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));

@@ -60,7 +60,10 @@
         "text",
         "image",
         "title",
-        "article-info"
+        "article-info",
+        "embed",
+        "form",
+        "mini-teasers"
       ]
     }
   ]
