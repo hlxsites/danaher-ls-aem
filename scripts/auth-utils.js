@@ -104,7 +104,9 @@ export async function userLogin(type, data = {}) {
   let loginData = {};
   const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
   sessionStorage.clear();
-  sessionStorage.setItem('basketData', JSON.stringify(getCurrentBasketData));
+  if (getCurrentBasketData) {
+    sessionStorage.setItem('basketData', JSON.stringify(getCurrentBasketData));
+  }
   try {
     if (type === 'customer' && data) {
       loginData = {

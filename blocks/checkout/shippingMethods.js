@@ -27,12 +27,11 @@ async function setShippingNotesOnBlur() {
   const getShippingNotesField = document.querySelector('#shippingNotes');
 
   if (getShippingNotesField) {
-    showPreLoader();
     if (getShippingNotesField.value.trim() === '') {
-      removePreLoader();
-      showNotification('Please update Order Note.', 'error');
-      return false;
+      //showNotification('Please update Order Note.', 'error');
+      return true;
     }
+    showPreLoader();
     /*
  :::::::::::::
  get current basket details
@@ -59,8 +58,8 @@ async function setShippingNotesOnBlur() {
  :::::::::::::
 */
       if (
-        getNotes.name === 'GroupShippingNote'
-          && getNotes.value.trim() === getShippingNotesField.value.trim()
+        (getNotes.name === 'GroupShippingNote')
+          && (getNotes?.value?.trim() === getShippingNotesField?.value?.trim()) && (getShippingNotesField?.value?.trim() !== '')
       ) {
         removePreLoader();
       } else {

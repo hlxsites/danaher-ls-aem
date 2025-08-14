@@ -1388,7 +1388,10 @@ export const changeStep = async (step) => {
       ],
     };
   }
-  const validatingBasket = await validateBasket(validateData);
+  let validatingBasket = { status: 'success' };
+  if (validateData !== '') {
+    validatingBasket = await validateBasket(validateData);
+  }
   if (validatingBasket?.status === 'error') {
     if (currentTab === 'payment') {
       // window.location.href = '/us/en/e-buy/cartlanding';
@@ -1450,7 +1453,11 @@ export const changeStep = async (step) => {
                 sessionStorage.removeItem('productDetailObject');
                 sessionStorage.removeItem('basketData');
                 window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
+                return true;
               }
+              removePreLoader();
+              showNotification('Error submitting order.', 'error');
+              return false;
             }
           }
         } else {
@@ -1462,11 +1469,11 @@ export const changeStep = async (step) => {
               sessionStorage.removeItem('productDetailObject');
               sessionStorage.removeItem('basketData');
               window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-            } else {
-              removePreLoader();
-              showNotification('Error submitting order.', 'error');
-              return false;
+              return true;
             }
+            removePreLoader();
+            showNotification('Error submitting order.', 'error');
+            return false;
           }
           removePreLoader();
           showNotification('Error getting basket.', 'error');
@@ -1486,17 +1493,17 @@ export const changeStep = async (step) => {
       const paymentMethod = 'STRIPE_PAYMENT';
       const createInstrument = await createPaymentInstrument(paymentMethod, pIID, cS);
       if (createInstrument?.status === 'success') {
-        console.log('Instrumenting...', createInstrument);
+        // console.log('Instrumenting...', createInstrument);
 
         const instrumentId = createInstrument?.data?.data?.id;
         if (instrumentId) {
           const assignInstrument = await assignPaymentInstrument(instrumentId);
           if (assignInstrument?.status === 'success') {
-            console.log('Assigning...', assignInstrument);
+            // console.log('Assigning...', assignInstrument);
 
             const getPI = await getPaymentIntent();
             if (getPI?.status === 'success') {
-              console.log('Getting Intent...', getPI);
+              // console.log('Getting Intent...', getPI);
               const gPIID = JSON.stringify(getPI?.data?.data[0]);
               if (gPIID) {
                 const addData = {
@@ -1507,7 +1514,7 @@ export const changeStep = async (step) => {
                 const addingCardToOrder = await addCardToOrder(addData);
 
                 if (addingCardToOrder?.status === 'success') {
-                  console.log('Adding...', addingCardToOrder);
+                  // console.log('Adding...', addingCardToOrder);
                   const confirmPayment = await stripe.confirmPayment({
                     elements,
                     confirmParams: {
@@ -1543,11 +1550,11 @@ export const changeStep = async (step) => {
                         sessionStorage.removeItem('productDetailObject');
                         sessionStorage.removeItem('basketData');
                         window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                      } else {
-                        removePreLoader();
-                        showNotification('Error submitting order.', 'error');
-                        return false;
+                        return true;
                       }
+                      removePreLoader();
+                      showNotification('Error submitting order.', 'error');
+                      return false;
                     }
                   }
                   removePreLoader();
@@ -1556,7 +1563,7 @@ export const changeStep = async (step) => {
                 }
                 if (addingCardToOrder?.status === 'error') {
                   const updatingCardToOrder = await updateCardToOrder(addData);
-                  console.log('Updating Card ....', updatingCardToOrder);
+                  // console.log('Updating Card ....', updatingCardToOrder);
                   const confirmPayment = await stripe.confirmPayment({
                     elements,
                     confirmParams: {
@@ -1583,7 +1590,7 @@ export const changeStep = async (step) => {
                     return false;
                   }
                   if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
-                    console.log('Payment Confirmed...');
+                    // console.log('Payment Confirmed...');
 
                     const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
                     if (submittingOrder?.data?.data?.id) {
@@ -1592,11 +1599,11 @@ export const changeStep = async (step) => {
                       sessionStorage.removeItem('productDetailObject');
                       sessionStorage.removeItem('basketData');
                       window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                    } else {
-                      removePreLoader();
-                      showNotification('Error submitting order.', 'error');
-                      return false;
+                      return true;
                     }
+                    removePreLoader();
+                    showNotification('Error submitting order.', 'error');
+                    return false;
                   }
 
                   removePreLoader();
@@ -2543,7 +2550,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  `text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  `text-right text-violet-600 text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),

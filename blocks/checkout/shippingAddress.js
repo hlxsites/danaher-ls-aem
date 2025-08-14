@@ -735,6 +735,7 @@ export const shippingAddressModule = async () => {
         const getCurrentBasketDetails = await getBasketDetails();
         if (getCurrentBasketDetails.data.totalProductQuantity === 0) {
           window.location.href = '/us/en/e-buy/cartlanding';
+          return false;
         }
         /*
     *
