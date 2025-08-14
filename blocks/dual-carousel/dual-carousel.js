@@ -58,7 +58,8 @@ async function createCarousel(
           'flex-shrink-0 hover:shadow-md transform transition duration-500  cursor-pointer hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
       },
       img({
-        src: product?.images?.[0],
+        src: (
+          product?.images?.[0] && !product?.images?.[0]?.toLowerCase().includes('.pdf')) ? product?.images?.[0] : '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: product?.title || '',
         class: 'w-full h-[164px] p-0 object-contain',
       }),
@@ -191,6 +192,7 @@ export default async function decorate(block) {
   ] = block.children;
 
   block.parentElement.parentElement.style.padding = '0';
+
   block.parentElement.parentElement.style.margin = '0';
 
   const dualCarouselWrapper = div({

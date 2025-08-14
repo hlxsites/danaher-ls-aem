@@ -171,7 +171,7 @@ export default function decorate(block) {
     const productSubHeading = itemSubHeading?.textContent?.trim() || '';
     const productDescription = itemDescription?.innerHTML || '';
     const productImage = itemImage?.querySelector('img');
-    const bgColor = itemBgColor?.textContent?.trim() || '#660099';
+    const bgColor = itemBgColor?.textContent?.trim() || '#4000A5';
     const productButtonUrl = itemButtonUrl?.querySelector('a')?.href;
     const productButtonTarget = itemButtonTarget?.textContent?.trim() || '';
     const productButtonLabel = itemButtonLabel?.textContent?.trim() || '';

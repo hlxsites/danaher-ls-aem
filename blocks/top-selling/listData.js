@@ -33,15 +33,19 @@ export default function renderListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain',
-      src: src || fallbackImagePath,
+        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
+      src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
+      onclick: () => window.open(
+        item?.url || '#',
+        item?.url?.includes('http') ? '_blank' : '_self',
+      ),
     });
 
-    imageElement.addEventListener('error', () => {
-      imageElement.src = fallbackImagePath;
-      imageElement.alt = 'Product image not available';
-    });
+    // imageElement.addEventListener('error', () => {
+    //   imageElement.src = fallbackImagePath;
+    //   imageElement.alt = 'Product image not available';
+    // });
 
     return imageElement;
   };
@@ -72,7 +76,11 @@ export default function renderListCard(item) {
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md',
     }),
     a(
-      { title: item.title },
+      {
+        href: item?.url || '#',
+        target: item?.url?.includes('http') ? '_blank' : '_self',
+        title: item.title,
+      },
       createImageWithFallback(imageUrl, item.title || ''),
     ),
   );
@@ -127,8 +135,8 @@ export default function renderListCard(item) {
     ),
     a(
       {
-        href: item.url,
-        title: item.title,
+        href: item?.url || '#',
+        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
@@ -190,6 +198,8 @@ export default function renderListCard(item) {
     { class: 'w-full flex-col gap-2 cursor-pointer' },
     a(
       {
+        href: item?.url || '#',
+        target: item?.url?.includes('http') ? '_blank' : '_self',
         title: item.title,
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
@@ -276,7 +286,8 @@ export default function renderListCard(item) {
       }),
       a(
         {
-          href: item.url,
+          href: item?.url || '#',
+          target: item?.url?.includes('http') ? '_blank' : '_self',
           class:
             'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },
@@ -317,7 +328,8 @@ export default function renderListCard(item) {
       actionButtons.append(
         a(
           {
-            href: item.url || '#',
+            href: item?.url || '#',
+            target: item?.url?.includes('http') ? '_blank' : '_self',
             class:
               'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
           },

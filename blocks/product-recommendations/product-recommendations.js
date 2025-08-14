@@ -4,7 +4,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import Carousel from '../../scripts/carousel.js';
-import buildProductSlug from '../../scripts/slug-utils.js';
 
 import { createCard } from '../product-card/product-card.js';
 
@@ -22,7 +21,7 @@ export default async function decorate(block) {
     if (response?.results.length > 0) {
       const cardList = ul({ class: 'carousel grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth auto-cols-[calc(100%)] md:auto-cols-[calc(100%/2)] lg:auto-cols-[calc((100%/3)-20px)] xl:auto-cols-[calc((100%/4)-20px)] pb-2' });
       response.results.forEach((product, productIndex) => {
-        product.path = buildProductSlug(product, product.clickUri);
+        product.path = product.clickUri;
         product.image = product?.raw?.images[0];
         product.description = product?.raw?.description;
         const categoriesName = [];

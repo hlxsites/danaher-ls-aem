@@ -84,8 +84,17 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "pdp-page-tabs",
       "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications",
       "pdp-carousel"
     ]
     }

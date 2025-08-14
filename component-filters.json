@@ -55,8 +55,17 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "pdp-page-tabs",
       "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications",
       "pdp-carousel"
     ]
   },
@@ -81,6 +90,12 @@
     ]
   },
   {
+    "id": "banner",
+    "components": [
+      "  "
+    ]
+  },
+  {
     "id": "body-banner",
     "components": [
       ""
@@ -89,13 +104,22 @@
   {
     "id": "card-list",
     "components": [
-      ""
+      "articleCard",
+      "applicationCard",
+      "libraryCard",
+      "labCard"
     ]
   },
   {
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      " "
     ]
   },
   {
@@ -109,11 +133,11 @@
     "components": [
       "text",
       "image",
-      "button",
       "title",
-      "article-info-new",
+      "article-info",
       "embed",
-      "form"
+      "form",
+      "mini-teasers"
     ]
   },
   {
@@ -179,6 +203,14 @@
     ]
   },
   {
+    "id": "recent-articles",
+    "components": []
+  },
+  {
+    "id": "related-articles",
+    "components": []
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -197,11 +229,19 @@
     ]
   },
   {
+    "id": "social-media",
+    "components": []
+  },
+  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",
       "tiny-carousel-item"
     ]
+  },
+  {
+    "id": "tags-list",
+    "components": []
   },
   {
     "id": "tiny-carousel",

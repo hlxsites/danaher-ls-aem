@@ -9,4 +9,27 @@ export const searchEngine = buildSearchEngine({
   },
 });
 
+// 1️⃣ Build engine
+export const resourceEngine = buildSearchEngine({
+  configuration: {
+    accessToken: window.DanaherConfig.familyResourceKey,
+    organizationId: window.DanaherConfig.searchOrg,
+    search: {
+      searchHub: 'DanaherFamilyResources',
+      pipeline: 'Danaher Family Resources',
+    },
+  },
+});
+
+export const frequentViewedEngine = buildSearchEngine({
+  configuration: {
+    organizationId: 'danaherproductionrfl96bkr',
+    accessToken: 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2',
+    search: {
+      searchHub: 'DanaherLifeSciencesProductRecommendations',
+      pipeline: 'Danaher LifeSciences Product Recommendations',
+    },
+  },
+});
+
 // export default searchEngine;

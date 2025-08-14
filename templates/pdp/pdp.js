@@ -1,6 +1,6 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
-import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
+import { getFrequentlyViewedTogether, getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 
 function loadPdpBlocks() {
@@ -48,16 +48,14 @@ function loadPdpBlocks() {
   const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
   document.querySelector('main').append(pdpCitations);
 
-   const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+  const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
   document.querySelector('main').append(pdpFaqs);
-  
+
   const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
   document.querySelector('main').append(pdpRelatedProducts);
 
   const pdpCarousel = div(buildBlock('pdp-carousel', { elems: [] }));
   document.querySelector('main').append(pdpCarousel);
-
-
 
   //    const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
   //    const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
@@ -88,5 +86,6 @@ export default async function buildAutoBlocks() {
       }
     });
   });
+  getFrequentlyViewedTogether();
   loadPdpBlocks();
 }
