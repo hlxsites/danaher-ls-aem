@@ -879,7 +879,9 @@ export async function updateAddressToDefault(data) {
  */
 export async function getUseAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem('useAddress'));
-  if (cachedAddress) return cachedAddress;
+  const commonShipToAddress = cachedAddress?.data?.commonShipToAddress?.id;
+  const invoiceToAddress = cachedAddress?.data?.invoiceToAddress?.id;
+  if (commonShipToAddress || invoiceToAddress) return cachedAddress;
   const useAddressData = await getBasketDetails();
 
   if (useAddressData?.status === 'success') {
