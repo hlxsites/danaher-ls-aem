@@ -1103,17 +1103,11 @@ show default billing address else mark shippingAsBilling checkbox as checked
         }
 
         // defaultBillingAddress.classList.add('hidden');
-        if (
-          getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
-            ':',
-          )[4]
-          === getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
-            ':',
-          )[4]
-        ) {
-          if (shippingAsBillingAddressInput) shippingAsBillingAddressInput.checked = 'checked';
-        } else {
-          if (shippingAsBillingAddressInput) shippingAsBillingAddressInput.checked = false;
+        const invoiceTo = getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(':')[4];
+        const shipTo = getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(':')[4];
+
+        if (shippingAsBillingAddressInput) {
+          shippingAsBillingAddressInput.checked = invoiceTo === shipTo;
         }
       }
     } else {

@@ -1422,212 +1422,135 @@ export const changeStep = async (step) => {
     const getBasketForOrder = await getBasketDetails();
     const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
     if (getSelectedPaymentMethod?.value === 'invoice') {
-      const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
-      const defaultHeaders = new Headers();
-      defaultHeaders.append('Content-Type', 'Application/json');
-      defaultHeaders.append(
-        'authentication-token',
-        authenticationToken.access_token,
-      );
-      const data = JSON.stringify({ paymentInstrument: 'Invoice' });
-      const setupInvoice = await putApiData(url, data, defaultHeaders);
-      if (setupInvoice?.status === 'error') {
-        showNotification('Error setting Invoice as payment Method for this Order.', 'error');
-      }
-      if (setupInvoice?.status === 'success') {
-        showNotification('Invoice set as payment Method for this Order.', 'success');
+      showPreLoader();
 
-        const invoiceNumber = document.querySelector('#invoiceNumber');
-        if (invoiceNumber?.value !== '') {
-          const creatingInvoiceNumber = await createPoNumber(invoiceNumber.value);
-          if (creatingInvoiceNumber?.status === 'success') {
-            if (getBasketForOrder?.status === 'success') {
-              const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
-              if (submittingOrder?.data?.data?.id) {
-                sessionStorage.removeItem('submittedOrderData');
-                sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-                sessionStorage.removeItem('productDetailObject');
-                sessionStorage.removeItem('basketData');
-                window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                return true;
-              }
-              removePreLoader();
-              showNotification('Error submitting order.', 'error');
-              return false;
-            }
-          }
-        } else {
-          if (getBasketForOrder?.status === 'success') {
-            const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'invoice');
-            if (submittingOrder?.data?.data?.id) {
-              sessionStorage.removeItem('submittedOrderData');
-              sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-              sessionStorage.removeItem('productDetailObject');
-              sessionStorage.removeItem('basketData');
-              window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-              return true;
-            }
-            removePreLoader();
-            showNotification('Error submitting order.', 'error');
-            return false;
-          }
-          removePreLoader();
-          showNotification('Error getting basket.', 'error');
-          return false;
+      try {
+        const url = `${baseURL}baskets/current/payments/open-tender?include=paymentMethod`;
+        const defaultHeaders = new Headers();
+        defaultHeaders.append('Content-Type', 'application/json');
+        defaultHeaders.append('authentication-token', authenticationToken.access_token);
+
+        const data = JSON.stringify({ paymentInstrument: 'Invoice' });
+        const setupInvoice = await putApiData(url, data, defaultHeaders);
+
+        if (setupInvoice?.status !== 'success') {
+          throw new Error('Error setting Invoice as payment Method for this Order.');
         }
+
+        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+        if (invoiceNumberValue) {
+          const creatingInvoiceNumber = await createPoNumber(invoiceNumberValue);
+          if (creatingInvoiceNumber?.status !== 'success') {
+            throw new Error('Error creating invoice number.');
+          }
+        }
+
+        if (getBasketForOrder?.status !== 'success') {
+          throw new Error('Error getting basket.');
+        }
+
+        const basketId = getBasketForOrder?.data?.data?.id;
+        const submittingOrder = await submitOrder(basketId, 'invoice');
+        const orderId = submittingOrder?.data?.data?.id;
+
+        if (!orderId) {
+          throw new Error('Error submitting order.');
+        }
+
+        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        sessionStorage.removeItem('productDetailObject');
+        sessionStorage.removeItem('basketData');
+
+        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
+      } catch (err) {
+        showNotification(err?.message || 'An unexpected error occurred.', 'error');
+      } finally {
+        removePreLoader();
       }
     }
-
-    if (getSelectedPaymentMethod?.value === 'stripe' && validateBasket?.status === 'success') {
+    if (getSelectedPaymentMethod?.value === 'stripe' && validatingBasket?.status === 'success') {
+      showPreLoader();
       const stripe = await loadStripe();
       const { stripeElements } = window;
       const elements = stripeElements;
-      // payment intent ID
+
       const pIID = sessionStorage.getItem('stripePIId');
-      // client secret
       const cS = sessionStorage.getItem('stripeCS');
       const paymentMethod = 'STRIPE_PAYMENT';
-      const createInstrument = await createPaymentInstrument(paymentMethod, pIID, cS);
-      if (createInstrument?.status === 'success') {
-        // console.log('Instrumenting...', createInstrument);
+
+      try {
+        const createInstrument = await createPaymentInstrument(paymentMethod, pIID, cS);
+        if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
 
         const instrumentId = createInstrument?.data?.data?.id;
-        if (instrumentId) {
-          const assignInstrument = await assignPaymentInstrument(instrumentId);
-          if (assignInstrument?.status === 'success') {
-            // console.log('Assigning...', assignInstrument);
+        if (!instrumentId) throw new Error('Instrument ID missing.');
 
-            const getPI = await getPaymentIntent();
-            if (getPI?.status === 'success') {
-              // console.log('Getting Intent...', getPI);
-              const gPIID = JSON.stringify(getPI?.data?.data[0]);
-              if (gPIID) {
-                const addData = {
-                  name: 'SelectedCard',
-                  value: gPIID,
-                  type: 'String',
-                };
-                const addingCardToOrder = await addCardToOrder(addData);
+        const assignInstrument = await assignPaymentInstrument(instrumentId);
+        if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
 
-                if (addingCardToOrder?.status === 'success') {
-                  // console.log('Adding...', addingCardToOrder);
-                  const confirmPayment = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                      return_url: `${window.location.origin}/checkout`,
-                      payment_method_data: {
-                        billing_details: {
-                          name: 'John Doe', // full name or combine first + last
-                          email: 'john@example.com',
-                          address: {
-                            country: 'US', // required if address collection is disabled
-                            line1: '123 Main St',
-                            city: 'New York',
-                            state: 'NY',
-                            postal_code: '10001',
-                          },
-                        },
-                      },
-                    },
-                    redirect: 'if_required',
-                  });
-                  if (confirmPayment?.error) {
-                    removePreLoader();
-                    showNotification(confirmPayment.error.message, 'error');
-                    return false;
-                  }
+        const getPI = await getPaymentIntent();
+        if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
 
-                  if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
-                    if (getBasketForOrder?.status === 'success') {
-                      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
-                      if (submittingOrder?.data?.data?.id) {
-                        sessionStorage.removeItem('submittedOrderData');
-                        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-                        sessionStorage.removeItem('productDetailObject');
-                        sessionStorage.removeItem('basketData');
-                        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                        return true;
-                      }
-                      removePreLoader();
-                      showNotification('Error submitting order.', 'error');
-                      return false;
-                    }
-                  }
-                  removePreLoader();
-                  showNotification('Error getting basket.', 'error');
-                  return false;
-                }
-                if (addingCardToOrder?.status === 'error') {
-                  const updatingCardToOrder = await updateCardToOrder(addData);
-                  if (updatingCardToOrder?.status === 'success') {
-                    // console.log('Updating Card ....', updatingCardToOrder);
-                    const confirmPayment = await stripe.confirmPayment({
-                      elements,
-                      confirmParams: {
-                        return_url: `${window.location.origin}/checkout`,
-                        payment_method_data: {
-                          billing_details: {
-                            name: 'John Doe', // full name or combine first + last
-                            email: 'john@example.com',
-                            address: {
-                              country: 'US', // required if address collection is disabled
-                              line1: '123 Main St',
-                              city: 'New York',
-                              state: 'NY',
-                              postal_code: '10001',
-                            },
-                          },
-                        },
-                      },
-                      redirect: 'if_required',
-                    });
-                    if (confirmPayment?.error) {
-                      removePreLoader();
-                      showNotification(confirmPayment.error.message, 'error');
-                      return false;
-                    }
-                    if (confirmPayment?.paymentIntent?.status === 'succeeded' || confirmPayment?.paymentIntent?.status === 'requires_capture' || confirmPayment?.paymentIntent?.status === 'processing') {
-                      // console.log('Payment Confirmed...');
+        // get payment intent id
+        const gPIID = JSON.stringify(getPI?.data?.data[0]);
+        if (!gPIID) throw new Error('Payment intent ID missing.');
 
-                      const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
-                      if (submittingOrder?.data?.data?.id) {
-                        sessionStorage.removeItem('submittedOrderData');
-                        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-                        sessionStorage.removeItem('productDetailObject');
-                        sessionStorage.removeItem('basketData');
-                        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${submittingOrder?.data?.data?.id}`;
-                        return true;
-                      }
-                      removePreLoader();
-                      showNotification('Error submitting order.', 'error');
-                      return false;
-                    }
-                  }
+        const addData = {
+          name: 'SelectedCard',
+          value: gPIID,
+          type: 'String',
+        };
 
-                  removePreLoader();
-                  showNotification('Error getting basket.', 'error');
-                  return false;
-                }
-              }
-              removePreLoader();
-              showNotification('Error Processing Payment.', 'error');
-              return false;
-            }
-            removePreLoader();
-            showNotification('Error Processing Payment.', 'error');
-            return false;
-          }
-          removePreLoader();
-          showNotification('Error Processing Payment.', 'error');
-          return false;
+        let addingCardToOrder = await addCardToOrder(addData);
+        if (addingCardToOrder?.status === 'error') {
+          addingCardToOrder = await updateCardToOrder(addData);
+          if (addingCardToOrder?.status !== 'success') throw new Error('Failed to update card to order.');
         }
+
+        const confirmPayment = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: `${window.location.origin}/checkout`,
+            payment_method_data: {
+              billing_details: {
+                name: 'John Doe',
+                email: 'john@example.com',
+                address: {
+                  country: 'US',
+                  line1: '123 Main St',
+                  city: 'New York',
+                  state: 'NY',
+                  postal_code: '10001',
+                },
+              },
+            },
+          },
+          redirect: 'if_required',
+        });
+
+        if (confirmPayment?.error) throw new Error(confirmPayment.error.message);
+
+        const status = confirmPayment?.paymentIntent?.status;
+        const validStatuses = ['succeeded', 'requires_capture', 'processing'];
+        if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
+
+        if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
+
+        const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+        const orderId = submittingOrder?.data?.data?.id;
+        if (!orderId) throw new Error('Order submission failed.');
+
+        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        sessionStorage.removeItem('productDetailObject');
+        sessionStorage.removeItem('basketData');
+
+        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
+        return true;
+      } catch (error) {
         removePreLoader();
-        showNotification('Error Processing Payment.', 'error');
+        showNotification(error.message || 'Error Processing Payment.', 'error');
         return false;
       }
-      removePreLoader();
-      showNotification('Error Processing Payment.', 'error');
-      return false;
     }
   }
   if (activeTab && activeTab === 'shippingMethods') {
@@ -2328,7 +2251,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2638,7 +2561,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2733,7 +2656,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
@@ -2903,7 +2826,7 @@ export const cartItemsContainer = (cartItemValue) => {
                 `product-Quantity-${opcoBe[0]}`,
               );
               logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length
-              } Items`;
+                } Items`;
             },
           );
         }
