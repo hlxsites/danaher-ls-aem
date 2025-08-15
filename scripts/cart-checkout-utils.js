@@ -2522,6 +2522,7 @@ get price type if its net or gross
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
     if (window.location.href.includes('cartlanding') && userLoggedInStatus) {
+      localStorage.removeItem('activeCheckoutTab');
       proceedButton.textContent = 'Proceed to Checkout';
     } else {
       proceedButton.textContent = 'Proceed to Shipping';
@@ -2544,13 +2545,6 @@ get price type if its net or gross
         checkoutSummaryWrapper.insertAdjacentElement(
           'afterbegin',
           loggedOutUserDiv,
-        );
-      } else {
-        checkoutSummaryWrapper.insertAdjacentElement(
-          'afterbegin',
-          div({
-            class: 'h-[0px]',
-          }),
         );
       }
     }
@@ -2770,8 +2764,19 @@ export const cartItemsContainer = (cartItemValue) => {
         await updateCheckoutSummary();
         removePreLoader();
       } else {
-        alert(response);
+      const item = {
+        lineItemId: cartItemValue.lineItemId,
+        value,
+        manufacturer: cartItemValue.manufacturer,
+        type,
+      };
+      console.log(item);
+      
+      const response = await updateCartItemQuantity(item);
+      console.log(response);
+      
         removePreLoader();
+        showNotification('Product removed from cart', 'success');
       }
     } else {
       const item = {
@@ -2833,15 +2838,20 @@ export const cartItemsContainer = (cartItemValue) => {
     if (enteredValue < Number(inputItem.min)) {
       productItem.style.border = '2px solid red';
       // eslint-disable-next-line no-alert
-      alert(
-        `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
-      );
+      showNotification(`Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`, 'error');
+      // alert(
+      //  `Please enter a valid order quantity which
+      // should be greater then ${inputItem.min} and less then ${inputItem.max}`,
+      // );
     } else if (enteredValue > Number(inputItem.max)) {
       productItem.style.border = '2px solid red';
       // eslint-disable-next-line no-alert
-      alert(
-        `Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`,
-      );
+
+      showNotification(`Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`, 'error');
+      // alert(
+      //   `Please enter a valid order quantity which should be
+      //  greater then ${inputItem.min} and less then ${inputItem.max}`,
+      // );
     } else {
       productItem.style.border = '';
       modifyCart('quantity-added', inputItem, event.target.value, eventParent);
