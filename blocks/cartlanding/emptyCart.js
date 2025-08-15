@@ -71,7 +71,7 @@ export const emptyCart = () => {
 
   // Browse by Topic Section
   const browseSection = div({
-    class: 'w-full text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose',
+    class: 'w-full text-black text-2xl font-normal  leading-loose',
   }, 'Browse by Topic');
 
   const topicButtons = div({
