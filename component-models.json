@@ -736,17 +736,17 @@
       {
         "component": "text",
         "name": "viewProductInfoText",
-        "label": "Left Product Info Text"
+        "label": "View Product Info Text"
       },
       {
         "component": "text",
-        "name": "productInfoTitle",
-        "label": "Product Info Title"
+        "name": "viewProductInfoTitle",
+        "label": "View Product Info Title"
       },
       {
         "component": "select",
-        "name": "productInfoTitleType",
-        "label": "Product Info Title Type",
+        "name": "viewProductInfoTitleType",
+        "label": "View Product Info Title Type",
         "options": [
           {
             "name": "primary",
