@@ -18,7 +18,7 @@ export const addProducts = async () => {
   //   div(
   //     {
   //       class:
-  //         "w-[683px] mt-12 justify-start text-black text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
+  //         "w-[683px] mt-12 justify-start text-black text-3xl font-normal  leading-10",
   //     },
   //     "Want to add more products?"
   //   ),
@@ -35,7 +35,7 @@ export const addProducts = async () => {
   //   div(
   //     {
   //       class:
-  //         "w-80 justify-start text-gray-700 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+  //         "w-80 justify-start text-gray-700 text-base font-bold  leading-snug",
   //     },
   //     "Search for a product"
   //   ),

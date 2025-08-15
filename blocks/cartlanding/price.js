@@ -262,7 +262,7 @@ export const price = async () => {
   const disclaimer = div(
     {
       class:
-        "w-80 p-6 justify-start text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+        "w-80 p-6 justify-start text-gray-500 text-xs font-normal  leading-none",
     },
     '*estimated sales tax. Additional tax may apply upon actual calculation of order',
   );
@@ -274,7 +274,7 @@ export const price = async () => {
     div(
       {
         class:
-          "w-80 justify-start text-black text-3xl font-bold font-['TWK_Lausanne_Pan'] leading-10",
+          "w-80 justify-start text-black text-3xl font-bold  leading-10",
       },
       'Let’s get started',
     ),

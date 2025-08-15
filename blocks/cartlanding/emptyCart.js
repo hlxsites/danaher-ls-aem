@@ -46,14 +46,14 @@ export const emptyCart = () => {
     h1(
       {
         class:
-          "w-full text-center justify-start text-gray-900 text-4xl font-normal font-['TWK_Lausanne_Pan'] leading-[48px]",
+          "w-full text-center justify-start text-gray-900 text-4xl font-normal  leading-[48px]",
       },
       'Your Cart is Empty',
     ),
     p(
       {
         class:
-          "w-full text-center justify-start text-gray-900 text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
+          "w-full text-center justify-start text-gray-900 text-xl font-normal  leading-7",
       },
       'Explore our top products or a wide range of options for your workflow solutions',
     ),
@@ -87,7 +87,7 @@ export const emptyCart = () => {
 
   topics.forEach((topic) => {
     const topicButton = button({
-      class: "px-4 py-1 bg-danaherpurple-500 bg-opacity-10 rounded-[48px] text-center justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+      class: "px-4 py-1 bg-danaherpurple-500 bg-opacity-10 rounded-[48px] text-center justify-start text-violet-600 text-base font-bold  leading-snug",
     }, topic);
     topicButtons.appendChild(topicButton);
   });
