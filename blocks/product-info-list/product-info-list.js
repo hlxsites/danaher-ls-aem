@@ -1,8 +1,8 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
   const productInfoListWrapper = div({
     class: 'dhls-container px-5 lg:px-0',
   });
@@ -22,6 +22,13 @@ export default async function decorate(block) {
     tempDiv.querySelectorAll('ul')?.forEach((ulEle) => {
       if (ulEle) {
         ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
+      }
+    });
+    tempDiv.querySelectorAll('li')?.forEach((liEle) => {
+      if (liEle) {
+        liEle.querySelectorAll('strong').forEach((strong) => {
+          strong.classList.add('font-bold');
+        });
       }
     });
     tempDiv?.querySelectorAll('a')?.forEach((aEle) => {

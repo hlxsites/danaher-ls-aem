@@ -49,14 +49,14 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
 export default function decorate(block) {
   const [bannerTitle, ...shopFeaturedBannerItems] = block.children;
 
-  // const opcoBannerItems = [];
-  // [...block.children].forEach((child, index) => {
-  //   if (index > 0) {
-  //     opcoBannerItems.push(child);
-  //   }
-  // });
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  const opcoBannerItems = [];
+  [...block.children].forEach((child, index) => {
+    if (index > 0) {
+      opcoBannerItems.push(child);
+    }
+  });
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
   const sectionHeading = bannerTitle?.textContent.trim().replace(/<[^>]*>/g, '') || '';
 
   const carouselHead = div({
@@ -171,7 +171,7 @@ export default function decorate(block) {
     const productSubHeading = itemSubHeading?.textContent?.trim() || '';
     const productDescription = itemDescription?.innerHTML || '';
     const productImage = itemImage?.querySelector('img');
-    const bgColor = itemBgColor?.textContent?.trim() || '#660099';
+    const bgColor = itemBgColor?.textContent?.trim() || '#4000A5';
     const productButtonUrl = itemButtonUrl?.querySelector('a')?.href;
     const productButtonTarget = itemButtonTarget?.textContent?.trim() || '';
     const productButtonLabel = itemButtonLabel?.textContent?.trim() || '';

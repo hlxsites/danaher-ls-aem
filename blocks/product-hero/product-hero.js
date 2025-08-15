@@ -1,5 +1,5 @@
 import {
-  div, p, span, input, button,
+  a, div, p, span, hr, h1, img,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization,
@@ -56,25 +56,25 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div(
-    { class: 'image-content' },
-    createOptimizedS7Picture(allImages[0], `${productName} - image`, true),
-  );
+  let slideContent = '';
+  const filteredImages = allImages.filter((aImg) => !aImg.toLowerCase().endsWith('.pdf'));
+
+  if (filteredImages[0].includes('.pdf')) {
+    slideContent = div({ class: 'image-content' }, img({ src: '/content/dam/danaher/products/fallbackImage.jpeg' }));
+  } else {
+    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(filteredImages[0], `${productName} - image`, true));
+  }
   const verticalSlides = div();
-  allImages.map((image, index) => {
-    const imageElement = createOptimizedS7Picture(
-      image,
-      `${productName} - image ${index + 1}`,
-      false,
-    );
-    let imageClass = index === 0 ? 'active' : '';
+  filteredImages.map((image, index) => {
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
+    let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
     imageElement.addEventListener('click', showImage);
     verticalSlides.append(imageElement);
     return image;
   });
-  if (allImages.length > 3) {
+  if (filteredImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
@@ -124,22 +124,14 @@ function imageSlider(allImages, productName = 'product') {
 //         ),
 //       );
 
-//       bundleProducts.querySelectorAll('img').forEach((img) => {
-//         img.className = 'rounded-md shadow-lg w-16 h-16';
-//         img.height = '64';
-//         img.width = '64';
-//       });
-//     }
-//     if (index === 3) {
-//       bundleProducts.append(
-//         div({
-//           class: 'block relative w-full mt-[-256px] h-[17rem]',
-//           style:
-//             'background: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #F3F4F6 92.07%);',
-//         }),
-//       );
-//     }
-//   });
+      bundleProducts.querySelectorAll('img').forEach((bImg) => {
+        bImg.className = 'rounded-md shadow-lg w-16 h-16';
+        bImg.height = '64';
+        bImg.width = '64';
+      });
+    }
+    if (index === 3) bundleProducts.append(div({ class: 'block relative w-full mt-[-256px] h-[17rem]', style: 'background: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #F3F4F6 92.07%);' }));
+  });
 
 //   if (bundleDetails.length > 3) {
 //     bundleProducts.append(

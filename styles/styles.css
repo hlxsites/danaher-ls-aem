@@ -1815,7 +1815,6 @@ main .top-border > div.columns-wrapper:first-child {
 @media (min-width: 1024px) {
   .blog main .columns-wrapper {
     min-height: 20rem;
-    overflow-y: scroll;
   }
 }
 

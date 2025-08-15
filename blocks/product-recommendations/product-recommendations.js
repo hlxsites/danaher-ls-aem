@@ -4,6 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import Carousel from '../../scripts/carousel.js';
+
 import { createCard } from '../product-card/product-card.js';
 
 function createProdRecommendsCard(product, idx, firstCard = false) {

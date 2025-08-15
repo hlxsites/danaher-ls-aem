@@ -32,9 +32,8 @@ export default async function decorate(block) {
   const baseUrl = `https://${window.DanaherConfig.host}`;
 
   const currentPath = window.location.href;
-
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   const opcoBannerTitle = bannerTitle;
   const opcoBannerHeading = bannerHeading;
@@ -106,7 +105,7 @@ export default async function decorate(block) {
   }
   // === LEFT SECTION ===
   const leftContent = div({
-    class: 'flex flex-col gap-4 max-w-[567px]',
+    class: 'flex flex-col gap-4 max-w-[567px] items-start',
   });
 
   if (opcoBannerTitle) {
@@ -125,7 +124,7 @@ export default async function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || 'Brand Image',
-        class: 'w-[172px] mb-2 md:mb-8 h-auto',
+        class: 'max-w-[294px] max-h-[120px] object-contain mb-2 md:mb-8 h-auto',
       }),
     );
   }
@@ -351,14 +350,12 @@ export default async function decorate(block) {
 
     if (opcoBannerItemButtonLabel && ctaUrl) {
       contentWrapper.append(
-        button(
+        a(
           {
+            href: ctaUrl || '#',
+            target: opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
             class:
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
-            onclick: () => window.open(
-              ctaUrl,
-              opcoBannerItemButtonTarget === 'true' ? '_blank' : '_self',
-            ),
           },
           opcoBannerItemButtonLabel,
         ),

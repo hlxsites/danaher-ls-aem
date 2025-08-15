@@ -1393,33 +1393,229 @@ async function loadForm(row, tags) {
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  const cols = [...block.firstElementChild.children];
-  block.classList.add(`columns-${cols.length}-cols`);
-  const imageAspectRatio = 1.7778;
-  block.querySelectorAll('div').forEach((ele, index) => {
-    if (index === 0) {
+
+  // Unwrap <div> inside <p>
+  block.querySelectorAll('p > div').forEach(div => {
+    div.parentElement.replaceWith(div);
+  });
+
+  // block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
+
+  // Universal column detection (supports wrappers)
+  function getColumns(block) {
+    let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
+    if (cols.length === 2 || cols.length === 3) return cols;
+    if (cols.length === 1) {
+      cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
+      if (cols.length === 2 || cols.length === 3) return cols;
+    }
+    return [];
+  }
+
+  const columns = getColumns(block);
+
+  // Helper: add blog/news alignment container classes
+  function addBlogNewsContainerClasses(container) {
+    container.classList.add(
+      'align-text-center',
+      'w-full',
+      'h-full',
+      'container',
+      'max-w-7xl',
+      'mx-auto',
+      'flex',
+      'flex-col-reverse',
+      'gap-x-12',
+      'lg:flex-col-reverse',
+      'justify-items-center'
+    );
+  }
+
+  // --- 3 COLUMN LOGIC ---
+  if (columns.length === 3) {
+    block.className = '';
+    columns.forEach(col => {
+      col.className = '';
+      col.style.flexBasis = '';
+      col.style.width = '';
+      col.querySelectorAll('*').forEach(child => {
+        child.classList?.remove(
+          'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
+          'order-none', 'block', 'h-48', 'md:h-[27rem]', 'lg:w-1/2', 'columns-img-col',
+          'w-1/2', 'w-1/3', 'w-2/3', 'lg:w-1/3', 'lg:w-2/3', 'container', 'grid', 'flex',
+          'justify-center', 'items-center', 'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3', 'h-full'
+        );
+      });
+    });
+
+    block.classList.add(
+      'w-full', 'min-h-[350px]',
+      'grid', 'gap-x-8', 'gap-y-4',
+      'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
+    );
+
+    columns.forEach(col => {
+      col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
+      if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
+      col.querySelectorAll('img').forEach(img => {
+        img.removeAttribute('width');
+        img.removeAttribute('height');
+        img.style.maxWidth = '100%';
+        img.style.width = "auto";
+        img.style.width = "100%";
+        img.style.height = "auto";
+        img.style.height = "100%";
+        img.style.objectFit = 'contain';
+        img.style.display = 'block';
+        // Add aspect ratio error handler
+        const imageAspectRatio = 1.7778;
+        img.onerror = function () {
+          img.width = this.width;
+          img.height = Math.floor(this.width / imageAspectRatio);
+        };
+      });
+      // H1 padding for blog/news
       if (
-        window.location.pathname.includes('/us/en/blog/')
-        || window.location.pathname.includes('/us/en/news/')
+        window.location.pathname.includes('/us/en/blog/') ||
+        window.location.pathname.includes('/us/en/news/')
       ) {
-        ele.classList.add(...'align-text-center w-full h-full'.split(' '));
-      } else {
-        ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
-        const firstDiv = ele.querySelector('div:nth-child(1)');
-        const secondDiv = ele.querySelector('div:nth-child(2)');
-        if (sectionDiv.className.includes('thirtyseventy')) {
-          firstDiv.classList.add('lg:w-1/3');
-          secondDiv.classList.add('lg:w-2/3');
-        } else if (sectionDiv.className.includes('seventythirty')) {
-          firstDiv.classList.add('lg:w-2/3');
-          secondDiv.classList.add('lg:w-1/3');
-        } else {
-          firstDiv.classList.add('lg:w-1/2');
-          secondDiv?.classList.add('lg:w-1/2');
-        }
+        col.querySelectorAll('h1').forEach((ele) => {
+          ele.classList.add('pb-4');
+        });
+      }
+    });
+
+    // features-card-left logic (if present)
+    if (block.className.includes('features-card-left')) {
+      columns.forEach(row => {
+        const pTags = row.querySelectorAll('p');
+        let cardDiv;
+        let leftDiv;
+        let rightDiv;
+        pTags.forEach((element) => {
+          if (element.firstElementChild?.nodeName?.toLowerCase() === 'span') {
+            cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            leftDiv = document.createElement('div');
+            leftDiv.className = 'left-content';
+            rightDiv = document.createElement('div');
+            rightDiv.className = 'right-content';
+            leftDiv.append(element);
+            cardDiv.append(leftDiv);
+            cardDiv.append(rightDiv);
+            row.append(cardDiv);
+          } else if (rightDiv) rightDiv.append(element);
+        });
+      });
+    }
+
+    return;
+  }
+
+  // --- 2 COLUMN LOGIC ---
+  if (columns.length === 2) {
+    let firstCol = columns[0];
+    let secondCol = columns[1];
+
+    [
+      'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
+      'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
+      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3'
+    ].forEach(cls => {
+      firstCol.classList.remove(cls);
+      secondCol.classList.remove(cls);
+    });
+
+    // Ratio detection
+    const classes = sectionDiv.className.split(/\s+/).concat(block.className.split(/\s+/));
+    if (classes.includes('thirtyseventy')) {
+      firstCol.classList.add('lg:w-1/3');
+      secondCol.classList.add('lg:w-2/3');
+    } else if (classes.includes('seventythirty')) {
+      firstCol.classList.add('lg:w-2/3');
+      secondCol.classList.add('lg:w-1/3');
+    } else {
+      firstCol.classList.add('lg:w-1/2');
+      secondCol.classList.add('lg:w-1/2');
+    }
+
+    // firstCol.classList.add('flex', 'flex-col', 'justify-center');
+
+     // Container logic (Image 5 style takes precedence if present)
+    const isPicDiv = !!firstCol.querySelector('picture');
+    if (isPicDiv) {
+      firstCol.classList.add('lg:w-1/2', 'picdiv');
+      block.firstElementChild?.classList.add(
+        'align-text-top', 'pb-7', 'py-0', 'my-0',
+        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
+        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+      );
+    } else {
+      firstCol.classList.add('lg:w-1/2', 'flex', 'flex-col', 'justify-center');
+      block.firstElementChild?.classList.add(
+        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
+        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+      );
+    }
+
+    // Responsive image style + aspect ratio error handler
+    const img = secondCol.querySelector('img');
+    if (img) {
+      img.removeAttribute('width');
+      img.removeAttribute('height');
+      img.style.maxWidth = "100%";
+      img.style.width = "auto";
+      img.style.width = "100%";
+      img.style.height = "auto";
+      img.style.height = "100%";
+      img.style.objectFit = "contain";
+      img.style.display = "block";
+      const imageAspectRatio = 1.7778;
+      img.onerror = function () {
+        img.width = this.width;
+        img.height = Math.floor(this.width / imageAspectRatio);
+      };
+    }
+
+    // Promotion form loading
+    const aTag = secondCol.querySelectorAll('p > a');
+    const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
+    if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
+      if (typeof loadForm === 'function') {
+        loadForm(secondCol, aTag);
       }
     }
-  });
+
+    // Blog/news column classes
+    if (
+      window.location.pathname.includes('/us/en/blog/') ||
+      window.location.pathname.includes('/us/en/news/')
+    ) {
+      addBlogNewsContainerClasses(block.firstElementChild);
+      firstCol.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
+      secondCol.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
+      firstCol.querySelectorAll('h1').forEach((ele) => ele.classList.add('pb-4'));
+      secondCol.querySelectorAll('h1').forEach((ele) => ele.classList.add('pb-4'));
+    } else {
+      block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
+    }
+    // picture column logic already handled below
+  }
+
+  // Add column count class for further styling if needed
+  function getColumnCount(block) {
+    const directDivs = Array.from(block.children).filter(el => el.tagName === 'DIV');
+    if (directDivs.length > 1) return directDivs.length;
+    if (directDivs.length === 1) {
+      const innerDivs = Array.from(directDivs[0].children).filter(el => el.tagName === 'DIV');
+      if (innerDivs.length > 1) return innerDivs.length;
+    }
+    return directDivs.length;
+  }
+  const colCount = getColumnCount(block);
+  block.classList.add(`columns-${colCount}-cols`);
+
+  // Style headings
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(
       ...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '),
@@ -1427,6 +1623,8 @@ export default function decorate(block) {
     if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
+
+  // Style buttons
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(
       ...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(
@@ -1435,6 +1633,7 @@ export default function decorate(block) {
     );
   });
 
+  // Additional styling for bottom-border-right
   if (block.className.includes('bottom-border-right')) {
     block
       .querySelectorAll('div > div:nth-child(2) > p > a')
@@ -1448,6 +1647,7 @@ export default function decorate(block) {
       });
   }
 
+  // Additional styling for bg-color-right
   if (block.className.includes('bg-color-right')) {
     const divEl = block.querySelector('div > div:nth-child(2)');
     divEl.classList.add('bg-danaherred-800', 'pb-10');
@@ -1473,157 +1673,52 @@ export default function decorate(block) {
     });
   }
 
-  // setup image columns
-  [...block.children].forEach((col) => {
-    cols.forEach((row) => {
-      const img = row.querySelector('img');
-      if (img) {
-        img.classList.add('w-full');
-        // eslint-disable-next-line func-names
-        img.onerror = function () {
-          img.width = this.width;
-          img.height = Math.floor(this.width / imageAspectRatio);
-        };
-      } else if (!block.className.includes('itemscenter')) {
-        if (
-          window.location.pathname.includes('/us/en/blog/')
-          || window.location.pathname.includes('/us/en/news/')
-        ) {
-          row.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
-          row.querySelectorAll('h1').forEach((ele) => {
-            ele.classList.add('pb-4');
-          });
+  // Style lists and icons
+  block.querySelectorAll('div > ul, p > ul').forEach((ele) => {
+    ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+  });
+
+  block.querySelectorAll('p > span.icon').forEach((element) => {
+    element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
+    const svg = element.querySelector('svg');
+    if (svg) svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
+  });
+
+  // Add column container classes for certain layouts
+  if (block.className.includes('columns-3-cols')) {
+    block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
+    block.querySelector('h4')?.classList.add('font-bold');
+  }
+
+  // Style links
+  block.querySelectorAll('p > a[title="link"]').forEach((item) => {
+    item.parentElement.classList.add('link', 'pb-8');
+    item.textContent += ' ->';
+    item.classList.add(...'text-sm font-bold'.split(' '));
+    if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+    else item.classList.add('text-danaherpurple-500');
+  });
+
+  // Style images for special layouts
+  block.querySelectorAll('picture').forEach((pic) => {
+    const picWrapper = pic.closest('div');
+    if (picWrapper && picWrapper.children.length === 1) {
+      if (
+        window.location.pathname.includes('/us/en/blog/') ||
+        window.location.pathname.includes('/us/en/news/')
+      ) {
+        picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
+        pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
+      } else {
+        picWrapper.classList.add('columns-img-col', 'order-none');
+        const seventythirtyEl = picWrapper.parentElement
+          ?.parentElement?.parentElement?.parentElement;
+        if (seventythirtyEl?.querySelector('img')) {
+          pic.querySelector('img').classList.add('block', 'w-1/2');
         } else {
-          row.classList.add('h-full');
-          const aTag = row.querySelectorAll('p > a');
-          const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
-          if (
-            formType[0]?.title === 'Form_Type'
-            && formType[0]?.textContent === 'promotion'
-          ) {
-            loadForm(row, aTag);
-          }
+          pic.querySelector('img').classList.add('block');
         }
       }
-
-      const ulEle = row.querySelectorAll('div > ul, p > ul');
-      ulEle.forEach((ele) => {
-        ele.classList.add(
-          ...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(
-            ' ',
-          ),
-        );
-      });
-
-      const spanEl = row.querySelectorAll('p > span.icon');
-      spanEl.forEach((element) => {
-        element.classList.add(
-          ...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(
-            ' ',
-          ),
-        );
-        const svg = element.querySelector('svg');
-        svg.classList.add(
-          ...'w-4 h-4 rounded shadow invert brightness-0'.split(' '),
-        );
-      });
-
-      if (block.className.includes('features-card-left')) {
-        const pTags = row.querySelectorAll('p');
-        let cardDiv;
-        let leftDiv;
-        let rightDiv;
-        pTags.forEach((element) => {
-          if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
-            cardDiv = div({ class: 'card' });
-            leftDiv = div({ class: 'left-content' });
-            rightDiv = div({ class: 'right-content' });
-            leftDiv.append(element);
-            cardDiv.append(leftDiv);
-            cardDiv.append(rightDiv);
-            row.append(cardDiv);
-          } else if (rightDiv) rightDiv.append(element);
-        });
-      }
-      if (block.className.includes('columns-2-cols')) {
-        if (
-          window.location.pathname.includes('/us/en/blog/')
-          || window.location.pathname.includes('/us/en/news/')
-        ) {
-          block.firstElementChild?.classList.add(
-            ...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(
-              ' ',
-            ),
-          );
-        } else {
-          block.firstElementChild?.classList.add(
-            ...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(
-              ' ',
-            ),
-          );
-        }
-        const pTags = row.querySelectorAll('p');
-        pTags.forEach((element) => {
-          if (
-            element?.firstElementChild?.nodeName?.toLowerCase() === 'picture'
-          ) {
-            element.parentElement.classList.add('picdiv');
-          }
-        });
-      } else if (block.className.includes('columns-3-cols')) {
-        block.firstElementChild?.classList.add(
-          ...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(
-            ' ',
-          ),
-        );
-        const heading = block.querySelector('h4');
-        heading?.classList.add('font-bold');
-      }
-
-      const anc = row.querySelectorAll('p > a');
-      if (anc) {
-        [...anc].forEach((item) => {
-          if (item.title === 'link') {
-            item.parentElement.classList.add('link', 'pb-8');
-            item.textContent += ' ->';
-            item.classList.add(...'text-sm font-bold'.split(' '));
-            if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
-            else item.classList.add('text-danaherpurple-500');
-          }
-        });
-      }
-
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          if (
-            window.location.pathname.includes('/us/en/blog/')
-            || window.location.pathname.includes('/us/en/news/')
-          ) {
-            picWrapper.classList.add(
-              ...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(
-                ' ',
-              ),
-            );
-            pic
-              .querySelector('img')
-              .classList.add(
-                ...'absolute bottom-0 h-full w-full object-cover'.split(' '),
-              );
-          } else {
-            picWrapper.classList.add('columns-img-col', 'order-none');
-            const seventythirtyEl = picWrapper.parentElement?.parentElement?.parentElement
-              ?.parentElement;
-            if (seventythirtyEl.querySelector('img')) {
-              pic.querySelector('img').classList.add('block', 'w-1/2');
-            } else {
-              pic.querySelector('img').classList.add('block');
-            }
-          }
-        }
-      }
-    });
+    }
   });
 }

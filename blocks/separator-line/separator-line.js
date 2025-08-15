@@ -7,8 +7,7 @@ export default function decorate(block) {
   const [heightInput, bgColorInput] = block.children;
   const bgColorContainer = bgColorInput?.textContent?.trim() || '#D1D5DB';
   const separatorHeightInput = heightInput?.textContent?.trim() || '1';
-  const parsedHeight = parseFloat(separatorHeightInput);
-  const separatorHeight = !Number.isNaN(parsedHeight) ? parsedHeight : 1;
+  const separatorHeight = !Number.isNaN(parseFloat(separatorHeightInput)) ? separatorHeightInput : '1';
 
   const bgColor = bgColorContainer;
   const height = separatorHeight;

@@ -278,9 +278,11 @@
       },
       {
         "component": "date-time",
-        "valueType": "date",
+        "valueType": "date-time",
         "name": "publishDate",
         "label": "Date",
+        "displayFormat": null,
+        "valueFormat": null,
         "value": ""
       },
       {
@@ -296,16 +298,54 @@
     "id": "article-info",
     "fields": [
       {
-        "component": "date-time",
-        "valueType": "date",
-        "name": "publishdate",
-        "label": "Publish Date",
+        "component": "text",
+        "valueType": "string",
+        "name": "authorName",
+        "label": "Author Name",
         "value": ""
       },
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "timetoread",
+        "component": "text",
+        "valueType": "string",
+        "name": "authorTitle",
+        "label": "Author Title",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "Picture",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleOpco",
+        "label": "Article Opco",
+        "value": ""
+      },
+      {
+        "component": "date-time",
+        "valueType": "date-time",
+        "name": "publishDate",
+        "label": "Date",
+        "displayFormat": null,
+        "valueFormat": null,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readingTime",
         "label": "Reading Time",
         "value": ""
       }
@@ -330,15 +370,75 @@
         "component": "text",
         "valueType": "string",
         "name": "banner",
-        "value": "",
         "label": "Banner"
+      },
+      {
+        "component": "select",
+        "name": "bannerType",
+        "label": "Banner Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "description",
-        "value": "",
         "label": "Description"
+      },
+      {
+        "component": "select",
+        "name": "descriptionType",
+        "label": "Description Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       }
     ]
   },
@@ -414,8 +514,57 @@
         "component": "text",
         "valueType": "string",
         "name": "tagName",
-        "value": "",
-        "label": "Tag Name"
+        "value": "topics",
+        "label": "Tag Category (e.g. topics, solutions)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "options": [
+          {
+            "name": "Default (Articles)",
+            "value": ""
+          },
+          {
+            "name": "Application",
+            "value": "application"
+          },
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Library",
+            "value": "library"
+          },
+          {
+            "name": "New Lab",
+            "value": "new-lab"
+          }
+        ]
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "pagination",
+        "label": "Enable Pagination",
+        "value": true
+      },
+      {
+        "component": "checkbox",
+        "valueType": "boolean",
+        "name": "filters",
+        "label": "Enable Filters",
+        "value": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceIndex",
+        "label": "Custom Index Path",
+        "value": "/us/en/article-index.json"
       }
     ]
   },
@@ -529,40 +678,380 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "carousel",
     "fields": [
       {
-        "component": "multiselect",
-        "name": "classes",
-        "value": "",
-        "label": "Style",
-        "valueType": "string"
+        "component": "text",
+        "name": "left_subheading",
+        "label": "Left Side Subheading",
+        "description": "Eyebrow style subheading"
       },
       {
         "component": "text",
-        "valueType": "number",
-        "name": "columns",
-        "value": "",
-        "label": "Columns"
+        "name": "leftMainHeading",
+        "label": "Main Heading Text"
+      },
+      {
+        "component": "select",
+        "name": "leftMainHeadingType",
+        "label": "Heading Tag Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "name": "leftProductInfo",
+        "label": "Left Side Product Info",
+        "description": "Descriptive paragraph below heading"
+      },
+      {
+        "component": "url",
+        "name": "leftProductInfoLink",
+        "label": "Left Product Info Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_title",
+        "label": "Left CTA 1 Title"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_1_type",
+        "label": "Left CTA 1 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
+        "component": "url",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Text"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_title",
+        "label": "Left CTA 2 Title"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_2_type",
+        "label": "Left CTA 2 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "picture",
+        "label": "Right Side Image",
+        "description": "Picture with styling from decorate"
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Right Side Alt Text"
+      },
+      {
+        "component": "boolean",
+        "name": "auto_play",
+        "label": "Enable Auto Play",
+        "description": "Auto play enabled via isAutoPlay flag",
+        "default": ""
+      },
+      {
+        "component": "number",
+        "name": "slide_delay",
+        "label": "Slide Delay",
+        "description": "Delay between slides in milliseconds",
+        "default": ""
+      },
+      {
+        "component": "number",
+        "name": "slide_transition",
+        "label": "Slide Transition Duration",
+        "description": "Slide transition speed in milliseconds",
+        "default": ""
+      },
+      {
+        "component": "boolean",
+        "name": "show_pagination",
+        "label": "Show Pagination",
+        "description": "Display 1/3 pagination indicator",
+        "default": ""
+      },
+      {
+        "component": "boolean",
+        "name": "show_navigation",
+        "label": "Show Navigation Arrows",
+        "description": "Previous/Next buttons",
+        "default": ""
       }
     ]
   },
   {
-    "id": "dashboard",
+    "id": "carousel",
     "fields": [
       {
-        "component": "text",
+        "component": "select",
+        "name": "rows",
+        "label": "Number of Columns",
         "valueType": "string",
-        "name": "dashboardTitle",
-        "value": "",
-        "label": "Page Title"
+        "default": "2",
+        "options": [
+          {
+            "name": "2 Columns",
+            "value": "2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "left_subheading",
+        "label": "Left Side Subheading",
+        "description": "Eyebrow style subheading"
+      },
+      {
+        "component": "text",
+        "name": "leftMainHeading",
+        "label": "Main Heading Text"
+      },
+      {
+        "component": "select",
+        "name": "leftMainHeadingType",
+        "label": "Heading Tag Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "leftProductInfo",
+        "label": "Left Side Product Info",
+        "description": "Descriptive paragraph below heading"
+      },
+      {
+        "component": "url",
+        "name": "leftProductInfoLink",
+        "label": "Left Product Info Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_title",
+        "label": "Left CTA 1 Title"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_1_type",
+        "label": "Left CTA 1 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
+        "component": "url",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Text"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_title",
+        "label": "Left CTA 2 Title"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_2_type",
+        "label": "Left CTA 2 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "picture",
+        "label": "Right Side Image",
+        "description": "Picture with styling from decorate"
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Right Side Alt Text"
+      },
+      {
+        "component": "boolean",
+        "name": "auto_play",
+        "label": "Enable Auto Play",
+        "description": "Auto play enabled via isAutoPlay flag",
+        "default": ""
+      },
+      {
+        "component": "number",
+        "name": "slide_delay",
+        "label": "Slide Delay",
+        "description": "Delay between slides in milliseconds",
+        "default": ""
+      },
+      {
+        "component": "number",
+        "name": "slide_transition",
+        "label": "Slide Transition Duration",
+        "description": "Slide transition speed in milliseconds",
+        "default": ""
+      },
+      {
+        "component": "boolean",
+        "name": "show_pagination",
+        "label": "Show Pagination",
+        "description": "Display 1/3 pagination indicator",
+        "default": ""
+      },
+      {
+        "component": "boolean",
+        "name": "show_navigation",
+        "label": "Show Navigation Arrows",
+        "description": "Previous/Next buttons",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "select",
+        "name": "rows",
+        "label": "Number of Columns",
+        "valueType": "string",
+        "default": "2",
+        "options": [
+          {
+            "name": "2 Columns",
+            "value": "2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Select Ratio (only for 2 columns)",
+        "valueType": "string",
+        "default": "fiftyfifty",
+        "options": [
+          {
+            "name": "70/30 Split",
+            "value": "seventythirty"
+          },
+          {
+            "name": "30/70 Split",
+            "value": "thirtyseventy"
+          }
+        ],
+        "condition": {
+          "field": "rows",
+          "equals": "2"
+        }
       }
     ]
   },
@@ -617,13 +1106,52 @@
         "name": "rightCarouselProductId",
         "value": "",
         "label": "Right Carousel Product IDs"
-      },
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
       {
         "component": "text",
-        "valueType": "string",
-        "name": "rightProductsEndPoint",
-        "value": "",
-        "label": "Right Carousel Products API Endpoint"
+        "name": "url",
+        "type": "string",
+        "label": "Media URL",
+        "required": true
+      },
+      {
+        "component": "boolean",
+        "name": "autoplay",
+        "type": "boolean",
+        "label": "Autoplay",
+        "default": false
+      },
+      {
+        "component": "select",
+        "name": "type",
+        "label": "Type",
+        "options": [
+          {
+            "name": "YouTube",
+            "value": "youtube"
+          },
+          {
+            "name": "Vimeo",
+            "value": "vimeo"
+          },
+          {
+            "name": "Vidyard",
+            "value": "vidyard"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          },
+          {
+            "name": "Other",
+            "value": "default"
+          }
+        ]
       }
     ]
   },
@@ -741,105 +1269,92 @@
     ]
   },
   {
-    "id": "login",
+    "id": "mini-teasers",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "loginHeading",
-        "value": "",
-        "label": "Heading"
+        "name": "miniTeasers",
+        "label": "Mini Teasers"
+      },
+      {
+        "component": "select",
+        "name": "miniTeasersType",
+        "label": "Mini Teasers Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "loginSubHeading",
-        "value": "",
-        "label": "Sub Heading"
+        "name": "miniTeasersDescription",
+        "label": "Mini Teasers Description"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormTitle",
-        "value": "",
-        "label": "Form Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormSubHeading",
-        "value": "",
-        "label": "Form Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormEmailLabel",
-        "value": "",
-        "label": "Email Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormPasswordLabel",
-        "value": "",
-        "label": "Password Field Label"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "loginFormCheckboxText",
-        "value": "",
-        "label": "Form Checkbox Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormForgotPasswordLabel",
-        "value": "",
-        "label": "Forgot Password Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "loginFormForgotPasswordLink",
-        "value": "",
-        "label": "Forgot Password Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormSubmitButtonLabel",
-        "value": "",
-        "label": "Submit Button Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormNewAccountText",
-        "value": "",
-        "label": "New Account Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormNewAccountButtonLabel",
-        "value": "",
-        "label": "New Account Button Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "loginFormNewAccountButtonLink",
-        "value": "",
-        "label": "New Account Button Link"
+        "component": "select",
+        "name": "miniTeasersDescriptionType",
+        "label": "Mini Teasers Description Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
       },
       {
         "component": "reference",
-        "valueType": "string",
-        "name": "backgroundImage",
-        "label": "Background Image",
+        "name": "image",
+        "label": "Image",
         "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
       }
     ]
   },
@@ -1303,101 +1818,127 @@
   },
   {
     "id": "recent-articles",
-    "fields": []
-  },
-  {
-    "id": "register",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "registerHeading",
-        "value": "",
-        "label": "Heading"
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "registerSubHeading",
-        "value": "",
-        "label": "Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormTitle",
-        "value": "",
-        "label": "Form Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormSubHeading",
-        "value": "",
-        "label": "Form Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormFirstNameLabel",
-        "value": "",
-        "label": "First Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormLastNameLabel",
-        "value": "",
-        "label": "Last Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormCompanyNameLabel",
-        "value": "",
-        "label": "Company Name Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormEmailLabel",
-        "value": "",
-        "label": "Email Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormPasswordLabel",
-        "value": "",
-        "label": "Password Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormConfirmPasswordLabel",
-        "value": "",
-        "label": "Confirm Password Field Label"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "registerFormCheckboxText",
-        "value": "",
-        "label": "Form Checkbox Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormSubmitButtonLabel",
-        "value": "",
-        "label": "Submit Button Label"
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
       },
       {
         "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Articles List",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "related-articles",
+    "fields": [
+      {
+        "component": "text",
         "valueType": "string",
-        "name": "backgroundImage",
-        "label": "Background Image",
-        "multi": false
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
       }
     ]
   },
@@ -1537,6 +2078,18 @@
     ]
   },
   {
+    "id": "social-media",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "tabs-container",
     "fields": [
       {
@@ -1545,6 +2098,76 @@
         "value": "",
         "label": "Container Id",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tags-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleType",
+        "label": "Article Type",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTopics",
+        "label": "Article Topics",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Current Article URL",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "List",
+        "name": "articles",
+        "label": "Filtered Articles",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "label": "Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "path",
+            "label": "Path",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "type",
+            "label": "Type",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "label": "Topics",
+            "value": ""
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "value": ""
+          }
+        ]
       }
     ]
   },

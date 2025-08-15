@@ -2,8 +2,8 @@ import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
   const [title, brandAddress, callDescription, browseDescription] = block.children;
 
   brandAddress

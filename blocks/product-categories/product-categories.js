@@ -8,8 +8,8 @@ export default async function decorate(block) {
   const maxCards = 28;
 
   const [productCategoryId, blockTitle, blockBrand] = block.children;
-  block?.parentElement?.parentElement?.removeAttribute('class');
-  block?.parentElement?.parentElement?.removeAttribute('style');
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
 
   document.documentElement.style.scrollBehavior = 'smooth';
   const blockId = productCategoryId?.querySelector('p')?.textContent?.trim() || '';
@@ -42,14 +42,12 @@ export default async function decorate(block) {
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.images?.[0] || '';
       const absImg = image?.startsWith('http') ? image : `${baseUrl}${image}`;
-      return div(
+      return a(
         {
+          href: clickUri,
+          target: clickUri?.includes('http') ? '_blank' : '_self',
           class:
             'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
-          onclick: () => window.open(
-            clickUri,
-            clickUri?.includes('http') ? '_blank' : '_self',
-          ),
         },
         image
           && img({
