@@ -125,6 +125,13 @@
         },
         {
           "component": "number",
+          "name": "data-carousel-item",
+          "label": "Data Carousel Item",
+          "description": "Data Carousel Item",
+          "default": ""
+        },
+        {
+          "component": "number",
           "name": "slide_transition",
           "label": "Slide Transition Duration",
           "description": "Slide transition speed in milliseconds",

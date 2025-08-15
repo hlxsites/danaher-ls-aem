@@ -40,6 +40,7 @@ export default function decorate(block) {
   block.parentElement.parentElement.querySelector('h1')?.classList.add('hidden');
   const uuid = crypto.randomUUID(4).substring(0, 6);
   if (block.querySelector('a[title="link"]')) block.parentElement.parentElement.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
+ 
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
   block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
@@ -48,7 +49,9 @@ export default function decorate(block) {
     ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
     ele.setAttribute('data-carousel-item', (eleIndex + 1));
     const contentEl = ele.querySelector('h2, p');
+    console.log('contentEl', contentEl);
     const picture = ele.querySelector('picture');
+    console.log('picture', picture);
     let changedBtn = 0;
     if (contentEl) {
       const content = contentEl.closest('div');
