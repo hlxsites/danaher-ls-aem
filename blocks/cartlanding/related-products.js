@@ -24,7 +24,7 @@ export default async function relatedProducts(headingText, productIds) {
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered px-0 w-[1358px] dhlsBp:p-0 flex flex-col gap-4',
+      'top-selling-rendered px-0 w-full dhlsBp:p-0 flex flex-col gap-4',
   });
 
   // const headingText = block
@@ -52,7 +52,7 @@ export default async function relatedProducts(headingText, productIds) {
   //   '[data-aue-prop="subscribe"]',
   // )?.textContent;
   const carouselContainer = div({
-    class: 'carousel-container w-[1358px] flex flex-col gap-y-6 w-full justify-center',
+    class: 'carousel-container w-full flex flex-col gap-y-6 w-full justify-center',
   });
   const carouselHead = div({
     class: 'w-[1280px] flex flex-row justify-between md:h-10',

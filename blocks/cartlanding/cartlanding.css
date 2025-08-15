@@ -1453,6 +1453,10 @@
     width: 640px
   }
 
+  .cartlanding-wrapper :is(.md\:w-full) {
+    width: 100%
+  }
+
   .cartlanding-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }

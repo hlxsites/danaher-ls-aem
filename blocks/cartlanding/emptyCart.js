@@ -4,7 +4,7 @@ import {
 
 export const emptyCart = () => {
   const container = div({
-    class: 'inline-flex flex-col justify-center w-[1358px]',
+    class: 'inline-flex flex-col justify-center w-full',
   });
 
   // Browse button with event listener
@@ -46,14 +46,14 @@ export const emptyCart = () => {
     h1(
       {
         class:
-          "w-[861px] text-center justify-start text-gray-900 text-4xl font-normal font-['TWK_Lausanne_Pan'] leading-[48px]",
+          "w-full text-center justify-start text-gray-900 text-4xl font-normal font-['TWK_Lausanne_Pan'] leading-[48px]",
       },
       'Your Cart is Empty',
     ),
     p(
       {
         class:
-          "w-[855px] text-center justify-start text-gray-900 text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
+          "w-full text-center justify-start text-gray-900 text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
       },
       'Explore our top products or a wide range of options for your workflow solutions',
     ),
@@ -65,17 +65,17 @@ export const emptyCart = () => {
       viewButton,
     ),
     hr({
-      class: 'w-[1358px] border-black-500',
+      class: 'w-full border-black-500',
     }),
   );
 
   // Browse by Topic Section
   const browseSection = div({
-    class: 'w-[1358px] text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose',
+    class: 'w-full text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose',
   }, 'Browse by Topic');
 
   const topicButtons = div({
-    class: 'w-[1227px] inline-flex justify-start items-start gap-4 flex-wrap content-start',
+    class: 'w-full inline-flex justify-start items-start gap-4 flex-wrap content-start',
   });
   //     topicButtons.className = 'topic-buttons';
 

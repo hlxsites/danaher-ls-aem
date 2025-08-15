@@ -143,12 +143,12 @@ export const addProducts = async () => {
   }
 
   const productSearchcontainer = div({
-    class: 'w-[1358px]',
+    class: 'w-full',
     id: 'productSearchcontainer',
   });
   const searchBlock = div(
     {
-      class: 'md:w-[1358px] py-12 px-0 lg:flex-row flex-col inline-flex justify-start gap-5',
+      class: 'md:w-full py-12 px-0 lg:flex-row flex-col inline-flex justify-start gap-5',
     },
     div(
       {

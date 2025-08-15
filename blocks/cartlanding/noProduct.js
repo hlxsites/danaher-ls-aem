@@ -14,7 +14,7 @@ export const noProducts = (searchedWord) => {
   decorateIcons(cubeButton);
   const noProductDiv = div(
     {
-      class: 'no-product-found w-[1358px] text-center justify-center inline-flex flex-col gap-2',
+      class: 'no-product-found w-full text-center justify-center inline-flex flex-col gap-2',
     },
     div(
       {
