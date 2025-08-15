@@ -332,6 +332,10 @@
   max-width: 20rem
 }
 
+.checkout :is(.max-w-\[792px\]) {
+  max-width: 792px
+}
+
 .checkout :is(.flex-1) {
   flex: 1 1 0%
 }

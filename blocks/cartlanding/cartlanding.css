@@ -555,6 +555,10 @@
   max-width: 20rem
 }
 
+.cartlanding-wrapper :is(.max-w-\[792px\]) {
+  max-width: 792px
+}
+
 .cartlanding-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }

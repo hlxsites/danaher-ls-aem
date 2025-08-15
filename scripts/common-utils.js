@@ -170,7 +170,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
     id: 'utilityModal',
   });
   const modalContainer = div({
-    class: 'relative max-w-xl w-full items-center bg-white p-8',
+    class: 'relative max-w-[792px] w-full items-center bg-white p-8',
     id: 'utilityModalWrapper',
   });
 

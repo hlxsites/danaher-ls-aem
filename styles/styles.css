@@ -3218,6 +3218,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   max-width: 20rem;
 }
 
+.max-w-\[792px\] {
+  max-width: 792px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
