@@ -117,6 +117,7 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
+// eslint-disable-next-line consistent-return
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
   if (page === 'cartlanding') {
     const searchTerm = searchInput.value.trim();
@@ -988,7 +989,8 @@ export default async function decorate(block) {
           loadedBreadcrumb.default(edsBreadcrumbWrapper);
         })
         .catch((error) => {
-          console.error('Failed to load breadcrumb module:', error);
+        // eslint-disable-next-line no-console
+          console.warn('Failed to load breadcrumb module:', error);
         });
     }
   }
