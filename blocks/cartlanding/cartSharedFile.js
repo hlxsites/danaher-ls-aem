@@ -302,8 +302,6 @@ export const updateCartItemQuantity = async (item) => {
       Accept: 'application/vnd.intershop.basket.v1+json',
     });
     const url = `${baseURL}/baskets/current/items/${item.lineItemId}`;
-    console.log(defaultHeader);
-    
     try {
       const response = await deleteApiData(url, defaultHeader);
       if (response && response.status === 'success') {

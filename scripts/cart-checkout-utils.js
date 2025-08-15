@@ -2764,17 +2764,6 @@ export const cartItemsContainer = (cartItemValue) => {
         await updateCheckoutSummary();
         removePreLoader();
       } else {
-      const item = {
-        lineItemId: cartItemValue.lineItemId,
-        value,
-        manufacturer: cartItemValue.manufacturer,
-        type,
-      };
-      console.log(item);
-      
-      const response = await updateCartItemQuantity(item);
-      console.log(response);
-      
         removePreLoader();
         showNotification('Product removed from cart', 'success');
       }
