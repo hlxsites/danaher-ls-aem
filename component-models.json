@@ -740,13 +740,13 @@
       },
       {
         "component": "text",
-        "name": "leftProductInfoTitle",
-        "label": "Left CTA 1 Title"
+        "name": "productInfoTitle",
+        "label": "Product Info Title"
       },
       {
         "component": "select",
-        "name": "leftProductInfoType",
-        "label": "Left CTA 1 Type",
+        "name": "productInfoTitleType",
+        "label": "Product Info Title Type",
         "options": [
           {
             "name": "primary",
@@ -775,8 +775,8 @@
       },
       {
         "component": "select",
-        "name": "talkToAnExpertType",
-        "label": "Talk To An Expert Type",
+        "name": "talkToAnExpertTitleType",
+        "label": "Talk To An Expert Title Type",
         "options": [
           {
             "name": "primary",

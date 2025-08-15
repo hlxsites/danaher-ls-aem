@@ -38,7 +38,7 @@ function configurePagination(carouselControls, totalSlides) {
 
 export default function decorate(block) {
   block.parentElement.parentElement.querySelector('h1')?.classList.add('hidden');
-  // const uuid = crypto.randomUUID(4).substring(0, 6);
+  const uuid = crypto.randomUUID(4).substring(0, 6);
   if (block.querySelector('a[title="link"]')) block.parentElement.parentElement.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
   block.style = 'grid-auto-columns: 100%';
