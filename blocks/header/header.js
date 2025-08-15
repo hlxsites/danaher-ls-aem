@@ -117,39 +117,50 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-async function submitSearchQuery(searchInput, actionCause = '') {
-  let searchLocation = '/us/en/search.html';
-  const redirectList = [];
-  const searchTerm = searchInput.value.trim();
-  if (searchTerm) {
-    const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-    const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
-    requestPayload.analytics.actionCause = actionCause
-      || searchInput.getAttribute('data-action-cause')
-      || 'searchFromLink';
-    await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-    const triggerResponseData = await makeCoveoApiRequest(
-      '/rest/search/v2/plan',
-      'searchKey',
-      triggerRequestPayload,
-    );
-    const { preprocessingOutput } = triggerResponseData;
-    const { triggers } = preprocessingOutput;
-    if (triggers != null && triggers.length > 0) {
-      triggers.forEach(({ content, type }) => {
-        if (type === 'redirect') {
-          redirectList.push(content);
-        }
-      });
+// eslint-disable-next-line consistent-return
+export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  if (page === 'cartlanding') {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      return resp;
     }
-    setRecentSearches(searchTerm);
-    searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
-  }
-  if (redirectList.length > 0) {
-    const [redirect] = redirectList;
-    window.location = redirect;
-  } else {
-    window.location = searchLocation;
+    let searchLocation = '/us/en/search.html';
+    const redirectList = [];
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      const triggerResponseData = await makeCoveoApiRequest(
+        '/rest/search/v2/plan',
+        'searchKey',
+        triggerRequestPayload,
+      );
+      const { preprocessingOutput } = triggerResponseData;
+      const { triggers } = preprocessingOutput;
+      if (triggers != null && triggers.length > 0) {
+        triggers.forEach(({ content, type }) => {
+          if (type === 'redirect') {
+            redirectList.push(content);
+          }
+        });
+      }
+      setRecentSearches(searchTerm);
+      searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+    }
+    if (redirectList.length > 0) {
+      const [redirect] = redirectList;
+      window.location = redirect;
+    } else {
+      window.location = searchLocation;
+    }
   }
 }
 
@@ -969,17 +980,19 @@ export default async function decorate(block) {
       {
         class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
       },
-    );
-    bred.append(edsBreadcrumbWrapper);
-    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+    ); if (edsBreadcrumbWrapper) {
+      bred.append(edsBreadcrumbWrapper);
+      loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
 
-    import('../breadcrumb/breadcrumb.js')
-      .then((loadedBreadcrumb) => {
-        loadedBreadcrumb.default(edsBreadcrumbWrapper);
-      })
-      .catch((error) => {
-        console.error('Failed to load breadcrumb module:', error);
-      });
+      import('../breadcrumb/breadcrumb.js')
+        .then((loadedBreadcrumb) => {
+          loadedBreadcrumb.default(edsBreadcrumbWrapper);
+        })
+        .catch((error) => {
+        // eslint-disable-next-line no-console
+          console.warn('Failed to load breadcrumb module:', error);
+        });
+    }
   }
 
   /*

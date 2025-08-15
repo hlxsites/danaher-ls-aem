@@ -29,6 +29,13 @@
       "accordion",
       "recent-articles",
       "embed",
+      "register",
+      "login",
+      "dashboard",
+      "cartlanding",
+      "checkout",
+      "order-submit",
+      "order-status",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -170,6 +177,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "order-submit",
+    "components": [
+      ""
     ]
   },
   {
