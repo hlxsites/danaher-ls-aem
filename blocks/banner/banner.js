@@ -9,12 +9,11 @@ export default function decorate(block) {
     main.appendChild(section);
   }
   const bannerBlocks = Array.from(main.children).filter(
-    (el) => el.classList && el.classList.contains('banner-block') && el.parentElement === main
+    (el) => el.classList && el.classList.contains('banner-block') && el.parentElement === main,
   );
-  if (block.classList && block.classList.contains('banner-block') && block.parentElement === main 
+  if (block.classList && block.classList.contains('banner-block') && block.parentElement === main
       && !bannerBlocks.includes(block)
-  ) 
-  {
+  ) {
     bannerBlocks.push(block);
   }
   bannerBlocks.forEach((banner) => {
@@ -32,7 +31,7 @@ export default function decorate(block) {
   } else {
     content.parentNode.setAttribute(
       'style',
-      'background: linear-gradient(to right bottom, #430f9f, #5d12b5, #7814cc, #9414e2, #b110f7)'
+      'background: linear-gradient(to right bottom, #430f9f, #5d12b5, #7814cc, #9414e2, #b110f7)',
     );
   }
 
@@ -91,7 +90,7 @@ export default function decorate(block) {
     }
   }
   const buttonContainer = document.querySelector('.button-container');
-    if (buttonContainer) {
+  if (buttonContainer) {
     buttonContainer.remove();
   }
 }

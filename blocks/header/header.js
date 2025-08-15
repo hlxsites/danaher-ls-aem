@@ -117,83 +117,50 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-async function submitSearchQuery(searchInput, actionCause = '') {
-  let searchLocation = '/us/en/search.html';
-  const redirectList = [];
-  const searchTerm = searchInput.value.trim();
-  if (searchTerm) {
-    const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-    const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
-    requestPayload.analytics.actionCause = actionCause
-      || searchInput.getAttribute('data-action-cause')
-      || 'searchFromLink';
-    await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-    const triggerResponseData = await makeCoveoApiRequest(
-      '/rest/search/v2/plan',
-      'searchKey',
-      triggerRequestPayload,
-    );
-    const { preprocessingOutput } = triggerResponseData;
-    const { triggers } = preprocessingOutput;
-    if (triggers != null && triggers.length > 0) {
-      triggers.forEach(({ content, type }) => {
-        if (type === 'redirect') {
-          redirectList.push(content);
-        }
-      });
+export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  if (page === 'cartlanding') {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      return resp;
     }
-    setRecentSearches(searchTerm);
-    searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+    let searchLocation = '/us/en/search.html';
+    const redirectList = [];
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      const triggerResponseData = await makeCoveoApiRequest(
+        '/rest/search/v2/plan',
+        'searchKey',
+        triggerRequestPayload,
+      );
+      const { preprocessingOutput } = triggerResponseData;
+      const { triggers } = preprocessingOutput;
+      if (triggers != null && triggers.length > 0) {
+        triggers.forEach(({ content, type }) => {
+          if (type === 'redirect') {
+            redirectList.push(content);
+          }
+        });
+      }
+      setRecentSearches(searchTerm);
+      searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+    }
+    if (redirectList.length > 0) {
+      const [redirect] = redirectList;
+      window.location = redirect;
+    } else {
+      window.location = searchLocation;
+    }
   }
-  if (redirectList.length > 0) {
-    const [redirect] = redirectList;
-    window.location = redirect;
-  } else {
-    window.location = searchLocation;
-  }
-}
-
-function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
-  const searchSuggestion = button(
-    {
-      class:
-        'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
-      'data-suggestion-type': suggestionType,
-    },
-    div(
-      {
-        class: 'flex items-center',
-      },
-      span({
-        class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
-      }),
-      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
-    ),
-  );
-  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
-    ? `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
-        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
-      </svg>
-    `
-    : `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-        <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
-      </svg>
-    `;
-  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
-  searchSuggestion.addEventListener('click', async (e) => {
-    const searchInput = e.target.closest('.searchbox').querySelector('input');
-    searchInput.value = e.target
-      .closest('button')
-      .querySelector('span.search-suggestion-text').innerText;
-    searchInput.focus();
-    await submitSearchQuery(
-      searchInput,
-      suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink',
-    );
-  });
-  return searchSuggestion;
 }
 
 async function buildSearchSuggestions(searchbox) {
@@ -969,17 +936,18 @@ export default async function decorate(block) {
       {
         class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
       },
-    );
-    bred.append(edsBreadcrumbWrapper);
-    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+    ); if (edsBreadcrumbWrapper) {
+      bred.append(edsBreadcrumbWrapper);
+      loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
 
-    import('../breadcrumb/breadcrumb.js')
-      .then((loadedBreadcrumb) => {
-        loadedBreadcrumb.default(edsBreadcrumbWrapper);
-      })
-      .catch((error) => {
-        console.error('Failed to load breadcrumb module:', error);
-      });
+      import('../breadcrumb/breadcrumb.js')
+        .then((loadedBreadcrumb) => {
+          loadedBreadcrumb.default(edsBreadcrumbWrapper);
+        })
+        .catch((error) => {
+          console.error('Failed to load breadcrumb module:', error);
+        });
+    }
   }
 
   /*

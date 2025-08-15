@@ -152,10 +152,6 @@
   display: block;
 }
 
-.columns-wrapper :is(.\!block) {
-  display: block !important;
-}
-
 .columns-wrapper :is(.flex) {
   display: flex;
 }
@@ -456,6 +452,11 @@
   padding-right: 1.5rem;
 }
 
+.columns-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .columns-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -471,13 +472,16 @@
   padding-bottom: 1rem;
 }
 
-.columns-wrapper :is(.py-0) {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 .columns-wrapper :is(.pb-10) {
   padding-bottom: 2.5rem;
+}
+
+.columns-wrapper :is(.pb-4) {
+  padding-bottom: 1rem;
+}
+
+.columns-wrapper :is(.pb-7) {
+  padding-bottom: 1.75rem;
 }
 
 .columns-wrapper :is(.pb-8) {
@@ -490,14 +494,6 @@
 
 .columns-wrapper :is(.pl-2) {
   padding-left: 0.5rem;
-}
-
-.columns-wrapper :is(.pb-4) {
-  padding-bottom: 1rem;
-}
-
-.columns-wrapper :is(.pb-7) {
-  padding-bottom: 1.75rem;
 }
 
 .columns-wrapper :is(.align-text-top) {
