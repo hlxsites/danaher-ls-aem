@@ -50,8 +50,6 @@ export const updateCartQuantity = (newQuantity) => {
 };
 
 export const mycart = async () => {
-  console.log('my cart');
-
   const authenticationToken = await getAuthenticationToken();
 
   if (authenticationToken?.status === 'error') {
