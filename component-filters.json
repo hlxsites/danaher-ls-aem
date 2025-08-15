@@ -28,6 +28,13 @@
       "call-to-action",
       "accordion",
       "recent-articles",
+      "login",
+      "register",
+      "cartlanding",
+      "checkout",
+      "order-submit",
+      "order-status",
+      "dashboard",
       "embed",
       "carousel",
       "dual-carousel",
@@ -170,6 +177,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "order-submit",
+    "components": [
+      ""
     ]
   },
   {
