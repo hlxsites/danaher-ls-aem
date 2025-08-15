@@ -1355,7 +1355,6 @@ export const changeStep = async (step) => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const currentTab = step?.target?.getAttribute('data-tab') || step?.getAttribute('data-tab');
-  const activeTab = step?.target?.getAttribute('data-activeTab') || step?.getAttribute('data-activeTab');
   let validateData = '';
   if (currentTab === 'shippingMethods') {
     localStorage.setItem('activeCheckoutTab', currentTab);
@@ -2077,31 +2076,6 @@ get counrty field and attach change event listener to populate states based on c
   return adressForm;
 }
 
-// const getOrderDetails = async () => {
-// const authenticationToken = await getAuthenticationToken();
-// if (!authenticationToken) {
-//   return { status: 'error', data: 'Unauthorized access.' };
-// }
-// const token = authenticationToken.access_token;
-// const defaultHeader = new Headers({
-//   'Content-Type': 'Application/json',
-//   'Authentication-Token': token,
-// });
-// const url = `${baseURL}/orders/${orderId}`;
-// try {
-//   const response = await getApiData(
-//     url,
-//     defaultHeader,
-//   );
-//   if (response?.status === 'success') {
-//     return response;
-//   }
-//   return response;
-// } catch (error) {
-//   return error;
-// }
-// }
-
 /*
 *
 *
@@ -2188,7 +2162,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2498,7 +2472,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2587,7 +2561,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
@@ -2756,8 +2730,7 @@ export const cartItemsContainer = (cartItemValue) => {
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
-              logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length
-                } Items`;
+              logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length} Items`;
             },
           );
         }
@@ -2787,7 +2760,7 @@ export const cartItemsContainer = (cartItemValue) => {
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
-        alert(response);
+        // alert(response);
         removePreLoader();
         element.blur(); // Removes focus from the input
       }

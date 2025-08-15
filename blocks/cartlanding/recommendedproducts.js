@@ -254,14 +254,14 @@ export const recommendedProducts = () => {
           span(
             {
               class:
-                "text-gray-900 text-2xl font-bold  leading-loose",
+                'text-gray-900 text-2xl font-bold  leading-loose',
             },
             `$${item.salePrice.value}`,
           ),
           span(
             {
               class:
-                "text-gray-900 text-base font-extralight  leading-snug",
+                'text-gray-900 text-base font-extralight  leading-snug',
             },
             '(USD)',
           ),

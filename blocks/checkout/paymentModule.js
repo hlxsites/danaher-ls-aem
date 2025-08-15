@@ -1,5 +1,5 @@
 import {
-  buildInputElement, removePreLoader, showNotification, showPreLoader,
+  buildInputElement, removePreLoader, showPreLoader,
 } from '../../scripts/common-utils.js';
 import {
   h2, h5, div, p, span, form,
@@ -7,9 +7,8 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
 import {
-  loadStripe, getPaymentIntent, postPaymentIntent, createPaymentInstrument, assignPaymentInstrument, setupPaymentIntent,
+  loadStripe, getPaymentIntent, postPaymentIntent,
 } from '../../scripts/stripe_utils.js';
-import { getCommerceBase } from '../../scripts/commerce.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 /*
@@ -22,7 +21,6 @@ const paymentModule = async () => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized.' };
   }
-  const baseURL = getCommerceBase();
   /*
   ::::::::::::::
   get price type if its net or gross.

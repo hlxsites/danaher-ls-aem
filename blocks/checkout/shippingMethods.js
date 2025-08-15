@@ -96,6 +96,7 @@ if basket has the shipping notes attribute and has value. Update the shipping no
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
+      // eslint-disable-next-line no-lonely-if
       if (getShippingNotesField?.value?.trim() !== '') {
         const shippingNotesPayload = {
           name: 'GroupShippingNote',

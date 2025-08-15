@@ -121,7 +121,7 @@ export default function renderListCard(item) {
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -281,7 +281,7 @@ export default function renderListCard(item) {
         },
         span(
           {
-            class: 'text-violet-600 text-base font-normal leading-snug',
+            class: 'inherit text-base font-medium leading-snug',
           },
           'Quote',
         ),

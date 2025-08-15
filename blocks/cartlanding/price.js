@@ -85,7 +85,7 @@ export const price = async () => {
         a(
           {
             href: 'item.url',
-            class: 'dhlsLink text-base font-bold leading-snug',
+            class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
           },
           'View Details',
           // span({
@@ -262,7 +262,7 @@ export const price = async () => {
   const disclaimer = div(
     {
       class:
-        "w-80 p-6 justify-start text-gray-500 text-xs font-normal  leading-none",
+        'w-80 p-6 justify-start text-gray-500 text-xs font-normal  leading-none',
     },
     '*estimated sales tax. Additional tax may apply upon actual calculation of order',
   );
@@ -274,7 +274,7 @@ export const price = async () => {
     div(
       {
         class:
-          "w-80 justify-start text-black text-3xl font-bold  leading-10",
+          'w-80 justify-start text-black text-3xl font-bold  leading-10',
       },
       'Let’s get started',
     ),

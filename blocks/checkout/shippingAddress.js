@@ -726,6 +726,7 @@ export const shippingAddressModule = async () => {
     const getCurrentBasketDetails = await getBasketDetails();
 
     shippingAsBillingAddressInput?.addEventListener('click', async (c) => {
+      // eslint-disable-next-line consistent-return
       setTimeout(async () => {
         c.preventDefault();
         /*

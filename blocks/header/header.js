@@ -163,6 +163,49 @@ export async function submitSearchQuery(searchInput, actionCause = '', page = ''
   }
 }
 
+function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
+  const searchSuggestion = button(
+    {
+      class:
+        'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+      'data-suggestion-type': suggestionType,
+    },
+    div(
+      {
+        class: 'flex items-center',
+      },
+      span({
+        class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
+      }),
+      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
+    ),
+  );
+  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
+    ? `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
+        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
+      </svg>
+    `
+    : `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
+      </svg>
+    `;
+  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
+  searchSuggestion.addEventListener('click', async (e) => {
+    const searchInput = e.target.closest('.searchbox').querySelector('input');
+    searchInput.value = e.target
+      .closest('button')
+      .querySelector('span.search-suggestion-text').innerText;
+    searchInput.focus();
+    await submitSearchQuery(
+      searchInput,
+      suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink',
+    );
+  });
+  return searchSuggestion;
+}
+
 async function buildSearchSuggestions(searchbox) {
   selectedSuggestionIndex = -1;
   const searchboxInput = searchbox.querySelector('input');

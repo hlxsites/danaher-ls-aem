@@ -203,11 +203,11 @@ export default function renderGridCard(item) {
             button(
               {
                 class:
-                    'dhlsBtn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                    'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
-                  class: 'text-violet-600 text-base font-normal leading-snug',
+                  class: 'inherit text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -222,12 +222,12 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: 'dhlsLink text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );
