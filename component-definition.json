@@ -276,8 +276,9 @@
               "page": {
                 "resourceType": "core/franklin/components/column/v1/column",
                 "template": {
-                  "name": "Column",
-                  "model": "column"
+                  "blocks": {
+                    "$ref": "blocks"
+                  }
                 }
               }
             }
