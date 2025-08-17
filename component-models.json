@@ -887,6 +887,52 @@
     ]
   },
   {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "text",
+        "name": "url",
+        "type": "string",
+        "label": "Media URL",
+        "required": true
+      },
+      {
+        "component": "boolean",
+        "name": "autoplay",
+        "type": "boolean",
+        "label": "Autoplay",
+        "default": false
+      },
+      {
+        "component": "select",
+        "name": "type",
+        "label": "Type",
+        "options": [
+          {
+            "name": "YouTube",
+            "value": "youtube"
+          },
+          {
+            "name": "Vimeo",
+            "value": "vimeo"
+          },
+          {
+            "name": "Vidyard",
+            "value": "vidyard"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          },
+          {
+            "name": "Other",
+            "value": "default"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "dual-carousel",
     "fields": [
       {
