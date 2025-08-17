@@ -24,7 +24,7 @@
           "page": {
             "resourceType": "core/franklin/components/column/v1/column",
             "template": {
-              "children": { "$ref": "allowedChildren" }
+              "children": { "$ref": "allowedInnerBlocks" }
             }
           }
         }
@@ -62,6 +62,22 @@
           }
         }
       ]
+    },
+    {
+      "id": "allowedChildren",
+      "type": "list",
+      "items": {
+        "type": "reference",
+        "filter": "columns"
+      }
+    },
+    {
+      "id": "allowedInnerBlocks",
+      "type": "list",
+      "items": {
+        "type": "reference",
+        "filter": "column"
+      }
     }
   ],
   "filters": [

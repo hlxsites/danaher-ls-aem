@@ -280,7 +280,7 @@
                 "resourceType": "core/franklin/components/column/v1/column",
                 "template": {
                   "children": {
-                    "$ref": "allowedChildren"
+                    "$ref": "allowedInnerBlocks"
                   }
                 }
               }
