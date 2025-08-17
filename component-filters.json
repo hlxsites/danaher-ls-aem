@@ -131,14 +131,6 @@
     ]
   },
   {
-    "id": "embed",
-    "components": [
-      "video",
-      "pdf",
-      "iframe"
-    ]
-  },
-  {
     "id": "dual-carousel",
     "components": [
       ""
