@@ -854,11 +854,11 @@
         "default": "2",
         "options": [
           {
-            "name": "2 Column",
+            "name": "2 Columns",
             "value": "2"
           },
           {
-            "name": "3 Column",
+            "name": "3 Columns",
             "value": "3"
           }
         ]

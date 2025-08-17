@@ -14,7 +14,22 @@
           }
         }
       }
-    }
+    },
+    {
+            "title": "Column",
+            "id": "column",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/column/v1/column",
+                  "template": {
+                    "name": "Column",
+                    "model": "column"
+                  }
+                }
+              }
+            }
+          }
   ],
   "models": [
     {
@@ -27,8 +42,8 @@
           "valueType": "string",
           "default": "2",
           "options": [
-            { "name": "2 Column", "value": "2" },
-            { "name": "3 Column", "value": "3" }
+            { "name": "2 Columns", "value": "2" },
+            { "name": "3 Columns", "value": "3" }
           ]
         },
         {
