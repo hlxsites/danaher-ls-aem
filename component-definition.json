@@ -275,11 +275,7 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/column/v1/column",
-                "template": {
-                  "blocks": {
-                    "$ref": "blocks"
-                  }
-                }
+                "template": {}
               }
             }
           }
