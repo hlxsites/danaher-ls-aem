@@ -123,6 +123,7 @@
     "components": [
       "text",
       "image",
+      "button",
       "title",
       "article-info",
       "embed",

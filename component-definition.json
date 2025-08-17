@@ -260,9 +260,7 @@
                   "class": {
                     "$ref": "classes"
                   },
-                  "rows": {
-                    "$ref": "rows"
-                  }
+                  "rows": "2"
                 }
               }
             }
