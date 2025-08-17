@@ -57,6 +57,9 @@
     {
       "id": "column",
       "components": [
+        "text",
+        "image",
+        "title",
         "article-info",
         "embed",
         "form",
