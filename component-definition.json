@@ -262,6 +262,9 @@
                   },
                   "rows": {
                     "$ref": "rows"
+                  },
+                  "children": {
+                    "$ref": "allowedChildren"
                   }
                 }
               }
