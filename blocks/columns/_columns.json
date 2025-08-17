@@ -23,7 +23,6 @@
           "page": {
             "resourceType": "core/franklin/components/column/v1/column",
             "template": {
-              "blocks": { "$ref": "blocks" }
             }
           }
         }
@@ -59,26 +58,6 @@
             "field": "rows",
             "equals": "2"
           }
-        }
-      ]
-    },
-    {
-      "id": "column",
-      "fields": [
-        {
-          "component": "multiselect",
-          "name": "blocks",
-          "label": "Blocks in Column",
-          "valueType": "string",
-          "options": [
-            { "name": "Text", "value": "text" },
-            { "name": "Image", "value": "image" },
-            { "name": "Title", "value": "title" },
-            { "name": "Article Info", "value": "article-info" },
-            { "name": "Embed", "value": "embed" },
-            { "name": "Form", "value": "form" },
-            { "name": "Mini Teasers", "value": "mini-teasers" }
-          ]
         }
       ]
     }
