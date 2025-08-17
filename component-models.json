@@ -887,18 +887,6 @@
     ]
   },
   {
-    "id": "embed",
-    "fields": [
-      {
-        "component": "text",
-        "name": "url",
-        "type": "string",
-        "label": "Media URL",
-        "required": true
-      }
-    ]
-  },
-  {
     "id": "dual-carousel",
     "fields": [
       {
