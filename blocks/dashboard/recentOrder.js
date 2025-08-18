@@ -5,7 +5,7 @@ const recentOrders = async () => {
   const orderDetailResponse = await orderDetails();
   const requestedQuotesResponse = await requestedQuotes();
   const topRequestedQuote = requestedQuotesResponse.slice(0, 3);
-  const topRecentOrder = orderDetailResponse.slice(0, 3);
+  const topRecentOrder = orderDetailResponse.slice(0, 4);
 
   const recentDetailsContainer = div({
     class: 'flex gap-6 w-full dhls-container',
