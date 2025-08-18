@@ -1103,7 +1103,7 @@
         "component": "select",
         "name": "columns",
         "label": "Number of Columns",
-        "default": "3",
+        "default": "",
         "options": [
           {
             "name": "3 Columns",
