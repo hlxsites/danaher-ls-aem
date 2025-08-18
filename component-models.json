@@ -883,17 +883,6 @@
           "field": "rows",
           "equals": "2"
         }
-      },
-      {
-        "id": "column",
-        "fields": [
-          {
-            "component": "embed",
-            "name": "embedCode",
-            "label": "Embed Code",
-            "valueType": "string"
-          }
-        ]
       }
     ]
   },

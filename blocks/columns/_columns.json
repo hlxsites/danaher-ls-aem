@@ -22,7 +22,9 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/column/v1/column",
-            "template": {}
+            "template": {
+              "blocks": { "$ref": "column" }
+            }
           }
         }
       }
@@ -57,17 +59,6 @@
             "field": "rows",
             "equals": "2"
           }
-        },
-        {
-          "id": "column",
-          "fields": [
-            {
-              "component": "embed",
-              "name": "embedCode",
-              "label": "Embed Code",
-              "valueType": "string"
-            }
-          ]
         }
       ]
     }
