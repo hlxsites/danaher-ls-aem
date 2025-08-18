@@ -389,9 +389,21 @@ const fileMappings = [
     wrapper: 'login-wrapper',
   },
   {
-    content: ['./blocks/dashboard/dashboard.js', './scripts/common-utils.js'],
+    content: ['./blocks/dashboard/dashboard.js',
+      './blocks/dashboard/orderStatus.js',
+      './blocks/dashboard/dashboardutils.js',
+      './scripts/common-utils.js',
+      './blocks/dashboard/recentOrder.js',
+      './blocks/dashboardSideBar/dashboardSideBar.js',
+    ],
     output: './blocks/dashboard/dashboard.css',
     wrapper: 'dashboard-wrapper',
+  },
+  {
+    content: ['./blocks/dashboardSideBar/dashboardSideBar.js',
+    ],
+    output: './blocks/dashboardSideBar/ddashboardSideBar.css',
+    wrapper: 'dashboardSideBar-wrapper',
   },
   {
     content: [

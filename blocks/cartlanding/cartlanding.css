@@ -203,10 +203,6 @@
   margin-top: 0.25rem
 }
 
-.cartlanding-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
 .cartlanding-wrapper :is(.mt-2) {
   margin-top: 0.5rem
 }
@@ -311,10 +307,6 @@
   height: 0.75rem
 }
 
-.cartlanding-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .cartlanding-wrapper :is(.h-40) {
   height: 10rem
 }
@@ -329,10 +321,6 @@
 
 .cartlanding-wrapper :is(.h-5) {
   height: 1.25rem
-}
-
-.cartlanding-wrapper :is(.h-6) {
-  height: 1.5rem
 }
 
 .cartlanding-wrapper :is(.h-7) {
@@ -353,10 +341,6 @@
 
 .cartlanding-wrapper :is(.h-\[26px\]) {
   height: 26px
-}
-
-.cartlanding-wrapper :is(.h-\[35px\]) {
-  height: 35px
 }
 
 .cartlanding-wrapper :is(.h-\[60px\]) {
@@ -419,20 +403,12 @@
   width: 0.75rem
 }
 
-.cartlanding-wrapper :is(.w-40) {
-  width: 10rem
-}
-
 .cartlanding-wrapper :is(.w-48) {
   width: 12rem
 }
 
 .cartlanding-wrapper :is(.w-5) {
   width: 1.25rem
-}
-
-.cartlanding-wrapper :is(.w-6) {
-  width: 1.5rem
 }
 
 .cartlanding-wrapper :is(.w-64) {
@@ -455,16 +431,8 @@
   width: 11rem
 }
 
-.cartlanding-wrapper :is(.w-\[1227px\]) {
-  width: 1227px
-}
-
 .cartlanding-wrapper :is(.w-\[1280px\]) {
   width: 1280px
-}
-
-.cartlanding-wrapper :is(.w-\[1358px\]) {
-  width: 1358px
 }
 
 .cartlanding-wrapper :is(.w-\[150px\]) {
@@ -491,10 +459,6 @@
   width: 331px
 }
 
-.cartlanding-wrapper :is(.w-\[350px\]) {
-  width: 350px
-}
-
 .cartlanding-wrapper :is(.w-\[3rem\]) {
   width: 3rem
 }
@@ -503,28 +467,12 @@
   width: 40rem
 }
 
-.cartlanding-wrapper :is(.w-\[683px\]) {
-  width: 683px
-}
-
 .cartlanding-wrapper :is(.w-\[737px\]) {
   width: 737px
 }
 
-.cartlanding-wrapper :is(.w-\[75px\]) {
-  width: 75px
-}
-
 .cartlanding-wrapper :is(.w-\[80px\]) {
   width: 80px
-}
-
-.cartlanding-wrapper :is(.w-\[855px\]) {
-  width: 855px
-}
-
-.cartlanding-wrapper :is(.w-\[861px\]) {
-  width: 861px
 }
 
 .cartlanding-wrapper :is(.w-full) {
@@ -547,16 +495,12 @@
   max-width: 70%
 }
 
-.cartlanding-wrapper :is(.max-w-xl) {
-  max-width: 36rem
+.cartlanding-wrapper :is(.max-w-\[792px\]) {
+  max-width: 792px
 }
 
 .cartlanding-wrapper :is(.max-w-xs) {
   max-width: 20rem
-}
-
-.cartlanding-wrapper :is(.max-w-\[792px\]) {
-  max-width: 792px
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -927,6 +871,11 @@
   padding: 22px
 }
 
+.cartlanding-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .cartlanding-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px
@@ -1002,9 +951,8 @@
   padding-bottom: 1.5rem
 }
 
-.cartlanding-wrapper :is(.\!px-3) {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important
+.cartlanding-wrapper :is(.\!pb-3) {
+  padding-bottom: 0.75rem !important
 }
 
 .cartlanding-wrapper :is(.pb-2) {
@@ -1025,6 +973,10 @@
 
 .cartlanding-wrapper :is(.pl-1) {
   padding-left: 0.25rem
+}
+
+.cartlanding-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
 }
 
 .cartlanding-wrapper :is(.pl-2) {
@@ -1067,32 +1019,12 @@
   padding-top: 5px
 }
 
-.cartlanding-wrapper :is(.\!pb-3) {
-  padding-bottom: 0.75rem !important
-}
-
-.cartlanding-wrapper :is(.pl-1\.5) {
-  padding-left: 0.375rem
-}
-
 .cartlanding-wrapper :is(.text-center) {
   text-align: center
 }
 
 .cartlanding-wrapper :is(.text-right) {
   text-align: right
-}
-
-.cartlanding-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
-}
-
-.cartlanding-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
-.cartlanding-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
 }
 
 .cartlanding-wrapper :is(.text-2xl) {
@@ -1113,11 +1045,6 @@
 .cartlanding-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.cartlanding-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
 }
 
 .cartlanding-wrapper :is(.text-sm) {
@@ -1187,10 +1114,6 @@
   line-height: 1.5
 }
 
-.cartlanding-wrapper :is(.leading-relaxed) {
-  line-height: 1.625
-}
-
 .cartlanding-wrapper :is(.leading-snug) {
   line-height: 1.375
 }
@@ -1232,11 +1155,6 @@
 .cartlanding-wrapper :is(.text-green-500) {
   --tw-text-opacity: 1;
   color: rgb(34 197 94 / var(--tw-text-opacity))
-}
-
-.cartlanding-wrapper :is(.text-indigo-300) {
-  --tw-text-opacity: 1;
-  color: rgb(165 180 252 / var(--tw-text-opacity))
 }
 
 .cartlanding-wrapper :is(.text-red-500) {
@@ -1306,6 +1224,10 @@
   outline-offset: -1px
 }
 
+.cartlanding-wrapper :is(.outline-\[\#7523FF\]) {
+  outline-color: #7523FF
+}
+
 .cartlanding-wrapper :is(.outline-gray-200) {
   outline-color: #e5e7eb
 }
@@ -1316,10 +1238,6 @@
 
 .cartlanding-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
-}
-
-.cartlanding-wrapper :is(.outline-\[\#7523FF\]) {
-  outline-color: #7523FF
 }
 
 .cartlanding-wrapper :is(.ring) {
@@ -1381,10 +1299,6 @@
 .cartlanding-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.cartlanding-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
 }
 
 .cartlanding-wrapper :is(.focus\:outline-none:focus) {
@@ -1472,10 +1386,6 @@
     width: 20rem
   }
 
-  .cartlanding-wrapper :is(.md\:w-\[1358px\]) {
-    width: 1358px
-  }
-
   .cartlanding-wrapper :is(.md\:w-\[305px\]) {
     width: 305px
   }
@@ -1498,10 +1408,6 @@
 
   .cartlanding-wrapper :is(.md\:items-center) {
     align-items: center
-  }
-
-  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
-    white-space: nowrap
   }
 
   .cartlanding-wrapper :is(.md\:pt-0) {
@@ -1568,10 +1474,6 @@
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[3px\] svg>use) {
-  stroke-width: 3px
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
