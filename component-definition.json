@@ -378,7 +378,7 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/columns/v1/columns",
+                "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
                 "template": {
                   "rows": {
                     "$ref": "rows"
