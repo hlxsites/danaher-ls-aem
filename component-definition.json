@@ -262,9 +262,6 @@
                   },
                   "rows": {
                     "$ref": "rows"
-                  },
-                  "children": {
-                    "$ref": "allowedChildren"
                   }
                 }
               }
@@ -278,11 +275,7 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/column/v1/column",
-                "template": {
-                  "children": {
-                    "$ref": "allowedInnerBlocks"
-                  }
-                }
+                "template": {}
               }
             }
           }

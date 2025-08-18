@@ -887,22 +887,6 @@
     ]
   },
   {
-    "id": "allowedChildren",
-    "type": "list",
-    "items": {
-      "type": "reference",
-      "filter": "columns"
-    }
-  },
-  {
-    "id": "allowedInnerBlocks",
-    "type": "list",
-    "items": {
-      "type": "reference",
-      "filter": "column"
-    }
-  },
-  {
     "id": "dual-carousel",
     "fields": [
       {

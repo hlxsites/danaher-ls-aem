@@ -9,27 +9,24 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" },
-              "children": { "$ref": "allowedChildren" }
+              "rows": { "$ref": "rows" }
             }
           }
         }
       }
     },
-    {
-      "title": "Column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/column/v1/column",
-            "template": {
-              "children": { "$ref": "allowedInnerBlocks" }
-            }
-          }
+      {
+    "title": "Column",
+    "id": "column",
+    "plugins": {
+      "xwalk": {
+        "page": {
+          "resourceType": "core/franklin/components/column/v1/column",
+          "template": {}
         }
       }
     }
+  }
   ],
   "models": [
     {
@@ -62,22 +59,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "allowedChildren",
-      "type": "list",
-      "items": {
-        "type": "reference",
-        "filter": "columns"
-      }
-    },
-    {
-      "id": "allowedInnerBlocks",
-      "type": "list",
-      "items": {
-        "type": "reference",
-        "filter": "column"
-      }
     }
   ],
   "filters": [
