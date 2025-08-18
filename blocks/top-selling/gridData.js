@@ -46,10 +46,7 @@ export default function renderGridCard(item) {
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
       class: 'w-full h-[164px] object-contain cursor-pointer',
-      onclick: () => window.open(
-        item?.url || '#',
-        item?.url?.includes('http') ? '_blank' : '_self',
-      ),
+      onclick: () => window.location.href = item?.url || '#',
     });
 
     // imageElement.addEventListener('error', () => {
@@ -73,7 +70,10 @@ export default function renderGridCard(item) {
   );
 
   const contentWrapper = div({
-    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow',
+    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow cursor-pointer',
+    onclick: () => {
+      window.location.href = item?.url;
+    },
   });
   contentWrapper.append(
     p(
