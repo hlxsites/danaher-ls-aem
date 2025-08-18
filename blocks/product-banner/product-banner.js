@@ -99,7 +99,6 @@ export default function productBannerDecorate(block) {
 
   const tempContainerBold = tempContainer.querySelectorAll('p,ul,li,a');
   tempContainerBold.forEach((p) => {
-    p.classList.add('mb-3');
     p.querySelectorAll('strong').forEach((strong) => {
       strong.classList.add('font-bold');
     });

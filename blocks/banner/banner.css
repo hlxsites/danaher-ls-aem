@@ -7,26 +7,6 @@
   margin-right: auto
 }
 
-.banner :is(.\!mb-2) {
-  margin-bottom: 0.5rem !important
-}
-
-.banner :is(.\!mt-0) {
-  margin-top: 0px !important
-}
-
-.banner :is(.\!mb-1) {
-  margin-bottom: 0.25rem !important
-}
-
-.banner :is(.\!ml-0) {
-  margin-left: 0px !important
-}
-
-.banner :is(.\!mb-0) {
-  margin-bottom: 0px !important
-}
-
 .banner :is(.block) {
   display: block
 }
@@ -35,13 +15,13 @@
   display: flex
 }
 
+.banner :is(.h-auto) {
+  height: auto
+}
+
 .banner :is(.h-max) {
   height: -moz-max-content;
   height: max-content
-}
-
-.banner :is(.h-auto) {
-  height: auto
 }
 
 .banner :is(.min-h-\[13rem\]) {
@@ -83,16 +63,16 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.banner :is(.p-4) {
-  padding: 1rem
+.banner :is(.p-0) {
+  padding: 0px
 }
 
 .banner :is(.p-2) {
   padding: 0.5rem
 }
 
-.banner :is(.p-0) {
-  padding: 0px
+.banner :is(.p-4) {
+  padding: 1rem
 }
 
 .banner :is(.px-6) {
@@ -100,9 +80,9 @@
   padding-right: 1.5rem
 }
 
-.banner :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem
+.banner :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
 }
 
 .banner :is(.py-2) {
@@ -110,14 +90,9 @@
   padding-bottom: 0.5rem
 }
 
-.banner :is(.px-0) {
-  padding-left: 0px;
-  padding-right: 0px
-}
-
-.banner :is(.py-0) {
-  padding-top: 0px;
-  padding-bottom: 0px
+.banner :is(.py-4) {
+  padding-top: 1rem;
+  padding-bottom: 1rem
 }
 
 .banner :is(.text-left) {
@@ -146,14 +121,14 @@
   letter-spacing: -0.025em
 }
 
-.banner :is(.text-white) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
 .banner :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.banner :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .banner :is(.filter) {
