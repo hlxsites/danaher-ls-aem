@@ -89,6 +89,10 @@
         "form",
         "mini-teasers"
       ]
+    },
+    {
+      "id": "embed",
+      "components": []
     }
   ]
 }
