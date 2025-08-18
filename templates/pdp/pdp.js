@@ -70,7 +70,7 @@ export default async function buildAutoBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
   if (response && response?.raw.sku === productSlug) {
-    //loadPdpBlocks();
+    loadPdpBlocks();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -87,5 +87,5 @@ export default async function buildAutoBlocks() {
     });
   });
   getFrequentlyViewedTogether();
-  //loadPdpBlocks();
+  loadPdpBlocks();
 }
