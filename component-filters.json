@@ -159,10 +159,10 @@
   {
     "id": "mini-teasers",
     "components": [
+      "icon",
+      "heading",
       "text",
-      "image",
-      "title",
-      "button"
+      "link"
     ]
   },
   {

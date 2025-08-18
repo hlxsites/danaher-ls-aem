@@ -378,10 +378,13 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
+                "resourceType": "core/franklin/components/grid/v1/grid",
                 "template": {
-                  "rows": {
-                    "$ref": "rows"
+                  "columns": {
+                    "$ref": "columns"
+                  },
+                  "items": {
+                    "$ref": "items"
                   }
                 }
               }

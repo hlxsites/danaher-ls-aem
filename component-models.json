@@ -1101,20 +1101,55 @@
     "fields": [
       {
         "component": "select",
-        "name": "rows",
+        "name": "columns",
         "label": "Number of Grid Columns",
         "valueType": "string",
         "default": "3",
         "options": [
           {
-            "name": "grid-cols-3",
+            "name": "3 Columns",
             "value": "3"
           },
           {
-            "name": "grid-cols-4",
+            "name": "4 Columns",
             "value": "4"
           }
         ]
+      },
+      {
+        "component": "list",
+        "name": "items",
+        "label": "Grid Items",
+        "itemSchema": {
+          "type": "object",
+          "properties": {
+            "icon": {
+              "component": "icon",
+              "class": "w-16 h-16 stroke-current",
+              "label": "Icon"
+            },
+            "title": {
+              "component": "heading",
+              "type": "h3",
+              "class": "mt-4 mb-0 h-16 line-clamp-2 break-words",
+              "label": "Title"
+            },
+            "description": {
+              "component": "text",
+              "type": "p",
+              "class": "line-clamp-3 h-24 pt-4 break-words",
+              "label": "Description"
+            },
+            "link": {
+              "component": "link",
+              "type": "a",
+              "class": "text-base font-semibold text-danaherpurple-500 pt-4",
+              "label": "Link",
+              "suffix": " ->",
+              "showModal": true
+            }
+          }
+        }
       }
     ]
   },
