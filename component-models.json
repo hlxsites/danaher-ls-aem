@@ -1100,11 +1100,37 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "list",
+        "component": "group-list",
         "name": "teasers",
         "label": "Teasers",
         "description": "Add up to 4 mini teasers. Layout will adapt automatically.",
         "max": 4,
+        "default": [
+          {
+            "title": "Teaser One Title",
+            "description": "This is a short description for teaser one.",
+            "image": "/assets/image1.png",
+            "imageAlt": "Image 1 alt text",
+            "linkText": "Learn More",
+            "linkUrl": "/teaser-one"
+          },
+          {
+            "title": "Teaser Two Title",
+            "description": "This is a short description for teaser two.",
+            "image": "/assets/image2.png",
+            "imageAlt": "Image 2 alt text",
+            "linkText": "Learn More",
+            "linkUrl": "/teaser-two"
+          },
+          {
+            "title": "Teaser Three Title",
+            "description": "This is a short description for teaser three.",
+            "image": "/assets/image3.png",
+            "imageAlt": "Image 3 alt text",
+            "linkText": "Learn More",
+            "linkUrl": "/teaser-three"
+          }
+        ],
         "fields": [
           {
             "component": "text",
