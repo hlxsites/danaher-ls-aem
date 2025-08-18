@@ -405,6 +405,11 @@ const fileMappings = [
     output: './blocks/dashboardSideBar/ddashboardSideBar.css',
     wrapper: 'dashboardSideBar-wrapper',
   },
+   {
+    content: ['./blocks/order-status/order-status.js', './blocks/dashboardSideBar/dashboardSideBar.js',],
+    output: './blocks/order-status/order-status.css',
+    wrapper: 'order-status-wrapper',
+  },
   {
     content: [
       './blocks/cartlanding/cartlanding.js',
