@@ -21,7 +21,7 @@
       "id": "mini-teasers",
       "fields": [
         {
-          "component": "group",
+          "component": "array",
           "label": "Teaser 1",
           "name": "teaser1Group",
           "fields": [
