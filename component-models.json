@@ -1097,12 +1097,12 @@
     ]
   },
   {
-    "id": "gridColumns",
+    "id": "mini-teasers",
     "fields": [
       {
         "component": "select",
-        "name": "gridColumns",
-        "label": "Grid Columns",
+        "name": "miniTeasersSelection",
+        "label": "Mini Teasers Selection",
         "default": "3",
         "options": [
           {
@@ -1113,14 +1113,6 @@
             "name": "4 Columns",
             "value": "4"
           }
-        ]
-      },
-      {
-        "component": "blocks",
-        "name": "miniTeasersBlock",
-        "label": "Mini Teasers Block",
-        "allowedComponents": [
-          "mini-teasers"
         ]
       }
     ]

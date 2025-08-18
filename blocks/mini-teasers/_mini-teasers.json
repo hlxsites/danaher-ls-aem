@@ -1,30 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Grid Columns",
-      "id": "gridColumns",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
-            "template": {
-              "name": "Grid Columns",
-              "model": "gridColumns"
-            }
-          }
-        }
-      }
-    },
-    {
       "title": "Mini-Teasers",
-      "id": "mini-teasers",
+      "id": "miniTeasers",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Mini-Teasers",
-              "model": "mini-teasers"
+              "model": "miniTeasers"
             }
           }
         }
@@ -33,23 +18,17 @@
   ],
   "models": [
     {
-      "id": "gridColumns",
+      "id": "mini-teasers",
       "fields": [
         {
           "component": "select",
-          "name": "gridColumns",
-          "label": "Grid Columns",
+          "name": "miniTeasersSelection",
+          "label": "Mini Teasers Selection",
           "default": "3",
           "options": [
             { "name": "3 Columns", "value": "3" },
             { "name": "4 Columns", "value": "4" }
           ]
-        },
-        {
-          "component": "blocks",
-          "name": "miniTeasersBlock",
-          "label": "Mini Teasers Block",
-          "allowedComponents": ["mini-teasers"]
         }
       ]
     },
