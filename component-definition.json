@@ -378,10 +378,45 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
+                "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
                 "template": {
-                  "name": "Mini-Teasers",
-                  "model": "mini-teasers"
+                  "class": {
+                    "$ref": "classes"
+                  },
+                  "teasers": {
+                    "$ref": "teasers"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mini-Teaser",
+          "id": "mini-teaser",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
+                "template": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "imageAlt": {
+                    "type": "string"
+                  },
+                  "linkText": {
+                    "type": "string"
+                  },
+                  "linkUrl": {
+                    "type": "string"
+                  }
                 }
               }
             }
