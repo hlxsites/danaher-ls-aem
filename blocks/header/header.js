@@ -167,7 +167,6 @@ export async function submitSearchQuery(searchInput, actionCause = '', page = ''
     window.location = searchLocation;
   }
 }
-
 function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
   const searchSuggestion = button(
     {
