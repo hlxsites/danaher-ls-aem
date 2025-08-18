@@ -8,27 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
             "template": {
-              "class": { "$ref": "classes" },
-              "teasers": { "$ref": "teasers" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Mini-Teaser",
-      "id": "mini-teaser",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
-            "template": {
-              "title": { "type": "string" },
-              "description": { "type": "string" },
-              "image": { "type": "string" },
-              "imageAlt": { "type": "string" },
-              "linkText": { "type": "string" },
-              "linkUrl": { "type": "string" }
+              "class": { "$ref": "classes" }
             }
           }
         }
@@ -44,21 +24,12 @@
           "name": "classes",
           "label": "Grid Classes",
           "valueType": "string",
-          "default": "grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 mb-10 mt-4 lg:grid-cols-3",
           "options": [
             { "name": "1 Column", "value": "grid-cols-1" },
             { "name": "2 Columns", "value": "sm:grid-cols-2" },
             { "name": "3 Columns", "value": "lg:grid-cols-3" },
             { "name": "4 Columns", "value": "lg:grid-cols-4" }
           ]
-        },
-        {
-          "component": "blocks",
-          "name": "teasers",
-          "label": "Mini Teasers",
-          "valueType": "array",
-          "maxItems": 4,
-          "blockTypes": ["mini-teaser"]
         }
       ]
     },

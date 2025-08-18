@@ -1104,7 +1104,6 @@
         "name": "classes",
         "label": "Grid Classes",
         "valueType": "string",
-        "default": "grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 mb-10 mt-4 lg:grid-cols-3",
         "options": [
           {
             "name": "1 Column",
@@ -1122,16 +1121,6 @@
             "name": "4 Columns",
             "value": "lg:grid-cols-4"
           }
-        ]
-      },
-      {
-        "component": "blocks",
-        "name": "teasers",
-        "label": "Mini Teasers",
-        "valueType": "array",
-        "maxItems": 4,
-        "blockTypes": [
-          "mini-teaser"
         ]
       }
     ]
