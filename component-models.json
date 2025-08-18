@@ -1100,72 +1100,115 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "group-list",
-        "name": "teasers",
-        "label": "Teasers",
-        "description": "Add up to 4 mini teasers. Layout will adapt automatically.",
-        "max": 4,
-        "default": [
-          {
-            "title": "Teaser One Title",
-            "description": "This is a short description for teaser one.",
-            "image": "/assets/image1.png",
-            "imageAlt": "Image 1 alt text",
-            "linkText": "Learn More",
-            "linkUrl": "/teaser-one"
-          },
-          {
-            "title": "Teaser Two Title",
-            "description": "This is a short description for teaser two.",
-            "image": "/assets/image2.png",
-            "imageAlt": "Image 2 alt text",
-            "linkText": "Learn More",
-            "linkUrl": "/teaser-two"
-          },
-          {
-            "title": "Teaser Three Title",
-            "description": "This is a short description for teaser three.",
-            "image": "/assets/image3.png",
-            "imageAlt": "Image 3 alt text",
-            "linkText": "Learn More",
-            "linkUrl": "/teaser-three"
-          }
-        ],
-        "fields": [
-          {
-            "component": "text",
-            "name": "title",
-            "label": "Title",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "description",
-            "label": "Description",
-            "valueType": "string"
-          },
-          {
-            "component": "reference",
-            "name": "image",
-            "label": "Image",
-            "multi": false
-          },
-          {
-            "component": "text",
-            "name": "imageAlt",
-            "label": "Alt Text"
-          },
-          {
-            "component": "text",
-            "name": "linkText",
-            "label": "Link Text"
-          },
-          {
-            "component": "text",
-            "name": "linkUrl",
-            "label": "Link URL"
-          }
-        ]
+        "component": "text",
+        "name": "teaser1Title",
+        "label": "Teaser 1 Title",
+        "valueType": "string",
+        "default": "Teaser One Title"
+      },
+      {
+        "component": "text",
+        "name": "teaser1Description",
+        "label": "Teaser 1 Description",
+        "valueType": "string",
+        "default": "This is a short description for teaser one."
+      },
+      {
+        "component": "reference",
+        "name": "teaser1Image",
+        "label": "Teaser 1 Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "teaser1ImageAlt",
+        "label": "Teaser 1 Image Alt Text"
+      },
+      {
+        "component": "text",
+        "name": "teaser1LinkText",
+        "label": "Teaser 1 Link Text",
+        "default": "Learn More"
+      },
+      {
+        "component": "text",
+        "name": "teaser1LinkUrl",
+        "label": "Teaser 1 Link URL",
+        "default": "/teaser-one"
+      },
+      {
+        "component": "text",
+        "name": "teaser2Title",
+        "label": "Teaser 2 Title",
+        "valueType": "string",
+        "default": "Teaser Two Title"
+      },
+      {
+        "component": "text",
+        "name": "teaser2Description",
+        "label": "Teaser 2 Description",
+        "valueType": "string",
+        "default": "This is a short description for teaser two."
+      },
+      {
+        "component": "reference",
+        "name": "teaser2Image",
+        "label": "Teaser 2 Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "teaser2ImageAlt",
+        "label": "Teaser 2 Image Alt Text"
+      },
+      {
+        "component": "text",
+        "name": "teaser2LinkText",
+        "label": "Teaser 2 Link Text",
+        "default": "Learn More"
+      },
+      {
+        "component": "text",
+        "name": "teaser2LinkUrl",
+        "label": "Teaser 2 Link URL",
+        "default": "/teaser-two"
+      },
+      {
+        "component": "text",
+        "name": "teaser3Title",
+        "label": "Teaser 3 Title",
+        "valueType": "string",
+        "default": "Teaser Three Title"
+      },
+      {
+        "component": "text",
+        "name": "teaser3Description",
+        "label": "Teaser 3 Description",
+        "valueType": "string",
+        "default": "This is a short description for teaser three."
+      },
+      {
+        "component": "reference",
+        "name": "teaser3Image",
+        "label": "Teaser 3 Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "teaser3ImageAlt",
+        "label": "Teaser 3 Image Alt Text"
+      },
+      {
+        "component": "text",
+        "name": "teaser3LinkText",
+        "label": "Teaser 3 Link Text",
+        "default": "Learn More"
+      },
+      {
+        "component": "text",
+        "name": "teaser3LinkUrl",
+        "label": "Teaser 3 Link URL",
+        "default": "/teaser-three"
       },
       {
         "component": "select",
@@ -1228,12 +1271,6 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "toggle",
-        "name": "addBorder",
-        "label": "Add Border to Block",
-        "valueType": "boolean"
       }
     ]
   },
