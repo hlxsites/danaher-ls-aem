@@ -157,15 +157,6 @@
     ]
   },
   {
-    "id": "mini-teasers",
-    "components": [
-      "icon",
-      "heading",
-      "text",
-      "link"
-    ]
-  },
-  {
     "id": "top-selling",
     "components": [
       ""

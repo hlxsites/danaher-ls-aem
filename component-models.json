@@ -1100,56 +1100,89 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "select",
-        "name": "rows",
-        "label": "Number of Grid Columns",
+        "component": "text",
         "valueType": "string",
-        "default": "3",
+        "name": "miniTeasers",
+        "label": "Mini Teasers"
+      },
+      {
+        "component": "select",
+        "name": "miniTeasersType",
+        "label": "Mini Teasers Type",
         "options": [
           {
-            "name": "3 Columns",
-            "value": "3"
+            "name": "h1",
+            "value": "h1"
           },
           {
-            "name": "4 Columns",
-            "value": "4"
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
           }
         ]
       },
       {
-        "component": "list",
-        "name": "classes",
-        "label": "Grid Classes",
-        "itemSchema": {
-          "type": "object",
-          "properties": {
-            "icon": {
-              "component": "icon",
-              "class": "w-16 h-16 stroke-current",
-              "label": "Icon"
-            },
-            "title": {
-              "component": "heading",
-              "type": "h3",
-              "class": "mt-4 mb-0 h-16 line-clamp-2 break-words",
-              "label": "Title"
-            },
-            "description": {
-              "component": "text",
-              "type": "p",
-              "class": "line-clamp-3 h-24 pt-4 break-words",
-              "label": "Description"
-            },
-            "link": {
-              "component": "link",
-              "type": "a",
-              "class": "text-base font-semibold text-danaherpurple-500 pt-4",
-              "label": "Link",
-              "suffix": " ->",
-              "showModal": true
-            }
+        "component": "text",
+        "valueType": "string",
+        "name": "miniTeasersDescription",
+        "label": "Mini Teasers Description"
+      },
+      {
+        "component": "select",
+        "name": "miniTeasersDescriptionType",
+        "label": "Mini Teasers Description Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
           }
-        }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
       }
     ]
   },
