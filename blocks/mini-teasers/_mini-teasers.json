@@ -20,7 +20,23 @@
     {
       "id": "mini-teasers",
       "fields": [
-         {
+        {
+          "component": "select",
+          "name": "miniTeasersGridCols",
+          "label": "Number of Columns",
+          "options": [
+            {
+              "name": "3 Columns",
+              "value": "3"
+            },
+            {
+              "name": "4 Columns",
+              "value": "4"
+            }
+          ],
+          "default": "3"
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "miniTeasers",
@@ -31,67 +47,12 @@
           "name": "miniTeasersType",
           "label": "Mini Teasers Type",
           "options": [
-            {
-              "name": "h1",
-              "value": "h1"
-            },
-            {
-              "name": "h2",
-              "value": "h2"
-            },
-            {
-              "name": "h3",
-              "value": "h3"
-            },
-            {
-              "name": "h4",
-              "value": "h4"
-            },
-            {
-              "name": "h5",
-              "value": "h5"
-            },
-            {
-              "name": "h6",
-              "value": "h6"
-            }
-          ]
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "miniTeasersDescription",
-          "label": "Mini Teasers Description"
-        },
-        {
-          "component": "select",
-          "name": "miniTeasersDescriptionType",
-          "label": "Mini Teasers Description Type",
-          "options": [
-            {
-              "name": "h1",
-              "value": "h1"
-            },
-            {
-              "name": "h2",
-              "value": "h2"
-            },
-            {
-              "name": "h3",
-              "value": "h3"
-            },
-            {
-              "name": "h4",
-              "value": "h4"
-            },
-            {
-              "name": "h5",
-              "value": "h5"
-            },
-            {
-              "name": "h6",
-              "value": "h6"
-            }
+            { "name": "h1", "value": "h1" },
+            { "name": "h2", "value": "h2" },
+            { "name": "h3", "value": "h3" },
+            { "name": "h4", "value": "h4" },
+            { "name": "h5", "value": "h5" },
+            { "name": "h6", "value": "h6" }
           ]
         },
         {
@@ -104,9 +65,28 @@
           "component": "text",
           "name": "imageAlt",
           "label": "Alt Text"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "miniTeasersDescription",
+          "label": "Mini Teasers Description"
+        },
+        {
+          "component": "select",
+          "name": "miniTeasersDescriptionType",
+          "label": "Mini Teasers Description Type",
+          "options": [
+            { "name": "h1", "value": "h1" },
+            { "name": "h2", "value": "h2" },
+            { "name": "h3", "value": "h3" },
+            { "name": "h4", "value": "h4" },
+            { "name": "h5", "value": "h5" },
+            { "name": "h6", "value": "h6" }
+          ]
         }
       ]
     }
   ],
-  "filters": [ ]
+  "filters": []
 }

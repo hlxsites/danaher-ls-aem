@@ -1100,6 +1100,22 @@
     "id": "mini-teasers",
     "fields": [
       {
+        "component": "select",
+        "name": "miniTeasersGridCols",
+        "label": "Number of Columns",
+        "options": [
+          {
+            "name": "3 Columns",
+            "value": "3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "4"
+          }
+        ],
+        "default": "3"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "miniTeasers",
@@ -1137,6 +1153,17 @@
         ]
       },
       {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "miniTeasersDescription",
@@ -1172,17 +1199,6 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
       }
     ]
   },
