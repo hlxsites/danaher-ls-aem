@@ -22,75 +22,85 @@
       "fields": [
         {
           "component": "select",
-          "name": "miniTeasersSelection",
-          "label": "Mini Teasers Selection",
+          "name": "columns",
+          "label": "Number of Columns",
           "default": "3",
           "options": [
             { "name": "3 Columns", "value": "3" },
             { "name": "4 Columns", "value": "4" }
           ]
-        }
-      ]
-    },
-    {
-      "id": "mini-teasers",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "miniTeasers",
-          "label": "Mini Teasers"
-        },
-        {
-          "component": "select",
-          "name": "miniTeasersType",
-          "label": "Mini Teasers Type",
-          "options": [
-            { "name": "h1", "value": "h1" },
-            { "name": "h2", "value": "h2" },
-            { "name": "h3", "value": "h3" },
-            { "name": "h4", "value": "h4" },
-            { "name": "h5", "value": "h5" },
-            { "name": "h6", "value": "h6" }
-          ]
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "miniTeasersDescription",
-          "label": "Mini Teasers Description"
+          "name": "teaser1Title",
+          "label": "Teaser 1 Title"
         },
         {
-          "component": "select",
-          "name": "miniTeasersDescriptionType",
-          "label": "Mini Teasers Description Type",
-          "options": [
-            { "name": "h1", "value": "h1" },
-            { "name": "h2", "value": "h2" },
-            { "name": "h3", "value": "h3" },
-            { "name": "h4", "value": "h4" },
-            { "name": "h5", "value": "h5" },
-            { "name": "h6", "value": "h6" }
-          ]
+          "component": "text",
+          "valueType": "string",
+          "name": "teaser1Description",
+          "label": "Teaser 1 Description"
         },
         {
           "component": "reference",
-          "name": "image",
-          "label": "Image",
+          "name": "teaser1Image",
+          "label": "Teaser 1 Image",
           "multi": false
         },
         {
           "component": "text",
-          "name": "imageAlt",
-          "label": "Alt Text"
+          "name": "teaser1ImageAlt",
+          "label": "Teaser 1 Image Alt Text"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "teaser2Title",
+          "label": "Teaser 2 Title"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "teaser2Description",
+          "label": "Teaser 2 Description"
+        },
+        {
+          "component": "reference",
+          "name": "teaser2Image",
+          "label": "Teaser 2 Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "teaser2ImageAlt",
+          "label": "Teaser 2 Image Alt Text"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "teaser3Title",
+          "label": "Teaser 3 Title"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "teaser3Description",
+          "label": "Teaser 3 Description"
+        },
+        {
+          "component": "reference",
+          "name": "teaser3Image",
+          "label": "Teaser 3 Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "teaser3ImageAlt",
+          "label": "Teaser 3 Image Alt Text"
         }
       ]
     }
   ],
-  "filters": [
-     {
-      "id": "mini-teasers",
-      "components": [""]
-    }
-  ]
+  "filters": []
 }
