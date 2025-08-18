@@ -1101,8 +1101,10 @@
     "fields": [
       {
         "component": "select",
-        "name": "miniTeasersGridCols",
+        "name": "rows",
         "label": "Number of Columns",
+        "valueType": "string",
+        "default": "3",
         "options": [
           {
             "name": "3 Columns",
@@ -1111,92 +1113,6 @@
           {
             "name": "4 Columns",
             "value": "4"
-          }
-        ],
-        "default": "3"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
           }
         ]
       }

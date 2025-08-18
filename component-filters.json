@@ -157,6 +157,15 @@
     ]
   },
   {
+    "id": "mini-teasers",
+    "components": [
+      "text",
+      "image",
+      "title",
+      "button"
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
