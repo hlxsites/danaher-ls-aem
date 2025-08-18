@@ -156,6 +156,7 @@ export async function submitSearchQuery(searchInput, actionCause = '', page = ''
         }
       });
     }
+    
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
   }
