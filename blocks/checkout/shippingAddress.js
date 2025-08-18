@@ -20,6 +20,7 @@ import {
   closeUtilityModal,
   createModal,
   removePreLoader,
+  showNotification,
   showPreLoader,
 } from '../../scripts/common-utils.js';
 /*
@@ -266,17 +267,21 @@ click use address button to set the address as default for current order
             */
             await updateCheckoutSummary();
 
-            // remove preloader
-            removePreLoader();
             /*
             ::::::::::::::
             close utility modal
             :::::::::::::::::::
             */
             closeUtilityModal();
+
+            // remove preloader
+            removePreLoader();
+
+            showNotification('Address set for current order.', 'success');
           } else {
             removePreLoader();
             closeUtilityModal();
+            showNotification('Error processing request.', 'error');
           }
         });
 
@@ -329,6 +334,7 @@ click use address button to set the address as default for current order
         */
         closeUtilityModal();
         removePreLoader();
+        showNotification('Address set as default.', 'success');
       }
 
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
