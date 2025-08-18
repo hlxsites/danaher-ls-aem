@@ -8,7 +8,6 @@
           "page": {
             "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
             "template": {
-              "class": { "$ref": "classes" },
               "rows": { "$ref": "rows" }
             }
           }
@@ -22,20 +21,6 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/mini-teaser/v1/mini-teaser",
-            "template": {
-              "blocks": { "$ref": "blocks" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Block",
-      "id": "block",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
             "template": {}
           }
         }
