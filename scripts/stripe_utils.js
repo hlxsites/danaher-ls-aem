@@ -171,3 +171,34 @@ export async function assignPaymentInstrument(instrumentId) {
   }
   return { status: 'error', data: {} };
 }
+// get saved cards
+export async function getSavedCards() {
+  return getPaymentIntent();
+}
+
+// set card as default
+export async function setGetCardAsDefault(paymentMethodId = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const pIntentUrl = `${baseURL}/baskets/current/setup-intent`;
+  const pIntentHeaders = new Headers();
+  pIntentHeaders.append('Content-Type', 'Application/json');
+  pIntentHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  let pIntentBody = JSON.stringify({});
+  if (paymentMethodId !== '') {
+    pIntentBody = JSON.stringify({
+      pm: paymentMethodId,
+    });
+  }
+  const response = await putApiData(pIntentUrl, pIntentBody, pIntentHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}

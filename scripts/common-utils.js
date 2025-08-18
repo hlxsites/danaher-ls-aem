@@ -917,7 +917,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
-          ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-300',
+          ' min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-300',
         'aria-label': dtName,
       }),
     ),

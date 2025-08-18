@@ -244,12 +244,24 @@
   height: max-content
 }
 
+.checkout :is(.h-\[50px\]) {
+  height: 50px
+}
+
 .checkout :is(.max-h-48) {
   max-height: 12rem
 }
 
 .checkout :is(.max-h-97) {
   max-height: 25rem
+}
+
+.checkout :is(.max-h-\[720px\]) {
+  max-height: 720px
+}
+
+.checkout :is(.max-h-\[642px\]) {
+  max-height: 642px
 }
 
 .checkout :is(.w-20) {
@@ -334,6 +346,10 @@
 
 .checkout :is(.max-w-\[792px\]) {
   max-width: 792px
+}
+
+.checkout :is(.max-w-\[71px\]) {
+  max-width: 71px
 }
 
 .checkout :is(.flex-1) {
@@ -695,6 +711,10 @@
   padding-top: 1.5rem
 }
 
+.checkout :is(.pr-\[10px\]) {
+  padding-right: 10px
+}
+
 .checkout :is(.text-left) {
   text-align: left
 }
@@ -776,6 +796,10 @@
 
 .checkout :is(.leading-none) {
   line-height: 1
+}
+
+.checkout :is(.leading-7) {
+  line-height: 1.75rem
 }
 
 .checkout :is(.text-black) {
@@ -919,6 +943,11 @@
 .checkout :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.checkout :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .checkout :is(.hover\:text-danaherpurple-800:hover) {
