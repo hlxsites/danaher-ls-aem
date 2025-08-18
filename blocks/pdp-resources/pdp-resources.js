@@ -9,6 +9,9 @@ export default async function decorate(block) {
   block.replaceChildren()
   block.classList.add(..."border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0".split(" "))
 
+  let selectedContentType = "All" // Track the currently selected content type
+  let selectedSortType = "Newest" // Track the currently selected sort type
+
   resourceResultList.subscribe(() => {
     console.log("Resource results updated:", resourceResultList?.state?.results)
 
@@ -27,8 +30,6 @@ export default async function decorate(block) {
 
     block.replaceChildren()
 
-    let selectedContentType = "All" // Track the currently selected content type
-    let selectedSortType = "Newest" // Track the currently selected sort type
     const itemsPerPage = 6
     let pdpResourceWrapperBlock
     let resCountElement
@@ -316,7 +317,10 @@ export default async function decorate(block) {
               },
             },
             span({
-              class: "icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]",
+              class:
+                selectedContentType === "All"
+                  ? "icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]"
+                  : "icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]",
             }),
             div(
               { class: "text-gray-700 text-[14px] font-medium leading-5 cursor-pointer", style: "padding-left: 20px" },
@@ -360,7 +364,10 @@ export default async function decorate(block) {
               },
             },
             span({
-              class: "icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]",
+              class:
+                selectedContentType === type
+                  ? "icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]"
+                  : "icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]",
             }),
             div(
               { class: "text-gray-700 text-[14px] font-medium leading-5 cursor-pointer", style: "padding-left: 20px" },
@@ -422,7 +429,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-              option.value === "Newest"
+              option.value === selectedSortType
                 ? "icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]"
                 : "icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]",
           }),
@@ -476,7 +483,7 @@ export default async function decorate(block) {
                 dropdown.classList.toggle("hidden")
               },
             },
-            "Content Type",
+            selectedContentType === "All" ? "All" : selectedContentType,
           ),
           span({
             class: "icon icon-chevron-down w-4 h-4 [&_svg>use]:stroke-danaherblack-500",
@@ -509,7 +516,7 @@ export default async function decorate(block) {
               class: "text-gray-500 text-[14px] font-medium leading-5 sorting-button-text cursor-pointer",
               style: "font-size:14px;padding-right:8px;",
             },
-            "Newest",
+            selectedSortType,
           ),
           span({
             class: "icon icon-chevron-down w-4 h-4 [&_svg>use]:stroke-danaherblack-500",
