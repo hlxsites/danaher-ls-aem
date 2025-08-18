@@ -281,6 +281,22 @@
           }
         },
         {
+          "title": "Embed",
+          "id": "embed",
+          "plugins": {
+            "xwalk": {
+              "block": {
+                "resourceType": "core/franklin/components/embed/v1/embed",
+                "template": {
+                  "embedCode": {
+                    "$ref": "embedCode"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {

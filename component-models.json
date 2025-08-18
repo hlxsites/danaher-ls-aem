@@ -883,6 +883,41 @@
           "field": "rows",
           "equals": "2"
         }
+      },
+      {
+        "id": "column",
+        "fields": [
+          {
+            "component": "repeater",
+            "name": "blocks",
+            "label": "Blocks",
+            "item": {
+              "oneOf": [
+                {
+                  "$ref": "text"
+                },
+                {
+                  "$ref": "image"
+                },
+                {
+                  "$ref": "button"
+                },
+                {
+                  "$ref": "title"
+                },
+                {
+                  "$ref": "article-info-new"
+                },
+                {
+                  "$ref": "embed"
+                },
+                {
+                  "$ref": "form"
+                }
+              ]
+            }
+          }
+        ]
       }
     ]
   },
