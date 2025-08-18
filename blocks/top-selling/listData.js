@@ -36,7 +36,9 @@ export default function renderListCard(item) {
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
-      onclick: () => window.location.href = item?.url || '#',
+      onclick: () => {
+        window.location.href = item?.url;
+      },
     });
 
     // imageElement.addEventListener('error', () => {
@@ -98,17 +100,17 @@ export default function renderListCard(item) {
   });
 
   mobileTitleWrapper.append(
-  ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
-  div(
-    {
-      class: 'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
-      onclick: () => {
-        window.location.href = item?.url;
+    ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
+    div(
+      {
+        class: 'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
+        onclick: () => {
+          window.location.href = item?.url;
+        },
       },
-    },
-    (item?.title || '').trim().replace(/<[^>]*>/g, '')
-  )
-);
+      (item?.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
+  );
 
   mobileTitleSection.append(mobileTitleWrapper);
   mobileContentSection.append(mobileTitleSection, imageSection);

@@ -46,7 +46,9 @@ export default function renderGridCard(item) {
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
       class: 'w-full h-[164px] object-contain cursor-pointer',
-      onclick: () => window.location.href = item?.url || '#',
+      onclick: () => {
+        window.location.href = item?.url;
+      },
     });
 
     // imageElement.addEventListener('error', () => {
