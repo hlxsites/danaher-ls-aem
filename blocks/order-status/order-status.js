@@ -11,7 +11,7 @@ import { getApiData } from '../../scripts/api-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
 
-// let totalOrdersPlaced = '';
+let totalOrdersPlaced = '';
 const orderDetails = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
