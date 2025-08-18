@@ -611,18 +611,18 @@ export default function decorate(block) {
   const sectionDiv = block.closest('.section');
 
   // Unwrap <div> inside <p>
-  block.querySelectorAll('p > div').forEach(div => {
-    div.parentElement.replaceWith(div);
+  block.querySelectorAll('p > div').forEach((divs) => {
+    divs.parentElement.replaceWith(div);
   });
 
   // block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
 
   // Universal column detection (supports wrappers)
-  function getColumns(block) {
-    let cols = Array.from(block.children).filter(el => el.tagName === 'DIV');
+  function getColumns(blocks) {
+    let cols = Array.from(blocks.children).filter((el) => el.tagName === 'DIV');
     if (cols.length === 2 || cols.length === 3) return cols;
     if (cols.length === 1) {
-      cols = Array.from(cols[0].children).filter(el => el.tagName === 'DIV');
+      cols = Array.from(cols[0].children).filter((el) => el.tagName === 'DIV');
       if (cols.length === 2 || cols.length === 3) return cols;
     }
     return [];
@@ -643,44 +643,75 @@ export default function decorate(block) {
       'flex-col-reverse',
       'gap-x-12',
       'lg:flex-col-reverse',
-      'justify-items-center'
+      'justify-items-center',
     );
   }
 
   // --- 3 COLUMN LOGIC ---
   if (columns.length === 3) {
     block.className = '';
-    columns.forEach(col => {
+    columns.forEach((col) => {
       col.className = '';
       col.style.flexBasis = '';
       col.style.width = '';
-      col.querySelectorAll('*').forEach(child => {
+      col.querySelectorAll('*').forEach((child) => {
         child.classList?.remove(
-          'absolute', 'relative', 'lg:absolute', 'md:inset-y-0', 'lg:inset-y-0', 'lg:right-2', 'lg:mt-56',
-          'order-none', 'block', 'h-48', 'md:h-[27rem]', 'lg:w-1/2', 'columns-img-col',
-          'w-1/2', 'w-1/3', 'w-2/3', 'lg:w-1/3', 'lg:w-2/3', 'container', 'grid', 'flex',
-          'justify-center', 'items-center', 'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3', 'h-full'
+          'absolute',
+          'relative',
+          'lg:absolute',
+          'md:inset-y-0',
+          'lg:inset-y-0',
+          'lg:right-2',
+          'lg:mt-56',
+          'order-none',
+          'block',
+          'h-48',
+          'md:h-[27rem]',
+          'lg:w-1/2',
+          'columns-img-col',
+          'w-1/2',
+          'w-1/3',
+          'w-2/3',
+          'lg:w-1/3',
+          'lg:w-2/3',
+          'container',
+          'grid',
+          'flex',
+          'justify-center',
+          'items-center',
+          'basis-full',
+          'basis-1/2',
+          'basis-1/3',
+          'basis-2/3',
+          'h-full',
         );
       });
     });
 
     block.classList.add(
-      'w-full', 'min-h-[350px]',
-      'grid', 'gap-x-8', 'gap-y-4',
-      'grid-cols-1', 'lg:grid-cols-3', 'justify-items-center', 'items-center', 'columns-3-cols'
+      'w-full',
+      'min-h-[350px]',
+      'grid',
+      'gap-x-8',
+      'gap-y-4',
+      'grid-cols-1',
+      'lg:grid-cols-3',
+      'justify-items-center',
+      'items-center',
+      'columns-3-cols',
     );
 
-    columns.forEach(col => {
+    columns.forEach((col) => {
       col.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'w-full', 'h-full');
       if (!col.innerHTML.trim()) col.innerHTML = '&nbsp;';
-      col.querySelectorAll('img').forEach(img => {
+      col.querySelectorAll('img').forEach((img) => {
         img.removeAttribute('width');
         img.removeAttribute('height');
         img.style.maxWidth = '100%';
-        img.style.width = "auto";
-        img.style.width = "100%";
-        img.style.height = "auto";
-        img.style.height = "100%";
+        img.style.width = 'auto';
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        img.style.height = '100%';
         img.style.objectFit = 'contain';
         img.style.display = 'block';
         // Add aspect ratio error handler
@@ -692,8 +723,8 @@ export default function decorate(block) {
       });
       // H1 padding for blog/news
       if (
-        window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/')
+        window.location.pathname.includes('/us/en/blog/')
+        || window.location.pathname.includes('/us/en/news/')
       ) {
         col.querySelectorAll('h1').forEach((ele) => {
           ele.classList.add('pb-4');
@@ -703,7 +734,7 @@ export default function decorate(block) {
 
     // features-card-left logic (if present)
     if (block.className.includes('features-card-left')) {
-      columns.forEach(row => {
+      columns.forEach((row) => {
         const pTags = row.querySelectorAll('p');
         let cardDiv;
         let leftDiv;
@@ -730,14 +761,14 @@ export default function decorate(block) {
 
   // --- 2 COLUMN LOGIC ---
   if (columns.length === 2) {
-    let firstCol = columns[0];
-    let secondCol = columns[1];
+    const firstCol = columns[0];
+    const secondCol = columns[1];
 
     [
       'w-full', 'w-1/2', 'w-1/3', 'w-2/3',
       'lg:w-full', 'lg:w-1/2', 'lg:w-1/3', 'lg:w-2/3',
-      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3'
-    ].forEach(cls => {
+      'basis-full', 'basis-1/2', 'basis-1/3', 'basis-2/3',
+    ].forEach((cls) => {
       firstCol.classList.remove(cls);
       secondCol.classList.remove(cls);
     });
@@ -757,20 +788,37 @@ export default function decorate(block) {
 
     // firstCol.classList.add('flex', 'flex-col', 'justify-center');
 
-     // Container logic (Image 5 style takes precedence if present)
+    // Container logic (Image 5 style takes precedence if present)
     const isPicDiv = !!firstCol.querySelector('picture');
     if (isPicDiv) {
       firstCol.classList.add('lg:w-1/2', 'picdiv');
       block.firstElementChild?.classList.add(
-        'align-text-top', 'pb-7', 'py-0', 'my-0',
-        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
-        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+        'align-text-top',
+        'pb-7',
+        'py-0',
+        'my-0',
+        'container',
+        'max-w-7xl',
+        'mx-auto',
+        'flex',
+        'flex-col',
+        'gap-x-12',
+        'gap-y-4',
+        'lg:flex-row',
+        'justify-items-center',
       );
     } else {
       firstCol.classList.add('lg:w-1/2', 'flex', 'flex-col', 'justify-center');
       block.firstElementChild?.classList.add(
-        'container', 'max-w-7xl', 'mx-auto', 'flex', 'flex-col', 'gap-x-12',
-        'gap-y-4', 'lg:flex-row', 'justify-items-center'
+        'container',
+        'max-w-7xl',
+        'mx-auto',
+        'flex',
+        'flex-col',
+        'gap-x-12',
+        'gap-y-4',
+        'lg:flex-row',
+        'justify-items-center',
       );
     }
 
@@ -779,13 +827,13 @@ export default function decorate(block) {
     if (img) {
       img.removeAttribute('width');
       img.removeAttribute('height');
-      img.style.maxWidth = "100%";
-      img.style.width = "auto";
-      img.style.width = "100%";
-      img.style.height = "auto";
-      img.style.height = "100%";
-      img.style.objectFit = "contain";
-      img.style.display = "block";
+      img.style.maxWidth = '100%';
+      img.style.width = 'auto';
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      img.style.height = '100%';
+      img.style.objectFit = 'contain';
+      img.style.display = 'block';
       const imageAspectRatio = 1.7778;
       img.onerror = function () {
         img.width = this.width;
@@ -804,8 +852,8 @@ export default function decorate(block) {
 
     // Blog/news column classes
     if (
-      window.location.pathname.includes('/us/en/blog/') ||
-      window.location.pathname.includes('/us/en/news/')
+      window.location.pathname.includes('/us/en/blog/')
+      || window.location.pathname.includes('/us/en/news/')
     ) {
       addBlogNewsContainerClasses(block.firstElementChild);
       firstCol.classList.add('h-full', 'lg:w-1/2', 'md:pr-16');
@@ -819,11 +867,11 @@ export default function decorate(block) {
   }
 
   // Add column count class for further styling if needed
-  function getColumnCount(block) {
-    const directDivs = Array.from(block.children).filter(el => el.tagName === 'DIV');
+  function getColumnCount(blocks) {
+    const directDivs = Array.from(blocks.children).filter((el) => el.tagName === 'DIV');
     if (directDivs.length > 1) return directDivs.length;
     if (directDivs.length === 1) {
-      const innerDivs = Array.from(directDivs[0].children).filter(el => el.tagName === 'DIV');
+      const innerDivs = Array.from(directDivs[0].children).filter((el) => el.tagName === 'DIV');
       if (innerDivs.length > 1) return innerDivs.length;
     }
     return directDivs.length;
@@ -898,8 +946,8 @@ export default function decorate(block) {
     const picWrapper = pic.closest('div');
     if (picWrapper && picWrapper.children.length === 1) {
       if (
-        window.location.pathname.includes('/us/en/blog/') ||
-        window.location.pathname.includes('/us/en/news/')
+        window.location.pathname.includes('/us/en/blog/')
+        || window.location.pathname.includes('/us/en/news/')
       ) {
         picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
         pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
