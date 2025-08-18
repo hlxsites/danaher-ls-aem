@@ -12,8 +12,7 @@ export default function decorate(block) {
     (el) => el.classList && el.classList.contains('banner-block') && el.parentElement === main,
   );
   if (block.classList && block.classList.contains('banner-block') && block.parentElement === main
-      && !bannerBlocks.includes(block)
-  ) {
+      && !bannerBlocks.includes(block)) {
     bannerBlocks.push(block);
   }
   bannerBlocks.forEach((banner) => {
