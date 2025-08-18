@@ -1101,7 +1101,7 @@
     "fields": [
       {
         "component": "select",
-        "name": "columns",
+        "name": "rows",
         "label": "Number of Grid Columns",
         "valueType": "string",
         "default": "3",
@@ -1118,8 +1118,8 @@
       },
       {
         "component": "list",
-        "name": "items",
-        "label": "Grid Items",
+        "name": "classes",
+        "label": "Grid Classes",
         "itemSchema": {
           "type": "object",
           "properties": {
