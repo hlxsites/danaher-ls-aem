@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  block.replaceChildren();
+  //block.replaceChildren();
   block.id = 'bundle-list-tab';
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
   // const response = JSON.parse(localStorage.getItem('eds-product-details'));
