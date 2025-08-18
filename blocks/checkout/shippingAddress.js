@@ -285,13 +285,7 @@ click use address button to set the address as default for current order
           }
         });
 
-        // const listItem = addressListItem.querySelector(
-        //   `.${type}-address-list-item-actions`
-        // );
 
-        // if (listItem) {
-        //   // listItem.append(makeDefaultButton);
-        // }
         addressItems.append(addressListItem);
       }
     });

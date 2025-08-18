@@ -1994,15 +1994,15 @@ get counrty field and attach change event listener to populate states based on c
         ) {
           formToSubmit.classList.add('hidden');
 
-          saveAddressButton.insertAdjacentElement(
-            'afterend',
-            p(
-              {
-                class: 'text-green-500 font-medium pl-6 text-l',
-              },
-              'Address Updated Successfully.',
-            ),
-          );
+          // saveAddressButton.insertAdjacentElement(
+          //   'afterend',
+          //   p(
+          //     {
+          //       class: 'text-green-500 font-medium pl-6 text-l',
+          //     },
+          //     'Address Updated Successfully.',
+          //   ),
+          // );
 
           /*
         ::::::::::::::
@@ -2010,24 +2010,32 @@ get counrty field and attach change event listener to populate states based on c
         ::::::::::::::
         */
           await updateAddresses();
+          /*
+            ::::::::::::
+            remove preloader
+            :::::::::::::
+            */
+          removePreLoader();
+          showNotification('Address updated successfully.', 'success');
         } else {
-          saveAddressButton.insertAdjacentElement(
-            'afterend',
-            p(
-              {
-                id: 'addressFormErrorMessage',
-                class: 'text-red-500 font-medium pl-6 text-l text-center',
-              },
-              'Error submitting address.',
-            ),
-          );
+          // saveAddressButton.insertAdjacentElement(
+          //   'afterend',
+          //   p(
+          //     {
+          //       id: 'addressFormErrorMessage',
+          //       class: 'text-red-500 font-medium pl-6 text-l text-center',
+          //     },
+          //     'Error submitting address.',
+          //   ),
+          // );
+          /*
+            ::::::::::::
+            remove preloader
+            :::::::::::::
+            */
+          removePreLoader();
+          showNotification('Error submitting address.', 'error');
         }
-        /*
-          ::::::::::::
-          remove preloader
-          :::::::::::::
-          */
-        removePreLoader();
         /*
           ::::::::::::::
           close utility modal
@@ -2163,7 +2171,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2473,7 +2481,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2562,7 +2570,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
