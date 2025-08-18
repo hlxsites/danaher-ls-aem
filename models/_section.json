@@ -39,6 +39,7 @@
     "components": [
       "article-info",
       "article-info-new",
+      "talk-to-an-expert-form",
       "breadcrumb",
       "banner",
       "text",
