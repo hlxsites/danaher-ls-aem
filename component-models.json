@@ -2007,6 +2007,179 @@
     ]
   },
   {
+    "id": "talk-to-an-expert-form",
+    "fields": [
+      {
+        "component": "input",
+        "type": "text",
+        "name": "First_Name",
+        "label": "First name",
+        "autocomplete": "given-name",
+        "required": true
+      },
+      {
+        "component": "input",
+        "type": "text",
+        "name": "Last_Name",
+        "label": "Last name",
+        "autocomplete": "family-name",
+        "required": true
+      },
+      {
+        "component": "input",
+        "type": "text",
+        "name": "Email_Address",
+        "label": "Email address",
+        "autocomplete": "email",
+        "required": true
+      },
+      {
+        "component": "input",
+        "type": "text",
+        "name": "Phone_Number",
+        "label": "Phone number",
+        "autocomplete": "tel",
+        "required": false
+      },
+      {
+        "component": "input",
+        "type": "text",
+        "name": "Company_Name",
+        "label": "Company name",
+        "autocomplete": "organization",
+        "required": true
+      },
+      {
+        "component": "input",
+        "type": "text",
+        "name": "Postal_Code",
+        "label": "ZIP / Postal code",
+        "autocomplete": "postal-code",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "Job_Role",
+        "label": "Job role",
+        "required": true,
+        "options": [
+          {
+            "value": "Select",
+            "label": "Select"
+          },
+          {
+            "value": "C-Suite",
+            "label": "C-Suite"
+          },
+          {
+            "value": "Vice President",
+            "label": "Vice President"
+          },
+          {
+            "value": "Associate Vice President",
+            "label": "Associate Vice President"
+          },
+          {
+            "value": "Executive Director",
+            "label": "Executive Director"
+          },
+          {
+            "value": "Director",
+            "label": "Director"
+          },
+          {
+            "value": "Department Head / Group Lead",
+            "label": "Department Head / Group Lead"
+          },
+          {
+            "value": "Principal Scientist",
+            "label": "Principal Scientist"
+          },
+          {
+            "value": "Operations Manager",
+            "label": "Operations Manager"
+          },
+          {
+            "value": "Lab Manager",
+            "label": "Lab Manager"
+          },
+          {
+            "value": "Scientist",
+            "label": "Scientist"
+          },
+          {
+            "value": "Senior Scientist",
+            "label": "Senior Scientist"
+          },
+          {
+            "value": "Associate Scientist",
+            "label": "Associate Scientist"
+          },
+          {
+            "value": "Graduate Student",
+            "label": "Graduate Student"
+          },
+          {
+            "value": "Academia",
+            "label": "Academia"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "Country",
+        "label": "Country",
+        "required": true,
+        "options": [
+          {
+            "value": "Select",
+            "label": "Select"
+          },
+          {
+            "value": "United States",
+            "label": "United States"
+          },
+          {
+            "value": "Afghanistan",
+            "label": "Afghanistan"
+          },
+          {
+            "value": "Albania",
+            "label": "Albania"
+          }
+        ]
+      },
+      {
+        "component": "textarea",
+        "name": "OpCo_Comments",
+        "label": "Additional information (please provide as many details as possible):",
+        "autocomplete": "off",
+        "required": false,
+        "rows": 3,
+        "cols": 50
+      },
+      {
+        "component": "checkbox",
+        "name": "Email_Opt_In",
+        "label": "I would like to receive more information via email about products and services offered by DH Life Sciences, LLC.",
+        "required": false
+      },
+      {
+        "component": "info",
+        "name": "tnc",
+        "label": "Terms and Conditions",
+        "content": "By submitting this form, you agree to the Terms of Use and Privacy Policy."
+      }
+    ],
+    "actions": [
+      {
+        "component": "submit",
+        "label": "Submit",
+        "class": "btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6"
+      }
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "fields": [
       {

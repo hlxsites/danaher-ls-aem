@@ -790,10 +790,6 @@ export default function decorate(block) {
       const match = url.match(/v=([^&]+)/);
       if (match) url = `https://www.youtube.com/embed/${match[1]}`;
     }
-    if (url.includes('youtu.be/')) {
-      const match = url.match(/youtu\.be\/([^?&]+)/);
-      if (match) url = `https://www.youtube.com/embed/${match[1]}`;
-    }
     if (url.startsWith('http')) {
       if (embed.tagName.toLowerCase() === 'p') {
         const div = document.createElement('div');
