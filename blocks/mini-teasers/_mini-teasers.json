@@ -8,8 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
             "template": {
-              "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" }
+              "rows": "3"
             }
           }
         }
