@@ -1100,89 +1100,21 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
-      },
-      {
         "component": "select",
-        "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
+        "name": "rows",
+        "label": "Number of Grid Columns",
+        "valueType": "string",
+        "default": "3",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
+            "name": "grid-cols-3",
+            "value": "3"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "name": "grid-cols-4",
+            "value": "4"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
       }
     ]
   },
