@@ -887,6 +887,17 @@
     ]
   },
   {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "embed",
+        "name": "embedCode",
+        "label": "Embed Code",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "dual-carousel",
     "fields": [
       {

@@ -59,6 +59,17 @@
           }
         }
       ]
+    },
+    {
+      "id": "embed",
+      "fields": [
+        {
+          "component": "embed",
+          "name": "embedCode",
+          "label": "Embed Code",
+          "valueType": "string"
+        }
+      ]
     }
   ],
   "filters": [
