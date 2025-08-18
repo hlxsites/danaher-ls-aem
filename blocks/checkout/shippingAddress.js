@@ -78,16 +78,16 @@ const renderAddressList = (addressItems, addressListArray, type) => {
         ::::::::::::::
         */
         let makeDefaultButton = '';
-        if (item?.preferredShippingAddress === 'true' || item?.preferredBillingAddress === 'true') {
+        if ((item?.preferredShippingAddress === 'true' && type === 'shipping') || (type === 'billing' && item?.preferredBillingAddress === 'true')) {
           makeDefaultButton = div(
             {
-              class: `flex justify-between items-center gap-3 is-default-${type}-address`,
+              class: `flex justify-between items-center gap-3 is-default-${type}-address mt-6 cursor-pointer`,
             },
             input(
               {
                 type: 'checkbox',
                 name: `default${type}address`,
-                class: `input-focus-checkbox  is-default-${type}-address`,
+                class: `input-focus-checkbox  is-default-${type}-address `,
                 'data-required': false,
               },
             ),
@@ -101,7 +101,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
         } else {
           makeDefaultButton = div(
             {
-              class: `relative flex gap-3 text-right not-default-${type}-address mt-6`,
+              class: `relative flex gap-3 text-right not-default-${type}-address mt-6 cursor-pointer`,
               'data-address': JSON.stringify(item),
             },
             input(
@@ -290,52 +290,45 @@ click use address button to set the address as default for current order
         addressItems.append(addressListItem);
       }
     });
-    addressItems.addEventListener('click', async (event) => {
+    addressItems?.addEventListener('click', async (event) => {
       event.preventDefault();
-      if (
-        event.target.parentElement.classList.contains(
-          `not-default-${type}-address`,
-        )
-      ) {
+      if (event?.target?.matches('input[type="checkbox"]') && event?.target?.classList.contains(`not-default-${type}-address`)) {
+        event.target.checked = true;
         const getParent = event.target.parentElement;
-        if (getParent.classList.contains(`not-default-${type}-address`)) {
-          if (event.target.textContent === 'Make this my default address') {
-            showPreLoader();
-            const setAddressDetails = JSON.parse(
-              getParent.getAttribute('data-address'),
-            );
-            if (type === 'shipping') {
-              Object.assign(setAddressDetails, {
-                preferredShippingAddress: 'true',
-              });
-            } else {
-              Object.assign(setAddressDetails, {
-                preferredBillingAddress: 'true',
-              });
-            }
-            Object.assign(setAddressDetails, { type: 'MyAddress' });
-
-            /*
-            ::::::::::::::
-            update address
-            ::::::::::::::
-            */
-            await updateAddressToDefault(setAddressDetails);
-          }
-          /*
-          ::::::::::::::
-          update address list
-          ::::::::::::::
-          */
-          await updateAddresses();
-          /*
-          ::::::::::::::
-          close utility modal
-          ::::::::::::::
-          */
-          removePreLoader();
-          closeUtilityModal();
+        showPreLoader();
+        const setAddressDetails = JSON.parse(
+          getParent.getAttribute('data-address'),
+        );
+        if (type === 'shipping') {
+          Object.assign(setAddressDetails, {
+            preferredShippingAddress: 'true',
+          });
+        } else {
+          Object.assign(setAddressDetails, {
+            preferredBillingAddress: 'true',
+          });
         }
+        Object.assign(setAddressDetails, { type: 'MyAddress' });
+
+        /*
+        ::::::::::::::
+        update address
+        ::::::::::::::
+        */
+        await updateAddressToDefault(setAddressDetails);
+        /*
+        ::::::::::::::
+        update address list
+        ::::::::::::::
+        */
+        await updateAddresses();
+        /*
+        ::::::::::::::
+        close utility modal
+        ::::::::::::::
+        */
+        closeUtilityModal();
+        removePreLoader();
       }
 
       if (event.target.classList.contains(`edit-${type}-address-button`)) {

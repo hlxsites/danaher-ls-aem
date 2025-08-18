@@ -3206,6 +3206,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   max-width: 80rem;
 }
 
+.max-w-\[792px\] {
+  max-width: 792px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -3216,10 +3220,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .max-w-xs {
   max-width: 20rem;
-}
-
-.max-w-\[792px\] {
-  max-width: 792px;
 }
 
 .flex-1 {
