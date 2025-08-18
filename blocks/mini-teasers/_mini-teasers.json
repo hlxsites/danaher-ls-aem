@@ -21,16 +21,6 @@
       "id": "mini-teasers",
       "fields": [
         {
-          "component": "select",
-          "name": "columns",
-          "label": "Number of Columns",
-          "default": "",
-          "options": [
-            { "name": "3 Columns", "value": "3" },
-            { "name": "4 Columns", "value": "4" }
-          ]
-        },
-        {
           "component": "text",
           "valueType": "string",
           "name": "teaser1Title",
@@ -98,6 +88,16 @@
           "component": "text",
           "name": "teaser3ImageAlt",
           "label": "Teaser 3 Image Alt Text"
+        },
+        {
+          "component": "select",
+          "name": "columns",
+          "label": "Number of Columns",
+          "default": "3",
+          "options": [
+            { "name": "3 Columns", "value": "3" },
+            { "name": "4 Columns", "value": "4" }
+          ]
         }
       ]
     }
