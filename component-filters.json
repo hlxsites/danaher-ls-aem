@@ -191,12 +191,6 @@
     ]
   },
   {
-    "id": "pdp-tabs",
-    "components": [
-      "pdp-tabs-item"
-    ]
-  },
-  {
     "id": "product-categories",
     "components": [
       ""

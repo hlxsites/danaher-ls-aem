@@ -1549,7 +1549,7 @@
     "fields": []
   },
   {
-    "id": "pdp-tabs",
+    "id": "pdp-page-tabs",
     "fields": []
   },
   {
@@ -1600,7 +1600,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "product-tab-title",
+        "name": "product- tab-title",
         "value": "",
         "label": "Product Tab Title"
       },
