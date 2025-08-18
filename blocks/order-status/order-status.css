@@ -56,6 +56,10 @@
   margin-top: -75px
 }
 
+.order-status-wrapper :is(.ml-\[23px\]) {
+  margin-left: 23px
+}
+
 .order-status-wrapper :is(.block) {
   display: block
 }
@@ -458,6 +462,11 @@
   line-height: 1rem
 }
 
+.order-status-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .order-status-wrapper :is(.font-\[400\]) {
   font-weight: 400
 }
@@ -500,6 +509,10 @@
 
 .order-status-wrapper :is(.leading-tight) {
   line-height: 1.25
+}
+
+.order-status-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
 .order-status-wrapper :is(.text-black) {

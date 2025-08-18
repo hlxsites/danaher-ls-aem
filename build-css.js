@@ -402,11 +402,11 @@ const fileMappings = [
   {
     content: ['./blocks/dashboardSideBar/dashboardSideBar.js',
     ],
-    output: './blocks/dashboardSideBar/ddashboardSideBar.css',
+    output: './blocks/dashboardSideBar/dashboardSideBar.css',
     wrapper: 'dashboardSideBar-wrapper',
   },
-   {
-    content: ['./blocks/order-status/order-status.js', './blocks/dashboardSideBar/dashboardSideBar.js',],
+  {
+    content: ['./blocks/order-status/order-status.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
     output: './blocks/order-status/order-status.css',
     wrapper: 'order-status-wrapper',
   },

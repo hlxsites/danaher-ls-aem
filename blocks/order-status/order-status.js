@@ -8,9 +8,10 @@ import {
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { baseURL, showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import { getApiData } from '../../scripts/api-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
 
-let totalOrdersPlaced = '';
+// let totalOrdersPlaced = '';
 const orderDetails = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -21,25 +22,26 @@ const orderDetails = async () => {
     'Authentication-Token': token,
     Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const url = `${baseURL}orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
+  const url = `${baseURL}orders?include=lineItems`;
 
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
       const orderDetailResponse = response.data;
       totalOrdersPlaced = orderDetailResponse.data.length;
-      if (totalOrdersPlaced < 10) {
-        return orderDetailResponse.data;
-      }
+      // if (totalOrdersPlaced < 10) {
+      return orderDetailResponse.data;
+      // }
 
-      const orders = [];
-      for (let i = 0; i < 10; i + 1) {
-        orders.push(orderDetailResponse.data[i]);
-      }
-      return orders;
+      // const orders = [];
+      // for (let i = 0; i < 10; i + 1) {
+      //   orders.push(orderDetailResponse.data[i]);
+      // }
+      // return orders;
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
+    console.log('error', error);
     return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
 };
@@ -170,21 +172,37 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
   return tableDataRows;
 };
 
-export const decorate = async (block) => {
+export default async function decorate(block) {
   showPreLoader();
-    block?.parentElement?.parentElement?.removeAttribute('class');
-    block?.parentElement?.parentElement?.removeAttribute('style');
-    document.querySelector('main').style = 'background: #f4f4f4';
-   const wrapper = div({
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  document.querySelector('main').style = 'background: #f4f4f4';
+  const wrapper = div({
     id: 'dashboardWrapper',
     class:
       'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
   });
   const dashboardSideBarContent = await dashboardSidebar();
+  const orderStatusTitle = div(
+    {
+      class: 'ml-[23px] self-stretch inline-flex flex-col justify-start items-start gap-4',
+    },
+    div({
+      class: 'self-stretch justify-start text-black text-3xl font-medium leading-10',
+    }, 'Order Status'),
+    div({
+      class: 'self-stretch justify-start text-black text-base font-extralight leading-snug',
+    }, 'Track your order every step of the way see real-time updates and delivery details here.'),
+  );
   // const days = ['Period', 'Last 90 days', 'This month', 'this Year', 'Last Year'];
   // const status = ['Status', 'All', 'Approved', 'Cancelled',
   // 'Invoiced', 'Shipped', 'Submitted', 'New'];
   const orderDetailsResponse = await orderDetails();
+  const allOrders = orderDetailsResponse || []; // Set this from your API
+  let currentIndex = 0;
+  const pageSize = 10;
+
+  console.log('orderDetailsResponse', orderDetailsResponse);
   // const dropDown = (day) => {
   //   const selectElement = document.createElement('select');
   //   selectElement.classList.add(
@@ -417,20 +435,54 @@ export const decorate = async (block) => {
   // orderWrapper.append(searchProduct);
   orderWrapper.append(orderDesc);
   // orderWrapper.append(orderTable);
-  const orderRows = await dynamicTableContent(orderDetailsResponse);
-  orderTable.append(orderRows);
-  orderWrapper.append(orderTable);
+  let orderRows;
+  async function renderNextBatch() {
+    const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
+    console.log('nextBatch', nextBatch);
+    orderRows = await dynamicTableContent(nextBatch);
+    console.log('order rows : 442', orderRows);
+    orderTable.append(orderRows);
+    orderWrapper.append(orderTable);
+    // nextBatch.forEach((order) => {
+    //   const orderElement = document.createElement('div');
+    //   orderElement.innerText = `Order #${order.documentNumber}`;
+    //   dataContainer.appendChild(orderElement);
+    // });
+
+    currentIndex += pageSize;
+
+    // Hide button if all data has been loaded
+    if (currentIndex >= allOrders.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+  renderNextBatch();
+  window.addEventListener('scroll', () => {
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+    if (nearBottom) {
+      renderNextBatch();
+    }
+  });
+  // orderTable.append(orderRows);
+  // orderWrapper.append(orderTable);
   // const paginationWrapper = div({
   //   class: '',
   // });
   // const pagination = renderPagination(totalOrdersPlaced, paginationWrapper);
   // paginationWrapper.append(pagination);
   // orderWrapper.append(paginationWrapper);
-  wrapper.append(dashboardSideBarContent, orderWrapper);
-  
-    block.innerHTML = '';
-    block.textContent = '';
-    block.append(wrapper);
-    decorateIcons(wrapper);
-    removePreLoader();
-};
+  const orderStatusPageWrapper = div({
+    class: 'inline-flex flex-col gap-4',
+  });
+  orderStatusPageWrapper.append(orderStatusTitle);
+
+  orderStatusPageWrapper.append(orderWrapper);
+
+  wrapper.append(dashboardSideBarContent, orderStatusPageWrapper);
+
+  block.innerHTML = '';
+  block.textContent = '';
+  block.append(wrapper);
+  decorateIcons(wrapper);
+  removePreLoader();
+}
