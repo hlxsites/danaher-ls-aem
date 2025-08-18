@@ -104,6 +104,21 @@
           "component": "text",
           "name": "imageAlt",
           "label": "Alt Text"
+        },
+        {
+          "component": "select",
+          "name": "miniTeasersLayout",
+          "label": "Mini Teasers Layout",
+          "options": [
+            {
+              "name": "3 Columns",
+              "value": "col-3"
+            },
+            {
+              "name": "4 Columns",
+              "value": "col-4"
+            }
+          ]
         }
       ]
     }
