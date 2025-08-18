@@ -1100,104 +1100,114 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
+        "component": "group-list",
+        "name": "teasers",
+        "label": "Teasers",
+        "description": "Add up to 4 mini teasers. Layout will adapt automatically.",
+        "max": 4,
+        "fields": [
+          {
+            "component": "text",
+            "name": "title",
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "label": "Description",
+            "valueType": "string"
+          },
+          {
+            "component": "reference",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "imageAlt",
+            "label": "Alt Text"
+          },
+          {
+            "component": "text",
+            "name": "linkText",
+            "label": "Link Text"
+          },
+          {
+            "component": "text",
+            "name": "linkUrl",
+            "label": "Link URL"
+          }
+        ]
       },
       {
         "component": "select",
         "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
+        "label": "Mini Teasers Title Heading Type",
         "options": [
           {
-            "name": "h1",
+            "name": "H1",
             "value": "h1"
           },
           {
-            "name": "h2",
+            "name": "H2",
             "value": "h2"
           },
           {
-            "name": "h3",
+            "name": "H3",
             "value": "h3"
           },
           {
-            "name": "h4",
+            "name": "H4",
             "value": "h4"
           },
           {
-            "name": "h5",
+            "name": "H5",
             "value": "h5"
           },
           {
-            "name": "h6",
+            "name": "H6",
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
       },
       {
         "component": "select",
         "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
+        "label": "Mini Teasers Description Heading Type",
         "options": [
           {
-            "name": "h1",
+            "name": "H1",
             "value": "h1"
           },
           {
-            "name": "h2",
+            "name": "H2",
             "value": "h2"
           },
           {
-            "name": "h3",
+            "name": "H3",
             "value": "h3"
           },
           {
-            "name": "h4",
+            "name": "H4",
             "value": "h4"
           },
           {
-            "name": "h5",
+            "name": "H5",
             "value": "h5"
           },
           {
-            "name": "h6",
+            "name": "H6",
             "value": "h6"
           }
         ]
       },
       {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersLayout",
-        "label": "Mini Teasers Layout",
-        "options": [
-          {
-            "name": "3 Columns",
-            "value": "col-3"
-          },
-          {
-            "name": "4 Columns",
-            "value": "col-4"
-          }
-        ]
+        "component": "toggle",
+        "name": "addBorder",
+        "label": "Add Border to Block",
+        "valueType": "boolean"
       }
     ]
   },
