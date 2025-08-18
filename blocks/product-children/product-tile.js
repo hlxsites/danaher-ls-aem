@@ -114,41 +114,63 @@ export default class ProductTile extends HTMLElement {
     }
   }
 
-  // fetch skushowdetail flag from API using ClickUri
-  async getSkuShowDetail() {
-    try {
-      // Prefer SKU from Coveo raw
-      const sku = this.result?.raw?.sku;
-      if (!sku) {
-        console.warn('No SKU found in result.raw');
-        this.skuShowDetail = true; // default enable if no SKU
-        return;
-      }
+  // --- fetch skushowdetail flag USING ClickUri (not Intershop) ---
+async getSkuShowDetail() {
+  try {
+    // ClickUri can be at result.ClickUri (capital C) in Atomic
+    const clickUri =
+      this.result?.ClickUri ||
+      this.result?.clickUri ||
+      this.result?.raw?.clickUri ||
+      this.result?.raw?.clickableuri;
 
-      const res = await fetch(`${baseURL}/products/${sku}`);
-
-      if (!res.ok) {
-        console.warn(`No product found for SKU ${sku}, status: ${res.status}`);
-        this.skuShowDetail = true; // safer default: leave enabled
-        return;
-      }
-
-      const productData = await res.json();
-      const rawValue = productData?.skushowdetail;
-      console.log('Raw skushowdetail from API:', rawValue, 'type:', typeof rawValue, 'for SKU:', sku);
-      if (typeof rawValue === 'boolean') {
-        this.skuShowDetail = rawValue;
-      } else if (typeof rawValue === 'string') {
-        this.skuShowDetail = rawValue.trim().toLowerCase() === 'true';
-      } else {
-        this.skuShowDetail = false;
-      }
-      console.log('Tile SKU:', sku, 'Normalized skushowdetail:', this.skuShowDetail);
-    } catch (err) {
-      console.error('Error fetching skushowdetail', err);
-      this.skuShowDetail = true;
+    if (!clickUri) {
+      console.warn('⚠️ No ClickUri on result; defaulting to enabled');
+      this.skuShowDetail = true; // enable when we can't determine
+      return;
     }
+
+    // Parse slug from ClickUri: /.../products/sku/<slug>.html
+    const click = new URL(clickUri);
+    const file = click.pathname.split('/').pop();            // e.g. "5300885-sciex.html"
+    const slug = file?.replace(/\.html$/i, '');              // e.g. "5300885-sciex"
+
+    // Locale prefix (e.g. "/us/en") is everything before "/products/"
+    const localePrefix = click.pathname.split('/products/')[0] || '';
+    const productDataUrl = `${click.origin}${localePrefix}/product-data/?product=${slug}`;
+
+    console.log('ClickUri:', clickUri);
+    console.log('Product-data URL:', productDataUrl);
+
+    const res = await fetch(productDataUrl, { credentials: 'same-origin' });
+    if (!res.ok) {
+      console.warn(`⚠️ product-data fetch failed (${res.status}) for slug ${slug}; defaulting to enabled`);
+      this.skuShowDetail = true;
+      return;
+    }
+
+    const data = await res.json();
+    const rawValue = data?.results?.[0]?.raw?.skushowdetail; // string "true"/"false" or undefined
+
+    console.log('Raw skushowdetail from product-data:', rawValue, 'type:', typeof rawValue, 'for SKU:', this.sku);
+
+    // Apply your rule exactly:
+    // - if undefined/missing  → ENABLE
+    // - if "true"             → ENABLE
+    // - if "false"            → DISABLE
+    if (rawValue == null) {
+      this.skuShowDetail = true;
+    } else {
+      this.skuShowDetail = String(rawValue).trim().toLowerCase() === 'true';
+    }
+
+    console.log(`Tile SKU: ${this.sku} → enabled?`, this.skuShowDetail);
+  } catch (err) {
+    console.error('Error fetching skushowdetail', err);
+    this.skuShowDetail = true; // be permissive on errors
   }
+}
+
 
   async addToQuote() {
     try {
@@ -240,8 +262,9 @@ export default class ProductTile extends HTMLElement {
     }
   }
 
-  render() {
-    this.shadowRoot.innerHTML = `
+  // --- render() (uses this.skuShowDetail to enable/disable links) ---
+render() {
+  this.shadowRoot.innerHTML = `
     <style>
       @import url('/styles/coveo-custom/product-tile.css');
       .disabled-link {
@@ -259,37 +282,39 @@ export default class ProductTile extends HTMLElement {
           <atomic-result-image field="images" aria-hidden="true"></atomic-result-image>
         </div>
         <div class="${this.result?.raw?.objecttype === 'Family' ? 'family-description' : 'description'}">
+
           ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
             <atomic-field-condition if-defined="opco">
               <atomic-result-text class="brand-info" field="opco"></atomic-result-text>
             </atomic-field-condition>
           ` : ''}
 
-      <!-- Title -->
-    <atomic-result-title class="title">
-      ${!this.skuShowDetail
-        ? `<span class="disabled-link">${this.result?.title}</span>`
-        : `<a href="${this.result?.ClickUri}">${this.result?.title}</a>`}
-      </atomic-result-title>
-      <!-- SKU -->
-      <div class="sku-text">
-      ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
-      <atomic-field-condition if-defined="sku">
-      <p><atomic-result-text class="att-value" field="sku"></atomic-result-text></p>
-      </atomic-field-condition>
-      ` : ''}
-      </div>
+          <!-- Title -->
+          <atomic-result-title class="title">
+            ${!this.skuShowDetail
+              ? `<span class="disabled-link">${this.result?.title}</span>`
+              : `<a href="${this.result?.ClickUri}">${this.result?.title}</a>`}
+          </atomic-result-title>
+
+          <!-- SKU -->
+          <div class="sku-text">
+            ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
+              <atomic-field-condition if-defined="sku">
+                <p><atomic-result-text class="att-value" field="sku"></atomic-result-text></p>
+              </atomic-field-condition>
+            ` : ''}
+          </div>
 
           <!-- Family / Bundle -->
           ${this.result?.raw?.objecttype === 'Family' || this.result?.raw?.objecttype === 'Bundle' ? `
             <div class="product-description ${this.result?.raw?.objecttype === 'Family' ? 'family' : ''}">
-              ${this.result?.raw?.richdescription}
+              ${this.result?.raw?.richdescription || ''}
             </div>
             ${this.result?.raw?.objecttype === 'Bundle' ? `
               <div class='full-specification'>
                 ${!this.skuShowDetail
-            ? `<span class='disabled-link'>See Full Specifications</span>`
-            : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
+                  ? `<span class='disabled-link'>See Full Specifications</span>`
+                  : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
               </div>
             ` : ''}
           ` : ''}
@@ -299,19 +324,15 @@ export default class ProductTile extends HTMLElement {
             <div class="a">
               ${Object.entries(this.specifications).map(([index, content]) => `
                 <div class="b">
-                  <div class="c">
-                    <div class="d">${index}:</div>
-                  </div>
-                  <div class="e">
-                    <div class="d">${typeof content !== 'object' ? content : content.toString().replaceAll(',', ', ')}</div>
-                  </div>
+                  <div class="c"><div class="d">${index}:</div></div>
+                  <div class="e"><div class="d">${typeof content !== 'object' ? content : content.toString().replaceAll(',', ', ')}</div></div>
                 </div>
               `).join('')}
             </div>
             <div class='full-specification'>
               ${!this.skuShowDetail
-          ? `<span class='disabled-link'>See Full Specifications</span>`
-          : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
+                ? `<span class='disabled-link'>See Full Specifications</span>`
+                : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
             </div>
           ` : ''}
         </div>
@@ -321,14 +342,12 @@ export default class ProductTile extends HTMLElement {
       <atomic-field-condition class="family-wrapper" must-match-objecttype="Family">
         <div class='middle-align'>
           ${!this.skuShowDetail
-        ? `<button class='btn btn-outline-brand disabled-link'>Learn More</button>`
-        : `<a href="${this.result?.ClickUri}">
-                <button class="btn btn-outline-brand">Learn More</button>
-              </a>`}
+            ? `<button class='btn btn-outline-brand disabled-link'>Learn More</button>`
+            : `<a href="${this.result?.ClickUri}"><button class="btn btn-outline-brand">Learn More</button></a>`}
         </div>
       </atomic-field-condition>
 
-      <!-- Action wrapper (unchanged) -->
+      <!-- Action wrapper (unchanged aside from using this.skuShowDetail above) -->
       ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
         <div class="action-wrapper">
           <div class="middle-align">
@@ -372,5 +391,6 @@ export default class ProductTile extends HTMLElement {
       ` : ''}
     </div>
     <div class="product-details-list gray-background padding-x-3"></div>`;
-  }
+}
+
 }
