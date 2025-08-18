@@ -4,8 +4,21 @@ import { orderDetails, requestedQuotes } from './dashboardutils.js';
 const recentOrders = async () => {
   const orderDetailResponse = await orderDetails();
   const requestedQuotesResponse = await requestedQuotes();
-  const topRequestedQuote = requestedQuotesResponse.slice(0, 4);
-  const topRecentOrder = orderDetailResponse.slice(0, 3);
+  let topRequestedQuote;
+  let topRecentOrder;
+  if(requestedQuotesResponse.length > 4){
+    topRequestedQuote = requestedQuotesResponse.slice(0, 4);
+  }
+  else {
+    topRequestedQuote = requestedQuotesResponse;
+  }
+  if(orderDetailResponse.length > 3){
+    topRecentOrder = orderDetailResponse.slice(0, 3);
+  }
+  else {
+    topRecentOrder = orderDetailResponse
+  }
+  
 
   const recentDetailsContainer = div({
     class: 'flex gap-6 w-full dhls-container',
