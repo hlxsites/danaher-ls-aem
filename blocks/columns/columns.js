@@ -915,4 +915,42 @@ export default function decorate(block) {
       }
     }
   });
+
+  // --- EMBEDS ---
+  block.querySelectorAll('.embed').forEach(embed => {
+    let url = '';
+    if (embed.dataset && embed.dataset.url) {
+      url = embed.dataset.url.trim();
+    } else {
+      url = embed.textContent.trim();
+    }
+    if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+      const match = url.match(/vimeo\.com\/(\d+)/);
+      if (match) url = `https://player.vimeo.com/video/${match[1]}`;
+    }
+    if (url.includes('youtube.com/watch')) {
+      const match = url.match(/v=([^&]+)/);
+      if (match) url = `https://www.youtube.com/embed/${match[1]}`;
+    }
+    if (url.includes('youtu.be/')) {
+      const match = url.match(/youtu\.be\/([^?&]+)/);
+      if (match) url = `https://www.youtube.com/embed/${match[1]}`;
+    }
+    if (url.startsWith('http')) {
+      if (embed.tagName.toLowerCase() === 'p') {
+        const div = document.createElement('div');
+        div.className = embed.className;
+        embed.replaceWith(div);
+        embed = div;
+      }
+      embed.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.width = "100%";
+      iframe.height = "400";
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allowfullscreen', '');
+      embed.appendChild(iframe);
+    }
+  });
 }
