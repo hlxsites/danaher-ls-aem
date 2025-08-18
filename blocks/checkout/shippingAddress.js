@@ -1,5 +1,5 @@
 import {
-  h2, h3, h5, span, div, p, button,
+  h2, h3, h5, span, div, p, button, input,
 } from '../../scripts/dom-builder.js';
 /*
  ::::::::::::::
@@ -51,8 +51,14 @@ import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 const renderAddressList = (addressItems, addressListArray, type) => {
   if (typeof addressListArray !== 'undefined' && addressListArray.length > 0) {
     addressItems.textContent = '';
+    const filteredArray = addressListArray.filter((adr) => {
+      if (type === 'shipping') {
+        return adr?.shipToAddress === true;
+      }
+      return adr?.invoiceToAddress === true;
+    });
 
-    addressListArray.forEach((item, index) => {
+    filteredArray.forEach((item, index) => {
       if (typeof item !== 'undefined') {
         let defaultBgClass = '';
         if (type === 'shipping' && typeof item !== 'undefined') {
@@ -68,21 +74,26 @@ const renderAddressList = (addressItems, addressListArray, type) => {
 
         /*
         ::::::::::::::
-        button to set the ${type} address as the default  address
+        button to set the ${type}(billing/shipping) address as the default  address
         ::::::::::::::
         */
         let makeDefaultButton = '';
-        if (item.preferredShippingAddress || item.preferredBillingAddress) {
+        if (item?.preferredShippingAddress === 'true' || item?.preferredBillingAddress === 'true') {
           makeDefaultButton = div(
             {
-              class: `flex justify-between items-center gap-1 is-default-${type}-address`,
+              class: `flex justify-between items-center gap-3 is-default-${type}-address`,
             },
-            span({
-              class: 'icon icon-check-circle',
-            }),
+            input(
+              {
+                type: 'checkbox',
+                name: `default${type}address`,
+                class: `input-focus-checkbox  is-default-${type}-address`,
+                'data-required': false,
+              },
+            ),
             span(
               {
-                class: 'text-black',
+                class: 'text-black text-base',
               },
               'Default Address',
             ),
@@ -90,13 +101,21 @@ const renderAddressList = (addressItems, addressListArray, type) => {
         } else {
           makeDefaultButton = div(
             {
-              class: `relative text-right not-default-${type}-address mt-6`,
+              class: `relative flex gap-3 text-right not-default-${type}-address mt-6`,
               'data-address': JSON.stringify(item),
             },
+            input(
+              {
+                type: 'checkbox',
+                name: `default${type}address`,
+                class: `input-focus-checkbox  not-default-${type}-address`,
+                'data-required': false,
+              },
+            ),
             span(
               {
                 class:
-                  'text-base text-danaherpurple-500 hover:text-danaherpurple-800',
+                  'text-base text-black',
               },
               'Make this my default address',
             ),
@@ -178,7 +197,12 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             ),
           ),
         );
-
+        // mark the default address as checked
+        addressListItem?.querySelectorAll('input[type="checkbox"]')?.forEach((element) => {
+          if (element.classList.contains('is-default-shipping-address') || element.classList.contains('is-default-billing-address')) {
+            element.checked = true;
+          }
+        });
         /*
 :::::::::::::::::::::::::::::
 click use address button to set the address as default for current order

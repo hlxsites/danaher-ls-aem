@@ -776,9 +776,10 @@ export async function addressList(type) {
 
   if (getAddressesData?.status === 'success') {
     return getAddressesData?.data?.filter((adr) => {
-      const usage = adr?.usage;
-      if (!Array.isArray(usage)) return [];
-      return type === 'billing' ? adr?.usage[0] === true : adr?.usage[1] === true;
+      if (type === 'shipping') {
+        return adr?.shipToAddress === true;
+      }
+      return adr?.invoiceToAddress === true;
     });
   }
   return [];
@@ -2162,7 +2163,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2472,7 +2473,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2561,7 +2562,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
