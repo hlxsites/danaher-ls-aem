@@ -1121,68 +1121,6 @@
         "component": "text",
         "name": "teaser1ImageAlt",
         "label": "Teaser 1 Image Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "teaser2Title",
-        "label": "Teaser 2 Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "teaser2Description",
-        "label": "Teaser 2 Description"
-      },
-      {
-        "component": "reference",
-        "name": "teaser2Image",
-        "label": "Teaser 2 Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "teaser2ImageAlt",
-        "label": "Teaser 2 Image Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "teaser3Title",
-        "label": "Teaser 3 Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "teaser3Description",
-        "label": "Teaser 3 Description"
-      },
-      {
-        "component": "reference",
-        "name": "teaser3Image",
-        "label": "Teaser 3 Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "teaser3ImageAlt",
-        "label": "Teaser 3 Image Alt Text"
-      },
-      {
-        "component": "select",
-        "name": "columns",
-        "label": "Number of Columns",
-        "default": "3",
-        "options": [
-          {
-            "name": "3 Columns",
-            "value": "3"
-          },
-          {
-            "name": "4 Columns",
-            "value": "4"
-          }
-        ]
       }
     ]
   },
