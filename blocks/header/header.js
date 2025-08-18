@@ -118,9 +118,11 @@ function getCoveoApiPayload(searchValue, type) {
 }
 
 // eslint-disable-next-line consistent-return
+
+// eslint-disable-next-line consistent-return
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  const searchTerm = searchInput.value.trim();
   if (page === 'cartlanding') {
-    const searchTerm = searchInput.value.trim();
     if (searchTerm) {
       const requestPayload = getCoveoApiPayload(searchTerm, 'search');
       requestPayload.analytics.actionCause = actionCause
@@ -129,38 +131,39 @@ export async function submitSearchQuery(searchInput, actionCause = '', page = ''
       const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
       return resp;
     }
-    let searchLocation = '/us/en/search.html';
-    const redirectList = [];
-    if (searchTerm) {
-      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-      const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
-      requestPayload.analytics.actionCause = actionCause
-        || searchInput.getAttribute('data-action-cause')
-        || 'searchFromLink';
-      await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-      const triggerResponseData = await makeCoveoApiRequest(
-        '/rest/search/v2/plan',
-        'searchKey',
-        triggerRequestPayload,
-      );
-      const { preprocessingOutput } = triggerResponseData;
-      const { triggers } = preprocessingOutput;
-      if (triggers != null && triggers.length > 0) {
-        triggers.forEach(({ content, type }) => {
-          if (type === 'redirect') {
-            redirectList.push(content);
-          }
-        });
-      }
-      setRecentSearches(searchTerm);
-      searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+  }
+
+  let searchLocation = '/us/en/search.html';
+  const redirectList = [];
+  if (searchTerm) {
+    const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+    const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
+    requestPayload.analytics.actionCause = actionCause
+      || searchInput.getAttribute('data-action-cause')
+      || 'searchFromLink';
+    await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+    const triggerResponseData = await makeCoveoApiRequest(
+      '/rest/search/v2/plan',
+      'searchKey',
+      triggerRequestPayload,
+    );
+    const { preprocessingOutput } = triggerResponseData;
+    const { triggers } = preprocessingOutput;
+    if (triggers != null && triggers.length > 0) {
+      triggers.forEach(({ content, type }) => {
+        if (type === 'redirect') {
+          redirectList.push(content);
+        }
+      });
     }
-    if (redirectList.length > 0) {
-      const [redirect] = redirectList;
-      window.location = redirect;
-    } else {
-      window.location = searchLocation;
-    }
+    setRecentSearches(searchTerm);
+    searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+  }
+  if (redirectList.length > 0) {
+    const [redirect] = redirectList;
+    window.location = redirect;
+  } else {
+    window.location = searchLocation;
   }
 }
 

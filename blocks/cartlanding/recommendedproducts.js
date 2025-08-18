@@ -2,17 +2,8 @@ import { addItemToCart, recommendedProduct } from './myCartService.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import {
   div,
-  h3,
-  input,
-  label,
   span,
   button,
-  fieldset,
-  ul,
-  li,
-  a,
-  img,
-  p,
 } from '../../scripts/dom-builder.js';
 import {
   makePublicUrl,
@@ -34,15 +25,14 @@ export const recommendedProducts = () => {
   });
   const productsCategories = recommendedProduct;
 
-  let cardsPerPage = getCardsPerPage();
-  let currentIndex = 0;
-
   function getCardsPerPage() {
     if (window.innerWidth < 640) return 1;
     if (window.innerWidth < 1024) return 2;
     if (window.innerWidth < 1280) return 3;
     return 4;
   }
+  let cardsPerPage = getCardsPerPage();
+  let currentIndex = 0;
 
   const carouselContainer = div({
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
@@ -66,16 +56,6 @@ export const recommendedProducts = () => {
         'text-black text-2xl font-normal  leading-loose whitespace-nowrap',
     },
     'Others also bought',
-  );
-
-  // Browse Link
-  const browseLink = a(
-    {
-      href: '#',
-      class:
-        'text-violet-600 text-base font-bold  leading-snug hover:underline whitespace-nowrap',
-    },
-    'Browse 120 Products →',
   );
 
   // Outer container holding both arrows and toggle (gap between them)
@@ -116,40 +96,6 @@ export const recommendedProducts = () => {
   const viewModeGroup = div({
     class: 'flex justify-start items-center',
   });
-
-  // List Button
-  const listBtn = div(
-    {
-      class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-    },
-    div(
-      {
-        class: 'w-5 h-5 relative overflow-hidden',
-      },
-      span({
-        class:
-          'icon icon-icons8-delete w-6 h-6 absolute  fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
-      }),
-    ),
-  );
-
-  // Grid Button
-  const gridBtn = div(
-    {
-      class:
-        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-    },
-    div(
-      {
-        class: 'w-5 h-5 relative overflow-hidden',
-      },
-      span({
-        class:
-          'icon icon-icons8-delete w-6 h-6 absolute  fill-current text-white [&_svg>use]:stroke-white',
-      }),
-    ),
-  );
 
   // viewModeGroup.append(listBtn, gridBtn);
 
@@ -209,7 +155,7 @@ export const recommendedProducts = () => {
         const res = await addItemToCart(itemId, 'recommended-product');
 
         if (res) {
-          if (res.status == 'success') {
+          if (res.status === 'success') {
             removePreLoader();
           }
         }
