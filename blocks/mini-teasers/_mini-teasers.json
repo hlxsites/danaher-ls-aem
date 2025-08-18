@@ -21,27 +21,34 @@
       "id": "mini-teasers",
       "fields": [
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "teaser1Title",
-          "label": "Teaser 1 Title"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "teaser1Description",
-          "label": "Teaser 1 Description"
-        },
-        {
-          "component": "reference",
-          "name": "teaser1Image",
-          "label": "Teaser 1 Image",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "name": "teaser1ImageAlt",
-          "label": "Teaser 1 Image Alt Text"
+          "component": "group",
+          "label": "Teaser 1",
+          "name": "teaser1Group",
+          "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "teaser1Title",
+              "label": "Teaser 1 Title"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "teaser1Description",
+              "label": "Teaser 1 Description"
+            },
+            {
+              "component": "reference",
+              "name": "teaser1Image",
+              "label": "Teaser 1 Image",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "name": "teaser1ImageAlt",
+              "label": "Teaser 1 Image Alt Text"
+            }
+          ]
         }
       ]
     }
