@@ -1100,7 +1100,7 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "group-list",
+        "component": "list",
         "name": "teasers",
         "label": "Teasers",
         "description": "Add up to 4 mini teasers. Layout will adapt automatically.",
