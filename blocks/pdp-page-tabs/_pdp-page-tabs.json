@@ -98,5 +98,12 @@
         ]
       }
   ],
-  "filters": []
+  "filters": [
+    {
+            "id": "pdp-page-tabs",
+            "components": [
+              "pdp-tabs-item"
+            ]
+          }
+  ]
 }
