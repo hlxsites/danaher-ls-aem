@@ -378,11 +378,10 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/mini-teasers/v1/mini-teasers",
+                "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "class": {
-                    "$ref": "classes"
-                  }
+                  "name": "Mini-Teasers",
+                  "model": "mini-teasers"
                 }
               }
             }
