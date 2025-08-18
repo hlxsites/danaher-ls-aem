@@ -55,7 +55,8 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "mini-teasers"
+      "mini-teasers",
+      "gridColumns"
     ]
   },
   {
@@ -154,21 +155,6 @@
     "id": "learn-more",
     "components": [
       ""
-    ]
-  },
-  {
-    "id": "mini-teasers",
-    "components": [
-      "mini-teaser"
-    ]
-  },
-  {
-    "id": "mini-teaser",
-    "components": [
-      "text",
-      "image",
-      "title",
-      "button"
     ]
   },
   {
