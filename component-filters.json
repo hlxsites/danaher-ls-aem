@@ -132,10 +132,6 @@
     ]
   },
   {
-    "id": "embed",
-    "components": []
-  },
-  {
     "id": "dual-carousel",
     "components": [
       ""
