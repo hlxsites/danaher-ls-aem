@@ -1100,89 +1100,53 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
-      },
-      {
         "component": "select",
-        "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
+        "name": "rows",
+        "label": "Number of Columns",
+        "valueType": "string",
+        "default": "2",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
+            "name": "2 Columns",
+            "value": "2"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "name": "3 Columns",
+            "value": "3"
           }
         ]
       },
       {
-        "component": "text",
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Select Ratio (only for 2 columns)",
         "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
+        "default": "fiftyfifty",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
+            "name": "70/30 Split",
+            "value": "seventythirty"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "name": "30/70 Split",
+            "value": "thirtyseventy"
           }
-        ]
-      },
+        ],
+        "condition": {
+          "field": "rows",
+          "equals": "2"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mini-teaser",
+    "fields": [
       {
-        "component": "reference",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
+        "component": "blocks",
+        "name": "blocks",
+        "label": "Blocks",
+        "valueType": "array"
       }
     ]
   },
