@@ -36,10 +36,9 @@ export default function renderListCard(item) {
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
-      onclick: () => window.open(
-        item?.url || '#',
-        item?.url?.includes('http') ? '_blank' : '_self',
-      ),
+      onclick: () => {
+        window.location.href = item?.url;
+      },
     });
 
     // imageElement.addEventListener('error', () => {
@@ -78,7 +77,7 @@ export default function renderListCard(item) {
     a(
       {
         href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        target: item?.url,
         title: item.title,
       },
       createImageWithFallback(imageUrl, item.title || ''),
@@ -104,10 +103,12 @@ export default function renderListCard(item) {
     ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
     div(
       {
-        class:
-          'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2',
+        class: 'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
+        onclick: () => {
+          window.location.href = item?.url;
+        },
       },
-      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+      (item?.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -136,7 +137,7 @@ export default function renderListCard(item) {
     a(
       {
         href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        target: item?.url,
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
@@ -169,9 +170,12 @@ export default function renderListCard(item) {
       ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
       div(
         {
-          class: 'justify-start text-black text-xl font-medium leading-7',
+          class: 'justify-start text-black text-xl font-medium leading-7 cursor-pointer',
+          onclick: () => {
+            window.location.href = item?.url;
+          },
         },
-        (item.title || '').trim().replace(/<[^>]*>/g, ''),
+        (item?.title || '').trim().replace(/<[^>]*>/g, ''),
       ),
     ),
   );
@@ -287,7 +291,7 @@ export default function renderListCard(item) {
       a(
         {
           href: item?.url || '#',
-          target: item?.url?.includes('http') ? '_blank' : '_self',
+          target: item?.url,
           class:
             'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },

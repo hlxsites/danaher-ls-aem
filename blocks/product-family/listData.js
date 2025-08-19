@@ -21,11 +21,13 @@ export default function renderProductListCard(item) {
   const createImageWithFallback = (src, alt) => {
     const imageElement = img({
       class:
-        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute border border-gray-200 object-contain',
+        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
+      onclick: () => {
+        window.location.href = item?.clickUri;
+      },
     });
-
     imageElement.addEventListener('error', () => {
       imageElement.src = fallbackImagePath;
       imageElement.alt = 'Product image not available';
@@ -76,7 +78,10 @@ export default function renderProductListCard(item) {
   mobileTitleSection.append(
     div(
       {
-        class: 'text-black font-medium leading-7 line-clamp-2 text-xl',
+        class: 'text-black font-medium leading-7 line-clamp-2 text-xl cursor-pointer',
+        onclick: () => {
+          window.location.href = item?.clickUri;
+        },
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -147,7 +152,12 @@ export default function renderProductListCard(item) {
   });
 
   const desktopTitle = div(
-    { class: 'text-black font-medium leading-7 text-xl line-clamp-2' },
+    {
+      class: 'text-black font-medium leading-7 text-xl line-clamp-2 cursor-pointer',
+      onclick: () => {
+        window.location.href = item?.clickUri;
+      },
+    },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
