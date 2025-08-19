@@ -31,6 +31,7 @@ export default async function dashboardSidebar() {
     // { name: 'Report Product Complaint', icon: 'Emoji-sad' }
   ];
   const sidePanelDiv = (name, icon) => {
+    const url = name.replace(/\s+/g, '').toLowerCase();
     const innerDiv = div(
       {
         class:
@@ -45,14 +46,22 @@ export default async function dashboardSidebar() {
         span({
           class: `icon icon-${icon} [&_svg>use]:stroke-black !w-[60px] !h-[60px] p-[18px]`,
         }),
-        div(
-          {
-            class:
-              'justify-start text-base font-medium leading-snug',
-            id: name.replace(/\s+/g, ''),
-          },
-          name,
-        ),
+        a(
+        {
+          href: `/us/en/e-buy/${url}`,
+          class: 'justify-start text-base font-medium leading-snug',
+          id: name.replace(/\s+/g, ''),
+        },
+       name
+      ),
+        // div(
+        //   {
+        //     class:
+        //       'justify-start text-base font-medium leading-snug',
+        //     id: name.replace(/\s+/g, ''),
+        //   },
+        //   name,
+        // ),
       ),
     );
     return innerDiv;
@@ -138,7 +147,6 @@ export default async function dashboardSidebar() {
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   const targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  console.log('targetedPage', targetedPage);
   //   listDiv.addEventListener('click', (event) => {
   const allItemsInDiv = listDiv.querySelectorAll('.sidePanel-content');
   allItemsInDiv.forEach((itemsInDiv) => {
@@ -167,8 +175,8 @@ export default async function dashboardSidebar() {
         'border-l-[4px]',
         'border-danaherpurple-500',
       );
-      itemsInDiv.querySelector('div').classList.remove('text-danaherpurple-500');
-      itemsInDiv.querySelector('div').classList.add('text-black');
+      itemsInDiv.querySelector('a').classList.remove('text-danaherpurple-500');
+      itemsInDiv.querySelector('a').classList.add('text-black');
       iconSpan.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
       iconSpan.classList.add('[&_svg>use]:stroke-black');
     }

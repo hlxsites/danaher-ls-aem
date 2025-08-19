@@ -41,8 +41,8 @@ const orderDetails = async () => {
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    console.log('error', error);
-    return { status: 'error', data: 'Something went wrong fetching order details.' };
+    window.location.href = '/us/en/e-buy/login';
+    // return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
 };
 
@@ -199,10 +199,7 @@ export default async function decorate(block) {
   // 'Invoiced', 'Shipped', 'Submitted', 'New'];
   const orderDetailsResponse = await orderDetails();
   const allOrders = orderDetailsResponse || []; // Set this from your API
-  let currentIndex = 0;
-  const pageSize = 10;
 
-  console.log('orderDetailsResponse', orderDetailsResponse);
   // const dropDown = (day) => {
   //   const selectElement = document.createElement('select');
   //   selectElement.classList.add(
@@ -276,7 +273,7 @@ export default async function decorate(block) {
   // };
   const orderWrapper = div({
     class:
-      'w-[980px] ml-[20px] p-6 bg-white border-t border-l border-r border-b border-gray-300 inline-flex flex-col justify-start ',
+      'w-full ml-[20px] p-6 bg-white border-t border-l border-r border-b border-gray-300 inline-flex flex-col justify-start ',
     id: 'orderWrapper',
   });
   // const searchProduct = div(
@@ -416,7 +413,7 @@ export default async function decorate(block) {
   const orderTable = table(
     {
       class:
-        'w-[932px] border border-gray-200 inline-flex flex-col justify-start items-start',
+        'w-full border border-gray-200 h-[500px] inline-flex flex-col justify-start items-start max-h-[642px] pr-[10px] overflow-y-auto gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
       id: 'orderTable',
     },
     tr(
@@ -435,34 +432,50 @@ export default async function decorate(block) {
   // orderWrapper.append(searchProduct);
   orderWrapper.append(orderDesc);
   // orderWrapper.append(orderTable);
-  let orderRows;
-  async function renderNextBatch() {
-    const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
-    console.log('nextBatch', nextBatch);
-    orderRows = await dynamicTableContent(nextBatch);
-    console.log('order rows : 442', orderRows);
+  // let orderRows;
+  // async function renderNextBatch() {
+  //   const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
+    const orderRows = await dynamicTableContent(orderDetailsResponse);
     orderTable.append(orderRows);
     orderWrapper.append(orderTable);
-    // nextBatch.forEach((order) => {
-    //   const orderElement = document.createElement('div');
-    //   orderElement.innerText = `Order #${order.documentNumber}`;
-    //   dataContainer.appendChild(orderElement);
-    // });
+  //   currentIndex += pageSize;
 
-    currentIndex += pageSize;
+  //   // Hide button if all data has been loaded
+  //   if (currentIndex >= allOrders.length) {
+  //     loadMoreBtn.style.display = 'none';
+  //   }
+  // }
+  // renderNextBatch();
+  // window.addEventListener('scroll', () => {
+  //   const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+  //   if (nearBottom) {
+  //     renderNextBatch();
+  //   }
+  // });
 
-    // Hide button if all data has been loaded
-    if (currentIndex >= allOrders.length) {
-      loadMoreBtn.style.display = 'none';
-    }
-  }
-  renderNextBatch();
-  window.addEventListener('scroll', () => {
-    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-    if (nearBottom) {
-      renderNextBatch();
-    }
-  });
+//   const observer = new MutationObserver(() => {
+//   const scrollContainer = document.getElementById('orderTable');
+//   if (scrollContainer) {
+//     scrollContainer.addEventListener('scroll', () => {
+//       const nearBottom =
+//         scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 100;
+
+//       if (nearBottom) {
+//         renderNextBatch();
+//       }
+//     });
+
+//     // Stop observing once we’ve found and attached the listener
+//     observer.disconnect();
+//   }
+// });
+
+// Start observing the document body (or another parent node)
+// observer.observe(document.body, { childList: true, subtree: true });
+
+
+
+  
   // orderTable.append(orderRows);
   // orderWrapper.append(orderTable);
   // const paginationWrapper = div({
@@ -475,14 +488,13 @@ export default async function decorate(block) {
     class: 'inline-flex flex-col gap-4',
   });
   orderStatusPageWrapper.append(orderStatusTitle);
-
   orderStatusPageWrapper.append(orderWrapper);
-
   wrapper.append(dashboardSideBarContent, orderStatusPageWrapper);
 
   block.innerHTML = '';
   block.textContent = '';
   block.append(wrapper);
   decorateIcons(wrapper);
+  
   removePreLoader();
 }

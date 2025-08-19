@@ -40,6 +40,10 @@
   margin-left: 20px
 }
 
+.order-status-wrapper :is(.ml-\[23px\]) {
+  margin-left: 23px
+}
+
 .order-status-wrapper :is(.mr-\[8px\]) {
   margin-right: 8px
 }
@@ -54,10 +58,6 @@
 
 .order-status-wrapper :is(.mt-\[-75px\]) {
   margin-top: -75px
-}
-
-.order-status-wrapper :is(.ml-\[23px\]) {
-  margin-left: 23px
 }
 
 .order-status-wrapper :is(.block) {
@@ -106,6 +106,30 @@
 
 .order-status-wrapper :is(.h-\[46px\]) {
   height: 46px
+}
+
+.order-status-wrapper :is(.h-\[400px\]) {
+  height: 400px
+}
+
+.order-status-wrapper :is(.h-\[800px\]) {
+  height: 800px
+}
+
+.order-status-wrapper :is(.h-\[600px\]) {
+  height: 600px
+}
+
+.order-status-wrapper :is(.h-\[500px\]) {
+  height: 500px
+}
+
+.order-status-wrapper :is(.h-\[550px\]) {
+  height: 550px
+}
+
+.order-status-wrapper :is(.max-h-\[642px\]) {
+  max-height: 642px
 }
 
 .order-status-wrapper :is(.\!w-\[60px\]) {
@@ -216,6 +240,10 @@
   gap: 1.25rem
 }
 
+.order-status-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .order-status-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -226,8 +254,16 @@
   align-self: stretch
 }
 
+.order-status-wrapper :is(.overflow-auto) {
+  overflow: auto
+}
+
 .order-status-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.order-status-wrapper :is(.overflow-y-auto) {
+  overflow-y: auto
 }
 
 .order-status-wrapper :is(.rounded) {
@@ -420,6 +456,14 @@
   padding-top: 5px
 }
 
+.order-status-wrapper :is(.pr-\[10px\]) {
+  padding-right: 10px
+}
+
+.order-status-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
 .order-status-wrapper :is(.text-left) {
   text-align: left
 }
@@ -442,6 +486,11 @@
   line-height: 2rem
 }
 
+.order-status-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .order-status-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
@@ -462,11 +511,6 @@
   line-height: 1rem
 }
 
-.order-status-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
 .order-status-wrapper :is(.font-\[400\]) {
   font-weight: 400
 }
@@ -485,6 +529,10 @@
 
 .order-status-wrapper :is(.font-normal) {
   font-weight: 200
+}
+
+.order-status-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
 .order-status-wrapper :is(.leading-7) {
@@ -509,10 +557,6 @@
 
 .order-status-wrapper :is(.leading-tight) {
   line-height: 1.25
-}
-
-.order-status-wrapper :is(.leading-10) {
-  line-height: 2.5rem
 }
 
 .order-status-wrapper :is(.text-black) {
@@ -602,6 +646,34 @@
     padding-top: 3rem;
     padding-bottom: 3rem
   }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar-thumb\]\:bg-gray-300)::-webkit-scrollbar-thumb {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .order-status-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-thumb\]\:bg-neutral-500)::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgb(115 115 115 / var(--tw-bg-opacity))
+  }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar-track\]\:bg-gray-100)::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .order-status-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-track\]\:bg-neutral-700)::-webkit-scrollbar-track {
+    --tw-bg-opacity: 1;
+    background-color: rgb(64 64 64 / var(--tw-bg-opacity))
+  }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar\]\:w-1)::-webkit-scrollbar {
+  width: 0.25rem
 }
 
 .order-status-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {
