@@ -300,7 +300,6 @@ export const orderDetails = async () => {
 export const requestedQuotes = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
@@ -308,7 +307,13 @@ export const requestedQuotes = async () => {
     'Authentication-Token': token,
   });
   const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
-  const userId = basketDataFromSession.data.data.customer;
+  if(basketDataFromSession){
+    const userId = basketDataFromSession.data.data.customer;
+  }
+  else {
+
+    window.location.href = '/us/en/e-buy/login';
+  }
   const url = `${baseURL}/customers/${userId}/users/${userId}/quoterequests?attrs=number,name,lineItems,creationDate,validFromDate,validToDate,rejected`;
 
   try {
