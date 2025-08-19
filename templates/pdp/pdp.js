@@ -1,6 +1,6 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
-import { getFrequentlyViewedTogether, getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
+import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 
 function loadPdpBlocks() {
@@ -8,66 +8,62 @@ function loadPdpBlocks() {
   console.log(response.raw.sku);
 
   // PDP Hero
-  const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
-  document.querySelector('main').append(pdpHeroBlock);
+  // const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
+  // document.querySelector('main').append(pdpHeroBlock);
 
   // PDP Page tabs
   // const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
   // document.querySelector('main').append(pdpPageTabsBlock);
   const superParent = document.querySelector('.pdp-page-tabs');
   if (superParent) {
-    [...superParent.children]?.forEach(divEle => {
+    [...superParent.children]?.forEach((divEle) => {
       divEle.classList.add('hidden');
-    })
-}
+    });
+  }
 
- const tabs = document.querySelector('.pdp-page-tabs')?.children;
+  const tabs = document.querySelector('.pdp-page-tabs')?.children;
 
   if (tabs) {
-    Array.from(tabs).forEach(tabItem => {
-      
+    Array.from(tabs).forEach((tabItem) => {
       // Overview / Description
+      tabItem.children[0].classList.add('authored-tab-type');
+      tabItem.children[2].classList.add('authored-tab-title');
       if (tabItem.children[0]?.textContent === 'overview') {
-        tabItem.classList.add('authored-overview');
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-overview';
         const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
         document.querySelector('main').append(pdpDescriptionBlock);
-      }
-
-      // Specifications
-      else if (tabItem.children[0]?.textContent === 'specifications') {
-        tabItem.classList.add('authored-specifications');
+      } else if (tabItem.children[0]?.textContent === 'specifications') {
+        // Specifications
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-specifications';
         const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
         document.querySelector('main').append(pdpSpecificationsBlock);
-      }
-
-      //product parts list
-      else if (tabItem.children[0]?.textContent === 'parts') {
-        tabItem.classList.add('authored-bundle');
-         const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
-         document.querySelector('main').append(pdpBundleList);
-      }
-
-      //Citations
-      else if (tabItem.children[0]?.textContent === 'citations') {
-        tabItem.classList.add('authored-citations');
+      } else if (tabItem.children[0]?.textContent === 'parts') {
+        // product parts list
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-parts';
+        const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
+        document.querySelector('main').append(pdpBundleList);
+      } else if (tabItem.children[0]?.textContent === 'citations') {
+        // Citations
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-citations';
         const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
         document.querySelector('main').append(pdpCitations);
-      }
-
-      //FAQs
-      else if (tabItem.children[0]?.textContent === 'faqs') {
-        tabItem.classList.add('authored-faqs');
+      } else if (tabItem.children[0]?.textContent === 'faqs') {
+        // FAQs
+        tabItem.classList.add('tabs-authored');
+        tabItem.id = 'authored-faqs';
         const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
         document.querySelector('main').append(pdpFaqs);
-      }
-
-      //Related Products
-      else if (tabItem.children[0]?.textContent === 'relatedproducts') {
-        tabItem.classList.add('authored-relatedproducts');
+      } else if (tabItem.children[0]?.textContent === 'relatedproducts') {
+        // Related Products
+        tabItem.classList.add('tabs-authored');
+        tabItem.id = 'authored-relatedproducts';
         const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
         document.querySelector('main').append(pdpRelatedProducts);
       }
-
     });
   }
 
@@ -142,6 +138,6 @@ export default async function buildAutoBlocks() {
       }
     });
   });
-  getFrequentlyViewedTogether();
+  // getFrequentlyViewedTogether();
   loadPdpBlocks();
 }
