@@ -993,7 +993,7 @@
         "label": "Form Id",
         "required": true,
         "description": "Unique identifier for the form.",
-        "value": "TTAE"
+        "value": ""
       },
       {
         "component": "richtext",
