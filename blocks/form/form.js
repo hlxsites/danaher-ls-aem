@@ -219,13 +219,15 @@ async function loadSFDCForm(block) {
     // Now you can get the value!
     const formId = jsonData?.models?.find(m => m.id === 'form')
     ?.fields?.find(f => f.name === 'formId')
-    ?.value;
+    // ?.value;
     console.log('formID:', formId);
   });
   const formIdEl = block?.firstElementChild;
-  const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
-  const formNameEl = formIdEl?.nextElementSibling;
-  const formName = formNameEl?.firstElementChild?.nextElementSibling?.textContent;
+  console.log('formIdEl:', formIdEl?.textContent);
+  // const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
+  // const formNameEl = formIdEl?.nextElementSibling;
+  const formName = block?.firstElementChild?.nextElementSibling?.textContent;
+  console.log('formName:', formName);
   const clientIdEl = formNameEl?.nextElementSibling;
   const clientId = clientIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const deExternalKeyEl = clientIdEl?.nextElementSibling;
