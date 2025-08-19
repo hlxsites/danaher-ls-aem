@@ -43,9 +43,8 @@ export default async function decorate(block) {
   block.innerHTML = mainDiv ? mainDiv.outerHTML : doc.body.innerHTML;
   block.classList.add('embedded-form-wrapper', 'form-2col-main');
 
-  // Responsive two-column grid CSS and field styling, with spacing and chevron icon fix
+  // Responsive two-column grid CSS and field styling
   const customStyles = `
-/* --- 2col form layout --- */
 .form-2col-main {
   display: flex;
   align-items: flex-start;
@@ -56,39 +55,23 @@ export default async function decorate(block) {
   padding: 2.5rem 1rem 2rem 1rem;
   box-sizing: border-box;
   font-family: 'Inter', Arial, sans-serif;
-}
-.form-2col-main .form-left {
-  min-width: 240px;
-  max-width: 320px;
-  flex: 0 0 310px;
-  margin-right: 2rem;
-}
-.form-2col-main .form-left h2,
-.form-2col-main .form-left .form-title {
-  font-size: 1.375rem;
-  font-weight: 500;
-  line-height: 1.35;
-  margin: 0 0 2.2rem 0;
-}
-.form-2col-main .form-right {
-  flex: 1 1 0%;
-  min-width: 0;
+  background: #fafafa;
+  border-radius: 18px;
 }
 .form-2col-main form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.1rem 1.3rem;
   width: 100%;
+  background: #fafafa;
+  border-radius: 18px;
 }
 @media (max-width: 800px) {
   .form-2col-main {
     flex-direction: column;
     padding: 1.2rem 0.5rem;
     gap: 0.5rem;
-  }
-  .form-2col-main .form-left {
-    max-width: unset;
-    margin: 0 0 1.5rem 0;
+    border-radius: 16px;
   }
   .form-2col-main form {
     grid-template-columns: 1fr;
@@ -291,7 +274,7 @@ export default async function decorate(block) {
     document.body.appendChild(scriptTag);
   }
 
-  // --- Robust custom dropdown logic for your structure ---
+  // --- Robust custom dropdown logic ---
   function setupCustomDropdowns(scope) {
     scope.querySelectorAll('input.prior[type="checkbox"]').forEach(input => {
       const container = input.closest('div');
