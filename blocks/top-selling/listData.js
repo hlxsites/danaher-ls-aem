@@ -202,8 +202,7 @@ export default function renderListCard(item) {
     { class: 'w-full flex-col gap-2 cursor-pointer' },
     a(
       {
-        href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        href: item.url,
         title: item.title,
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
