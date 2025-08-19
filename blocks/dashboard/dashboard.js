@@ -65,7 +65,7 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            openOrder.length,
+            openOrder.length === 0 ? 0 : openOrder.length,
           ),
           p(
             {
@@ -118,7 +118,7 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            requestedQuotesResponse.length,
+            requestedQuotesResponse.length === 0 ? 0 : requestedQuotesResponse.length,
           ),
           p(
             {
