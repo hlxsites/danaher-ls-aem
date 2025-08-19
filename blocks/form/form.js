@@ -214,7 +214,7 @@ function loadUTMParams() {
 
 async function loadSFDCForm(block) {
 
-  fetch('./_form.json')
+  fetch('/blocks/form/_form.json')
   .then(response => response.json())
   .then(jsonData => {
     // Now you can get the value!
