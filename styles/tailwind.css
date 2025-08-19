@@ -951,9 +951,9 @@
    color: #000;
  }
  .checkout-progress-bar-icons {
-   width: 10px;
+   width: 9px;
    display: block;
-   height: 10px;
+   height: 9px;
    background-color: rgb(117 35 255);
    margin: 10px 0px 10px 10px !important;
    border-radius: 50%;

@@ -3472,6 +3472,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
+.border-gray-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -4053,9 +4058,9 @@ main .section.top-border {
 }
 
 .checkout-progress-bar-icons {
-  width: 10px;
+  width: 9px;
   display: block;
-  height: 10px;
+  height: 9px;
   background-color: rgb(117 35 255);
   margin: 10px 0px 10px 10px !important;
   border-radius: 50%;

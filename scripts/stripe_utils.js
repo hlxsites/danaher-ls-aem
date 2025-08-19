@@ -1,5 +1,5 @@
 import { getCommerceBase } from './commerce.js';
-import { getApiData, postApiData, putApiData } from './api-utils.js';
+import { getApiData, patchApiData, postApiData, putApiData } from './api-utils.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -201,4 +201,103 @@ export async function setGetCardAsDefault(paymentMethodId = '') {
     return response;
   }
   return { status: 'error', data: {} };
+}
+
+/*
+*
+add selected card to order
+*
+*
+*/
+
+export async function addCardToOrder(data = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
+  const addCardToOrderHeaders = new Headers();
+  addCardToOrderHeaders.append('Content-Type', 'Application/json');
+  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  addCardToOrderHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const addCardToOrderBody = JSON.stringify(data);
+  const response = await postApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+/*
+*
+update selected card to order
+*
+*
+*/
+
+export async function updateCardToOrder(data = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderHeaders = new Headers();
+  addCardToOrderHeaders.append('Content-Type', 'Application/json');
+  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  addCardToOrderHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const addCardToOrderBody = JSON.stringify(data);
+  const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+
+// async function update selected card for current order
+
+export async function updateUseCard(paymentMethodId) {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const pIntentUrl = `${baseURL}/baskets/current/attributes/SelectedPM`;
+  const pIntentHeaders = new Headers();
+  pIntentHeaders.append('Content-Type', 'Application/json');
+  pIntentHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  pIntentHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const pIntentBody = JSON.stringify({
+    name: 'SelectedPM',
+    value: JSON.stringify({
+      id: paymentMethodId,
+      type: 'Card',
+    }),
+    type: 'String',
+  });
+  const response = await patchApiData(pIntentUrl, pIntentBody, pIntentHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+
+// use card for current order
+export async function setUseCard(paymentMethodId) {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  sessionStorage.removeItem('useStripeCardId');
+  sessionStorage.setItem('useStripeCardId', paymentMethodId);
+  return { status: 'success', data: paymentMethodId };
 }

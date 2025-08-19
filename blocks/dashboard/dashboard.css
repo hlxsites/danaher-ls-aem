@@ -196,16 +196,12 @@
   min-width: 320px
 }
 
-.dashboard-wrapper :is(.max-w-xl) {
-  max-width: 36rem
+.dashboard-wrapper :is(.max-w-\[792px\]) {
+  max-width: 792px
 }
 
 .dashboard-wrapper :is(.max-w-xs) {
   max-width: 20rem
-}
-
-.dashboard-wrapper :is(.max-w-\[792px\]) {
-  max-width: 792px
 }
 
 .dashboard-wrapper :is(.-translate-y-full) {
@@ -300,6 +296,11 @@
 .dashboard-wrapper :is(.border-white) {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity))
+}
+
+.dashboard-wrapper :is(.border-gray-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity))
 }
 
 .dashboard-wrapper :is(.bg-black) {

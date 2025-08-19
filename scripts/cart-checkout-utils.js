@@ -41,7 +41,12 @@ import {
   getProductDetailObject,
 } from '../blocks/cartlanding/cartSharedFile.js';
 import {
-  assignPaymentInstrument, createPaymentInstrument, getPaymentIntent, loadStripe,
+  assignPaymentInstrument,
+  createPaymentInstrument,
+  getPaymentIntent,
+  loadStripe,
+  addCardToOrder,
+  updateCardToOrder,
 } from './stripe_utils.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
@@ -832,7 +837,7 @@ export const buildCountryStateSelectBox = (
         name: inputName,
         'data-required': required,
         class:
-          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-300',
+          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-600',
       },
       ...selectOptions,
     ),
@@ -1285,63 +1290,6 @@ export const updatePoNumber = async (invoiceNumber) => {
 };
 /*
 *
-add selected card to order
-*
-*
-*/
-
-async function addCardToOrder(data = '') {
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
-  const addCardToOrderHeaders = new Headers();
-  addCardToOrderHeaders.append('Content-Type', 'Application/json');
-  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
-  addCardToOrderHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
-  );
-  const addCardToOrderBody = JSON.stringify(data);
-  const response = await postApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
-  if (response?.status === 'success') {
-    return response;
-  }
-  return { status: 'error', data: {} };
-}
-/*
-*
-update selected card to order
-*
-*
-*/
-
-async function updateCardToOrder(data = '') {
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
-  const addCardToOrderHeaders = new Headers();
-  addCardToOrderHeaders.append('Content-Type', 'Application/json');
-  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
-  addCardToOrderHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
-  );
-  const addCardToOrderBody = JSON.stringify(data);
-  const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
-  if (response?.status === 'success') {
-    return response;
-  }
-  return { status: 'error', data: {} };
-}
-
-/*
-*
 *
  ::::::::::::::
  handle the interaction when user click on proceed button or the steps icons
@@ -1501,7 +1449,7 @@ export const changeStep = async (step) => {
 
         const addData = {
           name: 'SelectedCard',
-          value: gPIID,
+          value: JSON.stringify(gPIID),
           type: 'String',
         };
 

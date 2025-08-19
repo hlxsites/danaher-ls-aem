@@ -88,12 +88,14 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               {
                 type: 'checkbox',
                 name: `default${type}address`,
+                id: `c_${item.id}`,
                 class: `input-focus-checkbox  is-default-${type}-address `,
                 'data-required': false,
               },
             ),
             span(
               {
+                'label-for': `c_${item.id}`,
                 class: 'text-black text-base',
               },
               'Default Address',
@@ -109,12 +111,14 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               {
                 type: 'checkbox',
                 name: `default${type}address`,
+                id: `c_${item.id}`,
                 class: `input-focus-checkbox  not-default-${type}-address`,
                 'data-required': false,
               },
             ),
             span(
               {
+                'label-for': `c_${item.id}`,
                 class:
                   'text-base text-black',
               },
@@ -284,8 +288,6 @@ click use address button to set the address as default for current order
             showNotification('Error processing request.', 'error');
           }
         });
-
-
         addressItems.append(addressListItem);
       }
     });
@@ -326,7 +328,25 @@ click use address button to set the address as default for current order
         close utility modal
         ::::::::::::::
         */
-        closeUtilityModal();
+        // closeUtilityModal();
+
+        const currentDefaultAddress = addressItems?.querySelector(`.is-default-${type}-address`);
+
+        if (currentDefaultAddress) {
+          const currentInput = currentDefaultAddress.querySelector('input');
+          const currentInputSpan = currentDefaultAddress.querySelector('span');
+          currentInput.checked = false;
+          currentInputSpan.textContent = 'Make this my default address';
+          currentInputSpan.classList.remove(`is-default-${type}-address`);
+        }
+        if (getParent) {
+          const gCurrentInput = getParent.querySelector('input');
+          const gCurrentInputSpan = getParent.querySelector('span');
+          gCurrentInput.checked = true;
+          getParent.classList.add(`is-default-${type}-address`);
+          gCurrentInputSpan.textContent = 'Default Address';
+        }
+
         removePreLoader();
         showNotification('Address set as default.', 'success');
       }

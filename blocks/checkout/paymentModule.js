@@ -11,6 +11,7 @@ import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
 import {
   loadStripe, getPaymentIntent, postPaymentIntent, getSavedCards,
   setGetCardAsDefault,
+  setUseCard,
 } from '../../scripts/stripe_utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
@@ -85,6 +86,7 @@ function createCardItem(item, defaultCard) {
       button(
         {
           class: 'shipping-address-use-button text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 m-0 hover:bg-danaherpurple-500',
+          id: itemObject?.itemId,
         },
         'Use Card',
       ),
@@ -426,7 +428,7 @@ const paymentModule = async () => {
                 variables: {
                   colorPrimary: '#7523FF',
                   colorBackground: '#ffffff',
-                  colorText: '#30313d',
+                  colorText: '#4b5563',
                   colorDanger: '#df1b41',
                   fontFamily: 'Inter, system-ui, sans-serif',
                   spacingUnit: '4px',
@@ -520,14 +522,14 @@ const paymentModule = async () => {
             'items-center',
             'gap-2',
           );
-          const inpu = inp?.querySelector('label');
-          if (inpu?.classList.contains('font-normal')) {
-            inpu?.classList.remove('font-normal');
+          const inpuLabel = inp?.querySelector('label');
+          if (inpuLabel?.classList.contains('font-normal')) {
+            inpuLabel?.classList.remove('font-normal');
           }
-          if (inpu?.classList.contains('text-sm')) {
-            inpu?.classList.remove('text-sm');
+          if (inpuLabel?.classList.contains('text-sm')) {
+            inpuLabel?.classList.remove('text-sm');
           }
-          inpu?.classList.add('text-base', 'font-semibold');
+          inpuLabel?.classList.add('text-base', 'font-semibold');
         });
       decorateIcons(stripeCardsWrapper);
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
@@ -562,7 +564,7 @@ const paymentModule = async () => {
     }
     const savedCardsSearch = paymentMethodsWrapper?.querySelector('#search');
     if (savedCardsSearch) {
-      savedCardsSearch.className = 'min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-300 outline-none';
+      savedCardsSearch.className = 'min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600 outline-none';
     }
 
     // show new cards wrapper when clicked add new card
@@ -627,21 +629,30 @@ const paymentModule = async () => {
       try {
         showPreLoader();
         const allPaymentCards = savedStripeCardsList.querySelectorAll('.payment-card-wrapper');
-        const currentCheckbox = e.target;
-        if (currentCheckbox?.matches('input[type="checkbox"]')) {
+        const currentTarget = e.target;
+        if (currentTarget?.matches('input[type="checkbox"]')) {
           // eslint-disable-next-line prefer-destructuring
-          const value = currentCheckbox.value;
+          const value = currentTarget.value;
           const setAsDefault = await setGetCardAsDefault(value);
-          if (!setAsDefault?.status === 'success') throw new Error('Error processing request');
+          if (setAsDefault?.status !== 'success') throw new Error('Error processing request');
           allPaymentCards.forEach((method) => {
             const methodCheckbox = method.querySelector('input[name="defaultStripeCard"');
             if (methodCheckbox) {
               methodCheckbox.checked = false;
             }
           });
-          currentCheckbox.checked = true;
+          currentTarget.checked = true;
           removePreLoader();
           showNotification('Setup as default payment method.', 'success');
+        }
+        if (currentTarget?.classList.contains('shipping-address-use-button')) {
+          const pMId = currentTarget.id;
+          if (pMId) {
+            const settingUseCard = await setUseCard(pMId);
+            if (settingUseCard?.status !== 'success') throw new Error('Error processing request');
+            removePreLoader();
+            showNotification('Setup as to use for current order.', 'success');
+          }
         }
       } catch (error) {
         removePreLoader();

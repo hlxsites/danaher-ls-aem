@@ -871,7 +871,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
-        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-300  px-3 py-2',
+        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-600  px-3 py-2',
       'aria-label': dtName,
     }),
     span({
@@ -917,7 +917,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
-          ' min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-300',
+          ' min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600',
         'aria-label': dtName,
       }),
     ),
@@ -969,7 +969,7 @@ export const buildSelectBox = (
         name: inputName,
         'data-required': required,
         class:
-          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-300',
+          'input-focus text-base w-full block px-2 py-4  border border-solid border-gray-600',
       },
       options,
     ),
@@ -1033,7 +1033,7 @@ export function buildSelectElement(
         {
           for: inputId,
           class:
-            'w-full flex justify-between items-center p-4 text-base text-gray-600  border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
+            'w-full flex justify-between items-center p-4 text-base text-gray-600  border border-solid border-gray-600 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
         span({ class: 'icon icon-dropdown w-3 h-3' }),
