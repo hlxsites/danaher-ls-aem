@@ -1066,12 +1066,11 @@ export const buildBillingCheckboxElement = (
     class: 'input-focus-checkbox',
     id: inputName,
     value: fieldValue,
-    'data-required': required,
     'aria-label': fieldLable,
   }),
   label(
     {
-      for: fieldLable,
+      for: inputName,
       class: 'pl-2',
     },
     field,

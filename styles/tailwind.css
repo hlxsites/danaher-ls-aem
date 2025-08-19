@@ -803,7 +803,7 @@
     dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 gap-6;
   }
   #shippingAddressListItemsWrapper > div {
-    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+    @apply border-b my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
   }
   #shippingAddressListItemsWrapper > div:hover {
     @apply bg-gray-100;
@@ -834,7 +834,7 @@
     dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 gap-6;
   }
   #billingAddressListItemsWrapper > div {
-    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+    @apply border-b  my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
   }
   #billingAddressListItemsWrapper > div:hover {
     @apply bg-gray-100;

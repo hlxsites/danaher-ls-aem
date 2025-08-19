@@ -2608,8 +2608,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-top: 0px;
   margin-bottom: 0px;
   border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 1.5rem;
@@ -2706,8 +2704,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-top: 0px;
   margin-bottom: 0px;
   border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 1.5rem;
@@ -3467,14 +3463,14 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
-.border-red-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
 .border-gray-600 {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
 .bg-black {

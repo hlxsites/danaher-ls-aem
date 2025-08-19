@@ -395,7 +395,7 @@ const paymentModule = async () => {
               },
               buildInputElement(
                 'stripe',
-                pm?.displayName,
+                'Credit Card',
                 'radio',
                 'paymentMethod',
                 true,
