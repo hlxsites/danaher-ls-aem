@@ -192,7 +192,7 @@ export default async function decorate(block) {
     tabsDiv,
   );
 
-  block.replaceChildren();
+ // block.replaceChildren();
   block.append(pageTabsSuperParent);
 
   window.addEventListener('scroll', () => {

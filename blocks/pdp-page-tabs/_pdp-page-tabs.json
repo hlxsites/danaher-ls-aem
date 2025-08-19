@@ -51,8 +51,8 @@
                 "value": "overview"
               },
               {
-                "name": "Specification",
-                "value": "specification"
+                "name": "Specifications",
+                "value": "specifications"
               },
               {
                 "name": "Resources",
@@ -73,6 +73,10 @@
               {
                 "name": "Citations",
                 "value": "citations"
+              },
+              {
+                "name": "FAQs",
+                "value": "faqs"
               }
             ]
           },

@@ -12,20 +12,76 @@ function loadPdpBlocks() {
   document.querySelector('main').append(pdpHeroBlock);
 
   // PDP Page tabs
-  const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
-  document.querySelector('main').append(pdpPageTabsBlock);
+  // const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
+  // document.querySelector('main').append(pdpPageTabsBlock);
+  const superParent = document.querySelector('.pdp-page-tabs');
+  if (superParent) {
+    [...superParent.children]?.forEach(divEle => {
+      divEle.classList.add('hidden');
+    })
+}
+
+ const tabs = document.querySelector('.pdp-page-tabs')?.children;
+
+  if (tabs) {
+    Array.from(tabs).forEach(tabItem => {
+      
+      // Overview / Description
+      if (tabItem.children[0]?.textContent === 'overview') {
+        tabItem.classList.add('authored-overview');
+        const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
+        document.querySelector('main').append(pdpDescriptionBlock);
+      }
+
+      // Specifications
+      else if (tabItem.children[0]?.textContent === 'specifications') {
+        tabItem.classList.add('authored-specifications');
+        const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
+        document.querySelector('main').append(pdpSpecificationsBlock);
+      }
+
+      //product parts list
+      else if (tabItem.children[0]?.textContent === 'parts') {
+        tabItem.classList.add('authored-bundle');
+         const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
+         document.querySelector('main').append(pdpBundleList);
+      }
+
+      //Citations
+      else if (tabItem.children[0]?.textContent === 'citations') {
+        tabItem.classList.add('authored-citations');
+        const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
+        document.querySelector('main').append(pdpCitations);
+      }
+
+      //FAQs
+      else if (tabItem.children[0]?.textContent === 'faqs') {
+        tabItem.classList.add('authored-faqs');
+        const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+        document.querySelector('main').append(pdpFaqs);
+      }
+
+      //Related Products
+      else if (tabItem.children[0]?.textContent === 'relatedproducts') {
+        tabItem.classList.add('authored-relatedproducts');
+        const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
+        document.querySelector('main').append(pdpRelatedProducts);
+      }
+
+    });
+  }
 
   // Overview / Description
-  if (response?.raw?.richlongdescription) {
-    const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
-    document.querySelector('main').append(pdpDescriptionBlock);
-  }
+  // if (response?.raw?.richlongdescription) {
+  //   const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
+  //   document.querySelector('main').append(pdpDescriptionBlock);
+  // }
 
   // Specifications
-  if (response?.raw?.numattributes > 0) {
-    const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
-    document.querySelector('main').append(pdpSpecificationsBlock);
-  }
+  // if (response?.raw?.numattributes > 0) {
+  //   const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
+  //   document.querySelector('main').append(pdpSpecificationsBlock);
+  // }
 
   // Products
   if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
@@ -40,19 +96,19 @@ function loadPdpBlocks() {
   }
 
   // Bundle parts list
-  if (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0) {
-    const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
-    document.querySelector('main').append(pdpBundleList);
-  }
+  // if (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0) {
+  //   const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
+  //   document.querySelector('main').append(pdpBundleList);
+  // }
 
-  const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-  document.querySelector('main').append(pdpCitations);
+  // const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
+  // document.querySelector('main').append(pdpCitations);
 
-  const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-  document.querySelector('main').append(pdpFaqs);
+  // const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+  // document.querySelector('main').append(pdpFaqs);
 
-  const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-  document.querySelector('main').append(pdpRelatedProducts);
+  // const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
+  // document.querySelector('main').append(pdpRelatedProducts);
 
   const pdpCarousel = div(buildBlock('pdp-carousel', { elems: [] }));
   document.querySelector('main').append(pdpCarousel);
