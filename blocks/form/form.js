@@ -1,466 +1,354 @@
-export default async function decorate(block) {
-  // Safely get the raw HTML source
-  const raw = block.textContent || block.innerText;
-  if (!raw) {
-    console.warn('No embedded script found in block');
-    return;
-  }
+import {
+  a, div, form, input, label, span, strong, textarea,
+} from '../../scripts/dom-builder.js';
+import {
+  decorateIcons,
+} from '../../scripts/lib-franklin.js';
 
-  // Remove Markdown/code block fences if present
-  let cleanedRaw = raw.replace(/^```(?:html)?|```$/gm, "").trim();
+const roles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
+  'Department Head / Group Lead', 'Principal Scientist', 'Operations Manager', 'Lab Manager', 'Scientist', 'Senior Scientist',
+  'Associate Scientist', 'Graduate Student', 'Academia'];
 
-  // Decode HTML entities
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = cleanedRaw;
-  let decodedHtml = textarea.value;
+const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
+  'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
+  'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic',
+  'Chad', 'Channel Islands', 'Chile', 'China', 'Colombia', 'Comoros', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Cote d Ivoire', 'Denmark',
+  'Djibouti', 'Dominica', 'Dominican Republic', 'DR Congo', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia',
+  'Faeroe Islands', 'Finland', 'France', 'French Guiana', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece',
+  'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Holy See', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran',
+  'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Korea', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia',
+  'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta',
+  'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal',
+  'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Panama', 'Papua New Guinea',
+  'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines',
+  'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Somalia',
+  'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania',
+  'Thailand', 'Timor-Leste', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
+  'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'];
 
-  // Replace &nbsp; and invisible chars
-  decodedHtml = decodedHtml.replace(/(&nbsp;|\u00a0)+/gi, ' ')
-    .replace(/[\u200B-\u200D\uFEFF]/g, '');
+const buildInputElement = (lable, field, inputType, inputName, autoCmplte, required, dtName) => {
+  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+  return div(
+    { class: 'space-y-2' },
+    label(
+      { for: lable, class: 'font-normal text-sm leading-4' },
+      field,
+      dataRequired,
+    ),
+    input(
+      {
+        type: inputType,
+        name: inputName,
+        autocomplete: autoCmplte,
+        'data-required': required,
+        class: 'input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
+        'aria-label': inputName,
+      },
+    ),
+    span(
+      { id: 'msg', 'data-name': dtName, class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500' },
+    ),
+  );
+};
 
-  // Replace ":is" with "is"
-  const normalizedHtml = decodedHtml.replace(/:is=/g, 'is=');
-
-  // Parse decoded HTML
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(normalizedHtml, 'text/html');
-
-  // Extract styles/scripts
-  let capturedStyles = '';
-  doc.querySelectorAll('component[is="style"], style').forEach(style => {
-    capturedStyles += style.textContent + '\n';
-    style.remove();
+function createDropdown(itemsList) {
+  const list = document.createElement('ul');
+  list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
+  itemsList.forEach((item) => {
+    const li = document.createElement('li');
+    li.classList.add(...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '));
+    li.textContent = item;
+    list.append(li);
   });
-  let combinedScript = '';
-  doc.querySelectorAll('component[async][is="script"]').forEach(component => {
-    combinedScript += component.textContent + '\n';
-    component.remove();
-  });
-  doc.querySelectorAll('component').forEach(el => el.remove());
+  return list;
+}
 
-  // Find the main <div> and inject
-  const mainDiv = doc.querySelector('div');
-  block.innerHTML = mainDiv ? mainDiv.outerHTML : doc.body.innerHTML;
-  block.classList.add('embedded-form-wrapper', 'form-2col-main');
+function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, inputList) {
+  const selectIcon = div(
+    { class: 'space-y-2' },
+    label(
+      {
+        for: lableFor,
+        class: 'font-normal text-sm leading-4',
+      },
+      fieldName,
+      span({ class: 'text-red-500' }, '*'),
+    ),
+    div(
+      { class: 'relative bg-white' },
+      input(
+        {
+          type: inputType,
+          id: inputId,
+          class: 'peer hidden',
+        },
+      ),
+      label(
+        {
+          for: inputId,
+          class: 'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
+        },
+        span({ class: 'text-gray-600' }, 'Select'),
+        span({ class: 'icon icon-dropdown w-3 h-3' }),
+      ),
+      createDropdown(inputList),
+      span(
+        {
+          id: 'msg',
+          'data-name': dataName,
+          class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
+        },
+      ),
+    ),
+  );
+  return selectIcon;
+}
 
-  // Responsive two-column grid CSS and field styling
-  const customStyles = `
-.form-2col-main {
-  display: flex;
-  align-items: flex-start;
-  gap: 2.5rem;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2.5rem 1rem 2rem 1rem;
-  box-sizing: border-box;
-  font-family: 'Inter', Arial, sans-serif;
-  background: #fafafa;
-  border-radius: 18px;
+function emailOptIn() {
+  const emailOptin = div(
+    { class: 'flex items-baseline' },
+    input(
+      {
+        type: 'checkbox',
+        name: 'Email_Opt_In',
+        class: 'input-focus-checkbox',
+        value: 'true',
+        'data-required': false,
+        'aria-label': 'Email_Opt_In',
+      },
+    ),
+    label(
+      {
+        for: 'DHLS_Interest',
+        class: 'pl-2',
+      },
+      'I would like to receive more information via email about products and services offered by DH Life Sciences, LLC.',
+    ),
+  );
+  return emailOptin;
 }
-.form-2col-main form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.1rem 1.3rem;
-  width: 100%;
-  background: #fafafa;
-  border-radius: 18px;
-}
-@media (max-width: 800px) {
-  .form-2col-main {
-    flex-direction: column;
-    padding: 1.2rem 0.5rem;
-    gap: 0.5rem;
-    border-radius: 16px;
-  }
-  .form-2col-main form {
-    grid-template-columns: 1fr;
-    gap: 1.3rem 0;
-  }
-}
-.form-2col-main label {
-  display: block;
-  font-weight: 400;
-  font-size: 0.97rem;
-  margin-bottom: 0.35em;
-  color: #111;
-  letter-spacing: 0.01em;
-}
-.form-2col-main input[type="text"],
-.form-2col-main input[type="email"],
-.form-2col-main input[type="number"],
-.form-2col-main input[type="tel"],
-.form-2col-main textarea,
-.form-2col-main ul[id="dropdown"],
-.form-2col-main .dropdown-label {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 1.15em;
-  padding: 0.68em 1em;
-  border: 1.5px solid #bdbdbd;
-  border-radius: 5px;
-  font-size: 1.02rem;
-  background: #fff;
-  color: #111;
-  outline: none;
-  transition: border 0.2s;
-}
-.form-2col-main input[type="text"]:focus,
-.form-2col-main input[type="email"]:focus,
-.form-2col-main input[type="number"]:focus,
-.form-2col-main input[type="tel"]:focus,
-.form-2col-main textarea:focus {
-  border: 1.5px solid #6c47f5;
-}
-.form-2col-main ul[id="dropdown"] {
-  margin: 0;
-  z-index: 100;
-  min-width: 100%;
-  background: #fff;
-  border-radius: 0 0 5px 5px;
-  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.09);
-  border: 1.5px solid #bdbdbd;
-  border-top: none;
-  list-style: none;
-  padding: 0;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  max-height: 170px;
-  overflow-y: auto;
-}
-.form-2col-main ul[id="dropdown"] li {
-  padding: 0.7em 1em;
-  cursor: pointer;
-  font-size: 1.01rem;
-  border-bottom: 1px solid #efefef;
-}
-.form-2col-main ul[id="dropdown"] li:last-child {
-  border-bottom: none;
-}
-.form-2col-main ul[id="dropdown"] li:hover,
-.form-2col-main ul[id="dropdown"] li:focus {
-  background: #f6f2ff;
-}
-.form-2col-main .dropdown-label {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: #fff;
-  cursor: pointer;
-  transition: border 0.2s;
-  border: 1.5px solid #bdbdbd;
-  border-radius: 5px;
-  font-size: 1.02rem;
-  padding-right: 2.3em;
-}
-.form-2col-main .dropdown-label svg.chevron {
-  position: absolute;
-  right: 1em;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.35em;
-  height: 1.35em;
-  fill: none;
-  stroke: #7c40ff;
-  stroke-width: 2;
-  pointer-events: none;
-  display: block;
-}
-.form-2col-main input[type="checkbox"].prior { display: none; }
-.form-2col-main textarea {
-  min-height: 88px;
-  resize: vertical;
-  grid-column: 1 / span 2;
-  margin-bottom: 1.15em;
-}
-.form-2col-main .form-row.jobrole,
-.form-2col-main .form-row.country {
-  margin-bottom: 0;
-}
-.form-2col-main .form-row-full {
-  grid-column: 1 / span 2;
-}
-.form-2col-main .form-checkbox-row {
-  display: flex;
-  align-items: baseline;
-  grid-column: 1 / span 2;
-  margin: 0.25em 0 0.7em 0;
-}
-.form-2col-main input[type="checkbox"]:not(.prior) {
-  margin-right: 0.6em;
-  vertical-align: middle;
-}
-.form-2col-main button,
-.form-2col-main input[type="submit"] {
-  display: block;
-  width: 150px;
-  margin: 1.9em 0 0.7em 0;
-  padding: 0.82em 0;
-  background: #6c47f5;
-  color: #fff;
-  border: none;
-  border-radius: 22px;
-  font-size: 1.18em;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-  grid-column: 1 / span 1;
-}
-.form-2col-main button:hover,
-.form-2col-main input[type="submit"]:hover {
-  background: #4f2cb8;
-}
-.form-2col-main .terms,
-.form-2col-main .form-help,
-.form-2col-main .help-block {
-  color: #666;
-  font-size: 0.95em;
-  grid-column: 1 / span 2;
-  margin: 0.4em 0;
-}
-.form-2col-main .terms strong,
-.form-2col-main .terms a {
-  font-weight: 500;
-  color: #2d1d7a;
-  text-decoration: underline;
-}
-.form-2col-main .text-red-500 {
-  color: #e53935;
-  margin-left: 0.2em;
-  font-size: 0.93em;
-}
-.form-2col-main svg {
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 24px;
-  max-height: 24px;
-}
-.form-2col-main .required-message {
-  color: #e53935;
-  font-size: 0.93em;
-  margin-top: 0.12em;
-  margin-bottom: 0.35em;
-  display: none;
-}
-`;
 
-  // Scope extracted styles and add to <head>
-  function scopeCss(cssText, scopeSelector) {
-    return cssText.replace(/(^|})(\s*[^{}]+){/g, (match, g1, selectors) => {
-      const scopedSelectors = selectors.split(',')
-        .map(s => `${scopeSelector} ${s.trim()}`)
-        .join(', ');
-      return `${g1} ${scopedSelectors} {`;
-    });
-  }
-  const styleTag = document.createElement('style');
-  styleTag.appendChild(document.createTextNode(scopeCss(capturedStyles, '.embedded-form-wrapper') + '\n' + customStyles));
-  document.head.appendChild(styleTag);
+function tnc() {
+  const tncEl = div(
+    { class: 'flex items-center mt-5' },
+    span(
+      {
+        style: 'font-family: helvetica, arial, sans-serif; font-size: 13px;',
+      },
+      'By submitting this form, you agree to the ',
+      span(
+        {
+          style: 'color: #000000;',
+        },
+        'By clicking the Submit button below and proceeding I confirm that I have reviewed and agree with the',
+      ),
+      strong(
+        a({
+          'aria-label': 'Link Terms of Use',
+          title: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
+          href: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          class: 'fui-Link ___m14voj0 f3rmtva f1ern45e f1deefiw f1n71otn f1q5o8ev f1h8hb77 f1vxd6vx f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1hu3pq6 f11qmguv f19f4twv f1tyq0we f1g0x7ka fhxju0i f1qch9an f1cnd47f fqv5qza f1vmzxwi f1o700av f13mvf36 f9n3di6 f1ids18y fygtlnl f1deo86v f12x56k7 f1iescvh ftqa4ok f50u1b5 fs3pq8b f1hghxdh f1tymzes f1x7u7e9 f1cmlufx f10aw75t fsle3fq',
+          tabindex: '-1',
+        }, 'Terms of Use'),
+      ),
+      span({ style: 'color: #000000;' }, ' and the '),
+      strong(
+        a(
+          {
+            'aria-label': 'Link Privacy Policy',
+            title: 'https://lifesciences.danaher.com/us/en/legal/privacy-policy.html',
+            href: 'https://lifesciences.danaher.com/us/en/legal/privacy-policy.html',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            class: 'fui-Link ___m14voj0 f3rmtva f1ern45e f1deefiw f1n71otn f1q5o8ev f1h8hb77 f1vxd6vx f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1hu3pq6 f11qmguv f19f4twv f1tyq0we f1g0x7ka fhxju0i f1qch9an f1cnd47f fqv5qza f1vmzxwi f1o700av f13mvf36 f9n3di6 f1ids18y fygtlnl f1deo86v f12x56k7 f1iescvh ftqa4ok f50u1b5 fs3pq8b f1hghxdh f1tymzes f1x7u7e9 f1cmlufx f10aw75t fsle3fq',
+            tabindex: '-1',
+          },
+          'Privacy Policy',
+        ),
+      ),
+    ),
+  );
+  return tncEl;
+}
 
-  // Re-inject any <script> tags to execute them
-  block.querySelectorAll('script').forEach(oldScript => {
-    const newScript = document.createElement('script');
-    if (oldScript.src) newScript.src = oldScript.src;
-    newScript.textContent = oldScript.textContent;
-    oldScript.parentNode.replaceChild(newScript, oldScript);
-  });
+function getInquiry() {
+  const currentDate = new Date();
+  const year = currentDate.getUTCFullYear();
+  const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(currentDate.getUTCDate()).padStart(2, '0');
+  const hour = String(currentDate.getUTCHours()).padStart(2, '0');
+  const min = String(currentDate.getUTCMinutes()).padStart(2, '0');
+  const sec = String(currentDate.getUTCSeconds()).padStart(2, '0');
+  const milli = String(currentDate.getUTCMilliseconds()).padStart(3, '0');
+  const inquiry = year + month + day + hour + min + sec + milli;
+  document.getElementsByName('Inquiry_Number')[0].value = inquiry;
+  // eslint-disable-next-line
+  window.dataLayer?.push({ event: 'formSubmit', formId: 'TTAE', inquiry: inquiry });
+}
 
-  // Run combined <component async is="script">
-  if (combinedScript.trim()) {
-    const scriptTag = document.createElement('script');
-    scriptTag.textContent = combinedScript;
-    document.body.appendChild(scriptTag);
-  }
-
-  // --- Robust custom dropdown logic ---
-  function setupCustomDropdowns(scope) {
-    scope.querySelectorAll('input.prior[type="checkbox"]').forEach(input => {
-      const container = input.closest('div');
-      if (!container) return;
-
-      // Replace dropdown label icon with chevron if not already present
-      const label = container.querySelector(`label[for="${input.id}"]`);
-      if (label) {
-        // Remove any existing SVG
-        label.querySelectorAll('svg').forEach(svg => svg.remove());
-        // Add chevron SVG
-        const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        chevron.setAttribute('width', '20');
-        chevron.setAttribute('height', '20');
-        chevron.setAttribute('viewBox', '0 0 20 20');
-        chevron.setAttribute('fill', 'none');
-        chevron.setAttribute('aria-hidden', 'true');
-        chevron.classList.add('chevron');
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', 'M6 8l4 4 4-4');
-        path.setAttribute('stroke', '#7c40ff');
-        path.setAttribute('stroke-width', '2');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('stroke-linejoin', 'round');
-        chevron.appendChild(path);
-        label.appendChild(chevron);
-      }
-
-      const ul = container.querySelector('ul#dropdown');
-      const span = label ? (label.querySelector('span') || label) : null;
-      const hiddenInput = scope.querySelector(`input[type="hidden"][name="${input.id}"]`);
-
-      if (!label || !ul || !span) return;
-
-      label.addEventListener('click', function(e) {
-        e.preventDefault();
-        scope.querySelectorAll('input.prior').forEach(i => {
-          if (i !== input) {
-            i.checked = false;
-            const otherUl = i.closest('div')?.querySelector('ul#dropdown');
-            if (otherUl) otherUl.classList.add('hidden');
-          }
-        });
-        input.checked = !input.checked;
-        ul.classList.toggle('hidden', !input.checked);
-      });
-
-      ul.querySelectorAll('li').forEach(li => {
-        li.addEventListener('click', function(e) {
-          e.preventDefault();
-          const text = li.textContent.trim();
-          if (hiddenInput) hiddenInput.value = text === 'Select' ? '' : text;
-          span.textContent = text;
-          input.checked = false;
-          ul.classList.add('hidden');
-        });
-      });
-
-      label.setAttribute('tabindex', '0');
-      label.addEventListener('keydown', function(e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          label.click();
-        }
-      });
-    });
-
-    if (!window.__dropdownListenerAdded) {
-      document.addEventListener('click', function(e) {
-        document.querySelectorAll('.embedded-form-wrapper').forEach(scope => {
-          scope.querySelectorAll('input.prior').forEach(i => {
-            const container = i.closest('div');
-            const ul = container?.querySelector('ul#dropdown');
-            const label = container?.querySelector(`label[for="${i.id}"]`);
-            if (ul && !ul.contains(e.target) && (!label || !label.contains(e.target))) {
-              i.checked = false;
-              ul.classList.add('hidden');
-            }
-          });
-        });
-      });
-      window.__dropdownListenerAdded = true;
-    }
-  }
-
-  setupCustomDropdowns(block);
-
-  // --- Validation logic for required fields (per asterisk) ---
-  // Find the form element
-  const form = block.querySelector('form');
-  if (form) {
-    // Mark fields with asterisk as required and add validation messages
-    form.querySelectorAll('label').forEach(label => {
-      const asterisk = label.querySelector('.text-red-500, .required, [style*="color:red"], [style*="color: #e53935"]');
-      if (asterisk && !label.classList.contains('no-required')) {
-        // Try to find associated input/select/textarea
-        let field;
-        // For input/textarea/select with matching id
-        const forAttr = label.getAttribute('for');
-        if (forAttr) {
-          field = form.querySelector(`#${forAttr}`);
-        }
-        // For dropdown custom fields
-        if (!field) {
-          // Try input/textarea/select inside parent row
-          field = label.parentNode.querySelector('input, textarea, select');
-        }
-        // For custom dropdown: look for hidden input with name == id
-        if (field && field.type === 'checkbox' && field.classList.contains('prior')) {
-          const hiddenInput = form.querySelector(`input[type="hidden"][name="${field.id}"]`);
-          if (hiddenInput) field = hiddenInput;
-        }
-
-        // Add required attribute if possible
-        if (field && !field.hasAttribute('required')) {
-          field.setAttribute('required', 'required');
-          field.setAttribute('aria-required', 'true');
-        }
-
-        // Add error message after field
-        if (field && !field.requiredMessageAdded) {
-          const errorMsg = document.createElement('div');
-          errorMsg.className = 'required-message';
-          errorMsg.innerText = 'This field is required';
-          field.insertAdjacentElement('afterend', errorMsg);
-          field.requiredMessageAdded = true;
-        }
-      }
-    });
-
-    // Validation on submit
-    form.addEventListener('submit', function(e) {
-      let valid = true;
-      form.querySelectorAll('[required]').forEach(field => {
-        // For dropdown: check hidden input value
-        let value = field.value ? field.value.trim() : '';
-        // For checkboxes (not custom dropdowns), check checked state
-        if (field.type === 'checkbox' && !field.classList.contains('prior')) {
-          value = field.checked ? 'on' : '';
-        }
-        const errorMsg = field.nextElementSibling && field.nextElementSibling.classList.contains('required-message')
-          ? field.nextElementSibling
-          : null;
-        if (!value) {
-          valid = false;
-          if (errorMsg) errorMsg.style.display = 'block';
-          field.classList.add('invalid');
+function formValidate() {
+  let isValid = true;
+  document.querySelectorAll('[data-required]').forEach((el) => {
+    if (el.dataset.required === 'true') {
+      const msgEl = document.querySelector(`[data-name=${el.name}]`);
+      if (msgEl !== null) {
+        if (el.value.length === 0) {
+          msgEl.innerHTML = 'This field is required';
+          isValid = false;
         } else {
-          if (errorMsg) errorMsg.style.display = 'none';
-          field.classList.remove('invalid');
-        }
-      });
-      if (!valid) {
-        e.preventDefault();
-        // Optionally, scroll to first error
-        const firstError = form.querySelector('.invalid');
-        if (firstError && typeof firstError.scrollIntoView === 'function') {
-          firstError.scrollIntoView({behavior: 'smooth', block: 'center'});
+          msgEl.innerHTML = '';
         }
       }
-    });
+    }
+  });
+  return isValid;
+}
 
-    // Hide error on input/change
-    form.querySelectorAll('[required]').forEach(field => {
-      field.addEventListener('input', () => {
-        const errorMsg = field.nextElementSibling && field.nextElementSibling.classList.contains('required-message')
-          ? field.nextElementSibling
-          : null;
-        if (field.value && errorMsg) {
-          errorMsg.style.display = 'none';
-          field.classList.remove('invalid');
-        }
-      });
-      field.addEventListener('change', () => {
-        const errorMsg = field.nextElementSibling && field.nextElementSibling.classList.contains('required-message')
-          ? field.nextElementSibling
-          : null;
-        if (field.value && errorMsg) {
-          errorMsg.style.display = 'none';
-          field.classList.remove('invalid');
-        }
-      });
-    });
-  }
+function loadUTMParams() {
+  document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
+  document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
+  document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
+  document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
+  document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
+  document.getElementsByName('UTM_NLC')[0].value = localStorage.getItem('danaher_utm_nlc');
+  document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
+}
 
-  if (!block.querySelector('select, input, textarea, button')) {
-    console.warn('No form elements found inside the block after decoration');
-  }
+async function loadSFDCForm(block) {
+  const formIdEl = block?.firstElementChild;
+  const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
+  const formNameEl = formIdEl?.nextElementSibling;
+  const formName = formNameEl?.firstElementChild?.nextElementSibling?.textContent;
+  const clientIdEl = formNameEl?.nextElementSibling;
+  const clientId = clientIdEl?.firstElementChild?.nextElementSibling?.textContent;
+  const deExternalKeyEl = clientIdEl?.nextElementSibling;
+  const deExternalKey = deExternalKeyEl?.firstElementChild?.nextElementSibling?.textContent;
+  const actionEl = deExternalKeyEl?.nextElementSibling;
+  const action = actionEl?.firstElementChild?.nextElementSibling?.textContent;
+  const inquiryTypeEl = actionEl?.nextElementSibling?.nextElementSibling;
+  const inquiryType = inquiryTypeEl?.firstElementChild?.nextElementSibling?.textContent;
+  const successUrlEl = inquiryTypeEl?.nextElementSibling;
+  const successUrl = successUrlEl?.firstElementChild?.nextElementSibling?.textContent;
+  const errorUrlEl = successUrlEl?.nextElementSibling;
+  const errorUrl = errorUrlEl?.firstElementChild?.nextElementSibling?.textContent;
+  const formEl = div(
+    { class: 'relative my-2 mx-0 md:ml-2' },
+    form(
+      {
+        id: `${formId}`,
+        name: `${formName}`,
+        action: 'https://cl.s13.exct.net/DEManager.aspx',
+        method: 'post',
+        class: 'text-sm w-full max-w-4xl box-border overflow-hidden rounded-xl my-0 mx-auto p-6',
+        style: 'background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%;',
+      },
+      input({ type: 'hidden', name: '_clientID', value: `${clientId}` }),
+      input({ type: 'hidden', name: '_deExternalKey', value: `${deExternalKey}` }),
+      input({ type: 'hidden', name: '_action', value: `${action}` }),
+      input({ type: 'hidden', name: '_returnXML', value: '1' }),
+      input({ type: 'hidden', name: 'Inquiry_Type', value: `${inquiryType}` }),
+      input({ type: 'hidden', name: 'Inquiry_Number' }),
+      input({ type: 'hidden', name: 'UTM_Content' }),
+      input({ type: 'hidden', name: 'UTM_Campaign' }),
+      input({ type: 'hidden', name: 'UTM_Medium' }),
+      input({ type: 'hidden', name: 'UTM_Term' }),
+      input({ type: 'hidden', name: 'UTM_Source' }),
+      input({ type: 'hidden', name: 'UTM_NLC' }),
+      input({ type: 'hidden', name: 'Page_Track_URL' }),
+      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
+      input({ type: 'hidden', name: 'Country', 'data-required': true }),
+      input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
+      input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
+      div(
+        { class: 'container mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6' },
+        buildInputElement('First_Name', 'First name', 'text', 'First_Name', 'given-name', true, 'First_Name'),
+        buildInputElement('Last_Name', 'Last name', 'text', 'Last_Name', 'family-name', true, 'Last_Name'),
+        buildInputElement('Email_Address', 'Email address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
+        buildInputElement('Phone_Number', 'Phone number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
+        buildInputElement('Company_Name', 'Company name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
+        buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
+        buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
+        buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+        div(
+          { class: 'space-y-2 col-span-1 md:col-span-2' },
+          label(
+            {
+              for: 'OpCo_Comments',
+              class: 'font-normal text-sm leading-4',
+            },
+            'Additional information (please provide as many details as possible):',
+          ),
+          textarea(
+            {
+              name: 'OpCo_Comments',
+              autocomplete: 'off',
+              'data-required': false,
+              rows: '3',
+              cols: '50',
+              class: 'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+              'aria-label': 'OpCo_Comments',
+            },
+          ),
+          emailOptIn(),
+          tnc(),
+        ),
+      ),
+      input(
+        {
+          type: 'submit',
+          name: 'submit',
+          value: 'Submit',
+          class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
+          role: 'button',
+        },
+      ),
+    ),
+  );
+  block.innerHTML = '';
+  decorateIcons(formEl);
+  block.append(formEl);
+  loadUTMParams();
+
+  document.querySelector('#TTAE').addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry();
+    } else {
+      event.preventDefault();
+    }
+  });
+
+  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
+    el.addEventListener('click', () => {
+      const dropdownInput = document.querySelector('input[name="Job_Role"]');
+      if (el.innerText === 'Select') {
+        dropdownInput.value = '';
+      } else {
+        dropdownInput.value = el.innerText;
+      }
+      const dropdownLabel = document.querySelector('input#Job_Role + label');
+      dropdownLabel.children[0].innerHTML = el.innerText;
+      dropdownLabel.click();
+    });
+  });
+
+  document.querySelectorAll('input#Country + label + ul > li').forEach((el) => {
+    el.addEventListener('click', () => {
+      const dropdownInput = document.querySelector('input[name="Country"]');
+      if (el.innerText === 'Select') {
+        dropdownInput.value = '';
+      } else {
+        dropdownInput.value = el.innerText;
+      }
+      const dropdownLabel = document.querySelector('input#Country + label');
+      dropdownLabel.children[0].innerHTML = el.innerText;
+      dropdownLabel.click();
+    });
+  });
+}
+
+export default function decorate(block) {
+  block.classList.add('relative');
+  loadSFDCForm(block);
 }
