@@ -308,11 +308,9 @@ export const requestedQuotes = async () => {
   });
   const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
   let userId;
-  if(basketDataFromSession){
+  if (basketDataFromSession) {
     userId = basketDataFromSession.data.data.customer;
-  }
-  else {
-
+  } else {
     window.location.href = '/us/en/e-buy/login';
   }
   const url = `${baseURL}/customers/${userId}/users/${userId}/quoterequests?attrs=number,name,lineItems,creationDate,validFromDate,validToDate,rejected`;

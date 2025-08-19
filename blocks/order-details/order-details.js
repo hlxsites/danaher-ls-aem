@@ -9,7 +9,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
   const orderId = new URLSearchParams(window.location.search).get('orderId');
-  console.log("orderId", orderId);
+  console.log('orderId', orderId);
   const orderDetailsWrapper = div({
     class: 'w-full inline-flex flex-col justify-start items-start gap-5 ',
   });
@@ -37,82 +37,83 @@ export default async function decorate(block) {
       class: 'justify-start text-violet-600 text-base font-bold leading-snug',
     }, 'Go Back to Order Status'),
   );
-  
-  const orderDetailTitleDiv = div({
-    class:"self-stretch flex flex-col justify-start items-start gap-4"
-  },
-  div({
-    class: "self-stretch justify-start text-black text-3xl font-normal leading-10"
-  }, "Order Details"),
-  div({
-    class: "self-stretch justify-start text-black text-base font-extralight leading-snug"
-  }, "Your order details, all in one place—from items to shipping and everything in between.")
-);
-const orderDetailsContainer = div({
-  class: "w-full inline-flex gap-5"
-});
-const orderDetail = div({
-  class: "w-[70%] p-6 bg-white border-t border-l border-r border-b border-gray-300 inline-flex flex-col justify-start items-center gap-6"
-});
-const addressDetail = div({
-  class: "w-[30%] border-t border-l border-r border-b border-gray-300 p-5 bg-white inline-flex flex-col justify-start items-start gap-6"
-}, "Address");
 
-const orderSummary = div(
-  {
-    class:
-      "self-stretch p-6 bg-violet-50 inline-flex flex-col justify-center items-start gap-5 overflow-hidden",
-  },
-  div(
+  const orderDetailTitleDiv = div(
     {
-      class: "self-stretch inline-flex justify-start items-start gap-2",
+      class: 'self-stretch flex flex-col justify-start items-start gap-4',
+    },
+    div({
+      class: 'self-stretch justify-start text-black text-3xl font-normal leading-10',
+    }, 'Order Details'),
+    div({
+      class: 'self-stretch justify-start text-black text-base font-extralight leading-snug',
+    }, 'Your order details, all in one place—from items to shipping and everything in between.'),
+  );
+  const orderDetailsContainer = div({
+    class: 'w-full inline-flex gap-5',
+  });
+  const orderDetail = div({
+    class: 'w-[70%] p-6 bg-white border-t border-l border-r border-b border-gray-300 inline-flex flex-col justify-start items-center gap-6',
+  });
+  const addressDetail = div({
+    class: 'w-[30%] border-t border-l border-r border-b border-gray-300 p-5 bg-white inline-flex flex-col justify-start items-start gap-6',
+  }, 'Address');
+
+  const orderSummary = div(
+    {
+      class:
+      'self-stretch p-6 bg-violet-50 inline-flex flex-col justify-center items-start gap-5 overflow-hidden',
     },
     div(
       {
-        class: "flex-1 inline-flex flex-col justify-start items-start gap-2",
+        class: 'self-stretch inline-flex justify-start items-start gap-2',
       },
       div(
         {
-          class:
-            "self-stretch justify-start text-black text-2xl font-normal leading-loose",
-        },
-        `Order # - ${orderId}`
-      ),
-      div(
-        {
-          class:
-            "self-stretch justify-start text-black text-base font-extralight leading-snug",
-        },
-        "Ordered on 03/28/2022 10:00 am"
-      )
-    ),
-    div(
-      {
-        class: "flex-1 inline-flex flex-col justify-center items-end gap-2",
-      },
-      div(
-        {
-          class:
-            "self-stretch text-right justify-start text-black text-2xl font-normal leading-loose",
-        },
-        " $54,85,000.00"
-      ),
-      div(
-        {
-          class:
-            "px-2.5 py-2 bg-green-50 inline-flex justify-center items-center",
+          class: 'flex-1 inline-flex flex-col justify-start items-start gap-2',
         },
         div(
           {
             class:
-              "text-center justify-start text-green-700 text-xs font-medium font-['Inter'] leading-none",
+            'self-stretch justify-start text-black text-2xl font-normal leading-loose',
           },
-          "Approved"
-        )
-      )
-    )
-  )
-);
+          `Order # - ${orderId}`,
+        ),
+        div(
+          {
+            class:
+            'self-stretch justify-start text-black text-base font-extralight leading-snug',
+          },
+          'Ordered on 03/28/2022 10:00 am',
+        ),
+      ),
+      div(
+        {
+          class: 'flex-1 inline-flex flex-col justify-center items-end gap-2',
+        },
+        div(
+          {
+            class:
+            'self-stretch text-right justify-start text-black text-2xl font-normal leading-loose',
+          },
+          ' $54,85,000.00',
+        ),
+        div(
+          {
+            class:
+            'px-2.5 py-2 bg-green-50 inline-flex justify-center items-center',
+          },
+          div(
+            {
+              class:
+              "text-center justify-start text-green-700 text-xs font-medium font-['Inter'] leading-none",
+            },
+            'Approved',
+          ),
+        ),
+      ),
+    ),
+  );
   orderDetail.append(orderSummary);
   orderDetailsContainer.append(orderDetail);
   orderDetailsContainer.append(addressDetail);
