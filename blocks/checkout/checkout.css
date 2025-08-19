@@ -316,6 +316,10 @@
   width: 100%
 }
 
+.checkout :is(.w-\[7rem\]) {
+  width: 7rem
+}
+
 .checkout :is(.min-w-\[320px\]) {
   min-width: 320px
 }

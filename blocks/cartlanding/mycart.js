@@ -133,7 +133,7 @@ export const mycart = async () => {
   const description = div(
     {
       class:
-        'w-[737px] break-normal justify-start text-black text-base font-extralight ',
+        'w-[70%] break-normal justify-start text-black text-base font-extralight ',
     },
     'Welcome to your cart. Review your selections, make any last-minute adjustments, and prepare for a seamless checkout experience tailored just for you.',
   );

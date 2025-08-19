@@ -479,6 +479,14 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.w-\[7rem\]) {
+  width: 7rem
+}
+
+.cartlanding-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
   min-width: 320px
 }

@@ -80,13 +80,13 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
     ),
     div(
       {
-        class: 'hidden sm:block w-48 justify-start text-black text-base font-semibold',
+        class: 'hidden sm:block w-26 justify-start text-black text-base font-semibold',
       },
       'Unit Price',
     ),
     div(
       {
-        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-semibold',
+        class: 'hidden sm:block w-[7rem] justify-start text-right text-black text-base font-semibold',
       },
       'Total',
     ),
@@ -2837,7 +2837,7 @@ export const cartItemsContainer = (cartItemValue) => {
         div(
           {
             class:
-              'unit-price w-[150px] justify-start text-black text-base',
+              'unit-price w-48 justify-start text-black text-base',
           },
           `$${cartItemValue.salePrice.value}`,
         ),

@@ -68,6 +68,10 @@
   height: 2px
 }
 
+.order-details-wrapper :is(.h-\[24px\]) {
+  height: 24px
+}
+
 .order-details-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
@@ -88,6 +92,22 @@
   width: 100%
 }
 
+.order-details-wrapper :is(.w-\[24px\]) {
+  width: 24px
+}
+
+.order-details-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
+.order-details-wrapper :is(.w-\[30\%\]) {
+  width: 30%
+}
+
+.order-details-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
 .order-details-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -98,6 +118,10 @@
 
 .order-details-wrapper :is(.items-start) {
   align-items: flex-start
+}
+
+.order-details-wrapper :is(.items-end) {
+  align-items: flex-end
 }
 
 .order-details-wrapper :is(.items-center) {
@@ -134,6 +158,14 @@
 
 .order-details-wrapper :is(.gap-5) {
   gap: 1.25rem
+}
+
+.order-details-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.order-details-wrapper :is(.gap-6) {
+  gap: 1.5rem
 }
 
 .order-details-wrapper :is(.self-stretch) {
@@ -216,6 +248,16 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.order-details-wrapper :is(.bg-green-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 244 / var(--tw-bg-opacity))
+}
+
+.order-details-wrapper :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+}
+
 .order-details-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -224,9 +266,48 @@
   padding: 18px
 }
 
+.order-details-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
+.order-details-wrapper :is(.p-5) {
+  padding: 1.25rem
+}
+
 .order-details-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
+}
+
+.order-details-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.order-details-wrapper :is(.px-2\.5) {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem
+}
+
+.order-details-wrapper :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.order-details-wrapper :is(.text-center) {
+  text-align: center
+}
+
+.order-details-wrapper :is(.text-right) {
+  text-align: right
+}
+
+.order-details-wrapper :is(.font-\[\'Inter\'\]) {
+  font-family: 'Inter'
+}
+
+.order-details-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
 }
 
 .order-details-wrapper :is(.\!text-4xl) {
@@ -249,12 +330,35 @@
   line-height: 1.75rem
 }
 
+.order-details-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.order-details-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.order-details-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
 .order-details-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
 .order-details-wrapper :is(.font-medium) {
   font-weight: 500
+}
+
+.order-details-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.order-details-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .order-details-wrapper :is(.leading-7) {
@@ -271,6 +375,18 @@
 
 .order-details-wrapper :is(.leading-tight) {
   line-height: 1.25
+}
+
+.order-details-wrapper :is(.leading-10) {
+  line-height: 2.5rem
+}
+
+.order-details-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
+.order-details-wrapper :is(.leading-none) {
+  line-height: 1
 }
 
 .order-details-wrapper :is(.text-black) {
@@ -291,6 +407,11 @@
 .order-details-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.order-details-wrapper :is(.text-green-700) {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity))
 }
 
 .order-details-wrapper :is(.filter) {

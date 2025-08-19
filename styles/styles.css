@@ -3194,6 +3194,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
+.w-\[7rem\] {
+  width: 7rem;
+}
+
 .min-w-\[320px\] {
   min-width: 320px;
 }

@@ -89,7 +89,7 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
     const row = a(
       {
         class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-        href: '/us/en/e-buy/orderdetails',
+        href: `/us/en/e-buy/orderdetails?orderId=${order}`,
       },
       div(
         {
