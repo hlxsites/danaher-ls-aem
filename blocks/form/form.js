@@ -63,6 +63,27 @@ function createDropdown(itemsList) {
   return list;
 }
 
+const buildCheckboxElement = (lable, field, inputType, inputName, value, required) => div(
+  { class: 'flex items-baseline' },
+  input(
+    {
+      type: inputType,
+      name: inputName,
+      class: 'input-focus-checkbox',
+      value,
+      'data-required': required,
+      'aria-label': inputName,
+    },
+  ),
+  label(
+    {
+      for: lable,
+      class: 'pl-2',
+    },
+    field,
+  ),
+);
+
 function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, inputList) {
   const selectIcon = div(
     { class: 'space-y-2' },
@@ -104,30 +125,6 @@ function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, i
   return selectIcon;
 }
 
-function emailOptIn() {
-  const emailOptin = div(
-    { class: 'flex items-baseline' },
-    input(
-      {
-        type: 'checkbox',
-        name: 'Email_Opt_In',
-        class: 'input-focus-checkbox',
-        value: 'true',
-        'data-required': false,
-        'aria-label': 'Email_Opt_In',
-      },
-    ),
-    label(
-      {
-        for: 'DHLS_Interest',
-        class: 'pl-2',
-      },
-      'I would like to receive more information via email about products and services offered by DH Life Sciences, LLC.',
-    ),
-  );
-  return emailOptin;
-}
-
 function tnc() {
   const tncEl = div(
     { class: 'flex items-center mt-5' },
@@ -135,25 +132,20 @@ function tnc() {
       {
         style: 'font-family: helvetica, arial, sans-serif; font-size: 13px;',
       },
-      'By submitting this form, you agree to the ',
-      span(
-        {
-          style: 'color: #000000;',
-        },
-        'By clicking the Submit button below and proceeding I confirm that I have reviewed and agree with the',
-      ),
+      'Please tick below if you would like Danaher Life Sciences and the Danaher group of companies listed ',
       strong(
         a({
           'aria-label': 'Link Terms of Use',
-          title: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
-          href: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
+          title: 'https://www.danaher.com/business-directory',
+          href: 'https://www.danaher.com/business-directory',
           target: '_blank',
           rel: 'noopener noreferrer',
-          class: 'fui-Link ___m14voj0 f3rmtva f1ern45e f1deefiw f1n71otn f1q5o8ev f1h8hb77 f1vxd6vx f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1hu3pq6 f11qmguv f19f4twv f1tyq0we f1g0x7ka fhxju0i f1qch9an f1cnd47f fqv5qza f1vmzxwi f1o700av f13mvf36 f9n3di6 f1ids18y fygtlnl f1deo86v f12x56k7 f1iescvh ftqa4ok f50u1b5 fs3pq8b f1hghxdh f1tymzes f1x7u7e9 f1cmlufx f10aw75t fsle3fq',
+          class: 'text-[#333333] underline',
           tabindex: '-1',
-        }, 'Terms of Use'),
+        }, 'here '),
       ),
-      span({ style: 'color: #000000;' }, ' and the '),
+      span('to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. '),
+      span(' For more information please review our '),
       strong(
         a(
           {
@@ -162,11 +154,15 @@ function tnc() {
             href: 'https://lifesciences.danaher.com/us/en/legal/privacy-policy.html',
             target: '_blank',
             rel: 'noopener noreferrer',
-            class: 'fui-Link ___m14voj0 f3rmtva f1ern45e f1deefiw f1n71otn f1q5o8ev f1h8hb77 f1vxd6vx f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1hu3pq6 f11qmguv f19f4twv f1tyq0we f1g0x7ka fhxju0i f1qch9an f1cnd47f fqv5qza f1vmzxwi f1o700av f13mvf36 f9n3di6 f1ids18y fygtlnl f1deo86v f12x56k7 f1iescvh ftqa4ok f50u1b5 fs3pq8b f1hghxdh f1tymzes f1x7u7e9 f1cmlufx f10aw75t fsle3fq',
+            class: 'text-[#333333] underline',
             tabindex: '-1',
           },
-          'Privacy Policy',
+          'Privacy Policy.',
         ),
+      ),
+      div(
+        { class: 'flex items-center mt-5' },
+        span(' Please send me communications by: '),
       ),
     ),
   );
@@ -291,8 +287,12 @@ async function loadSFDCForm(block) {
               'aria-label': 'OpCo_Comments',
             },
           ),
-          emailOptIn(),
+          // emailOptIn(),
           tnc(),
+          buildCheckboxElement('DHLS_Interest', 'Email', 'checkbox', 'Email_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'SMS', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Phone', 'checkbox', 'Phone_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Direct Mail', 'checkbox', 'Post_Opt_In', 'true', false),
         ),
       ),
       input(
