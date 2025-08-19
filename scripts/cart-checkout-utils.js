@@ -1408,6 +1408,9 @@ export const changeStep = async (step) => {
 
     removePreLoader();
     showNotification('Invalid Basket', 'error');
+    setTimeout(() => {
+      window.location.href = '/us/en/e-buy/cartlanding';
+    }, 2000);
     return false;
   }
 

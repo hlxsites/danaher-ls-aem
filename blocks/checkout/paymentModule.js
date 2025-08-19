@@ -364,6 +364,7 @@ const paymentModule = async () => {
     });
     // adding new card form
     newStripeCardsWrapper.append(newStripeCardForm);
+    newStripeCardsWrapper.append(button({ class: 'w-full m-0 shipping-address-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-[239px]', id: 'showStripePaymentList' }, 'Back'));
     stripeCardsContainer.append(newStripeCardsWrapper);
 
     // adding saved cards header and list
@@ -575,7 +576,19 @@ const paymentModule = async () => {
         getStripeCardsWrapper.classList.remove('hidden');
       }
     });
-
+    // show payment methods list
+    newStripeCardsWrapper?.querySelector('#showStripePaymentList')?.addEventListener('click', () => {
+      const savedCardsHeader = document.querySelector('#savedStripeCardsHeader');
+      const savedCardList = document.querySelector('#savedStripeCardsList');
+      const getStripeCardsWrapper = document.querySelector('#newStripeCardsWrapper');
+      getStripeCardsWrapper.classList.add('hidden');
+      if (savedCardsHeader?.classList.contains('hidden')) {
+        savedCardsHeader.classList.remove('hidden');
+      }
+      if (savedCardList?.classList.contains('hidden')) {
+        savedCardList.classList.remove('hidden');
+      }
+    });
     /*
     ::::::::::::::
     search functionality for search for cards list
