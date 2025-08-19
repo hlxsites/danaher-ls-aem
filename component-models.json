@@ -987,7 +987,7 @@
     "id": "form",
     "fields": [
       {
-        "component": "html",
+        "component": "richtext",
         "name": "script",
         "type": "string",
         "label": "Embedded Form Script",
