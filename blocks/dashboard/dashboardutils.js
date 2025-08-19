@@ -300,6 +300,7 @@ export const orderDetails = async () => {
 export const requestedQuotes = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
