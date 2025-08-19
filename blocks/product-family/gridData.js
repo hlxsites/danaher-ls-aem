@@ -49,6 +49,7 @@ export default function renderProductGridCard(item) {
           window.location.href = item?.clickUri;
         },
       },
+      (item?.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
