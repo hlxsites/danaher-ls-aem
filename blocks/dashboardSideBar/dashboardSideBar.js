@@ -47,13 +47,13 @@ export default async function dashboardSidebar() {
           class: `icon icon-${icon} [&_svg>use]:stroke-black !w-[60px] !h-[60px] p-[18px]`,
         }),
         a(
-        {
-          href: `/us/en/e-buy/${url}`,
-          class: 'justify-start text-base font-medium leading-snug',
-          id: name.replace(/\s+/g, ''),
-        },
-       name
-      ),
+          {
+            href: `/us/en/e-buy/${url}`,
+            class: 'justify-start text-base font-medium leading-snug',
+            id: name.replace(/\s+/g, ''),
+          },
+          name,
+        ),
         // div(
         //   {
         //     class:

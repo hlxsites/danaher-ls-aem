@@ -36,6 +36,7 @@
       "checkout",
       "order-submit",
       "order-status",
+      "order-details",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -177,6 +178,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "order-details",
+    "components": [
+      ""
     ]
   },
   {

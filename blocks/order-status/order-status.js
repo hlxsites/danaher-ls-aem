@@ -4,6 +4,7 @@ import {
   table,
   tr,
   tbody,
+  a,
 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { baseURL, showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
@@ -42,6 +43,7 @@ const orderDetails = async () => {
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
     window.location.href = '/us/en/e-buy/login';
+    return { status: 'error', data: 'Exception occurred, redirecting.' };
     // return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
 };
@@ -84,9 +86,10 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
       };
     };
     const statusTextColor = statusColor(status);
-    const row = div(
+    const row = a(
       {
         class: 'inline-flex justify-start border-b border-gray-200 gap-1',
+        href: '/us/en/e-buy/orderdetails',
       },
       div(
         {
@@ -198,7 +201,6 @@ export default async function decorate(block) {
   // const status = ['Status', 'All', 'Approved', 'Cancelled',
   // 'Invoiced', 'Shipped', 'Submitted', 'New'];
   const orderDetailsResponse = await orderDetails();
-  const allOrders = orderDetailsResponse || []; // Set this from your API
 
   // const dropDown = (day) => {
   //   const selectElement = document.createElement('select');
@@ -435,9 +437,9 @@ export default async function decorate(block) {
   // let orderRows;
   // async function renderNextBatch() {
   //   const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
-    const orderRows = await dynamicTableContent(orderDetailsResponse);
-    orderTable.append(orderRows);
-    orderWrapper.append(orderTable);
+  const orderRows = await dynamicTableContent(orderDetailsResponse);
+  orderTable.append(orderRows);
+  orderWrapper.append(orderTable);
   //   currentIndex += pageSize;
 
   //   // Hide button if all data has been loaded
@@ -453,29 +455,27 @@ export default async function decorate(block) {
   //   }
   // });
 
-//   const observer = new MutationObserver(() => {
-//   const scrollContainer = document.getElementById('orderTable');
-//   if (scrollContainer) {
-//     scrollContainer.addEventListener('scroll', () => {
-//       const nearBottom =
-//         scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 100;
+  //   const observer = new MutationObserver(() => {
+  //   const scrollContainer = document.getElementById('orderTable');
+  //   if (scrollContainer) {
+  //     scrollContainer.addEventListener('scroll', () => {
+  //       const nearBottom =
+  //         scrollContainer.scrollTop
+  //  + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 100;
 
-//       if (nearBottom) {
-//         renderNextBatch();
-//       }
-//     });
+  //       if (nearBottom) {
+  //         renderNextBatch();
+  //       }
+  //     });
 
-//     // Stop observing once we’ve found and attached the listener
-//     observer.disconnect();
-//   }
-// });
+  //     // Stop observing once we’ve found and attached the listener
+  //     observer.disconnect();
+  //   }
+  // });
 
-// Start observing the document body (or another parent node)
-// observer.observe(document.body, { childList: true, subtree: true });
+  // Start observing the document body (or another parent node)
+  // observer.observe(document.body, { childList: true, subtree: true });
 
-
-
-  
   // orderTable.append(orderRows);
   // orderWrapper.append(orderTable);
   // const paginationWrapper = div({
@@ -495,6 +495,6 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(wrapper);
   decorateIcons(wrapper);
-  
+
   removePreLoader();
 }

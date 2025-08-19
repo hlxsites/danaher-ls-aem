@@ -292,6 +292,7 @@ export const orderDetails = async () => {
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
     window.location.href = '/us/en/e-buy/login';
+    return { status: 'error', data: 'Exception occurred, redirecting.' };
     // return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
 };
@@ -313,7 +314,7 @@ export const requestedQuotes = async () => {
     const response = await getApiData(url, defaultHeader);
     if (response) {
       console.log('response', response);
-      if(response.data === "Unauthorized! please try again."){
+      if (response.data === 'Unauthorized! please try again.') {
         window.location.href = '/us/en/e-buy/login';
       }
       const quotesResponse = response.data.elements;
@@ -322,6 +323,6 @@ export const requestedQuotes = async () => {
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
     window.location.href = '/us/en/e-buy/login';
-    // return { status: 'error', data: 'Something went wrong fetching quotes details.' };
+    return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };

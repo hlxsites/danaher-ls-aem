@@ -65,6 +65,7 @@
       "checkout",
       "order-submit",
       "order-status",
+      "order-details",
       "carousel",
       "dual-carousel",
       "opco-banner",

@@ -108,24 +108,8 @@
   height: 46px
 }
 
-.order-status-wrapper :is(.h-\[400px\]) {
-  height: 400px
-}
-
-.order-status-wrapper :is(.h-\[800px\]) {
-  height: 800px
-}
-
-.order-status-wrapper :is(.h-\[600px\]) {
-  height: 600px
-}
-
 .order-status-wrapper :is(.h-\[500px\]) {
   height: 500px
-}
-
-.order-status-wrapper :is(.h-\[550px\]) {
-  height: 550px
 }
 
 .order-status-wrapper :is(.max-h-\[642px\]) {
@@ -162,14 +146,6 @@
 
 .order-status-wrapper :is(.w-\[930px\]) {
   width: 930px
-}
-
-.order-status-wrapper :is(.w-\[932px\]) {
-  width: 932px
-}
-
-.order-status-wrapper :is(.w-\[980px\]) {
-  width: 980px
 }
 
 .order-status-wrapper :is(.w-full) {
@@ -252,10 +228,6 @@
 
 .order-status-wrapper :is(.self-stretch) {
   align-self: stretch
-}
-
-.order-status-wrapper :is(.overflow-auto) {
-  overflow: auto
 }
 
 .order-status-wrapper :is(.overflow-hidden) {
@@ -452,16 +424,16 @@
   padding-right: 2rem
 }
 
-.order-status-wrapper :is(.pt-\[5px\]) {
-  padding-top: 5px
-}
-
 .order-status-wrapper :is(.pr-\[10px\]) {
   padding-right: 10px
 }
 
 .order-status-wrapper :is(.pt-0) {
   padding-top: 0px
+}
+
+.order-status-wrapper :is(.pt-\[5px\]) {
+  padding-top: 5px
 }
 
 .order-status-wrapper :is(.text-left) {

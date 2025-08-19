@@ -6,19 +6,16 @@ const recentOrders = async () => {
   const requestedQuotesResponse = await requestedQuotes();
   let topRequestedQuote;
   let topRecentOrder;
-  if(requestedQuotesResponse.length > 4){
+  if (requestedQuotesResponse.length > 4) {
     topRequestedQuote = requestedQuotesResponse.slice(0, 4);
-  }
-  else {
+  } else {
     topRequestedQuote = requestedQuotesResponse;
   }
-  if(orderDetailResponse.length > 3){
+  if (orderDetailResponse.length > 3) {
     topRecentOrder = orderDetailResponse.slice(0, 3);
+  } else {
+    topRecentOrder = orderDetailResponse;
   }
-  else {
-    topRecentOrder = orderDetailResponse
-  }
-  
 
   const recentDetailsContainer = div({
     class: 'flex gap-6 w-full dhls-container',
