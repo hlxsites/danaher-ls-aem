@@ -230,6 +230,12 @@
     "components": []
   },
   {
+    "id": "stats",
+    "components": [
+      "stats"
+    ]
+  },
+  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",
