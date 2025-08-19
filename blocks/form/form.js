@@ -213,6 +213,16 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
+
+  fetch('./_form.json')
+  .then(response => response.json())
+  .then(jsonData => {
+    // Now you can get the value!
+    const formId = jsonData?.models?.find(m => m.id === 'form')
+      ?.fields?.find(f => f.name === 'formId')
+      ?.value;
+    console.log(formId);
+  });
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
@@ -311,13 +321,26 @@ async function loadSFDCForm(block) {
   block.append(formEl);
   loadUTMParams();
 
-  document.querySelector('#TTAE').addEventListener('submit', (event) => {
-    if (formValidate()) {
-      getInquiry();
-    } else {
-      event.preventDefault();
-    }
-  });
+  // document.querySelector('#TTAE').addEventListener('submit', (event) => {
+  //   if (formValidate()) {
+  //     getInquiry();
+  //   } else {
+  //     event.preventDefault();
+  //   }
+  // });
+
+  const formElement = document.querySelector(`#${formId}`);
+  if (formElement) {
+    formElement.addEventListener('submit', (event) => {
+      if (formValidate()) {
+        getInquiry();
+      } else {
+        event.preventDefault();
+      }
+    });
+  } else {
+    console.warn(`Form with id ${formId} not found!`);
+  }
 
   document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
     el.addEventListener('click', () => {
@@ -327,6 +350,7 @@ async function loadSFDCForm(block) {
       } else {
         dropdownInput.value = el.innerText;
       }
+      console.log('dropdownInput', dropdownInput);
       const dropdownLabel = document.querySelector('input#Job_Role + label');
       dropdownLabel.children[0].innerHTML = el.innerText;
       dropdownLabel.click();
@@ -346,6 +370,7 @@ async function loadSFDCForm(block) {
       dropdownLabel.click();
     });
   });
+  
 }
 
 export default function decorate(block) {

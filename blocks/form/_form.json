@@ -21,6 +21,14 @@
       "id": "form",
       "fields": [
         {
+          "component": "text",
+          "name": "formId",
+          "type": "string",
+          "label": "Form Id",
+          "required": true,
+          "description": "Unique identifier for the form."
+        },
+        {
           "component": "richtext",
           "name": "script",
           "type": "string",
