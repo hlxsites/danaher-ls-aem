@@ -213,15 +213,14 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
-
   fetch('/blocks/form/_form.json')
   .then(response => response.json())
   .then(jsonData => {
     // Now you can get the value!
     const formId = jsonData?.models?.find(m => m.id === 'form')
-      ?.fields?.find(f => f.name === 'formId')
-      ?.value;
-    console.log(formId);
+    ?.fields?.find(f => f.name === 'formId')
+    ?.value;
+    console.log('formID:', formId);
   });
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;

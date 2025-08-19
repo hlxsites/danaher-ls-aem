@@ -27,7 +27,7 @@
           "label": "Form Id",
           "required": true,
           "description": "Unique identifier for the form.",
-          "value": ""
+          "value": "TTAE"
         },
         {
           "component": "richtext",
