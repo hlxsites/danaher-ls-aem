@@ -34,10 +34,10 @@ export default async function decorate(block) {
     let bundleDetails;
 
     if (isPIM === 'true') {
+      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
+    } else {
       const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
       bundleDetails = parsedData;
-    } else {
-      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
     }
     bundleDetails.forEach((product) => {
       const wrapper = div({
