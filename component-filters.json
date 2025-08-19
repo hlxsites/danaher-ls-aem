@@ -55,7 +55,8 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "mini-teasers"
+      "mini-teasers",
+      "form"
     ]
   },
   {
@@ -142,6 +143,12 @@
       "video",
       "pdf",
       "iframe"
+    ]
+  },
+  {
+    "id": "form",
+    "components": [
+      "form"
     ]
   },
   {
