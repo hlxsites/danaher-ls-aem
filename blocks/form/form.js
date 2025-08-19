@@ -213,21 +213,19 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
-  fetch('/blocks/form/_form.json')
-  .then(response => response.json())
-  .then(jsonData => {
-    // Now you can get the value!
-    const formId = jsonData?.models?.find(m => m.id === 'form')
-    ?.fields?.find(f => f.name === 'formId')
-    // ?.value;
-    console.log('formID:', formId);
-  });
+  // fetch('/blocks/form/_form.json')
+  // .then(response => response.json())
+  // .then(jsonData => {
+  //   // Now you can get the value!
+  //   const formId = jsonData?.models?.find(m => m.id === 'form')
+  //   ?.fields?.find(f => f.name === 'formId')
+  //   // ?.value;
+  //   console.log('formID:', formId);
+  // });
   const formIdEl = block?.firstElementChild;
-  console.log('formIdEl:', formIdEl?.textContent);
-  // const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
-  // const formNameEl = formIdEl?.nextElementSibling;
+  const formId = formIdEl?.firstElementChild?.textContent;
+  const formNameEl = formIdEl?.nextElementSibling;
   const formName = block?.firstElementChild?.nextElementSibling?.textContent;
-  console.log('formName:', formName);
   const clientIdEl = formNameEl?.nextElementSibling;
   const clientId = clientIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const deExternalKeyEl = clientIdEl?.nextElementSibling;

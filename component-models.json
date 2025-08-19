@@ -1005,12 +1005,22 @@
         "value": ""
       },
       {
-        "component": "richtext",
-        "name": "script",
+        "component": "text",
+        "name": "_clientID",
         "type": "string",
-        "label": "Embedded Form Script",
+        "label": "Client ID",
         "required": true,
-        "description": "Paste the complete HTML, JS, and CSS code for the form here."
+        "description": "Unique name for the form.",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "_deExternalKey",
+        "type": "string",
+        "label": "External Key",
+        "required": true,
+        "description": "Unique name for the form.",
+        "value": ""
       }
     ]
   },
