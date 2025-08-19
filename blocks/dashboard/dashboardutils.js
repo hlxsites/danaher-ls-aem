@@ -307,8 +307,9 @@ export const requestedQuotes = async () => {
     'Authentication-Token': token,
   });
   const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  let userId;
   if(basketDataFromSession){
-    const userId = basketDataFromSession.data.data.customer;
+    userId = basketDataFromSession.data.data.customer;
   }
   else {
 
