@@ -984,6 +984,75 @@
     ]
   },
   {
+    "id": "form",
+    "fields": [
+      {
+        "component": "text",
+        "name": "formId",
+        "type": "string",
+        "label": "Form Id",
+        "required": true,
+        "description": "Unique identifier for the form."
+      },
+      {
+        "component": "text",
+        "name": "formName",
+        "type": "string",
+        "label": "Form Name",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "_clientID",
+        "type": "string",
+        "label": "Client ID",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "_deExternalKey",
+        "type": "string",
+        "label": "External Key",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "_action",
+        "type": "string",
+        "label": "Action",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "Inquiry_Type",
+        "type": "string",
+        "label": "Inquiry Type",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "_successURL",
+        "type": "string",
+        "label": "Success URL",
+        "required": true,
+        "description": "Unique name for the form."
+      },
+      {
+        "component": "text",
+        "name": "_errorURL",
+        "type": "string",
+        "label": "Error URL",
+        "required": true,
+        "description": "Unique name for the form."
+      }
+    ]
+  },
+  {
     "id": "insight",
     "fields": [
       {
@@ -1914,6 +1983,53 @@
         "name": "articleType",
         "label": "Article Type",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stats",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "label": "Title Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "type": "string",
+        "label": "Description"
       }
     ]
   },

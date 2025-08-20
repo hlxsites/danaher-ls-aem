@@ -144,6 +144,12 @@
     ]
   },
   {
+    "id": "form",
+    "components": [
+      "form"
+    ]
+  },
+  {
     "id": "insight",
     "components": [
       "insight-item"
@@ -220,6 +226,12 @@
   {
     "id": "social-media",
     "components": []
+  },
+  {
+    "id": "stats",
+    "components": [
+      "stats"
+    ]
   },
   {
     "id": "tabs-container",
