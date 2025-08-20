@@ -70,22 +70,6 @@
         },
         {
           "component": "text",
-          "name": "Inquiry_Number",
-          "type": "string",
-          "label": "Inquiry Number",
-          "required": true,
-          "description": "Unique name for the form."
-        },
-        {
-          "component": "text",
-          "name": "Page_Track_URL",
-          "type": "string",
-          "label": "Page Track URL",
-          "required": true,
-          "description": "Unique name for the form."
-        },
-        {
-          "component": "text",
           "name": "_successURL",
           "type": "string",
           "label": "Success URL",
