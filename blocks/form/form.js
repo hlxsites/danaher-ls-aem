@@ -213,15 +213,6 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
-  // fetch('/blocks/form/_form.json')
-  // .then(response => response.json())
-  // .then(jsonData => {
-  //   // Now you can get the value!
-  //   const formId = jsonData?.models?.find(m => m.id === 'form')
-  //   ?.fields?.find(f => f.name === 'formId')
-  //   // ?.value;
-  //   console.log('formID:', formId);
-  // });
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
@@ -234,11 +225,10 @@ async function loadSFDCForm(block) {
   const action = actionEl?.textContent;  
   const inquiryTypeEl = actionEl?.nextElementSibling;
   const inquiryType = inquiryTypeEl?.textContent;
-  console.log('inquiryType:', inquiryType);
   const successUrlEl = inquiryTypeEl?.nextElementSibling;
-  const successUrl = successUrlEl?.firstElementChild?.nextElementSibling?.textContent;
+  const successUrl = successUrlEl?.textContent;
   const errorUrlEl = successUrlEl?.nextElementSibling;
-  const errorUrl = errorUrlEl?.firstElementChild?.nextElementSibling?.textContent;
+  const errorUrl = errorUrlEl?.textContent;
   const formEl = div(
     { class: 'relative my-2 mx-0 md:ml-2' },
     form(
