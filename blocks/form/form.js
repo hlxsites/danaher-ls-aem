@@ -226,10 +226,11 @@ async function loadSFDCForm(block) {
   const formId = formIdEl?.firstElementChild?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
   const formName = block?.firstElementChild?.nextElementSibling?.textContent;
-  const clientIdEl = formNameEl?.nextElementSibling;
-  const clientId = clientIdEl?.firstElementChild?.nextElementSibling?.textContent;
+  const clientIdEl = formNameEl?.nextElementSibling;  
+  const clientId = formNameEl?.nextElementSibling?.textContent;
   const deExternalKeyEl = clientIdEl?.nextElementSibling;
-  const deExternalKey = deExternalKeyEl?.firstElementChild?.nextElementSibling?.textContent;
+  const deExternalKey = deExternalKeyEl?.textContent;
+  
   const actionEl = deExternalKeyEl?.nextElementSibling;
   const action = actionEl?.firstElementChild?.nextElementSibling?.textContent;
   const inquiryTypeEl = actionEl?.nextElementSibling?.nextElementSibling;
