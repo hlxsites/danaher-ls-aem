@@ -65,7 +65,8 @@
       "pdp-products",
       "pdp-related-products",
       "pdp-resources",
-      "pdp-specifications"
+      "pdp-specifications",
+      "authorable-pdp-tabs"
     ]
   },
   {
@@ -86,6 +87,12 @@
     "id": "articles-list",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "authorable-pdp-tabs",
+    "components": [
+      "authorable-pdp-tabs-item"
     ]
   },
   {
@@ -182,6 +189,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "pdp-page-tabs",
+    "components": [
+      "pdp-tabs-item"
     ]
   },
   {

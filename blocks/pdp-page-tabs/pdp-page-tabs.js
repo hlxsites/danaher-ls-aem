@@ -19,7 +19,7 @@ function highlightActiveTab(forcedLabel = null) {
 
   const tabEntries = Object.entries(dynamicTabMap)
     .map(([label, selector]) => {
-      const section = document.querySelector(selector);
+      const section = document.querySelector(`#${selector}`);
       return section
         ? {
           label,
@@ -100,7 +100,7 @@ function highlightActiveTab(forcedLabel = null) {
 function updatePageTabs(event) {
   const label = event.target.textContent.trim();
   const targetId = dynamicTabMap[label];
-  const targetEl = document.querySelector(targetId);
+  const targetEl = document.querySelector(`#${targetId}`);
 
   if (targetEl) {
     const offset = 100;
@@ -124,34 +124,58 @@ export default async function decorate(block) {
   block.classList.add('bg-white');
   block.parentElement.parentElement.style.padding = '0px';
 
-  const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  // const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
 
   // Decide tabs based on available data
-  if (response?.raw?.richlongdescription?.trim()) tabsList.push('Description');
-  if (response?.raw?.attributejson?.trim()) tabsList.push('Specifications');
-  if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) tabsList.push('Products');
-  if (response?.raw?.numresources) tabsList.push('Resources');
-  if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
-  tabsList.push('Citations');
-  tabsList.push('FAQs');
-  tabsList.push('Related Products');
+  // if (response?.raw?.richlongdescription?.trim()) tabsList.push('Description');
+  // if (response?.raw?.attributejson?.trim()) tabsList.push('Specifications');
+  // if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)
+  //  tabsList.push('Products');
+  // if (response?.raw?.numresources) tabsList.push('Resources');
+  // if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
+  // tabsList.push('Citations');
+  // tabsList.push('FAQs');
+  // tabsList.push('Related Products');
 
-  // Full map of label to section ID
-  const fullTabMap = {
-    Description: '#description-tab',
-    Specifications: '#specifications-tab',
-    'Product Parts List': '#bundle-list-tab',
-    Products: '#products-tab',
-    Resources: '#resources-tab',
-    Citations: '#citations-tab',
-    FAQs: '#faqs-tab',
-    'Related Products': '#related-products-tab'
-  };
+  // // Full map of label to section ID
+  // const fullTabMap = {
+  //   Description: '#description-tab',
+  //   Specifications: '#specifications-tab',
+  //   'Product Parts List': '#bundle-list-tab',
+  //   Products: '#products-tab',
+  //   Resources: '#resources-tab',
+  //   Citations: '#citations-tab',
+  //   FAQs: '#faqs-tab',
+  //   'Related Products': '#related-products-tab'
+  // };
 
-  // Dynamically build tab map based on actual tabs available
+  // // Dynamically build tab map based on actual tabs available
+  // dynamicTabMap = Object.fromEntries(
+  //   tabsList.map((label) => [label, fullTabMap[label]]),
+  // );
+
+  // Pick authored tab blocks (e.g., tab-item-description, tab-item-specifications)
+  const authoredBlocks = document.querySelectorAll('.tab-authored');
+
+  authoredBlocks.forEach((authoredBlock) => {
+    const titleEl = authoredBlock.querySelector('.authored-tab-title');
+    if (titleEl) {
+      const label = titleEl.textContent.trim();
+      if (label) {
+        tabsList.push({
+          label,
+          selector: `${authoredBlock.querySelector('.authored-tab-type').textContent}-tab`, // use block’s class as selector
+        });
+      }
+      // Remove title <p> so it won’t show in content area
+      titleEl.remove();
+    }
+  });
+
+  // Build dynamic tab map {label: selector}
   dynamicTabMap = Object.fromEntries(
-    tabsList.map((label) => [label, fullTabMap[label]]),
+    tabsList.map((t) => [t.label, t.selector]),
   );
 
   // Build UI
@@ -181,7 +205,7 @@ export default async function decorate(block) {
             } text-base cursor-pointer`,
             onclick: updatePageTabs,
           },
-          tab,
+          tab.label,
         ),
       ),
     );
@@ -192,7 +216,7 @@ export default async function decorate(block) {
     tabsDiv,
   );
 
-  block.replaceChildren();
+  // block.replaceChildren();
   block.append(pageTabsSuperParent);
 
   window.addEventListener('scroll', () => {

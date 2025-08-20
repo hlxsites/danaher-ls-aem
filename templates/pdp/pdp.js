@@ -1,31 +1,146 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
-import { getFrequentlyViewedTogether, getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
+import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
+
+function designPdp() {
+  const main = document.querySelector('main');
+
+  const heroSection = main.querySelector('.pdp-hero');
+  const pageTabs = main.querySelector('.pdp-page-tabs');
+  const carousel = main.querySelector('.pdp-carousel');
+
+  const flexWrapper = div({
+    class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
+  });
+
+  const tabsWrapper = div({
+    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
+  });
+
+  const restWrapper = div({
+    class: 'tabs-right-parent border-l border-gray-200 flex-1',
+  });
+
+  // Insert pageTabs into left wrapper
+  if (pageTabs) {
+    tabsWrapper.appendChild(pageTabs);
+  }
+
+  // Collect all sections between pageTabs and carousel
+  const afterTabsSections = [];
+  let reachedTabs = false;
+  let reachedCarousel = false;
+
+  const allSections = Array.from(main.children);
+
+  allSections.forEach((section) => {
+    if (section === pageTabs) {
+      reachedTabs = true;
+      return;
+    }
+    if (section === carousel) {
+      reachedCarousel = true;
+    }
+
+    if (reachedTabs && !reachedCarousel) {
+      // Goes inside right wrapper
+      restWrapper.appendChild(section);
+    } else if (reachedCarousel) {
+      // Goes outside (after flexWrapper)
+      afterTabsSections.push(section);
+    }
+  });
+
+  flexWrapper.appendChild(tabsWrapper);
+  flexWrapper.appendChild(restWrapper);
+
+  // Place flexWrapper after hero
+  heroSection?.after(flexWrapper);
+
+  // Place carousel + later sections after flexWrapper
+  afterTabsSections.forEach((section) => {
+    flexWrapper.after(section);
+  });
+}
+
+
 
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   console.log(response.raw.sku);
 
   // PDP Hero
-  const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
-  document.querySelector('main').append(pdpHeroBlock);
+  // const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
+  // document.querySelector('main').append(pdpHeroBlock);
 
   // PDP Page tabs
-  const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
-  document.querySelector('main').append(pdpPageTabsBlock);
+  // const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
+  // document.querySelector('main').append(pdpPageTabsBlock);
+  const superParent = document.querySelector('.pdp-page-tabs');
+  if (superParent) {
+    [...superParent.children]?.forEach((divEle) => {
+      divEle.classList.add('hidden');
+    });
+  }
+
+  const tabs = document.querySelector('.pdp-page-tabs')?.children;
+
+  if (tabs) {
+    Array.from(tabs).forEach((tabItem) => {
+      // Overview / Description
+      tabItem.children[0].classList.add('authored-tab-type');
+      tabItem.children[2].classList.add('authored-tab-title');
+      if (tabItem.children[0]?.textContent === 'overview') {
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-overview';
+        const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
+        document.querySelector('main').append(pdpDescriptionBlock);
+      } else if (tabItem.children[0]?.textContent === 'specifications') {
+        // Specifications
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-specifications';
+        const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
+        document.querySelector('main').append(pdpSpecificationsBlock);
+      } else if (tabItem.children[0]?.textContent === 'parts') {
+        // product parts list
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-parts';
+        const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
+        document.querySelector('main').append(pdpBundleList);
+      } else if (tabItem.children[0]?.textContent === 'citations') {
+        // Citations
+        tabItem.classList.add('tab-authored');
+        tabItem.id = 'authored-citations';
+        const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
+        document.querySelector('main').append(pdpCitations);
+      } else if (tabItem.children[0]?.textContent === 'faqs') {
+        // FAQs
+        tabItem.classList.add('tabs-authored');
+        tabItem.id = 'authored-faqs';
+        const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+        document.querySelector('main').append(pdpFaqs);
+      } else if (tabItem.children[0]?.textContent === 'relatedproducts') {
+        // Related Products
+        tabItem.classList.add('tabs-authored');
+        tabItem.id = 'authored-relatedproducts';
+        const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
+        document.querySelector('main').append(pdpRelatedProducts);
+      }
+    });
+  }
 
   // Overview / Description
-  if (response?.raw?.richlongdescription) {
-    const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
-    document.querySelector('main').append(pdpDescriptionBlock);
-  }
+  // if (response?.raw?.richlongdescription) {
+  //   const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
+  //   document.querySelector('main').append(pdpDescriptionBlock);
+  // }
 
   // Specifications
-  if (response?.raw?.numattributes > 0) {
-    const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
-    document.querySelector('main').append(pdpSpecificationsBlock);
-  }
+  // if (response?.raw?.numattributes > 0) {
+  //   const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
+  //   document.querySelector('main').append(pdpSpecificationsBlock);
+  // }
 
   // Products
   if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
@@ -40,19 +155,19 @@ function loadPdpBlocks() {
   }
 
   // Bundle parts list
-  if (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0) {
-    const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
-    document.querySelector('main').append(pdpBundleList);
-  }
+  // if (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0) {
+  //   const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
+  //   document.querySelector('main').append(pdpBundleList);
+  // }
 
-  const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-  document.querySelector('main').append(pdpCitations);
+  // const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
+  // document.querySelector('main').append(pdpCitations);
 
-  const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-  document.querySelector('main').append(pdpFaqs);
+  // const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
+  // document.querySelector('main').append(pdpFaqs);
 
-  const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-  document.querySelector('main').append(pdpRelatedProducts);
+  // const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
+  // document.querySelector('main').append(pdpRelatedProducts);
 
   const pdpCarousel = div(buildBlock('pdp-carousel', { elems: [] }));
   document.querySelector('main').append(pdpCarousel);
@@ -71,6 +186,7 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
+    designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -86,6 +202,7 @@ export default async function buildAutoBlocks() {
       }
     });
   });
-  getFrequentlyViewedTogether();
+  // getFrequentlyViewedTogether();
   loadPdpBlocks();
+  designPdp();
 }
