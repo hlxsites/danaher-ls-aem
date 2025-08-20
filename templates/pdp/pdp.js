@@ -3,6 +3,68 @@ import { div } from '../../scripts/dom-builder.js';
 import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 
+function designPdp() {
+  const main = document.querySelector('main');
+
+  const heroSection = main.querySelector('.pdp-hero');
+  const pageTabs = main.querySelector('.pdp-page-tabs');
+  const carousel = main.querySelector('.pdp-carousel');
+
+  const flexWrapper = div({
+    class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
+  });
+
+  const tabsWrapper = div({
+    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
+  });
+
+  const restWrapper = div({
+    class: 'tabs-right-parent border-l border-gray-200 flex-1',
+  });
+
+  // Insert pageTabs into left wrapper
+  if (pageTabs) {
+    tabsWrapper.appendChild(pageTabs);
+  }
+
+  // Collect all sections between pageTabs and carousel
+  const afterTabsSections = [];
+  let reachedTabs = false;
+  let reachedCarousel = false;
+
+  const allSections = Array.from(main.children);
+
+  allSections.forEach((section) => {
+    if (section === pageTabs) {
+      reachedTabs = true;
+      return;
+    }
+    if (section === carousel) {
+      reachedCarousel = true;
+    }
+
+    if (reachedTabs && !reachedCarousel) {
+      // Goes inside right wrapper
+      restWrapper.appendChild(section);
+    } else if (reachedCarousel) {
+      // Goes outside (after flexWrapper)
+      afterTabsSections.push(section);
+    }
+  });
+
+  flexWrapper.appendChild(tabsWrapper);
+  flexWrapper.appendChild(restWrapper);
+
+  // Place flexWrapper after hero
+  heroSection?.after(flexWrapper);
+
+  // Place carousel + later sections after flexWrapper
+  afterTabsSections.forEach((section) => {
+    flexWrapper.after(section);
+  });
+}
+
+
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   console.log(response.raw.sku);
@@ -123,6 +185,7 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
+   // designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -140,4 +203,5 @@ export default async function buildAutoBlocks() {
   });
   // getFrequentlyViewedTogether();
   loadPdpBlocks();
+ // designPdp();
 }
