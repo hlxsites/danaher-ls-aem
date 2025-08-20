@@ -24,9 +24,10 @@ export default function renderProductListCard(item) {
         'md:w-full w-[100px] h-[100px] left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
-      onclick: () => {
-        window.location.href = item?.clickUri;
-      },
+      onclick: () => window.open(
+        item.clickUri,
+        item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+      ),
     });
     imageElement.addEventListener('error', () => {
       imageElement.src = fallbackImagePath;
@@ -79,9 +80,10 @@ export default function renderProductListCard(item) {
     div(
       {
         class: 'text-black font-medium leading-7 line-clamp-2 text-xl cursor-pointer',
-        onclick: () => {
-          window.location.href = item?.clickUri;
-        },
+        onclick: () => window.open(
+          item.clickUri,
+          item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        ),
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -109,6 +111,7 @@ export default function renderProductListCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
+        target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class:
           'group text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
       },
@@ -154,9 +157,10 @@ export default function renderProductListCard(item) {
   const desktopTitle = div(
     {
       class: 'text-black font-medium leading-7 text-xl line-clamp-2 cursor-pointer',
-      onclick: () => {
-        window.location.href = item?.clickUri;
-      },
+      onclick: () => window.open(
+        item.clickUri,
+        item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+      ),
     },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
@@ -175,6 +179,7 @@ export default function renderProductListCard(item) {
   const desktopviewdetail = a(
     {
       href: makePublicUrl(item.path || item.clickUri),
+      target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
       class:
         'group text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
     },

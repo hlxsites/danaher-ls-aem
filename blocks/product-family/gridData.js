@@ -24,9 +24,10 @@ export default function renderProductGridCard(item) {
       src: src || fallbackImagePath,
       alt: alt || 'Product image not available',
       class: 'w-full h-40 object-contain',
-      onclick: () => {
-        window.location.href = item?.clickUri;
-      },
+      onclick: () => window.open(
+        item.clickUri,
+        item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+      ),
     });
 
     // Add error handler for fallback
@@ -45,9 +46,10 @@ export default function renderProductGridCard(item) {
     p(
       {
         class: 'text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
-        onclick: () => {
-          window.location.href = item?.clickUri;
-        },
+        onclick: () => window.open(
+          item.clickUri,
+          item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        ),
       },
       (item?.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -99,6 +101,7 @@ export default function renderProductGridCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
+        target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
       },
       'View Details',
