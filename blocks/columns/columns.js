@@ -4,6 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
+import loadSFDCForm from '../../blocks/form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -684,6 +685,7 @@ export default function decorate(block) {
         } else {
           row.classList.add('h-full');
           const aTag = row.querySelectorAll('p > a');
+          loadSFDCForm(row);
           const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
           if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
             loadForm(row, aTag);
