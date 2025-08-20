@@ -185,7 +185,7 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
-   // designPdp();
+    designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -203,5 +203,5 @@ export default async function buildAutoBlocks() {
   });
   // getFrequentlyViewedTogether();
   loadPdpBlocks();
- // designPdp();
+  designPdp();
 }
