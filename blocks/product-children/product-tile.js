@@ -311,7 +311,7 @@ export default class ProductTile extends HTMLElement {
         ${this.result?.raw?.objecttype === 'Bundle' ? `
           <div class='full-specification'>
           ${!this.skuShowDetail
-    ? '<span class=\'disabled-link\'>See Full Specifications</span>'
+    ? `<span class='disabled-link'>See Full Specifications</span>`
     : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
           </div>
         ` : ''}
@@ -329,7 +329,7 @@ export default class ProductTile extends HTMLElement {
         </div>
         <div class='full-specification'>
           ${!this.skuShowDetail
-    ? '<span class=\'disabled-link\'>See Full Specifications</span>'
+    ? `<button class='btn btn-outline-brand disabled-link'>Learn More</button>`
     : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
         </div>
         ` : ''}
@@ -340,7 +340,7 @@ export default class ProductTile extends HTMLElement {
       <atomic-field-condition class='family-wrapper' must-match-objecttype='Family'>
       <div class='middle-align'>
         ${!this.skuShowDetail
-    ? '<button class=\'btn btn-outline-brand disabled-link\'>Learn More</button>'
+    ? `<button class='btn btn-outline-brand disabled-link'>Learn More</button>`
     : `<a href="${this.result?.ClickUri}"><button class="btn btn-outline-brand">Learn More</button></a>`}
       </div>
       </atomic-field-condition>
