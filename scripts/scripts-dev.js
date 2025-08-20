@@ -902,7 +902,7 @@ function loadUTMprams() {
   });
 }
 // UTM Paramaters check - end
-async function designPdp() {
+ export async function designPdp() {
   const main = document.querySelector('main');
 
   const allSections = Array.from(main.querySelectorAll('.section'));
@@ -1039,7 +1039,7 @@ async function loadPage() {
   
   loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
-  await designPdp();
+  //await designPdp();
 }
 
 /**
