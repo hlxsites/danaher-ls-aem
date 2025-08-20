@@ -2955,6 +2955,18 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin: 7px;
 }
 
+.m-3 {
+  margin: 0.75rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
 .\!mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -3329,6 +3341,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   gap: 30px;
 }
 
+.gap-7 {
+  gap: 1.75rem;
+}
+
 .gap-x-6 {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem;
@@ -3432,6 +3448,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-b-4 {
+  border-bottom-width: 4px;
 }
 
 .border-solid {
@@ -3585,6 +3605,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding: 22px;
 }
 
+.p-5 {
+  padding: 1.25rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -3711,6 +3735,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
 }
 
 .text-left {
@@ -4167,6 +4195,10 @@ main .section.top-border {
     margin: 0px;
   }
 
+  .sm\:m-0 {
+    margin: 0px;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -4202,6 +4234,10 @@ main .section.top-border {
 
   .sm\:pt-8 {
     padding-top: 2rem;
+  }
+
+  .sm\:pl-0 {
+    padding-left: 0px;
   }
 
   .sm\:text-5xl {

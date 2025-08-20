@@ -62,7 +62,7 @@ function createCardItem(item, defaultCard) {
             class: 'payment-card-icon flex items-center',
           },
           span({
-            class: `icon flex-none icon-${itemObject.brand} max-w-[71px] h-[50px] w-full`,
+            class: `icon flex-none icon-${itemObject.brand} max-w-16 h-12 w-full`,
           }),
         ),
         div(
@@ -131,7 +131,7 @@ const paymentModule = async () => {
       h2(
         {
           class:
-            'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0 pb-6',
+            'text-black text-left text-4xl font-normal leading-12 p-0 m-0 pb-6',
         },
         'Choose your payment method',
       ),
@@ -188,7 +188,7 @@ const paymentModule = async () => {
     );
     const savedStripeCardsList = div(
       {
-        class: 'w-full gap-6 flex flex-col max-h-[642px] pr-[10px] overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
+        class: 'w-full gap-6 flex flex-col max-h-40] pr-2 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
         id: 'savedStripeCardsList',
       },
     );
@@ -288,12 +288,6 @@ const paymentModule = async () => {
           action: '',
           method: 'POST',
         },
-        // h3(
-        //   {
-        //     class: 'text-2xl font-medium text-black leading-[48px] m-0 p-0',
-        //   },
-        //   'Credit Card Information',
-        // ),
         buildInputElement(
           'name',
           'Name on Card',
@@ -366,7 +360,7 @@ const paymentModule = async () => {
     });
     // adding new card form
     newStripeCardsWrapper.append(newStripeCardForm);
-    newStripeCardsWrapper.append(button({ class: 'w-full m-0 shipping-address-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-[239px]', id: 'showStripePaymentList' }, 'Back'));
+    newStripeCardsWrapper.append(button({ class: 'w-full m-0 shipping-address-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-xs', id: 'showStripePaymentList' }, 'Back'));
     stripeCardsContainer.append(newStripeCardsWrapper);
 
     // adding saved cards header and list
@@ -405,7 +399,7 @@ const paymentModule = async () => {
               ),
             ),
             span({
-              class: 'icon flex-none icon-payment-cards max-w-[115px] w-full',
+              class: 'icon flex-none icon-payment-cards max-w-28 w-full',
             }),
           ),
         );
@@ -494,7 +488,7 @@ const paymentModule = async () => {
             'Invoice',
             'radio',
             'paymentMethod',
-            true,
+            false,
             false,
             'mt-6',
             'invoice',
@@ -532,39 +526,77 @@ const paymentModule = async () => {
           inpuLabel?.classList.add('text-base', 'font-semibold');
         });
       decorateIcons(stripeCardsWrapper);
-      paymentMethodsWrapper?.addEventListener('click', async (c) => {
-        setTimeout(async () => {
-          c.preventDefault();
-          const eventTarget = c.target;
-          const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
-          const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
-          if (!eventTarget.checked) {
-            // handle invoice payment method
-            if (eventTarget?.id === 'invoice') {
-              showPreLoader();
-              getInvoiceNumberWrapper?.classList?.remove('hidden');
-              getStripeCardsWrapper?.classList?.add('hidden');
-            }
+      paymentMethodsWrapper?.addEventListener('change', (e) => {
+ if (e.target.type !== 'radio') return; // only handle radios
+ const targetRadioId = e.target.id;
+ const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
+ const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
+ if (targetRadioId === 'invoice') {
+   showPreLoader();
+   getInvoiceNumberWrapper?.classList?.remove('hidden');
+   getStripeCardsWrapper?.classList?.add('hidden');
+   removePreLoader();
+ }
+ if (targetRadioId === 'stripe') {
+   showPreLoader();
+   getStripeCardsWrapper?.classList?.remove('hidden');
+   getInvoiceNumberWrapper?.classList?.add('hidden');
+   removePreLoader();
+ }
+ });
+//       paymentMethodsWrapper?.querySelectorAll('input')?.addEventListener('click', (c) => {
+//         let targetRadio;
+//         let targetRadioId;
 
-            // handle stripe payment method
-            if (eventTarget?.id === 'stripe') {
-              showPreLoader();
-              getStripeCardsWrapper?.classList?.remove('hidden');
-              getInvoiceNumberWrapper?.classList.add('hidden');
-            }
-            c.target.checked = true;
-          } else {
-            getInvoiceNumberWrapper?.classList.add('hidden');
-            c.target.checked = false;
-          }
-          removePreLoader();
-          return true;
-        }, 0);
-      });
+//         const eventTarget = c.target;
+//         // If label clicked, find associated radio
+
+//         if (eventTarget.tagName === 'LABEL') {
+//           const radioId = eventTarget.getAttribute('for');
+
+//           targetRadio = document.getElementById(radioId);
+
+//           targetRadioId = radioId;
+//         }
+
+//         // If radio clicked directly
+
+//         if (eventTarget.type === 'radio') {
+//           targetRadio = eventTarget;
+
+//           targetRadioId = eventTarget.id;
+//         }
+
+//         if (!targetRadio) return;
+
+//         const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
+
+//         const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
+
+//         if (targetRadioId === 'invoice') {
+//           showPreLoader();
+
+//           getInvoiceNumberWrapper?.classList?.remove('hidden');
+
+//           getStripeCardsWrapper?.classList?.add('hidden');
+//           targetRadio.checked = true;
+//           removePreLoader();
+//         }
+
+//         if (targetRadioId === 'stripe') {
+//           showPreLoader();
+
+//           getStripeCardsWrapper?.classList?.remove('hidden');
+
+//           getInvoiceNumberWrapper?.classList?.add('hidden');
+//           targetRadio.checked = true;
+//           removePreLoader();
+//         }
+//       });
     }
     const savedCardsSearch = paymentMethodsWrapper?.querySelector('#search');
     if (savedCardsSearch) {
-      savedCardsSearch.className = 'min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600 outline-none';
+      savedCardsSearch.className = 'min-w-xs h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600 outline-none';
     }
 
     // show new cards wrapper when clicked add new card

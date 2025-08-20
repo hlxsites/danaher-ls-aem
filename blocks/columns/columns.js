@@ -615,7 +615,6 @@ export default function decorate(block) {
     div.parentElement.replaceWith(div);
   });
 
-  // block.classList.add('flex', 'items-center', 'w-full', 'min-h-[350px]', 'gap-6');
 
   // Universal column detection (supports wrappers)
   function getColumns(block) {

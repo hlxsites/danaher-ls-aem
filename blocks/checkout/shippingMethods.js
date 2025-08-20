@@ -148,7 +148,7 @@ const shippingMethodsModule = async () => {
           'relative flex flex-col mb-6',
       },
       h2({
-        class: 'text-black text-left text-4xl font-normal leading-[48px] p-0 m-0  pb-6',
+        class: 'text-black text-left text-4xl font-normal leading-12 p-0 m-0  pb-6',
       }, 'Confirm your shipping method(s)'),
       p(
         {},
@@ -158,7 +158,7 @@ const shippingMethodsModule = async () => {
 
     const moduleToggleButtonsWrapper = div(
       {
-        class: 'flex justify-between mt-[50px]',
+        class: 'flex justify-between mt-12',
       },
       div(
         {
@@ -304,7 +304,7 @@ const shippingMethodsModule = async () => {
               const methodData = div(
                 {
                   id: method.id,
-                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
+                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-46 border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                     ? highlightDefaultShippingMethod
                     : 'border-gray-400'
                   }`,

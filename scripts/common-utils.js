@@ -104,7 +104,7 @@ function to append notification container
 */
 const generateNotification = div(
   {
-    class: 'fixed top-[170px] right-4 max-w-xs bg-blue-600 text-white p-4 rounded shadow-lg z-50 transform -translate-y-full transition-transform duration-1000 ease-in-out hidden',
+    class: 'fixed top-42 right-4 max-w-xs bg-blue-600 text-white p-4 rounded shadow-lg z-50 transform -translate-y-full transition-transform duration-1000 ease-in-out hidden',
     id: 'notificationWrapper',
   },
   notificationContainer(),
@@ -170,7 +170,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
     id: 'utilityModal',
   });
   const modalContainer = div({
-    class: 'relative max-w-[792px] w-full items-center bg-white p-8',
+    class: 'relative max-w-md w-full items-center bg-white p-8',
     id: 'utilityModalWrapper',
   });
 
@@ -917,7 +917,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
-          ' min-w-[320px] h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600',
+          ' min-w-xs h-10 pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600  border border-solid border-gray-600',
         'aria-label': dtName,
       }),
     ),

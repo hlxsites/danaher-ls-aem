@@ -715,7 +715,7 @@ export const shippingAddressModule = async () => {
     h2(
       {
         class:
-          'text-black text-left text-3xl font-normal leading-[48px] p-0 m-0  pb-6',
+          'text-black text-left text-3xl font-normal leading-12 p-0 m-0  pb-6',
       },
       'Shipping address',
     ),
@@ -734,7 +734,7 @@ export const shippingAddressModule = async () => {
     },
     h2(
       {
-        class: 'text-black text-3xl text-left font-normal leading-[48px]',
+        class: 'text-black text-3xl text-left font-normal leading-12',
       },
       'Bill to address',
     ),

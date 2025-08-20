@@ -385,6 +385,11 @@
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.columns-wrapper :is(.border-gray-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
 .columns-wrapper :is(.bg-danaherblue-900) {
   --tw-bg-opacity: 1;
   background-color: rgb(6 28 68 / var(--tw-bg-opacity));

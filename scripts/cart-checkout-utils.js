@@ -954,7 +954,7 @@ export const getPromotionDetails = async (promotionId) => {
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
     {
-      class: 'flex w-full flex-col gap-[30px]',
+      class: 'flex w-full flex-col gap-7',
       id: 'taxExemptWrapper',
     },
     /*
@@ -2237,7 +2237,7 @@ get price type if its net or gross
     div(
       {
         class:
-          'p-[22px] flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-[5px] justify-start items-start gap-y-6',
+          'p-5 flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-4 justify-start items-start gap-y-6',
         id: 'checkoutSummaryWrapper',
       },
       div(
@@ -2785,19 +2785,19 @@ export const cartItemsContainer = (cartItemValue) => {
     if (cartItemValue.listPrice.value !== cartItemValue.salePrice.value) {
       return div(
         {
-          class: 'w-[150px] justify-start text-black text-base font-semibold',
+          class: 'w-38 justify-start text-black text-base font-semibold',
         },
         div(
           {
             class:
-              'w-[150px] justify-start text-gray-500 text-base font-semibold item line-through',
+              'w-38 justify-start text-gray-500 text-base font-semibold item line-through',
           },
           `$${cartItemValue.listPrice.value}`,
         ),
         div(
           {
             class:
-              'unit-price w-[150px] justify-start text-black text-base',
+              'unit-price w-38 justify-start text-black text-base',
           },
           `$${cartItemValue.salePrice.value}`,
         ),
@@ -2806,7 +2806,7 @@ export const cartItemsContainer = (cartItemValue) => {
 
     return div(
       {
-        class: 'w-[150px] justify-start text-black text-base font-semibold',
+        class: 'w-38 justify-start text-black text-base font-semibold',
       },
       //  div(
       //     {
@@ -2818,7 +2818,7 @@ export const cartItemsContainer = (cartItemValue) => {
       div(
         {
           class:
-            'unit-price w-[150px] justify-start text-black text-base',
+            'unit-price w-38 justify-start text-black text-base',
         },
         `$${cartItemValue.salePrice.value}`,
       ),
@@ -2841,7 +2841,7 @@ export const cartItemsContainer = (cartItemValue) => {
         },
         div(
           {
-            class: 'justify-start text-black text-base font-semibold truncate m-[5px]',
+            class: 'justify-start text-black text-base font-semibold truncate m-1',
           },
           img({
             class: 'w-full h-auto',
@@ -2872,7 +2872,7 @@ export const cartItemsContainer = (cartItemValue) => {
     ),
     div(
       {
-        class: 'sm:pl-[0px] pl-[13px] inline-flex justify-start items-center',
+        class: 'sm:pl-0 pl-3 inline-flex justify-start items-center',
       },
       div(
         {
@@ -2884,7 +2884,7 @@ export const cartItemsContainer = (cartItemValue) => {
       unitPriceDiv(),
       div(
         {
-          class: 'total-price w-[80px] justify-start text-black text-base font-semibold sm:m-[0px] m-[7px]',
+          class: 'total-price w-20 justify-start text-black text-base font-semibold sm:m-0 m-3',
           // id: 'total-price',
         },
         `$${cartItemValue.itemQuantity * cartItemValue.salePrice.value}`,
