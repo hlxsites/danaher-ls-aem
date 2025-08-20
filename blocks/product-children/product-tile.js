@@ -329,7 +329,7 @@ export default class ProductTile extends HTMLElement {
         </div>
         <div class='full-specification'>
           ${!this.skuShowDetail
-    ? `<button class='btn btn-outline-brand disabled-link'>Learn More</button>`
+    ? `<span class='disabled-link'>See Full Specifications</span>`
     : `<a href="${this.result?.ClickUri}#specifications">See Full Specifications</a>`}
         </div>
         ` : ''}
