@@ -304,7 +304,7 @@ const shippingMethodsModule = async () => {
               const methodData = div(
                 {
                   id: method.id,
-                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-46 border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
+                  class: `flex relative flex-col w-full shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-xs border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                     ? highlightDefaultShippingMethod
                     : 'border-gray-400'
                   }`,

@@ -3230,6 +3230,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   max-width: 20rem;
 }
 
+.max-w-2xl {
+  max-width: 42rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -4188,6 +4192,16 @@ main .section.top-border {
 
 .peer:checked ~ .peer-checked\:block {
   display: block;
+}
+
+.peer:checked ~ .peer-checked\:bg-danaherpurple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+}
+
+.peer:hover ~ .peer-hover\:bg-danaherpurple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 640px) {

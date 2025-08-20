@@ -170,7 +170,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
     id: 'utilityModal',
   });
   const modalContainer = div({
-    class: 'relative max-w-md w-full items-center bg-white p-8',
+    class: 'relative max-w-2xl w-full items-center bg-white p-8',
     id: 'utilityModalWrapper',
   });
 
@@ -858,7 +858,7 @@ export const buildInputElement = (
     label(
       {
         for: fieldLable,
-        class: 'font-normal text-sm leading-4',
+        class: 'font-normal text-sm peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 leading-4',
       },
       field,
       dataRequired,
@@ -871,7 +871,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
-        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-600  px-3 py-2',
+        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-600 peer px-3 py-2',
       'aria-label': dtName,
     }),
     span({
