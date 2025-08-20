@@ -2,7 +2,6 @@ import { buildBlock } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
-import { designPdp } from '../../scripts/scripts-dev.js';
 
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
@@ -124,7 +123,6 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
-    designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -142,5 +140,4 @@ export default async function buildAutoBlocks() {
   });
   // getFrequentlyViewedTogether();
   loadPdpBlocks();
-  designPdp();
 }
