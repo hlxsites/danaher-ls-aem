@@ -65,6 +65,7 @@ function designPdp() {
 }
 
 
+
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   console.log(response.raw.sku);
@@ -185,7 +186,7 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
-   // designPdp();
+    designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -203,5 +204,5 @@ export default async function buildAutoBlocks() {
   });
   // getFrequentlyViewedTogether();
   loadPdpBlocks();
- // designPdp();
+  designPdp();
 }
