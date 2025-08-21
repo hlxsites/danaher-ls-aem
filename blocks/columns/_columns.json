@@ -10,20 +10,7 @@
             "template": {
               "class": { "$ref": "classes" },
               "rows": { "$ref": "rows" },
-              "children": [
-             {
-            "component": "column",
-            "fields": {
-              "blocks": []
-            }
-          },
-          {
-            "component": "column",
-            "fields": {
-              "blocks": []
-            }
-          }
-        ]
+              "columns": "2"
             }
           }
         }
@@ -78,8 +65,8 @@
           "valueType": "string",
           "default": "fiftyfifty",
           "options": [
-            { "name": "seventythirty", "value": "seventythirty" },
-            { "name": "thirtyseventy", "value": "thirtyseventy" }
+            { "name": "70/30 Split", "value": "seventythirty" },
+            { "name": "30/70 Split", "value": "thirtyseventy" }
           ],
           "condition": {
             "field": "rows",

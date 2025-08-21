@@ -263,20 +263,7 @@
                   "rows": {
                     "$ref": "rows"
                   },
-                  "children": [
-                    {
-                      "component": "column",
-                      "fields": {
-                        "blocks": []
-                      }
-                    },
-                    {
-                      "component": "column",
-                      "fields": {
-                        "blocks": []
-                      }
-                    }
-                  ]
+                  "columns": "2"
                 }
               }
             }
