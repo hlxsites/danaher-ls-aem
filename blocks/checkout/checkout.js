@@ -1,6 +1,6 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
+import { showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { loadStripeScript } from '../../scripts/stripe_utils.js';
 import { changeStep } from '../../scripts/cart-checkout-utils.js';
@@ -47,7 +47,7 @@ export default async function decorate(block) {
   */
   const modulesContainer = div({
     class:
-      'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-full md:w-7/10 p-6',
+      'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-full lg:w-7/10 p-6',
   });
 
   const progressBar = progressModule();
@@ -63,7 +63,7 @@ export default async function decorate(block) {
       modules.forEach((module) => {
         if (module.getAttribute('id') === 'checkout-details') {
           module.className = '';
-          module.className = 'checkout-summary-wrapper h-max flex justify-center w-full md:w-[30%]';
+          module.className = 'checkout-summary-wrapper h-max flex justify-center w-full lg:w-[30%]';
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);

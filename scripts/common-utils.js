@@ -848,12 +848,13 @@ export const buildInputElement = (
   required,
   dtName,
   value = '',
+  classes = '',
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   const hiddenField = inputType === 'hidden' ? 'hidden' : '';
   return div(
     {
-      class: `space-y-2 field-wrapper    ${hiddenField}`,
+      class: `space-y-2 field-wrapper    ${hiddenField} ${classes}`,
     },
     label(
       {

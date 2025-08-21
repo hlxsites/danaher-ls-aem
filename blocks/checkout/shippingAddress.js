@@ -39,8 +39,55 @@ import {
   updateAddresses,
   updateAddressToDefault,
   updateCheckoutSummary,
+  loadGmapsScript,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
+
+// load google maps script
+await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBAwQawztgIw0AobQk8q-2OlEzuzQ&libraries=places');
+
+// google maps api to autopopulate fields
+function initGmapsAutocomplete(addressType) {
+  console.log(' init gmaps autocomplete');
+
+  const gInput = document.getElementById('addressLine1');
+  const autocomplete = new google.maps.places.Autocomplete(gInput, {
+    types: ['address'], // restrict to addresses
+    componentRestrictions: { country: 'in' },
+    // optional: restrict to India
+  });
+
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+
+    const components = place.address_components;
+
+    const getComponent = (type) => {
+      const comp = components.find((c) => c.types.includes(type));
+      return comp ? comp.long_name : '';
+    };
+
+    const streetNumber = getComponent('street_number');
+    const street = getComponent('route');
+    const city = getComponent('locality') || getComponent('administrative_area_level_2');
+    const state = getComponent('locality') || getComponent('administrative_area_level_1');
+    const postcode = getComponent('postal_code');
+    const country = getComponent('country');
+
+    const getFormId = document.querySelector(`#${addressType}AddressForm`);
+    if (getFormId) {
+      getFormId.querySelectorAll('.field-wrapper')?.forEach((fd) => {
+        if (fd?.classList.contains('!w-full')) {
+          fd.classList.remove('!w-full');
+        }
+        if (fd?.classList.contains('hidden')) {
+          fd.classList.remove('hidden');
+        }
+      });
+    }
+  });
+}
+
 /*
  :::::::::::::::::::::::::::::
  Render Adress list for the address modal for shipping/billing
@@ -477,6 +524,7 @@ click use address button to set the address as default for current order
         const addressFormModal = await addressForm(type, '');
         if (addressFormModal) {
           createModal(addressFormModal, true, true);
+          initGmapsAutocomplete(type);
         }
       });
     }
@@ -572,6 +620,7 @@ export const addressListModal = async (type) => {
         const addressFormModal = await addressForm(type, '');
         if (addressFormModal) {
           createModal(addressFormModal, true, true);
+          initGmapsAutocomplete(type);
         }
       });
     }
@@ -828,9 +877,8 @@ export const shippingAddressModule = async () => {
  get addresses which are set as use address for the current order
  ::::::::::::::
  */
-      if (getCurrentBasketDetails.data.totalProductQuantity === 0) {
+      if (getCurrentBasketDetails?.data?.totalProductQuantity === 0) {
         window.location.href = '/us/en/e-buy/cartlanding';
-        return false;
       }
       /*
   *

@@ -52,6 +52,34 @@ import {
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
+/*
+*
+*
+  Load Google Maps script dynamically
+*
+*
+*/
+export function loadGmapsScript(src) {
+  return new Promise((resolve, reject) => {
+    const existingScript = document.querySelector(`script[src="${src}"]`);
+    if (existingScript) {
+      if (window.Stripe) {
+        resolve(true);
+      } else {
+        existingScript.addEventListener('load', () => resolve(true));
+        existingScript.addEventListener('error', reject);
+      }
+      return;
+    }
+
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => resolve(true);
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   const logoDivInner = div(
     {
@@ -85,13 +113,13 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
     ),
     div(
       {
-        class: 'hidden sm:block w-48 justify-start text-black text-base font-semibold',
+        class: 'hidden sm:block w-26 justify-start text-black text-base font-semibold',
       },
       'Unit Price',
     ),
     div(
       {
-        class: 'hidden sm:block w-[3rem] justify-start text-black text-base font-semibold',
+        class: 'hidden sm:block w-[7rem] justify-start text-right text-black text-base font-semibold',
       },
       'Total',
     ),
@@ -840,6 +868,7 @@ export const buildCountryStateSelectBox = (
   dtName,
   itemsList,
   selected = '',
+  classes = '',
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
 
@@ -858,7 +887,7 @@ export const buildCountryStateSelectBox = (
   );
 
   return div(
-    { class: 'space-y-2 field-wrapper  mt-4' },
+    { class: ` ${classes} space-y-2 field-wrapper  mt-4` },
     label(
       {
         for: lable,
@@ -1724,6 +1753,7 @@ export async function addressForm(type, data = {}) {
       true,
       'addressLine1',
       data ? data.addressLine1 : '',
+      '!w-full',
     ),
     buildInputElement(
       'addressLine2',
@@ -1734,6 +1764,7 @@ export async function addressForm(type, data = {}) {
       false,
       'addressLine2',
       data ? data.addressLine2 : '',
+      'hidden',
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
@@ -1744,6 +1775,7 @@ export async function addressForm(type, data = {}) {
       false,
       `preferred${capitalizeFirstLetter(type)}Address`,
       true,
+      'hidden',
     ),
     buildCountryStateSelectBox(
       'countryCode',
@@ -1753,6 +1785,7 @@ export async function addressForm(type, data = {}) {
       'countryCode',
       countriesList,
       data?.countryCode ?? '',
+      'hidden',
     ),
     buildCountryStateSelectBox(
       'mainDivision',
@@ -1762,6 +1795,7 @@ export async function addressForm(type, data = {}) {
       'mainDivision',
       statesList,
       data?.mainDivision ?? '',
+      'hidden',
     ),
     buildInputElement(
       'city',
@@ -1772,6 +1806,7 @@ export async function addressForm(type, data = {}) {
       true,
       'city',
       data ? data.city : '',
+      'hidden',
     ),
     buildInputElement(
       'postalCode',
@@ -1782,6 +1817,7 @@ export async function addressForm(type, data = {}) {
       true,
       'postalCode',
       data ? data.postalCode : '',
+      'hidden',
     ),
     buildButton(
       'Save',
@@ -2159,7 +2195,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2243,13 +2279,6 @@ get price type if its net or gross
       },
       'Login / Create Account',
     ),
-    // button(
-    //   {
-    //     class:
-    //       "btn btn-outline-primary border-solid border-purple rounded-full px-6",
-    //   },
-    //   "Checkout as Guest"
-    // ),
     hr({
       class: 'border-black-300',
     }),
@@ -2469,7 +2498,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2558,7 +2587,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',

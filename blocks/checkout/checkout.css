@@ -368,6 +368,14 @@
   width: 10rem
 }
 
+.checkout :is(.w-\[7rem\]) {
+  width: 7rem
+}
+
+.checkout :is(.\!w-full) {
+  width: 100% !important
+}
+
 .checkout :is(.min-w-\[320px\]) {
   min-width: 320px
 }
@@ -1122,6 +1130,10 @@
 }
 
 @media (min-width: 1024px) {
+  .checkout :is(.lg\:w-\[30\%\]) {
+    width: 30%
+  }
+
   .checkout :is(.lg\:flex-row) {
     flex-direction: row
   }

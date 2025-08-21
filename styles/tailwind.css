@@ -938,6 +938,7 @@
  }
  .checkout-step {
    width: 30px;
+   border: 1px solid;
    height: 30px;
    border-radius: 50%;
    background-color: lightgray;
@@ -955,7 +956,7 @@
    display: block;
    height: 9px;
    background-color: rgb(117 35 255);
-   margin: 10px 0px 10px 10px !important;
+   margin: 9px 0px 9px 9px !important;
    border-radius: 50%;
  }
  .checkout-step.active {
