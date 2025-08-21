@@ -9,8 +9,7 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" },
-              "default": "2"
+              "rows": { "$ref": "rows" }
             }
           }
         }
@@ -90,7 +89,7 @@
   "filters": [
     {
       "id": "columns",
-      "components": ["column"]
+      "components": ["column", "column"]
     },
     {
       "id": "column",
