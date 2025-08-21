@@ -22,7 +22,7 @@ import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 // eslint-disable-next-line
 //import pathConfig from './pathConfig.json' with { type: 'json' };
-import { includeProdEdsPaths, includeStageEdsPaths } from './converter-paths-config.js';
+import { includeProdEdsPaths, includeStageEdsPaths, excludeStagePaths } from './converter-paths-config.js';
 
 const mediaTypes = {
   'application/atom+xml': false,
