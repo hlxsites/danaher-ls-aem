@@ -248,9 +248,10 @@ if(includeProdEdsPaths.some((prodPath) => path.includes(prodPath)))
 if (!converterCfg.internalHost.includes('danaher-ls-aem-prod') && includeStageEdsPaths.some((stagePath) => path.includes(stagePath))) {
     return true;
 }
+/*
   if (path.includes('/us/en/blog/')) return true;
   if (path.includes('/us/en/news/')) return true;
-  if (path.includes('/us/en/videos-eds/')) return true;
+  if (path.includes('/us/en/videos-eds/')) return true; */
   // skip the converter for pages like **/products/*/topics/**
   const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
   return regex.test(path);
