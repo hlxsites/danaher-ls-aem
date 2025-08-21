@@ -26,7 +26,6 @@ export default async function decorate(block) {
     block.replaceChildren();
 
     const itemsPerPage = 6;
-    let pdpResourceWrapperBlock;
     let resCountElement;
     let paginationContainer;
 
@@ -35,7 +34,8 @@ export default async function decorate(block) {
     });
 
     const getContentTypes = () => {
-      const contentTypes = response.map((item) => item?.raw?.contenttype || item.raw?.documenttype).filter(Boolean);
+      const contentTypes = response.map((item) => item?.raw?.contenttype
+      || item.raw?.documenttype).filter(Boolean);
       return [...new Set(contentTypes)]; // Remove duplicates
     };
 
@@ -70,7 +70,8 @@ export default async function decorate(block) {
     };
 
     const renderPagination = () => {
-      const totalPages = Math.ceil(resourceEngine?.state?.search?.response?.totalCount / itemsPerPage);
+      const totalCountForPagination = resourceEngine?.state?.search?.response?.totalCount;
+      const totalPages = Math.ceil(totalCountForPagination / itemsPerPage);
       const { currentPage } = resourcePager.state;
 
       paginationContainer.innerHTML = '';
@@ -553,8 +554,6 @@ export default async function decorate(block) {
     renderResourceCards();
 
     block.append(pdpResourceWrapperBlockContainer, paginationContainer);
-    pdpResourceWrapperBlock = pdpResourceWrapperBlockContainer;
-
     decorateIcons(pdpResourceWrapperBlockContainer);
   });
 
