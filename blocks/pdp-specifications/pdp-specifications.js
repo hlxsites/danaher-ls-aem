@@ -1,22 +1,53 @@
 import { div, p } from '../../scripts/dom-builder.js';
 
+function extractJsonFromHtml(rootElement) {
+  let rawText = rootElement.textContent || '';
+  rawText = rawText.replace(/\u00a0/g, ' ').trim();
+
+  const startIdx = rawText.indexOf('[');
+  const endIdx = rawText.lastIndexOf(']');
+
+  if (startIdx === -1 || endIdx === -1) {
+    return null;
+  }
+
+  const jsonSnippet = rawText.slice(startIdx, endIdx + 1);
+
+  try {
+    return JSON.parse(jsonSnippet);
+  } catch (err) {
+    console.error('Error parsing JSON:', err);
+    return null;
+  }
+}
+
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'specifications-tab';
+  const isPIM = document.querySelector('#authored-specifications')?.children[1].textContent;
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
 
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   if (response !== undefined && response !== null) {
-    if (response?.raw.attributejson !== undefined) {
+    let attrJson;
+
+    if (isPIM === 'true') {
+      if (response?.raw.attributejson !== undefined) {
+        attrJson = JSON.parse(response?.raw.attributejson);
+      }
+    } else {
+      const parsedData = extractJsonFromHtml(document.querySelector('#authored-specifications')?.children[3]);
+      if (parsedData) {
+        attrJson = parsedData;
+      }
+    }
+
+    if (attrJson) {
       const attrWrapper = div({ class: 'attr-wrapper' });
-      const attrJson = JSON.parse(response?.raw.attributejson);
       attrJson.forEach((item, index) => {
         const tableCaption = div(
           { class: `sm:flex sm:items-center ${index === 0 ? 'pb-6' : 'py-6'}` },
-          div(
-            { class: 'sm:flex-auto' },
-            p({ class: '!text-xl font-medium leading-6 text-black' }, item.label),
-          ),
+          div({ class: 'sm:flex-auto' }, p({ class: '!text-xl font-medium leading-6 text-black' }, item.label)),
         );
         const tableContainer = div({ class: 'min-w-full border divide-y divide-gray-300' });
         item.value.forEach((items) => {
@@ -24,21 +55,12 @@ export default async function decorate(block) {
             { class: 'flex flex-row flex-wrap h-full min-w-full align-middle' },
             div(
               { class: 'flex w-full p-4 text-base font-medium text-gray-900 bg-gray-100 md:w-1/4' },
-              div(
-                { class: 'my-auto' },
-                items.label,
-              ),
+              div({ class: 'my-auto' }, items.label),
             ),
             div(
               { class: 'flex w-full p-4 text-sm text-black break-words md:w-2/4' },
-              div(
-                { class: 'my-auto' },
-                items.value.toString().split(',').join(', '),
-              ),
-              div(
-                { class: 'my-auto px-1' },
-                items.unit,
-              ),
+              div({ class: 'my-auto' }, items.value.toString().split(',').join(', ')),
+              div({ class: 'my-auto px-1' }, items.unit),
             ),
           );
           tableContainer.append(tableRow);
