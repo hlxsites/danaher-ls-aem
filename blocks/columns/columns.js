@@ -4,6 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
+import { loadSFDCForm } from '../../blocks/form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -610,7 +611,6 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   // const block = block.closest('.section');
   block.classList.add('flex', 'min-h-[350px]', 'gap-6');
-  console.log('block', block);
    const flexContainer = block.firstElementChild;
    console.log('flexContainer', flexContainer);
   // const cols = [...block.firstElementChild.children];
@@ -681,6 +681,7 @@ export default function decorate(block) {
 
   // setup image columns
   [...block.children].forEach((col) => {
+    
     cols.forEach((row) => {
       const img = row.querySelector('img');
       if (img) {
@@ -821,4 +822,8 @@ export default function decorate(block) {
       embed.appendChild(iframe);
     }
   });
+
+  // const formColumn = div({ class: 'column col-span-1' });
+  //loadSFDCForm(cols);
+
 }
