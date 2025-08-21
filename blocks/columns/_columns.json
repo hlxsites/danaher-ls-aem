@@ -9,8 +9,7 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" },
-              "columns": "2"
+              "rows": { "$ref": "rows" }
             }
           }
         }

@@ -609,7 +609,7 @@ async function loadForm(row, tags) {
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  const cols = [...block.children];
+  const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
