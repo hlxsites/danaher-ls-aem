@@ -608,8 +608,11 @@ async function loadForm(row, tags) {
 /** ********JOIN-TODAY-FORM Ends****************** */
 
 export default function decorate(block) {
-  const sectionDiv = block.closest('.section');
+  // const block = block.closest('.section');
+  block.classList.add('flex', 'min-h-[350px]', 'gap-6');
+  console.log('block', block);
    const flexContainer = block.firstElementChild;
+   console.log('flexContainer', flexContainer);
   // const cols = [...block.firstElementChild.children];
   Array.from(block.children).forEach(child => {
     if (child !== flexContainer) {
@@ -630,10 +633,12 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
-        if (sectionDiv.className.includes('thirtyseventy')) {
+        console.log('firstDiv', firstDiv);
+        console.log('secondDiv', secondDiv);
+        if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
-        } else if (sectionDiv.className.includes('seventythirty')) {
+        } else if (block.className.includes('seventythirty')) {
           firstDiv.classList.add('lg:w-2/3');
           secondDiv.classList.add('lg:w-1/3');
         } else {
@@ -645,7 +650,7 @@ export default function decorate(block) {
   });
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
-    if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
+    if (block.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
   block.querySelectorAll('.button-container > a').forEach((ele) => {
@@ -755,7 +760,7 @@ export default function decorate(block) {
             item.parentElement.classList.add('link', 'pb-8');
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold'.split(' '));
-            if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+            if (block.className.includes('text-white')) item.classList.add('text-white');
             else item.classList.add('text-danaherpurple-500');
           }
         });
