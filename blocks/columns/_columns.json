@@ -64,8 +64,8 @@
           "valueType": "string",
           "default": "fiftyfifty",
           "options": [
-            { "name": "70/30 Split", "value": "seventythirty" },
-            { "name": "30/70 Split", "value": "thirtyseventy" }
+            { "name": "seventythirty", "value": "seventythirty" },
+            { "name": "thirtyseventy", "value": "thirtyseventy" }
           ],
           "condition": {
             "field": "rows",
