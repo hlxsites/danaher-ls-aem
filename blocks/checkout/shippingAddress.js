@@ -22,6 +22,7 @@ import {
   removePreLoader,
   showNotification,
   showPreLoader,
+  getStates,
 } from '../../scripts/common-utils.js';
 /*
 ::::::::::::::::::
@@ -53,26 +54,38 @@ function initGmapsAutocomplete(addressType) {
   const gInput = document.getElementById('addressLine1');
   const autocomplete = new google.maps.places.Autocomplete(gInput, {
     types: ['address'], // restrict to addresses
-    componentRestrictions: { country: 'in' },
+    componentRestrictions: { country: 'us' },
     // optional: restrict to India
   });
 
-  autocomplete.addListener('place_changed', () => {
+  autocomplete.addListener('place_changed', async () => {
+    showPreLoader();
     const place = autocomplete.getPlace();
 
     const components = place.address_components;
 
     const getComponent = (type) => {
       const comp = components.find((c) => c.types.includes(type));
+      if (type === 'country' || type === 'locality') {
+        return comp ? comp.short_name : '';
+      }
       return comp ? comp.long_name : '';
     };
 
     const streetNumber = getComponent('street_number');
-    const street = getComponent('route');
-    const city = getComponent('locality') || getComponent('administrative_area_level_2');
+    const street = getComponent('route') || '';
+    const gCity = getComponent('locality') || getComponent('administrative_area_level_2');
     const state = getComponent('locality') || getComponent('administrative_area_level_1');
     const postcode = getComponent('postal_code');
     const country = getComponent('country');
+/*
+    console.log('streetNumber: ', streetNumber);
+    console.log('street: ', street);
+    console.log('gCity: ', gCity);
+    console.log('state: ', state);
+    console.log('postcode: ', postcode);
+    console.log('country: ', country); */
+
 
     const getFormId = document.querySelector(`#${addressType}AddressForm`);
     if (getFormId) {
@@ -84,7 +97,41 @@ function initGmapsAutocomplete(addressType) {
           fd.classList.remove('hidden');
         }
       });
+      gInput.value = street;
+      const addressLine2 = getFormId.querySelector('#addressLine2');
+      if (addressLine2) {
+        addressLine2.value = streetNumber;
+      }
+      const city = getFormId.querySelector('#city');
+      if (city) {
+        city.value = gCity;
+      }
+      const postalCode = getFormId.querySelector('#postalCode');
+      if (postalCode) {
+        postalCode.value = postcode;
+      }
+      const countryCode = getFormId.querySelector('#countryCode');
+      if (countryCode) {
+        countryCode.value = country;
+      }
+      const mainDivision = getFormId.querySelector('#mainDivision');
+      if (mainDivision) {
+        const statesList = await getStates(country);
+        statesList?.data?.data?.forEach((stat) => {
+          const option = document.createElement('option');
+          option.value = stat.id;
+          option.text = stat.name;
+          console.log(' stat name: ', stat.name);
+          console.log(' state : ', state);
+          
+          if (stat.name === state) {
+            option.selected = true;
+          }
+          mainDivision.appendChild(option);
+        });
+      }
     }
+    removePreLoader();
   });
 }
 

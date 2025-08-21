@@ -231,6 +231,10 @@
   display: none
 }
 
+.checkout :is(.\!hidden) {
+  display: none !important
+}
+
 .checkout :is(.h-10) {
   height: 2.5rem
 }

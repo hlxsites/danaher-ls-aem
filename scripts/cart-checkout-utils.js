@@ -883,7 +883,7 @@ export const buildCountryStateSelectBox = (
     });
   }
   selectOptions.unshift(
-    option({ value: '', selected: true }, 'Select an option'),
+    option({ value: '', selected: true, disabled: true }, 'Select an option'),
   );
 
   return div(
@@ -1753,7 +1753,7 @@ export async function addressForm(type, data = {}) {
       true,
       'addressLine1',
       data ? data.addressLine1 : '',
-      '!w-full',
+      data ? '' : '!w-full',
     ),
     buildInputElement(
       'addressLine2',
@@ -1764,7 +1764,7 @@ export async function addressForm(type, data = {}) {
       false,
       'addressLine2',
       data ? data.addressLine2 : '',
-      'hidden',
+      data ? '' : 'hidden',
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
@@ -1775,7 +1775,7 @@ export async function addressForm(type, data = {}) {
       false,
       `preferred${capitalizeFirstLetter(type)}Address`,
       true,
-      'hidden',
+      '!hidden',
     ),
     buildCountryStateSelectBox(
       'countryCode',
@@ -1785,7 +1785,7 @@ export async function addressForm(type, data = {}) {
       'countryCode',
       countriesList,
       data?.countryCode ?? '',
-      'hidden',
+      data ? '' : 'hidden',
     ),
     buildCountryStateSelectBox(
       'mainDivision',
@@ -1795,7 +1795,7 @@ export async function addressForm(type, data = {}) {
       'mainDivision',
       statesList,
       data?.mainDivision ?? '',
-      'hidden',
+      data ? '' : 'hidden',
     ),
     buildInputElement(
       'city',
@@ -1806,7 +1806,7 @@ export async function addressForm(type, data = {}) {
       true,
       'city',
       data ? data.city : '',
-      'hidden',
+      data ? '' : 'hidden',
     ),
     buildInputElement(
       'postalCode',
@@ -1817,7 +1817,7 @@ export async function addressForm(type, data = {}) {
       true,
       'postalCode',
       data ? data.postalCode : '',
-      'hidden',
+      data ? '' : 'hidden',
     ),
     buildButton(
       'Save',
