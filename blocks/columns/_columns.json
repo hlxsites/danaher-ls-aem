@@ -89,7 +89,7 @@
   "filters": [
     {
       "id": "columns",
-      "components": ["column", "column"]
+      "components": ["column"]
     },
     {
       "id": "column",
