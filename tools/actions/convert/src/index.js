@@ -239,14 +239,21 @@ function skipConverter(path) {
  */
 
   // check for production
-if(includeProdEdsPaths.some((prodPath) => path.includes(prodPath)))
+if(includeProdEdsPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/'))
 {
   return true;
 }
 
  // check for stage : :::::  checking host in the config for stage/prod
-if (!converterCfg.internalHost.includes('danaher-ls-aem-prod') && includeStageEdsPaths.some((stagePath) => path.includes(stagePath))) {
+if (!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
+  if(includeStageEdsPaths.some((stagePath) => path.includes(stagePath))  && !path.includes('/topics-jck1/'))
+  {
     return true;
+  }
+  if(excludeStagePaths.some((excludeStagePath) => path.includes(excludeStagePath)) && !path.includes('/topics-jck1/'))
+  {
+    return false;
+  }
 }
 /*
   if (path.includes('/us/en/blog/')) return true;
