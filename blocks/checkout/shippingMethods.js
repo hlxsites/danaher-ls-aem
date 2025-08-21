@@ -158,7 +158,7 @@ const shippingMethodsModule = async () => {
 
     const moduleToggleButtonsWrapper = div(
       {
-        class: 'flex justify-between mt-12',
+        class: 'flex justify-between mt-12 hidden',
       },
       div(
         {
@@ -171,14 +171,14 @@ const shippingMethodsModule = async () => {
           button(
             {
               class:
-                'w-lg text-white text-l text-uppercase  btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
+                'w-lg text-white text-l text-uppercase hidden btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
             },
             'Ship for me',
           ),
           button(
             {
               class:
-                'm-0 text-xl hover:bg-danaherpurple-500   border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+                'm-0 text-xl hover:bg-danaherpurple-500 hidden  border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             },
             'Use my carrier',
           ),

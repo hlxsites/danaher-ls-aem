@@ -425,6 +425,13 @@ export async function getAddressDetails(addressURI) {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
+    const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
+    if (cachedAddress?.status === 'success') {
+      const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === addressURI.split('/')[3]);
+      if (checkCachedAddress) {
+        return { status: 'success', data: checkCachedAddress[0] };
+      }
+    }
     const url = `${baseURL}/${addressURI}`;
 
     const defaultHeaders = new Headers();
@@ -458,18 +465,15 @@ export async function setUseAddressObject(response) {
       addressDetails = await getAddressDetails(
         `customers/-/addresses/${invoiceToAddressURI}`,
       );
-      Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+      useAddressObject.invoiceToAddress = addressDetails?.data;
     }
     if (response?.data?.commonShipToAddress) {
       const commonShipToAddressURI = response.data.commonShipToAddress.split(':')[4];
       addressDetails = await getAddressDetails(
         `customers/-/addresses/${commonShipToAddressURI}`,
       );
-      Object.assign(useAddressObject, {
-        commonShipToAddress: addressDetails,
-      });
+      useAddressObject.commonShipToAddress = addressDetails?.data;
     }
-
     if (Object.keys(useAddressObject).length !== 0) {
       return { status: 'success', data: useAddressObject };
     }
@@ -492,6 +496,36 @@ export const setUseAddress = async (id, type) => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
+    const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
+    if (getUseAddressesObject?.status === 'success') {
+      const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
+      if (cachedAddress?.status === 'success') {
+        const updatedUseObject = {
+          status: 'success',
+          data: {
+            commonShipToAddress: '',
+            invoiceToAddress: '',
+          },
+        };
+        const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === id);
+
+        if (type === 'shipping' && checkCachedAddress) {
+          // eslint-disable-next-line prefer-destructuring
+          updatedUseObject.data.commonShipToAddress = checkCachedAddress[0];
+          updatedUseObject.data.invoiceToAddress = getUseAddressesObject?.data?.invoiceToAddress;
+        }
+        if (type === 'billing' && checkCachedAddress) {
+          // eslint-disable-next-line prefer-destructuring
+          updatedUseObject.data.invoiceToAddress = checkCachedAddress[0];
+          // eslint-disable-next-line max-len
+          updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
+        }
+        sessionStorage.removeItem('useAddress');
+        sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
+        return updatedUseObject;
+      }
+    }
+
     const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     if (type === 'shipping') {
@@ -768,8 +802,11 @@ export async function updateAddresses() {
  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function getAddresses() {
-  const cachedAddress = sessionStorage.getItem('addressList');
-  return cachedAddress ? JSON.parse(cachedAddress) : updateAddresses();
+  const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
+  if (cachedAddress?.status === 'success') {
+    return cachedAddress;
+  }
+  return updateAddresses();
 }
 /*
 ::::::::::::::
@@ -2232,12 +2269,12 @@ get price type if its net or gross
   const summaryModule = div(
     {
       id: 'checkoutSummaryContainer',
-      class: 'flex flex-col justify-start items-start gap-4 ',
+      class: 'flex flex-col justify-start items-start gap-4 w-full',
     },
     div(
       {
         class:
-          'p-5 flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-4 justify-start items-start gap-y-6',
+          'p-5 flex flex-col bg-white p-6 border-l border-r border-t border-danahergray-75 border-b-4 justify-start items-start gap-y-6 w-full',
         id: 'checkoutSummaryWrapper',
       },
       div(

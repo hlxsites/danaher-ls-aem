@@ -58,7 +58,12 @@ const renderAddressList = (addressItems, addressListArray, type) => {
       }
       return adr?.invoiceToAddress === true;
     });
-
+    let selectedAddress;
+    let checkedUseAddress;
+    const checkUseAddresses = JSON.parse(sessionStorage.getItem('useAddress'));
+    if (checkUseAddresses?.status === 'success') {
+      checkedUseAddress = checkUseAddresses?.data;
+    }
     filteredArray.forEach((item, index) => {
       if (typeof item !== 'undefined') {
         let defaultBgClass = '';
@@ -72,7 +77,14 @@ const renderAddressList = (addressItems, addressListArray, type) => {
             defaultBgClass = `is-default-${type}-address`;
           }
         }
-
+        if (checkedUseAddress) {
+          if (type === 'shipping') {
+            selectedAddress = checkedUseAddress?.commonShipToAddress?.id === item.id;
+          }
+          if (type === 'billing') {
+            selectedAddress = checkedUseAddress?.invoiceToAddress?.id === item.id;
+          }
+        }
         /*
         ::::::::::::::
         button to set the ${type}(billing/shipping) address as the default  address
@@ -129,7 +141,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
           {
             id: `item_c_${type}_${index}`,
             'data-address': JSON.stringify(item),
-            class: `:hover:bg-gray-100 flex justify-between p-6 border ${defaultBgClass ? 'border-danaherpurple-500' : 'border-danahergray-300'}  ${type}-address-list-item ${defaultBgClass}`,
+            class: `:hover:bg-gray-100 flex justify-between p-6 border ${selectedAddress ? 'border-danaherpurple-500' : 'border-danahergray-300'}  ${type}-address-list-item ${defaultBgClass}`,
           },
           div(
             {
@@ -158,7 +170,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               {
                 class: 'text-black text-base ',
               },
-              `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`,
+              `${item.mainDivision || ''}, ${item.countryCode || ''}, ${item.postalCode || ''}`,
             ),
             makeDefaultButton,
           ),
@@ -198,7 +210,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
                 id: item.id,
                 class: `${type}-address-use-button text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
               },
-              'Use address',
+              selectedAddress ? 'Selected Address' : 'Use address',
             ),
           ),
         );
@@ -257,13 +269,13 @@ click use address button to set the address as default for current order
             update address list
             ::::::::::::::
             */
-            await updateAddresses();
+            // await updateAddresses();
             /*
             ::::::::::::::
             update basket with the current use address
             ::::::::::::::
             */
-            await updateBasketDetails();
+            // await updateBasketDetails();
             /*
             ::::::::::::::
             update checkout summary module
@@ -277,14 +289,17 @@ click use address button to set the address as default for current order
             :::::::::::::::::::
             */
             closeUtilityModal();
-
+            const getSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
+            if (getSameAsShippingCheckbox) {
+              getSameAsShippingCheckbox.checked = false;
+            }
             // remove preloader
             removePreLoader();
 
             showNotification('Address set for current order.', 'success');
           } else {
             removePreLoader();
-            closeUtilityModal();
+            // closeUtilityModal();
             showNotification('Error processing request.', 'error');
           }
         });
@@ -705,7 +720,6 @@ function generateDefaultAddress(
 ::::::::::::::
 */
 export const shippingAddressModule = async () => {
-  showPreLoader();
   const moduleContent = div({});
   const moduleShippingDetails = div(
     {
@@ -998,7 +1012,7 @@ export const shippingAddressModule = async () => {
      */
     if (
       getUseAddressesResponse?.status === 'success'
-      && getUseAddressesResponse?.data?.commonShipToAddress?.length > 0
+      && getUseAddressesResponse?.data?.commonShipToAddress
     ) {
       const showDefaultShippingAddress = defaultAddress(
         getUseAddressesResponse.data?.commonShipToAddress,
@@ -1039,7 +1053,9 @@ export const shippingAddressModule = async () => {
             showDefaultShippingAddress,
           );
 
+          // call set use address only if don't have object
           await setUseAddress(address[0].id, 'shipping');
+
           if (showDefaultShippingAddress.classList.contains('hidden')) {
             showDefaultShippingAddress.classList.remove('hidden');
           }
@@ -1069,9 +1085,9 @@ export const shippingAddressModule = async () => {
         }
       }
       // :::::::::::: remove preloader :::::::::::::
-      removePreLoader();
+      // removePreLoader();
       // ::::::::::::::close utility modal :::::::::::::::::::
-      closeUtilityModal();
+      // closeUtilityModal();
     }
 
     /*

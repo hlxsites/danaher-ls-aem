@@ -16,15 +16,6 @@ import {
  ::::::::::::::
  */
 export const shippingStates = '';
-/*
- ::::::::::::::
- get default address either shipping or billing
- :::::::::::::::::
- */
-export const getDefaultAddress = () => {
-  const address = '';
-  return address;
-};
 
 /*
  ::::::::::::::
@@ -68,7 +59,7 @@ render the modules
 
 export const loadModule = async (module) => {
   const moduleWrapper = div({
-    class: `checkout-${module}-container`,
+    class: `checkout-${module}-container w-full`,
   });
   const moduleContent = div({
     class: `checkout-${module}-content`,
