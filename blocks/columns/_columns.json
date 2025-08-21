@@ -9,7 +9,7 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" }
+              "rows": "2"
             }
           }
         }
@@ -46,17 +46,6 @@
     {
       "id": "columns",
       "fields": [
-        {
-          "component": "select",
-          "name": "rows",
-          "label": "Number of Columns",
-          "valueType": "string",
-          "default": "2",
-          "options": [
-            { "name": "2 Columns", "value": "2" },
-            { "name": "3 Columns", "value": "3" }
-          ]
-        },
         {
           "component": "multiselect",
           "name": "classes",
