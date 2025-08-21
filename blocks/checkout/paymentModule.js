@@ -42,6 +42,8 @@ function createCardItem(item, defaultCard) {
 
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
+    sessionStorage.setItem('useStripeCardId', itemObject.itemId);
+    sessionStorage.setItem('selectedStripeMethod', 'savedCard');
     defaultPaymentCheckboxText = 'Default Payment';
   }
 
@@ -190,7 +192,7 @@ const paymentModule = async () => {
     );
     const savedStripeCardsList = div(
       {
-        class: 'w-full gap-6 flex flex-col max-h-[642px] pr-2 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
+        class: 'w-full gap-6 flex flex-col max-h-[645px] pr-2 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
         id: 'savedStripeCardsList',
       },
     );
@@ -316,7 +318,7 @@ const paymentModule = async () => {
     newStripeCardsWrapper.append(newStripeCardAddressWrapper);
     newStripeCardsWrapper.append(newStripeCardPaymentWrapper);
 
-    if (getSavedStripeCardsList?.data?.length > 0) {
+    if (getSavedStripeCardsList?.data?.data?.length > 0) {
       newStripeCardsWrapper.append(button({ class: 'w-full m-0 stripe-card-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-xs', id: 'showStripePaymentList' }, 'Back'));
     }
     stripeCardsContainer.append(newStripeCardsWrapper);
@@ -417,14 +419,12 @@ const paymentModule = async () => {
               };
               if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
                 const stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
-                window.stripeElements = '';
-                window.stripeElements = stripeElements;
-                sessionStorage.removeItem('stripePIId');
-                sessionStorage.removeItem('stripeCS');
-                sessionStorage.setItem('stripePIId', pIID);
-                sessionStorage.setItem('stripeCS', clientSecret);
+
+                // mount address elements
                 const addressElements = stripeElements.create('address', addressOptions);
                 addressElements.mount('#newStripeCardAddressWrapper');
+
+                // mount payment elements
                 const paymentElements = stripeElements.create('payment', options);
                 paymentElements.mount('#newStripeCardPaymentWrapper');
               }
@@ -541,6 +541,7 @@ const paymentModule = async () => {
 
     // show new cards wrapper when clicked add new card
     savedStripeCardsHeader?.querySelector('#addNewStripeCard')?.addEventListener('click', () => {
+      sessionStorage.setItem('selectedStripeMethod', 'newCard');
       const savedCardsHeader = document.querySelector('#savedStripeCardsHeader');
       const savedCardList = document.querySelector('#savedStripeCardsList');
       const getStripeCardsWrapper = document.querySelector('#newStripeCardsWrapper');
@@ -552,6 +553,7 @@ const paymentModule = async () => {
     });
     // show payment methods list
     newStripeCardsWrapper?.querySelector('#showStripePaymentList')?.addEventListener('click', () => {
+      sessionStorage.setItem('selectedStripeMethod', 'savedCard');
       const savedCardsHeader = document.querySelector('#savedStripeCardsHeader');
       const savedCardList = document.querySelector('#savedStripeCardsList');
       const getStripeCardsWrapper = document.querySelector('#newStripeCardsWrapper');

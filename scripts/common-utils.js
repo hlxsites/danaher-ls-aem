@@ -142,7 +142,7 @@ export function showNotification(content, type) {
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 3000);
+  }, 10000);
 }
 /*
  ::::::::::::::::::::::::

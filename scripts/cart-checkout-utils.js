@@ -46,7 +46,8 @@ import {
   getPaymentIntent,
   loadStripe,
   addCardToOrder,
-  updateCardToOrder,
+  postPaymentIntent,
+  setupPaymentIntent,
 } from './stripe_utils.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
@@ -1369,7 +1370,6 @@ export const changeStep = async (step) => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  console.log('step : ', step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
 
   const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
   let validateData = '';
@@ -1491,80 +1491,114 @@ export const changeStep = async (step) => {
     if (getSelectedPaymentMethod?.value === 'stripe' && validatingBasket?.status === 'success') {
       showPreLoader();
       const stripe = await loadStripe();
-      const { stripeElements } = window;
-      const elements = stripeElements;
-
-      const pIID = sessionStorage.getItem('stripePIId');
-      const cS = sessionStorage.getItem('stripeCS');
       const paymentMethod = 'STRIPE_PAYMENT';
 
       try {
-        const createInstrument = await createPaymentInstrument(paymentMethod, pIID, cS);
+        const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
+
+        /*
+        *
+        *
+          :::::::: handle stripe payment for saved/new card :::::::::
+        *
+        */
+        if (!sessionStorage.getItem('useStripeCardId') && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
+        const postingIntent = await postPaymentIntent();
+        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+
+        // Call setup-intent API to confirm setup for new card
+        let settingIntent;
+        if (selectedStripeMethod === 'newCard') {
+          settingIntent = await setupPaymentIntent();
+          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        }
+
+        // Call create-instrument API
+        // eslint-disable-next-line max-len
+        const createInstrument = await createPaymentInstrument(paymentMethod, postingIntent?.data?.id, postingIntent?.data?.client_secret);
         if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
 
         const instrumentId = createInstrument?.data?.data?.id;
         if (!instrumentId) throw new Error('Instrument ID missing.');
 
+        // Call assign instrument API
         const assignInstrument = await assignPaymentInstrument(instrumentId);
         if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
 
+        // Call get payment-intent API
         const getPI = await getPaymentIntent();
+
         if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+        console.log(' Get Payment Intent...', getPI);
 
         // get payment intent id
-        const gPIID = JSON.stringify(getPI?.data?.data[0]);
+        const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
         if (!gPIID) throw new Error('Payment intent ID missing.');
 
-        const addData = {
-          name: 'SelectedCard',
-          value: JSON.stringify(gPIID),
-          type: 'String',
+        // parameters to validate basket for payment
+        const validatePaymentData = {
+          adjustmentsAllowed: true,
+          scopes: [
+            'Payment',
+          ],
         };
+        // validating basket for payment
+        const validatinBasketForPayment = await validateBasket(validatePaymentData);
 
-        let addingCardToOrder = await addCardToOrder(addData);
-        if (addingCardToOrder?.status === 'error') {
-          addingCardToOrder = await updateCardToOrder(addData);
-          if (addingCardToOrder?.status !== 'success') throw new Error('Failed to update card to order.');
+        if (validatinBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
+        console.log(' Basket Validated for Pyament...');
+
+        // confirm  stripe Setup for new cards
+        let confirmSetup;
+        if (selectedStripeMethod === 'newCard') {
+          confirmSetup = await stripe.confirmSetup({
+            clientSecret: settingIntent?.data?.client_secret,
+            confirmParams: {
+              return_url: `${window.location.origin}/checkout`,
+              payment_method: gPIID[0]?.id,
+            },
+            redirect: 'if_required',
+          });
+          console.log('Confirming Setup...');
+          
+          // if stripe setup confirmed, move to confirm payment
+          if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
         }
 
+        // confirm payment :::: final step
         const confirmPayment = await stripe.confirmPayment({
-          elements,
+          clientSecret: postingIntent?.data?.client_secret,
           confirmParams: {
             return_url: `${window.location.origin}/checkout`,
-            payment_method_data: {
-              billing_details: {
-                name: 'John Doe',
-                email: 'john@example.com',
-                address: {
-                  country: 'US',
-                  line1: '123 Main St',
-                  city: 'New York',
-                  state: 'NY',
-                  postal_code: '10001',
-                },
-              },
-            },
+            payment_method: gPIID[0]?.id,
           },
           redirect: 'if_required',
         });
+        console.log('Confirming Payment...');
 
-        if (confirmPayment?.error) throw new Error(confirmPayment.error.message);
+        if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
 
+        // validating confirm-payment status from stripe
         const status = confirmPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
 
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
-        const orderId = submittingOrder?.data?.data?.id;
-        if (!orderId) throw new Error('Order submission failed.');
+        console.log('Submitting order');
+        removePreLoader();
 
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
-
-        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
+        // payment confirmed from Stripe, now submitting order
+        /*
+                const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+                const orderId = submittingOrder?.data?.data?.id;
+                if (!orderId) throw new Error('Order submission failed.');
+        
+                sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+                sessionStorage.removeItem('productDetailObject');
+                sessionStorage.removeItem('basketData');
+        
+                window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`; */
         return true;
       } catch (error) {
         removePreLoader();
@@ -1615,11 +1649,13 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+
       document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
       document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('!bg-danaherpurple-500');
       document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
       document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
       document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
+
       proceedButton.setAttribute('data-tab', 'shippingMethods');
       proceedButton.setAttribute('data-activeTab', 'shippingAddress');
       proceedButton.textContent = 'Proceed to Shipping';
@@ -1638,6 +1674,7 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+
       document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
       document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
 
@@ -1657,10 +1694,12 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+
       document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
       document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
       document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
       document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
+
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.textContent = 'Place your order';
@@ -2212,7 +2251,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2515,7 +2554,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2604,7 +2643,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',

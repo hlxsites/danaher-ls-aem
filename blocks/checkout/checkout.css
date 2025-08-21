@@ -300,6 +300,10 @@
   max-height: 620px
 }
 
+.checkout :is(.max-h-\[645px\]) {
+  max-height: 645px
+}
+
 .checkout :is(.w-20) {
   width: 5rem
 }

@@ -76,7 +76,9 @@ export default async function decorate(block) {
       }
 
       const tabButton = progressBar?.querySelector(`#checkout-${loadTab}`);
-      changeStep(tabButton);
+      setTimeout(() => {
+        changeStep(tabButton);
+      }, 2000);
     })
     .catch((error) => ({
       status: 'error',

@@ -1,5 +1,6 @@
 import { getCommerceBase } from './commerce.js';
 import { getApiData, patchApiData, postApiData, putApiData } from './api-utils.js';
+import { updateBasketDetails } from '../blocks/cartlanding/cartSharedFile.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -63,10 +64,7 @@ export async function getPaymentIntent() {
     authenticationToken.access_token,
   );
   const response = await getApiData(getPaymentIntentUrl, getPaymentIntentHeaders);
-  if (response?.status === 'success') {
-    return response;
-  }
-  return { status: 'error', data: {} };
+  return response;
 }
 
 // post payment intent
@@ -83,7 +81,7 @@ export async function postPaymentIntent() {
     'authentication-token',
     authenticationToken.access_token,
   );
-  const pIntentBody = JSON.stringify({});
+  const pIntentBody = JSON.stringify({ type: 'Card' });
   const response = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
   if (response?.status === 'success') {
     return response;
@@ -198,6 +196,7 @@ export async function setGetCardAsDefault(paymentMethodId = '') {
   }
   const response = await putApiData(pIntentUrl, pIntentBody, pIntentHeaders);
   if (response?.status === 'success') {
+    await updateBasketDetails();
     return response;
   }
   return { status: 'error', data: {} };
@@ -231,73 +230,36 @@ export async function addCardToOrder(data = '') {
   }
   return { status: 'error', data: {} };
 }
+
 /*
 *
-update selected card to order
+update selected card
 *
 *
 */
-
-export async function updateCardToOrder(data = '') {
+export async function setUseCard(paymentMethodId) {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedPM`;
   const addCardToOrderHeaders = new Headers();
   addCardToOrderHeaders.append('Content-Type', 'Application/json');
   addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
   addCardToOrderHeaders.append(
     'authentication-token',
     authenticationToken.access_token,
-  );
-  const addCardToOrderBody = JSON.stringify(data);
+  ); const addData = {
+    name: 'SelectedPM',
+    value: JSON.stringify({ id: paymentMethodId, type: 'Card' }),
+    type: 'String',
+  };
+  const addCardToOrderBody = JSON.stringify(addData);
   const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
   if (response?.status === 'success') {
+    await updateBasketDetails();
     return response;
   }
   return { status: 'error', data: {} };
-}
-
-// async function update selected card for current order
-
-export async function updateUseCard(paymentMethodId) {
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  // post card payment intent
-  const pIntentUrl = `${baseURL}/baskets/current/attributes/SelectedPM`;
-  const pIntentHeaders = new Headers();
-  pIntentHeaders.append('Content-Type', 'Application/json');
-  pIntentHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
-  pIntentHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
-  );
-  const pIntentBody = JSON.stringify({
-    name: 'SelectedPM',
-    value: JSON.stringify({
-      id: paymentMethodId,
-      type: 'Card',
-    }),
-    type: 'String',
-  });
-  const response = await patchApiData(pIntentUrl, pIntentBody, pIntentHeaders);
-  if (response?.status === 'success') {
-    return response;
-  }
-  return { status: 'error', data: {} };
-}
-
-// use card for current order
-export async function setUseCard(paymentMethodId) {
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  sessionStorage.removeItem('useStripeCardId');
-  sessionStorage.setItem('useStripeCardId', paymentMethodId);
-  return { status: 'success', data: paymentMethodId };
 }
