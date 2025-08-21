@@ -609,7 +609,17 @@ async function loadForm(row, tags) {
 
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
-  const cols = [...block.firstElementChild.children];
+   const flexContainer = block.firstElementChild;
+  // const cols = [...block.firstElementChild.children];
+  Array.from(block.children).forEach(child => {
+    if (child !== flexContainer) {
+      flexContainer.appendChild(child);
+    }
+  });
+
+  // Now get columns (direct children of flexContainer)
+  const cols = Array.from(flexContainer.children);
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
