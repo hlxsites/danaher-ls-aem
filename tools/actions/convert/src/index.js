@@ -238,7 +238,7 @@ function skipConverter(path) {
   }
  */
 
-  // check for production
+// check for production
 if(includeProdEdsPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/'))
 {
   return true;
