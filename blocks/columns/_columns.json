@@ -9,7 +9,21 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "class": { "$ref": "classes" },
-              "rows": { "$ref": "rows" }
+              "rows": { "$ref": "rows" },
+              "children": [
+             {
+            "component": "column",
+            "fields": {
+              "blocks": []
+            }
+          },
+          {
+            "component": "column",
+            "fields": {
+              "blocks": []
+            }
+          }
+        ]
             }
           }
         }
@@ -72,23 +86,7 @@
             "equals": "2"
           }
         }
-      ],
-      "defaults": {
-        "children": [
-          {
-            "component": "column",
-            "fields": {
-              "blocks": []
-            }
-          },
-          {
-            "component": "column",
-            "fields": {
-              "blocks": []
-            }
-          }
-        ]
-      }
+      ]
     },
     {
       "id": "column",
