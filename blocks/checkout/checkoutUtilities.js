@@ -1,5 +1,5 @@
 import {
-  div, button,
+  div, button, span,
 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { shippingAddressModule } from './shippingAddress.js';
@@ -9,6 +9,7 @@ import {
   changeStep,
   checkoutSummary,
 } from '../../scripts/cart-checkout-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
  ::::::::::::::
@@ -123,29 +124,85 @@ export const progressModule = () => {
     id: 'checkout-segment2',
   });
 
-  const address = div({
-    class: 'checkout-step active relative cursor-pointer',
-    id: 'checkout-shippingAddress',
-    'data-tab': 'shippingAddress',
-    'data-activeTab': 'shippingAddress',
-  });
-  address.innerHTML = '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
-
-  const shipping = div({
-    class: 'checkout-step cursor-pointer relative',
-    id: 'checkout-shippingMethods',
-    'data-tab': 'shippingMethods',
-    'data-activeTab': 'shippingAddress',
-  });
-  shipping.innerHTML = '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
-
-  const payment = div({
-    class: ' checkout-step cursor-pointer relative',
-    id: 'checkout-payment',
-    'data-tab': 'payment',
-    'data-activeTab': 'paymentMethods',
-  });
-  payment.innerHTML = '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
+  const address = div(
+    {
+      class: 'checkout-step active relative cursor-pointer bg-white border-gray-300',
+      id: 'checkout-shippingAddress',
+      'data-tab': 'shippingAddress',
+      'data-activeTab': 'shippingAddress',
+    },
+    span(
+      {
+        class: 'checkout-progress-bar-icons',
+        'data-tab': 'shippingAddress',
+        'data-activeTab': 'shippingAddress',
+      },
+    ),
+    span(
+      {
+        'data-tab': 'shippingAddress',
+        'data-activeTab': 'shippingAddress',
+        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+      },
+    ),
+    span({
+      'data-tab': 'shippingAddress',
+      'data-activeTab': 'shippingAddress',
+    }, 'Address'),
+  );
+  const shipping = div(
+    {
+      class: 'checkout-step cursor-pointer relative bg-white border-gray-300',
+      id: 'checkout-shippingMethods',
+      'data-tab': 'shippingMethods',
+      'data-activeTab': 'shippingAddress',
+    },
+    span(
+      {
+        class: 'checkout-progress-bar-icons',
+        'data-tab': 'shippingMethods',
+        'data-activeTab': 'shippingMethods',
+      },
+    ),
+    span(
+      {
+        'data-tab': 'shippingMethods',
+        'data-activeTab': 'shippingMethods',
+        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+      },
+    ),
+    span({
+      'data-tab': 'shippingMethods',
+      'data-activeTab': 'shippingMethods',
+    }, 'shipping'),
+  );
+  const payment = div(
+    {
+      class: ' checkout-step cursor-pointer relative bg-white border-gray-300',
+      id: 'checkout-payment',
+      'data-tab': 'payment',
+      'data-activeTab': 'paymentMethods',
+    },
+    span(
+      {
+        class: 'checkout-progress-bar-icons',
+        'data-tab': 'payment',
+        'data-activeTab': 'paymentMethods',
+      },
+    ),
+    span(
+      {
+        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+      },
+    ),
+    span(
+      {
+        'data-tab': 'payment',
+        'data-activeTab': 'paymentMethods',
+      },
+      'Payment',
+    ),
+  );
 
   /*
  ::::::::::::::
@@ -153,7 +210,7 @@ export const progressModule = () => {
  ::::::::::::::
  */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
-
+  decorateIcons(progressBar);
   const checkoutSteps = progressBar.querySelectorAll('.checkout-step');
   checkoutSteps.forEach((step) => {
     step.addEventListener('click', (s) => {

@@ -121,9 +121,6 @@ function initGmapsAutocomplete(addressType) {
           const option = document.createElement('option');
           option.value = stat.id;
           option.text = stat.name;
-          console.log(' stat name: ', stat.name);
-          console.log(' state : ', state);
-          
           if (stat.name === state) {
             option.selected = true;
           }

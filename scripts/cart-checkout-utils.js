@@ -1369,7 +1369,9 @@ export const changeStep = async (step) => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  const currentTab = step?.target?.getAttribute('data-tab') || step?.getAttribute('data-tab');
+  console.log('step : ', step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
+
+  const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
   let validateData = '';
   if (currentTab === 'shippingMethods') {
     localStorage.setItem('activeCheckoutTab', currentTab);
@@ -1613,6 +1615,11 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('!bg-danaherpurple-500');
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
       proceedButton.setAttribute('data-tab', 'shippingMethods');
       proceedButton.setAttribute('data-activeTab', 'shippingAddress');
       proceedButton.textContent = 'Proceed to Shipping';
@@ -1631,6 +1638,12 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
+
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
+
       proceedButton.textContent = 'Proceed to Payment';
       proceedButton.setAttribute('data-activeTab', 'shippingMethods');
       proceedButton.setAttribute('data-tab', 'payment');
@@ -1644,6 +1657,10 @@ export const changeStep = async (step) => {
           st.classList.add('active');
         }
       });
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
+      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
+      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
       proceedButton.setAttribute('data-activeTab', 'paymentMethods');
       proceedButton.setAttribute('data-tab', 'submitOrder');
       proceedButton.textContent = 'Place your order';

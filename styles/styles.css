@@ -3070,12 +3070,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   display: contents;
 }
 
-.hidden {
-  display: none;
-}
-
 .\!hidden {
   display: none !important;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-10 {
@@ -3455,6 +3455,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.\!bg-danaherpurple-500 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-black {
@@ -3997,15 +4002,15 @@ main .section.top-border {
   top: 50%;
   left: 0;
   width: 100%;
-  height: 4px;
-  background-color: lightgray;
+  height: 2px;
+  background-color: #d1d5db;
   z-index: 0;
 }
 
 .checkout-line-segment {
   position: absolute;
   top: 50%;
-  height: 4px;
+  height: 2px;
   background-color: rgb(117 35 255);
   z-index: 1;
   transition: width 0.3s ease;
@@ -4042,14 +4047,24 @@ main .section.top-border {
   width: 9px;
   display: block;
   height: 9px;
-  background-color: rgb(117 35 255);
+  background-color: none;
   margin: 9px 0px 9px 9px !important;
   border-radius: 50%;
 }
 
+.checkout-progress-bar-check {
+  margin: -3px 0 0 -4px !important;
+  width: 33px;
+  height: 33px;
+}
+
 .checkout-step.active {
-  border: 1px solid rgb(117 35 255);
+  border: 1px solid rgb(117 35 255) !important;
   background: #fff;
+}
+
+.checkout-step.active .checkout-progress-bar-icons {
+  background: rgb(117 35 255) !important;
 }
 
 @media (min-width: 640px) {

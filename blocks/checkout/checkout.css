@@ -668,6 +668,16 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.checkout :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.checkout :is(.\!bg-danaherpurple-500) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity)) !important
+}
+
 .checkout :is(.bg-opacity-50) {
   --tw-bg-opacity: 0.5
 }
