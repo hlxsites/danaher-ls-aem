@@ -72,7 +72,23 @@
             "equals": "2"
           }
         }
-      ]
+      ],
+      "defaults": {
+        "children": [
+          {
+            "component": "column",
+            "fields": {
+              "blocks": []
+            }
+          },
+          {
+            "component": "column",
+            "fields": {
+              "blocks": []
+            }
+          }
+        ]
+      }
     },
     {
       "id": "column",
