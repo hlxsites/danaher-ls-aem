@@ -618,8 +618,7 @@ export default function decorate(block) {
       flexContainer.appendChild(child);
     }
   });
-
-  // Now get columns (direct children of flexContainer)
+  
   const cols = Array.from(flexContainer.children);
 
   block.classList.add(`columns-${cols.length}-cols`);
@@ -632,8 +631,6 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
-        console.log('firstDiv', firstDiv);
-        console.log('secondDiv', secondDiv);
         if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
@@ -789,12 +786,13 @@ export default function decorate(block) {
   });
 
   // Form Load
-  block.querySelectorAll('.form');
-  if (block.classList.contains('thirtyseventy')) {
-    if (cols.length > 1 && !cols[1].querySelector('form')) {
-      loadSFDCForm(cols[1]);
-    }
-  }
+ 
+    if (block.querySelectorAll('.form') && block.classList.contains('thirtyseventy'))
+      {
+        if (cols.length > 1 && !cols[1].querySelector('form')) {
+          loadSFDCForm(cols[1]);
+      }
+      }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
