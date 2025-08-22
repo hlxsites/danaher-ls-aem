@@ -136,7 +136,7 @@ export default async function decorate(block) {
     const authoredLabel = titleEl?.textContent.trim();
     if (type && authoredLabel) {
       authoredTabMap[type] = authoredLabel;
-      //titleEl.remove(); // Don't show inside section
+      // titleEl.remove(); // Don't show inside section
     }
   });
 
@@ -152,7 +152,7 @@ export default async function decorate(block) {
   // Build tabsList → pick authored label if present, static fallback otherwise
   Object.entries(fullTabConfig).forEach(([type, cfg]) => {
     if (cfg.available) {
-      const label = cfg.label;
+      const { label } = cfg;
       tabsList.push({ label, selector: `${type}-tab` });
     }
   });
@@ -202,4 +202,3 @@ export default async function decorate(block) {
   // Activate scroll-based highlight
   window.addEventListener('scroll', () => highlightActiveTab());
 }
-

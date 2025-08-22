@@ -32,13 +32,15 @@ export default async function decorate(block) {
   // if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
   try {
     let bundleDetails = JSON.parse(response.raw?.bundlepreviewjson) || [];
-    const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
-    if (isPIM === 'only-authored') {
-      //const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
+    const elem = document.querySelector('#authored-parts')?.children[3];
+    let parsedData;
+    if (elem) {
+      parsedData = extractJsonFromHtml(elem);
+    }
+    if (isPIM !== undefined && isPIM === 'only-authored') {
       bundleDetails = parsedData;
-    } else if(isPIM === 'pim-authored') {
-      if(parsedData.length > 0 )
-      bundleDetails.push(...parsedData);
+    } else if (isPIM !== undefined && isPIM === 'pim-authored') {
+      if (parsedData.length > 0) bundleDetails.push(...parsedData);
     } else {
       bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
     }
