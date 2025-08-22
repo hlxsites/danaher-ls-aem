@@ -55,7 +55,6 @@
           "name": "opcoBannerHeadingType",
           "label": "Banner Heading Type",
           "required": true,
-          "value": "h1",
           "options": [
             {
               "name": "h1",
