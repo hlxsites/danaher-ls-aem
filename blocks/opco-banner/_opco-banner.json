@@ -47,7 +47,6 @@
           "component": "select",
           "name": "opcoBannerTitleType",
           "label": "Banner Title Type",
-          "required": true,
           "options": [
             {
               "name": "h1",
@@ -72,6 +71,10 @@
             {
               "name": "h6",
               "value": "h6"
+            },
+            {
+              "name": "p",
+              "value": "p"
             }
           ]
         }
