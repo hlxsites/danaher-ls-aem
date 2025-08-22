@@ -1401,7 +1401,7 @@ export const updatePoNumber = async (invoiceNumber) => {
   }
 };
 
-function silentNavigation(path) {
+async function silentNavigation(path) {
   window.history.pushState({}, '', path);
   // eslint-disable-next-line no-use-before-define
   loadingModule();
@@ -1423,13 +1423,14 @@ export const changeStep = async (step) => {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-
   // handle browser forward and back button event
   window.addEventListener('popstate', () => {
     silentNavigation(window.location.pathname);
   });
 
   const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
+
+  console.log('currentTab : ', currentTab);
 
   let validateData = '';
   let validatingBasket;
@@ -1476,6 +1477,33 @@ export const changeStep = async (step) => {
       silentNavigation('/us/en/e-buy/payment');
     }
 
+    const activateModule = document.querySelector(
+      `#checkout-${currentTab}-module`,
+    );
+
+    const modules = document.querySelectorAll('.checkout-module');
+    const proceedButton = document.querySelector('#proceed-button');
+
+    if (activateModule) {
+      modules.forEach((m) => {
+        if (m.classList.contains('active')) {
+          m.classList.remove('active');
+          m.classList.add('hidden');
+        }
+      });
+      activateModule.classList.add('active');
+      if (activateModule.classList.contains('hidden')) {
+        activateModule.classList.remove('hidden');
+      }
+    }
+
+    /*
+    *
+    *
+      ::::::::: handle payment ::::::
+    *
+    *
+    * */
     if (currentTab === 'submitOrder') {
       const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
       // check if payment methos is selected
@@ -1647,57 +1675,6 @@ export const changeStep = async (step) => {
 
         return true;
       }
-    }
-    const activateModule = document.querySelector(
-      `#checkout-${currentTab}-module`,
-    );
-
-    const modules = document.querySelectorAll('.checkout-module');
-    const proceedButton = document.querySelector('#proceed-button');
-
-    if (activateModule) {
-      modules.forEach((m) => {
-        if (m.classList.contains('active')) {
-          m.classList.remove('active');
-          m.classList.add('hidden');
-        }
-      });
-      activateModule.classList.add('active');
-      if (activateModule.classList.contains('hidden')) {
-        activateModule.classList.remove('hidden');
-      }
-    }
-
-    /*
-    ::::::::::::::
-    Update line segments between steps
-    ::::::::::::::
-    */
-    switch (currentTab) {
-      case 'shippingAddress':
-        proceedButton.setAttribute('data-tab', 'shippingMethods');
-        proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-        proceedButton.textContent = 'Proceed to Shipping';
-        break;
-      case 'shippingMethods':
-        proceedButton.textContent = 'Proceed to Payment';
-        proceedButton.setAttribute('data-activeTab', 'shippingMethods');
-        proceedButton.setAttribute('data-tab', 'payment');
-        break;
-      case 'payment':
-        proceedButton.setAttribute('data-activeTab', 'paymentMethods');
-        proceedButton.setAttribute('data-tab', 'submitOrder');
-        proceedButton.textContent = 'Place your order';
-        break;
-      case 'submitOrder':
-        proceedButton.setAttribute('data-tab', 'submitOrder');
-        proceedButton.setAttribute('data-activeTab', 'submitOrder');
-        proceedButton.textContent = 'Place your order';
-        break;
-      default:
-        proceedButton.setAttribute('data-tab', 'shippingMethods');
-        proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-        proceedButton.textContent = 'Proceed to Shipping';
     }
   } catch (error) {
     removePreLoader();
@@ -2564,14 +2541,29 @@ get price type if its net or gross
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
     if (window.location.href.includes('cartlanding') && userLoggedInStatus) {
-      localStorage.removeItem('activeCheckoutTab');
       proceedButton.textContent = 'Proceed to Checkout';
     } else {
-      proceedButton.textContent = 'Proceed to Shipping';
+    /*
+    ::::::::::::::
+    Update checkout summary button
+    ::::::::::::::
+    */
+      const currentPath = window.location.pathname;
+      if (currentPath.includes('address')) proceedButton.textContent = 'Proceed to Shipping';
+      if (currentPath.includes('shipping')) {
+        proceedButton.textContent = 'Proceed to Payment';
+        proceedButton?.setAttribute('data-activetab', 'shippingMethod');
+        proceedButton?.setAttribute('data-tab', 'payment');
+      }
+      if (currentPath.includes('payment')) {
+        proceedButton.textContent = 'Place your order';
+        proceedButton?.setAttribute('data-activetab', 'submitOrder');
+        proceedButton?.setAttribute('data-tab', 'submitOrder');
+      }
     }
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
-      if (window.location.href.includes('cartlanding')) {
+      if (window.location.pathname.includes('cartlanding')) {
         window.location.href = '/us/en/e-buy/addresses';
       } else {
         changeStep(e);
@@ -2769,7 +2761,6 @@ export async function updateCheckoutSummary() {
   );
   if (checkoutSummaryWrapper) {
     const updatedCheckoutSummary = await checkoutSummary();
-
     checkoutSummaryWrapper.innerHTML = '';
     checkoutSummaryWrapper.append(updatedCheckoutSummary);
     return { status: 'success', data: 'updated checkout summary' };
@@ -2789,8 +2780,8 @@ async function loadingModule() {
         removePreLoader();
       }
     });
-    await updateCheckoutSummary();
   });
+  await updateCheckoutSummary();
 }
 
 // load cart items
