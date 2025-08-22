@@ -1550,6 +1550,37 @@
         "label": "Heading"
       },
       {
+        "component": "select",
+        "name": "headingType",
+        "label": "Heading Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "button_text",
