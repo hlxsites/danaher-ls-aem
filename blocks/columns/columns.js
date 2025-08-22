@@ -611,6 +611,7 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   // const block = block.closest('.section');
   block.classList.add('flex', 'min-h-[350px]', 'gap-6');
+  
   const flexContainer = block.firstElementChild;
   // const cols = [...block.firstElementChild.children];
   Array.from(block.children).forEach((child) => {
@@ -785,15 +786,10 @@ export default function decorate(block) {
     });
   });
 
-  if (block.classList.contains('thirtyseventy'))
+      if(block.className.includes('thirtyseventy'))
       {
-         const form = cols[1].querySelector('form');
-         if (form) form.remove();
-        // form.remove();
-        if (cols.length > 1 && !cols[1].querySelector('form')) {
-          loadSFDCForm(cols[1]);
-        }
-  }
+        loadSFDCForm(cols[1]);
+      }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
