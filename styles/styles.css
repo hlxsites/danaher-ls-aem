@@ -3114,10 +3114,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 100%;
 }
 
-.h-6 {
-  height: 1.5rem;
-}
-
 .max-h-48 {
   max-height: 12rem;
 }
@@ -3180,10 +3176,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
-}
-
-.w-6 {
-  width: 1.5rem;
 }
 
 .\!max-w-7xl {

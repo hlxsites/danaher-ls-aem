@@ -80,6 +80,10 @@
   bottom: 0.5rem
 }
 
+.checkout :is(.left-0) {
+  left: 0px
+}
+
 .checkout :is(.left-\[46\%\]) {
   left: 46%
 }
@@ -102,10 +106,6 @@
 
 .checkout :is(.top-6) {
   top: 1.5rem
-}
-
-.checkout :is(.left-0) {
-  left: 0px
 }
 
 .checkout :is(.z-10) {
@@ -167,6 +167,10 @@
   margin-left: 0.5rem
 }
 
+.checkout :is(.ml-\[-30px\]) {
+  margin-left: -30px
+}
+
 .checkout :is(.mt-0) {
   margin-top: 0px
 }
@@ -189,14 +193,6 @@
 
 .checkout :is(.mt-6) {
   margin-top: 1.5rem
-}
-
-.checkout :is(.ml-\[-10px\]) {
-  margin-left: -10px
-}
-
-.checkout :is(.ml-\[-30px\]) {
-  margin-left: -30px
 }
 
 .checkout :is(.box-border) {
@@ -254,10 +250,6 @@
 .checkout :is(.h-max) {
   height: -moz-max-content;
   height: max-content
-}
-
-.checkout :is(.h-6) {
-  height: 1.5rem
 }
 
 .checkout :is(.max-h-48) {
@@ -330,14 +322,6 @@
 
 .checkout :is(.w-full) {
   width: 100%
-}
-
-.checkout :is(.w-6) {
-  width: 1.5rem
-}
-
-.checkout :is(.w-\[130px\]) {
-  width: 130px
 }
 
 .checkout :is(.max-w-2xl) {
@@ -689,6 +673,10 @@
   padding-left: 0px
 }
 
+.checkout :is(.pl-10) {
+  padding-left: 2.5rem
+}
+
 .checkout :is(.pl-2) {
   padding-left: 0.5rem
 }
@@ -719,14 +707,6 @@
 
 .checkout :is(.pt-6) {
   padding-top: 1.5rem
-}
-
-.checkout :is(.pl-8) {
-  padding-left: 2rem
-}
-
-.checkout :is(.pl-10) {
-  padding-left: 2.5rem
 }
 
 .checkout :is(.text-left) {
