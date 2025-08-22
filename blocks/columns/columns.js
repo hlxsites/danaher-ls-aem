@@ -634,7 +634,6 @@ export default function decorate(block) {
         if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
-          loadSFDCForm(secondDiv);
         } else if (block.className.includes('seventythirty')) {
           firstDiv.classList.add('lg:w-2/3');
           secondDiv.classList.add('lg:w-1/3');
@@ -786,11 +785,15 @@ export default function decorate(block) {
     });
   });
 
-  // Form Load
-    // if (block.classList.contains('thirtyseventy') && block.classList.contains('relative'))
-    //   {
-    //       loadSFDCForm(cols[1]);
-    //   }
+  if (block.classList.contains('thirtyseventy'))
+      {
+         const form = cols[1].querySelector('form');
+         if (form) form.remove();
+        // form.remove();
+        if (cols.length > 1 && !cols[1].querySelector('form')) {
+          loadSFDCForm(cols[1]);
+        }
+  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
