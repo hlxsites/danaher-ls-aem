@@ -41,6 +41,25 @@
         "id": "pdp-tabs-item",
         "fields": [
           {
+            "id": "my-radio-group-model",
+            "fields": [
+              {
+                "component": "radio-group",
+                "name": "selectedOption",
+                "label": "Choose an Option",
+                "description": "Select one option below",
+                "valueType": "string",
+                "required": true,
+                "defaultValue": "only-pim", 
+                "options": [
+                  { "label": "Show only PIM data", "value": "only-pim" },
+                  { "label": "Show only Authored data", "value": "only-authored" },
+                  { "label": "Show both", "value": "pim-and-authored" }
+                ]
+              }
+            ]
+          },
+          {
             "component": "select",
             "name": "tabType",
             "label": "Product Tab ID",
