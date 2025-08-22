@@ -1359,6 +1359,7 @@
         "component": "select",
         "name": "opcoBannerTitleType",
         "label": "Banner Title Type",
+        "required": true,
         "options": [
           {
             "name": "h1",
@@ -1397,6 +1398,7 @@
         "component": "select",
         "name": "opcoBannerHeadingType",
         "label": "Banner Heading Type",
+        "required": true,
         "options": [
           {
             "name": "h1",
@@ -1615,6 +1617,7 @@
         "component": "select",
         "name": "headingType",
         "label": "Heading Type",
+        "required": true,
         "options": [
           {
             "name": "h1",

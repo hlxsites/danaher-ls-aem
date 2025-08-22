@@ -31,6 +31,7 @@
           "component": "select",
           "name": "headingType",
           "label": "Heading Type",
+          "required": true,
           "options": [
             {
               "name": "h1",
