@@ -46,11 +46,11 @@
             "name": "selectedOption",
             "valueType": "string",
             "required": true,
-            "defaultValue": "pim", 
+            "defaultValue": "only-pim", 
             "options": [
-              { "name": "Show only PIM data", "value": "pim" },
-              { "name": "Show only Authored data", "value": "authored" },
-              { "name": "Show both", "value": "pimAuthored" }
+              { "name": "Show only PIM data", "value": "only-pim" },
+              { "name": "Show only Authored data", "value": "only-authored" },
+              { "name": "Show both", "value": "pim-authored" }
             ]
           },
           {

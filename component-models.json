@@ -1641,19 +1641,19 @@
         "name": "selectedOption",
         "valueType": "string",
         "required": true,
-        "defaultValue": "pim",
+        "defaultValue": "only-pim",
         "options": [
           {
             "name": "Show only PIM data",
-            "value": "pim"
+            "value": "only-pim"
           },
           {
             "name": "Show only Authored data",
-            "value": "authored"
+            "value": "only-authored"
           },
           {
             "name": "Show both",
-            "value": "pimAuthored"
+            "value": "pim-authored"
           }
         ]
       },
