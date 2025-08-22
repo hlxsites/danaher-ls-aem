@@ -15,7 +15,15 @@ export const renderFacetBreadcurm = () => {
   const filters = [];
 
   facetBreadcrumb.state.facetBreadcrumbs.forEach((facet) => {
-    facet.values.forEach((item) => {
+    createFacetBreadcurmb(facet.values, facet);
+  });
+
+  facetBreadcrumb.state.categoryFacetBreadcrumbs.forEach((facet) =>{
+    createFacetBreadcurmb(facet.path, facet, true)
+  });
+
+  function createFacetBreadcurmb(values, facet, isCategoryFacet = false){
+    values.forEach((item) => {
       let fieldName = facet.field;
 
       if (facet.field === 'categoriesname') {
@@ -26,7 +34,7 @@ export const renderFacetBreadcurm = () => {
         fieldName = 'Document Type';
       }
 
-      const displayText = item.value.value === 'binarydata' ? 'eCommerce' : item.value.value;
+      const displayText = isCategoryFacet ? item.value :item.value.value 
 
       // Create filter tag
       const filterTag = document.createElement('div');
@@ -55,7 +63,7 @@ export const renderFacetBreadcurm = () => {
 
       filters.push(filterTag);
     });
-  });
+  }
 
   if (filters.length === 0) {
     facetBreadcrumbElement.classList.add('hidden');
