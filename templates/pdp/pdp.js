@@ -177,7 +177,7 @@ export default async function buildAutoBlocks() {
   }
   localStorage.removeItem('eds-product-details');
 
-  await getPdpDetails(productSlug);
+  await getPdpDetails(productSlug.replace(".html", ""));
   await new Promise((resolve) => {
     const unsubscribe = searchEngine.subscribe(() => {
       const { results } = searchEngine.state.search;
