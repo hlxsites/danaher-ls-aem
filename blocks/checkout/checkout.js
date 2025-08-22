@@ -3,7 +3,6 @@ import { progressModule, initializeModules } from './checkoutUtilities.js';
 import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { loadStripeScript } from '../../scripts/stripe_utils.js';
-import { changeStep } from '../../scripts/cart-checkout-utils.js';
 
 // eslint-disable-next-line consistent-return
 export default async function decorate(block) {

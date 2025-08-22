@@ -59,7 +59,7 @@ render the modules
 ::::::::::::::
 */
 
-export const loadModule = async (module) => {
+export const loadCheckoutModule = async (module) => {
   const moduleWrapper = div({
     class: `checkout-${module}-container w-full`,
   });
@@ -342,28 +342,28 @@ export const initializeModules = async () => {
   else if (checkPath.includes('payment')) updateCheckoutUI(steps, 'payment');
 
   if (checkPath.includes('addresses')) {
-    const shippingAddressPage = await loadModule('shippingAddress');
+    const shippingAddressPage = await loadCheckoutModule('shippingAddress');
     modules.push(
       createModule('checkout-shippingAddress-module', true, shippingAddressPage, []),
     );
   }
 
   if (checkPath.includes('shipping')) {
-    const shippingMethodsPage = await loadModule('shippingMethods');
+    const shippingMethodsPage = await loadCheckoutModule('shippingMethods');
     modules.push(
       createModule('checkout-shippingMethods-module', true, shippingMethodsPage, []),
     );
   }
 
   if (checkPath.includes('payment')) {
-    const paymentPage = await loadModule('payment');
+    const paymentPage = await loadCheckoutModule('payment');
     modules.push(
       createModule('checkout-payment-module', true, paymentPage, []),
     );
   }
 
   // Optional: Always load summary/details module
-  const detailsModule = await loadModule('summary');
+  const detailsModule = await loadCheckoutModule('summary');
   modules.push(createModule('checkout-details', false, detailsModule, []));
   return modules;
 };

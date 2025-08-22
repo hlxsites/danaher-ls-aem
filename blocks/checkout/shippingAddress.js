@@ -50,9 +50,8 @@ await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBA
 
 // google maps api to autopopulate fields
 function initGmapsAutocomplete(addressType) {
-  console.log(' init gmaps autocomplete');
-
   const gInput = document.getElementById('addressLine1');
+  // eslint-disable-next-line no-undef
   const autocomplete = new google.maps.places.Autocomplete(gInput, {
     types: ['address'], // restrict to addresses
     componentRestrictions: { country: 'us' },
@@ -79,14 +78,13 @@ function initGmapsAutocomplete(addressType) {
     const state = getComponent('locality') || getComponent('administrative_area_level_1');
     const postcode = getComponent('postal_code');
     const country = getComponent('country');
-/*
+    /*
     console.log('streetNumber: ', streetNumber);
     console.log('street: ', street);
     console.log('gCity: ', gCity);
     console.log('state: ', state);
     console.log('postcode: ', postcode);
     console.log('country: ', country); */
-
 
     const getFormId = document.querySelector(`#${addressType}AddressForm`);
     if (getFormId) {

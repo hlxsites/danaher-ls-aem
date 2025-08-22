@@ -1,5 +1,7 @@
 import { getCommerceBase } from './commerce.js';
-import { getApiData, patchApiData, postApiData, putApiData } from './api-utils.js';
+import {
+  getApiData, patchApiData, postApiData, putApiData,
+} from './api-utils.js';
 import { updateBasketDetails } from '../blocks/cartlanding/cartSharedFile.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');

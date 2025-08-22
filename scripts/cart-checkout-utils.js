@@ -872,7 +872,7 @@ export async function updateAddresses() {
 
 /*
  :::::::::::::::::::::::::::::
- get addresses to be shown on ui
+ get addresses to be shown
  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function getAddresses() {
@@ -1430,8 +1430,6 @@ export const changeStep = async (step) => {
 
   const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
 
-  console.log('currentTab : ', currentTab);
-
   let validateData = '';
   let validatingBasket;
   try {
@@ -1482,7 +1480,6 @@ export const changeStep = async (step) => {
     );
 
     const modules = document.querySelectorAll('.checkout-module');
-    const proceedButton = document.querySelector('#proceed-button');
 
     if (activateModule) {
       modules.forEach((m) => {
@@ -1592,7 +1589,7 @@ export const changeStep = async (step) => {
         const getPI = await getPaymentIntent();
 
         if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        console.log(' Get Payment Intent...');
+        // console.log(' Get Payment Intent...');
 
         // get payment intent id
         const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
@@ -1609,7 +1606,7 @@ export const changeStep = async (step) => {
         const validatinBasketForPayment = await validateBasket(validatePaymentData);
 
         if (validatinBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
-        console.log(' Basket Validated for Pyament...');
+        // console.log(' Basket Validated for Pyament...');
 
         // add selected card details to order
         const selectedData = {
@@ -1618,7 +1615,7 @@ export const changeStep = async (step) => {
           type: 'String',
         };
         const addingCardToOrder = await addCardToOrder();
-        console.log('Adding Card to Order...', addingCardToOrder);
+        // console.log('Adding Card to Order...', addingCardToOrder);
 
         if (addingCardToOrder?.status !== 'success') throw new Error('Error Adding Card Details.');
 
@@ -1633,7 +1630,7 @@ export const changeStep = async (step) => {
             },
             redirect: 'if_required',
           });
-          console.log('Confirming Setup...');
+          // console.log('Confirming Setup...');
 
           // if stripe setup confirmed, move to confirm payment
           if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
@@ -1648,7 +1645,7 @@ export const changeStep = async (step) => {
           },
           redirect: 'if_required',
         });
-        console.log('Confirming Payment...');
+        // console.log('Confirming Payment...');
 
         if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
 
@@ -1659,7 +1656,7 @@ export const changeStep = async (step) => {
 
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        console.log('Submitting order');
+        // console.log('Submitting order');
 
         // payment confirmed from Stripe, now submitting order
 
@@ -1676,6 +1673,7 @@ export const changeStep = async (step) => {
         return true;
       }
     }
+    return true;
   } catch (error) {
     removePreLoader();
     showNotification(error.message || 'Error Processing Request.', 'error');
@@ -2214,7 +2212,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2517,7 +2515,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2621,7 +2619,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
