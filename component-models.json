@@ -1645,15 +1645,15 @@
         "options": [
           {
             "label": "Show only PIM data",
-            "value": "only-pim"
+            "value": "pim"
           },
           {
             "label": "Show only Authored data",
-            "value": "only-authored"
+            "value": "authored"
           },
           {
             "label": "Show both",
-            "value": "pim-and-authored"
+            "value": "pimAuthored"
           }
         ]
       },
