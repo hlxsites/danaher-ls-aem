@@ -117,6 +117,7 @@ function createCardItem(item, defaultCard) {
  ::::::::::::::
  */
 const paymentModule = async () => {
+  if (!window.location.pathname.includes('payment')) return false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized.' };
@@ -486,7 +487,7 @@ const paymentModule = async () => {
           if (inpuLabel?.classList.contains('text-sm')) {
             inpuLabel?.classList.remove('text-sm');
           }
-          inpuLabel?.classList.add('text-base', 'font-semibold', 'ml-[-30px]', 'pl-10', 'z-10', 'relative');
+          inpuLabel?.classList.add('text-base', 'font-semibold', 'ml-[-30px]', '!pl-10', 'z-10', 'relative');
         });
       decorateIcons(stripeCardsWrapper);
 

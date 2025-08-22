@@ -123,15 +123,15 @@ function getCoveoApiPayload(searchValue, type) {
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
   const searchTerm = searchInput.value.trim();
   if (page === 'cartlanding') {
-  const searchTerm = searchInput.value.trim();
-  if (page === 'cartlanding') {
-    if (searchTerm) {
-      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-      requestPayload.analytics.actionCause = actionCause
-        || searchInput.getAttribute('data-action-cause')
-        || 'searchFromLink';
-      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-      return resp;
+    if (page === 'cartlanding') {
+      if (searchTerm) {
+        const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+        requestPayload.analytics.actionCause = actionCause
+          || searchInput.getAttribute('data-action-cause')
+          || 'searchFromLink';
+        const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+        return resp;
+      }
     }
   }
 

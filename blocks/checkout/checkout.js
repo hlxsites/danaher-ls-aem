@@ -1,6 +1,6 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { showPreLoader } from '../../scripts/common-utils.js';
+import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { loadStripeScript } from '../../scripts/stripe_utils.js';
 import { changeStep } from '../../scripts/cart-checkout-utils.js';
@@ -48,6 +48,7 @@ export default async function decorate(block) {
   const modulesContainer = div({
     class:
       'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-full lg:w-7/10 p-6',
+    id: 'checkoutModulesWrapper',
   });
 
   const progressBar = progressModule();
@@ -69,16 +70,7 @@ export default async function decorate(block) {
           modulesContainer.appendChild(module);
         }
       });
-
-      let loadTab = 'shippingAddress';
-      if (localStorage.getItem('activeCheckoutTab')) {
-        loadTab = localStorage.getItem('activeCheckoutTab');
-      }
-
-      const tabButton = progressBar?.querySelector(`#checkout-${loadTab}`);
-      setTimeout(() => {
-        changeStep(tabButton);
-      }, 2000);
+      removePreLoader();
     })
     .catch((error) => ({
       status: 'error',

@@ -49,6 +49,7 @@ import {
   postPaymentIntent,
   setupPaymentIntent,
 } from './stripe_utils.js';
+import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -482,6 +483,7 @@ export async function getAddressDetails(addressURI) {
  * @param {Object} response - Response from the Set default address API.
  */
 export async function setUseAddressObject(response) {
+  if (window.location.pathname.includes('cartlanding')) return false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -525,6 +527,7 @@ export const setUseAddress = async (id, type) => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
+    if (window.location.pathname.includes('cartlanding')) return false;
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
     if (getUseAddressesObject?.status === 'success') {
       const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
@@ -831,6 +834,7 @@ update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function updateAddresses() {
+  if (window.location.pathname.includes('cartlanding')) return false;
   const authenticationToken = await getAuthenticationToken();
 
   if (authenticationToken?.status === 'error') {
@@ -1396,6 +1400,13 @@ export const updatePoNumber = async (invoiceNumber) => {
     };
   }
 };
+
+function silentNavigation(path) {
+  window.history.pushState({}, '', path);
+  // eslint-disable-next-line no-use-before-define
+  loadingModule();
+}
+
 /*
 *
 *
@@ -1407,84 +1418,74 @@ export const updatePoNumber = async (invoiceNumber) => {
 *
  */
 export const changeStep = async (step) => {
+  showPreLoader();
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
-  const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
-  let validateData = '';
-  if (currentTab === 'shippingMethods') {
-    localStorage.setItem('activeCheckoutTab', currentTab);
-    showPreLoader();
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'InvoiceAddress',
-        'ShippingAddress',
-        'Addresses',
-      ],
-    };
-  }
+  // handle browser forward and back button event
+  window.addEventListener('popstate', () => {
+    silentNavigation(window.location.pathname);
+  });
 
-  if (currentTab === 'payment') {
-    showPreLoader();
-    localStorage.setItem('activeCheckoutTab', currentTab);
-    validateData = {
-      adjustmentsAllowed: true,
-      scopes: [
-        'InvoiceAddress',
-        'ShippingAddress',
-        'Addresses',
-        'Shipping',
-      ],
-    };
-  }
-  if (currentTab === 'submitOrder') {
-    validateData = '';
-  }
-  let validatingBasket = { status: 'success' };
-  if (validateData !== '') {
-    validatingBasket = await validateBasket(validateData);
-  } if (validatingBasket?.status === 'error') {
+  const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
+
+  let validateData = '';
+  let validatingBasket;
+  try {
+    if (currentTab === 'shippingAddress') {
+      validateData = {
+        adjustmentsAllowed: true,
+        scopes: [
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+        ],
+      };
+      validatingBasket = await validateBasket(validateData);
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+      silentNavigation('/us/en/e-buy/addresses');
+    }
+    if (currentTab === 'shippingMethods') {
+      validateData = {
+        adjustmentsAllowed: true,
+        scopes: [
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+        ],
+      };
+      validatingBasket = await validateBasket(validateData);
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+      silentNavigation('/us/en/e-buy/shipping');
+    }
+
     if (currentTab === 'payment') {
-      removePreLoader();
-      showNotification('Invalid Basket', 'error');
-      return false;
+      validateData = {
+        adjustmentsAllowed: true,
+        scopes: [
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+          'Shipping',
+        ],
+      };
+      validatingBasket = await validateBasket(validateData);
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+      silentNavigation('/us/en/e-buy/payment');
     }
 
     if (currentTab === 'submitOrder') {
-      const checkMethods = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
+      const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
+      // check if payment methos is selected
+      const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
+      if (!getSelectedPaymentMethod) throw new Error('Please select Payment Method');
 
-      if (!checkMethods) {
-        showNotification('Please select Payment Method', 'error');
-        return false;
-      }
-    }
+      const getBasketForOrder = await getBasketDetails();
 
-    removePreLoader();
-    showNotification('Invalid Basket', 'error');
-    setTimeout(() => {
-      window.location.href = '/us/en/e-buy/cartlanding';
-    }, 2000);
-    return false;
-  }
-
-  if (validatingBasket?.status === 'success' && currentTab === 'submitOrder') {
-    const checkMethods = document
-      .querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
-
-    if (!checkMethods) {
-      removePreLoader();
-      showNotification('Please select Payment Method', 'error');
-      return false;
-    }
-    const getBasketForOrder = await getBasketDetails();
-    const getSelectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-    if (getSelectedPaymentMethod?.value === 'invoice') {
-      showPreLoader();
-
-      try {
+      if (getSelectedPaymentMethod?.value === 'invoice') {
+        showPreLoader();
         const url = `${baseURL}/baskets/current/payments/open-tender?include=paymentMethod`;
         const defaultHeaders = new Headers();
         defaultHeaders.append('Content-Type', 'application/json');
@@ -1521,19 +1522,13 @@ export const changeStep = async (step) => {
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
 
-        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
-      } catch (err) {
-        showNotification(err?.message || 'An unexpected error occurred.', 'error');
-      } finally {
-        removePreLoader();
+        window.location.href = `${submittedOrderUrl}${orderId}`;
       }
-    }
-    if (getSelectedPaymentMethod?.value === 'stripe' && validatingBasket?.status === 'success') {
-      showPreLoader();
-      const stripe = await loadStripe();
-      const paymentMethod = 'STRIPE_PAYMENT';
+      if (getSelectedPaymentMethod?.value === 'stripe') {
+        showPreLoader();
+        const stripe = await loadStripe();
+        const paymentMethod = 'STRIPE_PAYMENT';
 
-      try {
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
         /*
@@ -1648,134 +1643,67 @@ export const changeStep = async (step) => {
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
 
-        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
+        window.location.href = `${submittedOrderUrl}${orderId}`;
 
         return true;
-      } catch (error) {
-        removePreLoader();
-        showNotification(error.message || 'Error Processing Payment.', 'error');
-        return false;
       }
     }
-  }
-  const activateModule = document.querySelector(
-    `#checkout-${currentTab}-module`,
-  );
+    const activateModule = document.querySelector(
+      `#checkout-${currentTab}-module`,
+    );
 
-  const modules = document.querySelectorAll('.checkout-module');
-  const segment1 = document.getElementById('checkout-segment1');
-  const segment2 = document.getElementById('checkout-segment2');
-  const proceedButton = document.querySelector('#proceed-button');
+    const modules = document.querySelectorAll('.checkout-module');
+    const proceedButton = document.querySelector('#proceed-button');
 
-  if (activateModule) {
-    modules.forEach((m) => {
-      if (m.classList.contains('active')) {
-        m.classList.remove('active');
-        m.classList.add('hidden');
+    if (activateModule) {
+      modules.forEach((m) => {
+        if (m.classList.contains('active')) {
+          m.classList.remove('active');
+          m.classList.add('hidden');
+        }
+      });
+      activateModule.classList.add('active');
+      if (activateModule.classList.contains('hidden')) {
+        activateModule.classList.remove('hidden');
       }
-    });
-    activateModule.classList.add('active');
-    if (activateModule.classList.contains('hidden')) {
-      activateModule.classList.remove('hidden');
     }
+
+    /*
+    ::::::::::::::
+    Update line segments between steps
+    ::::::::::::::
+    */
+    switch (currentTab) {
+      case 'shippingAddress':
+        proceedButton.setAttribute('data-tab', 'shippingMethods');
+        proceedButton.setAttribute('data-activeTab', 'shippingAddress');
+        proceedButton.textContent = 'Proceed to Shipping';
+        break;
+      case 'shippingMethods':
+        proceedButton.textContent = 'Proceed to Payment';
+        proceedButton.setAttribute('data-activeTab', 'shippingMethods');
+        proceedButton.setAttribute('data-tab', 'payment');
+        break;
+      case 'payment':
+        proceedButton.setAttribute('data-activeTab', 'paymentMethods');
+        proceedButton.setAttribute('data-tab', 'submitOrder');
+        proceedButton.textContent = 'Place your order';
+        break;
+      case 'submitOrder':
+        proceedButton.setAttribute('data-tab', 'submitOrder');
+        proceedButton.setAttribute('data-activeTab', 'submitOrder');
+        proceedButton.textContent = 'Place your order';
+        break;
+      default:
+        proceedButton.setAttribute('data-tab', 'shippingMethods');
+        proceedButton.setAttribute('data-activeTab', 'shippingAddress');
+        proceedButton.textContent = 'Proceed to Shipping';
+    }
+  } catch (error) {
+    removePreLoader();
+    showNotification(error.message || 'Error Processing Request.', 'error');
+    return false;
   }
-
-  // Persist active tab in localStorage
-  localStorage.setItem('activeCheckoutTab', currentTab);
-
-  /*
-  ::::::::::::::
-  Update line segments between steps
-  ::::::::::::::
-  */
-  switch (currentTab) {
-    case 'shippingAddress':
-      segment1.style.width = '0';
-      segment2.style.width = '0';
-      document.querySelectorAll('.checkout-step')?.forEach((st) => {
-        if (st?.classList.contains('active')) {
-          st.classList.remove('active');
-        }
-        if (st.id === 'checkout-shippingAddress') {
-          st.classList.add('active');
-        }
-      });
-
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('!bg-danaherpurple-500');
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
-
-      proceedButton.setAttribute('data-tab', 'shippingMethods');
-      proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-      proceedButton.textContent = 'Proceed to Shipping';
-      break;
-    case 'shippingMethods':
-      segment1.style.width = '50%';
-      segment2.style.width = '0';
-      document.querySelectorAll('.checkout-step')?.forEach((st) => {
-        if (st?.classList.contains('active')) {
-          st.classList.remove('active');
-        }
-        if (st.id === 'checkout-shippingMethods') {
-          st.classList.add('active');
-        }
-        if (st.id === 'checkout-shippingAddress') {
-          st.classList.add('active');
-        }
-      });
-
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
-
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.remove('hidden');
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.add('hidden');
-
-      proceedButton.textContent = 'Proceed to Payment';
-      proceedButton.setAttribute('data-activeTab', 'shippingMethods');
-      proceedButton.setAttribute('data-tab', 'payment');
-      break;
-    case 'payment':
-      segment1.style.width = '50%';
-      segment2.style.width = '50%';
-
-      document.querySelectorAll('.checkout-step')?.forEach((st) => {
-        if (!st?.classList.contains('active')) {
-          st.classList.add('active');
-        }
-      });
-
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
-      document.querySelector('#checkout-shippingAddress')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.checkout-progress-bar-icons')?.classList.add('hidden');
-      document.querySelector('#checkout-shippingMethods')?.querySelector('.icon-check-circle-filled')?.classList.remove('hidden');
-
-      proceedButton.setAttribute('data-activeTab', 'paymentMethods');
-      proceedButton.setAttribute('data-tab', 'submitOrder');
-      proceedButton.textContent = 'Place your order';
-      break;
-    case 'submitOrder':
-      segment1.style.width = '50%';
-      segment2.style.width = '50%';
-      document.querySelectorAll('.checkout-step')?.forEach((st) => {
-        if (!st?.classList.contains('active')) {
-          st.classList.add('active');
-        }
-      });
-      proceedButton.setAttribute('data-tab', 'submitOrder');
-      proceedButton.setAttribute('data-activeTab', 'submitOrder');
-      proceedButton.textContent = 'Place your order';
-      break;
-    default:
-      segment1.style.width = '0';
-      segment2.style.width = '0';
-      proceedButton.setAttribute('data-tab', 'shippingMethods');
-      proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-      proceedButton.textContent = 'Proceed to Shipping';
-  }
-  removePreLoader();
-  return {};
 };
 
 /*
@@ -2644,7 +2572,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.href.includes('cartlanding')) {
-        window.location.href = '/us/en/e-buy/checkout';
+        window.location.href = '/us/en/e-buy/addresses';
       } else {
         changeStep(e);
       }
@@ -2834,7 +2762,7 @@ get price type if its net or gross
   }
   return summaryModule;
 }
-
+// update checkout summary wrapper on request
 export async function updateCheckoutSummary() {
   const checkoutSummaryWrapper = document.querySelector(
     '#checkoutSummaryContainer',
@@ -2849,6 +2777,23 @@ export async function updateCheckoutSummary() {
   return { status: 'error', data: 'Error updating checkout summary' };
 }
 
+// load module on navigation
+async function loadingModule() {
+  initializeModules()?.then(async (modules) => {
+    // Append modules to container
+    modules.forEach((module) => {
+      if (module.getAttribute('id') !== 'checkout-details') {
+        const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
+        checkoutModulesWrapper.innerHTML = '';
+        checkoutModulesWrapper?.appendChild(module);
+        removePreLoader();
+      }
+    });
+    await updateCheckoutSummary();
+  });
+}
+
+// load cart items
 export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value, eventParent) => {
     showPreLoader();

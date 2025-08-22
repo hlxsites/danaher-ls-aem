@@ -130,6 +130,7 @@ if basket has the shipping notes attribute and has value. Update the shipping no
  ::::::::::::::
  */
 const shippingMethodsModule = async () => {
+  if (!window.location.pathname.includes('shipping')) return false;
   const storeConfigurations = await getStoreConfigurations();
   /*
   ::::::::::::::

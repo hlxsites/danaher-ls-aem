@@ -2,6 +2,7 @@ import {
   div, button, span,
 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
+// eslint-disable-next-line import/no-cycle
 import { shippingAddressModule } from './shippingAddress.js';
 import shippingMethodsModule from './shippingMethods.js';
 import paymentModule from './paymentModule.js';
@@ -98,6 +99,7 @@ export const loadModule = async (module) => {
   gerenarte the progressbar...for the checkout module to enhance user interaction
   .::::::::::::::
   */
+
 export const progressModule = () => {
   /*
   ::::::::::::::
@@ -178,7 +180,7 @@ export const progressModule = () => {
   );
   const payment = div(
     {
-      class: ' checkout-step cursor-pointer relative bg-white border-gray-300',
+      class: 'checkout-step cursor-pointer relative bg-white border-gray-300',
       id: 'checkout-payment',
       'data-tab': 'payment',
       'data-activeTab': 'paymentMethods',
@@ -221,6 +223,63 @@ export const progressModule = () => {
 };
 
 /*
+  ::::::::::::::
+  Update line segments between steps
+  ::::::::::::::
+  */
+function updateCheckoutUI(steps, stepKey) {
+  const path = window.location.pathname;
+  document.querySelectorAll('.checkout-step')?.forEach((ste) => {
+    if (ste?.classList.contains('pointer-events-none')) {
+      ste?.classList.remove('pointer-events-none');
+    }
+  });
+  if (path.includes('address')) {
+    document.querySelector('#checkout-shippingAddress')?.classList.add('pointer-events-none');
+  }
+  if (path.includes('shipping')) {
+    document.querySelector('#checkout-shippingMethods')?.classList.add('pointer-events-none');
+  }
+  if (path.includes('payment')) {
+    document.querySelector('#checkout-payment')?.classList.add('pointer-events-none');
+  }
+  const config = steps[stepKey];
+  if (!config) return;
+
+  const segment1 = document.getElementById('checkout-segment1');
+  const segment2 = document.getElementById('checkout-segment2');
+
+  // Update segment widths
+  // eslint-disable-next-line prefer-destructuring
+  segment1.style.width = config.width[0];
+  // eslint-disable-next-line prefer-destructuring
+  segment2.style.width = config.width[1];
+
+  // Update active steps
+  document.querySelectorAll('.checkout-step').forEach((st) => {
+    st.classList.toggle('active', config.activeSteps.includes(st.id));
+  });
+
+  // Update progress bar icons
+  Object.entries(config.progress).forEach(([id, { show, check, color }]) => {
+    const stepEl = document.getElementById(id);
+    if (!stepEl) return;
+
+    const progressIcon = stepEl.querySelector('.checkout-progress-bar-icons');
+    const checkIcon = stepEl.querySelector('.icon-check-circle-filled');
+
+    progressIcon?.classList.toggle('hidden', !show);
+    checkIcon?.classList.toggle('hidden', !check);
+
+    if (color) {
+      progressIcon?.classList.add('!bg-danaherpurple-500');
+    } else {
+      progressIcon?.classList.remove('!bg-danaherpurple-500');
+    }
+  });
+}
+
+/*
 ::::::::::::::
 initialize module to render at page load.
 .::::::::::::::
@@ -232,30 +291,79 @@ export const initializeModules = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
-  const getShippingAddressModule = await loadModule('shippingAddress');
+  const modules = [];
+
+  const steps = {
+    addresses: {
+      width: ['0', '0'],
+      activeSteps: ['checkout-shippingAddress'],
+      progress: {
+        'checkout-shippingAddress': { show: true, check: false, color: true },
+        'checkout-shippingMethods': { show: true, check: false },
+      },
+      button: {
+        text: 'Proceed to Shipping',
+        activeTab: 'shippingAddress',
+        tab: 'shippingMethods',
+      },
+    },
+    shipping: {
+      width: ['50%', '0'],
+      activeSteps: ['checkout-shippingAddress', 'checkout-shippingMethods'],
+      progress: {
+        'checkout-shippingAddress': { show: false, check: true },
+        'checkout-shippingMethods': { show: true, check: false },
+      },
+      button: {
+        text: 'Proceed to Payment',
+        activeTab: 'shippingMethods',
+        tab: 'payment',
+      },
+    },
+    payment: {
+      width: ['50%', '50%'],
+      activeSteps: ['checkout-shippingAddress', 'checkout-shippingMethods', 'checkout-payment'],
+      progress: {
+        'checkout-shippingAddress': { show: false, check: true },
+        'checkout-shippingMethods': { show: false, check: true },
+      },
+      button: {
+        text: 'Place your order',
+        activeTab: 'paymentMethods',
+        tab: 'submitOrder',
+      },
+    },
+  };
+
+  const checkPath = window.location.pathname;
+  // Determine which step to render
+  if (checkPath.includes('addresses')) updateCheckoutUI(steps, 'addresses');
+  else if (checkPath.includes('shipping')) updateCheckoutUI(steps, 'shipping');
+  else if (checkPath.includes('payment')) updateCheckoutUI(steps, 'payment');
+
+  if (checkPath.includes('addresses')) {
+    const shippingAddressPage = await loadModule('shippingAddress');
+    modules.push(
+      createModule('checkout-shippingAddress-module', true, shippingAddressPage, []),
+    );
+  }
+
+  if (checkPath.includes('shipping')) {
+    const shippingMethodsPage = await loadModule('shippingMethods');
+    modules.push(
+      createModule('checkout-shippingMethods-module', true, shippingMethodsPage, []),
+    );
+  }
+
+  if (checkPath.includes('payment')) {
+    const paymentPage = await loadModule('payment');
+    modules.push(
+      createModule('checkout-payment-module', true, paymentPage, []),
+    );
+  }
+
+  // Optional: Always load summary/details module
   const detailsModule = await loadModule('summary');
-  const getShippingMethodsModule = await loadModule('shippingMethods');
-  const paymentModuleContent = await loadModule('payment');
-  /*
-   ::::::::::::::
-   Define module details
-   ::::::::::::::
-   */
-  const modules = [
-    createModule(
-      'checkout-shippingAddress-module',
-      true,
-      getShippingAddressModule,
-      [],
-    ),
-    createModule('checkout-details', false, detailsModule, []),
-    createModule(
-      'checkout-shippingMethods-module',
-      false,
-      getShippingMethodsModule,
-      [],
-    ),
-    createModule('checkout-payment-module', false, paymentModuleContent, []),
-  ];
+  modules.push(createModule('checkout-details', false, detailsModule, []));
   return modules;
 };
