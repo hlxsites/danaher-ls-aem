@@ -22,7 +22,7 @@ import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 // eslint-disable-next-line
 //import pathConfig from './pathConfig.json' with { type: 'json' };
-import { includeProdEdsPaths, includeStageEdsPaths, excludeStagePaths } from './converter-paths-config.js';
+import { excludeProdPaths, excludeStagePaths } from './converter-paths-config.js';
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -237,25 +237,23 @@ function skipConverter(path) {
     if (path.includes('/us/en/products-eds') || path.includes('/us/en/e-buy')) return true;
   }
  */
+  // this is the prod repo
+  const prodRepo = 'danaher-ls-aem-prod';
 
-// check for production
-if(includeProdEdsPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/'))
-{
-  return true;
-}
+  // check for stage : :::::  checking host in the config for prod
+  if (converterCfg.internalHost.includes(prodRepo)) {
+    if (excludeProdPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/')) {
+      return false;
+    }
+  }
 
- // check for stage : :::::  checking host in the config for stage/prod
-if (!converterCfg.internalHost.includes('danaher-ls-aem-prod')) {
-  if(includeStageEdsPaths.some((stagePath) => path.includes(stagePath))  && !path.includes('/topics-jck1/'))
-  {
-    return true;
+  // check for stage : :::::  checking host in the config for stage
+  if (!converterCfg.internalHost.includes(prodRepo)) {
+    if (excludeStagePaths.some((stagePath) => path.includes(stagePath)) && !path.includes('/topics-jck1/')) {
+      return false;
+    }
   }
-  if(excludeStagePaths.some((excludeStagePath) => path.includes(excludeStagePath)) && !path.includes('/topics-jck1/'))
-  {
-    return false;
-  }
-}
-/*
+  /*
   if (path.includes('/us/en/blog/')) return true;
   if (path.includes('/us/en/news/')) return true;
   if (path.includes('/us/en/videos-eds/')) return true; */
