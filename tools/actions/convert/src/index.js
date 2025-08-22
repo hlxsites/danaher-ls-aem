@@ -242,15 +242,15 @@ function skipConverter(path) {
 
   // check for stage : :::::  checking host in the config for prod
   if (converterCfg.internalHost.includes(prodRepo)) {
-    if (excludeProdPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/')) {
-      return false;
+    if (!excludeProdPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/')) {
+      return true;
     }
   }
 
   // check for stage : :::::  checking host in the config for stage
   if (!converterCfg.internalHost.includes(prodRepo)) {
-    if (excludeStagePaths.some((stagePath) => path.includes(stagePath)) && !path.includes('/topics-jck1/')) {
-      return false;
+    if (!excludeStagePaths.some((stagePath) => path.includes(stagePath)) && !path.includes('/topics-jck1/')) {
+      return true;
     }
   }
   /*
