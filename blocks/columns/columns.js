@@ -787,12 +787,10 @@ export default function decorate(block) {
   });
 
   // Form Load
-    if (block.classList.contains('thirtyseventy'))
+    if (block.classList.contains('thirtyseventy') && block.classList.contains('relative'))
       {
-        if (cols.length > 1 && !cols[1].querySelector('form')) {
           loadSFDCForm(cols[1]);
       }
-  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
