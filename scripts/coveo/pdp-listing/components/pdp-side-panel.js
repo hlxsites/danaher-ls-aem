@@ -290,7 +290,11 @@ export function createFiltersPanel() {
       attrs: { id: 'modalOverlay' },
       className: 'fixed inset-0 bg-black bg-opacity-75 z-50 hidden',
     });
-    document.body.appendChild(modalOverlay);
+    // document.body.appendChild(modalOverlay);
+    const target = document.getElementsByClassName('pdp-products-wrapper')[0];
+    if (target) {
+      target.appendChild(modalOverlay);
+    }
   }
 
   if (panel) {
@@ -311,7 +315,7 @@ export function createFiltersPanel() {
   // Panel does not exist: create new panel
   panel = createEl('div', {
     className:
-      'fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 z-50 flex flex-col items-start gap-3 p-6 w-[370px]',
+      'fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 z-50 flex flex-col items-start gap-3 w-[370px]',
     style: 'width: 374px;', // Fix width so it never changes on expand/collapse
     attrs: { id: 'filtersPanel' },
   });
@@ -420,7 +424,12 @@ export function createFiltersPanel() {
 
   // === ASSEMBLE PANEL ===
   panel.append(header, body, footer);
-  document.body.appendChild(panel);
+  // document.body.appendChild(panel);
+  const target = document.getElementsByClassName('pdp-products-wrapper')[0];
+
+  if (target) {
+    target.appendChild(panel);
+  }
 
   renderBreadcrumbs();
   return panel;
