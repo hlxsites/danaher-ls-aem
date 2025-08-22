@@ -52,11 +52,11 @@ indices:
     target: /us/en/products-index.json
     properties:
       title:
-        select: main h1
-        value: textContent(el)
+        select: head > meta[name="categorytitle"]
+        value: attribute(el, "content")
       description:
-        select: main .banner h2
-        value: textContent(el)
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")

@@ -42,13 +42,15 @@
           "name": "opcoBannerTitle",
           "value": "",
           "label": "Banner Title"
-        },{
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "opcoBannerHeading",
           "value": "",
           "label": "Banner Heading"
-        },{
+        },      
+        {
           "component": "richtext",
           "valueType": "string",
           "name": "opcoBannerDescription",
