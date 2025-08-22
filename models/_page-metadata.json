@@ -17,6 +17,13 @@
             {
               "component": "text",
               "valueType": "string",
+              "name": "categoryTitle",
+              "label": "Category Title",
+              "value": ""
+            },
+            {
+              "component": "text",
+              "valueType": "string",
               "name": "description",
               "label": "Description",
               "value": ""
