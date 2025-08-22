@@ -42,15 +42,15 @@
         "fields": [
           {
             "component": "radio-group",
-            "name": "selectedOption",
             "label": "Choose an Option",
+            "name": "selectedOption",
             "valueType": "string",
             "required": true,
             "defaultValue": "pim", 
             "options": [
-              { "label": "Show only PIM data", "value": "pim" },
-              { "label": "Show only Authored data", "value": "authored" },
-              { "label": "Show both", "value": "pimAuthored" }
+              { "name": "Show only PIM data", "value": "pim" },
+              { "name": "Show only Authored data", "value": "authored" },
+              { "name": "Show both", "value": "pimAuthored" }
             ]
           },
           {
