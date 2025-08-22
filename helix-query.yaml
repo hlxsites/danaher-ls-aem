@@ -52,7 +52,7 @@ indices:
     target: /us/en/products-index.json
     properties:
       title:
-        select: head > meta[name="categoryTitle"]
+        select: head > meta[name="categorytitle"]
         value: attribute(el, "content")
       description:
         select: head > meta[name="description"]
