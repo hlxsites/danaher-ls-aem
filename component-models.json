@@ -1636,7 +1636,6 @@
     "id": "pdp-tabs-item",
     "fields": [
       {
-        "id": "my-radio-group-model",
         "fields": [
           {
             "component": "radio-group",
