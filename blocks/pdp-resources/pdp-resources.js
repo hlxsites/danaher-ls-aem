@@ -30,7 +30,7 @@ export default async function decorate(block) {
     let paginationContainer;
 
     const pdpResourceWrapperBlockContainer = div({
-      class: 'pdpResourceWrapperBlock flex flex-col gap-y-[14px]', // Added 14px gap between records
+      class: 'pdpResourceWrapperBlock flex flex-col gap-y-[14px]',
     });
 
     const getContentTypes = () => {
@@ -270,7 +270,6 @@ export default async function decorate(block) {
                     }),
                   ]
                   : 'Read Article',
-
               ),
             ),
           ),
@@ -298,14 +297,13 @@ export default async function decorate(block) {
                 selectedContentType = 'All';
                 resourcePager.selectPage(1);
 
-                const icon = e.currentTarget.querySelector('.icon');
-                const allIcons = e.currentTarget.parentElement.querySelectorAll('.icon');
-                allIcons.forEach((i) => {
-                  i.classList.remove('icon-radio-button');
-                  i.classList.add('icon-radio-input-unchecked');
+                const allItems = e.currentTarget.parentElement.querySelectorAll('.content-type-item');
+                allItems.forEach((item) => {
+                  item.classList.remove('text-danaherpurple-500');
+                  item.classList.add('text-blac');
                 });
-                icon.classList.remove('icon-radio-input-unchecked');
-                icon.classList.add('icon-radio-button');
+                e.currentTarget.querySelector('.content-type-item').classList.remove('text-black');
+                e.currentTarget.querySelector('.content-type-item').classList.add('text-danaherpurple-500');
 
                 const contentTypeButton = document.querySelector('.content-type-text');
                 if (contentTypeButton) {
@@ -321,14 +319,11 @@ export default async function decorate(block) {
                 }
               },
             },
-            span({
-              class:
-                selectedContentType === 'All'
-                  ? 'icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]'
-                  : 'icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]',
-            }),
             div(
-              { class: 'text-gray-700 text-[14px] font-medium leading-5 cursor-pointer', style: 'padding-left: 20px' },
+              {
+                class: `text-${selectedContentType === 'All' ? 'danaherpurple-500' : 'gray-700'} text-[14px] font-medium leading-5 cursor-pointer content-type-item`,
+                style: 'padding-left: 10px',
+              },
               'All',
             ),
           ),
@@ -344,14 +339,13 @@ export default async function decorate(block) {
               selectedContentType = type;
               resourcePager.selectPage(1);
 
-              const icon = e.currentTarget.querySelector('.icon');
-              const allIcons = e.currentTarget.parentElement.querySelectorAll('.icon');
-              allIcons.forEach((i) => {
-                i.classList.remove('icon-radio-button');
-                i.classList.add('icon-radio-input-unchecked');
+              const allItems = e.currentTarget.parentElement.querySelectorAll('.content-type-item');
+              allItems.forEach((item) => {
+                item.classList.remove('text-danaherpurple-500');
+                item.classList.add('text-black');
               });
-              icon.classList.remove('icon-radio-input-unchecked');
-              icon.classList.add('icon-radio-button');
+              e.currentTarget.querySelector('.content-type-item').classList.remove('text-black');
+              e.currentTarget.querySelector('.content-type-item').classList.add('text-danaherpurple-500');
 
               const contentTypeButton = document.querySelector('.content-type-text');
               if (contentTypeButton) {
@@ -367,14 +361,11 @@ export default async function decorate(block) {
               }
             },
           },
-          span({
-            class:
-                selectedContentType === type
-                  ? 'icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]'
-                  : 'icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]',
-          }),
           div(
-            { class: 'text-gray-700 text-[14px] font-medium leading-5 cursor-pointer', style: 'padding-left: 20px' },
+            {
+              class: `text-${selectedContentType === type ? 'danaherpurple-500' : 'gray-700'} text-[14px] font-medium leading-5 cursor-pointer content-type-item`,
+              style: 'padding-left: 10px',
+            },
             type,
           ),
         )),
@@ -406,14 +397,13 @@ export default async function decorate(block) {
             selectedSortType = option.value;
             resourcePager.selectPage(1);
 
-            const icon = e.currentTarget.querySelector('.icon');
-            const allIcons = e.currentTarget.parentElement.querySelectorAll('.icon');
-            allIcons.forEach((i) => {
-              i.classList.remove('icon-radio-button');
-              i.classList.add('icon-radio-input-unchecked');
+            const allItems = e.currentTarget.parentElement.querySelectorAll('.sort-type-item');
+            allItems.forEach((item) => {
+              item.classList.remove('text-danaherpurple-500');
+              item.classList.add('text-black');
             });
-            icon.classList.remove('icon-radio-input-unchecked');
-            icon.classList.add('icon-radio-button');
+            e.currentTarget.querySelector('.sort-type-item').classList.remove('text-black');
+            e.currentTarget.querySelector('.sort-type-item').classList.add('text-danaherpurple-500');
 
             const sortButton = document.querySelector('.sorting-button-text');
             if (sortButton) {
@@ -429,14 +419,11 @@ export default async function decorate(block) {
             }
           },
         },
-        span({
-          class:
-              option.value === selectedSortType
-                ? 'icon icon-radio-button absolute w-4 h-4 cursor-pointer p-[2px]'
-                : 'icon icon-radio-input-unchecked absolute w-4 h-4 cursor-pointer p-[2px]',
-        }),
         div(
-          { class: 'text-gray-700 text-[14px] font-medium leading-5 cursor-pointer', style: 'padding-left: 20px' },
+          {
+            class: `text-${option.value === selectedSortType ? 'danaherpurple-500' : 'gray-700'} text-[14px] font-medium leading-5 cursor-pointer sort-type-item`,
+            style: 'padding-left: 10px',
+          },
           option.label,
         ),
       ));
