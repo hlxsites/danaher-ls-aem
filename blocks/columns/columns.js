@@ -634,6 +634,7 @@ export default function decorate(block) {
         if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
+          loadSFDCForm(secondDiv);
         } else if (block.className.includes('seventythirty')) {
           firstDiv.classList.add('lg:w-2/3');
           secondDiv.classList.add('lg:w-1/3');
@@ -786,13 +787,9 @@ export default function decorate(block) {
   });
 
   // Form Load
- 
-    if (block.querySelectorAll('.form') && block.classList.contains('thirtyseventy'))
-      {
-        if (cols.length > 1 && !cols[1].querySelector('form')) {
-          loadSFDCForm(cols[1]);
-      }
-      }
+    // if (cols.length > 1 && !cols[1].querySelector('form')) {
+    //       loadSFDCForm(cols[1]);
+    // }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
