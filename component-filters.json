@@ -54,7 +54,19 @@
       "table",
       "testimonial",
       "tags-list",
-      "related-articles"
+      "related-articles",
+      "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications",
+      "authorable-pdp-tabs"
     ]
   },
   {
@@ -75,6 +87,12 @@
     "id": "articles-list",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "authorable-pdp-tabs",
+    "components": [
+      "authorable-pdp-tabs-item"
     ]
   },
   {
@@ -177,6 +195,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "pdp-page-tabs",
+    "components": [
+      "pdp-tabs-item"
     ]
   },
   {
