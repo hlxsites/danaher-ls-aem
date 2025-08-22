@@ -31,7 +31,7 @@ export default async function decorate(block) {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   // if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
   try {
-    let bundleDetails;
+    let bundleDetails = JSON.parse(response.raw?.bundlepreviewjson) || [];
     const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
     if (isPIM === 'only-authored') {
       //const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
