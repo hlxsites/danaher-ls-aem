@@ -262,13 +262,16 @@ export default async function decorate(block) {
                   },
                 },
                 item?.raw?.filetype === 'pdf'
-                  ? [
+                  ? div(
+                    {
+                      class: 'flex items-center',
+                    },
                     'View Document',
                     span({
                       class:
                         'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
                     }),
-                  ]
+                  )
                   : 'Read Article',
               ),
             ),
