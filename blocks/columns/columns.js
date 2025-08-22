@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import { loadSFDCForm } from '../../blocks/form/form.js';
+import loadSFDCForm from '../../blocks/form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -471,8 +471,8 @@ async function loadForm(row, tags) {
           'Are you currently exploring solutions to improve efficiency in your workflows?',
         ),
         buildOptionsElement('drugdiscovery_challenges', [
-          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
-          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Yes, actively evaluating options within the next 3-6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6-12 months)', value: 'longer_term_6_12_months' },
           { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
         ]),
       ),
@@ -680,8 +680,7 @@ export default function decorate(block) {
   }
 
   // setup image columns
-  [...block.children].forEach((col) => {
-    
+  [...block.children].forEach((col) => {    
     cols.forEach((row) => {
       const img = row.querySelector('img');
       if (img) {
@@ -790,6 +789,22 @@ export default function decorate(block) {
     });
   });
 
+  //Form Load
+  block.querySelectorAll('.form')
+  {
+    if (block.classList.contains('thirtyseventy'))
+      {
+        if (cols.length > 1 && !cols[1].querySelector('form')) {
+          loadSFDCForm(cols[1]);
+      }
+  }
+  else
+  {
+    const form = cols[1].querySelector('form');
+    if (form) form.remove();
+  }
+  }
+
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
     let url = '';
@@ -822,8 +837,4 @@ export default function decorate(block) {
       embed.appendChild(iframe);
     }
   });
-
-  // const formColumn = div({ class: 'column col-span-1' });
-  //loadSFDCForm(cols);
-
 }
