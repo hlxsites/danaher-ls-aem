@@ -3,6 +3,10 @@
   font-family: TWK Lausanne EDS
 }
 
+.pdp-page-tabs-wrapper :is(.static) {
+  position: static
+}
+
 .pdp-page-tabs-wrapper :is(.sticky) {
   position: sticky
 }
