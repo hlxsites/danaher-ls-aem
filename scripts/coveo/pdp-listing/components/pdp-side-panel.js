@@ -39,16 +39,22 @@ function getFacetDataFromControllers() {
       title: 'Product Type',
       items: format(productTypeFacetController.state.values),
       toggleSelect: (value) => productTypeFacetController.toggleSelect(value),
+      state: productTypeFacetController.state,
+      deselectAll : () => productTypeFacetController.deselectAll()
     },
     {
       title: 'Brand',
       items: format(brandFacetController.state.values),
       toggleSelect: (value) => brandFacetController.toggleSelect(value),
+      state: brandFacetController.state,
+      deselectAll : () => brandFacetController.deselectAll()
     },
     {
       title: 'Document Type',
       items: format(documentTypeFacetController.state.values),
       toggleSelect: (value) => documentTypeFacetController.toggleSelect(value),
+      state: documentTypeFacetController.state,
+      deselectAll : () => documentTypeFacetController.deselectAll()
     },
   ];
 }
@@ -69,7 +75,15 @@ function renderBreadcrumbs() {
   const filters = [];
 
   facetBreadcrumb.state.facetBreadcrumbs.forEach((facet) => {
-    facet.values.forEach((item) => {
+    createFacetBreadcurmb(facet.values, facet);
+  });
+
+  facetBreadcrumb.state.categoryFacetBreadcrumbs.forEach((facet) =>{
+    createFacetBreadcurmb(facet.path, facet, true)
+  });
+
+  function createFacetBreadcurmb(values, facet, isCategoryFacet = false){
+    values.forEach((item) => {
       let fieldName = facet.field;
 
       if (facet.field === 'categoriesname') {
@@ -79,42 +93,37 @@ function renderBreadcrumbs() {
       } else if (facet.field === 'documenttype') {
         fieldName = 'Document Type';
       }
-      const displayText = item.value.value === 'binarydata' ? 'eCommerce' : item.value.value;
 
-      const filterTag = createEl('div', {
-        className:
-          'bg-danaherpurple-50 p-2 rounded-md flex items-center text-sm text-purple-700 font-medium gap-2',
-      });
+      const displayText = isCategoryFacet ? item.value :item.value.value 
 
-      const label = createEl('span', {
-        text: `${fieldName}: ${displayText}`,
-      });
+      // Create filter tag
+      const filterTag = document.createElement('div');
+      filterTag.className = 'bg-danaherpurple-50 px-2 py-1 rounded-[6px] flex items-center text-sm text-purple-700 font-medium gap-2';
 
-      const removeBtn = createEl('button', {
-        className:
-          'text-purple-500 hover:text-purple-700 focus:outline-none text-lg font-bold',
-        html: `<span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <g clip-path="url(#clip0_37271_76180)">
-            <path d="M11.2313 1.03137L1.03125 11.2314M1.03125 1.03137L11.2313 11.2314" stroke="#7523FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-          <defs>
-            <clipPath id="clip0_37271_76180">
-              <rect width="12" height="12" fill="white"/>
-            </clipPath>
-          </defs>
-        </svg><span/>`,
-        title: 'Remove filter',
-      });
+      const label = document.createElement('span');
+      label.textContent = `${fieldName}: ${displayText}`;
 
-      removeBtn.addEventListener('click', () => {
-        item.deselect();
-        renderBreadcrumbs();
-      });
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'text-purple-500 hover:text-purple-700 focus:outline-none text-lg font-bold';
+      removeBtn.title = 'Remove filter';
+      removeBtn.innerHTML = `<span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <g clip-path="url(#clip0_37271_76180)">
+          <path d="M11.2313 1.03137L1.03125 11.2314M1.03125 1.03137L11.2313 11.2314" stroke="#7523FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_37271_76180">
+            <rect width="12" height="12" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg><span/>`;
+      removeBtn.addEventListener('click', () => item.deselect());
 
-      filterTag.append(label, removeBtn);
+      filterTag.appendChild(label);
+      filterTag.appendChild(removeBtn);
+
       filters.push(filterTag);
     });
-  });
+  }
 
   if (filters.length === 0) {
     facetBreadcrumbElement.classList.add('hidden');
@@ -159,21 +168,24 @@ function createFacet(facet, isFirst = false) {
 
   const toggleIcon = createEl('span', {
     className: 'facet-toggle-icon text-xl text-purple-600',
-    text: isFirst ? '−' : '+', // open first facet
+    text: isFirst ? '−' : '+',
   });
 
   header.append(title, toggleIcon);
 
   const body = createEl('div', {
-    className: `facet-body space-y-2 w-full p-3 ${isFirst ? '' : 'hidden'}`, // first facet open
+    className: `facet-body space-y-2 w-full p-3 ${isFirst ? '' : 'hidden'}`,
   });
 
-  // ✅ Show search only if more than 10 items
+  const itemsContainer = createEl('div', { className: 'space-y-2 facet-items' });
+  body.appendChild(itemsContainer);
+
   let searchInput;
-  if (facet.items.length > 10) {
+  const needsSearch = (facet.items?.length ?? 0) > 10 || (facet.state?.valuesAsTrees?.length ?? 0) > 10;
+
+  if (needsSearch) {
     const searchWrapper = createEl('div', {
-      className:
-        'flex h-8 p-1 items-center gap-2 self-stretch border rounded bg-gray-100',
+      className: 'flex h-8 p-1 items-center gap-2 self-stretch border rounded bg-gray-100',
     });
 
     const searchIcon = createEl('span', {
@@ -189,22 +201,91 @@ function createFacet(facet, isFirst = false) {
 
     searchInput = createEl('input', {
       attrs: { type: 'text', placeholder: 'Search' },
-      className:
-        'flex-grow text-sm bg-gray-100 outline-none focus:outline-none focus:ring-0 focus:border-transparent',
+      className: 'flex-grow text-sm bg-gray-100 outline-none',
     });
 
     searchWrapper.append(searchIcon, searchInput);
     body.appendChild(searchWrapper);
   }
 
-  // Items container
-  const itemsContainer = createEl('div', { className: 'space-y-2 facet-items' });
-  body.appendChild(itemsContainer);
+  // -------------------------
+  // 1. HIERARCHICAL rendering
+  // -------------------------
+  function renderTreeNodes(nodes, level = 0, filterText = '') {
+  const container = document.createElement('div');
 
-  function renderItems(filterText = '') {
-    itemsContainer.innerHTML = ''; // clear
+  nodes.forEach((node) => {
+    const labelMatch = node.value.toLowerCase().includes(filterText.toLowerCase());
+    const hasMatchingChildren = node.children?.some(child =>
+      child.value.toLowerCase().includes(filterText.toLowerCase())
+    );
 
-    const visibleItems = facet.items.filter((item) => item.label.toLowerCase().includes(filterText.toLowerCase()));
+    if (filterText && !labelMatch && !hasMatchingChildren) return;
+
+    const nodeWrapper = createEl('div', {
+      className: `ml-${level * 7} cursor-pointer`,
+    });
+
+    const label = createEl('div', {
+      className: `text-sm text-black font-twk py-1 flex items-center gap-2 ${
+        node.state === 'selected' ? 'font-semibold text-indigo-600' : ''
+      }`,
+      text: `${node.value} (${node.numberOfResults})`,
+      events: {
+        click: () => {
+          facet.toggleSelect(node);
+          renderBreadcrumbs()
+          render(filterText); // Refresh tree
+        },
+      }, 
+    });
+
+    const arrow = document.createElement("span");
+    arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+    <path d="M1 1.33341L5.66667 6.00008L1 10.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+
+    nodeWrapper.appendChild(label);
+
+    if (node.children && node.children.length > 0) {
+      const arrowBack= `<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+        <path d="M6 1.33341L1.33333 6.00008L6 10.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`
+
+      label.innerHTML = `${arrowBack} ${node.value} (${node.numberOfResults})`;
+      nodeWrapper.appendChild(label);
+      label.addEventListener("click", (e) => {
+        e.stopPropagation();
+        facet.deselectAll();
+        renderBreadcrumbs?.();
+        render(filterText); // Refresh tree
+      });
+      const childContainer = renderTreeNodes(node.children, level + 1, filterText);
+      nodeWrapper
+      nodeWrapper.appendChild(childContainer);
+    } else if (node.path.length == 1 ){
+      label.appendChild(arrow)
+      nodeWrapper.appendChild(label);
+    } else if (node.path.length >= 2){
+      // nodeWrapper.
+    } 
+
+    container.appendChild(nodeWrapper);
+  });
+
+  return container;
+}
+
+
+  // -------------------------
+  // 2. ORIGINAL checkbox rendering
+  // -------------------------
+  function renderCheckboxItems(filterText = '') {
+    itemsContainer.innerHTML = '';
+
+    const visibleItems = facet.items.filter(item =>
+      item.label.toLowerCase().includes(filterText.toLowerCase())
+    );
 
     if (visibleItems.length === 0) {
       const noResults = createEl('div', {
@@ -215,15 +296,10 @@ function createFacet(facet, isFirst = false) {
       return;
     }
 
-    // Recursive function to render an item and its children
-    function renderItem(item, level = 0) {
-      const container = createEl('div', {
-        className: `ml-${level * 4}`, // indent based on level (e.g., ml-4, ml-8, ...)
-      });
-
+    visibleItems.forEach((item) => {
+      const container = createEl('div');
       const label = createEl('label', {
-        className:
-        'flex items-center gap-2 text-[14px] leading-[20px] font-normal text-black font-twk',
+        className: 'flex items-center gap-2 text-[14px] leading-[20px] font-normal text-black font-twk',
       });
 
       const checkbox = createEl('input', {
@@ -234,49 +310,98 @@ function createFacet(facet, isFirst = false) {
         events: {
           change: () => {
             facet.toggleSelect(item);
-            renderBreadcrumbs();
+            renderBreadcrumbs?.();
+            render(filterText);
           },
         },
       });
 
       label.append(checkbox, document.createTextNode(item.label));
       container.appendChild(label);
-
-      // Recursively render children, if any
-      if (item.children && item.children.length > 0) {
-        item.children.forEach((child) => {
-          const childEl = renderItem(child, level + 1);
-          container.appendChild(childEl);
-        });
-      }
-
-      return container;
-    }
-
-    visibleItems.forEach((item) => {
-      const el = renderItem(item);
-      itemsContainer.appendChild(el);
+      itemsContainer.appendChild(container);
     });
   }
 
-  // initial render
-  renderItems();
+  // -------------------------
+  // 3. Combined render() switch
+  // -------------------------
+  function render(filterText = '') {
+    itemsContainer.innerHTML = '';
 
-  // attach search listener
+    if (facet.state?.valuesAsTrees && facet.state.valuesAsTrees.length > 0) {
+      const tree = renderTreeNodes(facet.state.valuesAsTrees, 0, filterText);
+      itemsContainer.appendChild(tree);
+    } else {
+      renderCheckboxItems(filterText);
+    }
+  }
+
+  render();
+
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      renderItems(e.target.value);
+      render(e.target.value);
     });
   }
 
-  header.addEventListener('click', () => {
+  header.addEventListener('click', (e) => {
     const hidden = body.classList.toggle('hidden');
     toggleIcon.textContent = hidden ? '+' : '−';
+    checkNodes() ;
   });
 
   wrapper.append(header, body);
   return wrapper;
 }
+
+const expandCollapseAll = createEl('button', {
+  className:
+    'text-[#7523FF] text-right text-[16px] leading-[22px] font-bold hover:underline flex items-center gap-2 ml-auto font-twk',
+  html: `<span class="label text-danaherpurple-500">Expand All</span> <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></span>`,
+});
+
+function checkNodes() {
+  let panel = document.getElementById('filtersPanel');
+  const nodeValues = panel.querySelectorAll('.facet-body');
+
+  const nodesArray = Array.from(nodeValues);
+
+  const allHidden = nodesArray.every(node => node.classList.contains('hidden'));
+  const noneHidden = nodesArray.every(node => !node.classList.contains('hidden'));
+
+  if (allHidden) {
+    updateExpandCollapseButton();
+  } else if (noneHidden) {
+    updateExpandCollapseButton();
+  }
+}
+
+// Helper function: update button label and icon based on hidden state
+function updateExpandCollapseButton() {
+  let panel = document.getElementById('filtersPanel');
+  const bodies = panel.querySelectorAll('.facet-body');
+  const allHidden = Array.from(bodies).every((body) => body.classList.contains('hidden'));
+  const noneHidden = Array.from(bodies).every((body) => !body.classList.contains('hidden'));
+
+  const labelEl = expandCollapseAll.querySelector('.label');
+  const arrowEl = expandCollapseAll.querySelector('.arrow');
+
+  if (allHidden) {
+    labelEl.textContent = 'Expand All';
+    arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  } else if (noneHidden) {
+    labelEl.textContent = 'Collapse All';
+    arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  }
+  // Optionally handle mixed state (some hidden, some visible) if needed
+}
+
 
 // === Create or Update Filters Panel ===
 export function createFiltersPanel() {
@@ -290,7 +415,6 @@ export function createFiltersPanel() {
       attrs: { id: 'modalOverlay' },
       className: 'fixed inset-0 bg-black bg-opacity-75 z-50 hidden',
     });
-    // document.body.appendChild(modalOverlay);
     const target = document.getElementsByClassName('pdp-products-wrapper')[0];
     if (target) {
       target.appendChild(modalOverlay);
@@ -307,6 +431,7 @@ export function createFiltersPanel() {
       facetData.forEach((facet, index) => {
         body.appendChild(createFacet(facet, index === 0)); // first facet open
       });
+      // checkNodes(); // Update button state after creating facets
     }
     renderBreadcrumbs();
     return panel;
@@ -331,7 +456,8 @@ export function createFiltersPanel() {
   });
 
   const title = createEl('h2', {
-    className: 'font-semibold flex items-center gap-2 text-black text-[32px] leading-[40px] font-normal font-twk',
+    className:
+      'font-semibold flex items-center gap-2 text-black text-[32px] leading-[40px] font-normal font-twk',
     html: `<span class="rounded-full bg-danaherpurple-25 p-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4" stroke="#7523FF" stroke-linecap="round" stroke-linejoin="round"/>
     </svg></span> Filters`,
@@ -352,14 +478,6 @@ export function createFiltersPanel() {
 
   headerTop.append(title, closeBtn);
 
-  const expandCollapseAll = createEl('button', {
-    className:
-      'text-[#7523FF] text-right text-[16px] leading-[22px] font-bold hover:underline flex items-center gap-2 ml-auto font-twk',
-    html: `<span class="label text-danaherpurple-500">Expand All</span> <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></span>`,
-  });
-
   expandCollapseAll.addEventListener('click', () => {
     const bodies = panel.querySelectorAll('.facet-body');
     const icons = panel.querySelectorAll('.facet-toggle-icon');
@@ -367,17 +485,7 @@ export function createFiltersPanel() {
 
     bodies.forEach((body) => body.classList.toggle('hidden', !isExpanding));
     icons.forEach((icon) => (icon.textContent = isExpanding ? '−' : '+'));
-
-    expandCollapseAll.querySelector('.label').textContent = isExpanding
-      ? 'Collapse All'
-      : 'Expand All';
-    expandCollapseAll.querySelector('.arrow').innerHTML = isExpanding
-      ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-           <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>`
-      : `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-           <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>`;
+    updateExpandCollapseButton();
   });
 
   const selectedFiltersBar = createEl('div', {
@@ -398,6 +506,7 @@ export function createFiltersPanel() {
     facetData.forEach((facet, index) => {
       body.appendChild(createFacet(facet, index === 0)); // first facet open
     });
+    // checkNodes(); // Update expand/collapse button state after facets render
   }
 
   // === FOOTER ===
@@ -406,7 +515,8 @@ export function createFiltersPanel() {
   });
 
   const viewBtn = createEl('button', {
-    className: 'w-full py-2 bg-danaherpurple-500 rounded-full hover:bg-purple-700 text-white text-right text-base leading-[22px] font-normal font-twk',
+    className:
+      'w-full py-2 bg-danaherpurple-500 rounded-full hover:bg-purple-700 text-white text-right text-base leading-[22px] font-normal font-twk',
     events: {
       click() {
         panel.style.transform = 'translateX(100%)';
@@ -414,6 +524,7 @@ export function createFiltersPanel() {
       },
     },
   });
+
   let totalResult = 0;
   querySummary.subscribe(() => {
     totalResult = querySummary.state.total;
@@ -424,14 +535,13 @@ export function createFiltersPanel() {
 
   // === ASSEMBLE PANEL ===
   panel.append(header, body, footer);
-  // document.body.appendChild(panel);
-  const target = document.getElementsByClassName('pdp-products-wrapper')[0];
 
+  const target = document.getElementsByClassName('pdp-products-wrapper')[0];
   if (target) {
     target.appendChild(panel);
   }
-
   renderBreadcrumbs();
+
   return panel;
 }
 

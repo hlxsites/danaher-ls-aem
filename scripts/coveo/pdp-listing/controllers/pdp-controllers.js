@@ -5,9 +5,27 @@ import {
   buildFacet,
   buildBreadcrumbManager,
   buildQuerySummary,
+  buildCategoryFacet,
+  buildSearchBox
 } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 
 import { pdpEngine } from "../pdp-engine.js";
+
+export const searchBoxController = buildSearchBox(pdpEngine, {
+  options: {
+    numberOfSuggestions: 5,
+    highlightOptions: {
+      notMatchDelimiters: {
+        open: '<strong>',
+        close: '</strong> &nbsp;',
+      },
+      correctionDelimiters: {
+        open: '<i>',
+        close: '</i> &nbsp;',
+      },
+    },
+  },
+});
 
 export const pdpResultList = buildResultList(pdpEngine, {
   options: {
@@ -28,12 +46,12 @@ export const pdpResultList = buildResultList(pdpEngine, {
 export const facetBreadcrumb = buildBreadcrumbManager(pdpEngine)
 
 // facets 
-export const productTypeFacetController = buildFacet(pdpEngine, {
+export const productTypeFacetController = buildCategoryFacet(pdpEngine, { 
   options: { 
     numberOfValues: 10,
     field: 'categoriesname',
     facetId: 'categoriesname',
-    // delimitingCharacter: '|'
+    delimitingCharacter: '|'
   },
 });
 
