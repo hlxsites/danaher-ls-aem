@@ -26,18 +26,21 @@ function extractJsonFromHtml(rootElement) {
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'parts-tab';
-  const isPIM = document.querySelector('#authored-parts')?.children[1].textContent;
+  const isPIM = document.querySelector('#authored-parts')?.children[0].textContent;
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   // if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
   try {
     let bundleDetails;
-
-    if (isPIM === 'true') {
-      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
-    } else {
-      const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
+    const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
+    if (isPIM === 'only-authored') {
+      //const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
       bundleDetails = parsedData;
+    } else if(isPIM === 'pim-authored') {
+      if(parsedData.length > 0 )
+      bundleDetails.push(...parsedData);
+    } else {
+      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
     }
     bundleDetails.forEach((product) => {
       const wrapper = div({

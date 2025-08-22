@@ -94,15 +94,9 @@
             ]
           },
           {
-            "component": "boolean",
-            "name": "is-pim-data",
-            "value": false,
-            "label": "Show PIM data"
-          },
-          {
             "component": "text",
             "valueType": "string",
-            "name": "product- tab-title",
+            "name": "product-tab-title",
             "value": "",
             "label": "Product Tab Title"
           },

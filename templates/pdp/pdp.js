@@ -5,11 +5,13 @@ import { searchEngine } from '../../scripts/coveo/engine.js';
 
 function designPdp() {
   const main = document.querySelector('main');
+  if (!main) return;
 
   const heroSection = main.querySelector('.pdp-hero');
   const pageTabs = main.querySelector('.pdp-page-tabs');
   const carousel = main.querySelector('.pdp-carousel');
 
+  // wrappers
   const flexWrapper = div({
     class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
   });
@@ -22,18 +24,18 @@ function designPdp() {
     class: 'tabs-right-parent border-l border-gray-200 flex-1',
   });
 
-  // Insert pageTabs into left wrapper
   if (pageTabs) {
     tabsWrapper.appendChild(pageTabs);
   }
 
-  // Collect all sections between pageTabs and carousel
+  // collect intended layout groups in separate arrays before reparenting
+  const rightSections = [];
   const afterTabsSections = [];
+
   let reachedTabs = false;
   let reachedCarousel = false;
 
   const allSections = Array.from(main.children);
-
   allSections.forEach((section) => {
     if (section === pageTabs) {
       reachedTabs = true;
@@ -44,25 +46,34 @@ function designPdp() {
     }
 
     if (reachedTabs && !reachedCarousel) {
-      // Goes inside right wrapper
-      restWrapper.appendChild(section);
+      rightSections.push(section);
     } else if (reachedCarousel) {
-      // Goes outside (after flexWrapper)
       afterTabsSections.push(section);
     }
   });
 
+  // append right sections into right wrapper
+  rightSections.forEach((section) => restWrapper.appendChild(section));
+
+  // build flexWrapper
   flexWrapper.appendChild(tabsWrapper);
   flexWrapper.appendChild(restWrapper);
 
-  // Place flexWrapper after hero
-  heroSection?.after(flexWrapper);
+  // place flexWrapper after hero
+  if (heroSection) {
+    heroSection.after(flexWrapper);
+  } else {
+    main.prepend(flexWrapper); // fallback if no hero
+  }
 
-  // Place carousel + later sections after flexWrapper
+  // append afterTabsSections in preserved order
+  let insertPoint = flexWrapper;
   afterTabsSections.forEach((section) => {
-    flexWrapper.after(section);
+    insertPoint.after(section);
+    insertPoint = section; // move pointer forward
   });
 }
+
 
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
@@ -79,132 +90,80 @@ function loadPdpBlocks() {
   if (superParent) {
     [...superParent.children]?.forEach((divEle) => {
       divEle.classList.add('hidden');
+      
     });
   }
-
   const tabs = document.querySelector('.pdp-page-tabs')?.children;
+const tabsList = new Set();
 
-  if (tabs) {
-    Array.from(tabs).forEach((tabItem) => {
-      // Overview / Description
-      tabItem.children[0].classList.add('authored-tab-type');
-      tabItem.children[2].classList.add('authored-tab-title');
-      if (tabItem.children[0]?.textContent === 'overview') {
-        tabItem.classList.add('tab-authored');
-        tabItem.id = 'authored-overview';
-        const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
-        document.querySelector('main').append(pdpDescriptionBlock);
-      }
-      // Products
-      if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
-        const pdpProducts = div(buildBlock('pdp-products', { elems: [] }));
-        document.querySelector('main').append(pdpProducts);
-      }
-
-      // Resources
-      if (response?.raw?.numresources) {
-        const pdpResources = div(buildBlock('pdp-resources', { elems: [] }));
-        document.querySelector('main').append(pdpResources);
-      }
-      if (tabItem.children[0]?.textContent === 'specifications') {
-        // Specifications
-        tabItem.classList.add('tab-authored');
-        tabItem.id = 'authored-specifications';
-        const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
-        document.querySelector('main').append(pdpSpecificationsBlock);
-      }
-      if (tabItem.children[0]?.textContent === 'parts') {
-        // product parts list
-        tabItem.classList.add('tab-authored');
-        tabItem.id = 'authored-parts';
-        const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
-        document.querySelector('main').append(pdpBundleList);
-      }
-      if (tabItem.children[0]?.textContent === 'citations') {
-        // Citations
-        tabItem.classList.add('tab-authored');
-        tabItem.id = 'authored-citations';
-        const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-        document.querySelector('main').append(pdpCitations);
-      }
-      if (tabItem.children[0]?.textContent === 'faqs') {
-        // FAQs
-        tabItem.classList.add('tabs-authored');
-        tabItem.id = 'authored-faqs';
-        const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-        document.querySelector('main').append(pdpFaqs);
-      }
-      if (tabItem.children[0]?.textContent === 'relatedproducts') {
-        // Related Products
-        tabItem.classList.add('tabs-authored');
-        tabItem.id = 'authored-relatedproducts';
-        const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-        document.querySelector('main').append(pdpRelatedProducts);
-      }
-    });
-  } else {
-    // PDP - hero
-    const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
-    document.querySelector('main').append(pdpHeroBlock);
-    // pdp page tabs
-    const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
-    document.querySelector('main').append(pdpPageTabsBlock);
-    // Overview / Description
-    if (response?.raw?.richlongdescription) {
-      const pdpDescriptionBlock = div(buildBlock('pdp-description', { elems: [] }));
-      document.querySelector('main').append(pdpDescriptionBlock);
-    }
-    
-    // Products
-    if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) {
-      const pdpProducts = div(buildBlock('pdp-products', { elems: [] }));
-      document.querySelector('main').append(pdpProducts);
-    }
-
-    // Resources
-    if (response?.raw?.numresources) {
-      const pdpResources = div(buildBlock('pdp-resources', { elems: [] }));
-      document.querySelector('main').append(pdpResources);
-    }
-
-    // Specifications
-    if (response?.raw?.numattributes > 0) {
-      const pdpSpecificationsBlock = div(buildBlock('pdp-specifications', { elems: [] }));
-      document.querySelector('main').append(pdpSpecificationsBlock);
-    }
-    // Bundle parts list
-    if (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0) {
-      const pdpBundleList = div(buildBlock('pdp-bundle-list', { elems: [] }));
-      document.querySelector('main').append(pdpBundleList);
-    }
-    const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-    document.querySelector('main').append(pdpCitations);
-
-    const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-    document.querySelector('main').append(pdpFaqs);
-
-    const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-    document.querySelector('main').append(pdpRelatedProducts);
+// Helper: add a block once
+function appendBlock(key, blockName) {
+  if (!tabsList.has(key)) {
+    const block = div(buildBlock(blockName, { elems: [] }));
+    document.querySelector('main').append(block);
+    tabsList.add(key);
   }
+}
 
-  // const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-  // document.querySelector('main').append(pdpCitations);
+// Pre-collect authored tabs
+const authoredTabs = new Set();
+if (tabs) {
+  Array.from(tabs).forEach((tabItem) => {
+    const tabType = tabItem.children[1]?.textContent?.toLowerCase();
+    if (!tabType) return;
 
-  // const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-  // document.querySelector('main').append(pdpFaqs);
+    authoredTabs.add(tabType);
 
-  // const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-  // document.querySelector('main').append(pdpRelatedProducts);
+    // Add authored tab metadata
+    tabItem.classList.add('tab-authored', `authored-${tabType}`);
+    tabItem.id = `authored-${tabType}`;
+    tabItem?.children[1]?.classList.add('authored-tab-type');
+    tabItem?.children[3]?.classList.add('authored-tab-title');
+  });
+}
 
-  const pdpCarousel = div(buildBlock('pdp-carousel', { elems: [] }));
-  document.querySelector('main').append(pdpCarousel);
+// CONDITIONS for loading blocks
+if (authoredTabs.has('overview') || response?.raw?.richlongdescription) {
+  appendBlock('overview', 'pdp-description');
+}
 
-  //    const pdpFaqs = div(buildBlock('pdp-faqs', { elems: [] }));
-  //    const pdpRelatedProducts = div(buildBlock('pdp-related-products', { elems: [] }));
-  //    const pdpYouMayAlsoNeeded = div(buildBlock('pdp-you-may-also-needed', { elems: [] }));
-  //    const pdpFrequentlyViewed = div(buildBlock('pdp-frequently-viewed', { elems: [] }));
-  // const pdpCitations = div(buildBlock('pdp-citations', { elems: [] }));
-  // document.querySelector('main').append(pdpCitations);
+if (
+  authoredTabs.has('products') ||
+  (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)
+) {
+  appendBlock('products', 'pdp-products');
+}
+
+if (authoredTabs.has('resources') || response?.raw?.numresources) {
+  appendBlock('resources', 'pdp-resources');
+}
+
+if (authoredTabs.has('specifications') || response?.raw?.numattributes > 0) {
+  appendBlock('specifications', 'pdp-specifications');
+}
+
+if (
+  authoredTabs.has('parts') ||
+  (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0)
+) {
+  appendBlock('parts', 'pdp-bundle-list');
+}
+
+if (authoredTabs.has('citations')) {
+  appendBlock('citations', 'pdp-citations');
+}
+
+if (authoredTabs.has('faqs')) {
+  appendBlock('faqs', 'pdp-faqs');
+}
+
+if (authoredTabs.has('relatedproducts')) {
+  appendBlock('relatedproducts', 'pdp-related-products');
+}
+
+// Always load carousel
+appendBlock('carousel', 'pdp-carousel');
+
 }
 
 export default async function buildAutoBlocks() {
@@ -213,7 +172,7 @@ export default async function buildAutoBlocks() {
 
   if (response && response?.raw.sku === productSlug) {
     loadPdpBlocks();
-    // designPdp();
+   // designPdp();
     return;
   }
   localStorage.removeItem('eds-product-details');
@@ -231,5 +190,5 @@ export default async function buildAutoBlocks() {
   });
   // getFrequentlyViewedTogether();
   loadPdpBlocks();
-  // designPdp();
+  //designPdp();
 }

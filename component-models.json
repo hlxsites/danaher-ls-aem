@@ -364,71 +364,6 @@
     ]
   },
   {
-    "id": "authorable-pdp-tabs",
-    "fields": []
-  },
-  {
-    "id": "authorable-pdp-tabs-item",
-    "fields": [
-      {
-        "component": "select",
-        "name": "tabType",
-        "label": "Product Tab ID",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Overview",
-            "value": "overview"
-          },
-          {
-            "name": "Specification",
-            "value": "specification"
-          },
-          {
-            "name": "Resources",
-            "value": "resources"
-          },
-          {
-            "name": "Products",
-            "value": "products"
-          },
-          {
-            "name": "Bundle Parts",
-            "value": "parts"
-          },
-          {
-            "name": "Related Products",
-            "value": "relatedproducts"
-          },
-          {
-            "name": "Citations",
-            "value": "citations"
-          }
-        ]
-      },
-      {
-        "component": "boolean",
-        "name": "is-pim-data",
-        "value": false,
-        "label": "Show PIM data"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "product- tab-title",
-        "value": "",
-        "label": "Product Tab Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "product-tab-content",
-        "value": "",
-        "label": "Product Tab Content"
-      }
-    ]
-  },
-  {
     "id": "banner",
     "fields": [
       {
@@ -1698,15 +1633,9 @@
         ]
       },
       {
-        "component": "boolean",
-        "name": "is-pim-data",
-        "value": false,
-        "label": "Show PIM data"
-      },
-      {
         "component": "text",
         "valueType": "string",
-        "name": "product- tab-title",
+        "name": "product-tab-title",
         "value": "",
         "label": "Product Tab Title"
       },

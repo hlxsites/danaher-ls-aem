@@ -1036,7 +1036,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
-  await designPdp();
+ // await designPdp();
   loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
 }
