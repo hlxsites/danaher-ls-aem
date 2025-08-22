@@ -41,6 +41,7 @@ import {
   updateAddressToDefault,
   updateCheckoutSummary,
   loadGmapsScript,
+  updateShippingMethods,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
@@ -1044,6 +1045,13 @@ export const shippingAddressModule = async () => {
             checkoutSummaryBillAddress?.classList.remove('hidden');
           }
 
+          /*
+          ::::::::::::::
+          update shipping methods based on address change
+          ::::::::::::::
+          */
+
+          await updateShippingMethods();
           /*
           ::::::::::::::
           update basket with the current use address

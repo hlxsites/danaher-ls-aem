@@ -374,7 +374,6 @@ const paymentModule = async () => {
           const postPI = await postPaymentIntent();
           if (postPI?.status === 'success') {
             const postPIData = postPI?.data || '';
-            const pIID = postPIData?.id || '';
             const clientSecret = postPIData?.client_secret || '';
             if (clientSecret) {
               const appearance = {
@@ -472,7 +471,7 @@ const paymentModule = async () => {
           const inputElement = inp?.querySelector('input');
           if (inputElement) {
             inputElement.className = '';
-            inputElement.classList.add('!mt-0');
+            inputElement.classList.add('!mt-0', 'absolute', 'left-0');
           }
           inp?.classList.add(
             'flex',
@@ -487,7 +486,7 @@ const paymentModule = async () => {
           if (inpuLabel?.classList.contains('text-sm')) {
             inpuLabel?.classList.remove('text-sm');
           }
-          inpuLabel?.classList.add('text-base', 'font-semibold');
+          inpuLabel?.classList.add('text-base', 'font-semibold', 'ml-[-30px]', 'pl-10', 'z-10', 'relative');
         });
       decorateIcons(stripeCardsWrapper);
 
@@ -498,34 +497,48 @@ const paymentModule = async () => {
 
         const eventTarget = c.target;
         // If label clicked, find associated radio
-        if (eventTarget.tagName === 'LABEL') {
+        if (eventTarget.matches('label')) {
           const radioId = eventTarget.getAttribute('for');
           targetRadio = document.getElementById(radioId);
           targetRadioId = radioId;
           targetFrom = 'label';
         }
         // If radio clicked directly
-        if (eventTarget.type === 'radio') {
+        if (eventTarget.matches('input[type="radio"]')) {
           targetRadio = eventTarget;
           targetFrom = 'radio';
           targetRadioId = eventTarget.id;
         }
-
+        // check if radio input available
         if (!targetRadio) return;
         const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
         const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
-        paymentMethodsWrapper.querySelectorAll('input[name="paymentMethod"]')?.forEach((rdo) => {
-          rdo.checked = false;
-        });
+
+        // this is for selecting invoice payment method
         if (targetRadioId === 'invoice') {
           getInvoiceNumberWrapper?.classList?.remove('hidden');
           getStripeCardsWrapper?.classList?.add('hidden');
-          targetRadio.checked = true;
+          if (targetFrom === 'label') targetRadio.checked = true;
         }
+        // this is for selecting stripe payment method
         if (targetRadioId === 'stripe') {
           getStripeCardsWrapper?.classList?.remove('hidden');
           getInvoiceNumberWrapper?.classList?.add('hidden');
-          targetRadio.checked = true;
+          if (targetFrom === 'label') targetRadio.checked = true;
+        }
+        if (targetRadioId === 'sameAsShipping') {
+          if (targetFrom === 'label') targetRadio.checked = true;
+          newStripeCardAddressWrapper?.classList.add('hidden');
+        }
+        if (targetRadioId === 'sameAsBilling') {
+          if (targetFrom === 'label') targetRadio.checked = true;
+          newStripeCardAddressWrapper?.classList.add('hidden');
+        }
+        if (targetRadioId === 'newAddress') {
+          if (targetFrom === 'label') targetRadio.checked = true;
+          if (newStripeCardAddressWrapper?.classList.contains('hidden')) {
+            newStripeCardAddressWrapper?.classList.remove('hidden');
+          }
         }
       });
     }

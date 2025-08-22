@@ -854,12 +854,12 @@ export const buildInputElement = (
   const hiddenField = inputType === 'hidden' ? 'hidden' : '';
   return div(
     {
-      class: `space-y-2 field-wrapper    ${hiddenField} ${classes}`,
+      class: `space-y-2 field-wrapper relative  ${hiddenField} ${classes}`,
     },
     label(
       {
         for: fieldLable,
-        class: 'font-normal text-sm peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 leading-4',
+        class: 'font-normal pl-4 text-sm peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 leading-4',
       },
       field,
       dataRequired,
@@ -872,7 +872,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
-        'input-focus text-base w-full block text-gray-600  border border-solid border-gray-600 peer px-3 py-2',
+        `input-focus ${(inputType === 'radio' || inputType === 'checkbox') ? 'absolute' : ''} left-0 text-base w-full block text-gray-600  border border-solid border-gray-600 peer px-3 py-2`,
       'aria-label': dtName,
     }),
     span({

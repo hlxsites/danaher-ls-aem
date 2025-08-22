@@ -174,7 +174,7 @@ export const progressModule = () => {
     span({
       'data-tab': 'shippingMethods',
       'data-activeTab': 'shippingMethods',
-    }, 'shipping'),
+    }, 'Shipping'),
   );
   const payment = div(
     {

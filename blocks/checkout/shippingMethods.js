@@ -29,8 +29,9 @@ async function setShippingNotesOnBlur() {
 
   if (getShippingNotesField) {
     if (getShippingNotesField.value.trim() === '') {
+      //removePreLoader();
       // showNotification('Please update Order Note.', 'error');
-      return false;
+      //return false;
     }
     /*
  :::::::::::::

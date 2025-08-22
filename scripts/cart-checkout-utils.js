@@ -658,6 +658,47 @@ export async function getBasketDetails(userType = null) {
 
 /*
  :::::::::::::::::::::::::::::
+ update shipping methods
+  ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export const updateShippingMethods = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    if (shippingBucket.status === 'success') {
+      sessionStorage.removeItem('shippingMethods');
+      const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      defaultHeaders.append(
+        'Accept',
+        'application/vnd.intershop.basket.v1+json',
+      );
+      const response = await getApiData(url, defaultHeaders);
+
+      if (response.status === 'success') {
+        sessionStorage.setItem(
+          'shippingMethods',
+          JSON.stringify({ status: 'success', data: response.data.data }),
+        );
+        return { status: 'success', data: response.data.data };
+      }
+      return { status: 'error', data: '' };
+    }
+    return { status: 'error', data: 'Error getting shipping methods:' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+};
+/*
+ :::::::::::::::::::::::::::::
  get shipping methods
   ::::::::::::::::::::::::::::::::::::::::::::
  */
@@ -1413,8 +1454,7 @@ export const changeStep = async (step) => {
     }
 
     if (currentTab === 'submitOrder') {
-      const checkMethods = document
-        .querySelector('#paymentMethodsWrapper input[type="radio"]:checked');
+      const checkMethods = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
       if (!checkMethods) {
         showNotification('Please select Payment Method', 'error');
@@ -1432,7 +1472,7 @@ export const changeStep = async (step) => {
 
   if (validatingBasket?.status === 'success' && currentTab === 'submitOrder') {
     const checkMethods = document
-      .querySelector('#paymentMethodsWrapper input[type="radio"]:checked');
+      .querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
     if (!checkMethods) {
       removePreLoader();
@@ -1529,7 +1569,7 @@ export const changeStep = async (step) => {
         const getPI = await getPaymentIntent();
 
         if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        console.log(' Get Payment Intent...', getPI);
+        console.log(' Get Payment Intent...');
 
         // get payment intent id
         const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
@@ -1548,6 +1588,17 @@ export const changeStep = async (step) => {
         if (validatinBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
         console.log(' Basket Validated for Pyament...');
 
+        // add selected card details to order
+        const selectedData = {
+          name: 'SelectedCard',
+          value: '',
+          type: 'String',
+        };
+        const addingCardToOrder = await addCardToOrder();
+        console.log('Adding Card to Order...', addingCardToOrder);
+
+        if (addingCardToOrder?.status !== 'success') throw new Error('Error Adding Card Details.');
+
         // confirm  stripe Setup for new cards
         let confirmSetup;
         if (selectedStripeMethod === 'newCard') {
@@ -1560,7 +1611,7 @@ export const changeStep = async (step) => {
             redirect: 'if_required',
           });
           console.log('Confirming Setup...');
-          
+
           // if stripe setup confirmed, move to confirm payment
           if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
         }
@@ -1586,19 +1637,19 @@ export const changeStep = async (step) => {
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
         console.log('Submitting order');
-        removePreLoader();
 
         // payment confirmed from Stripe, now submitting order
-        /*
-                const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
-                const orderId = submittingOrder?.data?.data?.id;
-                if (!orderId) throw new Error('Order submission failed.');
-        
-                sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-                sessionStorage.removeItem('productDetailObject');
-                sessionStorage.removeItem('basketData');
-        
-                window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`; */
+
+        const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
+        const orderId = submittingOrder?.data?.data?.id;
+        if (!orderId) throw new Error('Order submission failed.');
+
+        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        sessionStorage.removeItem('productDetailObject');
+        sessionStorage.removeItem('basketData');
+
+        window.location.href = `/us/en/e-buy/ordersubmit?orderId=${orderId}`;
+
         return true;
       } catch (error) {
         removePreLoader();
@@ -2095,6 +2146,13 @@ get counrty field and attach change event listener to populate states based on c
             remove preloader
             :::::::::::::
             */
+          /*
+           ::::::::::::::
+           update address list
+           ::::::::::::::
+           */
+          await updateAddresses();
+
           removePreLoader();
           showNotification('Address updated successfully.', 'success');
         } else {
