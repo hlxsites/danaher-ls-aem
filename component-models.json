@@ -1639,7 +1639,6 @@
         "component": "radio-group",
         "name": "selectedOption",
         "label": "Choose an Option",
-        "description": "Select one option below",
         "valueType": "string",
         "required": true,
         "defaultValue": "only-pim",
