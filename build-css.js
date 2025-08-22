@@ -404,7 +404,14 @@ const fileMappings = [
     wrapper: 'pdp-specifications-wrapper',
   },
   {
-    content: './blocks/pdp-products/pdp-products.js',
+    content: [
+      './blocks/pdp-products/pdp-products.js', 
+      './scripts/coveo/pdp-listing/components/pdp-facet-bradcurmb.js',
+      './scripts/coveo/pdp-listing/components/pdp-facets.js',
+      './scripts/coveo/pdp-listing/components/pdp-pagination.js',
+      './scripts/coveo/pdp-listing/components/pdp-resultlist.js',
+      './scripts/coveo/pdp-listing/components/pdp-side-panel.js',
+    ],
     output: './blocks/pdp-products/pdp-products.css',
     wrapper: 'pdp-products-wrapper',
   },
