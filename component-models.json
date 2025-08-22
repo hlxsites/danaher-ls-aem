@@ -16,6 +16,13 @@
           {
             "component": "text",
             "valueType": "string",
+            "name": "categoryTitle",
+            "label": "Category Title",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
             "name": "description",
             "label": "Description",
             "value": ""
@@ -1367,7 +1374,6 @@
         "name": "opcoBannerHeadingType",
         "label": "Banner Heading Type",
         "required": true,
-        "value": "h1",
         "options": [
           {
             "name": "h1",
