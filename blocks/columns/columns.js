@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import loadSFDCForm from '../../blocks/form/form.js';
+import loadSFDCForm from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -611,10 +611,9 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   // const block = block.closest('.section');
   block.classList.add('flex', 'min-h-[350px]', 'gap-6');
-   const flexContainer = block.firstElementChild;
-   console.log('flexContainer', flexContainer);
+  const flexContainer = block.firstElementChild;
   // const cols = [...block.firstElementChild.children];
-  Array.from(block.children).forEach(child => {
+  Array.from(block.children).forEach((child) => {
     if (child !== flexContainer) {
       flexContainer.appendChild(child);
     }
@@ -680,7 +679,7 @@ export default function decorate(block) {
   }
 
   // setup image columns
-  [...block.children].forEach((col) => {    
+  [...block.children].forEach((col) => {
     cols.forEach((row) => {
       const img = row.querySelector('img');
       if (img) {
@@ -789,20 +788,12 @@ export default function decorate(block) {
     });
   });
 
-  //Form Load
-  block.querySelectorAll('.form')
-  {
-    if (block.classList.contains('thirtyseventy'))
-      {
-        if (cols.length > 1 && !cols[1].querySelector('form')) {
-          loadSFDCForm(cols[1]);
-      }
-  }
-  else
-  {
-    const form = cols[1].querySelector('form');
-    if (form) form.remove();
-  }
+  // Form Load
+  block.querySelectorAll('.form');
+  if (block.classList.contains('thirtyseventy')) {
+    if (cols.length > 1 && !cols[1].querySelector('form')) {
+      loadSFDCForm(cols[1]);
+    }
   }
 
   // EMBEDS
