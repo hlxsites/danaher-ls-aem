@@ -887,6 +887,18 @@
     ]
   },
   {
+    "id": "dashboard",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dashboardTitle",
+        "value": "",
+        "label": "Page Title"
+      }
+    ]
+  },
+  {
     "id": "column",
     "fields": [
       {
@@ -1169,6 +1181,109 @@
         "name": "browseDescription",
         "value": "",
         "label": "Browse-Description"
+      }
+    ]
+  },
+  {
+    "id": "login",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "loginFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLabel",
+        "value": "",
+        "label": "Forgot Password Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLink",
+        "value": "",
+        "label": "Forgot Password Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountText",
+        "value": "",
+        "label": "New Account Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLabel",
+        "value": "",
+        "label": "New Account Button Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLink",
+        "value": "",
+        "label": "New Account Button Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
@@ -1773,6 +1888,102 @@
             "value": ""
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "register",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormFirstNameLabel",
+        "value": "",
+        "label": "First Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormLastNameLabel",
+        "value": "",
+        "label": "Last Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormCompanyNameLabel",
+        "value": "",
+        "label": "Company Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormConfirmPasswordLabel",
+        "value": "",
+        "label": "Confirm Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "registerFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },

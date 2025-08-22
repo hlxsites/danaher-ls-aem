@@ -68,7 +68,12 @@ export function getAuthorization() {
     env = 'prod';
   }
   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
-  const parsedToken = JSON.parse(tokenInStore);
+  let parsedToken = '';
+  if (typeof tokenInStore === 'string') {
+    parsedToken = tokenInStore;
+  } else {
+    parsedToken = JSON.parse(tokenInStore);
+  }
   if (localStorage.getItem('authToken')) {
     authHeader.append(
       'Authorization',

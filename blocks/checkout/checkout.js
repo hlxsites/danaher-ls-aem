@@ -1,0 +1,97 @@
+import { div } from '../../scripts/dom-builder.js';
+import { progressModule, initializeModules } from './checkoutUtilities.js';
+import { showPreLoader } from '../../scripts/common-utils.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { loadStripeScript } from '../../scripts/stripe_utils.js';
+import { changeStep } from '../../scripts/cart-checkout-utils.js';
+
+// eslint-disable-next-line consistent-return
+export default async function decorate(block) {
+  showPreLoader();
+  await loadStripeScript('https://js.stripe.com/v3/');
+  document.querySelector('main')?.classList.add('bg-checkout');
+  const authenticationToken = await getAuthenticationToken();
+
+  if (
+    authenticationToken?.status === 'error'
+    || authenticationToken.user_type === 'guest' || !sessionStorage.getItem('productDetailObject')
+  ) {
+    window.location.href = '/us/en/e-buy/cartlanding';
+    return false;
+  }
+  block.innerHtml = '';
+
+  /*
+  ::::::::::::::
+  Create container
+  ::::::::::::::
+  */
+  const checkoutWrapper = div({
+    class:
+      'checkout-wrapper dhls-container  w-full flex flex-col mx-auto flex justify-between',
+  });
+
+  /*
+  ::::::::::::::
+  Create Modules outer
+  ::::::::::::::
+  */
+  const modulesContent = div({
+    class: 'checkout-content flex flex-col gap-5 justify-between  lg:flex-row',
+  });
+
+  /*
+  ::::::::::::::
+  Create Modules container
+  ::::::::::::::
+  */
+  const modulesContainer = div({
+    class:
+      'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-full lg:w-7/10 p-6',
+  });
+
+  const progressBar = progressModule();
+
+  /*
+  ::::::::::::::
+  initialize the shipping address, shipping methods and payment module at page load
+  ::::::::::::::
+  */
+  initializeModules()
+    .then((modules) => {
+      // Append modules to container
+      modules.forEach((module) => {
+        if (module.getAttribute('id') === 'checkout-details') {
+          module.className = '';
+          module.className = 'checkout-summary-wrapper h-max flex justify-center w-full lg:w-[30%]';
+          modulesContent.appendChild(module);
+        } else {
+          modulesContainer.appendChild(module);
+        }
+      });
+
+      let loadTab = 'shippingAddress';
+      if (localStorage.getItem('activeCheckoutTab')) {
+        loadTab = localStorage.getItem('activeCheckoutTab');
+      }
+
+      const tabButton = progressBar?.querySelector(`#checkout-${loadTab}`);
+      setTimeout(() => {
+        changeStep(tabButton);
+      }, 2000);
+    })
+    .catch((error) => ({
+      status: 'error',
+      data: `Error initializing modules: ${error}`,
+    }));
+
+  modulesContent.append(modulesContainer);
+  checkoutWrapper.appendChild(progressBar);
+  checkoutWrapper.append(modulesContent);
+  /*
+  ::::::::::::::
+  Append container to document body
+  ::::::::::::::
+  */
+  block.appendChild(checkoutWrapper);
+}

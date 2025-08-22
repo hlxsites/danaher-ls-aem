@@ -374,6 +374,11 @@
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.columns-wrapper :is(.border-gray-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
 .columns-wrapper :is(.bg-danaherblue-900) {
   --tw-bg-opacity: 1;
   background-color: rgb(6 28 68 / var(--tw-bg-opacity));
@@ -446,6 +451,11 @@
   padding-bottom: 0px;
 }
 
+.columns-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .columns-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -463,6 +473,14 @@
 
 .columns-wrapper :is(.pb-10) {
   padding-bottom: 2.5rem;
+}
+
+.columns-wrapper :is(.pb-4) {
+  padding-bottom: 1rem;
+}
+
+.columns-wrapper :is(.pb-7) {
+  padding-bottom: 1.75rem;
 }
 
 .columns-wrapper :is(.pb-4) {
