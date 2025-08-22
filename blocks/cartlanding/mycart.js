@@ -1,8 +1,8 @@
 import { div } from '../../scripts/dom-builder.js';
 import { cartItem } from './cartItem.js';
-import { emptyCart } from './emptyCart.js';
+import emptyCart from './emptyCart.js';
 import { recommendedProducts } from './recommendedproducts.js';
-import { addProducts } from './addproducts.js';
+import addProducts from './addproducts.js';
 import {
   getBasketDetails,
   checkoutSummary,

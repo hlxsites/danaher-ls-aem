@@ -6,75 +6,28 @@ import {
   submitSearchQuery,
 } from '../header/header.js';
 import relatedProducts from './related-products.js';
-import { noProducts } from './noProduct.js';
+import noProducts from './noProduct.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 // import { buildSearchWithIcon } from "../../scripts/common-utils.js";
 
-export const addProducts = async () => {
-  // const productContainer = div(
-  //   {
-  //     class: "",
-  //   },
-  //   div(
-  //     {
-  //       class:
-  //         "w-[683px] mt-12 justify-start text-black text-3xl font-normal  leading-10",
-  //     },
-  //     "Want to add more products?"
-  //   ),
-  //   div(
-  //     {
-  //       class:
-  //         "self-stretch justify-start text-black text-base font-extralight",
-  //     },
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum semper mollis. Integer pharetra dui sed urna cursus, eu pretium tortor sodales. "
-  //   ),
-  //   div({
-  //     class: "w-24 h-10 left-[63px] top-[57px]  bg-white",
-  //   }),
-  //   div(
-  //     {
-  //       class:
-  //         "w-80 justify-start text-gray-700 text-base font-bold  leading-snug",
-  //     },
-  //     "Search for a product"
-  //   ),
-  //   div({
-  //     class: "w-10 h-4 left-[63px] top-[57px]  bg-white",
-  //   }),
-  //   div(
-  //     {
-  //       class: "inline-flex gap-2 bg-white",
-  //     },
-  //     div(
-  //       {
-  //         class:
-  //           "w-[75px] h-10 px-6 border-solid border-2 rounded-md inline-flex justify-between items-center",
-  //       },
-  //       div(
-  //         {
-  //           class: "",
-  //         },
-  //         "🔍"
-  //       ),
-  //       div({
-  //         class: "flex-1 justify-start text-gray-500 font-extralight text-base ",
-
-  //       }, "Search by name or SKU ID")
-  //     ),
-  //     button(
-  //       {
-  //         class: "h-10 btn btn-lg font-medium btn-primary-purple rounded-full m-0",
-  //       },
-  //       "Get started"
-  //     )
-  //   ),
-
-  //   div({
-  //     class: "w-24 h-10 left-[63px] top-[57px]  bg-white",
-  //   })
-  // );
+export default async function addProducts() {
   let skuarray = [];
+
+  async function handleSearchInput() {
+    const clearIcon = document.querySelector('span.searchbox-clear');
+    const inputValue = document.getElementById('searchInput');
+    if (inputValue.value) {
+      clearIcon.classList.add('cursor-pointer');
+      clearIcon.classList.remove('hidden');
+    } else {
+      clearIcon.classList.add('hidden');
+    }
+    clearIcon.addEventListener('click', () => {
+      inputValue.value = '';
+      clearIcon.classList.add('hidden');
+    });
+  }
+
   const buildSearchWithIcon = (
     lable,
     field,
@@ -85,7 +38,6 @@ export const addProducts = async () => {
     dtName,
     placeholder,
   ) => {
-    const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
     const searchElement = div(
       {
         class: 'space-y-2 field-wrapper relative',
@@ -126,21 +78,6 @@ export const addProducts = async () => {
     searchElement.addEventListener('input', handleSearchInput);
     return searchElement;
   };
-
-  async function handleSearchInput(e) {
-    const clearIcon = document.querySelector('span.searchbox-clear');
-    const inputValue = document.getElementById('searchInput');
-    if (inputValue.value) {
-      clearIcon.classList.add('cursor-pointer');
-      clearIcon.classList.remove('hidden');
-    } else {
-      clearIcon.classList.add('hidden');
-    }
-    clearIcon.addEventListener('click', () => {
-      inputValue.value = '';
-      clearIcon.classList.add('hidden');
-    });
-  }
 
   const productSearchcontainer = div({
     class: 'w-full',
@@ -186,16 +123,6 @@ export const addProducts = async () => {
           {
             class: 'inline-flex lg:flex-row flex-col justify-center items-right lg:items-center  gap-4',
           },
-          //  span({
-          //     class: ' icon icon-search absolute mt-2 ml-2',
-          // }),
-          // input({
-          //   type: "text",
-          //   placeholder: "Search by name and SKU ID",
-          //   class:
-          //     "w-[350px] h-[35px] bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 px-6 py-3 text-lg",
-          //   id: "searchInput",
-          // }),
           buildSearchWithIcon(
             '',
             '',
@@ -234,7 +161,7 @@ export const addProducts = async () => {
       'cartlanding',
     );
     skuarray = [];
-    const skuids = searchResponse.results?.map((item) => {
+    searchResponse.results?.forEach((item) => {
       skuarray.push(item.raw.sku);
     });
     if (skuarray.length > 0) {
@@ -246,9 +173,9 @@ export const addProducts = async () => {
 
       if (re) {
         re.append(productSearched);
-        const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
-        if (div.length > 1) {
-          div[0].remove();
+        const topSellDiv = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
+        if (topSellDiv.length > 1) {
+          topSellDiv[0].remove();
         }
         const noProductFoundDiv = document.querySelector('.no-product-found');
         if (noProductFoundDiv) noProductFoundDiv.remove();
@@ -257,8 +184,8 @@ export const addProducts = async () => {
     } else {
       const re = document.getElementById('productSearchcontainer');
       re.append(noProducts(inputValue));
-      const div = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
-      if (div.length === 1) div[0].remove();
+      const topSellingDiv = document.querySelectorAll('.top-selling-rendered'); // Select the first element with class 'my-div'
+      if (topSellingDiv.length === 1) topSellingDiv[0].remove();
       removePreLoader();
     }
   };
@@ -269,4 +196,4 @@ export const addProducts = async () => {
   productSearchcontainer.append(searchBlock);
 
   return productSearchcontainer;
-};
+}

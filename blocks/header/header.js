@@ -118,7 +118,11 @@ function getCoveoApiPayload(searchValue, type) {
 }
 
 // eslint-disable-next-line consistent-return
+
+// eslint-disable-next-line consistent-return
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  const searchTerm = searchInput.value.trim();
+  if (page === 'cartlanding') {
   const searchTerm = searchInput.value.trim();
   if (page === 'cartlanding') {
     if (searchTerm) {

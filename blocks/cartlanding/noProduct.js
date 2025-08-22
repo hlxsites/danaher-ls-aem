@@ -1,7 +1,7 @@
 import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export const noProducts = (searchedWord) => {
+export default function noProducts(searchedWord) {
   const cubeButton = div(
     {
       class: 'w-full relative overflow-hidden',
@@ -55,4 +55,4 @@ export const noProducts = (searchedWord) => {
   );
 
   return noProductDiv;
-};
+}

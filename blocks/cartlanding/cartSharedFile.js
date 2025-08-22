@@ -183,7 +183,9 @@ export const sessionObject = async (
 ) => {
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
-    const foundObject = getProductDetailsObject.data.find((obj) => obj.hasOwnProperty(manufacturer));
+    const foundObject = getProductDetailsObject.data.find(
+      (obj) => Object.prototype.hasOwnProperty.call(obj, manufacturer),
+    );
 
     if (foundObject) {
       const result = foundObject[manufacturer].find(
@@ -231,6 +233,7 @@ export const sessionObject = async (
       return "No object with the key' was found";
     }
   }
+  return 'no product details found';
 };
 export const updateProductQuantityValue = async (
   type,
@@ -261,7 +264,6 @@ export const updateProductQuantityValue = async (
     }
     return response;
   }
-  const quantityElement = document.getElementById(lineItemId);
   const response = await sessionObject(
     type,
     quantity,
