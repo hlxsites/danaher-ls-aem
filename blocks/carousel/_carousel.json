@@ -23,13 +23,17 @@
         {
           "component": "text",
           "name": "subHeading",
+          "valueType": "string",
           "label": "Sub Heading",
-          "description": "Eyebrow style subheading"
+          "description": "Eyebrow style subheading",
+          "value": ""
         },
         {
           "component": "text",
           "name": "mainHeading",
-          "label": "Main Heading"
+          "valueType": "string",
+          "label": "Main Heading",
+          "value": ""
         },
         {
           "component": "select",
@@ -46,21 +50,27 @@
         },
         {
           "component": "text",
+          "valueType": "string",
           "name": "productInfo",
           "label": "Product Info",
-          "description": "Descriptive paragraph below heading"
+          "description": "Descriptive paragraph below heading",
+          "value": ""
         },
         {
-          "component": "reference",
-          "name": "picture",
-          "label": "Right Side Image",
-          "description": "Picture with styling from decorate"
-        },
-        {
-          "component": "text",
-          "name": "imageAlt",
-          "label": "Right Side Alt Text"
-        }
+        "component": "reference",
+        "valueType": "Picture",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      }
       ]
     }
   ],
