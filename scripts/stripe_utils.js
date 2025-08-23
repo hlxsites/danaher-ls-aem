@@ -226,6 +226,35 @@ export async function addCardToOrder(data = '') {
     authenticationToken.access_token,
   );
   const addCardToOrderBody = JSON.stringify(data);
+  const response = await postApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  if (response?.status === 'success') {
+    return response;
+  }
+  return { status: 'error', data: {} };
+}
+
+/*
+*
+update selected card to order
+*
+*
+*/
+
+export async function updateCardForOrder(data = '') {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  // post card payment intent
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderHeaders = new Headers();
+  addCardToOrderHeaders.append('Content-Type', 'Application/json');
+  addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
+  addCardToOrderHeaders.append(
+    'authentication-token',
+    authenticationToken.access_token,
+  );
+  const addCardToOrderBody = JSON.stringify(data);
   const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
   if (response?.status === 'success') {
     return response;

@@ -46,6 +46,7 @@ import {
   getPaymentIntent,
   loadStripe,
   addCardToOrder,
+  updateCardForOrder,
   postPaymentIntent,
   setupPaymentIntent,
 } from './stripe_utils.js';
@@ -1668,9 +1669,10 @@ export const changeStep = async (step) => {
         const addingCardToOrder = await addCardToOrder(selectedData);
         console.log('Adding Card to Order...', addingCardToOrder);
 
-        if (addingCardToOrder?.status !== 'success') throw new Error('Error Adding Card Details.');
-
-        throw new Error('Work in progress...');
+        if (addingCardToOrder?.status !== 'success') {
+          const updatingCardForOrder = await updateCardForOrder(selectedData);
+          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        }
         // confirm  stripe Setup for new cards
         let confirmSetup;
         if (selectedStripeMethod === 'newCard') {
