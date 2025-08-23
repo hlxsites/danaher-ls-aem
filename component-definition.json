@@ -235,6 +235,21 @@
           }
         },
         {
+          "title": "Carousel",
+          "id": "carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Carousel",
+                  "model": "carousel"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {
@@ -245,8 +260,38 @@
                   "class": {
                     "$ref": "classes"
                   },
-                  "rows": "2"
+                  "rows": {
+                    "$ref": "rows"
+                  }
                 }
+              }
+            }
+          }
+        },
+        {
+          "title": "Column",
+          "id": "column",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/column/v1/column",
+                "template": {
+                  "blocks": {
+                    "$ref": "blocks"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Block",
+          "id": "block",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {}
               }
             }
           }
@@ -276,6 +321,21 @@
                 "template": {
                   "name": "Embed",
                   "model": "embed"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form",
+          "id": "form",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Form",
+                  "model": "form"
                 }
               }
             }
@@ -322,6 +382,21 @@
                 "template": {
                   "name": "Learn More",
                   "model": "learn-more"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mini-Teasers",
+          "id": "mini-teasers",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Mini-Teasers",
+                  "model": "mini-teasers"
                 }
               }
             }
@@ -655,6 +730,36 @@
                 "template": {
                   "name": "Simple Text",
                   "model": "simple-text"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Social-Media",
+          "id": "social-media",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Social-Media",
+                  "model": "social-media"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Stats",
+          "id": "stats",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Stats",
+                  "model": "stats"
                 }
               }
             }
