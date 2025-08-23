@@ -7,26 +7,6 @@
   margin-right: auto
 }
 
-.banner :is(.\!mb-2) {
-  margin-bottom: 0.5rem !important
-}
-
-.banner :is(.\!mt-0) {
-  margin-top: 0px !important
-}
-
-.banner :is(.\!mb-1) {
-  margin-bottom: 0.25rem !important
-}
-
-.banner :is(.\!ml-0) {
-  margin-left: 0px !important
-}
-
-.banner :is(.\!mb-0) {
-  margin-bottom: 0px !important
-}
-
 .banner :is(.block) {
   display: block
 }
@@ -40,10 +20,6 @@
   height: max-content
 }
 
-.banner :is(.h-auto) {
-  height: auto
-}
-
 .banner :is(.min-h-\[13rem\]) {
   min-height: 13rem
 }
@@ -54,10 +30,6 @@
 
 .banner :is(.max-w-7xl) {
   max-width: 80rem
-}
-
-.banner :is(.items-start) {
-  align-items: flex-start
 }
 
 .banner :is(.items-center) {
@@ -87,41 +59,9 @@
   padding: 1rem
 }
 
-.banner :is(.p-2) {
-  padding: 0.5rem
-}
-
-.banner :is(.p-0) {
-  padding: 0px
-}
-
 .banner :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
-}
-
-.banner :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem
-}
-
-.banner :is(.py-2) {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem
-}
-
-.banner :is(.px-0) {
-  padding-left: 0px;
-  padding-right: 0px
-}
-
-.banner :is(.py-0) {
-  padding-top: 0px;
-  padding-bottom: 0px
-}
-
-.banner :is(.text-left) {
-  text-align: left
 }
 
 .banner :is(.\!text-4xl) {
@@ -149,15 +89,6 @@
 .banner :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.banner :is(.text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
-.banner :is(.filter) {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 @media (min-width: 768px) {

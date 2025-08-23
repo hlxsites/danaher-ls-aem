@@ -66,7 +66,7 @@ export default function productBannerDecorate(block) {
 
   const categoryBannerTitle = h1(
     {
-      class: 'text-black text-4xl font-bold leading-[48px]',
+      class: 'text-black text-4xl font-bold leading-[48px]}',
     },
     categoryHeading,
   );
