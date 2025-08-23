@@ -72,17 +72,9 @@ if (document.readyState === "loading") {
   ::::::::::::::
   *
   */
- /*
-export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits'];
-export const includeStageEdsPaths = ['news', 'news.html', 'blog.html', 'blog', 'we-see-a-way', 'we-see-a-way.html', 'products/brands', 'products.html', 'products/antibodies', 'products/assay-kits', 'products-eds.html', 'e-buy', 'products-eds/brands', 'products/extraction-kits', 'products/dna-extraction', 'products/rna-extraction', 'products/liquid-handlers', 'products/capillary-electrophoresis-systems', 'products/2d-3d-cell-culture-systems', 'products/cell-lines-lysates', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems']; */
+export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits', 'products/liquid-handlers', 'products/assay-kits', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems', 'products/high-performance-liquid-chromatography-systems', 'products/high-throughput-cellular-screening-systems', 'products/mass-spectrometers', 'products/microarray-scanners', 'products/microbioreactors', 'products/microplate-readers', 'products/microscopes', 'products/particle-counters-and-analyzers', 'products/patch-clamp-systems', 'products/proteins-peptides', 'products/sample-preparation-detection', 'products/software-platforms', 'products/centrifuges', 'products/clone-screening-systems', 'products/flow-cytometers', 'products/chromatography-columns', '/products.html'];
 
-
-// production paths to go through converter
-export const excludeProdEdsPaths = ['products/family', 'products/sku', 'products/bundle', 'products/product-coveo'];
-
-// exclude stage paths
-export const excludeStageEdsPaths = ['products/family', 'products/sku', 'products/bundle', 'products/product-coveo'];
-
+export const includeStageEdsPaths = ['news', 'news.html', 'blog.html', 'blog', 'we-see-a-way', 'we-see-a-way.html', 'products/brands', 'products.html', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'e-buy', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits', 'products/liquid-handlers', 'products/assay-kits', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems', 'products/high-performance-liquid-chromatography-systems', 'products/high-throughput-cellular-screening-systems', 'products/mass-spectrometers', 'products/microarray-scanners', 'products/microbioreactors', 'products/microplate-readers', 'products/microscopes', 'products/particle-counters-and-analyzers', 'products/patch-clamp-systems', 'products/proteins-peptides', 'products/sample-preparation-detection', 'products/software-platforms', 'products/centrifuges', 'products/clone-screening-systems', 'products/flow-cytometers', 'products/chromatography-columns',];
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
