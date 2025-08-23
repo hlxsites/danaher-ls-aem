@@ -117,10 +117,26 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-async function submitSearchQuery(searchInput, actionCause = '') {
+// eslint-disable-next-line consistent-return
+
+// eslint-disable-next-line consistent-return
+export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
+  const searchTerm = searchInput.value.trim();
+  if (page === 'cartlanding') {
+    if (page === 'cartlanding') {
+      if (searchTerm) {
+        const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+        requestPayload.analytics.actionCause = actionCause
+          || searchInput.getAttribute('data-action-cause')
+          || 'searchFromLink';
+        const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+        return resp;
+      }
+    }
+  }
+
   let searchLocation = '/us/en/search.html';
   const redirectList = [];
-  const searchTerm = searchInput.value.trim();
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm, 'search');
     const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
@@ -969,17 +985,19 @@ export default async function decorate(block) {
       {
         class: 'block breadcrumb-wrapper flex bg-white border-b border-gray-200',
       },
-    );
-    bred.append(edsBreadcrumbWrapper);
-    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
+    ); if (edsBreadcrumbWrapper) {
+      bred.append(edsBreadcrumbWrapper);
+      loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
 
-    import('../breadcrumb/breadcrumb.js')
-      .then((loadedBreadcrumb) => {
-        loadedBreadcrumb.default(edsBreadcrumbWrapper);
-      })
-      .catch((error) => {
-        console.error('Failed to load breadcrumb module:', error);
-      });
+      import('../breadcrumb/breadcrumb.js')
+        .then((loadedBreadcrumb) => {
+          loadedBreadcrumb.default(edsBreadcrumbWrapper);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.warn('Failed to load breadcrumb module:', error);
+        });
+    }
   }
 
   /*

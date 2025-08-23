@@ -1,210 +1,437 @@
 import {
   div,
-  h6,
-  p,
-  h2,
-  img,
-  h4,
-  h1,
-  button,
+  span,
+  table,
+  tr,
+  tbody,
 } from '../../scripts/dom-builder.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { baseURL, showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { getApiData } from '../../scripts/api-utils.js';
+import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export default function decorate(block) {
-  block.textContent = '';
+let totalOrdersPlaced = '';
+const orderDetails = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const token = authenticationToken.access_token;
+  const defaultHeader = new Headers({
+    'Authentication-Token': token,
+    Accept: 'application/vnd.intershop.order.v1+json',
+  });
+  const url = `${baseURL}orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
 
-  const mainDiv = div(
-    {
-      class: 'flex justify-between items-start max-w-[1100px] mx-auto bg-white',
-    },
+  try {
+    const response = await getApiData(url, defaultHeader);
+    if (response) {
+      const orderDetailResponse = response.data;
+      totalOrdersPlaced = orderDetailResponse.data.length;
+      if (totalOrdersPlaced < 10) {
+        return orderDetailResponse.data;
+      }
 
-    // LEFT SIDE
-    div(
-      { class: 'p-2 w-[65%]' },
+      const orders = [];
+      for (let i = 0; i < 10; i + 1) {
+        orders.push(orderDetailResponse.data[i]);
+      }
+      return orders;
+    }
+    return { status: 'error', data: 'No response data.' };
+  } catch (error) {
+    return { status: 'error', data: 'Something went wrong fetching order details.' };
+  }
+};
 
-      // Order Submitted Block
-      div(
-        { class: 'mb-5' },
-        h1(
-          { class: 'text-[28px] font-bold text-black mb-1' },
-          'Order Submitted',
-        ),
-        h2(
-          { class: 'text-[18px] font-normal text-gray-800 mb-2' },
-          'Order number: DHR134578-8978',
-        ),
-        p(
-          { class: 'text-[14px] text-gray-600' },
-          'Congratulations! Your order is submitted. Get ready for the excitement as we process your purchase.',
-        ),
-      ),
+export const dynamicTableContent = async (orderDetailsResponse) => {
+  const tableRow = (order, po, status, creationDate, orderTotal) => {
+    const date = new Date(creationDate);
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
 
-      // Shipping & Payment
-      div(
-        { class: 'flex justify-between' },
-
-        // Shipping Address
-        div(
-          {
-            class:
-              'border border-gray-300 p-4 w-1/2 bg-white mt-4 shadow-sm pl-2 text-sm',
-          },
-          p({ class: 'text-[16px] font-bold mb-1' }, 'Shipping address'),
-          p({}, 'ATTN: Barbara Smith'),
-          p({}, '5300 Sciences Ave'),
-          p({}, 'San Francisco, CA 90228'),
-        ),
-
-        // Payment
-        div(
-          {
-            class:
-              'border border-gray-300 p-4 w-[340px] bg-white mt-4 shadow-sm pl-2 text-sm',
-          },
-          p({ class: 'text-[16px] font-bold mb-1' }, 'Payment'),
-          p({}, 'Credit Card'),
-          p({}, '**** **** **** 4242'),
-        ),
-      ),
-
-      // Estimated & Notes
-      div(
-        { class: 'flex justify-between items-start gap-[130px] mt-4' },
-
-        // Estimated
-        div(
-          { class: 'w-[340px]' },
-          div(
-            { class: 'text-sm text-gray-700 space-y-1 mt-2' },
-            h6({ class: 'font-bold' }, 'Estimated Shipping'),
-            h6({}, '4-7 Days USPS Parcel Select Ground'),
-          ),
-          div(
-            { class: 'text-sm text-gray-700 space-y-1 mt-2' },
-            h6({ class: 'font-bold' }, 'Estimated Delivery'),
-            h6({}, 'April 4–11'),
-          ),
-        ),
-
-        // Notes
-        div(
-          { class: 'mt-4 w-[340px]' },
-          div(
-            { class: 'text-sm text-gray-700 space-y-1' },
-            h6({ class: 'font-bold' }, 'Notes'),
-            h6(
-              {},
-              'This is the notes block to test. It contains data which is entered by user.',
-            ),
-          ),
-        ),
-      ),
-
-      // Product list
-      div(
-        { class: 'mt-6 space-y-4' },
-
-        // Product 1
-        div(
-          {
-            class: 'flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm',
-          },
-          img({
-            src: '/icons/sciex-7500-system-beyond01-hero.avif',
-            alt: 'Neutral Capillary',
-            class: 'w-[60px] h-[60px] object-contain',
-          }),
-          div(
-            { class: 'flex flex-col' },
-            h4(
-              { class: 'font-semibold text-[16px] text-black' },
-              'Neutral Capillary 50 µm ID x 67 cm',
-            ),
-            p({ class: 'text-[13px] text-gray-500 mt-1' }, 'SKU-2762411'),
-            p(
-              { class: 'text-[13px] text-gray-600 mt-2' },
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel dolor, ultricies velit.',
-            ),
-          ),
-        ),
-
-        // Product 2
-        div(
-          {
-            class: 'flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm',
-          },
-          img({
-            src: '/icons/sciex-7500-system-beyond01-hero.avif',
-            alt: 'DNA Capillary',
-            class: 'w-[60px] h-[60px] object-contain',
-          }),
-          div(
-            { class: 'flex flex-col' },
-            h4(
-              { class: 'font-semibold text-[16px] text-black' },
-              'DNA Capillary',
-            ),
-            p({ class: 'text-[13px] text-gray-500 mt-1' }, 'SKU-2762417'),
-          ),
-        ),
-
-        // Product 3
-        div(
-          {
-            class: 'flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm',
-          },
-          img({
-            src: '/icons/sciex-7500-system-beyond01-hero.avif',
-            alt: 'N-CHO Capillary',
-            class: 'w-[60px] h-[60px] object-contain',
-          }),
-          div(
-            { class: 'flex flex-col' },
-            h4(
-              { class: 'font-semibold text-[16px] text-black' },
-              'N-CHO Capillary',
-            ),
-            p({ class: 'text-[13px] text-gray-500 mt-1' }, 'SKU-2762413'),
-          ),
-        ),
-      ),
-    ),
-
-    // RIGHT SIDEBAR
-    div(
+    const formattedDate = `${month}/${day}/${year}`;
+    const formattedAmount = parseFloat(orderTotal).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    const formattedWords = status
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+    const statusColor = (orderStatus) => {
+      if (orderStatus === 'Approved') {
+        return {
+          text: 'self-stretch text-center justify-start text-green-700 bg-green-50 text-medium font-[400] leading-tight',
+        };
+      } if (orderStatus === 'Cancelled') {
+        return {
+          text: 'self-stretch text-center justify-start text-red-800 bg-red-100 text-medium font-[400] leading-tight',
+        };
+      } if (orderStatus === 'Shipped') {
+        return {
+          text: 'self-stretch text-center justify-start text-sky-800 bg-sky-50 text-medium font-[400] leading-tight',
+        };
+      } if (orderStatus === 'Invoiced') {
+        return {
+          text: 'self-stretch text-center justify-start text-gray-800 bg-gray-100 text-medium font-[400] leading-tight',
+        };
+      }
+      return {
+        text: 'self-stretch text-center justify-start text-green-700 bg-green-50 text-medium font-[400] leading-tight',
+      };
+    };
+    const statusTextColor = statusColor(status);
+    const row = div(
       {
-        class:
-          'w-[30%] text-left flex flex-col items-end pt-[50px] pr-[20px] mt-[100px]',
+        class: 'inline-flex justify-start border-b border-gray-200 gap-1',
       },
-
       div(
-        { class: 'text-[14px] text-gray-500 mb-4 text-right' },
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
+        },
         div(
-          { class: 'text-sm text-gray-700 space-y-1' },
-          h6({ class: 'font-bold' }, 'Stay Up to Date'),
-          h6(
-            {},
-            'Stay informed about your recent orders by tracking them online.',
-          ),
+          {
+            class:
+              'self-stretch justify-start text-left text-danaherpurple-500 text-medium font-[400] leading-tight',
+          },
+          order,
         ),
       ),
 
-      button(
+      div(
         {
           class:
-            'bg-[#1b2dd3] hover:bg-[#040f79] text-white font-bold rounded-full px-[30px] py-[12px] w-[250px] mt-2 transition-all',
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
         },
-        'Track your orders',
+        div(
+          {
+            class:
+              'self-stretch justify-start text-gray-900 text-medium font-[400] leading-tight',
+          },
+          formattedDate,
+        ),
       ),
-
-      button(
+      div(
         {
           class:
-            'bg-transparent hover:bg-[#040f79] text-[#1b2dd3] hover:text-white font-bold rounded-full px-[30px] py-[12px] border-2 border-[#1b2dd3] w-[250px] mt-2 transition-all',
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
         },
-        'Continue Shopping',
+        div(
+          {
+            class:
+              'self-stretch justify-start text-gray-900 text-medium font-[400] leading-tight',
+          },
+          po,
+        ),
       ),
-    ),
+      div(
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-end',
+        },
+        div(
+          {
+            class:
+              'self-stretch text-right justify-start text-gray-900 text-medium font-[400] leading-tight',
+          },
+          `$${formattedAmount}`,
+        ),
+      ),
+      div(
+        {
+          class: 'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-center items-center',
+        },
+        div(
+          {
+            class: statusTextColor.text,
+          },
+          formattedWords,
+        ),
+      ),
+    );
+    return row;
+  };
+  const tableRows = orderDetailsResponse.map(
+    (element) => {
+      const order = {
+        order: element.documentNumber,
+        po: '',
+        status: element.status,
+        creationDate: element.creationDate,
+        orderTotal: element.totals.grandTotal.gross.value,
+      };
+      return tableRow(order.order, order.po, order.status, order.creationDate, order.orderTotal);
+    },
   );
 
-  block.appendChild(mainDiv);
-}
+  const tableDataRows = tbody({ class: 'w-[930px] flex flex-col', id: 'tableRow' }, ...tableRows);
+  return tableDataRows;
+};
+
+export const decorate = async (block) => {
+  showPreLoader();
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  document.querySelector('main').style = 'background: #f4f4f4';
+  const wrapper = div({
+    id: 'dashboardWrapper',
+    class:
+      'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
+  });
+  const dashboardSideBarContent = await dashboardSidebar();
+  // const days = ['Period', 'Last 90 days', 'This month', 'this Year', 'Last Year'];
+  // const status = ['Status', 'All', 'Approved', 'Cancelled',
+  // 'Invoiced', 'Shipped', 'Submitted', 'New'];
+  const orderDetailsResponse = await orderDetails();
+  // const dropDown = (day) => {
+  //   const selectElement = document.createElement('select');
+  //   selectElement.classList.add(
+  //     'bg-gray-100',
+  //     'border',
+  //     'border-gray-300',
+  //     'p-[0.5rem]',
+  //   );
+  //   day.forEach((day, index) => {
+  //     const option = document.createElement('option');
+  //     option.value = day.toLowerCase().
+  // replace(/\s+/g, '-'); // e.g., "Last 7 days" -> "last-7-days"
+  //     option.textContent = day;
+  //     if (index === 0) {
+  //       option.selected = true; // "All Dates" selected by default
+  //     }
+  //     selectElement.append(option);
+  //   });
+  //   return selectElement;
+  // };
+  // const buildSearchWithIcon = (
+  //   lable,
+  //   field,
+  //   inputType,
+  //   inputName,
+  //   autoCmplte,
+  //   required,
+  //   dtName,
+  //   placeholder,
+  // ) => {
+  //   // const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+  //   const searchElement = div(
+  //     {
+  //       class: 'space-y-2 field-wrapper relative',
+  //       id: 'searchWithIcon',
+  //     },
+  //     div(
+  //       {
+  //         class:
+  //           'search-with-icon inline-flex justify-between relative pt-[5px] pb-[3px] ',
+  //       },
+  //       span({
+  //         class: 'icon icon-search fill-gray-400 absolute mt-2 ml-2',
+  //       }),
+  //       input({
+  //         type: inputType,
+  //         name: inputName,
+  //         id: inputName,
+  //         placeholder,
+  //         'data-required': required,
+  //         class:
+  //           'searchbox min-w-[415px] h-10 rounded-md pl-9 text-base
+  // block px-8 py-5 text-gray-600 font-extralight
+  //   border-t border-l border-r border-b border-gray-300 ',
+  //         'aria-label': dtName,
+  //       }),
+  //       div(
+  //         {
+  //           class: 'absolute mr-[8px] right-0',
+  //         },
+  //         span({
+  //           class: 'hidden searchbox-clear icon icon-close fill-gray-400 ',
+  //         }),
+  //       ),
+  //     ),
+  //   );
+  //   decorateIcons(searchElement);
+
+  //   // searchElement.addEventListener("input", handleSearchInput);
+  //   return searchElement;
+  // };
+  const orderWrapper = div({
+    class:
+      'w-[980px] ml-[20px] p-6 bg-white border-t border-l border-r border-b border-gray-300 inline-flex flex-col justify-start ',
+    id: 'orderWrapper',
+  });
+  // const searchProduct = div(
+  //   {
+  //     class:
+  //       'w-full pb-3 gap-5 inline-flex flex-col justify-center items-start',
+  //   },
+  //   div(
+  //     {
+  //       class: 'flex flex-col justify-start items-start',
+  //     },
+  //     div(
+  //       {
+  //         class: 'flex flex-col justify-end items-start gap-4',
+  //       },
+  //       div(
+  //         {
+  //           class:
+  //             'w-80 justify-start text-gray-700 text-base font-bold leading-snug',
+  //         },
+  //         'Search for a product',
+  //       ),
+  //       div(
+  //         {
+  //           class: 'inline-flex justify-center items-center gap-4',
+  //         },
+  //         buildSearchWithIcon(
+  //           '',
+  //           '',
+  //           'text',
+  //           'searchInput',
+  //           false,
+  //           true,
+  //           'cart-search',
+  //           'Search by PO # and order #',
+  //         ),
+  //         div(
+  //           {
+  //             class: '',
+  //           },
+  //           button(
+  //             {
+  //               class:
+  //                 'w-[200px] btn btn-lg btn-primary-purple m-0 rounded-full',
+  //             },
+  //             'Search',
+  //           ),
+  //         ),
+  //       ),
+  //       div(
+  //         {
+  //           class: 'flex gap-4',
+  //         },
+  //         dropDown(days),
+  //         dropDown(status),
+  //       ),
+  //     ),
+  //   ),
+  // );
+  // const downloadSvg = div(
+  //   {
+  //     class: 'sidePanel-content flex justify-start items-center',
+  //   },
+  //   span({
+  //     class: 'icon icon-Download [&_svg>use]:stroke-danaherpurple-500
+  // !w-[60px] !h-[60px] p-[18px] [&_svg>use]:hover:stroke-danaherpurple-800',
+  //   }),
+  //   div(
+  //     {
+  //       class:
+  //         'bg-white justify-start text-danaherpurple-500 text-xs font-medium leading-none',
+  //       id: 'download',
+  //     },
+  //     'Download',
+  //   ),
+  // );
+  // decorateIcons(downloadSvg);
+  const orderDesc = div(
+    {
+      class: ' py-3 inline-flex justify-between items-center',
+    },
+    div(
+      {
+        class: 'pr-8 inline-flex justify-start items-center gap-5',
+      },
+      div(
+        {
+          class:
+            'justify-start text-gray-900 text-2xl font-medium leading-loose',
+        },
+        'Orders',
+      ),
+      div(
+        {
+          class:
+            'justify-between text-gray-700 text-sm font-normal leading-tight',
+        },
+        'New orders may take up to 72 hours to display',
+      ),
+    ),
+    // div(
+    //   {
+    //     class:
+    //       'w-28 pl-2 pr-2.5 py-1.5 rounded shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]
+    //  flex justify-center items-center gap-2 overflow-hidden',
+    //   },
+    //   downloadSvg,
+    // ),
+  );
+  const tableData = (name) => {
+    const row = div(
+      {
+        class:
+          'w-[186.4px] h-[46px] self-stretch p-3 border-b-2 border-gray-200 inline-flex justify-start items-center gap-1',
+      },
+      div(
+        {
+          class: 'justify-start text-right text-black text-base font-bold leading-snug',
+        },
+        name,
+      ),
+      div(
+        {
+          class: 'inline-flex flex-col justify-center items-start',
+        },
+        span({
+          class: 'w-[10px] h-[10px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+        }),
+        span({
+          class: 'w-[10px] h-[10px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+        }),
+      ),
+    );
+    return row;
+  };
+
+  const orderTable = table(
+    {
+      class:
+        'w-[932px] border border-gray-200 inline-flex flex-col justify-start items-start',
+      id: 'orderTable',
+    },
+    tr(
+      {
+        class: 'w-[930px] flex',
+      },
+      tableData('Order #'),
+      tableData('Order Date'),
+      tableData('PO'),
+      tableData('Order Total'),
+      tableData('Status'),
+    ),
+
+  );
+
+  // orderWrapper.append(searchProduct);
+  orderWrapper.append(orderDesc);
+  // orderWrapper.append(orderTable);
+  const orderRows = await dynamicTableContent(orderDetailsResponse);
+  orderTable.append(orderRows);
+  orderWrapper.append(orderTable);
+  // const paginationWrapper = div({
+  //   class: '',
+  // });
+  // const pagination = renderPagination(totalOrdersPlaced, paginationWrapper);
+  // paginationWrapper.append(pagination);
+  // orderWrapper.append(paginationWrapper);
+  wrapper.append(dashboardSideBarContent, orderWrapper);
+
+  block.innerHTML = '';
+  block.textContent = '';
+  block.append(wrapper);
+  decorateIcons(wrapper);
+  removePreLoader();
+};
