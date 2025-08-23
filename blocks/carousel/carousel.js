@@ -37,9 +37,13 @@ function configurePagination(carouselControls, totalSlides) {
 }
 
 export default function decorate(block) {
+  console.log('first');
   block.parentElement.parentElement.querySelector('h1')?.classList.add('hidden');
+  console.log('second');
   const uuid = crypto.randomUUID(4).substring(0, 6);
+  console.log('third');
   if (block.querySelector('a[title="link"]')) block.parentElement.parentElement.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
+  console.log('fourth');
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
   block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
