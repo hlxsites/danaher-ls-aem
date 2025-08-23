@@ -145,7 +145,7 @@ export const checkoutSkeleton = () => {
   const checkoutSkeletonwrapper = div(
     {
       id: 'checkoutSkeleton',
-      class: 'animate-pulse space-y-6 p-6 w-full mx-auto'
+      class: 'animate-pulse space-y-6 p-6 w-full mx-auto',
     },
     div(
       { class: 'h-8 bg-gray-300 rounded w-1/3' },
@@ -1643,7 +1643,7 @@ export const changeStep = async (step) => {
         // get payment intent id
         const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
         if (!gPIID) throw new Error('Payment intent ID missing.');
-        console.log('Getting Payment Intent: ', gPIID);
+        // console.log('Getting Payment Intent: ', gPIID);
 
         // parameters to validate basket for payment
         const validatePaymentData = {
@@ -1667,7 +1667,7 @@ export const changeStep = async (step) => {
           type: 'String',
         };
         const addingCardToOrder = await addCardToOrder(selectedData);
-        console.log('Adding Card to Order...', addingCardToOrder);
+        // console.log('Adding Card to Order...', addingCardToOrder);
 
         if (addingCardToOrder?.status !== 'success') {
           const updatingCardForOrder = await updateCardForOrder(selectedData);
@@ -2275,7 +2275,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2578,7 +2578,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2682,7 +2682,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
