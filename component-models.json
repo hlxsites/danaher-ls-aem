@@ -682,19 +682,19 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_subheading",
-        "label": "Left Side Subheading",
+        "name": "subHeading",
+        "label": "Sub Heading",
         "description": "Eyebrow style subheading"
       },
       {
         "component": "text",
-        "name": "leftMainHeading",
-        "label": "Main Heading Text"
+        "name": "mainHeading",
+        "label": "Main Heading"
       },
       {
         "component": "select",
-        "name": "leftMainHeadingType",
-        "label": "Heading Tag Type",
+        "name": "mainHeadingType",
+        "label": "Main Heading Type",
         "options": [
           {
             "name": "h1",
@@ -724,69 +724,9 @@
       },
       {
         "component": "text",
-        "name": "leftProductInfo",
-        "label": "Left Side Product Info",
+        "name": "productInfo",
+        "label": "Product Info",
         "description": "Descriptive paragraph below heading"
-      },
-      {
-        "component": "url",
-        "name": "leftProductInfoLink",
-        "label": "Left Product Info Link"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_1_title",
-        "label": "Left CTA 1 Title"
-      },
-      {
-        "component": "select",
-        "name": "left_cta_1_type",
-        "label": "Left CTA 1 Type",
-        "options": [
-          {
-            "name": "primary",
-            "value": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary"
-          }
-        ]
-      },
-      {
-        "component": "url",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_2_text",
-        "label": "Left CTA 2 Text"
-      },
-      {
-        "component": "text",
-        "name": "left_cta_2_title",
-        "label": "Left CTA 2 Title"
-      },
-      {
-        "component": "select",
-        "name": "left_cta_2_type",
-        "label": "Left CTA 2 Type",
-        "options": [
-          {
-            "name": "primary",
-            "value": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary"
-          }
-        ]
       },
       {
         "component": "reference",
@@ -798,13 +738,6 @@
         "component": "text",
         "name": "imageAlt",
         "label": "Right Side Alt Text"
-      },
-      {
-        "component": "boolean",
-        "name": "auto_play",
-        "label": "Enable Auto Play",
-        "description": "Auto play enabled via isAutoPlay flag",
-        "default": ""
       }
     ]
   },
