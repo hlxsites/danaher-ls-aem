@@ -79,12 +79,6 @@
     ]
   },
   {
-    "id": "banner",
-    "components": [
-      "  "
-    ]
-  },
-  {
     "id": "body-banner",
     "components": [
       ""
@@ -93,22 +87,13 @@
   {
     "id": "card-list",
     "components": [
-      "articleCard",
-      "applicationCard",
-      "libraryCard",
-      "labCard"
+      ""
     ]
   },
   {
     "id": "cards",
     "components": [
       "cards-item"
-    ]
-  },
-  {
-    "id": "carousel",
-    "components": [
-      " "
     ]
   },
   {
@@ -122,12 +107,11 @@
     "components": [
       "text",
       "image",
-      "title",
       "button",
-      "article-info",
+      "title",
+      "article-info-new",
       "embed",
-      "form",
-      "mini-teasers"
+      "form"
     ]
   },
   {
@@ -142,12 +126,6 @@
       "video",
       "pdf",
       "iframe"
-    ]
-  },
-  {
-    "id": "form",
-    "components": [
-      "form"
     ]
   },
   {
@@ -199,14 +177,6 @@
     ]
   },
   {
-    "id": "recent-articles",
-    "components": []
-  },
-  {
-    "id": "related-articles",
-    "components": []
-  },
-  {
     "id": "top-selling",
     "components": [
       ""
@@ -225,25 +195,11 @@
     ]
   },
   {
-    "id": "social-media",
-    "components": []
-  },
-  {
-    "id": "stats",
-    "components": [
-      "stats"
-    ]
-  },
-  {
     "id": "tabs-container",
     "components": [
       "tiny-carousel",
       "tiny-carousel-item"
     ]
-  },
-  {
-    "id": "tags-list",
-    "components": []
   },
   {
     "id": "tiny-carousel",
