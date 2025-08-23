@@ -7,7 +7,7 @@ import {
   h2, h5, h4, div, p, span, button, input, label,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
+import { getBasketDetails, getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
 import {
   loadStripe, getPaymentIntent, postPaymentIntent, getSavedCards,
   setGetCardAsDefault,
@@ -331,6 +331,13 @@ const paymentModule = async () => {
     savedStripeCardsWrapper.append(savedStripeCardsList);
     stripeCardsContainer.append(savedStripeCardsWrapper);
 
+    let stripe;
+    let getPI;
+    let stripeElements;
+    let postPI;
+    let addressElements;
+    let paymentElements;
+    let addressOptions;
     allPaymentMethods?.data?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
@@ -367,12 +374,11 @@ const paymentModule = async () => {
 
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
+        stripe = await loadStripe();
 
-        const stripe = await loadStripe();
-
-        const getPI = await getPaymentIntent();
+        getPI = await getPaymentIntent();
         if (getPI?.status === 'success') {
-          const postPI = await postPaymentIntent();
+          postPI = await postPaymentIntent();
           if (postPI?.status === 'success') {
             const postPIData = postPI?.data || '';
             const clientSecret = postPIData?.client_secret || '';
@@ -397,7 +403,7 @@ const paymentModule = async () => {
                   },
                 },
               };
-              const addressOptions = {
+              addressOptions = {
                 mode: 'billing', display: {}, blockPoBox: true, fields: { phone: 'always' },
               };
               const options = {
@@ -417,15 +423,16 @@ const paymentModule = async () => {
                   },
                 },
               };
-              if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
-                const stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
 
+              stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
+
+              if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
                 // mount address elements
-                const addressElements = stripeElements.create('address', addressOptions);
+                addressElements = stripeElements.create('address', addressOptions);
                 addressElements.mount('#newStripeCardAddressWrapper');
 
                 // mount payment elements
-                const paymentElements = stripeElements.create('payment', options);
+                paymentElements = stripeElements.create('payment', options);
                 paymentElements.mount('#newStripeCardPaymentWrapper');
               }
             }
@@ -491,7 +498,7 @@ const paymentModule = async () => {
         });
       decorateIcons(stripeCardsWrapper);
 
-      paymentMethodsWrapper?.addEventListener('click', (c) => {
+      paymentMethodsWrapper?.addEventListener('click', async (c) => {
         let targetRadio;
         let targetRadioId;
         let targetFrom;
@@ -527,19 +534,75 @@ const paymentModule = async () => {
           getInvoiceNumberWrapper?.classList?.add('hidden');
           if (targetFrom === 'label') targetRadio.checked = true;
         }
-        if (targetRadioId === 'sameAsShipping') {
-          if (targetFrom === 'label') targetRadio.checked = true;
-          newStripeCardAddressWrapper?.classList.add('hidden');
+
+        if (targetRadioId === 'sameAsShipping' || targetRadioId === 'sameAsBilling') {
+          const getBasketData = await getBasketDetails();
+
+          const basketData = getBasketData?.data;
+          const invoiceToAddress = basketData?.data?.invoiceToAddress;
+          const commonShipToAddress = basketData?.data?.commonShipToAddress;
+          let basketAddressData;
+
+          if (targetRadioId === 'sameAsShipping') {
+            if (targetFrom === 'label') targetRadio.checked = true;
+            // newStripeCardAddressWrapper?.classList.add('hidden');
+            basketAddressData = basketData?.included?.commonShipToAddress[commonShipToAddress];
+          }
+          if (targetRadioId === 'sameAsBilling') {
+            if (targetFrom === 'label') targetRadio.checked = true;
+            // newStripeCardAddressWrapper?.classList.add('hidden');
+
+            basketAddressData = basketData?.included?.invoiceToAddress[invoiceToAddress];
+          }
+          const defaultData = {
+            name: `${basketAddressData?.firstName} ${basketAddressData?.lastName}`,
+            address: {
+              line1: basketAddressData?.addressLine1,
+              line2: basketAddressData?.addressLine2,
+              city: basketAddressData?.city,
+              state: basketAddressData?.mainDivisionCode,
+              postal_code: basketAddressData?.postalCode,
+              country: basketAddressData?.countryCode,
+            },
+          };
+
+          addressElements?.destroy();
+
+          addressOptions = {
+            mode: 'billing', display: {}, blockPoBox: true, fields: { phone: 'always' }, defaultValues: defaultData,
+          };
+          // mount address elements
+          addressElements = stripeElements.create('address', addressOptions);
+          addressElements.mount('#newStripeCardAddressWrapper');
         }
-        if (targetRadioId === 'sameAsBilling') {
-          if (targetFrom === 'label') targetRadio.checked = true;
-          newStripeCardAddressWrapper?.classList.add('hidden');
-        }
+
         if (targetRadioId === 'newAddress') {
           if (targetFrom === 'label') targetRadio.checked = true;
           if (newStripeCardAddressWrapper?.classList.contains('hidden')) {
             newStripeCardAddressWrapper?.classList.remove('hidden');
           }
+
+          addressOptions = {
+            mode: 'billing',
+            display: {},
+            blockPoBox: true,
+            fields: { phone: 'always' },
+            defaultValues: {
+              name: '',
+              phone: '',
+              address: {
+                line1: '',
+                line2: '',
+                city: '',
+                state: '',
+                postal_code: '',
+                country: '',
+              },
+            },
+          };
+          addressElements?.destroy();
+          addressElements = stripeElements.create('address', addressOptions);
+          addressElements.mount('#newStripeCardAddressWrapper');
         }
       });
     }
@@ -556,6 +619,8 @@ const paymentModule = async () => {
     // show new cards wrapper when clicked add new card
     savedStripeCardsHeader?.querySelector('#addNewStripeCard')?.addEventListener('click', () => {
       sessionStorage.setItem('selectedStripeMethod', 'newCard');
+      const newAddressCheckbox = document.querySelector('#newAddress');
+      if (newAddressCheckbox) newAddressCheckbox.checked = true;
       const savedCardsHeader = document.querySelector('#savedStripeCardsHeader');
       const savedCardList = document.querySelector('#savedStripeCardsList');
       const getStripeCardsWrapper = document.querySelector('#newStripeCardsWrapper');

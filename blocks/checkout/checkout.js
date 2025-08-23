@@ -1,12 +1,11 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { loadStripeScript } from '../../scripts/stripe_utils.js';
+import { checkoutSkeleton } from '../../scripts/cart-checkout-utils.js';
 
 // eslint-disable-next-line consistent-return
 export default async function decorate(block) {
-  showPreLoader();
   await loadStripeScript('https://js.stripe.com/v3/');
   document.querySelector('main')?.classList.add('bg-checkout');
   const authenticationToken = await getAuthenticationToken();
@@ -26,8 +25,9 @@ export default async function decorate(block) {
   ::::::::::::::
   */
   const checkoutWrapper = div({
+    id: 'checkoutWrapper',
     class:
-      'checkout-wrapper dhls-container  w-full flex flex-col mx-auto flex justify-between',
+      'checkout-wrapper dhls-container !mt-0 w-full flex flex-col mx-auto flex justify-between',
   });
 
   /*
@@ -46,7 +46,7 @@ export default async function decorate(block) {
   */
   const modulesContainer = div({
     class:
-      'checkout-modules-wrapper h-max border border-danahergray-75 bg-white w-full lg:w-7/10 p-6',
+      'checkout-modules-wrapper hidden h-max border border-danahergray-75 bg-white w-full lg:w-7/10 p-6',
     id: 'checkoutModulesWrapper',
   });
 
@@ -67,15 +67,21 @@ export default async function decorate(block) {
           modulesContent.appendChild(module);
         } else {
           modulesContainer.appendChild(module);
+          if (progressBar?.classList.contains('hidden')) {
+            progressBar.classList.remove('hidden');
+          }
+          if (modulesContainer?.classList.contains('hidden')) {
+            modulesContainer.classList.remove('hidden');
+          }
+          modulesContent.querySelector('#checkoutSkeleton')?.remove();
         }
       });
-      removePreLoader();
     })
     .catch((error) => ({
       status: 'error',
       data: `Error initializing modules: ${error}`,
     }));
-
+  modulesContent.append(checkoutSkeleton());
   modulesContent.append(modulesContainer);
   checkoutWrapper.appendChild(progressBar);
   checkoutWrapper.append(modulesContent);

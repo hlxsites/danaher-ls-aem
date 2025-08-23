@@ -327,6 +327,7 @@ click use address button to set the address as default for current order
           const useAddressButtonResponse = await setUseAddress(
             useAddressId,
             type,
+            'useAddress',
           );
 
           if (useAddressButtonResponse?.status === 'success') {
@@ -365,7 +366,7 @@ click use address button to set the address as default for current order
             update basket with the current use address
             ::::::::::::::
             */
-            // await updateBasketDetails();
+            await updateBasketDetails();
             /*
             ::::::::::::::
             update checkout summary module

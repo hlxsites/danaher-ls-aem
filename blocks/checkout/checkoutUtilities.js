@@ -107,8 +107,9 @@ export const progressModule = () => {
   ::::::::::::::
   */
   const progressBar = div({
+    id: 'checkoutProgressBar',
     class:
-      'checkout-progress-bar flex items-center justify-between mb-16 relative w-full',
+      'checkout-progress-bar hidden flex items-center justify-between mb-16 relative w-full',
   });
 
   // Add elements to progress-bar

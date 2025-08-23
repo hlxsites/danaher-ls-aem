@@ -134,6 +134,39 @@ export const divider = (val) => hr({
 });
 
 /*
+*
+*
+::::::::: skeleton for checkout modules ::::::
+*
+*
+*/
+export const checkoutSkeleton = () => {
+  const checkoutSkeletonwrapper = div(
+    {
+      id: 'checkoutSkeleton',
+      class: 'animate-pulse space-y-6 p-6 w-full mx-auto'
+    },
+    div(
+      { class: 'h-8 bg-gray-300 rounded w-1/3' },
+    ),
+    div(
+      { class: 'flex items-center space-x-4' },
+      div({ class: 'w-16 h-16 bg-gray-300 rounded' }),
+      div(
+        { class: 'flex-1 space-y-2' },
+        div({ class: 'h-4 bg-gray-300 rounded w-3/4' }),
+        div({ class: 'h-4 bg-gray-200 rounded w-1/2' }),
+      ),
+    ),
+    div({ class: 'h-6 bg-gray-300 rounded w-1/4' }),
+    div({ class: 'h-4 bg-gray-200 rounded w-full' }),
+    div({ class: 'h-4 bg-gray-200 rounded w-full' }),
+    div({ class: 'h-4 bg-gray-200 rounded w-2/3' }),
+  );
+  return checkoutSkeletonwrapper;
+};
+
+/*
 ::::::::::::::
 default shipping/billing address if available when user lands on checkout page
 ::::::::::::::
@@ -521,7 +554,7 @@ export async function setUseAddressObject(response) {
  * @param {string} id - The ID of the current address.
  * @param {string} type - Shipping/Billing.
  */
-export const setUseAddress = async (id, type) => {
+export const setUseAddress = async (id, type, action = '') => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -529,7 +562,7 @@ export const setUseAddress = async (id, type) => {
   try {
     if (window.location.pathname.includes('cartlanding')) return false;
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
-    if (getUseAddressesObject?.status === 'success') {
+    if (getUseAddressesObject?.status === 'success' && action !== 'useAddress') {
       const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
       if (cachedAddress?.status === 'success') {
         const updatedUseObject = {
@@ -1418,7 +1451,7 @@ async function silentNavigation(path) {
 *
  */
 export const changeStep = async (step) => {
-  showPreLoader();
+  // showPreLoader();
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -1427,12 +1460,28 @@ export const changeStep = async (step) => {
   window.addEventListener('popstate', () => {
     silentNavigation(window.location.pathname);
   });
+  const checkoutWrapper = document.querySelector('#checkoutWrapper');
+  checkoutWrapper?.classList.add('pointer-events-none');
+  const checkoutProgressBar = document.querySelector('#checkoutProgressBar');
 
   const currentTab = (step?.target?.getAttribute('data-tab') || step?.target?.parentElement?.getAttribute('data-tab') || step?.target?.parentElement?.parentElement?.getAttribute('data-tab'));
+
+  if (currentTab !== 'submitOrder') {
+    const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
+    checkoutModulesWrapper.innerHTML = '';
+    checkoutModulesWrapper.append(checkoutSkeleton());
+
+    const checkoutSummaryContainer = document.querySelector('#checkoutSummaryContainer');
+    if (checkoutSummaryContainer) {
+      checkoutSummaryContainer.innerHTML = '';
+      checkoutSummaryContainer.append(checkoutSkeleton());
+    }
+  }
 
   let validateData = '';
   let validatingBasket;
   try {
+    checkoutProgressBar?.classList.add('hidden');
     if (currentTab === 'shippingAddress') {
       validateData = {
         adjustmentsAllowed: true,
@@ -1453,6 +1502,7 @@ export const changeStep = async (step) => {
           'InvoiceAddress',
           'ShippingAddress',
           'Addresses',
+          'Shipping',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1464,10 +1514,7 @@ export const changeStep = async (step) => {
       validateData = {
         adjustmentsAllowed: true,
         scopes: [
-          'InvoiceAddress',
-          'ShippingAddress',
-          'Addresses',
-          'Shipping',
+          'Payment',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1505,6 +1552,7 @@ export const changeStep = async (step) => {
       const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
+
       if (!getSelectedPaymentMethod) throw new Error('Please select Payment Method');
 
       const getBasketForOrder = await getBasketDetails();
@@ -1594,6 +1642,7 @@ export const changeStep = async (step) => {
         // get payment intent id
         const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
         if (!gPIID) throw new Error('Payment intent ID missing.');
+        console.log('Getting Payment Intent: ', gPIID);
 
         // parameters to validate basket for payment
         const validatePaymentData = {
@@ -1603,22 +1652,25 @@ export const changeStep = async (step) => {
           ],
         };
         // validating basket for payment
-        const validatinBasketForPayment = await validateBasket(validatePaymentData);
+        const validatingBasketForPayment = await validateBasket(validatePaymentData);
 
-        if (validatinBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
+        if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
+
         // console.log(' Basket Validated for Pyament...');
-
-        // add selected card details to order
+        // Remove email from the first item
+        delete gPIID[0].billing_details.email;
+        // add selected card to order
         const selectedData = {
           name: 'SelectedCard',
-          value: '',
+          value: JSON.stringify(gPIID[0]),
           type: 'String',
         };
-        const addingCardToOrder = await addCardToOrder();
-        // console.log('Adding Card to Order...', addingCardToOrder);
+        const addingCardToOrder = await addCardToOrder(selectedData);
+        console.log('Adding Card to Order...', addingCardToOrder);
 
         if (addingCardToOrder?.status !== 'success') throw new Error('Error Adding Card Details.');
 
+        throw new Error('Work in progress...');
         // confirm  stripe Setup for new cards
         let confirmSetup;
         if (selectedStripeMethod === 'newCard') {
@@ -1673,8 +1725,17 @@ export const changeStep = async (step) => {
         return true;
       }
     }
+    if (checkoutWrapper?.classList.contains('pointer-events-none')) {
+      checkoutWrapper.classList.remove('pointer-events-none');
+    }
     return true;
   } catch (error) {
+    if (checkoutProgressBar?.classList.contains('hidden')) {
+      checkoutProgressBar.classList.remove('hidden');
+    }
+    if (checkoutWrapper?.classList.contains('pointer-events-none')) {
+      checkoutWrapper.classList.remove('pointer-events-none');
+    }
     removePreLoader();
     showNotification(error.message || 'Error Processing Request.', 'error');
     return false;
@@ -2212,7 +2273,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2515,7 +2576,7 @@ get price type if its net or gross
         },
         button({
           class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+            } `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2541,11 +2602,11 @@ get price type if its net or gross
     if (window.location.href.includes('cartlanding') && userLoggedInStatus) {
       proceedButton.textContent = 'Proceed to Checkout';
     } else {
-    /*
-    ::::::::::::::
-    Update checkout summary button
-    ::::::::::::::
-    */
+      /*
+      ::::::::::::::
+      Update checkout summary button
+      ::::::::::::::
+      */
       const currentPath = window.location.pathname;
       if (currentPath.includes('address')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
@@ -2591,7 +2652,7 @@ get price type if its net or gross
       if (
         getUseAddressesResponse?.data?.invoiceToAddress
         && getUseAddressesResponse?.data?.invoiceToAddress?.id
-        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && window.location.pathname.includes('checkout')
+        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && window.location.pathname.includes('addresses')
       ) {
         const invoiceToAddress = div(
           {
@@ -2619,7 +2680,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
@@ -2665,7 +2726,7 @@ get price type if its net or gross
  check if shipping address exists in basket
  ::::::::::::::::::
    */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && window.location.pathname.includes('checkout')) {
+      if (getUseAddressesResponse?.data?.commonShipToAddress && window.location.pathname.includes('addresses')) {
         const commonShipToAddress = div(
           {
             id: 'checkoutSummaryCommonShipAddress',
@@ -2768,18 +2829,23 @@ export async function updateCheckoutSummary() {
 
 // load module on navigation
 async function loadingModule() {
+  const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
+  const checkoutProgressBar = document.querySelector('#checkoutProgressBar');
+
   initializeModules()?.then(async (modules) => {
     // Append modules to container
-    modules.forEach((module) => {
+    modules.forEach(async (module) => {
       if (module.getAttribute('id') !== 'checkout-details') {
-        const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
         checkoutModulesWrapper.innerHTML = '';
         checkoutModulesWrapper?.appendChild(module);
+        if (checkoutProgressBar?.classList.contains('hidden')) {
+          checkoutProgressBar.classList.remove('hidden');
+        }
+        await updateCheckoutSummary();
         removePreLoader();
       }
     });
   });
-  await updateCheckoutSummary();
 }
 
 // load cart items
