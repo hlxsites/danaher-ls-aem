@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
-import { includeProdEdsPaths, includeStageEdsPaths } from '../../scripts/delayed.js';
+import { excludeProdEdsPaths, excludeStageEdsPaths } from '../../scripts/delayed.js';
 
 const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
@@ -56,7 +56,7 @@ export default async function decorate(block) {
   *
   */
 
-    if ((includeProdEdsPaths.some((prodPath) => window.location.pathname.includes(prodPath)) || (includeStageEdsPaths.some((stagePath) => window.location.pathname.includes(stagePath)) && window.DanaherConfig.host.includes('stage.lifesciences'))) && index > 1) {
+    if ((!excludeProdEdsPaths.some((prodPath) => window.location.pathname.includes(prodPath)) || (!excludeStageEdsPaths.some((stagePath) => window.location.pathname.includes(stagePath)) && window.DanaherConfig.host.includes('stage.lifesciences'))) && index > 1) {
       const elementContent = element.textContent.trim().replace(/-/g, ' ');
 
       const elementAnchorContent = element.querySelector('a');
@@ -130,7 +130,7 @@ export default async function decorate(block) {
     },
   );
   breadcrumbWrapper.innerHTML = '';
-  if (includeProdEdsPaths.some((prodPath) => window.location.pathname.includes(prodPath)) || (includeStageEdsPaths.some((stagePath) => window.location.pathname.includes(stagePath)) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
+  if (!excludeProdEdsPaths.some((prodPath) => window.location.pathname.includes(prodPath)) || (!excludeStageEdsPaths.some((stagePath) => window.location.pathname.includes(stagePath)) && window.DanaherConfig.host.includes('stage.lifesciences'))) {
     bredWrap.append(entries);
     breadcrumbWrapper.append(bredWrap);
   } else {
