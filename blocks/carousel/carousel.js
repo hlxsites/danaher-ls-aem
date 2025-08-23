@@ -144,8 +144,8 @@ export default function decorate(block) {
 
     setTimeout(() => {
       new Carousel({
-        wrapperEl: uuid,
-        mainEl: `#${uuid}`,
+       wrapperEl: `#${uuid}`,     // id of the block, NOT parent
+        mainEl: `#${uuid}`, 
         delay: SLIDE_DELAY,
         previousElAction: 'button[data-carousel-prev]',
         nextElAction: 'button[data-carousel-next]',
