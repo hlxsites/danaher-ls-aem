@@ -7,7 +7,7 @@ import tabsOrder from '../../scripts/tabs-order.js';
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   // Determine opco, e.g. from response
-  const opco = response?.raw?.opco?.toLowerCase() || 'sciex'; // use your correct field
+  const opco = response?.raw?.opco?.toLowerCase() || 'sciex';
   const tabOrderArr = tabsOrder()[opco] || [];
   const tabsList = new Set();
 
@@ -52,7 +52,6 @@ function loadPdpBlocks() {
     .sort((a, b) => a.order - b.order)
     .forEach(({ tabName }) => {
       // Map tabName to block names
-      // You may want to keep this in a mapping object for clarity
       const blockMap = {
         'overview': 'pdp-description',
         'products': 'pdp-products',
@@ -99,7 +98,6 @@ function loadPdpBlocks() {
           break;
         // Add more cases as needed, following your current logic
         default:
-          // If you have other conditions for specific tabs, add them here
           break;
       }
 
