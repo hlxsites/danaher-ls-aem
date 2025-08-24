@@ -730,24 +730,18 @@
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "left_cta_1_title",
-        "value": "",
-        "label": "Title Text"
+        "label": "Left CTA 1 Title"
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "left_cta_1_text",
-        "value": "",
-        "label": "Link Text"
+        "label": "Left CTA 1 Text"
       },
       {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "left_cta_1_link",
-        "value": "",
-        "label": "Link URL"
+        "component": "url",
+        "name": "leftProductInfoLink",
+        "label": "Left Product Info Link"
       },
       {
         "component": "select",
@@ -765,9 +759,9 @@
         ]
       },
       {
-        "component": "url",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
+        "component": "text",
+        "name": "left_cta_2_title",
+        "label": "Left CTA 2 Title"
       },
       {
         "component": "text",
@@ -775,9 +769,9 @@
         "label": "Left CTA 2 Text"
       },
       {
-        "component": "text",
-        "name": "left_cta_2_title",
-        "label": "Left CTA 2 Title"
+        "component": "url",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
       },
       {
         "component": "select",

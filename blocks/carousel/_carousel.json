@@ -51,26 +51,20 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-                  "component": "text",
-                  "valueType": "string",
-                  "name": "left_cta_1_title",
-                  "value": "",
-                  "label": "Title Text"
-                },
-            {
-              "component": "text",
-              "valueType": "string",
-              "name": "left_cta_1_text",
-              "value": "",
-              "label": "Link Text"
-            },
-            {
-              "component": "aem-content",
-              "valueType": "string",
-              "name": "left_cta_1_link",
-              "value": "",
-              "label": "Link URL"
-            },
+          "component": "text",
+          "name": "left_cta_1_title",
+          "label": "Left CTA 1 Title"
+        },
+        {
+          "component": "text",
+          "name": "left_cta_1_text",
+          "label": "Left CTA 1 Text"
+        },
+        {
+          "component": "url",
+          "name": "leftProductInfoLink",
+          "label": "Left Product Info Link"
+        },
         {
           "component": "select",
           "name": "left_cta_1_type",
@@ -81,9 +75,9 @@
           ]
         },
         {
-          "component": "url",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
+          "component": "text",
+          "name": "left_cta_2_title",
+          "label": "Left CTA 2 Title"
         },
         {
           "component": "text",
@@ -91,9 +85,9 @@
           "label": "Left CTA 2 Text"
         },
         {
-          "component": "text",
-          "name": "left_cta_2_title",
-          "label": "Left CTA 2 Title"
+          "component": "url",
+          "name": "left_cta_2_link",
+          "label": "Left CTA 2 Link"
         },
         {
           "component": "select",
