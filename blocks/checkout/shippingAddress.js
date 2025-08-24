@@ -51,8 +51,6 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBAwQawztgIw0AobQk8q-2OlEzuzQ&libraries=places');
 
 const authenticationToken = await getAuthenticationToken();
-// get current basket details
-const getCurrentBasketDetails = await getBasketDetails();
 
 // google maps api to autopopulate fields
 function initGmapsAutocomplete(addressType, addressInput = '') {
@@ -341,6 +339,7 @@ click use address button to set the address as default for current order
               type,
               'useAddress',
             );
+            const getCurrentBasketDetails = await getBasketDetails();
             const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
             const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
 
@@ -949,6 +948,7 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
+    const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
     if (basketInvoiceToAddress === basketShipToAddress) {
