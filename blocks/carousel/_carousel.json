@@ -51,20 +51,26 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-          "component": "url",
-          "name": "left_cta_1_link",
-          "label": "Left CTA 1 Link"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_1_text",
-          "label": "Left CTA 1 Text"
-        },
-        {
-          "component": "text",
-          "name": "left_cta_1_title",
-          "label": "Left CTA 1 Title"
-        },
+                  "component": "text",
+                  "valueType": "string",
+                  "name": "left_cta_1_title",
+                  "value": "",
+                  "label": "Title Text"
+                },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "left_cta_1_text",
+              "value": "",
+              "label": "Link Text"
+            },
+            {
+              "component": "aem-content",
+              "valueType": "string",
+              "name": "left_cta_1_link",
+              "value": "",
+              "label": "Link URL"
+            },
         {
           "component": "select",
           "name": "left_cta_1_type",
