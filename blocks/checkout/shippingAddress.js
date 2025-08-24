@@ -50,6 +50,9 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 // load google maps script
 await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBAwQawztgIw0AobQk8q-2OlEzuzQ&libraries=places');
 
+// get current basket details
+const getCurrentBasketDetails = await getBasketDetails();
+
 // google maps api to autopopulate fields
 function initGmapsAutocomplete(addressType, addressInput = '') {
   let gInput;
@@ -328,94 +331,101 @@ click use address button to set the address as default for current order
         );
         useAddressButton?.addEventListener('click', async (event) => {
           event.preventDefault();
-
-          showPreLoader();
-          const useAddressId = event.target.id;
-
-          const useAddressButtonResponse = await setUseAddress(
-            useAddressId,
-            type,
-            'useAddress',
-          );
-          const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
-          if (getShipAsBillBox) {
-            if (getShipAsBillBox?.classList.contains('pointer-events-none')) {
-              getShipAsBillBox?.classList.remove('pointer-events-none');
-            }
-            const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
-            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
-            const shipAsBillInput = getShipAsBillBox?.querySelector('input');
-            if (shipAsBillInput?.classList.contains('hidden')) {
-              shipAsBillInput?.classList.remove('hidden');
-            }
-            if (shipAsBillLabel?.classList.contains('pl-2')) {
-              shipAsBillLabel?.classList.remove('pl-2');
-              shipAsBillLabel?.classList.add('pl-6');
-            }
-            shipAsBillCheck?.classList.add('hidden');
-          }
-          if (useAddressButtonResponse?.status === 'success') {
-            const renderDefaultAddress = defaultAddress(
-              type === 'shipping'
-                ? useAddressButtonResponse.data?.commonShipToAddress
-                : useAddressButtonResponse.data?.invoiceToAddress,
+          try {
+            if (event.target?.textContent === 'Selected Address') throw new Error('Already Selected.');
+            showPreLoader();
+            const useAddressId = event.target.id;
+            const useAddressButtonResponse = await setUseAddress(
+              useAddressId,
               type,
+              'useAddress',
             );
-            const getDefaultAddressWrapper = document.querySelector(
-              `#${type}AddressHeader`,
-            );
-            if (getDefaultAddressWrapper && renderDefaultAddress) {
-              /*
-                ::::::::::::::
-                show this address as default address
-                :::::::::::::
-                */
-              getDefaultAddressWrapper.insertAdjacentElement(
-                'afterend',
-                renderDefaultAddress,
-              );
-              if (renderDefaultAddress.classList.contains('hidden')) {
-                renderDefaultAddress.classList.remove('hidden');
+            const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
+            const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
+
+            if ((type === 'billing' && useAddressId !== basketShipToAddress?.split(':')[4]) || (type === 'shipping' && useAddressId !== basketInvoiceToAddress?.split(':')[4])) {
+              const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+              if (getShipAsBillBox) {
+                if (getShipAsBillBox?.classList.contains('pointer-events-none')) {
+                  getShipAsBillBox?.classList.remove('pointer-events-none');
+                }
+                const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+                const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+                const shipAsBillInput = getShipAsBillBox?.querySelector('input');
+                if (shipAsBillInput?.classList.contains('hidden')) {
+                  shipAsBillInput?.classList.remove('hidden');
+                }
+                if (shipAsBillLabel?.classList.contains('pl-2')) {
+                  shipAsBillLabel?.classList.remove('pl-2');
+                  shipAsBillLabel?.classList.add('pl-6');
+                }
+                shipAsBillCheck?.classList.add('hidden');
               }
             }
+            if (useAddressButtonResponse?.status === 'success') {
+              const renderDefaultAddress = defaultAddress(
+                type === 'shipping'
+                  ? useAddressButtonResponse.data?.commonShipToAddress
+                  : useAddressButtonResponse.data?.invoiceToAddress,
+                type,
+              );
+              const getDefaultAddressWrapper = document.querySelector(
+                `#${type}AddressHeader`,
+              );
+              if (getDefaultAddressWrapper && renderDefaultAddress) {
+                /*
+                  ::::::::::::::
+                  show this address as default address
+                  :::::::::::::
+                  */
+                getDefaultAddressWrapper.insertAdjacentElement(
+                  'afterend',
+                  renderDefaultAddress,
+                );
+                if (renderDefaultAddress.classList.contains('hidden')) {
+                  renderDefaultAddress.classList.remove('hidden');
+                }
+              }
 
-            /*
-            ::::::::::::::
-            update address list
-            ::::::::::::::
-            */
-            // await updateAddresses();
-            /*
-            ::::::::::::::
-            update basket with the current use address
-            ::::::::::::::
-            */
-            await updateBasketDetails();
-            /*
-            ::::::::::::::
-            update checkout summary module
-            ::::::::::::::
-            */
-            await updateCheckoutSummary();
+              /*
+              ::::::::::::::
+              update address list
+              ::::::::::::::
+              */
+              // await updateAddresses();
+              /*
+              ::::::::::::::
+              update basket with the current use address
+              ::::::::::::::
+              */
+              await updateBasketDetails();
+              /*
+              ::::::::::::::
+              update checkout summary module
+              ::::::::::::::
+              */
+              await updateCheckoutSummary();
 
-            /*
-            ::::::::::::::
-            close utility modal
-            :::::::::::::::::::
-            */
-            closeUtilityModal();
-            const getSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
-            if (getSameAsShippingCheckbox) {
-              getSameAsShippingCheckbox.checked = false;
+              /*
+              ::::::::::::::
+              close utility modal
+              :::::::::::::::::::
+              */
+              closeUtilityModal();
+              const getSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
+              if (getSameAsShippingCheckbox) {
+                getSameAsShippingCheckbox.checked = false;
+              }
+              // remove preloader
+              removePreLoader();
+
+              showNotification('Address set for current order.', 'success');
+            } else {
+              throw new Error('Error processing request.');
             }
-            // remove preloader
+          } catch (error) {
             removePreLoader();
-
-            showNotification('Address set for current order.', 'success');
-          } else {
-            removePreLoader();
-            // closeUtilityModal();
-            showNotification('Error processing request.', 'error');
+            showNotification(error.message, 'error');
           }
         });
         addressItems.append(addressListItem);
@@ -437,7 +447,7 @@ click use address button to set the address as default for current order
         checkboxId = event.target.id;
       }
 
-      if (!clickedCheckbox) return;
+      if (!clickedCheckbox && !event.target.classList.contains(`edit-${type}-address-button`)) return;
 
       if (clickedCheckbox?.classList.contains(`not-default-${type}-address`)) {
         const getParent = addressItems?.querySelector(`#item_${checkboxId}`);
@@ -939,7 +949,6 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
-    const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
     if (basketInvoiceToAddress === basketShipToAddress) {

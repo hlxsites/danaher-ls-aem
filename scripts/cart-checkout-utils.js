@@ -1647,7 +1647,7 @@ export const changeStep = async (step) => {
           // Post Payment Setup intent
           settingIntent = await postSetupIntent();
           if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
-         // console.log('Posting Setup Intent...', settingIntent);
+          // console.log('Posting Setup Intent...', settingIntent);
           // const clientSecret = settingIntent?.data?.client_secret;
           // // confirm Setup Intent
           // const confirmSetup = await stripe.confirmSetup({
@@ -1979,7 +1979,11 @@ get counrty field and attach change event listener to populate states based on c
     });
     removePreLoader();
   });
-
+  adressForm?.querySelectorAll('label')?.forEach((lab) => {
+    if (lab?.classList.contains('pl-4')) {
+      lab.classList.remove('pl-4');
+    }
+  });
   // actions when save address button is clicked
   saveAddressButton?.addEventListener('click', async (event) => {
     event.preventDefault();
@@ -2094,10 +2098,8 @@ get counrty field and attach change event listener to populate states based on c
                 `customers/-/addresses/${addressURI}`,
                 type,
               );
-              console.log('get address details response: ', address);
 
               const renderDefaultAddress = defaultAddress(address, type);
-              console.log('renderDefaultAddress response: ', renderDefaultAddress);
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
                   ::::::::::::::
@@ -2584,8 +2586,7 @@ get price type if its net or gross
             'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-            } `,
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''} `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2658,10 +2659,7 @@ get price type if its net or gross
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
    */
-      if (
-        getUseAddressesResponse?.data?.invoiceToAddress
-        && getUseAddressesResponse?.data?.invoiceToAddress?.id
-        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))
+      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
