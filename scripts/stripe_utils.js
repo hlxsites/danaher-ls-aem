@@ -91,7 +91,7 @@ export async function postPaymentIntent() {
   return { status: 'error', data: {} };
 }
 // setup payment intent
-export async function setupPaymentIntent() {
+export async function postSetupIntent() {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };

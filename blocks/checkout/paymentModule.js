@@ -9,14 +9,18 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getBasketDetails, getPaymentMethods, silentNavigation, validateBasket } from '../../scripts/cart-checkout-utils.js';
 import {
-  loadStripe, getPaymentIntent, postPaymentIntent, getSavedCards,
+  loadStripe, getPaymentIntent, 
+  postPaymentIntent, getSavedCards,
   setGetCardAsDefault,
   setUseCard,
-  setupPaymentIntent,
+  postSetupIntent,
+  loadStripeScript,
 } from '../../scripts/stripe_utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
+await loadStripeScript('https://js.stripe.com/v3/');
 let stripeElements;
+const stripe = await loadStripe();
 
 function createCardItem(item, defaultCard) {
   const useCard = sessionStorage.getItem('useStripeCardId');
@@ -169,14 +173,12 @@ const paymentModule = async () => {
 
     // get available payment methods
     const allPaymentMethods = await getPaymentMethods();
-    console.log('Eligible Payment Method...', allPaymentMethods);
     
     if (allPaymentMethods?.status !== 'success') throw new Error('No Payment methods Available.');
 
     // get saved stripe cards
     const getSavedStripeCardsList = await getSavedCards();
     if (getSavedStripeCardsList?.status !== 'success') throw new Error('No Saved Cards Found.');
-    console.log('Payment Intent Get...', getSavedStripeCardsList);
 
     const savedStripeCardsHeader = div(
       {
@@ -222,11 +224,9 @@ const paymentModule = async () => {
     const getDefaultCard = await setGetCardAsDefault();
     let defaultCard = '';
     if (getDefaultCard?.status !== 'success') throw new Error('Error getting default card');
-    console.log('Get Card as default...PUT', getDefaultCard);
 
-    const setPaymentIntent = await setupPaymentIntent();
+    const setPaymentIntent = await postSetupIntent();
     if (setPaymentIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
-    console.log('Setup Intent...POST', setPaymentIntent);
     
     defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
     if (checkSavedStripeCards?.length > 0) {
@@ -355,8 +355,6 @@ const paymentModule = async () => {
 
     savedStripeCardsWrapper.append(savedStripeCardsList);
     stripeCardsContainer.append(savedStripeCardsWrapper);
-
-    let stripe;
     let getPI;
     let postPI;
     let addressElements;
@@ -398,14 +396,9 @@ const paymentModule = async () => {
 
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
-        stripe = await loadStripe();
-        console.log('Loading Stripe...', stripe);
-        
         getPI = getSavedStripeCardsList;
-        console.log(' Get PI...', getPI);
         if (getPI?.status === 'success') {
           postPI = await postPaymentIntent();
-        console.log(' postPI PI...', postPI);
           
           if (postPI?.status === 'success') {
             const postPIData = postPI?.data || '';
@@ -799,6 +792,9 @@ const paymentModule = async () => {
     return false;
   }
 };
+export function getStripeInstance() {
+  return stripe;
+}
 export function getStripeElements() {
   return stripeElements;
 }

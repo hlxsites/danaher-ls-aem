@@ -337,7 +337,23 @@ click use address button to set the address as default for current order
             type,
             'useAddress',
           );
-
+          const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+          if (getShipAsBillBox) {
+            if (getShipAsBillBox?.classList.contains('pointer-events-none')) {
+              getShipAsBillBox?.classList.remove('pointer-events-none');
+            }
+            const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+            const shipAsBillInput = getShipAsBillBox?.querySelector('input');
+            if (shipAsBillInput?.classList.contains('hidden')) {
+              shipAsBillInput?.classList.remove('hidden');
+            }
+            if (shipAsBillLabel?.classList.contains('pl-2')) {
+              shipAsBillLabel?.classList.remove('pl-2');
+              shipAsBillLabel?.classList.add('pl-6');
+            }
+            shipAsBillCheck?.classList.add('hidden');
+          }
           if (useAddressButtonResponse?.status === 'success') {
             const renderDefaultAddress = defaultAddress(
               type === 'shipping'
@@ -926,7 +942,30 @@ export const shippingAddressModule = async () => {
     const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
+    if (basketInvoiceToAddress === basketShipToAddress) {
+      if (shippingAsBillingAddress) {
+        shippingAsBillingAddress.checked = true;
+        setTimeout(() => {
+          const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+          if (getShipAsBillBox) {
+            getShipAsBillBox?.classList.add('pointer-events-none');
 
+            const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+
+            getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+            if (sameShipAsBillCheck?.classList.contains('hidden')) {
+              sameShipAsBillCheck?.classList.remove('hidden');
+            }
+
+            if (shipAsBillLabel?.classList.contains('pl-6')) {
+              shipAsBillLabel?.classList.remove('pl-6');
+              shipAsBillLabel?.classList.add('pl-2');
+            }
+          }
+        }, 0);
+      }
+    }
     // actions when shippingAsBilling :checked clicked
     shippingAsBillingAddress?.addEventListener('click', async (c) => {
       let targetCheckbox;
@@ -975,9 +1014,9 @@ export const shippingAddressModule = async () => {
    check if  checkbox for shipping as billing address is checked
     ::::::::::::::::::::::::
   */
-      console.log('checbox checked: ', targetCheckbox.checked);
+      // console.log('checbox checked: ', targetCheckbox.checked);
 
-      if (targetCheckbox.checked) {
+      if (!targetCheckbox.checked && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');
 
         if (!basketInvoiceToAddress) showDefaultBillingAddressButton?.classList.remove('hidden');
@@ -990,6 +1029,7 @@ export const shippingAddressModule = async () => {
             ':',
           )[4]
         ) {
+          showPreLoader();
           /*
    :::::::::::::::::
    check if  we have use address is set for shipping
@@ -1032,7 +1072,6 @@ export const shippingAddressModule = async () => {
           const updatingToDefault = await updateAddressToDefault(
             setAddressDetails,
           );
-
           if (updatingToDefault?.status === 'success') {
             /*
              ::::::::::::::
@@ -1042,6 +1081,7 @@ export const shippingAddressModule = async () => {
             const setAddressAsShipping = await setUseAddress(
               useShipToAddress?.id,
               'billing',
+              'useAddress',
             );
             if (setAddressAsShipping?.status === 'success') {
               const renderDefaultAddress = defaultAddress(
@@ -1087,7 +1127,24 @@ export const shippingAddressModule = async () => {
           */
 
           await updateBasketDetails();
+          if (targetFrom === 'label') targetCheckbox.checked = true;
+          const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+          if (getShipAsBillBox) {
+            getShipAsBillBox?.classList.add('pointer-events-none');
 
+            const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+
+            getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+            if (sameShipAsBillCheck?.classList.contains('hidden')) {
+              sameShipAsBillCheck?.classList.remove('hidden');
+            }
+            getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+            if (shipAsBillLabel?.classList.contains('pl-6')) {
+              shipAsBillLabel?.classList.remove('pl-6');
+              shipAsBillLabel?.classList.add('pl-2');
+            }
+          }
           removePreLoader();
         }
         if (checkoutSummaryBillAddress?.classList.contains('hidden')) {
@@ -1349,15 +1406,13 @@ show default billing address else mark shippingAsBilling checkbox as checked
 */
 
         if (
-          getUseAddressesResponse?.data?.invoiceToAddress
-          && getUseAddressesResponse?.data?.invoiceToAddress?.id
-          !== getUseAddressesResponse?.data?.commonShipToAddress?.id
+          basketInvoiceToAddress
+          !== basketShipToAddress
         ) {
           defaultBillingAddress.classList.remove('hidden');
           const shippingAsBillingAddressCheckBox = moduleContent.querySelector(
             '#shippingAsBillingAddress',
           );
-          console.log(' here 1332');
 
           if (
             shippingAsBillingAddressCheckBox
@@ -1371,7 +1426,6 @@ show default billing address else mark shippingAsBilling checkbox as checked
         // defaultBillingAddress.classList.add('hidden');
         const invoiceTo = getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(':')[4];
         const shipTo = getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(':')[4];
-        console.log(' here 1340');
 
         if (shippingAsBillingAddressInput) {
           shippingAsBillingAddressInput.checked = invoiceTo === shipTo;

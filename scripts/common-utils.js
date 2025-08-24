@@ -1060,21 +1060,39 @@ export const buildBillingCheckboxElement = (
   required,
   extraClasses = '',
   hidden = '',
-) => div(
-  { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
-  input({
-    type: inputType,
-    name: inputName,
-    class: 'input-focus-checkbox',
-    id: inputName,
-    value: fieldValue,
-    'aria-label': fieldLable,
-  }),
-  label(
+) => {
+  const shipAsBillBox = div(
     {
-      for: inputName,
-      class: 'pl-2',
+      id: 'shippingAsBillingCheckboxWrapper',
+      class: `flex center gap-2 mt-6 false relative ${extraClasses} ${hidden}`,
     },
-    field,
-  ),
-);
+    div(
+      {
+        class: 'hidden',
+        id: 'sameShipAsBillCheck',
+      },
+      span(
+        {
+          class: 'icon icon-check-circle-filled',
+        },
+      ),
+    ),
+    input({
+      type: inputType,
+      name: inputName,
+      class: 'input-focus-checkbox absolute mt-1',
+      id: inputName,
+      value: fieldValue,
+      'aria-label': fieldLable,
+    }),
+    label(
+      {
+        for: inputName,
+        class: 'pl-6 z-10',
+      },
+      field,
+    ),
+  );
+  decorateIcons(shipAsBillBox);
+  return shipAsBillBox;
+};

@@ -48,10 +48,10 @@ import {
   addCardToOrder,
   updateCardForOrder,
   postPaymentIntent,
-  setupPaymentIntent,
+  postSetupIntent,
 } from './stripe_utils.js';
 import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
-import { getStripeElements } from '../blocks/checkout/paymentModule.js';
+import { getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -650,7 +650,7 @@ export async function getBasketDetails(userType = null) {
   });
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
-  if ((basketData?.status === 'success' && userType !== 'customer') && !basketData?.data?.data?.customer) return basketData;
+  if (basketData?.status === 'success' && userType !== 'customer') return basketData;
 
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
@@ -1623,7 +1623,7 @@ export const changeStep = async (step) => {
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         showPreLoader();
-        const stripe = await loadStripe();
+        const stripe = getStripeInstance();
         const paymentMethod = 'STRIPE_PAYMENT';
 
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
@@ -1631,26 +1631,48 @@ export const changeStep = async (step) => {
         /*
         *
         *
-          :::::::: handle stripe payment for saved/new card :::::::::
+          ::::::::
+          handle stripe payment for saved/new card
+          :::::::::
         *
         */
         if (!sessionStorage.getItem('useStripeCardId') && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
-        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          settingIntent = await setupPaymentIntent();
-          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
-        }
-        console.log('Setting Intent...POST...', settingIntent);
+        const elements = getStripeElements();
+        // console.log('elements: ', elements);
 
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          // Post Payment Setup intent
+          settingIntent = await postSetupIntent();
+          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+         // console.log('Posting Setup Intent...', settingIntent);
+          // const clientSecret = settingIntent?.data?.client_secret;
+          // // confirm Setup Intent
+          // const confirmSetup = await stripe.confirmSetup({
+          //   elements,
+          //   confirmParams: {
+          //     return_url: `${window.location.origin}/us/en/e-buy/payment`,
+          //   },
+          //   redirect: 'if_required',
+          // });
+          // console.log('Confirm Setup......', confirmSetup);
+
+          // // if stripe setup confirmed, move to confirm payment
+          // if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error(confirmSetup?.error?.message);
+        }
+        // Post Payment Intent
         const postingIntent = await postPaymentIntent();
         if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+        // console.log('Post Payment Intent...', postingIntent);
+
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          // Get Payment Intent
           const getPaymentIntentData = await getPaymentIntent();
           if (getPaymentIntentData?.status !== 'success') throw new Error('Error Processing Request');
-          console.log('Getting Payment Intent for new...', getPaymentIntentData);
+          // console.log('Getting Payment Intent...', getPaymentIntentData);
         }
 
         // Call create-instrument API
@@ -1669,103 +1691,76 @@ export const changeStep = async (step) => {
         const getPI = await getPaymentIntent();
 
         if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        console.log(' Get Payment Intent...');
-
-        let gPIIData;
-        let gPIID;
-        let paymentElement;
-        let addressElement;
-        let addressValue;
-        const elements = getStripeElements();
-        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          addressElement = elements.getElement('address');
-          paymentElement = elements.getElement('payment');
-          console.log(' paymentElement element: ', addressElement);
-          console.log(' address element: ', addressElement);
-
-          const { value, complete } = await addressElement.getValue();
-          if (!complete) throw new Error('Please Fill all details.');
-          addressValue = value;
-          gPIIData = {
-            billing_details: addressValue,
-          };
-        }
-
-        if (selectedStripeMethod === 'savedCard' && selectedStripeMethod) {
-          // get payment intent id
-          gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
-          if (!gPIID) throw new Error('Payment intent ID missing.');
-          // Remove email from the first item
-          if (gPIID[0]?.billing_details?.email) {
-            delete gPIID[0]?.billing_details?.email;
-          }
-          gPIIData = gPIID[0];
-        }
-        console.log('Getting Payment Intent gPIIData: ', gPIIData);
-        console.log('stripeElements: ', elements);
+        // console.log(' Get Payment Intent...', getPI);
 
         // parameters to validate basket for payment
-        const validatePaymentData = {
+        const validateBasketData = {
           adjustmentsAllowed: true,
           scopes: [
             'Payment',
           ],
         };
         // validating basket for payment
-        const validatingBasketForPayment = await validateBasket(validatePaymentData);
+        const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
+        console.log('Basket Validated for Pyament...');
 
-        // add selected card to order
-        const selectedData = {
-          name: 'SelectedCard',
-          value: JSON.stringify(gPIIData),
-          type: 'String',
-        };
-        const addingCardToOrder = await addCardToOrder(selectedData);
-        console.log('Adding Card to Order...', addingCardToOrder);
-
-        if (addingCardToOrder?.status !== 'success') {
-          const updatingCardForOrder = await updateCardForOrder(selectedData);
-          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
-        }
-        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          const confirmSetup = await stripe.confirmSetup({
-            clientSecret: settingIntent?.data?.client_secret,
-            confirmParams: {
-              return_url: `${window.location.origin}/checkout`,
-            },
-            redirect: 'if_required',
-          });
-          console.log('Confirming Setup...New Card...', confirmSetup);
-
-          // if stripe setup confirmed, move to confirm payment
-          if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
-        }
-
-        console.log(' Basket Validated for Pyament...');
-        console.log('settingIntent?.data : ', settingIntent?.data);
         // confirm payment :::: final step
+        // validating confirm-payment status from stripe
         const confirmPayment = await stripe.confirmPayment({
           elements,
           confirmParams: {
-            return_url: `${window.location.origin}/checkout`,
+            return_url: `${window.location.origin}/payment`,
           },
           redirect: 'if_required',
         });
-        console.log('Confirming Payment...', confirmPayment);
 
         if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
+
+        console.log('Confirming Payment...');
 
         // validating confirm-payment status from stripe
         const status = confirmPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
 
+        const paymentMethodId = confirmPayment?.paymentIntent?.payment_method;
+        // console.log(' Retrieve this Payment Method: ', paymentMethodId);
+        // Call get payment-intent API
+        const getConfirmedPI = await getPaymentIntent();
+
+        if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+        // console.log(' Get getConfirmedPI Payment Intent...', getConfirmedPI);
+        // addressElement = elements.getElement('address')
+        // get payment intent id
+        // eslint-disable-next-line max-len
+        const getConfirmedPID = getConfirmedPI?.data?.data?.filter((dat) => dat?.id === paymentMethodId);
+        if (!getConfirmedPID) throw new Error('Payment intent ID missing.');
+        // Remove email from the first item
+        if (getConfirmedPID[0]?.billing_details?.email) {
+          delete getConfirmedPID[0]?.billing_details?.email;
+        }
+        //console.log('gPIID : ', getConfirmedPID);
+
+        // add selected card to order
+        const selectedData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const addingCardToOrder = await addCardToOrder(selectedData);
+        // console.log('Adding Card to Order...');
+
+        if (addingCardToOrder?.status !== 'success') {
+          const updatingCardForOrder = await updateCardForOrder(selectedData);
+          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        }
+
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        console.log('Submitting order');
+        console.log('Submitting Order...');
 
         // payment confirmed from Stripe, now submitting order
 
@@ -1777,7 +1772,7 @@ export const changeStep = async (step) => {
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
 
-        window.location.href = `${submittedOrderUrl}${orderId}`;
+        // window.location.href = `${submittedOrderUrl}${orderId}`;
 
         return true;
       }
