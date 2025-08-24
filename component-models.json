@@ -729,24 +729,24 @@
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "text",
-        "name": "left_cta_1_title",
-        "label": "Left CTA 1 Title"
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       },
       {
         "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
+        "name": "linkText",
+        "label": "Text"
       },
       {
-        "component": "url",
-        "name": "leftProductInfoLink",
-        "label": "Left Product Info Link"
+        "component": "text",
+        "name": "linkTitle",
+        "label": "Title"
       },
       {
         "component": "select",
-        "name": "left_cta_1_type",
-        "label": "Left CTA 1 Type",
+        "name": "linkType",
+        "label": "Type",
         "options": [
           {
             "name": "primary",
