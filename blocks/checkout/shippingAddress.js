@@ -50,6 +50,7 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 // load google maps script
 await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBAwQawztgIw0AobQk8q-2OlEzuzQ&libraries=places');
 
+const authenticationToken = await getAuthenticationToken();
 // get current basket details
 const getCurrentBasketDetails = await getBasketDetails();
 
@@ -849,7 +850,6 @@ function generateDefaultAddress(
 export const shippingAddressModule = async () => {
   try {
     if (!window.location.pathname.includes('addresses')) return false;
-    const authenticationToken = await getAuthenticationToken();
     if (authenticationToken?.status === 'error') {
       throw new Error('Unauthorized Access');
     }
