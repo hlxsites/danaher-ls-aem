@@ -312,6 +312,10 @@
   padding-bottom: 2rem;
 }
 
+.carousel-wrapper :is(.text-center) {
+  text-align: center;
+}
+
 .carousel-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -376,6 +380,10 @@
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.carousel-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms;
 }
 
 .carousel-wrapper :is(.ease-in-out) {
