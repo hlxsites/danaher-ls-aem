@@ -4,16 +4,19 @@ import {
   showNotification,
 } from '../../scripts/common-utils.js';
 import {
-  h2, h5, h4, div, p, span, button, input, label,
+  h2, h4, div, p, span, button, input, label,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getBasketDetails, getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
+import { getBasketDetails, getPaymentMethods, silentNavigation, validateBasket } from '../../scripts/cart-checkout-utils.js';
 import {
   loadStripe, getPaymentIntent, postPaymentIntent, getSavedCards,
   setGetCardAsDefault,
   setUseCard,
+  setupPaymentIntent,
 } from '../../scripts/stripe_utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
+
+let stripeElements;
 
 function createCardItem(item, defaultCard) {
   const useCard = sessionStorage.getItem('useStripeCardId');
@@ -117,17 +120,29 @@ function createCardItem(item, defaultCard) {
  ::::::::::::::
  */
 const paymentModule = async () => {
-  if (!window.location.pathname.includes('payment')) return false;
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized.' };
-  }
   /*
-  ::::::::::::::
-  get price type if its net or gross.
-  ::::::::::::::
-  */
+    ::::::::::::::
+    get price type if its net or gross.
+    ::::::::::::::
+    */
+
+  const validateData = {
+    adjustmentsAllowed: true,
+    scopes: [
+      'InvoiceAddress',
+      'ShippingAddress',
+      'Addresses',
+      'Shipping',
+    ],
+  };
+  const validatingBasket = await validateBasket(validateData);
   try {
+    if (!window.location.pathname.includes('payment')) return false;
+    const authenticationToken = await getAuthenticationToken();
+    if (authenticationToken?.status === 'error') {
+      throw new Error('Unauthorized Access');
+    }
+    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -154,13 +169,18 @@ const paymentModule = async () => {
 
     // get available payment methods
     const allPaymentMethods = await getPaymentMethods();
+    console.log('Eligible Payment Method...', allPaymentMethods);
+    
+    if (allPaymentMethods?.status !== 'success') throw new Error('No Payment methods Available.');
 
     // get saved stripe cards
     const getSavedStripeCardsList = await getSavedCards();
+    if (getSavedStripeCardsList?.status !== 'success') throw new Error('No Saved Cards Found.');
+    console.log('Payment Intent Get...', getSavedStripeCardsList);
 
     const savedStripeCardsHeader = div(
       {
-        class: `flex ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data.length > 0) ? '' : 'hidden'} justify-between items-center w-full bg-white`,
+        class: `flex ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data?.length > 0) ? '' : 'hidden'} justify-between items-center w-full bg-white`,
         id: 'savedStripeCardsHeader',
       },
       buildSearchWithIcon(
@@ -201,9 +221,14 @@ const paymentModule = async () => {
     const checkSavedStripeCards = getSavedStripeCardsList?.data?.data;
     const getDefaultCard = await setGetCardAsDefault();
     let defaultCard = '';
-    if (getDefaultCard?.status === 'success') {
-      defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
-    }
+    if (getDefaultCard?.status !== 'success') throw new Error('Error getting default card');
+    console.log('Get Card as default...PUT', getDefaultCard);
+
+    const setPaymentIntent = await setupPaymentIntent();
+    if (setPaymentIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
+    console.log('Setup Intent...POST', setPaymentIntent);
+    
+    defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
     if (checkSavedStripeCards?.length > 0) {
       checkSavedStripeCards?.forEach((item) => {
         savedStripeCardsList?.append(createCardItem(item, defaultCard));
@@ -240,7 +265,7 @@ const paymentModule = async () => {
 
     const newStripeCardsWrapper = div(
       {
-        class: `no-cards-wrapper ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data.length > 0) ? 'hidden' : ''}  flex-1 flex-col flex p-6  gap-6 w-full items-start bg-checkout`,
+        class: `no-cards-wrapper ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data?.length > 0) ? 'hidden' : ''}  flex-1 flex-col flex p-6  gap-6 w-full items-start bg-checkout`,
         id: 'newStripeCardsWrapper',
       },
       div(
@@ -333,7 +358,6 @@ const paymentModule = async () => {
 
     let stripe;
     let getPI;
-    let stripeElements;
     let postPI;
     let addressElements;
     let paymentElements;
@@ -375,10 +399,14 @@ const paymentModule = async () => {
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
         stripe = await loadStripe();
-
-        getPI = await getPaymentIntent();
+        console.log('Loading Stripe...', stripe);
+        
+        getPI = getSavedStripeCardsList;
+        console.log(' Get PI...', getPI);
         if (getPI?.status === 'success') {
           postPI = await postPaymentIntent();
+        console.log(' postPI PI...', postPI);
+          
           if (postPI?.status === 'success') {
             const postPIData = postPI?.data || '';
             const clientSecret = postPIData?.client_secret || '';
@@ -419,13 +447,12 @@ const paymentModule = async () => {
                     cardHolderName: 'auto',
                   },
                   billingDetails: {
-                    address: 'never',
+                    address: 'auto',
                   },
                 },
               };
-
-              stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
-
+              
+              stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });              
               if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
                 // mount address elements
                 addressElements = stripeElements.create('address', addressOptions);
@@ -533,6 +560,11 @@ const paymentModule = async () => {
           getStripeCardsWrapper?.classList?.remove('hidden');
           getInvoiceNumberWrapper?.classList?.add('hidden');
           if (targetFrom === 'label') targetRadio.checked = true;
+
+          if (!(getSavedStripeCardsList?.data?.data?.length > 0)) {
+            const newAddressCheckbox = document.querySelector('#newAddress');
+            if (newAddressCheckbox) newAddressCheckbox.checked = true;
+          }
         }
 
         if (targetRadioId === 'sameAsShipping' || targetRadioId === 'sameAsBilling') {
@@ -599,7 +631,7 @@ const paymentModule = async () => {
                 country: '',
               },
             },
-          };
+          };          
           addressElements?.destroy();
           addressElements = stripeElements.create('address', addressOptions);
           addressElements.mount('#newStripeCardAddressWrapper');
@@ -749,7 +781,7 @@ const paymentModule = async () => {
         }
       } catch (error) {
         removePreLoader();
-        showNotification(error, 'error');
+        showNotification(error.message, 'error');
       }
     });
 
@@ -757,8 +789,17 @@ const paymentModule = async () => {
     decorateIcons(moduleContent);
     return moduleContent;
   } catch (error) {
-    return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));
+    showNotification(error.message, 'error');
+    if (error.message === 'Unauthorized Access') {
+      window.location.href = '/us/en/e-buy/cartlanding';
+    }
+    if (error.message === 'Invalid Basket') {
+      silentNavigation('/us/en/e-buy/addresses');
+    }
+    return false;
   }
 };
-
+export function getStripeElements() {
+  return stripeElements;
+}
 export default paymentModule;

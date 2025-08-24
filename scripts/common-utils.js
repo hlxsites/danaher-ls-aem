@@ -142,7 +142,7 @@ export function showNotification(content, type) {
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 10000);
+  }, 5000);
 }
 /*
  ::::::::::::::::::::::::
@@ -689,6 +689,7 @@ export async function submitForm(id, action, method, data) {
       );
       return submitFormResponse;
     }
+    showNotification('Error Submitting Form.', 'error');
     return { status: 'error', data: 'Error Submitting Form.' };
   } catch (error) {
     return { status: 'error', data: error.message };

@@ -83,7 +83,7 @@ export async function postPaymentIntent() {
     'authentication-token',
     authenticationToken.access_token,
   );
-  const pIntentBody = JSON.stringify({ type: 'bank,' });
+  const pIntentBody = JSON.stringify({ type: 'Card' });
   const response = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
   if (response?.status === 'success') {
     return response;
@@ -217,7 +217,7 @@ export async function addCardToOrder(data = '') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
   const addCardToOrderHeaders = new Headers();
   addCardToOrderHeaders.append('Content-Type', 'Application/json');
   addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
@@ -246,7 +246,7 @@ export async function updateCardForOrder(data = '') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
   const addCardToOrderHeaders = new Headers();
   addCardToOrderHeaders.append('Content-Type', 'Application/json');
   addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
@@ -274,7 +274,7 @@ export async function setUseCard(paymentMethodId) {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedPM`;
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
   const addCardToOrderHeaders = new Headers();
   addCardToOrderHeaders.append('Content-Type', 'Application/json');
   addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
@@ -287,7 +287,7 @@ export async function setUseCard(paymentMethodId) {
     type: 'String',
   };
   const addCardToOrderBody = JSON.stringify(addData);
-  const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
+  const response = await postApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
   if (response?.status === 'success') {
     await updateBasketDetails();
     return response;
