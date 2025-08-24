@@ -342,25 +342,42 @@ click use address button to set the address as default for current order
             const getCurrentBasketDetails = await getBasketDetails();
             const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
             const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
+            console.log('type: ', type);
+            console.log('useAddressId: ', useAddressId);
+            console.log('basketShipToAddress?.split(":")[4]: ', basketShipToAddress?.split(':')[4]);
+            console.log('basketInvoiceToAddress?.split(":")[4]: ', basketInvoiceToAddress?.split(':')[4]);
+            const shipToId = basketShipToAddress?.split(':')[4];
+            const invoiceToId = basketInvoiceToAddress?.split(':')[4];
 
-            if ((type === 'billing' && useAddressId !== basketShipToAddress?.split(':')[4]) || (type === 'shipping' && useAddressId !== basketInvoiceToAddress?.split(':')[4])) {
-              const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
-              if (getShipAsBillBox) {
-                if (getShipAsBillBox?.classList.contains('pointer-events-none')) {
-                  getShipAsBillBox?.classList.remove('pointer-events-none');
-                }
-                const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
-                const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
-                const shipAsBillInput = getShipAsBillBox?.querySelector('input');
-                if (shipAsBillInput?.classList.contains('hidden')) {
-                  shipAsBillInput?.classList.remove('hidden');
-                }
-                if (shipAsBillLabel?.classList.contains('pl-2')) {
-                  shipAsBillLabel?.classList.remove('pl-2');
-                  shipAsBillLabel?.classList.add('pl-6');
-                }
-                shipAsBillCheck?.classList.add('hidden');
+            const isBillingMismatch = type === 'billing' && useAddressId === shipToId;
+            const isShippingConflict = type === 'shipping' && useAddressId === invoiceToId;
+
+            const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+            const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+            const shipAsBillInput = getShipAsBillBox?.querySelector('input');
+            if (isBillingMismatch || isShippingConflict) {
+              getShipAsBillBox?.classList.add('pointer-events-none');
+              if (shipAsBillCheck?.classList.contains('hidden')) {
+                shipAsBillCheck?.classList.remove('hidden');
               }
+              if (shipAsBillLabel?.classList.contains('pl-6')) {
+                shipAsBillLabel?.classList.add('pl-2');
+                shipAsBillLabel?.classList.remove('pl-6');
+              }
+              shipAsBillInput?.classList.add('hidden');
+            } else {
+              if (getShipAsBillBox?.classList.contains('pointer-events-none')) {
+                getShipAsBillBox?.classList.remove('pointer-events-none');
+              }
+              if (shipAsBillInput?.classList.contains('hidden')) {
+                shipAsBillInput?.classList.remove('hidden');
+              }
+              if (shipAsBillLabel?.classList.contains('pl-2')) {
+                shipAsBillLabel?.classList.add('pl-6');
+                shipAsBillLabel?.classList.remove('pl-2');
+              }
+              shipAsBillCheck?.classList.add('hidden');
             }
             if (useAddressButtonResponse?.status === 'success') {
               const renderDefaultAddress = defaultAddress(
