@@ -96,7 +96,7 @@ function loadPdpBlocks() {
         case 'relatedproducts':
           shouldAdd = authoredTabs.has('relatedproducts');
           break;
-        // Add more cases as needed, following your current logic
+        // Add more cases as needed
         default:
           break;
       }
