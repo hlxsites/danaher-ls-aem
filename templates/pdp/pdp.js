@@ -2,28 +2,32 @@ import { buildBlock } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
+import tabsOrder from '../../scripts/tabs-order.js';
 
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
-  console.log(response.raw.sku);
-
-  // PDP Hero
-  // const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
-  // document.querySelector('main').append(pdpHeroBlock);
-
-  // PDP Page tabs
-  // const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
-  // document.querySelector('main').append(pdpPageTabsBlock);
-  const superParent = document.querySelector('.pdp-page-tabs');
-  if (superParent) {
-    [...superParent.children]?.forEach((divEle) => {
-      divEle.classList.add('hidden');
-    });
-  }
-  const tabs = document.querySelector('.pdp-page-tabs')?.children;
+  // Determine opco, e.g. from response
+  const opco = response?.raw?.opco?.toLowerCase() || 'sciex'; // use your correct field
+  const tabOrderArr = tabsOrder()[opco] || [];
   const tabsList = new Set();
 
-  // Helper: add a block once
+  // Pre-collect authored tabs
+  const authoredTabs = new Set();
+  const tabs = document.querySelector('.pdp-page-tabs')?.children;
+  if (tabs) {
+    Array.from(tabs).forEach((tabItem) => {
+      const tabType = tabItem.children[1]?.textContent?.toLowerCase();
+      if (tabType) authoredTabs.add(tabType);
+
+      // Add authored tab metadata
+      tabItem.classList.add('tab-authored', `authored-${tabType}`, 'hidden');
+      tabItem.id = `authored-${tabType}`;
+      tabItem?.children[1]?.classList.add('authored-tab-type');
+      tabItem?.children[2]?.classList.add('authored-tab-title');
+    });
+  }
+
+  // Helper to append block once
   function appendBlock(key, blockName) {
     if (!tabsList.has(key)) {
       const block = div(buildBlock(blockName, { elems: [] }));
@@ -31,72 +35,85 @@ function loadPdpBlocks() {
       tabsList.add(key);
     }
   }
-  if (tabs === undefined || tabs.length === 0) {
+
+  // Always add PDP Hero and Tabs Block first (before the ordered tabs)
+  // Only if not already present
+  if (!document.querySelector('.pdp-hero')) {
     const pdpHeroBlock = div(buildBlock('pdp-hero', { elems: [] }));
     document.querySelector('main').append(pdpHeroBlock);
+  }
+  if (!document.querySelector('.pdp-page-tabs')) {
     const pdpPageTabsBlock = div(buildBlock('pdp-page-tabs', { elems: [] }));
     document.querySelector('main').append(pdpPageTabsBlock);
   }
 
-  // Pre-collect authored tabs
-  const authoredTabs = new Set();
-  if (tabs) {
-    Array.from(tabs).forEach((tabItem) => {
-      const tabType = tabItem.children[1]?.textContent?.toLowerCase();
-      if (!tabType) return;
+  // Main: go through the tab order for the opco and append blocks IN ORDER
+  tabOrderArr
+    .sort((a, b) => a.order - b.order)
+    .forEach(({ tabName }) => {
+      // Map tabName to block names
+      // You may want to keep this in a mapping object for clarity
+      const blockMap = {
+        'overview': 'pdp-description',
+        'products': 'pdp-products',
+        'resources': 'pdp-resources',
+        'specifications': 'pdp-specifications',
+        'parts': 'pdp-bundle-list',
+        'citations': 'pdp-citations',
+        'faqs': 'pdp-faqs',
+        'relatedproducts': 'pdp-related-products',
+        'carousel': 'pdp-carousel',
+        // Add any other mappings needed
+        // e.g. 'images': 'pdp-images',
+        //      'analysis': 'pdp-analysis',
+      };
+      const blockName = blockMap[tabName];
+      if (!blockName) return; // skip unmapped tab
 
-      authoredTabs.add(tabType);
+      // Decision: add block if authored OR available via data
+      let shouldAdd = false;
+      switch (tabName) {
+        case 'overview':
+          shouldAdd = authoredTabs.has('overview') || response?.raw?.richlongdescription;
+          break;
+        case 'products':
+          shouldAdd = authoredTabs.has('products') || (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0);
+          break;
+        case 'resources':
+          shouldAdd = authoredTabs.has('resources') || response?.raw?.numresources;
+          break;
+        case 'specifications':
+          shouldAdd = authoredTabs.has('specifications') || response?.raw?.numattributes > 0;
+          break;
+        case 'parts':
+          shouldAdd = authoredTabs.has('parts') || (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0);
+          break;
+        case 'citations':
+          shouldAdd = authoredTabs.has('citations');
+          break;
+        case 'faqs':
+          shouldAdd = authoredTabs.has('faqs');
+          break;
+        case 'relatedproducts':
+          shouldAdd = authoredTabs.has('relatedproducts');
+          break;
+        // Add more cases as needed, following your current logic
+        default:
+          // If you have other conditions for specific tabs, add them here
+          break;
+      }
 
-      // Add authored tab metadata
-      tabItem.classList.add('tab-authored', `authored-${tabType}`);
-      tabItem.id = `authored-${tabType}`;
-      tabItem?.children[1]?.classList.add('authored-tab-type');
-      tabItem?.children[3]?.classList.add('authored-tab-title');
+      if (shouldAdd) {
+        appendBlock(tabName, blockName);
+      }
     });
-  }
 
-  // CONDITIONS for loading blocks
-  if (authoredTabs.has('overview') || response?.raw?.richlongdescription) {
-    appendBlock('overview', 'pdp-description');
+  // Always load carousel (after the ordered tabs, if not already added in the tabOrderArr)
+  if (!tabsList.has('carousel')) {
+    appendBlock('carousel', 'pdp-carousel');
   }
-
-  if (
-    authoredTabs.has('products')
-  || (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)
-  ) {
-    appendBlock('products', 'pdp-products');
-  }
-
-  if (authoredTabs.has('resources') || response?.raw?.numresources) {
-    appendBlock('resources', 'pdp-resources');
-  }
-
-  if (authoredTabs.has('specifications') || response?.raw?.numattributes > 0) {
-    appendBlock('specifications', 'pdp-specifications');
-  }
-
-  if (
-    authoredTabs.has('parts')
-  || (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0)
-  ) {
-    appendBlock('parts', 'pdp-bundle-list');
-  }
-
-  if (authoredTabs.has('citations')) {
-    appendBlock('citations', 'pdp-citations');
-  }
-
-  if (authoredTabs.has('faqs')) {
-    appendBlock('faqs', 'pdp-faqs');
-  }
-
-  if (authoredTabs.has('relatedproducts')) {
-    appendBlock('relatedproducts', 'pdp-related-products');
-  }
-
-  // Always load carousel
-  appendBlock('carousel', 'pdp-carousel');
 }
+
 
 export default async function buildAutoBlocks() {
   const productSlug = new URL(window.location.href).pathname.split('/').pop();

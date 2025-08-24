@@ -1,4 +1,5 @@
 import { div, p } from '../../scripts/dom-builder.js';
+import tabsOrder from '../../scripts/tabs-order.js';
 
 // Global tracking for scroll behavior
 let lastScrollY = window.scrollY;
@@ -150,10 +151,21 @@ export default async function decorate(block) {
   };
 
   // Build tabsList → pick authored label if present, static fallback otherwise
-  Object.entries(fullTabConfig).forEach(([type, cfg]) => {
-    if (cfg.available) {
-      const { label } = cfg;
-      tabsList.push({ label, selector: `${type}-tab` });
+  // Object.entries(fullTabConfig).forEach(([type, cfg]) => {
+  //   if (cfg.available) {
+  //     const label = authoredTabMap[type] || cfg.label;
+  //     tabsList.push({ label, selector: `${type}-tab` });
+  //   }
+  // });
+
+  // -------------- Generate tabsList in JSON order --------------
+  const opco = response?.raw?.opco?.toLowerCase() || 'sciex';
+  const opcoTabs = tabsOrder()[opco] || tabsOrder().sciex;
+  opcoTabs.forEach(({ tabName }) => {
+    const config = fullTabConfig[tabName];
+    if (config?.available) {
+      const label = authoredTabMap[tabName] || config.label || tabName;
+      tabsList.push({ label, selector: `${tabName}-tab` });
     }
   });
 
