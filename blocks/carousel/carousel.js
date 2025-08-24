@@ -44,7 +44,7 @@ export default function decorate(block) {
   block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
   block.classList.add(...'grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 scroll-smooth'.split(' '));
-  const slides = [...block.children].map((ele, eleIndex) => {
+  const slides = [...block.children].filter(child => child.classList.contains('card')).map(...).map((ele, eleIndex) => {
    ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
     ele.setAttribute('data-carousel-item', (eleIndex + 1));
     const contentEl = ele.querySelector('h2, p');
