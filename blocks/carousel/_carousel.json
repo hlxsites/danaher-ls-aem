@@ -52,24 +52,24 @@
         },
         {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Text"
-      },
-      {
-        "component": "text",
-        "name": "linkTitle",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "linkType",
-        "label": "Type",
-        "options": [
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
+        },
+        {
+          "component": "text",
+          "name": "left_cta_1_text",
+          "label": "Left CTA 1 Text"
+        },
+        {
+          "component": "text",
+          "name": "left_cta_1_title",
+          "label": "Left CTA 1 Title"
+        },
+        {
+          "component": "select",
+          "name": "left_cta_1_type",
+          "label": "Type",
+          "options": [
           {
             "name": "primary",
             "value": "primary"
@@ -81,19 +81,19 @@
         ]
         },
         {
-          "component": "text",
-          "name": "left_cta_2_title",
-          "label": "Left CTA 2 Title"
+          "component": "aem-content",
+          "name": "left_cta_2_link",
+          "label": "Left CTA 2 Link"
         },
         {
           "component": "text",
           "name": "left_cta_2_text",
-          "label": "Left CTA 2 Text"
+          "label": "Left CTA 2 Title"
         },
         {
-          "component": "url",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
+          "component": "text",
+          "name": "left_cta_2_title",
+          "label": "Left CTA 2 Text"
         },
         {
           "component": "select",
@@ -105,15 +105,19 @@
           ]
         },
         {
-          "component": "reference",
-          "name": "picture",
-          "label": "Right Side Image",
-          "description": "Picture with styling from decorate"
+        "component": "reference",
+        "valueType": "Picture",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
         },
         {
           "component": "text",
+          "valueType": "string",
           "name": "imageAlt",
-          "label": "Right Side Alt Text"
+          "label": "Alt Text",
+          "value": ""
         }
       ]
     }
