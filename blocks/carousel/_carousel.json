@@ -52,8 +52,8 @@
         },
         {
           "component": "url",
-          "name": "leftProductInfoLink",
-          "label": "Left Product Info Link"
+          "name": "left_cta_1_link",
+          "label": "Left CTA 1 Link"
         },
         {
           "component": "text",
