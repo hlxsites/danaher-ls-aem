@@ -14,26 +14,11 @@
           }
         }
       }
-    },
-    {
-      "title": "Carousel Item",
-      "id": "carousel-item",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Carousel Item",
-              "model": "carousel-item"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
     {
-      "id": "carousel-item",
+      "id": "carousel",
       "fields": [
         {
           "component": "text",
@@ -140,7 +125,7 @@
   "filters": [
     {
       "id": "carousel",
-      "components": ["carousel-item"]
+      "components": [""]
     }
   ]
 }
