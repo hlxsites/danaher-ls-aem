@@ -678,7 +678,7 @@
     ]
   },
   {
-    "id": "carousel",
+    "id": "carousel-item",
     "fields": [
       {
         "component": "text",
