@@ -731,22 +731,22 @@
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Carousel Link 1"
+        "label": "Link"
       },
       {
         "component": "text",
         "name": "linkText",
-        "label": "Carousel Link Text 1"
+        "label": "Text"
       },
       {
         "component": "text",
         "name": "linkTitle",
-        "label": "Carousel Link Title 1"
+        "label": "Title"
       },
       {
         "component": "select",
         "name": "linkType",
-        "label": "Carousel Link Type 1",
+        "label": "Type",
         "options": [
           {
             "name": "default",
