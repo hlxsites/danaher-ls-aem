@@ -51,61 +51,71 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Text"
-      },
-      {
-        "component": "text",
-        "name": "linkTitle",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "linkType",
-        "label": "Type",
-        "options": [
-          {
-            "name": "default",
-            "value": ""
-          },
-          {
-            "name": "primary",
-            "value": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary"
-          }
-        ]
-      },
-        {
           "component": "aem-content",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
+          "name": "link",
+          "label": "Link"
         },
         {
           "component": "text",
-          "name": "left_cta_2_text",
-          "label": "Left CTA 2 Title"
+          "name": "linkText",
+          "label": "Text"
         },
         {
           "component": "text",
-          "name": "left_cta_2_title",
-          "label": "Left CTA 2 Text"
+          "name": "linkTitle",
+          "label": "Title"
         },
         {
           "component": "select",
-          "name": "left_cta_2_type",
-          "label": "Left CTA 2 Type",
+          "name": "linkType",
+          "label": "Type",
           "options": [
-            { "name": "primary", "value": "primary" },
-            { "name": "secondary", "value": "secondary" }
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
+          ]
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "linkTitle",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "linkType",
+          "label": "Type",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
           ]
         },
         {
