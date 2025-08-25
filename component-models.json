@@ -730,22 +730,22 @@
       },
       {
         "component": "aem-content",
-        "name": "carousel_link",
+        "name": "carousel_link_1",
         "label": "Link"
       },
       {
         "component": "text",
-        "name": "carousel_linkText",
+        "name": "carousel_linkText_1",
         "label": "Text"
       },
       {
         "component": "text",
-        "name": "carousel_linkTitle",
+        "name": "carousel_linkTitle_1",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "carousel_linkType",
+        "name": "carousel_linkType_1",
         "label": "Type",
         "options": [
           {

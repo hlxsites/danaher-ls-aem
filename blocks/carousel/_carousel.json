@@ -50,40 +50,40 @@
           "label": "Left Side Product Info",
           "description": "Descriptive paragraph below heading"
         },
-              {
-        "component": "aem-content",
-        "name": "carousel_link",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "name": "carousel_linkText",
-        "label": "Text"
-      },
-      {
-        "component": "text",
-        "name": "carousel_linkTitle",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "carousel_linkType",
-        "label": "Type",
-        "options": [
-          {
-            "name": "default",
-            "value": ""
-          },
-          {
-            "name": "primary",
-            "value": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary"
-          }
-        ]
-      },
+        {
+          "component": "aem-content",
+          "name": "carousel_link_1",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "carousel_linkText_1",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "carousel_linkTitle_1",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "carousel_linkType_1",
+          "label": "Type",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
+          ]
+        },
         {
           "component": "aem-content",
           "name": "left_cta_2_link",
