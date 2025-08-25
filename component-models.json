@@ -730,22 +730,22 @@
       },
       {
         "component": "aem-content",
-        "name": "cta_1_link",
+        "name": "carousel_1_link",
         "label": "Link1"
       },
       {
         "component": "text",
-        "name": "cta_1_linkText",
+        "name": "carousel_1_linkText",
         "label": "Text1"
       },
       {
         "component": "text",
-        "name": "cta_1_linkTitle",
+        "name": "carousel_1_linkTitle",
         "label": "Title1"
       },
       {
         "component": "select",
-        "name": "cta_1_linkType",
+        "name": "carousel_1_linkType",
         "label": "Type1",
         "options": [
           {
@@ -774,7 +774,7 @@
       },
       {
         "component": "text",
-        "name": "cta2_linkTitle",
+        "name": "cta_2_linkTitle",
         "label": "Title2"
       },
       {
