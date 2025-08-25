@@ -53,22 +53,22 @@
         {
           "component": "aem-content",
           "name": "link",
-          "label": "Link"
+          "label": "Link1"
         },
         {
           "component": "text",
           "name": "linkText",
-          "label": "Text"
+          "label": "Text1"
         },
         {
           "component": "text",
           "name": "linkTitle",
-          "label": "Title"
+          "label": "Title1"
         },
         {
           "component": "select",
           "name": "linkType",
-          "label": "Type",
+          "label": "Type1",
           "options": [
             {
               "name": "default",
@@ -87,22 +87,22 @@
         {
           "component": "aem-content",
           "name": "link",
-          "label": "Link"
+          "label": "Link2"
         },
         {
           "component": "text",
           "name": "linkText",
-          "label": "Text"
+          "label": "Text2"
         },
         {
           "component": "text",
           "name": "linkTitle",
-          "label": "Title"
+          "label": "Title2"
         },
         {
           "component": "select",
           "name": "linkType",
-          "label": "Type",
+          "label": "Type2",
           "options": [
             {
               "name": "default",
