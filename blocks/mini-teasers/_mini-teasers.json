@@ -18,83 +18,41 @@
   ],
   "models": [
     {
-  "id": "mini-teasers",
-  "fields": [
-    {
-      "component": "select",
-      "name": "gridLayout",
-      "label": "Grid Layout",
-      "options": [
-        { "name": "3-Grid", "value": "3" },
-        { "name": "4-Grid", "value": "4" }
-      ]
-    },
-    {
-      "component": "blocks",
-      "name": "teaser1",
-      "label": "Teaser 1",
+      "id": "mini-teasers",
       "fields": [
-        { "component": "text", "name": "heading", "label": "Heading" },
-        { "component": "text", "name": "description", "label": "Description" },
         {
-          "component": "reference",
-          "name": "image",
-          "label": "Image",
-          "multi": false
+          "component": "select",
+          "name": "gridLayout",
+          "label": "Grid Layout",
+          "options": [
+            { "name": "3-Grid", "value": "3" },
+            { "name": "4-Grid", "value": "4" }
+          ]
         },
-        { "component": "text", "name": "imageAlt", "label": "Alt Text" }
-      ]
-    },
-    {
-      "component": "blocks",
-      "name": "teaser2",
-      "label": "Teaser 2",
-      "fields": [
-        { "component": "text", "name": "heading", "label": "Heading" },
-        { "component": "text", "name": "description", "label": "Description" },
-        {
-          "component": "reference",
-          "name": "image",
-          "label": "Image",
-          "multi": false
-        },
-        { "component": "text", "name": "imageAlt", "label": "Alt Text" }
-      ]
-    },
-    {
-      "component": "blocks",
-      "name": "teaser3",
-      "label": "Teaser 3",
-      "fields": [
-        { "component": "text", "name": "heading", "label": "Heading" },
-        { "component": "text", "name": "description", "label": "Description" },
-        {
-          "component": "reference",
-          "name": "image",
-          "label": "Image",
-          "multi": false
-        },
-        { "component": "text", "name": "imageAlt", "label": "Alt Text" }
-      ]
-    },
-    {
-      "component": "group",
-      "name": "teaser4",
-      "label": "Teaser 4 (optional)",
-      "fields": [
-        { "component": "text", "name": "heading", "label": "Heading" },
-        { "component": "text", "name": "description", "label": "Description" },
-        {
-          "component": "reference",
-          "name": "image",
-          "label": "Image",
-          "multi": false
-        },
-        { "component": "text", "name": "imageAlt", "label": "Alt Text" }
+        { "component": "text", "name": "teaser1Heading", "label": "Teaser 1 Heading" },
+        { "component": "text", "name": "teaser1Description", "label": "Teaser 1 Description" },
+        { "component": "reference", "name": "teaser1Image", "label": "Teaser 1 Image", "multi": false },
+        { "component": "text", "name": "teaser1AltText", "label": "Teaser 1 Alt Text" },
+
+        
+        { "component": "text", "name": "teaser2Heading", "label": "Teaser 2 Heading" },
+        { "component": "text", "name": "teaser2Description", "label": "Teaser 2 Description" },
+        { "component": "reference", "name": "teaser2Image", "label": "Teaser 2 Image", "multi": false },
+        { "component": "text", "name": "teaser2AltText", "label": "Teaser 2 Alt Text" },
+
+        
+        { "component": "text", "name": "teaser3Heading", "label": "Teaser 3 Heading" },
+        { "component": "text", "name": "teaser3Description", "label": "Teaser 3 Description" },
+        { "component": "reference", "name": "teaser3Image", "label": "Teaser 3 Image", "multi": false },
+        { "component": "text", "name": "teaser3AltText", "label": "Teaser 3 Alt Text" },
+
+        
+        { "component": "text", "name": "teaser4Heading", "label": "Teaser 4 Heading" },
+        { "component": "text", "name": "teaser4Description", "label": "Teaser 4 Description" },
+        { "component": "reference", "name": "teaser4Image", "label": "Teaser 4 Image", "multi": false },
+        { "component": "text", "name": "teaser4AltText", "label": "Teaser 4 Alt Text" }
       ]
     }
-  ]
-}
   ],
   "filters": []
 }
