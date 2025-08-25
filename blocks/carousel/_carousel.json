@@ -52,22 +52,22 @@
         },
         {
         "component": "aem-content",
-        "name": "carousel_cta1_link",
+        "name": "cta_link",
         "label": "Left CTA 1 Link"
         },
         {
           "component": "text",
-          "name": "carousel_cta1_text",
+          "name": "cta_text",
           "label": "Left CTA 1 Text"
         },
         {
           "component": "text",
-          "name": "carousel_cta1_title",
+          "name": "cta_title",
           "label": "Left CTA 1 Title"
         },
         {
           "component": "select",
-          "name": "carousel_cta1_Type",
+          "name": "cta1_titleType",
           "label": "Type",
           "options": [
           {
