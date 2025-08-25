@@ -786,10 +786,13 @@ export default function decorate(block) {
     });
   });
 
-      if(block.className.includes('thirtyseventy'))
-      {
-        loadSFDCForm(cols[1]);
-      }
+  // Form Load
+  block.querySelectorAll('.form');
+  if (block.classList.contains('thirtyseventy')) {
+    if (cols.length > 1 && !cols[1].querySelector('form')) {
+      loadSFDCForm(cols[1]);
+    }
+  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
