@@ -730,22 +730,22 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
+        "name": "cta1_link",
         "label": "Link1"
       },
       {
         "component": "text",
-        "name": "linkText",
+        "name": "cta1_linkText",
         "label": "Text1"
       },
       {
         "component": "text",
-        "name": "linkTitle",
+        "name": "cta1_linkTitle",
         "label": "Title1"
       },
       {
         "component": "select",
-        "name": "linkType",
+        "name": "cta1_linkType",
         "label": "Type1",
         "options": [
           {
@@ -764,22 +764,22 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
+        "name": "cta2_link",
         "label": "Link2"
       },
       {
         "component": "text",
-        "name": "linkText",
+        "name": "cta2_linkText",
         "label": "Text2"
       },
       {
         "component": "text",
-        "name": "linkTitle",
+        "name": "cta2_linkTitle",
         "label": "Title2"
       },
       {
         "component": "select",
-        "name": "linkType",
+        "name": "cta2_linkType",
         "label": "Type2",
         "options": [
           {
