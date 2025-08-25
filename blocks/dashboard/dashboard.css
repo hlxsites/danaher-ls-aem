@@ -156,6 +156,10 @@
   margin-top: -75px
 }
 
+.dashboard-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
 .dashboard-wrapper :is(.block) {
   display: block
 }
@@ -248,6 +252,10 @@
   height: 1px
 }
 
+.dashboard-wrapper :is(.h-52) {
+  height: 13rem
+}
+
 .dashboard-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -322,6 +330,14 @@
 
 .dashboard-wrapper :is(.w-full) {
   width: 100%
+}
+
+.dashboard-wrapper :is(.w-\[50\%\]) {
+  width: 50%
+}
+
+.dashboard-wrapper :is(.w-\[70\%\]) {
+  width: 70%
 }
 
 .dashboard-wrapper :is(.min-w-\[320px\]) {
@@ -1019,6 +1035,14 @@
 
   .dashboard-wrapper :is(.md\:w-\[80\%\]) {
     width: 80%
+  }
+
+  .dashboard-wrapper :is(.md\:w-\[30\%\]) {
+    width: 30%
+  }
+
+  .dashboard-wrapper :is(.md\:w-\[25\%\]) {
+    width: 25%
   }
 
   .dashboard-wrapper :is(.md\:flex-row) {

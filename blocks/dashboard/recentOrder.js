@@ -18,7 +18,7 @@ const recentOrders = async () => {
   }
 
   const recentDetailsContainer = div({
-    class: 'flex gap-6 w-full dhls-container',
+    class: 'self-stretch inline-flex justify-start items-start',
   });
   const noOrdersDiv = div(
     {
@@ -37,6 +37,7 @@ const recentOrders = async () => {
       class: 'w-[205px] h-[20px] text-center justify-start text-gray-900 text-sm font-medium leading-tight',
     }, 'No Recent Orders'),
   );
+
   const topThreeOrdersDiv = (order, po, status, creationDate, orderTotal) => {
     const formattedAmount = parseFloat(orderTotal).toLocaleString('en-US', {
       minimumFractionDigits: 2,
@@ -175,11 +176,28 @@ const recentOrders = async () => {
     }, 'No Recent Requested Quotes'),
   );
 
-  const recentOrder = div(
+  const recentOrder = 
+    div(
     {
-      class: 'self-stretch w-[480px] p-6 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 inline-flex flex-col justify-start items-center gap-4',
+      class: 'flex-1 flex justify-start items-start gap-6',
+    },
+    div(
+    {
+      class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
+    },
+    
+  )
+  
+  );
+
+  const recentOrderWrapper = div(
+    {
+      class: 'self-stretch w-[480px] p-6 bg-white border border-solid border-gray-300 inline-flex flex-col justify-start items-center gap-4',
     },
   );
+  recentOrder.append(recentOrderWrapper);
+  
+  
   const recentOrderDiv = div(
     {
       class: 'self-stretch inline-flex flex-col justify-start gap-5',
@@ -189,7 +207,9 @@ const recentOrders = async () => {
       class: 'justify-start text-gray-900 text-[20px] font-medium leading-7',
     }, 'Recent Orders'),
   );
-  recentOrder.append(recentOrderDiv);
+  recentOrderWrapper.append(recentOrderDiv);
+
+
   // orderDetailResponse.length === 0 ?
   //  recentOrderDiv.append(noOrdersDiv) :
   // topRecentOrder.map((element) => {
@@ -273,11 +293,33 @@ const recentOrders = async () => {
     return topRequestedQuoteDiv;
   };
 
-  const recentQuotes = div(
+
+
+const recentQuotes = 
+    div(
     {
-      class: 'self-stretch w-[480px] p-6 bg-white outline outline-1 outline-offset-[-1px] outline-gray-300 inline-flex flex-col justify-start items-center gap-4',
+      class: 'flex-1 flex justify-start items-start gap-6',
+    },
+    div(
+    {
+      class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
+    },
+    
+  )
+  
+  );
+
+  const recentQuotesWrapper = div(
+    {
+      class: 'self-stretch w-[480px] p-6 bg-white border border-solid border-gray-300 inline-flex flex-col justify-start items-center gap-4',
     },
   );
+  recentQuotes.append(recentQuotesWrapper);
+
+
+
+
+
   const recentQuoteDiv = div(
     {
       class: 'self-stretch pr-8 inline-flex flex-col justify-start gap-5',
@@ -286,7 +328,7 @@ const recentOrders = async () => {
       class: 'justify-start text-gray-900 text-[20px] font-medium leading-7',
     }, 'Recent Requested Quotes'),
   );
-  recentQuotes.append(recentQuoteDiv);
+  recentQuotesWrapper.append(recentQuoteDiv);
 
   // requestedQuotesResponse.length === 0
   //   ? recentQuoteDiv.append(noRequestedQuotes)

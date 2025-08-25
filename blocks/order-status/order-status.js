@@ -49,7 +49,7 @@ const orderDetails = async () => {
 };
 
 export const dynamicTableContent = async (orderDetailsResponse) => {
-  const tableRow = (order, po, status, creationDate, orderTotal) => {
+  const tableRow = (orderId, order, po, status, creationDate, orderTotal) => {
     const date = new Date(creationDate);
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
     const day = String(date.getDate()).padStart(2, '0');
@@ -89,7 +89,7 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
     const row = a(
       {
         class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-        href: `/us/en/e-buy/orderdetails?orderId=${order}`,
+        href: `/us/en/e-buy/orderdetails?orderId=${orderId}`,
       },
       div(
         {
@@ -162,12 +162,13 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
     (element) => {
       const order = {
         order: element.documentNumber,
+        orderId: element.id,
         po: '',
         status: element.status,
         creationDate: element.creationDate,
         orderTotal: element.totals.grandTotal.gross.value,
       };
-      return tableRow(order.order, order.po, order.status, order.creationDate, order.orderTotal);
+      return tableRow(order.orderId, order.order, order.po, order.status, order.creationDate, order.orderTotal);
     },
   );
 
@@ -415,7 +416,7 @@ export default async function decorate(block) {
   const orderTable = table(
     {
       class:
-        'w-full border border-gray-200 h-[500px] inline-flex flex-col justify-start items-start max-h-[642px] pr-[10px] overflow-y-auto gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
+        'w-full border border-gray-200 h-[500px] inline-flex flex-col justify-start items-start max-h-[642px] pr-[10px] overflow-x-hidden overflow-y-auto gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
       id: 'orderTable',
     },
     tr(
@@ -485,7 +486,7 @@ export default async function decorate(block) {
   // paginationWrapper.append(pagination);
   // orderWrapper.append(paginationWrapper);
   const orderStatusPageWrapper = div({
-    class: 'inline-flex flex-col gap-4',
+    class: 'w-[80%] inline-flex flex-col gap-4',
   });
   orderStatusPageWrapper.append(orderStatusTitle);
   orderStatusPageWrapper.append(orderWrapper);

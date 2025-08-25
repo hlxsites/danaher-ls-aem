@@ -3178,8 +3178,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 3.5rem;
 }
 
-.w-\[3rem\] {
-  width: 3rem;
+.w-\[7rem\] {
+  width: 7rem;
 }
 
 .w-\[80px\] {
@@ -3192,10 +3192,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[7rem\] {
-  width: 7rem;
 }
 
 .min-w-\[320px\] {

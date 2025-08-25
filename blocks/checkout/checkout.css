@@ -300,12 +300,12 @@
   width: 30%
 }
 
-.checkout :is(.w-\[3rem\]) {
-  width: 3rem
-}
-
 .checkout :is(.w-\[70\%\]) {
   width: 70%
+}
+
+.checkout :is(.w-\[7rem\]) {
+  width: 7rem
 }
 
 .checkout :is(.w-\[80px\]) {
@@ -314,10 +314,6 @@
 
 .checkout :is(.w-full) {
   width: 100%
-}
-
-.checkout :is(.w-\[7rem\]) {
-  width: 7rem
 }
 
 .checkout :is(.min-w-\[320px\]) {

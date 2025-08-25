@@ -459,16 +459,16 @@
   width: 331px
 }
 
-.cartlanding-wrapper :is(.w-\[3rem\]) {
-  width: 3rem
-}
-
 .cartlanding-wrapper :is(.w-\[40rem\]) {
   width: 40rem
 }
 
-.cartlanding-wrapper :is(.w-\[737px\]) {
-  width: 737px
+.cartlanding-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
+.cartlanding-wrapper :is(.w-\[7rem\]) {
+  width: 7rem
 }
 
 .cartlanding-wrapper :is(.w-\[80px\]) {
@@ -477,14 +477,6 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
-}
-
-.cartlanding-wrapper :is(.w-\[7rem\]) {
-  width: 7rem
-}
-
-.cartlanding-wrapper :is(.w-\[70\%\]) {
-  width: 70%
 }
 
 .cartlanding-wrapper :is(.min-w-\[320px\]) {

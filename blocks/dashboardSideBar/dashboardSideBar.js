@@ -76,7 +76,7 @@ export default async function dashboardSidebar() {
   const sidebar = div(
     {
       id: 'dashboardSidebar',
-      class: 'bg-white gap-5 w-full md:w-[20%] flex flex-col items-center border-l border-r border-b border-t border-gray-300',
+      class: 'bg-white gap-5 w-full md:w-[25%] flex flex-col items-center border-l border-r border-b border-t border-gray-300',
     },
     div(
       { class: 'w-full px-6 flex flex-col items-center gap-5' },
@@ -113,7 +113,7 @@ export default async function dashboardSidebar() {
       ),
     ),
     div({
-      class: 'w-full bg-gray-100 h-[2px]',
+      class: 'w-full h-[2px]',
     }),
     div(
       { class: 'w-full px-6 flex flex-col' },
@@ -146,7 +146,11 @@ export default async function dashboardSidebar() {
   sidepanelList.map((item) => listDiv.append(sidePanelDiv(item.name, item.icon)));
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
-  const targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  console.log("targetedPage", targetedPage);
+  if(targetedPage === "Orderdetails"){
+    targetedPage = "Orderstatus"
+  }
   //   listDiv.addEventListener('click', (event) => {
   const allItemsInDiv = listDiv.querySelectorAll('.sidePanel-content');
   allItemsInDiv.forEach((itemsInDiv) => {

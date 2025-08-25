@@ -152,6 +152,26 @@
   width: 100%
 }
 
+.order-status-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
+.order-status-wrapper :is(.w-\[75\%\]) {
+  width: 75%
+}
+
+.order-status-wrapper :is(.w-\[85\%\]) {
+  width: 85%
+}
+
+.order-status-wrapper :is(.w-\[05\%\]) {
+  width: 05%
+}
+
+.order-status-wrapper :is(.w-\[80\%\]) {
+  width: 80%
+}
+
 .order-status-wrapper :is(.min-w-\[415px\]) {
   min-width: 415px
 }
@@ -236,6 +256,10 @@
 
 .order-status-wrapper :is(.overflow-y-auto) {
   overflow-y: auto
+}
+
+.order-status-wrapper :is(.overflow-x-hidden) {
+  overflow-x: hidden
 }
 
 .order-status-wrapper :is(.rounded) {
@@ -599,6 +623,14 @@
 @media (min-width: 768px) {
   .order-status-wrapper :is(.md\:w-\[20\%\]) {
     width: 20%
+  }
+
+  .order-status-wrapper :is(.md\:w-\[30\%\]) {
+    width: 30%
+  }
+
+  .order-status-wrapper :is(.md\:w-\[25\%\]) {
+    width: 25%
   }
 
   .order-status-wrapper :is(.md\:flex-row) {

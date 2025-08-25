@@ -133,7 +133,7 @@ export default async function decorate(block) {
     ),
   );
   const contentWrapper = div({
-    class: 'flex flex-col gap-[20px] w-[980px]',
+    class: 'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
   });
   // const orderBlock = await orderStatus();
   const order = await recentOrders();
