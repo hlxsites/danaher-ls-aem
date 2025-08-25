@@ -43,7 +43,11 @@ export const resourceResultList = buildResultList(resourceEngine, {
       'sku',
       'description',
       'opco',
-      'documenttype',
+      'documenttype',      
+      'contenttype',
+      'date',
+      'sysdate',
+      'filetype',
     ],
   },
 });
