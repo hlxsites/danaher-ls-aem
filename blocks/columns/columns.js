@@ -789,9 +789,10 @@ export default function decorate(block) {
   });
 
   // Form Load
-  block.querySelectorAll('.form');
-  if (block.classList.contains('thirtyseventy')) {
-    if (cols.length > 1 && !cols[1].querySelector('form')) {
+  if (cols.length > 1) {
+    const formBlock = cols[1].querySelector('.form');
+    const hasFormElement = cols[1].querySelector('form');
+    if (formBlock && !hasFormElement) {
       loadSFDCForm(cols[1]);
     }
   }
