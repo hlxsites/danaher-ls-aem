@@ -194,7 +194,8 @@
   {
     "id": "pdp-page-tabs",
     "components": [
-      "pdp-tabs-item"
+      "pdp-tabs-item",
+      "columns"
     ]
   },
   {

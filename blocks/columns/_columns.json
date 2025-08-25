@@ -3,6 +3,7 @@
     {
       "title": "Columns",
       "id": "columns",
+      "container": true,
       "plugins": {
         "xwalk": {
           "page": {

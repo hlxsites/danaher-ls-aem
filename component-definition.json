@@ -252,6 +252,7 @@
         {
           "title": "Columns",
           "id": "columns",
+          "container": true,
           "plugins": {
             "xwalk": {
               "page": {
@@ -602,6 +603,7 @@
         {
           "title": "Pdp Page Tabs",
           "id": "pdp-page-tabs",
+          "container": true,
           "plugins": {
             "xwalk": {
               "page": {
