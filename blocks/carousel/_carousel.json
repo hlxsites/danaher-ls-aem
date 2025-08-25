@@ -51,7 +51,7 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-        "component": "aem-content",
+        "component": "link",
         "name": "carousel_link",
         "label": "Left CTA 1 Link"
         },
