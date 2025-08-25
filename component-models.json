@@ -731,22 +731,22 @@
       {
         "component": "aem-content",
         "name": "link",
-        "label": "CTA 1 Link"
+        "label": "Link"
       },
       {
         "component": "text",
         "name": "linkText",
-        "label": "CTA 1 Text"
+        "label": "Text"
       },
       {
         "component": "text",
         "name": "linkTitle",
-        "label": "CTA 1 Title"
+        "label": "Title"
       },
       {
         "component": "select",
         "name": "linkType",
-        "label": "CTA 1 Type",
+        "label": "Type",
         "options": [
           {
             "name": "default",
