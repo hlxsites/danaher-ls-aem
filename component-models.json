@@ -724,7 +724,7 @@
       },
       {
         "component": "text",
-        "name": "leftProductInfo",
+        "name": "carousel_ProductInfo",
         "label": "Left Side Product Info",
         "description": "Descriptive paragraph below heading"
       },
