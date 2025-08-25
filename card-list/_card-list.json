@@ -1,0 +1,78 @@
+{
+  "definitions": [
+    {
+      "title": "Card-List",
+      "id": "card-list",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Card-List",
+              "model": "card-list"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "card-list",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tagName",
+          "value": "topics",
+          "label": "Tag Category (e.g. topics, solutions)"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "articleType",
+          "label": "Article Type",
+          "options": [
+            { "name": "Default (Articles)", "value": "" },
+            { "name": "Application", "value": "application" },
+            { "name": "Info", "value": "info" },
+            { "name": "Library", "value": "library" },
+            { "name": "New Lab", "value": "new-lab" }
+          ]
+        },
+        {
+          "component": "checkbox",
+          "valueType": "boolean",
+          "name": "pagination",
+          "label": "Enable Pagination",
+          "value": true
+        },
+        {
+          "component": "checkbox",
+          "valueType": "boolean",
+          "name": "filters",
+          "label": "Enable Filters",
+          "value": true
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "sourceIndex",
+          "label": "Custom Index Path",
+          "value": "/us/en/article-index.json"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "card-list",
+      "components": [
+        "articleCard",
+        "applicationCard",
+        "libraryCard",
+        "labCard"
+      ]
+    }
+  ]
+}

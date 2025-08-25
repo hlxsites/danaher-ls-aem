@@ -1,0 +1,108 @@
+{
+  "definitions": [
+    {
+      "title": "Columns",
+      "id": "columns",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "class": { "$ref": "classes" },
+              "rows": { "$ref": "rows" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Column",
+      "id": "column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/column/v1/column",
+            "template": {
+              "blocks": { "$ref": "blocks" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Block",
+      "id": "block",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {}
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns",
+      "fields": [
+        {
+          "component": "select",
+          "name": "rows",
+          "label": "Number of Columns",
+          "valueType": "string",
+          "default": "2",
+          "options": [
+            { "name": "2 Columns", "value": "2" },
+            { "name": "3 Columns", "value": "3" }
+          ]
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Select Ratio (only for 2 columns)",
+          "valueType": "string",
+          "default": "fiftyfifty",
+          "options": [
+            { "name": "70/30 Split", "value": "seventythirty" },
+            { "name": "30/70 Split", "value": "thirtyseventy" }
+          ],
+          "condition": {
+            "field": "rows",
+            "equals": "2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "column",
+      "fields": [
+        {
+          "component": "blocks",
+          "name": "blocks",
+          "label": "Blocks",
+          "valueType": "array"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns",
+      "components": ["column"]
+    },
+    {
+      "id": "column",
+      "components": [
+        "text",
+        "image",
+        "title",
+        "button",
+        "article-info",
+        "embed",
+        "form",
+        "mini-teasers"
+      ]
+    }
+  ]
+}
