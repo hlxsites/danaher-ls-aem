@@ -86,22 +86,22 @@
         },
         {
           "component": "aem-content",
-          "name": "cta_2_link",
+          "name": "carousel_2_link",
           "label": "Link2"
         },
         {
           "component": "text",
-          "name": "cta_2_linkText",
+          "name": "carousel_2_linkText",
           "label": "Text2"
         },
         {
           "component": "text",
-          "name": "cta_2_linkTitle",
+          "name": "carousel_2_linkTitle",
           "label": "Title2"
         },
         {
           "component": "select",
-          "name": "cta_2_linkType",
+          "name": "carousel_2_linkType",
           "label": "Type2",
           "options": [
             {
