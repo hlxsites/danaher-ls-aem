@@ -30,7 +30,7 @@
       ]
     },
     {
-      "component": "group",
+      "component": "blocks",
       "name": "teaser1",
       "label": "Teaser 1",
       "fields": [
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "component": "group",
+      "component": "blocks",
       "name": "teaser2",
       "label": "Teaser 2",
       "fields": [
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "component": "group",
+      "component": "blocks",
       "name": "teaser3",
       "label": "Teaser 3",
       "fields": [
