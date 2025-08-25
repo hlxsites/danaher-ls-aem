@@ -51,23 +51,23 @@
           "description": "Descriptive paragraph below heading"
         },
         {
-        "component": "aem-content",
-        "name": "carousel_link",
-        "label": "Left CTA 1 Link"
+          "component": "aem-content",
+          "name": "leftCarouselLink",
+          "label": "Left CTA 1 Link"
         },
         {
           "component": "text",
-          "name": "carousel_text",
+          "name": "leftCarouselLinkLabel",
           "label": "Left CTA 1 Text"
         },
         {
           "component": "text",
-          "name": "carousel_link_title",
+          "name": "leftCarouselTitle",
           "label": "Left CTA 1 Title"
         },
         {
           "component": "select",
-          "name": "carousel_link_titleType",
+          "name": "leftCarouselTitleType",
           "label": "Type",
           "options": [
           {
