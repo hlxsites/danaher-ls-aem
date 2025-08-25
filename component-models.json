@@ -1162,9 +1162,8 @@
       },
       {
         "component": "group",
-        "name": "teasers",
-        "label": "Mini Teasers",
-        "multi": true,
+        "name": "teaser1",
+        "label": "Teaser 1",
         "fields": [
           {
             "component": "text",
@@ -1172,35 +1171,32 @@
             "label": "Heading"
           },
           {
-            "component": "select",
-            "name": "headingType",
-            "label": "Heading Type",
-            "options": [
-              {
-                "name": "h1",
-                "value": "h1"
-              },
-              {
-                "name": "h2",
-                "value": "h2"
-              },
-              {
-                "name": "h3",
-                "value": "h3"
-              },
-              {
-                "name": "h4",
-                "value": "h4"
-              },
-              {
-                "name": "h5",
-                "value": "h5"
-              },
-              {
-                "name": "h6",
-                "value": "h6"
-              }
-            ]
+            "component": "text",
+            "name": "description",
+            "label": "Description"
+          },
+          {
+            "component": "reference",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "imageAlt",
+            "label": "Alt Text"
+          }
+        ]
+      },
+      {
+        "component": "group",
+        "name": "teaser2",
+        "label": "Teaser 2",
+        "fields": [
+          {
+            "component": "text",
+            "name": "heading",
+            "label": "Heading"
           },
           {
             "component": "text",
@@ -1208,35 +1204,60 @@
             "label": "Description"
           },
           {
-            "component": "select",
-            "name": "descriptionType",
-            "label": "Description Type",
-            "options": [
-              {
-                "name": "h1",
-                "value": "h1"
-              },
-              {
-                "name": "h2",
-                "value": "h2"
-              },
-              {
-                "name": "h3",
-                "value": "h3"
-              },
-              {
-                "name": "h4",
-                "value": "h4"
-              },
-              {
-                "name": "h5",
-                "value": "h5"
-              },
-              {
-                "name": "h6",
-                "value": "h6"
-              }
-            ]
+            "component": "reference",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "imageAlt",
+            "label": "Alt Text"
+          }
+        ]
+      },
+      {
+        "component": "group",
+        "name": "teaser3",
+        "label": "Teaser 3",
+        "fields": [
+          {
+            "component": "text",
+            "name": "heading",
+            "label": "Heading"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "label": "Description"
+          },
+          {
+            "component": "reference",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "imageAlt",
+            "label": "Alt Text"
+          }
+        ]
+      },
+      {
+        "component": "group",
+        "name": "teaser4",
+        "label": "Teaser 4 (optional)",
+        "fields": [
+          {
+            "component": "text",
+            "name": "heading",
+            "label": "Heading"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "label": "Description"
           },
           {
             "component": "reference",
