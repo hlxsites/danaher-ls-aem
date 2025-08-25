@@ -2,6 +2,7 @@ import {
   a, div, img, object,
 } from '../../scripts/dom-builder.js';
 import { loadScript } from '../../scripts/lib-franklin.js';
+import { extractJsonFromHtml } from '../../scripts/html-to-json-parser.js';
 
 export default async function decorate(block) {
   block.id = 'citations-tab';
@@ -11,8 +12,21 @@ export default async function decorate(block) {
   // const id = citationsLinkEl.getAttribute('title');
   // //https://www.bioz.com/v_widget_6_0/3230/5080337/
   // const data = citationsLinkEl.getAttribute('href');
-  const id = 'wobj-3230-5080337-q';
-  const data = 'https://www.bioz.com/v_widget_6_0/3230/5080337/';
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  const isPIM = document.querySelector('#authored-citations')?.children[0].textContent;
+  let citationsObj = response?.raw?.citations;
+  const elem = document.querySelector('#authored-citations')?.children[3];
+  let parsedData;
+  if (elem) {
+    parsedData = extractJsonFromHtml(elem);
+  }
+  if (isPIM !== undefined && isPIM === 'only-authored') {
+    citationsObj = parsedData;
+  }
+  // const id = 'wobj-3230-5080337-q';
+  // const data = 'https://www.bioz.com/v_widget_6_0/3230/5080337/';
+  const { id } = citationsObj;
+  const { data } = citationsObj;
   block.innerHTML = '';
   block.append(object({
     id, type: 'text/html', data, class: 'w-full h-48',

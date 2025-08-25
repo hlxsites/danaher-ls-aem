@@ -1,20 +1,23 @@
-
-/**
- * Parse the html in to a JSON object.
- * @param {Element} rootElement The HTML conten
- */
 export function extractJsonFromHtml(rootElement) {
   let rawText = rootElement.textContent || '';
   rawText = rawText.replace(/\u00a0/g, ' ').trim();
 
-  const startIdx = rawText.indexOf('[');
-  const endIdx = rawText.lastIndexOf(']');
+  // Look for array or object root
+  const startArr = rawText.indexOf('[');
+  const endArr = rawText.lastIndexOf(']');
+  const startObj = rawText.indexOf('{');
+  const endObj = rawText.lastIndexOf('}');
 
-  if (startIdx === -1 || endIdx === -1) {
+  let jsonSnippet = null;
+
+  // Prefer array if present, otherwise object
+  if (startArr !== -1 && endArr !== -1) {
+    jsonSnippet = rawText.slice(startArr, endArr + 1);
+  } else if (startObj !== -1 && endObj !== -1) {
+    jsonSnippet = rawText.slice(startObj, endObj + 1);
+  } else {
     return null;
   }
-
-  const jsonSnippet = rawText.slice(startIdx, endIdx + 1);
 
   try {
     return JSON.parse(jsonSnippet);

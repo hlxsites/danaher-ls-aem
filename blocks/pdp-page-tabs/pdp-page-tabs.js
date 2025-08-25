@@ -148,6 +148,7 @@ export default async function decorate(block) {
     products: { label: 'Products', available: response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0 },
     resources: { label: 'Resources', available: !!response?.raw?.numresources },
     parts: { label: 'Product Parts List', available: !!response?.raw?.bundlepreviewjson?.trim() },
+    citations: { label: 'Citations', available: true },
   };
 
   // Build tabsList → pick authored label if present, static fallback otherwise
