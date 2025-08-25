@@ -9,12 +9,13 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getBasketDetails, getPaymentMethods, silentNavigation, validateBasket } from '../../scripts/cart-checkout-utils.js';
 import {
-  loadStripe, getPaymentIntent, 
+  loadStripe,
   postPaymentIntent, getSavedCards,
   setGetCardAsDefault,
   setUseCard,
   postSetupIntent,
   loadStripeScript,
+  addCardToOrder,
 } from '../../scripts/stripe_utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
@@ -49,11 +50,13 @@ function createCardItem(item, defaultCard) {
 
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
-    sessionStorage.setItem('useStripeCardId', itemObject.itemId);
     sessionStorage.setItem('selectedStripeMethod', 'savedCard');
     defaultPaymentCheckboxText = 'Default Payment';
   }
-
+  let useCardLabel = 'Use Card';
+  if (useCard === itemObject.itemId) {
+    useCardLabel = 'Selected Card';
+  }
   const itemCard = div(
     {
       class: `bg-checkout payment-card-wrapper border p-6 flex flex-col gap-6 ${useCard === itemObject.itemId ? 'border-danaherpurple-500' : ''}`,
@@ -98,7 +101,7 @@ function createCardItem(item, defaultCard) {
           class: 'stripe-card-use-button cursor-pointer text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 m-0 hover:bg-danaherpurple-500',
           id: itemObject?.itemId,
         },
-        useCard === itemObject.itemId ? 'Selected Card' : 'Use Card',
+        useCardLabel,
       ),
     ),
     div(
@@ -173,7 +176,7 @@ const paymentModule = async () => {
 
     // get available payment methods
     const allPaymentMethods = await getPaymentMethods();
-    
+
     if (allPaymentMethods?.status !== 'success') throw new Error('No Payment methods Available.');
 
     // get saved stripe cards
@@ -227,7 +230,7 @@ const paymentModule = async () => {
 
     const setPaymentIntent = await postSetupIntent();
     if (setPaymentIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
-    
+
     defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
     if (checkSavedStripeCards?.length > 0) {
       checkSavedStripeCards?.forEach((item) => {
@@ -399,7 +402,7 @@ const paymentModule = async () => {
         getPI = getSavedStripeCardsList;
         if (getPI?.status === 'success') {
           postPI = await postPaymentIntent();
-          
+
           if (postPI?.status === 'success') {
             const postPIData = postPI?.data || '';
             const clientSecret = postPIData?.client_secret || '';
@@ -441,11 +444,12 @@ const paymentModule = async () => {
                   },
                   billingDetails: {
                     address: 'auto',
+                    name: 'auto',
                   },
                 },
               };
-              
-              stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });              
+
+              stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
               if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
                 // mount address elements
                 addressElements = stripeElements.create('address', addressOptions);
@@ -624,7 +628,7 @@ const paymentModule = async () => {
                 country: '',
               },
             },
-          };          
+          };
           addressElements?.destroy();
           addressElements = stripeElements.create('address', addressOptions);
           addressElements.mount('#newStripeCardAddressWrapper');
@@ -643,6 +647,8 @@ const paymentModule = async () => {
 
     // show new cards wrapper when clicked add new card
     savedStripeCardsHeader?.querySelector('#addNewStripeCard')?.addEventListener('click', () => {
+      console.log(' selectedStripeMethod : ');
+      
       sessionStorage.setItem('selectedStripeMethod', 'newCard');
       const newAddressCheckbox = document.querySelector('#newAddress');
       if (newAddressCheckbox) newAddressCheckbox.checked = true;
@@ -707,13 +713,26 @@ const paymentModule = async () => {
       try {
         const allPaymentCards = savedStripeCardsList.querySelectorAll('.payment-card-wrapper');
         const currentTarget = e.target;
-
+        if (currentTarget.textContent === 'Selected Card') return false;
         if (currentTarget?.classList.contains('stripe-card-use-button')) {
           showPreLoader();
           const pMId = currentTarget.id;
           if (pMId) {
             const settingUseCard = await setUseCard(pMId);
-            if (settingUseCard?.status !== 'success') throw new Error('Error processing request');
+
+            if (settingUseCard?.status !== 'success') {
+              const selectedData = {
+                name: 'SelectedPM',
+                value: JSON.stringify({
+                  id: pMId,
+                  type: 'Card',
+                }),
+                type: 'String',
+              };
+              const updateCard = await addCardToOrder(selectedData);
+              if (updateCard?.status !== 'status') throw new Error('Error processing request');
+            }
+            sessionStorage.setItem('useStripeCardId', pMId);
 
             allPaymentCards.forEach((method) => {
               if (method?.classList.contains('border-danaherpurple-500')) {

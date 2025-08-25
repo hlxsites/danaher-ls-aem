@@ -356,6 +356,7 @@ click use address button to set the address as default for current order
             const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
             const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
             const shipAsBillInput = getShipAsBillBox?.querySelector('input');
+            
             if (isBillingMismatch || isShippingConflict) {
               getShipAsBillBox?.classList.add('pointer-events-none');
               if (shipAsBillCheck?.classList.contains('hidden')) {
@@ -1235,7 +1236,7 @@ export const shippingAddressModule = async () => {
      */
     if (
       getUseAddressesResponse?.status === 'success'
-      && useInvoiceToAddress
+      && useShipToAddress
     ) {
       const showDefaultShippingAddress = defaultAddress(
         getUseAddressesResponse.data?.commonShipToAddress,

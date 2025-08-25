@@ -44,7 +44,6 @@ import {
   assignPaymentInstrument,
   createPaymentInstrument,
   getPaymentIntent,
-  loadStripe,
   addCardToOrder,
   updateCardForOrder,
   postPaymentIntent,
@@ -399,6 +398,9 @@ export const submitOrder = async (basketId, paymentMethod) => {
       });
       response = await postApiData(url, data, defaultHeader);
     }
+    console.log('Payment method: ', paymentMethod);
+    console.log('Payment basketId: ', basketId);
+
     if (paymentMethod === 'stripe') {
       const defaultHeader = new Headers({
         'Content-Type': 'Application/json',
@@ -429,13 +431,13 @@ export const submitOrder = async (basketId, paymentMethod) => {
       );
       if (!userOrderDetails) {
         const orderIdArray = [];
-        orderIdArray.push(response.data.data.id);
+        orderIdArray.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(orderIdArray),
         );
       } else {
-        userOrderDetails.push(response.data.data.id);
+        userOrderDetails.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(userOrderDetails),
@@ -443,10 +445,7 @@ export const submitOrder = async (basketId, paymentMethod) => {
       }
       return response;
     }
-    return {
-      data: response,
-      status: 'error',
-    };
+    throw new Error('Error Submitting Order');
   } catch (error) {
     return {
       data: error.message,
@@ -1405,7 +1404,7 @@ export const createPoNumber = async (invoiceNumber) => {
 *
 *
 *
- */
+*/
 
 export const updatePoNumber = async (invoiceNumber) => {
   const authenticationToken = await getAuthenticationToken();
@@ -1623,10 +1622,20 @@ export const changeStep = async (step) => {
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         showPreLoader();
+
+        /*
+        *
+        :::::::::::
+        Getting Stripe Instance
+        ::::::::::
+        *
+        */
         const stripe = getStripeInstance();
         const paymentMethod = 'STRIPE_PAYMENT';
 
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
+
+        const useStripeCardId = sessionStorage.getItem('useStripeCardId');
 
         /*
         *
@@ -1636,62 +1645,72 @@ export const changeStep = async (step) => {
           :::::::::
         *
         */
-        if (!sessionStorage.getItem('useStripeCardId') && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
         const elements = getStripeElements();
-        // console.log('elements: ', elements);
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          // Post Payment Setup intent
-          settingIntent = await postSetupIntent();
-          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
-          // console.log('Posting Setup Intent...', settingIntent);
-          // const clientSecret = settingIntent?.data?.client_secret;
-          // // confirm Setup Intent
-          // const confirmSetup = await stripe.confirmSetup({
-          //   elements,
-          //   confirmParams: {
-          //     return_url: `${window.location.origin}/us/en/e-buy/payment`,
-          //   },
-          //   redirect: 'if_required',
-          // });
-          // console.log('Confirm Setup......', confirmSetup);
-
-          // // if stripe setup confirmed, move to confirm payment
-          // if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error(confirmSetup?.error?.message);
-        }
-        // Post Payment Intent
-        const postingIntent = await postPaymentIntent();
-        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
-        // console.log('Post Payment Intent...', postingIntent);
-
-
-        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          // Get Payment Intent
+        /*
+        *
+        :::::::::::
+        Get Payment Intent
+        ::::::::::
+        *
+        */
           const getPaymentIntentData = await getPaymentIntent();
           if (getPaymentIntentData?.status !== 'success') throw new Error('Error Processing Request');
           // console.log('Getting Payment Intent...', getPaymentIntentData);
         }
 
-        // Call create-instrument API
+        /*
+        *
+        :::::::::::
+        Post Payment Intent
+        ::::::::::
+        *
+        */
+        const postingIntent = await postPaymentIntent();
+        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+        console.log('Post Payment Intent...', postingIntent);
+
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+        /*
+        *
+        :::::::::::
+        Post Setup Intent
+        ::::::::::
+        *
+        */
+          settingIntent = await postSetupIntent();
+          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        }
+        /*
+        *
+        :::::::::::
+        Creating Instrument
+        ::::::::::
+        *
+        */
         // eslint-disable-next-line max-len
         const createInstrument = await createPaymentInstrument(paymentMethod, postingIntent?.data?.id, postingIntent?.data?.client_secret);
         if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
-
+        console.log('Creating Instrument...', createInstrument);
+        
         const instrumentId = createInstrument?.data?.data?.id;
         if (!instrumentId) throw new Error('Instrument ID missing.');
 
-        // Call assign instrument API
+        /*
+        *
+        :::::::::::
+        Assigning Instrument
+        ::::::::::
+        *
+        */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
         if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
-
-        // Call get payment-intent API
-        const getPI = await getPaymentIntent();
-
-        if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        // console.log(' Get Payment Intent...', getPI);
+        console.log('Assigning Instrument...', assignInstrument);
 
         // parameters to validate basket for payment
         const validateBasketData = {
@@ -1700,28 +1719,85 @@ export const changeStep = async (step) => {
             'Payment',
           ],
         };
-        // validating basket for payment
+        /*
+        *
+        :::::::::::
+        validating basket
+        ::::::::::
+        *
+        */
         const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
-        console.log('Basket Validated for Pyament...');
+        console.log('Basket Validated for Pyament...', validateBasketData);
 
-        // confirm payment :::: final step
-        // validating confirm-payment status from stripe
-        const confirmPayment = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: `${window.location.origin}/payment`,
-          },
-          redirect: 'if_required',
-        });
+        let confirmBillingDetails = '';
+        let confirmPM = '';
 
+        /*
+        *
+        :::::::::::
+        confirm payment method :::: for saved cards
+        ::::::::::
+        *
+        */
+        if (selectedStripeMethod === 'savedCard') {
+          const getPreConfirmedPI = await getPaymentIntent();
+          if (getPreConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+          // eslint-disable-next-line max-len
+          const getPreConfirmedPIData = getPreConfirmedPI?.data?.data?.filter((dat) => dat?.id === useStripeCardId);
+          if (!getPreConfirmedPIData) throw new Error('Payment intent ID missing.');
+          confirmBillingDetails = getPreConfirmedPIData[0]?.billing_details;
+          confirmPM = getPreConfirmedPIData[0]?.id;
+          console.log('Pre Confirm Payment Intent...', confirmBillingDetails);
+          console.log('Pre Confirm Payment Intentdata getPreConfirmedPIData...', getPreConfirmedPIData);
+        }
+
+        let confirmPayment = '';
+        if (selectedStripeMethod === 'savedCard') {
+        /*
+        *
+        :::::::::::
+        confirm payment :::: final step for existing card
+        ::::::::::
+        *
+        */
+          confirmPayment = await stripe.confirmPayment({
+            clientSecret: postingIntent?.data?.client_secret,
+            confirmParams: {
+              return_url: `${window.location.origin}/payment`,
+              payment_method: confirmPM,
+            },
+            redirect: 'if_required',
+          });
+        }
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+        /*
+        *
+        :::::::::::
+        confirm payment :::: final step
+        ::::::::::
+        *
+        */
+          confirmPayment = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              return_url: `${window.location.origin}/payment`,
+            },
+            redirect: 'if_required',
+          });
+        }
+        console.log('Confirming Payment...', confirmPayment);
         if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
 
-        console.log('Confirming Payment...');
-
-        // validating confirm-payment status from stripe
+        /*
+        *
+        :::::::::::
+        validating confirm-payment status from stripe
+        ::::::::::
+        *
+        */
         const status = confirmPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
@@ -1729,8 +1805,8 @@ export const changeStep = async (step) => {
         const paymentMethodId = confirmPayment?.paymentIntent?.payment_method;
         // console.log(' Retrieve this Payment Method: ', paymentMethodId);
         // Call get payment-intent API
-        const getConfirmedPI = await getPaymentIntent();
 
+        const getConfirmedPI = await getPaymentIntent();
         if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
         // console.log(' Get getConfirmedPI Payment Intent...', getConfirmedPI);
         // addressElement = elements.getElement('address')
@@ -1742,37 +1818,45 @@ export const changeStep = async (step) => {
         if (getConfirmedPID[0]?.billing_details?.email) {
           delete getConfirmedPID[0]?.billing_details?.email;
         }
-        //console.log('gPIID : ', getConfirmedPID);
+        console.log('gPIID : ', getConfirmedPID[0]);
 
         // add selected card to order
-        const selectedData = {
+        const updatingCardData = {
           name: 'SelectedCard',
           value: JSON.stringify(getConfirmedPID[0]),
           type: 'String',
         };
-        const addingCardToOrder = await addCardToOrder(selectedData);
-        // console.log('Adding Card to Order...');
+        const addingCardData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const updateCardToOrder = await updateCardForOrder(updatingCardData);
 
-        if (addingCardToOrder?.status !== 'success') {
-          const updatingCardForOrder = await updateCardForOrder(selectedData);
-          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        if (updateCardToOrder?.status !== 'success') {
+          const addingCardForOrder = await addCardToOrder(addingCardData);
+          if (addingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
         }
 
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
         console.log('Submitting Order...');
-
+        return false;
         // payment confirmed from Stripe, now submitting order
 
         const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
+        console.log('Order Submitted...', submittingOrder);
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        sessionStorage.removeItem('useAddress');
+        sessionStorage.removeItem('useStripeCardId');
+        sessionStorage.removeItem('selectedStripeMethod');
 
-        // window.location.href = `${submittedOrderUrl}${orderId}`;
+        window.location.href = `${submittedOrderUrl}${orderId}`;
 
         return true;
       }

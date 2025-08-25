@@ -793,6 +793,10 @@
   padding-top: 1rem
 }
 
+.checkout :is(.pr-4) {
+  padding-right: 1rem
+}
+
 .checkout :is(.text-left) {
   text-align: left
 }
