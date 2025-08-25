@@ -44,13 +44,13 @@ import {
   assignPaymentInstrument,
   createPaymentInstrument,
   getPaymentIntent,
-  loadStripe,
   addCardToOrder,
   updateCardForOrder,
   postPaymentIntent,
-  setupPaymentIntent,
+  postSetupIntent,
 } from './stripe_utils.js';
 import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
+import { getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -145,7 +145,7 @@ export const checkoutSkeleton = () => {
   const checkoutSkeletonwrapper = div(
     {
       id: 'checkoutSkeleton',
-      class: 'animate-pulse space-y-6 p-6 w-full mx-auto',
+      class: 'animate-pulse space-y-6 bg-white p-6 w-full mx-auto',
     },
     div(
       { class: 'h-8 bg-gray-300 rounded w-1/3' },
@@ -361,7 +361,11 @@ export const validateBasket = async (validateData) => {
   const url = `${baseURL}/baskets/current/validations`;
   const data = JSON.stringify(validateData);
   try {
-    return await postApiData(url, data, defaultHeader);
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.data?.data?.results?.valid === false) {
+      return { status: 'error', data: {} };
+    }
+    return response;
   } catch (error) {
     return {
       data: error.message,
@@ -394,6 +398,9 @@ export const submitOrder = async (basketId, paymentMethod) => {
       });
       response = await postApiData(url, data, defaultHeader);
     }
+    console.log('Payment method: ', paymentMethod);
+    console.log('Payment basketId: ', basketId);
+
     if (paymentMethod === 'stripe') {
       const defaultHeader = new Headers({
         'Content-Type': 'Application/json',
@@ -424,13 +431,13 @@ export const submitOrder = async (basketId, paymentMethod) => {
       );
       if (!userOrderDetails) {
         const orderIdArray = [];
-        orderIdArray.push(response.data.data.id);
+        orderIdArray.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(orderIdArray),
         );
       } else {
-        userOrderDetails.push(response.data.data.id);
+        userOrderDetails.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(userOrderDetails),
@@ -438,10 +445,7 @@ export const submitOrder = async (basketId, paymentMethod) => {
       }
       return response;
     }
-    return {
-      data: response,
-      status: 'error',
-    };
+    throw new Error('Error Submitting Order');
   } catch (error) {
     return {
       data: error.message,
@@ -1400,7 +1404,7 @@ export const createPoNumber = async (invoiceNumber) => {
 *
 *
 *
- */
+*/
 
 export const updatePoNumber = async (invoiceNumber) => {
   const authenticationToken = await getAuthenticationToken();
@@ -1435,7 +1439,7 @@ export const updatePoNumber = async (invoiceNumber) => {
   }
 };
 
-async function silentNavigation(path) {
+export async function silentNavigation(path) {
   window.history.pushState({}, '', path);
   // eslint-disable-next-line no-use-before-define
   loadingModule();
@@ -1487,9 +1491,10 @@ export const changeStep = async (step) => {
       validateData = {
         adjustmentsAllowed: true,
         scopes: [
-          'InvoiceAddress',
-          'ShippingAddress',
-          'Addresses',
+          'Products',
+          'Promotion',
+          'Value',
+          'CostCenter',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1503,7 +1508,6 @@ export const changeStep = async (step) => {
           'InvoiceAddress',
           'ShippingAddress',
           'Addresses',
-          'Shipping',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1515,7 +1519,10 @@ export const changeStep = async (step) => {
       validateData = {
         adjustmentsAllowed: true,
         scopes: [
-          'Payment',
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+          'Shipping',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1568,9 +1575,19 @@ export const changeStep = async (step) => {
         const data = JSON.stringify({ paymentInstrument: 'Invoice' });
         const setupInvoice = await putApiData(url, data, defaultHeaders);
 
-        if (setupInvoice?.status !== 'success') {
-          throw new Error('Error setting Invoice as payment Method for this Order.');
-        }
+        if (setupInvoice?.status !== 'success') throw new Error('Error setting Invoice as payment Method for this Order.');
+
+        // parameters to validate basket for payment
+        const validatePaymentData = {
+          adjustmentsAllowed: true,
+          scopes: [
+            'Payment',
+          ],
+        };
+        // validating basket for payment
+        const validatingBasketForPayment = await validateBasket(validatePaymentData);
+
+        if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
         const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
         if (invoiceNumberValue) {
@@ -1598,129 +1615,246 @@ export const changeStep = async (step) => {
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
       }
+
+      /*
+      *
+      * :::::::::; handle stripe payment ::::::::
+      */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         showPreLoader();
-        const stripe = await loadStripe();
+
+        /*
+        *
+        :::::::::::
+        Getting Stripe Instance
+        ::::::::::
+        *
+        */
+        const stripe = getStripeInstance();
         const paymentMethod = 'STRIPE_PAYMENT';
 
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
+        const useStripeCardId = sessionStorage.getItem('useStripeCardId');
+
         /*
         *
         *
-          :::::::: handle stripe payment for saved/new card :::::::::
+          ::::::::
+          handle stripe payment for saved/new card
+          :::::::::
         *
         */
-        if (!sessionStorage.getItem('useStripeCardId') && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
-        const postingIntent = await postPaymentIntent();
-        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
-        if (selectedStripeMethod === 'newCard') {
-          settingIntent = await setupPaymentIntent();
-          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        const elements = getStripeElements();
+
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+        /*
+        *
+        :::::::::::
+        Get Payment Intent
+        ::::::::::
+        *
+        */
+          const getPaymentIntentData = await getPaymentIntent();
+          if (getPaymentIntentData?.status !== 'success') throw new Error('Error Processing Request');
+          // console.log('Getting Payment Intent...', getPaymentIntentData);
         }
 
-        // Call create-instrument API
+        /*
+        *
+        :::::::::::
+        Post Payment Intent
+        ::::::::::
+        *
+        */
+        const postingIntent = await postPaymentIntent();
+        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+        console.log('Post Payment Intent...', postingIntent);
+
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+        /*
+        *
+        :::::::::::
+        Post Setup Intent
+        ::::::::::
+        *
+        */
+          settingIntent = await postSetupIntent();
+          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        }
+        /*
+        *
+        :::::::::::
+        Creating Instrument
+        ::::::::::
+        *
+        */
         // eslint-disable-next-line max-len
         const createInstrument = await createPaymentInstrument(paymentMethod, postingIntent?.data?.id, postingIntent?.data?.client_secret);
         if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
-
+        console.log('Creating Instrument...', createInstrument);
+        
         const instrumentId = createInstrument?.data?.data?.id;
         if (!instrumentId) throw new Error('Instrument ID missing.');
 
-        // Call assign instrument API
+        /*
+        *
+        :::::::::::
+        Assigning Instrument
+        ::::::::::
+        *
+        */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
         if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
-
-        // Call get payment-intent API
-        const getPI = await getPaymentIntent();
-
-        if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        // console.log(' Get Payment Intent...');
-
-        // get payment intent id
-        const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
-        if (!gPIID) throw new Error('Payment intent ID missing.');
-        // console.log('Getting Payment Intent: ', gPIID);
+        console.log('Assigning Instrument...', assignInstrument);
 
         // parameters to validate basket for payment
-        const validatePaymentData = {
+        const validateBasketData = {
           adjustmentsAllowed: true,
           scopes: [
             'Payment',
           ],
         };
-        // validating basket for payment
-        const validatingBasketForPayment = await validateBasket(validatePaymentData);
+        /*
+        *
+        :::::::::::
+        validating basket
+        ::::::::::
+        *
+        */
+        const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
-        // console.log(' Basket Validated for Pyament...');
-        // Remove email from the first item
-        delete gPIID[0].billing_details.email;
-        // add selected card to order
-        const selectedData = {
-          name: 'SelectedCard',
-          value: JSON.stringify(gPIID[0]),
-          type: 'String',
-        };
-        const addingCardToOrder = await addCardToOrder(selectedData);
-        // console.log('Adding Card to Order...', addingCardToOrder);
+        console.log('Basket Validated for Pyament...', validateBasketData);
 
-        if (addingCardToOrder?.status !== 'success') {
-          const updatingCardForOrder = await updateCardForOrder(selectedData);
-          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        let confirmBillingDetails = '';
+        let confirmPM = '';
+
+        /*
+        *
+        :::::::::::
+        confirm payment method :::: for saved cards
+        ::::::::::
+        *
+        */
+        if (selectedStripeMethod === 'savedCard') {
+          const getPreConfirmedPI = await getPaymentIntent();
+          if (getPreConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+          // eslint-disable-next-line max-len
+          const getPreConfirmedPIData = getPreConfirmedPI?.data?.data?.filter((dat) => dat?.id === useStripeCardId);
+          if (!getPreConfirmedPIData) throw new Error('Payment intent ID missing.');
+          confirmBillingDetails = getPreConfirmedPIData[0]?.billing_details;
+          confirmPM = getPreConfirmedPIData[0]?.id;
+          console.log('Pre Confirm Payment Intent...', confirmBillingDetails);
+          console.log('Pre Confirm Payment Intentdata getPreConfirmedPIData...', getPreConfirmedPIData);
         }
-        // confirm  stripe Setup for new cards
-        let confirmSetup;
-        if (selectedStripeMethod === 'newCard') {
-          confirmSetup = await stripe.confirmSetup({
-            clientSecret: settingIntent?.data?.client_secret,
+
+        let confirmPayment = '';
+        if (selectedStripeMethod === 'savedCard') {
+        /*
+        *
+        :::::::::::
+        confirm payment :::: final step for existing card
+        ::::::::::
+        *
+        */
+          confirmPayment = await stripe.confirmPayment({
+            clientSecret: postingIntent?.data?.client_secret,
             confirmParams: {
-              return_url: `${window.location.origin}/checkout`,
-              payment_method: gPIID[0]?.id,
+              return_url: `${window.location.origin}/payment`,
+              payment_method: confirmPM,
             },
             redirect: 'if_required',
           });
-          // console.log('Confirming Setup...');
-
-          // if stripe setup confirmed, move to confirm payment
-          if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
         }
-
-        // confirm payment :::: final step
-        const confirmPayment = await stripe.confirmPayment({
-          clientSecret: postingIntent?.data?.client_secret,
-          confirmParams: {
-            return_url: `${window.location.origin}/checkout`,
-            payment_method: gPIID[0]?.id,
-          },
-          redirect: 'if_required',
-        });
-        // console.log('Confirming Payment...');
-
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+        /*
+        *
+        :::::::::::
+        confirm payment :::: final step
+        ::::::::::
+        *
+        */
+          confirmPayment = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              return_url: `${window.location.origin}/payment`,
+            },
+            redirect: 'if_required',
+          });
+        }
+        console.log('Confirming Payment...', confirmPayment);
         if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
 
-        // validating confirm-payment status from stripe
+        /*
+        *
+        :::::::::::
+        validating confirm-payment status from stripe
+        ::::::::::
+        *
+        */
         const status = confirmPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
 
+        const paymentMethodId = confirmPayment?.paymentIntent?.payment_method;
+        // console.log(' Retrieve this Payment Method: ', paymentMethodId);
+        // Call get payment-intent API
+
+        const getConfirmedPI = await getPaymentIntent();
+        if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+        // console.log(' Get getConfirmedPI Payment Intent...', getConfirmedPI);
+        // addressElement = elements.getElement('address')
+        // get payment intent id
+        // eslint-disable-next-line max-len
+        const getConfirmedPID = getConfirmedPI?.data?.data?.filter((dat) => dat?.id === paymentMethodId);
+        if (!getConfirmedPID) throw new Error('Payment intent ID missing.');
+        // Remove email from the first item
+        if (getConfirmedPID[0]?.billing_details?.email) {
+          delete getConfirmedPID[0]?.billing_details?.email;
+        }
+        console.log('gPIID : ', getConfirmedPID[0]);
+
+        // add selected card to order
+        const updatingCardData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const addingCardData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const updateCardToOrder = await updateCardForOrder(updatingCardData);
+
+        if (updateCardToOrder?.status !== 'success') {
+          const addingCardForOrder = await addCardToOrder(addingCardData);
+          if (addingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        }
+
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        // console.log('Submitting order');
-
+        console.log('Submitting Order...');
+        return false;
         // payment confirmed from Stripe, now submitting order
 
         const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
+        console.log('Order Submitted...', submittingOrder);
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        sessionStorage.removeItem('useAddress');
+        sessionStorage.removeItem('useStripeCardId');
+        sessionStorage.removeItem('selectedStripeMethod');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
 
@@ -1740,6 +1874,7 @@ export const changeStep = async (step) => {
     }
     removePreLoader();
     showNotification(error.message || 'Error Processing Request.', 'error');
+    // silentNavigation('/us/en/e-buy/addresses');
     return false;
   }
 };
@@ -1900,7 +2035,7 @@ export async function addressForm(type, data = {}) {
   );
   /*
 ::::::::::::::::
-get save address buttonl...
+get save address form buttonl...
 :::::::::::::::::
 */
   const saveAddressButton = adressForm.querySelector(
@@ -1928,7 +2063,12 @@ get counrty field and attach change event listener to populate states based on c
     });
     removePreLoader();
   });
-
+  adressForm?.querySelectorAll('label')?.forEach((lab) => {
+    if (lab?.classList.contains('pl-4')) {
+      lab.classList.remove('pl-4');
+    }
+  });
+  // actions when save address button is clicked
   saveAddressButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     showPreLoader();
@@ -1941,10 +2081,7 @@ get counrty field and attach change event listener to populate states based on c
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
-      const errorDiv = formToSubmit.querySelector('#addressFormErrorMessage');
-      if (errorDiv) {
-        errorDiv.remove();
-      }
+
       const formData = new FormData(formToSubmit);
       const formObject = {};
       formData.forEach((value, key) => {
@@ -1957,12 +2094,10 @@ get counrty field and attach change event listener to populate states based on c
        used for initial shipping and billing form
        ::::::::::::::
        */
+      console.log(' submitting form : 1976');
 
-      if (
-        !formToSubmit.classList.contains(
-          `default${capitalizeFirstLetter(type)}AddressFormModal`,
-        )
-      ) {
+      const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
+      if (!isDefaultSBForm) {
         if (data) {
           delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
           Object.assign(formObject, {
@@ -1980,10 +2115,18 @@ get counrty field and attach change event listener to populate states based on c
        set the address as shipping or biling
        ::::::::::::::
        */
+      const checkSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
+      const sameAsShipping = checkSameAsShippingCheckbox?.value === 'false' ? 'no' : 'yes';
 
       if (type === 'shipping') {
-        formObject.usage = [false, true];
+        if (isDefaultSBForm && sameAsShipping === 'yes') {
+          formObject.preferredBillingAddress = 'true';
+        }
+        formObject.usage = [sameAsShipping === 'yes', true];
       } else if (type === 'billing') {
+        if (isDefaultSBForm) {
+          formObject.preferredBillingAddress = 'true';
+        }
         formObject.usage = [true, false];
       } else {
         formObject.usage = [];
@@ -1994,12 +2137,14 @@ get counrty field and attach change event listener to populate states based on c
       submits the form
       ::::::::::::::::::::::::::::::::::::
       */
+
       const addAddressResponse = await submitForm(
         `${type}AddressForm`,
         'customers/-/myAddresses',
         method,
         formObject,
       );
+      console.log('form submit response: ', addAddressResponse);
 
       if (addAddressResponse?.status === 'success') {
         if (addAddressResponse?.data?.type === 'Link') {
@@ -2025,22 +2170,19 @@ get counrty field and attach change event listener to populate states based on c
             ),
           );
 
-          if (
-            formToSubmit.classList.contains(
-              `default${capitalizeFirstLetter(type)}AddressFormModal`,
-            )
-          ) {
+          if (isDefaultSBForm) {
             /*
             ::::::::::::::::
             set default address starts
             ::::::::::::::
             */
             if (showDefaultAddress) {
-              const addressURI = addAddressResponse.data.title.split(':')[4];
+              const addressURI = addAddressResponse?.data?.title?.split(':')[4];
               const address = await getAddressDetails(
                 `customers/-/addresses/${addressURI}`,
                 type,
               );
+
               const renderDefaultAddress = defaultAddress(address, type);
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
@@ -2062,6 +2204,14 @@ get counrty field and attach change event listener to populate states based on c
                    ::::::::::::::::::
                    */
                 await setUseAddress(addressURI, type);
+                /*
+                   ::::::::::::::
+                   assign address to backet
+                   ::::::::::::::::::
+                   */
+                if (sameAsShipping === 'yes' && type === 'shipping') {
+                  await setUseAddress(addressURI, 'billing');
+                }
 
                 /*
                    ::::::::::::::
@@ -2091,27 +2241,12 @@ get counrty field and attach change event listener to populate states based on c
         ) {
           formToSubmit.classList.add('hidden');
 
-          // saveAddressButton.insertAdjacentElement(
-          //   'afterend',
-          //   p(
-          //     {
-          //       class: 'text-green-500 font-medium pl-6 text-l',
-          //     },
-          //     'Address Updated Successfully.',
-          //   ),
-          // );
-
           /*
         ::::::::::::::
         update address list
         ::::::::::::::
         */
           await updateAddresses();
-          /*
-            ::::::::::::
-            remove preloader
-            :::::::::::::
-            */
           /*
            ::::::::::::::
            update address list
@@ -2122,23 +2257,7 @@ get counrty field and attach change event listener to populate states based on c
           removePreLoader();
           showNotification('Address updated successfully.', 'success');
         } else {
-          // saveAddressButton.insertAdjacentElement(
-          //   'afterend',
-          //   p(
-          //     {
-          //       id: 'addressFormErrorMessage',
-          //       class: 'text-red-500 font-medium pl-6 text-l text-center',
-          //     },
-          //     'Error submitting address.',
-          //   ),
-          // );
-          /*
-            ::::::::::::
-            remove preloader
-            :::::::::::::
-            */
-          removePreLoader();
-          showNotification('Error submitting address.', 'error');
+          throw new Error('Error Submitting form.');
         }
         /*
           ::::::::::::::
@@ -2147,42 +2266,16 @@ get counrty field and attach change event listener to populate states based on c
           */
         closeUtilityModal();
       } else {
-        saveAddressButton.insertAdjacentElement(
-          'afterend',
-          p(
-            {
-              class: 'text-red-500 pl-6 font-medium text-l',
-              id: 'addressFormErrorMessage',
-            },
-            addAddressResponse?.data,
-          ),
-        );
-
-        /*
-          ::::::::::::
-          remove preloader
-          :::::::::::::
-          */
-        removePreLoader();
+        throw new Error('Error Submitting form.');
       }
     } catch (error) {
-      saveAddressButton.insertAdjacentElement(
-        'afterend',
-        p(
-          {
-            id: 'addressFormErrorMessage',
-            class: 'text-red-500 pl-6 font-medium text-l',
-          },
-          error.message,
-        ),
-      );
-
       /*
           ::::::::::::
           remove preloader
           :::::::::::::
           */
       removePreLoader();
+      showNotification(error.message, 'error');
     }
   });
 
@@ -2275,7 +2368,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2577,8 +2670,7 @@ get price type if its net or gross
             'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''} `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2651,10 +2743,7 @@ get price type if its net or gross
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
    */
-      if (
-        getUseAddressesResponse?.data?.invoiceToAddress
-        && getUseAddressesResponse?.data?.invoiceToAddress?.id
-        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && window.location.pathname.includes('addresses')
+      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
@@ -2682,7 +2771,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
@@ -2728,7 +2817,7 @@ get price type if its net or gross
  check if shipping address exists in basket
  ::::::::::::::::::
    */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && window.location.pathname.includes('addresses')) {
+      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
         const commonShipToAddress = div(
           {
             id: 'checkoutSummaryCommonShipAddress',

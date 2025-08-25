@@ -83,7 +83,7 @@ export async function postPaymentIntent() {
     'authentication-token',
     authenticationToken.access_token,
   );
-  const pIntentBody = JSON.stringify({ type: 'bank,' });
+  const pIntentBody = JSON.stringify({ type: 'Card' });
   const response = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
   if (response?.status === 'success') {
     return response;
@@ -91,7 +91,7 @@ export async function postPaymentIntent() {
   return { status: 'error', data: {} };
 }
 // setup payment intent
-export async function setupPaymentIntent() {
+export async function postSetupIntent() {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -217,7 +217,7 @@ export async function addCardToOrder(data = '') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   // post card payment intent
-  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes/SelectedCard`;
+  const addCardToOrderUrl = `${baseURL}/baskets/current/attributes`;
   const addCardToOrderHeaders = new Headers();
   addCardToOrderHeaders.append('Content-Type', 'Application/json');
   addCardToOrderHeaders.append('Accept', 'application/vnd.intershop.basket.v1+json');
@@ -289,7 +289,7 @@ export async function setUseCard(paymentMethodId) {
   const addCardToOrderBody = JSON.stringify(addData);
   const response = await patchApiData(addCardToOrderUrl, addCardToOrderBody, addCardToOrderHeaders);
   if (response?.status === 'success') {
-    await updateBasketDetails();
+    // await updateBasketDetails();
     return response;
   }
   return { status: 'error', data: {} };

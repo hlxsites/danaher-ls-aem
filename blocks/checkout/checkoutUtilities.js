@@ -149,6 +149,7 @@ export const progressModule = () => {
       },
     ),
     span({
+      class: 'pl-4',
       'data-tab': 'shippingAddress',
       'data-activeTab': 'shippingAddress',
     }, 'Address'),
@@ -200,6 +201,7 @@ export const progressModule = () => {
     ),
     span(
       {
+        class: 'pr-4',
         'data-tab': 'payment',
         'data-activeTab': 'paymentMethods',
       },
