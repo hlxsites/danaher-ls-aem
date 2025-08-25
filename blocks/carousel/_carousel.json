@@ -62,12 +62,12 @@
         },
         {
           "component": "text",
-          "name": "carousel_title",
+          "name": "carousel_cta_title",
           "label": "Left CTA 1 Title"
         },
         {
           "component": "select",
-          "name": "carousel_titleType",
+          "name": "carousel_cta_titleType",
           "label": "Type",
           "options": [
           {
