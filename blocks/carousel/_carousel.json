@@ -22,19 +22,19 @@
       "fields": [
         {
           "component": "text",
-          "name": "left_subheading",
-          "label": "Left Side Subheading",
+          "name": "carousel_subtitle",
+          "label": "Carousel Sub Title",
           "description": "Eyebrow style subheading"
         },
         {
           "component": "text",
-          "name": "leftMainHeading",
-          "label": "Main Heading Text"
+          "name": "carousel_title",
+          "label": "Carousel Title"
         },
         {
           "component": "select",
-          "name": "leftMainHeadingType",
-          "label": "Heading Tag Type",
+          "name": "carousel_titleType",
+          "label": "Carousel Title Type",
           "options": [
             { "name": "h1", "value": "h1" },
             { "name": "h2", "value": "h2" },
