@@ -50,7 +50,7 @@
           "label": "Left Side Product Info",
           "description": "Descriptive paragraph below heading"
         },
-              {
+        {
         "component": "aem-content",
         "name": "link",
         "label": "Link"
