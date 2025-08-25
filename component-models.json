@@ -730,22 +730,22 @@
       },
       {
         "component": "aem-content",
-        "name": "carousel_link_1",
+        "name": "carousel_link",
         "label": "Carousel Link 1"
       },
       {
         "component": "text",
-        "name": "carousel_linkText_1",
+        "name": "carousel_linkText",
         "label": "Carousel Link Text 1"
       },
       {
         "component": "text",
-        "name": "carousel_linkTitle_1",
+        "name": "carousel_linkTitle",
         "label": "Carousel Link Title 1"
       },
       {
         "component": "select",
-        "name": "carousel_linkType_1",
+        "name": "carousel_linkType",
         "label": "Carousel Link Type 1",
         "options": [
           {
@@ -764,22 +764,22 @@
       },
       {
         "component": "aem-content",
-        "name": "carousel_link_2",
+        "name": "carousel_link",
         "label": "Carousel Link 2"
       },
       {
         "component": "text",
-        "name": "carousel_linkText_2",
+        "name": "carousel_linkText",
         "label": "Carousel Link Text 2"
       },
       {
         "component": "text",
-        "name": "carousel_linkTitle_2",
+        "name": "carousel_linkTitle",
         "label": "Carousel Link Title 2"
       },
       {
         "component": "select",
-        "name": "carousel_linkType_2",
+        "name": "carousel_linkType",
         "label": "Carousel Link Type 2",
         "options": [
           {
