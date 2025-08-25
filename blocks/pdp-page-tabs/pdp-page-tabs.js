@@ -1,4 +1,5 @@
 import { div, p } from '../../scripts/dom-builder.js';
+import tabsOrder from '../../scripts/tabs-order.js';
 
 // Global tracking for scroll behavior
 let lastScrollY = window.scrollY;
@@ -6,68 +7,6 @@ let isManualScroll = false;
 
 // This will be set dynamically inside decorate()
 let dynamicTabMap = {};
-
-async function designPdp() {
-  const main = document.querySelector('main');
-
-  const allSections = Array.from(main.querySelectorAll('.section'));
-  const meaningfulSections = allSections.filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
-
-  const heroSection = meaningfulSections.find((sec) => sec.classList.contains('pdp-hero-container'));
-
-  const flexWrapper = div({
-    class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
-  });
-
-  const tabsWrapper = div({
-    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
-  });
-
-  const restWrapper = div({
-    class: 'tabs-right-parent border-l border-gray-200 flex-1',
-  });
-
-  // Define tabbed content section classes
-  const tabContentClasses = new Set([
-    'pdp-page-tabs-container',
-    'pdp-description-container',
-    'pdp-specifications-container',
-    'pdp-related-products-container',
-    'pdp-bundle-list-container',
-    'pdp-citations-container',
-    'pdp-products-container',
-    'pdp-resources-container',
-    'pdp-faqs-container',
-    // Add more as needed
-  ]);
-
-  const afterFlexSections = [];
-
-  meaningfulSections.forEach((section) => {
-    if (section === heroSection) return;
-
-    const hasTabbedClass = Array.from(section.classList).some((cls) => tabContentClasses.has(cls));
-
-    if (section.classList.contains('pdp-page-tabs-container')) {
-      tabsWrapper.appendChild(section);
-    } else if (hasTabbedClass) {
-      restWrapper.appendChild(section);
-    } else {
-      afterFlexSections.push(section);
-    }
-  });
-
-  flexWrapper.appendChild(tabsWrapper);
-  flexWrapper.appendChild(restWrapper);
-
-  // Insert flex wrapper after hero section
-  heroSection?.after(flexWrapper);
-
-  // Insert other sections (e.g., pdp-faqs, pdp-carousel) after flexWrapper
-  afterFlexSections.forEach((section) => {
-    flexWrapper.after(section);
-  });
-}
 
 function highlightActiveTab(forcedLabel = null) {
   if (isManualScroll && !forcedLabel) return;
@@ -188,60 +127,53 @@ export default async function decorate(block) {
 
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const tabsList = [];
-
-  // Pick authored tab blocks (e.g., tab-item-description, tab-item-specifications)
   const authoredBlocks = document.querySelectorAll('.tab-authored');
 
-  if (authoredBlocks.length > 0) {
-    authoredBlocks.forEach((authoredBlock) => {
-      const titleEl = authoredBlock.querySelector('.authored-tab-title');
-      if (titleEl) {
-        const label = titleEl.textContent.trim();
-        if (label) {
-          tabsList.push({
-            label,
-            selector: `${authoredBlock.querySelector('.authored-tab-type').textContent}-tab`, // use block’s class as selector
-          });
-        }
-        // Remove title <p> so it won’t show in content area
-        titleEl.remove();
-      }
-    });
+  // Collect authored labels indexed by type
+  const authoredTabMap = {};
+  authoredBlocks.forEach((authoredBlock) => {
+    const type = authoredBlock.querySelector('.authored-tab-type')?.textContent?.trim();
+    const titleEl = authoredBlock.querySelector('.authored-tab-title');
+    const authoredLabel = titleEl?.textContent.trim();
+    if (type && authoredLabel) {
+      authoredTabMap[type] = authoredLabel;
+      // titleEl.remove(); // Don't show inside section
+    }
+  });
 
-    // Build dynamic tab map {label: selector}
-    dynamicTabMap = Object.fromEntries(
-      tabsList.map((t) => [t.label, t.selector]),
-    );
-  } else {
-    // Decide tabs based on available data
-    if (response?.raw?.richlongdescription?.trim()) tabsList.push('Description');
-    if (response?.raw?.attributejson?.trim()) tabsList.push('Specifications');
-    if (response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0) tabsList.push('Products');
-    if (response?.raw?.numresources) tabsList.push('Resources');
-    if (response?.raw?.bundlepreviewjson?.trim()) tabsList.push('Product Parts List');
-    tabsList.push('Citations');
-    tabsList.push('FAQs');
-    tabsList.push('Related Products');
+  // Full map of static label to section ID/type
+  const fullTabConfig = {
+    overview: { label: 'Description', available: !!response?.raw?.richlongdescription?.trim() || authoredTabMap.overview?.length > 0},
+    specifications: { label: 'Specifications', available: !!response?.raw?.attributejson?.trim() || authoredTabMap.specifications?.length > 0},
+    products: { label: 'Products', available: response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0 },
+    resources: { label: 'Resources', available: !!response?.raw?.numresources },
+    parts: { label: 'Product Parts List', available: !!response?.raw?.bundlepreviewjson?.trim() || authoredTabMap.parts?.length > 0},
+    citations: { label: 'Citations', available: !!response?.raw?.citations?.trim() ||  authoredTabMap.citations?.length > 0},
+  };
 
-    // Full map of label to section ID
-    const fullTabMap = {
-      Description: 'overview-tab',
-      Specifications: 'specifications-tab',
-      'Product Parts List': 'parts-tab',
-      Products: 'products-tab',
-      Resources: 'resources-tab',
-      Citations: 'citations-tab',
-      FAQs: 'faqs-tab',
-      'Related Products': 'related-products-tab',
-    };
+  // Build tabsList → pick authored label if present, static fallback otherwise
+  // Object.entries(fullTabConfig).forEach(([type, cfg]) => {
+  //   if (cfg.available) {
+  //     const label = authoredTabMap[type] || cfg.label;
+  //     tabsList.push({ label, selector: `${type}-tab` });
+  //   }
+  // });
 
-    // Dynamically build tab map based on actual tabs available
-    dynamicTabMap = Object.fromEntries(
-      tabsList.map((label) => [label, fullTabMap[label]]),
-    );
-  }
+  // -------------- Generate tabsList in JSON order --------------
+  const opco = response?.raw?.opco?.toLowerCase() || 'sciex';
+  const opcoTabs = tabsOrder()[opco] || tabsOrder().sciex;
+  opcoTabs.forEach(({ tabName }) => {
+    const config = fullTabConfig[tabName];
+    if (config?.available) {
+      const label = authoredTabMap[tabName] || config.label || tabName;
+      tabsList.push({ label, selector: `${tabName}-tab` });
+    }
+  });
 
-  // Build UI
+  // Build dynamic map for scrolling logic
+  dynamicTabMap = Object.fromEntries(tabsList.map((t) => [t.label, t.selector]));
+
+  // ---------------- UI build ----------------
   const tabsDiv = div({
     class:
       'tabs-parent flex flex-row md:flex-col overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
@@ -268,7 +200,7 @@ export default async function decorate(block) {
             } text-base cursor-pointer`,
             onclick: updatePageTabs,
           },
-          `${authoredBlocks.length > 0 ? tab.label : tab}`,
+          tab.label,
         ),
       ),
     );
@@ -278,12 +210,8 @@ export default async function decorate(block) {
     { class: 'super-parent md:w-48 overflow-x-auto' },
     tabsDiv,
   );
-
-  // block.replaceChildren();
   block.append(pageTabsSuperParent);
 
-  window.addEventListener('scroll', () => {
-    highlightActiveTab();
-  });
-  // designPdp();
+  // Activate scroll-based highlight
+  window.addEventListener('scroll', () => highlightActiveTab());
 }

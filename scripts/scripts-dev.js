@@ -50,6 +50,9 @@ const TEMPLATE_LIST = {
   },
   pdp: {
     templateName: 'pdp',
+    dependencies: [
+      '../templates/pdp/pdp.js'
+    ],
   },
   processstep: 'processstep',
   topic: 'topic',

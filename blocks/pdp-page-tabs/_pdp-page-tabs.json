@@ -41,6 +41,19 @@
         "id": "pdp-tabs-item",
         "fields": [
           {
+            "component": "radio-group",
+            "label": "Choose an Option",
+            "name": "selectedOption",
+            "valueType": "string",
+            "required": true,
+            "defaultValue": "only-pim", 
+            "options": [
+              { "name": "Show only PIM data", "value": "only-pim" },
+              { "name": "Show only Authored data", "value": "only-authored" },
+              { "name": "Show both", "value": "pim-authored" }
+            ]
+          },
+          {
             "component": "select",
             "name": "tabType",
             "label": "Product Tab ID",
@@ -81,15 +94,9 @@
             ]
           },
           {
-            "component": "boolean",
-            "name": "is-pim-data",
-            "value": false,
-            "label": "Show PIM data"
-          },
-          {
             "component": "text",
             "valueType": "string",
-            "name": "product- tab-title",
+            "name": "product-tab-title",
             "value": "",
             "label": "Product Tab Title"
           },

@@ -66,8 +66,7 @@
       "pdp-products",
       "pdp-related-products",
       "pdp-resources",
-      "pdp-specifications",
-      "authorable-pdp-tabs"
+      "pdp-specifications"
     ]
   },
   {
@@ -88,12 +87,6 @@
     "id": "articles-list",
     "components": [
       ""
-    ]
-  },
-  {
-    "id": "authorable-pdp-tabs",
-    "components": [
-      "authorable-pdp-tabs-item"
     ]
   },
   {

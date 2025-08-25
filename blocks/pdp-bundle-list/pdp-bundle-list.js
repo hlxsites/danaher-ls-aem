@@ -1,43 +1,29 @@
 import {
   div, p, img,
 } from '../../scripts/dom-builder.js';
+import { extractJsonFromHtml } from '../../scripts/html-to-json-parser.js';
 
-function extractJsonFromHtml(rootElement) {
-  let rawText = rootElement.textContent || '';
-  rawText = rawText.replace(/\u00a0/g, ' ').trim();
-
-  const startIdx = rawText.indexOf('[');
-  const endIdx = rawText.lastIndexOf(']');
-
-  if (startIdx === -1 || endIdx === -1) {
-    return null;
-  }
-
-  const jsonSnippet = rawText.slice(startIdx, endIdx + 1);
-
-  try {
-    return JSON.parse(jsonSnippet);
-  } catch (err) {
-    console.error('Error parsing JSON:', err);
-    return null;
-  }
-}
 
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'parts-tab';
-  const isPIM = document.querySelector('#authored-parts')?.children[1].textContent;
+  const isPIM = document.querySelector('#authored-parts')?.children[0].textContent;
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   // if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
   try {
-    let bundleDetails;
-
-    if (isPIM === 'true') {
-      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
-    } else {
-      const parsedData = extractJsonFromHtml(document.querySelector('#authored-parts')?.children[3]);
+    let bundleDetails = JSON.parse(response.raw?.bundlepreviewjson) || [];
+    const elem = document.querySelector('#authored-parts')?.children[3];
+    let parsedData;
+    if (elem) {
+      parsedData = extractJsonFromHtml(elem);
+    }
+    if (isPIM !== undefined && isPIM === 'only-authored') {
       bundleDetails = parsedData;
+    } else if (isPIM !== undefined && isPIM === 'pim-authored') {
+      if (parsedData.length > 0) bundleDetails.push(...parsedData);
+    } else {
+      bundleDetails = JSON.parse(response.raw?.bundlepreviewjson);
     }
     bundleDetails.forEach((product) => {
       const wrapper = div({
