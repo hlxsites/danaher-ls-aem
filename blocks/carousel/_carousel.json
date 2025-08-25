@@ -53,22 +53,22 @@
         {
           "component": "aem-content",
           "name": "carousel_link_1",
-          "label": "Link"
+          "label": "Carousel Link 1"
         },
         {
           "component": "text",
           "name": "carousel_linkText_1",
-          "label": "Text"
+          "label": "Carousel Link Text 1"
         },
         {
           "component": "text",
           "name": "carousel_linkTitle_1",
-          "label": "Title"
+          "label": "Carousel Link Title 1"
         },
         {
           "component": "select",
           "name": "carousel_linkType_1",
-          "label": "Type",
+          "label": "Carousel Link Type 1",
           "options": [
             {
               "name": "default",
@@ -86,35 +86,45 @@
         },
         {
           "component": "aem-content",
-          "name": "left_cta_2_link",
-          "label": "Left CTA 2 Link"
+          "name": "carousel_link_2",
+          "label": "Carousel Link 2"
         },
         {
           "component": "text",
-          "name": "left_cta_2_text",
-          "label": "Left CTA 2 Title"
+          "name": "carousel_linkText_2",
+          "label": "Carousel Link Text 2"
         },
         {
           "component": "text",
-          "name": "left_cta_2_title",
-          "label": "Left CTA 2 Text"
+          "name": "carousel_linkTitle_2",
+          "label": "Carousel Link Title 2"
         },
         {
           "component": "select",
-          "name": "left_cta_2_type",
-          "label": "Left CTA 2 Type",
+          "name": "carousel_linkType_2",
+          "label": "Carousel Link Type 2",
           "options": [
-            { "name": "primary", "value": "primary" },
-            { "name": "secondary", "value": "secondary" }
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
           ]
         },
         {
-        "component": "reference",
-        "valueType": "Picture",
-        "name": "carousel_image",
-        "label": "Image",
-        "multi": false,
-        "value": ""
+          "component": "reference",
+          "valueType": "Picture",
+          "name": "carousel_image",
+          "label": "Image",
+          "multi": false,
+          "value": ""
         },
         {
           "component": "text",
