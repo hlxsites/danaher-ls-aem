@@ -135,7 +135,7 @@ export default async function decorate(block) {
     const type = authoredBlock.querySelector('.authored-tab-type')?.textContent?.trim();
     const titleEl = authoredBlock.querySelector('.authored-tab-title');
     const authoredLabel = titleEl?.textContent.trim();
-    if (type && authoredLabel) {
+    if (type) {
       authoredTabMap[type] = authoredLabel;
       // titleEl.remove(); // Don't show inside section
     }
@@ -148,7 +148,7 @@ export default async function decorate(block) {
     products: { label: 'Products', available: response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0 },
     resources: { label: 'Resources', available: !!response?.raw?.numresources },
     parts: { label: 'Product Parts List', available: !!response?.raw?.bundlepreviewjson?.trim() || authoredTabMap.parts?.length > 0},
-    citations: { label: 'Citations', available: !!response?.raw?.citations?.trim() ||  authoredTabMap.citations?.length > 0},
+    citations: { label: 'Citations', available: !!response?.raw?.citations?.trim() || authoredTabMap.hasOwnProperty('citations')},
   };
 
   // Build tabsList → pick authored label if present, static fallback otherwise

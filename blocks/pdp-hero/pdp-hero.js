@@ -54,26 +54,59 @@ function loadMore() {
   }
 }
 
+// function imageSlider(allImages, productName = 'product') {
+//   const slideContent = div(
+//     { class: 'image-content' },
+//     createOptimizedS7Picture(allImages[0], `${productName} - image`, true),
+//   );
+//   const verticalSlides = div();
+//   allImages.map((image, index) => {
+//     const imageElement = createOptimizedS7Picture(
+//       image,
+//       `${productName} - image ${index + 1}`,
+//       false,
+//     );
+//     let imageClass = index === 0 ? 'active' : '';
+//     if (index > 2) imageClass += ' hidden';
+//     if (imageClass !== '') imageElement.className = imageClass.trim();
+//     imageElement.addEventListener('click', showImage);
+//     verticalSlides.append(imageElement);
+//     return image;
+//   });
+//   if (allImages.length > 3) {
+//     const showMore = div({ class: 'view-more' }, 'View More');
+//     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
+//       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+//     </svg>`;
+//     showMore.addEventListener('click', loadMore);
+//     verticalSlides.append(showMore);
+//   }
+//   return div(
+//     { class: 'vertical-gallery-container' },
+//     div(slideContent, verticalSlides),
+//   );
+// }
+
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div(
-    { class: 'image-content' },
-    createOptimizedS7Picture(allImages[0], `${productName} - image`, true),
-  );
+  let slideContent = '';
+  const filteredImages = allImages.filter((aImg) => !aImg.toLowerCase().endsWith('.pdf'));
+
+  if (filteredImages[0].includes('.pdf')) {
+    slideContent = div({ class: 'image-content' }, img({ src: '/content/dam/danaher/products/fallbackImage.jpeg' }));
+  } else {
+    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(filteredImages[0], `${productName} - image`, true));
+  }
   const verticalSlides = div();
-  allImages.map((image, index) => {
-    const imageElement = createOptimizedS7Picture(
-      image,
-      `${productName} - image ${index + 1}`,
-      false,
-    );
-    let imageClass = index === 0 ? 'active' : '';
+  filteredImages.map((image, index) => {
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
+    let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
     imageElement.addEventListener('click', showImage);
     verticalSlides.append(imageElement);
     return image;
   });
-  if (allImages.length > 3) {
+  if (filteredImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
@@ -81,10 +114,7 @@ function imageSlider(allImages, productName = 'product') {
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
-  return div(
-    { class: 'vertical-gallery-container' },
-    div(slideContent, verticalSlides),
-  );
+  return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
 }
 
 export default async function decorate(block) {
