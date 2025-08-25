@@ -107,7 +107,7 @@
         {
         "component": "reference",
         "valueType": "Picture",
-        "name": "image",
+        "name": "carousel_image",
         "label": "Image",
         "multi": false,
         "value": ""
@@ -115,7 +115,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
+          "name": "carousel_imageAlt",
           "label": "Alt Text",
           "value": ""
         }
