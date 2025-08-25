@@ -763,6 +763,36 @@
         ]
       },
       {
+        "component": "aem-content",
+        "name": "left_cta_2_link",
+        "label": "Left CTA 2 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_text",
+        "label": "Left CTA 2 Title"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_2_title",
+        "label": "Left CTA 2 Text"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_2_type",
+        "label": "Left CTA 2 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
         "component": "reference",
         "valueType": "Picture",
         "name": "carousel_image",
