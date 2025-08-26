@@ -1169,13 +1169,13 @@
     "fields": [
       {
         "component": "reference",
-        "name": "image",
+        "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
-        "name": "imageAlt",
+        "name": "mini-teaser_imageAlt",
         "label": "Alt Text"
       },
       {
