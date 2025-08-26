@@ -24,6 +24,10 @@ export default function renderProductGridCard(item) {
       src: src || fallbackImagePath,
       alt: alt || 'Product image not available',
       class: 'w-full h-40 object-contain',
+      onclick: () => window.open(
+        item.clickUri,
+        item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+      ),
     });
 
     // Add error handler for fallback
@@ -32,7 +36,7 @@ export default function renderProductGridCard(item) {
       imageElement.alt = 'Product image not available';
     });
 
-    return div({ class: 'w-full h-40 overflow-hidden' }, imageElement);
+    return div({ class: 'w-full h-40 overflow-hidden cursor-pointer' }, imageElement);
   };
 
   const imageElement = createImageWithFallback(item.raw.images?.[0], item.title);
@@ -40,8 +44,14 @@ export default function renderProductGridCard(item) {
   const titleElement = div(
     { class: 'p-3' },
     p(
-      { class: 'text-black text-xl font-medium leading-7 line-clamp-2' },
-      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+      {
+        class: 'text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
+        onclick: () => window.open(
+          item.clickUri,
+          item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        ),
+      },
+      (item?.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -91,6 +101,7 @@ export default function renderProductGridCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
+        target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
       },
       'View Details',
