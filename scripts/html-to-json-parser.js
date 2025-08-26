@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export function extractJsonFromHtml(rootElement) {
   let rawText = rootElement.textContent || '';
   rawText = rawText.replace(/\u00a0/g, ' ').trim();

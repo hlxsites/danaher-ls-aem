@@ -43,7 +43,7 @@ export const resourceResultList = buildResultList(resourceEngine, {
       'sku',
       'description',
       'opco',
-      'documenttype',      
+      'documenttype',
       'contenttype',
       'date',
       'sysdate',
@@ -96,8 +96,7 @@ export const resourcePager = buildPager(resourceEngine, {
 // }
 
 // Controller function
-export async function getFrequentlyViewedTogether(itemId) {
-  console.log(itemId);
+export async function getFrequentlyViewedTogether() {
   // Add ML context
   const context = buildContext(frequentViewedEngine);
   context.add('mlParameters', { itemid: 'intabio-zt-systems' });
@@ -115,7 +114,6 @@ export async function getFrequentlyViewedTogether(itemId) {
     const unsubscribe = recommendationController.subscribe(() => {
       const { results } = recommendationController.state;
       if (results.length > 0) {
-        console.log(results);
         unsubscribe();
         resolve(results);
       }

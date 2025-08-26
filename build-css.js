@@ -405,7 +405,7 @@ const fileMappings = [
   },
   {
     content: [
-      './blocks/pdp-products/pdp-products.js', 
+      './blocks/pdp-products/pdp-products.js',
       './scripts/coveo/pdp-listing/components/pdp-facet-bradcurmb.js',
       './scripts/coveo/pdp-listing/components/pdp-facets.js',
       './scripts/coveo/pdp-listing/components/pdp-pagination.js',
