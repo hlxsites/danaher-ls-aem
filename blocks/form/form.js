@@ -306,7 +306,7 @@ async function loadSFDCForm(block) {
       ),
     ),
   );
-  // block.innerHTML = '';
+  block.innerHTML = '';
   decorateIcons(formEl);
   block.append(formEl);
   loadUTMParams();
