@@ -76,7 +76,7 @@ const renderPagination = () => {
   `;
   nextButton.className = hasNextPage
     ? 'py-2 bg-white text-gray-700 hover:bg-gray-100 flex gap-1 items-center'
-    : 'px-3 py-2 border opacity-60 cursor-not-allowed';
+    : 'px-3 py-2 opacity-60 cursor-not-allowed flex items-cente';
   nextButton.disabled = !hasNextPage;
   nextButton.onclick = () => {
     if (hasNextPage) paginationController.nextPage();

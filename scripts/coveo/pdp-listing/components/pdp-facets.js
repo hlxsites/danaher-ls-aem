@@ -9,12 +9,11 @@ import { createFiltersPanel } from "./pdp-side-panel.js";
 import { renderFacetBreadcurm } from "./pdp-facet-breadcrumb.js";
 
 export function renderCreateFacet() {
-  console.log("productTypeFacetController", productTypeFacetController);
   const container = document.getElementById("filters-container");
   container.innerHTML = "";
   // === Main Filters Row ===
   const mainRow = document.createElement("div");
-  mainRow.className = "flex items-center gap-2 bg-white";
+  mainRow.className = "flex lg:flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-6 bg-white";
 
   // All Filters button
   const allFiltersBtn = document.createElement("button");
@@ -43,7 +42,7 @@ export function renderCreateFacet() {
   // Create and append selects
   function createCustomDropdown(controller, placeholderText) {
     const dropdownContainer = document.createElement("div");
-    dropdownContainer.className = "relative inline-block";
+    dropdownContainer.className = "relative inline-block w-64";
 
     // Button
     const button = document.createElement("button");
@@ -145,26 +144,28 @@ export function renderCreateFacet() {
       } else {
         // fallback
         const { values } = controller.state;
-        values.forEach((item) => {
-          const option = document.createElement("li");
-          option.textContent = item.label || item.value;
-          option.className =
-            "px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm text-gray-700";
-
-          if (item.state === "selected") {
-            labelSpan.textContent = item.label || item.value;
-            option.classList.add("font-semibold", "text-indigo-600");
-          }
-
-          option.addEventListener("click", () => {
-            controller.toggleSelect(item);
-            menu.classList.add("hidden");
-            // chevron.querySelector('svg').classList.remove('rotate-180');
-            setTimeout(rebuildMenu, 100);
+        if(values.length >= 1){
+          values.forEach((item) => {
+            const option = document.createElement("li");
+            option.textContent = item.label || item.value;
+            option.className =
+              "px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm text-gray-700";
+  
+            if (item.state === "selected") {
+              labelSpan.textContent = item.label || item.value;
+              option.classList.add("font-semibold", "text-indigo-600");
+            }
+  
+            option.addEventListener("click", () => {
+              controller.toggleSelect(item);
+              menu.classList.add("hidden");
+              // chevron.querySelector('svg').classList.remove('rotate-180');
+              setTimeout(rebuildMenu, 100);
+            });
+  
+            menu.appendChild(option);
           });
-
-          menu.appendChild(option);
-        });
+        }
       }
     }
 
@@ -190,13 +191,21 @@ export function renderCreateFacet() {
     return dropdownContainer;
   }
 
-  mainRow.appendChild(
-    createCustomDropdown(productTypeFacetController, "Product Type")
-  );
-  mainRow.appendChild(createCustomDropdown(brandFacetController, "Brand"));
-  mainRow.appendChild(
+  if(productTypeFacetController.state.valuesAsTrees.length >= 1) {
+    mainRow.appendChild(
+      createCustomDropdown(productTypeFacetController, "Product Type")
+    );
+  }
+  
+  if(brandFacetController.state.values.length >= 1) {
+    mainRow.appendChild(createCustomDropdown(brandFacetController, "Brand"));
+  }
+
+  if(documentTypeFacetController.state.values.length >= 1) {
+     mainRow.appendChild(
     createCustomDropdown(documentTypeFacetController, "Document Type")
   );
+  }
 
   // Search box
   const searchWrapper = document.createElement("div");
