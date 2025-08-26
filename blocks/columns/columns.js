@@ -789,6 +789,15 @@ export default function decorate(block) {
   });
 
   // Form Load
+
+  // Form Load
+  if (cols.length > 1) {
+    const formBlock = cols[1].querySelector('.form');
+    const hasFormElement = cols[1].querySelector('form');
+    if (formBlock && !hasFormElement) {
+      loadSFDCForm(cols[1]);
+    }
+  }
     document.querySelectorAll('.columns-wrapper p').forEach(p => {
   // Check if the <p> contains the text "relative"
   if (p.textContent.trim() === 'relative') {
