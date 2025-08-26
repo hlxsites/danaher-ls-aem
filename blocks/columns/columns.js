@@ -795,18 +795,12 @@ export default function decorate(block) {
     // Add class to parent <div>
     p.parentElement.parentElement.classList.add('relative');
     p.remove();
-    loadSFDCForm(cols[1]);
+    // Form Load
+    if (cols.length > 1) {
+      loadSFDCForm(cols[1]);
+    }
   }
 });
-  
-  // if (cols.length > 1 && block.className.includes('relative')) {
-  //   const formBlock = cols[1].querySelector('.form');
-  //   const hasFormElement = cols[1].querySelector('form');
-  //   if (formBlock && !hasFormElement) {
-  //     loadSFDCForm(cols[1]);
-      
-  //   }
-  // }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
