@@ -33,6 +33,7 @@ import {
   getStoreConfigurations,
   createModal,
   showNotification,
+  scrollViewToTop,
 } from './common-utils.js';
 // base url for the intershop api calls
 import {
@@ -1569,6 +1570,19 @@ export const changeStep = async (step) => {
 
       if (getSelectedPaymentMethod?.value === 'invoice') {
         showPreLoader();
+        /*
+        *
+        :::::::: check if invoice number is entered :::::::
+        *
+        */
+        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+        if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
+
+        /*
+        *
+        :::::::: Call Open tender API for Invoice :::::::
+        *
+        */
         const url = `${baseURL}/baskets/current/payments/open-tender?include=paymentMethod`;
         const defaultHeaders = new Headers();
         defaultHeaders.append('Content-Type', 'application/json');
@@ -1577,7 +1591,7 @@ export const changeStep = async (step) => {
         const data = JSON.stringify({ paymentInstrument: 'Invoice' });
         const setupInvoice = await putApiData(url, data, defaultHeaders);
 
-        if (setupInvoice?.status !== 'success') throw new Error('Error setting Invoice as payment Method for this Order.');
+        if (setupInvoice?.status !== 'success') throw new Error('Error Processing Request.');
 
         // parameters to validate basket for payment
         const validatePaymentData = {
@@ -1586,12 +1600,20 @@ export const changeStep = async (step) => {
             'Payment',
           ],
         };
-        // validating basket for payment
+        /*
+        *
+        :::::::: Validating Basket :::::::
+        *
+        */
         const validatingBasketForPayment = await validateBasket(validatePaymentData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
-        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+        /*
+        *
+        :::::::: Create PO number  :::::::
+        *
+        */
         if (invoiceNumberValue) {
           const creatingInvoiceNumber = await createPoNumber(invoiceNumberValue);
           if (creatingInvoiceNumber?.status !== 'success') {
@@ -1603,6 +1625,11 @@ export const changeStep = async (step) => {
           throw new Error('Error getting basket.');
         }
 
+        /*
+        *
+        :::::::: Submitting order :::::::
+        *
+        */
         const basketId = getBasketForOrder?.data?.data?.id;
         const submittingOrder = await submitOrder(basketId, 'invoice');
         const orderId = submittingOrder?.data?.data?.id;
@@ -1614,6 +1641,7 @@ export const changeStep = async (step) => {
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        sessionStorage.removeItem('useAddress');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
       }
@@ -1800,7 +1828,11 @@ export const changeStep = async (step) => {
 
         const paymentMethodId = confirmingPayment?.paymentIntent?.payment_method;
 
-        // Call get payment-intent API
+        /*
+        *
+        :::::::: Get Payment Intent API :::::::
+        *
+        */
 
         const getConfirmedPI = await getPaymentIntent();
         if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
@@ -1812,7 +1844,11 @@ export const changeStep = async (step) => {
           delete getConfirmedPID[0]?.billing_details?.email;
         }
 
-        // add selected card to order
+        /*
+        *
+        :::::::: Add / Update Card for Order :::::::
+        *
+        */
         const updatingCardData = {
           name: 'SelectedCard',
           value: JSON.stringify(getConfirmedPID[0]),
@@ -1832,12 +1868,21 @@ export const changeStep = async (step) => {
 
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        // payment confirmed from Stripe, now submitting order
+        /*
+        *
+        :::::::: Submit Order :::::::
+        *
+        */
 
         const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
+        /*
+        *
+        :::::::: Clear Session :::::::
+        *
+        */
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
@@ -1861,6 +1906,7 @@ export const changeStep = async (step) => {
     if (checkoutWrapper?.classList.contains('pointer-events-none')) {
       checkoutWrapper.classList.remove('pointer-events-none');
     }
+    scrollViewToTop();
     removePreLoader();
     showNotification(error.message || 'Error Processing Request.', 'error');
     // silentNavigation('/us/en/e-buy/addresses');
@@ -2256,6 +2302,7 @@ get counrty field and attach change event listener to populate states based on c
         throw new Error('Error Submitting form.');
       }
     } catch (error) {
+      scrollViewToTop();
       /*
           ::::::::::::
           remove preloader

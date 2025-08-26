@@ -2,6 +2,7 @@ import {
   buildInputElement, removePreLoader, showPreLoader,
   buildSearchWithIcon,
   showNotification,
+  scrollViewToTop,
 } from '../../scripts/common-utils.js';
 import {
   h2, h4, div, p, span, button, input, label,
@@ -253,7 +254,9 @@ const paymentModule = async () => {
     invoiceNumber?.querySelector('input')?.classList?.add('outline-none');
     invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
     invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
-
+    if (invoiceNumber?.querySelector('label')?.classList.contains('pl-4')) {
+      invoiceNumber?.querySelector('label')?.classList.remove('pl-4');
+    }
     const stripeCardsContainer = div(
       {
         id: 'stripeCardsContainer',
@@ -802,6 +805,7 @@ const paymentModule = async () => {
         }
         return true;
       } catch (error) {
+        scrollViewToTop();
         removePreLoader();
         showNotification(error.message, 'error');
         return false;
@@ -812,6 +816,7 @@ const paymentModule = async () => {
     decorateIcons(moduleContent);
     return moduleContent;
   } catch (error) {
+    scrollViewToTop();
     showNotification(error.message, 'error');
     if (error.message === 'Unauthorized Access') {
       window.location.href = '/us/en/e-buy/cartlanding';

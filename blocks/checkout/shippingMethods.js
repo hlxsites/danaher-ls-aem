@@ -8,6 +8,7 @@ import {
 import {
   getStoreConfigurations,
   removePreLoader,
+  scrollViewToTop,
   showNotification,
   showPreLoader,
 } from '../../scripts/common-utils.js';
@@ -442,6 +443,7 @@ const shippingMethodsModule = async () => {
 
     return moduleContent;
   } catch (error) {
+    scrollViewToTop();
     showNotification(error.message, 'error');
     if (error.message === 'Invalid Basket') {
       silentNavigation('/us/en/e-buy/addresses');

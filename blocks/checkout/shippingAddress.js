@@ -23,6 +23,7 @@ import {
   showNotification,
   showPreLoader,
   getStates,
+  scrollViewToTop,
 } from '../../scripts/common-utils.js';
 /*
 ::::::::::::::::::
@@ -432,6 +433,7 @@ click use address button to set the address as default for current order
               throw new Error('Error processing request.');
             }
           } catch (error) {
+            scrollViewToTop();
             removePreLoader();
             showNotification(error.message, 'error');
           }
@@ -1469,6 +1471,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
 
     return moduleContent;
   } catch (error) {
+    scrollViewToTop();
     // :::::::::::: remove preloader :::::::::::::
     removePreLoader();
 

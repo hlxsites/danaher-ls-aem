@@ -796,7 +796,7 @@
     @apply min-w-[320px] h-10 rounded-md pl-9;
   }
   #shippingAddressListItemsWrapper {
-    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+    @apply py-8 max-h-[30rem] overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
     [&::-webkit-scrollbar-track]:bg-gray-100
     [&::-webkit-scrollbar-thumb]:bg-gray-300
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700

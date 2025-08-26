@@ -145,6 +145,16 @@ export function showNotification(content, type) {
   }, 5000);
 }
 /*
+*
+*
+::::::::::: Scroll View to Top
+*
+*/
+export function scrollViewToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/*
  ::::::::::::::::::::::::
  utility function to close the modal...
  can be imported and used globally
