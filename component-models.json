@@ -1169,7 +1169,7 @@
     "fields": [
       {
         "component": "reference",
-        "name": "mini-teaser_icon",
+        "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
       },
