@@ -163,6 +163,12 @@
     ]
   },
   {
+    "id": "mini-teasers",
+    "components": [
+      "mini-teaser"
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
