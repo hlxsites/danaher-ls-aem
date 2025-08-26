@@ -8,10 +8,10 @@
 
 export function decorateRichtext(container = document) {
   function deleteInstrumentation(element) {
-    delete element.dataset.richtextResource;
+    /*delete element.dataset.richtextResource;
     delete element.dataset.richtextProp;
     delete element.dataset.richtextFilter;
-    delete element.dataset.richtextLabel;
+    delete element.dataset.richtextLabel; */
   }
 
   let element;
