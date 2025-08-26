@@ -1168,7 +1168,7 @@
     "id": "mini-teaser",
     "fields": [
       {
-        "component": "iconReference",
+        "component": "icon",
         "name": "mini-teaser_icon",
         "label": "Image",
         "multi": false
