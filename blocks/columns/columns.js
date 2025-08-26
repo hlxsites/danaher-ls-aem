@@ -789,13 +789,24 @@ export default function decorate(block) {
   });
 
   // Form Load
-  if (cols.length > 1) {
-    const formBlock = cols[1].querySelector('.form');
-    const hasFormElement = cols[1].querySelector('form');
-    if (formBlock && !hasFormElement) {
-      loadSFDCForm(cols[1]);
-    }
+    document.querySelectorAll('.columns-wrapper p').forEach(p => {
+  // Check if the <p> contains the text "relative"
+  if (p.textContent.trim() === 'relative') {
+    // Add class to parent <div>
+    p.parentElement.parentElement.classList.add('relative');
+    p.remove();
+    loadSFDCForm(cols[1]);
   }
+});
+  
+  // if (cols.length > 1 && block.className.includes('relative')) {
+  //   const formBlock = cols[1].querySelector('.form');
+  //   const hasFormElement = cols[1].querySelector('form');
+  //   if (formBlock && !hasFormElement) {
+  //     loadSFDCForm(cols[1]);
+      
+  //   }
+  // }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
