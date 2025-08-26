@@ -188,6 +188,18 @@
     ]
   },
   {
+    "id": "order-details",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "order-status",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "order-submit",
     "components": [
       ""

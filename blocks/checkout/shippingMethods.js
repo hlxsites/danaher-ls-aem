@@ -1,6 +1,5 @@
 import {
   h2,
-  h5,
   div,
   p,
   textarea,
@@ -12,6 +11,7 @@ import {
   showNotification,
   showPreLoader,
 } from '../../scripts/common-utils.js';
+// eslint-disable-next-line import/no-cycle
 import { cartItem } from '../cartlanding/cartItem.js';
 import {
   getBasketDetails,

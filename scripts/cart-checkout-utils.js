@@ -51,8 +51,10 @@ import {
   confirmSetup,
   confirmPayment,
 } from './stripe_utils.js';
+// eslint-disable-next-line import/no-cycle
 import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
-import { getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
+// eslint-disable-next-line import/no-cycle
+import { getPaymentMethodType, getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -1633,6 +1635,7 @@ export const changeStep = async (step) => {
         const stripe = getStripeInstance();
         const paymentMethod = 'STRIPE_PAYMENT';
 
+        const selectedPaymentMethodType = getPaymentMethodType();
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
         const useStripeCardId = sessionStorage.getItem('useStripeCardId');
@@ -1650,8 +1653,8 @@ export const changeStep = async (step) => {
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
         const elements = getStripeElements();
-        const addressElements = elements.getElements('address');
-        const paymentElements = elements.getElements('payment');
+        const addressElements = elements.getElement('address');
+        const paymentElements = elements.getElement('payment');
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
@@ -1672,7 +1675,7 @@ export const changeStep = async (step) => {
         ::::::::::
         *
         */
-        const postingIntent = await postPaymentIntent();
+        const postingIntent = await postPaymentIntent(selectedPaymentMethodType);
         if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
@@ -1766,8 +1769,8 @@ export const changeStep = async (step) => {
             throw new Error('Error Processing Payment');
           }
           if (confirmSetupStatus === 'succeeded') {
-            addressElements.clear();
-            paymentElements.clear();
+            addressElements.unmount();
+            paymentElements.unmount();
           }
           proceedTopayment = 'true';
         }
@@ -2352,7 +2355,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2755,7 +2758,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',

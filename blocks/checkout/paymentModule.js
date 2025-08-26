@@ -7,10 +7,13 @@ import {
   h2, h4, div, p, span, button, input, label,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getBasketDetails, getPaymentMethods, silentNavigation, validateBasket } from '../../scripts/cart-checkout-utils.js';
+// eslint-disable-next-line import/no-cycle
+import {
+  getBasketDetails, getPaymentMethods, silentNavigation, validateBasket,
+} from '../../scripts/cart-checkout-utils.js';
 import {
   loadStripe,
-  postPaymentIntent, getSavedCards,
+  getSavedCards,
   setGetCardAsDefault,
   setUseCard,
   postSetupIntent,
@@ -22,6 +25,7 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 await loadStripeScript('https://js.stripe.com/v3/');
 let stripeElements;
 const stripe = await loadStripe();
+let paymentMethodType = 'Card';
 
 function createCardItem(item, defaultCard) {
   const useCard = sessionStorage.getItem('useStripeCardId');
@@ -149,7 +153,7 @@ const paymentModule = async () => {
     if (authenticationToken?.status === 'error') {
       throw new Error('Unauthorized Access');
     }
-    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
+    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -203,10 +207,6 @@ const paymentModule = async () => {
           class: 'flex justify-between gap-2',
           id: 'addNewCard',
         },
-        // span({
-        //   class: 'icon icon-plus-circle',
-        //   id: 'plusCircleIcon',
-        // }),
         button(
           {
             class: 'flex w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6',
@@ -456,6 +456,18 @@ const paymentModule = async () => {
                   // mount payment elements
                   paymentElements = stripeElements.create('payment', options);
                   paymentElements.mount('#newStripeCardPaymentWrapper');
+                  // Listen for changes
+                  paymentElements.on('change', (event) => {
+                    const selectedType = event.value?.type;
+                    paymentMethodType = selectedType;
+                    if (selectedType === 'card') {
+                      // Handle card-specific logic
+                      paymentMethodType = 'Card';
+                    } else if (selectedType === 'us_bank_account') {
+                      // Handle bank-specific logic
+                      paymentMethodType = 'Bank';
+                    }
+                  });
                 }
               }, 0);
             }
@@ -788,9 +800,11 @@ const paymentModule = async () => {
           removePreLoader();
           showNotification('Setup as default payment method.', 'success');
         }
+        return true;
       } catch (error) {
         removePreLoader();
         showNotification(error.message, 'error');
+        return false;
       }
     });
 
@@ -813,5 +827,8 @@ export function getStripeInstance() {
 }
 export function getStripeElements() {
   return stripeElements;
+}
+export function getPaymentMethodType() {
+  return paymentMethodType;
 }
 export default paymentModule;

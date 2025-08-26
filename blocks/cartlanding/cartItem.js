@@ -1,4 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import {
   logoDiv,
   divider,
@@ -26,8 +27,6 @@ export const cartItem = async () => {
     id: 'cartListContainer',
   });
   if (getProductDetailsObject?.length > 0) {
-    // console.log("cartItem Value", getProductDetailsObject.data);
-
     // cartListContainer.append(divider(300));
     getProductDetailsObject.forEach((itemToBeDisplayed) => {
       const opcoBe = Object.keys(itemToBeDisplayed);

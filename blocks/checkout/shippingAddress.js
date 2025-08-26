@@ -29,6 +29,7 @@ import {
 import  functions / modules from checkout utilities...
 :::::::::::::
 */
+// eslint-disable-next-line import/no-cycle
 import {
   addressForm,
   addressList,
@@ -88,13 +89,6 @@ function initGmapsAutocomplete(addressType, addressInput = '') {
     const state = getComponent('locality') || getComponent('administrative_area_level_1');
     const postcode = getComponent('postal_code');
     const country = getComponent('country');
-    /*
-    console.log('streetNumber: ', streetNumber);
-    console.log('street: ', street);
-    console.log('gCity: ', gCity);
-    console.log('state: ', state);
-    console.log('postcode: ', postcode);
-    console.log('country: ', country); */
 
     const getFormId = document.querySelector(`#${addressType}AddressForm`);
     if (getFormId) {
@@ -352,7 +346,7 @@ click use address button to set the address as default for current order
             const shipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
             const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
             const shipAsBillInput = getShipAsBillBox?.querySelector('input');
-            
+
             if (isBillingMismatch || isShippingConflict) {
               getShipAsBillBox?.classList.add('pointer-events-none');
               if (shipAsBillCheck?.classList.contains('hidden')) {
@@ -952,7 +946,6 @@ export const shippingAddressModule = async () => {
    ::::::::::::::
    */
     const getUseAddressesResponse = await getUseAddresses();
-    const useInvoiceToAddress = getUseAddressesResponse?.data?.invoiceToAddress;
     const useShipToAddress = getUseAddressesResponse?.data?.commonShipToAddress;
     /*
     *
@@ -1037,7 +1030,6 @@ export const shippingAddressModule = async () => {
    check if  checkbox for shipping as billing address is checked
     ::::::::::::::::::::::::
   */
-      // console.log('checbox checked: ', targetCheckbox.checked);
 
       if (!targetCheckbox.checked && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');

@@ -325,4 +325,3 @@ export async function confirmPayment(stripe, secretKey, returnUrl, paymentMethod
   });
   return confirmingPayment;
 }
-

@@ -60,7 +60,6 @@ export const mycart = async () => {
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   const basketDetail = await getBasketDetails();
-  //  if (basketDetail) console.log("basketdetaill", basketDetail);
   let totalProductQuantity;
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
