@@ -16,8 +16,6 @@ export default async function decorate(block) {
     window.nextResults = () => {
       if (resourcePager.state.hasNextPage) {
         resourcePager.nextPage();
-      } else {
-        console.warn('🚫 No more pages');
       }
     };
 

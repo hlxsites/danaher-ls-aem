@@ -23,6 +23,7 @@ export function extractJsonFromHtml(rootElement) {
   try {
     return JSON.parse(jsonSnippet);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Error parsing JSON:', err);
     return null;
   }
