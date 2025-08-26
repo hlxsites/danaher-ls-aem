@@ -794,7 +794,7 @@ export default function decorate(block) {
   //     loadSFDCForm(cols[1]);
   //   }
   // }
-  loadSFDCForm(cols[1]);
+  //loadSFDCForm(cols[1]);
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
