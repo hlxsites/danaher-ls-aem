@@ -815,7 +815,10 @@ document.querySelectorAll('.columns-wrapper').forEach(wrapper => {
   const cols = wrapper.querySelectorAll('div[class*="lg:w-"]');
   if (cols.length > 1) {
     cols[1].classList.add('relative');
-     loadSFDCForm(cols[1]);
+    const formBlock = cols[1].querySelector('.form'); 
+    if (formBlock) {
+      loadSFDCForm(cols[1]);
+    }
   }
 });
 
