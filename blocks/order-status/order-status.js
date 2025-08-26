@@ -12,7 +12,7 @@ import { getApiData } from '../../scripts/api-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
 
-let totalOrdersPlaced = '';
+// let totalOrdersPlaced = '';
 const orderDetails = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -29,7 +29,7 @@ const orderDetails = async () => {
     const response = await getApiData(url, defaultHeader);
     if (response) {
       const orderDetailResponse = response.data;
-      totalOrdersPlaced = orderDetailResponse.data.length;
+      // totalOrdersPlaced = orderDetailResponse.data.length;
       // if (totalOrdersPlaced < 10) {
       return orderDetailResponse.data;
       // }
@@ -168,7 +168,14 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
         creationDate: element.creationDate,
         orderTotal: element.totals.grandTotal.gross.value,
       };
-      return tableRow(order.orderId, order.order, order.po, order.status, order.creationDate, order.orderTotal);
+      return tableRow(
+        order.orderId,
+        order.order,
+        order.po,
+        order.status,
+        order.creationDate,
+        order.orderTotal,
+      );
     },
   );
 

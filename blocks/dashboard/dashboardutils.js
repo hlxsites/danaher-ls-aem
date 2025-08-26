@@ -315,7 +315,7 @@ export const requestedQuotes = async () => {
   } else {
     window.location.href = '/us/en/e-buy/login';
   }
-  console.log("customerNo", customerNo, userId);
+  console.log('customerNo', customerNo, userId);
   const url = `${baseURL}/customers/${customerNo}/users/${userId}/quoterequests?attrs=number,name,lineItems,creationDate,validFromDate,validToDate,rejected`;
 
   try {
@@ -336,7 +336,7 @@ export const requestedQuotes = async () => {
 };
 
 export const userOrderDetails = async (orderId) => {
-   const authenticationToken = await getAuthenticationToken();
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     // window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
@@ -351,7 +351,7 @@ export const userOrderDetails = async (orderId) => {
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
-      console.log("response", response);
+      console.log('response', response);
       const userOrderDetailResponse = response.data;
       return userOrderDetailResponse;
     }
@@ -361,4 +361,4 @@ export const userOrderDetails = async (orderId) => {
     return { status: 'error', data: 'Exception occurred, redirecting.' };
     // return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
-}
+};

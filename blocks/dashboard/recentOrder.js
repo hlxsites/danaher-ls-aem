@@ -176,18 +176,17 @@ const recentOrders = async () => {
     }, 'No Recent Requested Quotes'),
   );
 
-  const recentOrder = 
-    div(
+  const recentOrder = div(
     {
       class: 'flex-1 flex justify-start items-start gap-6',
     },
     div(
-    {
-      class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
-    },
-    
-  )
-  
+      {
+        class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
+      },
+
+    ),
+
   );
 
   const recentOrderWrapper = div(
@@ -196,8 +195,7 @@ const recentOrders = async () => {
     },
   );
   recentOrder.append(recentOrderWrapper);
-  
-  
+
   const recentOrderDiv = div(
     {
       class: 'self-stretch inline-flex flex-col justify-start gap-5',
@@ -208,7 +206,6 @@ const recentOrders = async () => {
     }, 'Recent Orders'),
   );
   recentOrderWrapper.append(recentOrderDiv);
-
 
   // orderDetailResponse.length === 0 ?
   //  recentOrderDiv.append(noOrdersDiv) :
@@ -293,20 +290,17 @@ const recentOrders = async () => {
     return topRequestedQuoteDiv;
   };
 
-
-
-const recentQuotes = 
-    div(
+  const recentQuotes = div(
     {
       class: 'flex-1 flex justify-start items-start gap-6',
     },
     div(
-    {
-      class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
-    },
-    
-  )
-  
+      {
+        class: 'flex-1 inline-flex flex-col justify-start items-start gap-4 overflow-hidden',
+      },
+
+    ),
+
   );
 
   const recentQuotesWrapper = div(
@@ -315,10 +309,6 @@ const recentQuotes =
     },
   );
   recentQuotes.append(recentQuotesWrapper);
-
-
-
-
 
   const recentQuoteDiv = div(
     {

@@ -222,7 +222,7 @@ export const recommendedProduct = [
     minOrderQuantity: 1,
     productBundle: false,
     manufacturer: 'Beckman Coulter Life Sciences',
-     listPrice: {
+    listPrice: {
       type: 'ProductPrice',
       value: 1653.0,
       currencyMnemonic: 'USD',
