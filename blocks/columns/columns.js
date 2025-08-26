@@ -788,33 +788,27 @@ export default function decorate(block) {
     });
   });
 
-  // Form Load
-
-  // Form Load
-  
-  // For each section with columns
-document.querySelectorAll('.columns-wrapper').forEach(wrapper => {
-  // Find all <p> tags inside this columns-wrapper
-  wrapper.querySelectorAll('p').forEach(p => {
-    if (p.textContent.trim() === 'relative') {
-      // Add 'relative' class to the correct parent (column div)
-      const colDiv = p.parentElement.parentElement;
-      colDiv.classList.add('relative');
-      p.remove();
-
-      // Find all direct column children of this wrapper
-      const cols = wrapper.querySelectorAll('> div > div[class*="lg:w-"]'); // Adjust selector to your actual columns
-      if (cols.length > 1) {
-        // Check if form block exists and not loaded yet
-        const formBlock = cols[1].querySelector('.form');
-        const hasFormElement = cols[1].querySelector('form');
-        if (formBlock && !hasFormElement) {
-          loadSFDCForm(cols[1]);
-        }
-      }
+  // Form Load  
+  document.querySelectorAll('.columns-wrapper p').forEach(p => {
+  // Check if the <p> contains the text "relative"
+  if (p.textContent.trim() === 'relative') {
+    // Add class to parent <div>
+    p.parentElement.parentElement.classList.add('relative');
+    p.remove();
+    // Form Load
+    if (cols.length > 1) {
+      loadSFDCForm(cols[1]);
     }
-  });
+  }
 });
+
+// if (cols.length > 1) {
+//     const formBlock = cols[1].querySelector('.form');
+//     const hasFormElement = cols[1].querySelector('form');
+//     if (formBlock && !hasFormElement) {
+//       loadSFDCForm(cols[1]);
+//     }
+//   }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
