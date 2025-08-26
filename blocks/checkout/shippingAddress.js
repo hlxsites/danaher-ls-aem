@@ -342,10 +342,6 @@ click use address button to set the address as default for current order
             const getCurrentBasketDetails = await getBasketDetails();
             const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
             const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
-            console.log('type: ', type);
-            console.log('useAddressId: ', useAddressId);
-            console.log('basketShipToAddress?.split(":")[4]: ', basketShipToAddress?.split(':')[4]);
-            console.log('basketInvoiceToAddress?.split(":")[4]: ', basketInvoiceToAddress?.split(':')[4]);
             const shipToId = basketShipToAddress?.split(':')[4];
             const invoiceToId = basketInvoiceToAddress?.split(':')[4];
 

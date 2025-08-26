@@ -294,3 +294,35 @@ export async function setUseCard(paymentMethodId) {
   }
   return { status: 'error', data: {} };
 }
+/*
+*
+:::::: confirm setup ::::::
+*
+*/
+export async function confirmSetup(stripe, elements, returnUrl) {
+  const confirmSetupCall = await stripe.confirmSetup({
+    elements,
+    confirmParams: {
+      return_url: returnUrl,
+    },
+    redirect: 'if_required',
+  });
+  return confirmSetupCall;
+}
+/*
+*
+:::::: confirm Payment ::::::
+*
+*/
+export async function confirmPayment(stripe, secretKey, returnUrl, paymentMethod) {
+  const confirmingPayment = await stripe.confirmPayment({
+    clientSecret: secretKey,
+    confirmParams: {
+      return_url: returnUrl,
+      payment_method: paymentMethod,
+    },
+    redirect: 'if_required',
+  });
+  return confirmingPayment;
+}
+

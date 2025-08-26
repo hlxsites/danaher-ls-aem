@@ -296,7 +296,7 @@ const shippingMethodsModule = async () => {
        ::::::::::::::
        */
       const shippingMethods = await getShippingMethods();
-      if (shippingMethods?.data.length > 0) {
+      if (shippingMethods?.data?.length > 0 && shippingMethods?.status === 'success') {
         const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
           '#modulesMethodsItemsWrapper',
         );
@@ -316,7 +316,7 @@ const shippingMethodsModule = async () => {
              generates shipping methods cards
              ::::::::::::::::::::::::::::::::::::::::
              */
-            shippingMethods?.data.forEach((method) => {
+            shippingMethods?.data?.forEach((method) => {
               const methodData = div(
                 {
                   id: method.id,

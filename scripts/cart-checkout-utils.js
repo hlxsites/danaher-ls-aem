@@ -48,6 +48,8 @@ import {
   updateCardForOrder,
   postPaymentIntent,
   postSetupIntent,
+  confirmSetup,
+  confirmPayment,
 } from './stripe_utils.js';
 import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
 import { getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
@@ -398,8 +400,6 @@ export const submitOrder = async (basketId, paymentMethod) => {
       });
       response = await postApiData(url, data, defaultHeader);
     }
-    console.log('Payment method: ', paymentMethod);
-    console.log('Payment basketId: ', basketId);
 
     if (paymentMethod === 'stripe') {
       const defaultHeader = new Headers({
@@ -1652,16 +1652,15 @@ export const changeStep = async (step) => {
         const elements = getStripeElements();
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-        /*
-        *
-        :::::::::::
-        Get Payment Intent
-        ::::::::::
-        *
-        */
+          /*
+          *
+          :::::::::::
+          Get Payment Intent
+          ::::::::::
+          *
+          */
           const getPaymentIntentData = await getPaymentIntent();
           if (getPaymentIntentData?.status !== 'success') throw new Error('Error Processing Request');
-          // console.log('Getting Payment Intent...', getPaymentIntentData);
         }
 
         /*
@@ -1673,16 +1672,15 @@ export const changeStep = async (step) => {
         */
         const postingIntent = await postPaymentIntent();
         if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
-        console.log('Post Payment Intent...', postingIntent);
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-        /*
-        *
-        :::::::::::
-        Post Setup Intent
-        ::::::::::
-        *
-        */
+          /*
+          *
+          :::::::::::
+          Post Setup Intent
+          ::::::::::
+          *
+          */
           settingIntent = await postSetupIntent();
           if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
         }
@@ -1696,8 +1694,7 @@ export const changeStep = async (step) => {
         // eslint-disable-next-line max-len
         const createInstrument = await createPaymentInstrument(paymentMethod, postingIntent?.data?.id, postingIntent?.data?.client_secret);
         if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
-        console.log('Creating Instrument...', createInstrument);
-        
+
         const instrumentId = createInstrument?.data?.data?.id;
         if (!instrumentId) throw new Error('Instrument ID missing.');
 
@@ -1710,7 +1707,6 @@ export const changeStep = async (step) => {
         */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
         if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
-        console.log('Assigning Instrument...', assignInstrument);
 
         // parameters to validate basket for payment
         const validateBasketData = {
@@ -1719,6 +1715,7 @@ export const changeStep = async (step) => {
             'Payment',
           ],
         };
+
         /*
         *
         :::::::::::
@@ -1729,88 +1726,73 @@ export const changeStep = async (step) => {
         const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
-
-        console.log('Basket Validated for Pyament...', validateBasketData);
-
-        let confirmBillingDetails = '';
         let confirmPM = '';
 
-        /*
-        *
-        :::::::::::
-        confirm payment method :::: for saved cards
-        ::::::::::
-        *
-        */
         if (selectedStripeMethod === 'savedCard') {
+          /*
+          *
+          :::::::::::
+          confirm payment method ::::
+          ::::::::::
+          *
+          */
           const getPreConfirmedPI = await getPaymentIntent();
           if (getPreConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+
           // eslint-disable-next-line max-len
           const getPreConfirmedPIData = getPreConfirmedPI?.data?.data?.filter((dat) => dat?.id === useStripeCardId);
           if (!getPreConfirmedPIData) throw new Error('Payment intent ID missing.');
-          confirmBillingDetails = getPreConfirmedPIData[0]?.billing_details;
           confirmPM = getPreConfirmedPIData[0]?.id;
-          console.log('Pre Confirm Payment Intent...', confirmBillingDetails);
-          console.log('Pre Confirm Payment Intentdata getPreConfirmedPIData...', getPreConfirmedPIData);
         }
-
-        let confirmPayment = '';
-        if (selectedStripeMethod === 'savedCard') {
         /*
         *
         :::::::::::
-        confirm payment :::: final step for existing card
+        confirm setup ::::
         ::::::::::
         *
         */
-          confirmPayment = await stripe.confirmPayment({
-            clientSecret: postingIntent?.data?.client_secret,
-            confirmParams: {
-              return_url: `${window.location.origin}/payment`,
-              payment_method: confirmPM,
-            },
-            redirect: 'if_required',
-          });
-        }
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-        /*
-        *
-        :::::::::::
-        confirm payment :::: final step
-        ::::::::::
-        *
-        */
-          confirmPayment = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-              return_url: `${window.location.origin}/payment`,
-            },
-            redirect: 'if_required',
-          });
+          const confirmingSetup = await confirmSetup(stripe, elements, `${window.location.origin}/payment`);
+
+          // if stripe setup confirmed, move to confirm payment
+          const confirmSetupStatus = confirmingSetup?.setupIntent?.status;
+          // if stripe setup confirmed, move to confirm payment
+          confirmPM = confirmingSetup?.setupIntent?.payment_method;
+          const validConfirmStatus = ['succeeded', 'requires_action'];
+          if (!validConfirmStatus.includes(confirmSetupStatus)) {
+            throw new Error('Error Processing Payment');
+          }
         }
-        console.log('Confirming Payment...', confirmPayment);
-        if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
+        let confirmingPayment = '';
+        if (selectedStripeMethod === 'savedCard') {
+          /*
+          *
+          :::::::::::
+          confirm payment :::: final step
+          ::::::::::
+          *
+          */
+          confirmingPayment = await confirmPayment(stripe, postingIntent?.data?.client_secret, `${window.location.origin}/payment`, confirmPM);
+        }
+        if (confirmingPayment?.error) throw new Error(`Error: ${confirmingPayment.error.message}`);
 
         /*
         *
         :::::::::::
-        validating confirm-payment status from stripe
+        validating confirm-payment status
         ::::::::::
         *
         */
-        const status = confirmPayment?.paymentIntent?.status;
+        const status = confirmingPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
 
-        const paymentMethodId = confirmPayment?.paymentIntent?.payment_method;
-        // console.log(' Retrieve this Payment Method: ', paymentMethodId);
+        const paymentMethodId = confirmingPayment?.paymentIntent?.payment_method;
+
         // Call get payment-intent API
 
         const getConfirmedPI = await getPaymentIntent();
         if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        // console.log(' Get getConfirmedPI Payment Intent...', getConfirmedPI);
-        // addressElement = elements.getElement('address')
-        // get payment intent id
         // eslint-disable-next-line max-len
         const getConfirmedPID = getConfirmedPI?.data?.data?.filter((dat) => dat?.id === paymentMethodId);
         if (!getConfirmedPID) throw new Error('Payment intent ID missing.');
@@ -1818,7 +1800,6 @@ export const changeStep = async (step) => {
         if (getConfirmedPID[0]?.billing_details?.email) {
           delete getConfirmedPID[0]?.billing_details?.email;
         }
-        console.log('gPIID : ', getConfirmedPID[0]);
 
         // add selected card to order
         const updatingCardData = {
@@ -1840,15 +1821,12 @@ export const changeStep = async (step) => {
 
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        console.log('Submitting Order...');
-        return false;
         // payment confirmed from Stripe, now submitting order
 
         const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
-        console.log('Order Submitted...', submittingOrder);
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
@@ -2094,7 +2072,6 @@ get counrty field and attach change event listener to populate states based on c
        used for initial shipping and billing form
        ::::::::::::::
        */
-      console.log(' submitting form : 1976');
 
       const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
       if (!isDefaultSBForm) {
@@ -2144,7 +2121,6 @@ get counrty field and attach change event listener to populate states based on c
         method,
         formObject,
       );
-      console.log('form submit response: ', addAddressResponse);
 
       if (addAddressResponse?.status === 'success') {
         if (addAddressResponse?.data?.type === 'Link') {

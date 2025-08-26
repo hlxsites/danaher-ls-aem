@@ -228,8 +228,8 @@ const paymentModule = async () => {
     let defaultCard = '';
     if (getDefaultCard?.status !== 'success') throw new Error('Error getting default card');
 
-    const setPaymentIntent = await postSetupIntent();
-    if (setPaymentIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
+    const postingSetupIntent = await postSetupIntent();
+    if (postingSetupIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
 
     defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
     if (checkSavedStripeCards?.length > 0) {
@@ -359,7 +359,6 @@ const paymentModule = async () => {
     savedStripeCardsWrapper.append(savedStripeCardsList);
     stripeCardsContainer.append(savedStripeCardsWrapper);
     let getPI;
-    let postPI;
     let addressElements;
     let paymentElements;
     let addressOptions;
@@ -401,11 +400,9 @@ const paymentModule = async () => {
         paymentMethodsWrapper?.append(stripeCardsWrapper);
         getPI = getSavedStripeCardsList;
         if (getPI?.status === 'success') {
-          postPI = await postPaymentIntent();
-
-          if (postPI?.status === 'success') {
-            const postPIData = postPI?.data || '';
-            const clientSecret = postPIData?.client_secret || '';
+          if (postingSetupIntent?.status === 'success') {
+            const postSIData = postingSetupIntent?.data || '';
+            const clientSecret = postSIData?.client_secret || '';
             if (clientSecret) {
               const appearance = {
                 theme: 'stripe',
@@ -450,15 +447,17 @@ const paymentModule = async () => {
               };
 
               stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
-              if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
-                // mount address elements
-                addressElements = stripeElements.create('address', addressOptions);
-                addressElements.mount('#newStripeCardAddressWrapper');
+              setTimeout(() => {
+                if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
+                  // mount address elements
+                  addressElements = stripeElements.create('address', addressOptions);
+                  addressElements.mount('#newStripeCardAddressWrapper');
 
-                // mount payment elements
-                paymentElements = stripeElements.create('payment', options);
-                paymentElements.mount('#newStripeCardPaymentWrapper');
-              }
+                  // mount payment elements
+                  paymentElements = stripeElements.create('payment', options);
+                  paymentElements.mount('#newStripeCardPaymentWrapper');
+                }
+              }, 0);
             }
           }
         }
@@ -647,8 +646,6 @@ const paymentModule = async () => {
 
     // show new cards wrapper when clicked add new card
     savedStripeCardsHeader?.querySelector('#addNewStripeCard')?.addEventListener('click', () => {
-      console.log(' selectedStripeMethod : ');
-      
       sessionStorage.setItem('selectedStripeMethod', 'newCard');
       const newAddressCheckbox = document.querySelector('#newAddress');
       if (newAddressCheckbox) newAddressCheckbox.checked = true;
@@ -761,7 +758,7 @@ const paymentModule = async () => {
         if (currentTarget.name === 'defaultStripeCard') {
           targetCheckbox = currentTarget;
         }
-        if (!targetCheckbox) return;
+        if (!targetCheckbox) return false;
 
         if (targetCheckbox) {
           showPreLoader();

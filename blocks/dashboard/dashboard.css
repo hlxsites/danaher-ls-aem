@@ -221,10 +221,6 @@
   align-items: center
 }
 
-.dashboard-wrapper :is(.items-baseline) {
-  align-items: baseline
-}
-
 .dashboard-wrapper :is(.justify-start) {
   justify-content: flex-start
 }
@@ -397,12 +393,12 @@
   padding-bottom: 1.5rem
 }
 
-.dashboard-wrapper :is(.pl-2) {
-  padding-left: 0.5rem
-}
-
 .dashboard-wrapper :is(.pl-4) {
   padding-left: 1rem
+}
+
+.dashboard-wrapper :is(.pl-6) {
+  padding-left: 1.5rem
 }
 
 .dashboard-wrapper :is(.pl-9) {
@@ -411,10 +407,6 @@
 
 .dashboard-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.dashboard-wrapper :is(.pl-6) {
-  padding-left: 1.5rem
 }
 
 .dashboard-wrapper :is(.\!text-4xl) {
