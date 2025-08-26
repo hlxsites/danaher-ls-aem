@@ -1650,6 +1650,8 @@ export const changeStep = async (step) => {
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
         const elements = getStripeElements();
+        const addressElements = elements.getElements('address');
+        const paymentElements = elements.getElements('payment');
 
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
@@ -1751,6 +1753,7 @@ export const changeStep = async (step) => {
         ::::::::::
         *
         */
+        let proceedTopayment = 'false';
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           const confirmingSetup = await confirmSetup(stripe, elements, `${window.location.origin}/payment`);
 
@@ -1762,9 +1765,14 @@ export const changeStep = async (step) => {
           if (!validConfirmStatus.includes(confirmSetupStatus)) {
             throw new Error('Error Processing Payment');
           }
+          if (confirmSetupStatus === 'succeeded') {
+            addressElements.clear();
+            paymentElements.clear();
+          }
+          proceedTopayment = 'true';
         }
         let confirmingPayment = '';
-        if (selectedStripeMethod === 'savedCard') {
+        if (selectedStripeMethod === 'savedCard' || proceedTopayment) {
           /*
           *
           :::::::::::
