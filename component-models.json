@@ -972,6 +972,15 @@
     "fields": [
       {
         "component": "text",
+        "name": "className",
+        "type": "string",
+        "label": "Block Class Name",
+        "required": false,
+        "description": "CSS class name for the form block container.",
+        "value": "default-form-block"
+      },
+      {
+        "component": "text",
         "name": "formId",
         "type": "string",
         "label": "Form Id",
