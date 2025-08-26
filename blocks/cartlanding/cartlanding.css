@@ -500,8 +500,8 @@
   width: 40rem
 }
 
-.cartlanding-wrapper :is(.w-\[737px\]) {
-  width: 737px
+.cartlanding-wrapper :is(.w-\[70\%\]) {
+  width: 70%
 }
 
 .cartlanding-wrapper :is(.w-\[7rem\]) {
@@ -510,10 +510,6 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
-}
-
-.cartlanding-wrapper :is(.w-\[70\%\]) {
-  width: 70%
 }
 
 .cartlanding-wrapper :is(.max-w-2xl) {
