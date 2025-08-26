@@ -70,7 +70,7 @@ export async function getPaymentIntent() {
 }
 
 // post payment intent
-export async function postPaymentIntent() {
+export async function postPaymentIntent(intentType = '') {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -83,7 +83,7 @@ export async function postPaymentIntent() {
     'authentication-token',
     authenticationToken.access_token,
   );
-  const pIntentBody = JSON.stringify({ type: 'Card' });
+  const pIntentBody = JSON.stringify({ type: intentType });
   const response = await postApiData(pIntentUrl, pIntentBody, pIntentHeaders);
   if (response?.status === 'success') {
     return response;
