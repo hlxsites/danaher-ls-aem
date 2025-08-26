@@ -147,7 +147,7 @@ export function showNotification(content, type) {
 /*
 *
 *
-::::::::::: Scroll View to Top
+::::::::::: Scroll View to Top ::::::::
 *
 */
 export function scrollViewToTop() {

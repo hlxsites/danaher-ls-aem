@@ -365,6 +365,25 @@ const paymentModule = async () => {
     let addressElements;
     let paymentElements;
     let addressOptions;
+    const options = {
+      setup_future_usage: 'off_session',
+      layout: {
+        type: 'tabs',
+        defaultCollapsed: false,
+        radios: true,
+        spacedAccordionItems: true,
+      },
+      fields: {
+        cardDetails: {
+          cardHolderName: 'auto',
+        },
+        billingDetails: {
+          address: 'auto',
+          name: 'auto',
+        },
+      },
+    };
+
     allPaymentMethods?.data?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
@@ -430,25 +449,6 @@ const paymentModule = async () => {
               addressOptions = {
                 mode: 'billing', display: {}, blockPoBox: true, fields: { phone: 'always' },
               };
-              const options = {
-                setup_future_usage: 'off_session',
-                layout: {
-                  type: 'tabs',
-                  defaultCollapsed: false,
-                  radios: true,
-                  spacedAccordionItems: true,
-                },
-                fields: {
-                  cardDetails: {
-                    cardHolderName: 'auto',
-                  },
-                  billingDetails: {
-                    address: 'auto',
-                    name: 'auto',
-                  },
-                },
-              };
-
               stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
               setTimeout(() => {
                 if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {

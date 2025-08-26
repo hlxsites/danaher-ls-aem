@@ -1684,6 +1684,28 @@ export const changeStep = async (step) => {
         const addressElements = elements.getElement('address');
         const paymentElements = elements.getElement('payment');
 
+        let confirmPM = '';
+        /*
+        *
+        :::::::::::
+        confirm setup ::::
+        ::::::::::
+        *
+        */
+        let proceedTopayment = 'false';
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          const confirmingSetup = await confirmSetup(stripe, elements, `${window.location.origin}/payment`);
+
+          // if stripe setup confirmed, move to confirm payment
+          const confirmSetupStatus = confirmingSetup?.setupIntent?.status;
+          // if stripe setup confirmed, move to confirm payment
+          confirmPM = confirmingSetup?.setupIntent?.payment_method;
+          const validConfirmStatus = ['succeeded', 'requires_action'];
+          if (!validConfirmStatus.includes(confirmSetupStatus)) {
+            throw new Error('Error Processing Payment');
+          }
+          proceedTopayment = 'true';
+        }
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
           *
@@ -1759,7 +1781,6 @@ export const changeStep = async (step) => {
         const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
-        let confirmPM = '';
 
         if (selectedStripeMethod === 'savedCard') {
           /*
@@ -1776,31 +1797,6 @@ export const changeStep = async (step) => {
           const getPreConfirmedPIData = getPreConfirmedPI?.data?.data?.filter((dat) => dat?.id === useStripeCardId);
           if (!getPreConfirmedPIData) throw new Error('Payment intent ID missing.');
           confirmPM = getPreConfirmedPIData[0]?.id;
-        }
-        /*
-        *
-        :::::::::::
-        confirm setup ::::
-        ::::::::::
-        *
-        */
-        let proceedTopayment = 'false';
-        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
-          const confirmingSetup = await confirmSetup(stripe, elements, `${window.location.origin}/payment`);
-
-          // if stripe setup confirmed, move to confirm payment
-          const confirmSetupStatus = confirmingSetup?.setupIntent?.status;
-          // if stripe setup confirmed, move to confirm payment
-          confirmPM = confirmingSetup?.setupIntent?.payment_method;
-          const validConfirmStatus = ['succeeded', 'requires_action'];
-          if (!validConfirmStatus.includes(confirmSetupStatus)) {
-            throw new Error('Error Processing Payment');
-          }
-          if (confirmSetupStatus === 'succeeded') {
-            addressElements.unmount();
-            paymentElements.unmount();
-          }
-          proceedTopayment = 'true';
         }
         let confirmingPayment = '';
         if (selectedStripeMethod === 'savedCard' || proceedTopayment) {
@@ -1878,6 +1874,15 @@ export const changeStep = async (step) => {
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
+        /*
+        *
+        :::::::: Unmounting the stripe elements :::::::
+        *
+        */
+        if (proceedTopayment && proceedTopayment === 'true') {
+          addressElements?.unmount();
+          paymentElements?.unmount();
+        }
         /*
         *
         :::::::: Clear Session :::::::
@@ -2402,7 +2407,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2805,7 +2810,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
