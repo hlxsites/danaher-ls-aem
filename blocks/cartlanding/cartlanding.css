@@ -512,6 +512,10 @@
   width: 100%
 }
 
+.cartlanding-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
 .cartlanding-wrapper :is(.max-w-2xl) {
   max-width: 42rem
 }
