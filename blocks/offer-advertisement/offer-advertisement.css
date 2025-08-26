@@ -34,11 +34,9 @@
   width: 100%
 }
 
-
 .offer-advertisement-wrapper :is(.flex-col) {
   flex-direction: column
 }
-
 
 .offer-advertisement-wrapper :is(.items-start) {
   align-items: flex-start
@@ -51,7 +49,6 @@
 .offer-advertisement-wrapper :is(.justify-start) {
   justify-content: flex-start
 }
-
 
 .offer-advertisement-wrapper :is(.gap-1) {
   gap: 0.25rem
@@ -157,8 +154,6 @@
 }
 
 @media (min-width: 768px) {
-
-
   .offer-advertisement-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
@@ -175,7 +170,6 @@
     padding-left: 3rem;
     padding-right: 3rem
   }
-
 }
 
 @media (min-width: 1024px) {
