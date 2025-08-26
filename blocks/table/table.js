@@ -1,41 +1,35 @@
 /*
  * Table Block
+ * Recreate a table
+ * https://www.hlx.live/developer/block-collection/table
  */
 
-import {
-  table, tbody, td, thead, tr, th,
-} from '../../scripts/dom-builder.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-function buildCell(rowIndex) {
-  const cell = rowIndex ? td({ class: 'text-left p-2' }) : th({ class: 'text-left font-bold p-2' });
-  if (!rowIndex) cell.setAttribute('scope', 'col');
-  return cell;
-}
-
+/**
+ *
+ * @param {Element} block
+ */
 export default async function decorate(block) {
-  const t = table({
-    class: 'table-auto w-full max-w-full py-6',
-    cellpadding: 1,
-    cellspacing: 0,
-    border: 1,
-  });
-  const head = thead();
-  const body = tbody({ class: 'divide-y divide-gray-200' });
-  t.append(head, body);
-  [...block.children].forEach((child, i) => {
-    const row = tr();
-    if (i) body.append(row);
-    else {
-      row.classList.add(...'border-b border-b-gray-200'.split(' '));
-      head.append(row);
-    }
-    [...child.children].forEach((col) => {
-      const cell = buildCell(i);
-      cell.innerHTML = col.innerHTML;
-      row.append(cell);
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+  const header = !block.classList.contains('no-header');
+
+  [...block.children].forEach((row, i) => {
+    const tr = document.createElement('tr');
+    moveInstrumentation(row, tr);
+
+    [...row.children].forEach((cell) => {
+      const td = document.createElement(i === 0 && header ? 'th' : 'td');
+
+      if (i === 0) td.setAttribute('scope', 'column');
+      td.innerHTML = cell.innerHTML;
+      tr.append(td);
     });
+    if (i === 0 && header) thead.append(tr);
+    else tbody.append(tr);
   });
-  block.innerHTML = '';
-  block.classList.add('w-full', 'overflow-x-auto');
-  block.append(t);
+  table.append(thead, tbody);
+  block.replaceChildren(table);
 }
