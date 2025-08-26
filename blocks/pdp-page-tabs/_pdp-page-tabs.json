@@ -115,7 +115,12 @@
     {
       "id": "pdp-page-tabs",
       "components": [
-        "pdp-tabs-item",
+        "pdp-tabs-item"
+      ]
+    },
+     {
+      "id": "pdp-tabs-item",
+      "components": [
         "columns"
       ]
     }
