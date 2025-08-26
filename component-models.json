@@ -887,6 +887,17 @@
     ]
   },
   {
+    "id": "column",
+    "fields": [
+      {
+        "component": "blocks",
+        "name": "blocks",
+        "label": "Blocks",
+        "valueType": "array"
+      }
+    ]
+  },
+  {
     "id": "dashboard",
     "fields": [
       {
@@ -895,17 +906,6 @@
         "name": "dashboardTitle",
         "value": "",
         "label": "Page Title"
-      }
-    ]
-  },
-  {
-    "id": "column",
-    "fields": [
-      {
-        "component": "blocks",
-        "name": "blocks",
-        "label": "Blocks",
-        "valueType": "array"
       }
     ]
   },

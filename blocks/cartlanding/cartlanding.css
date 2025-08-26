@@ -500,8 +500,8 @@
   width: 40rem
 }
 
-.cartlanding-wrapper :is(.w-\[737px\]) {
-  width: 737px
+.cartlanding-wrapper :is(.w-\[70\%\]) {
+  width: 70%
 }
 
 .cartlanding-wrapper :is(.w-\[7rem\]) {
@@ -597,10 +597,6 @@
 
 .cartlanding-wrapper :is(.items-center) {
   align-items: center
-}
-
-.cartlanding-wrapper :is(.items-baseline) {
-  align-items: baseline
 }
 
 .cartlanding-wrapper :is(.justify-start) {
@@ -1038,10 +1034,6 @@
 
 .cartlanding-wrapper :is(.pl-1\.5) {
   padding-left: 0.375rem
-}
-
-.cartlanding-wrapper :is(.pl-2) {
-  padding-left: 0.5rem
 }
 
 .cartlanding-wrapper :is(.pl-3) {

@@ -140,6 +140,10 @@
   display: flex
 }
 
+.dashboard-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
 .dashboard-wrapper :is(.hidden) {
   display: none
 }
@@ -172,6 +176,10 @@
   height: 2px
 }
 
+.dashboard-wrapper :is(.h-\[118px\]) {
+  height: 118px
+}
+
 .dashboard-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -190,6 +198,18 @@
 
 .dashboard-wrapper :is(.w-full) {
   width: 100%
+}
+
+.dashboard-wrapper :is(.w-\[178px\]) {
+  width: 178px
+}
+
+.dashboard-wrapper :is(.w-\[310px\]) {
+  width: 310px
+}
+
+.dashboard-wrapper :is(.w-\[70\%\]) {
+  width: 70%
 }
 
 .dashboard-wrapper :is(.max-w-2xl) {
@@ -217,12 +237,12 @@
   flex-direction: column
 }
 
-.dashboard-wrapper :is(.items-center) {
-  align-items: center
+.dashboard-wrapper :is(.items-start) {
+  align-items: flex-start
 }
 
-.dashboard-wrapper :is(.items-baseline) {
-  align-items: baseline
+.dashboard-wrapper :is(.items-center) {
+  align-items: center
 }
 
 .dashboard-wrapper :is(.justify-start) {
@@ -253,6 +273,10 @@
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+
+.dashboard-wrapper :is(.self-stretch) {
+  align-self: stretch
 }
 
 .dashboard-wrapper :is(.overflow-scroll) {
@@ -397,12 +421,12 @@
   padding-bottom: 1.5rem
 }
 
-.dashboard-wrapper :is(.pl-2) {
-  padding-left: 0.5rem
-}
-
 .dashboard-wrapper :is(.pl-4) {
   padding-left: 1rem
+}
+
+.dashboard-wrapper :is(.pl-6) {
+  padding-left: 1.5rem
 }
 
 .dashboard-wrapper :is(.pl-9) {
@@ -512,6 +536,10 @@
 
 .dashboard-wrapper :is(.blur) {
   --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.dashboard-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 

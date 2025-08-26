@@ -796,7 +796,7 @@
     @apply min-w-[320px] h-10 rounded-md pl-9;
   }
   #shippingAddressListItemsWrapper {
-    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+    @apply py-8 max-h-[30rem] overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
     [&::-webkit-scrollbar-track]:bg-gray-100
     [&::-webkit-scrollbar-thumb]:bg-gray-300
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700
@@ -948,7 +948,6 @@
    position: relative;
  }
  .checkout-step span {
-   margin-left: -17px;
    color: #000;
  }
  .checkout-progress-bar-icons {
@@ -956,13 +955,13 @@
    display: block;
    height: 9px;
    background-color: none;
-   margin: 9px 0px 9px 9px !important;
+   margin: 9px 0px 12px 8px !important;
    border-radius: 50%;
  }
  .checkout-progress-bar-check {
-    margin: -3px 0 0 -4px !important;
-    width: 33px;
-    height: 33px;
+    margin: -3px 0 0 -2px !important;
+    width: 32px;
+    height: 32px;
  }
  .checkout-step.active {
    border: 1px solid rgb(117 35 255) !important;

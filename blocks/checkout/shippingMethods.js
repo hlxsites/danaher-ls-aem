@@ -1,6 +1,5 @@
 import {
   h2,
-  h5,
   div,
   p,
   textarea,
@@ -9,9 +8,11 @@ import {
 import {
   getStoreConfigurations,
   removePreLoader,
+  scrollViewToTop,
   showNotification,
   showPreLoader,
 } from '../../scripts/common-utils.js';
+// eslint-disable-next-line import/no-cycle
 import { cartItem } from '../cartlanding/cartItem.js';
 import {
   getBasketDetails,
@@ -20,6 +21,8 @@ import {
   updateCheckoutSummary,
   setShippingNotes,
   updateShippingNotes,
+  validateBasket,
+  silentNavigation,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
@@ -113,9 +116,9 @@ if basket has the shipping notes attribute and has value. Update the shipping no
           return false;
         }
         if (setShippingNotesResponse.status === 'success') {
-          showNotification('Order note added successfully.', 'success');
           await updateBasketDetails();
           removePreLoader();
+          showNotification('Order note added successfully.', 'success');
         }
       }
     }
@@ -131,18 +134,30 @@ if basket has the shipping notes attribute and has value. Update the shipping no
  */
 const shippingMethodsModule = async () => {
   if (!window.location.pathname.includes('shipping')) return false;
-  const storeConfigurations = await getStoreConfigurations();
-  /*
-  ::::::::::::::
-  get price type if its net or gross.
-  ::::::::::::::
-  */
-  let checkoutPriceType = 'net';
-  if (storeConfigurations.pricing?.priceType) {
-    checkoutPriceType = storeConfigurations.pricing.priceType;
-  }
-  const currencyCode = '$';
+
+  const validateData = {
+    adjustmentsAllowed: true,
+    scopes: [
+      'InvoiceAddress',
+      'ShippingAddress',
+      'Addresses',
+      'Shipping',
+    ],
+  };
+  const validatingBasket = await validateBasket(validateData);
   try {
+    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
+    const storeConfigurations = await getStoreConfigurations();
+    /*
+    ::::::::::::::
+    get price type if its net or gross.
+    ::::::::::::::
+    */
+    let checkoutPriceType = 'net';
+    if (storeConfigurations.pricing?.priceType) {
+      checkoutPriceType = storeConfigurations.pricing.priceType;
+    }
+    const currencyCode = '$';
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -282,7 +297,7 @@ const shippingMethodsModule = async () => {
        ::::::::::::::
        */
       const shippingMethods = await getShippingMethods();
-      if (shippingMethods?.data.length > 0) {
+      if (shippingMethods?.data?.length > 0 && shippingMethods?.status === 'success') {
         const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
           '#modulesMethodsItemsWrapper',
         );
@@ -302,7 +317,7 @@ const shippingMethodsModule = async () => {
              generates shipping methods cards
              ::::::::::::::::::::::::::::::::::::::::
              */
-            shippingMethods?.data.forEach((method) => {
+            shippingMethods?.data?.forEach((method) => {
               const methodData = div(
                 {
                   id: method.id,
@@ -428,9 +443,12 @@ const shippingMethodsModule = async () => {
 
     return moduleContent;
   } catch (error) {
-    return div(
-      h5({ class: 'text-red' }, 'Error Loading Shipping Address Module.'),
-    );
+    scrollViewToTop();
+    showNotification(error.message, 'error');
+    if (error.message === 'Invalid Basket') {
+      silentNavigation('/us/en/e-buy/addresses');
+    }
+    return false;
   }
 };
 
