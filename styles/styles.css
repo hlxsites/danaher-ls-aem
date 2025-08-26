@@ -4089,7 +4089,6 @@ main .section.top-border {
 }
 
 .checkout-step span {
-  margin-left: -17px;
   color: #000;
 }
 
@@ -4098,14 +4097,14 @@ main .section.top-border {
   display: block;
   height: 9px;
   background-color: none;
-  margin: 9px 0px 9px 9px !important;
+  margin: 9px 0px 12px 8px !important;
   border-radius: 50%;
 }
 
 .checkout-progress-bar-check {
-  margin: -3px 0 0 -4px !important;
-  width: 33px;
-  height: 33px;
+  margin: -3px 0 0 -2px !important;
+  width: 32px;
+  height: 32px;
 }
 
 .checkout-step.active {
