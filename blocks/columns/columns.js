@@ -629,7 +629,7 @@ export default function decorate(block) {
     if (pTag.textContent.trim() === 'TTAE') {
       // Create a new div to act as the form block
       const formDiv = document.createElement('div');
-      formDiv.className = '';
+      formDiv.className = 'form block';
       // Optionally, you can add any data attributes here
 
       // Replace the <p> with the new form block div
