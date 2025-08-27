@@ -764,6 +764,23 @@ export default function decorate(block) {
         });
       }
 
+    // Form load
+      const formBlock = row.querySelector('.form.block');
+      if (formBlock) {
+      const formElement = formBlock.querySelector('form[id]');
+        if (formElement) {
+      // Your SFDC logic here (e.g. add submit handler)
+        formElement.addEventListener('submit', (event) => {
+        // Validate, send inquiry, etc.
+          if (formValidate()) {
+            getInquiry();
+          } else {
+            event.preventDefault();
+          }
+        });
+      }
+    }
+
       const pic = col.querySelector('picture');
       if (pic) {
         const picWrapper = pic.closest('div');
@@ -786,15 +803,6 @@ export default function decorate(block) {
       }
     });
   });
-
-  // Form Load
-  if (cols.length > 1) {
-    const formBlock = cols[1].querySelector('.form');
-    const hasFormElement = cols[1].querySelector('form');
-    if (formBlock && !hasFormElement) {
-      loadSFDCForm(cols[1]);
-    }
-  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
