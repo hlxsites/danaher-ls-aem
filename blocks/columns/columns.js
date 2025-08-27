@@ -623,12 +623,29 @@ export default function decorate(block) {
   // Now get columns (direct children of flexContainer)
   const cols = Array.from(flexContainer.children);
 
-   cols.forEach((col) => {
-    col.querySelectorAll('.form').forEach((formBlock) => {
-      formBlock.innerHTML = '';
-      decorateFormBlock(formBlock);
-    });
+  cols.forEach((col) => {
+  col.querySelectorAll('p').forEach((pTag) => {
+    if (pTag.textContent.trim() === 'TTAE') {
+      // Create a new div to act as the form block
+      const formDiv = document.createElement('div');
+      formDiv.className = 'form block';
+      // Optionally, you can add any data attributes here
+
+      // Replace the <p> with the new form block div
+      pTag.parentNode.replaceChild(formDiv, pTag);
+
+      // Decorate the new form block to inject the form
+      decorateFormBlock(formDiv);
+    }
   });
+});
+
+  //  cols.forEach((col) => {
+  //   col.querySelectorAll('.form').forEach((formBlock) => {
+  //     formBlock.innerHTML = '';
+  //     decorateFormBlock(formBlock);
+  //   });
+  // });
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
