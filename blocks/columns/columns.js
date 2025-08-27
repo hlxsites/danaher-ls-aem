@@ -630,7 +630,7 @@ export default function decorate(block) {
       // Create new form block
       const formDiv = document.createElement('div');
       formDiv.className = 'form block';
-      formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
+      // formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
 
       // Replace <p> with form block
       pTag.parentNode.replaceChild(formDiv, pTag);
