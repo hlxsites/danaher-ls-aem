@@ -306,8 +306,8 @@ async function loadSFDCForm(block) {
       ),
     ),
   );
-  decorateIcons(formEl);
-  block.innerHTML = '';
+  // block.innerHTML = '';
+  decorateIcons(formEl); 
   block.append(formEl);
   loadUTMParams();
 
@@ -364,5 +364,6 @@ async function loadSFDCForm(block) {
 
 export default function decorate(block) {
   block.classList.add('relative');
+   block.innerHTML = '';
    loadSFDCForm(block);
 }

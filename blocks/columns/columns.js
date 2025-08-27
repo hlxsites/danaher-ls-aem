@@ -624,7 +624,7 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
    cols.forEach((col) => {
-    col.querySelectorAll('.form').forEach((formBlock) => {
+    col.querySelectorAll('.form.block').forEach((formBlock) => {
       decorateFormBlock(formBlock);
     });
   });
@@ -771,25 +771,10 @@ export default function decorate(block) {
       }
 
     // Form load
-      const formBlock = row.querySelector('.form');
-      if (formBlock) {
-        // If the form is not injected yet (i.e. no <form> present), inject it
-        if (!formBlock.querySelector('form')) {
-          decorateFormBlock(formBlock);
-        }
-        // Always ensure event listener is attached (avoid duplicates!)
-        const formElement = formBlock.querySelector('form[id]');
-        if (formElement) {
-          formElement.addEventListener('submit', (event) => {
-            if (formValidate()) {
-              getInquiry();
-            } else {
-              event.preventDefault();
-            }
-          });
-          formElement = true; // mark to avoid duplicate listeners
-        }
-      }
+      const formBlock = row.querySelector('.form.block');
+       if (formBlock) {
+    decorateFormBlock(formBlock);
+  }
 
 
       const pic = col.querySelector('picture');
