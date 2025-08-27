@@ -634,7 +634,7 @@ export default function decorate(block) {
 
       // Replace the <p> with the new form block div
       pTag.parentNode.replaceChild(formDiv, pTag);
-      block.innerHTML = '';
+      formDiv.innerHTML = '';
 
       // Decorate the new form block to inject the form
       decorateFormBlock(formDiv);
