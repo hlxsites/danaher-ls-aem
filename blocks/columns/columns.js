@@ -256,6 +256,7 @@ async function loadForm(row, tags) {
   tags.forEach((ele, index) => {
     if (index === 0) {
       formId = ele.textContent;
+      console.log('formId', formId);
     }
     if (index === 1) {
       formName = ele.textContent;

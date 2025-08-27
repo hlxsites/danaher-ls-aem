@@ -214,14 +214,9 @@ function loadUTMParams() {
 
 async function loadSFDCForm(block) {
   const formIdEl = block?.firstElementChild;
-  console.log('formIdEl', formIdEl);
-  // const formId = block.children[0]?.textContent.trim();
   const formId = formIdEl?.firstElementChild?.textContent;
-  console.log('formId', formId);
   const formNameEl = formIdEl?.nextElementSibling;
-  const formName = block.children[1]?.textContent.trim();
-  // const formName = block?.firstElementChild?.nextElementSibling?.textContent;
-  console.log('formName', formName);
+  const formName = block?.firstElementChild?.nextElementSibling?.textContent;
   const clientIdEl = formNameEl?.nextElementSibling;
   const clientId = formNameEl?.nextElementSibling?.textContent;
   const deExternalKeyEl = clientIdEl?.nextElementSibling;
@@ -311,7 +306,7 @@ async function loadSFDCForm(block) {
       ),
     ),
   );
-  // block.innerHTML = '';
+  block.innerHTML = '';
   decorateIcons(formEl);
   block.append(formEl);
   loadUTMParams();
