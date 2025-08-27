@@ -767,19 +767,24 @@ export default function decorate(block) {
     // Form load
       const formBlock = row.querySelector('.form.block');
       if (formBlock) {
-      const formElement = formBlock.querySelector('form[id]');
-        if (formElement) {
-      // Your SFDC logic here (e.g. add submit handler)
-        formElement.addEventListener('submit', (event) => {
-        // Validate, send inquiry, etc.
-          if (formValidate()) {
-            getInquiry();
-          } else {
-            event.preventDefault();
-          }
-        });
+        // If the form is not injected yet (i.e. no <form> present), inject it
+        if (!formBlock.querySelector('form')) {
+          loadSFDCForm(formBlock);
+        }
+        // Always ensure event listener is attached (avoid duplicates!)
+        const formElement = formBlock.querySelector('form[id]');
+        if (formElement && !formElement._sfdcListenerAttached) {
+          formElement.addEventListener('submit', (event) => {
+            if (formValidate()) {
+              getInquiry();
+            } else {
+              event.preventDefault();
+            }
+          });
+          formElement._sfdcListenerAttached = true; // mark to avoid duplicate listeners
+        }
       }
-    }
+
 
       const pic = col.querySelector('picture');
       if (pic) {

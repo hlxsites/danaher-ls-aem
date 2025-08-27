@@ -213,22 +213,45 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
-  const formIdEl = block?.firstElementChild;
-  const formId = formIdEl?.firstElementChild?.textContent;
-  const formNameEl = formIdEl?.nextElementSibling;
-  const formName = block?.firstElementChild?.nextElementSibling?.textContent;
-  const clientIdEl = formNameEl?.nextElementSibling;
-  const clientId = formNameEl?.nextElementSibling?.textContent;
-  const deExternalKeyEl = clientIdEl?.nextElementSibling;
-  const deExternalKey = deExternalKeyEl?.textContent;
-  const actionEl = deExternalKeyEl?.nextElementSibling;
-  const action = actionEl?.textContent;
-  const inquiryTypeEl = actionEl?.nextElementSibling;
-  const inquiryType = inquiryTypeEl?.textContent;
-  const successUrlEl = inquiryTypeEl?.nextElementSibling;
-  const successUrl = successUrlEl?.textContent;
-  const errorUrlEl = successUrlEl?.nextElementSibling;
-  const errorUrl = errorUrlEl?.textContent;
+  let formId = '';   // fallback/default
+  let formName = '';
+  let clientId = '';
+  let deExternalKey = '';
+  let action = '';
+  let inquiryType = '';
+  let successUrl = '';
+  let errorUrl = '';
+
+  // Example extraction (ONLY IF authoring markup present):
+  if (block.children.length > 0 && block.firstElementChild.children.length > 0) {
+    // Adjust logic here if your authoring provides these as divs/p tags
+    formId = block.firstElementChild.children[0]?.textContent?.trim() || formId;
+    formName = block.firstElementChild.children[1]?.textContent?.trim() || formName;
+    clientId = block.firstElementChild.children[2]?.textContent?.trim() || clientId;
+    deExternalKey = block.firstElementChild.children[3]?.textContent?.trim() || deExternalKey;
+    action = block.firstElementChild.children[4]?.textContent?.trim() || action;
+    inquiryType = block.firstElementChild.children[5]?.textContent?.trim() || inquiryType;
+    successUrl = block.firstElementChild.children[6]?.textContent?.trim() || successUrl;
+    errorUrl = block.firstElementChild.children[7]?.textContent?.trim() || errorUrl;
+  }
+
+  block.innerHTML = '';
+  // const formIdEl = block?.firstElementChild;
+  // const formId = formIdEl?.firstElementChild?.textContent;
+  // const formNameEl = formIdEl?.nextElementSibling;
+  // const formName = block?.firstElementChild?.nextElementSibling?.textContent;
+  // const clientIdEl = formNameEl?.nextElementSibling;
+  // const clientId = formNameEl?.nextElementSibling?.textContent;
+  // const deExternalKeyEl = clientIdEl?.nextElementSibling;
+  // const deExternalKey = deExternalKeyEl?.textContent;
+  // const actionEl = deExternalKeyEl?.nextElementSibling;
+  // const action = actionEl?.textContent;
+  // const inquiryTypeEl = actionEl?.nextElementSibling;
+  // const inquiryType = inquiryTypeEl?.textContent;
+  // const successUrlEl = inquiryTypeEl?.nextElementSibling;
+  // const successUrl = successUrlEl?.textContent;
+  // const errorUrlEl = successUrlEl?.nextElementSibling;
+  // const errorUrl = errorUrlEl?.textContent;
   const formEl = div(
     { class: 'relative my-2 mx-0 md:ml-2' },
     form(
