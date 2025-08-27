@@ -364,6 +364,6 @@ async function loadSFDCForm(block) {
 
 export default function decorate(block) {
   block.classList.add('relative');
-  block.innerHTML = '';
+  // block.innerHTML = '';
    loadSFDCForm(block);
 }
