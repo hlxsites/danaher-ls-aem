@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import loadSFDCForm from '../form/form.js';
+import decorateFormBlock from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -623,6 +623,12 @@ export default function decorate(block) {
   // Now get columns (direct children of flexContainer)
   const cols = Array.from(flexContainer.children);
 
+   cols.forEach((col) => {
+    col.querySelectorAll('.form.block').forEach((formBlock) => {
+      decorateFormBlock(formBlock);
+    });
+  });
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
@@ -769,7 +775,7 @@ export default function decorate(block) {
       if (formBlock) {
         // If the form is not injected yet (i.e. no <form> present), inject it
         if (!formBlock.querySelector('form')) {
-          loadSFDCForm(formBlock);
+          decorateFormBlock(formBlock);
         }
         // Always ensure event listener is attached (avoid duplicates!)
         const formElement = formBlock.querySelector('form[id]');
