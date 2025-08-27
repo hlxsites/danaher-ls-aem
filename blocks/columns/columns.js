@@ -788,7 +788,7 @@ export default function decorate(block) {
 
   // Form Load
   if (cols.length > 1) {
-    const formBlock = cols[1].querySelector('.form');
+    const formBlock = cols[1].querySelector('form');
     const hasFormElement = cols[1].querySelector('form');
     if (formBlock && !hasFormElement) {
       loadSFDCForm(cols[1]);

@@ -214,7 +214,9 @@ function loadUTMParams() {
 
 async function loadSFDCForm(block) {
   const formIdEl = block?.firstElementChild;
+  console.log('formIdEl', formIdEl);
   const formId = formIdEl?.firstElementChild?.textContent;
+  console.log('formId', formId);
   const formNameEl = formIdEl?.nextElementSibling;
   const formName = block?.firstElementChild?.nextElementSibling?.textContent;
   const clientIdEl = formNameEl?.nextElementSibling;
@@ -363,6 +365,6 @@ async function loadSFDCForm(block) {
 }
 
 export default function decorate(block) {
-  block.classList.add('form');
-  loadSFDCForm(block);
+  block.classList.add('relative');
+   loadSFDCForm(block);
 }
