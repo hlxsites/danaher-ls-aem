@@ -220,10 +220,6 @@
   width: 100%;
 }
 
-.columns-wrapper :is(.w-1) {
-  width: 0.25rem;
-}
-
 .columns-wrapper :is(.max-w-4xl) {
   max-width: 56rem;
 }
