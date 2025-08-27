@@ -627,15 +627,15 @@ export default function decorate(block) {
   cols.forEach((col) => {
   col.querySelectorAll('p').forEach((pTag) => {
     if (pTag.textContent.trim() === 'TTAE') {
-      // Create a new div to act as the form block
+      // Create new form block
       const formDiv = document.createElement('div');
       formDiv.className = 'form block';
-      // Optionally, you can add any data attributes here
+      formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
 
-      // Replace the <p> with the new form block div
+      // Replace <p> with form block
       pTag.parentNode.replaceChild(formDiv, pTag);
 
-      // Decorate the new form block to inject the form
+      // Decorate the form block ONLY (do NOT clear column!)
       decorateFormBlock(formDiv);
     }
   });
