@@ -215,8 +215,8 @@ function loadUTMParams() {
 async function loadSFDCForm(block) {
   const formIdEl = block?.firstElementChild;
   console.log('formIdEl', formIdEl);
-  const formId = block.children[0]?.textContent.trim();
-  // const formId = formIdEl?.firstElementChild?.textContent;
+  // const formId = block.children[0]?.textContent.trim();
+  const formId = formIdEl?.firstElementChild?.textContent;
   console.log('formId', formId);
   const formNameEl = formIdEl?.nextElementSibling;
   const formName = block.children[1]?.textContent.trim();
