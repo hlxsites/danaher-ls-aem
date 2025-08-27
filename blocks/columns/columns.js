@@ -625,6 +625,7 @@ export default function decorate(block) {
 
    cols.forEach((col) => {
     col.querySelectorAll('.form').forEach((formBlock) => {
+      formBlock.innerHTML = '';
       decorateFormBlock(formBlock);
     });
   });
@@ -773,6 +774,7 @@ export default function decorate(block) {
     // Form load
       const formBlock = row.querySelector('.form');
        if (formBlock) {
+        formBlock.innerHTML = '';
         decorateFormBlock(formBlock);
       }
 

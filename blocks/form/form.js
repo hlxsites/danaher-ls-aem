@@ -311,13 +311,13 @@ async function loadSFDCForm(block) {
   block.append(formEl);
   loadUTMParams();
 
-  // document.querySelector('#TTAE').addEventListener('submit', (event) => {
-  //   if (formValidate()) {
-  //     getInquiry();
-  //   } else {
-  //     event.preventDefault();
-  //   }
-  // });
+  document.querySelector('#TTAE').addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry();
+    } else {
+      event.preventDefault();
+    }
+  });
 
   const formElement = document.querySelector(`#${formId}`);
   if (formElement) {
@@ -364,6 +364,5 @@ async function loadSFDCForm(block) {
 
 export default function decorate(block) {
   block.classList.add('relative');
-   // block.innerHTML = '';
    loadSFDCForm(block);
 }
