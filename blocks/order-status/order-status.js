@@ -29,6 +29,8 @@ const orderDetails = async () => {
     const response = await getApiData(url, defaultHeader);
     if (response) {
       const orderDetailResponse = response.data;
+      if(response.data === "Unauthorized! please try again.")
+        window.location.href = '/us/en/e-buy/login';
       // totalOrdersPlaced = orderDetailResponse.data.length;
       // if (totalOrdersPlaced < 10) {
       return orderDetailResponse.data;
@@ -48,7 +50,7 @@ const orderDetails = async () => {
   }
 };
 
-export const dynamicTableContent = async (orderDetailsResponse) => {
+const dynamicTableContent = async (orderDetailsResponse) => {
   const tableRow = (orderId, order, po, status, creationDate, orderTotal) => {
     const date = new Date(creationDate);
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
@@ -183,6 +185,79 @@ export const dynamicTableContent = async (orderDetailsResponse) => {
   return tableDataRows;
 };
 
+const noContentDiv =  a(
+      {
+        class: 'inline-flex justify-start border-b border-gray-200 gap-1',
+        // href: `/us/en/e-buy/orderdetails?orderId=${orderId}`,
+      },
+      div(
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
+        },
+        div(
+          {
+            class:
+              'self-stretch justify-start text-left text-danaherpurple-500 text-medium font-[400] leading-tight',
+          },
+         
+        ),
+      ),
+
+      div(
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
+        },
+        div(
+          {
+            class:
+              'self-stretch justify-start text-gray-900 text-medium font-[400] leading-tight',
+          },
+         
+        ),
+      ),
+      div(
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch inline-flex flex-col justify-start items-start',
+        },
+        div(
+          {
+            class:
+              'self-stretch justify-start text-black text-medium font-[400] leading-tight',
+          },
+          "No Records Found"
+        ),
+      ),
+      div(
+        {
+          class:
+            'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-end',
+        },
+        div(
+          {
+            class:
+              'self-stretch text-right justify-start text-gray-900 text-medium font-[400] leading-tight',
+          },
+         
+        ),
+      ),
+      div(
+        {
+          class: 'w-[186.4px] h-[46px] self-stretch p-3 inline-flex flex-col justify-center items-center',
+        },
+        div(
+          {
+            class: "self-stretch text-center justify-start text-medium font-[400] leading-tight",
+          },
+          
+        ),
+      ),
+    );
+    
+ 
+
 export default async function decorate(block) {
   showPreLoader();
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -209,7 +284,6 @@ export default async function decorate(block) {
   // const status = ['Status', 'All', 'Approved', 'Cancelled',
   // 'Invoiced', 'Shipped', 'Submitted', 'New'];
   const orderDetailsResponse = await orderDetails();
-
   // const dropDown = (day) => {
   //   const selectElement = document.createElement('select');
   //   selectElement.classList.add(
@@ -445,9 +519,16 @@ export default async function decorate(block) {
   // let orderRows;
   // async function renderNextBatch() {
   //   const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
-  const orderRows = await dynamicTableContent(orderDetailsResponse);
-  orderTable.append(orderRows);
+  if(orderDetailsResponse.length !== 0){
+    const orderRows = await dynamicTableContent(orderDetailsResponse);
+    orderTable.append(orderRows);
+    
+  }
+  else {
+    orderTable.append(noContentDiv);
+  }
   orderWrapper.append(orderTable);
+  
   //   currentIndex += pageSize;
 
   //   // Hide button if all data has been loaded

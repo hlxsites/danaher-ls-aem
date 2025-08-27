@@ -247,14 +247,6 @@
 }
 
 @media (min-width: 768px) {
-  .dashboardSideBar-wrapper :is(.md\:w-\[20\%\]) {
-    width: 20%
-  }
-
-  .dashboardSideBar-wrapper :is(.md\:w-\[30\%\]) {
-    width: 30%
-  }
-
   .dashboardSideBar-wrapper :is(.md\:w-\[25\%\]) {
     width: 25%
   }

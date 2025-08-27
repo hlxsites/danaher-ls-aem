@@ -315,13 +315,11 @@ export const requestedQuotes = async () => {
   } else {
     window.location.href = '/us/en/e-buy/login';
   }
-  console.log('customerNo', customerNo, userId);
   const url = `${baseURL}/customers/${customerNo}/users/${userId}/quoterequests?attrs=number,name,lineItems,creationDate,validFromDate,validToDate,rejected`;
 
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
-      console.log('response', response);
       if (response.data === 'Unauthorized! please try again.') {
         window.location.href = '/us/en/e-buy/login';
       }
@@ -346,12 +344,11 @@ export const userOrderDetails = async (orderId) => {
     'Authentication-Token': token,
     Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const url = `${baseURL}orders/${orderId}?include=lineItems`;
+  const url = `${baseURL}orders/${orderId}?include=invoiceToAddress,commonShipToAddress,lineItems`;
 
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
-      console.log('response', response);
       const userOrderDetailResponse = response.data;
       return userOrderDetailResponse;
     }

@@ -147,7 +147,6 @@ export default async function dashboardSidebar() {
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  console.log('targetedPage', targetedPage);
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
   }
@@ -172,7 +171,6 @@ export default async function dashboardSidebar() {
       childWithId.classList.add('text-danaherpurple-500');
     } else {
       const borderDiv = itemsInDiv.parentElement;
-      // console.log('event.target.textContent', borderDiv);
       const itemsNotclicked = itemsInDiv;
       const iconSpan = itemsNotclicked.querySelector('.icon');
       borderDiv.classList.remove(
