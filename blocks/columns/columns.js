@@ -624,7 +624,7 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
    cols.forEach((col) => {
-    col.querySelectorAll('.form.block').forEach((formBlock) => {
+    col.querySelectorAll('.form').forEach((formBlock) => {
       decorateFormBlock(formBlock);
     });
   });
