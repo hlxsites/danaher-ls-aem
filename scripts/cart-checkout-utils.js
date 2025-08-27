@@ -875,6 +875,8 @@ update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function updateAddresses() {
+  console.log('Updating address list');
+  
   if (window.location.pathname.includes('cartlanding')) return false;
   const authenticationToken = await getAuthenticationToken();
 
@@ -1927,7 +1929,7 @@ generate the  address form
 * @param {Object} data. The data object for edit form
 * @param {String} type. Form type ( shipping / billing )
 */
-export async function addressForm(type, data = {}) {
+export async function addressForm(type, data = {}, action = '') {
   const countriesData = await getCountries();
 
   let countriesList = [];
@@ -1959,7 +1961,7 @@ export async function addressForm(type, data = {}) {
         {
           class: 'justify-start text-black text-2xl font-normal  leading-loose',
         },
-        `Add new ${type} address`,
+        data && !action ? `Edit ${type} Address` : `Add new ${type} address`,
       ),
     ),
     buildInputElement(
@@ -2137,7 +2139,7 @@ get counrty field and attach change event listener to populate states based on c
 
       const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
       if (!isDefaultSBForm) {
-        if (data) {
+        if (data && !action) {
           delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
           Object.assign(formObject, {
             id: data.id,
@@ -2170,7 +2172,7 @@ get counrty field and attach change event listener to populate states based on c
       } else {
         formObject.usage = [];
       }
-      const method = data ? 'PUT' : 'POST';
+      const method = data && !action ? 'PUT' : 'POST';
       /*
       :::::::::::::::::::::
       submits the form
@@ -2197,16 +2199,8 @@ get counrty field and attach change event listener to populate states based on c
           shippingAsBillingAddressCheckBox?.parentElement.removeAttribute(
             'style',
           );
-
-          saveAddressButton.insertAdjacentElement(
-            'afterend',
-            p(
-              {
-                class: 'text-green-500 font-medium pl-6 text-ll',
-              },
-              'Address Added Successfully.',
-            ),
-          );
+          
+          showNotification('Address Added Successfully.', 'success');
 
           if (isDefaultSBForm) {
             /*
@@ -2222,6 +2216,9 @@ get counrty field and attach change event listener to populate states based on c
               );
 
               const renderDefaultAddress = defaultAddress(address, type);
+              console.log(address);
+              console.log(renderDefaultAddress);
+              
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
                   ::::::::::::::
@@ -2241,14 +2238,61 @@ get counrty field and attach change event listener to populate states based on c
                    assign address to backet
                    ::::::::::::::::::
                    */
-                await setUseAddress(addressURI, type);
+                await setUseAddress(addressURI, type, 'useAddress');
                 /*
                    ::::::::::::::
                    assign address to backet
                    ::::::::::::::::::
                    */
                 if (sameAsShipping === 'yes' && type === 'shipping') {
-                  await setUseAddress(addressURI, 'billing');
+                  const showDefaultBillingAddress = document.querySelector(
+                    '#billingAddressHeader',
+                  );
+                  const renderDefaultBillingAddress = defaultAddress(address, 'billing');
+                  if (showDefaultBillingAddress && renderDefaultBillingAddress) {
+                    /*
+                      ::::::::::::::
+                      set this address as default address
+                      :::::::::::::
+                      */
+                    showDefaultBillingAddress.insertAdjacentElement(
+                      'afterend',
+                      renderDefaultBillingAddress,
+                    );
+                    if (renderDefaultBillingAddress.classList.contains('hidden')) {
+                      renderDefaultBillingAddress.classList.remove('hidden');
+                    }
+
+                    /*
+                      ::::::::::::::
+                      set billing address for use address , update for basket as well
+                      :::::::::::::
+                      */
+                    await setUseAddress(addressURI, 'billing', 'useAddress');
+
+                    /*
+                      ::::::::::::::
+                      hide the shipping as billing checkbox and show check indicator
+                      :::::::::::::
+                      */
+                    const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+                    if (getShipAsBillBox) {
+                      getShipAsBillBox?.classList.add('pointer-events-none');
+
+                      const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+                      const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+
+                      getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+                      if (sameShipAsBillCheck?.classList.contains('hidden')) {
+                        sameShipAsBillCheck?.classList.remove('hidden');
+                      }
+                      getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+                      if (shipAsBillLabel?.classList.contains('pl-6')) {
+                        shipAsBillLabel?.classList.remove('pl-6');
+                        shipAsBillLabel?.classList.add('pl-2');
+                      }
+                    }
+                  }
                 }
 
                 /*
@@ -2285,17 +2329,11 @@ get counrty field and attach change event listener to populate states based on c
         ::::::::::::::
         */
           await updateAddresses();
-          /*
-           ::::::::::::::
-           update address list
-           ::::::::::::::
-           */
-          await updateAddresses();
 
           removePreLoader();
           showNotification('Address updated successfully.', 'success');
         } else {
-          throw new Error('Error Submitting form.');
+          throw new Error('Error Updating Address.');
         }
         /*
           ::::::::::::::
@@ -2304,7 +2342,7 @@ get counrty field and attach change event listener to populate states based on c
           */
         closeUtilityModal();
       } else {
-        throw new Error('Error Submitting form.');
+        throw new Error('Error Adding Address.');
       }
     } catch (error) {
       scrollViewToTop();

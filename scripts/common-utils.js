@@ -46,7 +46,7 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        'flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
     img({
@@ -173,7 +173,7 @@ export function closeUtilityModal() {
   @param hasCancelButton : boolean. Optional cancel button
   @param hasCloseButton : boolean. Optional close button
 */
-export function createModal(content, hasCancelButton, hasCloseButton) {
+export function createModal(content, hasCancelButton, hasCloseButton, dataType = '', dataAction = '') {
   const modalWrapper = div({
     class:
       'inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
@@ -197,6 +197,8 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   if (hasCancelButton) {
     cancelButton = span(
       {
+        'data-type': dataType || 'close',
+        'data-action': dataAction || 'close',
         class: 'mt-6 text-danaherpurple-500 cursor-pointer',
         id: 'closeUtilityModal',
       },

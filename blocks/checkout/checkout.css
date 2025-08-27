@@ -104,16 +104,16 @@
   right: 1rem
 }
 
+.checkout :is(.top-0) {
+  top: 0px
+}
+
 .checkout :is(.top-1\/2) {
   top: 50%
 }
 
 .checkout :is(.top-6) {
   top: 1.5rem
-}
-
-.checkout :is(.top-0) {
-  top: 0px
 }
 
 .checkout :is(.z-10) {
@@ -203,18 +203,6 @@
   margin-top: 1.5rem
 }
 
-.checkout :is(.mr-\[-35px\]) {
-  margin-right: -35px
-}
-
-.checkout :is(.ml-\[-35px\]) {
-  margin-left: -35px
-}
-
-.checkout :is(.ml-\[-24px\]) {
-  margin-left: -24px
-}
-
 .checkout :is(.box-border) {
   box-sizing: border-box
 }
@@ -279,6 +267,10 @@
   height: 2.25rem
 }
 
+.checkout :is(.h-\[10px\]) {
+  height: 10px
+}
+
 .checkout :is(.h-auto) {
   height: auto
 }
@@ -286,10 +278,6 @@
 .checkout :is(.h-max) {
   height: -moz-max-content;
   height: max-content
-}
-
-.checkout :is(.h-\[10px\]) {
-  height: 10px
 }
 
 .checkout :is(.max-h-48) {
@@ -360,6 +348,10 @@
   width: 20rem
 }
 
+.checkout :is(.w-\[10px\]) {
+  width: 10px
+}
+
 .checkout :is(.w-\[11rem\]) {
   width: 11rem
 }
@@ -384,24 +376,16 @@
   width: 100%
 }
 
-.checkout :is(.w-\[10px\]) {
-  width: 10px
-}
-
 .checkout :is(.max-w-2xl) {
   max-width: 42rem
 }
 
-.checkout :is(.max-w-xs) {
-  max-width: 20rem
-}
-
-.checkout :is(.max-w-\[96\%\]) {
-  max-width: 96%
-}
-
 .checkout :is(.max-w-\[94\%\]) {
   max-width: 94%
+}
+
+.checkout :is(.max-w-xs) {
+  max-width: 20rem
 }
 
 .checkout :is(.flex-1) {
@@ -410,10 +394,6 @@
 
 .checkout :is(.flex-none) {
   flex: none
-}
-
-.checkout :is(.flex-shrink-0) {
-  flex-shrink: 0
 }
 
 .checkout :is(.-translate-y-full) {
@@ -805,20 +785,12 @@
   padding-right: 0.5rem
 }
 
-.checkout :is(.pr-4) {
-  padding-right: 1rem
-}
-
 .checkout :is(.pt-0) {
   padding-top: 0px
 }
 
 .checkout :is(.pt-6) {
   padding-top: 1.5rem
-}
-
-.checkout :is(.pt-3) {
-  padding-top: 0.75rem
 }
 
 .checkout :is(.pt-8) {
@@ -872,6 +844,10 @@
   line-height: 1rem
 }
 
+.checkout :is(.font-bold) {
+  font-weight: 700
+}
+
 .checkout :is(.font-extrabold) {
   font-weight: 800
 }
@@ -885,10 +861,6 @@
 }
 
 .checkout :is(.font-semibold) {
-  font-weight: 700
-}
-
-.checkout :is(.font-bold) {
   font-weight: 700
 }
 
