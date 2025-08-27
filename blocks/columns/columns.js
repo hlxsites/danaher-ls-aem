@@ -544,7 +544,7 @@ async function loadForm(row, tags) {
     formEl.querySelector('.add-gated-form-fields')?.append(wsawgenedataformFields);
   }
   decorateIcons(formEl);
-  row.innerHTML = '';
+ // row.innerHTML = '';
   row.append(formEl);
   loadUTMParams();
 
@@ -637,6 +637,7 @@ export default function decorate(block) {
 
       // Decorate the form block ONLY (do NOT clear column!)
       decorateFormBlock(formDiv);
+
     }
   });
 });
