@@ -623,12 +623,13 @@ export default function decorate(block) {
   // Now get columns (direct children of flexContainer)
   const cols = Array.from(flexContainer.children);
 
+  // Form load
   cols.forEach((col) => {
   col.querySelectorAll('p').forEach((pTag) => {
     if (pTag.textContent.trim() === 'TTAE') {
       // Create a new div to act as the form block
       const formDiv = document.createElement('div');
-      formDiv.className = 'form block';
+      formDiv.className = '';
       // Optionally, you can add any data attributes here
 
       // Replace the <p> with the new form block div
@@ -789,11 +790,11 @@ export default function decorate(block) {
       }
 
     // Form load
-      const formBlock = row.querySelector('.form');
-       if (formBlock) {
-        formBlock.innerHTML = '';
-        decorateFormBlock(formBlock);
-      }
+      // const formBlock = row.querySelector('.form');
+      //  if (formBlock) {
+      //   formBlock.innerHTML = '';
+      //   decorateFormBlock(formBlock);
+      // }
 
 
       const pic = col.querySelector('picture');
