@@ -771,7 +771,7 @@ export default function decorate(block) {
       }
 
     // Form load
-      const formBlock = row.querySelector('.form.block');
+      const formBlock = row.querySelector('.form');
        if (formBlock) {
     decorateFormBlock(formBlock);
   }
