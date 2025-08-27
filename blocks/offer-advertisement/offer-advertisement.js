@@ -39,7 +39,7 @@ export default function decorate(block) {
       ? div(
         {
           class:
-              'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1 group',
+              'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1 group whitespace-nowrap',
         },
         a(
           {
