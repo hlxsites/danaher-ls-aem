@@ -623,15 +623,6 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
   block.classList.add(`columns-${cols.length}-cols`);
-  
-  // form logic
-   cols.forEach((col) => {
-    const formBlock = col.querySelector('.form');
-    if (formBlock) {
-      loadSFDCForm(formBlock);
-    }
-  });
-
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
@@ -641,8 +632,6 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
-        console.log('firstDiv', firstDiv);
-        console.log('secondDiv', secondDiv);
         if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
@@ -796,6 +785,15 @@ export default function decorate(block) {
       }
     });
   });
+
+  // Form Load
+  if (cols.length > 1) {
+    const formBlock = cols[1].querySelector('.form');
+    const hasFormElement = cols[1].querySelector('form');
+    if (formBlock && !hasFormElement) {
+      loadSFDCForm(cols[1]);
+    }
+  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
