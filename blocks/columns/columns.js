@@ -639,7 +639,7 @@ export default function decorate(block) {
         expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
         decorateFormBlock(formDiv);
       }
-      pTags.forEach((pTag) => pTag.remove());
+      pTags.forEach((pTag) => pTag.style.display = 'none');
     }
   });
 
