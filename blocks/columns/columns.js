@@ -626,6 +626,7 @@ export default function decorate(block) {
   cols.forEach((col) => {
   col.querySelectorAll('p').forEach((pTag) => {
     if (pTag.textContent.trim() === 'Talk to an Expert') {
+      pTag.style.display = 'none';
       // Create new form block
       const formDiv = document.createElement('div');
       formDiv.className = '';
