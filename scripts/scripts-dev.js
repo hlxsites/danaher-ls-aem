@@ -618,7 +618,7 @@ async function decorateTemplates(main) {
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
       const templateObj = TEMPLATE_LIST[template];
-      const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
+      let templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
       const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
       if (templateName === 'productdetail') {
         templateName = 'pdp';
