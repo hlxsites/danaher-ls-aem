@@ -306,9 +306,9 @@ async function loadSFDCForm(block) {
       ),
     ),
   );
-  block.innerHTML = '';
   decorateIcons(formEl); 
   block.append(formEl);
+  block.innerHTML = '';
   loadUTMParams();
 
   // document.querySelector('#TTAE').addEventListener('submit', (event) => {
