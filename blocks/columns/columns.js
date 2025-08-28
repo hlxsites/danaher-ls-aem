@@ -620,7 +620,6 @@ export default function decorate(block) {
     }
   });
 
-  // Now get columns (direct children of flexContainer)
   const cols = Array.from(flexContainer.children);
 
   // Form load
@@ -630,17 +629,10 @@ export default function decorate(block) {
       // Create new form block
       const formDiv = document.createElement('div');
       formDiv.className = 'form block';
-      // formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
-
-      // Replace <p> with form block
-      //pTag.replaceWith(formDiv);
       pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
      // pTag.remove();
      // pTag.parentNode.replaceChild(formDiv, pTag);
-
-      // Decorate the form block ONLY (do NOT clear column!)
       decorateFormBlock(formDiv);
-
     }
   });
 });
