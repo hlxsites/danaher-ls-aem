@@ -642,18 +642,17 @@ export default function decorate(block) {
 // });
 
 cols.forEach((col) => {
-  let formAdded = false; // flag to prevent multiple forms
-
-  col.querySelectorAll('p').forEach((pTag) => {
-    if (!formAdded && pTag.textContent.trim() === 'Talk to an Expert') {
-      // Insert form only after the first matching <p>
+  const pTags = col.querySelectorAll('p');
+  pTags.forEach((pTag) => {
+    if (pTag.textContent.trim().includes('Talk to an Expert')) {
+      // Hide the <p>     
+      // Create and insert the form block after THIS <p>
       const formDiv = document.createElement('div');
-      formDiv.className = '';
+      formDiv.className = ''; // Use your styles
       pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
       decorateFormBlock(formDiv);
-      formAdded = true; // set flag so we only add once per column
-      pTag.style.display = 'none';
     }
+     pTag.style.display = 'none';
   });
 });
 
