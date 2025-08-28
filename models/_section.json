@@ -65,6 +65,7 @@
       "checkout",
       "order-submit",
       "order-status",
+      "requested-quote",
       "order-details",
       "carousel",
       "dual-carousel",

@@ -36,6 +36,7 @@
       "checkout",
       "order-submit",
       "order-status",
+      "requested-quote",
       "order-details",
       "carousel",
       "dual-carousel",
@@ -223,6 +224,12 @@
   {
     "id": "related-articles",
     "components": []
+  },
+  {
+    "id": "requested-quote",
+    "components": [
+      ""
+    ]
   },
   {
     "id": "top-selling",

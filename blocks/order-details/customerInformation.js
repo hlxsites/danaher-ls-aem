@@ -64,7 +64,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
           div(
             {
               class:
-                "justify-start text-black text-xl font-extralight  leading-relaxed",
+                "justify-start text-black text-[20px] font-extralight  leading-relaxed",
             },
             "Customer Information"
           )
@@ -77,14 +77,14 @@ export const customerInformation = (userOrderDetailsResponse) => {
         div(
           {
             class:
-              "self-stretch justify-start text-black text-sm font-normal  leading-tight",
+              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
           },
           "Name"
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-base font-bold  leading-snug",
+              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
           },
           `${custInfo.firstName + " " + custInfo.lastName}`
         )
@@ -96,14 +96,14 @@ export const customerInformation = (userOrderDetailsResponse) => {
         div(
           {
             class:
-              "self-stretch justify-start text-black text-sm font-normal  leading-tight",
+              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
           },
           "Email"
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-base font-bold  leading-snug",
+              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
           },
           `${custInfo.email}`
         )
@@ -115,16 +115,16 @@ export const customerInformation = (userOrderDetailsResponse) => {
         div(
           {
             class:
-              "self-stretch justify-start text-black text-sm font-normal  leading-tight",
+              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
           },
           "Contact Number"
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-base font-bold  leading-snug",
+              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
           },
-          "+1 (830) 256 8965"
+          "-"
         )
       )
     )
@@ -149,7 +149,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
           div(
             {
               class:
-                "justify-start text-black text-xl font-extralight leading-relaxed",
+                "justify-start text-black text-[20px] font-extralight leading-relaxed",
             },
             "Shipping Address"
           )
@@ -162,14 +162,14 @@ export const customerInformation = (userOrderDetailsResponse) => {
         div(
           {
             class:
-              "self-stretch justify-start text-black text-sm font-normal leading-tight",
+              "self-stretch justify-start text-black text-[14px] font-normal leading-tight",
           },
           "Address"
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-base font-bold leading-snug",
+              "self-stretch justify-start text-black text-[16px] font-bold leading-snug",
           },
           setAddressDetails.companyName2, ", ", " ", setAddressDetails.addressLine1, ", ", " ", setAddressDetails.city, ", ", " ",
           setAddressDetails.mainDivision,", ",  " ", setAddressDetails.countryCode, ", ", " ", setAddressDetails.postalCode
@@ -193,7 +193,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
         div(
           {
             class:
-              "justify-start text-black text-xl font-extralight leading-relaxed",
+              "justify-start text-black text-[20px] font-extralight leading-relaxed",
           },
           "Billing Address"
         )
@@ -206,14 +206,14 @@ export const customerInformation = (userOrderDetailsResponse) => {
       div(
         {
           class:
-            "self-stretch justify-start text-black text-sm font-normal leading-tight",
+            "self-stretch justify-start text-black text-[14px] font-normal leading-tight",
         },
         "Address"
       ),
       div(
         {
           class:
-            "self-stretch justify-start text-black text-base font-bold leading-snug",
+            "self-stretch justify-start text-black text-[16px] font-bold leading-snug",
         },
          setBillingAddressDetails.addressLine1, ", ", " ", setBillingAddressDetails.city, ", ", " ",
           setBillingAddressDetails.mainDivision,", ",  " ", setBillingAddressDetails.countryCode, ", ", " ", setBillingAddressDetails.postalCode

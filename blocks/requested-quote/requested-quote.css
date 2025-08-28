@@ -1,0 +1,314 @@
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.requested-quote-wrapper :is(.relative) {
+  position: relative
+}
+
+.requested-quote-wrapper :is(.mt-4) {
+  margin-top: 1rem
+}
+
+.requested-quote-wrapper :is(.mt-\[-75px\]) {
+  margin-top: -75px
+}
+
+.requested-quote-wrapper :is(.block) {
+  display: block
+}
+
+.requested-quote-wrapper :is(.flex) {
+  display: flex
+}
+
+.requested-quote-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
+.requested-quote-wrapper :is(.\!h-\[60px\]) {
+  height: 60px !important
+}
+
+.requested-quote-wrapper :is(.h-\[100px\]) {
+  height: 100px
+}
+
+.requested-quote-wrapper :is(.h-\[131px\]) {
+  height: 131px
+}
+
+.requested-quote-wrapper :is(.h-\[2px\]) {
+  height: 2px
+}
+
+.requested-quote-wrapper :is(.h-\[831px\]) {
+  height: 831px
+}
+
+.requested-quote-wrapper :is(.\!w-\[60px\]) {
+  width: 60px !important
+}
+
+.requested-quote-wrapper :is(.w-\[100px\]) {
+  width: 100px
+}
+
+.requested-quote-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
+.requested-quote-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.requested-quote-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.requested-quote-wrapper :is(.items-start) {
+  align-items: flex-start
+}
+
+.requested-quote-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.requested-quote-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
+.requested-quote-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
+.requested-quote-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.requested-quote-wrapper :is(.gap-1\.5) {
+  gap: 0.375rem
+}
+
+.requested-quote-wrapper :is(.gap-28) {
+  gap: 7rem
+}
+
+.requested-quote-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
+.requested-quote-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.requested-quote-wrapper :is(.gap-5) {
+  gap: 1.25rem
+}
+
+.requested-quote-wrapper :is(.self-stretch) {
+  align-self: stretch
+}
+
+.requested-quote-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.requested-quote-wrapper :is(.border-2) {
+  border-width: 2px
+}
+
+.requested-quote-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
+.requested-quote-wrapper :is(.border-l) {
+  border-left-width: 1px
+}
+
+.requested-quote-wrapper :is(.border-l-\[4px\]) {
+  border-left-width: 4px
+}
+
+.requested-quote-wrapper :is(.border-r) {
+  border-right-width: 1px
+}
+
+.requested-quote-wrapper :is(.border-t) {
+  border-top-width: 1px
+}
+
+.requested-quote-wrapper :is(.border-solid) {
+  border-style: solid
+}
+
+.requested-quote-wrapper :is(.border-danaherpurple-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
+}
+
+.requested-quote-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.requested-quote-wrapper :is(.border-white) {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity))
+}
+
+.requested-quote-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.requested-quote-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.requested-quote-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.requested-quote-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.requested-quote-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.requested-quote-wrapper :is(.p-\[18px\]) {
+  padding: 18px
+}
+
+.requested-quote-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.requested-quote-wrapper :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important
+}
+
+.requested-quote-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.requested-quote-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.requested-quote-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.requested-quote-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.requested-quote-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.requested-quote-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
+.requested-quote-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.requested-quote-wrapper :is(.leading-10) {
+  line-height: 2.5rem
+}
+
+.requested-quote-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.requested-quote-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.requested-quote-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.requested-quote-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
+.requested-quote-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.requested-quote-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.requested-quote-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.requested-quote-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+@media (min-width: 768px) {
+  .requested-quote-wrapper :is(.md\:w-\[25\%\]) {
+    width: 25%
+  }
+
+  .requested-quote-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .requested-quote-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .requested-quote-wrapper :is(.dhlsBp\:py-12) {
+    padding-top: 3rem;
+    padding-bottom: 3rem
+  }
+}
+
+.requested-quote-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {
+  stroke: #000
+}
+
+.requested-quote-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}

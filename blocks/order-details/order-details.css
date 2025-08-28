@@ -116,16 +116,16 @@
   width: 30%
 }
 
+.order-details-wrapper :is(.w-\[325px\]) {
+  width: 325px
+}
+
 .order-details-wrapper :is(.w-\[70\%\]) {
   width: 70%
 }
 
 .order-details-wrapper :is(.w-full) {
   width: 100%
-}
-
-.order-details-wrapper :is(.w-\[325px\]) {
-  width: 325px
 }
 
 .order-details-wrapper :is(.flex-1) {
@@ -381,6 +381,18 @@
 .order-details-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.order-details-wrapper :is(.text-\[14px\]) {
+  font-size: 14px
+}
+
+.order-details-wrapper :is(.text-\[16px\]) {
+  font-size: 16px
+}
+
+.order-details-wrapper :is(.text-\[20px\]) {
+  font-size: 20px
 }
 
 .order-details-wrapper :is(.text-\[32px\]) {
