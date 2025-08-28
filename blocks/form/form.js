@@ -212,61 +212,39 @@ function loadUTMParams() {
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
 }
 
-function extractFormConfig(block) {
-  // Only direct children that are <div> and have text
-  const configDivs = Array.from(block.children).filter(
-    el => el.tagName === 'DIV' && el.textContent.trim().length > 0
-  );
-
-  // Debug: See what you have
-  // Uncomment for debugging
-  // console.log("Config divs found:", configDivs.map(div => div.textContent.trim()));
-
-  if (configDivs.length < 8) {
-    console.warn("Not enough config divs found for form config!", configDivs);
-    // Provide defaults or throw as needed
-    return {
-      formId: '',
-      formName: '',
-      clientId: '',
-      deExternalKey: '',
-      action: '',
-      inquiryType: '',
-      successUrl: '',
-      errorUrl: '',
-    };
-  }
-
-  return {
-    formId: configDivs[0].textContent.trim(),
-    formName: configDivs[1].textContent.trim(),
-    clientId: configDivs[2].textContent.trim(),
-    deExternalKey: configDivs[3].textContent.trim(),
-    action: configDivs[4].textContent.trim(),
-    inquiryType: configDivs[5].textContent.trim(),
-    successUrl: configDivs[6].textContent.trim(),
-    errorUrl: configDivs[7].textContent.trim(),
-  };
-}
-
 async function loadSFDCForm(block) {
-  const config = extractFormConfig(block);
+  const formIdEl = block?.firstElementChild;
+  const formId = formIdEl?.firstElementChild?.textContent;
+  const formNameEl = formIdEl?.nextElementSibling;
+  const formName = block?.firstElementChild?.nextElementSibling?.textContent;
+  const clientIdEl = formNameEl?.nextElementSibling;
+  const clientId = formNameEl?.nextElementSibling?.textContent;
+  const deExternalKeyEl = clientIdEl?.nextElementSibling;
+  const deExternalKey = deExternalKeyEl?.textContent;
+  const actionEl = deExternalKeyEl?.nextElementSibling;
+  const action = actionEl?.textContent;
+  const inquiryTypeEl = actionEl?.nextElementSibling;
+  const inquiryType = inquiryTypeEl?.textContent;
+  const successUrlEl = inquiryTypeEl?.nextElementSibling;
+  const successUrl = successUrlEl?.textContent;
+  const errorUrlEl = successUrlEl?.nextElementSibling;
+  const errorUrl = errorUrlEl?.textContent;
   const formEl = div(
     { class: 'relative my-2 mx-0 md:ml-2' },
     form(
       {
-        id: `${config.formId}`,
-        name: `${config.formName}`,
+        id: `${formId}`,
+        name: `${formName}`,
         action: 'https://cl.s13.exct.net/DEManager.aspx',
         method: 'post',
         class: 'text-sm w-full max-w-4xl box-border overflow-hidden rounded-xl my-0 mx-auto p-6',
         style: 'background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%;',
       },
-      input({ type: 'hidden', name: '_clientID', value: `${config.clientId}` }),
-      input({ type: 'hidden', name: '_deExternalKey', value: `${config.deExternalKey}` }),
-      input({ type: 'hidden', name: '_action', value: `${config.action}` }),
+      input({ type: 'hidden', name: '_clientID', value: `${clientId}` }),
+      input({ type: 'hidden', name: '_deExternalKey', value: `${deExternalKey}` }),
+      input({ type: 'hidden', name: '_action', value: `${action}` }),
       input({ type: 'hidden', name: '_returnXML', value: '1' }),
-      input({ type: 'hidden', name: 'Inquiry_Type', value: `${config.inquiryType}` }),
+      input({ type: 'hidden', name: 'Inquiry_Type', value: `${inquiryType}` }),
       input({ type: 'hidden', name: 'Inquiry_Number' }),
       input({ type: 'hidden', name: 'UTM_Content' }),
       input({ type: 'hidden', name: 'UTM_Campaign' }),
@@ -277,8 +255,8 @@ async function loadSFDCForm(block) {
       input({ type: 'hidden', name: 'Page_Track_URL' }),
       input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'Country', 'data-required': true }),
-      input({ type: 'hidden', name: '_successURL', value: `${config.successUrl}` }),
-      input({ type: 'hidden', name: '_errorURL', value: `${config.errorUrl}` }),
+      input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
+      input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
       div(
         { class: 'container mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6' },
         buildInputElement('First_Name', 'First name', 'text', 'First_Name', 'given-name', true, 'First_Name'),
