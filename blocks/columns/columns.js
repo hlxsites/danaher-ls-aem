@@ -625,13 +625,14 @@ export default function decorate(block) {
   // Form load
   cols.forEach((col) => {
   col.querySelectorAll('p').forEach((pTag) => {
-    if (pTag.textContent.trim() === 'TTAE') {
+    if (pTag.textContent.trim() === 'Talk to an Expert') {
       // Create new form block
       const formDiv = document.createElement('div');
-      formDiv.className = 'form block';
+      formDiv.className = '';
       pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
      // pTag.remove();
      // pTag.parentNode.replaceChild(formDiv, pTag);
+     // formDiv.innerHTML = '';
       decorateFormBlock(formDiv);
       // pTag.remove();
     }
