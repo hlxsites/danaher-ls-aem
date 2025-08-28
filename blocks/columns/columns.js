@@ -624,18 +624,23 @@ export default function decorate(block) {
 
   // Form load
   cols.forEach((col) => {
-    const pTags = col.querySelectorAll('p');
+    const pTags = Array.from(col.querySelectorAll('p'));
+    let hasExpert = false;
     pTags.forEach((pTag) => {
       if (pTag.textContent.trim().includes('Talk to an Expert')) {
-      // Hide the <p>     
-      // Create and insert the form block after THIS <p>
+        hasExpert = true;
+      }
+    });
+    if (hasExpert) {
+      const expertPTag = pTags.find((pTag) => pTag.textContent.trim().includes('Talk to an Expert'));
+      if (expertPTag) {
         const formDiv = document.createElement('div');
-        formDiv.className = ''; // Use your styles
-        pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
+        formDiv.className = '';
+        expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
         decorateFormBlock(formDiv);
       }
-      // pTag.style.display = 'none';
-    });
+      pTags.forEach((pTag) => pTag.remove());
+    }
   });
 
   block.classList.add(`columns-${cols.length}-cols`);
@@ -803,15 +808,6 @@ export default function decorate(block) {
       }
     });
   });
-
-  // Form Load
-  if (cols.length > 1) {
-    const formBlock = cols[1].querySelector('.form');
-    const hasFormElement = cols[1].querySelector('form');
-    if (formBlock && !hasFormElement) {
-      loadSFDCForm(cols[1]);
-    }
-  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
