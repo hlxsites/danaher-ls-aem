@@ -623,34 +623,34 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
   // Form load
-  // cols.forEach((col) => {
-  //   const pTags = Array.from(col.querySelectorAll('p'));
-  //   let hasExpert = false;
-  //   pTags.forEach((pTag) => {
-  //     if (pTag.textContent.trim().includes('Talk to an Expert')) {
-  //       hasExpert = true;
-  //     }
-  //   });
-  //   if (hasExpert) {
-  //     const expertPTag = pTags.find((pTag) => pTag.textContent.trim().includes('Talk to an Expert'));
-  //     if (expertPTag) {
-  //       const formDiv = document.createElement('div');
-  //       formDiv.className = '';
-  //       expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
-  //       decorateFormBlock(col);
-  //     }
-  //       pTags.forEach((pTag) => pTag.style.display = 'none');
-  //     }
-  //   });
-
   cols.forEach((col) => {
-  const pTags = Array.from(col.querySelectorAll('p'));
-  if (pTags.some((pTag) => pTag.textContent.trim().includes('Talk to an Expert'))) {
-    pTags.forEach((pTag) => pTag.style.display = 'none');
-    // Pass the column itself (which holds your config divs)
-    decorateFormBlock(col); // This calls your form block's decorate function
-  }
-});
+    const pTags = Array.from(col.querySelectorAll('p'));
+    let hasExpert = false;
+    pTags.forEach((pTag) => {
+      if (pTag.textContent.trim().includes('Talk to an Expert')) {
+        hasExpert = true;
+      }
+    });
+    if (hasExpert) {
+      const expertPTag = pTags.find((pTag) => pTag.textContent.trim().includes('Talk to an Expert'));
+      if (expertPTag) {
+        const formDiv = document.createElement('div');
+        formDiv.className = '';
+        expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
+        decorateFormBlock(col);
+      }
+        pTags.forEach((pTag) => pTag.style.display = 'none');
+      }
+    });
+
+//   cols.forEach((col) => {
+//   const pTags = Array.from(col.querySelectorAll('p'));
+//   if (pTags.some((pTag) => pTag.textContent.trim().includes('Talk to an Expert'))) {
+//     pTags.forEach((pTag) => pTag.style.display = 'none');
+//     // Pass the column itself (which holds your config divs)
+//     decorateFormBlock(col); // This calls your form block's decorate function
+//   }
+// });
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
