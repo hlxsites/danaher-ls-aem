@@ -637,11 +637,11 @@ export default function decorate(block) {
         const formDiv = document.createElement('div');
         formDiv.className = '';
         expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
-        decorateFormBlock(formDiv);
+        decorateFormBlock(col);
       }
-      pTags.forEach((pTag) => pTag.style.display = 'none');
-    }
-  });
+        pTags.forEach((pTag) => pTag.style.display = 'none');
+      }
+    });
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
@@ -653,8 +653,6 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
-        console.log('firstDiv', firstDiv);
-        console.log('secondDiv', secondDiv);
         if (block.className.includes('thirtyseventy')) {
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
