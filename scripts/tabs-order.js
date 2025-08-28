@@ -140,7 +140,7 @@ export default function tabsOrder() {
         order: 8,
       },
     ],
-    beckmen: [
+    'beckman coulter life sciences': [
       {
         tabName: 'overview',
         order: 1,
