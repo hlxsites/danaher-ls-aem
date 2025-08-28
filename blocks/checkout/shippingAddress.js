@@ -1040,7 +1040,6 @@ export const shippingAddressModule = async () => {
       }
 
       if (!targetCheckbox) return;
-
       //   c.preventDefault();
       /*
  ::::::::::::::

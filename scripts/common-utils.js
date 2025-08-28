@@ -705,8 +705,6 @@ export async function submitForm(id, action, method, data) {
     return { status: 'error', data: 'Error Submitting Form.' };
   } catch (error) {
     return { status: 'error', data: error.message };
-  } finally {
-    removePreLoader();
   }
 }
 
