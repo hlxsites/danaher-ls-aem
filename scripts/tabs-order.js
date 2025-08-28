@@ -142,28 +142,32 @@ export default function tabsOrder() {
     ],
     'beckman coulter life sciences': [
       {
-        tabName: 'overview',
+        tabName: 'products',
         order: 1,
       },
       {
-        tabName: 'specifications',
+        tabName: 'overview',
         order: 2,
       },
       {
-        tabName: 'accessories',
+        tabName: 'specifications',
         order: 3,
       },
       {
-        tabName: 'resources',
+        tabName: 'accessories',
         order: 4,
       },
       {
-        tabName: 'faqs',
+        tabName: 'resources',
         order: 5,
       },
       {
-        tabName: 'relatedproducts',
+        tabName: 'faqs',
         order: 6,
+      },
+      {
+        tabName: 'relatedproducts',
+        order: 7,
       },
     ],
     'leica microsystems': [
