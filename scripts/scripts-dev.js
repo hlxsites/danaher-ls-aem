@@ -40,14 +40,14 @@ const TEMPLATE_LIST = {
       '../blocks/article-info/article-info.js',
     ],
   },
-  productdetail: {
-    templateName: 'productDetail',
-    dependencies: [
-      './commerce.js',
-      './product-payload-builder.js',
-      './schema.js',
-    ],
-  },
+  // productdetail: {
+  //   templateName: 'productDetail',
+  //   dependencies: [
+  //     './commerce.js',
+  //     './product-payload-builder.js',
+  //     './schema.js',
+  //   ],
+  // },
   pdp: {
     templateName: 'productdetail',
     dependencies: [
