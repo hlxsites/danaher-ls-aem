@@ -633,7 +633,7 @@ export default function decorate(block) {
       // formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
 
       // Replace <p> with form block
-      pTag.parentNode.replaceChild(formDiv, pTag);
+      pTag.replaceWith(formDiv);
 
       // Decorate the form block ONLY (do NOT clear column!)
       decorateFormBlock(formDiv);

@@ -364,11 +364,5 @@ async function loadSFDCForm(block) {
 
 export default function decorate(block) {
   block.classList.add('relative');
-  // block.innerHTML = '';
-   const column = block.querySelector('.column'); // or whatever your column class is
-  if (column) {
-    loadSFDCForm(column); // Pass the column, not the block
-  } else {
-    loadSFDCForm(block); // fallback if no column found
-  }
+  loadSFDCForm(block);
 }
