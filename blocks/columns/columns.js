@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import loadSFDCForm from '../form/form.js';
+import decorateFormBlock from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -624,19 +624,19 @@ export default function decorate(block) {
 
   // Form load
   cols.forEach((col) => {
-  const pTags = col.querySelectorAll('p');
-  pTags.forEach((pTag) => {
-    if (pTag.textContent.trim().includes('Tak to an Expert')) {
+    const pTags = col.querySelectorAll('p');
+    pTags.forEach((pTag) => {
+      if (pTag.textContent.trim().includes('Tak to an Expert')) {
       // Hide the <p>     
       // Create and insert the form block after THIS <p>
-      const formDiv = document.createElement('div');
-      formDiv.className = ''; // Use your styles
-      pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
-      decorateFormBlock(formDiv);
-    }
-     pTag.style.display = 'none';
+        const formDiv = document.createElement('div');
+        formDiv.className = ''; // Use your styles
+        pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
+        decorateFormBlock(formDiv);
+      }
+      pTag.style.display = 'none';
+    });
   });
-});
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
