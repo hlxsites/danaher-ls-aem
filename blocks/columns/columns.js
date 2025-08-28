@@ -626,7 +626,7 @@ export default function decorate(block) {
   cols.forEach((col) => {
     const pTags = col.querySelectorAll('p');
     pTags.forEach((pTag) => {
-      if (pTag.textContent.trim().includes('Tak to an Expert')) {
+      if (pTag.textContent.trim().includes('Talk to an Expert')) {
       // Hide the <p>     
       // Create and insert the form block after THIS <p>
         const formDiv = document.createElement('div');
