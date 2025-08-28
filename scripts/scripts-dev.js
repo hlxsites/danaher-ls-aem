@@ -48,7 +48,7 @@ const TEMPLATE_LIST = {
   //     './schema.js',
   //   ],
   // },
-  pdp: {
+  productdetail: {
     templateName: 'productdetail',
     dependencies: [
       '../templates/pdp/pdp.js',
