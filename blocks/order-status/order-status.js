@@ -519,7 +519,7 @@ export default async function decorate(block) {
   // let orderRows;
   // async function renderNextBatch() {
   //   const nextBatch = allOrders.slice(currentIndex, currentIndex + pageSize);
-  if(orderDetailsResponse.length !== 0){
+  if(orderDetailsResponse?.length !== 0){
     const orderRows = await dynamicTableContent(orderDetailsResponse);
     orderTable.append(orderRows);
     
