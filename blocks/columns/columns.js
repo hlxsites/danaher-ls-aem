@@ -634,7 +634,7 @@ export default function decorate(block) {
         pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
         decorateFormBlock(formDiv);
       }
-      pTag.style.display = 'none';
+      // pTag.style.display = 'none';
     });
   });
 
