@@ -2246,7 +2246,6 @@ get counrty field and attach change event listener to populate states based on c
             'style',
           );
 
-
           if (isDefaultSBForm) {
             /*
             ::::::::::::::::
@@ -2261,8 +2260,6 @@ get counrty field and attach change event listener to populate states based on c
               );
 
               const renderDefaultAddress = defaultAddress(address, type);
-              console.log(address);
-              console.log(renderDefaultAddress);
 
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
@@ -2493,7 +2490,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2896,7 +2893,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                    }`,
+                  }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',

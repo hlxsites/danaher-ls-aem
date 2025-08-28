@@ -808,7 +808,7 @@ add event listener to show address list modal...
 document.addEventListener('click', async (e) => {
   e.preventDefault();
 
-  const target = e.target;
+  const { target } = e;
   const type = target.getAttribute('data-type');
   const action = target.getAttribute('data-action');
 
@@ -828,7 +828,6 @@ document.addEventListener('click', async (e) => {
 
   if (target.matches('#closeUtilityModal')) {
     setTimeout(handleEditModal, 0);
-    return;
   }
 });
 /* ::::::::::::::::::::
