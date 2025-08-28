@@ -634,6 +634,7 @@ export default function decorate(block) {
 
       // Replace <p> with form block
       //pTag.replaceWith(formDiv);
+      pTag.parentNode.replaceChild(formDiv, pTag);
 
       // Decorate the form block ONLY (do NOT clear column!)
       decorateFormBlock(formDiv);
