@@ -489,7 +489,7 @@ export async function getSavedCards() {
  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {string} addressURI - The ID of the Address.
  */
-export async function getAddressDetails(addressURI) {
+export async function getAddressDetails(addressURI, type = '') {
   const authenticationToken = await getAuthenticationToken();
 
   if (authenticationToken?.status === 'error') {
@@ -497,9 +497,9 @@ export async function getAddressDetails(addressURI) {
   }
   try {
     const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
-    if (cachedAddress?.status === 'success') {
+    if (cachedAddress?.status === 'success' && type !== 'edit') {
       const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === addressURI.split('/')[3]);
-      if (checkCachedAddress) {
+      if (checkCachedAddress?.length > 0) {
         return { status: 'success', data: checkCachedAddress[0] };
       }
     }
@@ -873,46 +873,74 @@ export const setShippingMethod = async (methodId) => {
 :::::::::::::::::::::::::::::
 update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
- */
-export async function updateAddresses() {
-  console.log('Updating address list');
-  
+ */export async function updateAddresses(addressId = '') {
   if (window.location.pathname.includes('cartlanding')) return false;
-  const authenticationToken = await getAuthenticationToken();
 
+  const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
+    window.location.href = '/us/en/e-buy/cartlanding';
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  sessionStorage.removeItem('addressList');
-  const url = `${baseURL}/customers/-/addresses`;
-  const defaultHeaders = new Headers();
-  defaultHeaders.append('Content-Type', 'Application/json');
-  defaultHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
-  );
-  try {
-    const response = await getApiData(url, defaultHeaders);
-    if (response?.status !== 'success') return [];
-    const addressDetailsList = await Promise.all(
-      response.data.elements.map((address) => {
-        const addressURI = address.uri.split('addresses')[1];
-        return getAddressDetails(`customers/-/addresses${addressURI}`);
-      }),
-    );
-    if (addressDetailsList) {
-      sessionStorage.setItem(
-        'addressList',
-        JSON.stringify({ status: 'success', data: addressDetailsList }),
+
+  const addressListKey = 'addressList';
+
+  // If no addressId is provided, fetch all addresses
+  if (!addressId) {
+    sessionStorage.removeItem(addressListKey);
+
+    const url = `${baseURL}/customers/-/addresses`;
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'authentication-token': authenticationToken.access_token,
+    });
+
+    try {
+      const response = await getApiData(url, headers);
+      if (response?.status !== 'success') return [];
+
+      const addressDetailsList = await Promise.all(
+        response.data.elements.map((address) => {
+          const addressURI = address.uri.split('addresses')[1];
+          return getAddressDetails(`customers/-/addresses${addressURI}`);
+        }),
       );
-      return { status: 'success', data: addressDetailsList };
+
+      if (addressDetailsList?.length) {
+        const updatedCache = { status: 'success', data: addressDetailsList };
+        sessionStorage.setItem(addressListKey, JSON.stringify(updatedCache));
+        return { status: 'success', data: addressDetailsList };
+      }
+
+      return { status: 'error', data: 'Address not found.' };
+    } catch (error) {
+      return { status: 'error', data: error.message };
     }
-    return { status: 'error', data: 'Address Not found.' };
+  }
+
+  // If addressId is provided, update or add it in cache
+  const cachedAddress = JSON.parse(sessionStorage.getItem(addressListKey));
+  const currentList = cachedAddress?.data || [];
+  const index = currentList.findIndex((adr) => adr?.id === addressId);
+
+  try {
+    const addressDetails = await getAddressDetails(`customers/-/addresses/${addressId}`, 'edit');
+
+    if (!addressDetails) {
+      return { status: 'error', data: 'Address not found.' };
+    }
+
+    if (index !== -1) {
+      currentList[index] = addressDetails;
+    } else {
+      currentList.push(addressDetails);
+    }
+
+    sessionStorage.setItem(addressListKey, JSON.stringify({ status: 'success', data: currentList }));
+    return { status: 'success', data: currentList };
   } catch (error) {
     return { status: 'error', data: error.message };
   }
 }
-
 /*
  :::::::::::::::::::::::::::::
  get addresses to be shown
@@ -1920,7 +1948,14 @@ export const changeStep = async (step) => {
     return false;
   }
 };
-
+async function loadAddressListModal(type) {
+  showPreLoader();
+  // eslint-disable-next-line import/no-cycle
+  const { addressListModal } = await import('../blocks/checkout/shippingAddress.js');
+  const addressesModal = await addressListModal(type);
+  createModal(addressesModal, false, true, type, 'edit');
+  removePreLoader();
+}
 /*
 ::::::::::::::
 generate the  address form
@@ -2187,6 +2222,17 @@ get counrty field and attach change event listener to populate states based on c
       );
 
       if (addAddressResponse?.status === 'success') {
+        let addressId = '';
+
+        const uri = addAddressResponse?.data?.uri;
+        const urn = addAddressResponse?.data?.urn;
+
+        if (typeof uri === 'string') {
+          addressId = uri.split('/').pop();
+        } else if (typeof urn === 'string') {
+          addressId = urn.split(':').pop();
+        }
+
         if (addAddressResponse?.data?.type === 'Link') {
           formToSubmit.classList.add('hidden');
           const showDefaultAddress = document.querySelector(
@@ -2199,8 +2245,7 @@ get counrty field and attach change event listener to populate states based on c
           shippingAsBillingAddressCheckBox?.parentElement.removeAttribute(
             'style',
           );
-          
-          showNotification('Address Added Successfully.', 'success');
+
 
           if (isDefaultSBForm) {
             /*
@@ -2218,7 +2263,7 @@ get counrty field and attach change event listener to populate states based on c
               const renderDefaultAddress = defaultAddress(address, type);
               console.log(address);
               console.log(renderDefaultAddress);
-              
+
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
                   ::::::::::::::
@@ -2310,8 +2355,10 @@ get counrty field and attach change event listener to populate states based on c
            update address list
            ::::::::::::::
            */
-          await updateAddresses();
+          await updateAddresses(addressId);
 
+          showNotification('Address Added Successfully.', 'success');
+          await loadAddressListModal(type);
           /*
              ::::::::::::::
              set default address ends
@@ -2319,7 +2366,7 @@ get counrty field and attach change event listener to populate states based on c
              */
         } else if (
           addAddressResponse
-          && addAddressResponse.data.type === 'Address'
+          && addAddressResponse?.data?.type === 'Address'
         ) {
           formToSubmit.classList.add('hidden');
 
@@ -2328,10 +2375,11 @@ get counrty field and attach change event listener to populate states based on c
         update address list
         ::::::::::::::
         */
-          await updateAddresses();
+          await updateAddresses(addressId);
 
           removePreLoader();
           showNotification('Address updated successfully.', 'success');
+          await loadAddressListModal(type);
         } else {
           throw new Error('Error Updating Address.');
         }

@@ -459,6 +459,11 @@ click use address button to set the address as default for current order
 
       if (!clickedCheckbox && !event.target.classList.contains(`edit-${type}-address-button`) && !event.target.classList.contains(`copy-${type}-address-button`)) return;
 
+      /*
+      *
+      ::::::::: marking address as default ::::::::::::
+      *
+      */
       if (clickedCheckbox?.classList.contains(`not-default-${type}-address`)) {
         const getParent = addressItems?.querySelector(`#item_${checkboxId}`);
 
@@ -541,6 +546,9 @@ click use address button to set the address as default for current order
         removePreLoader();
         showNotification('Address set as default.', 'success');
       }
+      /*
+      ::::::::::::: edit button clicked :::::::::::::::
+      */
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
         showPreLoader();
         const editAddress = JSON.parse(
@@ -1025,9 +1033,6 @@ export const shippingAddressModule = async () => {
       }
 
       if (!targetCheckbox) return;
-
-      console.log('targetCheckbox: ', targetCheckbox.checked);
-      console.log('targetFrom: ', targetFrom);
 
       //   c.preventDefault();
       /*
