@@ -962,7 +962,7 @@ export const shippingAddressModule = async () => {
      handle the checkbox to set/unset shipping as billing address
      ::::::::::::::
      */
-    const shippingAsBillingAddressInput = shippingAsBillingAddress.querySelector('input');
+    const shippingAsBillingAddressInput = shippingAsBillingAddress?.querySelector('input');
     /*
    ::::::::::::::
    get all addresses details added
@@ -985,13 +985,16 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
+
     const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
     // eslint-disable-next-line max-len
-    const basketShipToAddressData = getCurrentBasketDetails?.data?.included.commonShipToAddress[basketShipToAddress];
-    // eslint-disable-next-line max-len
-    // const basketInvoiceToAddressData = getCurrentBasketDetails?.data?.included.invoiceToAddress[basketInvoiceToAddress];
+    let basketShipToAddressData = '';
+    if (basketShipToAddress) {
+      // eslint-disable-next-line max-len
+      basketShipToAddressData = getCurrentBasketDetails?.data?.included?.commonShipToAddress[basketShipToAddress];
+    }
 
     if (basketInvoiceToAddress && basketInvoiceToAddress === basketShipToAddress) {
       if (shippingAsBillingAddress) {
@@ -1017,6 +1020,7 @@ export const shippingAddressModule = async () => {
         }, 0);
       }
     }
+
     // actions when shippingAsBilling :checked clicked
     shippingAsBillingAddress?.addEventListener('click', async (c) => {
       let targetCheckbox;
@@ -1288,11 +1292,14 @@ export const shippingAddressModule = async () => {
         defaultShippingAddressWrapper.classList.remove('hidden');
       }
     } else {
-      const address = getDefaultAddressesResponse.data.filter(
-        (adr) => adr.preferredShippingAddress === 'true',
-      );
+      let address = [];
+      if (getDefaultAddressesResponse?.status === 'success' && getDefaultAddressesResponse?.data?.length > 0) {
+        address = getDefaultAddressesResponse?.data?.filter(
+          (adr) => adr?.preferredShippingAddress === 'true',
+        );
+      }
 
-      if (address.length > 0) {
+      if (address?.length > 0) {
         const showDefaultShippingAddress = defaultAddress(
           address[0],
           'shipping',
@@ -1319,28 +1326,28 @@ export const shippingAddressModule = async () => {
           }
         }
       } else if (getShippingAdressesModuleHeader && shippingForm) {
-        getShippingAdressesModuleHeader.insertAdjacentElement(
+        getShippingAdressesModuleHeader?.insertAdjacentElement(
           'afterend',
           shippingForm,
         );
-        shippingForm.classList.remove('hidden');
-        if (shippingForm.classList.contains('defaultBillingAddressFormModal')) {
-          shippingForm.classList.remove('defaultBillingAddressFormModal');
+        shippingForm?.classList.remove('hidden');
+        if (shippingForm?.classList.contains('defaultBillingAddressFormModal')) {
+          shippingForm?.classList.remove('defaultBillingAddressFormModal');
         }
-        if (!shippingForm.classList.contains('defaultShippingAddressFormModal')) {
-          shippingForm.classList.add('defaultShippingAddressFormModal');
+        if (!shippingForm?.classList.contains('defaultShippingAddressFormModal')) {
+          shippingForm?.classList.add('defaultShippingAddressFormModal');
         }
 
         if (shippingForm) {
-          shippingForm.querySelectorAll('.field-wrapper')?.forEach((fw) => {
+          shippingForm?.querySelectorAll('.field-wrapper')?.forEach((fw) => {
             fw.classList.add('mt-4');
           });
-          shippingForm.querySelectorAll('label')?.forEach((labe) => {
+          shippingForm?.querySelectorAll('label')?.forEach((labe) => {
             if (labe?.classList.contains('pl-4')) {
               labe.classList.remove('pl-4');
             }
           });
-          if (shippingForm.querySelector('#addressLine1')) {
+          if (shippingForm?.querySelector('#addressLine1')) {
             initGmapsAutocomplete('shipping', shippingForm.querySelector('#addressLine1'));
           }
           shippingAsBillingAddress?.querySelector('input[name="shippingAsBillingAddress"]')?.setAttribute('checked', true);
