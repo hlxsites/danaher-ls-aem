@@ -176,6 +176,48 @@ function handleKetchEvents(reason) {
   }
 }
 
+// === Email Group Sync ===
+function setupEmailGroupSync() {
+  // find all email labels
+  const emailLabels = Array.from(document.querySelectorAll('label[aria-label]')).filter(label =>
+    label.getAttribute("aria-label")?.toLowerCase().includes("email")
+  );
+
+  if (emailLabels.length === 0) return;
+
+  const emailCheckboxes = [];
+  let mainEmailCheckbox = null;
+
+  emailLabels.forEach(label => {
+    const aria = label.getAttribute("aria-label").toLowerCase();
+    const checkbox = label.querySelector('input[type="checkbox"]');
+    if (!checkbox) return;
+
+    emailCheckboxes.push(checkbox);
+
+    if ((aria.includes("danaher group companies") || aria.includes("danaher cross opco")) && aria.includes("email")) {
+      mainEmailCheckbox = checkbox;
+    }
+  });
+
+  if (!mainEmailCheckbox || emailCheckboxes.length < 2) return;
+
+  if (mainEmailCheckbox.dataset.emailGroupSyncAttached === "true") return;
+  mainEmailCheckbox.dataset.emailGroupSyncAttached = "true";
+
+  mainEmailCheckbox.addEventListener("change", () => {
+    const shouldCheck = mainEmailCheckbox.checked;
+    emailCheckboxes.forEach(cb => {
+      if (cb !== mainEmailCheckbox && cb.checked !== shouldCheck) {
+        cb.checked = shouldCheck;
+        //cb.dispatchEvent(new Event("change", { bubbles: true }));
+        const event = new Event('change', { bubbles: true });
+        cb.dispatchEvent(event);
+      }
+    });
+  });
+}
+
 // ======================
 // MAIN FUNCTION
 // ======================
@@ -270,6 +312,7 @@ const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
     if (mutation.addedNodes.length) {
       modifyElements();
+      setupEmailGroupSync();
     }
   });
 });
@@ -295,7 +338,7 @@ export default async function decorate(block) {
   const url = new URL(window.location.href);
 
   const emailParamRaw = url.searchParams.get('emailid');
-  
+
   const emailParam = emailParamRaw ? emailParamRaw.toLowerCase() : null;
 
   if (emailParam && CONFIG.allowedDomains.some(domain => url.href.startsWith(domain))) {
