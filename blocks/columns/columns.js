@@ -624,23 +624,23 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
   // Form load
-//   cols.forEach((col) => {
-//   col.querySelectorAll('p').forEach((pTag) => {
-//     if (pTag.textContent.trim() === 'TTAE') {
-//       // Create new form block
-//       const formDiv = document.createElement('div');
-//       formDiv.className = 'form block';
-//       // formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
+  cols.forEach((col) => {
+  col.querySelectorAll('p').forEach((pTag) => {
+    if (pTag.textContent.trim() === 'TTAE') {
+      // Create new form block
+      const formDiv = document.createElement('div');
+      formDiv.className = 'form block';
+      // formDiv.setAttribute('data-block-name', 'form'); // optional, for block registration
 
-//       // Replace <p> with form block
-//       pTag.replaceWith(formDiv);
+      // Replace <p> with form block
+      //pTag.replaceWith(formDiv);
 
-//       // Decorate the form block ONLY (do NOT clear column!)
-//       decorateFormBlock(formDiv);
+      // Decorate the form block ONLY (do NOT clear column!)
+      decorateFormBlock(formDiv);
 
-//     }
-//   });
-// });
+    }
+  });
+});
 
   //  cols.forEach((col) => {
   //   col.querySelectorAll('.form').forEach((formBlock) => {
