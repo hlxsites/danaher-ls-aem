@@ -168,28 +168,36 @@ export default function tabsOrder() {
     ],
     'leica microsystems': [
       {
-        tabName: 'overview',
+        tabName: 'products',
         order: 1,
       },
       {
-        tabName: 'specifications',
+        tabName: 'overview',
         order: 2,
       },
       {
-        tabName: 'parts',
+        tabName: 'specifications',
         order: 3,
       },
       {
-        tabName: 'citations',
+        tabName: 'parts',
         order: 4,
       },
       {
-        tabName: 'faqs',
+        tabName: 'citations',
         order: 5,
       },
       {
-        tabName: 'relatedproducts',
+        tabName: 'resources',
         order: 6,
+      },
+      {
+        tabName: 'faqs',
+        order: 7,
+      },
+      {
+        tabName: 'relatedproducts',
+        order: 8,
       },
     ],
     idbs: [
