@@ -24,6 +24,8 @@ export default function renderProductGridCard(item) {
       src: src || fallbackImagePath,
       alt: alt || 'Product image not available',
       class: 'w-full h-40 object-contain',
+      loading: 'lazy',
+      decoding: 'async',
     });
 
     // Add error handler for fallback

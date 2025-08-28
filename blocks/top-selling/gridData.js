@@ -46,6 +46,8 @@ export default function renderGridCard(item) {
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
       class: 'w-full h-[164px] object-contain cursor-pointer',
+      loading: 'lazy',
+      decoding: 'async',
       onclick: () => window.open(
         item?.url || '#',
         item?.url?.includes('http') ? '_blank' : '_self',
