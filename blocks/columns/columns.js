@@ -623,21 +623,37 @@ export default function decorate(block) {
   const cols = Array.from(flexContainer.children);
 
   // Form load
-  cols.forEach((col) => {
+//   cols.forEach((col) => {
+//   col.querySelectorAll('p').forEach((pTag) => {
+//     if (pTag.textContent.trim() === 'Talk to an Expert') {
+//       // pTag.style.display = 'none';
+//       // Create new form block
+//       const formDiv = document.createElement('div');
+//       formDiv.className = '';
+//       pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
+//      // pTag.remove();
+//      // pTag.parentNode.replaceChild(formDiv, pTag);
+//      // formDiv.innerHTML = '';
+//       decorateFormBlock(formDiv);
+//       // pTag.remove();
+//     }
+//     pTag.style.display = 'none';
+//   });
+// });
+
+cols.forEach((col) => {
+  let formAdded = false; // flag to prevent multiple forms
+
   col.querySelectorAll('p').forEach((pTag) => {
-    if (pTag.textContent.trim() === 'Talk to an Expert') {
-      // pTag.style.display = 'none';
-      // Create new form block
+    if (!formAdded && pTag.textContent.trim() === 'Talk to an Expert') {
+      // Insert form only after the first matching <p>
       const formDiv = document.createElement('div');
       formDiv.className = '';
       pTag.parentNode.insertBefore(formDiv, pTag.nextSibling);
-     // pTag.remove();
-     // pTag.parentNode.replaceChild(formDiv, pTag);
-     // formDiv.innerHTML = '';
       decorateFormBlock(formDiv);
-      // pTag.remove();
+      formAdded = true; // set flag so we only add once per column
+      pTag.style.display = 'none';
     }
-    pTag.style.display = 'none';
   });
 });
 
