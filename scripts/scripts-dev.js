@@ -49,7 +49,7 @@ const TEMPLATE_LIST = {
     ],
   },
   pdp: {
-    templateName: 'ProductDetail',
+    templateName: 'productdetail',
     dependencies: [
       '../templates/pdp/pdp.js',
     ],
