@@ -988,6 +988,10 @@ export const shippingAddressModule = async () => {
     const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
+    // eslint-disable-next-line max-len
+    const basketShipToAddressData = getCurrentBasketDetails?.data?.included.commonShipToAddress[basketShipToAddress];
+    // eslint-disable-next-line max-len
+    // const basketInvoiceToAddressData = getCurrentBasketDetails?.data?.included.invoiceToAddress[basketInvoiceToAddress];
 
     if (basketInvoiceToAddress && basketInvoiceToAddress === basketShipToAddress) {
       if (shippingAsBillingAddress) {
@@ -1061,7 +1065,6 @@ export const shippingAddressModule = async () => {
    check if  checkbox for shipping as billing address is checked
     ::::::::::::::::::::::::
   */
-
       if (targetCheckbox && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');
 
@@ -1084,32 +1087,33 @@ export const shippingAddressModule = async () => {
    check if  we have use address is set for shipping
     ::::::::::::::::::::::::
   */
+
           const setAddressDetails = {
             firstName:
-              useShipToAddress?.firstName
+              basketShipToAddressData?.firstName
               ?? '',
             lastName:
-              useShipToAddress?.lastName
+              basketShipToAddressData?.lastName
               ?? '',
             companyName2:
-              useShipToAddress
+              basketShipToAddressData
                 ?.companyName2 ?? '',
             addressLine1:
-              useShipToAddress
+              basketShipToAddressData
                 ?.addressLine1 ?? '',
             addressLine2:
-              useShipToAddress
+              basketShipToAddressData
                 ?.addressLine2 ?? '',
             city:
-              useShipToAddress?.city ?? '',
+              basketShipToAddressData?.city ?? '',
             mainDivision:
-              useShipToAddress
+              basketShipToAddressData
                 ?.mainDivision ?? '',
             countryCode:
-              useShipToAddress
+              basketShipToAddressData
                 ?.countryCode ?? '',
             postalCode:
-              useShipToAddress
+              basketShipToAddressData
                 ?.postalCode ?? '',
             usage: [true, true],
           };
