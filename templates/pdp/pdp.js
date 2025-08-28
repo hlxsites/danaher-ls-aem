@@ -53,15 +53,15 @@ function loadPdpBlocks() {
     .forEach(({ tabName }) => {
       // Map tabName to block names
       const blockMap = {
-        'overview': 'pdp-description',
-        'products': 'pdp-products',
-        'resources': 'pdp-resources',
-        'specifications': 'pdp-specifications',
-        'parts': 'pdp-bundle-list',
-        'citations': 'pdp-citations',
-        'faqs': 'pdp-faqs',
-        'relatedproducts': 'pdp-related-products',
-        'carousel': 'pdp-carousel',
+        overview: 'pdp-description',
+        products: 'pdp-products',
+        resources: 'pdp-resources',
+        specifications: 'pdp-specifications',
+        parts: 'pdp-bundle-list',
+        citations: 'pdp-citations',
+        faqs: 'pdp-faqs',
+        relatedproducts: 'pdp-related-products',
+        carousel: 'pdp-carousel',
         // Add any other mappings needed
         // e.g. 'images': 'pdp-images',
         //      'analysis': 'pdp-analysis',
@@ -111,7 +111,6 @@ function loadPdpBlocks() {
     appendBlock('carousel', 'pdp-carousel');
   }
 }
-
 
 export default async function buildAutoBlocks() {
   const productSlug = new URL(window.location.href).pathname.split('/').pop();

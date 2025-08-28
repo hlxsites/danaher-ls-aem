@@ -16,7 +16,7 @@ export default async function decorate(block) {
     parsedData = extractJsonFromHtml(elem);
   }
   if (isPIM !== undefined && isPIM === 'only-authored') {
-    if(parsedData === null) {
+    if (parsedData === null) {
       block.replaceChildren();
       block.innerHTML = `<h3>Please check ${document.querySelector('#authored-specifications')?.querySelector('.authored-tab-type').textContent} JSON </h3>`;
       block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
@@ -24,7 +24,7 @@ export default async function decorate(block) {
     }
     attrJson = parsedData;
   } else if (isPIM !== undefined && isPIM === 'pim-authored') {
-     if(parsedData === null) {
+    if (parsedData === null) {
       block.replaceChildren();
       block.innerHTML = `<h3>Please check ${document.querySelector('#authored-specifications')?.querySelector('.authored-tab-type').textContent} JSON </h3>`;
       block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));

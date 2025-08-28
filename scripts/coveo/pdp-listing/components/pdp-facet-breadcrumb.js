@@ -22,8 +22,16 @@ export const renderFacetBreadcurm = () => {
     createFacetBreadcurmb(facet.path, facet, true)
   });
 
-  function createFacetBreadcurmb(values, facet, isCategoryFacet = false){
-    values.forEach((item) => {
+  function createFacetBreadcurmb(values, facet, isCategoryFacet = false) {
+    let filteredValues = values;
+
+    if (isCategoryFacet) {
+      filteredValues = [values.reduce((deepest, current) => {
+        return current.path.length > deepest.path.length ? current : deepest;
+      })];
+    }
+
+    filteredValues.forEach((item) => {
       let fieldName = facet.field;
 
       if (facet.field === 'categoriesname') {
@@ -34,9 +42,10 @@ export const renderFacetBreadcurm = () => {
         fieldName = 'Document Type';
       }
 
-      const displayText = isCategoryFacet ? item.value :item.value.value 
+      const displayText = isCategoryFacet
+        ? item.path.join(' / ')
+        : item.value.value;
 
-      // Create filter tag
       const filterTag = document.createElement('div');
       filterTag.className = 'bg-danaherpurple-50 px-2 py-1 rounded-[6px] flex items-center text-sm text-purple-700 font-medium gap-2';
 
@@ -56,7 +65,12 @@ export const renderFacetBreadcurm = () => {
           </clipPath>
         </defs>
       </svg><span/>`;
-      removeBtn.addEventListener('click', () => item.deselect());
+
+      if (isCategoryFacet) {
+        removeBtn.addEventListener('click', () => facet.deselect());
+      } else {
+        removeBtn.addEventListener('click', () => item.deselect());
+      }
 
       filterTag.appendChild(label);
       filterTag.appendChild(removeBtn);

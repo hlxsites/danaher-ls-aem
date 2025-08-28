@@ -73,10 +73,10 @@ export async function buildProductTile(result, getCommerceBase, domHelpers) {
     // Product Details Section
     div(
       { class: 'flex-1 flex flex-col py-6 gap-3' },
-      h3({ class: 'font-bold text-lg m-0 truncate' }, result.title || ''),
+      h3({ class: 'font-bold text-lg m-0' }, result.title || ''),
       p(
-        { class: 'text-gray-700 truncate text-base font-extralight' },
-        result.raw.richdescription || result.raw.description || '',
+        { class: 'text-gray-700 text-base font-extralight' },
+        result.raw.description || '',
       ),
       link,
     ),

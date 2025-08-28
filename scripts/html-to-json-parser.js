@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export function extractJsonFromHtml(rootElement) {
   let rawText = rootElement.textContent || '';
   rawText = rawText.replace(/\u00a0/g, ' ').trim();
@@ -22,6 +23,7 @@ export function extractJsonFromHtml(rootElement) {
   try {
     return JSON.parse(jsonSnippet);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Error parsing JSON:', err);
     return null;
   }

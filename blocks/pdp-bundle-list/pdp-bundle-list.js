@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import { extractJsonFromHtml } from '../../scripts/html-to-json-parser.js';
 
-
 export default async function decorate(block) {
   block.replaceChildren();
   block.id = 'parts-tab';

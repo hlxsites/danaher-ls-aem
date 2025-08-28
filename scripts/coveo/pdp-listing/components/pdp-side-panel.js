@@ -82,8 +82,16 @@ function renderBreadcrumbs() {
     createFacetBreadcurmb(facet.path, facet, true)
   });
 
-  function createFacetBreadcurmb(values, facet, isCategoryFacet = false){
-    values.forEach((item) => {
+  function createFacetBreadcurmb(values, facet, isCategoryFacet = false) {
+    let filteredValues = values;
+
+    if (isCategoryFacet) {
+      filteredValues = [values.reduce((deepest, current) => {
+        return current.path.length > deepest.path.length ? current : deepest;
+      })];
+    }
+
+    filteredValues.forEach((item) => {
       let fieldName = facet.field;
 
       if (facet.field === 'categoriesname') {
@@ -94,9 +102,10 @@ function renderBreadcrumbs() {
         fieldName = 'Document Type';
       }
 
-      const displayText = isCategoryFacet ? item.value :item.value.value 
+      const displayText = isCategoryFacet
+        ? item.path.join(' / ')
+        : item.value.value;
 
-      // Create filter tag
       const filterTag = document.createElement('div');
       filterTag.className = 'bg-danaherpurple-50 px-2 py-1 rounded-[6px] flex items-center text-sm text-purple-700 font-medium gap-2';
 
@@ -116,7 +125,12 @@ function renderBreadcrumbs() {
           </clipPath>
         </defs>
       </svg><span/>`;
-      removeBtn.addEventListener('click', () => item.deselect());
+
+      if (isCategoryFacet) {
+        removeBtn.addEventListener('click', () => facet.deselect());
+      } else {
+        removeBtn.addEventListener('click', () => item.deselect());
+      }
 
       filterTag.appendChild(label);
       filterTag.appendChild(removeBtn);
@@ -173,8 +187,11 @@ function createFacet(facet, isFirst = false) {
 
   header.append(title, toggleIcon);
 
+  const filteredValues = facet.state.values.filter(item => item.state === 'selected');
+  const isSelected = filteredValues.length > 0;
+
   const body = createEl('div', {
-    className: `facet-body space-y-2 w-full p-3 ${isFirst ? '' : 'hidden'}`,
+    className: `facet-body space-y-2 w-full p-3 ${isFirst || isSelected ? '' : 'hidden'}`,
   });
 
   const itemsContainer = createEl('div', { className: 'space-y-2 facet-items' });
@@ -228,7 +245,7 @@ function createFacet(facet, isFirst = false) {
 
     const label = createEl('div', {
       className: `text-sm text-black font-twk py-1 flex items-center gap-2 ${
-        node.state === 'selected' ? 'font-semibold text-indigo-600' : ''
+        node.state === 'selected' ? 'font-semibold text-danaherpurple-500' : ''
       }`,
       text: `${node.value} (${node.numberOfResults})`,
       events: {
@@ -357,43 +374,44 @@ function createFacet(facet, isFirst = false) {
 const expandCollapseAll = createEl('button', {
   className:
     'text-[#7523FF] text-right text-[16px] leading-[22px] font-bold hover:underline flex items-center gap-2 ml-auto font-twk',
-  html: `<span class="label text-danaherpurple-500">Expand All</span> <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg></span>`,
+  html: `<span class="label text-danaherpurple-500">Collapse All</span> <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg></span>`,
 });
 
 function checkNodes() {
   let panel = document.getElementById('filtersPanel');
   const nodeValues = panel.querySelectorAll('.facet-body');
-
   const nodesArray = Array.from(nodeValues);
 
-  const allHidden = nodesArray.every(node => node.classList.contains('hidden'));
-  const noneHidden = nodesArray.every(node => !node.classList.contains('hidden'));
+  const anyOpen = nodesArray.some(node => !node.classList.contains('hidden'));
 
-  if (allHidden) {
-    updateExpandCollapseButton();
-  } else if (noneHidden) {
-    updateExpandCollapseButton();
+  if (anyOpen) {
+    updateExpandCollapseButton()
+  } else {
+    updateExpandCollapseButton()
   }
 }
+
+
+
+
 
 // Helper function: update button label and icon based on hidden state
 function updateExpandCollapseButton() {
   let panel = document.getElementById('filtersPanel');
   const bodies = panel.querySelectorAll('.facet-body');
-  const allHidden = Array.from(bodies).every((body) => body.classList.contains('hidden'));
-  const noneHidden = Array.from(bodies).every((body) => !body.classList.contains('hidden'));
+  const anyOpen =  Array.from(bodies).every((body) => body.classList.contains('hidden'));;
 
   const labelEl = expandCollapseAll.querySelector('.label');
   const arrowEl = expandCollapseAll.querySelector('.arrow');
 
-  if (allHidden) {
+  if (anyOpen) {
     labelEl.textContent = 'Expand All';
     arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
-  } else if (noneHidden) {
+  } else {
     labelEl.textContent = 'Collapse All';
     arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -429,7 +447,11 @@ export function createFiltersPanel() {
     if (body && facetData) {
       body.innerHTML = ''; // Clear existing facets
       facetData.forEach((facet, index) => {
-        body.appendChild(createFacet(facet, index === 0)); // first facet open
+        if(facet.items.length !== 0){
+          body.appendChild(createFacet(facet, index === 0)); // first facet open
+        }else if(facet.state.valuesAsTrees && facet.state?.valuesAsTrees.length !==0){
+          body.appendChild(createFacet(facet, index === 0)); // first facet open
+        }
       });
       // checkNodes(); // Update button state after creating facets
     }
@@ -504,7 +526,11 @@ export function createFiltersPanel() {
   const facetData = getFacetDataFromControllers();
   if (facetData) {
     facetData.forEach((facet, index) => {
-      body.appendChild(createFacet(facet, index === 0)); // first facet open
+      if(facet.items.length !== 0){
+        body.appendChild(createFacet(facet, index === 0)); // first facet open
+      }else if(facet.state.valuesAsTrees && facet.state?.valuesAsTrees.length !==0){
+        body.appendChild(createFacet(facet, index === 0)); // first facet open
+      }
     });
     // checkNodes(); // Update expand/collapse button state after facets render
   }

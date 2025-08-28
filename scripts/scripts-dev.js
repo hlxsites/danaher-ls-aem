@@ -29,7 +29,7 @@ if (window.location.hostname.includes('lifesciences.danaher.com')) {
   }
 }
 
-const LCP_BLOCKS = ['breadcrumb', 'pdp-hero' ,'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'pdp-hero', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: {
     templateName: 'blog',
@@ -52,7 +52,7 @@ const TEMPLATE_LIST = {
     templateName: 'pdp',
     dependencies: [
       '../templates/pdp/pdp.js',
-      '../blocks/columns/columns.js',
+      '../blocks/columns/columns.js',,
     ],
   },
   processstep: 'processstep',
@@ -910,13 +910,9 @@ async function designPdp() {
   const main = document.querySelector('main');
 
   const allSections = Array.from(main.querySelectorAll('.section'));
-  const meaningfulSections = allSections.filter((section) =>
-    Array.from(section.classList).some((cls) => cls.startsWith('pdp-'))
-  );
+  const meaningfulSections = allSections.filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
 
-  const heroSection = meaningfulSections.find((sec) =>
-    sec.classList.contains('pdp-hero-container')
-  );
+  const heroSection = meaningfulSections.find((sec) => sec.classList.contains('pdp-hero-container'));
 
   const flexWrapper = div({
     class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
@@ -949,9 +945,7 @@ async function designPdp() {
   meaningfulSections.forEach((section) => {
     if (section === heroSection) return;
 
-    const hasTabbedClass = Array.from(section.classList).some((cls) =>
-      tabContentClasses.has(cls)
-    );
+    const hasTabbedClass = Array.from(section.classList).some((cls) => tabContentClasses.has(cls));
 
     if (section.classList.contains('pdp-page-tabs-container')) {
       tabsWrapper.appendChild(section);
