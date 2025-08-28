@@ -633,6 +633,7 @@ export default function decorate(block) {
      // pTag.remove();
      // pTag.parentNode.replaceChild(formDiv, pTag);
       decorateFormBlock(formDiv);
+      pTag.remove();
     }
   });
 });
