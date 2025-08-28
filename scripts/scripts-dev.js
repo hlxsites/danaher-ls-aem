@@ -620,6 +620,9 @@ async function decorateTemplates(main) {
       const templateObj = TEMPLATE_LIST[template];
       const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
       const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
+      if (templateName === 'productdetail') {
+        templateName = 'pdp';
+      }
       const decorator = await Promise.all([
         import(`../templates/${templateName}/${templateName}.js`),
         ...templateDeps.map((dep) => import(dep)),
