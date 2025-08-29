@@ -864,17 +864,6 @@
     ]
   },
   {
-    "id": "column",
-    "fields": [
-      {
-        "component": "blocks",
-        "name": "blocks",
-        "label": "Blocks",
-        "valueType": "array"
-      }
-    ]
-  },
-  {
     "id": "dual-carousel",
     "fields": [
       {

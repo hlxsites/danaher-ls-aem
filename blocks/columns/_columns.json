@@ -62,17 +62,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "column",
-      "fields": [
-        {
-          "component": "blocks",
-          "name": "blocks",
-          "label": "Blocks",
-          "valueType": "array"
-        }
-      ]
     }
   ],
   "filters": [
