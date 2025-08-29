@@ -259,9 +259,11 @@
                 "template": {
                   "columns": "2",
                   "rows": "1",
-                  "className": [
-                    "bg-white seventythirty"
-                  ]
+                  "widths": [
+                    "70%",
+                    "30%"
+                  ],
+                  "className": ""
                 }
               }
             }
