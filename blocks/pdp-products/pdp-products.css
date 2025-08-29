@@ -135,6 +135,10 @@
   margin-right: 1.25rem
 }
 
+.pdp-products-wrapper :is(.mr-\[70px\]) {
+  margin-right: 70px
+}
+
 .pdp-products-wrapper :is(.mt-2) {
   margin-top: 0.5rem
 }
@@ -309,10 +313,6 @@
 
 .pdp-products-wrapper :is(.w-\[260px\]) {
   width: 260px
-}
-
-.pdp-products-wrapper :is(.w-\[331px\]) {
-  width: 331px
 }
 
 .pdp-products-wrapper :is(.w-full) {
@@ -1006,5 +1006,36 @@
 @media (min-width: 1024px) {
   .pdp-products-wrapper :is(.lg\:mr-0) {
     margin-right: 0px
+  }
+}
+
+@media (min-width: 768px) {
+
+  .pdp-products-wrapper :is(.md\:flex-row ) {
+    flex-direction: row;
+  }
+
+  .pdp-products-wrapper :is(.md\:w-\[331px\]) {
+    width: 331px
+  }
+
+  .pdp-products-wrapper :is(.md\:w-64) {
+    width: 16rem
+  }
+
+  .pdp-products-wrapper :is(.md\:flex) {
+    display: flex
+  }
+
+  .pdp-products-wrapper :is(.md\:flex-1) {
+    flex: 1 1 0%
+  }
+
+  .pdp-products-wrapper :is(.md\:w-auto) {
+    width: auto
+  }
+
+  .pdp-products-wrapper :is(.md\:m-auto) {
+    margin: auto
   }
 }

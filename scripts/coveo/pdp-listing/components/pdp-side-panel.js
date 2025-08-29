@@ -258,16 +258,12 @@ function createFacet(facet, isFirst = false) {
     });
 
     const arrow = document.createElement("span");
-    arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-    <path d="M1 1.33341L5.66667 6.00008L1 10.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
+    arrow.innerHTML = `<img src="/icons/chevron-right.svg" alt="arrow icon" width="20" height="21" />`;
 
     nodeWrapper.appendChild(label);
 
     if (node.children && node.children.length > 0) {
-      const arrowBack= `<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-        <path d="M6 1.33341L1.33333 6.00008L6 10.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>`
+      const arrowBack= `<img src="/icons/chevron-left-pdp.svg" alt="arrow icon" width="20" height="21" />`
 
       label.innerHTML = `${arrowBack} ${node.value} (${node.numberOfResults})`;
       nodeWrapper.appendChild(label);
@@ -374,9 +370,7 @@ function createFacet(facet, isFirst = false) {
 const expandCollapseAll = createEl('button', {
   className:
     'text-[#7523FF] text-right text-[16px] leading-[22px] font-bold hover:underline flex items-center gap-2 ml-auto font-twk',
-  html: `<span class="label text-danaherpurple-500">Collapse All</span> <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></span>`,
+  html: `<span class="label text-danaherpurple-500">Collapse All</span> <span class="arrow"><img src="/icons/arrow-up-pdp.svg" alt="arrow icon" width="20" height="21" /></span>`,
 });
 
 function checkNodes() {
@@ -408,14 +402,10 @@ function updateExpandCollapseButton() {
 
   if (anyOpen) {
     labelEl.textContent = 'Expand All';
-    arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M12.6654 6L7.9987 10.6667L3.33203 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
+    arrowEl.innerHTML = `<img src="/icons/arrow-down-pdp.svg" alt="arrow icon" width="20" height="21" />`;
   } else {
     labelEl.textContent = 'Collapse All';
-    arrowEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M12.6654 10L7.9987 5.33333L3.33203 10" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
+    arrowEl.innerHTML = `<img src="/icons/arrow-up-pdp.svg" alt="arrow icon" width="20" height="21" />`;
   }
   // Optionally handle mixed state (some hidden, some visible) if needed
 }
@@ -480,16 +470,12 @@ export function createFiltersPanel() {
   const title = createEl('h2', {
     className:
       'font-semibold flex items-center gap-2 text-black text-[32px] leading-[40px] font-normal font-twk',
-    html: `<span class="rounded-full bg-danaherpurple-25 p-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4" stroke="#7523FF" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></span> Filters`,
+    html: `<span class="rounded-full bg-danaherpurple-25 p-2"><img src="/icons/adjustments.svg" alt="arrow icon" width="20" height="21" /></span> Filters`,
   });
 
   const closeBtn = createEl('button', {
     className: 'text-gray-500 hover:text-gray-700 text-xl',
-    html: `<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M6 18L18 6M6 6L18 18" stroke="#7523FF" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg> </span>`,
+    html: `<span><img src="/icons/x-pdp.svg" alt="arrow icon" width="20" height="21" /> </span>`,
     events: {
       click() {
         panel.style.transform = 'translateX(100%)';

@@ -52,13 +52,11 @@ export async function buildProductTile(result, getCommerceBase, domHelpers) {
   // Now set the innerHTML to text + inline SVG
   link.innerHTML = `
     View details
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2929 5.37932C12.6834 4.98879 13.3166 4.98879 13.7071 5.37932L17.7071 9.37932C18.0976 9.76984 18.0976 10.403 17.7071 10.7935L13.7071 14.7935C13.3166 15.1841 12.6834 15.1841 12.2929 14.7935C11.9024 14.403 11.9024 13.7698 12.2929 13.3793L14.5858 11.0864H3C2.44772 11.0864 2 10.6387 2 10.0864C2 9.53414 2.44772 9.08643 3 9.08643H14.5858L12.2929 6.79353C11.9024 6.40301 11.9024 5.76984 12.2929 5.37932Z" fill="#7523FF"/>
-    </svg>
+    <img src="/icons/arrow-narrow-right.svg" alt="arrow icon" width="20" height="21" />
   `;
 
   return div(
-    { class: 'flex flex-row bg-white border outline-gray-300 gap-7' },
+    { class: 'flex flex-row bg-white border outline-gray-300 gap-7 flex-wrap' },
 
     // Image Section
     div(
@@ -83,7 +81,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers) {
 
     // Pricing & Action Section
     div(
-      { class: 'flex p-6 flex-col items-end gap-2 self-stretch  bg-gray-100 w-[331px]' },
+      { class: 'flex p-6 flex-col items-end gap-2 self-stretch  bg-gray-100 md:w-[331px] w-full' },
 
       // Price
       h3(

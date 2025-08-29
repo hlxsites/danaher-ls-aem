@@ -95,12 +95,16 @@ function setupCoveoContext(sku, host) {
 
 function subscribeToEngineUpdates(resultsGrid) {
   pdpEngine.subscribe(() => {
-    displayProducts(resultsGrid);
     renderPagination();
     renderFacetBreadcurm();
     renderCreateFacet();
     createFiltersPanel();
   });
+
+  pdpResultList.subscribe(()=>{
+    displayProducts(resultsGrid);
+  })
+
 }
 
 // Main function
