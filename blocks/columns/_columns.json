@@ -41,7 +41,6 @@
           "name": "rows",
           "label": "Number of Columns",
           "valueType": "string",
-          "default": "2",
           "options": [
             { "name": "2 Columns", "value": "2" },
             { "name": "3 Columns", "value": "3" }
@@ -56,11 +55,7 @@
           "options": [
             { "name": "70/30 Split", "value": "seventythirty" },
             { "name": "30/70 Split", "value": "thirtyseventy" }
-          ],
-          "condition": {
-            "field": "rows",
-            "equals": "2"
-          }
+          ]        
         }
       ]
     }

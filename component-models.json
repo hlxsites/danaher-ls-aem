@@ -828,7 +828,6 @@
         "name": "rows",
         "label": "Number of Columns",
         "valueType": "string",
-        "default": "2",
         "options": [
           {
             "name": "2 Columns",
@@ -855,11 +854,7 @@
             "name": "30/70 Split",
             "value": "thirtyseventy"
           }
-        ],
-        "condition": {
-          "field": "rows",
-          "equals": "2"
-        }
+        ]
       }
     ]
   },
