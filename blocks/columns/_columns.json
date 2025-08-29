@@ -7,10 +7,10 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
+            "className": "bg-white seventythirty",
             "template": {
               "columns": "2",
-              "rows": "1",
-              "className": ""
+              "rows": "1"
             }
           }
         }
@@ -34,23 +34,6 @@
           "name": "rows",
           "value": "1",
           "label": "Rows"
-        },
-        {
-          "component": "select",
-          "valueType": "string",
-          "name": "className",
-          "value": "",
-          "label": "Section Class",
-          "options": [
-            {
-              "name": "seventythirty",
-              "value": "bg-white seventythirty"
-            },
-            {
-              "name": "thirtyseventy",
-              "value": "bg-white thirtyseventy"
-            }
-          ]
         }
       ]
     }
