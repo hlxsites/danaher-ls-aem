@@ -249,8 +249,8 @@ function skipConverter(path) {
 
   // check for stage : :::::  checking host in the config for stage
   if (!converterCfg.internalHost.includes(prodRepo)) {
-    const shouldInclude = includeStagePaths.some((ip) => path.includes(ip)) && !excludeStagePaths.some((ep) => path.includes(ep));
-    return shouldInclude;
+      const shouldInclude = includeStagePaths.some((ip) => path.includes(ip)) && !excludeStagePaths.some((ep) => path.includes(ep));
+      return shouldInclude;
   }
   /*
   if (path.includes('/us/en/blog/')) return true;

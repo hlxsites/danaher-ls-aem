@@ -12,4 +12,4 @@ export const excludeProdPaths = ['products/family', 'products/sku', 'products/bu
 export const excludeStagePaths = ['products/family', 'products/sku', 'products/bundle', 'products/product-coveo'];
 
 // exclude stage paths
-export const includeStagePaths = ['e-buy', 'products', 'brands', 'products.html'];
+export const includeStagePaths = ['e-buy', 'products/', 'brands', 'products.html', 'blog', 'news'];
