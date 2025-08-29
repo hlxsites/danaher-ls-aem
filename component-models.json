@@ -937,33 +937,6 @@
         "type": "boolean",
         "label": "Autoplay",
         "default": false
-      },
-      {
-        "component": "select",
-        "name": "type",
-        "label": "Type",
-        "options": [
-          {
-            "name": "YouTube",
-            "value": "youtube"
-          },
-          {
-            "name": "Vimeo",
-            "value": "vimeo"
-          },
-          {
-            "name": "Vidyard",
-            "value": "vidyard"
-          },
-          {
-            "name": "PDF",
-            "value": "pdf"
-          },
-          {
-            "name": "Other",
-            "value": "default"
-          }
-        ]
       }
     ]
   },
@@ -1153,89 +1126,68 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
+            "name": "3 Columns",
+            "value": "cols-3"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "name": "4 Columns",
+            "value": "cols-4"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "mini-teaser",
+    "fields": [
       {
         "component": "reference",
-        "name": "image",
+        "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
-        "name": "imageAlt",
+        "name": "mini-teaser_imageAlt",
         "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "mini-teaser_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "mini-teaser_titleType",
+        "value": "h3",
+        "label": "Title Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "mini-teaser_description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
       }
     ]
   },

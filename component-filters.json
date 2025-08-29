@@ -56,6 +56,7 @@
       "testimonial",
       "tags-list",
       "related-articles",
+      "mini-teasers",
       "pdp-hero",
       "pdp-page-tabs",
       "pdp-bundle-list",
@@ -171,6 +172,12 @@
     "id": "learn-more",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "mini-teasers",
+    "components": [
+      "mini-teaser"
     ]
   },
   {

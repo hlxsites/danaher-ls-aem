@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import loadSFDCForm from '../form/form.js';
+import decorateFormBlock from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -622,6 +622,27 @@ export default function decorate(block) {
   // Now get columns (direct children of flexContainer)
   const cols = Array.from(flexContainer.children);
 
+  // Form load
+  cols.forEach((col) => {
+    const pTags = Array.from(col.querySelectorAll('p'));
+    let hasExpert = false;
+    pTags.forEach((pTag) => {
+      if (pTag.textContent.trim().includes('Talk to an Expert')) {
+        hasExpert = true;
+      }
+    });
+    if (hasExpert) {
+      const expertPTag = pTags.find((pTag) => pTag.textContent.trim().includes('Talk to an Expert'));
+      if (expertPTag) {
+        const formDiv = document.createElement('div');
+        formDiv.className = '';
+        expertPTag.parentNode.insertBefore(formDiv, expertPTag.nextSibling);
+        decorateFormBlock(formDiv);
+      }
+      pTags.forEach((pTag) => pTag.style.display = 'none');
+    }
+  });
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
@@ -787,15 +808,6 @@ export default function decorate(block) {
       }
     });
   });
-
-  // Form Load
-  if (cols.length > 1) {
-    const formBlock = cols[1].querySelector('.form');
-    const hasFormElement = cols[1].querySelector('form');
-    if (formBlock && !hasFormElement) {
-      loadSFDCForm(cols[1]);
-    }
-  }
 
   // EMBEDS
   block.querySelectorAll('.embed').forEach((embed) => {
