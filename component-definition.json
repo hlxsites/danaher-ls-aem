@@ -259,7 +259,9 @@
                 "template": {
                   "columns": "2",
                   "rows": "1",
-                  "className": ""
+                  "class": {
+                    "$ref": "classes"
+                  }
                 }
               }
             }

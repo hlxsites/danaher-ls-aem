@@ -847,10 +847,10 @@
       },
       {
         "component": "select",
+        "name": "classes",
+        "label": "Select Class Name",
         "valueType": "string",
-        "name": "className",
-        "value": "",
-        "label": "Section Class",
+        "default": "fiftyfifty",
         "options": [
           {
             "name": "itemscenter",

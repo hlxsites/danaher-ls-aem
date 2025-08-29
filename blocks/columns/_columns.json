@@ -10,7 +10,7 @@
             "template": {
               "columns": "2",
               "rows": "1",
-              "className": ""
+              "class": { "$ref": "classes" }
             }
           }
         }
@@ -37,15 +37,12 @@
         },
         {
           "component": "select",
+          "name": "classes",
+          "label": "Select Class Name",
           "valueType": "string",
-          "name": "className",
-          "value": "",
-          "label": "Section Class",
+          "default": "fiftyfifty",
           "options": [
-            {
-              "name": "itemscenter",
-              "value": "itemscenter"
-            }
+            { "name": "itemscenter", "value": "itemscenter" }
           ]
         }
       ]
