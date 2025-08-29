@@ -9,7 +9,8 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "columns": "2",
-              "rows": "1"
+              "rows": "1",
+              "className": ""
             }
           }
         }
@@ -33,6 +34,19 @@
           "name": "rows",
           "value": "1",
           "label": "Rows"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "className",
+          "value": "",
+          "label": "Section Class",
+          "options": [
+            {
+              "name": "itemscenter",
+              "value": "itemscenter"
+            }
+          ]
         }
       ]
     }

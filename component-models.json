@@ -844,6 +844,19 @@
         "name": "rows",
         "value": "1",
         "label": "Rows"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "className",
+        "value": "",
+        "label": "Section Class",
+        "options": [
+          {
+            "name": "itemscenter",
+            "value": "itemscenter"
+          }
+        ]
       }
     ]
   },
