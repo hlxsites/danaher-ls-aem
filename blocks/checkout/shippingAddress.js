@@ -996,11 +996,6 @@ export const shippingAddressModule = async () => {
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
     // eslint-disable-next-line max-len
-    let basketShipToAddressData = '';
-    if (basketShipToAddress) {
-      // eslint-disable-next-line max-len
-      basketShipToAddressData = getCurrentBasketDetails?.data?.included?.commonShipToAddress[basketShipToAddress];
-    }
 
     if (basketInvoiceToAddress && basketInvoiceToAddress === basketShipToAddress) {
       if (shippingAsBillingAddress) {
