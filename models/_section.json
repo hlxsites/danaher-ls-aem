@@ -27,6 +27,14 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "bg-white seventythirty",
+              "value": "bg-white seventythirty"
+            },
+            {
+              "name": "bg-white thirtyseventy",
+              "value": "bg-white thirtyseventy"
             }
           ]
         }

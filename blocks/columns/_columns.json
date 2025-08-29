@@ -7,7 +7,6 @@
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
-            "className": "bg-white seventythirty",
             "template": {
               "columns": "2",
               "rows": "1"
