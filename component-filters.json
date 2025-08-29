@@ -123,12 +123,8 @@
     "components": [
       "text",
       "image",
-      "title",
       "button",
-      "article-info",
-      "embed",
-      "form",
-      "mini-teasers"
+      "title"
     ]
   },
   {

@@ -8,24 +8,8 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "name": "Columns",
-              "model": "columns",
-              "filter": "columns"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "column",
-              "model": "column"
+              "columns": "2",
+              "rows": "1"
             }
           }
         }
@@ -37,25 +21,18 @@
       "id": "columns",
       "fields": [
         {
-          "component": "multiselect",
-          "name": "rows",
-          "label": "Number of Columns",
-          "valueType": "string",
-          "options": [
-            { "name": "2 Columns", "value": "2" },
-            { "name": "3 Columns", "value": "3" }
-          ]
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
         },
         {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Select Ratio (only for 2 columns)",
-          "valueType": "string",
-          "default": "fiftyfifty",
-          "options": [
-            { "name": "70/30 Split", "value": "seventythirty" },
-            { "name": "30/70 Split", "value": "thirtyseventy" }
-          ]        
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
         }
       ]
     }
@@ -63,19 +40,17 @@
   "filters": [
     {
       "id": "columns",
-      "components": ["column"]
+      "components": [
+        "column"
+      ]
     },
     {
       "id": "column",
       "components": [
         "text",
         "image",
-        "title",
         "button",
-        "article-info",
-        "embed",
-        "form",
-        "mini-teasers"
+        "title"
       ]
     }
   ]

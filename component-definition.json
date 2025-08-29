@@ -257,24 +257,8 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
-                  "name": "Columns",
-                  "model": "columns",
-                  "filter": "columns"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "column",
-          "id": "column",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "column",
-                  "model": "column"
+                  "columns": "2",
+                  "rows": "1"
                 }
               }
             }
