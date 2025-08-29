@@ -4,6 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
+import decorateFormBlock from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -610,6 +611,21 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
+
+  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  if (formWrapper) {
+    if (cols.length > 1) {
+      decorateFormBlock(cols[1]);
+    }
+  }
+
+//   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+// if (formWrapper && cols.length > 1) {
+//   // Move formWrapper into the second column
+//   cols[1].appendChild(formWrapper); // This will append the form as the last child in column 2
+//   decorateFormBlock(formWrapper); // Decorate the form itself, if needed
+// }
+
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
