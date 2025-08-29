@@ -276,11 +276,6 @@
     padding-right: 39px
   }
 
-  .product-banner-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
-  }
-
   .product-banner-wrapper :is(.md\:pt-12) {
     padding-top: 3rem
   }
