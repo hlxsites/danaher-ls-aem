@@ -10,7 +10,6 @@
             "template": {
               "columns": "2",
               "rows": "1",
-              "widths": ["70%", "30%"],
               "className": ""
             }
           }
@@ -39,33 +38,16 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "widths",
-          "value": "70,30",
-          "label": "Column Ratio",
-          "options": [
-            {
-              "name": "70/30",
-              "value": "70,30"
-            },
-            {
-              "name": "30/70",
-              "value": "30,70"
-            }
-          ]
-        },
-        {
-          "component": "select",
-          "valueType": "string",
           "name": "className",
           "value": "",
           "label": "Section Class",
           "options": [
             {
-              "name": "70/30",
+              "name": "seventythirty",
               "value": "bg-white seventythirty"
             },
             {
-              "name": "30/70",
+              "name": "thirtyseventy",
               "value": "bg-white thirtyseventy"
             }
           ]
