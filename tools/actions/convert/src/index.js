@@ -22,7 +22,7 @@ import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 // eslint-disable-next-line
 //import pathConfig from './pathConfig.json' with { type: 'json' };
-import { excludeProdPaths, excludeStagePaths } from './converter-paths-config.js';
+import { excludeProdPaths, excludeStagePaths, includeStagePaths } from './converter-paths-config.js';
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -249,9 +249,8 @@ function skipConverter(path) {
 
   // check for stage : :::::  checking host in the config for stage
   if (!converterCfg.internalHost.includes(prodRepo)) {
-    if (!excludeStagePaths.some((stagePath) => path.includes(stagePath)) && !path.includes('/topics-jck1/')) {
-      return true;
-    }
+      const shouldInclude = includeStagePaths.some((ip) => path.includes(ip)) && !excludeStagePaths.some((ep) => path.includes(ep));
+      return shouldInclude;
   }
   /*
   if (path.includes('/us/en/blog/')) return true;
