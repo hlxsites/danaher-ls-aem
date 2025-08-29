@@ -22,7 +22,7 @@ import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 // eslint-disable-next-line
 //import pathConfig from './pathConfig.json' with { type: 'json' };
-import { excludeProdPaths, excludeStagePaths, includeStagePaths } from './converter-paths-config.js';
+import { excludeProdPaths, includeProdPaths, excludeStagePaths, includeStagePaths } from './converter-paths-config.js';
 
 const mediaTypes = {
   'application/atom+xml': false,
@@ -240,11 +240,10 @@ function skipConverter(path) {
   // this is the prod repo
   const prodRepo = 'danaher-ls-aem-prod';
 
-  // check for stage : :::::  checking host in the config for prod
+  // check for prod : :::::  checking host in the config for prod
   if (converterCfg.internalHost.includes(prodRepo)) {
-    if (!excludeProdPaths.some((prodPath) => path.includes(prodPath)) && !path.includes('/topics-jck1/')) {
-      return true;
-    }
+      const shouldIncludeProd = includeProdPaths.some((ip) => path.includes(ip)) && !excludeProdPaths.some((ep) => path.includes(ep));
+      return shouldIncludeProd;
   }
 
   // check for stage : :::::  checking host in the config for stage
