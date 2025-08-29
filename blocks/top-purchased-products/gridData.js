@@ -21,6 +21,8 @@ export default function renderGridCard(item) {
       src: (imageUrl && !imageUrl.toLowerCase().includes('.pdf')) ? imageUrl : '/content/dam/danaher/products/fallbackImage.jpeg',
       alt: item?.title?.replace(/<[^>]*>/g, '') || '',
       class: 'w-full h-[164px] object-contain',
+      loading: 'lazy',
+      decoding: 'async',
     }),
     p(
       {

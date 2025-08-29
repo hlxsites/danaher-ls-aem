@@ -24,6 +24,8 @@ export default function renderProductListCard(item) {
         'md:w-full w-[100px] h-[100px] left-0 top-0 absolute border border-gray-200 object-contain',
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
+      loading: 'lazy',
+      decoding: 'async',
     });
 
     imageElement.addEventListener('error', () => {

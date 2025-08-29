@@ -19,12 +19,8 @@ export default function productBannerDecorate(block) {
   block.parentElement.parentElement.style.padding = '0';
   block.parentElement.parentElement.style.margin = '0';
 
-  const [
-    productBannerTitle,
-    productBannerLink,
-    productBannerLinkTarget,
-    productBannerHeading,
-  ] = block.children;
+  const [productBannerTitle, productBannerLink,
+    productBannerLinkTarget, productBannerHeading] = block.children;
   const categoryHeading = productBannerTitle?.textContent.trim() || '';
   const btnText = productBannerLink?.textContent.trim() || '';
   const btnLink = productBannerLinkTarget?.textContent?.trim();
@@ -114,13 +110,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add(
-      'text-danaherpurple-500',
-      'hover:text-danaherpurple-800',
-      'mt-8',
-      'gap-4',
-      'font-bold',
-    );
+    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-800', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
@@ -142,6 +132,8 @@ export default function productBannerDecorate(block) {
           src: image.src,
           alt,
           class: 'object-contain',
+          loading: 'lazy',
+          decoding: 'async',
         }),
       )
       : '',
@@ -207,14 +199,8 @@ export default function productBannerDecorate(block) {
     readMoreLink.style.display = isTruncated ? 'inline-block' : 'none';
   }
 
-  if (
-    categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
-  ) {
-    categoryBannerLeft.append(
-      categoryBannerTitle,
-      categoryBannerCta,
-      categoryBannerDescription,
-    );
+  if (categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0) {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
   } else {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }

@@ -59,6 +59,8 @@ export default function decorate(block) {
             || '/content/dam/danaher/products/fallbackImage.jpeg',
           alt: itemAltText?.textContent.trim() || '',
           class: 'h-[164px] w-[294px] !object-contain',
+          loading: 'lazy',
+          decoding: 'async',
         }),
       ),
       h3(

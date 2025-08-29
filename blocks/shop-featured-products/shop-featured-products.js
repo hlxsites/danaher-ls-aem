@@ -199,6 +199,8 @@ export default function decorate(block) {
           src: productImage?.getAttribute('src') || fallbackImage,
           alt: productImage?.getAttribute('alt') || productTitle,
           class: 'w-full h-full object-contain max-h-[450px]',
+          loading: 'lazy',
+          decoding: 'async',
         }),
       ),
     );

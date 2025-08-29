@@ -62,6 +62,8 @@ async function createCarousel(
           product?.images?.[0] && !product?.images?.[0]?.toLowerCase().includes('.pdf')) ? product?.images?.[0] : '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: product?.title || '',
         class: 'w-full h-[164px] p-0 object-contain',
+        loading: 'lazy',
+        decoding: 'async',
       }),
       p(
         {

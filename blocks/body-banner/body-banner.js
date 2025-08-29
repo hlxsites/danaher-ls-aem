@@ -46,6 +46,8 @@ export default function decorate(block) {
       img({
         src: imgSrc || '/content/dam/danaher/products/fallbackImage.jpeg',
         alt: imgAlt,
+        loading: 'lazy',
+        decoding: 'async',
         class: 'w-full h-full object-contain',
       }),
     ),

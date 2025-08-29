@@ -147,6 +147,8 @@ export default function decorate(block) {
           src: imgSrc,
           alt: title,
           class: 'w-12 mt-[2px] object-contain flex-shrink-0',
+          loading: 'lazy',
+          decoding: 'async',
         })
         : null;
 
