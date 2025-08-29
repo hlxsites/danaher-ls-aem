@@ -827,15 +827,32 @@
         "component": "text",
         "valueType": "number",
         "name": "columns",
-        "value": "",
+        "value": "2",
         "label": "Columns"
       },
       {
         "component": "text",
         "valueType": "number",
         "name": "rows",
-        "value": "",
+        "value": "1",
         "label": "Rows"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "widths",
+        "value": "",
+        "label": "Column Widths",
+        "options": [
+          {
+            "name": "70/30",
+            "value": "seventythirty"
+          },
+          {
+            "name": "30/70",
+            "value": "thirtyseventy"
+          }
+        ]
       }
     ]
   },
