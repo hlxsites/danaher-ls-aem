@@ -850,7 +850,7 @@
         "name": "classes",
         "label": "Select Class Name",
         "valueType": "string",
-        "default": "itemscenter",
+        "default": "",
         "options": [
           {
             "name": "itemscenter",
