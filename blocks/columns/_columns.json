@@ -61,7 +61,9 @@
         "text",
         "image",
         "button",
-        "title"
+        "title",
+        "form",
+        "embed"
       ]
     }
   ]
