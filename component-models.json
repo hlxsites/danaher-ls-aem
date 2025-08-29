@@ -216,6 +216,10 @@
           {
             "name": "bg-white thirtyseventy",
             "value": "bg-white thirtyseventy"
+          },
+          {
+            "name": "social-media-container",
+            "value": "social-media-container"
           }
         ]
       }
@@ -850,7 +854,7 @@
         "name": "classes",
         "label": "Select Class Name",
         "valueType": "string",
-        "default": "fiftyfifty",
+        "default": "itemscenter",
         "options": [
           {
             "name": "itemscenter",

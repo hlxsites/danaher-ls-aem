@@ -35,6 +35,10 @@
             {
               "name": "bg-white thirtyseventy",
               "value": "bg-white thirtyseventy"
+            },
+            {
+              "name": "social-media-container",
+              "value": "social-media-container"
             }
           ]
         }
@@ -93,7 +97,8 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "mini-teasers"
+      "mini-teasers",
+      "social-media"
     ]
     }
   ]

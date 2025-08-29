@@ -40,7 +40,7 @@
           "name": "classes",
           "label": "Select Class Name",
           "valueType": "string",
-          "default": "fiftyfifty",
+          "default": "itemscenter",
           "options": [
             { "name": "itemscenter", "value": "itemscenter" }
           ]
