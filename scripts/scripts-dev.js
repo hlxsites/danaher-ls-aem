@@ -40,16 +40,16 @@ const TEMPLATE_LIST = {
       '../blocks/article-info/article-info.js',
     ],
   },
-  // productdetail: {
-  //   templateName: 'productDetail',
-  //   dependencies: [
-  //     './commerce.js',
-  //     './product-payload-builder.js',
-  //     './schema.js',
-  //   ],
-  // },
   productdetail: {
-    templateName: 'productdetail',
+    templateName: 'productDetail',
+    dependencies: [
+      './commerce.js',
+      './product-payload-builder.js',
+      './schema.js',
+    ],
+  },
+  pdp: {
+    templateName: 'pdp',
     dependencies: [
       '../templates/pdp/pdp.js',
     ],
@@ -618,11 +618,8 @@ async function decorateTemplates(main) {
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
       const templateObj = TEMPLATE_LIST[template];
-      let templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
+      const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
       const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
-      if (templateName === 'productdetail') {
-        templateName = 'pdp';
-      }
       const decorator = await Promise.all([
         import(`../templates/${templateName}/${templateName}.js`),
         ...templateDeps.map((dep) => import(dep)),
