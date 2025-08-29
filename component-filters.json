@@ -56,7 +56,18 @@
       "testimonial",
       "tags-list",
       "related-articles",
-      "mini-teasers"
+      "mini-teasers",
+      "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications"
     ]
   },
   {
@@ -185,6 +196,12 @@
     "id": "opco-grid",
     "components": [
       "opco-grid-item"
+    ]
+  },
+  {
+    "id": "pdp-page-tabs",
+    "components": [
+      "pdp-tabs-item"
     ]
   },
   {

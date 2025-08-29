@@ -1,0 +1,26 @@
+{
+  "definitions": [
+    {
+      "title": "PDP Bundle List",
+      "id": "pdp-bundle-list",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "PDP Bundle List",
+              "model": "pdp-bundle-list"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+      {
+        "id": "pdp-bundle-list",
+        "fields": []
+      }
+  ],
+  "filters": []
+}
