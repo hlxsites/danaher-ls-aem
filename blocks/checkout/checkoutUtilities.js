@@ -36,7 +36,7 @@ export const createModule = (id, isActive, content, buttons) => {
     const proceedButton = button(
       {
         class:
-          'proceed-button btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
+          'proceed-button bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
         id: 'proceed-button',
         'data-tab': buttonData.tab,
       },

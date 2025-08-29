@@ -51,7 +51,7 @@ export function preLoader() {
     },
     img({
       class: ' h-24',
-      src: '/content/dam/loading_icon.gif',
+      src: '/content/dam/danaher/utility/loading_icon.gif',
     }),
   );
 }
