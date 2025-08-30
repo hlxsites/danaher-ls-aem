@@ -615,10 +615,7 @@ export default function decorate(block) {
 
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
   if (formWrapper) {
-    const formBlock = formWrapper.querySelector('.column'); 
-    if (formBlock) {
-    decorateFormBlock(formBlock); // your custom logic for form block
-  }
+    decorateFormBlock(block); // your custom logic for form block
   }
 
   block.classList.add(`columns-${cols.length}-cols`);
