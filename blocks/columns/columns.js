@@ -615,7 +615,7 @@ export default function decorate(block) {
   
 
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  if (formWrapper && cols.length > 1 && block.includes('form')) {
+  if (formWrapper && cols.length > 1) {
     decorateFormBlock(cols[1]); // your custom logic for form block
   }
 
