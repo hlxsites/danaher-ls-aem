@@ -614,8 +614,8 @@ export default function decorate(block) {
   console.log('cols', cols);
 
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  if (formWrapper) {
-    decorateFormBlock(block); // your custom logic for form block
+  if (formWrapper && cols.length > 1) {
+    decorateFormBlock(cols[1]); // your custom logic for form block
   }
 
   block.classList.add(`columns-${cols.length}-cols`);
@@ -780,5 +780,38 @@ export default function decorate(block) {
         }
       }
     });
+  });
+
+  // EMBEDS
+  block.querySelectorAll('.embed').forEach((embed) => {
+    let url = '';
+    if (embed.dataset && embed.dataset.url) {
+      url = embed.dataset.url.trim();
+    } else {
+      url = embed.textContent.trim();
+    }
+    if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+      const match = url.match(/vimeo\.com\/(\d+)/);
+      if (match) url = `https://player.vimeo.com/video/${match[1]}`;
+    }
+    if (url.includes('youtube.com/watch')) {
+      const match = url.match(/v=([^&]+)/);
+      if (match) url = `https://www.youtube.com/embed/${match[1]}`;
+    }
+    if (url.startsWith('http')) {
+      if (embed.tagName.toLowerCase() === 'p') {
+        div.className = embed.className;
+        embed.replaceWith(div);
+        // const embed = div;
+      }
+      embed.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.width = '100%';
+      iframe.height = '400';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allowfullscreen', '');
+      embed.appendChild(iframe);
+    }
   });
 }
