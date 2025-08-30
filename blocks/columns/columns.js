@@ -614,8 +614,16 @@ export default function decorate(block) {
   console.log('cols', cols);
 
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  const firstDiv = ele.querySelector('div:nth-child(1)');
+        const secondDiv = ele.querySelector('div:nth-child(2)');
   if (formWrapper && cols.length > 1) {
-    document.createElement('form');
+if (sectionDiv.className.includes('thirtyseventy')) {
+          firstDiv.classList.add('lg:w-1/3');
+          secondDiv.classList.add('lg:w-2/3');
+        } else {
+          firstDiv.classList.add('lg:w-1/2');
+          secondDiv?.classList.add('lg:w-1/2');
+        }
     decorateFormBlock(cols[1]); // your custom logic for form block
   }
 
