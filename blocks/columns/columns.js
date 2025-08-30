@@ -820,15 +820,6 @@ export default function decorate(block) {
   block.querySelectorAll('.relative').forEach((formBlock) => {
   // 1. Get form config or content (if needed)
   // For example, if your form is a JSON string inside data-config
-  let formConfig = {};
-  if (formBlock.dataset && formBlock.dataset.config) {
-    try {
-      formConfig = JSON.parse(formBlock.dataset.config);
-    } catch (e) {
-      // fallback: maybe config is not set or is invalid
-      formConfig = {};
-    }
-  }
 
   // 2. Create form wrapper if not present
   let formWrapper = formBlock.closest('.form-wrapper');
@@ -842,6 +833,6 @@ export default function decorate(block) {
   // 3. Decorate or render the form (customize as needed)
   // You can build your form HTML here, or enhance the existing one
   // For example, set up validation, listeners, etc.
-  decorateFormBlock(formBlock, formConfig);
+  decorateFormBlock(formBlock);
 });
 }
