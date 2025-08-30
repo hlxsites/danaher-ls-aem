@@ -614,10 +614,24 @@ export default function decorate(block) {
   console.log('sectionDiv', sectionDiv);
   
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  const relative = sectionDiv?.querySelector('relative');
-  if (formWrapper && relative) {
-    decorateFormBlock(cols[1]); // your custom logic for form block
-  }
+  if(formWrapper){
+   const flexContainer = block.firstElementChild;
+  // const cols = [...block.firstElementChild.children];
+  Array.from(block.children).forEach((child) => {
+    if (child !== flexContainer) {
+      flexContainer.appendChild(child);
+    }
+  });
+}
+
+  // if(sectionDiv.className.includes('seventythirty')) {
+  //         firstDiv.classList.add('lg:w-2/3');
+  //         secondDiv.classList.add('lg:w-1/3');
+  //       }
+  // const relative = sectionDiv?.querySelector('relative');
+  // if (formWrapper && relative) {
+  //   decorateFormBlock(cols[1]); // your custom logic for form block
+  // }
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
