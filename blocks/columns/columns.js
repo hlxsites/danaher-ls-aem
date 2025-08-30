@@ -614,10 +614,11 @@ export default function decorate(block) {
   console.log('sectionDiv', sectionDiv);
   
 
-  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  if (formWrapper && cols.length > 1) {
-    decorateFormBlock(cols[1]); // your custom logic for form block
-  }
+  // const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  // const relative = sectionDiv?.querySelector('.relative');
+  // if (formWrapper && relative) {
+  //   decorateFormBlock(cols[1]); // your custom logic for form block
+  // }
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
@@ -815,4 +816,32 @@ export default function decorate(block) {
       embed.appendChild(iframe);
     }
   });
+
+  block.querySelectorAll('.relative').forEach((formBlock) => {
+  // 1. Get form config or content (if needed)
+  // For example, if your form is a JSON string inside data-config
+  let formConfig = {};
+  if (formBlock.dataset && formBlock.dataset.config) {
+    try {
+      formConfig = JSON.parse(formBlock.dataset.config);
+    } catch (e) {
+      // fallback: maybe config is not set or is invalid
+      formConfig = {};
+    }
+  }
+
+  // 2. Create form wrapper if not present
+  let formWrapper = formBlock.closest('.form-wrapper');
+  if (!formWrapper) {
+    formWrapper = document.createElement('div');
+    formWrapper.className = 'form-wrapper';
+    formBlock.parentNode.insertBefore(formWrapper, formBlock);
+    formWrapper.appendChild(formBlock);
+  }
+
+  // 3. Decorate or render the form (customize as needed)
+  // You can build your form HTML here, or enhance the existing one
+  // For example, set up validation, listeners, etc.
+  decorateFormBlock(formBlock, formConfig);
+});
 }
