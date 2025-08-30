@@ -612,12 +612,12 @@ export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
 
-  // const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  // if (formWrapper) {
-  //   if (cols.length > 1) {
-  //     decorateFormBlock(cols[1]);
-  //   }
-  // }
+  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  if (formWrapper) {
+    if (cols.length > 1) {
+      decorateFormBlock(cols[1]);
+    }
+  }
 
 //   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
 // if (formWrapper && cols.length > 1) {
