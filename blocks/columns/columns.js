@@ -613,25 +613,13 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   console.log('cols', cols);
 
-  let formWrapper = sectionDiv?.querySelector('.form-wrapper');
-if (!formWrapper && cols.length > 1) {
-  // Create and insert a form-wrapper if it doesn't exist
-  formWrapper = document.createElement('div');
-  formWrapper.classList.add('form-wrapper');
-  sectionDiv.appendChild(formWrapper);
-  formWrapper.appendChild(cols[1]); // move the second column into the form wrapper
-  decorateFormBlock(cols[1]);
-} else if (formWrapper && cols.length > 1) {
-  decorateFormBlock(cols[1]);
-}
-
-//   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-//   console.log('formWrapper', formWrapper);
-// if (formWrapper && cols.length > 1) {
-//   // Move formWrapper into the second column
-//   cols[1].appendChild(formWrapper); // This will append the form as the last child in column 2
-//   decorateFormBlock(formWrapper); // Decorate the form itself, if needed
-// }
+  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  if (formWrapper) {
+    const formBlock = formWrapper.querySelector('.column'); 
+    if (formBlock) {
+    decorateFormBlock(formBlock); // your custom logic for form block
+  }
+  }
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
