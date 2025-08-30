@@ -611,7 +611,13 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
-  console.log('cols', cols);
+  console.log('sectionDiv', sectionDiv);
+  
+
+  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  if (formWrapper && cols.length > 1 && block.includes('form')) {
+    decorateFormBlock(cols[1]); // your custom logic for form block
+  }
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
@@ -624,12 +630,8 @@ export default function decorate(block) {
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
         if (sectionDiv.className.includes('thirtyseventy')) {
-          const formWrapper = sectionDiv?.querySelector('.form-wrapper');
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
-          if (formWrapper && cols.length > 1) {
-    decorateFormBlock(cols[1]); // your custom logic for form block
-  }
         } else if (sectionDiv.className.includes('seventythirty')) {
           firstDiv.classList.add('lg:w-2/3');
           secondDiv.classList.add('lg:w-1/3');
