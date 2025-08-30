@@ -611,18 +611,12 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
-  console.log('sectionDiv', sectionDiv);
+  console.log('cols', cols);
   
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  if(formWrapper){
-   const flexContainer = block.firstElementChild;
-  // const cols = [...block.firstElementChild.children];
-  Array.from(block.children).forEach((child) => {
-    if (child !== flexContainer) {
-      flexContainer.appendChild(child);
-    }
-  });
-}
+    if (formWrapper) {
+    decorateFormBlock(cols[1]); // your custom logic for form block
+  }
 
   // if(sectionDiv.className.includes('seventythirty')) {
   //         firstDiv.classList.add('lg:w-2/3');
