@@ -613,20 +613,6 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   console.log('cols', cols);
 
-  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-  const firstDiv = ele.querySelector('div:nth-child(1)');
-        const secondDiv = ele.querySelector('div:nth-child(2)');
-  if (formWrapper && cols.length > 1) {
-if (sectionDiv.className.includes('thirtyseventy')) {
-          firstDiv.classList.add('lg:w-1/3');
-          secondDiv.classList.add('lg:w-2/3');
-        } else {
-          firstDiv.classList.add('lg:w-1/2');
-          secondDiv?.classList.add('lg:w-1/2');
-        }
-    decorateFormBlock(cols[1]); // your custom logic for form block
-  }
-
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
@@ -638,8 +624,12 @@ if (sectionDiv.className.includes('thirtyseventy')) {
         const firstDiv = ele.querySelector('div:nth-child(1)');
         const secondDiv = ele.querySelector('div:nth-child(2)');
         if (sectionDiv.className.includes('thirtyseventy')) {
+          const formWrapper = sectionDiv?.querySelector('.form-wrapper');
           firstDiv.classList.add('lg:w-1/3');
           secondDiv.classList.add('lg:w-2/3');
+          if (formWrapper && cols.length > 1) {
+    decorateFormBlock(cols[1]); // your custom logic for form block
+  }
         } else if (sectionDiv.className.includes('seventythirty')) {
           firstDiv.classList.add('lg:w-2/3');
           secondDiv.classList.add('lg:w-1/3');
