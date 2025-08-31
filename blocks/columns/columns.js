@@ -611,33 +611,18 @@ async function loadForm(row, tags) {
 export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
-  console.log('cols', cols);
-  
-//   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-//     if (formWrapper) {
-//     const expertFormDiv = document.querySelector('.talk-to-an-expert-form');
-//     document.querySelectorAll('.talk-to-an-expert-form').forEach(div => {
-//   if (div.dataset.blockStatus === 'loaded') {
-//     div.classList.add('form-loaded');
-//   }
-// });
-//     decorateFormBlock(formWrapper); // your custom logic for form block
-//   }
 
- const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-    if (formWrapper) {
-    const expertFormDiv = document.querySelector('.talk-to-an-expert-form');
-    document.querySelectorAll('.talk-to-an-expert-form').forEach(div => {
-  if (expertFormDiv) {
-    decorateFormBlock(cols[1]);
-  }
-});
-    }
+// Form load
+const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
+const columns = columnsBlock.querySelectorAll(':scope > div');
+const container = columns[0];
+const colDivs = container.querySelectorAll(':scope > div');
+const child2 = colDivs[1];
+const expertFormDiv = document.createElement('div');
+expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
+child2.appendChild(expertFormDiv);
+// decorateFormBlock(child2);
 
-  // if(sectionDiv.className.includes('seventythirty')) {
-  //         firstDiv.classList.add('lg:w-2/3');
-  //         secondDiv.classList.add('lg:w-1/3');
-  //       }
   // const relative = sectionDiv?.querySelector('relative');
   // if (formWrapper && relative) {
   //   decorateFormBlock(cols[1]); // your custom logic for form block
