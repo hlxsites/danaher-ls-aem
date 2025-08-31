@@ -4,7 +4,7 @@ import {
 import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
-import decorateFormBlock from '../form/form.js';
+import loadSFDCForm from '../form/form.js';
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
@@ -621,7 +621,8 @@ const child2 = colDivs[1];
 const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
 child2.appendChild(expertFormDiv);
-// decorateFormBlock(child2);
+// expertFormDiv.appendChild(loadSFDCForm);
+loadSFDCForm(colDivs[1]);
 
   // const relative = sectionDiv?.querySelector('relative');
   // if (formWrapper && relative) {
