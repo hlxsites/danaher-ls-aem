@@ -620,15 +620,9 @@ const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
 const expertFormDiv = document.createElement('div');
-expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
+expertFormDiv.className = 'talk-to-an-expert-form';
 child2.appendChild(expertFormDiv);
-// const parentDiv = document.querySelector('.talk-to-an-expert-form-wrapper');
-const expertFormDiv1 = document.createElement('div');
-expertFormDiv1.className = 'talk-to-an-expert-form block';
-expertFormDiv1.setAttribute('data-block-name', 'talk-to-an-expert-form');
-expertFormDiv1.setAttribute('data-block-status', 'loaded');
-expertFormDiv.appendChild(expertFormDiv1);
-loadSFDCForm(expertFormDiv1);
+loadSFDCForm(expertFormDiv);
 }
 /** ********EDS FORM Ends****************** */
 
