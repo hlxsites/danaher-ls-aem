@@ -625,10 +625,7 @@ expertFormDiv.className = 'talk-to-an-expert-form';
 expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
 expertFormDiv.setAttribute('data-block-status', 'loaded');
 child2.appendChild(expertFormDiv);
-const expertFormBlock = document.querySelector('[data-block-name="talk-to-an-expert-form"]');
-if (expertFormBlock) {
-  loadSFDCForm(expertFormDiv);
-}
+loadSFDCForm(expertFormDiv);
 }
 /** ********EDS FORM Ends****************** */
 

@@ -43,8 +43,7 @@
           "default": "",
           "options": [
             { "name": "default", "value": "" },
-            { "name": "itemscenter", "value": "itemscenter" },
-            { "name": "form-wrapper", "value": "form-wrapper" }
+            { "name": "itemscenter", "value": "itemscenter" }
           ]
         }
       ]
