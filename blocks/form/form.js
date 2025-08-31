@@ -213,6 +213,7 @@ function loadUTMParams() {
 }
 
 async function loadSFDCForm(block) {
+  block.classList.add('talk-to-an-expert-form');
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.textContent || "TTAE";
   const formNameEl = formIdEl?.nextElementSibling;
@@ -363,6 +364,6 @@ async function loadSFDCForm(block) {
 }
 
 export default function decorate(block) {
-  block.classList.add('relative');
+  // block.classList.add('relative');
   loadSFDCForm(block);
 }
