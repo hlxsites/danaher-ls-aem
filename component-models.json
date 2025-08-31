@@ -934,6 +934,19 @@
     "id": "form",
     "fields": [
       {
+        "component": "select",
+        "name": "classes",
+        "label": "Select Class Name",
+        "valueType": "string",
+        "default": "",
+        "options": [
+          {
+            "name": "form-wrapper",
+            "value": "form-wrapper"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "formId",
         "type": "string",
