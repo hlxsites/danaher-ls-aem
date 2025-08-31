@@ -622,12 +622,12 @@ const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
 console.log('child2', child2);
-const expertFormDiv = document.createElement('div');
-expertFormDiv.className = 'talk-to-an-expert-form';
-expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
-expertFormDiv.setAttribute('data-block-status', 'loaded');
-child2.appendChild(expertFormDiv);
-loadSFDCForm(expertFormDiv);
+// const expertFormDiv = document.createElement('div');
+// expertFormDiv.className = 'talk-to-an-expert-form';
+// expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
+// expertFormDiv.setAttribute('data-block-status', 'loaded');
+// child2.appendChild(expertFormDiv);
+// loadSFDCForm(expertFormDiv);
 }
 /** ********EDS FORM Ends****************** */
 
