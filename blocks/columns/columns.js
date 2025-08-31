@@ -613,10 +613,10 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   console.log('cols', cols);
   
-  const formWrapper = sectionDiv?.querySelector('.form-wrapper');
-    if (formWrapper) {
-    decorateFormBlock(formWrapper); // your custom logic for form block
-  }
+  // const formWrapper = sectionDiv?.querySelector('.form-wrapper');
+  //   if (formWrapper) {
+  //   decorateFormBlock(formWrapper); // your custom logic for form block
+  // }
 
   // if(sectionDiv.className.includes('seventythirty')) {
   //         firstDiv.classList.add('lg:w-2/3');
