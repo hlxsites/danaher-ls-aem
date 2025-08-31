@@ -615,7 +615,7 @@ export default function decorate(block) {
   
   const formWrapper = sectionDiv?.querySelector('.form-wrapper');
     if (formWrapper) {
-    decorateFormBlock(sectionDiv); // your custom logic for form block
+    decorateFormBlock(formWrapper); // your custom logic for form block
   }
 
   // if(sectionDiv.className.includes('seventythirty')) {
