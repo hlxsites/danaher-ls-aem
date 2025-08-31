@@ -619,10 +619,13 @@ const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
+console.log('child2', child2);
 const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form';
 child2.appendChild(expertFormDiv);
+if(expertFormDiv.className.includes('talk-to-an-expert-form')){
 loadSFDCForm(expertFormDiv);
+}
 }
 /** ********EDS FORM Ends****************** */
 
