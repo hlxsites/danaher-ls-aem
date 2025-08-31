@@ -629,7 +629,7 @@ export default function decorate(block) {
     const expertFormDiv = document.querySelector('.talk-to-an-expert-form');
     document.querySelectorAll('.talk-to-an-expert-form').forEach(div => {
   if (expertFormDiv) {
-    decorateFormBlock(expertFormDiv);
+    decorateFormBlock(cols[1]);
   }
 });
     }
