@@ -859,10 +859,6 @@
           {
             "name": "itemscenter",
             "value": "itemscenter"
-          },
-          {
-            "name": "form-wrapper",
-            "value": "form-wrapper"
           }
         ]
       }
@@ -937,6 +933,13 @@
   {
     "id": "form",
     "fields": [
+      {
+        "component": "text",
+        "name": "classes",
+        "label": "Select Class Name",
+        "valueType": "string",
+        "default": "form-wrapper"
+      },
       {
         "component": "text",
         "name": "formId",

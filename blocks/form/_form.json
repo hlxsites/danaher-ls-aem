@@ -10,7 +10,7 @@
             "template": {
               "name": "Form",
               "model": "form",
-              "class": "form-wrapper"
+              "class": { "$ref": "classes" }
             }
           }
         }
@@ -21,6 +21,13 @@
     {
       "id": "form",
       "fields": [
+        {
+          "component": "text",
+          "name": "classes",
+          "label": "Select Class Name",
+          "valueType": "string",
+          "default": "form-wrapper"
+        },
         {
           "component": "text",
           "name": "formId",

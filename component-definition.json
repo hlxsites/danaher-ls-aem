@@ -307,7 +307,9 @@
                 "template": {
                   "name": "Form",
                   "model": "form",
-                  "class": "form-wrapper"
+                  "class": {
+                    "$ref": "classes"
+                  }
                 }
               }
             }
