@@ -616,18 +616,18 @@ export default function decorate(block) {
 if(window.location.pathname.includes('/us/en/we-see-a-way/')){
 // const formBlock = document.querySelector('.form-wrapper');
 const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
+if(columnsBlock.className.includes('form-wrapper')){
 const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
-const column1 = colDivs[0];
 const column2 = colDivs[1];
-// const child2 = colDivs[1];
-// const expertFormDiv = document.createElement('div');
-// expertFormDiv.className = 'talk-to-an-expert-form';
-column2.setAttribute('data-block-name', 'talk-to-an-expert-form');
-column2.setAttribute('data-block-status', 'loaded');
-// column2.appendChild(expertFormDiv);
-loadSFDCForm(column2);
+const expertFormDiv = document.createElement('div');
+expertFormDiv.className = 'talk-to-an-expert-form block';
+expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
+expertFormDiv.setAttribute('data-block-status', 'loaded');
+column2.appendChild(expertFormDiv);
+loadSFDCForm(expertFormDiv);
+}
 }
 /** ********EDS FORM Ends****************** */
 
