@@ -622,10 +622,10 @@ const child2 = colDivs[1];
 console.log('child2', child2);
 const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form';
+expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
+expertFormDiv.setAttribute('data-block-status', 'loaded');
 child2.appendChild(expertFormDiv);
-if(expertFormDiv.className.includes('talk-to-an-expert-form')){
 loadSFDCForm(expertFormDiv);
-}
 }
 /** ********EDS FORM Ends****************** */
 
