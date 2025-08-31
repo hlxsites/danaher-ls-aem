@@ -42,8 +42,8 @@
           "valueType": "string",
           "default": "",
           "options": [
-            { "name": "itemscenter", "value": "itemscenter" },
-            { "name": "form-wrapper", "value": "form-wrapper" }
+            { "name": "default", "value": "" },
+            { "name": "itemscenter", "value": "itemscenter" }
           ]
         }
       ]

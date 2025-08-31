@@ -853,12 +853,12 @@
         "default": "",
         "options": [
           {
-            "name": "itemscenter",
-            "value": "itemscenter"
+            "name": "default",
+            "value": ""
           },
           {
-            "name": "form-wrapper",
-            "value": "form-wrapper"
+            "name": "itemscenter",
+            "value": "itemscenter"
           }
         ]
       }
@@ -940,6 +940,10 @@
         "valueType": "string",
         "default": "",
         "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
           {
             "name": "form-wrapper",
             "value": "form-wrapper"

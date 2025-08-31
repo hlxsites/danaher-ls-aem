@@ -28,6 +28,7 @@
           "valueType": "string",
           "default": "",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "form-wrapper", "value": "form-wrapper" }
           ]
         },
