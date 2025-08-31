@@ -614,8 +614,10 @@ export default function decorate(block) {
 
 /** ********EDS FORM Starts****************** */
 if(window.location.pathname.includes('/us/en/we-see-a-way/')){
-const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
-const columns = columnsBlock.querySelectorAll(':scope > div');
+// const formBlock = document.querySelector('.form-wrapper');
+// const columnsBlock = document.querySelector('div[class*="columns-2-cols"]');
+// console.log('columnsBlock', columnsBlock);
+const columns = block.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
