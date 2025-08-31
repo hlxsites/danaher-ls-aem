@@ -619,14 +619,15 @@ const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
 const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
-const child2 = colDivs[1];
-console.log('child2', child2);
-const expertFormDiv = document.createElement('div');
-expertFormDiv.className = 'talk-to-an-expert-form';
-expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
-expertFormDiv.setAttribute('data-block-status', 'loaded');
-child2.appendChild(expertFormDiv);
-loadSFDCForm(expertFormDiv);
+const column1 = colDivs[0];
+const column2 = colDivs[1];
+// const child2 = colDivs[1];
+// const expertFormDiv = document.createElement('div');
+// expertFormDiv.className = 'talk-to-an-expert-form';
+column2.setAttribute('data-block-name', 'talk-to-an-expert-form');
+column2.setAttribute('data-block-status', 'loaded');
+// column2.appendChild(expertFormDiv);
+loadSFDCForm(column2);
 }
 /** ********EDS FORM Ends****************** */
 
