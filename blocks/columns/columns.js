@@ -612,27 +612,25 @@ export default function decorate(block) {
   const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
 
-// Form load
+/** ********EDS FORM Starts****************** */
+if(window.location.pathname.includes('/us/en/we-see-a-way/')){
 const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
 const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
-const pTags = child2.querySelectorAll('p');
-pTags.forEach(p => {
-  if (p.textContent.includes('TTAE')) { // or any condition
-    p.remove();
-  }
-});
 const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
 child2.appendChild(expertFormDiv);
-loadSFDCForm(expertFormDiv);
-
-  // const relative = sectionDiv?.querySelector('relative');
-  // if (formWrapper && relative) {
-  //   decorateFormBlock(cols[1]); // your custom logic for form block
-  // }
+// const parentDiv = document.querySelector('.talk-to-an-expert-form-wrapper');
+const expertFormDiv1 = document.createElement('div');
+expertFormDiv1.className = 'talk-to-an-expert-form block';
+expertFormDiv1.setAttribute('data-block-name', 'talk-to-an-expert-form');
+expertFormDiv1.setAttribute('data-block-status', 'loaded');
+expertFormDiv.appendChild(expertFormDiv1);
+loadSFDCForm(expertFormDiv1);
+}
+/** ********EDS FORM Ends****************** */
 
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
