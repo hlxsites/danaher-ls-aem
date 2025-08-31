@@ -869,18 +869,6 @@
     ]
   },
   {
-    "id": "column",
-    "fields": [
-      {
-        "component": "form",
-        "valueType": "form",
-        "name": "form",
-        "value": "",
-        "label": "Form"
-      }
-    ]
-  },
-  {
     "id": "dual-carousel",
     "fields": [
       {
