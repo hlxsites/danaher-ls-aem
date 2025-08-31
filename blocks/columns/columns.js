@@ -622,7 +622,7 @@ const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
 child2.appendChild(expertFormDiv);
 // expertFormDiv.appendChild(loadSFDCForm);
-loadSFDCForm(colDivs[1]);
+loadSFDCForm(expertFormDiv);
 
   // const relative = sectionDiv?.querySelector('relative');
   // if (formWrapper && relative) {
