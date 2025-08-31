@@ -618,10 +618,15 @@ const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
 const colDivs = container.querySelectorAll(':scope > div');
 const child2 = colDivs[1];
+const pTags = child2.querySelectorAll('p');
+pTags.forEach(p => {
+  if (p.textContent.includes('TTAE')) { // or any condition
+    p.remove();
+  }
+});
 const expertFormDiv = document.createElement('div');
 expertFormDiv.className = 'talk-to-an-expert-form-wrapper';
 child2.appendChild(expertFormDiv);
-// expertFormDiv.appendChild(loadSFDCForm);
 loadSFDCForm(expertFormDiv);
 
   // const relative = sectionDiv?.querySelector('relative');
