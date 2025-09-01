@@ -1,3 +1,4 @@
+
 import { addItemToCart, recommendedProduct } from './myCartService.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import {
@@ -281,3 +282,4 @@ export const recommendedProducts = () => {
   content.append(carouselContainer);
   return content;
 };
+

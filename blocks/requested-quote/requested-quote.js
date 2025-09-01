@@ -56,7 +56,7 @@ export default async function decorate(block) {
     return a(
       {
         class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-        // href: `/us/en/e-buy/requestquotedetails?quoteId=${quoteId}`, // Add this if needed
+        href: `/us/en/e-buy/requestquotedetails?quoteId=${quoteId}`, // Add this if needed
       },
       div(
         {
@@ -122,7 +122,7 @@ export default async function decorate(block) {
 
   // Return the tbody with all rows
   return tbody(
-    { class: 'w-[930px] flex flex-col', id: 'tableRow' },
+    { class: 'w-full flex flex-col', id: 'tableRow' },
     ...tableRows
   );
 };

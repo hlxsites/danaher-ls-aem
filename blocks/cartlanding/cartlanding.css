@@ -179,6 +179,11 @@
   margin: 7px
 }
 
+.cartlanding-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .cartlanding-wrapper :is(.mb-3) {
   margin-bottom: 0.75rem
 }
@@ -327,6 +332,10 @@
   height: 1.75rem
 }
 
+.cartlanding-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .cartlanding-wrapper :is(.h-9) {
   height: 2.25rem
 }
@@ -423,16 +432,16 @@
   width: 18rem
 }
 
+.cartlanding-wrapper :is(.w-8) {
+  width: 2rem
+}
+
 .cartlanding-wrapper :is(.w-80) {
   width: 20rem
 }
 
 .cartlanding-wrapper :is(.w-\[11rem\]) {
   width: 11rem
-}
-
-.cartlanding-wrapper :is(.w-\[1280px\]) {
-  width: 1280px
 }
 
 .cartlanding-wrapper :is(.w-\[150px\]) {
@@ -1132,6 +1141,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
@@ -1225,6 +1239,10 @@
 }
 
 .cartlanding-wrapper :is(.outline-\[\#7523FF\]) {
+  outline-color: #7523FF
+}
+
+.cartlanding-wrapper :is(.outline-danaherpurple-500) {
   outline-color: #7523FF
 }
 
@@ -1410,6 +1428,10 @@
     align-items: center
   }
 
+  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
+  }
+
   .cartlanding-wrapper :is(.md\:pt-0) {
     padding-top: 0px
   }
@@ -1440,6 +1462,11 @@
     justify-content: normal
   }
 
+  .cartlanding-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+
   .cartlanding-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
@@ -1449,10 +1476,6 @@
 @media (min-width: 1280px) {
   .cartlanding-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
-  }
-
-  .cartlanding-wrapper :is(.dhlsBp\:p-0) {
-    padding: 0px
   }
 }
 
@@ -1477,5 +1500,13 @@
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
 }

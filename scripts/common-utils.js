@@ -249,6 +249,7 @@ export async function getProductInfo(id, needInterShop = true) {
         `https://${window.DanaherConfig.host}/us/en/product-data/productInfo/?product=${id}`,
       );
       if (coveoResponse?.status === 'success') {
+        
         let productData = {};
         const product = coveoResponse?.data?.results?.[0];
         if (!product) return {};
