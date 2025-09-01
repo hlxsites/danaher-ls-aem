@@ -134,12 +134,10 @@
     "components": [
       "text",
       "image",
-      "title",
       "button",
-      "article-info",
-      "embed",
+      "title",
       "form",
-      "mini-teasers"
+      "embed"
     ]
   },
   {
