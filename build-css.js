@@ -426,6 +426,13 @@ const fileMappings = [
     wrapper: 'order-details-wrapper',
   },
   {
+    content: ['./blocks/quote-details/quote-details.js', 
+              './blocks/dashboardSideBar/dashboardSideBar.js',
+            ],
+    output: './blocks/quote-details/quote-details.css',
+    wrapper: 'quote-details-wrapper',
+  },
+  {
     content: [
       './blocks/cartlanding/cartlanding.js',
       './blocks/cartlanding/cartItem.js',

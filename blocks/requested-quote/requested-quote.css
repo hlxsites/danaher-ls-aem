@@ -100,20 +100,8 @@
   width: 70%
 }
 
-.requested-quote-wrapper :is(.w-\[930px\]) {
-  width: 930px
-}
-
 .requested-quote-wrapper :is(.w-full) {
   width: 100%
-}
-
-.requested-quote-wrapper :is(.w-\[830px\]) {
-  width: 830px
-}
-
-.requested-quote-wrapper :is(.w-\[800px\]) {
-  width: 800px
 }
 
 .requested-quote-wrapper :is(.flex-col) {
