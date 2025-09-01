@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  makePublicUrl,
   decorateModals,
 } from '../../scripts/scripts.js';
 
@@ -100,7 +99,8 @@ export default function renderProductGridCard(item) {
     { class: 'self-stretch p-3 flex justify-start items-center' },
     a(
       {
-        href: makePublicUrl(item.path || item.clickUri),
+        
+        href: item.clickUri,
         target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
       },
