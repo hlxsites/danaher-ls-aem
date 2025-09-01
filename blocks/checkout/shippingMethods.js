@@ -89,9 +89,9 @@ if basket has the shipping notes attribute and has value. Update the shipping no
         return false;
       }
       if (updateShippingNotesResponse?.status === 'success') {
-        showNotification('Order note updated successfully.', 'success');
         await updateBasketDetails();
         removePreLoader();
+        showNotification('Order note updated successfully.', 'success');
         return true;
       }
     } else {
@@ -324,7 +324,7 @@ const shippingMethodsModule = async () => {
                   class: `flex relative flex-col w-full shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-xs border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                     ? highlightDefaultShippingMethod
                     : 'border-gray-400'
-                  }`,
+                    }`,
                 },
                 p(
                   {
@@ -425,10 +425,12 @@ const shippingMethodsModule = async () => {
                               defaultShippingMethodIcon,
                             );
                           }
+                          showNotification('Shipping method updated successfully.', 'success');
                           removePreLoader();
                         }
                       } else {
                         removePreLoader();
+                        showNotification('Error updating shipping method.', 'error');
                       }
                     }
                   }

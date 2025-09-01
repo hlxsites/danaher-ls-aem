@@ -78,67 +78,124 @@ const getMainDiv = document.querySelector('body');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
 
 /*
- ::::::::::::::::::::
-function to create notification container
- :::::::::::::::::
- */
-export function notificationContainer() {
-  return div(
-    {
-      class:
-        'notification-container',
-      id: 'notificationContainer',
-    },
-    h3({
-      class: 'text-2xl p-0 m-0',
-    }),
-    p({
-      class: 'text-base',
-    }),
-  );
-}
-/*
 ::::::::::::::::::::::
 function to append notification container
 :::::::::::::::::::::::
 */
 const generateNotification = div(
   {
-    class: 'fixed top-42 right-4 max-w-xs bg-blue-600 text-white p-4 rounded shadow-lg z-50 transform -translate-y-full transition-transform duration-1000 ease-in-out hidden',
+    class: 'fixed flex flex-col bottom-10 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
     id: 'notificationWrapper',
   },
-  notificationContainer(),
+  div(
+    {
+      class: 'notification-container max-w-md w-full p-4 space-y-4 border-2 bg-white rounded-md pointer-events-auto ml-auto hidden',
+      role: 'alert',
+      id: 'notificationContainer',
+    },
+    div(
+      {
+        class: 'flex gap-4',
+        id: 'notificationContentWrapper',
+      },
+      div(
+        {
+          class: 'max-w-[20px]',
+          id: 'notificationIconWrapper',
+        },
+        span(
+          {
+            id: 'notificationIcon',
+            class: 'icon w-6 h-6 fill-current icon-check-circle [&_svg>use]:stroke-[#027243]',
+          },
+        ),
+      ),
+      div(
+        {
+          class: 'flex flex-col gap-2',
+        },
+        h3({
+          class: 'text-2xl p-0 m-0',
+        }),
+        p({
+          class: 'text-base',
+        }),
+      ),
+    ),
+  ),
 );
-getMainDiv.insertAdjacentElement('afterbegin', generateNotification);
+decorateIcons(generateNotification);
+getMainDiv?.insertAdjacentElement('afterbegin', generateNotification);
 
 /*
 ::::::::::::::::::::::
 function to show / hide notification whenever required
 :::::::::::::::::::::::
 */
-export function showNotification(content, type) {
+export function showNotification(content, type, wrapper = '') {
+  const container = wrapper ? document.querySelector(wrapper) : getMainDiv;
+  const notificationElement = generateNotification; // Should be a DOM element
+  container?.insertAdjacentElement('beforebegin', notificationElement);
+
   const notificationWrapper = document.querySelector('#notificationWrapper');
+  if (!notificationWrapper) return;
+
   const notificationTitle = notificationWrapper.querySelector('h3');
   const notificationContent = notificationWrapper.querySelector('p');
-  if (notificationTitle) {
-    notificationTitle.style.color = type === 'success' ? '#027243' : '#AC2734';
-    notificationTitle.textContent = type.toUpperCase();
-  }
-  if (notificationContent) {
-    notificationContent.textContent = content;
-    notificationWrapper.style.color = type === 'success' ? '#027243' : '#AC2734';
-  }
-  if (type === 'success') {
-    notificationWrapper.querySelector('h3').textContent = 'Success';
-    notificationWrapper.style.backgroundColor = '#F0FFEF';
-    notificationWrapper.style.color = '#027243';
-  }
-  if (type === 'error') {
-    notificationWrapper.style.backgroundColor = '#FFEFEF';
+  const notificationContentWrapper = document.querySelector('#notificationContentWrapper');
+  const notificationContainer = document.querySelector('#notificationContainer');
+  const notificationIconWrapper = document.querySelector('#notificationIconWrapper');
+  const notificationIcon = document.querySelector('#notificationIcon');
+
+  const isSuccess = type === 'success';
+  const color = isSuccess ? '#027243' : '#AC2734';
+  const bgColor = isSuccess ? '#F0FFEF' : '#FFEFEF';
+  const iconClass = isSuccess ? 'icon-check-circle' : 'icon-xcircle-red';
+
+  // Reset and style wrapper
+  notificationWrapper.style.display = 'block';
+  if (wrapper) {
+    notificationWrapper.className = '';
+    notificationContentWrapper?.classList.add('items-center');
+    notificationIconWrapper?.classList.add('items-center', 'flex');
+    notificationTitle?.classList.add('hidden');
   }
 
-  notificationWrapper.style.display = 'block';
-  notificationWrapper?.classList?.remove('-translate-y-full');
+  // Title
+  if (notificationTitle) {
+    notificationTitle.textContent = isSuccess ? 'Success' : type.toUpperCase();
+    notificationTitle.style.color = color;
+  }
+
+  // Content
+  if (notificationContent) {
+    notificationContent.textContent = content;
+  }
+
+  // Container styling
+  if (notificationContainer) {
+    notificationContainer.style.display = 'block';
+    notificationContainer.style.backgroundColor = bgColor;
+    notificationContainer.style.borderColor = color;
+    notificationContainer.style.color = color;
+    notificationContainer.classList?.remove('-translate-y-full');
+  }
+
+  // Icon
+  if (notificationIcon) {
+    if (notificationIcon?.classList.contains('icon-check-circle')) {
+      notificationIcon.classList.remove('icon-check-circle');
+    }
+    if (notificationIcon?.classList.contains('icon-xcircle-red')) {
+      notificationIcon.classList.remove('icon-xcircle-red');
+    }
+    notificationIcon?.classList.remove();
+    notificationIcon.classList.add(iconClass);
+    notificationIcon.classList.add(`[&_svg>use]:stroke-[${color}]`);
+  }
+
+  decorateIcons(notificationContainer);
+  notificationContainer?.querySelector('svg')?.classList.add('rounded-full');
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
