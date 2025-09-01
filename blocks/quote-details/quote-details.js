@@ -1,4 +1,4 @@
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils";
+import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
   showPreLoader();
