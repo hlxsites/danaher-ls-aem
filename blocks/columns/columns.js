@@ -615,6 +615,14 @@ export default function decorate(block) {
 /** ********EDS FORM Starts****************** */
 if(window.location.pathname.includes('/us/en/we-see-a-way/')){
 // const formBlock = document.querySelector('.form-wrapper');
+const pTags = document.querySelectorAll('p');
+pTags.forEach(p => {
+    if (p.textContent.trim() === 'talk-to-an-expert-form') {
+      p.remove();
+    }
+  });
+const hasExpertFormTag = Array.from(pTags).some(p => p.textContent.trim() === 'talk-to-an-expert-form');
+if (hasExpertFormTag) {
 const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
 const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
@@ -626,6 +634,7 @@ expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
 expertFormDiv.setAttribute('data-block-status', 'loaded');
 column2.appendChild(expertFormDiv);
 loadSFDCForm(expertFormDiv);
+}
 }
 /** ********EDS FORM Ends****************** */
 
