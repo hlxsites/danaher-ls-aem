@@ -618,7 +618,7 @@ if(window.location.pathname.includes('/us/en/we-see-a-way/')){
 const pTags = document.querySelectorAll('p');
 pTags.forEach(p => {
     if (p.textContent.trim() === 'talk-to-an-expert-form') {
-      p.remove();
+      pTags.forEach((pTag) => pTag.style.display = 'none');
     }
   });
 const hasExpertFormTag = Array.from(pTags).some(p => p.textContent.trim() === 'talk-to-an-expert-form');
