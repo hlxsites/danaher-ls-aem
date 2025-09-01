@@ -616,13 +616,13 @@ export default function decorate(block) {
   if (window.location.pathname.includes('/us/en/we-see-a-way/') || window.location.pathname.includes('/us/en/expert-eds/')) {
     const pTags = document.querySelectorAll('p');
     pTags.forEach((p) => {
-      if (p.textContent.trim() === 'talk-to-an-expert-form') {
+      if (p.textContent.trim() === 'talk-to-an-expert') {
         p.style.display = 'none';
       } else {
         p.style.display = '';
       }
     });
-    const hasExpertFormTag = Array.from(pTags).some((p) => p.textContent.trim() === 'talk-to-an-expert-form');
+    const hasExpertFormTag = Array.from(pTags).some((p) => p.textContent.trim() === 'talk-to-an-expert');
     if (hasExpertFormTag) {
       const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
       const columns = columnsBlock.querySelectorAll(':scope > div');
