@@ -1,7 +1,4 @@
 import { div } from "../../scripts/dom-builder.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import dashboardSidebar from "../dashboardSideBar/dashboardSideBar.js";
 
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
@@ -18,8 +15,6 @@ export default async function decorate(block) {
   });
   //const dashboardSideBarContent = await dashboardSidebar();
   //wrapper.append(dashboardSideBarContent, quoteDetailsWrapper);
-  block.innerHTML = "";
   block.textContent = "";
   block.append(wrapper);
-  decorateIcons(wrapper);
 }
