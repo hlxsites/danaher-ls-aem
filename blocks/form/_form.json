@@ -33,13 +33,6 @@
         },
         {
           "component": "text",
-          "name": "classes",
-          "label": "Select Class Name",
-          "valueType": "string",
-          "default": "form-wrapper"
-        },
-        {
-          "component": "text",
           "name": "formId",
           "type": "string",
           "label": "Form Id",
