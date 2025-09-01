@@ -7,8 +7,8 @@ export default async function decorate(block) {
   showPreLoader();
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  const quoteId = new URLSearchParams(window.location.search).get("quoteId");
-  console.log("quoteId", quoteId);
+//   const quoteId = new URLSearchParams(window.location.search).get("quoteId");
+//   console.log("quoteId", quoteId);
   const quoteDetailsWrapper = div({
     class: "w-[70%] inline-flex flex-col justify-start items-start gap-5 ",
   });
