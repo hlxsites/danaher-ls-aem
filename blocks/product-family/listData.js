@@ -2,7 +2,7 @@ import {
   div, a, span, img, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
+import { decorateModals } from '../../scripts/scripts.js';
 
 /**
  * Renders a product card in list view with responsive layout for mobile and desktop.
@@ -110,7 +110,7 @@ export default function renderProductListCard(item) {
   mobileDescSection.append(
     a(
       {
-        href: makePublicUrl(item.path || item.clickUri),
+        href: item.clickUri,
         target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class:
           'group text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
@@ -178,7 +178,7 @@ export default function renderProductListCard(item) {
 
   const desktopviewdetail = a(
     {
-      href: makePublicUrl(item.path || item.clickUri),
+      href: item.clickUri,
       target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
       class:
         'group text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',

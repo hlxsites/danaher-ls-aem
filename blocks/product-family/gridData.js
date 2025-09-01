@@ -99,7 +99,7 @@ export default function renderProductGridCard(item) {
     { class: 'self-stretch p-3 flex justify-start items-center' },
     a(
       {
-        
+
         href: item.clickUri,
         target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
