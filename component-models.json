@@ -934,6 +934,23 @@
     "id": "form",
     "fields": [
       {
+        "component": "select",
+        "name": "formSelection",
+        "label": "Select Form Name",
+        "valueType": "string",
+        "default": "",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "talk-to-an-expert-form",
+            "value": "talk-to-an-expert-form"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "classes",
         "label": "Select Class Name",
