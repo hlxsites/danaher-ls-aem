@@ -33,6 +33,7 @@ import {
   getStoreConfigurations,
   createModal,
   showNotification,
+  scrollViewToTop,
 } from './common-utils.js';
 // base url for the intershop api calls
 import {
@@ -44,13 +45,17 @@ import {
   assignPaymentInstrument,
   createPaymentInstrument,
   getPaymentIntent,
-  loadStripe,
   addCardToOrder,
   updateCardForOrder,
   postPaymentIntent,
-  setupPaymentIntent,
+  postSetupIntent,
+  confirmSetup,
+  confirmPayment,
 } from './stripe_utils.js';
+// eslint-disable-next-line import/no-cycle
 import { initializeModules } from '../blocks/checkout/checkoutUtilities.js';
+// eslint-disable-next-line import/no-cycle
+import { getPaymentMethodType, getStripeElements, getStripeInstance } from '../blocks/checkout/paymentModule.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
@@ -145,7 +150,7 @@ export const checkoutSkeleton = () => {
   const checkoutSkeletonwrapper = div(
     {
       id: 'checkoutSkeleton',
-      class: 'animate-pulse space-y-6 p-6 w-full mx-auto',
+      class: 'animate-pulse space-y-6 bg-white p-6 w-full mx-auto',
     },
     div(
       { class: 'h-8 bg-gray-300 rounded w-1/3' },
@@ -361,7 +366,11 @@ export const validateBasket = async (validateData) => {
   const url = `${baseURL}/baskets/current/validations`;
   const data = JSON.stringify(validateData);
   try {
-    return await postApiData(url, data, defaultHeader);
+    const response = await postApiData(url, data, defaultHeader);
+    if (response?.data?.data?.results?.valid === false) {
+      return { status: 'error', data: {} };
+    }
+    return response;
   } catch (error) {
     return {
       data: error.message,
@@ -394,6 +403,7 @@ export const submitOrder = async (basketId, paymentMethod) => {
       });
       response = await postApiData(url, data, defaultHeader);
     }
+
     if (paymentMethod === 'stripe') {
       const defaultHeader = new Headers({
         'Content-Type': 'Application/json',
@@ -424,13 +434,13 @@ export const submitOrder = async (basketId, paymentMethod) => {
       );
       if (!userOrderDetails) {
         const orderIdArray = [];
-        orderIdArray.push(response.data.data.id);
+        orderIdArray.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(orderIdArray),
         );
       } else {
-        userOrderDetails.push(response.data.data.id);
+        userOrderDetails.push(response?.data?.data?.id);
         sessionStorage.setItem(
           'userOrderDetails',
           JSON.stringify(userOrderDetails),
@@ -438,10 +448,7 @@ export const submitOrder = async (basketId, paymentMethod) => {
       }
       return response;
     }
-    return {
-      data: response,
-      status: 'error',
-    };
+    throw new Error('Error Submitting Order');
   } catch (error) {
     return {
       data: error.message,
@@ -482,7 +489,7 @@ export async function getSavedCards() {
  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {string} addressURI - The ID of the Address.
  */
-export async function getAddressDetails(addressURI) {
+export async function getAddressDetails(addressURI, type = '') {
   const authenticationToken = await getAuthenticationToken();
 
   if (authenticationToken?.status === 'error') {
@@ -490,9 +497,9 @@ export async function getAddressDetails(addressURI) {
   }
   try {
     const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
-    if (cachedAddress?.status === 'success') {
+    if (cachedAddress?.status === 'success' && type !== 'edit') {
       const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === addressURI.split('/')[3]);
-      if (checkCachedAddress) {
+      if (checkCachedAddress?.length > 0) {
         return { status: 'success', data: checkCachedAddress[0] };
       }
     }
@@ -866,44 +873,74 @@ export const setShippingMethod = async (methodId) => {
 :::::::::::::::::::::::::::::
 update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
- */
-export async function updateAddresses() {
+ */export async function updateAddresses(addressId = '') {
   if (window.location.pathname.includes('cartlanding')) return false;
-  const authenticationToken = await getAuthenticationToken();
 
+  const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
+    window.location.href = '/us/en/e-buy/cartlanding';
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  sessionStorage.removeItem('addressList');
-  const url = `${baseURL}/customers/-/addresses`;
-  const defaultHeaders = new Headers();
-  defaultHeaders.append('Content-Type', 'Application/json');
-  defaultHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
-  );
-  try {
-    const response = await getApiData(url, defaultHeaders);
-    if (response?.status !== 'success') return [];
-    const addressDetailsList = await Promise.all(
-      response.data.elements.map((address) => {
-        const addressURI = address.uri.split('addresses')[1];
-        return getAddressDetails(`customers/-/addresses${addressURI}`);
-      }),
-    );
-    if (addressDetailsList) {
-      sessionStorage.setItem(
-        'addressList',
-        JSON.stringify({ status: 'success', data: addressDetailsList }),
+
+  const addressListKey = 'addressList';
+
+  // If no addressId is provided, fetch all addresses
+  if (!addressId) {
+    sessionStorage.removeItem(addressListKey);
+
+    const url = `${baseURL}/customers/-/addresses`;
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'authentication-token': authenticationToken.access_token,
+    });
+
+    try {
+      const response = await getApiData(url, headers);
+      if (response?.status !== 'success') return [];
+
+      const addressDetailsList = await Promise.all(
+        response.data.elements.map((address) => {
+          const addressURI = address.uri.split('addresses')[1];
+          return getAddressDetails(`customers/-/addresses${addressURI}`);
+        }),
       );
-      return { status: 'success', data: addressDetailsList };
+
+      if (addressDetailsList?.length) {
+        const updatedCache = { status: 'success', data: addressDetailsList };
+        sessionStorage.setItem(addressListKey, JSON.stringify(updatedCache));
+        return { status: 'success', data: addressDetailsList };
+      }
+
+      return { status: 'error', data: 'Address not found.' };
+    } catch (error) {
+      return { status: 'error', data: error.message };
     }
-    return { status: 'error', data: 'Address Not found.' };
+  }
+
+  // If addressId is provided, update or add it in cache
+  const cachedAddress = JSON.parse(sessionStorage.getItem(addressListKey));
+  const currentList = cachedAddress?.data || [];
+  const index = currentList.findIndex((adr) => adr?.id === addressId);
+
+  try {
+    const addressDetails = await getAddressDetails(`customers/-/addresses/${addressId}`, 'edit');
+
+    if (!addressDetails) {
+      return { status: 'error', data: 'Address not found.' };
+    }
+
+    if (index !== -1) {
+      currentList[index] = addressDetails;
+    } else {
+      currentList.push(addressDetails);
+    }
+
+    sessionStorage.setItem(addressListKey, JSON.stringify({ status: 'success', data: currentList }));
+    return { status: 'success', data: currentList };
   } catch (error) {
     return { status: 'error', data: error.message };
   }
 }
-
 /*
  :::::::::::::::::::::::::::::
  get addresses to be shown
@@ -1400,7 +1437,7 @@ export const createPoNumber = async (invoiceNumber) => {
 *
 *
 *
- */
+*/
 
 export const updatePoNumber = async (invoiceNumber) => {
   const authenticationToken = await getAuthenticationToken();
@@ -1435,7 +1472,7 @@ export const updatePoNumber = async (invoiceNumber) => {
   }
 };
 
-async function silentNavigation(path) {
+export async function silentNavigation(path) {
   window.history.pushState({}, '', path);
   // eslint-disable-next-line no-use-before-define
   loadingModule();
@@ -1487,9 +1524,10 @@ export const changeStep = async (step) => {
       validateData = {
         adjustmentsAllowed: true,
         scopes: [
-          'InvoiceAddress',
-          'ShippingAddress',
-          'Addresses',
+          'Products',
+          'Promotion',
+          'Value',
+          'CostCenter',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1503,7 +1541,6 @@ export const changeStep = async (step) => {
           'InvoiceAddress',
           'ShippingAddress',
           'Addresses',
-          'Shipping',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1515,7 +1552,10 @@ export const changeStep = async (step) => {
       validateData = {
         adjustmentsAllowed: true,
         scopes: [
-          'Payment',
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+          'Shipping',
         ],
       };
       validatingBasket = await validateBasket(validateData);
@@ -1560,6 +1600,19 @@ export const changeStep = async (step) => {
 
       if (getSelectedPaymentMethod?.value === 'invoice') {
         showPreLoader();
+        /*
+        *
+        :::::::: check if invoice number is entered :::::::
+        *
+        */
+        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+        if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
+
+        /*
+        *
+        :::::::: Call Open tender API for Invoice :::::::
+        *
+        */
         const url = `${baseURL}/baskets/current/payments/open-tender?include=paymentMethod`;
         const defaultHeaders = new Headers();
         defaultHeaders.append('Content-Type', 'application/json');
@@ -1568,11 +1621,29 @@ export const changeStep = async (step) => {
         const data = JSON.stringify({ paymentInstrument: 'Invoice' });
         const setupInvoice = await putApiData(url, data, defaultHeaders);
 
-        if (setupInvoice?.status !== 'success') {
-          throw new Error('Error setting Invoice as payment Method for this Order.');
-        }
+        if (setupInvoice?.status !== 'success') throw new Error('Error Processing Request.');
 
-        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+        // parameters to validate basket for payment
+        const validatePaymentData = {
+          adjustmentsAllowed: true,
+          scopes: [
+            'Payment',
+          ],
+        };
+        /*
+        *
+        :::::::: Validating Basket :::::::
+        *
+        */
+        const validatingBasketForPayment = await validateBasket(validatePaymentData);
+
+        if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
+
+        /*
+        *
+        :::::::: Create PO number  :::::::
+        *
+        */
         if (invoiceNumberValue) {
           const creatingInvoiceNumber = await createPoNumber(invoiceNumberValue);
           if (creatingInvoiceNumber?.status !== 'success') {
@@ -1584,6 +1655,11 @@ export const changeStep = async (step) => {
           throw new Error('Error getting basket.');
         }
 
+        /*
+        *
+        :::::::: Submitting order :::::::
+        *
+        */
         const basketId = getBasketForOrder?.data?.data?.id;
         const submittingOrder = await submitOrder(basketId, 'invoice');
         const orderId = submittingOrder?.data?.data?.id;
@@ -1595,34 +1671,111 @@ export const changeStep = async (step) => {
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        sessionStorage.removeItem('useAddress');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
       }
+
+      /*
+      *
+      * :::::::::; handle stripe payment ::::::::
+      */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         showPreLoader();
-        const stripe = await loadStripe();
+
+        /*
+        *
+        :::::::::::
+        Getting Stripe Instance
+        ::::::::::
+        *
+        */
+        const stripe = getStripeInstance();
         const paymentMethod = 'STRIPE_PAYMENT';
 
+        const selectedPaymentMethodType = getPaymentMethodType();
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
+
+        const useStripeCardId = sessionStorage.getItem('useStripeCardId');
 
         /*
         *
         *
-          :::::::: handle stripe payment for saved/new card :::::::::
+          ::::::::
+          handle stripe payment for saved/new card
+          :::::::::
         *
         */
-        if (!sessionStorage.getItem('useStripeCardId') && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
-        const postingIntent = await postPaymentIntent();
-        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
-        if (selectedStripeMethod === 'newCard') {
-          settingIntent = await setupPaymentIntent();
-          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        const elements = getStripeElements();
+        const addressElements = elements.getElement('address');
+        const paymentElements = elements.getElement('payment');
+
+        let confirmPM = '';
+        /*
+        *
+        :::::::::::
+        confirm setup ::::
+        ::::::::::
+        *
+        */
+        let proceedTopayment = 'false';
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          const confirmingSetup = await confirmSetup(stripe, elements, `${window.location.origin}/payment`);
+
+          // if stripe setup confirmed, move to confirm payment
+          const confirmSetupStatus = confirmingSetup?.setupIntent?.status;
+          // if stripe setup confirmed, move to confirm payment
+          confirmPM = confirmingSetup?.setupIntent?.payment_method;
+          const validConfirmStatus = ['succeeded', 'requires_action'];
+          if (!validConfirmStatus.includes(confirmSetupStatus)) {
+            throw new Error('Error Processing Payment');
+          }
+          proceedTopayment = 'true';
+        }
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          /*
+          *
+          :::::::::::
+          Get Payment Intent
+          ::::::::::
+          *
+          */
+          const getPaymentIntentData = await getPaymentIntent();
+          if (getPaymentIntentData?.status !== 'success') throw new Error('Error Processing Request');
         }
 
-        // Call create-instrument API
+        /*
+        *
+        :::::::::::
+        Post Payment Intent
+        ::::::::::
+        *
+        */
+        const postingIntent = await postPaymentIntent(selectedPaymentMethodType);
+        if (postingIntent?.status !== 'success') throw new Error('Error Processing Request');
+
+        if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
+          /*
+          *
+          :::::::::::
+          Post Setup Intent
+          ::::::::::
+          *
+          */
+          settingIntent = await postSetupIntent();
+          if (settingIntent?.status !== 'success') throw new Error('Error Processing.');
+        }
+        /*
+        *
+        :::::::::::
+        Creating Instrument
+        ::::::::::
+        *
+        */
         // eslint-disable-next-line max-len
         const createInstrument = await createPaymentInstrument(paymentMethod, postingIntent?.data?.id, postingIntent?.data?.client_secret);
         if (createInstrument?.status !== 'success') throw new Error('Failed to create payment instrument.');
@@ -1630,97 +1783,147 @@ export const changeStep = async (step) => {
         const instrumentId = createInstrument?.data?.data?.id;
         if (!instrumentId) throw new Error('Instrument ID missing.');
 
-        // Call assign instrument API
+        /*
+        *
+        :::::::::::
+        Assigning Instrument
+        ::::::::::
+        *
+        */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
         if (assignInstrument?.status !== 'success') throw new Error('Failed to assign payment instrument.');
 
-        // Call get payment-intent API
-        const getPI = await getPaymentIntent();
-
-        if (getPI?.status !== 'success') throw new Error('Failed to get payment intent.');
-        // console.log(' Get Payment Intent...');
-
-        // get payment intent id
-        const gPIID = getPI?.data?.data?.filter((dat) => dat?.id === sessionStorage.getItem('useStripeCardId'));
-        if (!gPIID) throw new Error('Payment intent ID missing.');
-        // console.log('Getting Payment Intent: ', gPIID);
-
         // parameters to validate basket for payment
-        const validatePaymentData = {
+        const validateBasketData = {
           adjustmentsAllowed: true,
           scopes: [
             'Payment',
           ],
         };
-        // validating basket for payment
-        const validatingBasketForPayment = await validateBasket(validatePaymentData);
+
+        /*
+        *
+        :::::::::::
+        validating basket
+        ::::::::::
+        *
+        */
+        const validatingBasketForPayment = await validateBasket(validateBasketData);
 
         if (validatingBasketForPayment?.status !== 'success') throw new Error('Invalid Basket');
 
-        // console.log(' Basket Validated for Pyament...');
-        // Remove email from the first item
-        delete gPIID[0].billing_details.email;
-        // add selected card to order
-        const selectedData = {
-          name: 'SelectedCard',
-          value: JSON.stringify(gPIID[0]),
-          type: 'String',
-        };
-        const addingCardToOrder = await addCardToOrder(selectedData);
-        // console.log('Adding Card to Order...', addingCardToOrder);
+        if (selectedStripeMethod === 'savedCard') {
+          /*
+          *
+          :::::::::::
+          confirm payment method ::::
+          ::::::::::
+          *
+          */
+          const getPreConfirmedPI = await getPaymentIntent();
+          if (getPreConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
 
-        if (addingCardToOrder?.status !== 'success') {
-          const updatingCardForOrder = await updateCardForOrder(selectedData);
-          if (updatingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+          // eslint-disable-next-line max-len
+          const getPreConfirmedPIData = getPreConfirmedPI?.data?.data?.filter((dat) => dat?.id === useStripeCardId);
+          if (!getPreConfirmedPIData) throw new Error('Payment intent ID missing.');
+          confirmPM = getPreConfirmedPIData[0]?.id;
         }
-        // confirm  stripe Setup for new cards
-        let confirmSetup;
-        if (selectedStripeMethod === 'newCard') {
-          confirmSetup = await stripe.confirmSetup({
-            clientSecret: settingIntent?.data?.client_secret,
-            confirmParams: {
-              return_url: `${window.location.origin}/checkout`,
-              payment_method: gPIID[0]?.id,
-            },
-            redirect: 'if_required',
-          });
-          // console.log('Confirming Setup...');
-
-          // if stripe setup confirmed, move to confirm payment
-          if (confirmSetup?.setupIntent?.status !== 'succeeded') throw new Error('Error Processing Payment');
+        let confirmingPayment = '';
+        if (selectedStripeMethod === 'savedCard' || proceedTopayment) {
+          /*
+          *
+          :::::::::::
+          confirm payment :::: final step
+          ::::::::::
+          *
+          */
+          confirmingPayment = await confirmPayment(stripe, postingIntent?.data?.client_secret, `${window.location.origin}/payment`, confirmPM);
         }
+        if (confirmingPayment?.error) throw new Error(`Error: ${confirmingPayment.error.message}`);
 
-        // confirm payment :::: final step
-        const confirmPayment = await stripe.confirmPayment({
-          clientSecret: postingIntent?.data?.client_secret,
-          confirmParams: {
-            return_url: `${window.location.origin}/checkout`,
-            payment_method: gPIID[0]?.id,
-          },
-          redirect: 'if_required',
-        });
-        // console.log('Confirming Payment...');
-
-        if (confirmPayment?.error) throw new Error(`Error: ${confirmPayment.error.message}`);
-
-        // validating confirm-payment status from stripe
-        const status = confirmPayment?.paymentIntent?.status;
+        /*
+        *
+        :::::::::::
+        validating confirm-payment status
+        ::::::::::
+        *
+        */
+        const status = confirmingPayment?.paymentIntent?.status;
         const validStatuses = ['succeeded', 'requires_capture', 'processing'];
         if (!validStatuses.includes(status)) throw new Error('Invalid payment status.');
 
+        const paymentMethodId = confirmingPayment?.paymentIntent?.payment_method;
+
+        /*
+        *
+        :::::::: Get Payment Intent API :::::::
+        *
+        */
+
+        const getConfirmedPI = await getPaymentIntent();
+        if (getConfirmedPI?.status !== 'success') throw new Error('Failed to get payment intent.');
+        // eslint-disable-next-line max-len
+        const getConfirmedPID = getConfirmedPI?.data?.data?.filter((dat) => dat?.id === paymentMethodId);
+        if (!getConfirmedPID) throw new Error('Payment intent ID missing.');
+        // Remove email from the first item
+        if (getConfirmedPID[0]?.billing_details?.email) {
+          delete getConfirmedPID[0]?.billing_details?.email;
+        }
+
+        /*
+        *
+        :::::::: Add / Update Card for Order :::::::
+        *
+        */
+        const updatingCardData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const addingCardData = {
+          name: 'SelectedCard',
+          value: JSON.stringify(getConfirmedPID[0]),
+          type: 'String',
+        };
+        const updateCardToOrder = await updateCardForOrder(updatingCardData);
+
+        if (updateCardToOrder?.status !== 'success') {
+          const addingCardForOrder = await addCardToOrder(addingCardData);
+          if (addingCardForOrder?.status !== 'success') throw new Error('Error Processing Request');
+        }
+
         if (getBasketForOrder?.status !== 'success') throw new Error('Failed to get basket.');
 
-        // console.log('Submitting order');
-
-        // payment confirmed from Stripe, now submitting order
+        /*
+        *
+        :::::::: Submit Order :::::::
+        *
+        */
 
         const submittingOrder = await submitOrder(getBasketForOrder?.data?.data?.id, 'stripe');
         const orderId = submittingOrder?.data?.data?.id;
         if (!orderId) throw new Error('Order submission failed.');
 
+        /*
+        *
+        :::::::: Unmounting the stripe elements :::::::
+        *
+        */
+        if (proceedTopayment && proceedTopayment === 'true') {
+          addressElements?.unmount();
+          paymentElements?.unmount();
+        }
+        /*
+        *
+        :::::::: Clear Session :::::::
+        *
+        */
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         sessionStorage.removeItem('productDetailObject');
         sessionStorage.removeItem('basketData');
+        sessionStorage.removeItem('useAddress');
+        sessionStorage.removeItem('useStripeCardId');
+        sessionStorage.removeItem('selectedStripeMethod');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
 
@@ -1738,12 +1941,21 @@ export const changeStep = async (step) => {
     if (checkoutWrapper?.classList.contains('pointer-events-none')) {
       checkoutWrapper.classList.remove('pointer-events-none');
     }
+    scrollViewToTop();
     removePreLoader();
     showNotification(error.message || 'Error Processing Request.', 'error');
+    // silentNavigation('/us/en/e-buy/addresses');
     return false;
   }
 };
-
+async function loadAddressListModal(type) {
+  showPreLoader();
+  // eslint-disable-next-line import/no-cycle
+  const { addressListModal } = await import('../blocks/checkout/shippingAddress.js');
+  const addressesModal = await addressListModal(type);
+  createModal(addressesModal, false, true, type, 'edit');
+  removePreLoader();
+}
 /*
 ::::::::::::::
 generate the  address form
@@ -1752,7 +1964,7 @@ generate the  address form
 * @param {Object} data. The data object for edit form
 * @param {String} type. Form type ( shipping / billing )
 */
-export async function addressForm(type, data = {}) {
+export async function addressForm(type, data = {}, action = '') {
   const countriesData = await getCountries();
 
   let countriesList = [];
@@ -1784,7 +1996,7 @@ export async function addressForm(type, data = {}) {
         {
           class: 'justify-start text-black text-2xl font-normal  leading-loose',
         },
-        `Add new ${type} address`,
+        data && !action ? `Edit ${type} Address` : `Add new ${type} address`,
       ),
     ),
     buildInputElement(
@@ -1900,7 +2112,7 @@ export async function addressForm(type, data = {}) {
   );
   /*
 ::::::::::::::::
-get save address buttonl...
+get save address form buttonl...
 :::::::::::::::::
 */
   const saveAddressButton = adressForm.querySelector(
@@ -1928,7 +2140,12 @@ get counrty field and attach change event listener to populate states based on c
     });
     removePreLoader();
   });
-
+  adressForm?.querySelectorAll('label')?.forEach((lab) => {
+    if (lab?.classList.contains('pl-4')) {
+      lab.classList.remove('pl-4');
+    }
+  });
+  // actions when save address button is clicked
   saveAddressButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     showPreLoader();
@@ -1941,10 +2158,7 @@ get counrty field and attach change event listener to populate states based on c
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
-      const errorDiv = formToSubmit.querySelector('#addressFormErrorMessage');
-      if (errorDiv) {
-        errorDiv.remove();
-      }
+
       const formData = new FormData(formToSubmit);
       const formObject = {};
       formData.forEach((value, key) => {
@@ -1958,12 +2172,9 @@ get counrty field and attach change event listener to populate states based on c
        ::::::::::::::
        */
 
-      if (
-        !formToSubmit.classList.contains(
-          `default${capitalizeFirstLetter(type)}AddressFormModal`,
-        )
-      ) {
-        if (data) {
+      const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
+      if (!isDefaultSBForm) {
+        if (data && !action) {
           delete formObject[`preferred${capitalizeFirstLetter(type)}Address`];
           Object.assign(formObject, {
             id: data.id,
@@ -1980,20 +2191,29 @@ get counrty field and attach change event listener to populate states based on c
        set the address as shipping or biling
        ::::::::::::::
        */
+      const checkSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
+      const sameAsShipping = checkSameAsShippingCheckbox?.value === 'false' ? 'no' : 'yes';
 
       if (type === 'shipping') {
-        formObject.usage = [false, true];
+        if (isDefaultSBForm && sameAsShipping === 'yes') {
+          formObject.preferredBillingAddress = 'true';
+        }
+        formObject.usage = [sameAsShipping === 'yes', true];
       } else if (type === 'billing') {
+        if (isDefaultSBForm) {
+          formObject.preferredBillingAddress = 'true';
+        }
         formObject.usage = [true, false];
       } else {
         formObject.usage = [];
       }
-      const method = data ? 'PUT' : 'POST';
+      const method = data && !action ? 'PUT' : 'POST';
       /*
       :::::::::::::::::::::
       submits the form
       ::::::::::::::::::::::::::::::::::::
       */
+
       const addAddressResponse = await submitForm(
         `${type}AddressForm`,
         'customers/-/myAddresses',
@@ -2002,6 +2222,17 @@ get counrty field and attach change event listener to populate states based on c
       );
 
       if (addAddressResponse?.status === 'success') {
+        let addressId = '';
+
+        const uri = addAddressResponse?.data?.uri;
+        const urn = addAddressResponse?.data?.urn;
+
+        if (typeof uri === 'string') {
+          addressId = uri.split('/').pop();
+        } else if (typeof urn === 'string') {
+          addressId = urn.split(':').pop();
+        }
+
         if (addAddressResponse?.data?.type === 'Link') {
           formToSubmit.classList.add('hidden');
           const showDefaultAddress = document.querySelector(
@@ -2015,33 +2246,21 @@ get counrty field and attach change event listener to populate states based on c
             'style',
           );
 
-          saveAddressButton.insertAdjacentElement(
-            'afterend',
-            p(
-              {
-                class: 'text-green-500 font-medium pl-6 text-ll',
-              },
-              'Address Added Successfully.',
-            ),
-          );
-
-          if (
-            formToSubmit.classList.contains(
-              `default${capitalizeFirstLetter(type)}AddressFormModal`,
-            )
-          ) {
+          if (isDefaultSBForm) {
             /*
             ::::::::::::::::
             set default address starts
             ::::::::::::::
             */
             if (showDefaultAddress) {
-              const addressURI = addAddressResponse.data.title.split(':')[4];
+              const addressURI = addAddressResponse?.data?.title?.split(':')[4];
               const address = await getAddressDetails(
                 `customers/-/addresses/${addressURI}`,
                 type,
               );
+
               const renderDefaultAddress = defaultAddress(address, type);
+
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
                   ::::::::::::::
@@ -2061,7 +2280,62 @@ get counrty field and attach change event listener to populate states based on c
                    assign address to backet
                    ::::::::::::::::::
                    */
-                await setUseAddress(addressURI, type);
+                await setUseAddress(addressURI, type, 'useAddress');
+                /*
+                   ::::::::::::::
+                   assign address to backet
+                   ::::::::::::::::::
+                   */
+                if (sameAsShipping === 'yes' && type === 'shipping') {
+                  const showDefaultBillingAddress = document.querySelector(
+                    '#billingAddressHeader',
+                  );
+                  const renderDefaultBillingAddress = defaultAddress(address, 'billing');
+                  if (showDefaultBillingAddress && renderDefaultBillingAddress) {
+                    /*
+                      ::::::::::::::
+                      set this address as default address
+                      :::::::::::::
+                      */
+                    showDefaultBillingAddress.insertAdjacentElement(
+                      'afterend',
+                      renderDefaultBillingAddress,
+                    );
+                    if (renderDefaultBillingAddress.classList.contains('hidden')) {
+                      renderDefaultBillingAddress.classList.remove('hidden');
+                    }
+
+                    /*
+                      ::::::::::::::
+                      set billing address for use address , update for basket as well
+                      :::::::::::::
+                      */
+                    await setUseAddress(addressURI, 'billing', 'useAddress');
+
+                    /*
+                      ::::::::::::::
+                      hide the shipping as billing checkbox and show check indicator
+                      :::::::::::::
+                      */
+                    const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
+                    if (getShipAsBillBox) {
+                      getShipAsBillBox?.classList.add('pointer-events-none');
+
+                      const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+                      const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+
+                      getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+                      if (sameShipAsBillCheck?.classList.contains('hidden')) {
+                        sameShipAsBillCheck?.classList.remove('hidden');
+                      }
+                      getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+                      if (shipAsBillLabel?.classList.contains('pl-6')) {
+                        shipAsBillLabel?.classList.remove('pl-6');
+                        shipAsBillLabel?.classList.add('pl-2');
+                      }
+                    }
+                  }
+                }
 
                 /*
                    ::::::::::::::
@@ -2078,8 +2352,10 @@ get counrty field and attach change event listener to populate states based on c
            update address list
            ::::::::::::::
            */
-          await updateAddresses();
+          await updateAddresses(addressId);
 
+          showNotification('Address Added Successfully.', 'success');
+          await loadAddressListModal(type);
           /*
              ::::::::::::::
              set default address ends
@@ -2087,58 +2363,22 @@ get counrty field and attach change event listener to populate states based on c
              */
         } else if (
           addAddressResponse
-          && addAddressResponse.data.type === 'Address'
+          && addAddressResponse?.data?.type === 'Address'
         ) {
           formToSubmit.classList.add('hidden');
-
-          // saveAddressButton.insertAdjacentElement(
-          //   'afterend',
-          //   p(
-          //     {
-          //       class: 'text-green-500 font-medium pl-6 text-l',
-          //     },
-          //     'Address Updated Successfully.',
-          //   ),
-          // );
 
           /*
         ::::::::::::::
         update address list
         ::::::::::::::
         */
-          await updateAddresses();
-          /*
-            ::::::::::::
-            remove preloader
-            :::::::::::::
-            */
-          /*
-           ::::::::::::::
-           update address list
-           ::::::::::::::
-           */
-          await updateAddresses();
+          await updateAddresses(addressId);
 
           removePreLoader();
           showNotification('Address updated successfully.', 'success');
+          await loadAddressListModal(type);
         } else {
-          // saveAddressButton.insertAdjacentElement(
-          //   'afterend',
-          //   p(
-          //     {
-          //       id: 'addressFormErrorMessage',
-          //       class: 'text-red-500 font-medium pl-6 text-l text-center',
-          //     },
-          //     'Error submitting address.',
-          //   ),
-          // );
-          /*
-            ::::::::::::
-            remove preloader
-            :::::::::::::
-            */
-          removePreLoader();
-          showNotification('Error submitting address.', 'error');
+          throw new Error('Error Updating Address.');
         }
         /*
           ::::::::::::::
@@ -2147,42 +2387,17 @@ get counrty field and attach change event listener to populate states based on c
           */
         closeUtilityModal();
       } else {
-        saveAddressButton.insertAdjacentElement(
-          'afterend',
-          p(
-            {
-              class: 'text-red-500 pl-6 font-medium text-l',
-              id: 'addressFormErrorMessage',
-            },
-            addAddressResponse?.data,
-          ),
-        );
-
-        /*
-          ::::::::::::
-          remove preloader
-          :::::::::::::
-          */
-        removePreLoader();
+        throw new Error('Error Adding Address.');
       }
     } catch (error) {
-      saveAddressButton.insertAdjacentElement(
-        'afterend',
-        p(
-          {
-            id: 'addressFormErrorMessage',
-            class: 'text-red-500 pl-6 font-medium text-l',
-          },
-          error.message,
-        ),
-      );
-
+      scrollViewToTop();
       /*
           ::::::::::::
           remove preloader
           :::::::::::::
           */
       removePreLoader();
+      showNotification(error.message, 'error');
     }
   });
 
@@ -2577,8 +2792,7 @@ get price type if its net or gross
             'flex flex-col justify-center w-full items-start gap-4',
         },
         button({
-          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''
-          } `,
+          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''} `,
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
           'data-activetab': 'shippingAddress',
@@ -2651,10 +2865,7 @@ get price type if its net or gross
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
    */
-      if (
-        getUseAddressesResponse?.data?.invoiceToAddress
-        && getUseAddressesResponse?.data?.invoiceToAddress?.id
-        !== getUseAddressesResponse?.data?.commonShipToAddress?.id && window.location.pathname.includes('addresses')
+      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
@@ -2728,7 +2939,7 @@ get price type if its net or gross
  check if shipping address exists in basket
  ::::::::::::::::::
    */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && window.location.pathname.includes('addresses')) {
+      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
         const commonShipToAddress = div(
           {
             id: 'checkoutSummaryCommonShipAddress',

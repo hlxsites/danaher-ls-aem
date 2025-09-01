@@ -36,7 +36,7 @@ export const createModule = (id, isActive, content, buttons) => {
     const proceedButton = button(
       {
         class:
-          'proceed-button btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
+          'proceed-button bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
         id: 'proceed-button',
         'data-tab': buttonData.tab,
       },
@@ -109,7 +109,7 @@ export const progressModule = () => {
   const progressBar = div({
     id: 'checkoutProgressBar',
     class:
-      'checkout-progress-bar hidden flex items-center justify-between mb-16 relative w-full',
+      'checkout-progress-bar hidden flex items-center justify-between mb-16 relative w-full max-w-[94%] mx-auto',
   });
 
   // Add elements to progress-bar
@@ -129,77 +129,95 @@ export const progressModule = () => {
 
   const address = div(
     {
-      class: 'checkout-step active relative cursor-pointer bg-white border-gray-300',
+      class: 'checkout-step active flex items-center justify-center cursor-pointer bg-white border-gray-300',
       id: 'checkout-shippingAddress',
       'data-tab': 'shippingAddress',
       'data-activeTab': 'shippingAddress',
     },
     span(
       {
-        class: 'checkout-progress-bar-icons',
+        class: 'checkout-progress-bar-icons w-[10px] h-[10px] absolute left-0 top-0',
         'data-tab': 'shippingAddress',
         'data-activeTab': 'shippingAddress',
       },
     ),
-    span(
+    div(
       {
-        'data-tab': 'shippingAddress',
-        'data-activeTab': 'shippingAddress',
-        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        class: 'absolute left-0 top-0',
       },
+      span(
+        {
+          'data-tab': 'shippingAddress',
+          'data-activeTab': 'shippingAddress',
+          class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        },
+      ),
     ),
     span({
+      class: 'font-bold text-xl pt-8 mt-12',
       'data-tab': 'shippingAddress',
       'data-activeTab': 'shippingAddress',
     }, 'Address'),
   );
   const shipping = div(
     {
-      class: 'checkout-step cursor-pointer relative bg-white border-gray-300',
+      class: 'checkout-step flex items-center justify-center cursor-pointer bg-white border-gray-300',
       id: 'checkout-shippingMethods',
       'data-tab': 'shippingMethods',
       'data-activeTab': 'shippingAddress',
     },
     span(
       {
-        class: 'checkout-progress-bar-icons',
+        class: 'checkout-progress-bar-icons w-[10px] h-[10px] absolute left-0 top-0',
         'data-tab': 'shippingMethods',
         'data-activeTab': 'shippingMethods',
       },
     ),
-    span(
+    div(
       {
-        'data-tab': 'shippingMethods',
-        'data-activeTab': 'shippingMethods',
-        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        class: 'absolute left-0 top-0',
       },
+      span(
+        {
+          'data-tab': 'shippingMethods',
+          'data-activeTab': 'shippingMethods',
+          class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        },
+      ),
     ),
     span({
+      class: 'font-bold text-xl pt-8 mt-12',
       'data-tab': 'shippingMethods',
       'data-activeTab': 'shippingMethods',
     }, 'Shipping'),
   );
   const payment = div(
     {
-      class: 'checkout-step cursor-pointer relative bg-white border-gray-300',
+      class: 'checkout-step flex items-center justify-center cursor-pointer bg-white border-gray-300',
       id: 'checkout-payment',
       'data-tab': 'payment',
       'data-activeTab': 'paymentMethods',
     },
     span(
       {
-        class: 'checkout-progress-bar-icons',
+        class: 'checkout-progress-bar-icons w-[10px] h-[10px] absolute left-0 top-0',
         'data-tab': 'payment',
         'data-activeTab': 'paymentMethods',
       },
     ),
-    span(
+    div(
       {
-        class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        class: 'absolute left-0 top-0',
       },
+      span(
+        {
+          class: 'icon icon-check-circle-filled checkout-progress-bar-check hidden',
+        },
+      ),
     ),
     span(
       {
+        class: 'font-bold text-xl pt-8 mt-12',
         'data-tab': 'payment',
         'data-activeTab': 'paymentMethods',
       },
@@ -213,7 +231,9 @@ export const progressModule = () => {
  ::::::::::::::
  */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
-  decorateIcons(progressBar);
+  decorateIcons(address);
+  decorateIcons(shipping);
+  decorateIcons(payment);
   const checkoutSteps = progressBar.querySelectorAll('.checkout-step');
   checkoutSteps.forEach((step) => {
     step.addEventListener('click', (s) => {

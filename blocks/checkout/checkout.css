@@ -104,6 +104,10 @@
   right: 1rem
 }
 
+.checkout :is(.top-0) {
+  top: 0px
+}
+
 .checkout :is(.top-1\/2) {
   top: 50%
 }
@@ -263,6 +267,10 @@
   height: 2.25rem
 }
 
+.checkout :is(.h-\[10px\]) {
+  height: 10px
+}
+
 .checkout :is(.h-auto) {
   height: auto
 }
@@ -340,6 +348,10 @@
   width: 20rem
 }
 
+.checkout :is(.w-\[10px\]) {
+  width: 10px
+}
+
 .checkout :is(.w-\[11rem\]) {
   width: 11rem
 }
@@ -366,6 +378,10 @@
 
 .checkout :is(.max-w-2xl) {
   max-width: 42rem
+}
+
+.checkout :is(.max-w-\[94\%\]) {
+  max-width: 94%
 }
 
 .checkout :is(.max-w-xs) {
@@ -421,10 +437,6 @@
 
 .checkout :is(.items-center) {
   align-items: center
-}
-
-.checkout :is(.items-baseline) {
-  align-items: baseline
 }
 
 .checkout :is(.justify-start) {
@@ -525,6 +537,10 @@
 
 .checkout :is(.rounded-xl) {
   border-radius: 0.75rem
+}
+
+.checkout :is(.rounded-\[30px\]) {
+  border-radius: 30px
 }
 
 .checkout :is(.border) {
@@ -644,6 +660,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.checkout :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .checkout :is(.bg-opacity-50) {
   --tw-bg-opacity: 0.5
 }
@@ -729,6 +750,16 @@
   padding-bottom: 1.5rem
 }
 
+.checkout :is(.px-\[25px\]) {
+  padding-left: 25px;
+  padding-right: 25px
+}
+
+.checkout :is(.py-\[13px\]) {
+  padding-top: 13px;
+  padding-bottom: 13px
+}
+
 .checkout :is(.\!pl-10) {
   padding-left: 2.5rem !important
 }
@@ -781,6 +812,10 @@
   padding-top: 1.5rem
 }
 
+.checkout :is(.pt-8) {
+  padding-top: 2rem
+}
+
 .checkout :is(.text-left) {
   text-align: left
 }
@@ -826,6 +861,10 @@
 .checkout :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
+}
+
+.checkout :is(.font-bold) {
+  font-weight: 700
 }
 
 .checkout :is(.font-extrabold) {
@@ -1014,6 +1053,11 @@
 .checkout :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.checkout :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .checkout :is(.hover\:text-danaherpurple-800:hover) {

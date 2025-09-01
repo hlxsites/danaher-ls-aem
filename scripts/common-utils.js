@@ -46,12 +46,12 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        'flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
     img({
       class: ' h-24',
-      src: '/content/dam/loading_icon.gif',
+      src: '/content/dam/danaher/utility/loading_icon.gif',
     }),
   );
 }
@@ -142,8 +142,18 @@ export function showNotification(content, type) {
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 10000);
+  }, 5000);
 }
+/*
+*
+*
+::::::::::: Scroll View to Top ::::::::
+*
+*/
+export function scrollViewToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /*
  ::::::::::::::::::::::::
  utility function to close the modal...
@@ -163,7 +173,7 @@ export function closeUtilityModal() {
   @param hasCancelButton : boolean. Optional cancel button
   @param hasCloseButton : boolean. Optional close button
 */
-export function createModal(content, hasCancelButton, hasCloseButton) {
+export function createModal(content, hasCancelButton, hasCloseButton, dataType = '', dataAction = '') {
   const modalWrapper = div({
     class:
       'inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
@@ -187,6 +197,8 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   if (hasCancelButton) {
     cancelButton = span(
       {
+        'data-type': dataType || 'close',
+        'data-action': dataAction || 'close',
         class: 'mt-6 text-danaherpurple-500 cursor-pointer',
         id: 'closeUtilityModal',
       },
@@ -689,11 +701,10 @@ export async function submitForm(id, action, method, data) {
       );
       return submitFormResponse;
     }
+    showNotification('Error Submitting Form.', 'error');
     return { status: 'error', data: 'Error Submitting Form.' };
   } catch (error) {
     return { status: 'error', data: error.message };
-  } finally {
-    removePreLoader();
   }
 }
 
@@ -1059,21 +1070,39 @@ export const buildBillingCheckboxElement = (
   required,
   extraClasses = '',
   hidden = '',
-) => div(
-  { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
-  input({
-    type: inputType,
-    name: inputName,
-    class: 'input-focus-checkbox',
-    id: inputName,
-    value: fieldValue,
-    'aria-label': fieldLable,
-  }),
-  label(
+) => {
+  const shipAsBillBox = div(
     {
-      for: inputName,
-      class: 'pl-2',
+      id: 'shippingAsBillingCheckboxWrapper',
+      class: `flex center gap-2 mt-6 false relative ${extraClasses} ${hidden}`,
     },
-    field,
-  ),
-);
+    div(
+      {
+        class: 'hidden',
+        id: 'sameShipAsBillCheck',
+      },
+      span(
+        {
+          class: 'icon icon-check-circle-filled',
+        },
+      ),
+    ),
+    input({
+      type: inputType,
+      name: inputName,
+      class: 'input-focus-checkbox absolute mt-1',
+      id: inputName,
+      value: fieldValue,
+      'aria-label': fieldLable,
+    }),
+    label(
+      {
+        for: inputName,
+        class: 'pl-6 z-10',
+      },
+      field,
+    ),
+  );
+  decorateIcons(shipAsBillBox);
+  return shipAsBillBox;
+};

@@ -2,18 +2,31 @@ import {
   buildInputElement, removePreLoader, showPreLoader,
   buildSearchWithIcon,
   showNotification,
+  scrollViewToTop,
 } from '../../scripts/common-utils.js';
 import {
-  h2, h5, h4, div, p, span, button, input, label,
+  h2, h4, div, p, span, button, input, label,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getBasketDetails, getPaymentMethods } from '../../scripts/cart-checkout-utils.js';
+// eslint-disable-next-line import/no-cycle
 import {
-  loadStripe, getPaymentIntent, postPaymentIntent, getSavedCards,
+  getBasketDetails, getPaymentMethods, silentNavigation, validateBasket,
+} from '../../scripts/cart-checkout-utils.js';
+import {
+  loadStripe,
+  getSavedCards,
   setGetCardAsDefault,
   setUseCard,
+  postSetupIntent,
+  loadStripeScript,
+  addCardToOrder,
 } from '../../scripts/stripe_utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
+
+await loadStripeScript('https://js.stripe.com/v3/');
+let stripeElements;
+const stripe = await loadStripe();
+let paymentMethodType = 'Card';
 
 function createCardItem(item, defaultCard) {
   const useCard = sessionStorage.getItem('useStripeCardId');
@@ -42,11 +55,13 @@ function createCardItem(item, defaultCard) {
 
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
-    sessionStorage.setItem('useStripeCardId', itemObject.itemId);
     sessionStorage.setItem('selectedStripeMethod', 'savedCard');
     defaultPaymentCheckboxText = 'Default Payment';
   }
-
+  let useCardLabel = 'Use Card';
+  if (useCard === itemObject.itemId) {
+    useCardLabel = 'Selected Card';
+  }
   const itemCard = div(
     {
       class: `bg-checkout payment-card-wrapper border p-6 flex flex-col gap-6 ${useCard === itemObject.itemId ? 'border-danaherpurple-500' : ''}`,
@@ -91,7 +106,7 @@ function createCardItem(item, defaultCard) {
           class: 'stripe-card-use-button cursor-pointer text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 m-0 hover:bg-danaherpurple-500',
           id: itemObject?.itemId,
         },
-        useCard === itemObject.itemId ? 'Selected Card' : 'Use Card',
+        useCardLabel,
       ),
     ),
     div(
@@ -117,17 +132,29 @@ function createCardItem(item, defaultCard) {
  ::::::::::::::
  */
 const paymentModule = async () => {
-  if (!window.location.pathname.includes('payment')) return false;
-  const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized.' };
-  }
   /*
-  ::::::::::::::
-  get price type if its net or gross.
-  ::::::::::::::
-  */
+    ::::::::::::::
+    get price type if its net or gross.
+    ::::::::::::::
+    */
+
+  const validateData = {
+    adjustmentsAllowed: true,
+    scopes: [
+      'InvoiceAddress',
+      'ShippingAddress',
+      'Addresses',
+      'Shipping',
+    ],
+  };
+  const validatingBasket = await validateBasket(validateData);
   try {
+    if (!window.location.pathname.includes('payment')) return false;
+    const authenticationToken = await getAuthenticationToken();
+    if (authenticationToken?.status === 'error') {
+      throw new Error('Unauthorized Access');
+    }
+    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -155,12 +182,15 @@ const paymentModule = async () => {
     // get available payment methods
     const allPaymentMethods = await getPaymentMethods();
 
+    if (allPaymentMethods?.status !== 'success') throw new Error('No Payment methods Available.');
+
     // get saved stripe cards
     const getSavedStripeCardsList = await getSavedCards();
+    if (getSavedStripeCardsList?.status !== 'success') throw new Error('No Saved Cards Found.');
 
     const savedStripeCardsHeader = div(
       {
-        class: `flex ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data.length > 0) ? '' : 'hidden'} justify-between items-center w-full bg-white`,
+        class: `flex ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data?.length > 0) ? '' : 'hidden'} justify-between items-center w-full bg-white`,
         id: 'savedStripeCardsHeader',
       },
       buildSearchWithIcon(
@@ -178,10 +208,6 @@ const paymentModule = async () => {
           class: 'flex justify-between gap-2',
           id: 'addNewCard',
         },
-        // span({
-        //   class: 'icon icon-plus-circle',
-        //   id: 'plusCircleIcon',
-        // }),
         button(
           {
             class: 'flex w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6',
@@ -201,9 +227,12 @@ const paymentModule = async () => {
     const checkSavedStripeCards = getSavedStripeCardsList?.data?.data;
     const getDefaultCard = await setGetCardAsDefault();
     let defaultCard = '';
-    if (getDefaultCard?.status === 'success') {
-      defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
-    }
+    if (getDefaultCard?.status !== 'success') throw new Error('Error getting default card');
+
+    const postingSetupIntent = await postSetupIntent();
+    if (postingSetupIntent?.status !== 'success') throw new Error('Error Setting Payment Intent');
+
+    defaultCard = getDefaultCard?.data?.invoice_settings?.default_payment_method?.id;
     if (checkSavedStripeCards?.length > 0) {
       checkSavedStripeCards?.forEach((item) => {
         savedStripeCardsList?.append(createCardItem(item, defaultCard));
@@ -225,7 +254,9 @@ const paymentModule = async () => {
     invoiceNumber?.querySelector('input')?.classList?.add('outline-none');
     invoiceNumber?.querySelector('label')?.classList?.remove('font-semibold');
     invoiceNumber?.querySelector('label')?.classList?.add('font-normal');
-
+    if (invoiceNumber?.querySelector('label')?.classList.contains('pl-4')) {
+      invoiceNumber?.querySelector('label')?.classList.remove('pl-4');
+    }
     const stripeCardsContainer = div(
       {
         id: 'stripeCardsContainer',
@@ -240,7 +271,7 @@ const paymentModule = async () => {
 
     const newStripeCardsWrapper = div(
       {
-        class: `no-cards-wrapper ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data.length > 0) ? 'hidden' : ''}  flex-1 flex-col flex p-6  gap-6 w-full items-start bg-checkout`,
+        class: `no-cards-wrapper ${(getSavedStripeCardsList?.status === 'success' && getSavedStripeCardsList?.data?.data?.length > 0) ? 'hidden' : ''}  flex-1 flex-col flex p-6  gap-6 w-full items-start bg-checkout`,
         id: 'newStripeCardsWrapper',
       },
       div(
@@ -330,14 +361,29 @@ const paymentModule = async () => {
 
     savedStripeCardsWrapper.append(savedStripeCardsList);
     stripeCardsContainer.append(savedStripeCardsWrapper);
-
-    let stripe;
     let getPI;
-    let stripeElements;
-    let postPI;
     let addressElements;
     let paymentElements;
     let addressOptions;
+    const options = {
+      setup_future_usage: 'off_session',
+      layout: {
+        type: 'tabs',
+        defaultCollapsed: false,
+        radios: true,
+        spacedAccordionItems: true,
+      },
+      fields: {
+        cardDetails: {
+          cardHolderName: 'auto',
+        },
+        billingDetails: {
+          address: 'auto',
+          name: 'auto',
+        },
+      },
+    };
+
     allPaymentMethods?.data?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
@@ -374,14 +420,11 @@ const paymentModule = async () => {
 
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
-        stripe = await loadStripe();
-
-        getPI = await getPaymentIntent();
+        getPI = getSavedStripeCardsList;
         if (getPI?.status === 'success') {
-          postPI = await postPaymentIntent();
-          if (postPI?.status === 'success') {
-            const postPIData = postPI?.data || '';
-            const clientSecret = postPIData?.client_secret || '';
+          if (postingSetupIntent?.status === 'success') {
+            const postSIData = postingSetupIntent?.data || '';
+            const clientSecret = postSIData?.client_secret || '';
             if (clientSecret) {
               const appearance = {
                 theme: 'stripe',
@@ -406,35 +449,30 @@ const paymentModule = async () => {
               addressOptions = {
                 mode: 'billing', display: {}, blockPoBox: true, fields: { phone: 'always' },
               };
-              const options = {
-                setup_future_usage: 'off_session',
-                layout: {
-                  type: 'tabs',
-                  defaultCollapsed: false,
-                  radios: true,
-                  spacedAccordionItems: true,
-                },
-                fields: {
-                  cardDetails: {
-                    cardHolderName: 'auto',
-                  },
-                  billingDetails: {
-                    address: 'never',
-                  },
-                },
-              };
-
               stripeElements = stripe.elements({ clientSecret, appearance, disallowedCardBrands: ['discover_global_network'] });
+              setTimeout(() => {
+                if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
+                  // mount address elements
+                  addressElements = stripeElements.create('address', addressOptions);
+                  addressElements.mount('#newStripeCardAddressWrapper');
 
-              if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
-                // mount address elements
-                addressElements = stripeElements.create('address', addressOptions);
-                addressElements.mount('#newStripeCardAddressWrapper');
-
-                // mount payment elements
-                paymentElements = stripeElements.create('payment', options);
-                paymentElements.mount('#newStripeCardPaymentWrapper');
-              }
+                  // mount payment elements
+                  paymentElements = stripeElements.create('payment', options);
+                  paymentElements.mount('#newStripeCardPaymentWrapper');
+                  // Listen for changes
+                  paymentElements.on('change', (event) => {
+                    const selectedType = event.value?.type;
+                    paymentMethodType = selectedType;
+                    if (selectedType === 'card') {
+                      // Handle card-specific logic
+                      paymentMethodType = 'Card';
+                    } else if (selectedType === 'us_bank_account') {
+                      // Handle bank-specific logic
+                      paymentMethodType = 'Bank';
+                    }
+                  });
+                }
+              }, 0);
             }
           }
         }
@@ -533,6 +571,11 @@ const paymentModule = async () => {
           getStripeCardsWrapper?.classList?.remove('hidden');
           getInvoiceNumberWrapper?.classList?.add('hidden');
           if (targetFrom === 'label') targetRadio.checked = true;
+
+          if (!(getSavedStripeCardsList?.data?.data?.length > 0)) {
+            const newAddressCheckbox = document.querySelector('#newAddress');
+            if (newAddressCheckbox) newAddressCheckbox.checked = true;
+          }
         }
 
         if (targetRadioId === 'sameAsShipping' || targetRadioId === 'sameAsBilling') {
@@ -682,13 +725,26 @@ const paymentModule = async () => {
       try {
         const allPaymentCards = savedStripeCardsList.querySelectorAll('.payment-card-wrapper');
         const currentTarget = e.target;
-
+        if (currentTarget.textContent === 'Selected Card') return false;
         if (currentTarget?.classList.contains('stripe-card-use-button')) {
           showPreLoader();
           const pMId = currentTarget.id;
           if (pMId) {
             const settingUseCard = await setUseCard(pMId);
-            if (settingUseCard?.status !== 'success') throw new Error('Error processing request');
+
+            if (settingUseCard?.status !== 'success') {
+              const selectedData = {
+                name: 'SelectedPM',
+                value: JSON.stringify({
+                  id: pMId,
+                  type: 'Card',
+                }),
+                type: 'String',
+              };
+              const updateCard = await addCardToOrder(selectedData);
+              if (updateCard?.status !== 'status') throw new Error('Error processing request');
+            }
+            sessionStorage.setItem('useStripeCardId', pMId);
 
             allPaymentCards.forEach((method) => {
               if (method?.classList.contains('border-danaherpurple-500')) {
@@ -717,7 +773,7 @@ const paymentModule = async () => {
         if (currentTarget.name === 'defaultStripeCard') {
           targetCheckbox = currentTarget;
         }
-        if (!targetCheckbox) return;
+        if (!targetCheckbox) return false;
 
         if (targetCheckbox) {
           showPreLoader();
@@ -747,9 +803,12 @@ const paymentModule = async () => {
           removePreLoader();
           showNotification('Setup as default payment method.', 'success');
         }
+        return true;
       } catch (error) {
+        scrollViewToTop();
         removePreLoader();
-        showNotification(error, 'error');
+        showNotification(error.message, 'error');
+        return false;
       }
     });
 
@@ -757,8 +816,24 @@ const paymentModule = async () => {
     decorateIcons(moduleContent);
     return moduleContent;
   } catch (error) {
-    return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));
+    scrollViewToTop();
+    showNotification(error.message, 'error');
+    if (error.message === 'Unauthorized Access') {
+      window.location.href = '/us/en/e-buy/cartlanding';
+    }
+    if (error.message === 'Invalid Basket') {
+      silentNavigation('/us/en/e-buy/addresses');
+    }
+    return false;
   }
 };
-
+export function getStripeInstance() {
+  return stripe;
+}
+export function getStripeElements() {
+  return stripeElements;
+}
+export function getPaymentMethodType() {
+  return paymentMethodType;
+}
 export default paymentModule;
