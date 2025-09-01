@@ -36,6 +36,8 @@ export default function renderListCard(item) {
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute border border-gray-200 object-contain cursor-pointer',
       src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
       alt: alt || 'Product image',
+      loading: 'lazy',
+      decoding: 'async',
       onclick: () => {
         window.location.href = item?.url;
       },

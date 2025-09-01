@@ -27,6 +27,8 @@ export default function renderProductGridCard(item) {
         item.clickUri,
         item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
       ),
+      loading: 'lazy',
+      decoding: 'async',
     });
 
     // Add error handler for fallback

@@ -28,6 +28,8 @@ export default function renderProductListCard(item) {
         item.clickUri,
         item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
       ),
+      loading: 'lazy',
+      decoding: 'async',
     });
     imageElement.addEventListener('error', () => {
       imageElement.src = fallbackImagePath;
