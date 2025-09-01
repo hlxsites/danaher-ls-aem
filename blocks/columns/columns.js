@@ -616,13 +616,13 @@ export default function decorate(block) {
 if(window.location.pathname.includes('/us/en/we-see-a-way/')){
 // const formBlock = document.querySelector('.form-wrapper');
 const pTags = document.querySelectorAll('p');
+const hasExpertFormTag = Array.from(pTags).some(p => p.textContent.trim() === 'talk-to-an-expert-form');
+if (hasExpertFormTag) {
 pTags.forEach(p => {
     if (p.textContent.trim() === 'talk-to-an-expert-form') {
       pTags.forEach((pTag) => pTag.style.display = 'none');
     }
-  });
-const hasExpertFormTag = Array.from(pTags).some(p => p.textContent.trim() === 'talk-to-an-expert-form');
-if (hasExpertFormTag) {
+  });  
 const columnsBlock = document.querySelector('div[class*="form-wrapper"]');
 const columns = columnsBlock.querySelectorAll(':scope > div');
 const container = columns[0];
