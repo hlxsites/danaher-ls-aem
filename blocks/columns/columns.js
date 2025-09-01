@@ -629,12 +629,15 @@ export default function decorate(block) {
       const container = columns[0];
       const colDivs = container.querySelectorAll(':scope > div');
       const column2 = colDivs[1];
-      const expertFormDiv = document.createElement('div');
-      expertFormDiv.className = 'talk-to-an-expert-form block';
-      expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
-      expertFormDiv.setAttribute('data-block-status', 'loaded');
-      column2.appendChild(expertFormDiv);
-      loadSFDCForm(expertFormDiv);
+      // Check if form already exists
+      if (!column2.querySelector('.talk-to-an-expert-form')) {
+        const expertFormDiv = document.createElement('div');
+        expertFormDiv.className = 'talk-to-an-expert-form block';
+        expertFormDiv.setAttribute('data-block-name', 'talk-to-an-expert-form');
+        expertFormDiv.setAttribute('data-block-status', 'loaded');
+        column2.appendChild(expertFormDiv);
+        loadSFDCForm(expertFormDiv);
+      }
     }
   }
   /** ********EDS FORM Ends****************** */
