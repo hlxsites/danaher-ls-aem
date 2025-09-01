@@ -1,8 +1,6 @@
 import { div } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute("class");
-  block?.parentElement?.parentElement?.removeAttribute("style");
 //   const quoteId = new URLSearchParams(window.location.search).get("quoteId");
 //   console.log("quoteId", quoteId);
   const quoteDetailsWrapper = div({
