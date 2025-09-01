@@ -17,8 +17,8 @@ export default async function decorate(block) {
     class:
       "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12",
   });
-  const dashboardSideBarContent = await dashboardSidebar();
-  wrapper.append(dashboardSideBarContent, quoteDetailsWrapper);
+  //const dashboardSideBarContent = await dashboardSidebar();
+  //wrapper.append(dashboardSideBarContent, quoteDetailsWrapper);
   block.innerHTML = "";
   block.textContent = "";
   block.append(wrapper);
