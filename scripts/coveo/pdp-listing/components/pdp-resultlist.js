@@ -1,3 +1,5 @@
+import { decorateIcons } from '../../../lib-franklin.js';
+
 export async function buildProductTile(result, getCommerceBase, domHelpers, viewType) {
   const {
     div, img, h3, p, a, span, input, button,
@@ -104,13 +106,13 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
         }),
       ),
     );
-
+    decorateIcons(viewDetailsButton);
     const bgWrapper = div({ class: 'bg-gray-50 h-[191px] self-stretch' });
-    bgWrapper.append(pricingAndActions);
+    // bgWrapper.append(pricingAndActions);
     card.append(
       imageElement,
       contentWrapper,
-      bgWrapper,
+      // bgWrapper,
       viewDetailsButton,
     );
     return card;
