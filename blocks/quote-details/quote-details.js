@@ -4,7 +4,6 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import dashboardSidebar from "../dashboardSideBar/dashboardSideBar.js";
 
 export default async function decorate(block) {
-  showPreLoader();
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 //   const quoteId = new URLSearchParams(window.location.search).get("quoteId");
@@ -23,5 +22,4 @@ export default async function decorate(block) {
   block.textContent = "";
   block.append(wrapper);
   decorateIcons(wrapper);
-  removePreLoader();
 }
