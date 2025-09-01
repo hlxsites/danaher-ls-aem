@@ -214,21 +214,21 @@ function loadUTMParams() {
 
 async function loadSFDCForm(block) {
   const formIdEl = block?.firstElementChild;
-  const formId = formIdEl?.firstElementChild?.textContent;
+  const formId = formIdEl?.firstElementChild?.textContent || 'TTAE';
   const formNameEl = formIdEl?.nextElementSibling;
-  const formName = block?.firstElementChild?.nextElementSibling?.textContent;
+  const formName = block?.firstElementChild?.nextElementSibling?.textContent || 'TTAE';
   const clientIdEl = formNameEl?.nextElementSibling;
-  const clientId = formNameEl?.nextElementSibling?.textContent;
+  const clientId = formNameEl?.nextElementSibling?.textContent || '546006278';
   const deExternalKeyEl = clientIdEl?.nextElementSibling;
-  const deExternalKey = deExternalKeyEl?.textContent;
+  const deExternalKey = deExternalKeyEl?.textContent || 'TTAE';
   const actionEl = deExternalKeyEl?.nextElementSibling;
-  const action = actionEl?.textContent;
+  const action = actionEl?.textContent || 'add';
   const inquiryTypeEl = actionEl?.nextElementSibling;
-  const inquiryType = inquiryTypeEl?.textContent;
+  const inquiryType = inquiryTypeEl?.textContent || 'Talk to an Expert';
   const successUrlEl = inquiryTypeEl?.nextElementSibling;
-  const successUrl = successUrlEl?.textContent;
+  const successUrl = successUrlEl?.textContent || 'https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html';
   const errorUrlEl = successUrlEl?.nextElementSibling;
-  const errorUrl = errorUrlEl?.textContent;
+  const errorUrl = errorUrlEl?.textContent || 'https://help.salesforce.com/s/articleView?id=sf.mc\_es\_demanager.htm';
   const formEl = div(
     { class: 'relative my-2 mx-0 md:ml-2' },
     form(
@@ -306,7 +306,7 @@ async function loadSFDCForm(block) {
       ),
     ),
   );
-  // block.innerHTML = '';
+  block.innerHTML = '';
   decorateIcons(formEl);
   block.append(formEl);
   loadUTMParams();

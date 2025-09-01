@@ -49,8 +49,8 @@ export default function renderGridCard(item) {
       loading: 'lazy',
       decoding: 'async',
       onclick: () => window.open(
-        item?.url || '#',
-        item?.url?.includes('http') ? '_blank' : '_self',
+        item.url,
+        item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
       ),
     });
 
@@ -75,8 +75,13 @@ export default function renderGridCard(item) {
   );
 
   const contentWrapper = div({
-    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow',
+    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow cursor-pointer',
+    onclick: () => window.open(
+      item.url,
+      item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+    ),
   });
+
   contentWrapper.append(
     p(
       { class: 'font-medium text-black text-xl leading-7 line-clamp-2' },
@@ -244,12 +249,12 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
+        target: item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'View Details',
       span({
-        class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        class: 'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );

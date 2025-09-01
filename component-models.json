@@ -208,6 +208,14 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "bg-white seventythirty",
+            "value": "bg-white seventythirty"
+          },
+          {
+            "name": "bg-white thirtyseventy",
+            "value": "bg-white thirtyseventy"
           }
         ]
       }
@@ -824,53 +832,39 @@
     "id": "columns",
     "fields": [
       {
-        "component": "select",
-        "name": "rows",
-        "label": "Number of Columns",
-        "valueType": "string",
-        "default": "2",
-        "options": [
-          {
-            "name": "2 Columns",
-            "value": "2"
-          },
-          {
-            "name": "3 Columns",
-            "value": "3"
-          }
-        ]
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "2",
+        "label": "Columns"
       },
       {
-        "component": "multiselect",
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "1",
+        "label": "Rows"
+      },
+      {
+        "component": "select",
         "name": "classes",
-        "label": "Select Ratio (only for 2 columns)",
+        "label": "Select Class Name",
         "valueType": "string",
-        "default": "fiftyfifty",
+        "default": "",
         "options": [
           {
-            "name": "70/30 Split",
-            "value": "seventythirty"
+            "name": "default",
+            "value": ""
           },
           {
-            "name": "30/70 Split",
-            "value": "thirtyseventy"
+            "name": "itemscenter",
+            "value": "itemscenter"
+          },
+          {
+            "name": "form-wrapper",
+            "value": "form-wrapper"
           }
-        ],
-        "condition": {
-          "field": "rows",
-          "equals": "2"
-        }
-      }
-    ]
-  },
-  {
-    "id": "column",
-    "fields": [
-      {
-        "component": "blocks",
-        "name": "blocks",
-        "label": "Blocks",
-        "valueType": "array"
+        ]
       }
     ]
   },
@@ -937,39 +931,29 @@
         "type": "boolean",
         "label": "Autoplay",
         "default": false
-      },
-      {
-        "component": "select",
-        "name": "type",
-        "label": "Type",
-        "options": [
-          {
-            "name": "YouTube",
-            "value": "youtube"
-          },
-          {
-            "name": "Vimeo",
-            "value": "vimeo"
-          },
-          {
-            "name": "Vidyard",
-            "value": "vidyard"
-          },
-          {
-            "name": "PDF",
-            "value": "pdf"
-          },
-          {
-            "name": "Other",
-            "value": "default"
-          }
-        ]
       }
     ]
   },
   {
     "id": "form",
     "fields": [
+      {
+        "component": "select",
+        "name": "formSelection",
+        "label": "Select Form Name",
+        "valueType": "string",
+        "default": "",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "talk-to-an-expert-form",
+            "value": "talk-to-an-expert-form"
+          }
+        ]
+      },
       {
         "component": "text",
         "name": "formId",

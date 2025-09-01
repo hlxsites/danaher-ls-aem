@@ -38,10 +38,9 @@ export default function renderListCard(item) {
       alt: alt || 'Product image',
       loading: 'lazy',
       decoding: 'async',
-      onclick: () => window.open(
-        item?.url || '#',
-        item?.url?.includes('http') ? '_blank' : '_self',
-      ),
+      onclick: () => {
+        window.location.href = item?.url;
+      },
     });
 
     // imageElement.addEventListener('error', () => {
@@ -80,7 +79,7 @@ export default function renderListCard(item) {
     a(
       {
         href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        target: item?.url?.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         title: item.title,
       },
       createImageWithFallback(imageUrl, item.title || ''),
@@ -106,10 +105,13 @@ export default function renderListCard(item) {
     ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
     div(
       {
-        class:
-          'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2',
+        class: 'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2 cursor-pointer',
+        onclick: () => window.open(
+          item.url,
+          item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        ),
       },
-      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+      (item?.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -138,7 +140,7 @@ export default function renderListCard(item) {
     a(
       {
         href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        target: item?.url?.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
@@ -171,9 +173,13 @@ export default function renderListCard(item) {
       ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
       div(
         {
-          class: 'justify-start text-black text-xl font-medium leading-7',
+          class: 'justify-start text-black text-xl font-medium leading-7 cursor-pointer',
+          onclick: () => window.open(
+            item.url,
+            item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+          ),
         },
-        (item.title || '').trim().replace(/<[^>]*>/g, ''),
+        (item?.title || '').trim().replace(/<[^>]*>/g, ''),
       ),
     ),
   );
@@ -200,8 +206,8 @@ export default function renderListCard(item) {
     { class: 'w-full flex-col gap-2 cursor-pointer' },
     a(
       {
-        href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
+        href: item?.url,
+        target: item?.url?.includes(window.DanaherConfig.host) ? '_self' : '_blank',
         title: item.title,
         class:
           'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
@@ -289,7 +295,7 @@ export default function renderListCard(item) {
       a(
         {
           href: item?.url || '#',
-          target: item?.url?.includes('http') ? '_blank' : '_self',
+          target: item?.url?.includes(window.DanaherConfig.host) ? '_self' : '_blank',
           class:
             'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },
