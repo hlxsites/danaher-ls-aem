@@ -18,16 +18,20 @@ export default function tabsOrder() {
         order: 4,
       },
       {
-        tabName: 'resources',
+        tabName: 'citations',
         order: 5,
       },
       {
-        tabName: 'faqs',
+        tabName: 'resources',
         order: 6,
       },
       {
-        tabName: 'relatedproducts',
+        tabName: 'faqs',
         order: 7,
+      },
+      {
+        tabName: 'relatedproducts',
+        order: 8,
       },
     ],
     abcam: [
@@ -89,38 +93,8 @@ export default function tabsOrder() {
         tabName: 'specifications',
         order: 3,
       },
-      {
-        tabName: 'citations',
-        order: 4,
-      },
-      {
-        tabName: 'resources',
-        order: 5,
-      },
-      {
-        tabName: 'faqs',
-        order: 6,
-      },
-      {
-        tabName: 'relatedproducts',
-        order: 7,
-      },
-    ],
-    phenomenex: [
-      {
-        tabName: 'products',
-        order: 1,
-      },
-      {
-        tabName: 'overview',
-        order: 2,
-      },
-      {
-        tabName: 'conditions',
-        order: 3,
-      },
-      {
-        tabName: 'analysis',
+            {
+        tabName: 'parts',
         order: 4,
       },
       {
@@ -140,6 +114,48 @@ export default function tabsOrder() {
         order: 8,
       },
     ],
+    phenomenex: [
+      {
+        tabName: 'products',
+        order: 1,
+      },
+      {
+        tabName: 'overview',
+        order: 2,
+      },
+      {
+        tabName: 'specifications',
+        order: 3,
+      },
+      {
+        tabName: 'parts',
+        order: 4,
+      },
+      {
+        tabName: 'conditions',
+        order: 5,
+      },
+      {
+        tabName: 'analysis',
+        order: 6,
+      },
+      {
+        tabName: 'citations',
+        order: 7,
+      },
+      {
+        tabName: 'resources',
+        order: 8,
+      },
+      {
+        tabName: 'faqs',
+        order: 9,
+      },
+      {
+        tabName: 'relatedproducts',
+        order: 10,
+      },
+    ],
     'beckman coulter life sciences': [
       {
         tabName: 'products',
@@ -154,20 +170,28 @@ export default function tabsOrder() {
         order: 3,
       },
       {
-        tabName: 'accessories',
+        tabName: 'parts',
         order: 4,
       },
-      {
-        tabName: 'resources',
+            {
+        tabName: 'citations',
         order: 5,
       },
       {
-        tabName: 'faqs',
+        tabName: 'accessories',
         order: 6,
       },
       {
-        tabName: 'relatedproducts',
+        tabName: 'resources',
         order: 7,
+      },
+      {
+        tabName: 'faqs',
+        order: 8,
+      },
+      {
+        tabName: 'relatedproducts',
+        order: 9,
       },
     ],
     'leica microsystems': [

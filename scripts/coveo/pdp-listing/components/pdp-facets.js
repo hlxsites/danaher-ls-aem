@@ -171,7 +171,7 @@ export function renderCreateFacet() {
     document.addEventListener("click", (e) => {
       if (!dropdownContainer.contains(e.target)) {
         menu.classList.add("hidden");
-        chevron.querySelector("svg").classList.remove("rotate-180");
+        chevron.querySelector("svg")?.classList.remove("rotate-180");
       }
     });
 

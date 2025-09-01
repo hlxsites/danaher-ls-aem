@@ -96,6 +96,22 @@ export default async function decorate(block) {
   const productInfo = await getProductDetails(result?.raw?.sku);
   const allImages = result?.raw.images;
   const verticalImageGallery = imageSlider(allImages, result?.Title);
+  const opco = result?.raw?.opco?.toLowerCase();
+
+  const brandMap = {
+    'beckman coulter life sciences': 'beckman-coulter-life-sciences',
+    sciex: 'sciex',
+    abcam: 'abcam',
+    'molecular devices': 'molecular-devices',
+    phenomenex: 'phenomenex',
+    'leica microsystems': 'leica',
+    idbs: 'idbs',
+  };
+
+  const opcoBrandUrl = opco === 'genedata'
+    ? 'https://genedata.com/?utm_source=dhls_website'
+    : `/us/en/products/brands/${brandMap[opco] || ''}`;
+
   const defaultContent = div({
     class:
         'self-stretch inline-flex flex-col justify-start items-start gap-9 ',
@@ -113,7 +129,7 @@ export default async function decorate(block) {
       {
         class: 'self-stretch justify-start text-danaherpurple-800 text-[18px] font-medium leading-normal',
       },
-      result?.raw.opco,
+      a({ href: opcoBrandUrl }, result?.raw.opco),
     ),
     div(
       {
@@ -611,18 +627,19 @@ export default async function decorate(block) {
       ),
     );
   }
-  const categoryDiv = (category) => {
+  const categoryDiv = (label, href) => {
     const list = div(
       {
         class:
             'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
       },
-      div(
+      a(
         {
           class:
               'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
+          href: `/us/en/products/${href}`,
         },
-        category,
+        label,
       ),
     );
     return list;
@@ -631,10 +648,24 @@ export default async function decorate(block) {
   const categoriesDiv = div({
     class: 'flex-wrap py-4 inline-flex justify-start items-start gap-2',
   });
-  result?.raw?.categoriesname?.forEach((category) => {
-    // If category contains '|', split and use the last part
-    const lastLevel = category.includes('|') ? category.split('|').pop().trim() : category;
-    categoriesDiv.append(categoryDiv(lastLevel));
+  const names = result?.raw?.categoriesname || [];
+  const slugs = result?.raw?.categories || [];
+
+  const seen = new Set();
+
+  names.forEach((name, i) => {
+    const slug = slugs[i] || '';
+
+    // label = last part
+    const label = name.split('|').pop().trim();
+    // href = replace "|" with "/"
+    const href = slug.replace(/\|/g, '/').trim();
+
+    const key = `${label}|${href}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      categoriesDiv.append(categoryDiv(label, href));
+    }
   });
 
   defaultContent.append(categoriesDiv);

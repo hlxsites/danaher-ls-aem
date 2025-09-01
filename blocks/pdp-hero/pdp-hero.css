@@ -422,10 +422,6 @@
     display: flex;
   }
 
-  .pdp-hero-wrapper :is(.md\:w-\[692px\]) {
-    width: 692px;
-  }
-
   .pdp-hero-wrapper :is(.md\:flex-row) {
     flex-direction: row;
   }
