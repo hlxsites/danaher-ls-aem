@@ -295,7 +295,7 @@ export default async function decorate(block) {
     a(
       {
         class:
-                'hidden pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+                'hidden cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
       },
       span(
         {
