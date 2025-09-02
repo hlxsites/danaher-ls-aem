@@ -6,7 +6,8 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 export default function decorate(block) {
   block.innerHTML = '';
   // const authorName = getMetadata('authorname');
-  const authorName = block?.firstElementChild?.textContent
+  const authorName = block?.firstElementChild;
+  console.log('authorName', authorName);
   // const authorJobTitle = getMetadata('authortitle');
   const authorJobTitle = block?.firstElementChild?.nextElementSibling?.textContent 
   const publishDate = getMetadata('publishdate');
@@ -59,8 +60,8 @@ export default function decorate(block) {
   `;
 
   // const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
-  // const sectionEl = document.querySelector('main > div:nth-child(1)');
-  // sectionEl.classList.remove('article-info-container');
+  const sectionEl = document.querySelector('main > div:nth-child(1)');
+  sectionEl.classList.remove('article-info-container');
   // const leftSideElements = div({ class: 'mt-4' });
   // Array.from(sectionEl.children).forEach((element) => {
   //   if (!toBeRemoved.includes(element.classList[0])) {
