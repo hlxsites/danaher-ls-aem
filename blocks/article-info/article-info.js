@@ -7,7 +7,7 @@ export default function decorate(block) {
   // block.innerHTML = '';
   const authorName =  getMetadata('authorname') || block?.firstElementChild?.textContent;
   const authorJobTitle =  getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent;
-  const authorImage = getMetadata('authorimage') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.src;
+  const authorImage = getMetadata('authorimage') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.textContent;
   const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
   const publishDate = getMetadata('publishdate') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
   const readingTime = getMetadata('readingtime') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
