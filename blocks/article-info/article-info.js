@@ -56,15 +56,15 @@ export default function decorate(block) {
     </svg>
   `;
 
-  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
-  const sectionEl = document.querySelector('main > div:nth-child(1)');
-  sectionEl.classList.remove('article-info-container');
-  const leftSideElements = div({ class: 'mt-4' });
-  Array.from(sectionEl.children).forEach((element) => {
-    if (!toBeRemoved.includes(element.classList[0])) {
-      leftSideElements.append(element);
-    }
-  });
+  // const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
+  // const sectionEl = document.querySelector('main > div:nth-child(1)');
+  // sectionEl.classList.remove('article-info-container');
+  // const leftSideElements = div({ class: 'mt-4' });
+  // Array.from(sectionEl.children).forEach((element) => {
+  //   if (!toBeRemoved.includes(element.classList[0])) {
+  //     leftSideElements.append(element);
+  //   }
+  // });
 
   const divEl = div(
     { class: 'article-info-container' },
