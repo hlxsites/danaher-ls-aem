@@ -5,12 +5,12 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block.innerHTML = '';
-  const authorName = getMetadata('authorname');
-  console.log('authorName', authorName);
-  const authorJobTitle = getMetadata('authortitle');
-  const publishDate = getMetadata('publishdate');
-  const readingTime = getMetadata('readingtime');
-  const authorImage = getMetadata('authorimage');
+  const authorName = getMetadata('authorname') || block.querySelector('.authorName')?.textContent;
+  const authorJobTitle = getMetadata('authortitle') || block.querySelector('.authorJobTitle')?.textContent;
+  const publishDate = getMetadata('publishdate') || block.querySelector('.publishDate')?.textContent;
+  const readingTime = getMetadata('readingtime') || block.querySelector('.readingTime')?.textContent;
+  const authorImage = getMetadata('authorimage') || block.querySelector('.authorImage')?.src;
+  const articleOpco = block.querySelector('.articleOpco')?.textContent;
   const expectedPublishFormat = new Date(publishDate);
 
   block.append(
@@ -24,6 +24,7 @@ export default function decorate(block) {
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
+            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
           ),
         ),
         div(
@@ -57,14 +58,14 @@ export default function decorate(block) {
     </svg>
   `;
 
-  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
+  // const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
-  // sectionEl.classList.remove('article-info-container');
+  sectionEl.classList.remove('article-info-container');
   const leftSideElements = div({ class: 'mt-4' });
   Array.from(sectionEl.children).forEach((element) => {
-   if (!toBeRemoved.includes(element.classList[0])) {
-       leftSideElements.append(element);
-   }
+  if (!toBeRemoved.includes(element.classList[0])) {
+      leftSideElements.append(element);
+  }
   });
 
   const divEl = div(
