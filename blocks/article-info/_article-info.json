@@ -23,21 +23,21 @@
            {
             "component": "text",
             "valueType": "string",
-            "name": "article-info_authorName",
+            "name": "authorName",
             "label": "Author Name",
             "value": ""
            },
            {
             "component": "text",
             "valueType": "string",
-            "name": "article-info_authorTitle",
+            "name": "authorTitle",
             "label": "Author Title",
             "value": ""
            },
            {
             "component": "reference",
             "valueType": "Picture",
-            "name": "article-info_image",
+            "name": "image",
             "label": "Image",
             "multi": false,
             "value": ""
@@ -45,21 +45,21 @@
            {
             "component": "text",
             "valueType": "string",
-            "name": "article-info_imageAlt",
+            "name": "imageAlt",
             "label": "Alt Text",
             "value": ""
            },
            {
             "component": "text",
             "valueType": "string",
-            "name": "article-info_articleOpco",
+            "name": "articleOpco",
             "label": "Article Opco",
             "value": ""
            },           
            {
             "component": "date-time",
             "valueType": "date-time",
-            "name": "article-info_publishDate",
+            "name": "publishDate",
             "label": "Date", 
             "displayFormat": null,
             "valueFormat": null,
@@ -68,7 +68,7 @@
            {
             "component": "text",
             "valueType": "string",
-            "name": "article-info_readingTime",
+            "name": "readingTime",
             "label": "Reading Time",
             "value": ""
            }
