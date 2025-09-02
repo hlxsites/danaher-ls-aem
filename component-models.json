@@ -258,7 +258,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "article-info_authorName",
+        "name": "article_authorName",
         "label": "Author Name",
         "value": ""
       },
