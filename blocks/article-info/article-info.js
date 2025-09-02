@@ -5,11 +5,9 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block.innerHTML = '';
-  // const authorName = getMetadata('authorname');
-  const authorName = block?.firstElementChild;
+  const authorName = getMetadata('authorname');
   console.log('authorName', authorName);
-  // const authorJobTitle = getMetadata('authortitle');
-  const authorJobTitle = block?.firstElementChild?.nextElementSibling?.textContent 
+  const authorJobTitle = getMetadata('authortitle');
   const publishDate = getMetadata('publishdate');
   const readingTime = getMetadata('readingtime');
   const authorImage = getMetadata('authorimage');
@@ -59,15 +57,15 @@ export default function decorate(block) {
     </svg>
   `;
 
-  // const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
+  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
   sectionEl.classList.remove('article-info-container');
-  // const leftSideElements = div({ class: 'mt-4' });
-  // Array.from(sectionEl.children).forEach((element) => {
-  //   if (!toBeRemoved.includes(element.classList[0])) {
-  //     leftSideElements.append(element);
-  //   }
-  // });
+  const leftSideElements = div({ class: 'mt-4' });
+  Array.from(sectionEl.children).forEach((element) => {
+    if (!toBeRemoved.includes(element.classList[0])) {
+      leftSideElements.append(element);
+    }
+  });
 
   const divEl = div(
     { class: 'article-info-container' },
