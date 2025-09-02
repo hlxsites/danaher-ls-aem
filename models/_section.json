@@ -46,7 +46,6 @@
       "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",

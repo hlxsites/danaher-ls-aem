@@ -9,7 +9,6 @@
     "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -64,10 +63,6 @@
     "components": [
       "accordion-item"
     ]
-  },
-  {
-    "id": "article-info-new",
-    "components": []
   },
   {
     "id": "article-info",
