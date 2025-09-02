@@ -27,6 +27,10 @@
   margin-top: 26px;
 }
 
+.pdp-hero-wrapper :is(.mt-6) {
+  margin-top: 1.5rem;
+}
+
 .pdp-hero-wrapper :is(.block) {
   display: block;
 }
@@ -61,6 +65,10 @@
 
 .pdp-hero-wrapper :is(.h-\[1rem\]) {
   height: 1rem;
+}
+
+.pdp-hero-wrapper :is(.h-12) {
+  height: 3rem;
 }
 
 .pdp-hero-wrapper :is(.w-12) {
@@ -174,6 +182,10 @@
 
 .pdp-hero-wrapper :is(.overflow-hidden) {
   overflow: hidden;
+}
+
+.pdp-hero-wrapper :is(.whitespace-nowrap) {
+  white-space: nowrap;
 }
 
 .pdp-hero-wrapper :is(.rounded-\[20px\]) {
@@ -317,6 +329,10 @@
   font-weight: 200;
 }
 
+.pdp-hero-wrapper :is(.lowercase) {
+  text-transform: lowercase;
+}
+
 .pdp-hero-wrapper :is(.leading-10) {
   line-height: 2.5rem;
 }
@@ -357,6 +373,10 @@
 .pdp-hero-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.pdp-hero-wrapper :is(.\!no-underline) {
+  text-decoration-line: none !important;
 }
 
 .pdp-hero-wrapper :is(.shadow-sm) {
@@ -422,8 +442,18 @@
     display: flex;
   }
 
+  .pdp-hero-wrapper :is(.md\:w-auto) {
+    width: auto;
+  }
+
   .pdp-hero-wrapper :is(.md\:flex-row) {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pdp-hero-wrapper :is(.lg\:w-55) {
+    width: 14rem;
   }
 }
 

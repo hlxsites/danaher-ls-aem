@@ -156,7 +156,7 @@ export default async function decorate(block) {
           class:
               'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
-        //result?.raw?.richdescription?.replace(/<[^>]*>/g, ''),
+        // result?.raw?.richdescription?.replace(/<[^>]*>/g, ''),
       ),
     ),
   );
@@ -186,8 +186,9 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: 'justify-start text-black text-4xl font-normal md:block',
+        class: 'starts-at-price hidden justify-start text-black text-4xl font-normal md:block',
       },
+      div({ class: 'starts-at-label text-black text-base font-extralight' }, 'Starts at'),
       `$${productInfo?.data?.salePrice?.value}`,
     ),
     div(
@@ -196,7 +197,7 @@ export default async function decorate(block) {
       },
 
       div({
-        class: 'w-12 h-0 hidden md:block flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        class: 'uom-seperator-line w-12 h-0 hidden md:block flex-grow-0 mt-[26px] rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
       }),
       div(
         {
@@ -289,12 +290,12 @@ export default async function decorate(block) {
       value: '1',
       min: '1',
       class:
-              'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+              'hidden pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
     }),
     a(
       {
         class:
-                'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+                'hidden pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
       },
       span(
         {
@@ -306,7 +307,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-                'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                'show-modal-btn hidden pr-rfq cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
       },
       span(
         {
@@ -321,6 +322,7 @@ export default async function decorate(block) {
     class: 'self-stretch flex flex-col justify-start items-start gap-5',
   });
   priceInfoDiv.append(infoTab, shipInfo);
+  // defaultContent.append(priceInfoDiv);
 
   if (
     result?.raw?.objecttype === 'Product'
@@ -329,19 +331,118 @@ export default async function decorate(block) {
     defaultContent.append(priceInfoDiv);
   }
 
-  if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
-    priceInfoDiv.append(quoteButton);
-  }
-  if (
-    result?.raw?.objecttype === 'Family'
-  ) {
-    defaultContent.append(quoteButton);
+  // if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
+  //   priceInfoDiv.append(quoteButton);
+  // }
+
+  // if (
+  //   result?.raw?.objecttype === 'Family'
+  // ) {
+  //   defaultContent.append(quoteButton);
+  // }
+
+  // if (result?.raw?.objecttype === 'Product') {
+  //   priceInfoDiv.append(pricingQuoteButton);
+  // }
+
+  infoTab.querySelector('.starts-at-price').style.display = 'none';
+  infoTab.querySelector('.uom-seperator-line').style.display = 'none';
+
+  const availableOnlineRaw = result?.raw?.availableonline;
+  const availableOnline = Array.isArray(availableOnlineRaw)
+    ? availableOnlineRaw.map((c) => c.toUpperCase()) : [];
+
+  const shopEnabledRaw = result?.raw?.shopenabledcountry;
+  const shopEnabledCountries = Array.isArray(shopEnabledRaw)
+    ? shopEnabledRaw.map((c) => c.toUpperCase()) : [];
+
+  const showskupricelistusd = result?.raw.listpriceusd;
+  const currncyFormat = Number(showskupricelistusd);
+
+  const hasValidPrice = Number.isFinite(currncyFormat) && currncyFormat > 0;
+  const hideListPrice = result?.raw?.hidelistprice?.toString().toLowerCase() === 'true';
+  const showListPrice = !hideListPrice;
+
+  const showBuyNow = shopEnabledCountries.length > 0;
+  const showRFQ = availableOnline.length > 0;
+  defaultContent.append(pricingQuoteButton);
+
+  const brandURL = result?.raw?.externallink
+    ? `${result.raw.externallink}?utm_source=dhls_website`
+    : null;
+
+  function formatMoney(number) {
+    return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   }
 
-  if (result?.raw?.objecttype === 'Product') {
-    priceInfoDiv.append(pricingQuoteButton);
+  if (hasValidPrice && showListPrice) {
+    const priceEl = infoTab.querySelector('.starts-at-price');
+
+    if (priceEl) {
+      if (priceEl.childNodes[1]) {
+        priceEl.childNodes[1].textContent = `${formatMoney(currncyFormat)}`;
+      }
+      priceEl.style.display = 'block';
+      infoTab.querySelector('.uom-seperator-line').style.display = 'block';
+    }
   }
 
+  if (showRFQ) {
+    // rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg
+    // rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(' '));
+    if (['Product', 'Bundle'].includes(result?.raw?.objecttype)) {
+      // defaultContent.append(pricingQuoteButton);
+      pricingQuoteButton.querySelector('.pr-rfq')?.classList.remove('hidden');
+      // pricingQuoteButton.querySelector('.pr-rfq')?.addEventListener('
+      // click', () => { addToQuote(result); });
+    }
+    // else {
+    //   // defaultContent.append(pricingQuoteButton);
+    // }
+  }
+
+  // Buy Now logic decoupled
+  const rfqLabelRaw = result?.raw?.buynowlabel || '';
+  const externallinkRaw = result?.raw?.externallink;
+  let btnLabel = '';
+  let btnHref = '';
+
+  if (showBuyNow) {
+    if (rfqLabelRaw.includes('|')) {
+      const [labelPart, actionPart] = rfqLabelRaw.split('|');
+      btnLabel = labelPart.trim();
+      const actionValue = actionPart.trim().toLowerCase();
+
+      if (actionValue === 'true' && externallinkRaw) {
+        pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
+        btnHref = `${externallinkRaw}?utm_source=dhls_website`;
+      } else if (actionValue.startsWith('http')) {
+        pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
+        btnHref = actionPart.trim();
+      }
+    } else {
+      btnLabel = rfqLabelRaw.trim();
+    }
+
+    if (!btnLabel) {
+      btnLabel = 'Buy Now';
+    }
+
+    // const btn = document.createElement('button');
+    // btn.textContent = btnLabel;
+    // btn.classList.add(
+    //   ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto
+    // px-4 py-2 whitespace-nowrap h-12'.split(' '),
+    // );
+
+    pricingQuoteButton.querySelector('.pr-bn')?.addEventListener('click', () => {
+      if (btnHref) {
+        window.open(btnHref, '_blank');
+      } else if (brandURL) {
+        window.open(brandURL, '_blank');
+      }
+    });
+  }
   // const brandButton = document.createElement('button');
   // brandButton.textContent = 'Buy Now on abcam.com';
   // brandButton.classList.add(
@@ -564,7 +665,7 @@ export default async function decorate(block) {
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
-    const bundleTabList = main.querySelector('#bundle-list-tab');
+    const bundleTabList = main.querySelector('#parts-tab');
     if (bundleTabList) {
       bundleTabList.scrollIntoView({ behavior: 'smooth' });
     }
@@ -662,8 +763,13 @@ export default async function decorate(block) {
 
     // label = last part
     const label = name.split('|').pop().trim();
-    // href = replace "|" with "/"
-    const href = slug.replace(/\|/g, '/').trim();
+
+    // href = replace "|" with "/", replace spaces with "-", lowercase
+    const href = slug
+      .replace(/\|/g, '/')
+      .replace(/\s+/g, '-')
+      .toLowerCase()
+      .trim();
 
     const key = `${label}|${href}`;
     if (!seen.has(key)) {
