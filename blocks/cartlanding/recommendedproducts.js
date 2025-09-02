@@ -39,6 +39,7 @@ export const recommendedProducts = () => {
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
   });
 
+  
   // --- Carousel Header Section ---
   const carouselHead = div({
     class:
