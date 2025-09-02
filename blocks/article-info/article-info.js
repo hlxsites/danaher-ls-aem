@@ -4,7 +4,7 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  // block.innerHTML = '';
+  block.innerHTML = '';
   const authorName = getMetadata('authorname');
   const authorJobTitle = getMetadata('authortitle');
   const publishDate = getMetadata('publishdate');
