@@ -4,14 +4,15 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.innerHTML = '';
-  const authorName = getMetadata('authorname') || block.querySelector('.authorName')?.textContent;
-  const authorJobTitle = getMetadata('authortitle') || block.querySelector('.authorJobTitle')?.textContent;
-  const publishDate = getMetadata('publishdate') || block.querySelector('.publishDate')?.textContent;
-  const readingTime = getMetadata('readingtime') || block.querySelector('.readingTime')?.textContent;
-  const authorImage = getMetadata('authorimage') || block.querySelector('.authorImage')?.src;
-  const articleOpco = block.querySelector('.articleOpco')?.textContent;
+  // block.innerHTML = '';
+  const authorName =  getMetadata('authorname') || block?.firstElementChild?.textContent;
+  const authorJobTitle =  getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent;
+  const authorImage = getMetadata('authorimage') || authorJobTitle?.nextElementSibling?.src;
+  const articleOpco = authorImage?.nextElementSibling?.textContent;
+  const publishDate = getMetadata('publishdate') || articleOpco?.nextElementSibling?.textContent;
+  const readingTime = getMetadata('readingtime') || publishDate?.nextElementSibling?.textContent;
   const expectedPublishFormat = new Date(publishDate);
+  block.innerHTML = '';
 
   block.append(
     div(
