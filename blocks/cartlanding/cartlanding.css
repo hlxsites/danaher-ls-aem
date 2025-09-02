@@ -256,6 +256,13 @@
   -webkit-line-clamp: 5
 }
 
+.cartlanding-wrapper :is(.line-clamp-6) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6
+}
+
 .cartlanding-wrapper :is(.block) {
   display: block
 }
@@ -486,6 +493,14 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
+}
+
+.cartlanding-wrapper :is(.w-32) {
+  width: 8rem
+}
+
+.cartlanding-wrapper :is(.w-36) {
+  width: 9rem
 }
 
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
@@ -1034,6 +1049,10 @@
 
 .cartlanding-wrapper :is(.text-right) {
   text-align: right
+}
+
+.cartlanding-wrapper :is(.\!text-right) {
+  text-align: right !important
 }
 
 .cartlanding-wrapper :is(.text-2xl) {

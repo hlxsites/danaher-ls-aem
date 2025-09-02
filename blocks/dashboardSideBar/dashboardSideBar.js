@@ -151,6 +151,9 @@ export default async function dashboardSidebar() {
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
   }
+  else if(targetedPage === "Requestquotedetails"){
+    targetedPage = 'Requestedquotes';
+  }
   //   listDiv.addEventListener('click', (event) => {
   const allItemsInDiv = listDiv.querySelectorAll('.sidePanel-content');
   allItemsInDiv.forEach((itemsInDiv) => {

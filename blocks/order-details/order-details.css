@@ -240,8 +240,20 @@
   border-top-width: 1px
 }
 
+.order-details-wrapper :is(.border-b-2) {
+  border-bottom-width: 2px
+}
+
 .order-details-wrapper :is(.border-solid) {
   border-style: solid
+}
+
+.order-details-wrapper :is(.border-dashed) {
+  border-style: dashed
+}
+
+.order-details-wrapper :is(.border-dotted) {
+  border-style: dotted
 }
 
 .order-details-wrapper :is(.border-danaherpurple-500) {
@@ -297,6 +309,16 @@
 .order-details-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.order-details-wrapper :is(.bg-red-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity))
+}
+
+.order-details-wrapper :is(.bg-sky-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 249 255 / var(--tw-bg-opacity))
 }
 
 .order-details-wrapper :is(.fill-current) {
@@ -439,6 +461,10 @@
   font-weight: 700
 }
 
+.order-details-wrapper :is(.font-\[400\]) {
+  font-weight: 400
+}
+
 .order-details-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
@@ -499,6 +525,21 @@
 .order-details-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.order-details-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
+.order-details-wrapper :is(.text-red-800) {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity))
+}
+
+.order-details-wrapper :is(.text-sky-800) {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity))
 }
 
 .order-details-wrapper :is(.line-through) {

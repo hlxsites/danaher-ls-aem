@@ -55,7 +55,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
       div(
         {
           class:
-            "self-stretch h-10 border-b border-gray-300 flex flex-col justify-start items-start gap-2.5",
+            "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
         },
         div(
           {
@@ -140,7 +140,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
       div(
         {
           class:
-            "self-stretch h-10 border-b border-gray-300 flex flex-col justify-start items-start gap-2.5",
+            "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
         },
         div(
           {
@@ -184,7 +184,7 @@ export const customerInformation = (userOrderDetailsResponse) => {
     div(
       {
         class:
-          "self-stretch h-10 border-b border-gray-300 flex flex-col justify-start items-start gap-2.5",
+          "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
       },
       div(
         {

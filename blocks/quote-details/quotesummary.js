@@ -1,23 +1,14 @@
 import {
   div
 } from '../../scripts/dom-builder.js';
-export const orderSummary = (userOrderDetailsResponse) => {
-  console.log("userOrderDetailsResponse", userOrderDetailsResponse);
-      const date = new Date(userOrderDetailsResponse.data.creationDate);
+export const  quoteSummary = (requestedQuotesDetailsResponse) => {
+      const date = new Date(requestedQuotesDetailsResponse.creationDate);
       const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
       const day = String(date.getDate()).padStart(2, '0');
       const year = date.getFullYear();
     
       const formattedDate = `${month}/${day}/${year}`;
-      
-    const formattedAmount = (orderTotal) => {
-        const amount = parseFloat(orderTotal).toLocaleString('en-US', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        });
-        return amount;
-      };
-    const formattedWords = userOrderDetailsResponse.data.status
+      const formattedWords = "Pending"
       .toLowerCase()
       .replace(/\b\w/g, (char) => char.toUpperCase());
     const statusColor = (orderStatus) => {
@@ -42,8 +33,8 @@ export const orderSummary = (userOrderDetailsResponse) => {
         text: 'px-2.5 py-2 self-stretch text-center justify-start text-green-700 bg-green-50 text-medium font-[400] leading-tight',
       };
     };
-    const statusTextColor = statusColor(userOrderDetailsResponse.data.status);
-      const orderSummary = div(
+    const statusTextColor = statusColor("Pending");
+      const  quoteSummary = div(
         {
           class:
           'self-stretch p-6 bg-violet-50 inline-flex flex-col justify-center items-start gap-5 overflow-hidden',
@@ -61,7 +52,7 @@ export const orderSummary = (userOrderDetailsResponse) => {
                 class:
                 'self-stretch justify-start text-black text-2xl font-normal leading-loose',
               },
-              `Order # - ${userOrderDetailsResponse.data.documentNumber}`,
+              `Request # - ${requestedQuotesDetailsResponse.number}`,
             ),
             div(
               {
@@ -80,7 +71,7 @@ export const orderSummary = (userOrderDetailsResponse) => {
                 class:
                 'self-stretch text-right justify-start text-black text-2xl font-normal leading-loose',
               },
-              `$${formattedAmount(userOrderDetailsResponse.data.totals.grandTotal.gross.value)}`,
+             
             ),
             div(
               {
@@ -97,5 +88,5 @@ export const orderSummary = (userOrderDetailsResponse) => {
           ),
         ),
       );
-    return orderSummary;
+    return  quoteSummary;
 }

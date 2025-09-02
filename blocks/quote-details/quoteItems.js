@@ -1,39 +1,23 @@
 import {
   div, img,
 } from '../../scripts/dom-builder.js';
-export const orderItems = (response) => {
-      const lineItemIds = response.data.lineItems;
-  const includedLineItems = response.included.lineItems;
+export const quoteItems = (response) => {
+    const groupedByBrand = response.items.reduce((acc, item) => {
+  const brand = item.brand || 'Unknown';
+  if (!acc[brand]) {
+    acc[brand] = [];
+  }
+  acc[brand].push(item);
+  return acc;
+}, {});
 
-  const groupedByManufacturer = {};
 
-  lineItemIds.forEach((lineItemId) => {
-    const lineItem = includedLineItems[lineItemId];
-    if (!lineItem) return;
-
-    const { productData } = lineItem;
-    const { manufacturer } = productData;
-
-    const product = {
-      lineItemId,
-      displayName: lineItem.displayName,
-      sku: productData.sku,
-      quantity: lineItem.quantity.value,
-      manufacturer,
-    };
-
-    if (!groupedByManufacturer[manufacturer]) {
-      groupedByManufacturer[manufacturer] = [];
-    }
-
-    groupedByManufacturer[manufacturer].push(product);
-  });
-
-  const logoDiv = (itemToBeDisplayed) => {
-    // const logoDivContainer = div({
+  const quoteLogoDiv = (itemToBeDisplayed) => {
+    console.log("quoteLogoDiv", itemToBeDisplayed);
+    // const quoteLogoDivContainer = div({
     //   class: ""
     // });
-    const logoDivInner = div(
+    const quoteLogoDivInner = div(
       {
         class: 'self-stretch py-3 bg-gray-50 border-t border-b border-gray-300 inline-flex justify-start items-center gap-1',
       },
@@ -43,7 +27,7 @@ export const orderItems = (response) => {
         },
         div({
           class: 'justify-start text-black text-base font-bold leading-snug',
-        }, itemToBeDisplayed[1][0].manufacturer),
+        }, itemToBeDisplayed[1][0].brand),
       ),
       div({
         class: 'w-20 justify-start text-right text-black text-base font-bold leading-snug',
@@ -52,27 +36,12 @@ export const orderItems = (response) => {
         class: 'w-36 text-right justify-start text-black text-base font-bold leading-snug',
       }, 'Total'),
     );
-    // logoDivContainer.append(logoDivInner);
-    return logoDivInner;
+    // quoteLogoDivContainer.append(quoteLogoDivInner);
+    return quoteLogoDivInner;
   };
 
-  const shippingDiv = () => {
-    const shippingDivContainer = div(
-      {
-        class: 'self-stretch p-3 bg-violet-50 inline-flex justify-start items-start gap-3',
-      },
-      div({
-        class: 'justify-start text-black text-sm font-normal leading-tight',
-      }, 'Est Ship Date'),
-      div({
-        class: 'justify-start text-black text-base font-bold leading-snug',
-      }, '01/01/2025'),
-
-    );
-    return shippingDivContainer;
-  };
-  const unitPriceDiv = (cartItemValue) => {
-    if (cartItemValue.quantity.value * cartItemValue.productData.listPrice.value !== cartItemValue.quantity.value * cartItemValue.productData.salePrice.value) {
+  const unitPriceDiv = (quoteItemValue) => {
+    if (quoteItemValue.quantity.value * quoteItemValue.product.listPrice.value !== quoteItemValue.quantity.value * quoteItemValue.product.salePrice.value) {
       return div(
         {
           class: 'w-52 inline-flex flex-col justify-start items-end',
@@ -82,14 +51,14 @@ export const orderItems = (response) => {
             class:
               'self-stretch text-right justify-start text-gray-500 text-base font-extralight line-through leading-snug',
           },
-          `$${cartItemValue.quantity.value * cartItemValue.productData.listPrice.value}`,
+          `$${quoteItemValue.quantity.value * quoteItemValue.product.listPrice.value}`,
         ),
         div(
           {
             class:
               'self-stretch text-right justify-start text-black text-base font-bold leading-snug',
           },
-          `$${cartItemValue.quantity.value * cartItemValue.productData.salePrice.value}`,
+          `$${quoteItemValue.quantity.value * quoteItemValue.product.salePrice.value}`,
         ),
       );
     }
@@ -103,16 +72,17 @@ export const orderItems = (response) => {
           class:
             'unit-price w-[150px] text-right justify-start text-black text-base',
         },
-        `$${cartItemValue.quantity.value * cartItemValue.productData.salePrice.value}`,
+        `$${quoteItemValue.quantity.value * quoteItemValue.product.salePrice.value}`,
       ),
     );
   };
-  const cartItemDiv = (cartItemValue) => {
+  const quoteItemDiv = (quoteItemValue) => {
+    console.log("quoteItemValue", quoteItemValue)
     const itemsscontainer = div(
       {
         class:
          'self-stretch pb-4 relative border-b border-gray-300 inline-flex justify-start items-center',
-        id: cartItemValue.id,
+        id: quoteItemValue.id,
       },
       div(
         {
@@ -128,7 +98,7 @@ export const orderItems = (response) => {
             },
             img({
               class: 'w-16 self-stretch relative',
-              src: cartItemValue.productData.images.length !== 0 ? cartItemValue.productData.images[0].effectiveUrl : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+              src: quoteItemValue.product?.image ? quoteItemValue.product.image : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
             }),
           ),
         ),
@@ -141,14 +111,14 @@ export const orderItems = (response) => {
             {
               class: 'self-stretch justify-start text-black text-base font-bold leading-snug',
             },
-            cartItemValue.productData.name,
+            quoteItemValue.product.productName,
           ),
           div(
             {
               class:
                'self-stretch justify-start text-gray-500 text-sm font-normal leading-tight ',
             },
-            cartItemValue.productData.sku,
+            quoteItemValue.product.sku,
           ),
 
         ),
@@ -157,39 +127,41 @@ export const orderItems = (response) => {
         {
           class: 'w-20 text-right justify-start text-black text-base font-bold leading-snug',
         },
-        cartItemValue.quantity.value,
+        quoteItemValue.quantity.value,
       ),
-      unitPriceDiv(cartItemValue),
+      unitPriceDiv(quoteItemValue),
     );
     //  decorateIcons(itemsscontainer);
     return itemsscontainer;
   };
 
-  const cartItemDisplayContainer = div({
+  const quoteItemDisplayContainer = div({
     class: 'self-stretch bg-white flex flex-col justify-start items-start',
 
   });
-  Object.entries(groupedByManufacturer).forEach((itemToBeDisplayed) => {
-    const { lineItems } = response.included;
+  Object.entries(groupedByBrand).forEach((itemToBeDisplayed) => {
+    console.log("itemToBeDisplayed", itemToBeDisplayed);
+    // const { lineItems } = response.included;
     const manufacturerName = itemToBeDisplayed[0];
-    const lineItemsArray = Object.values(lineItems);
-    const matchingLineItems = lineItemsArray.filter(
-      (item) => item.productData.manufacturer === manufacturerName,
+    // const lineItemsArray = Object.values(lineItems);
+    const matchingLineItems = response.items.filter(
+      (item) => item.brand === manufacturerName,
     );
+    console.log("matchingLineItems", matchingLineItems);
     if (matchingLineItems.length > 0) {
-      const cartItemDisplayWrapper = div({
+      const quoteItemDisplayWrapper = div({
         class: 'self-stretch flex flex-col justify-start items-start gap-3',
       });
-
-      const logoDivDisplay = logoDiv(itemToBeDisplayed);
-      cartItemDisplayWrapper.append(logoDivDisplay);
-      const shippingDivDisplay = shippingDiv();
-      cartItemDisplayWrapper.append(shippingDivDisplay);
+      const quoteLogoDivDisplay = quoteLogoDiv(itemToBeDisplayed);
+      quoteItemDisplayWrapper.append(quoteLogoDivDisplay);
+      console.log("quoteLogoDivDisplay", quoteLogoDivDisplay)
+    //   const shippingDivDisplay = shippingDiv();
+    //   quoteItemDisplayWrapper.append(shippingDivDisplay);
       matchingLineItems.forEach((cartItem) => {
-        cartItemDisplayWrapper.append(cartItemDiv(cartItem));
-        cartItemDisplayContainer.append(cartItemDisplayWrapper);
+        quoteItemDisplayWrapper.append(quoteItemDiv(cartItem));
+        quoteItemDisplayContainer.append(quoteItemDisplayWrapper);
       });
     }
   });
-  return cartItemDisplayContainer;
+  return quoteItemDisplayContainer;
 }

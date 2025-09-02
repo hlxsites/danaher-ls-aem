@@ -427,6 +427,9 @@ const fileMappings = [
   },
   {
     content: ['./blocks/quote-details/quote-details.js', 
+              './blocks/quote-details/quotesummary.js',
+              './blocks/quote-details/quoteItems.js',
+              './blocks/quote-details/requesterInformation.js',
               './blocks/dashboardSideBar/dashboardSideBar.js',
             ],
     output: './blocks/quote-details/quote-details.css',

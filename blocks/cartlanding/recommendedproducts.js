@@ -120,7 +120,7 @@ export const recommendedProducts = () => {
     cardsToDisplay.forEach((item) => {
       const card = div({
         class:
-          ' sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] xl:w-[calc(25%-15px)] min-h-80 bg-white  flex flex-col justify-start items-start',
+          ' sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] xl:w-[calc(25%-15px)] border border-solid border-gray-300 min-h-80 bg-white  flex flex-col justify-start items-start',
       });
 
       const image = imageHelper(
@@ -147,7 +147,7 @@ export const recommendedProducts = () => {
           price: item.salePrice.value,
           quantity: 0,
         },
-        'Add to Cart',
+        'Buy',
       );
 
       addToCartButton.addEventListener('click', async (event) => {
@@ -164,12 +164,12 @@ export const recommendedProducts = () => {
 
       const itemContainer = div(
         {
-          class: 'inline-flex flex-col',
+          class: 'inline-flex flex-col self-stretch px-4 py-3 gap-3 ',
         },
         div(
           {
             class:
-              'relative w-full h-full flex flex-col cursor-pointer transition z-10',
+              'relative self-stretch h-40 relative',
           },
           image,
         ),
@@ -180,58 +180,92 @@ export const recommendedProducts = () => {
           div(
             {
               class:
-                'description text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4',
+                'description self-stretch justify-start text-black text-m font-normal break-words line-clamp-4 !h-20 py-4 leading-7',
             },
             item.name,
           ),
-          div(
-            {
-              class: 'h-[70px] text-gray-500 text-base font-extralight',
-            },
-            `SKU: ${item.sku}`,
-          ),
+          // div(
+          //   {
+          //     class: 'h-[70px] text-gray-500 text-base font-extralight',
+          //   },
+          //   `SKU: ${item.sku}`,
+          // ),
         ),
         div({
-          class: 'w-24 h-10 left-[63px] top-[57px] bg-white',
-        }),
+          class: 'self-stretch h-48 bg-gray-50 flex flex-col justify-start items-end gap-6',
+        },
         div(
           {
-            class: 'w-48 justify-start',
+            class: 'text-right justify-start text-black text-2xl font-normal leading-loose',
           },
-          span(
-            {
-              class:
-                'text-gray-900 text-2xl font-bold  leading-loose',
-            },
+          // span(
+          //   {
+          //     class:
+          //       'text-gray-900 text-2xl font-bold  leading-loose',
+          //   },
             `$${item.salePrice.value}`,
-          ),
-          span(
-            {
-              class:
-                'text-gray-900 text-base font-extralight  leading-snug',
-            },
-            '(USD)',
-          ),
+          // ),
+          // span(
+          //   {
+          //     class:
+          //       'text-gray-900 text-base font-extralight  leading-snug',
+          //   },
+          //   '(USD)',
+          // ),
         ),
 
         div(
           {
-            class: 'inline-flex gap-2',
+            class: 'self-stretch flex flex-col justify-start items-start gap-2',
           },
-          div(
-            {
-              class:
-                'w-11 h-10 px-4 border-solid border-2 inline-flex  justify-between items-center',
-            },
-            item.minOrderQuantity,
-          ),
-          addToCartButton,
+          div({
+            class: "flex justify-start items-start"
+          },
+          div({
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug"
+          }, "Unit of Measure:"),
+          div({
+            class: "w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug"
+          }, "1/Bundle")
         ),
-      );
+        div({
+          class: "flex "
+        },
+        div({
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug"
+          }, "Min. Order Qty:"),
+           div({
+            class: "w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug"
+          },item.minOrderQuantity ),
+      ),
+       div({
+    class: "inline-flex justify-start items-center gap-3"
+},
+div({
+    class: "w-14 self-stretch px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden"
+},
+div({
+    class: "justify-start text-black text-base font-normal leading-normal"
+}, "1")
+),
+// div({
+//     class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden"
+// }, div({
+//     class: "justify-start text-white text-base font-normal leading-snug"
+// }, "Buy")),
+addToCartButton,
+div({
+    class: "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden"
+}, div({
+    class: "justify-start text-violet-600 text-base font-normal leading-snug"
+}, "Quote"))
+)
+          // addToCartButton,
+        ),
+      ));
       card.append(itemContainer);
       carouselCards.append(card);
     });
-
     // cardsToDisplay;
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
