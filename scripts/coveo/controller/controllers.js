@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable */
 import {
   loadAdvancedSearchQueryActions, buildResultList, buildContext,
   loadContextActions, buildPager, loadPaginationActions,

@@ -93,7 +93,7 @@ export default function tabsOrder() {
         tabName: 'specifications',
         order: 3,
       },
-            {
+      {
         tabName: 'parts',
         order: 4,
       },
@@ -173,7 +173,7 @@ export default function tabsOrder() {
         tabName: 'parts',
         order: 4,
       },
-            {
+      {
         tabName: 'citations',
         order: 5,
       },
