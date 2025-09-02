@@ -21,7 +21,11 @@ switch (getMetadata('template')) {
     tagName = 'topics';
 }
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
+const getSelectionFromUrl = () => (
+  window.location.pathname.indexOf(tagName) > -1
+    ? toClassName(window.location.pathname.replace('.html', '').split('/').pop())
+    : ''
+);
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const createTopicUrl = (currentUrl, keyword = '') => {
@@ -32,7 +36,10 @@ const createTopicUrl = (currentUrl, keyword = '') => {
 };
 
 const patchBannerHeading = () => {
-  document.querySelector('body .banner h1').textContent = getMetadata('heading');
+  const bannerH1 = document.querySelector('body .banner h1');
+  if (bannerH1 && getMetadata('heading')) {
+    bannerH1.textContent = getMetadata('heading');
+  }
 };
 
 const createPaginationLink = (page, label, current = false) => {
@@ -95,7 +102,6 @@ const createPagination = (entries, page, limit) => {
 export function createFilters(articles, viewAll = false) {
   // collect tag filters
   const allKeywords = articles.map((item) => {
-    // Check if item[tagName] exists
     if (item[tagName]) {
       return item[tagName].replace(/,\s*/g, ',').split(',');
     }
@@ -103,8 +109,8 @@ export function createFilters(articles, viewAll = false) {
   });
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
-  keywords.delete('Blog'); // filter out generic blog tag
-  keywords.delete('News'); // filter out generic news tag
+  keywords.delete('Blog');
+  keywords.delete('News');
 
   // render tag cloud
   const newUrl = new URL(window.location);
@@ -162,6 +168,7 @@ export function createFilters(articles, viewAll = false) {
   return tags;
 }
 
+// Get template for index type
 let indexTemplate = getMetadata('template');
 if (window.location.href.includes('new-lab')) {
   indexTemplate = 'new-lab';
@@ -184,9 +191,14 @@ export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
-  // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
-  // fetch and sort all articles
+  // Pagination logic
+  let page = parseInt(getPageFromUrl(), 10);
+  page = Number.isNaN(page) ? 1 : page;
+  const limitPerPage = 18;
+  const start = (page - 1) * limitPerPage;
+
+  // Fetch all articles (you could optimize to chunk just for the page if your backend supports it)
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
@@ -203,49 +215,58 @@ export default async function decorate(block) {
       (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  // if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
-  // render cards application style
-  if (articleType === 'application' || articleType === 'info') {
+
+  // Sort and slice only what you render
+  let articlesToDisplay;
+  if (articleType === 'library') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    const cardList = ul({
+    articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+  } else if (articleType === 'application' || articleType === 'info') {
+    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
+    articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+  } else {
+    filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+    articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+  }
+
+  // Create filters/tags (topics) FIRST
+  const filterTags = createFilters(articles, true);
+
+  // Use fragment to batch DOM
+  const fragment = document.createDocumentFragment();
+  fragment.append(filterTags);
+
+  // Cards
+  let cardList;
+  if (articleType === 'application' || articleType === 'info') {
+    cardList = ul({
       class:
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
-    filteredArticles.forEach((article) => {
+    articlesToDisplay.forEach((article) => {
       cardList.appendChild(createApplicationCard(article));
     });
-    block.append(cardList);
-  // render cards article style
   } else {
-    if (articleType === 'library') {
-      filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    } else {
-      filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
-    }
-
-    let page = parseInt(getPageFromUrl(), 10);
-    page = Number.isNaN(page) ? 1 : page;
-    const limitPerPage = 18;
-    const start = (page - 1) * limitPerPage;
-    const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
-
-    const cardList = ul({
+    cardList = ul({
       class:
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
       if (articleType === 'library') {
         cardList.appendChild(createLibraryCard(article, index === 0));
-      } if (articleType === 'new-lab') {
+      } else if (articleType === 'new-lab') {
         cardList.appendChild(createLabCard(article, index === 0));
-      } else if (articleType !== 'library') {
+      } else {
         cardList.appendChild(createArticleCard(article, index === 0));
       }
     });
-
-    // render pagination and filters
-    const filterTags = createFilters(articles, true);
-    const paginationElements = createPagination(filteredArticles, page, limitPerPage);
-    block.append(filterTags, cardList, paginationElements);
   }
+  fragment.append(cardList);
+
+  // Pagination
+  const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+  fragment.append(paginationElements);
+
+  // Final append to block
+  block.appendChild(fragment);
 }
