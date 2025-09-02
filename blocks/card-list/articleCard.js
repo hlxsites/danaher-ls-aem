@@ -1,10 +1,9 @@
 import {
   formatDateUTCSeconds,
-  imageHelper,
   makePublicUrl,
 } from '../../scripts/scripts.js';
 import {
-  li, a, p, div, time, span, h3,
+  li, a, p, div, time, span, h3, img,
 } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
@@ -24,6 +23,11 @@ switch (template) {
 export default function createCard(article, firstCard = false) {
   const cardTitle = article.title.split('| Danaher Life Sciences')[0] || article.title;
 
+  const fallbackImagePath = '/content/dam/danaher/system/icons/preview-image.png';
+  const rawSrc = article.image ?? fallbackImagePath;
+  const safeSrc = rawSrc || fallbackImagePath;
+  const alt = article.title || 'Product image';
+
   const cardWrapper = a(
     {
       class: 'group h-full ',
@@ -31,11 +35,13 @@ export default function createCard(article, firstCard = false) {
       href: makePublicUrl(article.path),
       title: article.title,
     },
-    imageHelper(
-      article.image ?? '/content/dam/danaher/system/icons/preview-image.png',
-      article.title,
-      firstCard,
-    ),
+    img({
+      src: safeSrc,
+      alt,
+      class: 'mb-2 h-48 w-full object-cover',
+      loading: 'lazy',
+      decoding: 'async',
+    }),
     div(
       { class: '' },
       p({ class: 'eyebrow-sm' }, article.brand || 'Danaher Corporation'),

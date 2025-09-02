@@ -111,6 +111,10 @@
   margin-top: auto
 }
 
+.card-list-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .card-list-wrapper :is(.\!line-clamp-3) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -172,6 +176,14 @@
   height: 100%
 }
 
+.card-list-wrapper :is(.h-48) {
+  height: 12rem
+}
+
+.card-list-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .card-list-wrapper :is(.w-0) {
   width: 0px
 }
@@ -198,6 +210,10 @@
 
 .card-list-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.card-list-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .card-list-wrapper :is(.grid-cols-1) {
@@ -313,6 +329,16 @@
 
 .card-list-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.card-list-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.card-list-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .card-list-wrapper :is(.\!px-6) {
