@@ -7,10 +7,10 @@ export default function decorate(block) {
   // block.innerHTML = '';
   const authorName =  getMetadata('authorname') || block?.firstElementChild?.textContent;
   const authorJobTitle =  getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent;
-  const authorImage = getMetadata('authorimage') || authorJobTitle?.nextElementSibling?.src;
-  const articleOpco = authorImage?.nextElementSibling?.textContent;
-  const publishDate = getMetadata('publishdate') || articleOpco?.nextElementSibling?.textContent;
-  const readingTime = getMetadata('readingtime') || publishDate?.nextElementSibling?.textContent;
+  const authorImage = getMetadata('authorimage') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.src;
+  const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
+  const publishDate = getMetadata('publishdate') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
+  const readingTime = getMetadata('readingtime') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
   const expectedPublishFormat = new Date(publishDate);
   block.innerHTML = '';
 
