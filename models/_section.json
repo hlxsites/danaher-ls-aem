@@ -46,7 +46,6 @@
       "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -93,6 +92,7 @@
       "testimonial",
       "tags-list",
       "related-articles",
+      "social-media",
       "mini-teasers",
       "pdp-hero",
       "pdp-page-tabs",
