@@ -1,22 +1,19 @@
 import {
   div, img,
 } from '../../scripts/dom-builder.js';
-export const quoteItems = (response) => {
-    const groupedByBrand = response.items.reduce((acc, item) => {
-  const brand = item.brand || 'Unknown';
-  if (!acc[brand]) {
-    acc[brand] = [];
-  }
-  acc[brand].push(item);
-  return acc;
-}, {});
 
+// eslint-disable-next-line import/prefer-default-export
+export const quoteItems = (response) => {
+  const groupedByBrand = response.items.reduce((acc, item) => {
+    const brand = item.brand || 'Unknown';
+    if (!acc[brand]) {
+      acc[brand] = [];
+    }
+    acc[brand].push(item);
+    return acc;
+  }, {});
 
   const quoteLogoDiv = (itemToBeDisplayed) => {
-    console.log("quoteLogoDiv", itemToBeDisplayed);
-    // const quoteLogoDivContainer = div({
-    //   class: ""
-    // });
     const quoteLogoDivInner = div(
       {
         class: 'self-stretch py-3 bg-gray-50 border-t border-b border-gray-300 inline-flex justify-start items-center gap-1',
@@ -41,6 +38,7 @@ export const quoteItems = (response) => {
   };
 
   const unitPriceDiv = (quoteItemValue) => {
+    // eslint-disable-next-line max-len
     if (quoteItemValue.quantity.value * quoteItemValue.product.listPrice.value !== quoteItemValue.quantity.value * quoteItemValue.product.salePrice.value) {
       return div(
         {
@@ -77,7 +75,6 @@ export const quoteItems = (response) => {
     );
   };
   const quoteItemDiv = (quoteItemValue) => {
-    console.log("quoteItemValue", quoteItemValue)
     const itemsscontainer = div(
       {
         class:
@@ -105,7 +102,6 @@ export const quoteItems = (response) => {
         div(
           {
             class: 'w-48 inline-flex flex-col justify-start items-start',
-            // id: `product-Quantity-${opcoBe[0]}`,
           },
           div(
             {
@@ -131,7 +127,6 @@ export const quoteItems = (response) => {
       ),
       unitPriceDiv(quoteItemValue),
     );
-    //  decorateIcons(itemsscontainer);
     return itemsscontainer;
   };
 
@@ -140,23 +135,16 @@ export const quoteItems = (response) => {
 
   });
   Object.entries(groupedByBrand).forEach((itemToBeDisplayed) => {
-    console.log("itemToBeDisplayed", itemToBeDisplayed);
-    // const { lineItems } = response.included;
     const manufacturerName = itemToBeDisplayed[0];
-    // const lineItemsArray = Object.values(lineItems);
     const matchingLineItems = response.items.filter(
       (item) => item.brand === manufacturerName,
     );
-    console.log("matchingLineItems", matchingLineItems);
     if (matchingLineItems.length > 0) {
       const quoteItemDisplayWrapper = div({
         class: 'self-stretch flex flex-col justify-start items-start gap-3',
       });
       const quoteLogoDivDisplay = quoteLogoDiv(itemToBeDisplayed);
       quoteItemDisplayWrapper.append(quoteLogoDivDisplay);
-      console.log("quoteLogoDivDisplay", quoteLogoDivDisplay)
-    //   const shippingDivDisplay = shippingDiv();
-    //   quoteItemDisplayWrapper.append(shippingDivDisplay);
       matchingLineItems.forEach((cartItem) => {
         quoteItemDisplayWrapper.append(quoteItemDiv(cartItem));
         quoteItemDisplayContainer.append(quoteItemDisplayWrapper);
@@ -164,4 +152,4 @@ export const quoteItems = (response) => {
     }
   });
   return quoteItemDisplayContainer;
-}
+};

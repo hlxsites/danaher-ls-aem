@@ -20,14 +20,14 @@ export default async function decorate(block) {
   const orderDetailResponse = await orderDetails();
   const requestedQuotesResponse = await requestedQuotes();
   // console.log("orderDetailResponse", orderDetailResponse);
-  const shippedItems = orderDetailResponse.filter((item) => item.status.toLowerCase() === 'shipped');
+  const shippedItems = orderDetailResponse?.filter((item) => item.status.toLowerCase() === 'shipped');
   // console.log("cancelledItems", shippedItems );
   const excludedStatuses = ['cancelled', 'shipped'];
-  const openOrder = orderDetailResponse.filter(
+  const openOrder = orderDetailResponse?.filter(
     (item) => !excludedStatuses.includes(item.status.toLowerCase()),
   );
   // console.log("cancelledItems", openOrder );
-  const totalShippedItems = shippedItems.length;
+  const totalShippedItems = shippedItems?.length;
   const wrapper = div({
     id: 'dashboardWrapper',
     class:
@@ -65,7 +65,7 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            openOrder.length === 0 ? 0 : openOrder.length,
+            openOrder?.length === 0 ? 0 : openOrder?.length,
           ),
           p(
             {
@@ -75,7 +75,7 @@ export default async function decorate(block) {
           ),
         ),
       ),
-      openOrder.length !== 0
+      openOrder?.length !== 0
         ? div(
           {
             class: 'w-[310px] h-[118px] bg-white flex items-center justify-center  gap-6 p-6',
@@ -118,7 +118,7 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            requestedQuotesResponse.length === 0 ? 0 : requestedQuotesResponse.length,
+            requestedQuotesResponse?.length === 0 ? 0 : requestedQuotesResponse?.length,
           ),
           p(
             {

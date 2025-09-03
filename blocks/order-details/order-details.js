@@ -1,5 +1,5 @@
 import {
-  div, span, a, img,
+  div, span, a,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
@@ -67,7 +67,6 @@ export default async function decorate(block) {
     class: 'w-[30%]',
   });
 
-  
   const orderItemTitle = div(
     {
       class: 'self-stretch inline-flex justify-start items-start gap-5',

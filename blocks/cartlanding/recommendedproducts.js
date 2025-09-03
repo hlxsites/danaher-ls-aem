@@ -1,9 +1,7 @@
-
 import { addItemToCart, recommendedProduct } from './myCartService.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import {
   div,
-  span,
   button,
 } from '../../scripts/dom-builder.js';
 import {
@@ -39,7 +37,6 @@ export const recommendedProducts = () => {
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
   });
 
-  
   // --- Carousel Header Section ---
   const carouselHead = div({
     class:
@@ -192,18 +189,19 @@ export const recommendedProducts = () => {
           //   `SKU: ${item.sku}`,
           // ),
         ),
-        div({
-          class: 'self-stretch h-48 bg-gray-50 flex flex-col justify-start items-end gap-6',
-        },
         div(
           {
-            class: 'text-right justify-start text-black text-2xl font-normal leading-loose',
+            class: 'self-stretch h-48 bg-gray-50 flex flex-col justify-start items-end gap-6',
           },
-          // span(
-          //   {
-          //     class:
-          //       'text-gray-900 text-2xl font-bold  leading-loose',
-          //   },
+          div(
+            {
+              class: 'text-right justify-start text-black text-2xl font-normal leading-loose',
+            },
+            // span(
+            //   {
+            //     class:
+            //       'text-gray-900 text-2xl font-bold  leading-loose',
+            //   },
             `$${item.salePrice.value}`,
           // ),
           // span(
@@ -213,57 +211,57 @@ export const recommendedProducts = () => {
           //   },
           //   '(USD)',
           // ),
-        ),
+          ),
 
-        div(
-          {
-            class: 'self-stretch flex flex-col justify-start items-start gap-2',
-          },
-          div({
-            class: "flex justify-start items-start"
-          },
-          div({
-            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug"
-          }, "Unit of Measure:"),
-          div({
-            class: "w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug"
-          }, "1/Bundle")
-        ),
-        div({
-          class: "flex "
-        },
-        div({
-            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug"
-          }, "Min. Order Qty:"),
-           div({
-            class: "w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug"
-          },item.minOrderQuantity ),
-      ),
-       div({
-    class: "inline-flex justify-start items-center gap-3"
-},
-div({
-    class: "w-14 self-stretch px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden"
-},
-div({
-    class: "justify-start text-black text-base font-normal leading-normal"
-}, "1")
-),
-// div({
-//     class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden"
-// }, div({
-//     class: "justify-start text-white text-base font-normal leading-snug"
-// }, "Buy")),
-addToCartButton,
-div({
-    class: "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden"
-}, div({
-    class: "justify-start text-violet-600 text-base font-normal leading-snug"
-}, "Quote"))
-)
+          div(
+            {
+              class: 'self-stretch flex flex-col justify-start items-start gap-2',
+            },
+            div(
+              {
+                class: 'flex justify-start items-start',
+              },
+              div({
+                class: 'w-32 h-5 justify-start text-black text-base font-extralight leading-snug',
+              }, 'Unit of Measure:'),
+              div({
+                class: 'w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug',
+              }, '1/Bundle'),
+            ),
+            div(
+              {
+                class: 'flex ',
+              },
+              div({
+                class: 'w-32 h-5 justify-start text-black text-base font-extralight leading-snug',
+              }, 'Min. Order Qty:'),
+              div({
+                class: 'w-16 h-5 text-right justify-start text-black text-base font-bold leading-snug',
+              }, item.minOrderQuantity),
+            ),
+            div(
+              {
+                class: 'inline-flex justify-start items-center gap-3',
+              },
+              div(
+                {
+                  class: 'w-14 self-stretch px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
+                },
+                div({
+                  class: 'justify-start text-black text-base font-normal leading-normal',
+                }, '1'),
+              ),
+              addToCartButton,
+              div({
+                class: 'px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              }, div({
+                class: 'justify-start text-violet-600 text-base font-normal leading-snug',
+              }, 'Quote')),
+            ),
           // addToCartButton,
+          ),
         ),
-      ));
+      );
       card.append(itemContainer);
       carouselCards.append(card);
     });
@@ -317,4 +315,3 @@ div({
   content.append(carouselContainer);
   return content;
 };
-

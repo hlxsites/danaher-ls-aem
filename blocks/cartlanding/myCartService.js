@@ -11,10 +11,8 @@ import {
   postApiData,
 } from '../../scripts/api-utils.js';
 
+// eslint-disable-next-line import/no-cycle
 import addProducts from './addproducts.js';
-// import {
-//   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
-// } from './cartSharedFile.js';
 import {
   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
 } from './cartSharedFile.js';

@@ -17,7 +17,7 @@ export default async function dashboardSidebar() {
   const sidepanelList = [
     { name: 'My Profile', itemClicked: 'My profile', icon: 'User' },
     { name: 'My Address', itemClicked: 'My address', icon: 'Location-marker' },
-    { name: 'Payment Methods', itemClicked: 'Payment methods',  icon: 'Currency-dollar' },
+    { name: 'Payment Methods', itemClicked: 'Payment methods', icon: 'Currency-dollar' },
     { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
@@ -147,11 +147,9 @@ export default async function dashboardSidebar() {
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  console.log("targetedPage", targetedPage)
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
-  }
-  else if(targetedPage === "Requestquotedetails"){
+  } else if (targetedPage === 'Requestquotedetails') {
     targetedPage = 'Requestedquotes';
   }
   //   listDiv.addEventListener('click', (event) => {

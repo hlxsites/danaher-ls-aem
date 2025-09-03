@@ -288,6 +288,10 @@
   height: max-content
 }
 
+.checkout :is(.h-24) {
+  height: 6rem
+}
+
 .checkout :is(.max-h-48) {
   max-height: 12rem
 }

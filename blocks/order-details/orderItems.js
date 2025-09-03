@@ -1,8 +1,10 @@
 import {
   div, img,
 } from '../../scripts/dom-builder.js';
+
+// eslint-disable-next-line import/prefer-default-export
 export const orderItems = (response) => {
-      const lineItemIds = response.data.lineItems;
+  const lineItemIds = response.data.lineItems;
   const includedLineItems = response.included.lineItems;
 
   const groupedByManufacturer = {};
@@ -30,9 +32,6 @@ export const orderItems = (response) => {
   });
 
   const logoDiv = (itemToBeDisplayed) => {
-    // const logoDivContainer = div({
-    //   class: ""
-    // });
     const logoDivInner = div(
       {
         class: 'self-stretch py-3 bg-gray-50 border-t border-b border-gray-300 inline-flex justify-start items-center gap-1',
@@ -72,6 +71,7 @@ export const orderItems = (response) => {
     return shippingDivContainer;
   };
   const unitPriceDiv = (cartItemValue) => {
+    // eslint-disable-next-line max-len
     if (cartItemValue.quantity.value * cartItemValue.productData.listPrice.value !== cartItemValue.quantity.value * cartItemValue.productData.salePrice.value) {
       return div(
         {
@@ -192,4 +192,4 @@ export const orderItems = (response) => {
     }
   });
   return cartItemDisplayContainer;
-}
+};

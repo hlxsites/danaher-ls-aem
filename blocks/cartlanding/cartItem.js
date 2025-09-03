@@ -1,4 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import {
   logoDiv,
   divider,

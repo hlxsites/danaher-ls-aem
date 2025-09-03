@@ -1,224 +1,251 @@
-import { div } from "../../scripts/dom-builder.js";
+import { div } from '../../scripts/dom-builder.js';
+
+// eslint-disable-next-line import/prefer-default-export
 export const customerInformation = (userOrderDetailsResponse) => {
-    const custInfo = userOrderDetailsResponse.data.buyer;
-    const shippinfInfo = userOrderDetailsResponse.included.commonShipToAddress;
-    const billingInfo = userOrderDetailsResponse.included.invoiceToAddress;
-    const shipObjKey = Object.keys(shippinfInfo)[0];
-    const billObjKey = Object.keys(billingInfo)[0];
-       const setAddressDetails = {
-              companyName2:
-                shippinfInfo[shipObjKey]
-                  ?.companyName2 ?? '',
-              addressLine1:
-                shippinfInfo[shipObjKey]
-                  ?.addressLine1 ?? '',
-              city:
-                shippinfInfo[shipObjKey]?.city ?? '',
-              mainDivision:
-                shippinfInfo[shipObjKey]
-                  ?.mainDivision ?? '',
-              countryCode:
-                shippinfInfo[shipObjKey]
-                  ?.countryCode ?? '',
-              postalCode:
-                shippinfInfo[shipObjKey]
-                  ?.postalCode ?? '',
-            };
-        const setBillingAddressDetails = {
-              addressLine1:
-                billingInfo[billObjKey]
-                  ?.addressLine1 ?? '',
-              city:
-                billingInfo[billObjKey]?.city ?? '',
-              mainDivision:
-                billingInfo[billObjKey]
-                  ?.mainDivision ?? '',
-              countryCode:
-                billingInfo[billObjKey]
-                  ?.countryCode ?? '',
-              postalCode:
-                billingInfo[billObjKey]
-                  ?.postalCode ?? '',
-            };
+  const custInfo = userOrderDetailsResponse.data.buyer;
+  const shippinfInfo = userOrderDetailsResponse.included.commonShipToAddress;
+  const billingInfo = userOrderDetailsResponse.included.invoiceToAddress;
+  const shipObjKey = Object.keys(shippinfInfo)[0];
+  const billObjKey = Object.keys(billingInfo)[0];
+  const setAddressDetails = {
+    companyName2:
+      shippinfInfo[shipObjKey]
+        ?.companyName2 ?? '',
+    addressLine1:
+      shippinfInfo[shipObjKey]
+        ?.addressLine1 ?? '',
+    city:
+      shippinfInfo[shipObjKey]?.city ?? '',
+    mainDivision:
+      shippinfInfo[shipObjKey]
+        ?.mainDivision ?? '',
+    countryCode:
+      shippinfInfo[shipObjKey]
+        ?.countryCode ?? '',
+    postalCode:
+      shippinfInfo[shipObjKey]
+        ?.postalCode ?? '',
+  };
+  const setBillingAddressDetails = {
+    addressLine1:
+      billingInfo[billObjKey]
+        ?.addressLine1 ?? '',
+    city:
+      billingInfo[billObjKey]?.city ?? '',
+    mainDivision:
+      billingInfo[billObjKey]
+        ?.mainDivision ?? '',
+    countryCode:
+      billingInfo[billObjKey]
+        ?.countryCode ?? '',
+    postalCode:
+      billingInfo[billObjKey]
+        ?.postalCode ?? '',
+  };
   const customerInformationWrapper = div({
     class:
-      "w-[325px] self-stretch border border-solid border-gray-300 p-[20px] bg-white inline-flex flex-col justify-start items-start gap-6",
+      'w-[325px] self-stretch border border-solid border-gray-300 p-[20px] bg-white inline-flex flex-col justify-start items-start gap-6',
   });
   const customerInfoDiv = div(
     {
-      class: "self-stretch flex flex-col justify-start items-start gap-3",
+      class: 'self-stretch flex flex-col justify-start items-start gap-3',
     },
     div(
       {
-        class: "self-stretch flex flex-col justify-start items-start gap-3",
+        class: 'self-stretch flex flex-col justify-start items-start gap-3',
       },
       div(
         {
           class:
-            "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
+            'self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5',
         },
         div(
           {
-            class: "self-stretch inline-flex justify-start items-start gap-5",
+            class: 'self-stretch inline-flex justify-start items-start gap-5',
           },
           div(
             {
               class:
-                "justify-start text-black text-[20px] font-extralight  leading-relaxed",
+                'justify-start text-black text-[20px] font-extralight  leading-relaxed',
             },
-            "Customer Information"
-          )
-        )
+            'Customer Information',
+          ),
+        ),
       ),
       div(
         {
-          class: "self-stretch flex flex-col justify-start items-start",
+          class: 'self-stretch flex flex-col justify-start items-start',
         },
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
+              'self-stretch justify-start text-black text-[14px] font-normal  leading-tight',
           },
-          "Name"
+          'Name',
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
+              'self-stretch justify-start text-black text-[16px] font-bold  leading-snug',
           },
-          `${custInfo.firstName + " " + custInfo.lastName}`
-        )
+          `${`${custInfo.firstName} ${custInfo.lastName}`}`,
+        ),
       ),
       div(
         {
-          class: "self-stretch flex flex-col justify-start items-start",
+          class: 'self-stretch flex flex-col justify-start items-start',
         },
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
+              'self-stretch justify-start text-black text-[14px] font-normal  leading-tight',
           },
-          "Email"
+          'Email',
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
+              'self-stretch justify-start text-black text-[16px] font-bold  leading-snug',
           },
-          `${custInfo.email}`
-        )
+          `${custInfo.email}`,
+        ),
       ),
       div(
         {
-          class: "self-stretch flex flex-col justify-start items-start",
+          class: 'self-stretch flex flex-col justify-start items-start',
         },
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[14px] font-normal  leading-tight",
+              'self-stretch justify-start text-black text-[14px] font-normal  leading-tight',
           },
-          "Contact Number"
+          'Contact Number',
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[16px] font-bold  leading-snug",
+              'self-stretch justify-start text-black text-[16px] font-bold  leading-snug',
           },
-          "-"
-        )
-      )
-    )
+          '-',
+        ),
+      ),
+    ),
   );
   const shippingInfoDiv = div(
     {
-      class: "self-stretch flex flex-col justify-start items-start gap-3",
+      class: 'self-stretch flex flex-col justify-start items-start gap-3',
     },
     div(
       {
-        class: "self-stretch flex flex-col justify-start items-start gap-3",
+        class: 'self-stretch flex flex-col justify-start items-start gap-3',
       },
       div(
         {
           class:
-            "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
+            'self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5',
         },
         div(
           {
-            class: "self-stretch inline-flex justify-start items-start gap-5",
+            class: 'self-stretch inline-flex justify-start items-start gap-5',
           },
           div(
             {
               class:
-                "justify-start text-black text-[20px] font-extralight leading-relaxed",
+                'justify-start text-black text-[20px] font-extralight leading-relaxed',
             },
-            "Shipping Address"
-          )
-        )
+            'Shipping Address',
+          ),
+        ),
       ),
       div(
         {
-          class: "self-stretch flex flex-col justify-start items-start",
+          class: 'self-stretch flex flex-col justify-start items-start',
         },
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[14px] font-normal leading-tight",
+              'self-stretch justify-start text-black text-[14px] font-normal leading-tight',
           },
-          "Address"
+          'Address',
         ),
         div(
           {
             class:
-              "self-stretch justify-start text-black text-[16px] font-bold leading-snug",
+              'self-stretch justify-start text-black text-[16px] font-bold leading-snug',
           },
-          setAddressDetails.companyName2, ", ", " ", setAddressDetails.addressLine1, ", ", " ", setAddressDetails.city, ", ", " ",
-          setAddressDetails.mainDivision,", ",  " ", setAddressDetails.countryCode, ", ", " ", setAddressDetails.postalCode
-        )
-      )
-    )
+          setAddressDetails.companyName2,
+          ', ',
+          ' ',
+          setAddressDetails.addressLine1,
+          ', ',
+          ' ',
+          setAddressDetails.city,
+          ', ',
+          ' ',
+          setAddressDetails.mainDivision,
+          ', ',
+          ' ',
+          setAddressDetails.countryCode,
+          ', ',
+          ' ',
+          setAddressDetails.postalCode,
+        ),
+      ),
+    ),
   );
   const billingInfoDiv = div(
     {
-      class: "self-stretch flex flex-col justify-start items-start gap-3",
+      class: 'self-stretch flex flex-col justify-start items-start gap-3',
     },
     div(
       {
         class:
-          "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
+          'self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5',
       },
       div(
         {
-          class: "self-stretch inline-flex justify-start items-start gap-5",
+          class: 'self-stretch inline-flex justify-start items-start gap-5',
         },
         div(
           {
             class:
-              "justify-start text-black text-[20px] font-extralight leading-relaxed",
+              'justify-start text-black text-[20px] font-extralight leading-relaxed',
           },
-          "Billing Address"
-        )
-      )
+          'Billing Address',
+        ),
+      ),
     ),
     div(
       {
-        class: "self-stretch flex flex-col justify-start items-start",
+        class: 'self-stretch flex flex-col justify-start items-start',
       },
       div(
         {
           class:
-            "self-stretch justify-start text-black text-[14px] font-normal leading-tight",
+            'self-stretch justify-start text-black text-[14px] font-normal leading-tight',
         },
-        "Address"
+        'Address',
       ),
       div(
         {
           class:
-            "self-stretch justify-start text-black text-[16px] font-bold leading-snug",
+            'self-stretch justify-start text-black text-[16px] font-bold leading-snug',
         },
-         setBillingAddressDetails.addressLine1, ", ", " ", setBillingAddressDetails.city, ", ", " ",
-          setBillingAddressDetails.mainDivision,", ",  " ", setBillingAddressDetails.countryCode, ", ", " ", setBillingAddressDetails.postalCode
-      )
-    )
+        setBillingAddressDetails.addressLine1,
+        ', ',
+        ' ',
+        setBillingAddressDetails.city,
+        ', ',
+        ' ',
+        setBillingAddressDetails.mainDivision,
+        ', ',
+        ' ',
+        setBillingAddressDetails.countryCode,
+        ', ',
+        ' ',
+        setBillingAddressDetails.postalCode,
+      ),
+    ),
   );
   customerInformationWrapper.append(customerInfoDiv);
   customerInformationWrapper.append(shippingInfoDiv);

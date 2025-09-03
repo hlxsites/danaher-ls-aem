@@ -1,9 +1,9 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './grid-data.js';
 import renderListCard from './listData.js';
+// eslint-disable-next-line import/no-cycle
 import { recommendedProduct } from './myCartService.js';
-import { getProductInfo } from '../../scripts/common-utils.js';
 
 /**
  * Determines the number of cards to display per page in grid view based on window width.
@@ -19,7 +19,7 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function relatedProducts(headingText, productIds) {
+export default async function relatedProducts(headingText) {
   // block.parentElement.parentElement.style.padding = '0';
   // block.parentElement.parentElement.style.margin = '0';
   // block.style.display = 'none';
@@ -62,23 +62,6 @@ export default async function relatedProducts(headingText, productIds) {
       },
       headingText ?? '',
     ),
-    // a(
-    //   {
-    //     href: linkUrl ?? '#',
-    //     class:
-    //       'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
-    //     target: `${
-    //       block.children[2].textContent.trim() === 'true' ? '_blank' : '_self'
-    //     }`,
-    //   },
-    //   linkText ?? '',
-    //   linkText?.length
-    //     ? span({
-    //       class:
-    //           'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
-    //     })
-    //     : '',
-    // ),
   );
   decorateIcons(leftGroup);
 
@@ -161,15 +144,15 @@ export default async function relatedProducts(headingText, productIds) {
     style: 'display: none;',
   });
 
-//   const results = await Promise.allSettled(
-//     // making false as we don't need intershop data for top selling products as of now
-//     productIds.map((id) => getProductInfo(id, false)),
-//   );
-// console.log("results", results);
+  //   const results = await Promise.allSettled(
+  //     // making false as we don't need intershop data for top selling products as of now
+  //     productIds.map((id) => getProductInfo(id, false)),
+  //   );
+  // console.log("results", results);
   // const products = results
   //   .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
   //   .map((result) => result.value);
-const products = recommendedProduct;
+  const products = recommendedProduct;
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
     topSellingWrapper.style.display = 'none';

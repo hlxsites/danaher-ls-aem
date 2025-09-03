@@ -324,7 +324,7 @@ const shippingMethodsModule = async () => {
                   class: `flex relative flex-col w-full shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-xs border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                     ? highlightDefaultShippingMethod
                     : 'border-gray-400'
-                    }`,
+                  }`,
                 },
                 p(
                   {

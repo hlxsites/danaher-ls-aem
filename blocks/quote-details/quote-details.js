@@ -1,48 +1,46 @@
-import { div, a, span } from "../../scripts/dom-builder.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import dashboardSidebar from "../dashboardSideBar/dashboardSideBar.js";
-import { requestedQuotesDetails } from "../dashboard/dashboardutils.js";
-import { quoteSummary } from "./quotesummary.js";
-import { quoteItems } from "./quoteItems.js";
-import { requesterInformation } from "./requesterInformation.js";
+import { div, a, span } from '../../scripts/dom-builder.js';
+import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
+import { requestedQuotesDetails } from '../dashboard/dashboardutils.js';
+import { quoteSummary } from './quotesummary.js';
+import { quoteItems } from './quoteItems.js';
+import { requesterInformation } from './requesterInformation.js';
 
 export default async function decorate(block) {
   showPreLoader();
-  block?.parentElement?.parentElement?.removeAttribute("class");
-  block?.parentElement?.parentElement?.removeAttribute("style");
-  const quoteId = new URLSearchParams(window.location.search).get("quoteId");
-  console.log("quoteId", quoteId);
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  const quoteId = new URLSearchParams(window.location.search).get('quoteId');
   const requestedQuotesDetailsResponse = await requestedQuotesDetails(quoteId);
-  console.log("requestedQuotesDetailsResponse", requestedQuotesDetailsResponse);
   const quoteDetailsWrapper = div({
-    class: "w-[70%] inline-flex flex-col justify-start items-start gap-5 ",
+    class: 'w-[70%] inline-flex flex-col justify-start items-start gap-5 ',
   });
   const wrapper = div({
-    id: "dashboardWrapper",
+    id: 'dashboardWrapper',
     class:
-      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12",
+      'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
   });
   const goBackToQuoteStatusLink = a(
+    {
+      class: 'inline-flex justify-start items-start gap-2',
+      href: '/us/en/e-buy/requestedquotes',
+    },
+    div(
       {
-        class: 'inline-flex justify-start items-start gap-2',
-        href: '/us/en/e-buy/requestedquotes',
-      },
-      div(
-        {
-          class:
+        class:
                 'w-[24px] h-[24px] relative overflow-hidden cursor-pointer',
-        },
-        span({
-          class:
+      },
+      span({
+        class:
                 'icon icon-arrow-left cursor-pointer pointer-events-none w-[24px] h-[24px] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        }),
-      ),
-      div({
-        class: 'justify-start text-violet-600 text-base font-bold leading-snug',
-      }, 'Go Back to Requested Quotes'),
-    );
-const quoteDetailTitleDiv = div(
+      }),
+    ),
+    div({
+      class: 'justify-start text-violet-600 text-base font-bold leading-snug',
+    }, 'Go Back to Requested Quotes'),
+  );
+  const quoteDetailTitleDiv = div(
     {
       class: 'self-stretch flex flex-col justify-start items-start gap-4',
     },
@@ -70,13 +68,13 @@ const quoteDetailTitleDiv = div(
       class: 'justify-start font-bold text-black text-xl font-normal leading-7',
     }, 'Quote Request Item'),
   );
-   
+
   const quoteSummaryContainer = quoteSummary(requestedQuotesDetailsResponse);
   const quoteItemsContainer = quoteItems(requestedQuotesDetailsResponse);
   const requesterInformationContainer = requesterInformation(requestedQuotesDetailsResponse);
   quoteDetail.append(quoteSummaryContainer);
   quoteDetail.append(quoteItemTitle);
-   quoteDetail.append(quoteItemsContainer);
+  quoteDetail.append(quoteItemsContainer);
   quoteDetailsContainer.append(quoteDetail);
   addressDetail.append(requesterInformationContainer);
   quoteDetailsContainer.append(addressDetail);
@@ -85,8 +83,8 @@ const quoteDetailTitleDiv = div(
   quoteDetailsWrapper.append(quoteDetailsContainer);
   const dashboardSideBarContent = await dashboardSidebar();
   wrapper.append(dashboardSideBarContent, quoteDetailsWrapper);
-  block.innerHTML = "";
-  block.textContent = "";
+  block.innerHTML = '';
+  block.textContent = '';
   block.append(wrapper);
   decorateIcons(wrapper);
   removePreLoader();
