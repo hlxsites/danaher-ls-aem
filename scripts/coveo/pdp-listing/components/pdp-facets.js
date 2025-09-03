@@ -164,7 +164,7 @@ export function renderCreateFacet() {
     // Toggle dropdown and rotate chevron
     button.addEventListener("click", () => {
       const isHidden = menu.classList.toggle("hidden");
-      chevron.querySelector("svg").classList.toggle("rotate-180", !isHidden);
+      chevron?.querySelector("svg")?.classList?.toggle("rotate-180", !isHidden);
     });
 
     // Click outside closes dropdown and resets chevron
