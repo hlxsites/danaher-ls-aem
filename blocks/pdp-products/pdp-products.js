@@ -215,7 +215,6 @@ export default async function decorate(block) {
     localStorage.setItem('pdpListViewType', 'list');
     
     subscribeToEngineUpdates(resultsList, 'list');
-    // return;
   });
 
   // click action for grid view
@@ -246,7 +245,6 @@ export default async function decorate(block) {
     }
     localStorage.setItem('pdpListViewType', 'grid');
     subscribeToEngineUpdates(resultsList, 'grid');
-    // return;
   });
 
   await loadScript('/../../scripts/image-component.js');
@@ -258,7 +256,6 @@ export default async function decorate(block) {
       resultsList?.classList.remove('flex-col');
       resultsList?.classList.add('flex-wrap');
     }
-    console.log('viewtype: ', viewType);
     
     subscribeToEngineUpdates(resultsList, viewType);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
