@@ -9,7 +9,6 @@
     "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -56,6 +55,7 @@
       "testimonial",
       "tags-list",
       "related-articles",
+      "social-media",
       "mini-teasers"
     ]
   },
@@ -64,10 +64,6 @@
     "components": [
       "accordion-item"
     ]
-  },
-  {
-    "id": "article-info-new",
-    "components": []
   },
   {
     "id": "article-info",
