@@ -100,20 +100,12 @@
   right: 2.5rem
 }
 
-.dashboard-wrapper :is(.top-0) {
-  top: 0px
-}
-
 .dashboard-wrapper :is(.top-1\/2) {
   top: 50%
 }
 
 .dashboard-wrapper :is(.top-6) {
   top: 1.5rem
-}
-
-.dashboard-wrapper :is(.z-0) {
-  z-index: 0
 }
 
 .dashboard-wrapper :is(.z-10) {
@@ -192,32 +184,20 @@
   height: 60px !important
 }
 
-.dashboard-wrapper :is(.h-0) {
-  height: 0px
-}
-
-.dashboard-wrapper :is(.h-0\.5) {
-  height: 0.125rem
-}
-
 .dashboard-wrapper :is(.h-10) {
   height: 2.5rem
+}
+
+.dashboard-wrapper :is(.h-24) {
+  height: 6rem
 }
 
 .dashboard-wrapper :is(.h-3) {
   height: 0.75rem
 }
 
-.dashboard-wrapper :is(.h-5) {
-  height: 1.25rem
-}
-
 .dashboard-wrapper :is(.h-6) {
   height: 1.5rem
-}
-
-.dashboard-wrapper :is(.h-9) {
-  height: 2.25rem
 }
 
 .dashboard-wrapper :is(.h-\[100px\]) {
@@ -256,14 +236,6 @@
   height: 46px
 }
 
-.dashboard-wrapper :is(.h-px) {
-  height: 1px
-}
-
-.dashboard-wrapper :is(.h-24) {
-  height: 6rem
-}
-
 .dashboard-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -282,10 +254,6 @@
 
 .dashboard-wrapper :is(.w-3) {
   width: 0.75rem
-}
-
-.dashboard-wrapper :is(.w-5) {
-  width: 1.25rem
 }
 
 .dashboard-wrapper :is(.w-6) {
@@ -568,11 +536,6 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.dashboard-wrapper :is(.bg-gray-200) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
 .dashboard-wrapper :is(.bg-green-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(240 253 244 / var(--tw-bg-opacity))
@@ -586,10 +549,6 @@
 .dashboard-wrapper :is(.bg-sky-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(240 249 255 / var(--tw-bg-opacity))
-}
-
-.dashboard-wrapper :is(.bg-transparent) {
-  background-color: transparent
 }
 
 .dashboard-wrapper :is(.bg-white) {
@@ -714,10 +673,6 @@
   padding-bottom: 3px
 }
 
-.dashboard-wrapper :is(.pl-1) {
-  padding-left: 0.25rem
-}
-
 .dashboard-wrapper :is(.pl-2) {
   padding-left: 0.5rem
 }
@@ -734,10 +689,6 @@
   padding-left: 2.25rem
 }
 
-.dashboard-wrapper :is(.pr-1) {
-  padding-right: 0.25rem
-}
-
 .dashboard-wrapper :is(.pr-2) {
   padding-right: 0.5rem
 }
@@ -752,10 +703,6 @@
 
 .dashboard-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.dashboard-wrapper :is(.pt-4) {
-  padding-top: 1rem
 }
 
 .dashboard-wrapper :is(.pt-\[5px\]) {
@@ -840,10 +787,6 @@
   line-height: 1rem
 }
 
-.dashboard-wrapper :is(.leading-5) {
-  line-height: 1.25rem
-}
-
 .dashboard-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -876,11 +819,6 @@
 .dashboard-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.dashboard-wrapper :is(.text-gray-400) {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .dashboard-wrapper :is(.text-gray-500) {
@@ -1015,10 +953,6 @@
 }
 
 @media (min-width: 768px) {
-  .dashboard-wrapper :is(.md\:flex) {
-    display: flex
-  }
-
   .dashboard-wrapper :is(.md\:w-\[25\%\]) {
     width: 25%
   }
@@ -1050,20 +984,16 @@
   stroke: #027243
 }
 
+.dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
+  stroke: #AC2734
+}
+
 .dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {
   stroke: #000
 }
 
-.dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
-  stroke: currentColor
-}
-
 .dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
   stroke: #7523FF
-}
-
-.dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
-  stroke: #AC2734
 }
 
 .dashboard-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {

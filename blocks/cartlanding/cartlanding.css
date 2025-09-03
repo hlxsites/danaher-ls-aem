@@ -167,12 +167,12 @@
   margin: 0px
 }
 
-.cartlanding-wrapper :is(.m-1) {
-  margin: 0.25rem
+.cartlanding-wrapper :is(.m-\[5px\]) {
+  margin: 5px
 }
 
-.cartlanding-wrapper :is(.m-3) {
-  margin: 0.75rem
+.cartlanding-wrapper :is(.m-\[7px\]) {
+  margin: 7px
 }
 
 .cartlanding-wrapper :is(.mx-auto) {
@@ -304,6 +304,10 @@
   height: 4rem
 }
 
+.cartlanding-wrapper :is(.h-24) {
+  height: 6rem
+}
+
 .cartlanding-wrapper :is(.h-28) {
   height: 7rem
 }
@@ -376,10 +380,6 @@
   height: 1px
 }
 
-.cartlanding-wrapper :is(.h-24) {
-  height: 6rem
-}
-
 .cartlanding-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -444,6 +444,10 @@
   width: 8rem
 }
 
+.cartlanding-wrapper :is(.w-48) {
+  width: 12rem
+}
+
 .cartlanding-wrapper :is(.w-5) {
   width: 1.25rem
 }
@@ -476,6 +480,10 @@
   width: 11rem
 }
 
+.cartlanding-wrapper :is(.w-\[150px\]) {
+  width: 150px
+}
+
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -506,6 +514,10 @@
 
 .cartlanding-wrapper :is(.w-\[7rem\]) {
   width: 7rem
+}
+
+.cartlanding-wrapper :is(.w-\[80px\]) {
+  width: 80px
 }
 
 .cartlanding-wrapper :is(.w-full) {
@@ -1045,10 +1057,6 @@
   padding-left: 0.5rem
 }
 
-.cartlanding-wrapper :is(.pl-3) {
-  padding-left: 0.75rem
-}
-
 .cartlanding-wrapper :is(.pl-4) {
   padding-left: 1rem
 }
@@ -1059,6 +1067,10 @@
 
 .cartlanding-wrapper :is(.pl-9) {
   padding-left: 2.25rem
+}
+
+.cartlanding-wrapper :is(.pl-\[13px\]) {
+  padding-left: 13px
 }
 
 .cartlanding-wrapper :is(.pr-1) {
@@ -1378,7 +1390,7 @@
 }
 
 @media (min-width: 640px) {
-  .cartlanding-wrapper :is(.sm\:m-0) {
+  .cartlanding-wrapper :is(.sm\:m-\[0px\]) {
     margin: 0px
   }
 
@@ -1418,7 +1430,7 @@
     padding: 1.5rem
   }
 
-  .cartlanding-wrapper :is(.sm\:pl-0) {
+  .cartlanding-wrapper :is(.sm\:pl-\[0px\]) {
     padding-left: 0px
   }
 }
@@ -1472,10 +1484,6 @@
     align-items: center
   }
 
-  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
-    white-space: nowrap
-  }
-
   .cartlanding-wrapper :is(.md\:pt-0) {
     padding-top: 0px
   }
@@ -1527,6 +1535,10 @@
   stroke: #027243
 }
 
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
+  stroke: #AC2734
+}
+
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
 }
@@ -1547,18 +1559,10 @@
   stroke: #fff
 }
 
-.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
-  stroke: #AC2734
-}
-
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
 
 .cartlanding-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
-  stroke: #4000A5
-}
-
-.cartlanding-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
 }

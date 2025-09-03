@@ -3297,6 +3297,14 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin: 0.75rem;
 }
 
+.m-\[5px\] {
+  margin: 5px;
+}
+
+.m-\[7px\] {
+  margin: 7px;
+}
+
 .\!mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -3567,6 +3575,18 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
+}
+
+.w-48 {
+  width: 12rem;
+}
+
+.w-\[150px\] {
+  width: 150px;
+}
+
+.w-\[80px\] {
+  width: 80px;
 }
 
 .\!max-w-7xl {
@@ -4106,6 +4126,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding-top: 1.5rem;
 }
 
+.pl-\[13px\] {
+  padding-left: 13px;
+}
+
 .text-left {
   text-align: left;
 }
@@ -4566,6 +4590,10 @@ main .section.top-border {
     margin: 0px;
   }
 
+  .sm\:m-\[0px\] {
+    margin: 0px;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -4601,6 +4629,10 @@ main .section.top-border {
 
   .sm\:pt-8 {
     padding-top: 2rem;
+  }
+
+  .sm\:pl-\[0px\] {
+    padding-left: 0px;
   }
 
   .sm\:text-5xl {

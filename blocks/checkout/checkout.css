@@ -136,12 +136,12 @@
   margin: 0px
 }
 
-.checkout :is(.m-1) {
-  margin: 0.25rem
+.checkout :is(.m-\[5px\]) {
+  margin: 5px
 }
 
-.checkout :is(.m-3) {
-  margin: 0.75rem
+.checkout :is(.m-\[7px\]) {
+  margin: 7px
 }
 
 .checkout :is(.mx-auto) {
@@ -251,6 +251,10 @@
   height: 4rem
 }
 
+.checkout :is(.h-24) {
+  height: 6rem
+}
+
 .checkout :is(.h-28) {
   height: 7rem
 }
@@ -286,10 +290,6 @@
 .checkout :is(.h-max) {
   height: -moz-max-content;
   height: max-content
-}
-
-.checkout :is(.h-24) {
-  height: 6rem
 }
 
 .checkout :is(.max-h-48) {
@@ -352,6 +352,10 @@
   width: 10rem
 }
 
+.checkout :is(.w-48) {
+  width: 12rem
+}
+
 .checkout :is(.w-6) {
   width: 1.5rem
 }
@@ -372,6 +376,10 @@
   width: 11rem
 }
 
+.checkout :is(.w-\[150px\]) {
+  width: 150px
+}
+
 .checkout :is(.w-\[3\.5rem\]) {
   width: 3.5rem
 }
@@ -386,6 +394,10 @@
 
 .checkout :is(.w-\[7rem\]) {
   width: 7rem
+}
+
+.checkout :is(.w-\[80px\]) {
+  width: 80px
 }
 
 .checkout :is(.w-full) {
@@ -809,10 +821,6 @@
   padding-left: 0.5rem
 }
 
-.checkout :is(.pl-3) {
-  padding-left: 0.75rem
-}
-
 .checkout :is(.pl-4) {
   padding-left: 1rem
 }
@@ -823,6 +831,10 @@
 
 .checkout :is(.pl-9) {
   padding-left: 2.25rem
+}
+
+.checkout :is(.pl-\[13px\]) {
+  padding-left: 13px
 }
 
 .checkout :is(.pr-2) {
@@ -1090,7 +1102,7 @@
 }
 
 @media (min-width: 640px) {
-  .checkout :is(.sm\:m-0) {
+  .checkout :is(.sm\:m-\[0px\]) {
     margin: 0px
   }
 
@@ -1118,7 +1130,7 @@
     padding: 1.5rem
   }
 
-  .checkout :is(.sm\:pl-0) {
+  .checkout :is(.sm\:pl-\[0px\]) {
     padding-left: 0px
   }
 }
@@ -1165,12 +1177,12 @@
   stroke: #027243
 }
 
-.checkout :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
-  stroke: #7523FF
-}
-
 .checkout :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
   stroke: #AC2734
+}
+
+.checkout :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
 }
 
 .checkout :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
