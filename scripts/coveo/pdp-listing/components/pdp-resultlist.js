@@ -1,4 +1,5 @@
 import { decorateIcons } from '../../../lib-franklin.js';
+import { decorateModals } from '../../../scripts.js';
 
 export async function buildProductTile(result, getCommerceBase, domHelpers, viewType) {
   const {
@@ -115,22 +116,25 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
   const minOrderQuantity = product?.minOrderQuantity ?? 1;
   const availability = product?.availability ? 'Available' : 'Check Back Soon';
 
-  const link = a(
-    {
-      href: result.clickUri,
-      class: 'mt-auto text-danaherpurple-500 text-base font-bold flex items-center gap-1',
-    },
-    // placeholder text only, will be replaced by innerHTML below
-    'View details',
-  );
-
-  // Now set the innerHTML to text + inline SVG
-  link.innerHTML = `
-    View details
-    <img src="/icons/arrow-narrow-right.svg" alt="arrow icon" width="20" height="21" />
-  `;
   let ProductCard = '';
   if (viewType === 'list') {
+    const viewDetailsButton = div(
+      { class: 'self-stretch p-3 flex justify-start items-center' },
+      a(
+        {
+
+          href: result.clickUri,
+          target: result.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+          class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
+        },
+        'View Details',
+        span({
+          class:
+            'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
+        }),
+      ),
+    );
+    decorateIcons(viewDetailsButton);
     ProductCard = div(
       { class: 'flex flex-row bg-white border outline-gray-300 gap-7 flex-wrap' },
 
@@ -152,7 +156,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           { class: 'text-gray-700 text-base font-extralight' },
           result.raw.description || '',
         ),
-        link,
+        viewDetailsButton,
       ),
 
       // Pricing & Action Section
@@ -212,7 +216,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           button(
             {
               class:
-                'px-8 py-2 border border-danaherpurple-500 text-danaherpurple-500 text-base font-normal bg-white rounded-full text-sm hover:bg-purple-500',
+                'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
             },
             'Quote',
           ),
@@ -223,6 +227,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
   if (viewType === 'grid') {
     ProductCard = renderProductGridCard(result);
   }
+  decorateModals(ProductCard);
   return ProductCard;
 }
 
