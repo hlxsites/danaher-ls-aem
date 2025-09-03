@@ -3456,6 +3456,18 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 12rem;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
@@ -3521,12 +3533,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 1rem;
 }
 
-.w-64 {
-  width: 16rem;
+.w-6 {
+  width: 1.5rem;
 }
 
-.w-8 {
-  width: 2rem;
+.w-64 {
+  width: 16rem;
 }
 
 .w-8\/12 {
@@ -3557,10 +3569,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
-.w-6 {
-  width: 1.5rem;
-}
-
 .\!max-w-7xl {
   max-width: 80rem !important;
 }
@@ -3573,8 +3581,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   max-width: 80rem;
 }
 
-.max-w-\[48px\] {
-  max-width: 48px;
+.max-w-\[20px\] {
+  max-width: 20px;
 }
 
 .max-w-md {
@@ -3583,18 +3591,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.max-w-\[16px\] {
-  max-width: 16px;
-}
-
-.max-w-\[12px\] {
-  max-width: 12px;
-}
-
-.max-w-\[20px\] {
-  max-width: 20px;
 }
 
 .flex-1 {
@@ -3815,8 +3811,34 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-width: 2px;
 }
 
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+
 .border-l {
   border-left-width: 1px;
+}
+
+.border-r {
+  border-right-width: 1px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
+.border-solid {
+  border-style: solid;
+}
+
+.border-danaherblue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 74 89 / var(--tw-border-opacity));
+}
+
+.border-danahergray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .border-danaherpurple-500 {
@@ -4723,16 +4745,12 @@ main .section.top-border {
   display: none;
 }
 
-.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use {
-  stroke: #7523FF;
-}
-
 .\[\&_svg\>use\]\:stroke-\[\#027243\] svg>use {
   stroke: #027243;
 }
 
-.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use {
-  stroke: #AC2734;
+.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use {
+  stroke: #7523FF;
 }
 
 .\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use {

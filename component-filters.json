@@ -36,6 +36,9 @@
       "checkout",
       "order-submit",
       "order-status",
+      "requested-quote",
+      "order-details",
+      "quote-details",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -201,6 +204,24 @@
     ]
   },
   {
+    "id": "order-details",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "order-status",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "order-submit",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "pdp-page-tabs",
     "components": [
       "pdp-tabs-item"
@@ -225,12 +246,24 @@
     ]
   },
   {
+    "id": "quote-details",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "recent-articles",
     "components": []
   },
   {
     "id": "related-articles",
     "components": []
+  },
+  {
+    "id": "requested-quote",
+    "components": [
+      ""
+    ]
   },
   {
     "id": "top-selling",

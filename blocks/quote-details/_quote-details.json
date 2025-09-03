@@ -1,0 +1,28 @@
+{
+    "definitions": [
+        {    
+          "title": "Quote Details",
+          "id": "quote-details",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Quote Details"
+                }
+              }
+            }
+          }
+         }
+    ],
+    "models": [],
+    "filters": [
+      {
+      "id": "quote-details",
+      "components": [
+        ""
+      ]
+    }
+    ]
+  }
+   

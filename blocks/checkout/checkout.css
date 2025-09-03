@@ -251,10 +251,6 @@
   height: 4rem
 }
 
-.checkout :is(.h-24) {
-  height: 6rem
-}
-
 .checkout :is(.h-28) {
   height: 7rem
 }
@@ -352,12 +348,12 @@
   width: 10rem
 }
 
-.checkout :is(.w-64) {
-  width: 16rem
+.checkout :is(.w-6) {
+  width: 1.5rem
 }
 
-.checkout :is(.w-8) {
-  width: 2rem
+.checkout :is(.w-64) {
+  width: 16rem
 }
 
 .checkout :is(.w-80) {
@@ -392,20 +388,12 @@
   width: 100%
 }
 
-.checkout :is(.w-4) {
-  width: 1rem
-}
-
-.checkout :is(.w-6) {
-  width: 1.5rem
-}
-
 .checkout :is(.max-w-2xl) {
   max-width: 42rem
 }
 
-.checkout :is(.max-w-\[48px\]) {
-  max-width: 48px
+.checkout :is(.max-w-\[20px\]) {
+  max-width: 20px
 }
 
 .checkout :is(.max-w-\[94\%\]) {
@@ -418,18 +406,6 @@
 
 .checkout :is(.max-w-xs) {
   max-width: 20rem
-}
-
-.checkout :is(.max-w-\[16px\]) {
-  max-width: 16px
-}
-
-.checkout :is(.max-w-\[12px\]) {
-  max-width: 12px
-}
-
-.checkout :is(.max-w-\[20px\]) {
-  max-width: 20px
 }
 
 .checkout :is(.flex-1) {
@@ -748,10 +724,6 @@
 
 .checkout :is(.p-\[0px\]) {
   padding: 0px
-}
-
-.checkout :is(.p-1) {
-  padding: 0.25rem
 }
 
 .checkout :is(.px-2) {
@@ -1185,16 +1157,12 @@
   width: 0.25rem
 }
 
-.checkout :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
-  stroke: #7523FF
-}
-
 .checkout :is(.\[\&_svg\>use\]\:stroke-\[\#027243\] svg>use) {
   stroke: #027243
 }
 
-.checkout :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
-  stroke: #AC2734
+.checkout :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
 }
 
 .checkout :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {

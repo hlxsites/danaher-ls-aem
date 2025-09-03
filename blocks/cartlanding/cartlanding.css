@@ -123,10 +123,6 @@
   left: 60px
 }
 
-.cartlanding-wrapper :is(.left-\[63px\]) {
-  left: 63px
-}
-
 .cartlanding-wrapper :is(.right-0) {
   right: 0px
 }
@@ -145,10 +141,6 @@
 
 .cartlanding-wrapper :is(.top-6) {
   top: 1.5rem
-}
-
-.cartlanding-wrapper :is(.top-\[57px\]) {
-  top: 57px
 }
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
@@ -312,10 +304,6 @@
   height: 4rem
 }
 
-.cartlanding-wrapper :is(.h-24) {
-  height: 6rem
-}
-
 .cartlanding-wrapper :is(.h-28) {
   height: 7rem
 }
@@ -384,10 +372,6 @@
   height: auto
 }
 
-.cartlanding-wrapper :is(.h-full) {
-  height: 100%
-}
-
 .cartlanding-wrapper :is(.h-px) {
   height: 1px
 }
@@ -418,10 +402,6 @@
 
 .cartlanding-wrapper :is(.w-10) {
   width: 2.5rem
-}
-
-.cartlanding-wrapper :is(.w-11) {
-  width: 2.75rem
 }
 
 .cartlanding-wrapper :is(.w-14) {
@@ -456,12 +436,16 @@
   width: 75%
 }
 
-.cartlanding-wrapper :is(.w-48) {
-  width: 12rem
+.cartlanding-wrapper :is(.w-32) {
+  width: 8rem
 }
 
 .cartlanding-wrapper :is(.w-5) {
   width: 1.25rem
+}
+
+.cartlanding-wrapper :is(.w-6) {
+  width: 1.5rem
 }
 
 .cartlanding-wrapper :is(.w-64) {
@@ -486,10 +470,6 @@
 
 .cartlanding-wrapper :is(.w-\[11rem\]) {
   width: 11rem
-}
-
-.cartlanding-wrapper :is(.w-\[1280px\]) {
-  width: 1280px
 }
 
 .cartlanding-wrapper :is(.w-\[200px\]) {
@@ -528,14 +508,6 @@
   width: 100%
 }
 
-.cartlanding-wrapper :is(.w-4) {
-  width: 1rem
-}
-
-.cartlanding-wrapper :is(.w-6) {
-  width: 1.5rem
-}
-
 .cartlanding-wrapper :is(.max-w-2xl) {
   max-width: 42rem
 }
@@ -548,8 +520,8 @@
   max-width: 150px
 }
 
-.cartlanding-wrapper :is(.max-w-\[48px\]) {
-  max-width: 48px
+.cartlanding-wrapper :is(.max-w-\[20px\]) {
+  max-width: 20px
 }
 
 .cartlanding-wrapper :is(.max-w-\[70\%\]) {
@@ -558,18 +530,6 @@
 
 .cartlanding-wrapper :is(.max-w-md) {
   max-width: 28rem
-}
-
-.cartlanding-wrapper :is(.max-w-\[16px\]) {
-  max-width: 16px
-}
-
-.cartlanding-wrapper :is(.max-w-\[12px\]) {
-  max-width: 12px
-}
-
-.cartlanding-wrapper :is(.max-w-\[20px\]) {
-  max-width: 20px
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -582,6 +542,10 @@
 
 .cartlanding-wrapper :is(.-translate-y-full) {
   --tw-translate-y: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.cartlanding-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
@@ -965,10 +929,6 @@
   padding: 0px
 }
 
-.cartlanding-wrapper :is(.p-1) {
-  padding: 0.25rem
-}
-
 .cartlanding-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
@@ -1230,6 +1190,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
@@ -1315,6 +1280,10 @@
   outline-color: #7523FF
 }
 
+.cartlanding-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .cartlanding-wrapper :is(.outline-gray-200) {
   outline-color: #e5e7eb
 }
@@ -1342,12 +1311,18 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.cartlanding-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+.cartlanding-wrapper :is(.transition-transform) {
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
+}
+
+.cartlanding-wrapper :is(.duration-1000) {
+  transition-duration: 1000ms
+}
+
+.cartlanding-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .hover\:bg-danaherpurple-50:hover {
@@ -1493,6 +1468,10 @@
     align-items: center
   }
 
+  .cartlanding-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
+  }
+
   .cartlanding-wrapper :is(.md\:pt-0) {
     padding-top: 0px
   }
@@ -1523,6 +1502,11 @@
     justify-content: normal
   }
 
+  .cartlanding-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+
   .cartlanding-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
@@ -1533,10 +1517,10 @@
   .cartlanding-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+}
 
-  .cartlanding-wrapper :is(.dhlsBp\:p-0) {
-    padding: 0px
-  }
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#027243\] svg>use) {
+  stroke: #027243
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
@@ -1559,14 +1543,14 @@
   stroke: #fff
 }
 
-.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#027243\] svg>use) {
-  stroke: #027243
-}
-
-.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
-  stroke: #AC2734
-}
-
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+}
+
+.cartlanding-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
 }

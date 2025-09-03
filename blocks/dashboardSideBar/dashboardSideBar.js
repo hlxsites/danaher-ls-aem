@@ -15,13 +15,13 @@ export default async function dashboardSidebar() {
   document.querySelector('main').style = 'background: #f4f4f4';
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
-    { name: 'My Profile', icon: 'User' },
-    { name: 'My address', icon: 'Location-marker' },
-    { name: 'Payment Methods', icon: 'Currency-dollar' },
-    { name: 'Dashboard', icon: 'Home' },
-    { name: 'Order status', icon: 'Cube' },
-    { name: 'Requested Quotes', icon: 'chat' },
-    { name: 'Approved Quotes', icon: 'Document-duplicate' },
+    { name: 'My Profile', itemClicked: 'My profile', icon: 'User' },
+    { name: 'My Address', itemClicked: 'My address', icon: 'Location-marker' },
+    { name: 'Payment Methods', itemClicked: 'Payment methods',  icon: 'Currency-dollar' },
+    { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
+    { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
+    { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
+    { name: 'Approved Quotes', itemClicked: 'Approved quotes', icon: 'Document-duplicate' },
     // { name: 'Invoices', icon: 'document-text' },
     // { name: 'Communities', icon: 'Users' },
     // { name: 'Personalized Catalog', icon: 'shopping-cart' },
@@ -30,7 +30,7 @@ export default async function dashboardSidebar() {
     // { name: 'Manage Equipment', icon: 'Server' },
     // { name: 'Report Product Complaint', icon: 'Emoji-sad' }
   ];
-  const sidePanelDiv = (name, icon) => {
+  const sidePanelDiv = (name, itemClicked, icon) => {
     const url = name.replace(/\s+/g, '').toLowerCase();
     const innerDiv = div(
       {
@@ -40,17 +40,17 @@ export default async function dashboardSidebar() {
       },
       div(
         {
-          class: 'sidePanel-content flex justify-start items-center px-6 py-3 gap-3',
+          class: 'sidePanel-content flex justify-start items-center gap-3',
 
         },
         span({
-          class: `icon icon-${icon} [&_svg>use]:stroke-black !w-[24px] !h-[24px]`,
+          class: `icon icon-${icon} [&_svg>use]:stroke-black !w-[60px] !h-[60px] p-[18px]`,
         }),
         a(
           {
             href: `/us/en/e-buy/${url}`,
             class: 'justify-start text-base font-medium leading-snug',
-            id: name.replace(/\s+/g, ''),
+            id: itemClicked.replace(/\s+/g, ''),
           },
           name,
         ),
@@ -143,12 +143,16 @@ export default async function dashboardSidebar() {
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',
   });
   sidebar.append(listDiv);
-  sidepanelList.map((item) => listDiv.append(sidePanelDiv(item.name, item.icon)));
+  sidepanelList.map((item) => listDiv.append(sidePanelDiv(item.name, item.itemClicked, item.icon)));
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  console.log("targetedPage", targetedPage)
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
+  }
+  else if(targetedPage === "Requestquotedetails"){
+    targetedPage = 'Requestedquotes';
   }
   //   listDiv.addEventListener('click', (event) => {
   const allItemsInDiv = listDiv.querySelectorAll('.sidePanel-content');

@@ -88,6 +88,7 @@ export const productData = async (productArg) => {
         // Update sessionStorage
         sessionStorage.setItem('productDetailObject', JSON.stringify(array));
 
+        // console.log("Arraayayyy: ", array);
         return {
           data: product,
           status: 'success',
@@ -100,6 +101,7 @@ export const productData = async (productArg) => {
     }
     return { status: 'error', data: response.data };
   } catch (error) {
+    // console.log('error', error);
     return 'error';
   }
 };
@@ -132,6 +134,7 @@ export const getAllItemsFromBasket = async () => {
     }
     return { status: 'error', data: response.data };
   } catch (error) {
+    // console.log('error', error);
     return 'error';
   }
 };
@@ -397,6 +400,7 @@ export const updateCartItemQuantity = async (item) => {
       }
       return { status: 'error', data: response.data };
     } catch (error) {
+      // console.log('error', error);
       return 'error';
     }
   }

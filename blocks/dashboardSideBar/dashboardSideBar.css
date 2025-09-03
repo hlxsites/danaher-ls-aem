@@ -34,8 +34,8 @@
   display: inline-flex
 }
 
-.dashboardSideBar-wrapper :is(.\!h-\[24px\]) {
-  height: 24px !important
+.dashboardSideBar-wrapper :is(.\!h-\[60px\]) {
+  height: 60px !important
 }
 
 .dashboardSideBar-wrapper :is(.h-\[100px\]) {
@@ -50,8 +50,8 @@
   height: 2px
 }
 
-.dashboardSideBar-wrapper :is(.\!w-\[24px\]) {
-  width: 24px !important
+.dashboardSideBar-wrapper :is(.\!w-\[60px\]) {
+  width: 60px !important
 }
 
 .dashboardSideBar-wrapper :is(.w-\[100px\]) {
@@ -178,14 +178,13 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dashboardSideBar-wrapper :is(.p-\[18px\]) {
+  padding: 18px
+}
+
 .dashboardSideBar-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
-}
-
-.dashboardSideBar-wrapper :is(.py-3) {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem
 }
 
 .dashboardSideBar-wrapper :is(.\!text-4xl) {

@@ -80,10 +80,6 @@
   display: none
 }
 
-.order-status-wrapper :is(.\!h-\[24px\]) {
-  height: 24px !important
-}
-
 .order-status-wrapper :is(.\!h-\[60px\]) {
   height: 60px !important
 }
@@ -118,10 +114,6 @@
 
 .order-status-wrapper :is(.max-h-\[642px\]) {
   max-height: 642px
-}
-
-.order-status-wrapper :is(.\!w-\[24px\]) {
-  width: 24px !important
 }
 
 .order-status-wrapper :is(.\!w-\[60px\]) {
