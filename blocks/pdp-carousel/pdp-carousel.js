@@ -1,8 +1,151 @@
-import { div } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
+
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import renderGridCard from './grid-data.js';
+import { getProductRecommendationsResponse } from '../../scripts/commerce.js';
+
+function getCardsPerPageGrid() {
+  if (window.innerWidth < 640) return 1;
+  if (window.innerWidth < 1024) return 2;
+  return 4;
+}
 
 export default async function decorate(block) {
-  block.id = 'products-tab';
-  block.append(div({ class: 'block-pdp-carousel' }));
-  block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
-  block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
+  block.parentElement.parentElement.style.padding = '0';
+  block.parentElement.parentElement.style.margin = '0';
+  block.style.display = 'none';
+
+  const wrapper = block.closest('.pdp-carousel-wrapper');
+  if (wrapper) wrapper.classList.add('w-full', 'md:px-10');
+
+  const [heading] = block.children;
+  const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
+
+  let cardsPerPageGrid = getCardsPerPageGrid();
+  let scrollIndex = 0;
+
+  const blockWrapper = div({ class: 'pdp-rendered w-full dhls-container px-5 lg:px-10 dhlsBp:p-0 flex flex-col gap-4' });
+  const carouselContainer = div({ class: 'carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center' });
+  const carouselHead = div({ class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 pb-6' });
+
+  const leftGroup = div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' });
+  leftGroup.append(div({ class: 'text-black text-2xl font-medium leading-[2.5rem]' }, headingText ?? ''));
+
+  const arrows = div({ class: 'w-full md:w-72 inline-flex justify-end items-center gap-6' });
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
+
+  const prevDiv = div(
+    { class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer' },
+    span({ class: 'icon icon-Arrow-circle-left cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800' }),
+  );
+  const nextDiv = div(
+    { class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer' },
+    span({ class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }),
+  );
+
+  arrowGroup.append(prevDiv, nextDiv);
+  decorateIcons(arrowGroup);
+
+  arrows.append(arrowGroup);
+  carouselHead.append(leftGroup, arrows);
+
+  const track = div({
+    id: 'carouselTrack',
+    class: 'flex gap-5 overflow-hidden py-2',
+  });
+
+  const carouselCards = div({ class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full duration-1000 ease-in-out transition-transform transform ' }, track);
+
+  const paginationContainer = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full', style: 'display: none;' });
+
+  // Coveo call to get the response
+  // const response = await getProductsOnSolutionsResponse();
+  // Store up to 12 products in localStorage
+  //const productsList = (apiCall?.results || []).slice(0, 12);
+  const recommendationsResponse = await getProductRecommendationsResponse();
+  //console.log('Product Recommendations Response:', recommendationsResponse);
+  //localStorage.setItem('pdp-carousel-products', JSON.stringify(productsList));
+
+  // Retrieve products from localStorage
+  if(recommendationsResponse === undefined)
+    return;
+  const products = JSON.parse(recommendationsResponse?.results) || [];
+
+  products.forEach((product) => {
+    const mappedProduct = {
+      title: product.title,
+      url: product.clickUri,
+      image: product.raw?.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+      description: product.raw?.description || '',
+    };
+
+    track.append(renderGridCard(mappedProduct));
+  });
+
+  function updateArrows() {
+    const maxIndex = Math.ceil(products.length / cardsPerPageGrid) - 1;
+    const prevEnabled = scrollIndex > 0;
+    const nextEnabled = scrollIndex < maxIndex;
+
+    if (prevEnabled) {
+      prevDiv.querySelector('span')?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+      prevDiv.querySelector('span')?.classList.remove('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+    } else {
+      prevDiv.querySelector('span')?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+      prevDiv.querySelector('span')?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+    }
+
+    if (nextEnabled) {
+      nextDiv.querySelector('span')?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+      nextDiv.querySelector('span')?.classList.remove('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+    } else {
+      nextDiv.querySelector('span')?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+      nextDiv.querySelector('span')?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+    }
+  }
+
+  function scrollCarousel(direction) {
+    const card = track?.firstElementChild;
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth;
+    const gap = 20;
+    const scrollAmount = (cardWidth + gap) * cardsPerPageGrid;
+
+    scrollIndex += direction;
+    const maxIndex = Math.ceil(products.length / cardsPerPageGrid) - 1;
+    scrollIndex = Math.max(0, Math.min(scrollIndex, maxIndex));
+
+    track.scrollTo({
+      left: scrollIndex * scrollAmount,
+      behavior: 'smooth',
+    });
+
+    updateArrows();
+  }
+
+  // Event listeners
+  prevDiv.addEventListener('click', () => scrollCarousel(-1));
+  nextDiv.addEventListener('click', () => scrollCarousel(1));
+
+  window.addEventListener('resize', () => {
+    const newCardsPerPageGrid = getCardsPerPageGrid();
+    if (newCardsPerPageGrid !== cardsPerPageGrid) {
+      cardsPerPageGrid = newCardsPerPageGrid;
+      scrollIndex = 0;
+      scrollCarousel(0);
+    }
+  });
+
+  if (products?.length > 0) {
+    carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+  }
+
+  blockWrapper.append(carouselContainer);
+
+  block.textContent = '';
+  block.style = '';
+  block.append(blockWrapper);
+
+  scrollCarousel(0);
 }
