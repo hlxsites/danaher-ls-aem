@@ -1870,8 +1870,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "goParentBack",
-        "label": "Go Parent Back",
+        "name": "articleType",
+        "label": "Article Type",
         "value": ""
       }
     ]
