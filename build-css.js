@@ -415,6 +415,13 @@ const fileMappings = [
     output: './blocks/requested-quote/requested-quote.css',
     wrapper: 'requested-quote-wrapper',
   },
+    {
+    content: ['./blocks/approved-quote/approved-quote.js', 
+              './blocks/dashboardSideBar/dashboardSideBar.js',
+            ],
+    output: './blocks/approved-quote/approved-quote.css',
+    wrapper: 'approved-quote-wrapper',
+  },
   {
     content: ['./blocks/order-details/order-details.js', 
               './blocks/dashboardSideBar/dashboardSideBar.js',
@@ -425,6 +432,7 @@ const fileMappings = [
     output: './blocks/order-details/order-details.css',
     wrapper: 'order-details-wrapper',
   },
+
   {
     content: ['./blocks/quote-details/quote-details.js', 
               './blocks/quote-details/quotesummary.js',
