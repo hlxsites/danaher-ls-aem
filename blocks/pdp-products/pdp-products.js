@@ -158,26 +158,26 @@ export default async function decorate(block) {
 
   const listBtn = div(
     {
-      class: `px-3 py-2  rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] ${localStorage.getItem('pdpListViewType') === 'list' || !localStorage.getItem('pdpListViewType') ? 'bg-danaherpurple-500' : 'bg-white'} outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
+      class: `px-3 py-2  rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] ${((localStorage.getItem('pdpListViewType') === 'list') || !localStorage.getItem('pdpListViewType')) ? 'bg-danaherpurple-500' : 'bg-white'} outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
       span({
         class:
-          `icon icon-view-list w-6 h-6 fill-current  ${localStorage.getItem('pdpListViewType') === 'list' || !localStorage.getItem('pdpListViewType')  ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
+          `icon icon-view-list w-6 h-6 fill-current  ${(localStorage.getItem('pdpListViewType') === 'list') || !localStorage.getItem('pdpListViewType') ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
       }),
     ),
   );
 
   const gridBtn = div(
     {
-      class: `px-3 py-2  ${localStorage.getItem('pdpListViewType') === 'grid'  || !localStorage.getItem('pdpListViewType') ? 'bg-danaherpurple-500' : 'bg-white'}  rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
+      class: `px-3 py-2  ${((localStorage.getItem('pdpListViewType') === 'grid') && localStorage.getItem('pdpListViewType')) ? 'bg-danaherpurple-500' : 'bg-white'}  rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
       span({
         class:
-          `icon icon-view-grid w-6 h-6 fill-current ${localStorage.getItem('pdpListViewType') === 'grid'  || !localStorage.getItem('pdpListViewType') ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
+          `icon icon-view-grid w-6 h-6 fill-current ${(localStorage.getItem('pdpListViewType') === 'grid') && localStorage.getItem('pdpListViewType') ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
       }),
     ),
   );
