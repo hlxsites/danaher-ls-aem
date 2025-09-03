@@ -24,11 +24,6 @@
   position: relative
 }
 
-.quote-details-wrapper :is(.my-4) {
-  margin-top: 1rem;
-  margin-bottom: 1rem
-}
-
 .quote-details-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -53,6 +48,10 @@
   height: 60px !important
 }
 
+.quote-details-wrapper :is(.h-10) {
+  height: 2.5rem
+}
+
 .quote-details-wrapper :is(.h-\[100px\]) {
   height: 100px
 }
@@ -69,32 +68,8 @@
   height: 2px
 }
 
-.quote-details-wrapper :is(.h-10) {
-  height: 2.5rem
-}
-
 .quote-details-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
-}
-
-.quote-details-wrapper :is(.w-\[100px\]) {
-  width: 100px
-}
-
-.quote-details-wrapper :is(.w-\[24px\]) {
-  width: 24px
-}
-
-.quote-details-wrapper :is(.w-\[30\%\]) {
-  width: 30%
-}
-
-.quote-details-wrapper :is(.w-\[70\%\]) {
-  width: 70%
-}
-
-.quote-details-wrapper :is(.w-full) {
-  width: 100%
 }
 
 .quote-details-wrapper :is(.w-16) {
@@ -125,12 +100,32 @@
   width: 20rem
 }
 
+.quote-details-wrapper :is(.w-\[100px\]) {
+  width: 100px
+}
+
 .quote-details-wrapper :is(.w-\[150px\]) {
   width: 150px
 }
 
+.quote-details-wrapper :is(.w-\[24px\]) {
+  width: 24px
+}
+
+.quote-details-wrapper :is(.w-\[30\%\]) {
+  width: 30%
+}
+
 .quote-details-wrapper :is(.w-\[325px\]) {
   width: 325px
+}
+
+.quote-details-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
+.quote-details-wrapper :is(.w-full) {
+  width: 100%
 }
 
 .quote-details-wrapper :is(.flex-1) {
@@ -177,12 +172,20 @@
   gap: 0.5rem
 }
 
+.quote-details-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
 .quote-details-wrapper :is(.gap-28) {
   gap: 7rem
 }
 
 .quote-details-wrapper :is(.gap-3) {
   gap: 0.75rem
+}
+
+.quote-details-wrapper :is(.gap-3\.5) {
+  gap: 0.875rem
 }
 
 .quote-details-wrapper :is(.gap-4) {
@@ -195,14 +198,6 @@
 
 .quote-details-wrapper :is(.gap-6) {
   gap: 1.5rem
-}
-
-.quote-details-wrapper :is(.gap-2\.5) {
-  gap: 0.625rem
-}
-
-.quote-details-wrapper :is(.gap-3\.5) {
-  gap: 0.875rem
 }
 
 .quote-details-wrapper :is(.self-stretch) {
@@ -229,6 +224,10 @@
   border-bottom-width: 1px
 }
 
+.quote-details-wrapper :is(.border-b-2) {
+  border-bottom-width: 2px
+}
+
 .quote-details-wrapper :is(.border-l) {
   border-left-width: 1px
 }
@@ -245,24 +244,12 @@
   border-top-width: 1px
 }
 
-.quote-details-wrapper :is(.border-t-2) {
-  border-top-width: 2px
-}
-
-.quote-details-wrapper :is(.border-b-2) {
-  border-bottom-width: 2px
-}
-
 .quote-details-wrapper :is(.border-solid) {
   border-style: solid
 }
 
 .quote-details-wrapper :is(.border-dashed) {
   border-style: dashed
-}
-
-.quote-details-wrapper :is(.border-dotted) {
-  border-style: dotted
 }
 
 .quote-details-wrapper :is(.border-danaherpurple-500) {
@@ -300,24 +287,14 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.quote-details-wrapper :is(.bg-green-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(240 253 244 / var(--tw-bg-opacity))
-}
-
-.quote-details-wrapper :is(.bg-violet-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
-}
-
-.quote-details-wrapper :is(.bg-white) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
 .quote-details-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.quote-details-wrapper :is(.bg-green-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 244 / var(--tw-bg-opacity))
 }
 
 .quote-details-wrapper :is(.bg-red-100) {
@@ -330,16 +307,18 @@
   background-color: rgb(240 249 255 / var(--tw-bg-opacity))
 }
 
+.quote-details-wrapper :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+}
+
+.quote-details-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 .quote-details-wrapper :is(.fill-current) {
   fill: currentColor
-}
-
-.quote-details-wrapper :is(.p-6) {
-  padding: 1.5rem
-}
-
-.quote-details-wrapper :is(.p-\[18px\]) {
-  padding: 18px
 }
 
 .quote-details-wrapper :is(.p-2) {
@@ -350,8 +329,12 @@
   padding: 0.625rem
 }
 
-.quote-details-wrapper :is(.p-3) {
-  padding: 0.75rem
+.quote-details-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
+.quote-details-wrapper :is(.p-\[18px\]) {
+  padding: 18px
 }
 
 .quote-details-wrapper :is(.p-\[20px\]) {
@@ -368,6 +351,11 @@
   padding-right: 0.625rem
 }
 
+.quote-details-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .quote-details-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -376,11 +364,6 @@
 .quote-details-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
-}
-
-.quote-details-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .quote-details-wrapper :is(.py-3) {
@@ -400,10 +383,6 @@
   text-align: right
 }
 
-.quote-details-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
 .quote-details-wrapper :is(.\!text-4xl) {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important
@@ -412,6 +391,18 @@
 .quote-details-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.quote-details-wrapper :is(.text-\[14px\]) {
+  font-size: 14px
+}
+
+.quote-details-wrapper :is(.text-\[16px\]) {
+  font-size: 16px
+}
+
+.quote-details-wrapper :is(.text-\[20px\]) {
+  font-size: 20px
 }
 
 .quote-details-wrapper :is(.text-\[32px\]) {
@@ -433,21 +424,8 @@
   line-height: 1.75rem
 }
 
-.quote-details-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
-}
-
-.quote-details-wrapper :is(.text-\[14px\]) {
-  font-size: 14px
-}
-
-.quote-details-wrapper :is(.text-\[16px\]) {
-  font-size: 16px
-}
-
-.quote-details-wrapper :is(.text-\[20px\]) {
-  font-size: 20px
+.quote-details-wrapper :is(.font-\[400\]) {
+  font-weight: 400
 }
 
 .quote-details-wrapper :is(.font-bold) {
@@ -470,10 +448,6 @@
   font-weight: 700
 }
 
-.quote-details-wrapper :is(.font-\[400\]) {
-  font-weight: 400
-}
-
 .quote-details-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
@@ -490,8 +464,8 @@
   line-height: 2
 }
 
-.quote-details-wrapper :is(.leading-none) {
-  line-height: 1
+.quote-details-wrapper :is(.leading-relaxed) {
+  line-height: 1.625
 }
 
 .quote-details-wrapper :is(.leading-snug) {
@@ -500,10 +474,6 @@
 
 .quote-details-wrapper :is(.leading-tight) {
   line-height: 1.25
-}
-
-.quote-details-wrapper :is(.leading-relaxed) {
-  line-height: 1.625
 }
 
 .quote-details-wrapper :is(.text-black) {
@@ -516,21 +486,6 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
-.quote-details-wrapper :is(.text-green-700) {
-  --tw-text-opacity: 1;
-  color: rgb(21 128 61 / var(--tw-text-opacity))
-}
-
-.quote-details-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
-.quote-details-wrapper :is(.text-white) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
 .quote-details-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
@@ -541,6 +496,11 @@
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
+.quote-details-wrapper :is(.text-green-700) {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity))
+}
+
 .quote-details-wrapper :is(.text-red-800) {
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity))
@@ -549,6 +509,16 @@
 .quote-details-wrapper :is(.text-sky-800) {
   --tw-text-opacity: 1;
   color: rgb(7 89 133 / var(--tw-text-opacity))
+}
+
+.quote-details-wrapper :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.quote-details-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .quote-details-wrapper :is(.line-through) {

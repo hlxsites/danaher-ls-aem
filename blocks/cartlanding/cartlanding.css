@@ -115,10 +115,6 @@
   left: 60px
 }
 
-.cartlanding-wrapper :is(.left-\[63px\]) {
-  left: 63px
-}
-
 .cartlanding-wrapper :is(.right-0) {
   right: 0px
 }
@@ -145,10 +141,6 @@
 
 .cartlanding-wrapper :is(.top-\[170px\]) {
   top: 170px
-}
-
-.cartlanding-wrapper :is(.top-\[57px\]) {
-  top: 57px
 }
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
@@ -254,13 +246,6 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5
-}
-
-.cartlanding-wrapper :is(.line-clamp-6) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6
 }
 
 .cartlanding-wrapper :is(.block) {
@@ -371,10 +356,6 @@
   height: auto
 }
 
-.cartlanding-wrapper :is(.h-full) {
-  height: 100%
-}
-
 .cartlanding-wrapper :is(.h-px) {
   height: 1px
 }
@@ -389,10 +370,6 @@
 
 .cartlanding-wrapper :is(.w-10) {
   width: 2.5rem
-}
-
-.cartlanding-wrapper :is(.w-11) {
-  width: 2.75rem
 }
 
 .cartlanding-wrapper :is(.w-14) {
@@ -417,6 +394,10 @@
 
 .cartlanding-wrapper :is(.w-3) {
   width: 0.75rem
+}
+
+.cartlanding-wrapper :is(.w-32) {
+  width: 8rem
 }
 
 .cartlanding-wrapper :is(.w-48) {
@@ -493,14 +474,6 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
-}
-
-.cartlanding-wrapper :is(.w-32) {
-  width: 8rem
-}
-
-.cartlanding-wrapper :is(.w-36) {
-  width: 9rem
 }
 
 .cartlanding-wrapper :is(.min-w-\[320px\]) {
@@ -1051,10 +1024,6 @@
   text-align: right
 }
 
-.cartlanding-wrapper :is(.\!text-right) {
-  text-align: right !important
-}
-
 .cartlanding-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -1290,14 +1259,6 @@
 
 .cartlanding-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
-.cartlanding-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
 }
 
 .cartlanding-wrapper :is(.transition-transform) {

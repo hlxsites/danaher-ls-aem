@@ -19,7 +19,7 @@ export default async function decorate(block) {
   const dashboardSideBarContent = await dashboardSidebar();
   const orderDetailResponse = await orderDetails();
   const requestedQuotesResponse = await requestedQuotes();
-  // console.log("orderDetailResponse", orderDetailResponse);
+  console.log("requestedQuotesResponse", requestedQuotesResponse);
   const shippedItems = orderDetailResponse.filter((item) => item.status.toLowerCase() === 'shipped');
   // console.log("cancelledItems", shippedItems );
   const excludedStatuses = ['cancelled', 'shipped'];
