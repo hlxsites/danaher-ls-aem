@@ -37,6 +37,7 @@
       "order-submit",
       "order-status",
       "requested-quote",
+      "approved-quote",
       "order-details",
       "quote-details",
       "carousel",
@@ -71,6 +72,12 @@
     "id": "accordion-container",
     "components": [
       "accordion-item"
+    ]
+  },
+  {
+    "id": "approved-quote",
+    "components": [
+      ""
     ]
   },
   {
