@@ -27,6 +27,14 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "bg-white seventythirty",
+              "value": "bg-white seventythirty"
+            },
+            {
+              "name": "bg-white thirtyseventy",
+              "value": "bg-white thirtyseventy"
             }
           ]
         }
@@ -38,7 +46,6 @@
       "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -66,6 +73,9 @@
       "checkout",
       "order-submit",
       "order-status",
+      "requested-quote",
+      "order-details",
+      "quote-details",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -91,7 +101,21 @@
       "table",
       "testimonial",
       "tags-list",
-      "related-articles"
+      "related-articles",
+      "social-media",
+      "mini-teasers",
+      "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications",
+      "talk-to-an-expert-text"
     ]
     }
   ]

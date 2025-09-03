@@ -271,9 +271,9 @@
     flex-direction: row
   }
 
-  .product-banner-wrapper :is(.md\:px-\[39px\]) {
-    padding-left: 39px;
-    padding-right: 39px
+  .product-banner-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 
   .product-banner-wrapper :is(.md\:pt-12) {

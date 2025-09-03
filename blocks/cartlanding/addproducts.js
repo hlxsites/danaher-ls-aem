@@ -5,10 +5,10 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   submitSearchQuery,
 } from '../header/header.js';
+// eslint-disable-next-line import/no-cycle
 import relatedProducts from './related-products.js';
 import noProducts from './noProduct.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
-// import { buildSearchWithIcon } from "../../scripts/common-utils.js";
 
 export default async function addProducts() {
   let skuarray = [];

@@ -1,13 +1,14 @@
 import {
-  div, h1, p, span, a,
+  div, h1, p, span,
 } from '../../scripts/dom-builder.js';
 import {
   showPreLoader,
   removePreLoader,
-  capitalizeFirstLetter,
 } from '../../scripts/common-utils.js';
-import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import recentOrders from './recentOrder.js';
+import { orderDetails, requestedQuotes } from './dashboardutils.js';
+import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
 
 // eslint-disable-next-line
 export default async function decorate(block) {
@@ -15,87 +16,24 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
-  const authenticationToken = await getAuthenticationToken();
-  let userData = {};
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  userData = JSON.parse(authenticationToken.user_data);
-
-  const dashboardTitle = block.querySelector(
-    "[data-aue-prop='dashboardTitle']",
+  const dashboardSideBarContent = await dashboardSidebar();
+  const orderDetailResponse = await orderDetails();
+  const requestedQuotesResponse = await requestedQuotes();
+  // console.log("orderDetailResponse", orderDetailResponse);
+  const shippedItems = orderDetailResponse?.filter((item) => item.status.toLowerCase() === 'shipped');
+  // console.log("cancelledItems", shippedItems );
+  const excludedStatuses = ['cancelled', 'shipped'];
+  const openOrder = orderDetailResponse?.filter(
+    (item) => !excludedStatuses.includes(item.status.toLowerCase()),
   );
-
+  // console.log("cancelledItems", openOrder );
+  const totalShippedItems = shippedItems?.length;
   const wrapper = div({
     id: 'dashboardWrapper',
     class:
       'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
   });
-  const sidebar = div(
-    {
-      id: 'dashboardSidebar',
-      class: 'bg-white gap-5 w-full md:w-[20%] flex flex-col items-center pb-6',
-    },
-    div(
-      { class: 'w-full px-6 flex flex-col items-center gap-5' },
-      div({
-        class:
-          'h-[131px] w-full mt-4 w-full bg-danaherpurple-800 justify-center  flex flex-col items-center',
-      }),
-      div(
-        {
-          class:
-            'h-[100px] w-[100px] mt-[-75px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center',
-        },
-        p(
-          {
-            class: 'text-white !text-4xl font-medium leading-[48px]',
-          },
-          userData?.userData?.firstName?.charAt(0).toUpperCase(),
-          userData?.userData?.lastName?.charAt(0).toUpperCase(),
-        ),
-      ),
-      p(
-        {
-          class: 'text-xl text-black font-medium leading-7',
-        },
-        `${capitalizeFirstLetter(
-          userData?.userData?.firstName,
-        )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`,
-      ),
-      p(
-        {
-          class: 'text-sm  text-black font-medium leading-tight',
-        },
-        capitalizeFirstLetter(userData?.customerData?.companyName),
-      ),
-    ),
-    div({
-      class: 'w-full bg-gray-100 h-[2px]',
-    }),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/cartlanding',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Cart',
-      ),
-    ),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/orderSubmit?orderId=10000123',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Order Submit',
-      ),
-    ),
-  );
+  const dashboardTitle = 'Dashboard';
   const content = div(
     {
       id: 'dashboardContent',
@@ -113,7 +51,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'bg-white flex items-center justify-center  gap-6 p-6',
+          class: 'w-[310px] h-[118px] bg-white flex items-center justify-center  gap-6 p-6',
         },
         span({
           class:
@@ -127,19 +65,46 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            '14',
+            openOrder?.length === 0 ? 0 : openOrder?.length,
           ),
           p(
             {
-              class: 'text-black',
+              class: 'w-[178px] text-black',
             },
             'Open Order',
           ),
         ),
       ),
+      openOrder?.length !== 0
+        ? div(
+          {
+            class: 'w-[310px] h-[118px] bg-white flex items-center justify-center  gap-6 p-6',
+          },
+          span({
+            class:
+            'icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500  bg-danaherpurple-25  rounded-full !w-[60px] !h-[60px] p-[18px] transition-transform group-hover:-translate-x-0.5',
+          }),
+          div(
+            {
+              class: 'flex flex-col',
+            },
+            p(
+              {
+                class: 'text-black !text-4xl font-medium leading-[48px]',
+              },
+              totalShippedItems,
+            ),
+            p(
+              {
+                class: 'w-[178px] text-black',
+              },
+              'Shipped Order',
+            ),
+          ),
+        ) : '',
       div(
         {
-          class: 'bg-white flex gap-6 p-6  items-center justify-center ',
+          class: 'w-[310px] h-[118px] bg-white flex gap-6 p-6  items-center justify-center ',
         },
         span({
           class:
@@ -153,23 +118,33 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            '25',
+            requestedQuotesResponse?.length === 0 ? 0 : requestedQuotesResponse?.length,
           ),
           p(
             {
-              class: 'text-black',
+              class: 'w-[178px] text-black',
             },
             'Requested Quote Item',
           ),
         ),
       ),
+
+      // orderStatus()
     ),
   );
-  wrapper.append(sidebar, content);
+  const contentWrapper = div({
+    class: 'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
+  });
+  // const orderBlock = await orderStatus();
+  const order = await recentOrders();
+  contentWrapper.append(content);
+  // contentWrapper.append(orderBlock);
+  contentWrapper.append(order);
+  wrapper.append(dashboardSideBarContent, contentWrapper);
 
-  decorateIcons(wrapper);
   block.innerHTML = '';
   block.textContent = '';
   block.append(wrapper);
+  decorateIcons(wrapper);
   removePreLoader();
 }

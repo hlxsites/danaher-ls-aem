@@ -46,12 +46,12 @@ export function preLoader() {
   return div(
     {
       class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        'flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
     img({
       class: ' h-24',
-      src: '/content/dam/loading_icon.gif',
+      src: '/content/dam/danaher/utility/loading_icon.gif',
     }),
   );
 }
@@ -78,72 +78,147 @@ const getMainDiv = document.querySelector('body');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
 
 /*
- ::::::::::::::::::::
-function to create notification container
- :::::::::::::::::
- */
-export function notificationContainer() {
-  return div(
-    {
-      class:
-        'notification-container',
-      id: 'notificationContainer',
-    },
-    h3({
-      class: 'text-2xl p-0 m-0',
-    }),
-    p({
-      class: 'text-base',
-    }),
-  );
-}
-/*
 ::::::::::::::::::::::
 function to append notification container
 :::::::::::::::::::::::
 */
 const generateNotification = div(
   {
-    class: 'fixed top-42 right-4 max-w-xs bg-blue-600 text-white p-4 rounded shadow-lg z-50 transform -translate-y-full transition-transform duration-1000 ease-in-out hidden',
+    class: 'fixed flex flex-col bottom-10 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
     id: 'notificationWrapper',
   },
-  notificationContainer(),
+  div(
+    {
+      class: 'notification-container max-w-md w-full p-4 space-y-4 border-2 bg-white rounded-md pointer-events-auto ml-auto hidden',
+      role: 'alert',
+      id: 'notificationContainer',
+    },
+    div(
+      {
+        class: 'flex gap-4',
+        id: 'notificationContentWrapper',
+      },
+      div(
+        {
+          class: 'max-w-[20px]',
+          id: 'notificationIconWrapper',
+        },
+        span(
+          {
+            id: 'notificationIcon',
+            class: 'icon w-6 h-6 fill-current icon-check-circle [&_svg>use]:stroke-[#027243]',
+          },
+        ),
+      ),
+      div(
+        {
+          class: 'flex flex-col gap-2',
+        },
+        h3({
+          class: 'text-2xl p-0 m-0',
+        }),
+        p({
+          class: 'text-base',
+        }),
+      ),
+    ),
+  ),
 );
-getMainDiv.insertAdjacentElement('afterbegin', generateNotification);
+decorateIcons(generateNotification);
+getMainDiv?.insertAdjacentElement('afterbegin', generateNotification);
 
 /*
 ::::::::::::::::::::::
 function to show / hide notification whenever required
 :::::::::::::::::::::::
 */
-export function showNotification(content, type) {
+export function showNotification(content, type, wrapper = '') {
+  const container = wrapper ? document.querySelector(wrapper) : getMainDiv;
+  const notificationElement = generateNotification; // Should be a DOM element
+  container?.insertAdjacentElement('beforebegin', notificationElement);
+
   const notificationWrapper = document.querySelector('#notificationWrapper');
+  if (!notificationWrapper) return;
+
   const notificationTitle = notificationWrapper.querySelector('h3');
   const notificationContent = notificationWrapper.querySelector('p');
-  if (notificationTitle) {
-    notificationTitle.style.color = type === 'success' ? '#027243' : '#AC2734';
-    notificationTitle.textContent = type.toUpperCase();
-  }
-  if (notificationContent) {
-    notificationContent.textContent = content;
-    notificationWrapper.style.color = type === 'success' ? '#027243' : '#AC2734';
-  }
-  if (type === 'success') {
-    notificationWrapper.querySelector('h3').textContent = 'Success';
-    notificationWrapper.style.backgroundColor = '#F0FFEF';
-    notificationWrapper.style.color = '#027243';
-  }
-  if (type === 'error') {
-    notificationWrapper.style.backgroundColor = '#FFEFEF';
+  const notificationContentWrapper = document.querySelector('#notificationContentWrapper');
+  const notificationContainer = document.querySelector('#notificationContainer');
+  const notificationIconWrapper = document.querySelector('#notificationIconWrapper');
+  const notificationIcon = document.querySelector('#notificationIcon');
+
+  const isSuccess = type === 'success';
+  const color = isSuccess ? '#027243' : '#AC2734';
+  const bgColor = isSuccess ? '#F0FFEF' : '#FFEFEF';
+  const iconClass = isSuccess ? 'icon-check-circle' : 'icon-xcircle-red';
+  notificationIcon?.querySelector('svg')?.classList.add('rounded-full');
+  if (isSuccess) {
+    if (notificationIcon?.classList?.contains('[&_svg>use]:stroke-[#AC2734]')) {
+      notificationIcon?.classList?.remove('[&_svg>use]:stroke-[#AC2734]');
+    }
+  } else if (notificationIcon?.classList?.contains('[&_svg>use]:stroke-[#027243]')) {
+    notificationIcon?.classList?.remove('[&_svg>use]:stroke-[#027243]');
   }
 
+  // Reset and style wrapper
   notificationWrapper.style.display = 'block';
-  notificationWrapper?.classList?.remove('-translate-y-full');
+  if (wrapper) {
+    notificationWrapper.className = '';
+    notificationContentWrapper?.classList.add('items-center');
+    notificationIconWrapper?.classList.add('items-center', 'flex');
+    notificationTitle?.classList.add('hidden');
+  }
+
+  // Title
+  if (notificationTitle) {
+    notificationTitle.textContent = isSuccess ? 'Success' : type.toUpperCase();
+    notificationTitle.style.color = color;
+  }
+
+  // Content
+  if (notificationContent) {
+    notificationContent.textContent = content;
+  }
+
+  // Container styling
+  if (notificationContainer) {
+    notificationContainer.style.display = 'block';
+    notificationContainer.style.backgroundColor = bgColor;
+    notificationContainer.style.borderColor = color;
+    notificationContainer.style.color = color;
+    notificationContainer.classList?.remove('-translate-y-full');
+  }
+
+  // Icon
+  if (notificationIcon) {
+    if (notificationIcon?.classList.contains('icon-check-circle')) {
+      notificationIcon.classList.remove('icon-check-circle');
+    }
+    if (notificationIcon?.classList.contains('icon-xcircle-red')) {
+      notificationIcon.classList.remove('icon-xcircle-red');
+    }
+    notificationIcon?.classList.remove();
+    notificationIcon.classList.add(iconClass);
+    notificationIcon.classList.add(`[&_svg>use]:stroke-[${color}]`);
+  }
+
+  decorateIcons(notificationContainer);
+  notificationContainer?.querySelector('svg')?.classList.add('rounded-full');
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 10000);
+  }, 5000);
 }
+/*
+*
+*
+::::::::::: Scroll View to Top ::::::::
+*
+*/
+export function scrollViewToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /*
  ::::::::::::::::::::::::
  utility function to close the modal...
@@ -163,7 +238,7 @@ export function closeUtilityModal() {
   @param hasCancelButton : boolean. Optional cancel button
   @param hasCloseButton : boolean. Optional close button
 */
-export function createModal(content, hasCancelButton, hasCloseButton) {
+export function createModal(content, hasCancelButton, hasCloseButton, dataType = '', dataAction = '') {
   const modalWrapper = div({
     class:
       'inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
@@ -187,6 +262,8 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   if (hasCancelButton) {
     cancelButton = span(
       {
+        'data-type': dataType || 'close',
+        'data-action': dataAction || 'close',
         class: 'mt-6 text-danaherpurple-500 cursor-pointer',
         id: 'closeUtilityModal',
       },
@@ -689,11 +766,10 @@ export async function submitForm(id, action, method, data) {
       );
       return submitFormResponse;
     }
+    showNotification('Error Submitting Form.', 'error');
     return { status: 'error', data: 'Error Submitting Form.' };
   } catch (error) {
     return { status: 'error', data: error.message };
-  } finally {
-    removePreLoader();
   }
 }
 
@@ -1059,21 +1135,39 @@ export const buildBillingCheckboxElement = (
   required,
   extraClasses = '',
   hidden = '',
-) => div(
-  { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
-  input({
-    type: inputType,
-    name: inputName,
-    class: 'input-focus-checkbox',
-    id: inputName,
-    value: fieldValue,
-    'aria-label': fieldLable,
-  }),
-  label(
+) => {
+  const shipAsBillBox = div(
     {
-      for: inputName,
-      class: 'pl-2',
+      id: 'shippingAsBillingCheckboxWrapper',
+      class: `flex center gap-2 mt-6 false relative ${extraClasses} ${hidden}`,
     },
-    field,
-  ),
-);
+    div(
+      {
+        class: 'hidden',
+        id: 'sameShipAsBillCheck',
+      },
+      span(
+        {
+          class: 'icon icon-check-circle-filled',
+        },
+      ),
+    ),
+    input({
+      type: inputType,
+      name: inputName,
+      class: 'input-focus-checkbox absolute mt-1',
+      id: inputName,
+      value: fieldValue,
+      'aria-label': fieldLable,
+    }),
+    label(
+      {
+        for: inputName,
+        class: 'pl-6 z-10',
+      },
+      field,
+    ),
+  );
+  decorateIcons(shipAsBillBox);
+  return shipAsBillBox;
+};

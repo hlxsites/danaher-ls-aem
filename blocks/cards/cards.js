@@ -2,7 +2,7 @@ import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
   a, div,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
+// import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   if (block.parentElement.parentElement.classList.contains('cards-container')) {
@@ -25,7 +25,7 @@ export default function decorate(block) {
     }
     const readMoreLink = row.querySelector('a');
     const cardWrapper = (readMoreLink)
-      ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
+      ? a({ href: readMoreLink.href, title: readMoreLink.title })
       : div();
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
     if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));

@@ -51,7 +51,7 @@ export const updateCartQuantity = (newQuantity) => {
 
 export const mycart = async () => {
   const authenticationToken = await getAuthenticationToken();
-
+  const recommendedProductsConatiner = await recommendedProducts();
   if (authenticationToken?.status === 'error') {
     await userLogin('guest');
 
@@ -107,7 +107,7 @@ export const mycart = async () => {
   containerWrapper.append(emptyCartContainer);
   myCartEmptyContainer.append(containerWrapper);
   myCartEmptyContainer.append(emptyDiv);
-  myCartEmptyContainer.append(recommendedProducts());
+  myCartEmptyContainer.append(recommendedProductsConatiner);
   myCartContainerWrapper.append(myCartEmptyContainer);
 
   const container = div(
@@ -133,7 +133,7 @@ export const mycart = async () => {
   const description = div(
     {
       class:
-        'w-[737px] break-normal justify-start text-black text-base font-extralight ',
+        'w-[70%] break-normal justify-start text-black text-base font-extralight ',
     },
     'Welcome to your cart. Review your selections, make any last-minute adjustments, and prepare for a seamless checkout experience tailored just for you.',
   );
@@ -168,7 +168,7 @@ export const mycart = async () => {
     }),
   );
   myCartListContainer.append(searchBlock);
-  myCartListContainer.append(recommendedProducts());
+  myCartListContainer.append(recommendedProductsConatiner);
 
   myCartContainerWrapper.append(myCartListContainer);
   return myCartContainerWrapper;

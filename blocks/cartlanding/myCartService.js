@@ -11,10 +11,8 @@ import {
   postApiData,
 } from '../../scripts/api-utils.js';
 
+// eslint-disable-next-line import/no-cycle
 import addProducts from './addproducts.js';
-// import {
-//   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
-// } from './cartSharedFile.js';
 import {
   updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
 } from './cartSharedFile.js';
@@ -224,15 +222,15 @@ export const recommendedProduct = [
     manufacturer: 'Beckman Coulter Life Sciences',
     listPrice: {
       type: 'ProductPrice',
-      value: 0.0,
-      currencyMnemonic: 'N/A',
-      currency: 'N/A',
+      value: 1653.0,
+      currencyMnemonic: 'USD',
+      currency: 'USD',
     },
     salePrice: {
       type: 'ProductPrice',
-      value: 0.0,
-      currencyMnemonic: 'N/A',
-      currency: 'N/A',
+      value: 1653.0,
+      currencyMnemonic: 'USD',
+      currency: 'USD',
     },
     maxOrderQuantity: 0,
     stepOrderQuantity: 1,

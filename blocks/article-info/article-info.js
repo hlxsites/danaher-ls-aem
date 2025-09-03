@@ -4,13 +4,19 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.innerHTML = '';
-  const authorName = getMetadata('authorname');
-  const authorJobTitle = getMetadata('authortitle');
-  const publishDate = getMetadata('publishdate');
-  const readingTime = getMetadata('readingtime');
-  const authorImage = getMetadata('authorimage');
+  // block.innerHTML = '';
+  const authorName = getMetadata('authorname') || block?.firstElementChild?.textContent || '';
+  const authorJobTitle = getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent || '';
+  const authorImage = getMetadata('authorimage') || block.querySelector('img')?.src || '';
+  const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent || '';
+  let publishDate = getMetadata('publishdate') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent || '';
+  publishDate = publishDate.trim();
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(publishDate)) {
+    publishDate += 'Z';
+  }
+  const readingTime = getMetadata('readingtime') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent || '';
   const expectedPublishFormat = new Date(publishDate);
+  block.innerHTML = '';
 
   block.append(
     div(
@@ -23,6 +29,7 @@ export default function decorate(block) {
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
+            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
           ),
         ),
         div(

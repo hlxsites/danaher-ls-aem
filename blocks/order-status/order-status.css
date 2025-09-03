@@ -1,26 +1,51 @@
-.order-status-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
-.order-status-wrapper :is(.mb-1) {
-  margin-bottom: 0.25rem
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
 }
 
-.order-status-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
 }
 
-.order-status-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
+.order-status-wrapper :is(.absolute) {
+  position: absolute
 }
 
-.order-status-wrapper :is(.mb-5) {
-  margin-bottom: 1.25rem
+.order-status-wrapper :is(.relative) {
+  position: relative
 }
 
-.order-status-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
+.order-status-wrapper :is(.right-0) {
+  right: 0px
+}
+
+.order-status-wrapper :is(.m-0) {
+  margin: 0px
+}
+
+.order-status-wrapper :is(.ml-2) {
+  margin-left: 0.5rem
+}
+
+.order-status-wrapper :is(.ml-\[20px\]) {
+  margin-left: 20px
+}
+
+.order-status-wrapper :is(.ml-\[23px\]) {
+  margin-left: 23px
+}
+
+.order-status-wrapper :is(.mr-\[8px\]) {
+  margin-right: 8px
 }
 
 .order-status-wrapper :is(.mt-2) {
@@ -31,12 +56,8 @@
   margin-top: 1rem
 }
 
-.order-status-wrapper :is(.mt-6) {
-  margin-top: 1.5rem
-}
-
-.order-status-wrapper :is(.mt-\[100px\]) {
-  margin-top: 100px
+.order-status-wrapper :is(.mt-\[-75px\]) {
+  margin-top: -75px
 }
 
 .order-status-wrapper :is(.block) {
@@ -47,36 +68,96 @@
   display: flex
 }
 
-.order-status-wrapper :is(.h-\[60px\]) {
-  height: 60px
+.order-status-wrapper :is(.inline-flex) {
+  display: inline-flex
 }
 
-.order-status-wrapper :is(.w-1\/2) {
-  width: 50%
+.order-status-wrapper :is(.table) {
+  display: table
 }
 
-.order-status-wrapper :is(.w-\[250px\]) {
-  width: 250px
+.order-status-wrapper :is(.hidden) {
+  display: none
 }
 
-.order-status-wrapper :is(.w-\[30\%\]) {
-  width: 30%
+.order-status-wrapper :is(.\!h-\[60px\]) {
+  height: 60px !important
 }
 
-.order-status-wrapper :is(.w-\[340px\]) {
-  width: 340px
+.order-status-wrapper :is(.h-10) {
+  height: 2.5rem
 }
 
-.order-status-wrapper :is(.w-\[60px\]) {
-  width: 60px
+.order-status-wrapper :is(.h-\[100px\]) {
+  height: 100px
 }
 
-.order-status-wrapper :is(.w-\[65\%\]) {
-  width: 65%
+.order-status-wrapper :is(.h-\[10px\]) {
+  height: 10px
 }
 
-.order-status-wrapper :is(.max-w-\[1100px\]) {
-  max-width: 1100px
+.order-status-wrapper :is(.h-\[131px\]) {
+  height: 131px
+}
+
+.order-status-wrapper :is(.h-\[2px\]) {
+  height: 2px
+}
+
+.order-status-wrapper :is(.h-\[46px\]) {
+  height: 46px
+}
+
+.order-status-wrapper :is(.h-\[500px\]) {
+  height: 500px
+}
+
+.order-status-wrapper :is(.max-h-\[642px\]) {
+  max-height: 642px
+}
+
+.order-status-wrapper :is(.\!w-\[60px\]) {
+  width: 60px !important
+}
+
+.order-status-wrapper :is(.w-28) {
+  width: 7rem
+}
+
+.order-status-wrapper :is(.w-80) {
+  width: 20rem
+}
+
+.order-status-wrapper :is(.w-\[100px\]) {
+  width: 100px
+}
+
+.order-status-wrapper :is(.w-\[10px\]) {
+  width: 10px
+}
+
+.order-status-wrapper :is(.w-\[186\.4px\]) {
+  width: 186.4px
+}
+
+.order-status-wrapper :is(.w-\[200px\]) {
+  width: 200px
+}
+
+.order-status-wrapper :is(.w-\[80\%\]) {
+  width: 80%
+}
+
+.order-status-wrapper :is(.w-\[930px\]) {
+  width: 930px
+}
+
+.order-status-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.order-status-wrapper :is(.min-w-\[415px\]) {
+  min-width: 415px
 }
 
 .order-status-wrapper :is(.flex-col) {
@@ -91,36 +172,90 @@
   align-items: flex-end
 }
 
+.order-status-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.order-status-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
+.order-status-wrapper :is(.justify-end) {
+  justify-content: flex-end
+}
+
+.order-status-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
 .order-status-wrapper :is(.justify-between) {
   justify-content: space-between
+}
+
+.order-status-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.order-status-wrapper :is(.gap-1\.5) {
+  gap: 0.375rem
+}
+
+.order-status-wrapper :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.order-status-wrapper :is(.gap-28) {
+  gap: 7rem
+}
+
+.order-status-wrapper :is(.gap-3) {
+  gap: 0.75rem
 }
 
 .order-status-wrapper :is(.gap-4) {
   gap: 1rem
 }
 
-.order-status-wrapper :is(.gap-\[130px\]) {
-  gap: 130px
+.order-status-wrapper :is(.gap-5) {
+  gap: 1.25rem
 }
 
-.order-status-wrapper :is(.space-y-1 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse))
+.order-status-wrapper :is(.gap-6) {
+  gap: 1.5rem
 }
 
-.order-status-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+.order-status-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+
+.order-status-wrapper :is(.self-stretch) {
+  align-self: stretch
+}
+
+.order-status-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.order-status-wrapper :is(.overflow-y-auto) {
+  overflow-y: auto
+}
+
+.order-status-wrapper :is(.overflow-x-hidden) {
+  overflow-x: hidden
+}
+
+.order-status-wrapper :is(.rounded) {
+  border-radius: 0.25rem
 }
 
 .order-status-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }
 
-.order-status-wrapper :is(.rounded-lg) {
-  border-radius: 0.5rem
+.order-status-wrapper :is(.rounded-md) {
+  border-radius: 0.375rem
 }
 
 .order-status-wrapper :is(.border) {
@@ -131,9 +266,37 @@
   border-width: 2px
 }
 
-.order-status-wrapper :is(.border-\[\#1b2dd3\]) {
+.order-status-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
+.order-status-wrapper :is(.border-b-2) {
+  border-bottom-width: 2px
+}
+
+.order-status-wrapper :is(.border-l) {
+  border-left-width: 1px
+}
+
+.order-status-wrapper :is(.border-l-\[4px\]) {
+  border-left-width: 4px
+}
+
+.order-status-wrapper :is(.border-r) {
+  border-right-width: 1px
+}
+
+.order-status-wrapper :is(.border-t) {
+  border-top-width: 1px
+}
+
+.order-status-wrapper :is(.border-solid) {
+  border-style: solid
+}
+
+.order-status-wrapper :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
-  border-color: rgb(27 45 211 / var(--tw-border-opacity))
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .order-status-wrapper :is(.border-gray-200) {
@@ -146,9 +309,9 @@
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
-.order-status-wrapper :is(.bg-\[\#1b2dd3\]) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(27 45 211 / var(--tw-bg-opacity))
+.order-status-wrapper :is(.border-white) {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity))
 }
 
 .order-status-wrapper :is(.bg-danaherlightblue-50) {
@@ -156,13 +319,34 @@
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
+.order-status-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .order-status-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.order-status-wrapper :is(.bg-transparent) {
-  background-color: transparent
+.order-status-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.order-status-wrapper :is(.bg-green-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 244 / var(--tw-bg-opacity))
+}
+
+.order-status-wrapper :is(.bg-red-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity))
+}
+
+.order-status-wrapper :is(.bg-sky-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 249 255 / var(--tw-bg-opacity))
 }
 
 .order-status-wrapper :is(.bg-white) {
@@ -170,67 +354,126 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.order-status-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
+.order-status-wrapper :is(.fill-gray-400) {
+  fill: #9ca3af
 }
 
-.order-status-wrapper :is(.p-2) {
+.order-status-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
+.order-status-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
+.order-status-wrapper :is(.p-\[0\.5rem\]) {
   padding: 0.5rem
 }
 
-.order-status-wrapper :is(.p-4) {
-  padding: 1rem
+.order-status-wrapper :is(.p-\[18px\]) {
+  padding: 18px
 }
 
-.order-status-wrapper :is(.px-\[30px\]) {
-  padding-left: 30px;
-  padding-right: 30px
+.order-status-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
 }
 
-.order-status-wrapper :is(.py-\[12px\]) {
-  padding-top: 12px;
-  padding-bottom: 12px
+.order-status-wrapper :is(.px-8) {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.order-status-wrapper :is(.py-1) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.order-status-wrapper :is(.py-1\.5) {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem
+}
+
+.order-status-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.order-status-wrapper :is(.py-5) {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem
+}
+
+.order-status-wrapper :is(.pb-3) {
+  padding-bottom: 0.75rem
+}
+
+.order-status-wrapper :is(.pb-\[3px\]) {
+  padding-bottom: 3px
 }
 
 .order-status-wrapper :is(.pl-2) {
   padding-left: 0.5rem
 }
 
-.order-status-wrapper :is(.pr-\[20px\]) {
-  padding-right: 20px
+.order-status-wrapper :is(.pl-9) {
+  padding-left: 2.25rem
 }
 
-.order-status-wrapper :is(.pt-\[50px\]) {
-  padding-top: 50px
+.order-status-wrapper :is(.pr-2) {
+  padding-right: 0.5rem
+}
+
+.order-status-wrapper :is(.pr-2\.5) {
+  padding-right: 0.625rem
+}
+
+.order-status-wrapper :is(.pr-8) {
+  padding-right: 2rem
+}
+
+.order-status-wrapper :is(.pr-\[10px\]) {
+  padding-right: 10px
+}
+
+.order-status-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
+.order-status-wrapper :is(.pt-\[5px\]) {
+  padding-top: 5px
 }
 
 .order-status-wrapper :is(.text-left) {
   text-align: left
 }
 
+.order-status-wrapper :is(.text-center) {
+  text-align: center
+}
+
 .order-status-wrapper :is(.text-right) {
   text-align: right
 }
 
-.order-status-wrapper :is(.text-\[13px\]) {
-  font-size: 13px
+.order-status-wrapper :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important
 }
 
-.order-status-wrapper :is(.text-\[14px\]) {
-  font-size: 14px
+.order-status-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
-.order-status-wrapper :is(.text-\[16px\]) {
-  font-size: 16px
+.order-status-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
-.order-status-wrapper :is(.text-\[18px\]) {
-  font-size: 18px
-}
-
-.order-status-wrapper :is(.text-\[28px\]) {
-  font-size: 28px
+.order-status-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .order-status-wrapper :is(.text-sm) {
@@ -238,21 +481,62 @@
   line-height: 1.25rem
 }
 
+.order-status-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.order-status-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.order-status-wrapper :is(.font-\[400\]) {
+  font-weight: 400
+}
+
 .order-status-wrapper :is(.font-bold) {
   font-weight: 700
+}
+
+.order-status-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.order-status-wrapper :is(.font-medium) {
+  font-weight: 500
 }
 
 .order-status-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
-.order-status-wrapper :is(.font-semibold) {
-  font-weight: 700
+.order-status-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
-.order-status-wrapper :is(.text-\[\#1b2dd3\]) {
-  --tw-text-opacity: 1;
-  color: rgb(27 45 211 / var(--tw-text-opacity))
+.order-status-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.order-status-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.order-status-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
+.order-status-wrapper :is(.leading-none) {
+  line-height: 1
+}
+
+.order-status-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.order-status-wrapper :is(.leading-tight) {
+  line-height: 1.25
 }
 
 .order-status-wrapper :is(.text-black) {
@@ -260,9 +544,9 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.order-status-wrapper :is(.text-gray-500) {
+.order-status-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity))
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .order-status-wrapper :is(.text-gray-600) {
@@ -280,29 +564,106 @@
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
+.order-status-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.order-status-wrapper :is(.text-green-700) {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity))
+}
+
+.order-status-wrapper :is(.text-red-500) {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity))
+}
+
+.order-status-wrapper :is(.text-red-800) {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity))
+}
+
+.order-status-wrapper :is(.text-sky-800) {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity))
+}
+
 .order-status-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.order-status-wrapper :is(.shadow-sm) {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+.order-status-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.order-status-wrapper :is(.transition-all) {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
+.order-status-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.order-status-wrapper :is(.hover\:bg-\[\#040f79\]:hover) {
+@media (min-width: 768px) {
+  .order-status-wrapper :is(.md\:w-\[25\%\]) {
+    width: 25%
+  }
+
+  .order-status-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .order-status-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .order-status-wrapper :is(.dhlsBp\:py-12) {
+    padding-top: 3rem;
+    padding-bottom: 3rem
+  }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar-thumb\]\:bg-gray-300)::-webkit-scrollbar-thumb {
   --tw-bg-opacity: 1;
-  background-color: rgb(4 15 121 / var(--tw-bg-opacity))
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
-.order-status-wrapper :is(.hover\:text-white:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
+@media (prefers-color-scheme: dark) {
+  .order-status-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-thumb\]\:bg-neutral-500)::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgb(115 115 115 / var(--tw-bg-opacity))
+  }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar-track\]\:bg-gray-100)::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .order-status-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-track\]\:bg-neutral-700)::-webkit-scrollbar-track {
+    --tw-bg-opacity: 1;
+    background-color: rgb(64 64 64 / var(--tw-bg-opacity))
+  }
+}
+
+.order-status-wrapper :is(.\[\&\:\:-webkit-scrollbar\]\:w-1)::-webkit-scrollbar {
+  width: 0.25rem
+}
+
+.order-status-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {
+  stroke: #000
+}
+
+.order-status-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.order-status-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

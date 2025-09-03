@@ -2,7 +2,8 @@ import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './grid-data.js';
 import renderListCard from './listData.js';
-import { getProductInfo } from '../../scripts/common-utils.js';
+// eslint-disable-next-line import/no-cycle
+import { recommendedProduct } from './myCartService.js';
 
 /**
  * Determines the number of cards to display per page in grid view based on window width.
@@ -18,26 +19,22 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function relatedProducts(headingText, productIds) {
-  // block?.parentElement?.parentElement?.removeAttribute('class');
-  // block?.parentElement?.parentElement?.removeAttribute('style');
+export default async function relatedProducts(headingText) {
+  // block.parentElement.parentElement.style.padding = '0';
+  // block.parentElement.parentElement.style.margin = '0';
+  // block.style.display = 'none';
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered px-0 w-full dhlsBp:p-0 flex flex-col gap-4',
+      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
-  // const headingText = block
-  //   .querySelector('[data-aue-prop="titleText"]')
-  //   ?.textContent.trim();
-  // const linkText = block
-  //   .querySelector('[data-aue-prop="card_hrefText"]')
-  //   ?.textContent.trim();
-  // const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
-  //   || '#';
+  // const headingText = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
+  // const linkText = block.children[1]?.querySelectorAll('p')[0]?.textContent.trim() || '';
+  // const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
+  // const index = block.children.length === 4 ? 3 : 2;
+  // const rawIds = block.children[index]?.querySelector('p')?.textContent.trim() || '';
 
-  // const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim()
-  //   || '';
   // const productIds = rawIds
   //   .split(',')
   //   .map((id) => id.trim())
@@ -48,14 +45,11 @@ export default async function relatedProducts(headingText, productIds) {
   let currentPage = 1;
   let currentIndex = 0;
   let isGridView = true;
-  // const openNewTab = block.querySelector(
-  //   '[data-aue-prop="subscribe"]',
-  // )?.textContent;
   const carouselContainer = div({
-    class: 'carousel-container w-full flex flex-col gap-y-6 w-full justify-center',
+    class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
   const carouselHead = div({
-    class: 'w-[1280px] flex flex-row justify-between md:h-10',
+    class: 'w-full flex flex-row justify-between md:h-10',
   });
 
   const leftGroup = div({
@@ -64,7 +58,7 @@ export default async function relatedProducts(headingText, productIds) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-bold leading-loose',
+        class: 'text-2xl text-black font-medium',
       },
       headingText ?? '',
     ),
@@ -75,25 +69,25 @@ export default async function relatedProducts(headingText, productIds) {
     class:
       'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
   const prevDiv = div(
     {
       class:
-        'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+        'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
     }),
   );
   const nextDiv = div(
     {
       class:
-        'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+        'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500',
+        'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -105,7 +99,7 @@ export default async function relatedProducts(headingText, productIds) {
   const listBtn = div(
     {
       class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -118,7 +112,7 @@ export default async function relatedProducts(headingText, productIds) {
   const gridBtn = div(
     {
       class:
-        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -139,26 +133,37 @@ export default async function relatedProducts(headingText, productIds) {
       isGridView ? 'md:flex-nowrap' : ''
     }`,
   });
+  const slideWrapper = div({
+    class: 'slide-wrapper py-2 flex transition-transform duration-1000 ease-in-out',
+  });
+  carouselCards.append(slideWrapper);
+
   const paginationContainer = div({
     class:
       'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
     style: 'display: none;',
   });
 
-  const products = (
-    await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false)),
-    )
-  )
-    .filter((product) => product.status !== 'error')
-    .map((product) => product.value);
+  //   const results = await Promise.allSettled(
+  //     // making false as we don't need intershop data for top selling products as of now
+  //     productIds.map((id) => getProductInfo(id, false)),
+  //   );
+  // console.log("results", results);
+  // const products = results
+  //   .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
+  //   .map((result) => result.value);
+  const products = recommendedProduct;
+  // Hide viewModeGroup if no products are available
+  if (products.length === 0) {
+    topSellingWrapper.style.display = 'none';
+  }
 
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
   function scrollToFirstCard() {
     setTimeout(() => {
-      const firstCard = carouselCards.querySelector(':first-child');
+      const firstCard = slideWrapper.querySelector(':first-child');
       if (firstCard) {
         firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
@@ -182,30 +187,39 @@ export default async function relatedProducts(headingText, productIds) {
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
   function updateCarousel() {
-    carouselCards.innerHTML = '';
-    carouselCards.className = `carousel-cards flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
+    slideWrapper.innerHTML = '';
+    slideWrapper.className = `slide-wrapper w-full py-2 flex ${isGridView ? 'transition-transform duration-1000 ease-in-out' : ''} gap-5 ${
+      isGridView ? 'flex-row' : 'flex-col'
+    }`;
+    carouselCards.className = `carousel-cards ${isGridView ? 'overflow-hidden' : ''}  flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`;
 
     if (isGridView) {
-      let cardsToDisplay;
-      if (products.length < 5) {
-        cardsToDisplay = products; // Show all cards if fewer than 4
-        arrowGroup.style.display = 'none'; // Hide carousel arrows
+      if (products.length === 0) {
+        arrowGroup.style.display = 'none';
+        slideWrapper.style.transform = 'translateX(0)';
       } else {
-        cardsToDisplay = products.slice(
-          currentIndex,
-          currentIndex + cardsPerPageGrid,
-        );
-        arrowGroup.style.display = 'flex'; // Show carousel arrows
+        // Render all cards for continuous sliding
+        products.forEach((item) => slideWrapper.append(renderGridCard(item)));
+        arrowGroup.style.display = products.length <= cardsPerPageGrid ? 'none' : 'flex';
+
+        // Calculate transform for sliding
+        const card = slideWrapper.children[0];
+        if (card) {
+          const cardWidth = card.offsetWidth + 20; // Include gap-5 (20px)
+          slideWrapper.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        } else {
+          slideWrapper.style.transform = 'translateX(0)';
+        }
       }
-      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
+      cardsToDisplay.forEach((item) => slideWrapper.append(renderListCard(item)));
+      slideWrapper.style.transform = 'translateX(0)';
       paginationContainer.style.display = products.length < 7 ? 'none' : 'flex';
       arrowGroup.style.display = 'none';
 
@@ -242,14 +256,14 @@ export default async function relatedProducts(headingText, productIds) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-gray-700' : 'text-violet-600'
+                prevEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
           div(
             {
               class: `justify-start text-${
-                prevEnabled ? 'gray-700' : 'gray-400'
+                prevEnabled ? 'danaherpurple-500' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Previous',
@@ -289,7 +303,7 @@ export default async function relatedProducts(headingText, productIds) {
         pageNumber.append(
           div({
             class: `self-stretch h-0.5 ${
-              currentPage === page ? 'bg-violet-600' : 'bg-transparent'
+              currentPage === page ? 'bg-danaherpurple-500' : 'bg-transparent'
             }`,
           }),
           div(
@@ -300,7 +314,7 @@ export default async function relatedProducts(headingText, productIds) {
             div(
               {
                 class: `text-center justify-start text-${
-                  currentPage === page ? 'violet-600' : 'gray-700'
+                  currentPage === page ? 'danaherpurple-500' : 'gray-700'
                 } text-sm font-medium leading-tight`,
               },
               page.toString(),
@@ -392,7 +406,7 @@ export default async function relatedProducts(headingText, productIds) {
           div(
             {
               class: `justify-start text-${
-                nextEnabled ? 'gray-700' : 'gray-400'
+                nextEnabled ? 'danaherpurple-500' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Next',
@@ -401,7 +415,7 @@ export default async function relatedProducts(headingText, productIds) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-gray-700' : 'text-violet-600'
+                nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
@@ -460,8 +474,8 @@ export default async function relatedProducts(headingText, productIds) {
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn.classList.replace(
-      toGridView ? 'bg-white' : 'bg-violet-600',
-      toGridView ? 'bg-violet-600' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
       .querySelector('.icon')
@@ -477,8 +491,8 @@ export default async function relatedProducts(headingText, productIds) {
       );
 
     listBtn.classList.replace(
-      toGridView ? 'bg-violet-600' : 'bg-white',
-      toGridView ? 'bg-white' : 'bg-violet-600',
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
       .querySelector('.icon')
@@ -512,6 +526,7 @@ export default async function relatedProducts(headingText, productIds) {
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   topSellingWrapper.append(carouselContainer);
   // block.innerHTML = '';
+  // block.style = '';
   // block.append(topSellingWrapper);
   return topSellingWrapper;
 }
