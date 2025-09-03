@@ -20,7 +20,7 @@ switch (template) {
     linkText = 'Read Article';
 }
 
-export default function createCard(article, firstCard = false) {
+export default function createCard(article) {
   const cardTitle = article.title.split('| Danaher Life Sciences')[0] || article.title;
 
   const fallbackImagePath = '/content/dam/danaher/system/icons/preview-image.png';

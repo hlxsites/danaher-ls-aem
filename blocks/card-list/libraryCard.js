@@ -1,16 +1,26 @@
-import { imageHelper, makePublicUrl } from '../../scripts/scripts.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 import {
-  li, a, p, div, h2,
+  li, a, p, div, h2, img,
 } from '../../scripts/dom-builder.js';
 
-export default function createCard(article, firstCard = false) {
+export default function createCard(article) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
     ? article.title.split('| Danaher Life Sciences')[0]
     : article.title;
 
+  const fallbackImagePath = '/content/dam/danaher/system/icons/preview-image.png';
+  const rawSrc = article.image ?? fallbackImagePath;
+  const safeSrc = rawSrc || fallbackImagePath;
+  const alt = article.title || 'Product image';
   const cardWrapper = a(
     { class: 'group h-full', href: makePublicUrl(article.path), title: article.title },
-    imageHelper(article.image, article.title, firstCard),
+    img({
+      src: safeSrc,
+      alt,
+      class: 'mb-2 h-48 w-full object-cover',
+      loading: 'lazy',
+      decoding: 'async',
+    }),
     div(
       { class: '' },
       p(
