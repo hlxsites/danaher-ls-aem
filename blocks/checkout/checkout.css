@@ -1169,6 +1169,10 @@
   stroke: #7523FF
 }
 
+.checkout :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
+  stroke: #AC2734
+}
+
 .checkout :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }

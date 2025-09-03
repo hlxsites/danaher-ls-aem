@@ -4753,6 +4753,10 @@ main .section.top-border {
   stroke: #7523FF;
 }
 
+.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use {
+  stroke: #AC2734;
+}
+
 .\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use {
   stroke: #4000A5;
 }

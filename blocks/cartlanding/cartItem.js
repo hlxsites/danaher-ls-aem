@@ -27,9 +27,6 @@ export const cartItem = async () => {
     id: 'cartListContainer',
   });
   if (getProductDetailsObject?.length > 0) {
-    // console.log("cartItem Value", getProductDetailsObject.data);
-
-    // cartListContainer.append(divider(300));
     getProductDetailsObject.forEach((itemToBeDisplayed) => {
       const opcoBe = Object.keys(itemToBeDisplayed);
       const imgsrc = opcoBe[0].split(' ')[0];

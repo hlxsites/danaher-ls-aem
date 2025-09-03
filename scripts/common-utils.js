@@ -151,6 +151,14 @@ export function showNotification(content, type, wrapper = '') {
   const color = isSuccess ? '#027243' : '#AC2734';
   const bgColor = isSuccess ? '#F0FFEF' : '#FFEFEF';
   const iconClass = isSuccess ? 'icon-check-circle' : 'icon-xcircle-red';
+  notificationIcon?.querySelector('svg')?.classList.add('rounded-full');
+  if (isSuccess) {
+    if (notificationIcon?.classList?.contains('[&_svg>use]:stroke-[#AC2734]')) {
+      notificationIcon?.classList?.remove('[&_svg>use]:stroke-[#AC2734]');
+    }
+  } else if (notificationIcon?.classList?.contains('[&_svg>use]:stroke-[#027243]')) {
+    notificationIcon?.classList?.remove('[&_svg>use]:stroke-[#027243]');
+  }
 
   // Reset and style wrapper
   notificationWrapper.style.display = 'block';

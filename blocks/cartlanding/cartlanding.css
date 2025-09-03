@@ -1547,6 +1547,10 @@
   stroke: #fff
 }
 
+.cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use) {
+  stroke: #AC2734
+}
+
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
