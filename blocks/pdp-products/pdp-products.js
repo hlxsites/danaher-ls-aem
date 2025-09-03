@@ -113,7 +113,7 @@ function subscribeToEngineUpdates(resultsList) {
 
   pdpResultList.subscribe(() => {
     if (pdpResultList?.state?.results?.length > 0 && !pdpResultList?.state?.isLoading) {
-      const viewType = localStorage.getItem('pdpListViewType');
+      const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
       displayProducts(resultsList, viewType);
     }
   })
@@ -186,7 +186,6 @@ export default async function decorate(block) {
   decorateIcons(viewModeGroup);
   layoutDiv?.querySelector('#resultSummaryCount')?.insertAdjacentElement('afterend', viewModeGroup);
 
-  const resultlist = layoutDiv?.querySelector('#resultsList');
   // click action for list view
   listBtn.addEventListener('click', () => {
     listBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
@@ -209,11 +208,9 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-white',
         '[&_svg>use]:stroke-gray-600',
       );
-      
-    if(resultlist) resultlist.textContent = '';
-    if (resultlist?.classList.contains('flex-wrap')) {
-      resultlist?.classList.remove('flex-wrap');
-      resultlist?.classList.add('flex-col');
+    if (resultsList?.classList.contains('flex-wrap')) {
+      resultsList?.classList.remove('flex-wrap');
+      resultsList?.classList.add('flex-col');
     }
     localStorage.setItem('pdpListViewType', 'list');
     
@@ -243,10 +240,9 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-white',
         '[&_svg>use]:stroke-gray-600',
       );
-    if(resultlist) resultlist.textContent = '';
-    if (resultlist?.classList.contains('flex-col')) {
-      resultlist?.classList.remove('flex-col');
-      resultlist?.classList.add('flex-wrap');
+    if (resultsList?.classList.contains('flex-col')) {
+      resultsList?.classList.remove('flex-col');
+      resultsList?.classList.add('flex-wrap');
     }
     localStorage.setItem('pdpListViewType', 'grid');
     subscribeToEngineUpdates(resultsList, 'grid');
@@ -257,14 +253,13 @@ export default async function decorate(block) {
 
   createFiltersPanel();
   setupCoveoContext(sku, host);
-  const { isLoading } = pdpResultList.state;
-  if (isLoading) {    
     const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
-    if (resultlist?.classList.contains('flex-col') && viewType === 'grid') {
-      resultlist?.classList.remove('flex-col');
-      resultlist?.classList.add('flex-wrap');
+    if (resultsList?.classList.contains('flex-col') && viewType === 'grid') {
+      resultsList?.classList.remove('flex-col');
+      resultsList?.classList.add('flex-wrap');
     }
+    console.log('viewtype: ', viewType);
+    
     subscribeToEngineUpdates(resultsList, viewType);
-  }
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
