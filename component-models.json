@@ -2131,6 +2131,18 @@
     ]
   },
   {
+    "id": "talk-to-an-expert-text",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "talkToAnExpertText",
+        "label": "Talk to an Expert Text",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "fields": [
       {

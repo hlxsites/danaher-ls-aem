@@ -980,6 +980,21 @@
           }
         },
         {
+          "title": "Talk-To-An-Expert-Text",
+          "id": "talk-to-an-expert-text",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Talk-To-An-Expert-Text",
+                  "model": "talk-to-an-expert-text"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Testimonial",
           "id": "testimonial",
           "plugins": {

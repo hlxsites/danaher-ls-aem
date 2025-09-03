@@ -67,7 +67,8 @@
       "pdp-products",
       "pdp-related-products",
       "pdp-resources",
-      "pdp-specifications"
+      "pdp-specifications",
+      "talk-to-an-expert-text"
     ]
   },
   {
@@ -262,6 +263,12 @@
   {
     "id": "tags-list",
     "components": []
+  },
+  {
+    "id": "talk-to-an-expert-text",
+    "components": [
+      " "
+    ]
   },
   {
     "id": "tiny-carousel",
