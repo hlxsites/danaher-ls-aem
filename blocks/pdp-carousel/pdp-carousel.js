@@ -66,9 +66,9 @@ export default async function decorate(block) {
 
   products.forEach((product) => {
     const mappedProduct = {
-      title: product.title,
-      url: product.clickUri,
-      image: product.raw?.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+      title: product?.title || '',
+      url: product?.clickUri || '',
+      image: product?.raw?.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
       description: product.raw?.description || '',
     };
 

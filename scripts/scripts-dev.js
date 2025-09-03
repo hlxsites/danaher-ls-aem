@@ -132,7 +132,8 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 }
 
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
-  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1 || src.includes('.eps')
+  || src.includes('.png') || src.includes('.jpg') || src.includes('.jpeg')) {
     const picture = document.createElement('picture');
     picture.appendChild(img({
       src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',

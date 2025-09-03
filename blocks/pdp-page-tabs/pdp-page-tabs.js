@@ -132,8 +132,8 @@ export default async function decorate(block) {
   // Collect authored labels indexed by type
   const authoredTabMap = {};
   authoredBlocks.forEach((authoredBlock) => {
-    const type = authoredBlock.querySelector('.authored-tab-type')?.textContent?.trim();
-    const titleEl = authoredBlock.querySelector('.authored-tab-title');
+    const type = authoredBlock?.querySelector('.authored-tab-type')?.textContent?.trim();
+    const titleEl = authoredBlock?.querySelector('.authored-tab-title');
     const authoredLabel = titleEl?.textContent.trim();
     if (type) {
       authoredTabMap[type] = authoredLabel;
@@ -171,7 +171,7 @@ export default async function decorate(block) {
       'tabs-parent flex flex-row md:flex-col overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
   });
 
-  tabsList.forEach((tab, index) => {
+  tabsList?.forEach((tab, index) => {
     tabsDiv.append(
       div(
         {
