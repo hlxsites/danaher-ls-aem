@@ -29,7 +29,7 @@ if (window.location.hostname.includes('lifesciences.danaher.com')) {
   }
 }
 
-const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'pdp-hero', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: {
     templateName: 'blog',
@@ -46,6 +46,14 @@ const TEMPLATE_LIST = {
       './commerce.js',
       './product-payload-builder.js',
       './schema.js',
+    ],
+  },
+  pdp: {
+    templateName: 'pdp',
+    dependencies: [
+      './schema.js',
+      '../templates/pdp/pdp.js',
+      './commerce.js',
     ],
   },
   processstep: 'processstep',
@@ -124,7 +132,8 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 }
 
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
-  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1 || src.includes('.eps')
+  || src.includes('.png') || src.includes('.jpg') || src.includes('.jpeg')) {
     const picture = document.createElement('picture');
     picture.appendChild(img({
       src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
@@ -899,7 +908,67 @@ function loadUTMprams() {
   });
 }
 // UTM Paramaters check - end
+async function designPdp() {
+  const main = document.querySelector('main');
 
+  const allSections = Array.from(main.querySelectorAll('.section'));
+  const meaningfulSections = allSections.filter((section) => Array.from(section.classList).some((cls) => cls.startsWith('pdp-')));
+
+  const heroSection = meaningfulSections.find((sec) => sec.classList.contains('pdp-hero-container'));
+
+  const flexWrapper = div({
+    class: 'tabs-super-parent flex flex-col md:flex-row md:justify-center lg:max-w-screen-xl mx-auto pt-12',
+  });
+
+  const tabsWrapper = div({
+    class: 'tabs-left-parent sticky top-16 md:top-32 h-fit z-10',
+  });
+
+  const restWrapper = div({
+    class: 'tabs-right-parent border-l border-gray-200 flex-1',
+  });
+
+  // Define tabbed content section classes
+  const tabContentClasses = new Set([
+    'pdp-page-tabs-container',
+    'pdp-description-container',
+    'pdp-specifications-container',
+    'pdp-related-products-container',
+    'pdp-bundle-list-container',
+    'pdp-citations-container',
+    'pdp-products-container',
+    'pdp-resources-container',
+    'pdp-faqs-container',
+    // Add more as needed
+  ]);
+
+  const afterFlexSections = [];
+
+  meaningfulSections.forEach((section) => {
+    if (section === heroSection) return;
+
+    const hasTabbedClass = Array.from(section.classList).some((cls) => tabContentClasses.has(cls));
+
+    if (section.classList.contains('pdp-page-tabs-container')) {
+      tabsWrapper.appendChild(section);
+    } else if (hasTabbedClass) {
+      restWrapper.appendChild(section);
+    } else {
+      afterFlexSections.push(section);
+    }
+  });
+
+  flexWrapper.appendChild(tabsWrapper);
+  flexWrapper.appendChild(restWrapper);
+
+  // Insert flex wrapper after hero section
+  heroSection?.after(flexWrapper);
+
+  // Insert other sections (e.g., pdp-faqs, pdp-carousel) after flexWrapper
+  afterFlexSections.forEach((section) => {
+    flexWrapper.after(section);
+  });
+}
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -967,6 +1036,7 @@ async function loadPage() {
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
+  await designPdp();
   loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
 }

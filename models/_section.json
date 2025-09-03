@@ -93,7 +93,18 @@
       "tags-list",
       "related-articles",
       "social-media",
-      "mini-teasers"
+      "mini-teasers",
+      "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications"
     ]
     }
   ]

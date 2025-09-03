@@ -1430,6 +1430,131 @@
     "fields": []
   },
   {
+    "id": "pdp-bundle-list",
+    "fields": []
+  },
+  {
+    "id": "pdp-carousel",
+    "fields": []
+  },
+  {
+    "id": "pdp-citations",
+    "fields": []
+  },
+  {
+    "id": "pdp-description",
+    "fields": []
+  },
+  {
+    "id": "pdp-faqs",
+    "fields": []
+  },
+  {
+    "id": "pdp-hero",
+    "fields": []
+  },
+  {
+    "id": "pdp-page-tabs",
+    "fields": []
+  },
+  {
+    "id": "pdp-tabs-item",
+    "fields": [
+      {
+        "component": "radio-group",
+        "label": "Choose an Option",
+        "name": "selectedOption",
+        "valueType": "string",
+        "required": true,
+        "defaultValue": "only-pim",
+        "options": [
+          {
+            "name": "Show only PIM data",
+            "value": "only-pim"
+          },
+          {
+            "name": "Show only Authored data",
+            "value": "only-authored"
+          },
+          {
+            "name": "Show both",
+            "value": "pim-authored"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "tabType",
+        "label": "Product Tab ID",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Overview",
+            "value": "overview"
+          },
+          {
+            "name": "Specifications",
+            "value": "specifications"
+          },
+          {
+            "name": "Resources",
+            "value": "resources"
+          },
+          {
+            "name": "Products",
+            "value": "products"
+          },
+          {
+            "name": "Bundle Parts",
+            "value": "parts"
+          },
+          {
+            "name": "Related Products",
+            "value": "relatedproducts"
+          },
+          {
+            "name": "Citations",
+            "value": "citations"
+          },
+          {
+            "name": "FAQs",
+            "value": "faqs"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "product-tab-title",
+        "value": "",
+        "label": "Product Tab Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "product-tab-content",
+        "value": "",
+        "label": "Product Tab Content"
+      }
+    ]
+  },
+  {
+    "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-related-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-resources",
+    "fields": []
+  },
+  {
+    "id": "pdp-specifications",
+    "fields": []
+  },
+  {
     "id": "product-banner",
     "fields": [
       {

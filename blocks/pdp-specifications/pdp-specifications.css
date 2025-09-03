@@ -1,0 +1,172 @@
+.dhls-container .font-medium {
+  font-weight: 400;
+  font-family: TWK Lausanne EDS
+}
+
+.pdp-specifications-wrapper :is(.my-auto) {
+  margin-top: auto;
+  margin-bottom: auto
+}
+
+.pdp-specifications-wrapper :is(.\!mr-5) {
+  margin-right: 1.25rem !important
+}
+
+.pdp-specifications-wrapper :is(.block) {
+  display: block
+}
+
+.pdp-specifications-wrapper :is(.flex) {
+  display: flex
+}
+
+.pdp-specifications-wrapper :is(.h-full) {
+  height: 100%
+}
+
+.pdp-specifications-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.pdp-specifications-wrapper :is(.min-w-full) {
+  min-width: 100%
+}
+
+.pdp-specifications-wrapper :is(.flex-row) {
+  flex-direction: row
+}
+
+.pdp-specifications-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
+.pdp-specifications-wrapper :is(.divide-y > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
+}
+
+.pdp-specifications-wrapper :is(.divide-gray-300 > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-divide-opacity))
+}
+
+.pdp-specifications-wrapper :is(.break-words) {
+  overflow-wrap: break-word
+}
+
+.pdp-specifications-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.pdp-specifications-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
+.pdp-specifications-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.pdp-specifications-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.pdp-specifications-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.pdp-specifications-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.pdp-specifications-wrapper :is(.p-4) {
+  padding: 1rem
+}
+
+.pdp-specifications-wrapper :is(.px-1) {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem
+}
+
+.pdp-specifications-wrapper :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
+.pdp-specifications-wrapper :is(.\!pb-6) {
+  padding-bottom: 1.5rem !important
+}
+
+.pdp-specifications-wrapper :is(.pb-6) {
+  padding-bottom: 1.5rem
+}
+
+.pdp-specifications-wrapper :is(.align-middle) {
+  vertical-align: middle
+}
+
+.pdp-specifications-wrapper :is(.\!text-xl) {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important
+}
+
+.pdp-specifications-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.pdp-specifications-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.pdp-specifications-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.pdp-specifications-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
+.pdp-specifications-wrapper :is(.leading-6) {
+  line-height: 1.5rem
+}
+
+.pdp-specifications-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.pdp-specifications-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+@media (min-width: 640px) {
+  .pdp-specifications-wrapper :is(.sm\:flex) {
+    display: flex
+  }
+
+  .pdp-specifications-wrapper :is(.sm\:flex-auto) {
+    flex: 1 1 auto
+  }
+
+  .pdp-specifications-wrapper :is(.sm\:items-center) {
+    align-items: center
+  }
+}
+
+@media (min-width: 768px) {
+  .pdp-specifications-wrapper :is(.md\:w-1\/4) {
+    width: 25%
+  }
+
+  .pdp-specifications-wrapper :is(.md\:w-2\/4) {
+    width: 50%
+  }
+}
