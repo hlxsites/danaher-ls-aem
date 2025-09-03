@@ -53,6 +53,8 @@ export default async function decorate(block) {
              !absImg.includes('error') ? absImg : '/content/dam/danaher/products/fallbackImage.jpeg',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
+            loading: 'lazy',
+            decoding: 'async',
           }),
         p(
           {

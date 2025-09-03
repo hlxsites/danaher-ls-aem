@@ -208,6 +208,14 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "bg-white seventythirty",
+            "value": "bg-white seventythirty"
+          },
+          {
+            "name": "bg-white thirtyseventy",
+            "value": "bg-white thirtyseventy"
           }
         ]
       }
@@ -241,63 +249,6 @@
         "name": "item_description",
         "value": "",
         "label": "Description"
-      }
-    ]
-  },
-  {
-    "id": "article-info-new",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "authorName",
-        "label": "Author Name",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "authorTitle",
-        "label": "Author Title",
-        "value": ""
-      },
-      {
-        "component": "reference",
-        "valueType": "Picture",
-        "name": "image",
-        "label": "Image",
-        "multi": false,
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt Text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "articleOpco",
-        "label": "Article Opco",
-        "value": ""
-      },
-      {
-        "component": "date-time",
-        "valueType": "date-time",
-        "name": "publishDate",
-        "label": "Date",
-        "displayFormat": null,
-        "valueFormat": null,
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "readingTime",
-        "label": "Reading Time",
-        "value": ""
       }
     ]
   },
@@ -689,19 +640,19 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_subheading",
-        "label": "Left Side Subheading",
+        "name": "carousel_subtitle",
+        "label": "Carousel Sub Title",
         "description": "Eyebrow style subheading"
       },
       {
         "component": "text",
-        "name": "leftMainHeading",
-        "label": "Main Heading Text"
+        "name": "carousel_title",
+        "label": "Carousel Title"
       },
       {
         "component": "select",
-        "name": "leftMainHeadingType",
-        "label": "Heading Tag Type",
+        "name": "carousel_titleType",
+        "label": "Carousel Title Type",
         "options": [
           {
             "name": "h1",
@@ -731,30 +682,34 @@
       },
       {
         "component": "text",
-        "name": "leftProductInfo",
+        "name": "carousel_ProductInfo",
         "label": "Left Side Product Info",
         "description": "Descriptive paragraph below heading"
       },
       {
-        "component": "url",
-        "name": "leftProductInfoLink",
-        "label": "Left Product Info Link"
+        "component": "aem-content",
+        "name": "carousel_1_link",
+        "label": "Link1"
       },
       {
         "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
+        "name": "carousel_1_linkText",
+        "label": "Text1"
       },
       {
         "component": "text",
-        "name": "left_cta_1_title",
-        "label": "Left CTA 1 Title"
+        "name": "carousel_1_linkTitle",
+        "label": "Title1"
       },
       {
         "component": "select",
-        "name": "left_cta_1_type",
-        "label": "Left CTA 1 Type",
+        "name": "carousel_1_linkType",
+        "label": "Type1",
         "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
           {
             "name": "primary",
             "value": "primary"
@@ -766,25 +721,29 @@
         ]
       },
       {
-        "component": "url",
-        "name": "left_cta_2_link",
-        "label": "Left CTA 2 Link"
+        "component": "aem-content",
+        "name": "carousel_2_link",
+        "label": "Link2"
       },
       {
         "component": "text",
-        "name": "left_cta_2_text",
-        "label": "Left CTA 2 Text"
+        "name": "carousel_2_linkText",
+        "label": "Text2"
       },
       {
         "component": "text",
-        "name": "left_cta_2_title",
-        "label": "Left CTA 2 Title"
+        "name": "carousel_2_linkTitle",
+        "label": "Title2"
       },
       {
         "component": "select",
-        "name": "left_cta_2_type",
-        "label": "Left CTA 2 Type",
+        "name": "carousel_2_linkType",
+        "label": "Type2",
         "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
           {
             "name": "primary",
             "value": "primary"
@@ -797,49 +756,18 @@
       },
       {
         "component": "reference",
-        "name": "picture",
-        "label": "Right Side Image",
-        "description": "Picture with styling from decorate"
+        "valueType": "Picture",
+        "name": "carousel_image",
+        "label": "Image",
+        "multi": false,
+        "value": ""
       },
       {
         "component": "text",
-        "name": "imageAlt",
-        "label": "Right Side Alt Text"
-      },
-      {
-        "component": "boolean",
-        "name": "auto_play",
-        "label": "Enable Auto Play",
-        "description": "Auto play enabled via isAutoPlay flag",
-        "default": ""
-      },
-      {
-        "component": "number",
-        "name": "slide_delay",
-        "label": "Slide Delay",
-        "description": "Delay between slides in milliseconds",
-        "default": ""
-      },
-      {
-        "component": "number",
-        "name": "slide_transition",
-        "label": "Slide Transition Duration",
-        "description": "Slide transition speed in milliseconds",
-        "default": ""
-      },
-      {
-        "component": "boolean",
-        "name": "show_pagination",
-        "label": "Show Pagination",
-        "description": "Display 1/3 pagination indicator",
-        "default": ""
-      },
-      {
-        "component": "boolean",
-        "name": "show_navigation",
-        "label": "Show Navigation Arrows",
-        "description": "Previous/Next buttons",
-        "default": ""
+        "valueType": "string",
+        "name": "carousel_imageAlt",
+        "label": "Alt Text",
+        "value": ""
       }
     ]
   },
@@ -847,53 +775,39 @@
     "id": "columns",
     "fields": [
       {
-        "component": "select",
-        "name": "rows",
-        "label": "Number of Columns",
-        "valueType": "string",
-        "default": "2",
-        "options": [
-          {
-            "name": "2 Columns",
-            "value": "2"
-          },
-          {
-            "name": "3 Columns",
-            "value": "3"
-          }
-        ]
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "2",
+        "label": "Columns"
       },
       {
-        "component": "multiselect",
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "1",
+        "label": "Rows"
+      },
+      {
+        "component": "select",
         "name": "classes",
-        "label": "Select Ratio (only for 2 columns)",
+        "label": "Select Class Name",
         "valueType": "string",
-        "default": "fiftyfifty",
+        "default": "",
         "options": [
           {
-            "name": "70/30 Split",
-            "value": "seventythirty"
+            "name": "default",
+            "value": ""
           },
           {
-            "name": "30/70 Split",
-            "value": "thirtyseventy"
+            "name": "itemscenter",
+            "value": "itemscenter"
+          },
+          {
+            "name": "form-wrapper",
+            "value": "form-wrapper"
           }
-        ],
-        "condition": {
-          "field": "rows",
-          "equals": "2"
-        }
-      }
-    ]
-  },
-  {
-    "id": "column",
-    "fields": [
-      {
-        "component": "blocks",
-        "name": "blocks",
-        "label": "Blocks",
-        "valueType": "array"
+        ]
       }
     ]
   },
@@ -972,39 +886,29 @@
         "type": "boolean",
         "label": "Autoplay",
         "default": false
-      },
-      {
-        "component": "select",
-        "name": "type",
-        "label": "Type",
-        "options": [
-          {
-            "name": "YouTube",
-            "value": "youtube"
-          },
-          {
-            "name": "Vimeo",
-            "value": "vimeo"
-          },
-          {
-            "name": "Vidyard",
-            "value": "vidyard"
-          },
-          {
-            "name": "PDF",
-            "value": "pdf"
-          },
-          {
-            "name": "Other",
-            "value": "default"
-          }
-        ]
       }
     ]
   },
   {
     "id": "form",
     "fields": [
+      {
+        "component": "select",
+        "name": "formSelection",
+        "label": "Select Form Name",
+        "valueType": "string",
+        "default": "",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "talk-to-an-expert",
+            "value": "talk-to-an-expert"
+          }
+        ]
+      },
       {
         "component": "text",
         "name": "formId",
@@ -1291,89 +1195,68 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
-        "name": "miniTeasers",
-        "label": "Mini Teasers"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersType",
-        "label": "Mini Teasers Type",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
+            "name": "3 Columns",
+            "value": "cols-3"
           },
           {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
+            "name": "4 Columns",
+            "value": "cols-4"
           }
         ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "miniTeasersDescription",
-        "label": "Mini Teasers Description"
-      },
-      {
-        "component": "select",
-        "name": "miniTeasersDescriptionType",
-        "label": "Mini Teasers Description Type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "mini-teaser",
+    "fields": [
       {
         "component": "reference",
-        "name": "image",
+        "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
-        "name": "imageAlt",
+        "name": "mini-teaser_imageAlt",
         "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "mini-teaser_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "mini-teaser_titleType",
+        "value": "h3",
+        "label": "Title Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "mini-teaser_description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
       }
     ]
   },
@@ -1659,6 +1542,131 @@
   },
   {
     "id": "page-tabs",
+    "fields": []
+  },
+  {
+    "id": "pdp-bundle-list",
+    "fields": []
+  },
+  {
+    "id": "pdp-carousel",
+    "fields": []
+  },
+  {
+    "id": "pdp-citations",
+    "fields": []
+  },
+  {
+    "id": "pdp-description",
+    "fields": []
+  },
+  {
+    "id": "pdp-faqs",
+    "fields": []
+  },
+  {
+    "id": "pdp-hero",
+    "fields": []
+  },
+  {
+    "id": "pdp-page-tabs",
+    "fields": []
+  },
+  {
+    "id": "pdp-tabs-item",
+    "fields": [
+      {
+        "component": "radio-group",
+        "label": "Choose an Option",
+        "name": "selectedOption",
+        "valueType": "string",
+        "required": true,
+        "defaultValue": "only-pim",
+        "options": [
+          {
+            "name": "Show only PIM data",
+            "value": "only-pim"
+          },
+          {
+            "name": "Show only Authored data",
+            "value": "only-authored"
+          },
+          {
+            "name": "Show both",
+            "value": "pim-authored"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "tabType",
+        "label": "Product Tab ID",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Overview",
+            "value": "overview"
+          },
+          {
+            "name": "Specifications",
+            "value": "specifications"
+          },
+          {
+            "name": "Resources",
+            "value": "resources"
+          },
+          {
+            "name": "Products",
+            "value": "products"
+          },
+          {
+            "name": "Bundle Parts",
+            "value": "parts"
+          },
+          {
+            "name": "Related Products",
+            "value": "relatedproducts"
+          },
+          {
+            "name": "Citations",
+            "value": "citations"
+          },
+          {
+            "name": "FAQs",
+            "value": "faqs"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "product-tab-title",
+        "value": "",
+        "label": "Product Tab Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "product-tab-content",
+        "value": "",
+        "label": "Product Tab Content"
+      }
+    ]
+  },
+  {
+    "id": "pdp-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-related-products",
+    "fields": []
+  },
+  {
+    "id": "pdp-resources",
+    "fields": []
+  },
+  {
+    "id": "pdp-specifications",
     "fields": []
   },
   {
@@ -2330,6 +2338,18 @@
             "value": ""
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "talk-to-an-expert-text",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "talkToAnExpertText",
+        "label": "Talk to an Expert Text",
+        "value": ""
       }
     ]
   },

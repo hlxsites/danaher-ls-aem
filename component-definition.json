@@ -114,21 +114,6 @@
           }
         },
         {
-          "title": "Article-Info-New",
-          "id": "article-info-new",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Article-Info-New",
-                  "model": "article-info-new"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Article-Info",
           "id": "article-info",
           "plugins": {
@@ -287,55 +272,11 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
+                  "columns": "2",
+                  "rows": "1",
                   "class": {
                     "$ref": "classes"
-                  },
-                  "rows": {
-                    "$ref": "rows"
                   }
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Column",
-          "id": "column",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/column/v1/column",
-                "template": {
-                  "blocks": {
-                    "$ref": "blocks"
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Block",
-          "id": "block",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {}
-              }
-            }
-          }
-        },
-        {
-          "title": "Dashboard",
-          "id": "dashboard",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "dashboard",
-                  "model": "dashboard"
                 }
               }
             }
@@ -456,7 +397,23 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Mini-Teasers",
-                  "model": "mini-teasers"
+                  "model": "mini-teasers",
+                  "filter": "mini-teasers"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mini Teaser",
+          "id": "mini-teaser",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Mini Teaser",
+                  "model": "mini-teaser"
                 }
               }
             }
@@ -609,6 +566,187 @@
                 "template": {
                   "name": "Page Tabs",
                   "model": "page-tabs"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "PDP Bundle List",
+          "id": "pdp-bundle-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "PDP Bundle List",
+                  "model": "pdp-bundle-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Carousel",
+          "id": "pdp-carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Carousel",
+                  "model": "pdp-carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Citations",
+          "id": "pdp-citations",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Citations",
+                  "model": "pdp-citations"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "PDP Description",
+          "id": "pdp-description",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "PDP Description",
+                  "model": "pdp-description"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp FAQs",
+          "id": "pdp-faqs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp FAQs",
+                  "model": "pdp-faqs"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "PDP Hero",
+          "id": "pdp-hero",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "PDP Hero",
+                  "model": "pdp-hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Page Tabs",
+          "id": "pdp-page-tabs",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Page Tabs",
+                  "model": "pdp-page-tabs",
+                  "filter": "pdp-page-tabs"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "PDP tabs Item",
+          "id": "pdp-tabs-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "PDP tabs Item",
+                  "model": "pdp-tabs-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Products",
+          "id": "pdp-products",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Products",
+                  "model": "pdp-products"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Related Products",
+          "id": "pdp-related-products",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Related Products",
+                  "model": "pdp-related-products"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Pdp Resources",
+          "id": "pdp-resources",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Pdp Resources",
+                  "model": "pdp-resources"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "PDP Specifications",
+          "id": "pdp-specifications",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "PDP Specifications",
+                  "model": "pdp-specifications"
                 }
               }
             }
@@ -941,6 +1079,21 @@
                 "template": {
                   "name": "Takeway",
                   "model": "takeway"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Talk-To-An-Expert-Text",
+          "id": "talk-to-an-expert-text",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Talk-To-An-Expert-Text",
+                  "model": "talk-to-an-expert-text"
                 }
               }
             }

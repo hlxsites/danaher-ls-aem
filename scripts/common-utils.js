@@ -1,14 +1,5 @@
 import {
-  div,
-  input,
-  label,
-  span,
-  button,
-  select,
-  option,
-  img,
-  p,
-  h3,
+  div, span, p,
 } from './dom-builder.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
@@ -49,10 +40,6 @@ export function preLoader() {
         'flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
-    img({
-      class: ' h-24',
-      src: '/content/dam/danaher/utility/loading_icon.gif',
-    }),
   );
 }
 

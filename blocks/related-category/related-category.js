@@ -49,6 +49,8 @@ function renderGridCard(item) {
       src: src || fallbackImagePath,
       alt: alt || 'Product image',
       class: 'w-full h-40 object-cover',
+      loading: 'lazy',
+      decoding: 'async',
     });
 
     imageElement.addEventListener('error', () => {

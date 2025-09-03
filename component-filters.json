@@ -9,7 +9,6 @@
     "id": "section",
     "components": [
       "article-info",
-      "article-info-new",
       "breadcrumb",
       "banner",
       "text",
@@ -62,7 +61,21 @@
       "table",
       "testimonial",
       "tags-list",
-      "related-articles"
+      "related-articles",
+      "social-media",
+      "mini-teasers",
+      "pdp-hero",
+      "pdp-page-tabs",
+      "pdp-bundle-list",
+      "pdp-carousel",
+      "pdp-citations",
+      "pdp-description",
+      "pdp-faqs",
+      "pdp-products",
+      "pdp-related-products",
+      "pdp-resources",
+      "pdp-specifications",
+      "talk-to-an-expert-text"
     ]
   },
   {
@@ -70,10 +83,6 @@
     "components": [
       "accordion-item"
     ]
-  },
-  {
-    "id": "article-info-new",
-    "components": []
   },
   {
     "id": "article-info",
@@ -115,7 +124,7 @@
   {
     "id": "carousel",
     "components": [
-      " "
+      ""
     ]
   },
   {
@@ -129,12 +138,10 @@
     "components": [
       "text",
       "image",
-      "title",
       "button",
-      "article-info",
-      "embed",
+      "title",
       "form",
-      "mini-teasers"
+      "embed"
     ]
   },
   {
@@ -170,6 +177,12 @@
     ]
   },
   {
+    "id": "mini-teasers",
+    "components": [
+      "mini-teaser"
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -188,21 +201,9 @@
     ]
   },
   {
-    "id": "order-details",
+    "id": "pdp-page-tabs",
     "components": [
-      ""
-    ]
-  },
-  {
-    "id": "order-status",
-    "components": [
-      ""
-    ]
-  },
-  {
-    "id": "order-submit",
-    "components": [
-      ""
+      "pdp-tabs-item"
     ]
   },
   {
@@ -269,6 +270,12 @@
   {
     "id": "tags-list",
     "components": []
+  },
+  {
+    "id": "talk-to-an-expert-text",
+    "components": [
+      " "
+    ]
   },
   {
     "id": "tiny-carousel",

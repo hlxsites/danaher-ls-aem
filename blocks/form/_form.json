@@ -21,6 +21,17 @@
       "id": "form",
       "fields": [
         {
+          "component": "select",
+          "name": "formSelection",
+          "label": "Select Form Name",
+          "valueType": "string",
+          "default": "",
+          "options": [
+            { "name": "default", "value": "" },
+            { "name": "talk-to-an-expert", "value": "talk-to-an-expert" }
+          ]
+        },
+        {
           "component": "text",
           "name": "formId",
           "type": "string",
