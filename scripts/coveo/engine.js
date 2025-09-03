@@ -31,5 +31,3 @@ export const frequentViewedEngine = buildSearchEngine({
     },
   },
 });
-
-// export default searchEngine;

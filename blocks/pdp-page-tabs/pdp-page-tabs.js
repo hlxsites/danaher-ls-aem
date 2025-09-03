@@ -137,7 +137,6 @@ export default async function decorate(block) {
     const authoredLabel = titleEl?.textContent.trim();
     if (type) {
       authoredTabMap[type] = authoredLabel;
-      // titleEl.remove(); // Don't show inside section
     }
   });
 
@@ -151,14 +150,6 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-prototype-builtins
     citations: { label: 'Citations', available: !!response?.raw?.citations?.trim() || authoredTabMap.hasOwnProperty('citations') },
   };
-
-  // Build tabsList → pick authored label if present, static fallback otherwise
-  // Object.entries(fullTabConfig).forEach(([type, cfg]) => {
-  //   if (cfg.available) {
-  //     const label = authoredTabMap[type] || cfg.label;
-  //     tabsList.push({ label, selector: `${type}-tab` });
-  //   }
-  // });
 
   // -------------- Generate tabsList in JSON order --------------
   const opco = response?.raw?.opco?.toLowerCase() || 'sciex';

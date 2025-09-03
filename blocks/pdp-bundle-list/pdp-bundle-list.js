@@ -9,7 +9,6 @@ export default async function decorate(block) {
   const isPIM = document.querySelector('#authored-parts')?.children[0].textContent;
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
-  // if (response !== null && response !== undefined && response.raw?.bundlepreviewjson) {
   try {
     let bundleDetails = JSON.parse(response.raw?.bundlepreviewjson) || [];
     const elem = document.querySelector('#authored-parts')?.children[3];
@@ -72,10 +71,6 @@ export default async function decorate(block) {
           p({ class: 'text-black text-base font-bold leading-snug' }, `${product.quantity || 1}`),
           p({ class: 'text-gray-500 text-sm leading-tight' }, 'QTY'),
         ),
-        // div({
-        //   class: 'hidden md:block cursor-pointer text-danaherpurple-500
-        // hover:text-danaherpurple-800 text-base font-bold leading-snug',
-        // }, 'View →'),
       );
 
       block.append(wrapper);

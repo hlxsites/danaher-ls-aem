@@ -88,7 +88,6 @@ function imageSlider(allImages, productName = 'product') {
 export default async function decorate(block) {
   block.parentElement.parentElement.style.padding = '0';
   const titleEl = block.querySelector('h1');
-  // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
   const result = JSON.parse(localStorage.getItem('eds-product-details'));
@@ -156,7 +155,6 @@ export default async function decorate(block) {
           class:
               'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
-        // result?.raw?.richdescription?.replace(/<[^>]*>/g, ''),
       ),
     ),
   );
@@ -322,7 +320,6 @@ export default async function decorate(block) {
     class: 'self-stretch flex flex-col justify-start items-start gap-5',
   });
   priceInfoDiv.append(infoTab, shipInfo);
-  // defaultContent.append(priceInfoDiv);
 
   if (
     result?.raw?.objecttype === 'Product'
@@ -330,20 +327,6 @@ export default async function decorate(block) {
   ) {
     defaultContent.append(priceInfoDiv);
   }
-
-  // if (result?.raw?.objecttype === 'Bundle' || result?.raw?.objecttype === 'Family') {
-  //   priceInfoDiv.append(quoteButton);
-  // }
-
-  // if (
-  //   result?.raw?.objecttype === 'Family'
-  // ) {
-  //   defaultContent.append(quoteButton);
-  // }
-
-  // if (result?.raw?.objecttype === 'Product') {
-  //   priceInfoDiv.append(pricingQuoteButton);
-  // }
 
   infoTab.querySelector('.starts-at-price').style.display = 'none';
   infoTab.querySelector('.uom-seperator-line').style.display = 'none';
@@ -388,20 +371,12 @@ export default async function decorate(block) {
   }
 
   if (showRFQ) {
-    // rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg
-    // rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(' '));
     if (['Product', 'Bundle'].includes(result?.raw?.objecttype)) {
-      // defaultContent.append(pricingQuoteButton);
       pricingQuoteButton.querySelector('.pr-rfq')?.classList.remove('hidden');
-      // pricingQuoteButton.querySelector('.pr-rfq')?.addEventListener('
-      // click', () => { addToQuote(result); });
     }
-    // else {
-    //   // defaultContent.append(pricingQuoteButton);
-    // }
   }
 
-  // Buy Now logic decoupled
+  // Buy Now logic
   const rfqLabelRaw = result?.raw?.buynowlabel || '';
   const externallinkRaw = result?.raw?.externallink;
   let btnLabel = '';
@@ -428,13 +403,6 @@ export default async function decorate(block) {
       btnLabel = 'Buy Now';
     }
 
-    // const btn = document.createElement('button');
-    // btn.textContent = btnLabel;
-    // btn.classList.add(
-    //   ...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto
-    // px-4 py-2 whitespace-nowrap h-12'.split(' '),
-    // );
-
     pricingQuoteButton.querySelector('.pr-bn')?.addEventListener('click', () => {
       if (btnHref) {
         window.open(btnHref, '_blank');
@@ -443,20 +411,6 @@ export default async function decorate(block) {
       }
     });
   }
-  // const brandButton = document.createElement('button');
-  // brandButton.textContent = 'Buy Now on abcam.com';
-  // brandButton.classList.add(
-  //   ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
-  //     ' ',
-  //   ),
-  // );
-
-  // const brandURL = result?.raw?.externallink
-  //   ? `${result.raw.externallink}?utm_source=dhls_website`
-  //   : null;
-  // brandButton.addEventListener('click', () => {
-  //   window.open(brandURL, '_blank');
-  // });
   const infoDiv = div({
     class: '',
   });
@@ -654,7 +608,6 @@ export default async function decorate(block) {
     ),
   );
 
-  // decorateIcons(bundleLink);
   const bundleTab = div(
     {
       class: 'w-full inline-flex gap-6 flex-col md:flex-row',

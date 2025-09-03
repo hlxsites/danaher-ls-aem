@@ -33,7 +33,6 @@ export default async function decorate(block) {
     if (parsedData.length > 0) attrJson.push(...parsedData);
   }
 
-  // if (response !== undefined && response !== null) {
   if (attrJson.length > 0) {
     const attrWrapper = div({ class: 'attr-wrapper' });
     attrJson.forEach((item, index) => {

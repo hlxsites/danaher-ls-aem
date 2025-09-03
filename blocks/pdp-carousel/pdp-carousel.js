@@ -59,16 +59,9 @@ export default async function decorate(block) {
   const paginationContainer = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full', style: 'display: none;' });
 
   // Coveo call to get the response
-  // const response = await getProductsOnSolutionsResponse();
-  // Store up to 12 products in localStorage
-  //const productsList = (apiCall?.results || []).slice(0, 12);
   const recommendationsResponse = await getProductRecommendationsResponse();
-  //console.log('Product Recommendations Response:', recommendationsResponse);
-  //localStorage.setItem('pdp-carousel-products', JSON.stringify(productsList));
 
-  // Retrieve products from localStorage
-  if(recommendationsResponse === undefined)
-    return;
+  if (recommendationsResponse === undefined) return;
   const products = JSON.parse(recommendationsResponse?.results) || [];
 
   products.forEach((product) => {

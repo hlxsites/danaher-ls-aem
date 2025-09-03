@@ -25,7 +25,6 @@ const host = window.location.host === 'lifesciences.danaher.com'
   : 'stage.lifesciences.danaher.com';
 // 3️. Set context
 const resourceContext = loadContextActions(resourceEngine);
-// const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
 
 resourceEngine.dispatch(
   resourceContext.setContext({
@@ -57,44 +56,6 @@ export const resourcePager = buildPager(resourceEngine, {
 
 // ================================= END Resource =========================
 
-// export async function getFrequentlyViewedTogether(itemId) {
-//   const { updateSearchConfiguration } = loadSearchConfigurationActions(frequentViewedEngine);
-//   const { updateAdvancedSearchQueries } = loadAdvancedSearchQueryActions(frequentViewedEngine);
-
-//   // Set search config: tab, locale, timezone, pipeline
-//   frequentViewedEngine.dispatch(updateSearchConfiguration({
-//     locale: 'en',
-//     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-//     tab: 'Frequently Viewed Together',
-//     pipeline: 'Danaher LifeSciences Product Recommendations',
-//     fieldsToInclude: ['description', 'categoriesname', 'images', 'source'],
-//   }));
-
-//   // Add ML context
-//   const context = buildContext(frequentViewedEngine);
-//   context.add('mlParameters', { itemid: 'intabio-zt-systems' });
-
-//   // Optional AQ filter
-//   // frequentViewedEngine.dispatch(updateAdvancedSearchQueries({
-//   //   aq: `@itemid==intabio-zt-systems`, // if your index supports filtering on itemid
-//   // }));
-
-//   // Trigger search
-//   frequentViewedEngine.executeFirstSearch();
-
-//   // Return results via subscription
-//   return new Promise((resolve) => {
-//     const unsubscribe = frequentViewedEngine.subscribe(() => {
-//       const results = frequentViewedEngine.state.search.results;
-//       console.log(results);
-//       if (results.length > 0) {
-//         unsubscribe();
-//         resolve(results);
-//       }
-//     });
-//   });
-// }
-
 // Controller function
 export async function getFrequentlyViewedTogether() {
   // Add ML context
@@ -120,33 +81,3 @@ export async function getFrequentlyViewedTogether() {
     });
   });
 }
-
-// export async function getFrequentlyViewedTogether(itemId) {
-//   const recommendationController = buildResultList(frequentViewedEngine, {
-//     options: {
-//       numberOfResults: 10,
-//       mlParameters: {itemId: "intabio-zt-systems"},
-//       fieldsToInclude: ['description', 'categoriesname', 'images', 'source'],
-//       tab: 'Frequently Viewed Together'
-//     },
-//   });
-//   const context = buildContext(frequentViewedEngine);
-//   context.add('mlParameters', {
-//     "itemId": "intabio-zt-systems"});
-//   frequentViewedEngine.executeFirstSearch();
-//   frequentViewedEngine.subscribe(() => {
-//     console.log(recommendationController);
-//     });
-// }
-
-// return new Promise((resolve) => {
-//   const unsubscribe = recommendationController.subscribe(() => {
-//     const results = recommendationController.state.results;
-//     if (results.length > 0) {
-//       unsubscribe();
-//       resolve(results);
-//     }
-//   });
-
-//   recommendationController.refresh(); // triggers fetch
-// });

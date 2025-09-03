@@ -6,12 +6,6 @@ import { extractJsonFromHtml } from '../../scripts/html-to-json-parser.js';
 
 export default async function decorate(block) {
   block.id = 'citations-tab';
-  // const citationsLinkEl = block.querySelector('a');
-  // if (citationsLinkEl) {
-  // wobj-3230-5080337-q
-  // const id = citationsLinkEl.getAttribute('title');
-  // //https://www.bioz.com/v_widget_6_0/3230/5080337/
-  // const data = citationsLinkEl.getAttribute('href');
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const isPIM = document.querySelector('#authored-citations')?.children[0].textContent;
   let citationsObj = response?.raw?.citations;
@@ -23,8 +17,6 @@ export default async function decorate(block) {
   if (isPIM !== undefined && isPIM === 'only-authored') {
     citationsObj = parsedData;
   }
-  // const id = 'wobj-3230-5080337-q';
-  // const data = 'https://www.bioz.com/v_widget_6_0/3230/5080337/';
   const { id } = citationsObj;
   const { data } = citationsObj;
   block.innerHTML = '';
@@ -40,6 +32,5 @@ export default async function decorate(block) {
   const attrs = { defer: true };
   loadScript('https://cdn.bioz.com/assets/jquery-2.2.4.js', attrs);
   loadScript('https://cdn.bioz.com/assets/bioz-w-api-6.0.min.js', attrs);
-  // }
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }

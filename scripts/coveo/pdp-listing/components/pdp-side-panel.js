@@ -289,7 +289,6 @@ function createFacet(facet, isFirst = false) {
   return container;
 }
 
-
   // -------------------------
   // 2. ORIGINAL checkbox rendering
   // -------------------------
@@ -386,10 +385,6 @@ function checkNodes() {
     updateExpandCollapseButton()
   }
 }
-
-
-
-
 
 // Helper function: update button label and icon based on hidden state
 function updateExpandCollapseButton() {
@@ -562,5 +557,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const panel = createFiltersPanel();
   panel.style.transform = 'translateX(0)'; // Slide panel in on load
 });
-
-// In createFiltersPanel(), after panel creation:
