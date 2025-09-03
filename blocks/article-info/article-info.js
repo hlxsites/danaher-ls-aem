@@ -5,11 +5,15 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   // block.innerHTML = '';
-  const authorName =  getMetadata('authorname') || block?.firstElementChild?.textContent;
-  const authorJobTitle =  getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent;
-  const authorImage = getMetadata('authorimage') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.textContent;
-  const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
-  const publishDate = getMetadata('publishdate') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
+  const authorName = getMetadata('authorname') || block?.firstElementChild?.textContent;
+  const authorJobTitle = getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent;
+  const authorImage = getMetadata('authorimage') || block.querySelector('img')?.src;
+  const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent || '';
+  let publishDate = getMetadata('publishdate') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
+  publishDate = publishDate.trim();
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(publishDate)) {
+    publishDate += 'Z';
+  }
   const readingTime = getMetadata('readingtime') || block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent;
   const expectedPublishFormat = new Date(publishDate);
   block.innerHTML = '';
@@ -59,14 +63,14 @@ export default function decorate(block) {
     </svg>
   `;
 
-  // const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
+  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
   sectionEl.classList.remove('article-info-container');
   const leftSideElements = div({ class: 'mt-4' });
   Array.from(sectionEl.children).forEach((element) => {
-  if (!toBeRemoved.includes(element.classList[0])) {
+    if (!toBeRemoved.includes(element.classList[0])) {
       leftSideElements.append(element);
-  }
+    }
   });
 
   const divEl = div(
