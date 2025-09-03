@@ -214,7 +214,7 @@ export default async function decorate(block) {
     }
     localStorage.setItem('pdpListViewType', 'list');
     
-    subscribeToEngineUpdates(resultsList, 'list');
+    subscribeToEngineUpdates(resultsList);
   });
 
   // click action for grid view
@@ -244,7 +244,7 @@ export default async function decorate(block) {
       resultsList?.classList.add('flex-wrap');
     }
     localStorage.setItem('pdpListViewType', 'grid');
-    subscribeToEngineUpdates(resultsList, 'grid');
+    subscribeToEngineUpdates(resultsList);
   });
 
   await loadScript('/../../scripts/image-component.js');
@@ -257,6 +257,6 @@ export default async function decorate(block) {
       resultsList?.classList.add('flex-wrap');
     }
     
-    subscribeToEngineUpdates(resultsList, viewType);
+    subscribeToEngineUpdates(resultsList);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }

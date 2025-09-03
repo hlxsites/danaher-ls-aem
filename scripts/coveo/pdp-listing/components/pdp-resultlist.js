@@ -102,9 +102,6 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
   const hasPrice = () => product?.salePrice?.value > 0;
 
   const showAddToCart = () =>
-    // const addToCartAttr = product?.attributes?.find(
-    //   (attr) => attr.name === 'show_add_to_cart' && attr.value === true,
-    // );
     /* eslint-disable-next-line */
     (hasPrice() && true ? true : '');
   const formatCurrency = (value, currency) => {
