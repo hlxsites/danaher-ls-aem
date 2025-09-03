@@ -1,6 +1,4 @@
-import dashboardSidebar from "../dashboardSideBar/dashboardSideBar.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
+
 import { div } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
