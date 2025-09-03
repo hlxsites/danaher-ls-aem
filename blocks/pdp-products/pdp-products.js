@@ -76,18 +76,18 @@ function createLayout(block, viewType) {
   return { layoutDiv, resultsList, paginationRow };
 }
 
-async function displayProducts(resultsList, viewType = '') {
+async function displayProducts(resultsList, viewType) {
+  const { results, isLoading } = pdpResultList.state;
+  if (results?.length > 0 && !isLoading) {
+    await renderResults({
+      results,
+      getCommerceBase,
+      domHelpers,
+      resultsList,
+      viewType,
+    });
+  }
 
-  const { results } = pdpResultList.state;
-
-
-  await renderResults({
-    results,
-    getCommerceBase,
-    domHelpers,
-    resultsList,
-    viewType,
-  });
 }
 
 function setupCoveoContext(sku, host) {
@@ -102,7 +102,8 @@ function setupCoveoContext(sku, host) {
   pdpEngine.executeFirstSearch();
 }
 
-function subscribeToEngineUpdates(resultsList, viewType) {
+function subscribeToEngineUpdates(resultsList) {
+
   pdpEngine.subscribe(() => {
     renderPagination();
     renderFacetBreadcurm();
@@ -111,14 +112,17 @@ function subscribeToEngineUpdates(resultsList, viewType) {
   });
 
   pdpResultList.subscribe(() => {
-    displayProducts(resultsList, viewType);
+    if (pdpResultList?.state?.results?.length > 0 && !pdpResultList?.state?.isLoading) {
+      const viewType = localStorage.getItem('pdpListViewType');
+      displayProducts(resultsList, viewType);
+    }
   })
 
 }
 
 // Main function
 export default async function decorate(block) {
-  let viewType = 'list';
+
   const sku = new URL(window.location.href).pathname.split('/').pop();
   const host = window.location.host === 'lifesciences.danaher.com'
     ? window.location.host
@@ -154,26 +158,26 @@ export default async function decorate(block) {
 
   const listBtn = div(
     {
-      class: 'px-3 py-2 bg-danaherpurple-500 rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10',
+      class: `px-3 py-2  rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] ${localStorage.getItem('pdpListViewType') === 'list' ? 'bg-danaherpurple-500' : 'bg-white'} outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
       span({
         class:
-          'icon icon-view-list w-6 h-6 fill-current text-white [&_svg>use]:stroke-white',
+          `icon icon-view-list w-6 h-6 fill-current  ${localStorage.getItem('pdpListViewType') === 'list' ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
       }),
     ),
   );
 
   const gridBtn = div(
     {
-      class: 'px-3 py-2 bg-white rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10',
+      class: `px-3 py-2  ${localStorage.getItem('pdpListViewType') === 'grid' ? 'bg-danaherpurple-500' : 'bg-white'}  rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
       span({
         class:
-          'icon icon-view-grid w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
+          `icon icon-view-grid w-6 h-6 fill-current ${localStorage.getItem('pdpListViewType') === 'grid' ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
       }),
     ),
   );
@@ -182,6 +186,7 @@ export default async function decorate(block) {
   decorateIcons(viewModeGroup);
   layoutDiv?.querySelector('#resultSummaryCount')?.insertAdjacentElement('afterend', viewModeGroup);
 
+  const resultlist = layoutDiv?.querySelector('#resultsList');
   // click action for list view
   listBtn.addEventListener('click', () => {
     listBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
@@ -204,13 +209,16 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-white',
         '[&_svg>use]:stroke-gray-600',
       );
-    if (layoutDiv?.querySelector('#resultsList')?.classList.contains('flex-wrap'))
-      {
-        layoutDiv?.querySelector('#resultsList')?.classList.remove('flex-wrap');
-        layoutDiv?.querySelector('#resultsList')?.classList.add('flex-col');
-      } 
-
+      
+    if(resultlist) resultlist.textContent = '';
+    if (resultlist?.classList.contains('flex-wrap')) {
+      resultlist?.classList.remove('flex-wrap');
+      resultlist?.classList.add('flex-col');
+    }
+    localStorage.setItem('pdpListViewType', 'list');
+    
     subscribeToEngineUpdates(resultsList, 'list');
+    // return;
   });
 
   // click action for grid view
@@ -235,18 +243,28 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-white',
         '[&_svg>use]:stroke-gray-600',
       );
-    if (layoutDiv?.querySelector('#resultsList')?.classList.contains('flex-col'))
-      {
-        layoutDiv?.querySelector('#resultsList')?.classList.remove('flex-col');
-        layoutDiv?.querySelector('#resultsList')?.classList.add('flex-wrap');
-      } 
+    if(resultlist) resultlist.textContent = '';
+    if (resultlist?.classList.contains('flex-col')) {
+      resultlist?.classList.remove('flex-col');
+      resultlist?.classList.add('flex-wrap');
+    }
+    localStorage.setItem('pdpListViewType', 'grid');
     subscribeToEngineUpdates(resultsList, 'grid');
+    // return;
   });
 
   await loadScript('/../../scripts/image-component.js');
 
   createFiltersPanel();
   setupCoveoContext(sku, host);
-  subscribeToEngineUpdates(resultsList, viewType);
+  const { isLoading } = pdpResultList.state;
+  if (isLoading) {    
+    const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
+    if (resultlist?.classList.contains('flex-col') && viewType === 'grid') {
+      resultlist?.classList.remove('flex-col');
+      resultlist?.classList.add('flex-wrap');
+    }
+    subscribeToEngineUpdates(resultsList, viewType);
+  }
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
