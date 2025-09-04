@@ -15,12 +15,12 @@ function createCarrierFreeBadge(carrierFreeText) {
   return div(
     {
       class:
-        'absolute bottom-2 left-2 px-2 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10',
+        'absolute bottom-2 left-2 px-2 py-1 bg-danaherpurple-50 inline-flex justify-center items-center gap-2.5 z-10',
     },
     div(
       {
         class:
-          'text-center text-violet-600 text-sm font-normal leading-tight truncate max-w-[150px]',
+          'text-center text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight truncate max-w-[150px]',
       },
       carrierFreeText,
     ),
@@ -35,19 +35,38 @@ function createCarrierFreeBadge(carrierFreeText) {
 export default function renderGridCard(item) {
   const card = div({
     class:
-      'w-[331px] md:w-[305px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      'transform transition duration-500 hover:shadow-md min-w-[100%] w-full md:min-w-[285px] md:w-[285px] min-h-[485px] bg-white border border-1 border-gray-300 flex flex-col justify-start items-start',
   });
 
+  const fallbackImagePath = '/content/dam/danaher/products/fallbackImage.jpeg';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: (src && !src.toLowerCase().includes('.pdf')) ? src : fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-[164px] object-contain cursor-pointer',
+      loading: 'lazy',
+      decoding: 'async',
+      onclick: () => window.open(
+        item.url,
+        item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+      ),
+    });
+
+    // imageElement.addEventListener('error', () => {
+    //   imageElement.src = fallbackImagePath;
+    //   imageElement.alt = 'Product image not available';
+    // });
+
+    return imageElement;
+  };
+
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageUrl = item.images?.[0]
-    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const imageUrl = item.images?.[0] || '';
   const imageElement = div(
     { class: 'block w-full' },
-    img({
-      src: imageUrl,
-      alt: item.title,
-      class: 'w-full h-[164px] object-contain',
-    }),
+    createImageWithFallback(imageUrl, item.title),
   );
 
   imageWrapper.append(
@@ -56,101 +75,108 @@ export default function renderGridCard(item) {
   );
 
   const contentWrapper = div({
-    class: 'flex flex-col justify-start items-start w-full flex-grow',
+    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow cursor-pointer',
+    onclick: () => window.open(
+      item.url,
+      item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+    ),
   });
+
   contentWrapper.append(
     p(
-      { class: 'p-3 text-black text-xl font-bold leading-7' },
+      { class: 'font-medium text-black text-xl leading-7 line-clamp-2' },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
-  const pricingDetails = div({
-    class:
-      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
-  });
-  if (item.showCart && item.price !== undefined) {
-    pricingDetails.append(
+  // Combine pricingDetails and actionButtons in one block
+  let pricingAndActions;
+  // if (item.showCart && item.price !== undefined) {
+  if (item.showCart && item.price === 'abc123') {
+    pricingAndActions = div(
+      { class: 'self-stretch bg-gray-50 flex flex-col gap-0' },
       div(
         {
           class:
-            'text-right justify-start text-black text-2xl font-normal leading-loose',
+          'px-4 py-3 inline-flex flex-col justify-start items-end gap-6',
         },
-        `$${item.price.toLocaleString()}`,
-      ),
-      div(
-        { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
         div(
-          { class: 'flex justify-between items-center w-full' },
-          div(
-            { class: 'text-black text-base font-extralight leading-snug' },
-            'Unit of Measure:',
-          ),
-          div(
-            { class: 'text-black text-base font-bold leading-snug' },
-            item?.uom || '',
-          ),
+          {
+            class:
+              'text-right justify-start text-black text-2xl font-medium',
+          },
+          `$${item.price.toLocaleString()}`,
         ),
         div(
-          { class: 'flex justify-between items-center w-full' },
+          { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
           div(
-            { class: 'text-black text-base font-extralight leading-snug' },
-            'Min. Order Qty:',
+            { class: 'flex justify-between items-center w-full' },
+            div(
+              { class: 'text-black text-base font-extralight leading-snug' },
+              'Unit of Measure:',
+            ),
+            div(
+              { class: 'text-black text-base font-bold leading-snug' },
+              item?.uom || '',
+            ),
           ),
           div(
-            { class: 'text-black text-base font-bold leading-snug' },
-            item?.minQty || '',
+            { class: 'flex justify-between items-center w-full' },
+            div(
+              { class: 'text-black text-base font-extralight leading-snug' },
+              'Min. Order Qty:',
+            ),
+            div(
+              { class: 'text-black text-base font-bold leading-snug' },
+              item?.minQty || '',
+            ),
           ),
-        ),
-      ),
-    );
-  }
-
-  let actionButtons;
-  if (item.showCart && item.price !== undefined) {
-    actionButtons = div(
-      {
-        class:
-          'self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3',
-      },
-      input({
-        type: 'number',
-        value: '1',
-        min: '1',
-        class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
-      }),
-      a(
-        {
-          href: item.url,
-          class:
-            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-        },
-        span(
-          {
-            class: 'text-white text-base font-normal leading-snug',
-          },
-          'Buy',
         ),
       ),
       div(
         {
           class:
-            'dhlsBtn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'px-4 py-3 inline-flex justify-start items-center gap-3',
         },
-        span(
+        input({
+          type: 'number',
+          value: '1',
+          min: '1',
+          class:
+            'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+        }),
+        a(
           {
-            class: 'text-violet-600 text-base font-normal leading-snug',
+            href: item.url,
+            class:
+              'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
           },
-          'Quote',
+          span(
+            {
+              class: 'inherit text-base font-medium leading-snug',
+            },
+            'Buy',
+          ),
+        ),
+        div(
+          {
+            class:
+              'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+          },
+          span(
+            {
+              class: 'inherit text-base font-medium leading-snug',
+            },
+            'Quote',
+          ),
         ),
       ),
     );
   } else {
-    actionButtons = div(
+    pricingAndActions = div(
       {
         class:
-          'self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
+      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
       },
       div(
         {
@@ -161,12 +187,13 @@ export default function renderGridCard(item) {
           div(
             {
               class:
-                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
+            'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
             },
             (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
         ),
       ),
+      // Buttons section - conditional based on showAvailability
       div(
         { class: 'self-stretch inline-flex justify-start items-center gap-3' },
         ...(item.showAvailability
@@ -175,12 +202,12 @@ export default function renderGridCard(item) {
               {
                 href: item.url || '#',
                 class:
-                    'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
                   class:
-                      'justify-start text-white text-base font-normalbtn_link leading-snug',
+                'justify-start text-white text-base font-medium leading-snug',
                 },
                 'Price & Availability',
               ),
@@ -188,12 +215,12 @@ export default function renderGridCard(item) {
             div(
               {
                 class:
-                    'dhlsBtn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:bg-danaherpurple-500 hover:text-white px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
                   class:
-                      'justify-start text-violet-600 text-base font-normalbtn_link leading-snug',
+                'justify-start inherit text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -203,7 +230,7 @@ export default function renderGridCard(item) {
             button(
               {
                 class:
-                    'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
@@ -222,12 +249,12 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
+        target: item.url.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'View Details',
       span({
-        class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        class: 'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -237,20 +264,9 @@ export default function renderGridCard(item) {
   card.append(
     imageWrapper,
     contentWrapper,
-    pricingDetails,
-    actionButtons,
+    pricingAndActions,
     viewDetailsButton,
   );
-
-  const imgElement = card.querySelector('img');
-  if (imgElement) {
-    imgElement.onerror = () => {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
-      }
-    };
-  }
 
   decorateModals(card);
 

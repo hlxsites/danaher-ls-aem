@@ -161,15 +161,16 @@ export default async function relatedProducts(headingText, productIds) {
     style: 'display: none;',
   });
 
-//   const results = await Promise.allSettled(
-//     // making false as we don't need intershop data for top selling products as of now
-//     productIds.map((id) => getProductInfo(id, false)),
-//   );
+  const results = await Promise.allSettled(
+    // making false as we don't need intershop data for top selling products as of now
+    productIds.map((id) => getProductInfo(id, false)),
+  );
 // console.log("results", results);
-  // const products = results
-  //   .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
-  //   .map((result) => result.value);
-const products = recommendedProduct;
+  const products = results
+    .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
+    .map((result) => result.value);
+  console.log("products", products)
+// const products = recommendedProduct;
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
     topSellingWrapper.style.display = 'none';

@@ -324,6 +324,7 @@ export const requestedQuotes = async () => {
       if (response.data === 'Unauthorized! please try again.') {
         window.location.href = '/us/en/e-buy/login';
       }
+      console.log("response", response)
       const quotesResponse = response.data.elements;
       return quotesResponse;
     }

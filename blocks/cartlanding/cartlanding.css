@@ -480,6 +480,10 @@
   min-width: 320px
 }
 
+.cartlanding-wrapper :is(.min-w-\[100\%\]) {
+  min-width: 100%
+}
+
 .cartlanding-wrapper :is(.max-w-\[100\%\]) {
   max-width: 100%
 }
@@ -615,6 +619,10 @@
 
 .cartlanding-wrapper :is(.gap-\[4rem\]) {
   gap: 4rem
+}
+
+.cartlanding-wrapper :is(.gap-0) {
+  gap: 0px
 }
 
 .cartlanding-wrapper :is(.gap-y-6) {
@@ -1267,8 +1275,20 @@
   transition-duration: 150ms
 }
 
+.cartlanding-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
 .cartlanding-wrapper :is(.duration-1000) {
   transition-duration: 1000ms
+}
+
+.cartlanding-wrapper :is(.duration-500) {
+  transition-duration: 500ms
 }
 
 .cartlanding-wrapper :is(.ease-in-out) {
@@ -1289,6 +1309,11 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
+.cartlanding-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
 .cartlanding-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
@@ -1297,6 +1322,12 @@
 .cartlanding-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.cartlanding-wrapper :is(.hover\:shadow-md:hover) {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .cartlanding-wrapper :is(.focus\:outline-none:focus) {
@@ -1396,6 +1427,26 @@
     width: 100%
   }
 
+  .cartlanding-wrapper :is(.md\:w-\[290px\]) {
+    width: 290px
+  }
+
+  .cartlanding-wrapper :is(.md\:w-\[285px\]) {
+    width: 285px
+  }
+
+  .cartlanding-wrapper :is(.md\:min-w-\[305px\]) {
+    min-width: 305px
+  }
+
+  .cartlanding-wrapper :is(.md\:min-w-\[290px\]) {
+    min-width: 290px
+  }
+
+  .cartlanding-wrapper :is(.md\:min-w-\[285px\]) {
+    min-width: 285px
+  }
+
   .cartlanding-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
@@ -1457,6 +1508,10 @@
   .cartlanding-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+}
+
+.cartlanding-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {

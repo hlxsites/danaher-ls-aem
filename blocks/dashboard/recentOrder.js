@@ -22,11 +22,11 @@ const recentOrders = async () => {
   });
   const noOrdersDiv = div(
     {
-      class: 'w-[205px] h-[118px] flex flex-col justify-center items-center gap-2',
+      class: 'w-full h-[118px] flex flex-col text-center justify-center items-center gap-2',
     },
     div(
       {
-        class: 'w-full  h-[4.5rem] relative overflow-hidden',
+        class: 'w-full  h-[4.5rem] justify-center items-center relative overflow-hidden',
       },
       span({
         class:
@@ -160,7 +160,7 @@ const recentOrders = async () => {
 
   const noRequestedQuotes = div(
     {
-      class: 'w-[205px] h-[118px] flex flex-col justify-center items-center gap-2',
+      class: 'w-full h-[118px] flex flex-col text-center justify-center items-center gap-2',
     },
     div(
       {

@@ -13,11 +13,11 @@ export default async function decorate(block) {
       class:
             'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
     });
-const requestedQuoteWrapper = div({
+const approvedQuoteWrapper = div({
       class: 'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
     });
       const dashboardSideBarContent = await dashboardSidebar();
-      wrapper.append(dashboardSideBarContent, requestedQuoteWrapper);
+      wrapper.append(dashboardSideBarContent, approvedQuoteWrapper);
       block.innerHTML = "";
       block.textContent = "";
       block.append(wrapper);

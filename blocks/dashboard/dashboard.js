@@ -65,7 +65,7 @@ export default async function decorate(block) {
             {
               class: 'text-black !text-4xl font-medium leading-[48px]',
             },
-            openOrder.length === 0 ? 0 : openOrder.length,
+            openOrder?.length === 0 ? 0 : openOrder?.length,
           ),
           p(
             {
@@ -75,7 +75,7 @@ export default async function decorate(block) {
           ),
         ),
       ),
-      openOrder.length !== 0
+      openOrder?.length !== 0
         ? div(
           {
             class: 'w-[310px] h-[118px] bg-white flex items-center justify-center  gap-6 p-6',
