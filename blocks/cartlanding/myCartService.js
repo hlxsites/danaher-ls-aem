@@ -1239,7 +1239,6 @@ export const addItemToCart = async (item) => {
     return { status: 'error', data: addItem.data };
   }
   // if basket doesn't exists create basket and then add item
-
   const response = await createBasket();
   if (response) {
     if (response.status === 'success') {

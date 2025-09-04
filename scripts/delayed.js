@@ -4,7 +4,7 @@ import { setCookie, isOTEnabled } from './scripts.js';
 import { getAuthorization, getCommerceBase } from './commerce.js';
 import { getMetadata } from './lib-franklin.js';
 import { addItemToCart } from '../blocks/cartlanding/myCartService.js';
-import { showNotification } from './common-utils.js';
+import { removePreLoader, showNotification } from './common-utils.js';
 
 /**
  * Sets up event delegation for "Add to Cart" button clicks within the main container.
@@ -15,13 +15,21 @@ import { showNotification } from './common-utils.js';
 export function decorateBuyButton(wrapper) {
   wrapper.addEventListener('click', async (e) => {
     const targetElement = e.target;
-    try {      
-      if(targetElement?.classList?.contains('add-to-cart-btn')) {
-        
+    try {
         const btnProps = targetElement.attributes;
-        if (btnProps) await addItemToCart(btnProps);
+      if (targetElement?.classList?.contains('add-to-cart-btn')) {
+        // Look for a nearby input[type="number"]
+        const quantityInput = targetElement.closest('.product-card')?.querySelector('input[type="number"]') 
+          || targetElement.parentElement?.querySelector('input[type="number"]');
+        if (quantityInput) {
+          quantityInput.value = quantityInput.value || (btnProps.minorderquantity !== 0 ? btnProps.minorderquantity : 1);
+        }
+        if (btnProps) {
+          const addResponse = await addItemToCart(btnProps);
+        }
       }
     } catch (error) {
+      removePreLoader();
       showNotification('Error Processing Request.', 'error');
     }
   });
