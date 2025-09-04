@@ -7,7 +7,6 @@ import {
   makePublicUrl,
   imageHelper,
   decorateModals,
-  decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateBuyButton } from '../../scripts/delayed.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
