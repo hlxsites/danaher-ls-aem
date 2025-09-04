@@ -122,8 +122,8 @@ function getCoveoApiPayload(searchValue, type) {
 // eslint-disable-next-line consistent-return
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
   const searchTerm = searchInput.value.trim();
-  if (page === 'cartlanding') {
-    if (page === 'cartlanding') {
+  if (page === 'cart') {
+    if (page === 'cart') {
       if (searchTerm) {
         const requestPayload = getCoveoApiPayload(searchTerm, 'search');
         requestPayload.analytics.actionCause = actionCause

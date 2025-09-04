@@ -158,7 +158,7 @@ export default async function addProducts() {
     const searchResponse = await submitSearchQuery(
       searchValue,
       'searchboxSubmit',
-      'cartlanding',
+      'cart',
     );
     skuarray = [];
     searchResponse.results?.forEach((item) => {

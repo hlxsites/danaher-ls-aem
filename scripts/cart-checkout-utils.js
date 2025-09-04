@@ -524,7 +524,7 @@ export async function getAddressDetails(addressURI, type = '') {
  * @param {Object} response - Response from the Set default address API.
  */
 export async function setUseAddressObject(response) {
-  if (window.location.pathname.includes('cartlanding')) return false;
+  if (window.location.pathname.includes('cart')) return false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -568,7 +568,7 @@ export const setUseAddress = async (id, type, action = '') => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    if (window.location.pathname.includes('cartlanding')) return false;
+    if (window.location.pathname.includes('cart')) return false;
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
     if (getUseAddressesObject?.status === 'success' && action !== 'useAddress') {
       const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
@@ -874,7 +874,7 @@ export const setShippingMethod = async (methodId) => {
 update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
  */export async function updateAddresses(addressId = '') {
-  if (window.location.pathname.includes('cartlanding')) return false;
+  if (window.location.pathname.includes('cart')) return false;
 
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
@@ -2494,7 +2494,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2795,12 +2795,15 @@ get price type if its net or gross
           class:
             'flex flex-col justify-center w-full items-start gap-4',
         },
-        button({
-          class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''} `,
-          id: 'proceed-button',
-          'data-tab': 'shippingMethods',
-          'data-activetab': 'shippingAddress',
-        }),
+        button(
+          {
+            class: `proceed-button w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${((authenticationToken.user_type === 'guest') || window.location.pathname.includes('order')) ? 'hidden' : ''} `,
+            id: 'proceed-button',
+            'data-tab': 'shippingMethods',
+            'data-activetab': 'shippingAddress',
+          },
+          'Checkout',
+        ),
         div(
           {
             class:
@@ -2819,7 +2822,7 @@ get price type if its net or gross
    */
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
-    if (window.location.href.includes('cartlanding') && userLoggedInStatus) {
+    if (window.location.href.includes('cart') && userLoggedInStatus) {
       proceedButton.textContent = 'Proceed to Checkout';
     } else {
       /*
@@ -2842,7 +2845,7 @@ get price type if its net or gross
     }
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
-      if (window.location.pathname.includes('cartlanding')) {
+      if (window.location.pathname.includes('cart')) {
         window.location.href = '/us/en/e-buy/addresses';
       } else {
         changeStep(e);
@@ -2853,7 +2856,7 @@ get price type if its net or gross
     '#checkoutSummaryWrapper',
   );
   if (checkoutSummaryWrapper) {
-    if (window.location.href.includes('cartlanding')) {
+    if (window.location.href.includes('cart')) {
       if (!userLoggedInStatus) {
         checkoutSummaryWrapper.insertAdjacentElement(
           'afterbegin',
@@ -2897,7 +2900,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',
