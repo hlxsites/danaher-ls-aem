@@ -7,6 +7,7 @@ import {
   makePublicUrl,
   imageHelper,
   decorateModals,
+  decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateBuyButton } from '../../scripts/delayed.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -236,12 +237,16 @@ export const recommendedProducts = () => {
                 class: '',
               }, button({
                 class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                class: '',
+              }, button({
+                class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               }, 'Quote')),
             ),
           // addToCartButton,
           ),
         ),
-      );
+      ),
+    );
       decorateModals(itemContainer);
       decorateBuyButton(itemContainer);
       card.append(itemContainer);
