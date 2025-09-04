@@ -1,5 +1,4 @@
-import { addItemToCart, recommendedProduct } from './myCartService.js';
-import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { recommendedProduct } from './myCartService.js';
 import {
   div,
   button,
@@ -9,6 +8,7 @@ import {
   imageHelper,
   decorateModals,
 } from '../../scripts/scripts.js';
+import { decorateBuyButton } from '../../scripts/delayed.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export const updateCartButton = (itemID) => {
@@ -136,7 +136,7 @@ export const recommendedProducts = () => {
       const addToCartButton = button(
         {
           class:
-            'btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
+            'btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0 add-to-cart-btn',
           sku: item.sku,
           productName: item.productName,
           minOrderQuantity: item.minOrderQuantity,
@@ -147,8 +147,7 @@ export const recommendedProducts = () => {
         },
         'Buy',
       );
-
-      addToCartButton.addEventListener('click', async (event) => {
+      /*      addToCartButton.addEventListener('click', async (event) => {
         showPreLoader();
         const itemId = event.target.attributes;
         const res = await addItemToCart(itemId, 'recommended-product');
@@ -159,7 +158,7 @@ export const recommendedProducts = () => {
           }
         }
       });
-
+*/
       const itemContainer = div(
         {
           class: 'inline-flex flex-col self-stretch px-4 py-3 gap-3 ',
@@ -244,6 +243,7 @@ export const recommendedProducts = () => {
         ),
       );
       decorateModals(itemContainer);
+      decorateBuyButton(itemContainer);
       card.append(itemContainer);
       carouselCards.append(card);
     });

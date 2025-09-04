@@ -3,7 +3,29 @@ import { loadScript, sampleRUM } from './lib-franklin.js';
 import { setCookie, isOTEnabled } from './scripts.js';
 import { getAuthorization, getCommerceBase } from './commerce.js';
 import { getMetadata } from './lib-franklin.js';
+import { addItemToCart } from '../blocks/cartlanding/myCartService.js';
+import { showNotification } from './common-utils.js';
 
+/**
+ * Sets up event delegation for "Add to Cart" button clicks within the main container.
+ * Efficiently handles clicks even for dynamically added buttons.
+ *
+ * @param {HTMLElement} main - The container element that may contain one or more buy buttons.
+ */
+export function decorateBuyButton(wrapper) {
+  wrapper.addEventListener('click', async (e) => {
+    const targetElement = e.target;
+    try {      
+      if(targetElement?.classList?.contains('add-to-cart-btn')) {
+        
+        const btnProps = targetElement.attributes;
+        if (btnProps) await addItemToCart(btnProps);
+      }
+    } catch (error) {
+      showNotification('Error Processing Request.', 'error');
+    }
+  });
+}
 /*
   *
   :::::::::::

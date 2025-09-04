@@ -238,19 +238,5 @@ export function sessionPreLoader() {
       'Login Again',
     ),
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
-  if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await userLogin('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
-        removePreLoader();
-        removeSessionPreLoader();
-        return true;
-      }
-      return false;
-    });
-  }
   return createModal(sessionPreLoaderContent, true, true);
 }
