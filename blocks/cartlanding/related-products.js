@@ -1,9 +1,8 @@
-import { div, span } from '../../scripts/dom-builder.js';
+import { div, a, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './grid-data.js';
 import renderListCard from './listData.js';
-// eslint-disable-next-line import/no-cycle
-import { recommendedProduct } from './myCartService.js';
+import { getProductInfo } from '../../scripts/common-utils.js';
 
 /**
  * Determines the number of cards to display per page in grid view based on window width.
@@ -19,26 +18,11 @@ function getCardsPerPageGrid() {
  * Main function to decorate the top-selling block with a carousel of product cards.
  * @param {HTMLElement} block - The block element to decorate.
  */
-export default async function relatedProducts(headingText) {
-  // block.parentElement.parentElement.style.padding = '0';
-  // block.parentElement.parentElement.style.margin = '0';
-  // block.style.display = 'none';
-
+export default async function relatedProducts(headingText, productIds) {
   const topSellingWrapper = div({
     class:
       'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
-
-  // const headingText = block.firstElementChild?.querySelector('p')?.textContent.trim() || '';
-  // const linkText = block.children[1]?.querySelectorAll('p')[0]?.textContent.trim() || '';
-  // const linkUrl = block.children[1]?.querySelector('a')?.textContent.trim() || '#';
-  // const index = block.children.length === 4 ? 3 : 2;
-  // const rawIds = block.children[index]?.querySelector('p')?.textContent.trim() || '';
-
-  // const productIds = rawIds
-  //   .split(',')
-  //   .map((id) => id.trim())
-  //   .filter(Boolean);
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
@@ -144,15 +128,13 @@ export default async function relatedProducts(headingText) {
     style: 'display: none;',
   });
 
-  //   const results = await Promise.allSettled(
-  //     // making false as we don't need intershop data for top selling products as of now
-  //     productIds.map((id) => getProductInfo(id, false)),
-  //   );
-  // console.log("results", results);
-  // const products = results
-  //   .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
-  //   .map((result) => result.value);
-  const products = recommendedProduct;
+  const results = await Promise.allSettled(
+    // making false as we don't need intershop data for top selling products as of now
+    productIds.map((id) => getProductInfo(id, false)),
+  );
+  const products = results
+    .filter((result) => result.status === 'fulfilled' && result.value?.title?.trim())
+    .map((result) => result.value);
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
     topSellingWrapper.style.display = 'none';
@@ -525,8 +507,5 @@ export default async function relatedProducts(headingText) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   topSellingWrapper.append(carouselContainer);
-  // block.innerHTML = '';
-  // block.style = '';
-  // block.append(topSellingWrapper);
   return topSellingWrapper;
 }

@@ -7,6 +7,7 @@ import {
 import {
   makePublicUrl,
   imageHelper,
+  decorateModals,
 } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -233,15 +234,16 @@ export const recommendedProducts = () => {
               ),
               addToCartButton,
               div({
-                class: 'px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-              }, div({
-                class: 'justify-start text-violet-600 text-base font-normal leading-snug',
+                class: '',
+              }, button({
+                class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               }, 'Quote')),
             ),
           // addToCartButton,
           ),
         ),
       );
+      decorateModals(itemContainer);
       card.append(itemContainer);
       carouselCards.append(card);
     });
