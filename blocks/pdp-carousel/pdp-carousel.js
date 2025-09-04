@@ -2,7 +2,6 @@ import { div, span } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './grid-data.js';
-import { getProductRecommendationsResponse } from '../../scripts/commerce.js';
 
 function getCardsPerPageGrid() {
   if (window.innerWidth < 640) return 1;
@@ -433,8 +432,7 @@ export default async function decorate(block) {
   const wrapper = block.closest('.pdp-carousel-wrapper');
   if (wrapper) wrapper.classList.add('w-full', 'md:px-10');
 
-  const [heading] = block.children;
-  const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
+  const headingText = 'Frequently viewed together';
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let scrollIndex = 0;
@@ -477,8 +475,6 @@ export default async function decorate(block) {
   // const response = await getProductsOnSolutionsResponse();
   // Store up to 12 products in localStorage
   const productsList = (apiCall?.results || []).slice(0, 12);
-  const recommendationsResponse = await getProductRecommendationsResponse();
-  console.log('Product Recommendations Response:', recommendationsResponse);
   localStorage.setItem('pdp-carousel-products', JSON.stringify(productsList));
 
   // Retrieve products from localStorage
