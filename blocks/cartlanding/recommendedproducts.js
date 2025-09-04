@@ -18,7 +18,6 @@ export const updateCartButton = (itemID) => {
 };
 
 export const recommendedProducts = () => {
-  //   const content = block.querySelector('div');
   const content = div({
     class: 'inline-flex flex-col',
   });
@@ -182,12 +181,6 @@ export const recommendedProducts = () => {
             },
             item.name,
           ),
-          // div(
-          //   {
-          //     class: 'h-[70px] text-gray-500 text-base font-extralight',
-          //   },
-          //   `SKU: ${item.sku}`,
-          // ),
         ),
         div(
           {
@@ -197,20 +190,7 @@ export const recommendedProducts = () => {
             {
               class: 'text-right justify-start text-black text-2xl font-normal leading-loose',
             },
-            // span(
-            //   {
-            //     class:
-            //       'text-gray-900 text-2xl font-bold  leading-loose',
-            //   },
             `$${item.salePrice.value}`,
-          // ),
-          // span(
-          //   {
-          //     class:
-          //       'text-gray-900 text-base font-extralight  leading-snug',
-          //   },
-          //   '(USD)',
-          // ),
           ),
 
           div(

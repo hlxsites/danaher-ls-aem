@@ -37,11 +37,6 @@ export const updateCartQuantity = (newQuantity) => {
       if (myCartListContainer) myCartListContainer.classList.add('hidden');
       if (myCartEmptyContainer) myCartEmptyContainer.classList.remove('hidden');
     } else {
-      // const quantityElement = document.getElementById("totalProduct-Quantity");
-      // if (quantityElement) {
-      //   quantityElement.innerHTML = `Add to order template | ${newQuantity} Items`;
-      // }
-
       if (myCartListContainer) myCartListContainer.classList.remove('hidden');
       if (myCartEmptyContainer) myCartEmptyContainer.classList.add('hidden');
     }
@@ -51,16 +46,11 @@ export const updateCartQuantity = (newQuantity) => {
 
 export const mycart = async () => {
   const authenticationToken = await getAuthenticationToken();
-  const recommendedProductsConatiner = await recommendedProducts();
+  const recommendedProductsConatiner = recommendedProducts();
   if (authenticationToken?.status === 'error') {
     await userLogin('guest');
-
-    // window.location.href =
-    //   "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
-    // return { status: 'error', data: 'Unauthorized access.' };
   }
   const basketDetail = await getBasketDetails();
-  //  if (basketDetail) console.log("basketdetaill", basketDetail);
   let totalProductQuantity;
   const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
@@ -68,9 +58,17 @@ export const mycart = async () => {
     totalProductQuantity = basketData.totalProductQuantity;
   }
 
+  const myCartParentWrapper = div({
+    class: 'dhls-container',
+    id: 'myCartParentWrapper',
+  });
   const myCartContainerWrapper = div({
-    class: 'dhls-container px-5 lg:px-10',
+    class: '',
     id: 'myCartContainerWrapper',
+  });
+  const myCartProductsWrapper = div({
+    class: 'px-5 lg:px-10',
+    id: 'myCartProductsWrapper',
   });
   const myCartEmptyContainer = div({
     class: '',
@@ -99,7 +97,7 @@ export const mycart = async () => {
 
   const emptyCartContainer = emptyCart();
   const containerWrapper = div({
-    class: 'inline-flex justify-between gap-4',
+    class: 'inline-flex justify-between gap-4 w-full',
   });
   const emptyDiv = div({
     class: 'h-[0px]',
@@ -107,7 +105,6 @@ export const mycart = async () => {
   containerWrapper.append(emptyCartContainer);
   myCartEmptyContainer.append(containerWrapper);
   myCartEmptyContainer.append(emptyDiv);
-  myCartEmptyContainer.append(recommendedProductsConatiner);
   myCartContainerWrapper.append(myCartEmptyContainer);
 
   const container = div(
@@ -121,7 +118,6 @@ export const mycart = async () => {
       },
       'My Cart',
     ),
-    // prodQuantity(totalProductQuantity)
   );
   const cartWrapper = div({
     class: 'w-full inline-flex lg:flex-row flex-col gap-[4rem]',
@@ -145,7 +141,6 @@ export const mycart = async () => {
     }),
   );
 
-  // containerListWrapper.append(description);
   const priceContainer = await checkoutSummary();
   const searchBlock = await addProducts();
   const cartItems = await cartItem();
@@ -171,5 +166,8 @@ export const mycart = async () => {
   myCartListContainer.append(recommendedProductsConatiner);
 
   myCartContainerWrapper.append(myCartListContainer);
-  return myCartContainerWrapper;
+  myCartParentWrapper.append(myCartContainerWrapper);
+  myCartParentWrapper.append(recommendedProductsConatiner);
+  myCartParentWrapper.append(myCartProductsWrapper);
+  return myCartParentWrapper;
 };

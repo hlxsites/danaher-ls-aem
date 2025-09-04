@@ -106,7 +106,7 @@ export default async function addProducts() {
     ),
     div(
       {
-        class: 'lg:w-[600px] inline-flex flex-col justify-start items-start',
+        class: 'lg:w-[590px] inline-flex flex-col justify-start items-start',
       },
       div(
         {

@@ -670,7 +670,7 @@ export async function getBasketDetails(userType = null) {
         JSON.stringify(mergeData),
         mergeHeader,
       );
-
+      
       if (response?.status === 'success') {
         const basketResponse = await getApiData(url, defaultHeader);
 
@@ -3090,8 +3090,6 @@ export const cartItemsContainer = (cartItemValue) => {
           getProductDetailsObject.data.forEach(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              // const str = `product-Quantity-${opcoBe[0]}`;
-              // const parts = str.split('-');
               const logodivId = document.getElementById(
                 `product-Quantity-${opcoBe[0]}`,
               );
@@ -3145,7 +3143,6 @@ export const cartItemsContainer = (cartItemValue) => {
     modifyCart('delete-item', inputValue, '');
   });
   const inputBox = input({
-    // id: cartItemValue.lineItemId,
     class:
       'w-[3.5rem] h-10 pl-4 bg-white font-medium text-black border-solid border-2 inline-flex justify-center items-center',
     type: 'number',
@@ -3167,19 +3164,11 @@ export const cartItemsContainer = (cartItemValue) => {
       productItem.style.border = '2px solid red';
       // eslint-disable-next-line no-alert
       showNotification(`Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`, 'error');
-      // alert(
-      //  `Please enter a valid order quantity which
-      // should be greater then ${inputItem.min} and less then ${inputItem.max}`,
-      // );
     } else if (enteredValue > Number(inputItem.max)) {
       productItem.style.border = '2px solid red';
       // eslint-disable-next-line no-alert
 
       showNotification(`Please enter a valid order quantity which should be greater then ${inputItem.min} and less then ${inputItem.max}`, 'error');
-      // alert(
-      //   `Please enter a valid order quantity which should be
-      //  greater then ${inputItem.min} and less then ${inputItem.max}`,
-      // );
     } else {
       productItem.style.border = '';
       modifyCart('quantity-added', inputItem, event.target.value, eventParent);
@@ -3213,13 +3202,6 @@ export const cartItemsContainer = (cartItemValue) => {
       {
         class: 'w-[150px] justify-start text-black text-base font-semibold',
       },
-      //  div(
-      //     {
-      //       class:
-      //         "w-full justify-start text-gray-500 text-base font-semibold item line-through",
-      //     },
-      //     `$${cartItemValue.listPrice.value}`
-      //   ),
       div(
         {
           class:
