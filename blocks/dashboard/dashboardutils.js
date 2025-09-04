@@ -41,8 +41,8 @@ export const requestedQuotes = async () => {
   let userId;
   let customerNo;
   if (basketDataFromSession) {
-    userId = basketDataFromSession.data.data.buyer.accountID;
-    customerNo = basketDataFromSession.data.data.buyer.customerNo;
+    userId = basketDataFromSession?.data?.data?.buyer?.accountID;
+    customerNo = basketDataFromSession?.data?.data?.buyer?.customerNo;
   } else {
     window.location.href = '/us/en/e-buy/login';
   }

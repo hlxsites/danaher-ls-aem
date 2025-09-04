@@ -645,6 +645,10 @@ export async function getBasketDetails(userType = null) {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
+  const mergeHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+  });
   const defaultHeader = new Headers({
     'Content-Type': 'Application/json',
     'Authentication-Token': authenticationToken.access_token,
@@ -659,12 +663,12 @@ export async function getBasketDetails(userType = null) {
     if (basketData?.status === 'success' && userType === 'customer') {
       const mergeBasketUrl = `${baseURL}baskets/current/merges`;
       const mergeData = {
-        sourceBasket: basketData.data.data.id,
+        sourceBasket: basketData?.data?.data?.id,
       };
       const response = await postApiData(
         mergeBasketUrl,
         JSON.stringify(mergeData),
-        defaultHeader,
+        mergeHeader,
       );
 
       if (response?.status === 'success') {
