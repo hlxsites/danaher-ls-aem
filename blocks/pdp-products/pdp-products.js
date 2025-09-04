@@ -181,8 +181,6 @@ export default async function decorate(block) {
 
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
-  console.log(viewModeGroup);
-  console.log(layoutDiv);
 
   layoutDiv?.querySelector('#resultSummaryCount')?.insertAdjacentElement('afterend', viewModeGroup);
 
