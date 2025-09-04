@@ -1228,7 +1228,7 @@ export const updateCartItems = async (addItem) => {
 export const addItemToCart = async (item) => {
   const basketDetails = await getBasketDetails();
   // if basket exists add product and update the cart
-  if (basketDetails) {
+  if (basketDetails?.status === 'success') {
     const addItem = await addItemToBasket(item);
     if (addItem && addItem?.status === 'success') {
       const updateCartItem = await updateCartItems(addItem);
