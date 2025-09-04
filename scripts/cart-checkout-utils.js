@@ -2823,7 +2823,7 @@ get price type if its net or gross
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
     if (window.location.href.includes('cart') && userLoggedInStatus) {
-      proceedButton.textContent = 'Proceed to Checkout';
+      proceedButton.textContent = 'Checkout';
     } else {
       /*
       ::::::::::::::
