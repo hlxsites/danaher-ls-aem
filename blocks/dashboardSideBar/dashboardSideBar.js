@@ -119,7 +119,7 @@ export default async function dashboardSidebar() {
       { class: 'w-full px-6 flex flex-col' },
       a(
         {
-          href: '/us/en/e-buy/cartlanding',
+          href: '/us/en/e-buy/cart',
           class:
             'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },

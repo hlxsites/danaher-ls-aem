@@ -819,7 +819,7 @@ const paymentModule = async () => {
     scrollViewToTop();
     showNotification(error.message, 'error');
     if (error.message === 'Unauthorized Access') {
-      window.location.href = '/us/en/e-buy/cartlanding';
+      window.location.href = '/us/en/e-buy/cart';
     }
     if (error.message === 'Invalid Basket') {
       silentNavigation('/us/en/e-buy/addresses');

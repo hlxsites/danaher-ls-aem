@@ -12,7 +12,7 @@ export default async function decorate(block) {
     authenticationToken?.status === 'error'
     || authenticationToken.user_type === 'guest' || !sessionStorage.getItem('productDetailObject')
   ) {
-    window.location.href = '/us/en/e-buy/cartlanding';
+    window.location.href = '/us/en/e-buy/cart';
     return false;
   }
   block.innerHtml = '';

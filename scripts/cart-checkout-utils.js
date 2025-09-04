@@ -878,7 +878,7 @@ update addresses to be shown on ui
 
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href = '/us/en/e-buy/cartlanding';
+    window.location.href = '/us/en/e-buy/cart';
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
