@@ -433,8 +433,8 @@ export default async function decorate(block) {
   const wrapper = block.closest('.pdp-carousel-wrapper');
   if (wrapper) wrapper.classList.add('w-full', 'md:px-10');
 
-  const [heading] = block.children;
-  const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
+ // const [heading] = block.children;
+  const headingText = 'Frequently viewed together';
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let scrollIndex = 0;
