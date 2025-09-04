@@ -10,7 +10,7 @@ import {
   getCommerceBase,
 } from '../../scripts/commerce.js';
 
-import { loadScript } from '../../scripts/lib-franklin.js';
+import { decorateIcons, loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 import {
@@ -56,12 +56,18 @@ function createLayout(block) {
   block.innerHTML = '';
 
   const layoutDiv = div({ class: 'max-w-6xl mx-auto flex flex-col gap-6' });
-  const resultSummary = div({ class: 'text-black text-2xl font-twk' });
+  const resultSummary = div(
+    { class: 'flex justify-between' },
+    div({
+      class: 'text-black text-2xl font-twk',
+      id: 'resultSummaryCount',
+    }),
+  );
   const resultsGrid = div({ class: 'flex flex-col gap-4' });
   const paginationRow = div({ class: 'flex justify-end w-full', id: 'pagination' });
 
   querySummary.subscribe(() => {
-    resultSummary.innerHTML = `${querySummary.state.total} Results`;
+    resultSummary.querySelector('#resultSummaryCount').innerHTML = `${querySummary.state.total} Results`;
   });
 
   layoutDiv.append(resultSummary, resultsGrid);
@@ -70,15 +76,17 @@ function createLayout(block) {
   return { layoutDiv, resultsGrid, paginationRow };
 }
 
-async function displayProducts(resultsGrid) {
-  const { results } = pdpResultList.state;
-
-  await renderResults({
-    results,
-    getCommerceBase,
-    domHelpers,
-    resultsGrid,
-  });
+async function displayProducts(resultsGrid, viewType) {
+  const { results, isLoading } = pdpResultList.state;
+  if (results?.length > 0 && !isLoading) {
+    await renderResults({
+      results,
+      getCommerceBase,
+      domHelpers,
+      resultsGrid,
+      viewType,
+    });
+  }
 }
 
 function setupCoveoContext(sku, host) {
@@ -101,8 +109,11 @@ function subscribeToEngineUpdates(resultsGrid) {
     createFiltersPanel();
   });
 
-  pdpResultList.subscribe(()=>{
-    displayProducts(resultsGrid);
+  pdpResultList.subscribe(() => {
+    if (pdpResultList?.state?.results?.length > 0 && !pdpResultList?.state?.isLoading) {
+      const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
+      displayProducts(resultsGrid, viewType);
+    }
   })
 
 }
@@ -134,10 +145,109 @@ export default async function decorate(block) {
   block.id = 'products-tab';
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
 
+  /*
+  *
+  :::::::::::::: adding list and grid view buttons :::::::::::::::::::::
+  *
+  */
+
+  const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' });
+
+  const listBtn = div(
+    {
+      class: `px-3 py-2  rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] ${((localStorage.getItem('pdpListViewType') === 'list') || !localStorage.getItem('pdpListViewType')) ? 'bg-danaherpurple-500' : 'bg-white'} outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
+    },
+    div(
+      { class: 'w-5 h-5 flex justify-center items-center' },
+      span({
+        class:
+          `icon icon-view-list w-6 h-6 fill-current  ${(localStorage.getItem('pdpListViewType') === 'list') || !localStorage.getItem('pdpListViewType') ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
+      }),
+    ),
+  );
+
+  const gridBtn = div(
+    {
+      class: `px-3 py-2  ${((localStorage.getItem('pdpListViewType') === 'grid') && localStorage.getItem('pdpListViewType')) ? 'bg-danaherpurple-500' : 'bg-white'}  rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-visible cursor-pointer z-10`,
+    },
+    div(
+      { class: 'w-5 h-5 flex justify-center items-center' },
+      span({
+        class:
+          `icon icon-view-grid w-6 h-6 fill-current ${(localStorage.getItem('pdpListViewType') === 'grid') && localStorage.getItem('pdpListViewType') ? 'text-white [&_svg>use]:stroke-white' : 'text-gray-600 [&_svg>use]:stroke-gray-600'}`,
+      }),
+    ),
+  );
+
+  viewModeGroup.append(listBtn, gridBtn);
+  decorateIcons(viewModeGroup);
+  console.log(viewModeGroup);
+  console.log(layoutDiv);
+
+  layoutDiv?.querySelector('#resultSummaryCount')?.insertAdjacentElement('afterend', viewModeGroup);
+
+  // click action for list view
+  listBtn.addEventListener('click', () => {
+    listBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
+    listBtn
+      .querySelector('.icon')
+      .classList.replace('text-gray-600', 'text-white');
+    listBtn
+      .querySelector('.icon')
+      .classList.replace(
+        '[&_svg>use]:stroke-gray-600',
+        '[&_svg>use]:stroke-white',
+      );
+    gridBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
+    gridBtn.querySelector('.icon')?.classList.replace('text-white', 'text-gray-600');
+    gridBtn.querySelector('.icon')?.classList.replace(
+      '[&_svg>use]:stroke-white',
+      '[&_svg>use]:stroke-gray-600',
+    );
+    if (resultsGrid?.classList.contains('flex-wrap')) {
+      resultsGrid?.classList.remove('flex-wrap');
+      resultsGrid?.classList.add('flex-col');
+    }
+    localStorage.setItem('pdpListViewType', 'list');
+
+    subscribeToEngineUpdates(resultsGrid);
+  });
+
+  // click action for grid view
+  gridBtn.addEventListener('click', () => {
+    gridBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
+    gridBtn
+      .querySelector('.icon')
+      .classList.replace('text-gray-600', 'text-white');
+    gridBtn
+      .querySelector('.icon')
+      .classList.replace(
+        '[&_svg>use]:stroke-gray-600',
+        '[&_svg>use]:stroke-white',
+      );
+    listBtn?.classList?.replace('bg-danaherpurple-500', 'bg-white');
+    listBtn?.querySelector('.icon')?.classList.replace('text-white', 'text-gray-600');
+    listBtn?.querySelector('.icon')?.classList.replace(
+      '[&_svg>use]:stroke-white',
+      '[&_svg>use]:stroke-gray-600',
+    );
+    if (resultsGrid?.classList.contains('flex-col')) {
+      resultsGrid?.classList.remove('flex-col');
+      resultsGrid?.classList.add('flex-wrap');
+    }
+    localStorage.setItem('pdpListViewType', 'grid');
+    subscribeToEngineUpdates(resultsGrid);
+  });
+
   await loadScript('/../../scripts/image-component.js');
 
   createFiltersPanel();
   setupCoveoContext(sku, host);
+  const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
+  if (resultsGrid?.classList.contains('flex-col') && viewType === 'grid') {
+    resultsGrid?.classList.remove('flex-col');
+    resultsGrid?.classList.add('flex-wrap');
+  }
   subscribeToEngineUpdates(resultsGrid);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
