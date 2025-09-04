@@ -67,11 +67,6 @@ export default async function addProducts() {
         })),
 
       ),
-      // span({
-      //   id: "msg",
-      //   "data-name": dtName,
-      //   class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
-      // })
     );
     decorateIcons(searchElement);
 
