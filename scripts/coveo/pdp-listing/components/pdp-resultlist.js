@@ -48,16 +48,16 @@ export async function buildProductTile(result, getCommerceBase, domHelpers) {
     // placeholder text only, will be replaced by innerHTML below
     'View details',
   );
-  const showCTA = 
-  result?.raw?.skushowdetail === undefined 
+  const showCTA = result?.raw?.skushowdetail === undefined
   || String(result?.raw?.skushowdetail).trim().toLowerCase() === 'true';
 
-  if(showCTA)
-  // Now set the innerHTML to text + inline SVG
-  link.innerHTML = `
+  if (showCTA) {
+    // Now set the innerHTML to text + inline SVG
+    link.innerHTML = `
     View details
     <img src="/icons/arrow-narrow-right.svg" alt="arrow icon" width="20" height="21" />
   `;
+  }
 
   return div(
     { class: 'flex flex-row bg-white border outline-gray-300 gap-7 flex-wrap' },

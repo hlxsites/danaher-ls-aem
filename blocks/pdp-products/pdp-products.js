@@ -114,10 +114,11 @@ export default async function decorate(block) {
     ? window.location.host
     : 'stage.lifesciences.danaher.com';
 
-  const response = await getProductResponse();
+  //const response = await getProductResponse();
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
   // Early exit if no valid product response
-  if (!(response?.length && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0)) {
+  if (!(response !== null && response !==undefined && response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)) {
     block.innerHTML = '<div class="text-center py-10 text-gray-500">No products found for this family.</div>';
     return;
   }
@@ -137,7 +138,7 @@ export default async function decorate(block) {
   await loadScript('/../../scripts/image-component.js');
 
   createFiltersPanel();
-  setupCoveoContext(sku, host);
+  setupCoveoContext(sku.replace('.html', ''), host);
   subscribeToEngineUpdates(resultsGrid);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
