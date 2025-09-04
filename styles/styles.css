@@ -3289,14 +3289,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin: 0px;
 }
 
-.m-1 {
-  margin: 0.25rem;
-}
-
-.m-3 {
-  margin: 0.75rem;
-}
-
 .m-\[5px\] {
   margin: 5px;
 }
@@ -3541,6 +3533,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 1rem;
 }
 
+.w-48 {
+  width: 12rem;
+}
+
 .w-6 {
   width: 1.5rem;
 }
@@ -3561,6 +3557,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 11rem;
 }
 
+.w-\[150px\] {
+  width: 150px;
+}
+
 .w-\[3\.5rem\] {
   width: 3.5rem;
 }
@@ -3569,24 +3569,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 7rem;
 }
 
+.w-\[80px\] {
+  width: 80px;
+}
+
 .w-auto {
   width: auto;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-48 {
-  width: 12rem;
-}
-
-.w-\[150px\] {
-  width: 150px;
-}
-
-.w-\[80px\] {
-  width: 80px;
 }
 
 .\!max-w-7xl {
@@ -4086,10 +4078,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding-left: 0.5rem;
 }
 
-.pl-3 {
-  padding-left: 0.75rem;
-}
-
 .pl-4 {
   padding-left: 1rem;
 }
@@ -4100,6 +4088,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pl-9 {
   padding-left: 2.25rem;
+}
+
+.pl-\[13px\] {
+  padding-left: 13px;
 }
 
 .pr-11 {
@@ -4124,10 +4116,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pt-6 {
   padding-top: 1.5rem;
-}
-
-.pl-\[13px\] {
-  padding-left: 13px;
 }
 
 .text-left {
@@ -4586,10 +4574,6 @@ main .section.top-border {
 }
 
 @media (min-width: 640px) {
-  .sm\:m-0 {
-    margin: 0px;
-  }
-
   .sm\:m-\[0px\] {
     margin: 0px;
   }
@@ -4623,16 +4607,12 @@ main .section.top-border {
     padding-right: 1.5rem;
   }
 
-  .sm\:pl-0 {
+  .sm\:pl-\[0px\] {
     padding-left: 0px;
   }
 
   .sm\:pt-8 {
     padding-top: 2rem;
-  }
-
-  .sm\:pl-\[0px\] {
-    padding-left: 0px;
   }
 
   .sm\:text-5xl {
@@ -4781,12 +4761,12 @@ main .section.top-border {
   stroke: #027243;
 }
 
-.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use {
-  stroke: #7523FF;
-}
-
 .\[\&_svg\>use\]\:stroke-\[\#AC2734\] svg>use {
   stroke: #AC2734;
+}
+
+.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use {
+  stroke: #7523FF;
 }
 
 .\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use {
