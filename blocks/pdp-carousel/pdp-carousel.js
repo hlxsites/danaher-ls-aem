@@ -434,7 +434,7 @@ export default async function decorate(block) {
   if (wrapper) wrapper.classList.add('w-full', 'md:px-10');
 
   //const [heading] = block.children;
-  const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, '');
+  const headingText = 'Frequently viewed together';
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let scrollIndex = 0;
