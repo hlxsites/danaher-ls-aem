@@ -84,7 +84,7 @@ function to append notification container
 */
 const generateNotification = div(
   {
-    class: 'fixed flex flex-col bottom-10 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
+    class: 'fixed flex flex-col bottom-40 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
     id: 'notificationWrapper',
   },
   div(

@@ -655,8 +655,6 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
     Accept: 'application/vnd.intershop.basket.v1+json',
   });
 
-  // if (basketData?.status === 'success' && userType !== 'customer') return basketData;
-
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
     if (lastBasketId && userType === 'customer') {
@@ -3097,6 +3095,7 @@ export const cartItemsContainer = (cartItemValue) => {
         }
         await updateCheckoutSummary();
         removePreLoader();
+        showNotification('Product removed from cart', 'success');
       } else {
         await updateCartItemQuantity(item);
         removePreLoader();
@@ -3120,10 +3119,12 @@ export const cartItemsContainer = (cartItemValue) => {
         totalPrice.innerHTML = `$${totalPricValue}`;
         removePreLoader();
         element.blur(); // Removes focus from the input
+        showNotification('Cart updated successfully.', 'success');
       } else {
         // alert(response);
         removePreLoader();
         element.blur(); // Removes focus from the input
+        showNotification('Error Processing request.', 'error');
       }
     }
   };

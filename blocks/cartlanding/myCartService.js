@@ -1,6 +1,7 @@
 import { div, hr } from '../../scripts/dom-builder.js';
 import {
   baseURL,
+  showNotification,
 } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import {
@@ -1229,17 +1230,11 @@ export const addItemToCart = async (item) => {
   // if basket exists add product and update the cart
   if (basketDetails) {
     const addItem = await addItemToBasket(item);
-    if (addItem) {
-      if (addItem.status === 'success') {
-        const updateCartItem = await updateCartItems(addItem);
-
-        await updateCheckoutSummary();
-        return getProductQuantity(updateCartItem);
-      }
-      return {
-        data: addItem.data,
-        status: 'error',
-      };
+    if (addItem && addItem?.status === 'success') {
+      const updateCartItem = await updateCartItems(addItem);
+      await updateCheckoutSummary();
+      showNotification('Item added to cart successfully.', 'success');
+      return getProductQuantity(updateCartItem);
     }
     return { status: 'error', data: addItem.data };
   }

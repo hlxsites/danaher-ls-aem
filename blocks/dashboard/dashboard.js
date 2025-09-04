@@ -19,14 +19,11 @@ export default async function decorate(block) {
   const dashboardSideBarContent = await dashboardSidebar();
   const orderDetailResponse = await orderDetails();
   const requestedQuotesResponse = await requestedQuotes();
-  // console.log("orderDetailResponse", orderDetailResponse);
   const shippedItems = orderDetailResponse?.filter((item) => item.status.toLowerCase() === 'shipped');
-  // console.log("cancelledItems", shippedItems );
   const excludedStatuses = ['cancelled', 'shipped'];
   const openOrder = orderDetailResponse?.filter(
     (item) => !excludedStatuses.includes(item.status.toLowerCase()),
   );
-  // console.log("cancelledItems", openOrder );
   const totalShippedItems = shippedItems?.length;
   const wrapper = div({
     id: 'dashboardWrapper',
