@@ -105,8 +105,9 @@ export async function userLogin(type, data = {}) {
   const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
   sessionStorage.clear();
 
+  let lastBasketId = '';
   if (getCurrentBasketData?.status === 'success' && !getCurrentBasketData?.data?.data?.customer) {
-    sessionStorage.setItem('basketData', JSON.stringify(getCurrentBasketData));
+    lastBasketId = getCurrentBasketData?.data?.data?.id;
   }
   try {
     if (type === 'customer' && data) {
@@ -160,7 +161,7 @@ export async function userLogin(type, data = {}) {
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
-        const basketData = await getBasketDetails(type);
+        const basketData = await getBasketDetails(type, lastBasketId);
 
         if (basketData.status === 'success') {
           const useAddressObject = {};

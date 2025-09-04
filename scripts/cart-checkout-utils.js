@@ -640,7 +640,7 @@ export const setUseAddress = async (id, type, action = '') => {
 Function to get current basket details
 :::::::::::::::::::::::::::
 */
-export async function getBasketDetails(userType = null) {
+export async function getBasketDetails(userType = null, lastBasketId = null) {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
@@ -654,29 +654,27 @@ export async function getBasketDetails(userType = null) {
     'Authentication-Token': authenticationToken.access_token,
     Accept: 'application/vnd.intershop.basket.v1+json',
   });
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
 
-  if (basketData?.status === 'success' && userType !== 'customer') return basketData;
+  // if (basketData?.status === 'success' && userType !== 'customer') return basketData;
 
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
-    if (basketData?.status === 'success' && userType === 'customer') {
+    if (lastBasketId && userType === 'customer') {
       const mergeBasketUrl = `${baseURL}/baskets/current/merges`;
       const mergeData = {
-        sourceBasket: basketData?.data?.data?.id,
+        sourceBasket: lastBasketId,
       };
       const response = await postApiData(
         mergeBasketUrl,
         JSON.stringify(mergeData),
         mergeHeader,
       );
-      
+
       if (response?.status === 'success') {
         const basketResponse = await getApiData(url, defaultHeader);
 
         if (basketResponse && basketResponse.status === 'success') {
           sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
-
           return basketResponse;
         }
       } else {
