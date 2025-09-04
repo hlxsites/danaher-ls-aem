@@ -661,7 +661,7 @@ export async function getBasketDetails(userType = null) {
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
     if (basketData?.status === 'success' && userType === 'customer') {
-      const mergeBasketUrl = `${baseURL}baskets/current/merges`;
+      const mergeBasketUrl = `${baseURL}/baskets/current/merges`;
       const mergeData = {
         sourceBasket: basketData?.data?.data?.id,
       };

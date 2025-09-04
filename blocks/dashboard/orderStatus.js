@@ -20,7 +20,7 @@ const orderDetails = async () => {
     'Authentication-Token': token,
     Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const url = `${baseURL}orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
+  const url = `${baseURL}/orders?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument&Authentication-Token=${token}`;
 
   try {
     const response = await getApiData(url, defaultHeader);

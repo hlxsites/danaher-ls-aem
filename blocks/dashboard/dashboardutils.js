@@ -5,7 +5,6 @@ import { getApiData } from '../../scripts/api-utils.js';
 export const orderDetails = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    // window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
@@ -13,7 +12,7 @@ export const orderDetails = async () => {
     'Authentication-Token': token,
     Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const url = `${baseURL}orders?include=lineItems`;
+  const url = `${baseURL}/orders?include=lineItems`;
 
   try {
     const response = await getApiData(url, defaultHeader);
@@ -75,7 +74,7 @@ export const userOrderDetails = async (orderId) => {
     'Authentication-Token': token,
     Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const url = `${baseURL}orders/${orderId}?include=invoiceToAddress,commonShipToAddress,lineItems`;
+  const url = `${baseURL}/orders/${orderId}?include=invoiceToAddress,commonShipToAddress,lineItems`;
 
   try {
     const response = await getApiData(url, defaultHeader);

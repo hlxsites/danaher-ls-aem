@@ -26,6 +26,8 @@ export default async function decorate(block) {
   const openOrder = orderDetailResponse?.filter(
     (item) => !excludedStatuses.includes(item.status.toLowerCase()),
   );
+  console.log('open order: ', orderDetailResponse);
+  
   // console.log("cancelledItems", openOrder );
   const totalShippedItems = shippedItems?.length;
   const wrapper = div({
