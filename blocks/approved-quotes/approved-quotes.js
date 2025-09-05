@@ -11,7 +11,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
-  const approvedQuotesResponse = await requestedQuotes();
+  // const approvedQuotesResponse = await requestedQuotes();
   const approvedQuoteWrapper = div({
     class: 'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
   });
