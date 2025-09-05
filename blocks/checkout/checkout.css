@@ -380,6 +380,10 @@
   width: 150px
 }
 
+.checkout :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .checkout :is(.w-\[3\.5rem\]) {
   width: 3.5rem
 }

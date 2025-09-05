@@ -8,6 +8,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import { decorateModals } from '../../scripts/scripts.js';
 
 // Helper function to create a badge based on item.carrierFree

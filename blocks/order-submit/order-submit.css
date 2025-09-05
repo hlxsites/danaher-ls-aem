@@ -194,3 +194,9 @@
 .order-submit-wrapper :is(.outline-gray-200) {
   outline-color: #e5e7eb
 }
+
+@media (min-width: 1024px) {
+  .order-submit-wrapper :is(.lg\:flex-col) {
+    flex-direction: column
+  }
+}

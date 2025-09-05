@@ -92,7 +92,6 @@ export default function decorate(block) {
   }
   const buttonContainer = document.querySelector('.button-container');
   if (buttonContainer) {
-  if (buttonContainer) {
     buttonContainer.remove();
   }
 }

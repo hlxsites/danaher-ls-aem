@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 import {
   getApiData, patchApiData, postApiData, putApiData,

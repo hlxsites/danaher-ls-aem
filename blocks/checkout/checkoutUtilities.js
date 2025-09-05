@@ -1,6 +1,7 @@
 import {
   div, button, span,
 } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 // eslint-disable-next-line import/no-cycle
 import { shippingAddressModule } from './shippingAddress.js';

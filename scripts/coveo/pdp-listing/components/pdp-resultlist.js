@@ -1,3 +1,4 @@
+import { decorateBuyButton } from '../../../delayed.js';
 import { decorateIcons } from '../../../lib-franklin.js';
 import { decorateModals } from '../../../scripts.js';
 
@@ -191,7 +192,6 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           showAddToCart()
           && button(
             {
-              sku: result.raw.sku,
               productName: result.raw.title,
               minOrderQuantity: product?.minOrderQuantity,
               manufacturer: product.manufacturer,
@@ -199,7 +199,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
               price: product.salePrice.value,
               quantity: 1,
               class:
-                'px-8 py-2 border border-danaherpurple-500 rounded-full text-sm bg-danaherpurple-500 text-white text-base font-normal leading-[22px]',
+                'px-8 py-2 border border-danaherpurple-500 rounded-full text-sm bg-danaherpurple-500 text-white text-base font-normal leading-[22px] add-to-cart-btn',
             },
             'Buy',
           ),
@@ -218,6 +218,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
     ProductCard = renderProductGridCard(result);
   }
   decorateModals(ProductCard);
+  decorateBuyButton(ProductCard);
   return ProductCard;
 }
 

@@ -12,7 +12,7 @@ export const cartItem = async () => {
   const params = new URLSearchParams(window.location.search);
 
   if (params.get('orderId')) {
-    getProductDetailsObject = JSON.parse(sessionStorage.getItem('cartItemsDetails'));
+    getProductDetailsObject = JSON.parse(localStorage.getItem('cartItemsDetails'));
   } else {
     const productObject = await getProductDetailObject();
     getProductDetailsObject = productObject.data;

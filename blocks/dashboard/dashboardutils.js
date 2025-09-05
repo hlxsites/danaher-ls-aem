@@ -36,7 +36,7 @@ export const requestedQuotes = async () => {
   const defaultHeader = new Headers({
     'Authentication-Token': token,
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   let userId;
   let customerNo;
   if (basketDataFromSession) {
@@ -100,7 +100,7 @@ export const requestedQuotesDetails = async (quoteId) => {
     'Authentication-Token': token,
     // Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   if (!basketDataFromSession) {
     window.location.href = '/us/en/e-buy/login';
   }

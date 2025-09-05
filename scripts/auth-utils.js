@@ -2,9 +2,7 @@ import { div, span } from './dom-builder.js';
 import { postApiData, getApiData } from './api-utils.js';
 import { getCommerceBase } from './commerce.js';
 import {
-  preLoader,
   showPreLoader,
-  removePreLoader,
   createModal,
 } from './common-utils.js';
 import { setAuthenticationToken } from './token-utils.js';
@@ -102,8 +100,9 @@ export async function userRegister(data = {}) {
 export async function userLogin(type, data = {}) {
   showPreLoader();
   let loginData = {};
-  const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const getCurrentBasketData = JSON.parse(localStorage.getItem('basketData'));
   sessionStorage.clear();
+  localStorage.clear();
 
   let lastBasketId = '';
   if (getCurrentBasketData?.status === 'success' && !getCurrentBasketData?.data?.data?.customer) {

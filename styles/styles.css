@@ -3589,6 +3589,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
+.w-\[18px\] {
+  width: 18px;
+}
+
 .\!max-w-7xl {
   max-width: 80rem !important;
 }

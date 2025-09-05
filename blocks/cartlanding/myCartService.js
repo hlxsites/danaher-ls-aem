@@ -1132,7 +1132,6 @@ export const addItemToBasket = async (item) => {
     }
     return 'error';
   } catch (error) {
-    // console.log('error', error);
     return 'error';
   }
 };
@@ -1140,7 +1139,7 @@ export const addItemToBasket = async (item) => {
 export const getProductQuantity = async (newItem) => {
   // const basketDetail = await getBasketDetails();
   let totalProductQuantity;
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(localStorage.getItem('basketData'));
 
   if (basketData) {
     totalProductQuantity = basketData.totalProductQuantity;
@@ -1210,7 +1209,6 @@ export const updateCartItems = async (addItem) => {
         return 'error';
       }
     } else {
-      // console.log('error');
       return 'error fetching product object';
     }
   } else {
@@ -1242,7 +1240,7 @@ export const addItemToCart = async (item) => {
   const response = await createBasket();
   if (response) {
     if (response.status === 'success') {
-      sessionStorage.setItem(
+      localStorage.setItem(
         'basketData',
         JSON.stringify(response.data.data),
       );

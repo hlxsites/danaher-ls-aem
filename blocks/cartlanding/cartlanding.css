@@ -131,6 +131,10 @@
   right: 2.5rem
 }
 
+.cartlanding-wrapper :is(.right-2) {
+  right: 0.5rem
+}
+
 .cartlanding-wrapper :is(.top-0) {
   top: 0px
 }
@@ -145,10 +149,6 @@
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
-}
-
-.cartlanding-wrapper :is(.right-2) {
-  right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.z-0) {
@@ -475,6 +475,10 @@
 
 .cartlanding-wrapper :is(.w-\[150px\]) {
   width: 150px
+}
+
+.cartlanding-wrapper :is(.w-\[18px\]) {
+  width: 18px
 }
 
 .cartlanding-wrapper :is(.w-\[200px\]) {

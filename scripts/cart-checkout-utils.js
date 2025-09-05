@@ -419,14 +419,14 @@ export const submitOrder = async (basketId, paymentMethod) => {
       response = await postApiData(url, data, defaultHeader);
     }
     if (response?.status === 'success') {
-      sessionStorage.setItem(
+      localStorage.setItem(
         'orderSubmitDetails',
         JSON.stringify(response.data),
       );
       const cartItemsDetails = JSON.parse(
-        sessionStorage.getItem('productDetailObject'),
+        localStorage.getItem('productDetailObject'),
       );
-      sessionStorage.setItem(
+      localStorage.setItem(
         'cartItemsDetails',
         JSON.stringify(cartItemsDetails),
       );
@@ -673,7 +673,7 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
         const basketResponse = await getApiData(url, defaultHeader);
 
         if (basketResponse && basketResponse.status === 'success') {
-          sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+          localStorage.setItem('basketData', JSON.stringify(basketResponse));
           return basketResponse;
         }
       } else {
@@ -683,13 +683,13 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
     const basketResponse = await getApiData(url, defaultHeader);
 
     if (basketResponse && basketResponse.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+      localStorage.setItem('basketData', JSON.stringify(basketResponse));
 
       return basketResponse;
     }
     const response = await createBasket();
     if (response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
+      localStorage.setItem('basketData', JSON.stringify(response));
       if (response.data.invoiceToAddress) {
         const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
         await setUseAddress(setUseBillingAddress, 'billing');
@@ -712,9 +712,9 @@ export const updateShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -729,7 +729,7 @@ export const updateShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -753,13 +753,13 @@ export const getShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
       const shippingMethods = JSON.parse(
-        sessionStorage.getItem('shippingMethods'),
+        localStorage.getItem('shippingMethods'),
       );
       if (shippingMethods?.status === 'success') return await shippingMethods;
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -774,7 +774,7 @@ export const getShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -1099,7 +1099,7 @@ export const getPromotionDetails = async (promotionId) => {
   try {
     if (!promotionId) return { status: 'error', data: 'Invalid promotion ID' };
 
-    const autoDiscount = JSON.parse(sessionStorage.getItem('discountDetails')) || {};
+    const autoDiscount = JSON.parse(localStorage.getItem('discountDetails')) || {};
     if (autoDiscount?.status === 'success') return autoDiscount;
     const getBasket = await getBasketDetails();
     if (getBasket?.status === 'success') {
@@ -1113,7 +1113,7 @@ export const getPromotionDetails = async (promotionId) => {
         );
 
         if (getDiscountDetails?.status === 'success') {
-          sessionStorage.setItem(
+          localStorage.setItem(
             'discountDetails',
             JSON.stringify(getDiscountDetails),
           );
@@ -1693,9 +1693,9 @@ export const changeStep = async (step) => {
           throw new Error('Error submitting order.');
         }
 
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
@@ -1944,8 +1944,8 @@ export const changeStep = async (step) => {
         *
         */
         sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
         sessionStorage.removeItem('useStripeCardId');
         sessionStorage.removeItem('selectedStripeMethod');
@@ -2519,7 +2519,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2611,7 +2611,7 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href = '/us/en/e-buy/login';
+    // window.location.href = '/us/en/e-buy/login';
   });
 
   /*
@@ -2919,16 +2919,28 @@ get price type if its net or gross
               {
                 class: 'p-3 border border-danahergray-300',
               },
-              h5(
+              div(
                 {
-                  class: `font-normal m-0 p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
-                    ?.companyName2
-                    ? ''
-                    : 'hidden'
-                    }`,
+                  class: 'flex w-full justify-between',
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
-                ?? '',
+                h5(
+                  {
+                    class: `font-normal m-0 text-xl font-semibold p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
+                      ?.companyName2
+                      ? ''
+                      : 'hidden'
+                    }`,
+                  },
+                  getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                  ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: 'icon icon-edit w-[18px] cursor-pointer edit-address-icon',
+                  },
+                ),
               ),
               p(
                 {
@@ -2960,10 +2972,14 @@ get price type if its net or gross
         );
 
         if (invoiceToAddress) {
+          decorateIcons(invoiceToAddress);
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
             invoiceToAddress,
           );
+          invoiceToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
         }
       }
       /*
@@ -2992,12 +3008,24 @@ get price type if its net or gross
               {
                 class: 'p-3 border border-danahergray-300',
               },
-              h5(
+              div(
                 {
-                  class: 'font-normal  m-0 p-0',
+                  class: 'flex w-full justify-between',
                 },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.companyName2 ?? '',
+                h5(
+                  {
+                    class: 'font-normal  text-xl font-semibold m-0 p-0',
+                  },
+                  getUseAddressesResponse?.data?.commonShipToAddress
+                    ?.companyName2 ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: 'icon icon-edit w-[18px] cursor-pointer  edit-address-icon',
+                  },
+                ),
               ),
               p(
                 {
@@ -3028,10 +3056,14 @@ get price type if its net or gross
           ),
         );
         if (commonShipToAddress) {
+          decorateIcons(commonShipToAddress);
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
             commonShipToAddress,
           );
+          commonShipToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
         }
       }
     }

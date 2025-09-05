@@ -5,6 +5,7 @@ import { getAuthorization, getCommerceBase } from './commerce.js';
 import { getMetadata } from './lib-franklin.js';
 import { addItemToCart } from '../blocks/cartlanding/myCartService.js';
 import { removePreLoader, showNotification } from './common-utils.js';
+import { getAuthenticationToken } from './token-utils.js';
 
 /**
  * Sets up event delegation for "Add to Cart" button clicks within the main container.
@@ -318,6 +319,8 @@ if (
 ) {
   getAuthToken();
 }
+
+const emAuthToken = getAuthenticationToken();
 
 if (!window.location.hostname.includes('localhost')) {
   loadGTM();

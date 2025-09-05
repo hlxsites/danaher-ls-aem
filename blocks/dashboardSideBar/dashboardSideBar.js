@@ -9,9 +9,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 // eslint-disable-next-line
 export default async function dashboardSidebar() {
-// //   showPreLoader();
-//   block?.parentElement?.parentElement?.removeAttribute('class');
-//   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
@@ -22,13 +19,6 @@ export default async function dashboardSidebar() {
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
     { name: 'Approved Quotes', itemClicked: 'Approved quotes', icon: 'Document-duplicate' },
-    // { name: 'Invoices', icon: 'document-text' },
-    // { name: 'Communities', icon: 'Users' },
-    // { name: 'Personalized Catalog', icon: 'shopping-cart' },
-    // { name: 'Training', icon: 'Academic-cap' },
-    // { name: 'Kowledge Center', icon: 'Light-bulb' },
-    // { name: 'Manage Equipment', icon: 'Server' },
-    // { name: 'Report Product Complaint', icon: 'Emoji-sad' }
   ];
   const sidePanelDiv = (name, itemClicked, icon) => {
     const url = name.replace(/\s+/g, '').toLowerCase();
@@ -54,14 +44,6 @@ export default async function dashboardSidebar() {
           },
           name,
         ),
-        // div(
-        //   {
-        //     class:
-        //       'justify-start text-base font-medium leading-snug',
-        //     id: name.replace(/\s+/g, ''),
-        //   },
-        //   name,
-        // ),
       ),
     );
     return innerDiv;

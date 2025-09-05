@@ -10,6 +10,7 @@ import {
   p,
   h3,
 } from './dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
 import { getAuthenticationToken } from './token-utils.js';
@@ -864,9 +865,9 @@ Function to get general store configurations
 */
 export async function getStoreConfigurations() {
   try {
-    const configurations = sessionStorage.getItem('generalConfigurations');
+    const configurations = localStorage.getItem('generalConfigurations');
     if (configurations) return await JSON.parse(configurations);
-    sessionStorage.removeItem('generalConfigurations');
+    localStorage.removeItem('generalConfigurations');
     const url = `${baseURL}/configurations`;
     const defaultHeaders = new Headers();
     defaultHeaders.append('Content-Type', 'Application/json');
@@ -874,7 +875,7 @@ export async function getStoreConfigurations() {
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === 'success') {
-      sessionStorage.setItem('generalConfigurations', JSON.stringify(response));
+      localStorage.setItem('generalConfigurations', JSON.stringify(response));
     }
     return response;
   } catch (error) {

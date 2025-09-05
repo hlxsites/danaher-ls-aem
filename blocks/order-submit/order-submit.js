@@ -8,7 +8,7 @@ export default async function decorate(block) {
   const params = new URLSearchParams(window.location.search);
   const orderId = params.get('orderId');
   if (orderId) {
-    const orderDetails = JSON.parse(sessionStorage.getItem('orderSubmitDetails'));
+    const orderDetails = JSON.parse(localStorage.getItem('orderSubmitDetails'));
     let notes = '';
     orderDetails?.data?.attributes?.forEach((item) => {
       if (item.name === 'GroupShippingNote') {
@@ -77,7 +77,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'self-stretch inline-flex justify-start items-start gap-5',
+          class: 'self-stretch inline-flex justify-start items-start gap-5 lg:flex-col',
         },
         div(
           {
@@ -116,7 +116,7 @@ export default async function decorate(block) {
                     class:
                       'w-80 justify-start text-gray-700 text-base font-extralight',
                   },
-                  `${orderDetails?.included?.commonShippingMethod?.STD_GROUND?.name} `,
+                  `${orderDetails?.included?.commonShippingMethod?.[orderDetails?.data?.commonShippingMethod]?.description} `,
                 ),
                 div(
                   {
