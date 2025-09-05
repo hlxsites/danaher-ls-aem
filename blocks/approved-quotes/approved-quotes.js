@@ -26,11 +26,11 @@ export default async function decorate(block) {
   //     class: 'self-stretch justify-start text-black text-base font-extralight leading-snug',
   //   }, 'Track the status of your quote requests and stay in the loop.'),
   // );
-  // const wrapper = div({
-  //   id: 'dashboardWrapper',
-  //   class:
-  //           'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
-  // });
+  const wrapper = div({
+    id: 'dashboardWrapper',
+    class:
+            'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
+  });
   // const quoteWrapper = div(
   //   {
   //     class:
