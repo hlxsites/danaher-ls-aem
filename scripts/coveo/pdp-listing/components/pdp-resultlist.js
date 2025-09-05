@@ -22,6 +22,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       }),
     ),
   );
+  decorateIcons(viewDetailsButton);
   /**
    * Function to render a grid card
    */
@@ -72,7 +73,6 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
     contentWrapper.append(titleElement);
 
-    decorateIcons(viewDetailsButton);
     card.append(
       imageElement,
       contentWrapper,
@@ -116,7 +116,6 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
   const minOrderQuantity = product?.minOrderQuantity ?? 1;
   const availability = product?.availability ? 'Available' : 'Check Back Soon';
 
-  decorateIcons(viewDetailsButton);
   let ProductCard = '';
   if (viewType === 'list') {
     ProductCard = div(
