@@ -400,7 +400,7 @@ export default async function decorate(block) {
   }
 
   const brandURL = result?.raw?.externallink
-    ? `${result.raw.externallink}?utm_source=dhls_website`
+    ? `${result.raw.externallink}`
     : null;
 
   function formatMoney(number) {
@@ -444,7 +444,7 @@ export default async function decorate(block) {
 
       if (actionValue === 'true' && externallinkRaw) {
         pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
-        btnHref = `${externallinkRaw}?utm_source=dhls_website`;
+        btnHref = `${externallinkRaw}`;
       } else if (actionValue.startsWith('http')) {
         pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
         btnHref = actionPart.trim();
