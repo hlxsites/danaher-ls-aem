@@ -2856,7 +2856,7 @@ get price type if its net or gross
       ::::::::::::::
       */
       const currentPath = window.location.pathname;
-      if (currentPath.includes('address')) proceedButton.textContent = 'Proceed to Shipping';
+      if (currentPath.includes('addresses')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
         proceedButton.textContent = 'Proceed to Payment';
         proceedButton?.setAttribute('data-activetab', 'shippingMethod');
