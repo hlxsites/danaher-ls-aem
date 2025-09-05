@@ -131,10 +131,6 @@
   right: 2.5rem
 }
 
-.cartlanding-wrapper :is(.right-2) {
-  right: 0.5rem
-}
-
 .cartlanding-wrapper :is(.top-0) {
   top: 0px
 }
@@ -149,6 +145,10 @@
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
+}
+
+.cartlanding-wrapper :is(.right-2) {
+  right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.z-0) {
@@ -255,6 +255,10 @@
 
 .cartlanding-wrapper :is(.block) {
   display: block
+}
+
+.cartlanding-wrapper :is(.inline) {
+  display: inline
 }
 
 .cartlanding-wrapper :is(.flex) {
@@ -477,10 +481,6 @@
   width: 150px
 }
 
-.cartlanding-wrapper :is(.w-\[18px\]) {
-  width: 18px
-}
-
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -515,6 +515,14 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
+}
+
+.cartlanding-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
+.cartlanding-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .cartlanding-wrapper :is(.min-w-\[100\%\]) {
@@ -570,6 +578,16 @@
 
 .cartlanding-wrapper :is(.animate-pulse) {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.cartlanding-wrapper :is(.animate-spin) {
+  animation: spin 1s linear infinite
 }
 
 .cartlanding-wrapper :is(.cursor-pointer) {
@@ -1226,6 +1244,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-200) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.underline) {
   text-decoration-line: underline
 }
@@ -1390,6 +1413,13 @@
 .cartlanding-wrapper :is(.peer:hover ~ .peer-hover\:bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .cartlanding-wrapper :is(.dark\:text-gray-600) {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 }
 
 @media (min-width: 640px) {

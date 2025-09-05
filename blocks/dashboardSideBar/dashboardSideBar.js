@@ -108,18 +108,6 @@ export default async function dashboardSidebar() {
         'View Cart',
       ),
     ),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/orderSubmit?orderId=10000123',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Order Submit',
-      ),
-    ),
-
   );
   const listDiv = div({
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',

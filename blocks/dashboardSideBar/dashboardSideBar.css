@@ -22,6 +22,10 @@
   margin-top: -75px
 }
 
+.dashboardSideBar-wrapper :is(.block) {
+  display: block
+}
+
 .dashboardSideBar-wrapper :is(.flex) {
   display: flex
 }

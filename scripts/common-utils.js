@@ -44,17 +44,20 @@ export function showPreLoader() {
  :::::::::::::::::
  */
 export function preLoader() {
-  return div(
+  const preloaderContainer = div(
     {
       class:
         'flex w-full relative top-1/2 left-[46%] justify-start items-center',
       id: 'preLoader',
     },
-    img({
-      class: ' h-24',
-      src: '/content/dam/danaher/utility/loading_icon.gif',
-    }),
+    span(
+      {
+        class: 'icon icon-preloading w-12 h-12',
+      },
+    ),
   );
+  decorateIcons(preloaderContainer);
+  return preloaderContainer;
 }
 
 /*

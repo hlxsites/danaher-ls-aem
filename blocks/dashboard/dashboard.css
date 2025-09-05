@@ -164,6 +164,10 @@
   display: block
 }
 
+.dashboard-wrapper :is(.inline) {
+  display: inline
+}
+
 .dashboard-wrapper :is(.flex) {
   display: flex
 }
@@ -234,6 +238,14 @@
 
 .dashboard-wrapper :is(.h-\[46px\]) {
   height: 46px
+}
+
+.dashboard-wrapper :is(.h-16) {
+  height: 4rem
+}
+
+.dashboard-wrapper :is(.h-12) {
+  height: 3rem
 }
 
 .dashboard-wrapper :is(.max-h-48) {
@@ -316,6 +328,14 @@
   width: 100%
 }
 
+.dashboard-wrapper :is(.w-16) {
+  width: 4rem
+}
+
+.dashboard-wrapper :is(.w-12) {
+  width: 3rem
+}
+
 .dashboard-wrapper :is(.min-w-\[415px\]) {
   min-width: 415px
 }
@@ -339,6 +359,16 @@
 .dashboard-wrapper :is(.-translate-y-full) {
   --tw-translate-y: -100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.dashboard-wrapper :is(.animate-spin) {
+  animation: spin 1s linear infinite
 }
 
 .dashboard-wrapper :is(.cursor-pointer) {
@@ -876,6 +906,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.dashboard-wrapper :is(.text-gray-200) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+
 .dashboard-wrapper :is(.shadow) {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -950,6 +985,13 @@
 .dashboard-wrapper :is(.peer:hover ~ .peer-hover\:bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard-wrapper :is(.dark\:text-gray-600) {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 }
 
 @media (min-width: 768px) {

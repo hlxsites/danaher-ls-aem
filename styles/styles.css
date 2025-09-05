@@ -3593,6 +3593,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 18px;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .\!max-w-7xl {
   max-width: 80rem !important;
 }
@@ -3642,6 +3646,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .cursor-pointer {
@@ -4320,6 +4334,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -4583,6 +4602,13 @@ main .section.top-border {
 .peer:hover ~ .peer-hover\:bg-danaherpurple-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
 }
 
 @media (min-width: 640px) {
