@@ -125,7 +125,7 @@ export default async function decorate(block) {
     ? window.location.host
     : 'stage.lifesciences.danaher.com';
 
-  const response = await getProductResponse();
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
   // Early exit if no valid product response
   if (!(response !== null && response !==undefined && response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)) {
