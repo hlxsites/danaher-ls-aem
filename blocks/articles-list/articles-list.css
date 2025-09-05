@@ -96,6 +96,10 @@
   margin-top: auto
 }
 
+.articles-list-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .articles-list-wrapper :is(.line-clamp-3) {
   overflow: hidden;
   display: -webkit-box;
@@ -131,12 +135,24 @@
   height: 100%
 }
 
+.articles-list-wrapper :is(.h-48) {
+  height: 12rem
+}
+
+.articles-list-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .articles-list-wrapper :is(.w-full) {
   width: 100%
 }
 
 .articles-list-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.articles-list-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .articles-list-wrapper :is(.grid-cols-1) {
@@ -203,6 +219,16 @@
 
 .articles-list-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.articles-list-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.articles-list-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .articles-list-wrapper :is(.\!p-0) {
