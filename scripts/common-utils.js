@@ -47,7 +47,7 @@ export function preLoader() {
   const preloaderContainer = div(
     {
       class:
-        'flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        'fixed top-0 left-0 flex items-center justify-center w-screen h-screen z-[100] backdrop-blur-sm',
       id: 'preLoader',
     },
     span(
@@ -88,7 +88,7 @@ function to append notification container
 */
 const generateNotification = div(
   {
-    class: 'fixed flex flex-col bottom-40 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
+    class: 'fixed flex flex-col bottom-24 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
     id: 'notificationWrapper',
   },
   div(
