@@ -1249,18 +1249,40 @@ export const taxExemptModal = () => {
     cloud file icon for tax exempt modal
      :::::::::::::::::::::::::::::::
     */
-  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file span');
-  cloudFileIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file');
 
+  const cloudFileIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-file [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudFileIconWrapper);
+  cloudFileIcon?.insertAdjacentElement('beforeend', cloudFileIconWrapper);
   /*
     ::::::::::::::::::::::
     upload file icon for tax exempt modal
      :::::::::::::::::::::::::::::::
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
-    '.tax-exempt-upload span',
+    '.tax-exempt-upload',
   );
-  cloudUloadIcon.innerHTML = '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  const cloudUploadIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-cloud-upload [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudUploadIconWrapper);
+  cloudUloadIcon?.insertAdjacentElement('beforeend', cloudUploadIconWrapper);
 
   const taxExemptUploadButton = taxExemptWrapper.querySelector('#taxExemptUpload');
 
@@ -1590,24 +1612,26 @@ export const changeStep = async (step) => {
     *
     *
     * */
+
     if (currentTab === 'submitOrder') {
       const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
       if (!getSelectedPaymentMethod) throw new Error('Please select Payment Method');
-
-      const getBasketForOrder = await getBasketDetails();
-
+      const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
       if (getSelectedPaymentMethod?.value === 'invoice') {
-        showPreLoader();
         /*
         *
         :::::::: check if invoice number is entered :::::::
         *
         */
-        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
         if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
+      }
+      const getBasketForOrder = await getBasketDetails();
+
+      if (getSelectedPaymentMethod?.value === 'invoice') {
+        showPreLoader();
 
         /*
         *
@@ -2495,7 +2519,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2901,7 +2925,7 @@ get price type if its net or gross
                     ?.companyName2
                     ? ''
                     : 'hidden'
-                  }`,
+                    }`,
                 },
                 getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                 ?? '',

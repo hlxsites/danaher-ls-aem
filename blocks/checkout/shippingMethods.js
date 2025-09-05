@@ -4,7 +4,9 @@ import {
   p,
   textarea,
   button,
+  span,
 } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import {
   getStoreConfigurations,
   removePreLoader,
@@ -25,17 +27,13 @@ import {
   silentNavigation,
 } from '../../scripts/cart-checkout-utils.js';
 import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 async function setShippingNotesOnBlur() {
   showPreLoader();
   const getShippingNotesField = document.querySelector('#shippingNotes');
 
   if (getShippingNotesField) {
-    if (getShippingNotesField.value.trim() === '') {
-      // removePreLoader();
-      // showNotification('Please update Order Note.', 'error');
-      // return false;
-    }
     /*
  :::::::::::::
  get current basket details
@@ -311,7 +309,17 @@ const shippingMethodsModule = async () => {
             checkDefaultShippingMethod = getCurrentBasketDetails?.data?.data?.commonShippingMethod;
           }
           if (getCurrentBasketDetails?.status === 'success') {
-            const defaultShippingMethodIcon = '<svg class="absolute right-2 bottom-2" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1543 16L13.1543 18L17.1543 14M23.1543 16C23.1543 20.9706 19.1249 25 14.1543 25C9.18373 25 5.1543 20.9706 5.1543 16C5.1543 11.0294 9.18373 7 14.1543 7C19.1249 7 23.1543 11.0294 23.1543 16Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            const defaultShippingMethodIcon = div(
+              {
+                class: 'absolute right-2 bottom-2',
+              },
+              span(
+                {
+                  class: 'icon icon-check-circle [&_svg>use]:stroke-danaherpurple-500 ',
+                },
+              ),
+            );
+            decorateIcons(defaultShippingMethodIcon);
             /*
              ::::::::::::::::::
              generates shipping methods cards
@@ -323,7 +331,7 @@ const shippingMethodsModule = async () => {
                   id: method.id,
                   class: `flex relative flex-col w-full shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-xs border-solid border-2  p-4 ${method.id === checkDefaultShippingMethod
                     ? highlightDefaultShippingMethod
-                    : 'border-gray-400'
+                    : 'border-solid'
                   }`,
                 },
                 p(
@@ -351,7 +359,7 @@ const shippingMethodsModule = async () => {
               if (methodData) {
                 if (defaultShippingMethodIcon) {
                   if (method.id === checkDefaultShippingMethod) {
-                    methodData.insertAdjacentHTML(
+                    methodData.insertAdjacentElement(
                       'beforeend',
                       defaultShippingMethodIcon,
                     );
@@ -416,11 +424,15 @@ const shippingMethodsModule = async () => {
 
                         if (highlightShippingMethod) {
                           await updateCheckoutSummary();
+                          if (highlightShippingMethod?.classList?.contains('border-gray-400')) {
+                            highlightShippingMethod?.classList?.remove('border-gray-400');
+                          }
                           highlightShippingMethod.classList.add(
                             'border-danaherpurple-500',
                           );
+                          decorateIcons(defaultShippingMethodIcon);
                           if (defaultShippingMethodIcon) {
-                            highlightShippingMethod.insertAdjacentHTML(
+                            highlightShippingMethod.insertAdjacentElement(
                               'beforeend',
                               defaultShippingMethodIcon,
                             );

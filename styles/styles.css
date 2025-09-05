@@ -3233,8 +3233,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   bottom: 0px;
 }
 
-.bottom-10 {
-  bottom: 2.5rem;
+.bottom-40 {
+  bottom: 10rem;
 }
 
 .left-0 {
@@ -3273,16 +3273,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 83px;
 }
 
-.bottom-97 {
-  bottom: 25rem;
+.bottom-2 {
+  bottom: 0.5rem;
 }
 
-.bottom-56 {
-  bottom: 14rem;
-}
-
-.bottom-40 {
-  bottom: 10rem;
+.right-2 {
+  right: 0.5rem;
 }
 
 .z-10 {

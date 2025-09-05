@@ -232,20 +232,21 @@ export const recommendedProducts = () => {
                 }, '1'),
               ),
               addToCartButton,
-              div({
-                class: '',
-              }, button({
-                class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-                class: '',
-              }, button({
-                class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-              }, 'Quote')),
+              div(
+                {
+                  class: '',
+                },
+                button(
+                  {
+                    class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                  },
+                  'Quote',
+                ),
+              ),
             ),
-          // addToCartButton,
           ),
         ),
-      ),
-    );
+      );
       decorateModals(itemContainer);
       decorateBuyButton(itemContainer);
       card.append(itemContainer);
@@ -255,20 +256,14 @@ export const recommendedProducts = () => {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-          stroke="${
-  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          stroke="${currentIndex > 0 ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-          stroke="${
-  currentIndex + cardsPerPage < productsCategories.length
-    ? '#7523FF'
-    : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          stroke="${currentIndex + cardsPerPage < productsCategories.length ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
   }

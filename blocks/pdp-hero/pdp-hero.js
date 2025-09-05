@@ -290,21 +290,21 @@ export default async function decorate(block) {
       class:
         'hidden pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
     }),
-    button(
+    div(
+      {
+        class: 'pr-starts-at-price hidden text-base font-extralight justify-start text-black text-4xl font-normal md:block',
+      },
+      div({ class: 'text-black text-base font-extralight' }, 'Starts at'),
+      `$${productInfo?.data?.salePrice?.value}`,
+    ),
+    a(
       {
         class:
-          'hidden add-to-cart-btn cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+          'hidden cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
       },
       span(
         {
-          class: 'inherit text-base font-medium leading-snug',
-          sku: result.raw?.sku,
-          productName: result.title,
-          minOrderQuantity: productInfo?.data?.minOrderQuantity ?? 1,
-          manufacturer: productInfo?.data?.manufacturer,
-          maxOrderQuantity: productInfo?.data?.maxOrderQuantity ?? 999999,
-          price: productInfo?.data.salePrice.value,
-          quantity: 0,
+          class: 'add-to-cart-btn inherit text-base font-medium leading-snug',
         },
         'Buy Now',
       ),
@@ -337,6 +337,7 @@ export default async function decorate(block) {
 
   infoTab.querySelector('.starts-at-price').style.display = 'none';
   infoTab.querySelector('.uom-seperator-line').style.display = 'none';
+  pricingQuoteButton.querySelector('.pr-starts-at-price').style.display = 'none';
 
   const availableOnlineRaw = result?.raw?.availableonline;
   const availableOnline = Array.isArray(availableOnlineRaw)
@@ -378,8 +379,13 @@ export default async function decorate(block) {
   }
 
   if (showRFQ) {
-    if (['Product', 'Bundle'].includes(result?.raw?.objecttype)) {
-      pricingQuoteButton.querySelector('.pr-rfq')?.classList.remove('hidden');
+    pricingQuoteButton.querySelector('.pr-rfq')?.classList.remove('hidden');
+  }
+  if (['Family'].includes(result?.raw?.objecttype) && hasValidPrice && showListPrice) {
+    const familyPR = pricingQuoteButton.querySelector('.pr-starts-at-price');
+    if (familyPR) {
+      familyPR.childNodes[1].textContent = `${formatMoney(currncyFormat)}`;
+      familyPR.style.display = 'block';
     }
   }
 

@@ -13,6 +13,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import  functions / modules from common utilities
 ... :::::::::::::::::
 */
+// eslint-disable-next-line import/no-cycle
 import {
   buildBillingCheckboxElement,
   buildSearchWithIcon,
@@ -24,6 +25,7 @@ import {
   showPreLoader,
   getStates,
   scrollViewToTop,
+  getCountries,
 } from '../../scripts/common-utils.js';
 /*
 ::::::::::::::::::
@@ -53,7 +55,10 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 await loadGmapsScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCCLCWBAwQawztgIw0AobQk8q-2OlEzuzQ&libraries=places');
 
 const authenticationToken = await getAuthenticationToken();
-
+const countriesData = await getCountries();
+const countriesCode = Array.isArray(countriesData?.data?.data) && countriesData.data.data.length > 0
+  ? countriesData.data.data.map((c) => c?.id?.toLowerCase())
+  : ['us'];
 // google maps api to autopopulate fields
 function initGmapsAutocomplete(addressType, addressInput = '') {
   let gInput;
@@ -66,7 +71,7 @@ function initGmapsAutocomplete(addressType, addressInput = '') {
   // eslint-disable-next-line no-undef
   const autocomplete = new google.maps.places.Autocomplete(gInput, {
     types: ['address'], // restrict to addresses
-    componentRestrictions: { country: 'us' },
+    componentRestrictions: { country: countriesCode },
     // optional: restrict to India
   });
 
