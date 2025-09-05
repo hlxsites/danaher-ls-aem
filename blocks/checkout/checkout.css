@@ -84,12 +84,12 @@
   inset: 0px
 }
 
-.checkout :is(.bottom-10) {
-  bottom: 2.5rem
-}
-
 .checkout :is(.bottom-2) {
   bottom: 0.5rem
+}
+
+.checkout :is(.bottom-40) {
+  bottom: 10rem
 }
 
 .checkout :is(.left-0) {

@@ -80,8 +80,8 @@
   inset: 0px
 }
 
-.dashboard-wrapper :is(.bottom-10) {
-  bottom: 2.5rem
+.dashboard-wrapper :is(.bottom-40) {
+  bottom: 10rem
 }
 
 .dashboard-wrapper :is(.left-0) {

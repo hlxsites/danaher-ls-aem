@@ -74,6 +74,7 @@
       "order-submit",
       "order-status",
       "requested-quote",
+      "approved-quotes",
       "order-details",
       "quote-details",
       "carousel",
