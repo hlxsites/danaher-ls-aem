@@ -2847,7 +2847,8 @@ get price type if its net or gross
    */
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
-    if (window.location.href.includes('cart') && userLoggedInStatus) {
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('cart') && userLoggedInStatus) {
       proceedButton.textContent = 'Checkout';
     } else {
       /*
@@ -2855,7 +2856,6 @@ get price type if its net or gross
       Update checkout summary button
       ::::::::::::::
       */
-      const currentPath = window.location.pathname;
       if (currentPath.includes('addresses')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
         proceedButton.textContent = 'Proceed to Payment';
