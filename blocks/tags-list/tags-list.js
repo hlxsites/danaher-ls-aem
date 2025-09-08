@@ -8,8 +8,8 @@ import { createFilters } from '../card-list/card-list.js';
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const articleType = getMetadata('template').toLowerCase() || block?.firstElementChild?.textContent || '';
-  const articleTopics = getMetadata('topics')?.toLowerCase() || block?.firstElementChild?.nextElementSibling?.textContent || '';
+  const articleType = getMetadata('template').toLowerCase();
+  const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'), window.location.origin);
   const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
