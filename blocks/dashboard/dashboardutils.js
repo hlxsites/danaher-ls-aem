@@ -89,7 +89,7 @@ export const approvedQuotes = async () => {
       if (response.data === 'Unauthorized! please try again.') {
         window.location.href = '/us/en/e-buy/login';
       }
-      console.log("response", response)
+      console.log('response', response);
       const quotesResponse = response.data.elements;
       return quotesResponse;
     }
@@ -178,7 +178,7 @@ export const approvedQuotesDetails = async (quoteId) => {
     window.location.href = '/us/en/e-buy/login';
   }
   const url = `${baseURL}/customers/${customerNo}/users/${userId}/quotes/${quoteId}`;
-  
+
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
@@ -186,7 +186,7 @@ export const approvedQuotesDetails = async (quoteId) => {
         window.location.href = '/us/en/e-buy/login';
       }
       const quotesResponse = response.data;
-      console.log("quotesResponse", quotesResponse);
+      console.log('quotesResponse', quotesResponse);
       return quotesResponse;
     }
     return { status: 'error', data: 'No response data.' };

@@ -1,6 +1,6 @@
-import dashboardSidebar from "../dashboardSideBar/dashboardSideBar.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
+import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import {
   div,
   table,
@@ -9,279 +9,277 @@ import {
   span,
   a,
   button,
-} from "../../scripts/dom-builder.js";
+} from '../../scripts/dom-builder.js';
 import {
   approvedQuotes,
   approvedQuotesDetails,
-} from "../dashboard/dashboardutils.js";
+} from '../dashboard/dashboardutils.js';
 
 export default async function decorate(block) {
   showPreLoader();
-  block?.parentElement?.parentElement?.removeAttribute("class");
-  block?.parentElement?.parentElement?.removeAttribute("style");
-  document.querySelector("main").style = "background: #f4f4f4";
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  document.querySelector('main').style = 'background: #f4f4f4';
   const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
-  const customerName = basketDataFromSession?.data?.data?.buyer?.firstName + " " + basketDataFromSession?.data?.data?.buyer?.lastName;
-  const userId = basketDataFromSession?.data?.data?.buyer?.accountID; 
+  const customerName = `${basketDataFromSession?.data?.data?.buyer?.firstName} ${basketDataFromSession?.data?.data?.buyer?.lastName}`;
+  const userId = basketDataFromSession?.data?.data?.buyer?.accountID;
   const approvedQuotesResponse = await approvedQuotes();
   const approvedQuoteWrapper = div({
     class:
-      "w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5",
+      'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
   });
   const approvedquoteTitleDiv = div(
     {
-      class: "self-stretch p-6 flex flex-col justify-start items-start gap-4",
+      class: 'self-stretch p-6 flex flex-col justify-start items-start gap-4',
     },
     div(
       {
         class:
-          "self-stretch justify-start text-black text-3xl font-normal leading-10",
+          'self-stretch justify-start text-black text-3xl font-normal leading-10',
       },
-      "Approved Quote"
+      'Approved Quote',
     ),
     div(
       {
         class:
-          "self-stretch justify-start text-black text-base font-extralight leading-snug",
+          'self-stretch justify-start text-black text-base font-extralight leading-snug',
       },
-      "Track approved quotes effortlessly—everything you need, right here."
-    )
+      'Track approved quotes effortlessly—everything you need, right here.',
+    ),
   );
   const wrapper = div({
-    id: "dashboardWrapper",
+    id: 'dashboardWrapper',
     class:
-      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12",
+      'flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12',
   });
   const quoteWrapper = div({
     class:
-      "w-[980px] ml-[20px] p-6 bg-white border border-solid border-gray-300 inline-flex flex-col justify-start items-center",
-    id: "orderWrapper",
+      'w-[980px] ml-[20px] p-6 bg-white border border-solid border-gray-300 inline-flex flex-col justify-start items-center',
+    id: 'orderWrapper',
   });
 
   const dynamicQuoteDetail = (approvedQuotesDetailsResponse) => {
-    const tableHeader = (name) => {
-      return div(
+    const tableHeader = (name) => div(
+      {
+        class:
+            'w-[175px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1',
+      },
+      div(
         {
-          class:
-            "w-[175px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1",
+          class: 'justify-start text-black text-base font-bold leading-snug',
         },
-        div(
-          {
-            class: "justify-start text-black text-base font-bold leading-snug",
-          },
-          name
-        )
-      );
-    };
+        name,
+      ),
+    );
     const quoteDetail = div(
       {
         class:
-          "mx-w-[930px] h-96 p-6 bg-gray-50 inline-flex flex-col justify-start items-start gap-6",
+          'mx-w-[930px] h-96 p-6 bg-gray-50 inline-flex flex-col justify-start items-start gap-6',
         id: `${approvedQuotesDetailsResponse.id}`,
       },
       div(
         {
           class:
-            "self-stretch bg-white outline outline-1 outline-gray-200 flex flex-col justify-start items-start gap-6",
+            'self-stretch bg-white outline outline-1 outline-gray-200 flex flex-col justify-start items-start gap-6',
         },
         div(
           {
             class:
-              "self-stretch p-5 bg-white flex flex-col justify-start items-start gap-6",
+              'self-stretch p-5 bg-white flex flex-col justify-start items-start gap-6',
           },
           div(
             {
               class:
-                "self-stretch flex flex-col justify-start items-start gap-3",
+                'self-stretch flex flex-col justify-start items-start gap-3',
             },
             div(
               {
                 class:
-                  "self-stretch flex flex-col justify-start items-start gap-3",
+                  'self-stretch flex flex-col justify-start items-start gap-3',
               },
               div(
                 {
                   class:
-                    "self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5",
+                    'self-stretch h-10 border-b-2 border-dashed border-gray-300 flex flex-col justify-start items-start gap-2.5',
                 },
                 div(
                   {
                     class:
-                      "self-stretch inline-flex justify-start items-start gap-5",
+                      'self-stretch inline-flex justify-start items-start gap-5',
                   },
                   div(
                     {
                       class:
-                        "justify-start text-black text-base font-bold leading-snug",
+                        'justify-start text-black text-base font-bold leading-snug',
                     },
-                    "Contact Information"
-                  )
-                )
+                    'Contact Information',
+                  ),
+                ),
               ),
               div(
                 {
                   class:
-                    "self-stretch inline-flex justify-start items-start gap-3",
+                    'self-stretch inline-flex justify-start items-start gap-3',
                 },
                 div(
                   {
                     class:
-                      "w-[272.67px] flex-1 inline-flex flex-col justify-start items-start",
+                      'w-[272.67px] flex-1 inline-flex flex-col justify-start items-start',
                   },
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-sm font-normal leading-tight",
+                        'self-stretch justify-start text-black text-sm font-normal leading-tight',
                     },
-                    "Name"
+                    'Name',
                   ),
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-base font-bold leading-snug",
+                        'self-stretch justify-start text-black text-base font-bold leading-snug',
                     },
-                    customerName
-                  )
+                    customerName,
+                  ),
                 ),
                 div(
                   {
                     class:
-                      "w-[272.67px] flex-1 inline-flex flex-col justify-start items-start leading-tight",
+                      'w-[272.67px] flex-1 inline-flex flex-col justify-start items-start leading-tight',
                   },
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-sm font-normal",
+                        'self-stretch justify-start text-black text-sm font-normal',
                     },
-                    "Email"
+                    'Email',
                   ),
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-base font-bold leading-snug",
+                        'self-stretch justify-start text-black text-base font-bold leading-snug',
                     },
-                    userId
-                  )
+                    userId,
+                  ),
                 ),
                 div(
                   {
                     class:
-                      "w-[272.67px] flex-1 inline-flex flex-col justify-start items-start leading-tight",
+                      'w-[272.67px] flex-1 inline-flex flex-col justify-start items-start leading-tight',
                   },
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-sm font-normal",
+                        'self-stretch justify-start text-black text-sm font-normal',
                     },
-                    "Contact Number"
+                    'Contact Number',
                   ),
                   div(
                     {
                       class:
-                        "self-stretch justify-start text-black text-base font-bold leading-snug",
+                        'self-stretch justify-start text-black text-base font-bold leading-snug',
                     },
-                    "-"
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
+                    '-',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
     const quoteDetailTable = div(
       {
         class:
-          "self-stretch bg-white border border-[1px] border-gray-300 inline-flex flex-col justify-start items-start",
+          'self-stretch bg-white border border-[1px] border-gray-300 inline-flex flex-col justify-start items-start',
       },
       tr(
         {
-          class: "self-stretch bg-white border-b-2 border-gray-200",
+          class: 'self-stretch bg-white border-b-2 border-gray-200',
         },
-        tableHeader("SKU"),
-        tableHeader("Description"),
-        tableHeader("UOM"),
-        tableHeader("QTY"),
-        tableHeader("Unit Price")
-      )
+        tableHeader('SKU'),
+        tableHeader('Description'),
+        tableHeader('UOM'),
+        tableHeader('QTY'),
+        tableHeader('Unit Price'),
+      ),
     );
 
-    const dynamicQuoteDetailContent = (approvedQuotesDetailsResponse) => {
+    const dynamicQuoteDetailContent = (approvedQuoteDetailsResponse) => {
       const detailRow = div(
         {
-          class: "flex-1 inline-flex justify-start items-start",
+          class: 'flex-1 inline-flex justify-start items-start',
         },
         div(
           {
             class:
-              "w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start",
+              'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
           div(
             {
               class:
-                "self-stretch justify-start text-violet-600 text-sm font-normal leading-tight",
+                'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
             },
-            `${approvedQuotesDetailsResponse.items[0].productSKU}`
-          )
+            `${approvedQuoteDetailsResponse.items[0].productSKU}`,
+          ),
         ),
         div(
           {
             class:
-              "w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start",
+              'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
           div(
             {
               class:
-                "self-stretch justify-start text-gray-900 text-sm font-normal leading-tight",
+                'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `${approvedQuotesDetailsResponse.description}`
-          )
+            `${approvedQuoteDetailsResponse.description}`,
+          ),
         ),
         div(
           {
             class:
-              "w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start",
+              'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
           div(
             {
               class:
-                "self-stretch justify-start text-gray-900 text-sm font-normal leading-tight",
+                'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            "PC"
-          )
+            'PC',
+          ),
         ),
         div(
           {
             class:
-              "w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start",
+              'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
           div(
             {
               class:
-                "self-stretch justify-start text-gray-900 text-sm font-normal leading-tight",
+                'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `${approvedQuotesDetailsResponse.items[0].originQuantity.value}`
-          )
+            `${approvedQuoteDetailsResponse.items[0].originQuantity.value}`,
+          ),
         ),
         div(
           {
             class:
-              "w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start",
+              'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
           div(
             {
               class:
-                "self-stretch justify-start text-gray-900 text-sm font-normal leading-tight",
+                'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `$${approvedQuotesDetailsResponse.items[0].originSinglePrice.value}`
-          )
-        )
+            `$${approvedQuoteDetailsResponse.items[0].originSinglePrice.value}`,
+          ),
+        ),
       );
       return detailRow;
     };
     //   approvedQuoteRow.append(quoteDetail);
     const quoteDetailRows = dynamicQuoteDetailContent(
-      approvedQuotesDetailsResponse
+      approvedQuotesDetailsResponse,
     );
     quoteDetailTable.append(quoteDetailRows);
     quoteDetail.append(quoteDetailTable);
@@ -295,37 +293,37 @@ export default async function decorate(block) {
       creationDate,
       totalValue,
       status,
-      approvedQuotesDetailsResponse
+      approvedQuotesDetailsResponse,
     ) => {
       const date = new Date(creationDate);
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
       const year = date.getFullYear();
       const formattedDate = `${month}/${day}/${year}`;
-      const formattedAmount = parseFloat(totalValue).toLocaleString("en-US", {
+      const formattedAmount = parseFloat(totalValue).toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-      const buyButton = (status) => {
+      const buyButton = (buttonStatus) => {
         let addButton;
-        if (status === "Approved") {
+        if (buttonStatus === 'Approved') {
           addButton = div(
             {
               class:
-                "w-[113px] self-stretch inline-flex justify-center items-center",
+                'w-[113px] self-stretch inline-flex justify-center items-center',
             },
             button(
               {
                 class:
-                  "h-[40px] text-center text-white text-base font-normal btn-primary-purple rounded-full px-6 ",
-                id: "addButton",
+                  'h-[40px] text-center text-white text-base font-normal btn-primary-purple rounded-full px-6 ',
+                id: 'addButton',
               },
-              "Buy"
-            )
+              'Buy',
+            ),
           );
         } else {
           addButton = div({
-            class: "w-[113px] self-stretch text-center justify-start",
+            class: 'w-[113px] self-stretch text-center justify-start',
           });
         }
         return addButton;
@@ -334,125 +332,125 @@ export default async function decorate(block) {
         .toLowerCase()
         .replace(/\b\w/g, (char) => char.toUpperCase());
       const statusColor = (orderStatus) => {
-        if (orderStatus === "Approved") {
+        if (orderStatus === 'Approved') {
           return {
-            text: "w-[113px] self-stretch text-center justify-start text-green-700 bg-green-50 text-medium font-[400] leading-tight",
+            text: 'w-[113px] self-stretch text-center justify-start text-green-700 bg-green-50 text-medium font-[400] leading-tight',
           };
         }
         return {
-          text: "w-[113px] self-stretch text-center justify-start text-red-800 bg-red-100 text-medium font-[400] leading-tight",
+          text: 'w-[113px] self-stretch text-center justify-start text-red-800 bg-red-100 text-medium font-[400] leading-tight',
         };
       };
       const statusTextColor = statusColor(status);
       const chevronDownContainer = span({
         class:
-          "w-[10px] h-[15px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-        id: `dropdown`,
+          'w-[10px] h-[15px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+        id: 'dropdown',
       });
 
       const chevronUpContainer = span({
         class:
-          "w-[10px] h-[15px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800 hidden",
-        id: `chevronUp`,
+          'w-[10px] h-[15px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800 hidden',
+        id: 'chevronUp',
       });
-      chevronDownContainer.addEventListener("click", () => {
-        chevronDownContainer.classList.add("hidden");
-        chevronUpContainer.classList.remove("hidden");
+      chevronDownContainer.addEventListener('click', () => {
+        chevronDownContainer.classList.add('hidden');
+        chevronUpContainer.classList.remove('hidden');
         const detailedRow = document.getElementById(
-          approvedQuotesDetailsResponse.id
+          approvedQuotesDetailsResponse.id,
         );
-        if (detailedRow) detailedRow.classList.remove("hidden");
+        if (detailedRow) detailedRow.classList.remove('hidden');
         const quoteRowClicked = document.getElementById(
-          approvedQuotesDetailsResponse.number
+          approvedQuotesDetailsResponse.number,
         );
         const dynamicQuoteDetailRow = dynamicQuoteDetail(
-          approvedQuotesDetailsResponse
+          approvedQuotesDetailsResponse,
         );
         quoteRowClicked.append(dynamicQuoteDetailRow);
       });
-      chevronUpContainer.addEventListener("click", () => {
-        chevronUpContainer.classList.add("hidden");
-        chevronDownContainer.classList.remove("hidden");
+      chevronUpContainer.addEventListener('click', () => {
+        chevronUpContainer.classList.add('hidden');
+        chevronDownContainer.classList.remove('hidden');
         const detailedRow = document.getElementById(
-          approvedQuotesDetailsResponse.id
+          approvedQuotesDetailsResponse.id,
         );
         detailedRow.remove();
       });
 
       const approvedQuoteRow = div(
         {
-          class: "flex flex-col",
+          class: 'flex flex-col',
           id: `${approvedQuotesDetailsResponse.number}`,
         },
         a(
           {
             class:
-              "inline-flex h-[46px] justify-start border-b border-gray-200 gap-1",
+              'inline-flex h-[46px] justify-start border-b border-gray-200 gap-1',
             // href: `/us/en/e-buy/requestquotedetails?quoteId=${quoteId}`, // Add this if needed
           },
 
           div(
             {
               class:
-                "w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-start",
+                'w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-start',
             },
             div(
               {
                 class:
-                  "w-[40px] p-2 inline-flex flex-col justify-center items-center cursor-pointer",
-                id: "chevronContainer",
+                  'w-[40px] p-2 inline-flex flex-col justify-center items-center cursor-pointer',
+                id: 'chevronContainer',
               },
               chevronDownContainer,
-              chevronUpContainer
+              chevronUpContainer,
             ),
             div(
               {
                 class:
-                  "self-stretch w-[130px] text-center justify-start text-danaherpurple-500 text-medium font-[400] leading-tight",
+                  'self-stretch w-[130px] text-center justify-start text-danaherpurple-500 text-medium font-[400] leading-tight',
               },
-              quoteNo
-            )
+              quoteNo,
+            ),
           ),
           div(
             {
               class:
-                "w-[226px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start",
+                'w-[226px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-start',
             },
             div(
               {
                 class:
-                  "self-stretch justify-start text-gray-900 text-medium font-[400] leading-tight",
+                  'self-stretch justify-start text-gray-900 text-medium font-[400] leading-tight',
               },
-              formattedDate
-            )
+              formattedDate,
+            ),
           ),
           div(
             {
               class:
-                "w-[226px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-end",
+                'w-[226px] h-[46px] self-stretch p-3 inline-flex flex-col justify-start items-end',
             },
             div(
               {
                 class:
-                  "self-stretch text-right justify-start text-gray-900 text-medium font-[400] leading-tight",
+                  'self-stretch text-right justify-start text-gray-900 text-medium font-[400] leading-tight',
               },
-              `$${formattedAmount}`
-            )
+              `$${formattedAmount}`,
+            ),
           ),
           div(
             {
               class:
-                "w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-start",
+                'w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-start',
             },
             div(
               {
                 class: statusTextColor.text,
               },
-              formattedWords
+              formattedWords,
             ),
-            buyButton(status)
-          )
-        )
+            buyButton(status),
+          ),
+        ),
       );
 
       return approvedQuoteRow;
@@ -463,23 +461,23 @@ export default async function decorate(block) {
       approvedQuotesResp?.map(async (element) => {
         const quote = {};
         const approvedQuotesDetailsResponse = await approvedQuotesDetails(
-          element.title
+          element.title,
         );
 
         element.attributes.forEach((item) => {
-          if (item.name === "number") {
+          if (item.name === 'number') {
             quote.quoteNo = item.value;
-          } else if (item.name === "creationDate") {
+          } else if (item.name === 'creationDate') {
             quote.creationDate = item.value;
-          } else if (item.name === "rejected") {
+          } else if (item.name === 'rejected') {
             if (item.value === false) {
-              quote.status = "Approved";
+              quote.status = 'Approved';
             } else {
-              quote.status = "Expired";
+              quote.status = 'Expired';
             }
           }
         });
-        const totalValue = approvedQuotesDetailsResponse?.total?.value ?? "N/A";
+        const totalValue = approvedQuotesDetailsResponse?.total?.value ?? 'N/A';
 
         return tableRow(
           element.title,
@@ -487,72 +485,72 @@ export default async function decorate(block) {
           quote.creationDate,
           totalValue,
           quote.status,
-          approvedQuotesDetailsResponse
+          approvedQuotesDetailsResponse,
         );
-      })
+      }),
     );
 
     // Return the tbody with all rows
     return tbody(
-      { class: "w-full flex flex-col", id: "tableRow" },
-      ...tableRows
+      { class: 'w-full flex flex-col', id: 'tableRow' },
+      ...tableRows,
     );
   };
 
   const tableData = (name) => {
     let row;
-    if (name === "Quote #") {
+    if (name === 'Quote #') {
       row = div(
         {
           class:
-            "w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1",
+            'w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1',
         },
         div(
           {
             class:
-              "justify-start w-[130px] text-right text-black text-base font-bold leading-snug",
+              'justify-start w-[130px] text-right text-black text-base font-bold leading-snug',
           },
-          name
+          name,
         ),
         div(
           {
-            class: "inline-flex flex-col justify-center items-start",
+            class: 'inline-flex flex-col justify-center items-start',
           },
           span({
             class:
-              "w-[10px] h-[10px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
+              'w-[10px] h-[10px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
           }),
           span({
             class:
-              "w-[10px] h-[10px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-          })
-        )
+              'w-[10px] h-[10px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          }),
+        ),
       );
     } else {
       row = div(
         {
           class:
-            "w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1",
+            'w-[226px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1',
         },
         div(
           {
-            class: "justify-start text-black text-base font-bold leading-snug",
+            class: 'justify-start text-black text-base font-bold leading-snug',
           },
-          name
+          name,
         ),
         div(
           {
-            class: "inline-flex flex-col justify-center items-start",
+            class: 'inline-flex flex-col justify-center items-start',
           },
           span({
             class:
-              "w-[10px] h-[10px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
+              'w-[10px] h-[10px] icon icon-chevron-up [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
           }),
           span({
             class:
-              "w-[10px] h-[10px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-          })
-        )
+              'w-[10px] h-[10px] icon icon-chevron-down [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          }),
+        ),
       );
     }
 
@@ -561,18 +559,18 @@ export default async function decorate(block) {
   const quoteTable = table(
     {
       class:
-        "self-stretch w-full border border-solid border-gray-300 inline-flex flex-col justify-start items-start",
-      id: "orderTable",
+        'self-stretch w-full border border-solid border-gray-300 inline-flex flex-col justify-start items-start',
+      id: 'orderTable',
     },
     tr(
       {
-        class: "self-stretch w-full border-b-2 border-solid border-gray-300",
+        class: 'self-stretch w-full border-b-2 border-solid border-gray-300',
       },
-      tableData("Quote #"),
-      tableData("Quote Date"),
-      tableData("Total Value"),
-      tableData("Status")
-    )
+      tableData('Quote #'),
+      tableData('Quote Date'),
+      tableData('Total Value'),
+      tableData('Status'),
+    ),
   );
   quoteWrapper.append(quoteTable);
   const orderRows = await dynamicTableContent(approvedQuotesResponse);
@@ -581,8 +579,8 @@ export default async function decorate(block) {
   approvedQuoteWrapper.append(quoteWrapper);
   const dashboardSideBarContent = await dashboardSidebar();
   wrapper.append(dashboardSideBarContent, approvedQuoteWrapper);
-  block.innerHTML = "";
-  block.textContent = "";
+  block.innerHTML = '';
+  block.textContent = '';
   block.append(wrapper);
   decorateIcons(wrapper);
   removePreLoader();
