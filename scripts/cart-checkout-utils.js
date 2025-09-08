@@ -570,9 +570,9 @@ export const setUseAddress = async (id, type, action = '') => {
   }
   try {
     if (window.location.pathname.includes('cart')) return false;
+    const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
     if (getUseAddressesObject?.status === 'success' && action !== 'useAddress') {
-      const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
       if (cachedAddress?.status === 'success') {
         const updatedUseObject = {
           status: 'success',
@@ -600,6 +600,30 @@ export const setUseAddress = async (id, type, action = '') => {
       }
     }
 
+    if (cachedAddress?.status === 'success') {
+      const updatedUseObject = {
+        status: 'success',
+        data: {
+          commonShipToAddress: '',
+          invoiceToAddress: '',
+        },
+      };
+      const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === id);
+
+      if (type === 'shipping' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.commonShipToAddress = checkCachedAddress[0];
+        updatedUseObject.data.invoiceToAddress = getUseAddressesObject?.data?.invoiceToAddress;
+      }
+      if (type === 'billing' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.invoiceToAddress = checkCachedAddress[0];
+        // eslint-disable-next-line max-len
+        updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
+      }
+      sessionStorage.removeItem('useAddress');
+      sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
+    }
     const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     if (type === 'shipping') {
@@ -836,7 +860,7 @@ export const setShippingMethod = async (methodId) => {
   }
   try {
     sessionStorage.removeItem('useShippingMethod');
-    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {
       commonShippingMethod: methodId,
     };
@@ -2519,7 +2543,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-    }`;
+      }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2929,7 +2953,7 @@ get price type if its net or gross
                       ?.companyName2
                       ? ''
                       : 'hidden'
-                    }`,
+                      }`,
                   },
                   getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                   ?? '',

@@ -80,16 +80,12 @@
   inset: 0px
 }
 
-.dashboard-wrapper :is(.bottom-40) {
-  bottom: 10rem
+.dashboard-wrapper :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .dashboard-wrapper :is(.left-0) {
   left: 0px
-}
-
-.dashboard-wrapper :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .dashboard-wrapper :is(.right-0) {
@@ -100,8 +96,8 @@
   right: 2.5rem
 }
 
-.dashboard-wrapper :is(.top-1\/2) {
-  top: 50%
+.dashboard-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .dashboard-wrapper :is(.top-6) {
@@ -114,6 +110,10 @@
 
 .dashboard-wrapper :is(.z-50) {
   z-index: 50
+}
+
+.dashboard-wrapper :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .dashboard-wrapper :is(.z-\[9999\]) {
@@ -192,8 +192,8 @@
   height: 2.5rem
 }
 
-.dashboard-wrapper :is(.h-24) {
-  height: 6rem
+.dashboard-wrapper :is(.h-12) {
+  height: 3rem
 }
 
 .dashboard-wrapper :is(.h-3) {
@@ -240,12 +240,12 @@
   height: 46px
 }
 
-.dashboard-wrapper :is(.h-16) {
-  height: 4rem
+.dashboard-wrapper :is(.h-screen) {
+  height: 100vh
 }
 
-.dashboard-wrapper :is(.h-12) {
-  height: 3rem
+.dashboard-wrapper :is(.h-16) {
+  height: 4rem
 }
 
 .dashboard-wrapper :is(.max-h-48) {
@@ -254,6 +254,10 @@
 
 .dashboard-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
+}
+
+.dashboard-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .dashboard-wrapper :is(.w-20) {
@@ -328,12 +332,12 @@
   width: 100%
 }
 
-.dashboard-wrapper :is(.w-16) {
-  width: 4rem
+.dashboard-wrapper :is(.w-screen) {
+  width: 100vw
 }
 
-.dashboard-wrapper :is(.w-12) {
-  width: 3rem
+.dashboard-wrapper :is(.w-16) {
+  width: 4rem
 }
 
 .dashboard-wrapper :is(.min-w-\[415px\]) {
@@ -936,6 +940,12 @@
 
 .dashboard-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.dashboard-wrapper :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .dashboard-wrapper :is(.transition-transform) {

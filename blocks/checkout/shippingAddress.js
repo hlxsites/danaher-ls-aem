@@ -998,35 +998,10 @@ export const shippingAddressModule = async () => {
     const getCurrentBasketDetails = await getBasketDetails();
     const basketInvoiceToAddress = getCurrentBasketDetails?.data?.data?.invoiceToAddress;
     const basketShipToAddress = getCurrentBasketDetails?.data?.data?.commonShipToAddress;
-    // eslint-disable-next-line max-len
-
-    if (basketInvoiceToAddress && basketInvoiceToAddress === basketShipToAddress) {
-      if (shippingAsBillingAddress) {
-        shippingAsBillingAddress.checked = true;
-        setTimeout(() => {
-          const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
-          if (getShipAsBillBox) {
-            getShipAsBillBox?.classList.add('pointer-events-none');
-
-            const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
-            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
-
-            getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
-            if (sameShipAsBillCheck?.classList.contains('hidden')) {
-              sameShipAsBillCheck?.classList.remove('hidden');
-            }
-
-            if (shipAsBillLabel?.classList.contains('pl-6')) {
-              shipAsBillLabel?.classList.remove('pl-6');
-              shipAsBillLabel?.classList.add('pl-2');
-            }
-          }
-        }, 0);
-      }
-    }
 
     // actions when shippingAsBilling :checked clicked
     shippingAsBillingAddress?.addEventListener('click', async (c) => {
+      c.preventDefault();
       let targetCheckbox;
       let targetFrom;
 
@@ -1071,12 +1046,10 @@ export const shippingAddressModule = async () => {
   */
       if (targetCheckbox.value === 'true' && targetCheckbox.checked === true && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');
-
         if (!basketInvoiceToAddress) {
           billingAddressForm?.classList?.remove('hidden');
           initGmapsAutocomplete('billing', billingAddressForm?.querySelector('#addressLine1'));
         }
-
         if (targetFrom === 'label') targetCheckbox.checked = false;
         targetCheckbox.value = false;
       } else {
@@ -1148,6 +1121,7 @@ export const shippingAddressModule = async () => {
             const setAddressAsShipping = await setUseAddress(
               useShipToAddress?.id,
               'billing',
+              'useAddress',
             );
             if (setAddressAsShipping?.status === 'success') {
               const renderDefaultAddress = defaultAddress(
@@ -1211,6 +1185,7 @@ export const shippingAddressModule = async () => {
               shipAsBillLabel?.classList.add('pl-2');
             }
           }
+          targetCheckbox.checked = true;
           removePreLoader();
         }
         if (checkoutSummaryBillAddress?.classList.contains('hidden')) {
@@ -1460,6 +1435,30 @@ show default billing address else mark shippingAsBilling checkbox as checked
           }
         }
 
+        // hide checkbox and show check icon to notify
+        //  user that shipping and billing address are same.
+        // eslint-disable-next-line max-len
+        if (shippingAsBillingAddress && basketInvoiceToAddress && (basketInvoiceToAddress === basketShipToAddress)) {
+          shippingAsBillingAddress.checked = true;
+          const getShipAsBillBox = moduleContent.querySelector('#shippingAsBillingCheckboxWrapper');
+          if (getShipAsBillBox) {
+            getShipAsBillBox?.classList.add('pointer-events-none');
+
+            const sameShipAsBillCheck = getShipAsBillBox?.querySelector('#sameShipAsBillCheck');
+            const shipAsBillLabel = getShipAsBillBox?.querySelector('label');
+
+            getShipAsBillBox?.querySelector('input')?.classList.add('hidden');
+
+            if (sameShipAsBillCheck?.classList.contains('hidden')) {
+              sameShipAsBillCheck?.classList.remove('hidden');
+            }
+
+            if (shipAsBillLabel?.classList.contains('pl-6')) {
+              shipAsBillLabel?.classList.remove('pl-6');
+              shipAsBillLabel?.classList.add('pl-2');
+            }
+          }
+        }
         // defaultBillingAddress.classList.add('hidden');
         const invoiceTo = useInvoiceToAddress?.id;
         const shipTo = useShipToAddress?.id;
