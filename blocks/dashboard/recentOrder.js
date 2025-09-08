@@ -87,7 +87,7 @@ const recentOrders = async () => {
         div(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           order,
         ),
@@ -98,14 +98,14 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-gray-500 text-xs font-normal leading-none',
             },
             'Order Date: ',
           ),
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             formattedDate,
           ),
@@ -117,14 +117,14 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-gray-500 text-xs font-normal leading-none',
             },
             'PO: ',
           ),
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             po,
           ),
@@ -250,7 +250,7 @@ const recentOrders = async () => {
         div(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           quoteNo,
         ),
@@ -267,7 +267,7 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             formattedDate,
           ),

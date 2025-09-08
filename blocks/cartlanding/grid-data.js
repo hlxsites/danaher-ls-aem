@@ -107,7 +107,7 @@ export default function renderGridCard(item) {
           div(
             { class: 'flex justify-between items-center w-full' },
             div(
-              { class: 'text-black text-base font-extralight leading-snug' },
+              { class: 'text-black text-base leading-snug' },
               'Unit of Measure:',
             ),
             div(
@@ -118,7 +118,7 @@ export default function renderGridCard(item) {
           div(
             { class: 'flex justify-between items-center w-full' },
             div(
-              { class: 'text-black text-base font-extralight leading-snug' },
+              { class: 'text-black text-base leading-snug' },
               'Min. Order Qty:',
             ),
             div(

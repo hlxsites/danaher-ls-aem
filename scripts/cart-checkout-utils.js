@@ -2756,7 +2756,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  `text-right text-violet-600 text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  `text-right text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),
