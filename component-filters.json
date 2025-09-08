@@ -40,6 +40,7 @@
       "approved-quotes",
       "order-details",
       "quote-details",
+      "my-profile",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -190,6 +191,12 @@
     "id": "mini-teasers",
     "components": [
       "mini-teaser"
+    ]
+  },
+  {
+    "id": "my-profile",
+    "components": [
+      ""
     ]
   },
   {
