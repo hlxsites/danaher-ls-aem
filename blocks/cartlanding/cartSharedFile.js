@@ -300,7 +300,7 @@ export const updateCartItemQuantity = async (item) => {
       'Authentication-Token': authenticationToken.access_token,
       Accept: 'application/vnd.intershop.basket.v1+json',
     });
-    const url = `${baseURL}/baskets/current/items/${item.lineItemId}`;
+    const url = `${baseURL}//baskets/current/items/${item.lineItemId}`;
     try {
       const response = await deleteApiData(url, defaultHeader);
       if (response && response.status === 'success') {
