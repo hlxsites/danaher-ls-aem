@@ -156,7 +156,7 @@ const paymentModule = async () => {
     if (authenticationToken?.status === 'error') {
       throw new Error('Unauthorized Access');
     }
-    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket5');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -831,7 +831,7 @@ const paymentModule = async () => {
     if (error.message === 'Unauthorized Access') {
       window.location.href = '/us/en/e-buy/cart';
     }
-    if (error.message === 'Invalid Basket') {
+    if (error.message === 'Invalid Basket6') {
       silentNavigation('/us/en/e-buy/addresses');
     }
     return false;

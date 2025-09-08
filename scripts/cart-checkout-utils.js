@@ -13,6 +13,7 @@ import {
   p,
   input,
   form,
+  a,
   h3,
   h5,
   button,
@@ -1562,7 +1563,6 @@ export const changeStep = async (step) => {
       checkoutSummaryContainer.append(checkoutSkeleton());
     }
   }
-
   let validateData = '';
   let validatingBasket;
   try {
@@ -1591,7 +1591,7 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Address.');
       silentNavigation('/us/en/e-buy/shipping');
     }
 
@@ -1606,7 +1606,7 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping.');
       silentNavigation('/us/en/e-buy/payment');
     }
 
@@ -1996,7 +1996,13 @@ export const changeStep = async (step) => {
     } else {
       showNotification(error.message || 'Error Processing Request.', 'error');
     }
-    // silentNavigation('/us/en/e-buy/addresses');
+    if (error.message === 'Invalid Address.') {
+      // window.location.href = '/us/en/e-buy/cart';
+      silentNavigation('/us/en/e-buy/addresses');
+    }
+    if (error.message === 'Invalid Shipping.') {
+      silentNavigation('/us/en/e-buy/addresses');
+    }
     return false;
   }
 };
@@ -2542,7 +2548,7 @@ get price type if its net or gross
     const totalValue = `${checkoutSummaryData?.totals[type][
       checkoutPriceType === 'net' ? 'net' : 'gross'
     ]?.value ?? ''
-      }`;
+    }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
 
@@ -2619,9 +2625,9 @@ get price type if its net or gross
       },
       'Let’s get started',
     ),
-
-    button(
+    a(
       {
+        href: '/us/en/e-buy/login',
         class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
       },
       'Login / Create Account',
@@ -2952,7 +2958,7 @@ get price type if its net or gross
                       ?.companyName2
                       ? ''
                       : 'hidden'
-                      }`,
+                    }`,
                   },
                   getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
                   ?? '',

@@ -144,7 +144,7 @@ const shippingMethodsModule = async () => {
   };
   const validatingBasket = await validateBasket(validateData);
   try {
-    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
+    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket0');
     const storeConfigurations = await getStoreConfigurations();
     /*
     ::::::::::::::
@@ -459,7 +459,7 @@ const shippingMethodsModule = async () => {
   } catch (error) {
     scrollViewToTop();
     showNotification(error.message, 'error');
-    if (error.message === 'Invalid Basket') {
+    if (error.message === 'Invalid Basket 11') {
       silentNavigation('/us/en/e-buy/addresses');
     }
     return false;
