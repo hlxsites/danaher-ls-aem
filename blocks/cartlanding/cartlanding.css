@@ -99,8 +99,8 @@
   bottom: 0.5rem
 }
 
-.cartlanding-wrapper :is(.bottom-40) {
-  bottom: 10rem
+.cartlanding-wrapper :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .cartlanding-wrapper :is(.left-0) {
@@ -109,10 +109,6 @@
 
 .cartlanding-wrapper :is(.left-2) {
   left: 0.5rem
-}
-
-.cartlanding-wrapper :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -131,12 +127,12 @@
   right: 2.5rem
 }
 
-.cartlanding-wrapper :is(.top-0) {
-  top: 0px
+.cartlanding-wrapper :is(.right-2) {
+  right: 0.5rem
 }
 
-.cartlanding-wrapper :is(.top-1\/2) {
-  top: 50%
+.cartlanding-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .cartlanding-wrapper :is(.top-6) {
@@ -145,10 +141,6 @@
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
-}
-
-.cartlanding-wrapper :is(.right-2) {
-  right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.z-0) {
@@ -161,6 +153,10 @@
 
 .cartlanding-wrapper :is(.z-50) {
   z-index: 50
+}
+
+.cartlanding-wrapper :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .cartlanding-wrapper :is(.z-\[9999\]) {
@@ -305,10 +301,6 @@
   height: 4rem
 }
 
-.cartlanding-wrapper :is(.h-24) {
-  height: 6rem
-}
-
 .cartlanding-wrapper :is(.h-28) {
   height: 7rem
 }
@@ -377,6 +369,10 @@
   height: 1px
 }
 
+.cartlanding-wrapper :is(.h-screen) {
+  height: 100vh
+}
+
 .cartlanding-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
@@ -403,6 +399,10 @@
 
 .cartlanding-wrapper :is(.w-10) {
   width: 2.5rem
+}
+
+.cartlanding-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .cartlanding-wrapper :is(.w-14) {
@@ -481,6 +481,10 @@
   width: 150px
 }
 
+.cartlanding-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -517,12 +521,8 @@
   width: 100%
 }
 
-.cartlanding-wrapper :is(.w-\[18px\]) {
-  width: 18px
-}
-
-.cartlanding-wrapper :is(.w-12) {
-  width: 3rem
+.cartlanding-wrapper :is(.w-screen) {
+  width: 100vw
 }
 
 .cartlanding-wrapper :is(.min-w-\[100\%\]) {
@@ -1328,6 +1328,12 @@
 
 .cartlanding-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.cartlanding-wrapper :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .cartlanding-wrapper :is(.transition) {

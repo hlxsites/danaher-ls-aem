@@ -8,25 +8,30 @@ import { removePreLoader, showNotification } from './common-utils.js';
 import { getAuthenticationToken } from './token-utils.js';
 
 /**
- * Sets up event delegation for "Add to Cart" button clicks within the main container.
+ * Sets up event delegation for "Add to Cart" button clicks within the container.
  * Efficiently handles clicks even for dynamically added buttons.
  *
- * @param {HTMLElement} main - The container element that may contain one or more buy buttons.
+ * @param {HTMLElement} wrapper - The container element that may contain one or more buy buttons.
  */
 export function decorateBuyButton(wrapper) {
   wrapper.addEventListener('click', async (e) => {
     const targetElement = e.target;
+    
     try {
-        const btnProps = targetElement.attributes;
-      if (targetElement?.classList?.contains('add-to-cart-btn')) {
+        const btnProps = targetElement?.attributes;
+        let itemQuantity = '';
         // Look for a nearby input[type="number"]
-        const quantityInput = targetElement.closest('.product-card')?.querySelector('input[type="number"]') 
-          || targetElement.parentElement?.querySelector('input[type="number"]');
-        if (quantityInput) {
-          quantityInput.value = quantityInput.value || btnProps.minorderquantity;
+        const quantityInput = targetElement?.closest('input[type="number"]');
+        if (quantityInput || btnProps?.minorderquantity) {
+          itemQuantity = quantityInput?.value || btnProps?.minorderquantity?.value;
         }
-        if (btnProps) {
-          await addItemToCart(btnProps);
+        const itemObject = {
+          sku: btnProps?.sku?.value,
+          quantity: itemQuantity,
+        }
+      if (targetElement?.classList?.contains('add-to-cart-btn')) {
+        if (itemQuantity) {
+          await addItemToCart(itemObject);
         }
       }
     } catch (error) {

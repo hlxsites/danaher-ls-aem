@@ -88,16 +88,12 @@
   bottom: 0.5rem
 }
 
-.checkout :is(.bottom-40) {
-  bottom: 10rem
+.checkout :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .checkout :is(.left-0) {
   left: 0px
-}
-
-.checkout :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .checkout :is(.right-10) {
@@ -112,10 +108,6 @@
   top: 0px
 }
 
-.checkout :is(.top-1\/2) {
-  top: 50%
-}
-
 .checkout :is(.top-6) {
   top: 1.5rem
 }
@@ -126,6 +118,10 @@
 
 .checkout :is(.z-50) {
   z-index: 50
+}
+
+.checkout :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .checkout :is(.z-\[9999\]) {
@@ -255,10 +251,6 @@
   height: 4rem
 }
 
-.checkout :is(.h-24) {
-  height: 6rem
-}
-
 .checkout :is(.h-28) {
   height: 7rem
 }
@@ -296,6 +288,10 @@
   height: max-content
 }
 
+.checkout :is(.h-screen) {
+  height: 100vh
+}
+
 .checkout :is(.max-h-48) {
   max-height: 12rem
 }
@@ -322,6 +318,10 @@
 
 .checkout :is(.w-1\/4) {
   width: 25%
+}
+
+.checkout :is(.w-12) {
+  width: 3rem
 }
 
 .checkout :is(.w-16) {
@@ -384,6 +384,10 @@
   width: 150px
 }
 
+.checkout :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .checkout :is(.w-\[3\.5rem\]) {
   width: 3.5rem
 }
@@ -408,12 +412,8 @@
   width: 100%
 }
 
-.checkout :is(.w-\[18px\]) {
-  width: 18px
-}
-
-.checkout :is(.w-12) {
-  width: 3rem
+.checkout :is(.w-screen) {
+  width: 100vw
 }
 
 .checkout :is(.max-w-2xl) {
@@ -1068,6 +1068,12 @@
 
 .checkout :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.checkout :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .hover\:bg-danaherpurple-50:hover {

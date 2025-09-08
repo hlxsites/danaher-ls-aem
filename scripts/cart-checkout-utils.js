@@ -1943,7 +1943,7 @@ export const changeStep = async (step) => {
         :::::::: Clear Session :::::::
         *
         */
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
         localStorage.removeItem('productDetailObject');
         localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
@@ -2466,7 +2466,7 @@ get price type if its net or gross
   let checkoutSummaryData = false;
   let userLoggedInStatus = false;
   if (orderId !== '') {
-    getCheckoutSummaryData = JSON.parse(sessionStorage.getItem('submittedOrderData'));
+    getCheckoutSummaryData = JSON.parse(localStorage.getItem('submittedOrderData'));
 
     if (getCheckoutSummaryData?.status === 'success') {
       checkoutSummaryData = getCheckoutSummaryData.data.data;
