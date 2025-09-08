@@ -23,7 +23,7 @@ export function decorateBuyButton(wrapper) {
         const quantityInput = targetElement.closest('.product-card')?.querySelector('input[type="number"]') 
           || targetElement.parentElement?.querySelector('input[type="number"]');
         if (quantityInput) {
-          quantityInput.value = quantityInput.value || (btnProps.minorderquantity !== 0 ? btnProps.minorderquantity : 1);
+          quantityInput.value = quantityInput.value || btnProps.minorderquantity;
         }
         if (btnProps) {
           await addItemToCart(btnProps);

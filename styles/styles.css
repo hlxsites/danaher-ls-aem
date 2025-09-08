@@ -3233,16 +3233,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   bottom: 0px;
 }
 
-.bottom-40 {
-  bottom: 10rem;
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
+.bottom-24 {
+  bottom: 6rem;
 }
 
 .left-0 {
   left: 0px;
-}
-
-.left-\[46\%\] {
-  left: 46%;
 }
 
 .right-0 {
@@ -3253,12 +3253,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   right: 2.5rem;
 }
 
-.top-0 {
-  top: 0px;
+.right-2 {
+  right: 0.5rem;
 }
 
-.top-1\/2 {
-  top: 50%;
+.top-0 {
+  top: 0px;
 }
 
 .top-16 {
@@ -3273,22 +3273,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 83px;
 }
 
-.bottom-2 {
-  bottom: 0.5rem;
-}
-
-.right-2 {
-  right: 0.5rem;
-}
-
-.bottom-20 {
-  bottom: 5rem;
-}
-
-.bottom-24 {
-  bottom: 6rem;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -3297,12 +3281,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   z-index: 50;
 }
 
-.z-\[9999\] {
-  z-index: 9999;
-}
-
 .z-\[100\] {
   z-index: 100;
+}
+
+.z-\[9999\] {
+  z-index: 9999;
 }
 
 .m-0 {
@@ -3525,6 +3509,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 2.5rem;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -3585,6 +3573,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 150px;
 }
 
+.w-\[18px\] {
+  width: 18px;
+}
+
 .w-\[3\.5rem\] {
   width: 3.5rem;
 }
@@ -3603,14 +3595,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[18px\] {
-  width: 18px;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .w-screen {
