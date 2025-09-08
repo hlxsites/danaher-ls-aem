@@ -57,6 +57,7 @@ function createCardItem(item, defaultCard) {
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
     sessionStorage.setItem('selectedStripeMethod', 'savedCard');
+    sessionStorage.setItem('useStripeCardId', itemObject.itemId);
     defaultPaymentCheckboxText = 'Default Payment';
   }
   let useCardLabel = 'Use Card';

@@ -77,7 +77,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'self-stretch inline-flex justify-start items-start gap-5 lg:flex-col',
+          class: 'self-stretch inline-flex justify-start items-start flex-col gap-5 md:flex-row',
         },
         div(
           {

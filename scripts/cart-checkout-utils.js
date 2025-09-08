@@ -1731,7 +1731,6 @@ export const changeStep = async (step) => {
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         showPreLoader();
-
         /*
         *
         :::::::::::

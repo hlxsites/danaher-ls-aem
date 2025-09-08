@@ -205,7 +205,7 @@ export function showNotification(content, type, wrapper = '') {
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 5000);
+  }, 4000);
 }
 /*
 *
