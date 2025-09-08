@@ -8,7 +8,7 @@ import { removePreLoader, showNotification } from './common-utils.js';
 import { getAuthenticationToken } from './token-utils.js';
 
 /**
- * Sets up event delegation for "Add to Cart" button clicks within the container.
+ma * Sets up event delegation for "Add to Cart" button clicks within the container.
  * Efficiently handles clicks even for dynamically added buttons.
  *
  * @param {HTMLElement} wrapper - The container element that may contain one or more buy buttons.
