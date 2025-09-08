@@ -200,9 +200,3 @@
     flex-direction: row
   }
 }
-
-@media (min-width: 1024px) {
-  .order-submit-wrapper :is(.lg\:flex-col) {
-    flex-direction: column
-  }
-}
