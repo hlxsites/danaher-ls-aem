@@ -1044,7 +1044,7 @@ export const shippingAddressModule = async () => {
    check if  checkbox for shipping as billing address is checked
     ::::::::::::::::::::::::
   */
-      if (targetCheckbox.value === 'true' && targetCheckbox.checked === true && targetFrom === 'label') {
+      if (targetCheckbox.value === 'true' && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');
         if (!basketInvoiceToAddress) {
           billingAddressForm?.classList?.remove('hidden');
@@ -1142,6 +1142,12 @@ export const shippingAddressModule = async () => {
                   'afterend',
                   renderDefaultAddress,
                 );
+                /*
+                ::::::::::::::
+                update address list
+                ::::::::::::::
+                */
+                await updateAddresses();
                 // hide the billing address from checkout summary
 
                 checkoutSummaryBillAddress?.remove();
