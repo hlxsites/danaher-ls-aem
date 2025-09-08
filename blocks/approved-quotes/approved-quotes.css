@@ -16,8 +16,20 @@
   font-family: TWK Lausanne EDS
 }
 
+.approved-quotes-wrapper :is(.absolute) {
+  position: absolute
+}
+
 .approved-quotes-wrapper :is(.relative) {
   position: relative
+}
+
+.approved-quotes-wrapper :is(.left-0) {
+  left: 0px
+}
+
+.approved-quotes-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .approved-quotes-wrapper :is(.ml-\[20px\]) {
@@ -48,6 +60,10 @@
   display: table
 }
 
+.approved-quotes-wrapper :is(.hidden) {
+  display: none
+}
+
 .approved-quotes-wrapper :is(.\!h-\[60px\]) {
   height: 60px !important
 }
@@ -64,8 +80,16 @@
   height: 131px
 }
 
+.approved-quotes-wrapper :is(.h-\[15px\]) {
+  height: 15px
+}
+
 .approved-quotes-wrapper :is(.h-\[2px\]) {
   height: 2px
+}
+
+.approved-quotes-wrapper :is(.h-\[40px\]) {
+  height: 40px
 }
 
 .approved-quotes-wrapper :is(.h-\[46px\]) {
@@ -80,6 +104,18 @@
   height: 831px
 }
 
+.approved-quotes-wrapper :is(.h-10) {
+  height: 2.5rem
+}
+
+.approved-quotes-wrapper :is(.h-96) {
+  height: 24rem
+}
+
+.approved-quotes-wrapper :is(.h-\[44px\]) {
+  height: 44px
+}
+
 .approved-quotes-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
@@ -92,16 +128,68 @@
   width: 10px
 }
 
-.approved-quotes-wrapper :is(.w-\[262\.67px\]) {
-  width: 262.67px
+.approved-quotes-wrapper :is(.w-\[113px\]) {
+  width: 113px
+}
+
+.approved-quotes-wrapper :is(.w-\[130px\]) {
+  width: 130px
+}
+
+.approved-quotes-wrapper :is(.w-\[226px\]) {
+  width: 226px
+}
+
+.approved-quotes-wrapper :is(.w-\[40px\]) {
+  width: 40px
 }
 
 .approved-quotes-wrapper :is(.w-\[70\%\]) {
   width: 70%
 }
 
+.approved-quotes-wrapper :is(.w-\[980px\]) {
+  width: 980px
+}
+
 .approved-quotes-wrapper :is(.w-full) {
   width: 100%
+}
+
+.approved-quotes-wrapper :is(.w-\[930px\]) {
+  width: 930px
+}
+
+.approved-quotes-wrapper :is(.w-\[272\.67px\]) {
+  width: 272.67px
+}
+
+.approved-quotes-wrapper :is(.w-\[176\.4px\]) {
+  width: 176.4px
+}
+
+.approved-quotes-wrapper :is(.w-\[227px\]) {
+  width: 227px
+}
+
+.approved-quotes-wrapper :is(.w-\[228px\]) {
+  width: 228px
+}
+
+.approved-quotes-wrapper :is(.w-\[22px\]) {
+  width: 22px
+}
+
+.approved-quotes-wrapper :is(.w-\[175px\]) {
+  width: 175px
+}
+
+.approved-quotes-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.approved-quotes-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .approved-quotes-wrapper :is(.flex-col) {
@@ -110,6 +198,10 @@
 
 .approved-quotes-wrapper :is(.items-start) {
   align-items: flex-start
+}
+
+.approved-quotes-wrapper :is(.items-end) {
+  align-items: flex-end
 }
 
 .approved-quotes-wrapper :is(.items-center) {
@@ -148,6 +240,18 @@
   gap: 1.25rem
 }
 
+.approved-quotes-wrapper :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.approved-quotes-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
+.approved-quotes-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .approved-quotes-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -162,6 +266,10 @@
 
 .approved-quotes-wrapper :is(.border-2) {
   border-width: 2px
+}
+
+.approved-quotes-wrapper :is(.border-\[1px\]) {
+  border-width: 1px
 }
 
 .approved-quotes-wrapper :is(.border-b) {
@@ -190,6 +298,10 @@
 
 .approved-quotes-wrapper :is(.border-solid) {
   border-style: solid
+}
+
+.approved-quotes-wrapper :is(.border-dashed) {
+  border-style: dashed
 }
 
 .approved-quotes-wrapper :is(.border-danaherpurple-500) {
@@ -232,9 +344,28 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+.approved-quotes-wrapper :is(.bg-green-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 244 / var(--tw-bg-opacity))
+}
+
+.approved-quotes-wrapper :is(.bg-red-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity))
+}
+
 .approved-quotes-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.approved-quotes-wrapper :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.approved-quotes-wrapper :is(.p-2) {
+  padding: 0.5rem
 }
 
 .approved-quotes-wrapper :is(.p-3) {
@@ -249,13 +380,17 @@
   padding: 18px
 }
 
+.approved-quotes-wrapper :is(.p-5) {
+  padding: 1.25rem
+}
+
 .approved-quotes-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
 }
 
-.approved-quotes-wrapper :is(.text-left) {
-  text-align: left
+.approved-quotes-wrapper :is(.text-center) {
+  text-align: center
 }
 
 .approved-quotes-wrapper :is(.text-right) {
@@ -342,9 +477,44 @@
   color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
+.approved-quotes-wrapper :is(.text-green-700) {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity))
+}
+
+.approved-quotes-wrapper :is(.text-red-800) {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity))
+}
+
 .approved-quotes-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.approved-quotes-wrapper :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.approved-quotes-wrapper :is(.outline) {
+  outline-style: solid
+}
+
+.approved-quotes-wrapper :is(.outline-1) {
+  outline-width: 1px
+}
+
+.approved-quotes-wrapper :is(.outline-offset-\[-1px\]) {
+  outline-offset: -1px
+}
+
+.approved-quotes-wrapper :is(.outline-gray-200) {
+  outline-color: #e5e7eb
+}
+
+.approved-quotes-wrapper :is(.outline-gray-300) {
+  outline-color: #d1d5db
 }
 
 .approved-quotes-wrapper :is(.filter) {
