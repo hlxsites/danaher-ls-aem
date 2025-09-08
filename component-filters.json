@@ -101,12 +101,7 @@
   },
   {
     "id": "card-list",
-    "components": [
-      "articleCard",
-      "applicationCard",
-      "libraryCard",
-      "labCard"
-    ]
+    "components": []
   },
   {
     "id": "cards",
