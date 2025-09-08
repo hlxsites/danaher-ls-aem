@@ -26,7 +26,7 @@ export function decorateBuyButton(wrapper) {
           quantityInput.value = quantityInput.value || (btnProps.minorderquantity !== 0 ? btnProps.minorderquantity : 1);
         }
         if (btnProps) {
-          const addResponse = await addItemToCart(btnProps);
+          await addItemToCart(btnProps);
         }
       }
     } catch (error) {
