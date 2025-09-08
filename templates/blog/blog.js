@@ -31,7 +31,7 @@ export default async function buildAutoBlocks() {
     if (imgElement) return false;
     return true;
   });
-  section.removeChild(blogH1);
+  // section.removeChild(blogH1);
   let columnElements = '';
   let blogHeroImage;
   if (blogHeroP2) {
@@ -51,24 +51,24 @@ export default async function buildAutoBlocks() {
     columnElements = [blogH1];
   }
 
-  section.prepend(
-    buildBlock('social-media', { elems: [] }),
-    buildBlock('columns', columnElements),
-    buildBlock('article-info', { elems: [] }),
-  );
+  // section.prepend(
+  //   buildBlock('social-media', { elems: [] }),
+  //   buildBlock('columns', columnElements),
+  //   buildBlock('article-info', { elems: [] }),
+  // );
 
   const additionalContentSection = document.createElement('div');
   additionalContentSection.append(
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
-  section.after(additionalContentSection);
+  // section.after(additionalContentSection);
 
   buildArticleSchema();
 
-  // make the content section the first element in main, first before the breadcrumb section.
-  // do that hear to avoid the tag-list and related-articles to be moved as well.
-  // loading order should be social-media, columns, article-info, breadcrumb, tags-list
-  // related-articles
-  section.parentElement.prepend(section);
+  // // make the content section the first element in main, first before the breadcrumb section.
+  // // do that hear to avoid the tag-list and related-articles to be moved as well.
+  // // loading order should be social-media, columns, article-info, breadcrumb, tags-list
+  // // related-articles
+  // section.parentElement.prepend(section);
 }
