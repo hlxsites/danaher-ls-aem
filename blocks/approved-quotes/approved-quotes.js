@@ -217,7 +217,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+                'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
             },
             `${approvedQuoteDetailsResponse.items[0].productSKU}`,
           ),

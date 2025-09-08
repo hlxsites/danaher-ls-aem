@@ -92,7 +92,7 @@ const recentOrders = async () => {
         div(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           order,
         ),
@@ -255,7 +255,7 @@ const recentOrders = async () => {
         div(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           quoteNo,
         ),
