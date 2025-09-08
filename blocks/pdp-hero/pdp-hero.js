@@ -358,25 +358,27 @@ export default async function decorate(block) {
     {
       class: 'inline-flex justify-start items-center gap-3',
     },
-    result?.raw?.listpriceusd ? (div(
-      {
-        class: 'starts-at-price font-bold hidden justify-start text-black text-2xl font-normal md:block',
-      },
-      div({ class: 'starts-at-label text-black text-base font-bold' }, 'Starts at'),
-      `$${result?.raw?.listpriceusd}`,
-    ),
-    a(
-      {
-        class:
-        'cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
-      },
-      span(
+    ...(result?.raw?.listpriceusd ? [
+      div(
         {
-          class: 'inherit text-base font-medium leading-snug',
+          class: 'starts-at-price font-bold justify-start text-black text-2xl font-normal',
         },
-        'Buy',
+        div({ class: 'starts-at-label text-black text-base font-bold' }, 'Starts at'),
+        `$${result?.raw?.listpriceusd}`,
       ),
-    )) : '',
+      a(
+        {
+          class:
+            'cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+        },
+        span(
+          {
+            class: 'inherit text-base font-medium leading-snug',
+          },
+          'Buy',
+        ),
+      ),
+    ] : []),
     button(
       {
         class:
