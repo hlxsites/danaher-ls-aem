@@ -32,7 +32,7 @@ export default async function buildAutoBlocks() {
     return true;
   });
   // section.removeChild(blogH1);
-  let columnElements = '';
+  // let columnElements = '';
   let blogHeroImage;
   if (blogHeroP2) {
     blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
@@ -41,14 +41,12 @@ export default async function buildAutoBlocks() {
     const divEl = div();
     divEl.append(blogH1, blogHeroP1);
     moveImageInstrumentation(blogHeroImage);
-    columnElements = [[divEl, blogHeroImage]];
+    // columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
     blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
     moveImageInstrumentation(blogHeroImage);
     section.removeChild(blogHeroP1);
-    columnElements = [[blogHeroImage, blogH1]];
-  } else {
-    columnElements = [blogH1];
+    // columnElements = [[blogHeroImage, blogH1]];
   }
 
   // section.prepend(
