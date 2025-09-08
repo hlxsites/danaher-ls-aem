@@ -55,23 +55,28 @@ const recentOrders = async () => {
     const statusColor = (orderStatus) => {
       if (orderStatus === 'Approved') {
         return {
-          text: 'text-center justify-start text-green-700 text-xs font-normal leading-none bg-green-50',
+          text: 'w-[55px] h-[16px] self-stretch text-center justify-start text-green-700 text-xs font-normal leading-none bg-green-50',
+          backGround: 'w-[82px] h-[24px] px-[10px] py-[4px] inline-flex justify-center bg-green-50 items-center',
         };
       } if (orderStatus === 'Cancelled') {
         return {
-          text: 'text-center justify-start text-xs font-normal leading-none text-red-800 bg-red-100',
+          text: 'self-stretch text-center justify-start text-xs font-normal leading-none text-red-800 bg-red-100',
+          backGround: 'w-[82px] h-[24px] px-[10px] py-[4px] inline-flex justify-center bg-red-100 items-center',
         };
       } if (orderStatus === 'Shipped') {
         return {
-          text: 'text-center justify-start text-xs font-normal leading-none text-sky-800 bg-sky-50',
+          text: 'self-stretch text-center justify-start text-xs font-normal leading-none text-sky-800 bg-sky-50',
+          backGround: 'w-[82px] h-[24px] px-[10px] py-[4px] inline-flex justify-center bg-sky-50 items-center',
         };
       } if (orderStatus === 'Invoiced') {
         return {
-          text: 'text-center justify-start text-xs font-normal leading-none text-gray-800 bg-gray-100',
+          text: 'self-stretch text-center justify-start text-xs font-normal leading-none text-gray-800 bg-gray-100',
+          backGround: 'w-[82px] h-[24px] px-[10px] py-[4px] inline-flex justify-center bg-gray-100 items-center',
         };
       }
       return {
-        text: 'text-center justify-start text-green-700 text-xs font-normal leading-none bg-green-50',
+        text: 'self-stretch text-center justify-start text-green-700 text-xs font-normal leading-none bg-green-50',
+        backGround: 'w-[82px] h-[24px] px-[10px] py-[4px] inline-flex justify-center bg-green-50 items-center',
       };
     };
     const statusTextColor = statusColor(status);
@@ -136,8 +141,8 @@ const recentOrders = async () => {
         },
         div(
           {
-            class:
-              'w-20 px-2.5 py-1 bg-green-50 inline-flex justify-center items-center',
+            class: statusTextColor.backGround,
+            // 'w-[82px] h-[24px] px-2.5 py-1 inline-flex justify-center items-center',
           },
           div(
             {
