@@ -8,7 +8,6 @@ import createLabCard from './newLabCard.js';
 import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
-import { buildItemListSchema } from '../../scripts/schema.js';
 
 let tagName = '';
 switch (getMetadata('template')) {
@@ -204,7 +203,7 @@ export default async function decorate(block) {
       (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
+  // if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
   // render cards application style
   if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));

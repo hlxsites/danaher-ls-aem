@@ -1,0 +1,121 @@
+{
+  "definitions": [
+    {
+      "title": "Pdp Page Tabs",
+      "id": "pdp-page-tabs",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Pdp Page Tabs",
+              "model": "pdp-page-tabs",
+              "filter": "pdp-page-tabs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "PDP tabs Item",
+      "id": "pdp-tabs-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "PDP tabs Item",
+              "model": "pdp-tabs-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+      {
+        "id": "pdp-page-tabs",
+        "fields": []
+      },
+      {
+        "id": "pdp-tabs-item",
+        "fields": [
+          {
+            "component": "radio-group",
+            "label": "Choose an Option",
+            "name": "selectedOption",
+            "valueType": "string",
+            "required": true,
+            "defaultValue": "only-pim", 
+            "options": [
+              { "name": "Show only PIM data", "value": "only-pim" },
+              { "name": "Show only Authored data", "value": "only-authored" },
+              { "name": "Show both", "value": "pim-authored" }
+            ]
+          },
+          {
+            "component": "select",
+            "name": "tabType",
+            "label": "Product Tab ID",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Overview",
+                "value": "overview"
+              },
+              {
+                "name": "Specifications",
+                "value": "specifications"
+              },
+              {
+                "name": "Resources",
+                "value": "resources"
+              },
+              {
+                "name": "Products",
+                "value": "products"
+              },
+              {
+                "name": "Bundle Parts",
+                "value": "parts"
+              },
+              {
+                "name": "Related Products",
+                "value": "relatedproducts"
+              },
+              {
+                "name": "Citations",
+                "value": "citations"
+              },
+              {
+                "name": "FAQs",
+                "value": "faqs"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "product-tab-title",
+            "value": "",
+            "label": "Product Tab Title"
+          },
+          {
+            "component": "richtext",
+            "valueType": "string",
+            "name": "product-tab-content",
+            "value": "",
+            "label": "Product Tab Content"
+          }
+        ]
+      }
+  ],
+  "filters": [
+    {
+      "id": "pdp-page-tabs",
+      "components": [
+        "pdp-tabs-item"
+      ]
+    }
+  ]
+}
