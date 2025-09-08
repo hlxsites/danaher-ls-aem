@@ -21,7 +21,9 @@ function showImage(e) {
   if (targetElement) {
     const parentContainer = targetElement.parentElement;
     const currentActive = parentContainer.querySelector('.active');
-    if (currentActive) currentActive.classList.remove('active');
+    if (currentActive && currentActive.classList.contains('active')) {
+      currentActive.classList.remove('active');
+    }
     targetElement.classList.add('active');
     const pictureToShow = targetElement.tagName === 'PICTURE' ? targetElement : targetElement.querySelector('picture');
     if (pictureToShow && selectedImage) {
