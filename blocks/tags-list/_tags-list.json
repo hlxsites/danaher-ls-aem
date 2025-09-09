@@ -21,11 +21,10 @@
       "id": "tags-list",
       "fields": [
         {
-          "component": "text",
+          "component": "aem-tag",
           "valueType": "string",
-          "name": "articleTopics",
-          "label": "Article Topics",
-          "value": ""
+          "name": "topics",
+          "label": "Topics"
         }
       ]
     }
