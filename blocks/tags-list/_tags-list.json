@@ -21,7 +21,7 @@
       "id": "tags-list",
       "fields": [
         {
-          "component": "aem-tag",
+          "component": "text",
           "valueType": "string",
           "name": "topics",
           "label": "Topics"
