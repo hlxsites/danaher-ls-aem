@@ -21,6 +21,13 @@
       "id": "tags-list",
       "fields": [
         {
+          "component": "aem-tag",
+          "valueType": "string",
+          "name": "article:Tag",
+          "label": "article:tag",
+          "value": ""
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "topics",
