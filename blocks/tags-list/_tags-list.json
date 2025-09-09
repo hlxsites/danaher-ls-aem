@@ -21,21 +21,11 @@
       "id": "tags-list",
       "fields": [
         {
-          "component": "multiselect",
+          "component": "text",
           "valueType": "string",
-          "name": "classes",
-          "value": "",
-          "label": "Block Options",
-          "options": [
-            { "name": "News", "value": "news" },
-            { "name": "Blog", "value": "blog" },
-            { "name": "We see a way", "value": "wsaw" },
-            { "name": "Library", "value": "library" },
-            { "name": "Info", "value": "info" },
-            { "name": "Application", "value": "application" },
-            { "name": "New Lab", "value": "new-lab" },
-            { "name": "URL Filtered", "value": "url-filtered" }
-          ]
+          "name": "articleTopics",
+          "label": "Article Topics",
+          "value": ""
         }
       ]
     }
@@ -43,7 +33,7 @@
   "filters": [
     {
       "id": "tags-list",
-      "components": [" "]
+      "components": []
     }
   ]
 }
