@@ -1,7 +1,6 @@
 import {
   div,
   span,
-  input,
   button,
   a,
   img,
@@ -138,7 +137,7 @@ export default async function decorate(block) {
       {
         class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
       },
-      (result?.raw?.titlelsig || '').replace(/[^\u0020-\u007E]/g, ''),
+      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig
     ),
 
     div(
