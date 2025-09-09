@@ -1606,7 +1606,7 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping.');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping Method.');
       silentNavigation('/us/en/e-buy/payment');
     }
 
@@ -1652,11 +1652,10 @@ export const changeStep = async (step) => {
         */
         if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
       }
+      showPreLoader();
       const getBasketForOrder = await getBasketDetails();
 
       if (getSelectedPaymentMethod?.value === 'invoice') {
-        showPreLoader();
-
         /*
         *
         :::::::: Call Open tender API for Invoice :::::::
@@ -2000,7 +1999,7 @@ export const changeStep = async (step) => {
       // window.location.href = '/us/en/e-buy/cart';
       silentNavigation('/us/en/e-buy/addresses');
     }
-    if (error.message === 'Invalid Shipping.') {
+    if (error.message === 'Invalid Shipping Method.') {
       silentNavigation('/us/en/e-buy/addresses');
     }
     return false;

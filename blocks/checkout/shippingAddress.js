@@ -908,7 +908,7 @@ export const shippingAddressModule = async () => {
       ],
     };
     const validatingBasket = await validateBasket(validateData);
-    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket7');
+    if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
     const moduleContent = div({});
     const moduleShippingDetails = div(
       {
@@ -1523,7 +1523,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
     if (error.message === 'Unauthorized Access') {
       window.location.href = '/us/en/e-buy/cart';
     }
-    if (error.message === 'Invalid Basket9') {
+    if (error.message === 'Invalid Basket') {
       window.location.href = '/us/en/e-buy/cart';
     }
     showNotification(error.message, 'error');
