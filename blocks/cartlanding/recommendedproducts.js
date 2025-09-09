@@ -161,12 +161,12 @@ export const recommendedProducts = () => {
 */
       const itemContainer = div(
         {
-          class: 'inline-flex flex-col self-stretch px-4 py-3 gap-3 ',
+          class: 'inline-flex flex-col self-stretch gap-3 ',
         },
         div(
           {
             class:
-              'relative self-stretch h-40 relative',
+              'relative self-stretch h-48 relative',
           },
           image,
         ),
@@ -177,14 +177,14 @@ export const recommendedProducts = () => {
           div(
             {
               class:
-                'description self-stretch justify-start text-black text-m font-normal break-words line-clamp-4 !h-20 py-4 leading-7',
+                'description px-3 self-stretch justify-start text-black text-m font-normal break-words line-clamp-4 !h-20 py-4 leading-7',
             },
             item.name,
           ),
         ),
         div(
           {
-            class: 'self-stretch h-48 bg-gray-50 flex flex-col justify-start items-end gap-6',
+            class: 'self-stretch h-48 px-3 bg-gray-50 flex flex-col justify-start items-end gap-6',
           },
           div(
             {
