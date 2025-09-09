@@ -9,14 +9,7 @@ import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
-  let articleTopics = getMetadata('topics')?.toLowerCase();
-  articleTopics = articleTopics.split(',').map(topic => {
-    const match = topic.match(/topics\/([^,]*)/);
-    if (!match) return null;
-    const name = match[1];
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  }).filter(Boolean).join(',');
-  console.log('articleTopics', articleTopics);
+  const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'), window.location.origin);
   const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
@@ -24,7 +17,7 @@ export default async function decorate(block) {
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
     .filter((article) => path === article.path)
     .all();
-
+    
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 1);
   const filteredTags = createFilters(articles);
   const divEl = block.querySelector('div');

@@ -43,12 +43,6 @@
             "value": ""
           },
           {
-            "component": "aem-tag",
-            "valueType": "string",
-            "name": "topics",
-            "label": "Topics"
-          },
-          {
             "component": "text",
             "valueType": "string",
             "name": "path",
@@ -2071,8 +2065,8 @@
       {
         "component": "aem-tag",
         "valueType": "string",
-        "name": "articleTopics",
-        "label": "Article Topics"
+        "name": "topics",
+        "label": "Topics"
       }
     ]
   },

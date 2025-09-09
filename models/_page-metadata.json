@@ -44,12 +44,6 @@
               "value": ""
             },
             {
-              "component": "aem-tag",
-              "valueType": "string",
-              "name": "topics",
-              "label": "Topics"
-            },
-            {
               "component": "text",
               "valueType": "string",
               "name": "path",
