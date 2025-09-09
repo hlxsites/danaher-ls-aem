@@ -5,7 +5,7 @@ import { searchEngine } from '../../scripts/coveo/engine.js';
 import tabsOrder from '../../scripts/tabs-order.js';
 
 function setMetaTags(response) {
-  document.title = response.title + ' | Danaher Life Sciences';
+  document.title = `${response?.title} | Danaher Life Sciences`;
 
   // Handle meta tags by selector, else create and append
   const tags = [
@@ -29,13 +29,16 @@ function setMetaTags(response) {
     tag.setAttribute('content', value);
   });
 
-  if (response?.raw?.images && Array.isArray(response.raw.images)
-    && response.raw.images.length > 0) {
+  if (
+    response?.raw?.images &&
+    Array.isArray(response.raw.images) &&
+    response.raw.images.length > 0
+  ) {
     const imageUrl = response.raw.images.find(
-      (img) => typeof img === 'string' && !/\.pdf$/i.test(img),
+      (img) => typeof img === 'string' && !/\.pdf$/i.test(img)
     );
     if (imageUrl) {
-    // Twitter image meta tag
+      // Twitter image meta tag
       let twitterTag = document.head.querySelector('meta[name="twitter:image"]');
       if (!twitterTag) {
         twitterTag = document.createElement('meta');
