@@ -3184,6 +3184,7 @@ export const cartItemsContainer = (cartItemValue) => {
         showNotification('Product removed from cart', 'success');
       } else {
         await updateCartItemQuantity(item);
+        await updateCheckoutSummary();
         removePreLoader();
         showNotification('Product removed from cart', 'success');
       }
