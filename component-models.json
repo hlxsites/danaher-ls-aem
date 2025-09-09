@@ -45,12 +45,6 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "topics",
-            "label": "Topics"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
             "name": "path",
             "label": ":path",
             "value": ""
@@ -2069,7 +2063,7 @@
     "id": "tags-list",
     "fields": [
       {
-        "component": "text",
+        "component": "aem-tag",
         "valueType": "string",
         "name": "articleTopics",
         "label": "Article Topics"

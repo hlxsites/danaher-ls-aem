@@ -9,7 +9,8 @@ import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
-  const articleTopics = getMetadata('topics')?.toLowerCase();
+  // const articleTopics = getMetadata('topics')?.toLowerCase();
+  const articleTopics = block?.firstElementChild?.textContent;
   const url = new URL(getMetadata('og:url'), window.location.origin);
   const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
@@ -17,8 +18,6 @@ export default async function decorate(block) {
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
     .filter((article) => path === article.path)
     .all();
-
-  
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 1);
   const filteredTags = createFilters(articles);
