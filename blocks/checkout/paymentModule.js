@@ -829,10 +829,10 @@ const paymentModule = async () => {
     scrollViewToTop();
     showNotification(error.message, 'error');
     if (error.message === 'Unauthorized Access') {
-      window.location.href = '/us/en/e-buy/cart';
+      window.location.href = window.EbuyConfig.cartPageUrl;
     }
     if (error.message === 'Invalid Basket') {
-      silentNavigation('/us/en/e-buy/addresses');
+      silentNavigation(window.EbuyConfig.addressPageUrl);
     }
     return false;
   }

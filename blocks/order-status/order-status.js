@@ -29,12 +29,12 @@ const orderDetails = async () => {
     const response = await getApiData(url, defaultHeader);
     if (response) {
       const orderDetailResponse = response.data;
-      if (response.data === 'Unauthorized! please try again.') window.location.href = '/us/en/e-buy/login';
+      if (response.data === 'Unauthorized! please try again.') window.location.href = window.EbuyConfig.loginPageUrl;
       return orderDetailResponse.data;
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
+    window.location.href = window.EbuyConfig.loginPageUrl;
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };
@@ -80,7 +80,7 @@ const dynamicTableContent = async (orderDetailsResponse) => {
     const row = a(
       {
         class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-        href: `/us/en/e-buy/orderdetails?orderId=${orderId}`,
+        href: `${window.EbuyConfig.orderDetailsPageUrl}?orderId=${orderId}`,
       },
       div(
         {
@@ -180,7 +180,7 @@ const dynamicTableContent = async (orderDetailsResponse) => {
 const noContentDiv = a(
   {
     class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-    // href: `/us/en/e-buy/orderdetails?orderId=${orderId}`,
+    // href: `${window.EbuyConfig.orderDetailsPageUrl}?orderId=${orderId}`,
   },
   div(
     {

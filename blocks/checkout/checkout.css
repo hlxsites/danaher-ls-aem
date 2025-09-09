@@ -112,6 +112,14 @@
   top: 1.5rem
 }
 
+.checkout :is(.left-\[46\%\]) {
+  left: 46%
+}
+
+.checkout :is(.top-1\/2) {
+  top: 50%
+}
+
 .checkout :is(.z-10) {
   z-index: 10
 }
@@ -430,6 +438,10 @@
 
 .checkout :is(.max-w-xs) {
   max-width: 20rem
+}
+
+.checkout :is(.max-w-xl) {
+  max-width: 36rem
 }
 
 .checkout :is(.flex-1) {
@@ -1044,6 +1056,12 @@
 
 .checkout :is(.outline-gray-200) {
   outline-color: #e5e7eb
+}
+
+.checkout :is(.ring) {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
 }
 
 .checkout :is(.blur) {

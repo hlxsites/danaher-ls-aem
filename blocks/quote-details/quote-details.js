@@ -24,7 +24,7 @@ export default async function decorate(block) {
   const goBackToQuoteStatusLink = a(
     {
       class: 'inline-flex justify-start items-start gap-2',
-      href: '/us/en/e-buy/requestedquotes',
+      href: `${window.EbuyConfig.requestedQuotesPageUrl}`,
     },
     div(
       {

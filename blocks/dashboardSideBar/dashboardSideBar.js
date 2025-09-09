@@ -75,7 +75,7 @@ export default async function dashboardSidebar() {
   );
   logOut.addEventListener('click', () => {
     userLogOut();
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig.cartPageUrl;
   });
   const sidebar = div(
     {
@@ -114,17 +114,6 @@ export default async function dashboardSidebar() {
     div({
       class: 'w-full h-[2px]',
     }),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/cart',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Cart',
-      ),
-    ),
   );
   const listDiv = div({
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',

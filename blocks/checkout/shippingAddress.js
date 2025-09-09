@@ -1521,10 +1521,10 @@ show default billing address else mark shippingAsBilling checkbox as checked
     // :::::::::::::: close utility modal ::::::::::::::
     closeUtilityModal();
     if (error.message === 'Unauthorized Access') {
-      window.location.href = '/us/en/e-buy/cart';
+      window.location.href = window.EbuyConfig.cartPageUrl;
     }
     if (error.message === 'Invalid Basket') {
-      window.location.href = '/us/en/e-buy/cart';
+      window.location.href = window.EbuyConfig.cartPageUrl;
     }
     showNotification(error.message, 'error');
     return false;

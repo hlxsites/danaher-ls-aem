@@ -89,7 +89,7 @@ export default async function decorate(block) {
     loginFormNewAccountButtonLink:
       loginFormNewAccountButtonLink?.textContent
         ?.trim()
-        .replace(/<[^>]*>/g, '') || '/us/en/e-buy/register',
+        .replace(/<[^>]*>/g, '') || window.EbuyConfig.registerPageUrl,
     backgroundImage:
       backgroundImage?.src
       ?? 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
@@ -306,7 +306,7 @@ export default async function decorate(block) {
           formResponse.classList.remove('text-red-700');
         }
         formResponse.textContent = 'Login Successfull';
-        window.location.href = '/us/en/e-buy/cart';
+        window.location.href = window.EbuyConfig.cartPageUrl;
         return true;
       }
       formResponse.classList.remove('hidden');

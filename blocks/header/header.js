@@ -10,6 +10,8 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 // eslint-disable-next-line import/no-cycle
+import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
+// eslint-disable-next-line import/no-cycle
 import {
   getAuthorization,
   isLoggedInUser,
@@ -27,6 +29,45 @@ const COVEO_MAX_RECENT_SEARCHES = 3;
 
 let selectedSuggestionIndex = -1;
 
+/**
+ * Asynchronously creates and returns the header cart element.
+ * Includes cart icon, label, and item quantity.
+ */
+async function loadHeaderCart() {
+  const getBasketData = await getBasketDetails();
+  const cartWrapper = a(
+    {
+      href: window.EbuyConfig.cartPageUrl,
+      class: 'relative inline-flex text-xs font-semibold text-black hover:text-danaherpurple-800 gap-2',
+    },
+    // Cart icon
+    span({
+      class: 'icon icon-shopping-cart [&_svg>use]:stroke-black',
+    }),
+    // Cart label and quantity
+    div(
+      { class: 'flex flex-col relative' },
+      span(
+        { class: 'text-black text-xs' },
+        'Cart',
+      ),
+      span(
+        {
+          class: 'quantity absolute lg:pl-2 top-4 left-0 text-danaherpurple-500',
+          id: 'headerCartItemQuantity',
+        },
+        getBasketData?.data?.data?.lineItems?.length || '0', // Default quantity
+      ),
+    ),
+  );
+
+  // Apply icon styling
+  decorateIcons(cartWrapper);
+
+  return cartWrapper;
+}
+
+const headerCart = await loadHeaderCart();
 function shortName(user) {
   if (user) {
     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
@@ -645,6 +686,7 @@ function buildSearchBlock(headerBlock) {
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
+  loginBlock.append(headerCart);
   // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
 

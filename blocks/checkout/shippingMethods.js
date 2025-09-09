@@ -460,7 +460,7 @@ const shippingMethodsModule = async () => {
     scrollViewToTop();
     showNotification(error.message, 'error');
     if (error.message === 'Invalid Basket') {
-      silentNavigation('/us/en/e-buy/addresses');
+      silentNavigation(window.EbuyConfig.addressPageUrl);
     }
     return false;
   }
