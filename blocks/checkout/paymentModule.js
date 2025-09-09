@@ -54,9 +54,9 @@ function createCardItem(item, defaultCard) {
 
   defaultPaymentCheckboxText = 'Make this my default payment';
 
+  sessionStorage.setItem('selectedStripeMethod', 'savedCard');
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
-    sessionStorage.setItem('selectedStripeMethod', 'savedCard');
     sessionStorage.setItem('useStripeCardId', itemObject.itemId);
     defaultPaymentCheckboxText = 'Default Payment';
   }

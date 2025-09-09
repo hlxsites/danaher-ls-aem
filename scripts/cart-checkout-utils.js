@@ -1638,6 +1638,7 @@ export const changeStep = async (step) => {
     * */
 
     if (currentTab === 'submitOrder') {
+      showPreLoader();
       const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
@@ -1652,7 +1653,6 @@ export const changeStep = async (step) => {
         */
         if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
       }
-      showPreLoader();
       const getBasketForOrder = await getBasketDetails();
 
       if (getSelectedPaymentMethod?.value === 'invoice') {
@@ -1729,7 +1729,6 @@ export const changeStep = async (step) => {
       * :::::::::; handle stripe payment ::::::::
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
-        showPreLoader();
         /*
         *
         :::::::::::
@@ -1744,7 +1743,6 @@ export const changeStep = async (step) => {
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
         const useStripeCardId = sessionStorage.getItem('useStripeCardId');
-
         /*
         *
         *
@@ -1753,7 +1751,7 @@ export const changeStep = async (step) => {
           :::::::::
         *
         */
-        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select a card to place order.');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
