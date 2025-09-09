@@ -4,8 +4,78 @@ import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 import tabsOrder from '../../scripts/tabs-order.js';
 
+function setMetaTags(response) {
+  document.title = response.title + ' | Danaher Life Sciences';
+
+  // Handle meta tags by selector, else create and append
+  const tags = [
+    { selector: 'meta[property="og:title"]', create: { property: 'og:title' }, value: response.title },
+    { selector: 'meta[property="og:description"]', create: { property: 'og:description' }, value: response.raw.description },
+    { selector: 'meta[name="description"]', create: { name: 'description' }, value: response.raw.description },
+    { selector: 'meta[name="twitter:title"]', create: { name: 'twitter:title' }, value: response.title },
+    { selector: 'meta[name="twitter:description"]', create: { name: 'twitter:description' }, value: response.raw.description },
+    { selector: 'meta[property="og:url"]', create: { property: 'og:url' }, value: window.location.href },
+  ];
+
+  tags.forEach(({ selector, create, value }) => {
+    let tag = document.head.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      Object.entries(create).forEach(([attr, val]) => {
+        tag.setAttribute(attr, val);
+      });
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', value);
+  });
+
+  if (response?.raw?.images && Array.isArray(response.raw.images)
+    && response.raw.images.length > 0) {
+    const imageUrl = response.raw.images.find(
+      (img) => typeof img === 'string' && !/\.pdf$/i.test(img),
+    );
+    if (imageUrl) {
+    // Twitter image meta tag
+      let twitterTag = document.head.querySelector('meta[name="twitter:image"]');
+      if (!twitterTag) {
+        twitterTag = document.createElement('meta');
+        twitterTag.setAttribute('name', 'twitter:image');
+        document.head.appendChild(twitterTag);
+      }
+      twitterTag.setAttribute('content', imageUrl);
+
+      // Open Graph image meta tag
+      let ogImageTag = document.head.querySelector('meta[property="og:image"]');
+      if (!ogImageTag) {
+        ogImageTag = document.createElement('meta');
+        ogImageTag.setAttribute('property', 'og:image');
+        document.head.appendChild(ogImageTag);
+      }
+      ogImageTag.setAttribute('content', imageUrl);
+
+      // Open Graph secure image URL meta tag
+      let ogSecureTag = document.head.querySelector('meta[property="og:image:secure_url"]');
+      if (!ogSecureTag) {
+        ogSecureTag = document.createElement('meta');
+        ogSecureTag.setAttribute('property', 'og:image:secure_url');
+        document.head.appendChild(ogSecureTag);
+      }
+      ogSecureTag.setAttribute('content', imageUrl);
+    }
+  }
+  // Canonical link
+  let link = document.head.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    document.head.appendChild(link);
+  }
+  link.setAttribute('href', window.location.href);
+}
+
 function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  setMetaTags(response);
   // Determine opco, e.g. from response
   const opco = response?.raw?.opco?.toLowerCase() || 'sciex';
   const tabOrderArr = tabsOrder()[opco] || [];
