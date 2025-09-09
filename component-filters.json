@@ -259,7 +259,9 @@
   },
   {
     "id": "tags-list",
-    "components": []
+    "components": [
+      " "
+    ]
   },
   {
     "id": "talk-to-an-expert-text",
