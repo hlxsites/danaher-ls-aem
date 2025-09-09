@@ -8,7 +8,10 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
+  if(basketDataFromSession?.data?.data?.buyer === undefined){
+    window.location.href = '/us/en/e-buy/login';
+  }
   const firstName = basketDataFromSession?.data?.data?.buyer?.firstName;
   const lastName = basketDataFromSession?.data?.data?.buyer?.lastName;
   const userId = basketDataFromSession?.data?.data?.buyer?.accountID;
@@ -19,7 +22,7 @@ export default async function decorate(block) {
   });
   const myProfileWrapper = div({
     class:
-      'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
+      'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
   });
   const profileWrapper = div({
     class:

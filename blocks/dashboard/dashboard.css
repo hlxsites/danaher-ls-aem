@@ -80,16 +80,12 @@
   inset: 0px
 }
 
-.dashboard-wrapper :is(.bottom-40) {
-  bottom: 10rem
+.dashboard-wrapper :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .dashboard-wrapper :is(.left-0) {
   left: 0px
-}
-
-.dashboard-wrapper :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .dashboard-wrapper :is(.right-0) {
@@ -100,8 +96,8 @@
   right: 2.5rem
 }
 
-.dashboard-wrapper :is(.top-1\/2) {
-  top: 50%
+.dashboard-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .dashboard-wrapper :is(.top-6) {
@@ -114,6 +110,10 @@
 
 .dashboard-wrapper :is(.z-50) {
   z-index: 50
+}
+
+.dashboard-wrapper :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .dashboard-wrapper :is(.z-\[9999\]) {
@@ -164,6 +164,10 @@
   display: block
 }
 
+.dashboard-wrapper :is(.inline) {
+  display: inline
+}
+
 .dashboard-wrapper :is(.flex) {
   display: flex
 }
@@ -188,8 +192,8 @@
   height: 2.5rem
 }
 
-.dashboard-wrapper :is(.h-24) {
-  height: 6rem
+.dashboard-wrapper :is(.h-16) {
+  height: 4rem
 }
 
 .dashboard-wrapper :is(.h-3) {
@@ -244,12 +248,20 @@
   height: 46px
 }
 
+.dashboard-wrapper :is(.h-screen) {
+  height: 100vh
+}
+
 .dashboard-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
 
 .dashboard-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
+}
+
+.dashboard-wrapper :is(.w-16) {
+  width: 4rem
 }
 
 .dashboard-wrapper :is(.w-28) {
@@ -328,6 +340,10 @@
   width: 100%
 }
 
+.dashboard-wrapper :is(.w-screen) {
+  width: 100vw
+}
+
 .dashboard-wrapper :is(.min-w-\[415px\]) {
   min-width: 415px
 }
@@ -351,6 +367,16 @@
 .dashboard-wrapper :is(.-translate-y-full) {
   --tw-translate-y: -100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.dashboard-wrapper :is(.animate-spin) {
+  animation: spin 1s linear infinite
 }
 
 .dashboard-wrapper :is(.cursor-pointer) {
@@ -743,10 +769,6 @@
   text-align: right
 }
 
-.dashboard-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .dashboard-wrapper :is(.\!text-4xl) {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important
@@ -843,6 +865,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.dashboard-wrapper :is(.text-gray-200) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+
 .dashboard-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
@@ -888,11 +915,6 @@
   color: rgb(7 89 133 / var(--tw-text-opacity))
 }
 
-.dashboard-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
 .dashboard-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
@@ -910,19 +932,14 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.dashboard-wrapper :is(.ring) {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
-}
-
-.dashboard-wrapper :is(.blur) {
-  --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
 .dashboard-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.dashboard-wrapper :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .dashboard-wrapper :is(.transition-transform) {
@@ -972,6 +989,13 @@
 .dashboard-wrapper :is(.peer:hover ~ .peer-hover\:bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard-wrapper :is(.dark\:text-gray-600) {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 }
 
 @media (min-width: 768px) {

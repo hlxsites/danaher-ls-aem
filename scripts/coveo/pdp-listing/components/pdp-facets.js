@@ -219,8 +219,6 @@ export function renderCreateFacet() {
     if (e.key === "Enter") {
       searchBoxController.updateText(search.value);
       searchBoxController.submit();
-      console.log("searchBoxController", searchBoxController);
-      console.log("Search query:", search.value);
     }
   });
 

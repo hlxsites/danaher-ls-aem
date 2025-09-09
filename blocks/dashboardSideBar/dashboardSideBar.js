@@ -6,12 +6,10 @@ import {
 } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { userLogOut } from '../../scripts/auth-utils.js';
 
 // eslint-disable-next-line
 export default async function dashboardSidebar() {
-// //   showPreLoader();
-//   block?.parentElement?.parentElement?.removeAttribute('class');
-//   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
@@ -21,7 +19,6 @@ export default async function dashboardSidebar() {
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
     { name: 'Approved Quotes', itemClicked: 'Approved quotes', icon: 'Document-duplicate' },
-    // { name: 'My Profile', itemClicked: 'My profile', icon: 'User' },
     // { name: 'Invoices', icon: 'document-text' },
     // { name: 'Communities', icon: 'Users' },
     // { name: 'Personalized Catalog', icon: 'shopping-cart' },
@@ -68,6 +65,7 @@ export default async function dashboardSidebar() {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
+
   userData = JSON.parse(authenticationToken.user_data);
   const logOut = button(
         {
@@ -77,7 +75,7 @@ export default async function dashboardSidebar() {
         'Logout',
       );
   logOut.addEventListener("click", ()=>{
-    console.log("log out");
+    userLogOut();
     window.location.href = '/us/en/e-buy/cart';
   })
   const sidebar = div(
@@ -128,18 +126,6 @@ export default async function dashboardSidebar() {
         'View Cart',
       ),
     ),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/orderSubmit?orderId=10000123',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Order Submit',
-      ),
-    ),
-
   );
   const listDiv = div({
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',

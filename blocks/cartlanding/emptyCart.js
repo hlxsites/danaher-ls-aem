@@ -16,7 +16,7 @@ export default function emptyCart() {
     'Browse Products',
   );
   browseButton.addEventListener('click', () => {
-    window.location.href = 'https://stage.lifesciences.danaher.com/us/en/products.html';
+    window.location.href = '/us/en/products.html';
   });
 
   // Cart Empty Message Section

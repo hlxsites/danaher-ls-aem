@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import {
   buildInputElement, removePreLoader, showPreLoader,
   buildSearchWithIcon,
@@ -56,6 +57,7 @@ function createCardItem(item, defaultCard) {
   if (defaultCard === itemObject.itemId) {
     defaultPaymentCheckbox.checked = true;
     sessionStorage.setItem('selectedStripeMethod', 'savedCard');
+    sessionStorage.setItem('useStripeCardId', itemObject.itemId);
     defaultPaymentCheckboxText = 'Default Payment';
   }
   let useCardLabel = 'Use Card';
@@ -154,7 +156,7 @@ const paymentModule = async () => {
     if (authenticationToken?.status === 'error') {
       throw new Error('Unauthorized Access');
     }
-    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
+    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket5');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -454,11 +456,13 @@ const paymentModule = async () => {
                 if (newStripeCardPaymentWrapper && newStripeCardAddressWrapper) {
                   // mount address elements
                   addressElements = stripeElements.create('address', addressOptions);
-                  addressElements.mount('#newStripeCardAddressWrapper');
-
                   // mount payment elements
                   paymentElements = stripeElements.create('payment', options);
-                  paymentElements.mount('#newStripeCardPaymentWrapper');
+                  setTimeout(() => {
+                    addressElements.mount('#newStripeCardAddressWrapper');
+                    paymentElements.mount('#newStripeCardPaymentWrapper');
+                  }, 1000);
+
                   // Listen for changes
                   paymentElements.on('change', (event) => {
                     const selectedType = event.value?.type;
@@ -472,7 +476,7 @@ const paymentModule = async () => {
                     }
                   });
                 }
-              }, 0);
+              }, 1000);
             }
           }
         }
@@ -537,6 +541,7 @@ const paymentModule = async () => {
       decorateIcons(stripeCardsWrapper);
 
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
+        showPreLoader();
         let targetRadio;
         let targetRadioId;
         let targetFrom;
@@ -556,7 +561,9 @@ const paymentModule = async () => {
           targetRadioId = eventTarget.id;
         }
         // check if radio input available
-        if (!targetRadio) return;
+        if (!targetRadio) {
+          removePreLoader(); return;
+        }
         const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
         const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
 
@@ -588,12 +595,12 @@ const paymentModule = async () => {
 
           if (targetRadioId === 'sameAsShipping') {
             if (targetFrom === 'label') targetRadio.checked = true;
-            // newStripeCardAddressWrapper?.classList.add('hidden');
+            newStripeCardAddressWrapper?.classList.add('hidden');
             basketAddressData = basketData?.included?.commonShipToAddress[commonShipToAddress];
           }
           if (targetRadioId === 'sameAsBilling') {
             if (targetFrom === 'label') targetRadio.checked = true;
-            // newStripeCardAddressWrapper?.classList.add('hidden');
+            newStripeCardAddressWrapper?.classList.add('hidden');
 
             basketAddressData = basketData?.included?.invoiceToAddress[invoiceToAddress];
           }
@@ -614,9 +621,11 @@ const paymentModule = async () => {
           addressOptions = {
             mode: 'billing', display: {}, blockPoBox: true, fields: { phone: 'always' }, defaultValues: defaultData,
           };
-          // mount address elements
-          addressElements = stripeElements.create('address', addressOptions);
-          addressElements.mount('#newStripeCardAddressWrapper');
+          if (newStripeCardAddressWrapper) {
+            // mount address elements
+            addressElements = stripeElements.create('address', addressOptions);
+            addressElements.mount('#newStripeCardAddressWrapper');
+          }
         }
 
         if (targetRadioId === 'newAddress') {
@@ -647,6 +656,7 @@ const paymentModule = async () => {
           addressElements = stripeElements.create('address', addressOptions);
           addressElements.mount('#newStripeCardAddressWrapper');
         }
+        removePreLoader();
       });
     }
     const savedCardsSearchWrapper = paymentMethodsWrapper?.querySelector('#searchWithIcon');
@@ -821,7 +831,7 @@ const paymentModule = async () => {
     if (error.message === 'Unauthorized Access') {
       window.location.href = '/us/en/e-buy/cart';
     }
-    if (error.message === 'Invalid Basket') {
+    if (error.message === 'Invalid Basket6') {
       silentNavigation('/us/en/e-buy/addresses');
     }
     return false;

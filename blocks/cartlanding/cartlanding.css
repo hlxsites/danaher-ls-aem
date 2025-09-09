@@ -99,8 +99,8 @@
   bottom: 0.5rem
 }
 
-.cartlanding-wrapper :is(.bottom-40) {
-  bottom: 10rem
+.cartlanding-wrapper :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .cartlanding-wrapper :is(.left-0) {
@@ -109,10 +109,6 @@
 
 .cartlanding-wrapper :is(.left-2) {
   left: 0.5rem
-}
-
-.cartlanding-wrapper :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -131,12 +127,12 @@
   right: 2.5rem
 }
 
-.cartlanding-wrapper :is(.top-0) {
-  top: 0px
+.cartlanding-wrapper :is(.right-2) {
+  right: 0.5rem
 }
 
-.cartlanding-wrapper :is(.top-1\/2) {
-  top: 50%
+.cartlanding-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .cartlanding-wrapper :is(.top-6) {
@@ -157,6 +153,10 @@
 
 .cartlanding-wrapper :is(.z-50) {
   z-index: 50
+}
+
+.cartlanding-wrapper :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .cartlanding-wrapper :is(.z-\[9999\]) {
@@ -253,6 +253,10 @@
   display: block
 }
 
+.cartlanding-wrapper :is(.inline) {
+  display: inline
+}
+
 .cartlanding-wrapper :is(.flex) {
   display: flex
 }
@@ -295,10 +299,6 @@
 
 .cartlanding-wrapper :is(.h-16) {
   height: 4rem
-}
-
-.cartlanding-wrapper :is(.h-24) {
-  height: 6rem
 }
 
 .cartlanding-wrapper :is(.h-28) {
@@ -367,6 +367,10 @@
 
 .cartlanding-wrapper :is(.h-px) {
   height: 1px
+}
+
+.cartlanding-wrapper :is(.h-screen) {
+  height: 100vh
 }
 
 .cartlanding-wrapper :is(.max-h-48) {
@@ -473,6 +477,10 @@
   width: 150px
 }
 
+.cartlanding-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -507,6 +515,10 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
+}
+
+.cartlanding-wrapper :is(.w-screen) {
+  width: 100vw
 }
 
 .cartlanding-wrapper :is(.min-w-\[100\%\]) {
@@ -562,6 +574,16 @@
 
 .cartlanding-wrapper :is(.animate-pulse) {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.cartlanding-wrapper :is(.animate-spin) {
+  animation: spin 1s linear infinite
 }
 
 .cartlanding-wrapper :is(.cursor-pointer) {
@@ -1178,6 +1200,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-200) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-gray-400) {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity))
@@ -1206,11 +1233,6 @@
 .cartlanding-wrapper :is(.text-red-500) {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity))
-}
-
-.cartlanding-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .cartlanding-wrapper :is(.text-white) {
@@ -1284,12 +1306,6 @@
   outline-color: #7c3aed
 }
 
-.cartlanding-wrapper :is(.ring) {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
-}
-
 .cartlanding-wrapper :is(.blur) {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
@@ -1297,6 +1313,12 @@
 
 .cartlanding-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.cartlanding-wrapper :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .cartlanding-wrapper :is(.transition) {
@@ -1382,6 +1404,13 @@
 .cartlanding-wrapper :is(.peer:hover ~ .peer-hover\:bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .cartlanding-wrapper :is(.dark\:text-gray-600) {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 }
 
 @media (min-width: 640px) {

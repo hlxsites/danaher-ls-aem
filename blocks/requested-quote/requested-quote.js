@@ -13,7 +13,7 @@ export default async function decorate(block) {
   document.querySelector('main').style = 'background: #f4f4f4';
   const requestedQuotesResponse = await requestedQuotes();
   const requestedQuoteWrapper = div({
-    class: 'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
+    class: 'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
   });
   const resquestedquoteTitleDiv = div(
     {

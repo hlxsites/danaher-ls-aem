@@ -2,12 +2,10 @@ import { div, span } from './dom-builder.js';
 import { postApiData, getApiData } from './api-utils.js';
 import { getCommerceBase } from './commerce.js';
 import {
-  preLoader,
   showPreLoader,
-  removePreLoader,
   createModal,
 } from './common-utils.js';
-import { setAuthenticationToken } from './token-utils.js';
+import { setAuthenticationToken, siteID, env, deleteCookie } from './token-utils.js';
 import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
@@ -102,8 +100,9 @@ export async function userRegister(data = {}) {
 export async function userLogin(type, data = {}) {
   showPreLoader();
   let loginData = {};
-  const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const getCurrentBasketData = JSON.parse(localStorage.getItem('basketData'));
   sessionStorage.clear();
+  localStorage.clear();
 
   let lastBasketId = '';
   if (getCurrentBasketData?.status === 'success' && !getCurrentBasketData?.data?.data?.customer) {
@@ -238,19 +237,21 @@ export function sessionPreLoader() {
       'Login Again',
     ),
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
-  if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await userLogin('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
-        removePreLoader();
-        removeSessionPreLoader();
-        return true;
-      }
-      return false;
-    });
-  }
   return createModal(sessionPreLoaderContent, true, true);
+}
+
+/*
+:::::::::::::::
+ Logout the user (Customer/Guest)
+ :::::::::::::::::::::::::::
+*/
+export function userLogOut() {
+  deleteCookie(`em_${siteID}_${env}_apiToken`);
+  deleteCookie(`em_${siteID}_${env}_refresh-token`);
+  deleteCookie(`em_${siteID}_${env}_user_data`);
+  deleteCookie(`em_${siteID}_${env}_user_type`);
+  deleteCookie(`em_${siteID}_${env}_authorized`);
+
+  sessionStorage.clear();
+  localStorage.clear();
 }

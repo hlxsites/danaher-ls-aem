@@ -1,5 +1,6 @@
 import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import renderGridCard from './grid-data.js';
 import renderListCard from './listData.js';
 import { getProductInfo } from '../../scripts/common-utils.js';

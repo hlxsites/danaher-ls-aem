@@ -451,11 +451,6 @@
   color: rgb(153 27 27 / var(--tw-text-opacity))
 }
 
-.approved-quotes-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
 .approved-quotes-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))

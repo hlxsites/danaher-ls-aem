@@ -5,6 +5,7 @@ import { getApiData } from '../../scripts/api-utils.js';
 export const orderDetails = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
@@ -22,7 +23,6 @@ export const orderDetails = async () => {
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };
@@ -30,13 +30,14 @@ export const orderDetails = async () => {
 export const requestedQuotes = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
   const defaultHeader = new Headers({
     'Authentication-Token': token,
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   let userId;
   let customerNo;
   if (basketDataFromSession) {
@@ -58,7 +59,6 @@ export const requestedQuotes = async () => {
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };
@@ -66,13 +66,14 @@ export const requestedQuotes = async () => {
 export const approvedQuotes = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
   const defaultHeader = new Headers({
     'Authentication-Token': token,
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   let userId;
   let customerNo;
   if (basketDataFromSession) {
@@ -89,13 +90,11 @@ export const approvedQuotes = async () => {
       if (response.data === 'Unauthorized! please try again.') {
         window.location.href = '/us/en/e-buy/login';
       }
-      console.log('response', response);
       const quotesResponse = response.data.elements;
       return quotesResponse;
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };
@@ -121,7 +120,6 @@ export const userOrderDetails = async (orderId) => {
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
     // return { status: 'error', data: 'Something went wrong fetching order details.' };
   }
@@ -130,6 +128,8 @@ export const userOrderDetails = async (orderId) => {
 export const requestedQuotesDetails = async (quoteId) => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
@@ -137,7 +137,7 @@ export const requestedQuotesDetails = async (quoteId) => {
     'Authentication-Token': token,
     // Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   if (!basketDataFromSession) {
     window.location.href = '/us/en/e-buy/login';
   }
@@ -153,7 +153,6 @@ export const requestedQuotesDetails = async (quoteId) => {
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };
@@ -161,6 +160,7 @@ export const requestedQuotesDetails = async (quoteId) => {
 export const approvedQuotesDetails = async (quoteId) => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
+     window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;
@@ -168,7 +168,7 @@ export const approvedQuotesDetails = async (quoteId) => {
     'Authentication-Token': token,
     // Accept: 'application/vnd.intershop.order.v1+json',
   });
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   let userId;
   let customerNo;
   if (basketDataFromSession) {
@@ -186,12 +186,10 @@ export const approvedQuotesDetails = async (quoteId) => {
         window.location.href = '/us/en/e-buy/login';
       }
       const quotesResponse = response.data;
-      console.log('quotesResponse', quotesResponse);
       return quotesResponse;
     }
     return { status: 'error', data: 'No response data.' };
   } catch (error) {
-    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Exception occurred, redirecting.' };
   }
 };

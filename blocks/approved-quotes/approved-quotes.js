@@ -20,13 +20,16 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
-  const basketDataFromSession = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
+  if(basketDataFromSession?.data?.data?.buyer === undefined){
+    window.location.href = '/us/en/e-buy/login';
+  }
   const customerName = `${basketDataFromSession?.data?.data?.buyer?.firstName} ${basketDataFromSession?.data?.data?.buyer?.lastName}`;
   const userId = basketDataFromSession?.data?.data?.buyer?.accountID;
   const approvedQuotesResponse = await approvedQuotes();
   const approvedQuoteWrapper = div({
     class:
-      'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
+      'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
   });
   const approvedquoteTitleDiv = div(
     {
@@ -197,15 +200,16 @@ export default async function decorate(block) {
           class: 'self-stretch bg-white border-b-2 border-gray-200',
         },
         tableHeader('SKU'),
-        tableHeader('Description'),
+        tableHeader('Name'),
         tableHeader('UOM'),
         tableHeader('QTY'),
         tableHeader('Unit Price'),
       ),
     );
 
-    const dynamicQuoteDetailContent = (approvedQuoteDetailsResponse) => {
-      const detailRow = div(
+    const dynamicQuoteDetailContent = (productSKU, quantity, singlePrice) => {
+      
+        const detailedRow = div(
         {
           class: 'flex-1 inline-flex justify-start items-start',
         },
@@ -214,12 +218,13 @@ export default async function decorate(block) {
             class:
               'w-[176.4px] self-stretch p-3 border-b border-gray-200 flex flex-col justify-start items-start',
           },
-          div(
+          a(
             {
+              href:`/us/en/products/sku/${productSKU}`,
               class:
                 'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
             },
-            `${approvedQuoteDetailsResponse.items[0].productSKU}`,
+            `${productSKU}`,
           ),
         ),
         div(
@@ -232,7 +237,8 @@ export default async function decorate(block) {
               class:
                 'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `${approvedQuoteDetailsResponse.description}`,
+            "DMi1 for Core Cell Culture Test"
+            // `${item.description}`,
           ),
         ),
         div(
@@ -258,7 +264,7 @@ export default async function decorate(block) {
               class:
                 'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `${approvedQuoteDetailsResponse.items[0].originQuantity.value}`,
+            `${quantity}`,
           ),
         ),
         div(
@@ -271,17 +277,24 @@ export default async function decorate(block) {
               class:
                 'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            `$${approvedQuoteDetailsResponse.items[0].originSinglePrice.value}`,
+            `$${singlePrice}`,
           ),
         ),
       );
-      return detailRow;
+      return detailedRow;
+    
+      
     };
     //   approvedQuoteRow.append(quoteDetail);
-    const quoteDetailRows = dynamicQuoteDetailContent(
-      approvedQuotesDetailsResponse,
-    );
-    quoteDetailTable.append(quoteDetailRows);
+    approvedQuotesDetailsResponse.items?.map(async (element) => {
+      const quoteDetailRows = dynamicQuoteDetailContent(element.productSKU,
+          element.originQuantity.value,
+          element.originSinglePrice.value,);
+       quoteDetailTable.append(quoteDetailRows);
+      });
+    
+  
+   
     quoteDetail.append(quoteDetailTable);
     return quoteDetail;
   };

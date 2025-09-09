@@ -3,7 +3,46 @@ import { loadScript, sampleRUM } from './lib-franklin.js';
 import { setCookie, isOTEnabled } from './scripts.js';
 import { getAuthorization, getCommerceBase } from './commerce.js';
 import { getMetadata } from './lib-franklin.js';
+import { addItemToCart } from '../blocks/cartlanding/myCartService.js';
+import { removePreLoader, showNotification } from './common-utils.js';
+import { getAuthenticationToken } from './token-utils.js';
 
+/**
+ma * Sets up event delegation for "Add to Cart" button clicks within the container.
+ * Efficiently handles clicks even for dynamically added buttons.
+ *
+ * @param {HTMLElement} wrapper - The container element that may contain one or more buy buttons.
+ */
+export function decorateBuyButton(wrapper) {
+  wrapper.addEventListener('click', async (e) => {
+    const targetElement = e.target;
+
+    try {
+      const btnProps = targetElement?.attributes;
+      let itemQuantity = '';
+      // Look for a nearby input[type="number"]
+      const quantityInput = targetElement?.closest('input[type="number"]');
+      if (quantityInput || btnProps?.minorderquantity) {
+        itemQuantity = quantityInput?.value || btnProps?.minorderquantity?.value;
+      }
+      const itemObject = {
+        sku: {
+          value:
+            btnProps?.sku?.value,
+          quantity: itemQuantity,
+        }
+      }
+      if (targetElement?.classList?.contains('add-to-cart-btn')) {
+        if (itemQuantity) {
+          await addItemToCart(itemObject);
+        }
+      }
+    } catch (error) {
+      removePreLoader();
+      showNotification('Error Processing Request.', 'error');
+    }
+  });
+}
 /*
   *
   :::::::::::
@@ -65,13 +104,13 @@ if (document.readyState === "loading") {
 } else {
   initUtmParamsUtm();
 }
- /*
-  *
-  :::::::::::
-     include / exclude eds page for Prod and Stage
-  ::::::::::::::
-  *
-  */
+/*
+ *
+ :::::::::::
+    include / exclude eds page for Prod and Stage
+ ::::::::::::::
+ *
+ */
 export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits', 'products/liquid-handlers', 'products/assay-kits', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems', 'products/high-performance-liquid-chromatography-systems', 'products/high-throughput-cellular-screening-systems', 'products/mass-spectrometers', 'products/microarray-scanners', 'products/microbioreactors', 'products/microplate-readers', 'products/microscopes', 'products/particle-counters-and-analyzers', 'products/patch-clamp-systems', 'products/proteins-peptides', 'products/sample-preparation-detection', 'products/software-platforms', 'products/centrifuges', 'products/clone-screening-systems', 'products/flow-cytometers', 'products/chromatography-columns', '/products.html'];
 
 export const includeStageEdsPaths = ['news', 'news.html', 'blog.html', 'blog', 'we-see-a-way', 'we-see-a-way.html', 'products/brands', 'products.html', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'e-buy', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits', 'products/liquid-handlers', 'products/assay-kits', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems', 'products/high-performance-liquid-chromatography-systems', 'products/high-throughput-cellular-screening-systems', 'products/mass-spectrometers', 'products/microarray-scanners', 'products/microbioreactors', 'products/microplate-readers', 'products/microscopes', 'products/particle-counters-and-analyzers', 'products/patch-clamp-systems', 'products/proteins-peptides', 'products/sample-preparation-detection', 'products/software-platforms', 'products/centrifuges', 'products/clone-screening-systems', 'products/flow-cytometers', 'products/chromatography-columns'];
@@ -288,6 +327,8 @@ if (
 ) {
   getAuthToken();
 }
+
+const emAuthToken = getAuthenticationToken();
 
 if (!window.location.hostname.includes('localhost')) {
   loadGTM();
