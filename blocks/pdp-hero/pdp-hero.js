@@ -137,7 +137,7 @@ export default async function decorate(block) {
       {
         class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
       },
-      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig
+      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
     ),
 
     div(
@@ -293,7 +293,9 @@ export default async function decorate(block) {
     //   value: '1',
     //   min: '1',
     //   class:
-    //     'pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+    //     'pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline
+    // outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base
+    // font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
     // }),
     a(
       {
