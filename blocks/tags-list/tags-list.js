@@ -9,8 +9,14 @@ import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
-  // const articleTopics = getMetadata('topics')?.toLowerCase();
-  const articleTopics = block?.firstElementChild?.textContent;
+  let articleTopics = getMetadata('topics')?.toLowerCase();
+  articleTopics = articleTopics.split(',').map(topic => {
+    const match = topic.match(/topics\/([^,]*)/);
+    if (!match) return null;
+    const name = match[1];
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  }).filter(Boolean).join(',');
+  console.log('articleTopics', articleTopics);
   const url = new URL(getMetadata('og:url'), window.location.origin);
   const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
