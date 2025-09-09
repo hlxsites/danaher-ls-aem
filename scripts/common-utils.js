@@ -6,10 +6,10 @@ import {
   button,
   select,
   option,
-  img,
   p,
   h3,
 } from './dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
 import { getAuthenticationToken } from './token-utils.js';
@@ -43,17 +43,15 @@ export function showPreLoader() {
  :::::::::::::::::
  */
 export function preLoader() {
-  return div(
+  const preloaderContainer = div(
     {
       class:
-        'flex w-full relative top-1/2 left-[46%] justify-start items-center',
+        'fixed top-0 left-0 flex items-center justify-center w-screen h-screen z-[100] backdrop-blur-sm',
       id: 'preLoader',
     },
-    img({
-      class: ' h-24',
-      src: '/content/dam/danaher/utility/loading_icon.gif',
-    }),
   );
+  preloaderContainer?.insertAdjacentHTML('beforeend', '<svg aria-hidden="true" class="inline w-16 h-16 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: rgb(117, 35, 255);" data-di-res-id="3267c44e-874c83f9" data-di-rand="1757308281037"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"></path><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"></path></svg>');
+  return preloaderContainer;
 }
 
 /*
@@ -84,7 +82,7 @@ function to append notification container
 */
 const generateNotification = div(
   {
-    class: 'fixed flex flex-col bottom-40 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
+    class: 'fixed flex flex-col bottom-24 left-0 right-10 overflow-hidden pointer-events-none z-[9999]',
     id: 'notificationWrapper',
   },
   div(
@@ -207,7 +205,7 @@ export function showNotification(content, type, wrapper = '') {
   setTimeout(() => {
     notificationWrapper.classList.add('-translate-y-full');
     notificationWrapper.style.display = 'none';
-  }, 5000);
+  }, 4000);
 }
 /*
 *
@@ -396,314 +394,6 @@ export async function getProductInfo(id, needInterShop = true) {
     return {};
   }
 }
-export function renderProductJsonResponse(iterations) {
-  const productsArray = [];
-  for (let i = 0; i < iterations; i += 1) {
-    const productSample = {
-      systitle: 'DMi1 Inverted Microscope for Cell Culture',
-
-      showonlms: 'true',
-
-      ec_images:
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-hero;https://danaherls.scene7.com/is/image/danaher/leica-dmi1-inverted-microscope-16-hero;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-product-image1;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-objectives-product-image3;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-expansion-product-image7;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-sliders-product-image-5;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image35;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4-1;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image41;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image31;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image47;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image37;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image39;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image12;https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image9',
-      imageslms: [
-        'https://danaherls.scene7.com/is/image/danaher/leica-dmi1-inverted-microscope-16-hero',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-hero',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-product-image1',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-objectives-product-image3',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-expansion-product-image7',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image9',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image12',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image31',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image35',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image37',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image39',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image41',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image47',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-sliders-product-image-5',
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4-1',
-      ],
-
-      sysurihash: 's3u5QJOWwvd0zzsr',
-
-      inriverentityid: '535',
-
-      urihash: 's3u5QJOWwvd0zzsr',
-
-      workflowname: [
-        'Monoclonal Antibody (MAbs)',
-
-        'Monoclonal Antibody (MAbs)|Cell Line Development',
-
-        'Oligonucleotide Therapy',
-
-        'Oligonucleotide Therapy|Antisense Oligonucleotide Development and Manufacturing',
-
-        'mRNA Therapy',
-
-        'mRNA Therapy|mRNA Development and Manufacturing',
-
-        'Gene Therapy',
-
-        'Cell Therapy',
-
-        'Plasmid DNA Development and Manufacturing',
-      ],
-
-      externallink:
-        'https://www.leica-microsystems.com/products/light-microscopes/p/leica-dmi1/',
-
-      sysuri:
-        'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      sysprintableuri:
-        'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      systransactionid: 340578,
-
-      normalmodesamplevolumemetricmicrol: 0,
-
-      public: 'true',
-
-      sysconcepts:
-        'smart choice ; cell culture ; DMi1 ; microscopes ; variety of accessories ; concentrate ; handling ; LED illumination ; Leica Microsystems ; color temperature ; energy costs ; low maintenance ; S40 condenser ; flexibility',
-
-      concepts:
-        'smart choice ; cell culture ; DMi1 ; microscopes ; variety of accessories ; concentrate ; handling ; LED illumination ; Leica Microsystems ; color temperature ; energy costs ; low maintenance ; S40 condenser ; flexibility',
-
-      printableuri:
-        'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      locale: 'en-us',
-
-      mappingtype: 'Family',
-
-      responsiblebu: 'CM',
-
-      contenttype: 'Product',
-
-      sysindexeddate: 1744811961000,
-
-      categoriesname: [
-        'Microscopes',
-
-        'Microscopes|Light Microscopes',
-
-        'Microscopes|Light Microscopes|Inverted Light Microscopes',
-      ],
-
-      description:
-        'The DMi1 inverted microscope supports your specific work routine in your cell culture lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.\nJust Right – Smart Choice',
-
-      permanentid: 'dmi1-inverted-microscopes',
-
-      workflow: [
-        'mabs',
-
-        'mabs|cell-line-development',
-
-        'oligonucleotide-therapy',
-
-        'oligonucleotide-therapy|antisense-oligonucleotide-development-manufacturing',
-
-        'mrna-therapy',
-
-        'mrna-therapy|mrna-development-manufacturing',
-
-        'gene-therapy',
-
-        'cell-therapy',
-
-        'pdna-synthesis',
-      ],
-
-      syslanguage: ['English'],
-
-      opco: 'Leica Microsystems',
-
-      discontinued: 'false',
-
-      transactionid: 340578,
-
-      shopenabledcountry: ['EN-US'],
-
-      title: 'DMi1 Inverted Microscope for Cell Culture',
-
-      urlslug: 'dmi1-inverted-microscopes',
-
-      ec_brand: ['Leica Microsystems'],
-
-      typo3uid: '34845',
-
-      date: 1744811961000,
-
-      objecttype: 'Family',
-
-      richlongdescription:
-        '<h3>Just Right For Your Live Cell Lab</h3>\n<p>The well-thought-out design and quality control elements enable you to work in comfort, even during long routines</p>\n<h3>Cost Saving, Color Safe LED Illumination</h3>\n<p>All DMi1 microscopes feature 5W LED illumination for constant color temperature through all stages of intensity</p>\n<h3>All-In-One Visualization And Data Storage</h3>\n<p>The DMi1 camera version is an all-in-one solution for image capturing and cell culture documentation</p>\n<h3>Just Right For Your Live Cell Lab &ndash; Smart Choice For Quick Checks</h3>\n<p>The microscope&rsquo;s flexibility in accommodating an S40 condenser (40 &ndash; 50 mm working distance) or switching to an S80 condenser (80 mm working distance) is achieved by just a few hand moves. High-quality Leica objectives provide brilliant images.</p>\n<p>The well-thought-out design and quality control elements enable you to work in comfort, even during long routines.</p>\n<p>Smart features make your workflow smooth and efficient, saving time and resources. High-quality imaging technology from Leica Microsystems provides precise results and reduces the risk of errors.</p>\n<p>The microscope&rsquo;s LED illumination means low energy costs and minimal downtime. No need to replace lamps often, or wait for the right color temperature to develop.</p>\n<p>The DMi1 is the smart choice for excellent quality.</p>\n<h3>10x to 20x to 40x Phase Contrast With One Hand Move</h3>\n<p>The DMi1 is easy to use for phase contrast observation.</p>\n<p>With 40x PH1 objective from Leica Microsystems you can switch from 10x to 20x to 40x phase contrast by simply swiveling the nosepiece. There is no need to change the light ring in the slider &ndash; the PH1 light ring matches all three objectives!</p>\n<h3>Cost Saving, Color Safe LED Illumination</h3>\n<p>All DMi1 microscopes feature 5W LED illumination for constant color temperature through all stages of intensity.</p>\n<p>The cool LED light provides a perfect climate for delicate live specimens. There are no distortions of the device due to heat, which provides unchanged focus.</p>\n<p>Moreover, LED lamps make great economic sense. LED technology and a twohour auto-off-function reduce energy costs. Up to 20 years life cycle (40 working hrs / week) per lamp under regular conditions mean less downtime and low maintenance costs.</p>\n<h3>Auto Intensity</h3>\n<p>A smart sensor integrated in the slider makes sure that the light intensity automatically adjusts between brightfield and phase contrast. This feature protects the eyes, saves time, and adds comfort for the user.</p>\n<h3>Quick Change From 40 to 50 or 80 Millimeters Working Distance</h3>\n<p>A wide range of working distances makes the DMi1 the perfect partner for your live cell laboratory. Use the S40 condenser for optimal resolution with slides, petri dishes, multi-well dishes, and most types of flasks: The S40 provides an extra 10 mm of free space by simply moving it up.</p>\n<p>When working with taller flasks, simply exchange the S40 for an S80 condenser with a few steps. There is no need to remove the whole illumination arm.</p>\n<h3>All-In-One Visualization And Data Storage</h3>\n<p>The DMi1 camera version is an all-in-one solution for image capturing and cell culture documentation. The Leica 12 megapixel Flexacam C1 camera transforms your microscope into a stand-alone digital imaging station with no need for a PC. Simply connect the camera to your microscope, preferred viewing device such as HDMI monitor, and network and start working! Save images directly on a USB stick or to your local network.</p>\n<p>The camera is mounted at the back of the stand. No additional trinocular tube is needed, and you will have a clear view and easy access to the working area.</p>\n<p>Connect any HDMI monitor to the camera and discuss your observations without need of a PC.</p>\n<h3>Solid Construction</h3>\n<p>The Leica DMi1 is extremely stable due to its low center of gravity. The use of high-grade materials &ndash; almost exclusively metal &ndash; also helps avoid vibrations and resulting image blur. A scratch-resistant stage, high quality optical components, and a wide range of accessories promote a long product life with low maintenance costs.</p>\n<h3>Modular Expansion</h3>\n<p>More flexibility and cost savings by using existing Leica components across platforms. The object guide (accessory) allows the use of different holding frames for flasks, dishes, and multi-well plates.</p>',
-
-      numresources: 6,
-
-      richdescription:
-        '<p>The DMi1 inverted microscope supports your specific work routine in your <span style="color: #e03e2d;">cell culture</span> lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.</p>\n<h4>Just Right &ndash; Smart Choice</h4>',
-
-      obsolete: 'false',
-
-      longdescription:
-        'Just Right – Smart Choice\n\nThe DMi1 inverted microscope supports your specific work routine in your cell culture lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.\n\nJust Right For Your Live Cell Lab – Smart Choice For Quick Checks\nThe microscope’s flexibility in accommodating an S40 condenser (40 – 50 mm working distance) or switching to an S80 condenser (80 mm working distance) is achieved by just a few hand moves. High-quality Leica objectives provide brilliant images.\nThe well-thought-out design and quality control elements enable you to work in comfort, even during long routines.\nSmart features make your workflow smooth and efficient, saving time and resources. High-quality imaging technology from Leica Microsystems provides precise results and reduces the risk of errors.\nThe microscope’s LED illumination means low energy costs and minimal downtime. No need to replace lamps often, or wait for the right color temperature to develop.\nThe DMi1 is the smart choice for excellent quality.\n\n10x to 20x to 40x Phase Contrast With One Hand Move\nThe DMi1 is easy to use for phase contrast observation.\nWith 40x PH1 objective from Leica Microsystems you can switch from 10x to 20x to 40x phase contrast by simply swiveling the nosepiece. There is no need to change the light ring in the slider – the PH1 light ring matches all three objectives!\n\nCost Saving, Color Safe LED Illumination\nAll DMi1 microscopes feature 5W LED illumination for constant color temperature through all stages of intensity.\nThe cool LED light provides a perfect climate for delicate live specimens. There are no distortions of the device due to heat, which provides unchanged focus.\nMoreover, LED lamps make great economic sense. LED technology and a twohour auto-off-function reduce energy costs. Up to 20 years life cycle (40 working hrs / week) per lamp under regular conditions mean less downtime and low maintenance costs.\n\nAuto Intensity\nA smart sensor integrated in the slider makes sure that the light intensity automatically adjusts between brightfield and phase contrast. This feature protects the eyes, saves time, and adds comfort for the user.\n\nQuick Change From 40 to 50 or 80 Millimeters Working Distance\nA wide range of working distances makes the DMi1 the perfect partner for your live cell laboratory. Use the S40 condenser for optimal resolution with slides, petri dishes, multi-well dishes, and most types of flasks: The S40 provides an extra 10 mm of free space by simply moving it up.\nWhen working with taller flasks, simply exchange the S40 for an S80 condenser with a few steps. There is no need to remove the whole illumination arm.\n\nAll-In-One Visualization And Data Storage\nThe DMi1 camera version is an all-in-one solution for image capturing and cell culture documentation. The Leica 12 megapixel Flexacam C1 camera transforms your microscope into a stand-alone digital imaging station with no need for a PC. Simply connect the camera to your microscope, preferred viewing device such as HDMI monitor, and network and start working!  Save images directly on a USB stick or to your local network.\nThe camera is mounted at the back of the stand. No additional trinocular tube is needed, and you will have a clear view and easy access to the working area.\n\nSolid Construction\nThe Leica DMi1 is extremely stable due to its low center of gravity. The use of high-grade materials – almost exclusively metal – also helps avoid vibrations and resulting image blur. A scratch-resistant stage, high quality optical components, and a wide range of accessories promote a long product life with low maintenance costs.\n\nModular Expansion\nMore flexibility and cost savings by using existing Leica components across platforms. The object guide (accessory) allows the use of different holding frames for flasks, dishes, and multi-well plates.',
-
-      metadescriptionlsig:
-        'Discover the Leica DMi1 inverted microscope for efficient cell culture work. Its smart features streamline workflows. Enhance your research today!',
-
-      metatitlelsig:
-        'DMi1 Inverted Microscope for Cell Culture | Danaher Life Sciences',
-
-      activeinsfdc: 'true',
-
-      rowid: '1744811961047226807',
-
-      titlelsig: 'DMi1 Inverted Microscope for Cell Culture',
-
-      specificationsjson: '{}',
-
-      ec_shortdesc:
-        'The DMi1 inverted microscope supports your specific work routine in your cell culture lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.\nJust Right – Smart Choice',
-
-      size: 36,
-
-      ec_name: 'DMi1 Inverted Microscope for Cell Culture',
-
-      detectedtitle:
-        'Just Right For Your Live Cell Lab – Smart Choice For Quick Checks',
-
-      urlsluglsig: 'dmi1-inverted-microscopes',
-
-      clickableuri:
-        'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      syssource: 'PIM Catalog Source',
-
-      model: 'DMi1',
-
-      orderingid: 1744811950965,
-
-      status: 'Current',
-
-      syssize: 36,
-
-      sysdate: 1744811961000,
-
-      numspecifications: 0,
-
-      categories: [
-        'microscopes',
-
-        'microscopes|light-microscopes',
-
-        'microscopes|light-microscopes|inverted-light-microscopes',
-      ],
-
-      primaryid: 'OMZXKNKRJJHVO53WMQYHU6TTOIXDKOBUHE2C4ZDFMZQXK3DU',
-
-      familyid: ['dmi1-inverted-microscopes'],
-
-      wordcount: 322,
-
-      sku: 'dmi1-inverted-microscopes',
-
-      numbundles: 2,
-
-      ec_category: ['microscopes|light-microscopes|inverted-light-microscopes'],
-
-      showonlsig: 'true',
-
-      source: 'PIM Catalog Source',
-
-      ec_description:
-        'Just Right – Smart Choice\n\nThe DMi1 inverted microscope supports your specific work routine in your cell culture lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.\n\nJust Right For Your Live Cell Lab – Smart Choice For Quick Checks\nThe microscope’s flexibility in accommodating an S40 condenser (40 – 50 mm working distance) or switching to an S80 condenser (80 mm working distance) is achieved by just a few hand moves. High-quality Leica objectives provide brilliant images.\nThe well-thought-out design and quality control elements enable you to work in comfort, even during long routines.\nSmart features make your workflow smooth and efficient, saving time and resources. High-quality imaging technology from Leica Microsystems provides precise results and reduces the risk of errors.\nThe microscope’s LED illumination means low energy costs and minimal downtime. No need to replace lamps often, or wait for the right color temperature to develop.\nThe DMi1 is the smart choice for excellent quality.\n\n10x to 20x to 40x Phase Contrast With One Hand Move\nThe DMi1 is easy to use for phase contrast observation.\nWith 40x PH1 objective from Leica Microsystems you can switch from 10x to 20x to 40x phase contrast by simply swiveling the nosepiece. There is no need to change the light ring in the slider – the PH1 light ring matches all three objectives!\n\nCost Saving, Color Safe LED Illumination\nAll DMi1 microscopes feature 5W LED illumination for constant color temperature through all stages of intensity.\nThe cool LED light provides a perfect climate for delicate live specimens. There are no distortions of the device due to heat, which provides unchanged focus.\nMoreover, LED lamps make great economic sense. LED technology and a twohour auto-off-function reduce energy costs. Up to 20 years life cycle (40 working hrs / week) per lamp under regular conditions mean less downtime and low maintenance costs.\n\nAuto Intensity\nA smart sensor integrated in the slider makes sure that the light intensity automatically adjusts between brightfield and phase contrast. This feature protects the eyes, saves time, and adds comfort for the user.\n\nQuick Change From 40 to 50 or 80 Millimeters Working Distance\nA wide range of working distances makes the DMi1 the perfect partner for your live cell laboratory. Use the S40 condenser for optimal resolution with slides, petri dishes, multi-well dishes, and most types of flasks: The S40 provides an extra 10 mm of free space by simply moving it up.\nWhen working with taller flasks, simply exchange the S40 for an S80 condenser with a few steps. There is no need to remove the whole illumination arm.\n\nAll-In-One Visualization And Data Storage\nThe DMi1 camera version is an all-in-one solution for image capturing and cell culture documentation. The Leica 12 megapixel Flexacam C1 camera transforms your microscope into a stand-alone digital imaging station with no need for a PC. Simply connect the camera to your microscope, preferred viewing device such as HDMI monitor, and network and start working!  Save images directly on a USB stick or to your local network.\nThe camera is mounted at the back of the stand. No additional trinocular tube is needed, and you will have a clear view and easy access to the working area.\n\nSolid Construction\nThe Leica DMi1 is extremely stable due to its low center of gravity. The use of high-grade materials – almost exclusively metal – also helps avoid vibrations and resulting image blur. A scratch-resistant stage, high quality optical components, and a wide range of accessories promote a long product life with low maintenance costs.\n\nModular Expansion\nMore flexibility and cost savings by using existing Leica components across platforms. The object guide (accessory) allows the use of different holding frames for flasks, dishes, and multi-well plates.',
-
-      collection: 'default',
-
-      detectedlanguage: 1,
-
-      indexeddate: 1744811961000,
-
-      defaultcategoryname: 'Inverted Light Microscopes',
-
-      filetype: 'txt',
-
-      categoryclass: ['Categories'],
-
-      descriptionlsig:
-        'The DMi1 inverted microscope supports your specific work routine in your cell culture lab. Its operation is so intuitive, its handling so comfortable that you can fully concentrate on your work. Choose the functions you need, and, if necessary, you can easily add a variety of accessories that are important for your work.\nJust Right – Smart Choice',
-
-      metatitle: 'Inverted Microscope for Cell Culture',
-
-      sysclickableuri:
-        'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      metadescription:
-        'The DMi1 inverted microscope supports your specific work routine in your cell culture lab. Intuitive operation and comfortable handling - fully concentrate on your work.',
-
-      sysfiletype: 'txt',
-
-      language: ['English'],
-
-      defaultcategory:
-        'microscopes/light-microscopes/inverted-light-microscopes',
-
-      sysrowid: '1744811961047226807',
-
-      uri: 'https://lifesciences.danaher.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      numproducts: 2,
-
-      clickableurilms:
-        'https://shop.leica-microsystems.com/us/en/products/family/dmi1-inverted-microscopes.html',
-
-      syscollection: 'default',
-
-      images: [
-        'https://danaherls.scene7.com/is/image/danaher/leica-dmi1-inverted-microscope-16-hero',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-hero',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-product-image1',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-objectives-product-image3',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-expansion-product-image7',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image9',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image12',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image31',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image35',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image37',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image39',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image41',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-image47',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-sliders-product-image-5',
-
-        'https://danaherls.scene7.com/is/image/danaher/leica-microsystems-dmi1-colorsafe-led-ilumination-product-image4-1',
-      ],
-
-      productid: 'dmi1-inverted-microscopes',
-    };
-    productsArray.push(productSample);
-  }
-  return productsArray;
-}
 
 /*
 :::::::::::::::::::::::::::::::
@@ -864,9 +554,9 @@ Function to get general store configurations
 */
 export async function getStoreConfigurations() {
   try {
-    const configurations = sessionStorage.getItem('generalConfigurations');
+    const configurations = localStorage.getItem('generalConfigurations');
     if (configurations) return await JSON.parse(configurations);
-    sessionStorage.removeItem('generalConfigurations');
+    localStorage.removeItem('generalConfigurations');
     const url = `${baseURL}/configurations`;
     const defaultHeaders = new Headers();
     defaultHeaders.append('Content-Type', 'Application/json');
@@ -874,7 +564,7 @@ export async function getStoreConfigurations() {
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === 'success') {
-      sessionStorage.setItem('generalConfigurations', JSON.stringify(response));
+      localStorage.setItem('generalConfigurations', JSON.stringify(response));
     }
     return response;
   } catch (error) {

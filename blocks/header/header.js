@@ -9,6 +9,7 @@ import {
   li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import {
   getAuthorization,
   isLoggedInUser,
@@ -123,15 +124,13 @@ function getCoveoApiPayload(searchValue, type) {
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
   const searchTerm = searchInput.value.trim();
   if (page === 'cart') {
-    if (page === 'cart') {
-      if (searchTerm) {
-        const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-        requestPayload.analytics.actionCause = actionCause
-          || searchInput.getAttribute('data-action-cause')
-          || 'searchFromLink';
-        const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-        return resp;
-      }
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      return resp;
     }
   }
 

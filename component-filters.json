@@ -37,8 +37,10 @@
       "order-submit",
       "order-status",
       "requested-quote",
+      "approved-quotes",
       "order-details",
       "quote-details",
+      "my-profile",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -85,6 +87,12 @@
     "id": "accordion-container",
     "components": [
       "accordion-item"
+    ]
+  },
+  {
+    "id": "approved-quotes",
+    "components": [
+      ""
     ]
   },
   {
@@ -183,6 +191,12 @@
     "id": "mini-teasers",
     "components": [
       "mini-teaser"
+    ]
+  },
+  {
+    "id": "my-profile",
+    "components": [
+      ""
     ]
   },
   {

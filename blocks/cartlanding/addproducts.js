@@ -2,6 +2,7 @@ import {
   div, button, input, span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import {
   submitSearchQuery,
 } from '../header/header.js';

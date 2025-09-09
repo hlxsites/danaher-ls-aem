@@ -3233,16 +3233,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   bottom: 0px;
 }
 
-.bottom-10 {
-  bottom: 2.5rem;
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
+.bottom-24 {
+  bottom: 6rem;
 }
 
 .left-0 {
   left: 0px;
-}
-
-.left-\[46\%\] {
-  left: 46%;
 }
 
 .right-0 {
@@ -3253,12 +3253,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   right: 2.5rem;
 }
 
-.top-0 {
-  top: 0px;
+.right-2 {
+  right: 0.5rem;
 }
 
-.top-1\/2 {
-  top: 50%;
+.top-0 {
+  top: 0px;
 }
 
 .top-16 {
@@ -3273,24 +3273,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 83px;
 }
 
-.bottom-97 {
-  bottom: 25rem;
-}
-
-.bottom-56 {
-  bottom: 14rem;
-}
-
-.bottom-40 {
-  bottom: 10rem;
-}
-
 .z-10 {
   z-index: 10;
 }
 
 .z-50 {
   z-index: 50;
+}
+
+.z-\[100\] {
+  z-index: 100;
 }
 
 .z-\[9999\] {
@@ -3489,6 +3481,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .max-h-48 {
   max-height: 12rem;
 }
@@ -3573,6 +3569,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 150px;
 }
 
+.w-\[18px\] {
+  width: 18px;
+}
+
 .w-\[3\.5rem\] {
   width: 3.5rem;
 }
@@ -3591,6 +3591,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .\!max-w-7xl {
@@ -3642,6 +3646,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .cursor-pointer {
@@ -4260,6 +4274,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -4310,11 +4329,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
-.text-violet-600 {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -4362,12 +4376,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.ring {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -4375,6 +4383,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .transition {
@@ -4583,6 +4597,13 @@ main .section.top-border {
 .peer:hover ~ .peer-hover\:bg-danaherpurple-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
 }
 
 @media (min-width: 640px) {

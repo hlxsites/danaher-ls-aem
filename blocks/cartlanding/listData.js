@@ -2,6 +2,7 @@ import {
   div, img, a, button, input, span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import { decorateModals } from '../../scripts/scripts.js';
 // Helper function to create a badge based on item.carrierFree
 function createCarrierFreeBadge(carrierFreeText) {
@@ -13,7 +14,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     div(
       {
         class:
-          'text-center justify-start text-violet-600 text-sm font-normal leading-tight',
+          'text-center justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
       },
       carrierFreeText,
     ),
@@ -116,7 +117,7 @@ export default function renderListCard(item) {
         href: item.url,
         title: item.title,
         class:
-          'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
+          'self-stretch justify-start text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
@@ -179,7 +180,7 @@ export default function renderListCard(item) {
       {
         title: item.title,
         class:
-          'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
+          'self-stretch justify-start text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
@@ -322,7 +323,7 @@ export default function renderListCard(item) {
           },
           span(
             {
-              class: 'text-violet-600 text-base font-normal leading-snug',
+              class: 'text-danaherpurple-500 text-base font-normal leading-snug',
             },
             'Quote',
           ),
@@ -337,7 +338,7 @@ export default function renderListCard(item) {
           },
           span(
             {
-              class: 'text-violet-600 text-base font-normal leading-snug',
+              class: 'text-danaherpurple-500 text-base font-normal leading-snug',
             },
             'Quote',
           ),

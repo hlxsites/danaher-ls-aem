@@ -51,7 +51,7 @@ function createSelectedFiltersBar() {
   });
 }
 
-function createLayout(block, viewType) {
+function createLayout(block) {
   block.classList.add('font-sans', 'py-8');
   block.innerHTML = '';
 
@@ -63,31 +63,30 @@ function createLayout(block, viewType) {
       id: 'resultSummaryCount',
     }),
   );
-  const resultsList = div({ class: 'flex flex-col gap-4', id: 'resultsList' });
+  const resultsGrid = div({ class: 'flex flex-col gap-4' });
   const paginationRow = div({ class: 'flex justify-end w-full', id: 'pagination' });
 
   querySummary.subscribe(() => {
     resultSummary.querySelector('#resultSummaryCount').innerHTML = `${querySummary.state.total} Results`;
   });
 
-  layoutDiv.append(resultSummary, resultsList);
+  layoutDiv.append(resultSummary, resultsGrid);
   block.append(layoutDiv, paginationRow);
 
-  return { layoutDiv, resultsList, paginationRow };
+  return { layoutDiv, resultsGrid, paginationRow };
 }
 
-async function displayProducts(resultsList, viewType) {
+async function displayProducts(resultsGrid, viewType) {
   const { results, isLoading } = pdpResultList.state;
   if (results?.length > 0 && !isLoading) {
     await renderResults({
       results,
       getCommerceBase,
       domHelpers,
-      resultsList,
+      resultsGrid,
       viewType,
     });
   }
-
 }
 
 function setupCoveoContext(sku, host) {
@@ -102,8 +101,7 @@ function setupCoveoContext(sku, host) {
   pdpEngine.executeFirstSearch();
 }
 
-function subscribeToEngineUpdates(resultsList) {
-
+function subscribeToEngineUpdates(resultsGrid) {
   pdpEngine.subscribe(() => {
     renderPagination();
     renderFacetBreadcurm();
@@ -114,7 +112,7 @@ function subscribeToEngineUpdates(resultsList) {
   pdpResultList.subscribe(() => {
     if (pdpResultList?.state?.results?.length > 0 && !pdpResultList?.state?.isLoading) {
       const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
-      displayProducts(resultsList, viewType);
+      displayProducts(resultsGrid, viewType);
     }
   })
 
@@ -122,16 +120,15 @@ function subscribeToEngineUpdates(resultsList) {
 
 // Main function
 export default async function decorate(block) {
-
   const sku = new URL(window.location.href).pathname.split('/').pop();
   const host = window.location.host === 'lifesciences.danaher.com'
     ? window.location.host
     : 'stage.lifesciences.danaher.com';
 
-  const response = await getProductResponse();
+  const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
   // Early exit if no valid product response
-  if (!(response?.length && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0)) {
+  if (!(response !== null && response !==undefined && response?.raw?.objecttype === 'Family' && response?.raw?.numproducts > 0)) {
     block.innerHTML = '<div class="text-center py-10 text-gray-500">No products found for this family.</div>';
     return;
   }
@@ -139,7 +136,7 @@ export default async function decorate(block) {
   const heading = createHeading();
   const filtersContainer = createFiltersContainer();
   const selectedFiltersBar = createSelectedFiltersBar();
-  const { layoutDiv, resultsList } = createLayout(block);
+  const { layoutDiv, resultsGrid } = createLayout(block);
 
   block.insertBefore(heading, layoutDiv);
   block.insertBefore(filtersContainer, layoutDiv);
@@ -184,6 +181,7 @@ export default async function decorate(block) {
 
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
+
   layoutDiv?.querySelector('#resultSummaryCount')?.insertAdjacentElement('afterend', viewModeGroup);
 
   // click action for list view
@@ -199,22 +197,18 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-white',
       );
     gridBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
-    gridBtn
-      .querySelector('.icon')
-      .classList.replace('text-white', 'text-gray-600');
-    gridBtn
-      .querySelector('.icon')
-      .classList.replace(
-        '[&_svg>use]:stroke-white',
-        '[&_svg>use]:stroke-gray-600',
-      );
-    if (resultsList?.classList.contains('flex-wrap')) {
-      resultsList?.classList.remove('flex-wrap');
-      resultsList?.classList.add('flex-col');
+    gridBtn.querySelector('.icon')?.classList.replace('text-white', 'text-gray-600');
+    gridBtn.querySelector('.icon')?.classList.replace(
+      '[&_svg>use]:stroke-white',
+      '[&_svg>use]:stroke-gray-600',
+    );
+    if (resultsGrid?.classList.contains('flex-wrap')) {
+      resultsGrid?.classList.remove('flex-wrap');
+      resultsGrid?.classList.add('flex-col');
     }
     localStorage.setItem('pdpListViewType', 'list');
-    
-    subscribeToEngineUpdates(resultsList);
+
+    subscribeToEngineUpdates(resultsGrid);
   });
 
   // click action for grid view
@@ -229,34 +223,29 @@ export default async function decorate(block) {
         '[&_svg>use]:stroke-gray-600',
         '[&_svg>use]:stroke-white',
       );
-    listBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
-    listBtn
-      .querySelector('.icon')
-      .classList.replace('text-white', 'text-gray-600');
-    listBtn
-      .querySelector('.icon')
-      .classList.replace(
-        '[&_svg>use]:stroke-white',
-        '[&_svg>use]:stroke-gray-600',
-      );
-    if (resultsList?.classList.contains('flex-col')) {
-      resultsList?.classList.remove('flex-col');
-      resultsList?.classList.add('flex-wrap');
+    listBtn?.classList?.replace('bg-danaherpurple-500', 'bg-white');
+    listBtn?.querySelector('.icon')?.classList.replace('text-white', 'text-gray-600');
+    listBtn?.querySelector('.icon')?.classList.replace(
+      '[&_svg>use]:stroke-white',
+      '[&_svg>use]:stroke-gray-600',
+    );
+    if (resultsGrid?.classList.contains('flex-col')) {
+      resultsGrid?.classList.remove('flex-col');
+      resultsGrid?.classList.add('flex-wrap');
     }
     localStorage.setItem('pdpListViewType', 'grid');
-    subscribeToEngineUpdates(resultsList);
+    subscribeToEngineUpdates(resultsGrid);
   });
 
   await loadScript('/../../scripts/image-component.js');
 
   createFiltersPanel();
-  setupCoveoContext(sku, host);
-    const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
-    if (resultsList?.classList.contains('flex-col') && viewType === 'grid') {
-      resultsList?.classList.remove('flex-col');
-      resultsList?.classList.add('flex-wrap');
-    }
-    
-    subscribeToEngineUpdates(resultsList);
+ setupCoveoContext(sku.replace('.html', ''), host);
+  const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
+  if (resultsGrid?.classList.contains('flex-col') && viewType === 'grid') {
+    resultsGrid?.classList.remove('flex-col');
+    resultsGrid?.classList.add('flex-wrap');
+  }
+  subscribeToEngineUpdates(resultsGrid);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }

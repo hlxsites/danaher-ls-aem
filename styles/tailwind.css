@@ -24,7 +24,6 @@
   main img {
     @apply max-w-full w-auto h-auto;
   }
-
   .dhls-container .text-xs {
     font-size: 12px !important;
   }
