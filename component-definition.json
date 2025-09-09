@@ -283,8 +283,6 @@
           }
         },
         {
-<<<<<<< HEAD
-=======
           "title": "Dashboard",
           "id": "dashboard",
           "plugins": {
@@ -300,7 +298,6 @@
           }
         },
         {
->>>>>>> em1-t477-buy-cart-utility
           "title": "Dual Carousel",
           "id": "dual-carousel",
           "plugins": {

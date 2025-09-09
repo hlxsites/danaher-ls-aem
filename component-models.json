@@ -807,8 +807,6 @@
             "value": "form-wrapper"
           }
         ]
-<<<<<<< HEAD
-=======
       }
     ]
   },
@@ -821,7 +819,6 @@
         "name": "dashboardTitle",
         "value": "",
         "label": "Page Title"
->>>>>>> em1-t477-buy-cart-utility
       }
     ]
   },
@@ -1094,31 +1091,8 @@
     "id": "login",
     "fields": [
       {
-        "component": "multiselect",
+        "component": "text",
         "valueType": "string",
-<<<<<<< HEAD
-        "name": "classes",
-        "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "3 Columns",
-            "value": "cols-3"
-          },
-          {
-            "name": "4 Columns",
-            "value": "cols-4"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "mini-teaser",
-    "fields": [
-      {
-        "component": "reference",
-=======
         "name": "loginHeading",
         "value": "",
         "label": "Heading"
@@ -1243,7 +1217,6 @@
     "fields": [
       {
         "component": "reference",
->>>>>>> em1-t477-buy-cart-utility
         "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
@@ -2319,18 +2292,6 @@
         "valueType": "string",
         "name": "articles",
         "label": "articles",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "talk-to-an-expert-text",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "talkToAnExpertText",
-        "label": "Talk to an Expert Text",
         "value": ""
       }
     ]

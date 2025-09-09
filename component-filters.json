@@ -201,8 +201,6 @@
     ]
   },
   {
-<<<<<<< HEAD
-=======
     "id": "order-details",
     "components": [
       ""
@@ -221,7 +219,6 @@
     ]
   },
   {
->>>>>>> em1-t477-buy-cart-utility
     "id": "pdp-page-tabs",
     "components": [
       "pdp-tabs-item"
