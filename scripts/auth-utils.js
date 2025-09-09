@@ -5,11 +5,27 @@ import {
   showPreLoader,
   createModal,
 } from './common-utils.js';
-import { setAuthenticationToken, siteID, env, deleteCookie } from './token-utils.js';
+import {
+  setAuthenticationToken,
+} from './token-utils.js';
 import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
-
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+let env;
+if (hostName.includes('local')) {
+  env = 'local';
+} else if (hostName.includes('dev')) {
+  env = 'dev';
+} else if (hostName.includes('stage')) {
+  env = 'stage';
+} else {
+  env = 'prod';
+}
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
 /*
 :::::::::::::::
  Login the user (Customer/Guest)

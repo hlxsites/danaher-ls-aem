@@ -128,7 +128,6 @@ export const userOrderDetails = async (orderId) => {
 export const requestedQuotesDetails = async (quoteId) => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-
     window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
@@ -160,7 +159,7 @@ export const requestedQuotesDetails = async (quoteId) => {
 export const approvedQuotesDetails = async (quoteId) => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-     window.location.href = '/us/en/e-buy/login';
+    window.location.href = '/us/en/e-buy/login';
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const token = authenticationToken.access_token;

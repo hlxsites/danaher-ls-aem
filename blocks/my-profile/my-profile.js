@@ -9,7 +9,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
   const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
-  if(basketDataFromSession?.data?.data?.buyer === undefined){
+  if (basketDataFromSession?.data?.data?.buyer === undefined) {
     window.location.href = '/us/en/e-buy/login';
   }
   const firstName = basketDataFromSession?.data?.data?.buyer?.firstName;

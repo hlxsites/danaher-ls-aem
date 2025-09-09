@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-cycle
 import { getCookie, setCookie } from './scripts.js';
 
-export const siteID = window.DanaherConfig?.siteID;
+const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
-export let env;
+let env;
 if (hostName.includes('local')) {
   env = 'local';
 } else if (hostName.includes('dev')) {
@@ -13,7 +13,7 @@ if (hostName.includes('local')) {
 } else {
   env = 'prod';
 }
-export function deleteCookie(name) {
+function deleteCookie(name) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 

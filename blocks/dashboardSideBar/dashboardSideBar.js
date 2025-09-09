@@ -1,5 +1,5 @@
 import {
-  div, p, span, a, hr, button
+  div, p, span, a, hr, button,
 } from '../../scripts/dom-builder.js';
 import {
   capitalizeFirstLetter,
@@ -68,16 +68,16 @@ export default async function dashboardSidebar() {
 
   userData = JSON.parse(authenticationToken.user_data);
   const logOut = button(
-        {
-          // href: '/us/en/e-buy/cart',
-          class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
-        },
-        'Logout',
-      );
-  logOut.addEventListener("click", ()=>{
+    {
+      // href: '/us/en/e-buy/cart',
+      class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
+    },
+    'Logout',
+  );
+  logOut.addEventListener('click', () => {
     userLogOut();
     window.location.href = '/us/en/e-buy/cart';
-  })
+  });
   const sidebar = div(
     {
       id: 'dashboardSidebar',
@@ -110,7 +110,7 @@ export default async function dashboardSidebar() {
           userData?.userData?.firstName,
         )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`,
       ),
-      logOut
+      logOut,
     ),
     div({
       class: 'w-full h-[2px]',
