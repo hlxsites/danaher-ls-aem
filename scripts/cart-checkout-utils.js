@@ -2923,7 +2923,7 @@ get price type if its net or gross
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
    */
-      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
+      if (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
@@ -2964,7 +2964,7 @@ get price type if its net or gross
                   {
                     'data-tab': 'shippingAddress',
                     'data-activeTab': 'shippingAddress',
-                    class: 'icon icon-edit w-[18px] cursor-pointer edit-address-icon',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
                   },
                 ),
               ),
@@ -3013,7 +3013,7 @@ get price type if its net or gross
  check if shipping address exists in basket
  ::::::::::::::::::
    */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
+      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
         const commonShipToAddress = div(
           {
             id: 'checkoutSummaryCommonShipAddress',
@@ -3049,7 +3049,7 @@ get price type if its net or gross
                   {
                     'data-tab': 'shippingAddress',
                     'data-activeTab': 'shippingAddress',
-                    class: 'icon icon-edit w-[18px] cursor-pointer  edit-address-icon',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
                   },
                 ),
               ),
