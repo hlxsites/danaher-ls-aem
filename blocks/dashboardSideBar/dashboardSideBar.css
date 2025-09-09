@@ -207,6 +207,10 @@
   font-weight: 500
 }
 
+.dashboardSideBar-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .dashboardSideBar-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }

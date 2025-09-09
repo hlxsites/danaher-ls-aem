@@ -473,9 +473,19 @@ const fileMappings = [
     wrapper: 'order-status-wrapper',
   },
   {
+    content: ['./blocks/my-profile/my-profile.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
+    output: './blocks/my-profile/my-profile.css',
+    wrapper: 'my-profile-wrapper',
+  },
+  {
     content: ['./blocks/requested-quote/requested-quote.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
     output: './blocks/requested-quote/requested-quote.css',
     wrapper: 'requested-quote-wrapper',
+  },
+  {
+    content: ['./blocks/approved-quotes/approved-quotes.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
+    output: './blocks/approved-quotes/approved-quotes.css',
+    wrapper: 'approved-quotes-wrapper',
   },
   {
     content: ['./blocks/order-details/order-details.js',

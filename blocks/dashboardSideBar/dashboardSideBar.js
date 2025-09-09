@@ -1,27 +1,38 @@
 import {
-  div, p, span, a,
+  div, p, span, a, hr, button,
 } from '../../scripts/dom-builder.js';
 import {
   capitalizeFirstLetter,
 } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { userLogOut } from '../../scripts/auth-utils.js';
 
 // eslint-disable-next-line
 export default async function dashboardSidebar() {
   document.querySelector('main').style = 'background: #f4f4f4';
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
-    { name: 'My Profile', itemClicked: 'My profile', icon: 'User' },
+    { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
     { name: 'My Address', itemClicked: 'My address', icon: 'Location-marker' },
     { name: 'Payment Methods', itemClicked: 'Payment methods', icon: 'Currency-dollar' },
-    { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
     { name: 'Approved Quotes', itemClicked: 'Approved quotes', icon: 'Document-duplicate' },
+    // { name: 'Invoices', icon: 'document-text' },
+    // { name: 'Communities', icon: 'Users' },
+    // { name: 'Personalized Catalog', icon: 'shopping-cart' },
+    // { name: 'Training', icon: 'Academic-cap' },
+    // { name: 'Kowledge Center', icon: 'Light-bulb' },
+    // { name: 'Manage Equipment', icon: 'Server' },
+    // { name: 'Report Product Complaint', icon: 'Emoji-sad' }
   ];
+  const divider = () => hr({
+    class: 'w-full border-gray-300',
+  });
   const sidePanelDiv = (name, itemClicked, icon) => {
     const url = name.replace(/\s+/g, '').toLowerCase();
+
     const innerDiv = div(
       {
         class:
@@ -46,6 +57,7 @@ export default async function dashboardSidebar() {
         ),
       ),
     );
+
     return innerDiv;
   };
 
@@ -53,8 +65,18 @@ export default async function dashboardSidebar() {
   if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
-  userData = JSON.parse(authenticationToken.user_data);
 
+  userData = JSON.parse(authenticationToken.user_data);
+  const logOut = button(
+    {
+      class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
+    },
+    'Logout',
+  );
+  logOut.addEventListener('click', () => {
+    userLogOut();
+    window.location.href = '/us/en/e-buy/cart';
+  });
   const sidebar = div(
     {
       id: 'dashboardSidebar',
@@ -87,12 +109,7 @@ export default async function dashboardSidebar() {
           userData?.userData?.firstName,
         )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`,
       ),
-      p(
-        {
-          class: 'text-sm  text-black font-medium leading-tight',
-        },
-        capitalizeFirstLetter(userData?.customerData?.companyName),
-      ),
+      logOut,
     ),
     div({
       class: 'w-full h-[2px]',
@@ -113,7 +130,10 @@ export default async function dashboardSidebar() {
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',
   });
   sidebar.append(listDiv);
+  const profileDiv = sidePanelDiv('My Profile', 'My profile', 'User');
   sidepanelList.map((item) => listDiv.append(sidePanelDiv(item.name, item.itemClicked, item.icon)));
+  listDiv.append(divider());
+  listDiv.append(profileDiv);
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
@@ -138,6 +158,7 @@ export default async function dashboardSidebar() {
         'border-l-[4px]',
         'border-danaherpurple-500',
       );
+
       iconSpan.classList.remove('[&_svg>use]:stroke-black');
       iconSpan.classList.add('[&_svg>use]:stroke-danaherpurple-500');
       childWithId.classList.add('text-danaherpurple-500');

@@ -669,9 +669,6 @@ function buildSearchBlock(headerBlock) {
       sortFlyoutMenus('Menu');
     });
   addEventToSearchInput(searchHtmlBlock);
-  // searchIcon.addEventListener('click', () => {
-  //   console.log('CLicked');
-  // });
 }
 
 function buildNavBlock(headerBlock) {

@@ -2,6 +2,7 @@ import {
   a, div, li, ul,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
+// eslint-disable-next-line import/no-cycle
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 import { includeProdEdsPaths, includeStageEdsPaths } from '../../scripts/delayed.js';
 

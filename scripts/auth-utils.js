@@ -8,6 +8,18 @@ import {
 import { setAuthenticationToken } from './token-utils.js';
 import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
 
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+let env;
+if (hostName.includes('local')) {
+  env = 'local';
+} else if (hostName.includes('dev')) {
+  env = 'dev';
+} else if (hostName.includes('stage')) {
+  env = 'stage';
+} else {
+  env = 'prod';
+}
 const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 /*
@@ -238,4 +250,22 @@ export function sessionPreLoader() {
     ),
   );
   return createModal(sessionPreLoaderContent, true, true);
+}
+/*
+:::::::::::::::
+ Logout the user (Customer/Guest)
+ :::::::::::::::::::::::::::
+*/
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+export function userLogOut() {
+  deleteCookie(`em_${siteID}_${env}_apiToken`);
+  deleteCookie(`em_${siteID}_${env}_refresh-token`);
+  deleteCookie(`em_${siteID}_${env}_user_data`);
+  deleteCookie(`em_${siteID}_${env}_user_type`);
+  deleteCookie(`em_${siteID}_${env}_authorized`);
+
+  sessionStorage.clear();
+  localStorage.clear();
 }
