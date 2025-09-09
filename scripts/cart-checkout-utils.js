@@ -595,7 +595,6 @@ export const setUseAddress = async (id, type, action = '') => {
           // eslint-disable-next-line max-len
           updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
         }
-        sessionStorage.removeItem('useAddress');
         sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
         return updatedUseObject;
       }
@@ -622,7 +621,6 @@ export const setUseAddress = async (id, type, action = '') => {
         // eslint-disable-next-line max-len
         updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
       }
-      sessionStorage.removeItem('useAddress');
       sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
     }
     const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
@@ -1107,7 +1105,7 @@ export async function getUseAddresses() {
         'useAddress',
         JSON.stringify(useAddressObjectData),
       );
-      return { status: 'success', data: useAddressObjectData };
+      return useAddressObjectData;
     }
     return { status: 'error', data: {} };
   }
@@ -2919,6 +2917,92 @@ get price type if its net or gross
 
     if (getUseAddressesResponse) {
       /*
+   ::::::::::::
+   check if shipping address exists in basket
+   ::::::::::::::::::
+     */
+      const getBasketShippingAddress = getCheckoutSummaryData?.data?.data?.commonShipToAddress;
+
+      // eslint-disable-next-line max-len
+      const getShippingAddress = getUseAddressesResponse?.data?.commonShipToAddress || getCheckoutSummaryData?.data?.included?.commonShipToAddress?.[getBasketShippingAddress];
+      if (getShippingAddress && (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
+        const commonShipToAddress = div(
+          {
+            id: 'checkoutSummaryCommonShipAddress',
+            class:
+              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
+          },
+          div(
+            {
+              class: ' flex flex-col pb-2',
+            },
+            h5(
+              {
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
+              },
+              'Shipping Address',
+            ),
+            div(
+              {
+                class: 'p-3 border border-danahergray-300',
+              },
+              div(
+                {
+                  class: 'flex w-full justify-between',
+                },
+                h5(
+                  {
+                    class: 'font-normal  text-xl font-semibold m-0 p-0',
+                  },
+                  getShippingAddress?.companyName2 ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  },
+                ),
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.addressLine1 ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.city ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                `${getShippingAddress
+                  ?.mainDivision ?? ''
+                }, ${getShippingAddress
+                  ?.countryCode ?? ''
+                }, ${getShippingAddress
+                  ?.postalCode ?? ''
+                }`,
+              ),
+            ),
+          ),
+        );
+        if (commonShipToAddress) {
+          decorateIcons(commonShipToAddress);
+          checkoutSummaryWrapper.insertAdjacentElement(
+            'beforebegin',
+            commonShipToAddress,
+          );
+          commonShipToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
+        }
+      }
+      /*
  ::::::::::::
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
@@ -3004,90 +3088,6 @@ get price type if its net or gross
             invoiceToAddress,
           );
           invoiceToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
-            changeStep(e);
-          });
-        }
-      }
-      /*
- ::::::::::::
- check if shipping address exists in basket
- ::::::::::::::::::
-   */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
-        const commonShipToAddress = div(
-          {
-            id: 'checkoutSummaryCommonShipAddress',
-            class:
-              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
-          },
-          div(
-            {
-              class: ' flex flex-col pb-2',
-            },
-            h5(
-              {
-                class: 'font-semibold p-0 mb-3 mt-0 text-base',
-              },
-              'Shipping Address',
-            ),
-            div(
-              {
-                class: 'p-3 border border-danahergray-300',
-              },
-              div(
-                {
-                  class: 'flex w-full justify-between',
-                },
-                h5(
-                  {
-                    class: 'font-normal  text-xl font-semibold m-0 p-0',
-                  },
-                  getUseAddressesResponse?.data?.commonShipToAddress
-                    ?.companyName2 ?? '',
-                ),
-                span(
-                  {
-                    'data-tab': 'shippingAddress',
-                    'data-activeTab': 'shippingAddress',
-                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
-                  },
-                ),
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine1 ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                `${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? ''
-                }`,
-              ),
-            ),
-          ),
-        );
-        if (commonShipToAddress) {
-          decorateIcons(commonShipToAddress);
-          checkoutSummaryWrapper.insertAdjacentElement(
-            'beforebegin',
-            commonShipToAddress,
-          );
-          commonShipToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
             changeStep(e);
           });
         }
