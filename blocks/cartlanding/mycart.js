@@ -52,7 +52,7 @@ export const mycart = async () => {
   }
   const basketDetail = await getBasketDetails();
   let totalProductQuantity;
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(localStorage.getItem('basketData'));
 
   if (basketData) {
     totalProductQuantity = basketData.totalProductQuantity;

@@ -69,6 +69,8 @@
       "register",
       "login",
       "dashboard",
+      "approved-quotes",
+      "my-profile",
       "cartlanding",
       "checkout",
       "order-submit",

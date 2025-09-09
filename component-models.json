@@ -469,37 +469,43 @@
     "id": "card-list",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
-        "name": "tagName",
-        "value": "topics",
-        "label": "Tag Category (e.g. topics, solutions)"
-      },
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "articleType",
-        "label": "Article Type",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
         "options": [
           {
-            "name": "Default (Articles)",
-            "value": ""
+            "name": "News",
+            "value": "news"
           },
           {
-            "name": "Application",
-            "value": "application"
+            "name": "Blog",
+            "value": "blog"
           },
           {
-            "name": "Info",
-            "value": "info"
+            "name": "We see a way",
+            "value": "wsaw"
           },
           {
             "name": "Library",
             "value": "library"
           },
           {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "Application",
+            "value": "application"
+          },
+          {
             "name": "New Lab",
             "value": "new-lab"
+          },
+          {
+            "name": "URL Filtered",
+            "value": "url-filtered"
           }
         ]
       },
@@ -516,13 +522,6 @@
         "name": "filters",
         "label": "Enable Filters",
         "value": true
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "sourceIndex",
-        "label": "Custom Index Path",
-        "value": "/us/en/article-index.json"
       }
     ]
   },
@@ -2291,53 +2290,9 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "url",
-        "label": "Current Article URL",
-        "value": ""
-      },
-      {
-        "component": "reference",
-        "valueType": "List",
         "name": "articles",
-        "label": "Filtered Articles",
-        "multi": true,
-        "fields": [
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "label": "Title",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "path",
-            "label": "Path",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "type",
-            "label": "Type",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "topics",
-            "label": "Topics",
-            "value": ""
-          },
-          {
-            "component": "date-time",
-            "valueType": "date-time",
-            "name": "publishDate",
-            "label": "Publish Date",
-            "value": ""
-          }
-        ]
+        "label": "articles",
+        "value": ""
       }
     ]
   },

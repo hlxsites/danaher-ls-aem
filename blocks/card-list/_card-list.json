@@ -21,23 +21,20 @@
       "id": "card-list",
       "fields": [
         {
-          "component": "text",
+          "component": "multiselect",
           "valueType": "string",
-          "name": "tagName",
-          "value": "topics",
-          "label": "Tag Category (e.g. topics, solutions)"
-        },
-        {
-          "component": "select",
-          "valueType": "string",
-          "name": "articleType",
-          "label": "Article Type",
+          "name": "classes",
+          "value": "",
+          "label": "Block Options",
           "options": [
-            { "name": "Default (Articles)", "value": "" },
-            { "name": "Application", "value": "application" },
-            { "name": "Info", "value": "info" },
+            { "name": "News", "value": "news" },
+            { "name": "Blog", "value": "blog" },
+            { "name": "We see a way", "value": "wsaw" },
             { "name": "Library", "value": "library" },
-            { "name": "New Lab", "value": "new-lab" }
+            { "name": "Info", "value": "info" },
+            { "name": "Application", "value": "application" },
+            { "name": "New Lab", "value": "new-lab" },
+            { "name": "URL Filtered", "value": "url-filtered" }
           ]
         },
         {
@@ -53,13 +50,6 @@
           "name": "filters",
           "label": "Enable Filters",
           "value": true
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "sourceIndex",
-          "label": "Custom Index Path",
-          "value": "/us/en/article-index.json"
         }
       ]
     }
@@ -67,12 +57,7 @@
   "filters": [
     {
       "id": "card-list",
-      "components": [
-        "articleCard",
-        "applicationCard",
-        "libraryCard",
-        "labCard"
-      ]
+      "components": [" "]
     }
   ]
 }

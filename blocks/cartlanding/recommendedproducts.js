@@ -1,5 +1,4 @@
-import { addItemToCart, recommendedProduct } from './myCartService.js';
-import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { recommendedProduct } from './myCartService.js';
 import {
   div,
   button,
@@ -9,6 +8,7 @@ import {
   imageHelper,
   decorateModals,
 } from '../../scripts/scripts.js';
+import { decorateBuyButton } from '../../scripts/delayed.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export const updateCartButton = (itemID) => {
@@ -136,7 +136,7 @@ export const recommendedProducts = () => {
       const addToCartButton = button(
         {
           class:
-            'btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0',
+            'btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0 add-to-cart-btn',
           sku: item.sku,
           productName: item.productName,
           minOrderQuantity: item.minOrderQuantity,
@@ -147,8 +147,7 @@ export const recommendedProducts = () => {
         },
         'Buy',
       );
-
-      addToCartButton.addEventListener('click', async (event) => {
+      /*      addToCartButton.addEventListener('click', async (event) => {
         showPreLoader();
         const itemId = event.target.attributes;
         const res = await addItemToCart(itemId, 'recommended-product');
@@ -159,15 +158,15 @@ export const recommendedProducts = () => {
           }
         }
       });
-
+*/
       const itemContainer = div(
         {
-          class: 'inline-flex flex-col self-stretch px-4 py-3 gap-3 ',
+          class: 'inline-flex flex-col self-stretch gap-3 ',
         },
         div(
           {
             class:
-              'relative self-stretch h-40 relative',
+              'relative self-stretch h-48 relative',
           },
           image,
         ),
@@ -178,14 +177,14 @@ export const recommendedProducts = () => {
           div(
             {
               class:
-                'description self-stretch justify-start text-black text-m font-normal break-words line-clamp-4 !h-20 py-4 leading-7',
+                'description px-3 self-stretch justify-start text-black text-m font-normal break-words line-clamp-4 !h-20 py-4 leading-7',
             },
             item.name,
           ),
         ),
         div(
           {
-            class: 'self-stretch h-48 bg-gray-50 flex flex-col justify-start items-end gap-6',
+            class: 'self-stretch h-48 px-3 bg-gray-50 flex flex-col justify-start items-end gap-6',
           },
           div(
             {
@@ -233,17 +232,23 @@ export const recommendedProducts = () => {
                 }, '1'),
               ),
               addToCartButton,
-              div({
-                class: '',
-              }, button({
-                class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
-              }, 'Quote')),
+              div(
+                {
+                  class: '',
+                },
+                button(
+                  {
+                    class: 'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                  },
+                  'Quote',
+                ),
+              ),
             ),
-          // addToCartButton,
           ),
         ),
       );
       decorateModals(itemContainer);
+      decorateBuyButton(itemContainer);
       card.append(itemContainer);
       carouselCards.append(card);
     });
@@ -251,20 +256,14 @@ export const recommendedProducts = () => {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-          stroke="${
-  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          stroke="${currentIndex > 0 ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-          stroke="${
-  currentIndex + cardsPerPage < productsCategories.length
-    ? '#7523FF'
-    : '#D1D5DB'
-}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          stroke="${currentIndex + cardsPerPage < productsCategories.length ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     `;
   }

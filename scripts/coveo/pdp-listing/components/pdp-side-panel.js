@@ -523,7 +523,7 @@ export function createFiltersPanel() {
 
   const viewBtn = createEl('button', {
     className:
-      'w-full py-2 bg-danaherpurple-500 rounded-full hover:bg-purple-700 text-white text-right text-base leading-[22px] font-normal font-twk',
+      'w-full py-2 bg-danaherpurple-500 rounded-full hover:bg-purple-700 text-white text-base leading-[22px] font-normal font-twk',
     events: {
       click() {
         panel.style.transform = 'translateX(100%)';

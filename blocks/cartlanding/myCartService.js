@@ -1,7 +1,10 @@
 import { div, hr } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
 import {
   baseURL,
+  removePreLoader,
   showNotification,
+  showPreLoader,
 } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import {
@@ -1060,16 +1063,13 @@ export async function updateCart(newItem) {
           });
 
           const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-          // cartListContainer.append(divider(300));
           cartListContainer.append(logoDivDisplay);
-          // cartListContainer.append(divider(200));
           itemToBeDisplayed[opcoBe].forEach((item) => {
             cartItemDisplayContainer.append(divider(200));
             cartItemDisplayContainer.append(cartItemsContainer(item));
           });
 
           cartListContainer.append(cartItemDisplayContainer);
-          // cartListContainer.append(divider(300));
           const dividerMain = hr({
             class: 'w-full border-black-400',
           });
@@ -1077,7 +1077,6 @@ export async function updateCart(newItem) {
           addProductListContainer.append(addProducts());
           addProductListContainer.append(dividerMain);
           cartItemContainer.append(cartListContainer);
-          // cartItemContainer.append(addProductListContainer);
           return cartItemContainer;
         }
         const cartListContainer = document.getElementById('cartListContainer');
@@ -1087,15 +1086,12 @@ export async function updateCart(newItem) {
         });
 
         const logoDivDisplay = logoDiv(itemToBeDisplayed, opcoBe, imgsrc);
-        // cartListContainer.append(divider(300));
         cartListContainer.append(logoDivDisplay);
-        // cartListContainer.append(divider(200));
         itemToBeDisplayed[opcoBe].forEach((item) => {
           cartItemDisplayContainer.append(divider(200));
           cartItemDisplayContainer.append(cartItemsContainer(item));
         });
         cartListContainer.append(cartItemDisplayContainer);
-        // cartListContainer.append(divider(300));
         return cartItemContainer;
       }
       return 'error';
@@ -1136,7 +1132,6 @@ export const addItemToBasket = async (item) => {
     }
     return 'error';
   } catch (error) {
-    // console.log('error', error);
     return 'error';
   }
 };
@@ -1144,7 +1139,7 @@ export const addItemToBasket = async (item) => {
 export const getProductQuantity = async (newItem) => {
   // const basketDetail = await getBasketDetails();
   let totalProductQuantity;
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(localStorage.getItem('basketData'));
 
   if (basketData) {
     totalProductQuantity = basketData.totalProductQuantity;
@@ -1214,7 +1209,6 @@ export const updateCartItems = async (addItem) => {
         return 'error';
       }
     } else {
-      // console.log('error');
       return 'error fetching product object';
     }
   } else {
@@ -1226,6 +1220,7 @@ export const updateCartItems = async (addItem) => {
 
 // Add item to cart
 export const addItemToCart = async (item) => {
+  showPreLoader();
   const basketDetails = await getBasketDetails();
   // if basket exists add product and update the cart
   if (basketDetails?.status === 'success') {
@@ -1234,16 +1229,18 @@ export const addItemToCart = async (item) => {
       const updateCartItem = await updateCartItems(addItem);
       await updateCheckoutSummary();
       showNotification('Item added to cart successfully.', 'success');
+      removePreLoader();
       return getProductQuantity(updateCartItem);
     }
+    showNotification('Error Processing Request.', 'error');
+    removePreLoader();
     return { status: 'error', data: addItem.data };
   }
   // if basket doesn't exists create basket and then add item
-
   const response = await createBasket();
   if (response) {
     if (response.status === 'success') {
-      sessionStorage.setItem(
+      localStorage.setItem(
         'basketData',
         JSON.stringify(response.data.data),
       );

@@ -1,4 +1,4 @@
-import { div, span } from '../../scripts/dom-builder.js';
+import { div, span, p } from '../../scripts/dom-builder.js';
 import { orderDetails, requestedQuotes } from './dashboardutils.js';
 
 const recentOrders = async () => {
@@ -84,10 +84,10 @@ const recentOrders = async () => {
         {
           class: 'flex-1 inline-flex flex-col justify-start items-start gap-1',
         },
-        div(
+        p(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           order,
         ),
@@ -98,14 +98,14 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-gray-500 text-xs font-normal leading-none',
             },
             'Order Date: ',
           ),
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             formattedDate,
           ),
@@ -117,14 +117,14 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-gray-500 text-xs font-normal leading-none',
             },
             'PO: ',
           ),
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             po,
           ),
@@ -247,10 +247,10 @@ const recentOrders = async () => {
         {
           class: 'flex-1 inline-flex flex-col justify-start items-start gap-1',
         },
-        div(
+        p(
           {
             class:
-              'self-stretch justify-start text-violet-600 text-sm font-normal leading-tight',
+              'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
           },
           quoteNo,
         ),
@@ -267,7 +267,7 @@ const recentOrders = async () => {
           span(
             {
               class:
-                "text-black text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+                'text-black text-xs font-normal leading-none',
             },
             formattedDate,
           ),
