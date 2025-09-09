@@ -807,6 +807,21 @@
             "value": "form-wrapper"
           }
         ]
+<<<<<<< HEAD
+=======
+      }
+    ]
+  },
+  {
+    "id": "dashboard",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dashboardTitle",
+        "value": "",
+        "label": "Page Title"
+>>>>>>> em1-t477-buy-cart-utility
       }
     ]
   },
@@ -1076,6 +1091,132 @@
     ]
   },
   {
+    "id": "login",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+<<<<<<< HEAD
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "3 Columns",
+            "value": "cols-3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mini-teaser",
+    "fields": [
+      {
+        "component": "reference",
+=======
+        "name": "loginHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "loginFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLabel",
+        "value": "",
+        "label": "Forgot Password Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLink",
+        "value": "",
+        "label": "Forgot Password Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountText",
+        "value": "",
+        "label": "New Account Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLabel",
+        "value": "",
+        "label": "New Account Button Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLink",
+        "value": "",
+        "label": "New Account Button Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
     "id": "mini-teasers",
     "fields": [
       {
@@ -1102,6 +1243,7 @@
     "fields": [
       {
         "component": "reference",
+>>>>>>> em1-t477-buy-cart-utility
         "name": "mini-teaser_image",
         "label": "Image",
         "multi": false
@@ -1784,6 +1926,102 @@
     ]
   },
   {
+    "id": "register",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormFirstNameLabel",
+        "value": "",
+        "label": "First Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormLastNameLabel",
+        "value": "",
+        "label": "Last Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormCompanyNameLabel",
+        "value": "",
+        "label": "Company Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormConfirmPasswordLabel",
+        "value": "",
+        "label": "Confirm Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "registerFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
     "id": "related-articles",
     "fields": [
       {
@@ -2081,6 +2319,18 @@
         "valueType": "string",
         "name": "articles",
         "label": "articles",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "talk-to-an-expert-text",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "talkToAnExpertText",
+        "label": "Talk to an Expert Text",
         "value": ""
       }
     ]

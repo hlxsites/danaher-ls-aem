@@ -144,6 +144,10 @@
   margin-top: 0.75rem
 }
 
+.pdp-products-wrapper :is(.mt-auto) {
+  margin-top: auto
+}
+
 .pdp-products-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -157,6 +161,10 @@
 
 .pdp-products-wrapper :is(.inline-block) {
   display: inline-block
+}
+
+.pdp-products-wrapper :is(.inline) {
+  display: inline
 }
 
 .pdp-products-wrapper :is(.flex) {
@@ -906,6 +914,11 @@
 .pdp-products-wrapper :is(.hover\:bg-purple-700:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(126 34 206 / var(--tw-bg-opacity))
+}
+
+.pdp-products-wrapper :is(.hover\:bg-purple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 64 152 / var(--tw-bg-opacity))
 }
 
 .pdp-products-wrapper :is(.hover\:text-danaherpurple-800:hover) {
