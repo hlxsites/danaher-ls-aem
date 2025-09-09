@@ -1,5 +1,5 @@
 import {
-  div, p, span, a, hr,
+  div, p, span, a, hr, button
 } from '../../scripts/dom-builder.js';
 import {
   capitalizeFirstLetter,
@@ -69,7 +69,17 @@ export default async function dashboardSidebar() {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   userData = JSON.parse(authenticationToken.user_data);
-
+  const logOut = button(
+        {
+          // href: '/us/en/e-buy/cart',
+          class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
+        },
+        'Logout',
+      );
+  logOut.addEventListener("click", ()=>{
+    console.log("log out");
+    window.location.href = '/us/en/e-buy/cart';
+  })
   const sidebar = div(
     {
       id: 'dashboardSidebar',
@@ -102,12 +112,7 @@ export default async function dashboardSidebar() {
           userData?.userData?.firstName,
         )} ${capitalizeFirstLetter(userData?.userData?.lastName)}`,
       ),
-      a(
-        {
-          class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
-        },
-        'Logout',
-      ),
+      logOut
     ),
     div({
       class: 'w-full h-[2px]',
@@ -147,7 +152,6 @@ export default async function dashboardSidebar() {
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  console.log('targetedPage', targetedPage);
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
   } else if (targetedPage === 'Requestquotedetails') {
@@ -155,15 +159,12 @@ export default async function dashboardSidebar() {
   }
   //   listDiv.addEventListener('click', (event) => {
   const allItemsInDiv = listDiv.querySelectorAll('.sidePanel-content');
-  console.log('allItemsInDiv', allItemsInDiv);
   allItemsInDiv.forEach((itemsInDiv) => {
     const childWithId = itemsInDiv.querySelector(`#${targetedPage.replace(/\s+/g, '')}`);
-    console.log('childWithId', childWithId);
     if (childWithId) {
       const borderOfDiv = childWithId.parentElement.parentElement;
       const itemClicked = childWithId.parentElement;
       const iconSpan = itemClicked.querySelector('.icon');
-      console.log('itemClicked', itemClicked);
       borderOfDiv.classList.remove(
         'border-l',
         'border-gray-300',
