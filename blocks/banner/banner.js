@@ -35,14 +35,14 @@ export default function decorate(block) {
   }
 
   // Remove vertical padding from wrappers and reduce top margin on banner
-  content.parentNode.classList.remove('px-6', 'py-4', 'py-2', 'py-0');
-  content.parentNode.style.padding = '0';
-  content.parentNode.style.marginTop = '0'; // Make sure no parent margin
-  content.classList.add('relative', 'h-auto', 'w-full', 'flex', 'justify-start', 'items-start');
-  content.classList.remove('py-4', 'py-2', 'py-0');
-  content.style.minHeight = '0';
-  content.style.padding = '0';
-  content.style.marginTop = '0';
+  // content.parentNode.classList.remove('px-6', 'py-4', 'py-2', 'py-0');
+  // content.parentNode.style.padding = '0';
+  // content.parentNode.style.marginTop = '0'; // Make sure no parent margin
+  // content.classList.add('relative', 'h-auto', 'w-full', 'flex', 'justify-start', 'items-start');
+  // content.classList.remove('py-4', 'py-2', 'py-0');
+  // content.style.minHeight = '0';
+  // content.style.padding = '0';
+  // content.style.marginTop = '0';
 
   // Tighter inner content, left align, remove vertical spacing
   const innerContent = content?.querySelector('div');

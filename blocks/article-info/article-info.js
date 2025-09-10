@@ -5,7 +5,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   // block.innerHTML = '';
-  const authorName = getMetadata('authorname') || block?.firstElementChild?.textContent || '';
+  const authorName = getMetadata('authorname');
   const authorJobTitle = getMetadata('authortitle') || block?.firstElementChild?.nextElementSibling?.textContent || '';
   const authorImage = getMetadata('authorimage') || block.querySelector('img')?.src || '';
   const articleOpco = block?.firstElementChild?.nextElementSibling?.nextElementSibling?.nextElementSibling?.textContent || '';

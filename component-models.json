@@ -264,7 +264,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "authorName",
+        "name": "authorname",
         "label": "Author Name",
         "value": ""
       },

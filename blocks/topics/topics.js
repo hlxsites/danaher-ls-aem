@@ -1,12 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
-import {
-  ul, a, div, span,
-} from '../../scripts/dom-builder.js';
+import { ul, a, div, span } from '../../scripts/dom-builder.js';
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from '../card-list/articleCard.js';
-import createLabCard from '../card-list/newLabCard.js';
-import createLibraryCard from '../card-list/libraryCard.js';
-import createApplicationCard from '../card-list/applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 let tagName = '';
@@ -15,18 +10,22 @@ switch (getMetadata('template')) {
     tagName = 'topics';
 }
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
-const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
-
-const createTopicUrl = (currentUrl, keyword = '') => {
-  if (currentUrl.indexOf(tagName) > -1) {
-    return currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
+const getSelectionFromUrl = () => {
+  const parts = window.location.pathname.replace('.html', '').split('/');
+  const tagIndex = parts.findIndex((part) => part === tagName);
+  if (tagIndex > -1 && parts.length > tagIndex + 1) {
+    return toClassName(parts[tagIndex + 1]);
   }
-  return `${currentUrl.replace('.html', '')}/${tagName}/${toClassName(keyword).toLowerCase()}`;
+  return '';
 };
 
+const getPageFromUrl = () =>
+  toClassName(new URLSearchParams(window.location.search).get('page')) || '';
+
 const patchBannerHeading = () => {
-  document.querySelector('body .banner h1').textContent = getMetadata('heading');
+  const heading = getMetadata('heading');
+  const bannerH1 = document.querySelector('body .banner h1');
+  if (bannerH1 && heading) bannerH1.textContent = heading;
 };
 
 const createPaginationLink = (page, label, current = false) => {
@@ -86,90 +85,48 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-export function createFilters(articles, viewAll = false) {
-  // collect tag filters
-  const allKeywords = articles.map((item) => {
-    // Check if item[tagName] exists
-    if (item[tagName]) {
-      return item[tagName].replace(/,\s*/g, ',').split(',');
-    }
-    return [];
-  });
-  const keywords = new Set([].concat(...allKeywords));
-  keywords.delete('');
-  keywords.delete('Blog'); // filter out generic blog tag
-  keywords.delete('News'); // filter out generic news tag
+export function createFilters(articles, activeTag = '') {
+  // Reduce gap between "Blog topic:" and tag value
+  const container = div({ class: 'flex items-center gap-2 mb-24' });
 
-  // render tag cloud
+  if (activeTag) {
+    container.append(
+      span({ class: 'font-medium text-danahergray-700' }, 'Blog topic:'),
+      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
+    );
+  }
+
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('page');
   if (window.location.pathname.indexOf(tagName) > -1) {
-    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf(`/${tagName}/`));
+    newUrl.pathname = window.location.pathname.substring(
+      0,
+      window.location.pathname.indexOf(`/${tagName}/`)
+    );
   }
-  const tags = viewAll ? div(
-    { class: 'flex flex-wrap gap-2 gap-y-0 mb-4' },
+
+  container.append(
     a(
       {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+        class: 'text-danaherpurple-500 font-semibold',
         href: makePublicUrl(newUrl.toString()),
       },
-      'View All',
+      'View All Topics →',
     ),
-  ) : div({ class: 'flex flex-wrap gap-2 gap-y-0 mb-4' });
+  );
 
-  [...keywords].sort().forEach((keyword) => {
-    let currentUrl;
-    if (viewAll) {
-      currentUrl = window.location.pathname;
-    } else {
-      currentUrl = window.location.pathname.split('/');
-      currentUrl.pop();
-      currentUrl = currentUrl.join('/');
-    }
-    newUrl.pathname = createTopicUrl(currentUrl, keyword);
-    const tagAnchor = a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
-        href: makePublicUrl(newUrl.toString()),
-      },
-      keyword,
-    );
-    tags.append(tagAnchor);
-  });
-  [...tags.children].forEach((tag) => {
-    const url = new URL(tag.href);
-    if (url.pathname === window.location.pathname) {
-      tag.classList.add('bg-danaherpurple-500', 'text-white');
-      tag.setAttribute('aria-current', 'tag');
-    } else {
-      tag.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
-    }
-  });
-
-  // patch banner heading with selected tag only on topics pages
   if (getMetadata('heading') && window.location.pathname.indexOf(tagName) > -1) {
     patchBannerHeading();
   }
 
-  return tags;
+  return container;
 }
 
 let indexTemplate = getMetadata('template');
-if (window.location.href.includes('new-lab')) {
-  indexTemplate = 'new-lab';
-}
 
 export default async function decorate(block) {
   let indexType = '';
   switch (indexTemplate) {
-    case 'wsaw':
-      indexType = 'wsaw';
-      break;
-    case 'new-lab':
-      indexType = 'promotions';
-      break;
     default:
       indexType = 'article';
   }
@@ -178,9 +135,7 @@ export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
-  // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
-  // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
@@ -190,56 +145,43 @@ export default async function decorate(block) {
     })
     .all();
 
+  // Always extract tag from URL
+  const activeTagFilter = getSelectionFromUrl();
+
   let filteredArticles = articles;
-  const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
-    filteredArticles = articles.filter(
-      (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
-    );
+    filteredArticles = articles.filter((item) => {
+      const tags = (item[tagName] || '')
+        .split(',')
+        .map((t) => toClassName(t.trim()).toLowerCase());
+      return tags.includes(activeTagFilter);
+    });
   }
-  // if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
-  // render cards application style
-  if (articleType === 'application' || articleType === 'info') {
+
+  if (articleType === 'library') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    const cardList = ul({
-      class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-    });
-    filteredArticles.forEach((article) => {
-      cardList.appendChild(createApplicationCard(article));
-    });
-    block.append(cardList);
-  // render cards article style
   } else {
-    if (articleType === 'library') {
-      filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-    } else {
-      filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
-    }
-
-    let page = parseInt(getPageFromUrl(), 10);
-    page = Number.isNaN(page) ? 1 : page;
-    const limitPerPage = 18;
-    const start = (page - 1) * limitPerPage;
-    const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
-
-    const cardList = ul({
-      class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-    });
-    articlesToDisplay.forEach((article, index) => {
-      if (articleType === 'library') {
-        cardList.appendChild(createLibraryCard(article, index === 0));
-      } if (articleType === 'new-lab') {
-        cardList.appendChild(createLabCard(article, index === 0));
-      } else if (articleType !== 'library') {
-        cardList.appendChild(createArticleCard(article, index === 0));
-      }
-    });
-
-    // render pagination and filters
-    const filterTags = createFilters(articles, true);
-    const paginationElements = createPagination(filteredArticles, page, limitPerPage);
-    block.append(filterTags, cardList, paginationElements);
+    filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
   }
+
+  let page = parseInt(getPageFromUrl(), 10);
+  page = Number.isNaN(page) ? 1 : page;
+  const limitPerPage = 18;
+  const start = (page - 1) * limitPerPage;
+  const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+
+  const cardList = ul({
+    class:
+      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+  });
+  articlesToDisplay.forEach((article, index) => {
+    if (articleType !== 'library') {
+      cardList.appendChild(createArticleCard(article, index === 0));
+    }
+  });
+
+  // Always show topic label and "View All Topics"
+  const filterTags = createFilters(articles, activeTagFilter);
+  const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+  block.append(filterTags, cardList, paginationElements);
 }
