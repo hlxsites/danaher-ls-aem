@@ -64,6 +64,10 @@
   height: 2px
 }
 
+.my-profile-wrapper :is(.h-\[831px\]) {
+  height: 831px
+}
+
 .my-profile-wrapper :is(.h-\[836px\]) {
   height: 836px
 }

@@ -76,6 +76,10 @@
   height: 500px
 }
 
+.requested-quote-wrapper :is(.h-\[831px\]) {
+  height: 831px
+}
+
 .requested-quote-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
