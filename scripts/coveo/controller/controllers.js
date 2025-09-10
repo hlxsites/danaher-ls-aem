@@ -28,7 +28,7 @@ const resourceContext = loadContextActions(resourceEngine);
 
 resourceEngine.dispatch(
   resourceContext.setContext({
-    familyid: sku,
+    familyid: sku.replace('.html', ''),
     host,
   }),
 );

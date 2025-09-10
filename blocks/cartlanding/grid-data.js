@@ -8,6 +8,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
 import { decorateModals } from '../../scripts/scripts.js';
 
 // Helper function to create a badge based on item.carrierFree
@@ -106,7 +107,7 @@ export default function renderGridCard(item) {
           div(
             { class: 'flex justify-between items-center w-full' },
             div(
-              { class: 'text-black text-base font-extralight leading-snug' },
+              { class: 'text-black text-base leading-snug' },
               'Unit of Measure:',
             ),
             div(
@@ -117,7 +118,7 @@ export default function renderGridCard(item) {
           div(
             { class: 'flex justify-between items-center w-full' },
             div(
-              { class: 'text-black text-base font-extralight leading-snug' },
+              { class: 'text-black text-base leading-snug' },
               'Min. Order Qty:',
             ),
             div(

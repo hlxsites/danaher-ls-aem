@@ -10,9 +10,9 @@ export default async function decorate(block) {
 
   if (
     authenticationToken?.status === 'error'
-    || authenticationToken.user_type === 'guest' || !sessionStorage.getItem('productDetailObject')
+    || authenticationToken.user_type === 'guest' || !localStorage.getItem('productDetailObject')
   ) {
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig?.cartPageUrl;
     return false;
   }
   block.innerHtml = '';

@@ -257,6 +257,11 @@
   width: 100%
 }
 
+.header-wrapper :is(.w-min) {
+  width: -moz-min-content;
+  width: min-content
+}
+
 .header-wrapper :is(.max-w-7xl) {
   max-width: 80rem
 }
@@ -314,6 +319,10 @@
   flex-direction: row
 }
 
+.header-wrapper :is(.flex-row-reverse) {
+  flex-direction: row-reverse
+}
+
 .header-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -344,6 +353,14 @@
 
 .header-wrapper :is(.gap-5) {
   gap: 1.25rem
+}
+
+.header-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.header-wrapper :is(.gap-\[5px\]) {
+  gap: 5px
 }
 
 .header-wrapper :is(.gap-x-1) {

@@ -6,6 +6,23 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
     div, img, h3, p, a, span, input, button,
   } = domHelpers;
 
+  const showCTA = result?.raw?.skushowdetail === undefined || String(result?.raw?.skushowdetail).trim().toLowerCase() === 'true';
+  const viewDetailsButton = div(
+    { class: `self-stretch p-3 flex justify-start items-center ${showCTA ? '' : 'hidden'}` },
+    a(
+      {
+        href: result.clickUri,
+        target: result.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
+        class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
+      },
+      'View Details',
+      span({
+        class:
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
+      }),
+    ),
+  );
+  decorateIcons(viewDetailsButton);
   /**
    * Function to render a grid card
    */
@@ -56,27 +73,10 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
     contentWrapper.append(titleElement);
 
-    const viewDetailsButton = div(
-      { class: 'self-stretch p-3 flex justify-start items-center' },
-      a(
-        {
-
-          href: item.clickUri,
-          target: item.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
-          class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
-        },
-        'View Details',
-        span({
-          class:
-            'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-        }),
-      ),
-    );
-    decorateIcons(viewDetailsButton);
     card.append(
       imageElement,
       contentWrapper,
-      viewDetailsButton,
+      showCTA ? viewDetailsButton : '',
     );
     return card;
   }
@@ -118,23 +118,6 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
   let ProductCard = '';
   if (viewType === 'list') {
-    const viewDetailsButton = div(
-      { class: 'self-stretch p-3 flex justify-start items-center' },
-      a(
-        {
-
-          href: result.clickUri,
-          target: result.clickUri.includes(window.DanaherConfig.host) ? '_self' : '_blank',
-          class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
-        },
-        'View Details',
-        span({
-          class:
-            'icon icon-arrow-right !size-5 pl-1.5 fill-current group-hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500',
-        }),
-      ),
-    );
-    decorateIcons(viewDetailsButton);
     ProductCard = div(
       { class: 'flex flex-row bg-white border outline-gray-300 gap-7 flex-wrap' },
 
@@ -232,13 +215,13 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 }
 
 export async function renderResults({
-  results, getCommerceBase, domHelpers, resultsList, viewType,
+  results, getCommerceBase, domHelpers, resultsGrid, viewType,
 }) {
   const { div } = domHelpers;
-  resultsList.innerHTML = '';
+  resultsGrid.innerHTML = '';
 
   if (!results.length) {
-    resultsList.append(
+    resultsGrid.append(
       div({ class: 'text-center text-gray-400 py-11' }, 'No products found'),
     );
     return;
@@ -249,9 +232,8 @@ export async function renderResults({
   );
 
   const frag = document.createDocumentFragment();
-
   tiles.forEach((tile) => frag.append(tile));
 
-  resultsList.innerHTML = '';
-  resultsList.append(frag);
+  resultsGrid.innerHTML = '';
+  resultsGrid.append(frag);
 }

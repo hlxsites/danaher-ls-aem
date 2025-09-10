@@ -95,12 +95,12 @@
   inset: 0px
 }
 
-.cartlanding-wrapper :is(.bottom-10) {
-  bottom: 2.5rem
-}
-
 .cartlanding-wrapper :is(.bottom-2) {
   bottom: 0.5rem
+}
+
+.cartlanding-wrapper :is(.bottom-24) {
+  bottom: 6rem
 }
 
 .cartlanding-wrapper :is(.left-0) {
@@ -109,10 +109,6 @@
 
 .cartlanding-wrapper :is(.left-2) {
   left: 0.5rem
-}
-
-.cartlanding-wrapper :is(.left-\[46\%\]) {
-  left: 46%
 }
 
 .cartlanding-wrapper :is(.left-\[5px\]) {
@@ -131,12 +127,12 @@
   right: 2.5rem
 }
 
-.cartlanding-wrapper :is(.top-0) {
-  top: 0px
+.cartlanding-wrapper :is(.right-2) {
+  right: 0.5rem
 }
 
-.cartlanding-wrapper :is(.top-1\/2) {
-  top: 50%
+.cartlanding-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .cartlanding-wrapper :is(.top-6) {
@@ -145,6 +141,14 @@
 
 .cartlanding-wrapper :is(.top-\[5px\]) {
   top: 5px
+}
+
+.cartlanding-wrapper :is(.left-\[46\%\]) {
+  left: 46%
+}
+
+.cartlanding-wrapper :is(.top-1\/2) {
+  top: 50%
 }
 
 .cartlanding-wrapper :is(.z-0) {
@@ -157,6 +161,10 @@
 
 .cartlanding-wrapper :is(.z-50) {
   z-index: 50
+}
+
+.cartlanding-wrapper :is(.z-\[100\]) {
+  z-index: 100
 }
 
 .cartlanding-wrapper :is(.z-\[9999\]) {
@@ -249,15 +257,12 @@
   -webkit-line-clamp: 4
 }
 
-.cartlanding-wrapper :is(.line-clamp-5) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5
-}
-
 .cartlanding-wrapper :is(.block) {
   display: block
+}
+
+.cartlanding-wrapper :is(.inline) {
+  display: inline
 }
 
 .cartlanding-wrapper :is(.flex) {
@@ -302,10 +307,6 @@
 
 .cartlanding-wrapper :is(.h-16) {
   height: 4rem
-}
-
-.cartlanding-wrapper :is(.h-24) {
-  height: 6rem
 }
 
 .cartlanding-wrapper :is(.h-28) {
@@ -368,16 +369,16 @@
   height: 60px
 }
 
-.cartlanding-wrapper :is(.h-\[70px\]) {
-  height: 70px
-}
-
 .cartlanding-wrapper :is(.h-auto) {
   height: auto
 }
 
 .cartlanding-wrapper :is(.h-px) {
   height: 1px
+}
+
+.cartlanding-wrapper :is(.h-screen) {
+  height: 100vh
 }
 
 .cartlanding-wrapper :is(.max-h-48) {
@@ -484,6 +485,10 @@
   width: 150px
 }
 
+.cartlanding-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .cartlanding-wrapper :is(.w-\[200px\]) {
   width: 200px
 }
@@ -498,10 +503,6 @@
 
 .cartlanding-wrapper :is(.w-\[300px\]) {
   width: 300px
-}
-
-.cartlanding-wrapper :is(.w-\[331px\]) {
-  width: 331px
 }
 
 .cartlanding-wrapper :is(.w-\[40rem\]) {
@@ -522,6 +523,14 @@
 
 .cartlanding-wrapper :is(.w-full) {
   width: 100%
+}
+
+.cartlanding-wrapper :is(.w-screen) {
+  width: 100vw
+}
+
+.cartlanding-wrapper :is(.min-w-\[100\%\]) {
+  min-width: 100%
 }
 
 .cartlanding-wrapper :is(.max-w-2xl) {
@@ -546,6 +555,10 @@
 
 .cartlanding-wrapper :is(.max-w-md) {
   max-width: 28rem
+}
+
+.cartlanding-wrapper :is(.max-w-xl) {
+  max-width: 36rem
 }
 
 .cartlanding-wrapper :is(.flex-1) {
@@ -575,6 +588,16 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.cartlanding-wrapper :is(.animate-spin) {
+  animation: spin 1s linear infinite
+}
+
 .cartlanding-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -597,10 +620,6 @@
 
 .cartlanding-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
-}
-
-.cartlanding-wrapper :is(.content-start) {
-  align-content: flex-start
 }
 
 .cartlanding-wrapper :is(.items-start) {
@@ -629,6 +648,10 @@
 
 .cartlanding-wrapper :is(.justify-between) {
   justify-content: space-between
+}
+
+.cartlanding-wrapper :is(.gap-0) {
+  gap: 0px
 }
 
 .cartlanding-wrapper :is(.gap-1) {
@@ -736,10 +759,6 @@
 
 .cartlanding-wrapper :is(.rounded-\[20px\]) {
   border-radius: 20px
-}
-
-.cartlanding-wrapper :is(.rounded-\[48px\]) {
-  border-radius: 48px
 }
 
 .cartlanding-wrapper :is(.rounded-full) {
@@ -887,10 +906,6 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.cartlanding-wrapper :is(.bg-opacity-10) {
-  --tw-bg-opacity: 0.1
-}
-
 .cartlanding-wrapper :is(.bg-opacity-50) {
   --tw-bg-opacity: 0.5
 }
@@ -943,11 +958,6 @@
 
 .cartlanding-wrapper :is(.p-\[0px\]) {
   padding: 0px
-}
-
-.cartlanding-wrapper :is(.\!px-3) {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important
 }
 
 .cartlanding-wrapper :is(.px-0) {
@@ -1023,10 +1033,6 @@
 .cartlanding-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
-}
-
-.cartlanding-wrapper :is(.\!pb-3) {
-  padding-bottom: 0.75rem !important
 }
 
 .cartlanding-wrapper :is(.pb-2) {
@@ -1206,6 +1212,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.cartlanding-wrapper :is(.text-gray-200) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity))
+}
+
 .cartlanding-wrapper :is(.text-gray-400) {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity))
@@ -1234,11 +1245,6 @@
 .cartlanding-wrapper :is(.text-red-500) {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity))
-}
-
-.cartlanding-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .cartlanding-wrapper :is(.text-white) {
@@ -1327,6 +1333,20 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
+.cartlanding-wrapper :is(.backdrop-blur-sm) {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
+}
+
+.cartlanding-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
 .cartlanding-wrapper :is(.transition-transform) {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1335,6 +1355,10 @@
 
 .cartlanding-wrapper :is(.duration-1000) {
   transition-duration: 1000ms
+}
+
+.cartlanding-wrapper :is(.duration-500) {
+  transition-duration: 500ms
 }
 
 .cartlanding-wrapper :is(.ease-in-out) {
@@ -1355,6 +1379,11 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
+.cartlanding-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
 .cartlanding-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
@@ -1363,6 +1392,12 @@
 .cartlanding-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.cartlanding-wrapper :is(.hover\:shadow-md:hover) {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .cartlanding-wrapper :is(.focus\:outline-none:focus) {
@@ -1387,6 +1422,13 @@
 .cartlanding-wrapper :is(.peer:hover ~ .peer-hover\:bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+@media (prefers-color-scheme: dark) {
+  .cartlanding-wrapper :is(.dark\:text-gray-600) {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 }
 
 @media (min-width: 640px) {
@@ -1460,8 +1502,8 @@
     width: 20rem
   }
 
-  .cartlanding-wrapper :is(.md\:w-\[305px\]) {
-    width: 305px
+  .cartlanding-wrapper :is(.md\:w-\[285px\]) {
+    width: 285px
   }
 
   .cartlanding-wrapper :is(.md\:w-\[640px\]) {
@@ -1470,6 +1512,10 @@
 
   .cartlanding-wrapper :is(.md\:w-full) {
     width: 100%
+  }
+
+  .cartlanding-wrapper :is(.md\:min-w-\[285px\]) {
+    min-width: 285px
   }
 
   .cartlanding-wrapper :is(.md\:flex-row) {
@@ -1490,8 +1536,8 @@
 }
 
 @media (min-width: 1024px) {
-  .cartlanding-wrapper :is(.lg\:w-\[600px\]) {
-    width: 600px
+  .cartlanding-wrapper :is(.lg\:w-\[590px\]) {
+    width: 590px
   }
 
   .cartlanding-wrapper :is(.lg\:w-\[calc\(33\.33\%-13\.33px\)\]) {
@@ -1529,6 +1575,10 @@
   .cartlanding-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+}
+
+.cartlanding-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
 }
 
 .cartlanding-wrapper :is(.\[\&_svg\>use\]\:stroke-\[\#027243\] svg>use) {

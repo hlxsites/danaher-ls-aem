@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 
 import {
@@ -12,6 +13,7 @@ import {
   p,
   input,
   form,
+  a,
   h3,
   h5,
   button,
@@ -418,14 +420,14 @@ export const submitOrder = async (basketId, paymentMethod) => {
       response = await postApiData(url, data, defaultHeader);
     }
     if (response?.status === 'success') {
-      sessionStorage.setItem(
+      localStorage.setItem(
         'orderSubmitDetails',
         JSON.stringify(response.data),
       );
       const cartItemsDetails = JSON.parse(
-        sessionStorage.getItem('productDetailObject'),
+        localStorage.getItem('productDetailObject'),
       );
-      sessionStorage.setItem(
+      localStorage.setItem(
         'cartItemsDetails',
         JSON.stringify(cartItemsDetails),
       );
@@ -569,9 +571,9 @@ export const setUseAddress = async (id, type, action = '') => {
   }
   try {
     if (window.location.pathname.includes('cart')) return false;
+    const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
     if (getUseAddressesObject?.status === 'success' && action !== 'useAddress') {
-      const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
       if (cachedAddress?.status === 'success') {
         const updatedUseObject = {
           status: 'success',
@@ -593,12 +595,34 @@ export const setUseAddress = async (id, type, action = '') => {
           // eslint-disable-next-line max-len
           updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
         }
-        sessionStorage.removeItem('useAddress');
         sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
         return updatedUseObject;
       }
     }
 
+    if (cachedAddress?.status === 'success') {
+      const updatedUseObject = {
+        status: 'success',
+        data: {
+          commonShipToAddress: '',
+          invoiceToAddress: '',
+        },
+      };
+      const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === id);
+
+      if (type === 'shipping' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.commonShipToAddress = checkCachedAddress[0];
+        updatedUseObject.data.invoiceToAddress = getUseAddressesObject?.data?.invoiceToAddress;
+      }
+      if (type === 'billing' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.invoiceToAddress = checkCachedAddress[0];
+        // eslint-disable-next-line max-len
+        updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
+      }
+      sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
+    }
     const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     if (type === 'shipping') {
@@ -672,7 +696,7 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
         const basketResponse = await getApiData(url, defaultHeader);
 
         if (basketResponse && basketResponse.status === 'success') {
-          sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+          localStorage.setItem('basketData', JSON.stringify(basketResponse));
           return basketResponse;
         }
       } else {
@@ -682,13 +706,13 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
     const basketResponse = await getApiData(url, defaultHeader);
 
     if (basketResponse && basketResponse.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+      localStorage.setItem('basketData', JSON.stringify(basketResponse));
 
       return basketResponse;
     }
     const response = await createBasket();
     if (response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
+      localStorage.setItem('basketData', JSON.stringify(response));
       if (response.data.invoiceToAddress) {
         const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
         await setUseAddress(setUseBillingAddress, 'billing');
@@ -700,6 +724,19 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
   }
 }
 
+/**
+ * Updates the cart quantity displayed in the header.
+ * If a value is passed, it uses that; otherwise, it fetches basket data.
+ * @param {string|number} value - Optional cart item count override
+ */
+export async function updateHeaderCart() {
+  const getBasketData = await getBasketDetails();
+  // Update the cart quantity in the DOM
+  const getHeaderCart = document.querySelector('#headerCartItemQuantity');
+  if (getHeaderCart) {
+    getHeaderCart.textContent = getBasketData?.data?.data?.lineItems?.length || '0';
+  }
+}
 /*
  :::::::::::::::::::::::::::::
  update shipping methods
@@ -711,9 +748,9 @@ export const updateShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -728,7 +765,7 @@ export const updateShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -752,13 +789,13 @@ export const getShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
       const shippingMethods = JSON.parse(
-        sessionStorage.getItem('shippingMethods'),
+        localStorage.getItem('shippingMethods'),
       );
       if (shippingMethods?.status === 'success') return await shippingMethods;
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -773,7 +810,7 @@ export const getShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -835,7 +872,7 @@ export const setShippingMethod = async (methodId) => {
   }
   try {
     sessionStorage.removeItem('useShippingMethod');
-    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {
       commonShippingMethod: methodId,
     };
@@ -878,7 +915,7 @@ update addresses to be shown on ui
 
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig?.cartPageUrl;
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
@@ -1081,7 +1118,7 @@ export async function getUseAddresses() {
         'useAddress',
         JSON.stringify(useAddressObjectData),
       );
-      return { status: 'success', data: useAddressObjectData };
+      return useAddressObjectData;
     }
     return { status: 'error', data: {} };
   }
@@ -1098,7 +1135,7 @@ export const getPromotionDetails = async (promotionId) => {
   try {
     if (!promotionId) return { status: 'error', data: 'Invalid promotion ID' };
 
-    const autoDiscount = JSON.parse(sessionStorage.getItem('discountDetails')) || {};
+    const autoDiscount = JSON.parse(localStorage.getItem('discountDetails')) || {};
     if (autoDiscount?.status === 'success') return autoDiscount;
     const getBasket = await getBasketDetails();
     if (getBasket?.status === 'success') {
@@ -1112,7 +1149,7 @@ export const getPromotionDetails = async (promotionId) => {
         );
 
         if (getDiscountDetails?.status === 'success') {
-          sessionStorage.setItem(
+          localStorage.setItem(
             'discountDetails',
             JSON.stringify(getDiscountDetails),
           );
@@ -1248,18 +1285,40 @@ export const taxExemptModal = () => {
     cloud file icon for tax exempt modal
      :::::::::::::::::::::::::::::::
     */
-  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file span');
-  cloudFileIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file');
 
+  const cloudFileIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-file [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudFileIconWrapper);
+  cloudFileIcon?.insertAdjacentElement('beforeend', cloudFileIconWrapper);
   /*
     ::::::::::::::::::::::
     upload file icon for tax exempt modal
      :::::::::::::::::::::::::::::::
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
-    '.tax-exempt-upload span',
+    '.tax-exempt-upload',
   );
-  cloudUloadIcon.innerHTML = '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  const cloudUploadIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-cloud-upload [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudUploadIconWrapper);
+  cloudUloadIcon?.insertAdjacentElement('beforeend', cloudUploadIconWrapper);
 
   const taxExemptUploadButton = taxExemptWrapper.querySelector('#taxExemptUpload');
 
@@ -1515,7 +1574,6 @@ export const changeStep = async (step) => {
       checkoutSummaryContainer.append(checkoutSkeleton());
     }
   }
-
   let validateData = '';
   let validatingBasket;
   try {
@@ -1532,7 +1590,7 @@ export const changeStep = async (step) => {
       };
       validatingBasket = await validateBasket(validateData);
       if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/addresses');
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
     }
     if (currentTab === 'shippingMethods') {
       validateData = {
@@ -1544,8 +1602,8 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/shipping');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Address.');
+      silentNavigation(window.EbuyConfig?.shippingPageUrl);
     }
 
     if (currentTab === 'payment') {
@@ -1559,8 +1617,8 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/payment');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping Method.');
+      silentNavigation(window.EbuyConfig?.paymentPageUrl);
     }
 
     const activateModule = document.querySelector(
@@ -1589,25 +1647,26 @@ export const changeStep = async (step) => {
     *
     *
     * */
+
     if (currentTab === 'submitOrder') {
-      const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
+      showPreLoader();
+      const submittedOrderUrl = `${window.EbuyConfig?.orderSubmitPageUrl}?orderId=`;
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
       if (!getSelectedPaymentMethod) throw new Error('Please select Payment Method');
-
-      const getBasketForOrder = await getBasketDetails();
-
+      const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
       if (getSelectedPaymentMethod?.value === 'invoice') {
-        showPreLoader();
         /*
         *
         :::::::: check if invoice number is entered :::::::
         *
         */
-        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
         if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
+      }
+      const getBasketForOrder = await getBasketDetails();
 
+      if (getSelectedPaymentMethod?.value === 'invoice') {
         /*
         *
         :::::::: Call Open tender API for Invoice :::::::
@@ -1668,9 +1727,9 @@ export const changeStep = async (step) => {
           throw new Error('Error submitting order.');
         }
 
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
@@ -1681,8 +1740,6 @@ export const changeStep = async (step) => {
       * :::::::::; handle stripe payment ::::::::
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
-        showPreLoader();
-
         /*
         *
         :::::::::::
@@ -1697,7 +1754,6 @@ export const changeStep = async (step) => {
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
         const useStripeCardId = sessionStorage.getItem('useStripeCardId');
-
         /*
         *
         *
@@ -1706,7 +1762,7 @@ export const changeStep = async (step) => {
           :::::::::
         *
         */
-        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select a card to place order.');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
@@ -1918,9 +1974,9 @@ export const changeStep = async (step) => {
         :::::::: Clear Session :::::::
         *
         */
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
         sessionStorage.removeItem('useStripeCardId');
         sessionStorage.removeItem('selectedStripeMethod');
@@ -1948,7 +2004,12 @@ export const changeStep = async (step) => {
     } else {
       showNotification(error.message || 'Error Processing Request.', 'error');
     }
-    // silentNavigation('/us/en/e-buy/addresses');
+    if (error.message === 'Invalid Address.') {
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
+    }
+    if (error.message === 'Invalid Shipping Method.') {
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
+    }
     return false;
   }
 };
@@ -2441,7 +2502,7 @@ get price type if its net or gross
   let checkoutSummaryData = false;
   let userLoggedInStatus = false;
   if (orderId !== '') {
-    getCheckoutSummaryData = JSON.parse(sessionStorage.getItem('submittedOrderData'));
+    getCheckoutSummaryData = JSON.parse(localStorage.getItem('submittedOrderData'));
 
     if (getCheckoutSummaryData?.status === 'success') {
       checkoutSummaryData = getCheckoutSummaryData.data.data;
@@ -2497,7 +2558,6 @@ get price type if its net or gross
     }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
-
   /*
   ::::::::::::::
   map the data from checkout summary (basket) to the keys.
@@ -2571,9 +2631,9 @@ get price type if its net or gross
       },
       'Let’s get started',
     ),
-
-    button(
+    a(
       {
+        href: window.EbuyConfig?.loginPageUrl,
         class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
       },
       'Login / Create Account',
@@ -2586,7 +2646,7 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href = '/us/en/e-buy/login';
+    // window.location.href = window.EbuyConfig?.loginPageUrl;
   });
 
   /*
@@ -2708,7 +2768,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  `text-right text-violet-600 text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  `text-right text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),
@@ -2822,7 +2882,8 @@ get price type if its net or gross
    */
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
-    if (window.location.href.includes('cart') && userLoggedInStatus) {
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('cart') && userLoggedInStatus) {
       proceedButton.textContent = 'Checkout';
     } else {
       /*
@@ -2830,8 +2891,7 @@ get price type if its net or gross
       Update checkout summary button
       ::::::::::::::
       */
-      const currentPath = window.location.pathname;
-      if (currentPath.includes('address')) proceedButton.textContent = 'Proceed to Shipping';
+      if (currentPath.includes('addresses')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
         proceedButton.textContent = 'Proceed to Payment';
         proceedButton?.setAttribute('data-activetab', 'shippingMethod');
@@ -2846,7 +2906,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.pathname.includes('cart')) {
-        window.location.href = '/us/en/e-buy/addresses';
+        window.location.href = window.EbuyConfig?.addressPageUrl;
       } else {
         changeStep(e);
       }
@@ -2868,11 +2928,97 @@ get price type if its net or gross
 
     if (getUseAddressesResponse) {
       /*
+   ::::::::::::
+   check if shipping address exists in basket
+   ::::::::::::::::::
+     */
+      const getBasketShippingAddress = getCheckoutSummaryData?.data?.data?.commonShipToAddress;
+
+      // eslint-disable-next-line max-len
+      const getShippingAddress = getUseAddressesResponse?.data?.commonShipToAddress || getCheckoutSummaryData?.data?.included?.commonShipToAddress?.[getBasketShippingAddress];
+      if (getShippingAddress && (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
+        const commonShipToAddress = div(
+          {
+            id: 'checkoutSummaryCommonShipAddress',
+            class:
+              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
+          },
+          div(
+            {
+              class: ' flex flex-col pb-2',
+            },
+            h5(
+              {
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
+              },
+              'Shipping Address',
+            ),
+            div(
+              {
+                class: 'p-3 border border-danahergray-300',
+              },
+              div(
+                {
+                  class: 'flex w-full justify-between',
+                },
+                h5(
+                  {
+                    class: 'font-normal  text-xl font-semibold m-0 p-0',
+                  },
+                  getShippingAddress?.companyName2 ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  },
+                ),
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.addressLine1 ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.city ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                `${getShippingAddress
+                  ?.mainDivision ?? ''
+                }, ${getShippingAddress
+                  ?.countryCode ?? ''
+                }, ${getShippingAddress
+                  ?.postalCode ?? ''
+                }`,
+              ),
+            ),
+          ),
+        );
+        if (commonShipToAddress) {
+          decorateIcons(commonShipToAddress);
+          checkoutSummaryWrapper.insertAdjacentElement(
+            'beforebegin',
+            commonShipToAddress,
+          );
+          commonShipToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
+        }
+      }
+      /*
  ::::::::::::
  check if billing address exists in basket and not same as the shipping address
  ::::::::::::::::::
    */
-      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
+      if (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
@@ -2894,16 +3040,28 @@ get price type if its net or gross
               {
                 class: 'p-3 border border-danahergray-300',
               },
-              h5(
+              div(
                 {
-                  class: `font-normal m-0 p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
-                    ?.companyName2
-                    ? ''
-                    : 'hidden'
-                  }`,
+                  class: 'flex w-full justify-between',
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
-                ?? '',
+                h5(
+                  {
+                    class: `font-normal m-0 text-xl font-semibold p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
+                      ?.companyName2
+                      ? ''
+                      : 'hidden'
+                    }`,
+                  },
+                  getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                  ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  },
+                ),
               ),
               p(
                 {
@@ -2935,78 +3093,14 @@ get price type if its net or gross
         );
 
         if (invoiceToAddress) {
+          decorateIcons(invoiceToAddress);
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
             invoiceToAddress,
           );
-        }
-      }
-      /*
- ::::::::::::
- check if shipping address exists in basket
- ::::::::::::::::::
-   */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
-        const commonShipToAddress = div(
-          {
-            id: 'checkoutSummaryCommonShipAddress',
-            class:
-              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
-          },
-          div(
-            {
-              class: ' flex flex-col pb-2',
-            },
-            h5(
-              {
-                class: 'font-semibold p-0 mb-3 mt-0 text-base',
-              },
-              'Shipping Address',
-            ),
-            div(
-              {
-                class: 'p-3 border border-danahergray-300',
-              },
-              h5(
-                {
-                  class: 'font-normal  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.companyName2 ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine1 ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                `${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? ''
-                }`,
-              ),
-            ),
-          ),
-        );
-        if (commonShipToAddress) {
-          checkoutSummaryWrapper.insertAdjacentElement(
-            'beforebegin',
-            commonShipToAddress,
-          );
+          invoiceToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
         }
       }
     }
@@ -3098,6 +3192,7 @@ export const cartItemsContainer = (cartItemValue) => {
         showNotification('Product removed from cart', 'success');
       } else {
         await updateCartItemQuantity(item);
+        await updateCheckoutSummary();
         removePreLoader();
         showNotification('Product removed from cart', 'success');
       }
@@ -3127,6 +3222,11 @@ export const cartItemsContainer = (cartItemValue) => {
         showNotification('Error Processing request.', 'error');
       }
     }
+    /*
+    *
+    // update header cart item count
+    */
+    await updateHeaderCart();
   };
   const deleteButton = button(
     {
