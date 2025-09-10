@@ -135,7 +135,8 @@ export default async function decorate(block) {
 
     div(
       {
-        class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
+        class: 'self-stretch justify-start text-black font-medium leading-10',
+        style: 'font-size: 40px;'
       },
       result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
     ),
