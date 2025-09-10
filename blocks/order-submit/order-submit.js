@@ -46,8 +46,7 @@ export default async function decorate(block) {
       ),
     );
     const checkoutSummaryContainer = await checkoutSummary(orderId);
-    console.log(checkoutSummaryContainer);
-    
+
     const cartItems = await cartItem();
     const notesValue = () => {
       const notesDiv = div(

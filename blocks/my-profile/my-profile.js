@@ -56,7 +56,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'self-stretch h-[836px] flex flex-col justify-start items-start gap-6',
+          'self-stretch flex flex-col justify-start items-start gap-6',
       },
       div(
         {
