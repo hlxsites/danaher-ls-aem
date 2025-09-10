@@ -125,6 +125,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       div(
         { class: 'flex-none flex justify-center p-6' },
         img({
+          loading: 'lazy',
           src: result.raw.images?.[0] || '',
           alt: result.title || '',
           class: 'w-[100px] h-[100px] object-contain border rounded bg-gray-50',
