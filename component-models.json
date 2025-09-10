@@ -90,6 +90,20 @@
             "value": ""
           },
           {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishdate",
+            "label": "Publish Date",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": ""
+          },
+          {
             "component": "text",
             "valueType": "string",
             "name": "fullcategory",
@@ -2190,6 +2204,28 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs(comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "topics",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "News",
+            "value": "news"
+          },
+          {
+            "name": "Blog",
+            "value": "blog"
+          }
+        ]
       }
     ]
   }
