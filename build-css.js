@@ -488,6 +488,11 @@ const fileMappings = [
     wrapper: 'approved-quotes-wrapper',
   },
   {
+    content: ['./blocks/my-address/my-address.js'],
+    output: './blocks/my-address/my-address.css',
+    wrapper: 'my-address-wrapper',
+  },
+  {
     content: ['./blocks/order-details/order-details.js',
       './blocks/dashboardSideBar/dashboardSideBar.js',
       './blocks/order-details/customerInformation.js',

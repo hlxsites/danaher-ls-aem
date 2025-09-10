@@ -72,6 +72,7 @@ export default async function decorate(block) {
   const quoteSummaryContainer = quoteSummary(requestedQuotesDetailsResponse);
   const quoteItemsContainer = quoteItems(requestedQuotesDetailsResponse);
   const requesterInformationContainer = requesterInformation(requestedQuotesDetailsResponse);
+  console.log("requestedQuotesDetailsResponse", requestedQuotesDetailsResponse)
   quoteDetail.append(quoteSummaryContainer);
   quoteDetail.append(quoteItemTitle);
   quoteDetail.append(quoteItemsContainer);

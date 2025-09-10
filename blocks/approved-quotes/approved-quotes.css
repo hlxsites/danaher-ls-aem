@@ -92,10 +92,6 @@
   height: 46px
 }
 
-.approved-quotes-wrapper :is(.h-\[831px\]) {
-  height: 831px
-}
-
 .approved-quotes-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
