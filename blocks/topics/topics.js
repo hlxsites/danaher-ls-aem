@@ -92,12 +92,10 @@ export function createFilters(articles, activeTag = '') {
 
   if (activeTag) {
     let articleType = '';
-    if(window.location.pathname.startsWith('/us/en/blog'))
-    {
+    if (window.location.pathname.startsWith('/us/en/blog')) {
       articleType = 'Blog';
     }
-    if(window.location.pathname.startsWith('/us/en/news'))
-    {
+    if (window.location.pathname.startsWith('/us/en/news')) {
       articleType = 'News';
     }
     container.append(
