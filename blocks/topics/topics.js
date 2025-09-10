@@ -91,8 +91,17 @@ export function createFilters(articles, activeTag = '') {
   const container = div({ class: 'flex items-center gap-2 mb-24' });
 
   if (activeTag) {
+    let articleType = '';
+    if(window.location.pathname.startsWith('/us/en/blog'))
+    {
+      articleType = 'Blog';
+    }
+    if(window.location.pathname.startsWith('/us/en/news'))
+    {
+      articleType = 'News';
+    }
     container.append(
-      span({ class: 'font-medium text-danahergray-700' }, 'Blog topic:'),
+      span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic:`),
       span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
     );
   }
