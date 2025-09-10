@@ -9,6 +9,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
+  return null;
   const imageUrl = item.image;
 
   const card = a(
