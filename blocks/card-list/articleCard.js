@@ -18,7 +18,7 @@ switch (template) {
     linkText = 'Learn More';
     break;
   default:
-    linkText = 'Read Article';
+    linkText = 'Read Article →';
 }
 
 export default function createCard(article, firstCard = false) {

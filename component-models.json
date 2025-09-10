@@ -2192,5 +2192,27 @@
         "label": "Product IDs(comma separated)"
       }
     ]
+  },
+  {
+    "id": "topics",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "News",
+            "value": "news"
+          },
+          {
+            "name": "Blog",
+            "value": "blog"
+          }
+        ]
+      }
+    ]
   }
 ]
