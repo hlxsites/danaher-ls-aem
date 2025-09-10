@@ -38,6 +38,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
     const createImageWithFallback = (src, alt) => {
       const imageElement = img({
         src: src || fallbackImagePath,
+        height: '164px',
         alt: alt || 'Product image not available',
         class: 'w-full h-40 object-contain',
         onclick: () => window.open(
@@ -124,6 +125,14 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       // Image Section
       div(
         { class: 'flex-none flex justify-center p-6' },
+        img({
+          loading: 'lazy',
+          width: '100px',
+          height: '100px',
+          src: result.raw.images?.[0] || '',
+          alt: result.title || '',
+          class: 'w-[100px] h-[100px] object-contain border rounded bg-gray-50',
+        }),
       ),
 
       // Product Details Section
