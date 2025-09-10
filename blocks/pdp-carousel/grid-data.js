@@ -19,6 +19,7 @@ export default function renderGridCard(item) {
         'w-full relative flex-shrink-0 object-contain hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%] md:min-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300 flex flex-col justify-start items-start gap-3',
     },
     img({
+      loading: 'lazy',
       src: imageUrl,
       alt: item?.title?.replace(/<[^>]*>/g, '') || '',
       class: 'w-full h-[164px] object-contain',
