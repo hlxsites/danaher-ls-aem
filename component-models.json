@@ -90,6 +90,20 @@
             "value": ""
           },
           {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishdate",
+            "label": "Publish Date",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": ""
+          },
+          {
             "component": "text",
             "valueType": "string",
             "name": "fullcategory",
