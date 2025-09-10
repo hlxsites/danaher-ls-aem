@@ -89,60 +89,6 @@ function imageSlider(allImages, productName = 'product') {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.display = 'block';
-  const skeleton = div(
-    {
-      id: 'pdpSkeleton',
-      class: 'animate-pulse space-y-6 bg-white p-6 w-full mx-auto',
-    },
-
-    // Title Placeholder
-    div({ class: 'h-8 bg-gray-300 rounded w-2/3' }),
-
-    // Brand + Subtitle
-    div(
-      { class: 'space-y-2' },
-      div({ class: 'h-4 bg-gray-300 rounded w-1/4' }),
-      div({ class: 'h-6 bg-gray-300 rounded w-3/4' }),
-    ),
-
-    // Description Block
-    div(
-      { class: 'space-y-2' },
-      div({ class: 'h-4 bg-gray-200 rounded w-full' }),
-      div({ class: 'h-4 bg-gray-200 rounded w-full' }),
-      div({ class: 'h-4 bg-gray-200 rounded w-2/3' }),
-    ),
-
-    // CTA Button Placeholder
-    div({ class: 'h-10 bg-gray-300 rounded w-1/4' }),
-
-    // Icon Row
-    div(
-      { class: 'flex space-x-4' },
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-    ),
-
-    // Link Tags
-    div(
-      { class: 'flex flex-wrap gap-2' },
-      div({ class: 'px-4 py-2 bg-gray-200 rounded w-1/3' }),
-      div({ class: 'px-4 py-2 bg-gray-200 rounded w-1/3' }),
-    ),
-
-    // Image Gallery
-    div(
-      { class: 'grid grid-cols-2 gap-4' },
-      div({ class: 'h-40 bg-gray-300 rounded' }),
-      div({ class: 'h-40 bg-gray-300 rounded' }),
-    ),
-
-    // bottom  Placeholder
-    div({ class: 'h-8 bg-gray-300 rounded w-2/3' }),
-  );
-  block.append(skeleton);
   const titleEl = block.querySelector('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
@@ -169,7 +115,7 @@ export default async function decorate(block) {
 
   const defaultContent = div({
     class:
-      'self-stretch inline-flex flex-col justify-start items-start gap-9 ',
+        'self-stretch inline-flex flex-col justify-start items-start gap-9 ',
   });
   const headingDiv = div(
     {
@@ -203,7 +149,7 @@ export default async function decorate(block) {
           class: 'justify-start text-gray-700 text-base font-extralight leading-snug',
         },
         result?.raw?.objecttype === 'Product'
-          || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
+      || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
       ),
     ),
     div(
@@ -211,7 +157,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
+              'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
         },
       ),
     ),
@@ -226,7 +172,7 @@ export default async function decorate(block) {
   const quoteButton = button(
     {
       class:
-        'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
     },
     div(
       {
@@ -298,7 +244,7 @@ export default async function decorate(block) {
   const shipInfo = div(
     {
       class:
-        'w-full self-stretch inline-flex flex-col justify-start items-start gap-2',
+          'w-full self-stretch inline-flex flex-col justify-start items-start gap-2',
     },
     div(
       {
@@ -339,7 +285,7 @@ export default async function decorate(block) {
   const pricingQuoteButton = div(
     {
       class:
-        'inline-flex justify-start items-center gap-3',
+              'inline-flex justify-start items-center gap-3',
     },
     // For future implementation
     // input({
@@ -384,7 +330,7 @@ export default async function decorate(block) {
 
   if (
     result?.raw?.objecttype === 'Product'
-    || result?.raw?.objecttype === 'Bundle'
+      || result?.raw?.objecttype === 'Bundle'
   ) {
     defaultContent.append(priceInfoDiv);
   }
@@ -438,7 +384,7 @@ export default async function decorate(block) {
     button(
       {
         class:
-          'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+        'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
       },
       div(
         {
@@ -534,7 +480,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Globe-alt w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-Globe-alt w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const externalLink = div(
@@ -543,7 +489,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-External-link w-9 h-9 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-External-link w-9 h-9 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const externalButton = div(
@@ -582,7 +528,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const categoryLink = div(
@@ -592,7 +538,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
+            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
       },
       collectionButton,
       div(
@@ -611,7 +557,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-              'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -622,7 +568,7 @@ export default async function decorate(block) {
       },
       span({
         class:
-          'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -644,7 +590,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
+            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
       },
       div(
         {
@@ -652,7 +598,7 @@ export default async function decorate(block) {
         },
         span({
           class:
-            'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+              'icon icon-Collection w-9 h-9 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
         }),
       ),
       div(
@@ -688,7 +634,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'self-stretch inline-flex justify-start gap-3 cursor-pointer',
+        'self-stretch inline-flex justify-start gap-3 cursor-pointer',
       },
       clipBoard,
       div(
@@ -707,7 +653,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-              'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+            'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
 
@@ -717,7 +663,7 @@ export default async function decorate(block) {
           },
           span({
             class:
-              'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
+        'icon icon-chevron-down w-9 h-9 fill-current [&_svg>use]:stroke-violet-400 group-hover:[&_svg>use]:stroke-danaherpurple-800',
           }),
         ),
       ),
@@ -751,7 +697,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'inline-flex justify-start items-center gap-6 flex-col',
+          'inline-flex justify-start items-center gap-6 flex-col',
         },
         div(
           {
@@ -766,7 +712,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'w-full border-t border-b border-gray-300 inline-flex justify-start items-center gap-6',
+          'w-full border-t border-b border-gray-300 inline-flex justify-start items-center gap-6',
         },
         infoDiv,
       ),
@@ -776,7 +722,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'inline-flex justify-start items-center gap-6 flex-col',
+          'inline-flex justify-start items-center gap-6 flex-col',
         },
         bundleTab,
       ),
@@ -785,7 +731,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'w-full border-t border-b border-gray-300 flex justify-start items-center gap-6',
+          'w-full border-t border-b border-gray-300 flex justify-start items-center gap-6',
         },
         infoDiv, // Full-width border for Bundle
       ),
@@ -795,7 +741,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'border-t border-b border-gray-300 inline-flex justify-start items-center',
+          'border-t border-b border-gray-300 inline-flex justify-start items-center',
         },
         div(
           {
@@ -811,12 +757,12 @@ export default async function decorate(block) {
     const list = div(
       {
         class:
-          'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
+            'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
       },
       a(
         {
           class:
-            'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
+              'text-center justify-start text-violet-600 text-lg leading-normal font-medium',
           href: `/us/en/products/${href}`,
         },
         label,
