@@ -30,12 +30,12 @@ function setMetaTags(response) {
   });
 
   if (
-    response?.raw?.images &&
-    Array.isArray(response.raw.images) &&
-    response.raw.images.length > 0
+    response?.raw?.images
+    && Array.isArray(response.raw.images)
+    && response.raw.images.length > 0
   ) {
     const imageUrl = response.raw.images.find(
-      (img) => typeof img === 'string' && !/\.pdf$/i.test(img)
+      (img) => typeof img === 'string' && !/\.pdf$/i.test(img),
     );
     if (imageUrl) {
       // Twitter image meta tag
