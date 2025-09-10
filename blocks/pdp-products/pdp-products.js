@@ -64,7 +64,7 @@ function createLayout(block) {
     }),
   );
   const resultsGrid = div({ class: 'flex flex-col gap-4' });
-  const paginationRow = div({ class: 'flex justify-end w-full', id: 'pagination' });
+  const paginationRow = div({ class: 'flex justify-end w-full', id: 'pagination', style: 'display: none;' });
 
   querySummary.subscribe(() => {
     resultSummary.querySelector('#resultSummaryCount').innerHTML = `${querySummary.state.total} Results`;
@@ -100,10 +100,14 @@ function setupCoveoContext(sku, host) {
   pdpEngine.dispatch(loadPaginationActions(pdpEngine).registerNumberOfResults(6));
   pdpEngine.executeFirstSearch();
 }
-
-function subscribeToEngineUpdates(resultsGrid) {
+function subscribeToEngineUpdates(resultsGrid, paginationRow) {
   pdpEngine.subscribe(() => {
-    renderPagination();
+    if (querySummary.state.total > 6) {
+      paginationRow.style.display = 'block';
+        renderPagination();
+    } else {
+      paginationRow.style.display = 'none';
+    }
     renderFacetBreadcurm();
     renderCreateFacet();
     createFiltersPanel();
@@ -136,7 +140,7 @@ export default async function decorate(block) {
   const heading = createHeading();
   const filtersContainer = createFiltersContainer();
   const selectedFiltersBar = createSelectedFiltersBar();
-  const { layoutDiv, resultsGrid } = createLayout(block);
+  const { layoutDiv, resultsGrid, paginationRow } = createLayout(block);
 
   block.insertBefore(heading, layoutDiv);
   block.insertBefore(filtersContainer, layoutDiv);
@@ -208,7 +212,7 @@ export default async function decorate(block) {
     }
     localStorage.setItem('pdpListViewType', 'list');
 
-    subscribeToEngineUpdates(resultsGrid);
+    subscribeToEngineUpdates(resultsGrid, paginationRow);
   });
 
   // click action for grid view
@@ -234,18 +238,18 @@ export default async function decorate(block) {
       resultsGrid?.classList.add('flex-wrap');
     }
     localStorage.setItem('pdpListViewType', 'grid');
-    subscribeToEngineUpdates(resultsGrid);
+    subscribeToEngineUpdates(resultsGrid, paginationRow);
   });
 
   await loadScript('/../../scripts/image-component.js');
 
   createFiltersPanel();
- setupCoveoContext(sku.replace('.html', ''), host);
+  setupCoveoContext(sku, host);
   const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
   if (resultsGrid?.classList.contains('flex-col') && viewType === 'grid') {
     resultsGrid?.classList.remove('flex-col');
     resultsGrid?.classList.add('flex-wrap');
   }
-  subscribeToEngineUpdates(resultsGrid);
+  subscribeToEngineUpdates(resultsGrid, paginationRow);
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
 }
