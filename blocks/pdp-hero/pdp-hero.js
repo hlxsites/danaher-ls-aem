@@ -60,7 +60,14 @@ function imageSlider(allImages, productName = 'product') {
     const fallbackImg = img({ src: '/content/dam/danaher/products/fallbackImage.jpeg', alt: `${productName} - fallback image` });
     slideContent = div({ class: 'image-content' }, div({ class: 'active' }, fallbackImg));
   } else {
-    slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(filteredImages[0], `${productName} - image`, true));
+    const optimizedImage = createOptimizedS7Picture(filteredImages[0], `${productName} - image`, true);
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'image';
+    preloadLink.href = optimizedImage?.querySelector('img')?.src;
+    preloadLink.fetchPriority = 'high'; // Optional but recommended
+    document.head.appendChild(preloadLink);
+    slideContent = div({ class: 'image-content' }, optimizedImage);
   }
   const verticalSlides = div();
   filteredImages.forEach((image, index) => {
