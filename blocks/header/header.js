@@ -67,8 +67,6 @@ async function loadHeaderCart() {
   return cartWrapper;
 }
 
-const headerCart = await loadHeaderCart();
-
 // function shortName(user) {
 //   if (user) {
 //     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
@@ -604,7 +602,7 @@ function buildLoggedInUserBlock(loginLink, user) {
   loginLink.append(loginUser);
   loginLink.append(loginSpan);
 }
-function buildSearchBlock(headerBlock) {
+async function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
@@ -707,6 +705,9 @@ function buildSearchBlock(headerBlock) {
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
+
+  const headerCart = await loadHeaderCart();
+
   loginBlock.append(headerCart);
   // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
@@ -1018,7 +1019,7 @@ export default async function decorate(block) {
   headerBlock.innerHTML = html;
 
   buildLogosBlock(headerBlock);
-  buildSearchBlock(headerBlock);
+  await buildSearchBlock(headerBlock);
   buildNavBlock(headerBlock);
   const flyout = buildFlyoutMenus(headerBlock);
 
