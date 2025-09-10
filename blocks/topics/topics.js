@@ -1,5 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
-import { ul, a, div, span } from '../../scripts/dom-builder.js';
+import {
+  ul, a, div, span,
+} from '../../scripts/dom-builder.js';
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from '../card-list/articleCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
@@ -19,8 +21,7 @@ const getSelectionFromUrl = () => {
   return '';
 };
 
-const getPageFromUrl = () =>
-  toClassName(new URLSearchParams(window.location.search).get('page')) || '';
+const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const patchBannerHeading = () => {
   const heading = getMetadata('heading');
@@ -92,17 +93,14 @@ export function createFilters(articles, activeTag = '') {
   if (activeTag) {
     container.append(
       span({ class: 'font-medium text-danahergray-700' }, 'Blog topic:'),
-      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
+      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
     );
   }
 
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('page');
   if (window.location.pathname.indexOf(tagName) > -1) {
-    newUrl.pathname = window.location.pathname.substring(
-      0,
-      window.location.pathname.indexOf(`/${tagName}/`)
-    );
+    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf(`/${tagName}/`));
   }
 
   container.append(
@@ -122,7 +120,7 @@ export function createFilters(articles, activeTag = '') {
   return container;
 }
 
-let indexTemplate = getMetadata('template');
+const indexTemplate = getMetadata('template');
 
 export default async function decorate(block) {
   let indexType = '';

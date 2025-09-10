@@ -1,8 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
-import { a } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import {
-  ul, span,
+  a, ul, span,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
@@ -29,10 +28,10 @@ export default async function decorate(block) {
   });
 
   function goBack() {
-  const backArr = window.location.pathname.split('/');
-  const backNavigationPath = backArr.slice(0, (backArr.length - 1)).join('/');
-  return `${window.location.origin}${backNavigationPath}`;
- }
+    const backArr = window.location.pathname.split('/');
+    const backNavigationPath = backArr.slice(0, (backArr.length - 1)).join('/');
+    return `${window.location.origin}${backNavigationPath}`;
+  }
   const headerRow = document.createElement('div');
   headerRow.className = 'flex w-full justify-between items-center mb-8';
   const spanEl = articles.length > 0 ? span({ class: 'text-lg font-semibold' }, 'You may be interested in') : '';
@@ -41,8 +40,5 @@ export default async function decorate(block) {
   if (spanEl) headerRow.appendChild(spanEl);
   if (spanE2) headerRow.appendChild(spanE2);
   block.textContent = '';
-  // const spanEl = articles.length > 0 ? span({ class: 'text-lg font-semibold' }, 'You may be interested in') : '';
-  // const spanE2 = articles.length > 0 ? span({ class: 'text-rg font-semibold' }, 'Back to news →') : '';
-  // const goParentBack = a({ class: 'my-auto text-base text-danaherpurple-500 font-semibold', href: goBack() }, `← Back to ${articleType}`);
   block.append(headerRow, cardList);
 }

@@ -89,9 +89,9 @@ export default function decorate(block) {
     }
   }
   if (isBlogPath || isNewsPath) {
-  const buttonContainer = document.querySelector('.button-container');
-  if (buttonContainer) {
-    buttonContainer.remove();
+    const buttonContainer = document.querySelector('.button-container');
+    if (buttonContainer) {
+      buttonContainer.remove();
+    }
   }
-}
 }
