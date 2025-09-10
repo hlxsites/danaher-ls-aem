@@ -915,7 +915,7 @@ update addresses to be shown on ui
 
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href = window.EbuyConfig.cartPageUrl;
+    window.location.href = window.EbuyConfig?.cartPageUrl;
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
@@ -1590,7 +1590,7 @@ export const changeStep = async (step) => {
       };
       validatingBasket = await validateBasket(validateData);
       if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation(window.EbuyConfig.addressPageUrl);
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
     }
     if (currentTab === 'shippingMethods') {
       validateData = {
@@ -1603,7 +1603,7 @@ export const changeStep = async (step) => {
       };
       validatingBasket = await validateBasket(validateData);
       if (validatingBasket?.status !== 'success') throw new Error('Invalid Address.');
-      silentNavigation(window.EbuyConfig.shippingPageUrl);
+      silentNavigation(window.EbuyConfig?.shippingPageUrl);
     }
 
     if (currentTab === 'payment') {
@@ -1618,7 +1618,7 @@ export const changeStep = async (step) => {
       };
       validatingBasket = await validateBasket(validateData);
       if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping Method.');
-      silentNavigation(window.EbuyConfig.paymentPageUrl);
+      silentNavigation(window.EbuyConfig?.paymentPageUrl);
     }
 
     const activateModule = document.querySelector(
@@ -1650,7 +1650,7 @@ export const changeStep = async (step) => {
 
     if (currentTab === 'submitOrder') {
       showPreLoader();
-      const submittedOrderUrl = `${window.EbuyConfig.orderSubmitPageUrl}?orderId=`;
+      const submittedOrderUrl = `${window.EbuyConfig?.orderSubmitPageUrl}?orderId=`;
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
@@ -2005,10 +2005,10 @@ export const changeStep = async (step) => {
       showNotification(error.message || 'Error Processing Request.', 'error');
     }
     if (error.message === 'Invalid Address.') {
-      silentNavigation(window.EbuyConfig.addressPageUrl);
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
     }
     if (error.message === 'Invalid Shipping Method.') {
-      silentNavigation(window.EbuyConfig.addressPageUrl);
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
     }
     return false;
   }
@@ -2633,7 +2633,7 @@ get price type if its net or gross
     ),
     a(
       {
-        href: window.EbuyConfig.loginPageUrl,
+        href: window.EbuyConfig?.loginPageUrl,
         class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
       },
       'Login / Create Account',
@@ -2646,7 +2646,7 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    // window.location.href = window.EbuyConfig.loginPageUrl;
+    // window.location.href = window.EbuyConfig?.loginPageUrl;
   });
 
   /*
@@ -2906,7 +2906,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.pathname.includes('cart')) {
-        window.location.href = window.EbuyConfig.addressPageUrl;
+        window.location.href = window.EbuyConfig?.addressPageUrl;
       } else {
         changeStep(e);
       }

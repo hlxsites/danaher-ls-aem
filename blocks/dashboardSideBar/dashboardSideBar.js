@@ -75,7 +75,7 @@ export default async function dashboardSidebar() {
   );
   logOut.addEventListener('click', () => {
     userLogOut();
-    window.location.href = window.EbuyConfig.cartPageUrl;
+    window.location.href = window.EbuyConfig?.cartPageUrl;
   });
   const sidebar = div(
     {

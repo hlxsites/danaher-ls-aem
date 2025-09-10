@@ -29,7 +29,7 @@ export default async function decorate(block) {
   const goBackToOrderStatusLink = a(
     {
       class: 'inline-flex justify-start items-start gap-2',
-      href: window.EbuyConfig.orderStatusPageUrl,
+      href: window.EbuyConfig?.orderStatusPageUrl,
     },
     div(
       {

@@ -22,7 +22,7 @@ export default async function decorate(block) {
   document.querySelector('main').style = 'background: #f4f4f4';
   const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   if (basketDataFromSession?.data?.data?.buyer === undefined) {
-    window.location.href = window.EbuyConfig.loginPageUrl;
+    window.location.href = window.EbuyConfig?.loginPageUrl;
   }
   const customerName = `${basketDataFromSession?.data?.data?.buyer?.firstName} ${basketDataFromSession?.data?.data?.buyer?.lastName}`;
   const userId = basketDataFromSession?.data?.data?.buyer?.accountID;
@@ -394,7 +394,7 @@ export default async function decorate(block) {
             class:
               'inline-flex h-[46px] justify-start border-b border-gray-200 gap-1',
             // eslint-disable-next-line max-len
-            // href: `${window.EbuyConfig.requestQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
+            // href: `${window.EbuyConfig?.requestQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
           },
 
           div(

@@ -19,6 +19,7 @@ import {
   getCommerceBase,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
+// eslint-disable-next-line import/no-cycle
 import { includeProdEdsPaths, includeStageEdsPaths } from '../../scripts/delayed.js';
 
 const baseURL = getCommerceBase();
@@ -37,7 +38,7 @@ async function loadHeaderCart() {
   const getBasketData = await getBasketDetails();
   const cartWrapper = a(
     {
-      href: window.EbuyConfig.cartPageUrl,
+      href: window.EbuyConfig?.cartPageUrl,
       class: 'relative inline-flex text-xs font-semibold text-black hover:text-danaherpurple-800 gap-[5px]',
     },
     // Cart icon
@@ -558,7 +559,7 @@ function buildLoginBlock(loginLink) {
     loginLink.textContent,
   );
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
-  loginLink.setAttribute('href', window.EbuyConfig.loginPageUrl);
+  loginLink.setAttribute('href', window.EbuyConfig?.loginPageUrl);
   // loginLink.textContent = '';
   loginLink.append(loginIcon);
   loginLink.append(loginSpan);
@@ -586,7 +587,7 @@ function buildLoginBlock(loginLink) {
 
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
-  loginLink.href = window.EbuyConfig.dashboardPageUrl;
+  loginLink.href = window.EbuyConfig?.dashboardPageUrl;
   const loginUser = span(
     {
       class:

@@ -50,7 +50,7 @@ export default async function decorate(block) {
       return a(
         {
           class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-          href: `${window.EbuyConfig.requestedQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
+          href: `${window.EbuyConfig?.requestedQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
         },
         div(
           {

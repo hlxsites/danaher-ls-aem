@@ -1214,7 +1214,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
 }
 // Danaher Config - End
 
-window.EbuyConfig = {
+window.EbuyConfig? = {
   cartPageUrl: '/us/en/e-buy/cart',
   dashboardPageUrl: '/us/en/e-buy/dashboard',
   addressPageUrl: '/us/en/e-buy/addresses',
