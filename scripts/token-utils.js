@@ -51,10 +51,18 @@ export const setAuthenticationToken = (tokenData, loginData, type) => {
     deleteCookie(`em_${siteID}_${env}_user_data`);
     deleteCookie(`em_${siteID}_${env}_user_type`);
     deleteCookie(`em_${siteID}_${env}_authorized`);
+    deleteCookie('first_name');
+    deleteCookie('last_name');
+    deleteCookie('rationalized_id');
     sessionStorage.setItem(`em_${siteID}_${env}_apiToken`, tokenData.access_token);
     setCookie(`em_${siteID}_${env}_apiToken`, tokenData.access_token);
     setCookie(`em_${siteID}_${env}_refresh-token`, tokenData.refresh_token, tokenData.refresh_expires_in);
-    setCookie(`em_${siteID}_${env}_user_data`, JSON.stringify(loginData));
+    if (type === 'customer') {
+      setCookie(`em_${siteID}_${env}_user_data`, JSON.stringify(loginData));
+      setCookie('first_name', loginData?.userData?.firstName);
+      setCookie('last_name', loginData?.userData?.lastName);
+      setCookie('rationalized_id', loginData?.userData?.email);
+    }
     setCookie(`em_${siteID}_${env}_user_type`, type === 'guest' ? 'guest' : 'customer');
     setCookie(`em_${siteID}_${env}_authorized`, 'success');
     // sessionStorage.setItem(

@@ -265,6 +265,9 @@ export function userLogOut() {
   deleteCookie(`em_${siteID}_${env}_user_data`);
   deleteCookie(`em_${siteID}_${env}_user_type`);
   deleteCookie(`em_${siteID}_${env}_authorized`);
+  deleteCookie('first_name');
+  deleteCookie('last_name');
+  deleteCookie('rationalized_id');
 
   sessionStorage.clear();
   localStorage.clear();

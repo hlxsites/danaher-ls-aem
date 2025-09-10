@@ -38,7 +38,7 @@ async function loadHeaderCart() {
   const cartWrapper = a(
     {
       href: window.EbuyConfig.cartPageUrl,
-      class: 'relative inline-flex text-xs font-semibold text-black hover:text-danaherpurple-800 gap-2',
+      class: 'relative inline-flex text-xs font-semibold text-black hover:text-danaherpurple-800 gap-[5px]',
     },
     // Cart icon
     span({
@@ -53,7 +53,7 @@ async function loadHeaderCart() {
       ),
       span(
         {
-          class: 'quantity absolute lg:pl-2 top-4 left-0 text-danaherpurple-500',
+          class: 'quantity absolute top-4 left-0 text-danaherpurple-500',
           id: 'headerCartItemQuantity',
         },
         getBasketData?.data?.data?.lineItems?.length || '0', // Default quantity
@@ -68,12 +68,13 @@ async function loadHeaderCart() {
 }
 
 const headerCart = await loadHeaderCart();
-function shortName(user) {
-  if (user) {
-    return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
-  }
-  return '';
-}
+
+// function shortName(user) {
+//   if (user) {
+//     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
+//   }
+//   return '';
+// }
 
 function getUser() {
   if (isLoggedInUser()) {
@@ -546,7 +547,7 @@ function buildSearchBlockMobile() {
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  loginLink.className = 'text-black hover:text-black relative flex text-xs font-semibold flex-row-reverse w-min items-center gap-[5px]';
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
@@ -555,35 +556,54 @@ function buildLoginBlock(loginLink) {
     </svg>
   `;
   const loginSpan = span(
-    { class: 'w-12 pl-2 lg:block hidden lg:inline' },
+    { class: 'w-12 pl-2 hidden' },
     loginLink.textContent,
   );
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
-  loginLink.textContent = '';
+  loginLink.setAttribute('href', window.EbuyConfig.loginPageUrl);
+  // loginLink.textContent = '';
   loginLink.append(loginIcon);
   loginLink.append(loginSpan);
 }
 
+// function buildLoggedInUserBlock(loginLink, user) {
+//   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
+//   loginLink.href = '/us/en/signin/dashboard.html';
+//   const loginUser = span(
+//     {
+//       class:
+//         'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
+//     },
+//     span(shortName(user)),
+//   );
+//   const loginSpan = span(
+//     { class: 'pl-1 text-xs font-semibold text-black' },
+//     'My Account',
+//   );
+//   loginLink.setAttribute('aria-label', 'My Account');
+//   loginLink.textContent = '';
+//   loginLink.append(loginUser);
+//   loginLink.append(loginSpan);
+// }
+
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
-  loginLink.href = '/us/en/signin/dashboard.html';
+  loginLink.href = window.EbuyConfig.dashboardPageUrl;
   const loginUser = span(
     {
       class:
-        'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
+        'icon icon-User [&_svg>use]:stroke-black',
     },
-    span(shortName(user)),
   );
   const loginSpan = span(
     { class: 'pl-1 text-xs font-semibold text-black' },
-    'My Account',
+    user?.fname,
   );
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
   loginLink.append(loginSpan);
 }
-
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
@@ -642,6 +662,7 @@ function buildSearchBlock(headerBlock) {
   const loginLink = searchLinks[0];
 
   const user = getUser();
+
   if (user) buildLoggedInUserBlock(loginLink, user);
   else buildLoginBlock(loginLink);
 
