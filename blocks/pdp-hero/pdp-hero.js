@@ -140,7 +140,8 @@ export default async function decorate(block) {
       },
       result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
     ),
-
+    result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle' ?
     div(
       {
         class: 'flex flex-col justify-start items-start',
@@ -148,25 +149,21 @@ export default async function decorate(block) {
       div(
         {
           class: 'justify-start text-gray-700 text-base font-extralight leading-snug',
-        },
-        result?.raw?.objecttype === 'Product'
-      || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
+        }, productInfo?.data?.sku || '',
       ),
-    ),
+    ): '',
     div(
       { class: 'self-stretch flex flex-col justify-start items-start' },
       div(
         {
           class:
               'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
-        },
+        },result?.raw?.richdescription.replace(/<[^>]*>/g, '') || ' '
       ),
     ),
   );
-  const heroDesc = itemInfoDiv.querySelector('.hero-desc');
-  if (heroDesc) {
-    heroDesc.innerHTML = result?.raw?.richdescription || '';
-  }
+
+  console.log("result?.raw?.richdescription",result?.raw?.richdescription)
   headingDiv.append(itemInfoDiv);
   defaultContent.append(headingDiv);
 
