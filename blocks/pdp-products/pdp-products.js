@@ -1,3 +1,9 @@
+/* eslint-disable */
+import {
+  loadContextActions,
+  loadPaginationActions,
+  loadTabSetActions,
+} from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
 
 import {
   getProductResponse,
@@ -11,6 +17,13 @@ import {
   div, img, p, span, h3, a, button, input, strong,
 } from '../../scripts/dom-builder.js';
 
+import { renderCreateFacet } from '../../scripts/coveo/pdp-listing/components/pdp-facets.js';
+import { pdpEngine } from '../../scripts/coveo/pdp-listing/pdp-engine.js';
+import { createFiltersPanel } from '../../scripts/coveo/pdp-listing/components/pdp-side-panel.js';
+import { pdpResultList, querySummary } from '../../scripts/coveo/pdp-listing/controllers/pdp-controllers.js';
+import { renderFacetBreadcurm } from '../../scripts/coveo/pdp-listing/components/pdp-facet-breadcrumb.js';
+import { renderResults } from '../../scripts/coveo/pdp-listing/components/pdp-resultlist.js';
+import renderPagination from '../../scripts/coveo/pdp-listing/components/pdp-pagination.js';
 
 // DOM builder helpers
 const domHelpers = {
