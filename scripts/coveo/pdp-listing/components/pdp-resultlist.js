@@ -49,7 +49,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
         decoding: 'async',
       });
 
-      return div({ class: 'w-full h-40 overflow-hidden cursor-pointer' });
+      return div({ class: 'w-full h-40 overflow-hidden cursor-pointer' }, imageElement);
     };
 
     const imageElement = createImageWithFallback(item.raw.images?.[0], item.title);
