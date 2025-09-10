@@ -1,7 +1,6 @@
 import {
   div,
   span,
-  input,
   button,
   a,
   img,
@@ -17,40 +16,38 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
-  if (e.target) {
-    const currentPicture = e.target.parentElement;
-    const currentActive = currentPicture.parentElement.querySelector('.active');
-    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
-    currentPicture.classList.toggle('active');
-    selectedImage.replaceWith(currentPicture.cloneNode(true));
+  const targetElement = e.target.closest('picture') || e.target.closest('div:not(.image-content):not(.view-more)');
+  if (targetElement) {
+    const parentContainer = targetElement.parentElement;
+    const currentActive = parentContainer.querySelector('.active');
+    if (currentActive && currentActive.classList.contains('active')) {
+      currentActive.classList.remove('active');
+    }
+    targetElement.classList.add('active');
+    const pictureToShow = targetElement.tagName === 'PICTURE' ? targetElement : targetElement.querySelector('picture');
+    if (pictureToShow && selectedImage) {
+      selectedImage.replaceWith(pictureToShow.cloneNode(true));
+    }
   }
 }
 
 function loadMore() {
-  const allImageContainer = document.querySelector(
-    '.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active',
-  ).parentElement;
-  const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
-  const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
+  const allImageContainer = document.querySelector('.vertical-gallery-container > div > div:not(:nth-child(1))');
+  const shownImage = allImageContainer.querySelectorAll('div:not(.hidden):not(.view-more), picture:not(.hidden)');
+  const notShownImage = allImageContainer.querySelectorAll('div.hidden, picture.hidden');
   if (shownImage.length > 0) {
     if (
       shownImage[shownImage.length - 1].nextElementSibling
-      && !shownImage[shownImage.length - 1].nextElementSibling.className.includes(
-        'view-more',
-      )
+      && !shownImage[shownImage.length - 1].nextElementSibling.classList.contains('view-more')
     ) {
       shownImage[0].classList.add('hidden');
-      shownImage[shownImage.length - 1].nextElementSibling.classList.remove(
-        'hidden',
-      );
+      shownImage[shownImage.length - 1].nextElementSibling.classList.remove('hidden');
     } else {
       // REMOVE THE LASTS FIRST-INDEXED NON-HIDDEN VALUE
-      const firstNonActive = allImageContainer.querySelector('.hidden');
+      const firstNonActive = allImageContainer.querySelector('div.hidden, picture.hidden');
       if (firstNonActive) firstNonActive.classList.remove('hidden');
       // HIDE THE LAST-HIDDEN-ELEMENT'S NEXT-SIBLING
-      notShownImage[notShownImage.length - 1].nextElementSibling.classList.add(
-        'hidden',
-      );
+      notShownImage[notShownImage.length - 1].nextElementSibling?.classList.add('hidden');
     }
   }
 }
@@ -59,20 +56,25 @@ function imageSlider(allImages, productName = 'product') {
   let slideContent = '';
   const filteredImages = allImages.filter((aImg) => !aImg.toLowerCase().endsWith('.pdf'));
 
-  if (filteredImages[0].includes('.pdf')) {
-    slideContent = div({ class: 'image-content' }, img({ src: '/content/dam/danaher/products/fallbackImage.jpeg' }));
+  if (!filteredImages.length || filteredImages[0].includes('.pdf')) {
+    const fallbackImg = img({ src: '/content/dam/danaher/products/fallbackImage.jpeg', alt: `${productName} - fallback image` });
+    slideContent = div({ class: 'image-content' }, div({ class: 'active' }, fallbackImg));
   } else {
     slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(filteredImages[0], `${productName} - image`, true));
   }
   const verticalSlides = div();
-  filteredImages.map((image, index) => {
-    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
-    let imageClass = (index === 0) ? 'active' : '';
-    if (index > 2) imageClass += ' hidden';
-    if (imageClass !== '') imageElement.className = imageClass.trim();
-    imageElement.addEventListener('click', showImage);
-    verticalSlides.append(imageElement);
-    return image;
+  filteredImages.forEach((image, index) => {
+    let element;
+    const imageClass = [(index === 0) ? 'active' : '', index > 2 ? 'hidden' : ''].filter(Boolean).join(' ').trim();
+    const pictureElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
+    if (pictureElement.tagName === 'PICTURE') {
+      element = pictureElement;
+    } else {
+      element = div(pictureElement);
+    }
+    if (imageClass) element.className = imageClass;
+    element.addEventListener('click', showImage);
+    verticalSlides.append(element);
   });
   if (filteredImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More');
@@ -130,12 +132,14 @@ export default async function decorate(block) {
       },
       a({ href: opcoBrandUrl }, result?.raw.opco),
     ),
+
     div(
       {
         class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
       },
-      result?.raw.titlelsig || '',
+      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
     ),
+
     div(
       {
         class: 'flex flex-col justify-start items-start',
@@ -283,36 +287,32 @@ export default async function decorate(block) {
       class:
               'inline-flex justify-start items-center gap-3',
     },
-    input({
-      type: 'number',
-      value: '1',
-      min: '1',
-      class:
-              'hidden pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
-    }),
-    div(
-      {
-        class: 'pr-starts-at-price hidden text-base font-extralight justify-start text-black text-4xl font-normal md:block',
-      },
-      div({ class: 'text-black text-base font-extralight' }, 'Starts at'),
-      `$${productInfo?.data?.salePrice?.value}`,
-    ),
+    // For future implementation
+    // input({
+    //   type: 'number',
+    //   value: '1',
+    //   min: '1',
+    //   class:
+    //     'pr-input w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline
+    // outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base
+    // font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
+    // }),
     a(
       {
         class:
-                'hidden cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+          'cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
       },
       span(
         {
           class: 'inherit text-base font-medium leading-snug',
         },
-        'Buy Now',
+        'Buy',
       ),
     ),
     div(
       {
         class:
-                'show-modal-btn hidden pr-rfq cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+          'show-modal-btn  pr-rfq cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
       },
       span(
         {
@@ -337,7 +337,6 @@ export default async function decorate(block) {
 
   infoTab.querySelector('.starts-at-price').style.display = 'none';
   infoTab.querySelector('.uom-seperator-line').style.display = 'none';
-  pricingQuoteButton.querySelector('.pr-starts-at-price').style.display = 'none';
 
   const availableOnlineRaw = result?.raw?.availableonline;
   const availableOnline = Array.isArray(availableOnlineRaw)
@@ -356,10 +355,58 @@ export default async function decorate(block) {
 
   const showBuyNow = shopEnabledCountries.length > 0;
   const showRFQ = availableOnline.length > 0;
-  defaultContent.append(pricingQuoteButton);
+
+  const buyDetail = div(
+    {
+      class: 'inline-flex justify-start items-center gap-3',
+    },
+    ...(result?.raw?.listpriceusd ? [
+      div(
+        {
+          class: 'starts-at-price font-bold justify-start text-black text-2xl font-normal',
+        },
+        div({ class: 'starts-at-label text-black text-base font-bold' }, 'Starts at'),
+        `$${result?.raw?.listpriceusd}`,
+      ),
+      a(
+        {
+          class:
+            'cursor-pointer pr-bn px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 text-white rounded-[20px] flex justify-center items-center overflow-hidden',
+        },
+        span(
+          {
+            class: 'inherit text-base font-medium leading-snug',
+          },
+          'Buy',
+        ),
+      ),
+    ] : []),
+    button(
+      {
+        class:
+        'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+      },
+      div(
+        {
+          class: 'inherit text-base font-medium leading-snug',
+        },
+        'Request a Quote',
+      ),
+    ),
+  );
+
+  if (result?.raw?.objecttype !== 'Family' && result?.raw?.objecttype !== 'Bundle') {
+    defaultContent.append(pricingQuoteButton);
+  }
+  if (result?.raw?.objecttype === 'Bundle') {
+    defaultContent.append(quoteButton);
+  }
+  if (result?.raw?.objecttype === 'Family') {
+    defaultContent.append(buyDetail);
+  }
 
   const brandURL = result?.raw?.externallink
-    ? `${result.raw.externallink}?utm_source=dhls_website`
+    ? `${result.raw.externallink}`
     : null;
 
   function formatMoney(number) {
@@ -403,7 +450,7 @@ export default async function decorate(block) {
 
       if (actionValue === 'true' && externallinkRaw) {
         pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
-        btnHref = `${externallinkRaw}?utm_source=dhls_website`;
+        btnHref = `${externallinkRaw}`;
       } else if (actionValue.startsWith('http')) {
         pricingQuoteButton.querySelector('.pr-bn')?.classList.remove('hidden');
         btnHref = actionPart.trim();
@@ -454,12 +501,14 @@ export default async function decorate(block) {
     ? result.raw.externallink
     : result.raw.clickableuri;
   const externalURL = `${clickableLink}?utm_source=dhls_website`;
-  externalButton.addEventListener('click', () => {
-    window.open(externalURL, '_blank');
-  });
-  globeImg.addEventListener('click', () => {
-    window.open(externalURL, '_blank');
-  });
+  const openLink = () => {
+    const target = externalURL.includes(window.DanaherConfig.host) ? '_self' : '_blank';
+    window.open(externalURL, target);
+  };
+
+  externalButton.addEventListener('click', openLink);
+  globeImg.addEventListener('click', openLink);
+
   const info = div(
     {
       class:
@@ -621,13 +670,19 @@ export default async function decorate(block) {
     ),
   );
 
+  let content;
+
+  if (result?.raw?.numproducts > 0) {
+    content = result?.raw?.objecttype === 'Bundle' ? bundleLink : categoryLink;
+  }
+
   const bundleTab = div(
     {
       class: 'w-full inline-flex gap-6 flex-col md:flex-row',
     },
-    result?.raw?.objecttype === 'Bundle' ? bundleLink : categoryLink,
-
+    content,
   );
+
   decorateIcons(bundleTab);
   bundleLink.addEventListener('click', () => {
     const main = block.closest('main');
