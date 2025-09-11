@@ -54,6 +54,7 @@
       "table",
       "testimonial",
       "tags-list",
+      "topics",
       "related-articles",
       "social-media",
       "mini-teasers",
@@ -271,6 +272,12 @@
     "id": "tiny-carousel",
     "components": [
       "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "topics",
+    "components": [
+      " "
     ]
   }
 ]

@@ -40,11 +40,11 @@ export default async function buildAutoBlocks() {
     section.removeChild(blogHeroP2);
     const divEl = div();
     divEl.append(blogH1, blogHeroP1);
-    moveImageInstrumentation(blogHeroImage);
+    // moveImageInstrumentation(blogHeroImage);
     // columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
     blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
-    moveImageInstrumentation(blogHeroImage);
+    // moveImageInstrumentation(blogHeroImage);
     section.removeChild(blogHeroP1);
     // columnElements = [[blogHeroImage, blogH1]];
   }
