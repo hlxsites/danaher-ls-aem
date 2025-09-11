@@ -15,4 +15,4 @@ export const includeProdPaths = ['e-buy', 'products/', 'brands', 'products.html'
 export const excludeStagePaths = ['products/family', 'products/sku', 'products/bundle', 'products/product-coveo', 'topics-jck1'];
 
 // include stage paths
-export const includeStagePaths = ['e-buy', 'products/', 'brands', 'products.html', 'blog', 'news', 'we-see-a-way'];
+export const includeStagePaths = ['e-buy', 'products/', 'brands', 'products.html', 'blog', 'news', 'library', 'we-see-a-way'];
