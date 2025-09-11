@@ -18,9 +18,9 @@ function deleteCookie(name) {
 }
 
 /*
-:::::::::::::::
+
 Gets the Authentication-Token for user (Customer/Guest)
-:::::::::::::::::::::::::::
+
 */
 export const getAuthenticationToken = async () => {
   try {
@@ -40,9 +40,9 @@ export const getAuthenticationToken = async () => {
 };
 
 /*
-:::::::::::::::
+
 Gets the Authentication-Token for user (Customer/Guest)
-:::::::::::::::::::::::::::
+
 */
 export const setAuthenticationToken = (tokenData, loginData, type) => {
   try {

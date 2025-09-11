@@ -35,16 +35,16 @@ async function setShippingNotesOnBlur() {
 
   if (getShippingNotesField) {
     /*
- :::::::::::::
+
  get current basket details
- :::::::::::::
+
 */
     const getCurrentBasketDetails = await getBasketDetails();
 
     /*
- :::::::::::::
+
  check if basket has the shipping notes attribute
- :::::::::::::
+
 */
     if (getCurrentBasketDetails?.data?.data?.attributes?.some(
       (attr) => attr?.name === 'GroupShippingNote',
@@ -55,9 +55,9 @@ async function setShippingNotesOnBlur() {
       );
 
       /*
- :::::::::::::
+
  check if notes with same value esists
- :::::::::::::
+
 */
 
       if (
@@ -69,9 +69,9 @@ async function setShippingNotesOnBlur() {
       }
       showPreLoader();
       /*
-:::::::::::::
+
 if basket has the shipping notes attribute and has value. Update the shipping notes
-:::::::::::::
+
 */
       const shippingNotesPayload = {
         name: 'GroupShippingNote',
@@ -94,9 +94,9 @@ if basket has the shipping notes attribute and has value. Update the shipping no
       }
     } else {
       /*
- :::::::::::::
+
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
- :::::::::::::
+
 */
       // eslint-disable-next-line no-lonely-if
       if (getShippingNotesField?.value?.trim() !== '') {
@@ -126,9 +126,9 @@ if basket has the shipping notes attribute and has value. Update the shipping no
 }
 
 /*
- :::::::::::::::
+
  generates the shipping address module for the checkout module/page
- ::::::::::::::
+
  */
 const shippingMethodsModule = async () => {
   if (!window.location.pathname.includes('shipping')) return false;
@@ -147,9 +147,9 @@ const shippingMethodsModule = async () => {
     if (validatingBasket?.status === 'error') throw new Error('Invalid Basket');
     const storeConfigurations = await getStoreConfigurations();
     /*
-    ::::::::::::::
+
     get price type if its net or gross.
-    ::::::::::::::
+
     */
     let checkoutPriceType = 'net';
     if (storeConfigurations.pricing?.priceType) {
@@ -207,16 +207,16 @@ const shippingMethodsModule = async () => {
       ),
     );
     /*
-  ::::::::::::::
+
   get current basket/cart details.
-  ::::::::::::::
+
   */
     const getCurrentBasketDetails = await getBasketDetails();
     let basketShippingNotes = '';
     /*
-  ::::::::::::::
+
   check if the shipping notes exists
-  ::::::::::::::
+
   */
     if (
       getCurrentBasketDetails?.status === 'success'
@@ -272,9 +272,9 @@ const shippingMethodsModule = async () => {
       if (moduleToggleButtonsWrapper) moduleContent.append(moduleToggleButtonsWrapper);
 
       /*
-       ::::::::::::::
+
        get shipping bucket/methods with  id
-       ::::::::::::::
+
        */
       const shippingMethods = await getShippingMethods();
       if (shippingMethods?.data?.length > 0 && shippingMethods?.status === 'success') {
@@ -303,9 +303,9 @@ const shippingMethodsModule = async () => {
             );
             decorateIcons(defaultShippingMethodIcon);
             /*
-             ::::::::::::::::::
+             :::
              generates shipping methods cards
-             ::::::::::::::::::::::::::::::::::::::::
+             ::::::::::
              */
             shippingMethods?.data?.forEach((method) => {
               const methodData = div(
@@ -352,11 +352,11 @@ const shippingMethodsModule = async () => {
             });
             if (modulesMethodsWrapper) {
               /*
-               ::::::::::::::::::
+               :::
                attach event listener
                to set methods as
                default shipping method
-               ::::::::::::::::::::::::::::::::::::::::
+               ::::::::::
                */
               modulesMethodsWrapper.addEventListener('click', async (event) => {
                 event.preventDefault();
@@ -371,9 +371,9 @@ const shippingMethodsModule = async () => {
                       let highlightShippingMethod = false;
                       if (setShippingMethodResponse.status !== 'error') {
                         /*
-                           ::::::::::::::::::::::
+                           :::::::
                            update basket with selected shipping method
-                           :::::::::::::::::::::::::::::::
+                           :
                            */
                         await updateBasketDetails();
                         const getAllShippingMethods = modulesMethodsWrapper.querySelectorAll(
@@ -396,9 +396,9 @@ const shippingMethodsModule = async () => {
                           });
                         }
                         /*
-                            ::::::::::::::
+
                             highlight selected shipping method
-                            ::::::::::::::
+
                             */
                         highlightShippingMethod = modulesMethodsWrapper.querySelector(
                           `#${selectedMethod?.id}`,

@@ -147,7 +147,7 @@ export default async function decorate(block) {
 
   /*
   *
-  :::::::::::::: adding list and grid view buttons :::::::::::::::::::::
+   adding list and grid view buttons 
   *
   */
 

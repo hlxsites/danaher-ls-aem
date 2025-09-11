@@ -129,17 +129,17 @@ function createCardItem(item, defaultCard) {
 }
 
 /*
- :::::::::::::::
+
  generates the payment module for the checkout module/page
- ::::::::::::::
+
  */
 export const paymentModule = async (isValidated) => {
   try {
     if (!isValidated) {
     /*
-    ::::::::::::::
+
     validating basket.
-    ::::::::::::::
+
     */
       const validateData = {
         adjustmentsAllowed: true,
@@ -708,9 +708,9 @@ export const paymentModule = async (isValidated) => {
       }
     });
     /*
-    ::::::::::::::
+
     search functionality for search for cards list
-    ::::::::::::::
+
     */
     const cardsListSearchInput = savedStripeCardsHeader.querySelector(
       '#searchWithIcon input',

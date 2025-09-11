@@ -38,9 +38,9 @@ export default async function decorate(block) {
   );
   paymentmethodsWrapper.append(checkoutSkeleton());
   /*
-  ::::::::::::::
+
   initialize the payment module
-  ::::::::::::::
+
   */
   paymentModule(true)?.then(async (module) => {
     paymentmethodsWrapper.innerHTML = '';

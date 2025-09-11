@@ -15,16 +15,16 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
- ::::::::::::::
+
  shipping states will get from api based on the selected country
- ::::::::::::::
+
  */
 export const shippingStates = '';
 
 /*
- ::::::::::::::
+
  Create modules.. used for shipping address, shipping methods and payment module
- ::::::::::::::
+
  */
 export const createModule = (id, isActive, content, buttons) => {
   const module = div({
@@ -56,9 +56,9 @@ export const createModule = (id, isActive, content, buttons) => {
 };
 
 /*
-::::::::::::::
+
 render the modules
-::::::::::::::
+
 */
 
 export const loadCheckoutModule = async (module) => {
@@ -97,16 +97,16 @@ export const loadCheckoutModule = async (module) => {
 };
 
 /*
-  ::::::::::::::
+
   gerenarte the progressbar...for the checkout module to enhance user interaction
-  .::::::::::::::
+  .
   */
 
 export const progressModule = () => {
   /*
-  ::::::::::::::
+
   Create progress-bar
-  ::::::::::::::
+
   */
   const progressBar = div({
     id: 'checkoutProgressBar',
@@ -228,9 +228,9 @@ export const progressModule = () => {
   );
 
   /*
- ::::::::::::::
+
  Append steps and segments to progress-bar
- ::::::::::::::
+
  */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
   decorateIcons(address);
@@ -246,9 +246,9 @@ export const progressModule = () => {
 };
 
 /*
-  ::::::::::::::
+
   Update line segments between steps
-  ::::::::::::::
+
   */
 function updateCheckoutUI(steps, stepKey) {
   const path = window.location.pathname;
@@ -303,9 +303,9 @@ function updateCheckoutUI(steps, stepKey) {
 }
 
 /*
-::::::::::::::
+
 initialize module to render at page load.
-.::::::::::::::
+.
  */
 export const initializeModules = async () => {
   const authenticationToken = await getAuthenticationToken();

@@ -45,9 +45,7 @@ export function decorateBuyButton(wrapper) {
 }
 /*
   *
-  :::::::::::
      include function to add utm params in the url(s)
-  ::::::::::::::
   *
   */
 function initUtmParamsUtm() {
@@ -106,9 +104,7 @@ if (document.readyState === "loading") {
 }
 /*
  *
- :::::::::::
     include / exclude eds page for Prod and Stage
- ::::::::::::::
  *
  */
 export const includeProdEdsPaths = ['news-eds', 'news-eds.html', 'blog-eds.html', 'blog-eds', 'products/brands', 'products/2d-3d-cell-culture-systems', 'products/antibodies', 'products/capillary-electrophoresis-systems', 'products/cell-lines-lysates', 'products/extraction-kits', 'products/liquid-handlers', 'products/assay-kits', 'products/biochemicals', 'products/cell-counters-analyzers', 'products/cellular-imaging-systems', 'products/high-performance-liquid-chromatography-systems', 'products/high-throughput-cellular-screening-systems', 'products/mass-spectrometers', 'products/microarray-scanners', 'products/microbioreactors', 'products/microplate-readers', 'products/microscopes', 'products/particle-counters-and-analyzers', 'products/patch-clamp-systems', 'products/proteins-peptides', 'products/sample-preparation-detection', 'products/software-platforms', 'products/centrifuges', 'products/clone-screening-systems', 'products/flow-cytometers', 'products/chromatography-columns', '/products.html'];

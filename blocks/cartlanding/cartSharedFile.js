@@ -8,9 +8,9 @@ import {
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 /*
-:::::::::::::::::::::::::::
+
 Function to update current basket details
-:::::::::::::::::::::::::::
+
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();

@@ -74,9 +74,9 @@ export default async function decorate(block) {
     }
   }
   /*
-  ::::::::::::::
+
   initialize the payment module
-  ::::::::::::::
+
   */
 
   wrapper.append(dashboardSideBarContent, addressesWrapper);

@@ -23,9 +23,9 @@ if (hostName.includes('local')) {
 const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 /*
-:::::::::::::::
+
  Login the user (Customer/Guest)
- :::::::::::::::::::::::::::
+
 */
 async function getUserData(token) {
   try {
@@ -58,9 +58,9 @@ async function getUserData(token) {
   }
 }
 /*
-:::::::::::::::
+
  Register the user (Customer)
- :::::::::::::::::::::::::::
+
 */
 export async function userRegister(data = {}) {
   showPreLoader();
@@ -105,9 +105,9 @@ export async function userRegister(data = {}) {
   }
 }
 /*
-:::::::::::::::
+
  Login the user (Customer/Guest)
- :::::::::::::::::::::::::::
+
 */
 export async function userLogin(type, data = {}) {
   showPreLoader();
@@ -168,9 +168,9 @@ export async function userLogin(type, data = {}) {
         setAuthenticationToken(userLoggedIn.data, userInfoData, type);
 
         /*
- ::::::::::::
+
  get the basket details and create if doen't exists
- ::::::::::::::::::
+
    */
         const basketData = await getBasketDetails(type, lastBasketId);
 
@@ -212,9 +212,9 @@ export async function userLogin(type, data = {}) {
   }
 }
 /*
-::::::::::::::::::::::
+
 function to remove session preloader whenever required
-:::::::::::::::::::::::
+
 */
 export function removeSessionPreLoader() {
   setTimeout(() => {
@@ -224,9 +224,9 @@ export function removeSessionPreLoader() {
 }
 
 /*
- ::::::::::::::::::::
+
  creates a preloader for expired login session (animation)
-  :::::::::::::::::
+
  */
 export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
@@ -252,9 +252,9 @@ export function sessionPreLoader() {
   return createModal(sessionPreLoaderContent, true, true);
 }
 /*
-:::::::::::::::
+
  Logout the user (Customer/Guest)
- :::::::::::::::::::::::::::
+
 */
 function deleteCookie(name) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;

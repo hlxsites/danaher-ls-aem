@@ -18,9 +18,9 @@ export default async function decorate(block) {
   block.innerHtml = '';
 
   /*
-  ::::::::::::::
+  
   Create container
-  ::::::::::::::
+  
   */
   const checkoutWrapper = div({
     id: 'checkoutWrapper',
@@ -29,18 +29,18 @@ export default async function decorate(block) {
   });
 
   /*
-  ::::::::::::::
+  
   Create Modules outer
-  ::::::::::::::
+  
   */
   const modulesContent = div({
     class: 'checkout-content flex flex-col gap-5 justify-between  lg:flex-row',
   });
 
   /*
-  ::::::::::::::
+  
   Create Modules container
-  ::::::::::::::
+  
   */
   const modulesContainer = div({
     class:
@@ -51,9 +51,9 @@ export default async function decorate(block) {
   const progressBar = progressModule();
 
   /*
-  ::::::::::::::
+  
   initialize the shipping address, shipping methods and payment module at page load
-  ::::::::::::::
+  
   */
   initializeModules()
     .then((modules) => {
@@ -84,9 +84,9 @@ export default async function decorate(block) {
   checkoutWrapper.appendChild(progressBar);
   checkoutWrapper.append(modulesContent);
   /*
-  ::::::::::::::
+  
   Append container to document body
-  ::::::::::::::
+  
   */
   block.appendChild(checkoutWrapper);
 }

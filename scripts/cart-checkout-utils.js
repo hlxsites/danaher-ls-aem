@@ -144,7 +144,7 @@ export const divider = (val) => hr({
 /*
 *
 *
-::::::::: skeleton for checkout modules ::::::
+: skeleton for checkout modules :
 *
 *
 */
@@ -175,9 +175,9 @@ export const checkoutSkeleton = () => {
 };
 
 /*
-::::::::::::::
+
 default shipping/billing address if available when user lands on checkout page
-::::::::::::::
+
 */
 export function defaultAddress(address, type) {
   const getDefaultAddressWrapper = document.querySelector(
@@ -243,9 +243,9 @@ export function defaultAddress(address, type) {
   return false;
 }
 /*
- :::::::::::::::::::::::::::::
+
  set shipping notes to default based on the method ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function setShippingNotes(shippingNotesPayload) {
@@ -285,9 +285,9 @@ export async function setShippingNotes(shippingNotesPayload) {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  update shipping notes based on the method ID
- ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function updateShippingNotes(shippingNotesPayload) {
@@ -327,9 +327,9 @@ export async function updateShippingNotes(shippingNotesPayload) {
   }
 }
 /*
-:::::::::::::::::::::::::::
+
  Function to create basket
-  :::::::::::::::::::::::::::
+
 */
 export const createBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -353,9 +353,9 @@ export const createBasket = async () => {
   }
 };
 /*
-:::::::::::::::::::::::::::
+
  Function to validate basket
-  :::::::::::::::::::::::::::
+
 */
 export const validateBasket = async (validateData) => {
   const authenticationToken = await getAuthenticationToken();
@@ -382,9 +382,9 @@ export const validateBasket = async (validateData) => {
   }
 };
 /*
-:::::::::::::::::::::::::::
+
  Function to submit Order
-  :::::::::::::::::::::::::::
+
 */
 export const submitOrder = async (basketId, paymentMethod) => {
   const authenticationToken = await getAuthenticationToken();
@@ -461,9 +461,9 @@ export const submitOrder = async (basketId, paymentMethod) => {
 };
 
 /*
- :::::::::::::::::::::::::::::
+
  get saved cards for payment
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getSavedCards() {
   const authenticationToken = await getAuthenticationToken();
@@ -487,9 +487,9 @@ export async function getSavedCards() {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  get single adress details based on address id
- ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} addressURI - The ID of the Address.
  */
 export async function getAddressDetails(addressURI, type = '') {
@@ -521,9 +521,9 @@ export async function getAddressDetails(addressURI, type = '') {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  update use address object with cuyrrent address
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} response - Response from the Set default address API.
  */
 export async function setUseAddressObject(response) {
@@ -559,9 +559,9 @@ export async function setUseAddressObject(response) {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
   set use address to  show on ui based on adress id and type
-   ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} id - The ID of the current address.
  * @param {string} type - Shipping/Billing.
  */
@@ -661,9 +661,9 @@ export const setUseAddress = async (id, type, action = '') => {
 };
 
 /*
-:::::::::::::::::::::::::::
+
 Function to get current basket details
-:::::::::::::::::::::::::::
+
 */
 export async function getBasketDetails(userType = null, lastBasketId = null) {
   const authenticationToken = await getAuthenticationToken();
@@ -739,9 +739,9 @@ export async function updateHeaderCart() {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  update shipping methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const updateShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -780,9 +780,9 @@ export const updateShippingMethods = async () => {
   }
 };
 /*
- :::::::::::::::::::::::::::::
+
  get shipping methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const getShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -825,9 +825,9 @@ export const getShippingMethods = async () => {
   }
 };
 /*
- :::::::::::::::::::::::::::::
+
  get payment  methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const getPaymentMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -861,9 +861,9 @@ export const getPaymentMethods = async () => {
 };
 
 /*
- :::::::::::::::::::::::::::::
+
   set shipping method to default based on the method ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} methodId - The ID of the Shipping method.
  */
 export const setShippingMethod = async (methodId) => {
@@ -908,9 +908,9 @@ export const setShippingMethod = async (methodId) => {
 };
 
 /*
-:::::::::::::::::::::::::::::
+
 update addresses to be shown on ui
-::::::::::::::::::::::::::::::::::::::::::::
+
  */export async function updateAddresses(addressId = '') {
   if (window.location.pathname.includes('cart')) return false;
 
@@ -980,9 +980,9 @@ update addresses to be shown on ui
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  get addresses to be shown
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
@@ -992,9 +992,9 @@ export async function getAddresses() {
   return updateAddresses();
 }
 /*
-::::::::::::::
+
 shipping address list will get it from the api under my-account -  get addresses
-::::::::::::::
+
 */
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
@@ -1011,9 +1011,9 @@ export async function addressList(type) {
 }
 
 /*
-::::::::::::::::::::::
+
 generate country and state slect fields
-:::::::::::::::::::::::::::::::
+
 */
 export const buildCountryStateSelectBox = (
   lable,
@@ -1071,9 +1071,9 @@ export const buildCountryStateSelectBox = (
 };
 
 /*
- :::::::::::::::::::::::::::::
+
  set address to default
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
@@ -1100,9 +1100,9 @@ export async function updateAddressToDefault(data) {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
  get addresses to be shown in UI
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getUseAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem('useAddress'));
@@ -1127,9 +1127,9 @@ export async function getUseAddresses() {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
  Get promotion details based on promotion ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {String} promotionId - promotionId from the Basket Details API.
  */
 export const getPromotionDetails = async (promotionId) => {
@@ -1168,9 +1168,9 @@ export const getPromotionDetails = async (promotionId) => {
 };
 
 /*
- ::::::::::::::
+
  tax exempt module.feed the create modal function with tax exempt content
- ::::::::::::::
+
  */
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
@@ -1179,9 +1179,9 @@ export const taxExemptModal = () => {
       id: 'taxExemptWrapper',
     },
     /*
-    :::::::::::::::
+
      tax exempt header
-     ::::::::::::::
+
      */
     div(
       {
@@ -1215,9 +1215,9 @@ export const taxExemptModal = () => {
       ),
     ),
     /*
-    ::::::::::::::
+
     tax exempt body
-    ::::::::::::::
+
     */
     div(
       {
@@ -1254,9 +1254,9 @@ export const taxExemptModal = () => {
     ),
 
     /*
-     ::::::::::::::
+
      tax exempt footer
-     ::::::::::::::
+
      */
     div(
       {
@@ -1282,9 +1282,9 @@ export const taxExemptModal = () => {
     ),
   );
   /*
-    ::::::::::::::::::::::
+
     cloud file icon for tax exempt modal
-     :::::::::::::::::::::::::::::::
+
     */
   const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file');
 
@@ -1301,9 +1301,9 @@ export const taxExemptModal = () => {
   decorateIcons(cloudFileIconWrapper);
   cloudFileIcon?.insertAdjacentElement('beforeend', cloudFileIconWrapper);
   /*
-    ::::::::::::::::::::::
+
     upload file icon for tax exempt modal
-     :::::::::::::::::::::::::::::::
+
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
     '.tax-exempt-upload',
@@ -1448,9 +1448,9 @@ export const taxExemptModal = () => {
 /*
 *
 *
- ::::::::::::::
+
  function to create PO number if its not present in the Baket
- ::::::::::::::
+
 *
 *
 *
@@ -1491,9 +1491,9 @@ export const createPoNumber = async (invoiceNumber) => {
 /*
 *
 *
- ::::::::::::::
+
  function to update PO number if its not present in the Baket
- ::::::::::::::
+
 *
 *
 *
@@ -1541,9 +1541,9 @@ export async function silentNavigation(path) {
 /*
 *
 *
- ::::::::::::::
+
  handle the interaction when user click on proceed button or the steps icons
- ::::::::::::::
+
 *
 *
 *
@@ -1644,7 +1644,7 @@ export const changeStep = async (step) => {
     /*
     *
     *
-      ::::::::: handle payment ::::::
+     handle payment :
     *
     *
     * */
@@ -1660,7 +1660,7 @@ export const changeStep = async (step) => {
       if (getSelectedPaymentMethod?.value === 'invoice') {
         /*
         *
-        :::::::: check if invoice number is entered :::::::
+         check if invoice number is entered
         *
         */
         if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
@@ -1670,7 +1670,7 @@ export const changeStep = async (step) => {
       if (getSelectedPaymentMethod?.value === 'invoice') {
         /*
         *
-        :::::::: Call Open tender API for Invoice :::::::
+         Call Open tender API for Invoice
         *
         */
         const url = `${baseURL}/baskets/current/payments/open-tender?include=paymentMethod`;
@@ -1692,7 +1692,7 @@ export const changeStep = async (step) => {
         };
         /*
         *
-        :::::::: Validating Basket :::::::
+         Validating Basket
         *
         */
         const validatingBasketForPayment = await validateBasket(validatePaymentData);
@@ -1701,7 +1701,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Create PO number  :::::::
+         Create PO number
         *
         */
         if (invoiceNumberValue) {
@@ -1717,7 +1717,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Submitting order :::::::
+         Submitting order
         *
         */
         const basketId = getBasketForOrder?.data?.data?.id;
@@ -1738,14 +1738,14 @@ export const changeStep = async (step) => {
 
       /*
       *
-      * :::::::::; handle stripe payment ::::::::
+      * :; handle stripe payment
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
         /*
         *
-        :::::::::::
+        :
         Getting Stripe Instance
-        ::::::::::
+
         *
         */
         const stripe = getStripeInstance();
@@ -1758,9 +1758,9 @@ export const changeStep = async (step) => {
         /*
         *
         *
-          ::::::::
+
           handle stripe payment for saved/new card
-          :::::::::
+
         *
         */
         if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select a card to place order.');
@@ -1774,9 +1774,9 @@ export const changeStep = async (step) => {
         let confirmPM = '';
         /*
         *
-        :::::::::::
-        confirm setup ::::
-        ::::::::::
+
+        confirm setup :
+
         *
         */
         let proceedTopayment = 'false';
@@ -1796,9 +1796,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
           *
-          :::::::::::
+
           Get Payment Intent
-          ::::::::::
+
           *
           */
           const getPaymentIntentData = await getPaymentIntent();
@@ -1807,9 +1807,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         Post Payment Intent
-        ::::::::::
+
         *
         */
         const postingIntent = await postPaymentIntent(selectedPaymentMethodType);
@@ -1818,9 +1818,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
           *
-          :::::::::::
+
           Post Setup Intent
-          ::::::::::
+
           *
           */
           settingIntent = await postSetupIntent();
@@ -1828,9 +1828,9 @@ export const changeStep = async (step) => {
         }
         /*
         *
-        :::::::::::
+
         Creating Instrument
-        ::::::::::
+
         *
         */
         // eslint-disable-next-line max-len
@@ -1842,9 +1842,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         Assigning Instrument
-        ::::::::::
+
         *
         */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
@@ -1860,9 +1860,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         validating basket
-        ::::::::::
+
         *
         */
         const validatingBasketForPayment = await validateBasket(validateBasketData);
@@ -1872,9 +1872,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'savedCard') {
           /*
           *
-          :::::::::::
-          confirm payment method ::::
-          ::::::::::
+
+          confirm payment method :
+
           *
           */
           const getPreConfirmedPI = await getPaymentIntent();
@@ -1889,9 +1889,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'savedCard' || proceedTopayment) {
           /*
           *
-          :::::::::::
-          confirm payment :::: final step
-          ::::::::::
+
+          confirm payment : final step
+
           *
           */
           confirmingPayment = await confirmPayment(stripe, postingIntent?.data?.client_secret, `${window.location.origin}/payment`, confirmPM);
@@ -1900,9 +1900,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         validating confirm-payment status
-        ::::::::::
+
         *
         */
         const status = confirmingPayment?.paymentIntent?.status;
@@ -1913,7 +1913,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Get Payment Intent API :::::::
+         Get Payment Intent API
         *
         */
 
@@ -1929,7 +1929,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Add / Update Card for Order :::::::
+         Add / Update Card for Order
         *
         */
         const updatingCardData = {
@@ -1953,7 +1953,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Submit Order :::::::
+         Submit Order
         *
         */
 
@@ -1963,7 +1963,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Unmounting the stripe elements :::::::
+         Unmounting the stripe elements
         *
         */
         if (proceedTopayment && proceedTopayment === 'true') {
@@ -1972,7 +1972,7 @@ export const changeStep = async (step) => {
         }
         /*
         *
-        :::::::: Clear Session :::::::
+         Clear Session
         *
         */
         localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
@@ -2023,10 +2023,8 @@ async function loadAddressListModal(type) {
   removePreLoader();
 }
 /*
-::::::::::::::
-generate the  address form
-.::::::::::::::
 
+generate the  address form
 * @param {Object} data. The data object for edit form
 * @param {String} type. Form type ( shipping / billing )
 */
@@ -2177,17 +2175,16 @@ export async function addressForm(type, data = {}, action = '') {
     ),
   );
   /*
-::::::::::::::::
 get save address form buttonl...
-:::::::::::::::::
+
 */
   const saveAddressButton = adressForm.querySelector(
     `#save${capitalizeFirstLetter(type)}Address`,
   );
   /*
-::::::::::::::::
+:
 get counrty field and attach change event listener to populate states based on country code
-:::::::::::::::::
+
 */
   const selectedCountry = adressForm.querySelector('#countryCode');
   selectedCountry?.addEventListener('change', async (event) => {
@@ -2218,9 +2215,9 @@ get counrty field and attach change event listener to populate states based on c
 
     try {
       /*
-       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
        submitting form
-       :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
@@ -2231,11 +2228,11 @@ get counrty field and attach change event listener to populate states based on c
         formObject[key] = value;
       });
       /*
-       ::::::::::::::
+
        key to  set address as preferred billing or shipping address
        default${capitalizeFirstLetter(type)}AddressFormModal
        used for initial shipping and billing form
-       ::::::::::::::
+
        */
 
       const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
@@ -2253,9 +2250,9 @@ get counrty field and attach change event listener to populate states based on c
       }
 
       /*
-       ::::::::::::::
+
        set the address as shipping or biling
-       ::::::::::::::
+
        */
       const checkSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
       const sameAsShipping = checkSameAsShippingCheckbox?.value === 'false' ? 'no' : 'yes';
@@ -2275,9 +2272,9 @@ get counrty field and attach change event listener to populate states based on c
       }
       const method = data && !action ? 'PUT' : 'POST';
       /*
-      :::::::::::::::::::::
+      :
       submits the form
-      ::::::::::::::::::::::::::::::::::::
+
       */
 
       const addAddressResponse = await submitForm(
@@ -2314,9 +2311,9 @@ get counrty field and attach change event listener to populate states based on c
 
           if (isDefaultSBForm) {
             /*
-            ::::::::::::::::
+
             set default address starts
-            ::::::::::::::
+
             */
             if (showDefaultAddress) {
               const addressURI = addAddressResponse?.data?.title?.split(':')[4];
@@ -2329,9 +2326,9 @@ get counrty field and attach change event listener to populate states based on c
 
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
-                  ::::::::::::::
+
                   set this address as default address
-                  :::::::::::::
+                  :
                   */
                 showDefaultAddress.insertAdjacentElement(
                   'afterend',
@@ -2342,15 +2339,15 @@ get counrty field and attach change event listener to populate states based on c
                 }
 
                 /*
-                   ::::::::::::::
+
                    assign address to backet
-                   ::::::::::::::::::
+                   :
                    */
                 await setUseAddress(addressURI, type, 'useAddress');
                 /*
-                   ::::::::::::::
+
                    assign address to backet
-                   ::::::::::::::::::
+                   :
                    */
                 if (sameAsShipping === 'yes' && type === 'shipping') {
                   const showDefaultBillingAddress = document.querySelector(
@@ -2359,9 +2356,9 @@ get counrty field and attach change event listener to populate states based on c
                   const renderDefaultBillingAddress = defaultAddress(address, 'billing');
                   if (showDefaultBillingAddress && renderDefaultBillingAddress) {
                     /*
-                      ::::::::::::::
+
                       set this address as default address
-                      :::::::::::::
+                      :
                       */
                     showDefaultBillingAddress.insertAdjacentElement(
                       'afterend',
@@ -2372,16 +2369,16 @@ get counrty field and attach change event listener to populate states based on c
                     }
 
                     /*
-                      ::::::::::::::
+
                       set billing address for use address , update for basket as well
-                      :::::::::::::
+                      :
                       */
                     await setUseAddress(addressURI, 'billing', 'useAddress');
 
                     /*
-                      ::::::::::::::
+
                       hide the shipping as billing checkbox and show check indicator
-                      :::::::::::::
+                      :
                       */
                     const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
                     if (getShipAsBillBox) {
@@ -2404,9 +2401,9 @@ get counrty field and attach change event listener to populate states based on c
                 }
 
                 /*
-                   ::::::::::::::
+
                    update basket details with the latest address
-                   ::::::::::::::::::
+                   :
                    */
 
                 await updateBasketDetails();
@@ -2414,18 +2411,18 @@ get counrty field and attach change event listener to populate states based on c
             }
           }
           /*
-           ::::::::::::::
+
            update address list
-           ::::::::::::::
+
            */
           await updateAddresses(addressId);
 
           showNotification('Address Added Successfully.', 'success');
           await loadAddressListModal(type);
           /*
-             ::::::::::::::
+
              set default address ends
-             ::::::::::::::
+
              */
         } else if (
           addAddressResponse
@@ -2434,9 +2431,9 @@ get counrty field and attach change event listener to populate states based on c
           formToSubmit.classList.add('hidden');
 
           /*
-        ::::::::::::::
+
         update address list
-        ::::::::::::::
+
         */
           await updateAddresses(addressId);
 
@@ -2447,9 +2444,9 @@ get counrty field and attach change event listener to populate states based on c
           throw new Error('Error Updating Address.');
         }
         /*
-          ::::::::::::::
+
           close utility modal
-          ::::::::::::::
+
           */
         closeUtilityModal();
       } else {
@@ -2458,9 +2455,9 @@ get counrty field and attach change event listener to populate states based on c
     } catch (error) {
       scrollViewToTop();
       /*
-          ::::::::::::
+
           remove preloader
-          :::::::::::::
+          :
           */
       removePreLoader();
       showNotification(error.message, 'error');
@@ -2473,23 +2470,22 @@ get counrty field and attach change event listener to populate states based on c
 /*
 *
 *
-:::::::::::::::
  generates the checkout summary module.......
- ::::::::::::::::::
+
  *
  *
  */
 export async function checkoutSummary(orderId = '') {
   /*
- ::::::::::::::::
+
  store config to use some predefined set of rules/values
- :::::::::::::::::::::::::::::
+
  */
   const storeConfigurations = await getStoreConfigurations();
   /*
-:::::::::::::::
+
 get price type if its net or gross
-....:::::::::::::::::::
+
 */
   const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? 'net';
   const currencyCode = '$';
@@ -2548,9 +2544,9 @@ get price type if its net or gross
   }
 
   /*
-::::::::::::::
+
  common function to get key value from checout summary object
- ::::::::::::::::::::::::::::
+
   */
   const getTotalValue = (type) => {
     const totalValue = `${checkoutSummaryData?.totals[type][
@@ -2560,9 +2556,9 @@ get price type if its net or gross
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
   /*
-  ::::::::::::::
+
   map the data from checkout summary (basket) to the keys.
-  ::::::::::::::
+
   */
   let checkoutSummaryKeys = {};
   if (orderId !== '') {
@@ -2651,9 +2647,9 @@ get price type if its net or gross
   });
 
   /*
-  :::::::::::::
+  :
   generate checkout summary  module
-  ::::::::::::::::::::::::::::::
+  :
   */
   const summaryModule = div(
     {
@@ -2677,9 +2673,9 @@ get price type if its net or gross
             id: 'checkoutSummarySubtotal',
           },
           /*
- ::::::::::::
+
  subtotal
- ::::::::::::::::::
+ :
    */ span(
             {
               class: ' justify-start text-black text-base font-semibold ',
@@ -2710,9 +2706,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  discount
- ::::::::::::::::::
+ :
    */ div(
           {
             class: 'checkoutSummaryDiscount  flex justify-between w-full',
@@ -2745,9 +2741,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  sales tax
- ::::::::::::::::::
+ :
    */
         div(
           {
@@ -2783,9 +2779,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  shipping costs
- ::::::::::::::::::
+ :
    */ div(
           {
             class:
@@ -2823,9 +2819,9 @@ get price type if its net or gross
         ),
       ),
       /*
- ::::::::::::
+
  total
- ::::::::::::::::::
+ :
    */
       div(
         {
@@ -2847,9 +2843,9 @@ get price type if its net or gross
         ),
       ),
       /*
- ::::::::::::
+
  proceed button
- ::::::::::::::::::
+ :
    */
       div(
         {
@@ -2877,9 +2873,9 @@ get price type if its net or gross
   );
 
   /*
- ::::::::::::
+
  button to change steps when clicked on proceed or step icon
- ::::::::::::::::::
+ :
    */
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
@@ -2888,9 +2884,9 @@ get price type if its net or gross
       proceedButton.textContent = 'Checkout';
     } else {
       /*
-      ::::::::::::::
+
       Update checkout summary button
-      ::::::::::::::
+
       */
       if (currentPath.includes('addresses')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
@@ -2929,9 +2925,9 @@ get price type if its net or gross
 
     if (getUseAddressesResponse) {
       /*
-   ::::::::::::
+
    check if shipping address exists in basket
-   ::::::::::::::::::
+   :
      */
       const getBasketShippingAddress = getCheckoutSummaryData?.data?.data?.commonShipToAddress;
 
@@ -3015,9 +3011,9 @@ get price type if its net or gross
         }
       }
       /*
- ::::::::::::
+
  check if billing address exists in basket and not same as the shipping address
- ::::::::::::::::::
+ :
    */
       if (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {

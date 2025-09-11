@@ -2,16 +2,16 @@ import {
   h2, h3, h5, span, div, p, button, input, label,
 } from '../../scripts/dom-builder.js';
 /*
- ::::::::::::::
+
  prebuilt function to render icons based on the class used i.e: icon icon-search
- ::::::::::::::
+
  */
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
-::::::::::::::::
+
 import  functions / modules from common utilities
-... :::::::::::::::::
+
 */
 // eslint-disable-next-line import/no-cycle
 import {
@@ -28,9 +28,9 @@ import {
   getCountries,
 } from '../../scripts/common-utils.js';
 /*
-::::::::::::::::::
+
 import  functions / modules from checkout utilities...
-:::::::::::::
+
 */
 // eslint-disable-next-line import/no-cycle
 import {
@@ -142,9 +142,9 @@ function initGmapsAutocomplete(addressType, addressInput = '') {
 }
 
 /*
- :::::::::::::::::::::::::::::
+ :
  Render Adress list for the address modal for shipping/billing
- ::::::::::::::::::::::::::::::
+ ::
  * @param {HTML} id - The ID of the current address.
  * @param {Array} addressList - Shipping/Billing address list array.
  * @param {String} type - shipping/billing.
@@ -186,9 +186,9 @@ const renderAddressList = (addressItems, addressListArray, type, showEmptyAction
           }
         }
         /*
-        ::::::::::::::
+
         button to set the ${type}(billing/shipping) address as the default  address
-        ::::::::::::::
+
         */
         let makeDefaultButton = '';
         if ((item?.preferredShippingAddress === 'true' && type === 'shipping') || (type === 'billing' && item?.preferredBillingAddress === 'true')) {
@@ -323,9 +323,9 @@ const renderAddressList = (addressItems, addressListArray, type, showEmptyAction
           }
         });
         /*
-:::::::::::::::::::::::::::::
+:
 click use address button to set the address as default for current order
-:::::::::::::::::::::::::::::
+:
         */
         const useAddressButton = addressListItem.querySelector(
           `.${type}-address-use-button`,
@@ -390,9 +390,9 @@ click use address button to set the address as default for current order
               );
               if (getDefaultAddressWrapper && renderDefaultAddress) {
                 /*
-                  ::::::::::::::
+
                   show this address as default address
-                  :::::::::::::
+                  :
                   */
                 getDefaultAddressWrapper.insertAdjacentElement(
                   'afterend',
@@ -404,28 +404,28 @@ click use address button to set the address as default for current order
               }
 
               /*
-              ::::::::::::::
+
               update address list
-              ::::::::::::::
+
               */
               // await updateAddresses();
               /*
-              ::::::::::::::
+
               update basket with the current use address
-              ::::::::::::::
+
               */
               await updateBasketDetails();
               /*
-              ::::::::::::::
+
               update checkout summary module
-              ::::::::::::::
+
               */
               await updateCheckoutSummary();
 
               /*
-              ::::::::::::::
+
               close utility modal
-              :::::::::::::::::::
+              ::
               */
               closeUtilityModal();
               const getSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
@@ -468,7 +468,7 @@ click use address button to set the address as default for current order
 
       /*
       *
-      ::::::::: marking address as default ::::::::::::
+       marking address as default
       *
       */
       if (clickedCheckbox?.classList.contains(`not-default-${type}-address`)) {
@@ -493,21 +493,21 @@ click use address button to set the address as default for current order
         }
 
         /*
-        ::::::::::::::
+
         update address
-        ::::::::::::::
+
         */
         await updateAddressToDefault(setAddressDetails);
         /*
-        ::::::::::::::
+
         update address list
-        ::::::::::::::
+
         */
         await updateAddresses();
         /*
-        ::::::::::::::
+
         close utility modal
-        ::::::::::::::
+
         */
         // closeUtilityModal();
 
@@ -554,7 +554,7 @@ click use address button to set the address as default for current order
         showNotification('Address set as default.', 'success');
       }
       /*
-      ::::::::::::: edit button clicked :::::::::::::::
+      : edit button clicked :
       */
       let showCancleButton = false;
       if (event.target.getAttribute('data-canclebutton') === 'true') {
@@ -654,9 +654,9 @@ click use address button to set the address as default for current order
     if (clearSearchButton) {
       clearSearchButton.addEventListener('click', () => {
         /*
-        ::::::::::::::
+
         clear search functionality for search for address list popup
-        ::::::::::::::
+
         */
         const addressListSearchInput = document.querySelector(
           '#searchWithIcon input',
@@ -674,9 +674,9 @@ click use address button to set the address as default for current order
 };
 
 /*
-::::::::::::::
+
 generate the shipping address list module
-::::::::::::::
+
 */
 export const addressListModal = async (type, cancelButton = true) => {
   const addressListWrapper = div({
@@ -732,9 +732,9 @@ export const addressListModal = async (type, cancelButton = true) => {
       addNewAddress.addEventListener('click', async () => {
         closeUtilityModal();
         /*
-         :::::::::::::::::::::::
+
          generates addresses form
-         ::::::::::::::::::::::::::::::::::::::
+
          */
         const addressFormModal = await addressForm(type, '');
         if (addressFormModal) {
@@ -755,9 +755,9 @@ export const addressListModal = async (type, cancelButton = true) => {
   });
   showPreLoader();
   /*
-  :::::::::::::::::::::::
+
   get addresses from the Address API
-  ::::::::::::::::::::::::::::::::::::::
+
   */
   const addressListData = await addressList(type);
 
@@ -765,9 +765,9 @@ export const addressListModal = async (type, cancelButton = true) => {
   renderAddressList(addressItems, addressListData, type);
 
   /*
-  ::::::::::::::
+
   search functionality for search for address list popup
-  ::::::::::::::
+
   */
   const addressListSearchInput = addressListHeader.querySelector(
     '#searchWithIcon input',
@@ -818,9 +818,9 @@ export const addressListModal = async (type, cancelButton = true) => {
 };
 
 /*
-::::::::::::::::
+
 add event listener to show address list modal...
-:::::::::::::::::
+
 */
 document.addEventListener('click', async (e) => {
   const { target } = e;
@@ -848,10 +848,10 @@ document.addEventListener('click', async (e) => {
     setTimeout(handleEditModal, 0);
   }
 });
-/* ::::::::::::::::::::
+/*
 // if the use billing address is not set, we will show default address
 // else will show add billing address button
-// :::::::::::::::::::::::
+//
 */
 async function generateDefaultAddress(
   shipToAddress,
@@ -875,9 +875,9 @@ async function generateDefaultAddress(
     }
   } else {
     /*
-    ::::::::::::::
+
     load billing address form for new User
-    ::::::::::::::
+
     */
     const billingForm = await addressForm('billing', '');
 
@@ -903,9 +903,9 @@ async function generateDefaultAddress(
   }
 }
 /*
-  ::::::::::::::
+
   generates the shipping address module for the checkout module/page
-::::::::::::::
+
 */
 export const shippingAddressModule = async () => {
   try {
@@ -965,9 +965,9 @@ export const shippingAddressModule = async () => {
       ),
     );
     /*
-    ::::::::::::::::::::::
+    ::
     generates the checkbox to set biiling as shipping address
-    ::::::::::::::
+
     */
     const shippingAsBillingAddress = buildBillingCheckboxElement(
       'shippingAsBillingAddress',
@@ -981,32 +981,32 @@ export const shippingAddressModule = async () => {
       false,
     );
     /*
-     ::::::::::::::
+
      handle the checkbox to set/unset shipping as billing address
-     ::::::::::::::
+
      */
     const shippingAsBillingAddressInput = shippingAsBillingAddress?.querySelector('input');
     /*
-   ::::::::::::::
+
    get all addresses details added
-   ::::::::::::::
+
    */
     const getDefaultAddressesResponse = await getAddresses();
 
     /*
-   ::::::::::::::
+
    get addresses which are set as use address for the current order shipping/billing
-   ::::::::::::::
+
    */
     const getUseAddressesResponse = await getUseAddresses();
     const useShipToAddress = getUseAddressesResponse?.data?.commonShipToAddress;
     const useInvoiceToAddress = getUseAddressesResponse?.data?.invoiceToAddress;
     /*
     *
-     ::::::::::::::::::::::::
+
      checkbox action for shipping as billing address
      (shippingAsBilling Checkbox :checked action)
-     ::::::::::::::::::::::::
+
     *
     */
 
@@ -1036,15 +1036,15 @@ export const shippingAddressModule = async () => {
       if (!targetCheckbox) return;
       //   c.preventDefault();
       /*
- ::::::::::::::
+
  get addresses which are set as use address for the current order
- ::::::::::::::
+
  */
       /*
   *
-   ::::::::::::::::::::::::
+
    checkbox for shipping as billing address
-   ::::::::::::::::::::::::
+
   *
   */
       const checkoutSummaryBillAddress = document.querySelector(
@@ -1055,9 +1055,9 @@ export const shippingAddressModule = async () => {
       );
 
       /*
-   :::::::::::::::::
+
    check if  checkbox for shipping as billing address is checked
-    ::::::::::::::::::::::::
+    :
   */
       if (targetCheckbox.value === 'true' && targetFrom === 'label') {
         // showDefaultBillingAddress?.classList.add('hidden');
@@ -1071,9 +1071,9 @@ export const shippingAddressModule = async () => {
         // eslint-disable-next-line max-len
 
         /*
-             ::::::::::::::
+
              if shipping as billing address not checked
-             ::::::::::::::::
+             ::
              */
         if (!basketInvoiceToAddress && billingAddressForm) {
           billingAddressForm.classList.add('hidden');
@@ -1085,9 +1085,9 @@ export const shippingAddressModule = async () => {
         ) {
           showPreLoader();
           /*
-   :::::::::::::::::
+
    check if  we have use address is set for shipping
-    ::::::::::::::::::::::::
+    :
   */
 
           const setAddressDetails = {
@@ -1120,18 +1120,18 @@ export const shippingAddressModule = async () => {
             usage: [true, true],
           };
           /*
-        ::::::::::::::
+
         update address to default
-        ::::::::::::::
+
         */
           const updatingToDefault = await updateAddressToDefault(
             setAddressDetails,
           );
           if (updatingToDefault?.status === 'success') {
             /*
-             ::::::::::::::
+
              assign billing address to basket
-             ::::::::::::::::
+             ::
              */
             const setAddressAsShipping = await setUseAddress(
               useShipToAddress?.id,
@@ -1149,18 +1149,18 @@ export const shippingAddressModule = async () => {
               );
               if (getDefaultAddressWrapper && renderDefaultAddress) {
                 /*
-              ::::::::::::::
+
               show this address as default billing address
-              :::::::::::::
+              :
               */
                 getDefaultAddressWrapper.insertAdjacentElement(
                   'afterend',
                   renderDefaultAddress,
                 );
                 /*
-                ::::::::::::::
+
                 update address list
-                ::::::::::::::
+
                 */
                 await updateAddresses();
                 // hide the billing address from checkout summary
@@ -1175,16 +1175,16 @@ export const shippingAddressModule = async () => {
           }
 
           /*
-          ::::::::::::::
+
           update shipping methods based on address change
-          ::::::::::::::
+
           */
 
           await updateShippingMethods();
           /*
-          ::::::::::::::
+
           update basket with the current use address
-          ::::::::::::::
+
           */
 
           await updateBasketDetails();
@@ -1220,7 +1220,7 @@ export const shippingAddressModule = async () => {
     });
 
     /*
-    :::::::::::::: load shipping address form::::::::::::::
+     load shipping address form
     */
     const shippingForm = await addressForm('shipping', '');
 
@@ -1232,11 +1232,11 @@ export const shippingAddressModule = async () => {
     /*
     *
     *
-     ::::::::::::::::::::
+
      if the use-shipping-address is not set,
      we will show default address
      else will show add billing address button
-     :::::::::::::::::::::::
+
      *
      *
      */
@@ -1329,25 +1329,25 @@ export const shippingAddressModule = async () => {
           shippingAsBillingAddress?.querySelector('input[name="shippingAsBillingAddress"]')?.setAttribute('checked', true);
         }
       }
-      // :::::::::::: remove preloader :::::::::::::
+      //  remove preloader :
       // removePreLoader();
-      // ::::::::::::::close utility modal :::::::::::::::::::
+      // close utility modal ::
       // closeUtilityModal();
     }
 
     /*
     *
-     ::::::::::::::::::::::::
+     :
      add billing / shipping details to shipping module
-      ::::::::::::::::::::::::
+      :
     */
     moduleContent.append(moduleBillingDetails);
     moduleBillingDetails.append(shippingAsBillingAddress);
     /*
     *
-     ::::::::::::::::::::::::
+
      default billing address section
-      ::::::::::::::::::::::::
+
     *
     */
     const defaultBillingAddressButton = div(
@@ -1365,9 +1365,9 @@ export const shippingAddressModule = async () => {
     );
 
     /*
-::::::::::::::::::::::::::::
+
 add click event to default billing address button
- ::::::::::::::::::::::::::::::
+
     */
     defaultBillingAddressButton?.addEventListener('click', async (event) => {
       event.preventDefault();
@@ -1407,13 +1407,11 @@ add click event to default billing address button
     *
     *
     *
-  ::::::::::::::
-  set default billing address
-  ::::::::::::::
 
-   :::::::::::::
+  set default billing address
+
    check if the use address is set by
-   ::::::::::::::::::::::::::
+
    *
    */
     if (
@@ -1421,9 +1419,9 @@ add click event to default billing address button
       && getUseAddressesResponse?.data?.invoiceToAddress
     ) {
       /*
-       * ::::::::::::::::::::::::::::::
+       *
        * call default address function and set the address from useAdress as default address
-       * ::::::::::::::::::::::::::
+       *
        */
       const defaultBillingAddress = defaultAddress(
         getUseAddressesResponse.data?.invoiceToAddress,
@@ -1433,9 +1431,9 @@ add click event to default billing address button
       if (defaultBillingAddress) {
         moduleContent.append(defaultBillingAddress);
         /*
-::::::::::::::::::::::::::::
+
 show default billing address else mark shippingAsBilling checkbox as checked
-::::::::::::::::::::::::::::
+
 */
 
         if (
@@ -1508,11 +1506,11 @@ show default billing address else mark shippingAsBilling checkbox as checked
       }
     } else {
       /*
-      ::::::::::::::::::::
+
        if the use billing address is not set,
        we will show default address
        else will show add billing address form
-       :::::::::::::::::::::::
+
       */
       await generateDefaultAddress(
         basketShipToAddress,
@@ -1521,19 +1519,19 @@ show default billing address else mark shippingAsBilling checkbox as checked
         'billing',
       );
     }
-    // :::::::::::: remove preloader :::::::::::::
+    //  remove preloader :
     // removePreLoader();
 
-    // :::::::::::::: close utility modal ::::::::::::::
+    //  close utility modal
     closeUtilityModal();
 
     return moduleContent;
   } catch (error) {
     scrollViewToTop();
-    // :::::::::::: remove preloader :::::::::::::
+    //  remove preloader :
     removePreLoader();
 
-    // :::::::::::::: close utility modal ::::::::::::::
+    //  close utility modal
     closeUtilityModal();
     if (error.message === 'Unauthorized Access') {
       window.location.href = window.EbuyConfig?.cartPageUrl;
