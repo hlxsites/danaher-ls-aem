@@ -8,6 +8,7 @@
   {
     "id": "section",
     "components": [
+      "accordion",
       "article-info",
       "breadcrumb",
       "banner",
@@ -18,6 +19,7 @@
       "title",
       "columns",
       "card-list",
+      "call-to-action",
       "takeway",
       "product-banner",
       "product-category",
@@ -54,6 +56,7 @@
       "table",
       "testimonial",
       "tags-list",
+      "topics",
       "related-articles",
       "social-media",
       "mini-teasers",
@@ -78,6 +81,12 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
     "id": "article-info",
     "components": []
   },
@@ -97,6 +106,12 @@
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "call-to-action",
+    "components": [
+      " "
     ]
   },
   {
@@ -271,6 +286,12 @@
     "id": "tiny-carousel",
     "components": [
       "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "topics",
+    "components": [
+      " "
     ]
   }
 ]

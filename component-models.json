@@ -90,6 +90,20 @@
             "value": ""
           },
           {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishdate",
+            "label": "Publish Date",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "readingTime",
+            "label": "Reading Time",
+            "value": ""
+          },
+          {
             "component": "text",
             "valueType": "string",
             "name": "fullcategory",
@@ -234,6 +248,37 @@
         "component": "text",
         "valueType": "string",
         "name": "accordion_container_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "item_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "item_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
         "value": "",
         "label": "Super Title"
       }
@@ -468,6 +513,77 @@
         "name": "right-bg-color",
         "value": "",
         "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "call-to-action",
+    "fields": [
+      {
+        "component": "text",
+        "name": "left_main_heading_text",
+        "label": "Main Heading Text"
+      },
+      {
+        "component": "select",
+        "name": "left_main_heading_type",
+        "label": "Heading Tag Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "url",
+        "name": "left_cta_1_link",
+        "label": "Left CTA 1 Link"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_text",
+        "label": "Left CTA 1 Text"
+      },
+      {
+        "component": "text",
+        "name": "left_cta_1_title",
+        "label": "Left CTA 1 Title"
+      },
+      {
+        "component": "select",
+        "name": "left_cta_1_type",
+        "label": "Left CTA 1 Type",
+        "options": [
+          {
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "name": "secondary",
+            "value": "secondary"
+          }
+        ]
       }
     ]
   },
@@ -2190,6 +2306,32 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs(comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "topics",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "News",
+            "value": "news"
+          },
+          {
+            "name": "Blog",
+            "value": "blog"
+          },
+          {
+            "name": "Library",
+            "value": "library"
+          }
+        ]
       }
     ]
   }
