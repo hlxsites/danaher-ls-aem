@@ -144,6 +144,10 @@
   display: inline
 }
 
+.card-list-wrapper :is(.inline) {
+  display: inline
+}
+
 .card-list-wrapper :is(.flex) {
   display: flex
 }
