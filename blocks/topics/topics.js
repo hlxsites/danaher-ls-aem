@@ -180,9 +180,21 @@ export default async function decorate(block) {
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
   articlesToDisplay.forEach((article, index) => {
-    if (articleType !== 'library') {
-      cardList.appendChild(createArticleCard(article, index === 0));
+    let card;
+    if (articleType === 'library') {
+      card = createLibraryCard(article, index === 0);
+    } else {
+      card = createArticleCard(article, index === 0);
     }
+    // Apply lazy loading to all images in the card for better performance
+    card.querySelectorAll('img').forEach(img => {
+      img.setAttribute('loading', 'lazy');
+      img.setAttribute('decoding', 'async');
+      // Optionally set width/height for layout stability if available
+      if (!img.hasAttribute('width') && article.imageWidth) img.setAttribute('width', article.imageWidth);
+      if (!img.hasAttribute('height') && article.imageHeight) img.setAttribute('height', article.imageHeight);
+    });
+    cardList.appendChild(card);
   });
 
   // Always show topic label and "View All Topics"
