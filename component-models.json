@@ -2326,6 +2326,10 @@
           {
             "name": "Blog",
             "value": "blog"
+          },
+          {
+            "name": "Library",
+            "value": "library"
           }
         ]
       }
