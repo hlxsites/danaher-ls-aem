@@ -914,6 +914,8 @@ async function getQuote(headerBlock, authHeader) {
   *
   */
 function loadBreadcrumbCSS(href) {
+  console.log(href);
+  
   if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
