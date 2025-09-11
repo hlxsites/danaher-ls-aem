@@ -268,24 +268,6 @@ const shippingMethodsModule = async () => {
     getShippingNotesField?.addEventListener('blur', setShippingNotesOnBlur);
     if (moduleContent) {
       if (moduleHeader) moduleContent.append(moduleHeader);
-      const showCartItems = await cartItem();
-      if (showCartItems) {
-        showCartItems.querySelectorAll('button')?.forEach((btn) => {
-          btn.remove();
-        });
-        showCartItems.querySelectorAll('input')?.forEach((inp) => {
-          inp.removeAttribute('type');
-          if (inp.classList.contains('border-solid')) {
-            inp.classList.remove('border-solid');
-          }
-          inp.classList.add('focus:outline-none');
-          inp.classList.add('outline-none');
-          if (inp.classList.contains('border-2')) {
-            inp.classList.remove('border-2');
-          }
-        });
-        moduleContent.append(showCartItems);
-      }
       // if (moduleOpcos) moduleContent.append(moduleOpcos);
       if (moduleToggleButtonsWrapper) moduleContent.append(moduleToggleButtonsWrapper);
 
@@ -453,6 +435,24 @@ const shippingMethodsModule = async () => {
         }
       }
       if (modulesMethodsWrapper) moduleContent.append(modulesMethodsWrapper);
+      const showCartItems = await cartItem();
+      if (showCartItems) {
+        showCartItems.querySelectorAll('button')?.forEach((btn) => {
+          btn.remove();
+        });
+        showCartItems.querySelectorAll('input')?.forEach((inp) => {
+          inp.removeAttribute('type');
+          if (inp.classList.contains('border-solid')) {
+            inp.classList.remove('border-solid');
+          }
+          inp.classList.add('focus:outline-none');
+          inp.classList.add('outline-none');
+          if (inp.classList.contains('border-2')) {
+            inp.classList.remove('border-2');
+          }
+        });
+        moduleContent.append(showCartItems);
+      }
     }
 
     return moduleContent;
