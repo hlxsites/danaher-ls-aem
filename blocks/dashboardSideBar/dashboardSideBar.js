@@ -14,7 +14,7 @@ export default async function dashboardSidebar() {
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
     { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
-    { name: 'My Address', itemClicked: 'My address', icon: 'Location-marker' },
+    { name: 'My Address', itemClicked: 'My addresses', icon: 'Location-marker' },
     { name: 'Payment Methods', itemClicked: 'Payment methods', icon: 'Currency-dollar' },
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },

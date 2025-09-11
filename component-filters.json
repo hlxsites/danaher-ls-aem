@@ -32,6 +32,9 @@
       "register",
       "login",
       "dashboard",
+      "approved-quotes",
+      "my-profile",
+      "my-addresses",
       "cartlanding",
       "checkout",
       "order-submit",
@@ -85,6 +88,12 @@
     "id": "accordion-container",
     "components": [
       "accordion-item"
+    ]
+  },
+  {
+    "id": "approved-quotes",
+    "components": [
+      ""
     ]
   },
   {
@@ -183,6 +192,18 @@
     ]
   },
   {
+    "id": "my-addresses",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "my-profile",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -214,6 +235,12 @@
   },
   {
     "id": "order-submit",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "payment-methods",
     "components": [
       ""
     ]

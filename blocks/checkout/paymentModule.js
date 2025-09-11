@@ -133,7 +133,7 @@ function createCardItem(item, defaultCard) {
  generates the payment module for the checkout module/page
  ::::::::::::::
  */
-const paymentModule = async () => {
+export const paymentModule = async () => {
   /*
     ::::::::::::::
     get price type if its net or gross.
@@ -262,7 +262,7 @@ const paymentModule = async () => {
     const stripeCardsContainer = div(
       {
         id: 'stripeCardsContainer',
-        class: 'flex-col flex w-full items-start hidden',
+        class: 'flex-col flex w-full items-start',
       },
     );
     const savedStripeCardsWrapper = div(
@@ -386,7 +386,8 @@ const paymentModule = async () => {
       },
     };
 
-    allPaymentMethods?.data?.forEach(async (pm, ind) => {
+    // eslint-disable-next-line max-len
+    allPaymentMethods?.data?.sort((b, a) => a.displayName.localeCompare(b.displayName))?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
         stripeCardsWrapper = div(

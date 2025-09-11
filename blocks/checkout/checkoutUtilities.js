@@ -362,6 +362,7 @@ export const initializeModules = async () => {
   if (checkPath.includes('addresses')) updateCheckoutUI(steps, 'addresses');
   else if (checkPath.includes('shipping')) updateCheckoutUI(steps, 'shipping');
   else if (checkPath.includes('payment')) updateCheckoutUI(steps, 'payment');
+  else if (checkPath.includes('paymentmethods')) updateCheckoutUI(steps, 'payment');
 
   if (checkPath.includes('addresses')) {
     const shippingAddressPage = await loadCheckoutModule('shippingAddress');

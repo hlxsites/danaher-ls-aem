@@ -3142,7 +3142,7 @@ export async function updateCheckoutSummary() {
 }
 
 // load module on navigation
-async function loadingModule() {
+export async function loadingModule() {
   const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
   const checkoutProgressBar = document.querySelector('#checkoutProgressBar');
 
