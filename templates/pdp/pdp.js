@@ -3,6 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 import { getPdpDetails } from '../../scripts/coveo/controller/controllers.js';
 import { searchEngine } from '../../scripts/coveo/engine.js';
 import tabsOrder from '../../scripts/tabs-order.js';
+import { getProductResponse } from '../../scripts/commerce.js';
 
 function setMetaTags(response) {
   document.title = `${response?.title} | Danaher Life Sciences`;
@@ -76,11 +77,12 @@ function setMetaTags(response) {
   link.setAttribute('href', window.location.href);
 }
 
-function loadPdpBlocks() {
+async function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
+   
   setMetaTags(response);
   // Determine opco, e.g. from response
-  const opco = response?.raw?.opco?.toLowerCase() || 'sciex';
+  const opco = response[0]?.raw?.opco?.toLowerCase() || 'sciex';
   const tabOrderArr = tabsOrder()[opco] || [];
   const tabsList = new Set();
 
@@ -186,28 +188,30 @@ function loadPdpBlocks() {
 }
 
 export default async function buildAutoBlocks() {
-  const productSlug = new URL(window.location.href).pathname.split('/').pop();
-  const response = JSON.parse(localStorage.getItem('eds-product-details'));
+  // const productSlug = new URL(window.location.href).pathname.split('/').pop();
+  // const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
-  if (response && response?.raw.sku === productSlug.replace('.html', '')) {
-    loadPdpBlocks();
-    // designPdp();
-    return;
-  }
-  localStorage.removeItem('eds-product-details');
+  // if (response && response?.raw.sku === productSlug.replace('.html', '')) {
+  //   loadPdpBlocks();
+  //   // designPdp();
+  //   return;
+  // }
+  // localStorage.removeItem('eds-product-details');
 
-  await getPdpDetails(productSlug.replace('.html', ''));
-  await new Promise((resolve) => {
-    const unsubscribe = searchEngine.subscribe(() => {
-      const { results } = searchEngine.state.search;
-      if (results.length > 0) {
-        localStorage.setItem('eds-product-details', JSON.stringify(results[0]));
-        unsubscribe();
-        resolve();
-      }
-    });
-  });
+  // await getPdpDetails(productSlug.replace('.html', ''));
+  // await new Promise((resolve) => {
+  //   const unsubscribe = searchEngine.subscribe(() => {
+  //     const { results } = searchEngine.state.search;
+  //     if (results.length > 0) {
+  //       localStorage.setItem('eds-product-details', JSON.stringify(results[0]));
+  //       unsubscribe();
+  //       resolve();
+  //     }
+  //   });
+  // });
   // getFrequentlyViewedTogether();
+  const response = await getProductResponse();
+  localStorage.setItem('eds-product-details', JSON.stringify(response[0]));
   loadPdpBlocks();
   // designPdp();
 }
