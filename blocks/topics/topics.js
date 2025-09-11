@@ -1,7 +1,5 @@
 import ffetch from '../../scripts/ffetch.js';
-import {
-  ul, a, div, span,
-} from '../../scripts/dom-builder.js';
+import { ul, a, div, span } from '../../scripts/dom-builder.js';
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from '../card-list/articleCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
@@ -21,7 +19,8 @@ const getSelectionFromUrl = () => {
   return '';
 };
 
-const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
+const getPageFromUrl = () =>
+  toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const patchBannerHeading = () => {
   const heading = getMetadata('heading');
@@ -91,23 +90,19 @@ export function createFilters(articles, activeTag = '') {
   const container = div({ class: 'flex items-center gap-2 mb-24' });
 
   if (activeTag) {
-    let articleType = '';
-    if (window.location.pathname.startsWith('/us/en/blog')) {
-      articleType = 'Blog';
-    }
-    if (window.location.pathname.startsWith('/us/en/news')) {
-      articleType = 'News';
-    }
     container.append(
-      span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic:`),
-      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      span({ class: 'font-medium text-danahergray-700' }, 'Blog topic:'),
+      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
     );
   }
 
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('page');
   if (window.location.pathname.indexOf(tagName) > -1) {
-    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf(`/${tagName}/`));
+    newUrl.pathname = window.location.pathname.substring(
+      0,
+      window.location.pathname.indexOf(`/${tagName}/`)
+    );
   }
 
   container.append(
@@ -127,7 +122,7 @@ export function createFilters(articles, activeTag = '') {
   return container;
 }
 
-const indexTemplate = getMetadata('template');
+let indexTemplate = getMetadata('template');
 
 export default async function decorate(block) {
   let indexType = '';
@@ -180,21 +175,9 @@ export default async function decorate(block) {
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
   articlesToDisplay.forEach((article, index) => {
-    let card;
-    if (articleType === 'library') {
-      card = createLibraryCard(article, index === 0);
-    } else {
-      card = createArticleCard(article, index === 0);
+    if (articleType !== 'library') {
+      cardList.appendChild(createArticleCard(article, index === 0));
     }
-    // Apply lazy loading to all images in the card for better performance
-    card.querySelectorAll('img').forEach(img => {
-      img.setAttribute('loading', 'lazy');
-      img.setAttribute('decoding', 'async');
-      // Optionally set width/height for layout stability if available
-      if (!img.hasAttribute('width') && article.imageWidth) img.setAttribute('width', article.imageWidth);
-      if (!img.hasAttribute('height') && article.imageHeight) img.setAttribute('height', article.imageHeight);
-    });
-    cardList.appendChild(card);
   });
 
   // Always show topic label and "View All Topics"
