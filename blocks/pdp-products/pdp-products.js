@@ -112,7 +112,7 @@ function subscribeToEngineUpdates(resultsGrid) {
   pdpResultList.subscribe(() => {
     if (pdpResultList?.state?.results?.length > 0 && !pdpResultList?.state?.isLoading) {
       const viewType = localStorage.getItem('pdpListViewType') ?? 'list';
-      displayProducts(resultsGrid, viewType);
+      // displayProducts(resultsGrid, viewType);
     }
   })
 
