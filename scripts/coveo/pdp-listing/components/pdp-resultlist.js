@@ -37,7 +37,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
     // Compact image creation with fallback
     const createImageWithFallback = (src, alt) => {
       const imageElement = img({
-        src: src || fallbackImagePath,
+        src: src.includes('no-image-available') ? `${src}?wid=100&fit=constrain&fmt=avif` : src || fallbackImagePath,
         height: '164px',
         alt: alt || 'Product image not available',
         class: 'w-full h-40 object-contain',
@@ -129,7 +129,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           loading: 'lazy',
           width: '100px',
           height: '100px',
-          src: result.raw.images?.[0] || '',
+          src: result.raw.images?.[0].includes('no-image-available') ? `${result.raw.images?.[0]}?wid=100&fit=constrain&fmt=avif` : result.raw.images?.[0] || '',
           alt: result.title || '',
           class: 'w-[100px] h-[100px] object-contain border rounded bg-gray-50',
         }),
