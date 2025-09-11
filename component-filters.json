@@ -79,6 +79,12 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
     "id": "article-info",
     "components": []
   },
@@ -98,6 +104,12 @@
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "call-to-action",
+    "components": [
+      " "
     ]
   },
   {
