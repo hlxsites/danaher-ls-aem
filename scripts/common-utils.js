@@ -257,7 +257,7 @@ export function createModal(content, hasCancelButton, hasCloseButton, dataType =
     );
   }
   let cancelButton = '';
-  if (hasCancelButton) {
+  if (hasCancelButton === true) {
     cancelButton = span(
       {
         'data-type': dataType || 'close',
@@ -680,6 +680,7 @@ export const buildSearchWithIcon = (
         type: inputType,
         name: inputName,
         id: inputName,
+        'data-source': 'initial',
         placeholder,
         autocomplete: autoCmplte,
         'data-required': required,

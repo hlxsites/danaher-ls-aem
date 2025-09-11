@@ -149,7 +149,7 @@ function initGmapsAutocomplete(addressType, addressInput = '') {
  * @param {Array} addressList - Shipping/Billing address list array.
  * @param {String} type - shipping/billing.
  */
-const renderAddressList = (addressItems, addressListArray, type) => {
+const renderAddressList = (addressItems, addressListArray, type, showEmptyActions = '') => {
   if (typeof addressListArray !== 'undefined' && addressListArray.length > 0) {
     addressItems.textContent = '';
     const filteredArray = addressListArray.filter((adr) => {
@@ -285,6 +285,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               },
               span(
                 {
+                  'data-canclebutton': true,
                   class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex hover:text-danaherpurple-800 justify-start  text-base font-semibold`,
                   'data-address': JSON.stringify(item),
                 },
@@ -298,6 +299,7 @@ const renderAddressList = (addressItems, addressListArray, type) => {
               ),
               span(
                 {
+                  'data-canclebutton': true,
                   class:
                     `flex  justify-start text-base copy-${type}-address-button font-semibold text-danaherpurple-500 hover:text-danaherpurple-800 cursor-pointer`,
                   'data-address': JSON.stringify(item),
@@ -554,6 +556,10 @@ click use address button to set the address as default for current order
       /*
       ::::::::::::: edit button clicked :::::::::::::::
       */
+      let showCancleButton = false;
+      if (event.target.getAttribute('data-canclebutton') === 'true') {
+        showCancleButton = true;
+      }
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
         showPreLoader();
         const editAddress = JSON.parse(
@@ -563,7 +569,7 @@ click use address button to set the address as default for current order
           const addressFormModal = await addressForm(type, editAddress);
           if (addressFormModal) {
             closeUtilityModal();
-            createModal(addressFormModal, true, true, type, 'edit');
+            createModal(addressFormModal, showCancleButton, true, type, 'edit');
             removePreLoader();
           }
         }
@@ -577,7 +583,8 @@ click use address button to set the address as default for current order
           const addressFormModal = await addressForm(type, copyAddress, 'copy');
           if (addressFormModal) {
             closeUtilityModal();
-            createModal(addressFormModal, true, true, type, 'edit');
+
+            createModal(addressFormModal, showCancleButton, true, type, 'edit');
             removePreLoader();
           }
         }
@@ -605,22 +612,23 @@ click use address button to set the address as default for current order
         {
           class: 'flex w-full justify-center gap-4 items-center mt-6',
         },
-        button(
+        showEmptyActions ? button(
           {
+            'data-canclebutton': true,
             class:
               'text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
             id: `addNew${capitalizeFirstLetter(type)}AddressButton`,
           },
           'Add new address',
-        ),
-        button(
+        ) : '',
+        showEmptyActions ? button(
           {
             class:
-              'text-xl  border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+              'text-xl  hover:bg-danaherpurple-500 border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             id: `clear${capitalizeFirstLetter(type)}AddressListSearch`,
           },
           'Clear Search',
-        ),
+        ) : '',
       ),
     );
     addressItems.append(emptyAddressListWrapper);
@@ -670,7 +678,7 @@ click use address button to set the address as default for current order
 generate the shipping address list module
 ::::::::::::::
 */
-export const addressListModal = async (type) => {
+export const addressListModal = async (type, cancelButton = true) => {
   const addressListWrapper = div({
     class: 'flex flex-col',
     id: `${type}AddressListModal`,
@@ -708,6 +716,7 @@ export const addressListModal = async (type) => {
         },
         button(
           {
+            'data-canclebutton': true,
             class: 'flex w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6',
           },
           'Add New Address',
@@ -729,7 +738,7 @@ export const addressListModal = async (type) => {
          */
         const addressFormModal = await addressForm(type, '');
         if (addressFormModal) {
-          createModal(addressFormModal, true, true, type, 'edit');
+          createModal(addressFormModal, cancelButton, true, type, 'edit');
           initGmapsAutocomplete(type);
         }
       });
@@ -766,7 +775,10 @@ export const addressListModal = async (type) => {
   if (addressListSearchInput) {
     addressListSearchInput.addEventListener('input', (e) => {
       e.preventDefault();
-
+      let showEmptyActions = '';
+      if (e.target.getAttribute('data-source') === 'initial') {
+        showEmptyActions = true;
+      }
       const searchTerm = e.target.value.toLowerCase();
       const searchedAddress = addressListData.filter((ad) => {
         const lowerCaseCompanyName = ad?.companyName2?.toLowerCase();
@@ -793,7 +805,7 @@ export const addressListModal = async (type) => {
           || lowerCasemainDivisionName?.includes(searchTerm)
         );
       });
-      renderAddressList(addressItems, searchedAddress, type);
+      renderAddressList(addressItems, searchedAddress, type, showEmptyActions);
     });
   }
 
@@ -814,13 +826,16 @@ document.addEventListener('click', async (e) => {
   const { target } = e;
   const type = target.getAttribute('data-type');
   const action = target.getAttribute('data-action');
-
+  let hasCancelButton = false;
+  if (target?.getAttribute('data-canclebutton') === 'true') {
+    hasCancelButton = true;
+  }
   const shouldEdit = type && action === 'edit';
 
   const handleEditModal = async () => {
     if (!shouldEdit) return;
     const addressesModal = await addressListModal(type);
-    createModal(addressesModal, false, true, type, 'edit');
+    createModal(addressesModal, hasCancelButton, true, type, 'edit');
     removePreLoader();
   };
 

@@ -46,7 +46,7 @@ export default async function decorate(block) {
 
   addressesWrapper.append(checkoutSkeleton());
 
-  const addressesList = await addressListModal('shipping');
+  const addressesList = await addressListModal('shipping', false);
   if (addressesList) {
     addressesWrapper.innerHTML = '';
     addressesWrapper.append(addressesList);
@@ -61,9 +61,16 @@ export default async function decorate(block) {
     addressListItemsWrapper?.querySelectorAll('button')?.forEach((btn) => {
       btn?.classList.add('hover:bg-danaherpurple-500');
     });
+    addressListItemsWrapper?.querySelectorAll('.shipping-address-list-item-actions')?.forEach((act) => {
+      act?.querySelectorAll('span')?.forEach((actbtn) => actbtn?.removeAttribute('data-canclebutton'));
+    });
+    addressListItemsWrapper?.querySelectorAll('button')?.forEach((btn) => {
+      btn?.removeAttribute('data-canclebutton');
+    });
     if (addressListHeader) {
       addressListHeader.querySelector('p').textContent = 'My Address';
       addressListHeader.querySelector('p').insertAdjacentElement('afterend', addressesWrapperSubHeading);
+      addressListHeader?.querySelector('#search')?.removeAttribute('data-source');
     }
   }
   /*
@@ -79,4 +86,3 @@ export default async function decorate(block) {
   decorateIcons(wrapper);
   removePreLoader();
 }
-
