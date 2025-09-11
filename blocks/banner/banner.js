@@ -23,9 +23,9 @@ export default function decorate(block) {
   const content = block.querySelector('div');
   const isBlogPath = window.location.pathname.startsWith('/us/en/blog');
   const isNewsPath = window.location.pathname.startsWith('/us/en/news');
-
+  const isLibraryPath = window.location.pathname.startsWith('/us/en/library');
   // Set background
-  if (isBlogPath || isNewsPath) {
+  if (isBlogPath || isNewsPath || isLibraryPath) {
     content.parentNode.setAttribute('style', 'background: white');
   } else {
     content.parentNode.setAttribute(
@@ -64,7 +64,7 @@ export default function decorate(block) {
     contentH1.style.padding = '0';
     contentH1.style.textAlign = 'left';
     contentH1.classList.add('!text-4xl', 'font-extrabold', 'tracking-tight', 'text-left');
-    if (isBlogPath || isNewsPath) {
+    if (isBlogPath || isNewsPath || isLibraryPath) {
       contentH1.classList.add('text-black');
       contentH1.classList.remove('text-white');
     } else {
@@ -80,7 +80,7 @@ export default function decorate(block) {
     contentH2.style.padding = '0';
     contentH2.style.textAlign = 'left';
     contentH2.classList.add('w-full', 'md:w-3/4', '!text-lg', 'font-normal', 'tracking-tight', 'text-left');
-    if (isBlogPath || isNewsPath) {
+    if (isBlogPath || isNewsPath || isLibraryPath) {
       contentH2.classList.add('text-black');
       contentH2.classList.remove('text-white');
     } else {
@@ -88,7 +88,7 @@ export default function decorate(block) {
       contentH2.classList.remove('text-black');
     }
   }
-  if (isBlogPath || isNewsPath) {
+  if (isBlogPath || isNewsPath || isLibraryPath) {
     const buttonContainer = document.querySelector('.button-container');
     if (buttonContainer) {
       buttonContainer.remove();
