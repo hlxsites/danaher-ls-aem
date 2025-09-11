@@ -1,9 +1,10 @@
-import { div, h2 } from '../../scripts/dom-builder.js';
+import { div, h2, p } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
-import { paymentModule } from '../checkout/paymentModule.js';
 import { checkoutSkeleton } from '../../scripts/cart-checkout-utils.js';
+import { addressListModal } from '../checkout/shippingAddress.js';
+import { removePreLoader } from '../../scripts/common-utils.js';
 
 // eslint-disable-next-line consistent-return
 export default async function decorate(block) {
@@ -24,41 +25,58 @@ export default async function decorate(block) {
   );
   const dashboardSideBarContent = await dashboardSidebar();
 
-  const paymentmethodsWrapper = div(
+  const addressesWrapper = div(
     {
       class: 'w-[70%] bg-white p-6',
-      id: 'paymentMethodsWrapper',
+      id: 'addressesWrapper',
     },
     h2(
       {
         class: 'text-2xl',
       },
-      'Payment Methods Wrapper',
+      'My Address',
     ),
   );
-  paymentmethodsWrapper.append(checkoutSkeleton());
+  const addressesWrapperSubHeading = p(
+    {
+      class: 'text-sm text-black',
+    },
+    'Manage your shipping and billing info—your address book is always within reach.',
+  );
+
+  addressesWrapper.append(checkoutSkeleton());
+
+  const addressesList = await addressListModal('shipping');
+  if (addressesList) {
+    addressesWrapper.innerHTML = '';
+    addressesWrapper.append(addressesList);
+    const addressListItemsWrapper = addressesList?.querySelector('#shippingAddressListItemsWrapper');
+    const addressListHeader = addressesList?.querySelector('#shippingAddressListModalHeader');
+    if (addressListItemsWrapper) {
+      if (addressListItemsWrapper?.classList?.contains('max-h-97')) {
+        addressListItemsWrapper?.classList?.remove('max-h-97');
+        addressListItemsWrapper.style.maxHeight = '880px';
+      }
+    }
+    addressListItemsWrapper?.querySelectorAll('button')?.forEach((btn) => {
+      btn?.classList.add('hover:bg-danaherpurple-500');
+    });
+    if (addressListHeader) {
+      addressListHeader.querySelector('p').textContent = 'My Address';
+      addressListHeader.querySelector('p').insertAdjacentElement('afterend', addressesWrapperSubHeading);
+    }
+  }
   /*
   ::::::::::::::
   initialize the payment module
   ::::::::::::::
   */
-  paymentModule()?.then(async (module) => {
-    paymentmethodsWrapper.innerHTML = '';
-    paymentmethodsWrapper.append(module);
 
-    module?.querySelector('#paymentMethodInvoice')?.classList.add('opacity-50', 'pointer-events-none');
-    const paymentMethodStripe = module?.querySelector('#paymentMethodStripe');
-    const savedStripeCardsList = module?.querySelector('#savedStripeCardsList');
-    if (paymentMethodStripe) {
-      savedStripeCardsList.className = 'w-full gap-6 flex flex-col max-h-[645px] pr-2 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500';
-      if (paymentMethodStripe?.querySelector('input[type="radio"]')) {
-        paymentMethodStripe.querySelector('input[type="radio"]').checked = true;
-      }
-    }
-  });
-  wrapper.append(dashboardSideBarContent, paymentmethodsWrapper);
+  wrapper.append(dashboardSideBarContent, addressesWrapper);
 
   block.textContent = '';
   block.append(wrapper);
   decorateIcons(wrapper);
+  removePreLoader();
 }
+

@@ -57,6 +57,14 @@
   max-height: 645px
 }
 
+.my-addresses-wrapper :is(.max-h-97) {
+  max-height: 25rem
+}
+
+.my-addresses-wrapper :is(.max-h-\[880px\]) {
+  max-height: 880px
+}
+
 .my-addresses-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
@@ -71,6 +79,10 @@
 
 .my-addresses-wrapper :is(.w-full) {
   width: 100%
+}
+
+.my-addresses-wrapper :is(.max-w-\[880px\]) {
+  max-width: 880px
 }
 
 .my-addresses-wrapper :is(.flex-col) {
@@ -284,6 +296,11 @@
 
 .my-addresses-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.my-addresses-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
