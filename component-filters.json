@@ -8,6 +8,7 @@
   {
     "id": "section",
     "components": [
+      "accordion",
       "article-info",
       "breadcrumb",
       "banner",
@@ -18,6 +19,7 @@
       "title",
       "columns",
       "card-list",
+      "call-to-action",
       "takeway",
       "product-banner",
       "product-category",
@@ -79,6 +81,12 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
     "id": "article-info",
     "components": []
   },
@@ -98,6 +106,12 @@
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "call-to-action",
+    "components": [
+      " "
     ]
   },
   {
