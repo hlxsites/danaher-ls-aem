@@ -107,6 +107,31 @@ function loadGTM() {
 }
 // google tag manager -end
 
+// New relic Script -start
+function loadrelicScript() {
+  const scriptTag = document.createElement('script');
+  scriptTag.type = 'text/javascript';
+  scriptTag.src =
+    window.location.host === 'lifesciences.danaher.com'
+      ? '/scripts/new-relic.js'
+      : '/scripts/new-relic-stage.js';
+
+  scriptTag.onload = function () {
+    if (window.newrelic && typeof window.newrelic.addPageAction === 'function') {
+      window.newrelic.addPageAction('pageView', {
+        url: window.location.href,
+        title: document.title,
+        source: 'aem-eds',
+      });
+    } else {
+      console.warn('New Relic not available or addPageAction not defined.');
+    }
+  };
+
+  document.head.prepend(scriptTag);
+}
+// New relic Script - end
+
 // Adobe Target - start
 
 window.targetGlobalSettings = {
@@ -291,6 +316,7 @@ if (
 
 if (!window.location.hostname.includes('localhost')) {
   loadGTM();
+  loadrelicScript();
   //loadAT();
 
   if (isOTEnabled()) {
