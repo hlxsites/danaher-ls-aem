@@ -128,6 +128,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           loading: 'lazy',
           width: '100px',
           height: '100px',
+          decode: 'async',
           src: result.raw.images?.[0].includes('no-image') ? `${result.raw.images?.[0]}?wid=98&fit=constrain&fmt=avif` : result.raw.images?.[0] || '',
           alt: result.title || '',
           class: 'w-[100px] h-[100px] object-contain border rounded bg-gray-50',
