@@ -96,7 +96,6 @@ function imageSlider(allImages, productName = 'product') {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.display = 'block';
   const skeleton = div(
     {
       id: 'pdpSkeleton',
