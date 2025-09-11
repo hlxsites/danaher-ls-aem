@@ -151,7 +151,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           {
             class: hasPrice()
               ? 'text-black text-right text-xl font-normal leading-[32px] m-0'
-              : 'text-xl font-bold text-gray-500 m-0',
+              : 'text-xl font-bold m-0',
           },
           hasPrice()
             ? formatCurrency(product.salePrice?.value, product.salePrice?.currencyMnemonic)
@@ -160,23 +160,23 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
         // Availability (Placeholder for Phase 2)
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start mt-2' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start mt-2 leading-snug' },
           'Availability',
-          span({ class: 'font-bold text-green-700 text-black text-right text-base font-extralight' }, availability),
+          span({ class: 'font-bold text-green-700 text-black text-right text-base leading-snug' }, availability),
         ),
 
         // Unit of Measure
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start leading-snug' },
           'Unit of Measure',
-          span({ class: 'font-bold text-black text-right text-base font-extraligh' }, unitOfMeasure),
+          span({ class: 'font-bold text-black text-right text-base leading-snug' }, unitOfMeasure),
         ),
 
         // Minimum Order Quantity
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start mb-2' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start mb-2 leading-snug' },
           'Min. Order Qty',
-          span({ class: 'font-bold text-black text-right text-base font-extraligh' }, `${minOrderQuantity}`),
+          span({ class: 'font-bold text-black text-right text-base leading-snug' }, `${minOrderQuantity}`),
         ),
 
         // Buttons
