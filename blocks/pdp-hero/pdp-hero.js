@@ -461,7 +461,7 @@ export default async function decorate(block) {
       btnLabel = 'Buy Now';
     }
 
-    pricingQuoteButton.querySelector('.pr-bn')?.addEventListener('click', () => {
+    buyDetail.querySelector('.pr-bn')?.addEventListener('click', () => {
       if (btnHref) {
         window.open(btnHref, '_blank');
       } else if (brandURL) {
