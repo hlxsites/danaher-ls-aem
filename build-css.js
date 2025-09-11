@@ -450,7 +450,7 @@ fileMappings.forEach(({
 }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
   let command = '';
-  if (output.includes('styles.css')) {
+  if (output.includes('styles.css') || output.includes('pdp-products.css') || output.includes('header.css')) {
     command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
     } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
     } --minify`;
