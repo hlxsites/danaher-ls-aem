@@ -1,9 +1,9 @@
 /* eslint-disable */
-import {
-  loadContextActions,
-  loadPaginationActions,
-  loadTabSetActions,
-} from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
+// import {
+//   loadContextActions,
+//   loadPaginationActions,
+//   loadTabSetActions,
+// } from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
 
 import {
   getProductResponse,
@@ -92,12 +92,12 @@ async function displayProducts(resultsGrid, viewType) {
 function setupCoveoContext(sku, host) {
   const internal = typeof getCookie('exclude-from-analytics') !== 'undefined';
 
-  pdpEngine.dispatch(
-    loadContextActions(pdpEngine).setContext({ familyid: sku, host, internal }),
-  );
+  // pdpEngine.dispatch(
+  //   loadContextActions(pdpEngine).setContext({ familyid: sku, host, internal }),
+  // );
 
-  pdpEngine.dispatch(loadTabSetActions(pdpEngine).updateActiveTab('Family'));
-  pdpEngine.dispatch(loadPaginationActions(pdpEngine).registerNumberOfResults(6));
+  //pdpEngine.dispatch(loadTabSetActions(pdpEngine).updateActiveTab('Family'));
+  //dpEngine.dispatch(loadPaginationActions(pdpEngine).registerNumberOfResults(6));
   pdpEngine.executeFirstSearch();
 }
 
