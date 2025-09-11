@@ -8,7 +8,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
   const showCTA = result?.raw?.skushowdetail === undefined || String(result?.raw?.skushowdetail).trim().toLowerCase() === 'true';
   const viewDetailsButton = div(
-    { class: `self-stretch p-3 flex justify-start items-center ${showCTA ? '' : 'hidden'}` },
+    { class: `self-stretch py-3 flex justify-start items-center ${showCTA ? '' : 'hidden'}` },
     a(
       {
         href: result.clickUri,
@@ -134,9 +134,9 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       // Product Details Section
       div(
         { class: 'flex-1 flex flex-col py-6 gap-3' },
-        h3({ class: 'font-bold text-lg m-0' }, result.title || ''),
+        h3({ class: 'm-0', style: 'font-weight: 400 !important; font-size:20px !important; line-height:28px !important' }, result.title || ''),
         p(
-          { class: 'text-gray-700 text-base font-extralight' },
+          { class: 'text-gray-700 text-base font-extralight leading-snug' },
           result.raw.description || '',
         ),
         viewDetailsButton,
