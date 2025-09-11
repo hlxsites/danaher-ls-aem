@@ -453,7 +453,7 @@ fileMappings.forEach(({
     input ? `-i ${input}` : './styles/proxy-tailwind.css'
   } ${content ? `--content ${content}` : ''} -o ${output} ${
     watch ? '--watch' : ''
-  }`;
+  } --minify`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console
