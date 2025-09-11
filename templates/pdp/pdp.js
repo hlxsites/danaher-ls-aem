@@ -161,7 +161,7 @@ async function loadPdpBlocks() {
           shouldAdd = authoredTabs.has('parts') || (response?.raw?.objecttype === 'Bundle' && response?.raw?.numproducts > 0);
           break;
         case 'citations':
-          shouldAdd = authoredTabs.has('citations');
+          shouldAdd = authoredTabs.has('citations') || (response?.raw.citations === 'True');
           break;
         case 'faqs':
           shouldAdd = authoredTabs.has('faqs');

@@ -8,7 +8,10 @@ export default async function decorate(block) {
   block.id = 'citations-tab';
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
   const isPIM = document.querySelector('#authored-citations')?.children[0].textContent;
-  let citationsObj = response?.raw?.citations;
+  let citationsId = response?.raw?.citationsid;
+  let citationsUrl = response?.raw?.citationsurl;
+
+  let citationsObj = {};
   const elem = document.querySelector('#authored-citations')?.children[3];
   let parsedData;
   if (elem) {
@@ -16,16 +19,17 @@ export default async function decorate(block) {
   }
   if (isPIM !== undefined && isPIM === 'only-authored') {
     citationsObj = parsedData;
+    citationsId = citationsObj?.id;
+    citationsUrl = citationsObj?.data;
   }
-  const { id } = citationsObj;
-  const { data } = citationsObj;
+
   block.innerHTML = '';
   block.append(object({
-    id, type: 'text/html', data, class: 'w-full h-48',
+    citationsId, type: 'text/html', citationsUrl, class: 'w-full h-48',
   }));
   block.append(div(
-    { id, class: 'text-xs text-danaherblue-900' },
-    img({ src: '/icons/bioz-favicon.png', class: 'w-3 h-3 align-top pb-0 ml-0 mb-0 float-none', alt: `${id}` }),
+    { citationsId, class: 'text-xs text-danaherblue-900' },
+    img({ src: '/icons/bioz-favicon.png', class: 'w-3 h-3 align-top pb-0 ml-0 mb-0 float-none', alt: `${citationsId}` }),
     a({ href: 'https://www.bioz.com/', target: '_blank', title: 'link' }, 'Powered by Bioz See more details on Bioz © 2024'),
   ));
 
