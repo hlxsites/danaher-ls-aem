@@ -914,13 +914,11 @@ async function getQuote(headerBlock, authHeader) {
   *
   */
 function loadBreadcrumbCSS(href) {
-  console.log(href);
-  
   if (!document.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = href;
-    document.head?.appendChild(link);
+    document.head.appendChild(link);
   }
 }
 /*
@@ -973,7 +971,7 @@ export default async function decorate(block) {
       },
     );
     bred.append(edsBreadcrumbWrapper);
-    loadBreadcrumbCSS('../blocks/breadcrumb/breadcrumb.css');
+    loadBreadcrumbCSS('/blocks/breadcrumb/breadcrumb.css');
 
     import('../breadcrumb/breadcrumb.js')
       .then((loadedBreadcrumb) => {
