@@ -51,7 +51,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       return div({ class: 'w-full h-40 overflow-hidden cursor-pointer' }, imageElement);
     };
 
-    const imageElement = createImageWithFallback(item.raw.images?.[0], item.title);
+    const imageElement = createImageWithFallback(item?.raw?.images?.[1], item?.title);
 
     const titleElement = div(
       { class: 'p-3' },
