@@ -407,7 +407,7 @@ export const paymentModule = async (isValidated) => {
               },
               buildInputElement(
                 'stripe',
-                'Credit Card',
+                pm?.displayName,
                 'radio',
                 'paymentMethod',
                 true,
@@ -502,7 +502,7 @@ export const paymentModule = async (isValidated) => {
           },
           buildInputElement(
             'invoice',
-            'Invoice',
+            pm?.displayName,
             'radio',
             'paymentMethod',
             false,
