@@ -96,60 +96,7 @@ function imageSlider(allImages, productName = 'product') {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.style.padding = '0';
-  block.parentElement.parentElement.style.display = 'block';
-  const skeleton = div(
-    {
-      id: 'pdpSkeleton',
-      class: 'animate-pulse space-y-6 bg-white p-6 w-full mx-auto',
-    },
 
-    // Title Placeholder
-    div({ class: 'h-8 bg-gray-300 rounded w-2/3' }),
-
-    // Brand + Subtitle
-    div(
-      { class: 'space-y-2' },
-      div({ class: 'h-4 bg-gray-300 rounded w-1/4' }),
-      div({ class: 'h-6 bg-gray-300 rounded w-3/4' }),
-    ),
-
-    // Description Block
-    div(
-      { class: 'space-y-2' },
-      div({ class: 'h-4 bg-gray-200 rounded w-full' }),
-      div({ class: 'h-4 bg-gray-200 rounded w-full' }),
-      div({ class: 'h-4 bg-gray-200 rounded w-2/3' }),
-    ),
-
-    // CTA Button Placeholder
-    div({ class: 'h-10 bg-gray-300 rounded w-1/4' }),
-
-    // Icon Row
-    div(
-      { class: 'flex space-x-4' },
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-      div({ class: 'w-9 h-9 bg-gray-300 rounded' }),
-    ),
-
-    // Link Tags
-    div(
-      { class: 'flex flex-wrap gap-2' },
-      div({ class: 'px-4 py-2 bg-gray-200 rounded w-1/3' }),
-      div({ class: 'px-4 py-2 bg-gray-200 rounded w-1/3' }),
-    ),
-
-    // Image Gallery
-    div(
-      { class: 'grid grid-cols-2 gap-4' },
-      div({ class: 'h-40 bg-gray-300 rounded' }),
-      div({ class: 'h-40 bg-gray-300 rounded' }),
-    ),
-
-    // bottom  Placeholder
-    div({ class: 'h-8 bg-gray-300 rounded w-2/3' }),
-  );
-  block.append(skeleton);
   const titleEl = block.querySelector('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();

@@ -28,7 +28,8 @@
           "label": "Block Options",
           "options": [
             { "name": "News", "value": "news" },
-            { "name": "Blog", "value": "blog" }
+            { "name": "Blog", "value": "blog" },
+            { "name": "Library", "value": "library" }
           ]
         }
       ]
