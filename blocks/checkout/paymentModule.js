@@ -133,30 +133,31 @@ function createCardItem(item, defaultCard) {
  generates the payment module for the checkout module/page
  ::::::::::::::
  */
-export const paymentModule = async () => {
-  /*
+export const paymentModule = async (isValidated) => {
+  try {
+    if (!isValidated) {
+    /*
     ::::::::::::::
-    get price type if its net or gross.
+    validating basket.
     ::::::::::::::
     */
-
-  const validateData = {
-    adjustmentsAllowed: true,
-    scopes: [
-      'InvoiceAddress',
-      'ShippingAddress',
-      'Addresses',
-      'Shipping',
-    ],
-  };
-  const validatingBasket = await validateBasket(validateData);
-  try {
-    if (!window.location.pathname.includes('payment')) return false;
-    const authenticationToken = await getAuthenticationToken();
-    if (authenticationToken?.status === 'error') {
-      throw new Error('Unauthorized Access');
+      const validateData = {
+        adjustmentsAllowed: true,
+        scopes: [
+          'InvoiceAddress',
+          'ShippingAddress',
+          'Addresses',
+          'Shipping',
+        ],
+      };
+      const validatingBasket = await validateBasket(validateData);
+      if (!window.location.pathname.includes('payment')) return false;
+      const authenticationToken = await getAuthenticationToken();
+      if (authenticationToken?.status === 'error') {
+        throw new Error('Unauthorized Access');
+      }
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
     }
-    if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
     const moduleContent = div({});
     const moduleHeader = div(
       {
@@ -420,7 +421,9 @@ export const paymentModule = async () => {
             }),
           ),
         );
-
+        if (stripeCardsWrapper?.querySelector('input')) {
+          stripeCardsWrapper.querySelector('input').checked = true;
+        }
         stripeCardsWrapper.append(stripeCardsContainer);
         paymentMethodsWrapper?.append(stripeCardsWrapper);
         getPI = getSavedStripeCardsList;
@@ -542,7 +545,6 @@ export const paymentModule = async () => {
       decorateIcons(stripeCardsWrapper);
 
       paymentMethodsWrapper?.addEventListener('click', async (c) => {
-        showPreLoader();
         let targetRadio;
         let targetRadioId;
         let targetFrom;
@@ -563,19 +565,22 @@ export const paymentModule = async () => {
         }
         // check if radio input available
         if (!targetRadio) {
-          removePreLoader(); return;
+          return;
         }
         const getInvoiceNumberWrapper = paymentMethodsWrapper.querySelector('#invoiceNumberWrapper');
         const getStripeCardsWrapper = paymentMethodsWrapper.querySelector('#stripeCardsContainer');
 
         // this is for selecting invoice payment method
         if (targetRadioId === 'invoice') {
+          showPreLoader();
           getInvoiceNumberWrapper?.classList?.remove('hidden');
           getStripeCardsWrapper?.classList?.add('hidden');
           if (targetFrom === 'label') targetRadio.checked = true;
+          removePreLoader();
         }
         // this is for selecting stripe payment method
         if (targetRadioId === 'stripe') {
+          showPreLoader();
           getStripeCardsWrapper?.classList?.remove('hidden');
           getInvoiceNumberWrapper?.classList?.add('hidden');
           if (targetFrom === 'label') targetRadio.checked = true;
@@ -584,9 +589,11 @@ export const paymentModule = async () => {
             const newAddressCheckbox = document.querySelector('#newAddress');
             if (newAddressCheckbox) newAddressCheckbox.checked = true;
           }
+          removePreLoader();
         }
 
         if (targetRadioId === 'sameAsShipping' || targetRadioId === 'sameAsBilling') {
+          showPreLoader();
           const getBasketData = await getBasketDetails();
 
           const basketData = getBasketData?.data;
@@ -627,9 +634,11 @@ export const paymentModule = async () => {
             addressElements = stripeElements.create('address', addressOptions);
             addressElements.mount('#newStripeCardAddressWrapper');
           }
+          removePreLoader();
         }
 
         if (targetRadioId === 'newAddress') {
+          showPreLoader();
           if (targetFrom === 'label') targetRadio.checked = true;
           if (newStripeCardAddressWrapper?.classList.contains('hidden')) {
             newStripeCardAddressWrapper?.classList.remove('hidden');
@@ -656,8 +665,8 @@ export const paymentModule = async () => {
           addressElements?.destroy();
           addressElements = stripeElements.create('address', addressOptions);
           addressElements.mount('#newStripeCardAddressWrapper');
+          removePreLoader();
         }
-        removePreLoader();
       });
     }
     const savedCardsSearchWrapper = paymentMethodsWrapper?.querySelector('#searchWithIcon');
@@ -738,9 +747,9 @@ export const paymentModule = async () => {
         const currentTarget = e.target;
         if (currentTarget.textContent === 'Selected Card') return false;
         if (currentTarget?.classList.contains('stripe-card-use-button')) {
-          showPreLoader();
           const pMId = currentTarget.id;
           if (pMId) {
+            showPreLoader();
             const settingUseCard = await setUseCard(pMId);
 
             if (settingUseCard?.status !== 'success') {
@@ -806,6 +815,7 @@ export const paymentModule = async () => {
           if (targetLabel) {
             targetLabel.textContent = 'Default Payment';
           }
+          targetLabel?.classList.add('pointer-events-none');
           targetCheckbox.checked = true;
 
           targetCheckbox.dispatchEvent(

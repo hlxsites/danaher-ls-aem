@@ -42,7 +42,7 @@ export default async function decorate(block) {
   initialize the payment module
   ::::::::::::::
   */
-  paymentModule()?.then(async (module) => {
+  paymentModule(true)?.then(async (module) => {
     paymentmethodsWrapper.innerHTML = '';
     paymentmethodsWrapper.append(module);
 

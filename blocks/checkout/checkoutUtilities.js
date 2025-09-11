@@ -6,6 +6,7 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 // eslint-disable-next-line import/no-cycle
 import { shippingAddressModule } from './shippingAddress.js';
 import shippingMethodsModule from './shippingMethods.js';
+// eslint-disable-next-line import/no-named-as-default
 import paymentModule from './paymentModule.js';
 import {
   changeStep,
