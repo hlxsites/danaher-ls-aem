@@ -971,7 +971,7 @@ export default async function decorate(block) {
       },
     );
     bred.append(edsBreadcrumbWrapper);
-    loadBreadcrumbCSS('./blocks/breadcrumb/breadcrumb.css');
+    loadBreadcrumbCSS('../blocks/breadcrumb/breadcrumb.css');
 
     import('../breadcrumb/breadcrumb.js')
       .then((loadedBreadcrumb) => {
