@@ -899,7 +899,8 @@ export const setShippingMethod = async (methodId) => {
 :::::::::::::::::::::::::::::
 update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
- */export async function updateAddresses(addressId = '') {
+ */
+export async function updateAddresses(addressId = '') {
   if (window.location.pathname.includes('cart')) return false;
 
   const authenticationToken = await getAuthenticationToken();

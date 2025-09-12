@@ -149,7 +149,7 @@ function initGmapsAutocomplete(addressType, addressInput = '') {
  * @param {Array} addressList - Shipping/Billing address list array.
  * @param {String} type - shipping/billing.
  */
-const renderAddressList = (addressItems, addressListArray, type) => {
+export const renderAddressList = (addressItems, addressListArray, type) => {
   if (typeof addressListArray !== 'undefined' && addressListArray.length > 0) {
     addressItems.textContent = '';
     const filteredArray = addressListArray.filter((adr) => {
@@ -670,11 +670,18 @@ click use address button to set the address as default for current order
 generate the shipping address list module
 ::::::::::::::
 */
-export const addressListModal = async (type) => {
-  const addressListWrapper = div({
+export const addressListModal = async (type, addressItemsClass= null, addressListWrapperClass = mull) => {
+  
+  let addressListWrapper;
+  if(addressListWrapperClass != null){
+      addressListWrapper = addressListWrapperClass 
+  }
+  else{
+    addressListWrapper = div({
     class: 'flex flex-col',
     id: `${type}AddressListModal`,
   });
+  }
   const addressListHeader = div(
     {
       class: 'flex flex-col',
@@ -739,11 +746,19 @@ export const addressListModal = async (type) => {
     class: 'flex flex-col',
     id: `${type}AddressListModalContent`,
   });
-  const addressItems = div({
+   let addressItems;
+  if(addressItemsClass !== null){
+    
+    addressItems = addressItemsClass;
+  }
+  else {
+    addressItems = div({
     class:
       'max-h-97 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
     id: `${type}AddressListItemsWrapper`,
   });
+  }
+  
   showPreLoader();
   /*
   :::::::::::::::::::::::
@@ -753,6 +768,7 @@ export const addressListModal = async (type) => {
   const addressListData = await addressList(type);
 
   addressItems.textContent = '';
+  
   renderAddressList(addressItems, addressListData, type);
 
   /*

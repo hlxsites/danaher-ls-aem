@@ -92,10 +92,6 @@
   height: 46px
 }
 
-.approved-quotes-wrapper :is(.h-\[831px\]) {
-  height: 831px
-}
-
 .approved-quotes-wrapper :is(.\!w-\[60px\]) {
   width: 60px !important
 }
@@ -146,14 +142,6 @@
 
 .approved-quotes-wrapper :is(.w-full) {
   width: 100%
-}
-
-.approved-quotes-wrapper :is(.w-\[173px\]) {
-  width: 173px
-}
-
-.approved-quotes-wrapper :is(.w-\[197px\]) {
-  width: 197px
 }
 
 .approved-quotes-wrapper :is(.flex-1) {
