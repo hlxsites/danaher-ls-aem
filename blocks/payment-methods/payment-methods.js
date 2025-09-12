@@ -54,7 +54,7 @@ export default async function decorate(block) {
       paymentSubHeading.textContent = 'Manage your saved payment methods';
     }
     module?.querySelector('#paymentMethodInvoice')?.classList.add('opacity-50', 'pointer-events-none');
-    const paymentMethodStripe = module?.querySelector('#paymentMethodStripe');
+    const paymentMethodStripe = module?.querySelector('#paymentMethodSTRIPE_PAYMENT');
     const savedStripeCardsList = module?.querySelector('#savedStripeCardsList');
     if (paymentMethodStripe) {
       savedStripeCardsList.className = 'w-full gap-6 flex flex-col max-h-[645px] pr-2 overflow-auto flex flex-col gap-6 pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500';
