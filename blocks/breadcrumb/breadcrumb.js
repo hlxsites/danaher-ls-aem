@@ -145,12 +145,4 @@ export default async function decorate(block) {
     breadcrumbElement.appendChild(breadcrumbWrapper);
     breadcrumbSection.remove();
   }
-
-  // Remove duplicate breadcrumb-wrapper elements, keep only the first one
-  const wrappers = document.querySelectorAll('.breadcrumb-wrapper');
-  if (wrappers.length > 1) {
-    for (let i = 1; i < wrappers.length; i++) {
-      wrappers[i].remove();
-    }
-  }
 }
