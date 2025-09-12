@@ -103,7 +103,7 @@ export function createFilters(articles, activeTag = '') {
     }
      container.append(
       span({ class: 'font-medium text-danahergray-700' }, 'Blog topic: '),
-      span({ class: 'font-bold text-black'}, activeTag.replace(/-/g, '').replace(/\b\w/g, c => c.toUpperCase())),
+      span({ class: 'font-bold text-black'}, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
     );
   }
 

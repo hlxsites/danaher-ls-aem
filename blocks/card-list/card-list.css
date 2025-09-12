@@ -111,14 +111,6 @@
   margin-top: auto
 }
 
-.card-list-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
-.card-list-wrapper :is(.mt-2) {
-  margin-top: 0.5rem
-}
-
 .card-list-wrapper :is(.\!line-clamp-3) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -146,10 +138,6 @@
 
 .card-list-wrapper :is(.inline-block) {
   display: inline-block
-}
-
-.card-list-wrapper :is(.inline) {
-  display: inline
 }
 
 .card-list-wrapper :is(.flex) {
@@ -464,12 +452,6 @@
 .card-list-wrapper :is(.shadow-lg) {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.card-list-wrapper :is(.shadow) {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
