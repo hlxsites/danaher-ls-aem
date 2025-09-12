@@ -146,7 +146,7 @@ export default async function decorate(block) {
         class: 'self-stretch justify-start text-black font-medium leading-10',
         style: 'font-size: 40px;'
       },
-      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
+      result?.raw?.titlelsig ? result?.raw?.titlelsig : result?.raw?.title,
     ),
     result?.raw?.objecttype === 'Product'
       || result?.raw?.objecttype === 'Bundle' ?
