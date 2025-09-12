@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { baseURL } from '../../scripts/common-utils.js';
 import {
   deleteApiData,
@@ -7,9 +8,9 @@ import {
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 /*
-:::::::::::::::::::::::::::
+
 Function to update current basket details
-:::::::::::::::::::::::::::
+
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
@@ -24,9 +25,9 @@ export async function updateBasketDetails() {
   });
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
-    sessionStorage.removeItem('basketData');
+    localStorage.removeItem('basketData');
     const response = await getApiData(url, defaultHeader);
-    sessionStorage.setItem('basketData', JSON.stringify(response));
+    localStorage.setItem('basketData', JSON.stringify(response));
     return response;
   } catch (error) {
     return { status: 'error', data: error.message };
@@ -53,7 +54,7 @@ export const productData = async (productArg) => {
         const product = response.data;
         product.itemQuantity = itemQuantity;
         product.lineItemId = lineItemId;
-        const productDetailsObject = sessionStorage.getItem(
+        const productDetailsObject = localStorage.getItem(
           'productDetailObject',
         );
         const array = productDetailsObject
@@ -62,7 +63,6 @@ export const productData = async (productArg) => {
 
         const { manufacturer } = product;
         if (!manufacturer) {
-          // console.error('Product must have a manufacturer field.');
           return 'Product must have a manufacturer field.';
         }
 
@@ -86,9 +86,8 @@ export const productData = async (productArg) => {
         }
 
         // Update sessionStorage
-        sessionStorage.setItem('productDetailObject', JSON.stringify(array));
+        localStorage.setItem('productDetailObject', JSON.stringify(array));
 
-        // console.log("Arraayayyy: ", array);
         return {
           data: product,
           status: 'success',
@@ -101,7 +100,6 @@ export const productData = async (productArg) => {
     }
     return { status: 'error', data: response.data };
   } catch (error) {
-    // console.log('error', error);
     return 'error';
   }
 };
@@ -134,7 +132,6 @@ export const getAllItemsFromBasket = async () => {
     }
     return { status: 'error', data: response.data };
   } catch (error) {
-    // console.log('error', error);
     return 'error';
   }
 };
@@ -142,7 +139,7 @@ export const getAllItemsFromBasket = async () => {
 // function to get or create if not there -  product detail object from the session
 
 export const getProductDetailObject = async () => {
-  const productDetailsObject = sessionStorage.getItem('productDetailObject');
+  const productDetailsObject = localStorage.getItem('productDetailObject');
 
   if (productDetailsObject) {
     return {
@@ -150,7 +147,7 @@ export const getProductDetailObject = async () => {
       status: 'success',
     };
   }
-  // sessionStorage.setItem("productDetailObject", JSON.stringify([]));
+  // localStorage.setItem("productDetailObject", JSON.stringify([]));
   const getAllItemsDetails = await getAllItemsFromBasket();
   if (getAllItemsDetails?.data?.length > 0 && getAllItemsDetails?.status === 'success') {
     const productDetailsList = await Promise.all(
@@ -161,14 +158,14 @@ export const getProductDetailObject = async () => {
     );
     if (productDetailsList) {
       return {
-        data: JSON.parse(sessionStorage.getItem('productDetailObject')),
+        data: JSON.parse(localStorage.getItem('productDetailObject')),
         status: 'success',
       };
     }
   } else {
-    sessionStorage.setItem('productDetailObject', JSON.stringify([]));
+    localStorage.setItem('productDetailObject', JSON.stringify([]));
     return {
-      data: JSON.parse(sessionStorage.getItem('productDetailObject')),
+      data: JSON.parse(localStorage.getItem('productDetailObject')),
       status: 'success',
     };
   }
@@ -198,8 +195,8 @@ export const sessionObject = async (
           if (foundObject[manufacturer].length === 0) {
             const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
-            sessionStorage.removeItem('productDetailObject');
-            sessionStorage.setItem(
+            localStorage.removeItem('productDetailObject');
+            localStorage.setItem(
               'productDetailObject',
               JSON.stringify(getProductDetailsObject.data),
             );
@@ -207,8 +204,8 @@ export const sessionObject = async (
           }
           const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
           getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-          sessionStorage.removeItem('productDetailObject');
-          sessionStorage.setItem(
+          localStorage.removeItem('productDetailObject');
+          localStorage.setItem(
             'productDetailObject',
             JSON.stringify(getProductDetailsObject.data),
           );
@@ -219,8 +216,8 @@ export const sessionObject = async (
         foundObject[manufacturer][index] = result;
         const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
         getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.setItem(
+        localStorage.removeItem('productDetailObject');
+        localStorage.setItem(
           'productDetailObject',
           JSON.stringify(getProductDetailsObject.data),
         );
@@ -400,7 +397,6 @@ export const updateCartItemQuantity = async (item) => {
       }
       return { status: 'error', data: response.data };
     } catch (error) {
-      // console.log('error', error);
       return 'error';
     }
   }

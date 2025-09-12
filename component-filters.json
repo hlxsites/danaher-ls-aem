@@ -32,13 +32,18 @@
       "register",
       "login",
       "dashboard",
+      "approved-quotes",
+      "my-profile",
+      "my-addresses",
       "cartlanding",
       "checkout",
       "order-submit",
       "order-status",
       "requested-quote",
+      "approved-quotes",
       "order-details",
       "quote-details",
+      "my-profile",
       "carousel",
       "dual-carousel",
       "opco-banner",
@@ -88,6 +93,12 @@
     ]
   },
   {
+    "id": "approved-quotes",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "article-info",
     "components": []
   },
@@ -112,10 +123,7 @@
   {
     "id": "card-list",
     "components": [
-      "articleCard",
-      "applicationCard",
-      "libraryCard",
-      "labCard"
+      " "
     ]
   },
   {
@@ -186,6 +194,24 @@
     ]
   },
   {
+    "id": "my-address",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "my-addresses",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "my-profile",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""
@@ -217,6 +243,12 @@
   },
   {
     "id": "order-submit",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "payment-methods",
     "components": [
       ""
     ]

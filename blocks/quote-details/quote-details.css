@@ -1,10 +1,3 @@
-.btn-lg {
-  padding-top: .625rem;
-  padding-bottom: .625rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem
-}
-
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -509,11 +502,6 @@
 .quote-details-wrapper :is(.text-sky-800) {
   --tw-text-opacity: 1;
   color: rgb(7 89 133 / var(--tw-text-opacity))
-}
-
-.quote-details-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .quote-details-wrapper :is(.text-white) {

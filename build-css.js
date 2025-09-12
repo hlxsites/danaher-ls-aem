@@ -473,9 +473,31 @@ const fileMappings = [
     wrapper: 'order-status-wrapper',
   },
   {
+    content: ['./blocks/my-profile/my-profile.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
+    output: './blocks/my-profile/my-profile.css',
+    wrapper: 'my-profile-wrapper',
+  },
+  {
+    content: ['./blocks/my-addresses/my-addresses.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
+    output: './blocks/my-addresses/my-addresses.css',
+    wrapper: 'my-addresses-wrapper',
+  },
+  {
+    content: ['./blocks/payment-methods/payment-methods.js', './blocks/dashboardSideBar/dashboardSideBar.js',
+      './blocks/checkout/checkoutUtilities.js',
+      './blocks/checkout/paymentModule.js'],
+    output: './blocks/payment-methods/payment-methods.css',
+    wrapper: 'payment-methods-wrapper',
+  },
+  {
     content: ['./blocks/requested-quote/requested-quote.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
     output: './blocks/requested-quote/requested-quote.css',
     wrapper: 'requested-quote-wrapper',
+  },
+  {
+    content: ['./blocks/approved-quotes/approved-quotes.js', './blocks/dashboardSideBar/dashboardSideBar.js'],
+    output: './blocks/approved-quotes/approved-quotes.css',
+    wrapper: 'approved-quotes-wrapper',
   },
   {
     content: ['./blocks/order-details/order-details.js',
@@ -547,11 +569,16 @@ fileMappings.forEach(({
   content, input, output, wrapper,
 }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
-  const command = `npx tailwindcss ${
-    input ? `-i ${input}` : './styles/proxy-tailwind.css'
-  } ${content ? `--content ${content}` : ''} -o ${output} ${
-    watch ? '--watch' : ''
-  }`;
+  let command = '';
+  if (output.includes('styles.css')) {
+    command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
+    } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
+    } --minify`;
+  } else {
+    command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
+    } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
+    }`;
+  }
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console

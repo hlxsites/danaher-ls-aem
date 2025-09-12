@@ -1,7 +1,7 @@
 /*
-:::::::::::::::::::::::::::::::::::::::::::::::
+
  API POST/GET/PUT/PATH operations
- ::::::::::::::::::::::::::::::
+
 */
 
 /*
@@ -82,13 +82,13 @@ export async function postApiData(url, data, headers) {
 }
 
 /*
-::::::::::::::::::
+
  patch api data.. make use of the request function
  * @param {string} url - The URL of the API endpoint.
  * @param {Object} data - The data to be sent in the request body.
  * @param {Object} headers - Optional headers for the request.
  * @returns {<Object>} - Returns the response object from the API or an error object.
- :::::::::::::::::
+
  */
 export async function patchApiData(url, data, headers) {
   try {
@@ -99,13 +99,13 @@ export async function patchApiData(url, data, headers) {
 }
 
 /*
-::::::::::::::::::
+
  put api data.. make use of the request function
  * @param {string} url - The URL of the API endpoint.
  * @param {Object} data - The data to be sent in the request body.
  * @param {Object} headers - Optional headers for the request.
  * @returns {<Object>} - Returns the response object from the API or an error object.
- :::::::::::::::::
+
  */
 export async function putApiData(url, data, headers) {
   try {

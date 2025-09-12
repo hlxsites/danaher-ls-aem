@@ -1,10 +1,3 @@
-.btn-lg {
-  padding-top: .625rem;
-  padding-bottom: .625rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem
-}
-
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -74,10 +67,6 @@
 
 .requested-quote-wrapper :is(.h-\[500px\]) {
   height: 500px
-}
-
-.requested-quote-wrapper :is(.h-\[831px\]) {
-  height: 831px
 }
 
 .requested-quote-wrapper :is(.\!w-\[60px\]) {

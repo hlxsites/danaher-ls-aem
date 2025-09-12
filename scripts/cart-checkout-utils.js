@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 
 import {
@@ -12,6 +13,7 @@ import {
   p,
   input,
   form,
+  a,
   h3,
   h5,
   button,
@@ -142,7 +144,7 @@ export const divider = (val) => hr({
 /*
 *
 *
-::::::::: skeleton for checkout modules ::::::
+: skeleton for checkout modules :
 *
 *
 */
@@ -173,9 +175,9 @@ export const checkoutSkeleton = () => {
 };
 
 /*
-::::::::::::::
+
 default shipping/billing address if available when user lands on checkout page
-::::::::::::::
+
 */
 export function defaultAddress(address, type) {
   const getDefaultAddressWrapper = document.querySelector(
@@ -226,6 +228,7 @@ export function defaultAddress(address, type) {
           {
             'data-type': type,
             'data-action': 'edit',
+            'data-canclebutton': true,
             class:
               'flex justify-start bg-white editAddressButton text-danaherpurple-500 hover:text-danaherpurple-800 p-0 pl-0 text-base font-semibold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
@@ -240,9 +243,9 @@ export function defaultAddress(address, type) {
   return false;
 }
 /*
- :::::::::::::::::::::::::::::
+
  set shipping notes to default based on the method ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function setShippingNotes(shippingNotesPayload) {
@@ -282,9 +285,9 @@ export async function setShippingNotes(shippingNotesPayload) {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  update shipping notes based on the method ID
- ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function updateShippingNotes(shippingNotesPayload) {
@@ -324,9 +327,9 @@ export async function updateShippingNotes(shippingNotesPayload) {
   }
 }
 /*
-:::::::::::::::::::::::::::
+
  Function to create basket
-  :::::::::::::::::::::::::::
+
 */
 export const createBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -350,9 +353,9 @@ export const createBasket = async () => {
   }
 };
 /*
-:::::::::::::::::::::::::::
+
  Function to validate basket
-  :::::::::::::::::::::::::::
+
 */
 export const validateBasket = async (validateData) => {
   const authenticationToken = await getAuthenticationToken();
@@ -379,9 +382,9 @@ export const validateBasket = async (validateData) => {
   }
 };
 /*
-:::::::::::::::::::::::::::
+
  Function to submit Order
-  :::::::::::::::::::::::::::
+
 */
 export const submitOrder = async (basketId, paymentMethod) => {
   const authenticationToken = await getAuthenticationToken();
@@ -418,14 +421,14 @@ export const submitOrder = async (basketId, paymentMethod) => {
       response = await postApiData(url, data, defaultHeader);
     }
     if (response?.status === 'success') {
-      sessionStorage.setItem(
+      localStorage.setItem(
         'orderSubmitDetails',
         JSON.stringify(response.data),
       );
       const cartItemsDetails = JSON.parse(
-        sessionStorage.getItem('productDetailObject'),
+        localStorage.getItem('productDetailObject'),
       );
-      sessionStorage.setItem(
+      localStorage.setItem(
         'cartItemsDetails',
         JSON.stringify(cartItemsDetails),
       );
@@ -458,9 +461,9 @@ export const submitOrder = async (basketId, paymentMethod) => {
 };
 
 /*
- :::::::::::::::::::::::::::::
+
  get saved cards for payment
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getSavedCards() {
   const authenticationToken = await getAuthenticationToken();
@@ -484,9 +487,9 @@ export async function getSavedCards() {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  get single adress details based on address id
- ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} addressURI - The ID of the Address.
  */
 export async function getAddressDetails(addressURI, type = '') {
@@ -518,9 +521,9 @@ export async function getAddressDetails(addressURI, type = '') {
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  update use address object with cuyrrent address
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {Object} response - Response from the Set default address API.
  */
 export async function setUseAddressObject(response) {
@@ -556,9 +559,9 @@ export async function setUseAddressObject(response) {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
   set use address to  show on ui based on adress id and type
-   ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} id - The ID of the current address.
  * @param {string} type - Shipping/Billing.
  */
@@ -569,9 +572,9 @@ export const setUseAddress = async (id, type, action = '') => {
   }
   try {
     if (window.location.pathname.includes('cart')) return false;
+    const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
     const getUseAddressesObject = JSON.parse(sessionStorage.getItem('useAddress'));
     if (getUseAddressesObject?.status === 'success' && action !== 'useAddress') {
-      const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
       if (cachedAddress?.status === 'success') {
         const updatedUseObject = {
           status: 'success',
@@ -593,12 +596,34 @@ export const setUseAddress = async (id, type, action = '') => {
           // eslint-disable-next-line max-len
           updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
         }
-        sessionStorage.removeItem('useAddress');
         sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
         return updatedUseObject;
       }
     }
 
+    if (cachedAddress?.status === 'success') {
+      const updatedUseObject = {
+        status: 'success',
+        data: {
+          commonShipToAddress: '',
+          invoiceToAddress: '',
+        },
+      };
+      const checkCachedAddress = cachedAddress?.data?.filter((adr) => adr.id === id);
+
+      if (type === 'shipping' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.commonShipToAddress = checkCachedAddress[0];
+        updatedUseObject.data.invoiceToAddress = getUseAddressesObject?.data?.invoiceToAddress;
+      }
+      if (type === 'billing' && checkCachedAddress) {
+        // eslint-disable-next-line prefer-destructuring
+        updatedUseObject.data.invoiceToAddress = checkCachedAddress[0];
+        // eslint-disable-next-line max-len
+        updatedUseObject.data.commonShipToAddress = getUseAddressesObject?.data?.commonShipToAddress;
+      }
+      sessionStorage.setItem('useAddress', JSON.stringify(updatedUseObject));
+    }
     const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     if (type === 'shipping') {
@@ -636,9 +661,9 @@ export const setUseAddress = async (id, type, action = '') => {
 };
 
 /*
-:::::::::::::::::::::::::::
+
 Function to get current basket details
-:::::::::::::::::::::::::::
+
 */
 export async function getBasketDetails(userType = null, lastBasketId = null) {
   const authenticationToken = await getAuthenticationToken();
@@ -672,7 +697,7 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
         const basketResponse = await getApiData(url, defaultHeader);
 
         if (basketResponse && basketResponse.status === 'success') {
-          sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+          localStorage.setItem('basketData', JSON.stringify(basketResponse));
           return basketResponse;
         }
       } else {
@@ -682,13 +707,13 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
     const basketResponse = await getApiData(url, defaultHeader);
 
     if (basketResponse && basketResponse.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+      localStorage.setItem('basketData', JSON.stringify(basketResponse));
 
       return basketResponse;
     }
     const response = await createBasket();
     if (response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
+      localStorage.setItem('basketData', JSON.stringify(response));
       if (response.data.invoiceToAddress) {
         const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
         await setUseAddress(setUseBillingAddress, 'billing');
@@ -700,10 +725,23 @@ export async function getBasketDetails(userType = null, lastBasketId = null) {
   }
 }
 
+/**
+ * Updates the cart quantity displayed in the header.
+ * If a value is passed, it uses that; otherwise, it fetches basket data.
+ * @param {string|number} value - Optional cart item count override
+ */
+export async function updateHeaderCart() {
+  const getBasketData = await getBasketDetails();
+  // Update the cart quantity in the DOM
+  const getHeaderCart = document.querySelector('#headerCartItemQuantity');
+  if (getHeaderCart) {
+    getHeaderCart.textContent = getBasketData?.data?.data?.lineItems?.length || '0';
+  }
+}
 /*
- :::::::::::::::::::::::::::::
+
  update shipping methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const updateShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -711,9 +749,9 @@ export const updateShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -728,7 +766,7 @@ export const updateShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -742,9 +780,9 @@ export const updateShippingMethods = async () => {
   }
 };
 /*
- :::::::::::::::::::::::::::::
+
  get shipping methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const getShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -752,13 +790,13 @@ export const getShippingMethods = async () => {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(localStorage.getItem('basketData'));
     if (shippingBucket.status === 'success') {
       const shippingMethods = JSON.parse(
-        sessionStorage.getItem('shippingMethods'),
+        localStorage.getItem('shippingMethods'),
       );
       if (shippingMethods?.status === 'success') return await shippingMethods;
-      sessionStorage.removeItem('shippingMethods');
+      localStorage.removeItem('shippingMethods');
       const url = `${baseURL}/baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append('Content-Type', 'Application/json');
@@ -773,7 +811,7 @@ export const getShippingMethods = async () => {
       const response = await getApiData(url, defaultHeaders);
 
       if (response.status === 'success') {
-        sessionStorage.setItem(
+        localStorage.setItem(
           'shippingMethods',
           JSON.stringify({ status: 'success', data: response.data.data }),
         );
@@ -787,9 +825,9 @@ export const getShippingMethods = async () => {
   }
 };
 /*
- :::::::::::::::::::::::::::::
+
  get payment  methods
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export const getPaymentMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -823,9 +861,9 @@ export const getPaymentMethods = async () => {
 };
 
 /*
- :::::::::::::::::::::::::::::
+
   set shipping method to default based on the method ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {string} methodId - The ID of the Shipping method.
  */
 export const setShippingMethod = async (methodId) => {
@@ -835,7 +873,7 @@ export const setShippingMethod = async (methodId) => {
   }
   try {
     sessionStorage.removeItem('useShippingMethod');
-    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+    const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {
       commonShippingMethod: methodId,
     };
@@ -870,7 +908,7 @@ export const setShippingMethod = async (methodId) => {
 };
 
 /*
-:::::::::::::::::::::::::::::
+
 update addresses to be shown on ui
 ::::::::::::::::::::::::::::::::::::::::::::
  */export async function updateAddresses(addressId = '') {
@@ -878,7 +916,7 @@ update addresses to be shown on ui
 
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig?.cartPageUrl;
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
@@ -942,9 +980,9 @@ update addresses to be shown on ui
   }
 }
 /*
- :::::::::::::::::::::::::::::
+
  get addresses to be shown
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem('addressList'));
@@ -954,9 +992,9 @@ export async function getAddresses() {
   return updateAddresses();
 }
 /*
-::::::::::::::
+
 shipping address list will get it from the api under my-account -  get addresses
-::::::::::::::
+
 */
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
@@ -973,9 +1011,9 @@ export async function addressList(type) {
 }
 
 /*
-::::::::::::::::::::::
+
 generate country and state slect fields
-:::::::::::::::::::::::::::::::
+
 */
 export const buildCountryStateSelectBox = (
   lable,
@@ -1033,9 +1071,9 @@ export const buildCountryStateSelectBox = (
 };
 
 /*
- :::::::::::::::::::::::::::::
+
  set address to default
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
@@ -1062,9 +1100,9 @@ export async function updateAddressToDefault(data) {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
  get addresses to be shown in UI
- ::::::::::::::::::::::::::::::::::::::::::::
+
  */
 export async function getUseAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem('useAddress'));
@@ -1081,7 +1119,7 @@ export async function getUseAddresses() {
         'useAddress',
         JSON.stringify(useAddressObjectData),
       );
-      return { status: 'success', data: useAddressObjectData };
+      return useAddressObjectData;
     }
     return { status: 'error', data: {} };
   }
@@ -1089,16 +1127,16 @@ export async function getUseAddresses() {
 }
 
 /*
- :::::::::::::::::::::::::::::
+
  Get promotion details based on promotion ID
-  ::::::::::::::::::::::::::::::::::::::::::::
+
  * @param {String} promotionId - promotionId from the Basket Details API.
  */
 export const getPromotionDetails = async (promotionId) => {
   try {
     if (!promotionId) return { status: 'error', data: 'Invalid promotion ID' };
 
-    const autoDiscount = JSON.parse(sessionStorage.getItem('discountDetails')) || {};
+    const autoDiscount = JSON.parse(localStorage.getItem('discountDetails')) || {};
     if (autoDiscount?.status === 'success') return autoDiscount;
     const getBasket = await getBasketDetails();
     if (getBasket?.status === 'success') {
@@ -1112,7 +1150,7 @@ export const getPromotionDetails = async (promotionId) => {
         );
 
         if (getDiscountDetails?.status === 'success') {
-          sessionStorage.setItem(
+          localStorage.setItem(
             'discountDetails',
             JSON.stringify(getDiscountDetails),
           );
@@ -1130,9 +1168,9 @@ export const getPromotionDetails = async (promotionId) => {
 };
 
 /*
- ::::::::::::::
+
  tax exempt module.feed the create modal function with tax exempt content
- ::::::::::::::
+
  */
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
@@ -1141,9 +1179,9 @@ export const taxExemptModal = () => {
       id: 'taxExemptWrapper',
     },
     /*
-    :::::::::::::::
+
      tax exempt header
-     ::::::::::::::
+
      */
     div(
       {
@@ -1177,9 +1215,9 @@ export const taxExemptModal = () => {
       ),
     ),
     /*
-    ::::::::::::::
+
     tax exempt body
-    ::::::::::::::
+
     */
     div(
       {
@@ -1216,9 +1254,9 @@ export const taxExemptModal = () => {
     ),
 
     /*
-     ::::::::::::::
+
      tax exempt footer
-     ::::::::::::::
+
      */
     div(
       {
@@ -1244,22 +1282,44 @@ export const taxExemptModal = () => {
     ),
   );
   /*
-    ::::::::::::::::::::::
-    cloud file icon for tax exempt modal
-     :::::::::::::::::::::::::::::::
-    */
-  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file span');
-  cloudFileIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+    cloud file icon for tax exempt modal
+
+    */
+  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file');
+
+  const cloudFileIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-file [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudFileIconWrapper);
+  cloudFileIcon?.insertAdjacentElement('beforeend', cloudFileIconWrapper);
   /*
-    ::::::::::::::::::::::
+
     upload file icon for tax exempt modal
-     :::::::::::::::::::::::::::::::
+
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
-    '.tax-exempt-upload span',
+    '.tax-exempt-upload',
   );
-  cloudUloadIcon.innerHTML = '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  const cloudUploadIconWrapper = div(
+    {
+      class: 'absolute right-2 bottom-2',
+    },
+    span(
+      {
+        class: 'icon icon-cloud-upload [&_svg>use]:stroke-danaherpurple-500 ',
+      },
+    ),
+  );
+  decorateIcons(cloudUploadIconWrapper);
+  cloudUloadIcon?.insertAdjacentElement('beforeend', cloudUploadIconWrapper);
 
   const taxExemptUploadButton = taxExemptWrapper.querySelector('#taxExemptUpload');
 
@@ -1388,9 +1448,9 @@ export const taxExemptModal = () => {
 /*
 *
 *
- ::::::::::::::
+
  function to create PO number if its not present in the Baket
- ::::::::::::::
+
 *
 *
 *
@@ -1431,9 +1491,9 @@ export const createPoNumber = async (invoiceNumber) => {
 /*
 *
 *
- ::::::::::::::
+
  function to update PO number if its not present in the Baket
- ::::::::::::::
+
 *
 *
 *
@@ -1481,9 +1541,9 @@ export async function silentNavigation(path) {
 /*
 *
 *
- ::::::::::::::
+
  handle the interaction when user click on proceed button or the steps icons
- ::::::::::::::
+
 *
 *
 *
@@ -1515,7 +1575,6 @@ export const changeStep = async (step) => {
       checkoutSummaryContainer.append(checkoutSkeleton());
     }
   }
-
   let validateData = '';
   let validatingBasket;
   try {
@@ -1532,7 +1591,7 @@ export const changeStep = async (step) => {
       };
       validatingBasket = await validateBasket(validateData);
       if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/addresses');
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
     }
     if (currentTab === 'shippingMethods') {
       validateData = {
@@ -1544,8 +1603,8 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/shipping');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Address.');
+      silentNavigation(window.EbuyConfig?.shippingPageUrl);
     }
 
     if (currentTab === 'payment') {
@@ -1559,8 +1618,8 @@ export const changeStep = async (step) => {
         ],
       };
       validatingBasket = await validateBasket(validateData);
-      if (validatingBasket?.status !== 'success') throw new Error('Invalid Basket');
-      silentNavigation('/us/en/e-buy/payment');
+      if (validatingBasket?.status !== 'success') throw new Error('Invalid Shipping Method.');
+      silentNavigation(window.EbuyConfig?.paymentPageUrl);
     }
 
     const activateModule = document.querySelector(
@@ -1585,32 +1644,33 @@ export const changeStep = async (step) => {
     /*
     *
     *
-      ::::::::: handle payment ::::::
+     handle payment :
     *
     *
     * */
+
     if (currentTab === 'submitOrder') {
-      const submittedOrderUrl = '/us/en/e-buy/ordersubmit?orderId=';
+      showPreLoader();
+      const submittedOrderUrl = `${window.EbuyConfig?.orderSubmitPageUrl}?orderId=`;
       // check if payment methos is selected
       const getSelectedPaymentMethod = document.querySelector('#paymentMethodsWrapper')?.querySelector('input[name="paymentMethod"]:checked');
 
       if (!getSelectedPaymentMethod) throw new Error('Please select Payment Method');
-
+      const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
+      if (getSelectedPaymentMethod?.value === 'invoice') {
+        /*
+        *
+         check if invoice number is entered
+        *
+        */
+        if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
+      }
       const getBasketForOrder = await getBasketDetails();
 
       if (getSelectedPaymentMethod?.value === 'invoice') {
-        showPreLoader();
         /*
         *
-        :::::::: check if invoice number is entered :::::::
-        *
-        */
-        const invoiceNumberValue = document.querySelector('#invoiceNumber')?.value?.trim();
-        if (!invoiceNumberValue) throw new Error('Please Enter Invoice number.');
-
-        /*
-        *
-        :::::::: Call Open tender API for Invoice :::::::
+         Call Open tender API for Invoice
         *
         */
         const url = `${baseURL}/baskets/current/payments/open-tender?include=paymentMethod`;
@@ -1632,7 +1692,7 @@ export const changeStep = async (step) => {
         };
         /*
         *
-        :::::::: Validating Basket :::::::
+         Validating Basket
         *
         */
         const validatingBasketForPayment = await validateBasket(validatePaymentData);
@@ -1641,7 +1701,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Create PO number  :::::::
+         Create PO number
         *
         */
         if (invoiceNumberValue) {
@@ -1657,7 +1717,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Submitting order :::::::
+         Submitting order
         *
         */
         const basketId = getBasketForOrder?.data?.data?.id;
@@ -1668,9 +1728,9 @@ export const changeStep = async (step) => {
           throw new Error('Error submitting order.');
         }
 
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
 
         window.location.href = `${submittedOrderUrl}${orderId}`;
@@ -1678,16 +1738,14 @@ export const changeStep = async (step) => {
 
       /*
       *
-      * :::::::::; handle stripe payment ::::::::
+      * :; handle stripe payment
       */
       if (getSelectedPaymentMethod?.value === 'stripe') {
-        showPreLoader();
-
         /*
         *
-        :::::::::::
+        :
         Getting Stripe Instance
-        ::::::::::
+
         *
         */
         const stripe = getStripeInstance();
@@ -1697,16 +1755,15 @@ export const changeStep = async (step) => {
         const selectedStripeMethod = sessionStorage.getItem('selectedStripeMethod');
 
         const useStripeCardId = sessionStorage.getItem('useStripeCardId');
-
         /*
         *
         *
-          ::::::::
+
           handle stripe payment for saved/new card
-          :::::::::
+
         *
         */
-        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select Payment Method');
+        if (!useStripeCardId && selectedStripeMethod === 'savedCard') throw new Error('Please Select a card to place order.');
 
         // Call setup-intent API to confirm setup for new card
         let settingIntent;
@@ -1717,9 +1774,9 @@ export const changeStep = async (step) => {
         let confirmPM = '';
         /*
         *
-        :::::::::::
-        confirm setup ::::
-        ::::::::::
+
+        confirm setup :
+
         *
         */
         let proceedTopayment = 'false';
@@ -1739,9 +1796,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
           *
-          :::::::::::
+
           Get Payment Intent
-          ::::::::::
+
           *
           */
           const getPaymentIntentData = await getPaymentIntent();
@@ -1750,9 +1807,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         Post Payment Intent
-        ::::::::::
+
         *
         */
         const postingIntent = await postPaymentIntent(selectedPaymentMethodType);
@@ -1761,9 +1818,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'newCard' || !selectedStripeMethod) {
           /*
           *
-          :::::::::::
+
           Post Setup Intent
-          ::::::::::
+
           *
           */
           settingIntent = await postSetupIntent();
@@ -1771,9 +1828,9 @@ export const changeStep = async (step) => {
         }
         /*
         *
-        :::::::::::
+
         Creating Instrument
-        ::::::::::
+
         *
         */
         // eslint-disable-next-line max-len
@@ -1785,9 +1842,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         Assigning Instrument
-        ::::::::::
+
         *
         */
         const assignInstrument = await assignPaymentInstrument(instrumentId);
@@ -1803,9 +1860,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         validating basket
-        ::::::::::
+
         *
         */
         const validatingBasketForPayment = await validateBasket(validateBasketData);
@@ -1815,9 +1872,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'savedCard') {
           /*
           *
-          :::::::::::
-          confirm payment method ::::
-          ::::::::::
+
+          confirm payment method :
+
           *
           */
           const getPreConfirmedPI = await getPaymentIntent();
@@ -1832,9 +1889,9 @@ export const changeStep = async (step) => {
         if (selectedStripeMethod === 'savedCard' || proceedTopayment) {
           /*
           *
-          :::::::::::
-          confirm payment :::: final step
-          ::::::::::
+
+          confirm payment : final step
+
           *
           */
           confirmingPayment = await confirmPayment(stripe, postingIntent?.data?.client_secret, `${window.location.origin}/payment`, confirmPM);
@@ -1843,9 +1900,9 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::::::
+
         validating confirm-payment status
-        ::::::::::
+
         *
         */
         const status = confirmingPayment?.paymentIntent?.status;
@@ -1856,7 +1913,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Get Payment Intent API :::::::
+         Get Payment Intent API
         *
         */
 
@@ -1872,7 +1929,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Add / Update Card for Order :::::::
+         Add / Update Card for Order
         *
         */
         const updatingCardData = {
@@ -1896,7 +1953,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Submit Order :::::::
+         Submit Order
         *
         */
 
@@ -1906,7 +1963,7 @@ export const changeStep = async (step) => {
 
         /*
         *
-        :::::::: Unmounting the stripe elements :::::::
+         Unmounting the stripe elements
         *
         */
         if (proceedTopayment && proceedTopayment === 'true') {
@@ -1915,12 +1972,12 @@ export const changeStep = async (step) => {
         }
         /*
         *
-        :::::::: Clear Session :::::::
+         Clear Session
         *
         */
-        sessionStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
-        sessionStorage.removeItem('productDetailObject');
-        sessionStorage.removeItem('basketData');
+        localStorage.setItem('submittedOrderData', JSON.stringify(submittingOrder));
+        localStorage.removeItem('productDetailObject');
+        localStorage.removeItem('basketData');
         sessionStorage.removeItem('useAddress');
         sessionStorage.removeItem('useStripeCardId');
         sessionStorage.removeItem('selectedStripeMethod');
@@ -1948,7 +2005,12 @@ export const changeStep = async (step) => {
     } else {
       showNotification(error.message || 'Error Processing Request.', 'error');
     }
-    // silentNavigation('/us/en/e-buy/addresses');
+    if (error.message === 'Invalid Address.') {
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
+    }
+    if (error.message === 'Invalid Shipping Method.') {
+      silentNavigation(window.EbuyConfig?.addressPageUrl);
+    }
     return false;
   }
 };
@@ -1961,10 +2023,8 @@ async function loadAddressListModal(type) {
   removePreLoader();
 }
 /*
-::::::::::::::
-generate the  address form
-.::::::::::::::
 
+generate the  address form
 * @param {Object} data. The data object for edit form
 * @param {String} type. Form type ( shipping / billing )
 */
@@ -2115,17 +2175,16 @@ export async function addressForm(type, data = {}, action = '') {
     ),
   );
   /*
-::::::::::::::::
 get save address form buttonl...
-:::::::::::::::::
+
 */
   const saveAddressButton = adressForm.querySelector(
     `#save${capitalizeFirstLetter(type)}Address`,
   );
   /*
-::::::::::::::::
+:
 get counrty field and attach change event listener to populate states based on country code
-:::::::::::::::::
+
 */
   const selectedCountry = adressForm.querySelector('#countryCode');
   selectedCountry?.addEventListener('change', async (event) => {
@@ -2156,9 +2215,9 @@ get counrty field and attach change event listener to populate states based on c
 
     try {
       /*
-       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
        submitting form
-       :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
@@ -2169,11 +2228,11 @@ get counrty field and attach change event listener to populate states based on c
         formObject[key] = value;
       });
       /*
-       ::::::::::::::
+
        key to  set address as preferred billing or shipping address
        default${capitalizeFirstLetter(type)}AddressFormModal
        used for initial shipping and billing form
-       ::::::::::::::
+
        */
 
       const isDefaultSBForm = formToSubmit?.classList.contains(`default${capitalizeFirstLetter(type)}AddressFormModal`);
@@ -2191,9 +2250,9 @@ get counrty field and attach change event listener to populate states based on c
       }
 
       /*
-       ::::::::::::::
+
        set the address as shipping or biling
-       ::::::::::::::
+
        */
       const checkSameAsShippingCheckbox = document.querySelector('#shippingAsBillingAddress');
       const sameAsShipping = checkSameAsShippingCheckbox?.value === 'false' ? 'no' : 'yes';
@@ -2213,9 +2272,9 @@ get counrty field and attach change event listener to populate states based on c
       }
       const method = data && !action ? 'PUT' : 'POST';
       /*
-      :::::::::::::::::::::
+      :
       submits the form
-      ::::::::::::::::::::::::::::::::::::
+
       */
 
       const addAddressResponse = await submitForm(
@@ -2252,9 +2311,9 @@ get counrty field and attach change event listener to populate states based on c
 
           if (isDefaultSBForm) {
             /*
-            ::::::::::::::::
+
             set default address starts
-            ::::::::::::::
+
             */
             if (showDefaultAddress) {
               const addressURI = addAddressResponse?.data?.title?.split(':')[4];
@@ -2267,9 +2326,9 @@ get counrty field and attach change event listener to populate states based on c
 
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
-                  ::::::::::::::
+
                   set this address as default address
-                  :::::::::::::
+                  :
                   */
                 showDefaultAddress.insertAdjacentElement(
                   'afterend',
@@ -2280,15 +2339,15 @@ get counrty field and attach change event listener to populate states based on c
                 }
 
                 /*
-                   ::::::::::::::
+
                    assign address to backet
-                   ::::::::::::::::::
+                   :
                    */
                 await setUseAddress(addressURI, type, 'useAddress');
                 /*
-                   ::::::::::::::
+
                    assign address to backet
-                   ::::::::::::::::::
+                   :
                    */
                 if (sameAsShipping === 'yes' && type === 'shipping') {
                   const showDefaultBillingAddress = document.querySelector(
@@ -2297,9 +2356,9 @@ get counrty field and attach change event listener to populate states based on c
                   const renderDefaultBillingAddress = defaultAddress(address, 'billing');
                   if (showDefaultBillingAddress && renderDefaultBillingAddress) {
                     /*
-                      ::::::::::::::
+
                       set this address as default address
-                      :::::::::::::
+                      :
                       */
                     showDefaultBillingAddress.insertAdjacentElement(
                       'afterend',
@@ -2310,16 +2369,16 @@ get counrty field and attach change event listener to populate states based on c
                     }
 
                     /*
-                      ::::::::::::::
+
                       set billing address for use address , update for basket as well
-                      :::::::::::::
+                      :
                       */
                     await setUseAddress(addressURI, 'billing', 'useAddress');
 
                     /*
-                      ::::::::::::::
+
                       hide the shipping as billing checkbox and show check indicator
-                      :::::::::::::
+                      :
                       */
                     const getShipAsBillBox = document.querySelector('#shippingAsBillingCheckboxWrapper');
                     if (getShipAsBillBox) {
@@ -2342,9 +2401,9 @@ get counrty field and attach change event listener to populate states based on c
                 }
 
                 /*
-                   ::::::::::::::
+
                    update basket details with the latest address
-                   ::::::::::::::::::
+                   :
                    */
 
                 await updateBasketDetails();
@@ -2352,18 +2411,18 @@ get counrty field and attach change event listener to populate states based on c
             }
           }
           /*
-           ::::::::::::::
+
            update address list
-           ::::::::::::::
+
            */
           await updateAddresses(addressId);
 
           showNotification('Address Added Successfully.', 'success');
           await loadAddressListModal(type);
           /*
-             ::::::::::::::
+
              set default address ends
-             ::::::::::::::
+
              */
         } else if (
           addAddressResponse
@@ -2372,9 +2431,9 @@ get counrty field and attach change event listener to populate states based on c
           formToSubmit.classList.add('hidden');
 
           /*
-        ::::::::::::::
+
         update address list
-        ::::::::::::::
+
         */
           await updateAddresses(addressId);
 
@@ -2385,9 +2444,9 @@ get counrty field and attach change event listener to populate states based on c
           throw new Error('Error Updating Address.');
         }
         /*
-          ::::::::::::::
+
           close utility modal
-          ::::::::::::::
+
           */
         closeUtilityModal();
       } else {
@@ -2396,9 +2455,9 @@ get counrty field and attach change event listener to populate states based on c
     } catch (error) {
       scrollViewToTop();
       /*
-          ::::::::::::
+
           remove preloader
-          :::::::::::::
+          :
           */
       removePreLoader();
       showNotification(error.message, 'error');
@@ -2411,23 +2470,22 @@ get counrty field and attach change event listener to populate states based on c
 /*
 *
 *
-:::::::::::::::
  generates the checkout summary module.......
- ::::::::::::::::::
+
  *
  *
  */
 export async function checkoutSummary(orderId = '') {
   /*
- ::::::::::::::::
+
  store config to use some predefined set of rules/values
- :::::::::::::::::::::::::::::
+
  */
   const storeConfigurations = await getStoreConfigurations();
   /*
-:::::::::::::::
+
 get price type if its net or gross
-....:::::::::::::::::::
+
 */
   const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? 'net';
   const currencyCode = '$';
@@ -2441,7 +2499,7 @@ get price type if its net or gross
   let checkoutSummaryData = false;
   let userLoggedInStatus = false;
   if (orderId !== '') {
-    getCheckoutSummaryData = JSON.parse(sessionStorage.getItem('submittedOrderData'));
+    getCheckoutSummaryData = JSON.parse(localStorage.getItem('submittedOrderData'));
 
     if (getCheckoutSummaryData?.status === 'success') {
       checkoutSummaryData = getCheckoutSummaryData.data.data;
@@ -2486,9 +2544,9 @@ get price type if its net or gross
   }
 
   /*
-::::::::::::::
+
  common function to get key value from checout summary object
- ::::::::::::::::::::::::::::
+
   */
   const getTotalValue = (type) => {
     const totalValue = `${checkoutSummaryData?.totals[type][
@@ -2497,11 +2555,10 @@ get price type if its net or gross
     }`;
     return totalValue > 0 ? `${currencyCode}${totalValue}` : '$0';
   };
-
   /*
-  ::::::::::::::
+
   map the data from checkout summary (basket) to the keys.
-  ::::::::::::::
+
   */
   let checkoutSummaryKeys = {};
   if (orderId !== '') {
@@ -2571,9 +2628,9 @@ get price type if its net or gross
       },
       'Let’s get started',
     ),
-
-    button(
+    a(
       {
+        href: window.EbuyConfig?.loginPageUrl,
         class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
       },
       'Login / Create Account',
@@ -2586,13 +2643,13 @@ get price type if its net or gross
     }),
   );
   loggedOutUserDiv?.querySelector('button')?.addEventListener('click', () => {
-    window.location.href = '/us/en/e-buy/login';
+    // window.location.href = window.EbuyConfig?.loginPageUrl;
   });
 
   /*
-  :::::::::::::
+  :
   generate checkout summary  module
-  ::::::::::::::::::::::::::::::
+  :
   */
   const summaryModule = div(
     {
@@ -2616,9 +2673,9 @@ get price type if its net or gross
             id: 'checkoutSummarySubtotal',
           },
           /*
- ::::::::::::
+
  subtotal
- ::::::::::::::::::
+ :
    */ span(
             {
               class: ' justify-start text-black text-base font-semibold ',
@@ -2649,9 +2706,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  discount
- ::::::::::::::::::
+ :
    */ div(
           {
             class: 'checkoutSummaryDiscount  flex justify-between w-full',
@@ -2684,9 +2741,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  sales tax
- ::::::::::::::::::
+ :
    */
         div(
           {
@@ -2708,7 +2765,7 @@ get price type if its net or gross
               {
                 id: 'checkoutSummaryTaxExempt',
                 class:
-                  `text-right text-violet-600 text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  `text-right text-sm cursor-pointer hidden text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
               },
               'Tax exempt?',
             ),
@@ -2722,9 +2779,9 @@ get price type if its net or gross
           ),
         ),
         /*
- ::::::::::::
+
  shipping costs
- ::::::::::::::::::
+ :
    */ div(
           {
             class:
@@ -2762,9 +2819,9 @@ get price type if its net or gross
         ),
       ),
       /*
- ::::::::::::
+
  total
- ::::::::::::::::::
+ :
    */
       div(
         {
@@ -2786,9 +2843,9 @@ get price type if its net or gross
         ),
       ),
       /*
- ::::::::::::
+
  proceed button
- ::::::::::::::::::
+ :
    */
       div(
         {
@@ -2816,22 +2873,22 @@ get price type if its net or gross
   );
 
   /*
- ::::::::::::
+
  button to change steps when clicked on proceed or step icon
- ::::::::::::::::::
+ :
    */
   const proceedButton = summaryModule.querySelector('#proceed-button');
   if (proceedButton) {
-    if (window.location.href.includes('cart') && userLoggedInStatus) {
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('cart') && userLoggedInStatus) {
       proceedButton.textContent = 'Checkout';
     } else {
       /*
-      ::::::::::::::
+
       Update checkout summary button
-      ::::::::::::::
+
       */
-      const currentPath = window.location.pathname;
-      if (currentPath.includes('address')) proceedButton.textContent = 'Proceed to Shipping';
+      if (currentPath.includes('addresses')) proceedButton.textContent = 'Proceed to Shipping';
       if (currentPath.includes('shipping')) {
         proceedButton.textContent = 'Proceed to Payment';
         proceedButton?.setAttribute('data-activetab', 'shippingMethod');
@@ -2846,7 +2903,7 @@ get price type if its net or gross
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.location.pathname.includes('cart')) {
-        window.location.href = '/us/en/e-buy/addresses';
+        window.location.href = window.EbuyConfig?.addressPageUrl;
       } else {
         changeStep(e);
       }
@@ -2868,11 +2925,97 @@ get price type if its net or gross
 
     if (getUseAddressesResponse) {
       /*
- ::::::::::::
+
+   check if shipping address exists in basket
+   :
+     */
+      const getBasketShippingAddress = getCheckoutSummaryData?.data?.data?.commonShipToAddress;
+
+      // eslint-disable-next-line max-len
+      const getShippingAddress = getUseAddressesResponse?.data?.commonShipToAddress || getCheckoutSummaryData?.data?.included?.commonShipToAddress?.[getBasketShippingAddress];
+      if (getShippingAddress && (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
+        const commonShipToAddress = div(
+          {
+            id: 'checkoutSummaryCommonShipAddress',
+            class:
+              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
+          },
+          div(
+            {
+              class: ' flex flex-col pb-2',
+            },
+            h5(
+              {
+                class: 'font-semibold p-0 mb-3 mt-0 text-base',
+              },
+              'Shipping Address',
+            ),
+            div(
+              {
+                class: 'p-3 border border-danahergray-300',
+              },
+              div(
+                {
+                  class: 'flex w-full justify-between',
+                },
+                h5(
+                  {
+                    class: 'font-normal  text-xl font-semibold m-0 p-0',
+                  },
+                  getShippingAddress?.companyName2 ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  },
+                ),
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.addressLine1 ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                getShippingAddress?.city ?? '',
+              ),
+              p(
+                {
+                  class: 'text-black text-base  m-0 p-0',
+                },
+                `${getShippingAddress
+                  ?.mainDivision ?? ''
+                }, ${getShippingAddress
+                  ?.countryCode ?? ''
+                }, ${getShippingAddress
+                  ?.postalCode ?? ''
+                }`,
+              ),
+            ),
+          ),
+        );
+        if (commonShipToAddress) {
+          decorateIcons(commonShipToAddress);
+          checkoutSummaryWrapper.insertAdjacentElement(
+            'beforebegin',
+            commonShipToAddress,
+          );
+          commonShipToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
+        }
+      }
+      /*
+
  check if billing address exists in basket and not same as the shipping address
- ::::::::::::::::::
+ :
    */
-      if (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
+      if (window.location.pathname.includes('ordersubmit') || window.location.pathname.includes('shipping') || window.location.pathname.includes('payment')
       ) {
         const invoiceToAddress = div(
           {
@@ -2894,16 +3037,28 @@ get price type if its net or gross
               {
                 class: 'p-3 border border-danahergray-300',
               },
-              h5(
+              div(
                 {
-                  class: `font-normal m-0 p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
-                    ?.companyName2
-                    ? ''
-                    : 'hidden'
-                  }`,
+                  class: 'flex w-full justify-between',
                 },
-                getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
-                ?? '',
+                h5(
+                  {
+                    class: `font-normal m-0 text-xl font-semibold p-0 ${getUseAddressesResponse?.data?.invoiceToAddress
+                      ?.companyName2
+                      ? ''
+                      : 'hidden'
+                    }`,
+                  },
+                  getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                  ?? '',
+                ),
+                span(
+                  {
+                    'data-tab': 'shippingAddress',
+                    'data-activeTab': 'shippingAddress',
+                    class: `icon icon-edit w-[18px] cursor-pointer edit-address-icon ${window.location.pathname.includes('ordersubmit') ? 'hidden' : ''}`,
+                  },
+                ),
               ),
               p(
                 {
@@ -2935,78 +3090,14 @@ get price type if its net or gross
         );
 
         if (invoiceToAddress) {
+          decorateIcons(invoiceToAddress);
           checkoutSummaryWrapper.insertAdjacentElement(
             'beforebegin',
             invoiceToAddress,
           );
-        }
-      }
-      /*
- ::::::::::::
- check if shipping address exists in basket
- ::::::::::::::::::
-   */
-      if (getUseAddressesResponse?.data?.commonShipToAddress && (window.location.pathname.includes('shipping') || window.location.pathname.includes('payment'))) {
-        const commonShipToAddress = div(
-          {
-            id: 'checkoutSummaryCommonShipAddress',
-            class:
-              'flex-col w-full border-solid border border-danahergray-75 bg-white p-6',
-          },
-          div(
-            {
-              class: ' flex flex-col pb-2',
-            },
-            h5(
-              {
-                class: 'font-semibold p-0 mb-3 mt-0 text-base',
-              },
-              'Shipping Address',
-            ),
-            div(
-              {
-                class: 'p-3 border border-danahergray-300',
-              },
-              h5(
-                {
-                  class: 'font-normal  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.companyName2 ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine1 ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
-              ),
-              p(
-                {
-                  class: 'text-black text-base  m-0 p-0',
-                },
-                `${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? ''
-                }, ${getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? ''
-                }`,
-              ),
-            ),
-          ),
-        );
-        if (commonShipToAddress) {
-          checkoutSummaryWrapper.insertAdjacentElement(
-            'beforebegin',
-            commonShipToAddress,
-          );
+          invoiceToAddress?.querySelector('.edit-address-icon')?.addEventListener('click', (e) => {
+            changeStep(e);
+          });
         }
       }
     }
@@ -3048,7 +3139,7 @@ export async function updateCheckoutSummary() {
 }
 
 // load module on navigation
-async function loadingModule() {
+export async function loadingModule() {
   const checkoutModulesWrapper = document.querySelector('#checkoutModulesWrapper');
   const checkoutProgressBar = document.querySelector('#checkoutProgressBar');
 
@@ -3098,6 +3189,7 @@ export const cartItemsContainer = (cartItemValue) => {
         showNotification('Product removed from cart', 'success');
       } else {
         await updateCartItemQuantity(item);
+        await updateCheckoutSummary();
         removePreLoader();
         showNotification('Product removed from cart', 'success');
       }
@@ -3127,6 +3219,11 @@ export const cartItemsContainer = (cartItemValue) => {
         showNotification('Error Processing request.', 'error');
       }
     }
+    /*
+    *
+    // update header cart item count
+    */
+    await updateHeaderCart();
   };
   const deleteButton = button(
     {

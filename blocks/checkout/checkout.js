@@ -10,17 +10,17 @@ export default async function decorate(block) {
 
   if (
     authenticationToken?.status === 'error'
-    || authenticationToken.user_type === 'guest' || !sessionStorage.getItem('productDetailObject')
+    || authenticationToken.user_type === 'guest' || !localStorage.getItem('productDetailObject')
   ) {
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig?.cartPageUrl;
     return false;
   }
   block.innerHtml = '';
 
   /*
-  ::::::::::::::
+
   Create container
-  ::::::::::::::
+
   */
   const checkoutWrapper = div({
     id: 'checkoutWrapper',
@@ -29,18 +29,18 @@ export default async function decorate(block) {
   });
 
   /*
-  ::::::::::::::
+
   Create Modules outer
-  ::::::::::::::
+
   */
   const modulesContent = div({
     class: 'checkout-content flex flex-col gap-5 justify-between  lg:flex-row',
   });
 
   /*
-  ::::::::::::::
+
   Create Modules container
-  ::::::::::::::
+
   */
   const modulesContainer = div({
     class:
@@ -51,9 +51,9 @@ export default async function decorate(block) {
   const progressBar = progressModule();
 
   /*
-  ::::::::::::::
+
   initialize the shipping address, shipping methods and payment module at page load
-  ::::::::::::::
+
   */
   initializeModules()
     .then((modules) => {
@@ -84,9 +84,9 @@ export default async function decorate(block) {
   checkoutWrapper.appendChild(progressBar);
   checkoutWrapper.append(modulesContent);
   /*
-  ::::::::::::::
+
   Append container to document body
-  ::::::::::::::
+
   */
   block.appendChild(checkoutWrapper);
 }

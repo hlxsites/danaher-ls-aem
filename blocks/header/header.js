@@ -9,6 +9,9 @@ import {
   li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+// eslint-disable-next-line import/no-cycle
+import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
+// eslint-disable-next-line import/no-cycle
 import {
   getAuthorization,
   isLoggedInUser,
@@ -16,6 +19,7 @@ import {
   getCommerceBase,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
+// eslint-disable-next-line import/no-cycle
 import { includeProdEdsPaths, includeStageEdsPaths } from '../../scripts/delayed.js';
 
 const baseURL = getCommerceBase();
@@ -26,12 +30,50 @@ const COVEO_MAX_RECENT_SEARCHES = 3;
 
 let selectedSuggestionIndex = -1;
 
-function shortName(user) {
-  if (user) {
-    return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
-  }
-  return '';
+/**
+ * Asynchronously creates and returns the header cart element.
+ * Includes cart icon, label, and item quantity.
+ */
+async function loadHeaderCart() {
+  const getBasketData = await getBasketDetails();
+  const cartWrapper = a(
+    {
+      href: window.EbuyConfig?.cartPageUrl,
+      class: 'relative inline-flex text-xs font-semibold text-black hover:text-danaherpurple-800 gap-[5px]',
+    },
+    // Cart icon
+    span({
+      class: 'icon icon-shopping-cart [&_svg>use]:stroke-black',
+    }),
+    // Cart label and quantity
+    div(
+      { class: 'flex flex-col relative' },
+      span(
+        { class: 'text-black text-xs' },
+        'Cart',
+      ),
+      span(
+        {
+          class: 'quantity absolute top-4 left-0 text-danaherpurple-500',
+          id: 'headerCartItemQuantity',
+        },
+        getBasketData?.data?.data?.lineItems?.length || '0', // Default quantity
+      ),
+    ),
+  );
+
+  // Apply icon styling
+  decorateIcons(cartWrapper);
+
+  return cartWrapper;
 }
+
+// function shortName(user) {
+//   if (user) {
+//     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
+//   }
+//   return '';
+// }
 
 function getUser() {
   if (isLoggedInUser()) {
@@ -123,15 +165,13 @@ function getCoveoApiPayload(searchValue, type) {
 export async function submitSearchQuery(searchInput, actionCause = '', page = '') {
   const searchTerm = searchInput.value.trim();
   if (page === 'cart') {
-    if (page === 'cart') {
-      if (searchTerm) {
-        const requestPayload = getCoveoApiPayload(searchTerm, 'search');
-        requestPayload.analytics.actionCause = actionCause
-          || searchInput.getAttribute('data-action-cause')
-          || 'searchFromLink';
-        const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-        return resp;
-      }
+    if (searchTerm) {
+      const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+      requestPayload.analytics.actionCause = actionCause
+        || searchInput.getAttribute('data-action-cause')
+        || 'searchFromLink';
+      const resp = await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+      return resp;
     }
   }
 
@@ -506,7 +546,7 @@ function buildSearchBlockMobile() {
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  loginLink.className = 'text-black hover:text-black relative flex text-xs font-semibold flex-row-reverse w-min items-center gap-[5px]';
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
@@ -515,36 +555,55 @@ function buildLoginBlock(loginLink) {
     </svg>
   `;
   const loginSpan = span(
-    { class: 'w-12 pl-2 lg:block hidden lg:inline' },
+    { class: 'w-12 pl-2 hidden' },
     loginLink.textContent,
   );
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
-  loginLink.textContent = '';
+  loginLink.setAttribute('href', window.EbuyConfig?.loginPageUrl);
+  // loginLink.textContent = '';
   loginLink.append(loginIcon);
   loginLink.append(loginSpan);
 }
 
+// function buildLoggedInUserBlock(loginLink, user) {
+//   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
+//   loginLink.href = '/us/en/signin/dashboard.html';
+//   const loginUser = span(
+//     {
+//       class:
+//         'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
+//     },
+//     span(shortName(user)),
+//   );
+//   const loginSpan = span(
+//     { class: 'pl-1 text-xs font-semibold text-black' },
+//     'My Account',
+//   );
+//   loginLink.setAttribute('aria-label', 'My Account');
+//   loginLink.textContent = '';
+//   loginLink.append(loginUser);
+//   loginLink.append(loginSpan);
+// }
+
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
-  loginLink.href = '/us/en/signin/dashboard.html';
+  loginLink.href = window.EbuyConfig?.dashboardPageUrl;
   const loginUser = span(
     {
       class:
-        'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
+        'icon icon-User [&_svg>use]:stroke-black',
     },
-    span(shortName(user)),
   );
   const loginSpan = span(
     { class: 'pl-1 text-xs font-semibold text-black' },
-    'My Account',
+    user?.fname,
   );
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
   loginLink.append(loginSpan);
 }
-
-function buildSearchBlock(headerBlock) {
+async function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
@@ -602,6 +661,7 @@ function buildSearchBlock(headerBlock) {
   const loginLink = searchLinks[0];
 
   const user = getUser();
+
   if (user) buildLoggedInUserBlock(loginLink, user);
   else buildLoginBlock(loginLink);
 
@@ -646,6 +706,10 @@ function buildSearchBlock(headerBlock) {
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
+
+  const headerCart = await loadHeaderCart();
+
+  loginBlock.append(headerCart);
   // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
 
@@ -670,9 +734,6 @@ function buildSearchBlock(headerBlock) {
       sortFlyoutMenus('Menu');
     });
   addEventToSearchInput(searchHtmlBlock);
-  // searchIcon.addEventListener('click', () => {
-  //   console.log('CLicked');
-  // });
 }
 
 function buildNavBlock(headerBlock) {
@@ -959,7 +1020,7 @@ export default async function decorate(block) {
   headerBlock.innerHTML = html;
 
   buildLogosBlock(headerBlock);
-  buildSearchBlock(headerBlock);
+  await buildSearchBlock(headerBlock);
   buildNavBlock(headerBlock);
   const flyout = buildFlyoutMenus(headerBlock);
 

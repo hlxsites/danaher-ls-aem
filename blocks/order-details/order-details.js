@@ -29,7 +29,7 @@ export default async function decorate(block) {
   const goBackToOrderStatusLink = a(
     {
       class: 'inline-flex justify-start items-start gap-2',
-      href: '/us/en/e-buy/orderstatus',
+      href: window.EbuyConfig?.orderStatusPageUrl,
     },
     div(
       {
@@ -42,7 +42,7 @@ export default async function decorate(block) {
       }),
     ),
     div({
-      class: 'justify-start text-violet-600 text-base font-bold leading-snug',
+      class: 'justify-start text-danaherpurple-500 text-base font-bold leading-snug',
     }, 'Go Back to Order Status'),
   );
 

@@ -13,7 +13,7 @@ export default async function decorate(block) {
   document.querySelector('main').style = 'background: #f4f4f4';
   const requestedQuotesResponse = await requestedQuotes();
   const requestedQuoteWrapper = div({
-    class: 'w-[70%] self-stretch h-[831px] inline-flex flex-col justify-start items-start gap-5',
+    class: 'w-[70%] self-stretch inline-flex flex-col justify-start items-start gap-5',
   });
   const resquestedquoteTitleDiv = div(
     {
@@ -50,7 +50,7 @@ export default async function decorate(block) {
       return a(
         {
           class: 'inline-flex justify-start border-b border-gray-200 gap-1',
-          href: `/us/en/e-buy/requestquotedetails?quoteId=${quoteId}`, // Add this if needed
+          href: `${window.EbuyConfig?.requestedQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
         },
         div(
           {

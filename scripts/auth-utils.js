@@ -2,20 +2,34 @@ import { div, span } from './dom-builder.js';
 import { postApiData, getApiData } from './api-utils.js';
 import { getCommerceBase } from './commerce.js';
 import {
-  preLoader,
   showPreLoader,
-  removePreLoader,
   createModal,
 } from './common-utils.js';
-import { setAuthenticationToken } from './token-utils.js';
+import {
+  setAuthenticationToken,
+} from './token-utils.js';
 import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
-
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+let env;
+if (hostName.includes('local')) {
+  env = 'local';
+} else if (hostName.includes('dev')) {
+  env = 'dev';
+} else if (hostName.includes('stage')) {
+  env = 'stage';
+} else {
+  env = 'prod';
+}
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
 /*
-:::::::::::::::
+
  Login the user (Customer/Guest)
- :::::::::::::::::::::::::::
+
 */
 async function getUserData(token) {
   try {
@@ -48,9 +62,9 @@ async function getUserData(token) {
   }
 }
 /*
-:::::::::::::::
+
  Register the user (Customer)
- :::::::::::::::::::::::::::
+
 */
 export async function userRegister(data = {}) {
   showPreLoader();
@@ -95,15 +109,16 @@ export async function userRegister(data = {}) {
   }
 }
 /*
-:::::::::::::::
+
  Login the user (Customer/Guest)
- :::::::::::::::::::::::::::
+
 */
 export async function userLogin(type, data = {}) {
   showPreLoader();
   let loginData = {};
-  const getCurrentBasketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const getCurrentBasketData = JSON.parse(localStorage.getItem('basketData'));
   sessionStorage.clear();
+  localStorage.clear();
 
   let lastBasketId = '';
   if (getCurrentBasketData?.status === 'success' && !getCurrentBasketData?.data?.data?.customer) {
@@ -157,9 +172,9 @@ export async function userLogin(type, data = {}) {
         setAuthenticationToken(userLoggedIn.data, userInfoData, type);
 
         /*
- ::::::::::::
+
  get the basket details and create if doen't exists
- ::::::::::::::::::
+
    */
         const basketData = await getBasketDetails(type, lastBasketId);
 
@@ -201,9 +216,9 @@ export async function userLogin(type, data = {}) {
   }
 }
 /*
-::::::::::::::::::::::
+
 function to remove session preloader whenever required
-:::::::::::::::::::::::
+
 */
 export function removeSessionPreLoader() {
   setTimeout(() => {
@@ -213,9 +228,9 @@ export function removeSessionPreLoader() {
 }
 
 /*
- ::::::::::::::::::::
+
  creates a preloader for expired login session (animation)
-  :::::::::::::::::
+
  */
 export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
@@ -238,19 +253,24 @@ export function sessionPreLoader() {
       'Login Again',
     ),
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
-  if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await userLogin('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
-        removePreLoader();
-        removeSessionPreLoader();
-        return true;
-      }
-      return false;
-    });
-  }
   return createModal(sessionPreLoaderContent, true, true);
+}
+/*
+
+ Logout the user (Customer/Guest)
+
+*/
+
+export function userLogOut() {
+  deleteCookie(`em_${siteID}_${env}_apiToken`);
+  deleteCookie(`em_${siteID}_${env}_refresh-token`);
+  deleteCookie(`em_${siteID}_${env}_user_data`);
+  deleteCookie(`em_${siteID}_${env}_user_type`);
+  deleteCookie(`em_${siteID}_${env}_authorized`);
+  deleteCookie('first_name');
+  deleteCookie('last_name');
+  deleteCookie('rationalized_id');
+
+  sessionStorage.clear();
+  localStorage.clear();
 }

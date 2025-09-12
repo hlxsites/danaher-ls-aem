@@ -1,10 +1,3 @@
-.btn-lg {
-  padding-top: .625rem;
-  padding-bottom: .625rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem
-}
-
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -16,24 +9,8 @@
   font-family: TWK Lausanne EDS
 }
 
-.order-status-wrapper :is(.absolute) {
-  position: absolute
-}
-
 .order-status-wrapper :is(.relative) {
   position: relative
-}
-
-.order-status-wrapper :is(.right-0) {
-  right: 0px
-}
-
-.order-status-wrapper :is(.m-0) {
-  margin: 0px
-}
-
-.order-status-wrapper :is(.ml-2) {
-  margin-left: 0.5rem
 }
 
 .order-status-wrapper :is(.ml-\[20px\]) {
@@ -42,14 +19,6 @@
 
 .order-status-wrapper :is(.ml-\[23px\]) {
   margin-left: 23px
-}
-
-.order-status-wrapper :is(.mr-\[8px\]) {
-  margin-right: 8px
-}
-
-.order-status-wrapper :is(.mt-2) {
-  margin-top: 0.5rem
 }
 
 .order-status-wrapper :is(.mt-4) {
@@ -76,16 +45,8 @@
   display: table
 }
 
-.order-status-wrapper :is(.hidden) {
-  display: none
-}
-
 .order-status-wrapper :is(.\!h-\[60px\]) {
   height: 60px !important
-}
-
-.order-status-wrapper :is(.h-10) {
-  height: 2.5rem
 }
 
 .order-status-wrapper :is(.h-\[100px\]) {
@@ -120,14 +81,6 @@
   width: 60px !important
 }
 
-.order-status-wrapper :is(.w-28) {
-  width: 7rem
-}
-
-.order-status-wrapper :is(.w-80) {
-  width: 20rem
-}
-
 .order-status-wrapper :is(.w-\[100px\]) {
   width: 100px
 }
@@ -140,10 +93,6 @@
   width: 186.4px
 }
 
-.order-status-wrapper :is(.w-\[200px\]) {
-  width: 200px
-}
-
 .order-status-wrapper :is(.w-\[80\%\]) {
   width: 80%
 }
@@ -154,10 +103,6 @@
 
 .order-status-wrapper :is(.w-full) {
   width: 100%
-}
-
-.order-status-wrapper :is(.min-w-\[415px\]) {
-  min-width: 415px
 }
 
 .order-status-wrapper :is(.flex-col) {
@@ -180,10 +125,6 @@
   justify-content: flex-start
 }
 
-.order-status-wrapper :is(.justify-end) {
-  justify-content: flex-end
-}
-
 .order-status-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -198,10 +139,6 @@
 
 .order-status-wrapper :is(.gap-1\.5) {
   gap: 0.375rem
-}
-
-.order-status-wrapper :is(.gap-2) {
-  gap: 0.5rem
 }
 
 .order-status-wrapper :is(.gap-28) {
@@ -224,18 +161,8 @@
   gap: 1.5rem
 }
 
-.order-status-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
-}
-
 .order-status-wrapper :is(.self-stretch) {
   align-self: stretch
-}
-
-.order-status-wrapper :is(.overflow-hidden) {
-  overflow: hidden
 }
 
 .order-status-wrapper :is(.overflow-y-auto) {
@@ -246,16 +173,8 @@
   overflow-x: hidden
 }
 
-.order-status-wrapper :is(.rounded) {
-  border-radius: 0.25rem
-}
-
 .order-status-wrapper :is(.rounded-full) {
   border-radius: 9999px
-}
-
-.order-status-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem
 }
 
 .order-status-wrapper :is(.border) {
@@ -288,10 +207,6 @@
 
 .order-status-wrapper :is(.border-t) {
   border-top-width: 1px
-}
-
-.order-status-wrapper :is(.border-solid) {
-  border-style: solid
 }
 
 .order-status-wrapper :is(.border-danaherpurple-500) {
@@ -354,20 +269,12 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.order-status-wrapper :is(.fill-gray-400) {
-  fill: #9ca3af
-}
-
 .order-status-wrapper :is(.p-3) {
   padding: 0.75rem
 }
 
 .order-status-wrapper :is(.p-6) {
   padding: 1.5rem
-}
-
-.order-status-wrapper :is(.p-\[0\.5rem\]) {
-  padding: 0.5rem
 }
 
 .order-status-wrapper :is(.p-\[18px\]) {
@@ -379,53 +286,9 @@
   padding-right: 1.5rem
 }
 
-.order-status-wrapper :is(.px-8) {
-  padding-left: 2rem;
-  padding-right: 2rem
-}
-
-.order-status-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
-.order-status-wrapper :is(.py-1\.5) {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem
-}
-
 .order-status-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
-}
-
-.order-status-wrapper :is(.py-5) {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem
-}
-
-.order-status-wrapper :is(.pb-3) {
-  padding-bottom: 0.75rem
-}
-
-.order-status-wrapper :is(.pb-\[3px\]) {
-  padding-bottom: 3px
-}
-
-.order-status-wrapper :is(.pl-2) {
-  padding-left: 0.5rem
-}
-
-.order-status-wrapper :is(.pl-9) {
-  padding-left: 2.25rem
-}
-
-.order-status-wrapper :is(.pr-2) {
-  padding-right: 0.5rem
-}
-
-.order-status-wrapper :is(.pr-2\.5) {
-  padding-right: 0.625rem
 }
 
 .order-status-wrapper :is(.pr-8) {
@@ -438,10 +301,6 @@
 
 .order-status-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.order-status-wrapper :is(.pt-\[5px\]) {
-  padding-top: 5px
 }
 
 .order-status-wrapper :is(.text-left) {
@@ -486,11 +345,6 @@
   line-height: 1.75rem
 }
 
-.order-status-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
-}
-
 .order-status-wrapper :is(.font-\[400\]) {
   font-weight: 400
 }
@@ -527,10 +381,6 @@
   line-height: 2
 }
 
-.order-status-wrapper :is(.leading-none) {
-  line-height: 1
-}
-
 .order-status-wrapper :is(.leading-snug) {
   line-height: 1.375
 }
@@ -547,11 +397,6 @@
 .order-status-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.order-status-wrapper :is(.text-gray-600) {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
 .order-status-wrapper :is(.text-gray-700) {
@@ -574,11 +419,6 @@
   color: rgb(21 128 61 / var(--tw-text-opacity))
 }
 
-.order-status-wrapper :is(.text-red-500) {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity))
-}
-
 .order-status-wrapper :is(.text-red-800) {
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity))
@@ -592,12 +432,6 @@
 .order-status-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.order-status-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .order-status-wrapper :is(.filter) {

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { getCommerceBase } from './commerce.js';
 import {
   getApiData, patchApiData, postApiData, putApiData,
@@ -47,7 +48,7 @@ let stripeInstance;
 export async function loadStripe() {
   if (!stripeInstance) {
     // eslint-disable-next-line no-undef
-    stripeInstance = Stripe('pk_test_51MnpDKAJ0Jw7fvSlk31RtCK9fwvuWm7gs0HpW7Zq5O0Q9Xo81c9yPZRHiovDEEj4KSckql9MYGoaqIqaHGsBsHyt00SCVfbK11');
+    stripeInstance = Stripe('pk_test_51S5QfsDjNZoJyC3KgIgbXK2uTa4QiwEq3O1d07WoaWZTkpp2bXZpr9RGwBHYYn15GR2hVBIupbeoK4kuk2A8dkZ200qdZQhfsl');
   }
   return stripeInstance;
 }
