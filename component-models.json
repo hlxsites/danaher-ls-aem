@@ -521,13 +521,13 @@
     "fields": [
       {
         "component": "text",
-        "name": "left_main_heading_text",
-        "label": "Main Heading Text"
+        "name": "title",
+        "label": "Title"
       },
       {
         "component": "select",
-        "name": "left_main_heading_type",
-        "label": "Heading Tag Type",
+        "name": "titleType",
+        "label": "Title Type",
         "options": [
           {
             "name": "h1",
@@ -556,25 +556,29 @@
         ]
       },
       {
-        "component": "url",
-        "name": "left_cta_1_link",
-        "label": "Left CTA 1 Link"
+        "component": "aem-content",
+        "name": "carousel_link",
+        "label": "Link"
       },
       {
         "component": "text",
-        "name": "left_cta_1_text",
-        "label": "Left CTA 1 Text"
+        "name": "carousel_linkText",
+        "label": "Text"
       },
       {
         "component": "text",
-        "name": "left_cta_1_title",
-        "label": "Left CTA 1 Title"
+        "name": "carousel_linkTitle",
+        "label": "Title"
       },
       {
         "component": "select",
-        "name": "left_cta_1_type",
-        "label": "Left CTA 1 Type",
+        "name": "carousel_linkType",
+        "label": "Type",
         "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
           {
             "name": "primary",
             "value": "primary"
