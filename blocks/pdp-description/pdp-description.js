@@ -40,7 +40,6 @@ export default async function decorate(block) {
   const overview = response?.raw?.overview || '';
   const combinedContent = richLongDesc + overview;
 
-  console.log("authoredContent",authoredContent)
   // Final block content
   if (isPIM === 'only-authored' && authoredContent) {
     block.innerHTML = authoredContent.innerHTML;
@@ -73,7 +72,7 @@ export default async function decorate(block) {
 
       container.className = 'grid grid-cols-2 items-center w-full gap-8';
       const textWrapper = div({ class: 'w-full text-left' });
-      text.forEach(p => {
+      text.forEach((p) => {
         p.className = 'w-full text-left';
         textWrapper.appendChild(p);
       });
@@ -88,7 +87,7 @@ export default async function decorate(block) {
       container.replaceChildren(imgDiv, textWrapper);
     } else if (text) {
       container.className = 'flex justify-center items-center w-full';
-      text.forEach(p => {
+      text.forEach((p) => {
         p.className = 'text-left w-full';
       });
     } else if (img) {
