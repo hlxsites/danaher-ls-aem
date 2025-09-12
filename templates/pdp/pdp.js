@@ -78,7 +78,7 @@ function setMetaTags(response) {
 async function loadPdpBlocks() {
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
-  setMetaTags(response);
+  // setMetaTags(response);
   // Determine opco, e.g. from response
   const opco = response[0]?.raw?.opco?.toLowerCase() || 'sciex';
   const tabOrderArr = tabsOrder()[opco] || [];
