@@ -40,6 +40,7 @@ export default async function decorate(block) {
   const overview = response?.raw?.overview || '';
   const combinedContent = richLongDesc + overview;
 
+  console.log("authoredContent",authoredContent)
   // Final block content
   if (isPIM === 'only-authored' && authoredContent) {
     block.innerHTML = authoredContent.innerHTML;
@@ -60,7 +61,7 @@ export default async function decorate(block) {
   block.querySelectorAll('[id^="overviewdesc_"]').forEach((container) => {
     const imgDiv = container.querySelector('[id^="overviewimage_"]');
     const img = imgDiv?.querySelector('img[src]');
-    const text = container.querySelector('p');
+    const text = container.querySelectorAll('p');
 
     // Reset
     container.className = '';
@@ -71,18 +72,25 @@ export default async function decorate(block) {
       const position = imgDiv.getAttribute('data-position')?.toLowerCase() || 'right';
 
       container.className = 'grid grid-cols-2 items-center w-full gap-8';
-      text.className = 'w-full text-left';
+      const textWrapper = div({ class: 'w-full text-left' });
+      text.forEach(p => {
+        p.className = 'w-full text-left';
+        textWrapper.appendChild(p);
+      });
 
       if (position === 'left') {
         imgDiv.className = 'order-1 flex items-center justify-start';
-        text.className += ' order-2';
+        textWrapper.className += ' order-2';
       } else {
         imgDiv.className = 'order-2 flex items-center justify-end';
-        text.className += ' order-1';
+        textWrapper.className += ' order-1';
       }
+      container.replaceChildren(imgDiv, textWrapper);
     } else if (text) {
       container.className = 'flex justify-center items-center w-full';
-      text.className = 'text-left w-full';
+      text.forEach(p => {
+        p.className = 'text-left w-full';
+      });
     } else if (img) {
       container.className = 'flex justify-center items-center w-full';
       imgDiv.className = '';
