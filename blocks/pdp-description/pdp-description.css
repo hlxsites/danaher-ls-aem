@@ -86,16 +86,8 @@
   justify-content: center
 }
 
-.pdp-description-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
 .pdp-description-wrapper :is(.gap-8) {
   gap: 2rem
-}
-
-.pdp-description-wrapper :is(.justify-self-start) {
-  justify-self: start
 }
 
 .pdp-description-wrapper :is(.border-b) {
@@ -128,10 +120,6 @@
 
 .pdp-description-wrapper :is(.text-left) {
   text-align: left
-}
-
-.pdp-description-wrapper :is(.text-center) {
-  text-align: center
 }
 
 .pdp-description-wrapper :is(.text-2xl) {

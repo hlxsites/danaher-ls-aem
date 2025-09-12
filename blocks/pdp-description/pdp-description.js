@@ -35,17 +35,27 @@ export default async function decorate(block) {
     authoredContent = container;
   }
 
+  // Combine richlongdescription and overview if they exist
+  const richLongDesc = response?.raw?.richlongdescription || '';
+  const overview = response?.raw?.overview || '';
+  const combinedContent = richLongDesc + overview;
+
   // Final block content
   if (isPIM === 'only-authored' && authoredContent) {
     block.innerHTML = authoredContent.innerHTML;
   } else if (isPIM === 'pim-authored' && authoredContent) {
-    block.innerHTML = (response?.raw?.richlongdescription || '') + authoredContent.innerHTML;
+    block.innerHTML = combinedContent + authoredContent.innerHTML;
   } else {
-    block.innerHTML = response?.raw?.richlongdescription || '';
+    block.innerHTML = combinedContent;
   }
 
   // Styling
   block.classList.add(...'border-b border-gray-200 !pb-6 !mr-5 !lg:mr-0'.split(' '));
+  const paragraphs = block.querySelectorAll('p');
+  paragraphs.forEach((p) => {
+    p.style.fontSize = '16px';
+    p.style.lineHeight = '22px';
+  });
 
   block.querySelectorAll('[id^="overviewdesc_"]').forEach((container) => {
     const imgDiv = container.querySelector('[id^="overviewimage_"]');
