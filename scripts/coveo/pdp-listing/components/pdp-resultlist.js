@@ -8,7 +8,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
   const showCTA = result?.raw?.skushowdetail === undefined || String(result?.raw?.skushowdetail).trim().toLowerCase() === 'true';
   const viewDetailsButton = div(
-    { class: `self-stretch p-3 flex justify-start items-center ${showCTA ? '' : 'hidden'}` },
+    { class: `self-stretch py-3 flex justify-start items-center ${showCTA ? '' : 'hidden'}` },
     a(
       {
         href: result.clickUri,
@@ -52,7 +52,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       return div({ class: 'w-full h-40 overflow-hidden cursor-pointer' }, imageElement);
     };
 
-    const imageElement = createImageWithFallback(item.raw.images?.[0], item.title);
+    const imageElement = createImageWithFallback(item?.raw?.images?.[1], item?.title);
 
     const titleElement = div(
       { class: 'p-3' },
@@ -126,6 +126,8 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       div(
         { class: 'flex-none flex justify-center p-6' },
         img({
+          src: result?.raw.images?.[1] || '',
+          alt: result?.title || '',
           loading: 'lazy',
           width: '100px',
           height: '100px',
@@ -138,9 +140,9 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
       // Product Details Section
       div(
         { class: 'flex-1 flex flex-col py-6 gap-3' },
-        h3({ class: 'font-bold text-lg m-0' }, result.title || ''),
+        h3({ class: 'm-0', style: 'font-weight: 400 !important; font-size:20px !important; line-height:28px !important' }, result.title || ''),
         p(
-          { class: 'text-gray-700 text-base font-extralight' },
+          { class: 'text-gray-700 text-base font-extralight leading-snug' },
           result.raw.description || '',
         ),
         viewDetailsButton,
@@ -155,7 +157,7 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
           {
             class: hasPrice()
               ? 'text-black text-right text-xl font-normal leading-[32px] m-0'
-              : 'text-xl font-bold text-gray-500 m-0',
+              : 'text-xl font-bold m-0',
           },
           hasPrice()
             ? formatCurrency(product.salePrice?.value, product.salePrice?.currencyMnemonic)
@@ -164,23 +166,23 @@ export async function buildProductTile(result, getCommerceBase, domHelpers, view
 
         // Availability (Placeholder for Phase 2)
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start mt-2' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start mt-2 leading-snug' },
           'Availability',
-          span({ class: 'font-bold text-green-700 text-black text-right text-base font-extralight' }, availability),
+          span({ class: 'font-bold text-green-700 text-black text-right text-base leading-snug' }, availability),
         ),
 
         // Unit of Measure
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start leading-snug' },
           'Unit of Measure',
-          span({ class: 'font-bold text-black text-right text-base font-extraligh' }, unitOfMeasure),
+          span({ class: 'font-bold text-black text-right text-base leading-snug' }, unitOfMeasure),
         ),
 
         // Minimum Order Quantity
         div(
-          { class: 'text-black text-base font-extralight text-gray-600 flex w-full flex-row justify-between items-start mb-2' },
+          { class: 'text-black text-base font-extralight flex w-full flex-row justify-between items-start mb-2 leading-snug' },
           'Min. Order Qty',
-          span({ class: 'font-bold text-black text-right text-base font-extraligh' }, `${minOrderQuantity}`),
+          span({ class: 'font-bold text-black text-right text-base leading-snug' }, `${minOrderQuantity}`),
         ),
 
         // Buttons

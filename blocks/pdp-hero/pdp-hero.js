@@ -143,11 +143,13 @@ export default async function decorate(block) {
 
     div(
       {
-        class: 'self-stretch justify-start text-black text-4xl font-medium leading-10',
+        class: 'self-stretch justify-start text-black font-medium leading-10',
+        style: 'font-size: 40px;'
       },
-      result?.raw?.title ? result?.raw?.title : result?.raw?.titlelsig,
+      result?.raw?.titlelsig ? result?.raw?.titlelsig : result?.raw?.title,
     ),
-
+    result?.raw?.objecttype === 'Product'
+      || result?.raw?.objecttype === 'Bundle' ?
     div(
       {
         class: 'flex flex-col justify-start items-start',
@@ -159,21 +161,19 @@ export default async function decorate(block) {
         result?.raw?.objecttype === 'Product'
           || result?.raw?.objecttype === 'Bundle' ? productInfo?.data?.sku : '',
       ),
-    ),
+    ): '',
     div(
       { class: 'self-stretch flex flex-col justify-start items-start' },
       div(
         {
           class:
             'hero-desc self-stretch justify-start text-black text-base font-extralight leading-snug',
-        },
+        },result?.raw?.richdescription.replace(/<[^>]*>/g, '') || ' '
       ),
     ),
   );
-  const heroDesc = itemInfoDiv.querySelector('.hero-desc');
-  if (heroDesc) {
-    heroDesc.innerHTML = result?.raw?.richdescription || '';
-  }
+
+  console.log("result?.raw?.richdescription",result?.raw?.richdescription)
   headingDiv.append(itemInfoDiv);
   defaultContent.append(headingDiv);
 
@@ -471,7 +471,7 @@ export default async function decorate(block) {
       btnLabel = 'Buy Now';
     }
 
-    pricingQuoteButton.querySelector('.pr-bn')?.addEventListener('click', () => {
+    buyDetail.querySelector('.pr-bn')?.addEventListener('click', () => {
       if (btnHref) {
         window.open(btnHref, '_blank');
       } else if (brandURL) {
