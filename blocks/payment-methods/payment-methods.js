@@ -45,7 +45,14 @@ export default async function decorate(block) {
   paymentModule(true)?.then(async (module) => {
     paymentmethodsWrapper.innerHTML = '';
     paymentmethodsWrapper.append(module);
-
+    const paymentHeading = paymentmethodsWrapper.querySelector('h2');
+    const paymentSubHeading = paymentmethodsWrapper.querySelector('p');
+    if (paymentHeading) {
+      paymentHeading.textContent = 'Payment Methods';
+    }
+    if (paymentSubHeading) {
+      paymentSubHeading.textContent = 'Manage your saved payment methods';
+    }
     module?.querySelector('#paymentMethodInvoice')?.classList.add('opacity-50', 'pointer-events-none');
     const paymentMethodStripe = module?.querySelector('#paymentMethodStripe');
     const savedStripeCardsList = module?.querySelector('#savedStripeCardsList');

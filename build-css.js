@@ -569,16 +569,9 @@ fileMappings.forEach(({
   content, input, output, wrapper,
 }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
-  let command = '';
-  if (output.includes('styles.css')) {
-    command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
-    } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
-    } --minify`;
-  } else {
-    command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
-    } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
-    }`;
-  }
+  const command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'
+  } ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''
+  }`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console

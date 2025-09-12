@@ -386,6 +386,7 @@ export const paymentModule = async (isValidated) => {
         },
       },
     };
+console.log(allPaymentMethods);
 
     // eslint-disable-next-line max-len
     allPaymentMethods?.data?.sort((b, a) => a.displayName.localeCompare(b.displayName))?.forEach(async (pm, ind) => {
@@ -393,7 +394,7 @@ export const paymentModule = async (isValidated) => {
         stripeCardsWrapper.innerHTML = '';
         stripeCardsWrapper = div(
           {
-            id: `paymentMethod${pm?.displayName}`,
+            id: `paymentMethod${pm?.id}`,
             class:
               `border-solid border-gray-300 flex flex-col gap-3 items-start p-4 border-2  items-start  ${ind > 0 ? 'border-t-0 ' : ''}`,
           },
@@ -406,14 +407,14 @@ export const paymentModule = async (isValidated) => {
                 class: 'border-solid border-gray-300 flex gap-2 flex-none items-center',
               },
               buildInputElement(
-                'stripe',
+                pm?.id,
                 pm?.displayName,
                 'radio',
                 'paymentMethod',
                 true,
                 false,
                 'mt-6',
-                'stripe',
+                pm?.id,
               ),
             ),
             span({
@@ -496,19 +497,19 @@ export const paymentModule = async (isValidated) => {
         invoiceWrapper.innerHTML = '';
         invoiceWrapper = div(
           {
-            id: `paymentMethod${pm?.displayName}`,
+            id: `paymentMethod${pm?.id}`,
             class:
               `border-solid border-gray-300 flex flex-col gap-6 items-start p-4 border-2 ${ind > 0 ? 'border-t-0 ' : ''} items-start`,
           },
           buildInputElement(
-            'invoice',
+            pm?.id,
             pm?.displayName,
             'radio',
             'paymentMethod',
             false,
             false,
             'mt-6',
-            'invoice',
+            pm?.id,
           ),
         );
         invoiceWrapper.append(invoiceNumberWrapper);
@@ -579,7 +580,7 @@ export const paymentModule = async (isValidated) => {
           removePreLoader();
         }
         // this is for selecting stripe payment method
-        if (targetRadioId === 'stripe') {
+        if (targetRadioId === 'STRIPE_PAYMENT') {
           showPreLoader();
           getStripeCardsWrapper?.classList?.remove('hidden');
           getInvoiceNumberWrapper?.classList?.add('hidden');

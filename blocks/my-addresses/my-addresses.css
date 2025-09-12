@@ -9,10 +9,6 @@
   font-family: TWK Lausanne EDS
 }
 
-.my-addresses-wrapper :is(.pointer-events-none) {
-  pointer-events: none
-}
-
 .my-addresses-wrapper :is(.relative) {
   position: relative
 }
@@ -53,16 +49,8 @@
   height: 2px
 }
 
-.my-addresses-wrapper :is(.max-h-\[645px\]) {
-  max-height: 645px
-}
-
 .my-addresses-wrapper :is(.max-h-97) {
   max-height: 25rem
-}
-
-.my-addresses-wrapper :is(.max-h-\[880px\]) {
-  max-height: 880px
 }
 
 .my-addresses-wrapper :is(.\!w-\[60px\]) {
@@ -79,10 +67,6 @@
 
 .my-addresses-wrapper :is(.w-full) {
   width: 100%
-}
-
-.my-addresses-wrapper :is(.max-w-\[880px\]) {
-  max-width: 880px
 }
 
 .my-addresses-wrapper :is(.flex-col) {
@@ -125,16 +109,8 @@
   gap: 1.25rem
 }
 
-.my-addresses-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
 .my-addresses-wrapper :is(.self-stretch) {
   align-self: stretch
-}
-
-.my-addresses-wrapper :is(.overflow-auto) {
-  overflow: auto
 }
 
 .my-addresses-wrapper :is(.rounded-full) {
@@ -218,14 +194,6 @@
   padding-right: 1.5rem
 }
 
-.my-addresses-wrapper :is(.pr-2) {
-  padding-right: 0.5rem
-}
-
-.my-addresses-wrapper :is(.pt-0) {
-  padding-top: 0px
-}
-
 .my-addresses-wrapper :is(.\!text-4xl) {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important
@@ -290,10 +258,6 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.my-addresses-wrapper :is(.opacity-50) {
-  opacity: 0.5
-}
-
 .my-addresses-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
@@ -325,34 +289,6 @@
     padding-top: 3rem;
     padding-bottom: 3rem
   }
-}
-
-.my-addresses-wrapper :is(.\[\&\:\:-webkit-scrollbar-thumb\]\:bg-gray-300)::-webkit-scrollbar-thumb {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
-}
-
-@media (prefers-color-scheme: dark) {
-  .my-addresses-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-thumb\]\:bg-neutral-500)::-webkit-scrollbar-thumb {
-    --tw-bg-opacity: 1;
-    background-color: rgb(115 115 115 / var(--tw-bg-opacity))
-  }
-}
-
-.my-addresses-wrapper :is(.\[\&\:\:-webkit-scrollbar-track\]\:bg-gray-100)::-webkit-scrollbar-track {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
-@media (prefers-color-scheme: dark) {
-  .my-addresses-wrapper :is(.dark\:\[\&\:\:-webkit-scrollbar-track\]\:bg-neutral-700)::-webkit-scrollbar-track {
-    --tw-bg-opacity: 1;
-    background-color: rgb(64 64 64 / var(--tw-bg-opacity))
-  }
-}
-
-.my-addresses-wrapper :is(.\[\&\:\:-webkit-scrollbar\]\:w-1)::-webkit-scrollbar {
-  width: 0.25rem
 }
 
 .my-addresses-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {

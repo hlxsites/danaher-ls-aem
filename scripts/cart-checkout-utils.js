@@ -407,7 +407,7 @@ export const submitOrder = async (basketId, paymentMethod) => {
       response = await postApiData(url, data, defaultHeader);
     }
 
-    if (paymentMethod === 'stripe') {
+    if (paymentMethod === 'STRIPE_PAYMENT') {
       const defaultHeader = new Headers({
         'Content-Type': 'Application/json',
         Accept: 'application/vnd.intershop.order.v1+json',
@@ -1740,7 +1740,7 @@ export const changeStep = async (step) => {
       *
       * :; handle stripe payment
       */
-      if (getSelectedPaymentMethod?.value === 'stripe') {
+      if (getSelectedPaymentMethod?.value === 'STRIPE_PAYMENT') {
         /*
         *
         :
