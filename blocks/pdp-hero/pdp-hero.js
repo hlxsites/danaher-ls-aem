@@ -304,13 +304,7 @@ export default async function decorate(block) {
       },
       span(
         {
-          class: 'add-to-cart-btn inherit text-base font-medium leading-snug',
-          productName: result.raw.title,
-          minOrderQuantity: productInfo?.data?.minOrderQuantity,
-          manufacturer: productInfo?.data?.manufacturer,
-          maxOrderQuantity: productInfo?.data?.maxOrderQuantity,
-          price: Number(productInfo?.data?.salePrice?.value),
-          quantity: 1,
+          class: 'inherit text-base font-medium leading-snug',
         },
         'Buy Now',
       ),

@@ -18,9 +18,9 @@ import { postApiData, getApiData, putApiData } from './api-utils.js';
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 /*
- ::::::::::::::::::::::::
+
  Capitalize any string
- ::::::::::::::::::::::::::::::::::::
+
 */
 export function capitalizeFirstLetter(str) {
   if (typeof str !== 'string' || str.length === 0) return str;
@@ -28,9 +28,9 @@ export function capitalizeFirstLetter(str) {
 }
 
 /*
- ::::::::::::::::::::
+
  Show preloader (animation)
- :::::::::::::::::
+
  */
 export function showPreLoader() {
   const mainPreLoader = document.querySelector('#mainPreLoader');
@@ -38,9 +38,9 @@ export function showPreLoader() {
 }
 
 /*
- ::::::::::::::::::::
+
  creates a preloader (animation)
- :::::::::::::::::
+
  */
 export function preLoader() {
   const preloaderContainer = div(
@@ -55,9 +55,9 @@ export function preLoader() {
 }
 
 /*
-::::::::::::::::::::::
+
 function to remove preloader whenever required
-:::::::::::::::::::::::
+
 */
 export function removePreLoader() {
   const mainPreLoader = document.querySelector('#mainPreLoader');
@@ -76,9 +76,9 @@ const getMainDiv = document.querySelector('body');
 getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
 
 /*
-::::::::::::::::::::::
+
 function to append notification container
-:::::::::::::::::::::::
+
 */
 const generateNotification = div(
   {
@@ -126,9 +126,9 @@ decorateIcons(generateNotification);
 getMainDiv?.insertAdjacentElement('afterbegin', generateNotification);
 
 /*
-::::::::::::::::::::::
+
 function to show / hide notification whenever required
-:::::::::::::::::::::::
+
 */
 export function showNotification(content, type, wrapper = '') {
   const container = wrapper ? document.querySelector(wrapper) : getMainDiv;
@@ -210,7 +210,7 @@ export function showNotification(content, type, wrapper = '') {
 /*
 *
 *
-::::::::::: Scroll View to Top ::::::::
+ Scroll View to Top
 *
 */
 export function scrollViewToTop() {
@@ -218,11 +218,11 @@ export function scrollViewToTop() {
 }
 
 /*
- ::::::::::::::::::::::::
+
  utility function to close the modal...
  can be imported and used globally
  for the modal created using utlility createModal function
- ::::::::::::::::::::::::::::::::::::
+
 */
 export function closeUtilityModal() {
   const utilityModal = document.querySelector('#utilityModal');
@@ -257,7 +257,7 @@ export function createModal(content, hasCancelButton, hasCloseButton, dataType =
     );
   }
   let cancelButton = '';
-  if (hasCancelButton) {
+  if (hasCancelButton === true) {
     cancelButton = span(
       {
         'data-type': dataType || 'close',
@@ -396,9 +396,9 @@ export async function getProductInfo(id, needInterShop = true) {
 }
 
 /*
-:::::::::::::::::::::::::::::::
+
  Validates the form to check for empty fields
- ::::::::::::::::::::::::::::::::
+
   @param: {string} : Form ID
 */
 export function formValidate(formId) {
@@ -423,9 +423,9 @@ export function formValidate(formId) {
   return false;
 }
 /*
-:::::::::::::::::::::::::::::::
+
 Submits the form asper the passed parameters
- ::::::::::::::::::::::::::::::::
+
   @param: {string} : Form ID
   @param {String}  : action. Endpoints for the API to submit the form
   @param {String} : method. POST/PUT
@@ -464,9 +464,9 @@ export async function submitForm(id, action, method, data) {
 }
 
 /*
-:::::::::::::::::::::::::::
+
 Function to get states from the api based oncountry
-:::::::::::::::::::::::::::
+
  * @param {string} countryCode - The country code to get the states.
 */
 export async function getCountries() {
@@ -492,9 +492,9 @@ export async function getCountries() {
   }
 }
 /*
-:::::::::::::::::::::::::::
+
 Function to get countries from the API
-:::::::::::::::::::::::::::
+
 */
 export async function updateCountries() {
   const authenticationToken = await getAuthenticationToken();
@@ -519,9 +519,9 @@ export async function updateCountries() {
 }
 
 /*
-:::::::::::::::::::::::::::
+
 Function to get states from the api based oncountry
-:::::::::::::::::::::::::::
+
  * @param {string} countryCode - The country code to get the states.
 */
 export async function getStates(countryCode) {
@@ -548,9 +548,9 @@ export async function getStates(countryCode) {
 }
 
 /*
-:::::::::::::::::::::::::::
+
 Function to get general store configurations
-:::::::::::::::::::::::::::
+
 */
 export async function getStoreConfigurations() {
   try {
@@ -572,9 +572,8 @@ export async function getStoreConfigurations() {
   }
 }
 /*
-:::::::::::::::::::::::::::
+
 Function to remove any key from the object
- :::::::::::::::::::::::::::
 
  * @param {string} keyToRemove - The key to be removed from the object.
  * @param {Object} dataObject - The object from which the key to be removed.
@@ -587,9 +586,8 @@ export function removeObjectKey(dataObject, keyToRemove) {
 }
 /*
 
-:::::::::::::::::::::::::::
 inbuilt and custom dom functions
-::::::::::::::::::::::::::::::
+:
 
 */
 
@@ -650,9 +648,9 @@ export const buildInputElement = (
 };
 
 /*
-::::::::::::::::::
+:
  custom function to build a search input field with icon...
- ::::::::::::::::::::::
+
  */
 export const buildSearchWithIcon = (
   fieldLable,
@@ -680,6 +678,7 @@ export const buildSearchWithIcon = (
         type: inputType,
         name: inputName,
         id: inputName,
+        'data-source': 'initial',
         placeholder,
         autocomplete: autoCmplte,
         'data-required': required,
@@ -698,9 +697,9 @@ export const buildSearchWithIcon = (
   return searchElement;
 };
 /*
-::::::::::::::::::::::
+
  custom function to render select box
- :::::::::::::::::::::::
+
  */
 export const buildSelectBox = (
   fieldLable,
@@ -749,9 +748,9 @@ export const buildSelectBox = (
 };
 export function createDropdown(itemsList) {
   /*
-  ::::::::::::::::
+  :
    Ensure itemsList is an array without reassigning the parameter
-   :::::::::::::::::::
+
    */
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement('ul');

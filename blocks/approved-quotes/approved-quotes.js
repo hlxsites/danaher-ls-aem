@@ -21,8 +21,8 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
   document.querySelector('main').style = 'background: #f4f4f4';
   const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
-  if(basketDataFromSession?.data?.data?.buyer === undefined){
-    window.location.href = '/us/en/e-buy/login';
+  if (basketDataFromSession?.data?.data?.buyer === undefined) {
+    window.location.href = window.EbuyConfig?.loginPageUrl;
   }
   const customerName = `${basketDataFromSession?.data?.data?.buyer?.firstName} ${basketDataFromSession?.data?.data?.buyer?.lastName}`;
   const userId = basketDataFromSession?.data?.data?.buyer?.accountID;
@@ -65,7 +65,7 @@ export default async function decorate(block) {
     const tableHeader = (name) => div(
       {
         class:
-            'w-[175px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1',
+          'w-[175px] h-[46px] self-stretch p-3 inline-flex justify-start items-center gap-1',
       },
       div(
         {
@@ -208,8 +208,7 @@ export default async function decorate(block) {
     );
 
     const dynamicQuoteDetailContent = (productSKU, quantity, singlePrice) => {
-      
-        const detailedRow = div(
+      const detailedRow = div(
         {
           class: 'flex-1 inline-flex justify-start items-start',
         },
@@ -220,7 +219,7 @@ export default async function decorate(block) {
           },
           a(
             {
-              href:`/us/en/products/sku/${productSKU}`,
+              href: `/us/en/products/sku/${productSKU}`,
               class:
                 'self-stretch justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
             },
@@ -237,7 +236,7 @@ export default async function decorate(block) {
               class:
                 'self-stretch justify-start text-gray-900 text-sm font-normal leading-tight',
             },
-            "DMi1 for Core Cell Culture Test"
+            'DMi1 for Core Cell Culture Test',
             // `${item.description}`,
           ),
         ),
@@ -282,18 +281,14 @@ export default async function decorate(block) {
         ),
       );
       return detailedRow;
-    
-      
     };
+    //   approvedQuoteRow.append(quoteDetail);
     approvedQuotesDetailsResponse.items?.map(async (element) => {
-      const quoteDetailRows = dynamicQuoteDetailContent(element.productSKU,
-          element.originQuantity.value,
-          element.originSinglePrice.value,);
-       quoteDetailTable.append(quoteDetailRows);
-      });
-    
-  
-   
+      // eslint-disable-next-line max-len
+      const quoteDetailRows = dynamicQuoteDetailContent(element.productSKU, element.originQuantity.value, element.originSinglePrice.value);
+      quoteDetailTable.append(quoteDetailRows);
+    });
+
     quoteDetail.append(quoteDetailTable);
     return quoteDetail;
   };
@@ -398,6 +393,8 @@ export default async function decorate(block) {
           {
             class:
               'inline-flex h-[46px] justify-start border-b border-gray-200 gap-1',
+            // eslint-disable-next-line max-len
+            // href: `${window.EbuyConfig?.requestQuoteDetailsPageUrl}?quoteId=${quoteId}`, // Add this if needed
           },
 
           div(

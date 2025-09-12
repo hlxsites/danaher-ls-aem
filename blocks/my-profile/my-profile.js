@@ -10,7 +10,7 @@ export default async function decorate(block) {
   document.querySelector('main').style = 'background: #f4f4f4';
   const basketDataFromSession = JSON.parse(localStorage.getItem('basketData'));
   if (basketDataFromSession?.data?.data?.buyer === undefined) {
-    window.location.href = '/us/en/e-buy/login';
+    window.location.href = window.EbuyConfig?.loginPageUrl;
   }
   const firstName = basketDataFromSession?.data?.data?.buyer?.firstName;
   const lastName = basketDataFromSession?.data?.data?.buyer?.lastName;
@@ -56,7 +56,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'self-stretch h-[836px] flex flex-col justify-start items-start gap-6',
+          'self-stretch flex flex-col justify-start items-start gap-6',
       },
       div(
         {

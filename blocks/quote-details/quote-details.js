@@ -24,7 +24,7 @@ export default async function decorate(block) {
   const goBackToQuoteStatusLink = a(
     {
       class: 'inline-flex justify-start items-start gap-2',
-      href: '/us/en/e-buy/requestedquotes',
+      href: `${window.EbuyConfig?.requestedQuotesPageUrl}`,
     },
     div(
       {
@@ -72,7 +72,7 @@ export default async function decorate(block) {
   const quoteSummaryContainer = quoteSummary(requestedQuotesDetailsResponse);
   const quoteItemsContainer = quoteItems(requestedQuotesDetailsResponse);
   const requesterInformationContainer = requesterInformation(requestedQuotesDetailsResponse);
-  console.log("requestedQuotesDetailsResponse", requestedQuotesDetailsResponse)
+  console.log('requestedQuotesDetailsResponse', requestedQuotesDetailsResponse);
   quoteDetail.append(quoteSummaryContainer);
   quoteDetail.append(quoteItemTitle);
   quoteDetail.append(quoteItemsContainer);

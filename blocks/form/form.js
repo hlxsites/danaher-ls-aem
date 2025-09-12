@@ -228,7 +228,6 @@ async function loadSFDCForm(block) {
   const successUrlEl = inquiryTypeEl?.nextElementSibling;
   const successUrl = successUrlEl?.textContent || 'https://stage.lifesciences.danaher.com/us/en/solutions/mabs/cell-line-development.html';
   const errorUrlEl = successUrlEl?.nextElementSibling;
-  // eslint-disable-next-line no-useless-escape
   const errorUrl = errorUrlEl?.textContent || 'https://help.salesforce.com/s/articleView?id=sf.mc\_es\_demanager.htm';
   const formEl = div(
     { class: 'relative my-2 mx-0 md:ml-2' },
@@ -330,7 +329,6 @@ async function loadSFDCForm(block) {
       }
     });
   } else {
-    // eslint-disable-next-line no-console
     console.warn(`Form with id ${formId} not found!`);
   }
 
@@ -342,6 +340,7 @@ async function loadSFDCForm(block) {
       } else {
         dropdownInput.value = el.innerText;
       }
+      console.log('dropdownInput', dropdownInput);
       const dropdownLabel = document.querySelector('input#Job_Role + label');
       dropdownLabel.children[0].innerHTML = el.innerText;
       dropdownLabel.click();

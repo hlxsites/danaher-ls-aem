@@ -32,13 +32,15 @@
       "register",
       "login",
       "dashboard",
+      "approved-quotes",
+      "my-profile",
+      "my-addresses",
       "cartlanding",
       "checkout",
       "order-submit",
       "order-status",
       "requested-quote",
       "approved-quotes",
-      "my-address",
       "order-details",
       "quote-details",
       "my-profile",
@@ -121,10 +123,7 @@
   {
     "id": "card-list",
     "components": [
-      "articleCard",
-      "applicationCard",
-      "libraryCard",
-      "labCard"
+      " "
     ]
   },
   {
@@ -201,6 +200,12 @@
     ]
   },
   {
+    "id": "my-addresses",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "my-profile",
     "components": [
       ""
@@ -238,6 +243,12 @@
   },
   {
     "id": "order-submit",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "payment-methods",
     "components": [
       ""
     ]

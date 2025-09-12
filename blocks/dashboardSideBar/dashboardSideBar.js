@@ -14,7 +14,7 @@ export default async function dashboardSidebar() {
   const authenticationToken = await getAuthenticationToken();
   const sidepanelList = [
     { name: 'Dashboard', itemClicked: 'Dashboard', icon: 'Home' },
-    { name: 'My Address', itemClicked: 'My address', icon: 'Location-marker' },
+    { name: 'My Addresses', itemClicked: 'My addresses', icon: 'Location-marker' },
     { name: 'Payment Methods', itemClicked: 'Payment methods', icon: 'Currency-dollar' },
     { name: 'Order Status', itemClicked: 'Order status', icon: 'Cube' },
     { name: 'Requested Quotes', itemClicked: 'Requested quotes', icon: 'chat' },
@@ -69,14 +69,13 @@ export default async function dashboardSidebar() {
   userData = JSON.parse(authenticationToken.user_data);
   const logOut = button(
     {
-      // href: '/us/en/e-buy/cart',
       class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight',
     },
     'Logout',
   );
   logOut.addEventListener('click', () => {
     userLogOut();
-    window.location.href = '/us/en/e-buy/cart';
+    window.location.href = window.EbuyConfig?.cartPageUrl;
   });
   const sidebar = div(
     {
@@ -115,17 +114,6 @@ export default async function dashboardSidebar() {
     div({
       class: 'w-full h-[2px]',
     }),
-    div(
-      { class: 'w-full px-6 flex flex-col' },
-      a(
-        {
-          href: '/us/en/e-buy/cart',
-          class:
-            'w-full text-base  border-danaherpurple-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-        },
-        'View Cart',
-      ),
-    ),
   );
   const listDiv = div({
     class: 'self-stretch relative bg-white border-t border-gray-300 inline-flex flex-col justify-start items-start gap-1.5',
@@ -138,7 +126,7 @@ export default async function dashboardSidebar() {
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const lastSegment = pathSegments[pathSegments.length - 1];
   let targetedPage = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  console.log("targetedPage", targetedPage);
+  console.log('targetedPage', targetedPage);
   if (targetedPage === 'Orderdetails') {
     targetedPage = 'Orderstatus';
   } else if (targetedPage === 'Requestquotedetails') {

@@ -133,7 +133,7 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1 || src.includes('.eps')
-  || src.includes('.png') || src.includes('.jpg') || src.includes('.jpeg')) {
+    || src.includes('.png') || src.includes('.jpg') || src.includes('.jpeg')) {
     const picture = document.createElement('picture');
     picture.appendChild(img({
       src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
@@ -1214,6 +1214,22 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
 }
 // Danaher Config - End
 
+window.EbuyConfig = {
+  cartPageUrl: '/us/en/e-buy/cart',
+  dashboardPageUrl: '/us/en/e-buy/dashboard',
+  addressPageUrl: '/us/en/e-buy/addresses',
+  shippingPageUrl: '/us/en/e-buy/shipping',
+  paymentPageUrl: '/us/en/e-buy/payment',
+  loginPageUrl: '/us/en/e-buy/login',
+  registerPageUrl: '/us/en/e-buy/register',
+  orderStatusPageUrl: '/us/en/e-buy/orderstatus',
+  orderSubmitPageUrl: '/us/en/e-buy/ordersubmit',
+  orderDetailsPageUrl: '/us/en/e-buy/orderdetails',
+  paymentMethodsPageUrl: '/us/en/e-buy/paymentmethods',
+  myProfilePageUrl: '/us/en/e-buy/myprofile',
+  requestedQuoteDetailsPageUrl: '/us/en/e-buy/requestquotedetails',
+  requestedQuotesPageUrl: '/us/en/e-buy/requestedquotes',
+};
 // Datalayer Init - Start
 window.dataLayer = [];
 window.dataLayer.push({

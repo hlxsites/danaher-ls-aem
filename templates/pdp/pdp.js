@@ -116,7 +116,7 @@ export default async function buildAutoBlocks() {
   const productSlug = new URL(window.location.href).pathname.split('/').pop();
   const response = JSON.parse(localStorage.getItem('eds-product-details'));
 
-  if (response && response?.raw.sku === productSlug) {
+  if (response && response?.raw.sku === productSlug.replace('.html', '')) {
     loadPdpBlocks();
     // designPdp();
     return;

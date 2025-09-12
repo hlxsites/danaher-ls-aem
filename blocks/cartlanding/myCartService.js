@@ -9,7 +9,7 @@ import {
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import {
   getBasketDetails, createBasket,
-  logoDiv, divider, cartItemsContainer, updateCheckoutSummary,
+  logoDiv, divider, cartItemsContainer, updateCheckoutSummary, updateHeaderCart,
 } from '../../scripts/cart-checkout-utils.js';
 import {
   postApiData,
@@ -1228,8 +1228,17 @@ export const addItemToCart = async (item) => {
     if (addItem && addItem?.status === 'success') {
       const updateCartItem = await updateCartItems(addItem);
       await updateCheckoutSummary();
+      const getHeaderCart = document.querySelector('#headerCartItemQuantity');
+      if (getHeaderCart) {
+        getHeaderCart.textContent = basketDetails?.data?.data?.lineItems?.length ?? '0';
+      }
       showNotification('Item added to cart successfully.', 'success');
       removePreLoader();
+      /*
+      *
+      // update header cart item count
+      */
+      await updateHeaderCart();
       return getProductQuantity(updateCartItem);
     }
     showNotification('Error Processing Request.', 'error');
