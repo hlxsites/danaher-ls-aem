@@ -7,7 +7,7 @@
     "/content/danaher/ls/metadata:/metadata.json",
     "/content/danaher/ls/redirects:/redirects.json",
     "/content/experience-fragments/danaher/us/en/site/:/fragments/",
-    "/content/dam/danaher/franklin/metadata-products.json:/us/en/products/product-coveo/metadata.json",
+    "/content/dam/danaher/franklin/metadata-products.json:https://lifesciences.danaher.com/us/en/products/product-coveo/metadata.json",
     "/content/dam/danaher/franklin/metadata-articles.json:/metadata-articles.json",
     "/content/dam/danaher/franklin/promotions-index.json:/us/en/promotions-index.json",
     "/content/danaher.resource/us/en/article-index.json:/us/en/article-index.json",
