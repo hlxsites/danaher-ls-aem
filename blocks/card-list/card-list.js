@@ -98,7 +98,7 @@ export function createFilters(articles, viewAll = false) {
   const allKeywords = articles.map((item) => {
     // Check if item[tagName] exists
     if (item[tagName]) {
-      return item[tagName].replace(/,\s*/g, ',').replace(/&amp;/g, '&').split(',');
+      return item[tagName].replace(/,\s*/g, ',').replace(/&amp;/g, '& ').split(',');
     }
     return [];
   });
