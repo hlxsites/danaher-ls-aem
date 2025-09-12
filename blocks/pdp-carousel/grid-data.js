@@ -13,8 +13,8 @@ export default function renderGridCard(item) {
 
   const card = a(
     {
-      href: item?.clickUri,
-      target: item?.clickUri?.includes('http') ? '_blank' : '_self',
+      href: item?.url,
+      target: item?.url?.includes('http') ? '_blank' : '_self',
       class:
         'w-full relative flex-shrink-0 object-contain hover:shadow-md transform-origin transform cursor-pointer transition duration-500 sm:min-w-[100%] md:min-w-[305px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300 flex flex-col justify-start items-start gap-3',
     },
@@ -33,8 +33,8 @@ export default function renderGridCard(item) {
     ),
     span(
       {
-        href: item?.clickUri,
-        target: item?.clickUri?.includes('http') ? '_blank' : '_self',
+        href: item?.url,
+        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
           'text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3 self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug',
       },
