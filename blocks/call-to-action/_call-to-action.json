@@ -22,41 +22,59 @@
       "fields": [
         {
           "component": "text",
-          "name": "left_main_heading_text",
-          "label": "Main Heading Text"
+          "name": "title",
+          "label": "Title"
         },
         {
           "component": "select",
-          "name": "left_main_heading_type",
-          "label": "Heading Tag Type",
+          "name": "titleType",
+          "label": "Title Type",
           "options": [
-            { "name": "h1", "value": "h1" },
-            { "name": "h2", "value": "h2" },
-            { "name": "h3", "value": "h3" },
-            { "name": "h4", "value": "h4" },
-            { "name": "h5", "value": "h5" },
-            { "name": "h6", "value": "h6" }
+            {
+              "name": "h1",
+              "value": "h1"
+            },
+            {
+              "name": "h2",
+              "value": "h2"
+            },
+            {
+              "name": "h3",
+              "value": "h3"
+            },
+            {
+              "name": "h4",
+              "value": "h4"
+            },
+            {
+              "name": "h5",
+              "value": "h5"
+            },
+            {
+              "name": "h6",
+              "value": "h6"
+            }
           ]
         },
         {
           "component": "url",
-          "name": "left_cta_1_link",
-          "label": "Left CTA 1 Link"
+          "name": "link",
+          "label": "Link"
         },
         {
           "component": "text",
-          "name": "left_cta_1_text",
-          "label": "Left CTA 1 Text"
+          "name": "text",
+          "label": "Text"
         },
         {
           "component": "text",
-          "name": "left_cta_1_title",
-          "label": "Left CTA 1 Title"
+          "name": "title",
+          "label": "Title"
         },
         {
           "component": "select",
-          "name": "left_cta_1_type",
-          "label": "Left CTA 1 Type",
+          "name": "type",
+          "label": "Type",
           "options": [
             { "name": "primary", "value": "primary" },
             { "name": "secondary", "value": "secondary" }

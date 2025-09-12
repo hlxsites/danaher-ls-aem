@@ -102,7 +102,7 @@ export function createFilters(articles, activeTag = '') {
       articleType = 'Library';
     }
      container.append(
-      span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic: `),
+      span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic:`),
       span({ class: 'font-bold text-black'}, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
     );
   }
