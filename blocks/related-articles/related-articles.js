@@ -33,7 +33,7 @@ export default async function decorate(block) {
     return `${window.location.origin}${backNavigationPath}`;
   }
   const headerRow = document.createElement('div');
-  headerRow.className = 'flex w-full justify-between items-center mb-8';
+  headerRow.className = 'flex w-full justify-between items-center mb-12';
   const spanEl = articles.length > 0 ? span({ class: 'text-lg font-semibold' }, 'You may be interested in') : '';
   const spanE2 = articles.length > 0 ? a({ class: 'my-auto text-base text-danaherpurple-500 font-semibold', href: goBack() }, `Back to ${articleType} →`) : '';
   // Append both spans to header row
