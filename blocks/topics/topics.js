@@ -98,9 +98,12 @@ export function createFilters(articles, activeTag = '') {
     if (window.location.pathname.startsWith('/us/en/news')) {
       articleType = 'News';
     }
-    container.append(
-      span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic:`),
-      span({ class: 'font-bold text-black ml-1' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+    if (window.location.pathname.startsWith('/us/en/library')) {
+      articleType = 'Library';
+    }
+     container.append(
+      span({ class: 'font-medium text-danahergray-700' }, 'Blog topic: '),
+      span({ class: 'font-bold text-black'}, activeTag.replace(/-/g, '').replace(/\b\w/g, c => c.toUpperCase())),
     );
   }
 
@@ -114,6 +117,7 @@ export function createFilters(articles, activeTag = '') {
     a(
       {
         class: 'text-danaherpurple-500 font-semibold',
+        style: 'margin-left:16px;',
         href: makePublicUrl(newUrl.toString()),
       },
       'View All Topics →',
@@ -199,6 +203,7 @@ export default async function decorate(block) {
 
   // Always show topic label and "View All Topics"
   const filterTags = createFilters(articles, activeTagFilter);
+  filterTags.style.marginBottom = '45px';
   const paginationElements = createPagination(filteredArticles, page, limitPerPage);
   block.append(filterTags, cardList, paginationElements);
 }

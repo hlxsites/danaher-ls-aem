@@ -38,7 +38,7 @@ export default async function decorate(block) {
 
   divEl.append(
     div(
-      { class: 'space-y-2' },
+      { class: 'space-y-2', style: 'margin-bottom: 80px;' },
       p({ class: 'text-base font-bold' }, 'Tags'),
       p({ class: 'text-base font-bold' }, filteredTags),
     ),
