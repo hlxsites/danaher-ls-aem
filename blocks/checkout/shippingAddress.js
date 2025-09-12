@@ -823,11 +823,10 @@ add event listener to show address list modal...
 
 */
 document.addEventListener('click', async (e) => {
-  const { target } = e;
-  const type = target.getAttribute('data-type');
-  const action = target.getAttribute('data-action');
+  const type = e.target.getAttribute('data-type');
+  const action = e.target.getAttribute('data-action');
   let hasCancelButton = false;
-  if (target?.getAttribute('data-canclebutton') === 'true') {
+  if (e.target?.getAttribute('data-canclebutton') === 'true') {
     hasCancelButton = true;
   }
   const shouldEdit = type && action === 'edit';
@@ -839,12 +838,12 @@ document.addEventListener('click', async (e) => {
     removePreLoader();
   };
 
-  if (target.matches('.editAddressButton')) {
+  if (e.target.matches('.editAddressButton')) {
     await handleEditModal();
     return;
   }
 
-  if (target.matches('#closeUtilityModal')) {
+  if (e.target.matches('#closeUtilityModal')) {
     setTimeout(handleEditModal, 0);
   }
 });
