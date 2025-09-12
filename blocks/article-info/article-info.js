@@ -29,7 +29,7 @@ export default function decorate(block) {
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
-            div({ class: 'text-danaherblack-500 font-medium' }, articleOpco),
+            div({ class: 'text-danaherpurple-500 font-medium' }, articleOpco),
           ),
         ),
         div(
