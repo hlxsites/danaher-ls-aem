@@ -3,7 +3,7 @@
 async function getProductTitle(url, host) {
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(family\/|sku\/|bundles\/)/)) {
     const urlStr = url.pathname.replace(/^\/content\/danaher\/ls/, '').replace(/\.html$/, '');
-    const productMeta = await fetch(`${host}/metadata-products.json`)
+    const productMeta = await fetch(`${host}/metadata-products-old.json`)
       .then((response) => response.json())
       .catch((error) => {
         // eslint-disable-next-line no-console
