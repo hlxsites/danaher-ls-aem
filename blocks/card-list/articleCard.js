@@ -38,7 +38,7 @@ export default function createCard(article, firstCard = false) {
     ),
     div(
       { class: '' },
-      p({ class: 'eyebrow-sm' }, article.brand || 'Danaher Corporation'),
+      p({ class: 'eyebrow-sm font-medium' }, article.brand || 'Danaher Corporation'),
       h3(
         {
           class:
