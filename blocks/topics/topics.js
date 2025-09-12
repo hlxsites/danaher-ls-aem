@@ -90,6 +90,7 @@ export function createFilters(articles, activeTag = '') {
   const container = div({ class: 'flex items-center gap-2 mb-24' });
 
   if (activeTag) {
+    console.log('activeTag', activeTag);
     let articleType = '';
     if (window.location.pathname.startsWith('/us/en/blog')) {
       articleType = 'Blog';
@@ -102,7 +103,7 @@ export function createFilters(articles, activeTag = '') {
     }
      container.append(
       span({ class: 'font-medium text-danahergray-700' }, `${articleType} topic:`),
-      span({ class: 'font-bold text-black'}, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
+      span({ class: 'font-bold text-black', style: 'margin-left:-4px;' }, activeTag.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())),
     );
   }
 
@@ -119,7 +120,7 @@ export function createFilters(articles, activeTag = '') {
     a(
       {
         class: 'text-danaherpurple-500 font-semibold',
-        style: 'margin-left:16px;',
+        style: 'margin-left:12px;',
         href: makePublicUrl(newUrl.toString()),
       },
       'View All Topics →',
@@ -158,6 +159,7 @@ export default async function decorate(block) {
 
   // Always extract tag from URL
   const activeTagFilter = getSelectionFromUrl();
+  console.log('activeTagFilter', activeTagFilter);
 
   let filteredArticles = articles;
   if (activeTagFilter) {
@@ -186,7 +188,7 @@ export default async function decorate(block) {
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
   articlesToDisplay.forEach((article, index) => {
-    if (articleType !== 'library') {
+    if (articleType) {
       cardList.appendChild(createArticleCard(article, index === 0));
     }
   });
