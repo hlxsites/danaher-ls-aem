@@ -2348,13 +2348,6 @@
         "name": "testimonial_text",
         "value": "",
         "label": "Text1"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "testimonial_subtext",
-        "value": "",
-        "label": "Text2"
       }
     ]
   },
