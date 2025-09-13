@@ -58,8 +58,13 @@
         },
         {
           "component": "text",
-          "name": "linkText",
+          "name": "text",
           "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title"
         },
         {
           "component": "aem-content",
