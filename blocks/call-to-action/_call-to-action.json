@@ -57,23 +57,23 @@
           ]
         },
         {
-          "component": "aem-content",
-          "name": "cta_link",
-          "label": "Link"
-        },
-        {
           "component": "text",
-          "name": "cta_linkText",
+          "name": "call-to-action_linkText",
           "label": "Text"
         },
         {
           "component": "text",
-          "name": "cta_linkTitle",
+          "name": "call-to-action_linkTitle",
           "label": "Title"
         },
         {
+          "component": "aem-content",
+          "name": "call-to-action_link",
+          "label": "Link"
+        },
+        {
           "component": "select",
-          "name": "cta_linkType",
+          "name": "call-to-action_linkType",
           "label": "Type",
           "options": [
           {
