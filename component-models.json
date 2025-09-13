@@ -583,12 +583,12 @@
     "fields": [
       {
         "component": "text",
-        "name": "title",
+        "name": "call-to-action_title",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "titleType",
+        "name": "call-to-action_titleType",
         "label": "Title Type",
         "options": [
           {
@@ -619,22 +619,22 @@
       },
       {
         "component": "aem-content",
-        "name": "callToAction_link",
+        "name": "call-to-action_link",
         "label": "Link"
       },
       {
         "component": "text",
-        "name": "callToAction_linkText",
+        "name": "call-to-action_linkText",
         "label": "Text"
       },
       {
         "component": "text",
-        "name": "callToAction_linkTitle",
+        "name": "call-to-action_linkTitle",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "callToAction_linkType",
+        "name": "call-to-action_linkType",
         "label": "Type",
         "options": [
           {
