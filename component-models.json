@@ -2338,27 +2338,27 @@
     "fields": [
       {
         "component": "reference",
-        "name": "image",
+        "name": "testimonial_image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "text1",
+        "name": "testimonial_text1",
         "value": "",
         "label": "Text1"
       },
       {
         "component": "reference",
-        "name": "imagecopy",
+        "name": "testimonial_imagecopy",
         "label": "Image Copy",
         "multi": false
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "text2",
+        "name": "testimonial_text2",
         "value": "",
         "label": "Text2"
       }
