@@ -8,9 +8,10 @@ export default async function decorate(block) {
   block.classList.add('py-6');
   const divEl = block.querySelector('div');
   divEl.classList.add(...'flex items-center gap-8 justify-center'.split(' '));
-  const divOfDivEl = block.querySelector(':scope div > div:nth-child(2)');
+  const divOfDivEl = block.querySelector(':scope div > div:nth-child(2)');  
   divOfDivEl.classList.add(...'text-2xl leading-9 font-medium text-danahergreyblue-500 relative'.split(' '));
   const picDivEl = divEl.parentNode.querySelector(':scope div > div:nth-child(1)');
+  console.log('picDivEl', picDivEl);
   picDivEl.classList.add(...'hidden lg:block lg:flex-shrink-0'.split(' '));
   decorateIcons(buildQuote);
   buildQuote.firstChild.classList.add('absolute', 'top-16', 'left-28', 'text-indigo-200', 'w-36', 'h-36', '-translate-x-8', '-translate-y-24', 'transform', 'opacity-50');
