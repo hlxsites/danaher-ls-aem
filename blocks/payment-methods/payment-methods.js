@@ -2,7 +2,9 @@ import { div, h2 } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import dashboardSidebar from '../dashboardSideBar/dashboardSideBar.js';
-import { getStripeElements, getStripeInstance, paymentModule, createCardItem } from '../checkout/paymentModule.js';
+import {
+  getStripeElements, getStripeInstance, paymentModule, createCardItem,
+} from '../checkout/paymentModule.js';
 import { checkoutSkeleton } from '../../scripts/cart-checkout-utils.js';
 import { confirmSetup, setGetCardAsDefault, getPaymentIntent } from '../../scripts/stripe_utils.js';
 import { removePreLoader, showNotification, showPreLoader } from '../../scripts/common-utils.js';

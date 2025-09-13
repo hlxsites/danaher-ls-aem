@@ -613,7 +613,7 @@ export const paymentModule = async (isValidated) => {
           if (targetRadioId === 'sameAsShipping') {
             if (targetFrom === 'label') targetRadio.checked = true;
             newStripeCardAddressWrapper?.classList.add('hidden');
-            basketAddressData = basketData?.included?.commonShipToAddress[commonShipToAddress];
+            basketAddressData = basketData?.included?.commonShipToAddress?.[commonShipToAddress];
           }
           if (targetRadioId === 'sameAsBilling') {
             if (targetFrom === 'label') targetRadio.checked = true;
@@ -698,6 +698,8 @@ export const paymentModule = async (isValidated) => {
       const getStripeCardsWrapper = document.querySelector('#newStripeCardsWrapper');
       savedCardsHeader.classList.add('hidden');
       savedCardList.classList.add('hidden');
+      addressElements.mount('#newStripeCardAddressWrapper');
+      paymentElements.mount('#newStripeCardPaymentWrapper');
       if (getStripeCardsWrapper?.classList.contains('hidden')) {
         getStripeCardsWrapper.classList.remove('hidden');
       }
