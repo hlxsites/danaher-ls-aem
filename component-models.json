@@ -2345,7 +2345,7 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "testimonial_text1",
+        "name": "testimonial_text",
         "value": "",
         "label": "Text1"
       },
