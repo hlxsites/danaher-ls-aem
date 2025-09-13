@@ -619,22 +619,22 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
+        "name": "cta_link",
         "label": "Link"
       },
       {
         "component": "text",
-        "name": "linkText",
+        "name": "cta_linkText",
         "label": "Text"
       },
       {
         "component": "text",
-        "name": "linkTitle",
+        "name": "cta_linkTitle",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "linkType",
+        "name": "cta_linkType",
         "label": "Type",
         "options": [
           {
