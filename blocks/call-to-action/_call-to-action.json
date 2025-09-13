@@ -57,23 +57,23 @@
           ]
         },
         {
+          "component": "aem-content",
+          "name": "callToActionLink",
+          "label": "Link"
+        },
+        {
           "component": "text",
-          "name": "text",
+          "name": "callToActionLinkText",
           "label": "Text"
         },
         {
           "component": "text",
-          "name": "title",
+          "name": "callToActionLinkTitle",
           "label": "Title"
         },
         {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link"
-        },
-        {
           "component": "select",
-          "name": "linkType",
+          "name": "callToActionLinkType",
           "label": "Type",
           "options": [
           {
