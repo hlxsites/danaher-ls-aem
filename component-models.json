@@ -2345,14 +2345,14 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "testimonial_text1",
+        "name": "testimonial_1_text",
         "value": "",
         "label": "Text1"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "testimonial_text2",
+        "name": "testimonial_2_text",
         "value": "",
         "label": "Text2"
       }
