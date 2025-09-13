@@ -2345,15 +2345,9 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "testimonial_text",
+        "name": "testimonial_text1",
         "value": "",
         "label": "Text1"
-      },
-      {
-        "component": "reference",
-        "name": "testimonial_imagecopy",
-        "label": "Image Copy",
-        "multi": false
       },
       {
         "component": "richtext",
