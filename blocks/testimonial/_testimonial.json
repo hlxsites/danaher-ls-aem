@@ -24,21 +24,22 @@
           "component": "reference",
           "name": "testimonial_image",
           "label": "Image",
-          "multi": false
+          "multi": false,
+          "referenceType": "image"
         },
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "testimonial_1_text",
+          "name": "testimonial_text",
           "value": "",
-          "label": "Text1"
+          "label": "Text"
         },
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "testimonial_2_text",
+          "name": "testimonial_author",
           "value": "",
-          "label": "Text2"
+          "label": "Author"
         }
       ]
     }
