@@ -27,24 +27,24 @@
           "multi": false
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "testimonial_text1",
           "value": "",
           "label": "Text1"
         },
         {
-          "component": "reference",
-          "name": "testimonial_imagecopy",
-          "label": "Image Copy",
-          "multi": false
-        },
-        {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "testimonial_text2",
           "value": "",
           "label": "Text2"
+        },
+        {
+          "component": "reference",
+          "name": "testimonial_imagecopy",
+          "label": "Image Copy",
+          "multi": false
         }
       ]
     }
