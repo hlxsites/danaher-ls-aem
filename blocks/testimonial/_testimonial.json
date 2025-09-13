@@ -30,14 +30,21 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "text",
+          "name": "testimonial_1_text",
           "value": "",
           "label": "Text"
         },
         {
+          "component": "reference",
+          "name": "testimonial_imagecopy",
+          "label": "Image Copy",
+          "multi": false,
+          "referenceType": "image"
+        },
+        {
           "component": "richtext",
           "valueType": "string",
-          "name": "author",
+          "name": "testimonial_2_text",
           "value": "",
           "label": "Author"
         }
