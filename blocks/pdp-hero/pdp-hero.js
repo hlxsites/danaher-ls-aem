@@ -819,3 +819,71 @@ export default async function decorate(block) {
   );
   decorateModals(block);
 }
+
+// Performance enhancement wrapper - add loading state
+(function enhanceHeroPerformance() {
+  // const originalDecorate = window.pdpHeroDecorate;
+
+  // Enhanced async version
+  window.pdpHeroDecorateAsync = async function (block) {
+    // Show loading state immediately
+    block.innerHTML = '<div class="hero-loading">Loading hero content...</div>';
+
+    // Add performance CSS
+    if (!document.querySelector('#hero-perf-enhance')) {
+      const style = document.createElement('style');
+      style.id = 'hero-perf-enhance';
+      style.textContent = `
+        .pdp-hero{contain:layout style paint;transform:translateZ(0)}
+        .pdp-hero img{aspect-ratio:16/9;object-fit:cover;width:100%;height:auto;fetchpriority:high;loading:eager;decoding:async}
+        .pdp-hero *{contain:layout}
+      `;
+      document.head.appendChild(style);
+    }
+
+    const startTime = performance.now();
+
+    try {
+      // Process asynchronously
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          const children = [...block.querySelectorAll(':scope > *:not(.hero-loading)')];
+          const fragment = document.createDocumentFragment();
+
+          children.forEach((child) => {
+            // Enhanced image optimization
+            const images = child.querySelectorAll('img');
+            images.forEach((imgEle) => {
+              imgEle.loading = 'eager';
+              imgEle.decoding = 'async';
+              imgEle.fetchPriority = 'high';
+              imgEle.style.aspectRatio = '16/9';
+              imgEle.style.objectFit = 'cover';
+              imgEle.style.width = '100%';
+              img.style.height = 'auto';
+            });
+
+            fragment.appendChild(child);
+          });
+
+          // Smooth transition
+          block.style.transition = 'opacity 0.4s ease';
+          block.style.opacity = '0';
+          block.innerHTML = '';
+          block.appendChild(fragment);
+
+          requestAnimationFrame(() => {
+            block.style.opacity = '1';
+          });
+
+          resolve();
+        });
+      });
+
+      console.log(`Enhanced Hero: ${(performance.now() - startTime).toFixed(2)}ms`);
+    } catch (error) {
+      console.error('Hero enhancement error:', error);
+      block.innerHTML = '<div>Hero content unavailable</div>';
+    }
+  };
+}());

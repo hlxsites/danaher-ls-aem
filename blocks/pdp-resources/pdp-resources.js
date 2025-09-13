@@ -3,6 +3,115 @@ import { resourceEngine } from '../../scripts/coveo/engine.js';
 import { div, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+// Performance enhancement wrapper for resources
+(function enhanceResourcesPerformance() {
+  // Enhanced async version for resources
+  window.pdpResourcesDecorateAsync = async function (block) {
+    // Show loading state immediately
+    block.innerHTML = '<div class="resources-loading">Loading resources...</div>';
+
+    // Add performance CSS for resources
+    if (!document.querySelector('#resources-perf-enhance')) {
+      const style = document.createElement('style');
+      style.id = 'resources-perf-enhance';
+      style.textContent = `
+        .pdp-resources{contain:layout style paint;transform:translateZ(0)}
+        .resources-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));contain:layout}
+        .resource-item{contain:layout style;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s ease,box-shadow 0.2s ease;transform:translateZ(0)}
+        .resource-item:hover{transform:translateY(-4px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+        .pdp-resources img{width:100%;height:200px;object-fit:cover;contain:layout;background:#f5f5f5;loading:lazy;decoding:async}
+        .resource-content{padding:1.5rem;contain:layout}
+        .resource-title{font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;contain:layout}
+        .resource-description{color:#666;line-height:1.5;contain:layout}
+        .resources-loading{min-height:300px;display:flex;align-items:center;justify-content:center;color:#666;font-size:1.1rem;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:resourcesShimmer 1.5s infinite;border-radius:4px}
+        @keyframes resourcesShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        @media (max-width:767px){.resources-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.pdp-resources img{height:150px}}
+      `;
+      document.head.appendChild(style);
+    }
+
+    const startTime = performance.now();
+
+    try {
+      // Process resources asynchronously
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          const resources = [...block.querySelectorAll(':scope > *:not(.resources-loading)')];
+
+          if (resources.length === 0) {
+            block.innerHTML = '<div style="padding:2rem;text-align:center;color:#666;">No resources available</div>';
+            resolve();
+            return;
+          }
+
+          const resourcesGrid = document.createElement('div');
+          resourcesGrid.className = 'resources-grid';
+
+          // Process resources in batches for better performance
+          const batchSize = 4;
+          const fragment = document.createDocumentFragment();
+
+          for (let i = 0; i < resources.length; i += batchSize) {
+            const batch = resources.slice(i, i + batchSize);
+
+            batch.forEach((resource, batchIndex) => {
+              const resourceItem = document.createElement('div');
+              resourceItem.className = 'resource-item';
+
+              // Optimize images in resources
+              const img = resource.querySelector('img');
+              if (img) {
+                const absoluteIndex = i + batchIndex;
+                img.loading = absoluteIndex < 4 ? 'eager' : 'lazy';
+                img.decoding = 'async';
+                img.style.aspectRatio = '16/9';
+                img.style.width = '100%';
+                img.style.height = 'auto';
+                img.style.objectFit = 'cover';
+
+                if (absoluteIndex < 4) {
+                  img.fetchPriority = 'high';
+                }
+              }
+
+              // Create structured content
+              const content = document.createElement('div');
+              content.className = 'resource-content';
+
+              // Move content efficiently
+              while (resource.firstChild) {
+                content.appendChild(resource.firstChild);
+              }
+
+              resourceItem.appendChild(content);
+              fragment.appendChild(resourceItem);
+            });
+          }
+
+          resourcesGrid.appendChild(fragment);
+
+          // Smooth transition
+          block.style.transition = 'opacity 0.4s ease';
+          block.style.opacity = '0';
+          block.innerHTML = '';
+          block.appendChild(resourcesGrid);
+
+          requestAnimationFrame(() => {
+            block.style.opacity = '1';
+          });
+
+          resolve();
+        });
+      });
+
+      console.log(`Enhanced Resources: ${(performance.now() - startTime).toFixed(2)}ms`);
+    } catch (error) {
+      console.error('Resources enhancement error:', error);
+      block.innerHTML = '<div style="padding:2rem;text-align:center;color:#e74c3c;">Resources unavailable</div>';
+    }
+  };
+}());
+
 export default async function decorate(block) {
   block.id = 'resources-tab';
   block.parentElement.parentElement.style.padding = '0px 0px 0px 20px';
