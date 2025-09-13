@@ -22,7 +22,7 @@
       "fields": [
         {
           "component": "reference",
-          "name": "testimonial_image",
+          "name": "image",
           "label": "Image",
           "multi": false
         },
