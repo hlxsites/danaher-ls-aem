@@ -30,14 +30,14 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "testimonial_text",
+          "name": "text",
           "value": "",
           "label": "Text"
         },
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "testimonial_author",
+          "name": "author",
           "value": "",
           "label": "Author"
         }
