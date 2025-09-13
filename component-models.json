@@ -2334,6 +2334,37 @@
     ]
   },
   {
+    "id": "testimonial",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "testimonial_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "testimonial_text1",
+        "value": "",
+        "label": "Text1"
+      },
+      {
+        "component": "reference",
+        "name": "testimonial_imagecopy",
+        "label": "Image Copy",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "testimonial_text2",
+        "value": "",
+        "label": "Text2"
+      }
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "fields": [
       {

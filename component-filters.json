@@ -290,6 +290,12 @@
     ]
   },
   {
+    "id": "testimonial",
+    "components": [
+      " "
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "components": [
       "tiny-carousel-item"
