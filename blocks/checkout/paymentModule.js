@@ -29,7 +29,7 @@ let stripeElements;
 const stripe = await loadStripe();
 let paymentMethodType = 'Card';
 
-function createCardItem(item, defaultCard) {
+export function createCardItem(item, defaultCard) {
   const useCard = sessionStorage.getItem('useStripeCardId');
   const itemObject = {
     expiryMonth: String(item?.card?.exp_month).padStart(2, '0'),
@@ -136,11 +136,11 @@ function createCardItem(item, defaultCard) {
 export const paymentModule = async (isValidated) => {
   try {
     if (!isValidated) {
-    /*
+      /*
 
-    validating basket.
+      validating basket.
 
-    */
+      */
       const validateData = {
         adjustmentsAllowed: true,
         scopes: [
@@ -354,7 +354,16 @@ export const paymentModule = async (isValidated) => {
     newStripeCardsWrapper.append(newStripeCardPaymentWrapper);
 
     if (getSavedStripeCardsList?.data?.data?.length > 0) {
-      newStripeCardsWrapper.append(button({ class: 'w-full m-0 stripe-card-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-xs', id: 'showStripePaymentList' }, 'Back'));
+      const stripeCardsButtons = div(
+        {
+          class: 'flex justify-between w-full gap-6',
+        },
+      );
+      stripeCardsButtons.append(button({ class: 'w-full m-0 stripe-card-use-button text-xl border-danaherpurple-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6 hover:bg-danaherpurple-500 max-w-xs', id: 'showStripePaymentList' }, 'Back'));
+      if (isValidated) {
+        stripeCardsButtons.append(button({ 'data-customer': getSavedStripeCardsList?.data?.requestParams?.customer, class: 'flex w-full text-white text-xl  btn btn-lg font-medium btn-primary-purple rounded-full px-6', id: 'saveStripeCard' }, 'Save Card'));
+      }
+      newStripeCardsWrapper.append(stripeCardsButtons);
     }
     stripeCardsContainer.append(newStripeCardsWrapper);
 
@@ -386,10 +395,9 @@ export const paymentModule = async (isValidated) => {
         },
       },
     };
-console.log(allPaymentMethods);
 
     // eslint-disable-next-line max-len
-    allPaymentMethods?.data?.sort((b, a) => a.displayName.localeCompare(b.displayName))?.forEach(async (pm, ind) => {
+    allPaymentMethods?.data?.sort((a, b) => a.displayName.localeCompare(b.displayName))?.forEach(async (pm, ind) => {
       if (pm?.id === 'STRIPE_PAYMENT') {
         stripeCardsWrapper.innerHTML = '';
         stripeCardsWrapper = div(

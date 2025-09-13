@@ -297,7 +297,7 @@ export async function setUseCard(paymentMethodId) {
 }
 /*
 *
-:::::: confirm setup ::::::
+ confirm setup
 *
 */
 export async function confirmSetup(stripe, elements, returnUrl) {
@@ -312,7 +312,7 @@ export async function confirmSetup(stripe, elements, returnUrl) {
 }
 /*
 *
-:::::: confirm Payment ::::::
+ confirm Payment
 *
 */
 export async function confirmPayment(stripe, secretKey, returnUrl, paymentMethod) {
@@ -325,4 +325,23 @@ export async function confirmPayment(stripe, secretKey, returnUrl, paymentMethod
     redirect: 'if_required',
   });
   return confirmingPayment;
+}
+/*
+*
+ confirm Payment
+*
+*/
+export async function savePaymentMethod(stripe, elements, methodType, userData) {
+  const { error, paymentMethod } = await stripe.createPaymentMethod({
+    type: methodType,
+    card: elements,
+    billing_details: {
+      name: `${userData.firstName} ${userData.lastName}`,
+      email: userData.email,
+    },
+  });
+  if (error) {
+    return { status: 'error', data: error.message };
+  }
+  return { status: 'success', data: paymentMethod };
 }

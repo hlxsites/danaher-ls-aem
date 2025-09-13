@@ -984,10 +984,10 @@ async function getQuote(headerBlock, authHeader) {
 }
 /*
   *
-  :::::::::::
+
   function to load required css
   breadcrumb EDS supportive code starts
-  ::::::::::::::
+
   *
   */
 function loadBreadcrumbCSS(href) {
@@ -1000,9 +1000,9 @@ function loadBreadcrumbCSS(href) {
 }
 /*
   *
-  :::::::::::
+
    function to load required css ends
-  ::::::::::::::
+
   *
   */
 /**
@@ -1034,9 +1034,9 @@ export default async function decorate(block) {
 
   /*
   *
-  :::::::::::
+
     breadcrumb EDS supportive code  starts
-  ::::::::::::::
+
   *
   */
 
@@ -1063,9 +1063,9 @@ export default async function decorate(block) {
 
   /*
   *
-  :::::::::::
+
     breadcrumb EDS supportive code ends
-  ::::::::::::::
+
   *
   */
 

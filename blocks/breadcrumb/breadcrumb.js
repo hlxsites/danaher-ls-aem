@@ -51,9 +51,9 @@ export default async function decorate(block) {
   Array.from(entries.children).forEach((element, index, arr) => {
   /*
   *
-  :::::::::::
+
      breadcrumb EDS supportive code starts
-  ::::::::::::::
+
   *
   */
 
@@ -100,9 +100,9 @@ export default async function decorate(block) {
 
     /*
   *
-  :::::::::::
+
      breadcrumb EDS supportive code ends
-  ::::::::::::::
+
   *
   */
 

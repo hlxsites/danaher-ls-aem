@@ -303,9 +303,9 @@ const shippingMethodsModule = async () => {
             );
             decorateIcons(defaultShippingMethodIcon);
             /*
-             :::
+
              generates shipping methods cards
-             ::::::::::
+
              */
             shippingMethods?.data?.forEach((method) => {
               const methodData = div(
@@ -352,11 +352,11 @@ const shippingMethodsModule = async () => {
             });
             if (modulesMethodsWrapper) {
               /*
-               :::
+
                attach event listener
                to set methods as
                default shipping method
-               ::::::::::
+               :
                */
               modulesMethodsWrapper.addEventListener('click', async (event) => {
                 event.preventDefault();
@@ -371,7 +371,7 @@ const shippingMethodsModule = async () => {
                       let highlightShippingMethod = false;
                       if (setShippingMethodResponse.status !== 'error') {
                         /*
-                           :::::::
+                           :
                            update basket with selected shipping method
                            :
                            */
