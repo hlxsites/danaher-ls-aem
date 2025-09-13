@@ -2343,14 +2343,14 @@
         "multi": false
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "testimonial_text1",
         "value": "",
         "label": "Text1"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "testimonial_text2",
         "value": "",
